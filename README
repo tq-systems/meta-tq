@@ -37,8 +37,6 @@ Table of Contents
 I. Adding the tq layer to your build
 =================================================
 
---- replace with specific instructions for the tq layer ---
-
 In order to use this layer, you need to make the build system aware of
 it.
 
