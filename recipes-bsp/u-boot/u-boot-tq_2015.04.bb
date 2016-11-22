@@ -8,7 +8,7 @@ PROVIDES = "u-boot"
 
 SRCREV = "${AUTOREV}"
 SRCBRANCH = "TQMaxx2-v2015.04-rel_imx_4.1.15_1.2.0_ga"
-SRC_URI = "git://git@tq-git-pr1.tq-net.de/tq-embedded/tqmaxx/u-boot-tqmaxx.git;protocol=ssh;branch=${SRCBRANCH}"
+SRC_URI = "git://github.com/tq-systems/u-boot-tqmaxx.git;protocol=https;branch=${SRCBRANCH}"
 
 S = "${WORKDIR}/git"
 
