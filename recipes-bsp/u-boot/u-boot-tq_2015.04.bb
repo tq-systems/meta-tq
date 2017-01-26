@@ -14,4 +14,4 @@ S = "${WORKDIR}/git"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "(tqma6q-mba6x)"
+COMPATIBLE_MACHINE = "(tqma6q-mba6x|tqma7-mba7)"
