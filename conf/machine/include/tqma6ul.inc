@@ -7,7 +7,7 @@ include conf/machine/include/tune-cortexa7.inc
 #
 MACHINE_EXTRA_RRECOMMENDS = " kernel-modules kernel-devicetree"
 MACHINE_FEATURES_append = " wifi"
-SERIAL_CONSOLE = "115200 ttymxc1"
+SERIAL_CONSOLE = "115200 ttymxc0"
 
 # TQ u-boot and kernel
 #
