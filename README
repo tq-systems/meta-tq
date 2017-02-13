@@ -13,11 +13,6 @@ This layer depends on:
   branch: master
   revision: HEAD
 
-  URI: git://git.yoctoproject.org/meta-fsl-arm
-  branch: master
-  revision: HEAD
-
-
 Patches
 =======
 
@@ -35,7 +30,7 @@ Table of Contents
 
 
 I. Adding the tq layer to your build
-=================================================
+====================================
 
 In order to use this layer, you need to make the build system aware of
 it.
@@ -48,12 +43,22 @@ other layers needed. e.g.:
   BBLAYERS ?= " \
     /path/to/yocto/meta \
     /path/to/yocto/meta-poky \
-    /path/to/yocto/meta-yocto-bsp \
     /path/to/yocto/meta-tq \
     "
 
 
-II. Misc
-========
+II. Machines
+============
+
+support fot following machines
+
+SOC		SOM		Base board	MACHINE
+
+i.MX6<Q,D>	TQMa6D/TQMa6Q	MBa6		tqma6q_mba6x
+i.MX6UL		TQMa6UL		MBaUL		tqma6ul_mba6ul
+i.MX7<S,D>	TQMa7<S,D>	MBa7		tqma7_mba7
+
+III. Misc
+=========
 
 TBD
