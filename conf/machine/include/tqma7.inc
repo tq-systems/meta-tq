@@ -1,6 +1,6 @@
 # Common definitions for TQ-Group TQMa7x modules
 
-SOC_FAMILY = "mx7:mx7d"
+MACHINEOVERRIDES =. "mx7:mx7d:"
 
 DEFAULTTUNE ?= "cortexa7thf-neon"
 require conf/machine/include/tune-cortexa7.inc
