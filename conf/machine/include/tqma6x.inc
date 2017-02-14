@@ -32,5 +32,3 @@ do_image_wic[depends] += "\
 	parted-native:do_populate_sysroot \
 	"
 
-# TODO:
-#IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
