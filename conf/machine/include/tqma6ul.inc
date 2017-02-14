@@ -18,6 +18,9 @@ KERNEL_IMAGETYPE = "zImage"
 PREFERRED_PROVIDER_u-boot = "u-boot-tq"
 PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-tq"
 
+UBOOT_SUFFIX ?= "imx"
+UBOOT_MAKE_TARGET ?= "u-boot.imx"
+
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "u-boot"
