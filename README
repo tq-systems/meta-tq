@@ -26,11 +26,11 @@ Table of Contents
 =================
 
   I. Adding the tq layer to your build
- II. Misc
+ II. Supported machines
 
 
-I. Adding the tq layer to your build
-====================================
+I. Adding the meta-tq layer to your build
+=========================================
 
 In order to use this layer, you need to make the build system aware of
 it.
@@ -46,6 +46,9 @@ other layers needed. e.g.:
     /path/to/yocto/meta-tq \
     "
 
+The layer can be used together with the Freescale / NXP layers if needed.
+Therefore the MACHINEOVERRIDE variable is prepared inside the <modulename>.conf
+file.
 
 II. Machines
 ============
@@ -58,7 +61,3 @@ i.MX6<Q,D>	TQMa6D/TQMa6Q	MBa6		tqma6q_mba6x
 i.MX6UL		TQMa6UL		MBaUL		tqma6ul_mba6ul
 i.MX7<S,D>	TQMa7<S,D>	MBa7		tqma7_mba7
 
-III. Misc
-=========
-
-TBD
