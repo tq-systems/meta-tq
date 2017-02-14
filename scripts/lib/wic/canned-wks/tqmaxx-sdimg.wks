@@ -5,12 +5,12 @@
 # It uses u-boot
 #
 # The disk layout used is:
-#  - ---------- ------- ------- --------- --------- -------------
-# | |  u-boot  |  env  |  dtb  |  kernel |  /boot  |    rootfs   |
-#  - ---------- ------- ------- --------- --------- -------------
-# ^ ^          ^       ^       ^
-# | |          |       |       |
-# 0 1kiB     1MiB    2MiB    4MiB
+#  - ---------- ------- -------- --------- ------------- -------------
+# | |  u-boot  |  env  | resvd  |  /boot  |    rootfs   |
+#  - ---------- ------- -------- --------- ------------- -------------
+# ^ ^          ^       ^        ^
+# | |          |       |        |
+# 0 1kiB     1MiB    2MiB     4MiB
 #
 part u-boot --source rawcopy --sourceparams="file=u-boot.imx" --ondisk mmcblk --no-table --align 1
 part /boot --source bootimg-partition --ondisk mmcblk --fstype=vfat --label boot --active --align 4096 --size 16M --extra-space 0
