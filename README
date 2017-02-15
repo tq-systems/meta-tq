@@ -10,7 +10,7 @@ Dependencies
 This layer depends on:
 
   URI: git://git.yoctoproject.org/poky
-  branch: master
+  branch: krogoth
   revision: HEAD
 
 Patches
