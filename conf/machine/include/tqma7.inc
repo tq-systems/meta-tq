@@ -24,7 +24,7 @@ UBOOT_MAKE_TARGET ?= "u-boot.imx"
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "u-boot"
-IMAGE_FSTYPES = "ext3 wic"
+IMAGE_FSTYPES ?= "ext3 wic"
 
 do_image_wic[depends] += " \
 	mtools-native:do_populate_sysroot \
