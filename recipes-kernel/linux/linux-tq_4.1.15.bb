@@ -32,6 +32,9 @@ SRCREV_tqma6dl-mba6x = "35fc6c78ddec0220e2bebf08bd91eb4feac5753c"
 SRCBRANCH_tqma6s-mba6x = "TQMaxx2-v4.1.15-rel_imx_4.1.15_1.2.0_ga"
 SRCREV_tqma6s-mba6x = "35fc6c78ddec0220e2bebf08bd91eb4feac5753c"
 
-COMPATIBLE_MACHINE = "(tqma6q-mba6x|tqma6dl-mba6x|tqma6s-mba6x|tqma7-mba7|tqma6ul-mba6ul)"
+SRCBRANCH_tqma6q-nav = "NAV-v4.1.15-rel_imx_4.1.15_2.0.0_ga"
+SRCREV_tqma6q-nav = "b57ce170e24af5e39be75b75217f39051d4e5f2d"
+
+COMPATIBLE_MACHINE = "(tqma6q-mba6x|tqma6dl-mba6x|tqma6s-mba6x|tqma6q-nav|tqma7-mba7|tqma6ul-mba6ul)"
 
 S = "${WORKDIR}/git"

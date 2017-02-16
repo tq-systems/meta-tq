@@ -9,10 +9,13 @@ PROVIDES = "u-boot"
 SRCREV = "9a69dae7c0e3baebea1eba671aaa67602e5861c8"
 SRCBRANCH = "TQMaxx2-v2016.03-rel_imx_4.1.15_2.0.0_ga"
 
+SRCREV_tqma6q-nav = "6f9af19725574331e5269bbb5f7e4e4caf3f61dc"
+SRCBRANCH_tqma6q-nav = "NAV-imx_v2016.03_4.1.15_2.0.0_ga"
+
 SRC_URI = "git://github.com/tq-systems/u-boot-tqmaxx.git;protocol=https;branch=${SRCBRANCH}"
 
 S = "${WORKDIR}/git"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "(tqma7-mba7)"
+COMPATIBLE_MACHINE = "(tqma7-mba7|tqma6q-nav)"
