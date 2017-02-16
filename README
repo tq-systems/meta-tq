@@ -58,6 +58,7 @@ support for the following machines
 SOC		SOM		Base board	MACHINE
 
 i.MX6<Q,D>	TQMa6D/TQMa6Q	MBa6		tqma6q-mba6x
+i.MX6<Q,D>	TQMa6D/TQMa6Q	NAV		tqma6q-nav
 i.MX6DL		TQMa6DL		MBa6		tqma6dl-mba6x
 i.MX6S		TQMa6S		MBa6		tqma6s-mba6x
 i.MX6UL		TQMa6UL		MBaUL		tqma6ul-mba6ul
