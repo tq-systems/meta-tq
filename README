@@ -1,5 +1,5 @@
 This README file contains information on the contents of the
-tq layer.
+meta-tq layer.
 
 Please see the corresponding sections below for details.
 
@@ -13,6 +13,12 @@ This layer depends on:
   branch: krogoth
   layers: meta
   revision: HEAD
+
+optionally the layer can make use of features from meta-fsl-arm
+
+  URI: https://github.com/Freescale/meta-fsl-arm.git
+  layers: meta-fsl-arm
+  branch: krogoth
 
 Patches
 =======
@@ -49,7 +55,21 @@ other layers needed. e.g.:
 
 The layer can be used together with the Freescale / NXP layers if needed.
 Therefore the MACHINEOVERRIDE variable is prepared inside the <modulename>.conf
-file.
+file. See following examople:
+
+BBLAYERS = " \
+  ${BSPDIR}/sources/poky/meta \
+  ${BSPDIR}/sources/poky/meta-poky \
+  \
+  ${BSPDIR}/sources/meta-openembedded/meta-oe \
+  ${BSPDIR}/sources/meta-openembedded/meta-multimedia \
+  \
+  ${BSPDIR}/sources/meta-fsl-arm \
+  ${BSPDIR}/sources/meta-fsl-arm-extra \
+  ${BSPDIR}/sources/meta-fsl-demos \
+  \
+  ${BSPDIR}/sources/meta-tq \
+"
 
 II. Machines
 ============
