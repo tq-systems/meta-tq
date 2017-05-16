@@ -34,3 +34,6 @@ do_image_wic[depends] += "\
 
 # TODO:
 #IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
+
+# source the machine specific features for multimedia etc. from meta-fsl-arm
+include conf/machine/include/imx-base.inc
