@@ -4,7 +4,8 @@ KERNEL_DEVICETREE ?= " \
                         imx6dl-mba6a.dtb imx6dl-mba6a-hdmi.dtb \
                         imx6dl-mba6a-lvds.dtb imx6dl-mba6a-pd.dtb \
                         imx6dl-mba6b.dtb imx6dl-mba6b-hdmi.dtb \
-                        imx6dl-mba6b-lvds.dtb imx6dl-mba6b-pd.dtb \
+                        imx6dl-mba6b-lvds.dtb  imx6dl-mba6b-otg.dtb \
+                        imx6dl-mba6b-pd.dtb \
 "
 
 # Files are needed in IMAGE_BOOT_FILES because /boot is on an extra partition.
@@ -21,6 +22,7 @@ IMAGE_BOOT_FILES ?= "\
 	${KERNEL_IMAGETYPE}-imx6dl-mba6b.dtb;imx6dl-mba6b.dtb \
 	${KERNEL_IMAGETYPE}-imx6dl-mba6b-hdmi.dtb;imx6dl-mba6b-hdmi.dtb \
 	${KERNEL_IMAGETYPE}-imx6dl-mba6b-lvds.dtb;imx6dl-mba6b-lvds.dtb \
+	${KERNEL_IMAGETYPE}-imx6dl-mba6b-otg.dtb;imx6dl-mba6b-otg.dtb \
 	${KERNEL_IMAGETYPE}-imx6dl-mba6b-pd.dtb;imx6dl-mba6b-pd.dtb \
 	"
 
