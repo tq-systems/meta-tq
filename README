@@ -10,15 +10,15 @@ Dependencies
 This layer depends on:
 
   URI: git://git.yoctoproject.org/poky
-  branch: krogoth
+  branch: morty
   layers: meta
   revision: HEAD
 
-optionally the layer can make use of features from meta-fsl-arm
+optionally the layer can make use of features from meta-freescale
 
   URI: https://github.com/Freescale/meta-fsl-arm.git
-  layers: meta-fsl-arm
-  branch: krogoth
+  layers: meta-freeescale
+  branch: morty
 
 Patches
 =======
@@ -64,9 +64,8 @@ BBLAYERS = " \
   ${BSPDIR}/sources/meta-openembedded/meta-oe \
   ${BSPDIR}/sources/meta-openembedded/meta-multimedia \
   \
-  ${BSPDIR}/sources/meta-fsl-arm \
-  ${BSPDIR}/sources/meta-fsl-arm-extra \
-  ${BSPDIR}/sources/meta-fsl-demos \
+  ${BSPDIR}/sources/meta-freescale \
+  ${BSPDIR}/sources/meta-freescale-distro \
   \
   ${BSPDIR}/sources/meta-tq \
 "
