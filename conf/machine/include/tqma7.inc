@@ -32,5 +32,6 @@ do_image_wic[depends] += " \
 	parted-native:do_populate_sysroot \
 	"
 
-# source the machine specific features for multimedia etc. from meta-fsl-arm
+# optionally source the machine specific features for multimedia etc. from
+# meta-freescale
 include conf/machine/include/imx-base.inc
