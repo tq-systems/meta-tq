@@ -26,5 +26,3 @@ IMAGE_BOOT_FILES ?= "\
 	${KERNEL_IMAGETYPE}-imx6dl-mba6b-pd.dtb;imx6dl-mba6b-pd.dtb \
 	"
 
-WKS_FILE ?= "tqma6dl-sdimg.wks"
-
