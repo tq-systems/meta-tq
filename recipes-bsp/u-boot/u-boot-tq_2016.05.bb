@@ -11,7 +11,7 @@ SRCBRANCH = "TQMLS102x-v2016.05"
 
 SRC_URI = "git://github.com/tq-systems/u-boot-tqmaxx.git;protocol=https;branch=${SRCBRANCH}"
 
-DEPENDS += "dtc-native"
+DEPENDS += "swap-file-endianess-native tcl-native"
 
 S = "${WORKDIR}/git"
 
@@ -28,6 +28,9 @@ do_compile_append () {
                     case "${config}" in
                         *mmcsd*)
                             cp ${config}/u-boot-with-spl-pbl.bin ${config}/u-boot-${type}.${UBOOT_SUFFIX};;
+                        *qspi*)
+                            tclsh ${STAGING_BINDIR_NATIVE}/byteswap.tcl ${config}/u-boot-pbl.bin ${config}/u-boot-pbl.swap.bin 8
+                            cp ${config}/u-boot-pbl.swap.bin ${config}/u-boot-${type}.${UBOOT_SUFFIX};;
                     esac
                 fi
             done
