@@ -30,7 +30,17 @@ MACHINE_FEATURES_append = " alsa"
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "u-boot"
-IMAGE_FSTYPES ?= "ext4 wic"
+IMAGE_FSTYPES ?= "tar.gz ext4 wic ubi"
+
+# from PTXdist BSP:
+# PTXCONF_IMAGE_ROOT_UBIFS_PEB_SIZE="65536"
+# PTXCONF_IMAGE_ROOT_UBIFS_MINIMUM_IO_UNIT_SIZE="1"
+# PTXCONF_IMAGE_ROOT_UBIFS_SUB_PAGE_SIZE="1"
+# PTXCONF_IMAGE_ROOT_UBIFS_VID_HEADER_OFFSET="64"
+# PTXCONF_IMAGE_ROOT_UBIFS_LEB_SIZE="65408"
+
+MKUBIFS_ARGS = " -m 1 -e 65408 -c 1024 "
+UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
 
 do_image_wic[depends] += "\
 	mtools-native:do_populate_sysroot \
