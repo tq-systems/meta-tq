@@ -32,6 +32,9 @@ MACHINE_FEATURES_append = " alsa pci sata rtc usbhost vfat ext2 ext3 ext4 serial
 EXTRA_IMAGEDEPENDS += "u-boot"
 IMAGE_FSTYPES ?= "tar.gz ext4 wic ubi"
 
+# needed for Rootfs on QSPI
+IMAGE_INSTALL_append = " mtd-utils-jffs2 mtd-utils-ubifs mtd-utils-misc"
+
 # from PTXdist BSP:
 # PTXCONF_IMAGE_ROOT_UBIFS_PEB_SIZE="65536"
 # PTXCONF_IMAGE_ROOT_UBIFS_MINIMUM_IO_UNIT_SIZE="1"
