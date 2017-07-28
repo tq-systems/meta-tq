@@ -83,4 +83,5 @@ i.MX6DL		TQMa6DL		MBa6		tqma6dl-mba6x
 i.MX6S		TQMa6S		MBa6		tqma6s-mba6x
 i.MX6UL		TQMa6UL		MBaUL		tqma6ul-mba6ul
 i.MX7<S,D>	TQMa7<S,D>	MBa7		tqma7-mba7
+LS102[0,1]a	TQMLS102[0,1]a>	MBLS102xa	tqmls102xa-mbls102xa
 
