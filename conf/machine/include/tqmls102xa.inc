@@ -22,10 +22,10 @@ UBOOT_ENTRYPOINT_ls102xa = "0x80008000"
 # Machine specific options
 #
 
-MACHINE_FEATURES = "pci ext2 ext3 ext4 serial"
-
 MACHINE_EXTRA_RRECOMMENDS = " kernel-modules kernel-devicetree udev-extraconf"
-MACHINE_FEATURES_append = " alsa"
+
+# provide info about machine's capabilities
+MACHINE_FEATURES_append = " alsa pci sata rtc usbhost vfat ext2 ext3 ext4 serial"
 
 # Image Options
 #
