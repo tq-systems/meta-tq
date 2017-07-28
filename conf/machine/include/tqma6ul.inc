@@ -30,6 +30,8 @@ do_image_wic[depends] += "\
 	mtools-native:do_populate_sysroot \
 	dosfstools-native:do_populate_sysroot \
 	parted-native:do_populate_sysroot \
+	virtual/kernel:do_deploy \
+	u-boot:do_deploy \
 	"
 
 # TODO:
