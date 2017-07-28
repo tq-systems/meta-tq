@@ -39,8 +39,10 @@ IMAGE_FSTYPES ?= "tar.gz ext4 wic ubi"
 # PTXCONF_IMAGE_ROOT_UBIFS_VID_HEADER_OFFSET="64"
 # PTXCONF_IMAGE_ROOT_UBIFS_LEB_SIZE="65408"
 
-MKUBIFS_ARGS = " -m 1 -e 65408 -c 1024 "
+MKUBIFS_ARGS = " -m 1 -e 65408 -c 896 "
 UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
+# needs to be set to have it consistent for kernel command line
+UBI_VOLNAME = "root"
 
 WKS_FILE ?= "tqmls102xa-sdimg.wks"
 
