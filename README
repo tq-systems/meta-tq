@@ -1,8 +1,11 @@
-This README file contains information on the contents of the
-meta-tq layer.
+OpenEmbedded/Yocto hardware support layer for TQ Systems ARM SOM
+================================================================
+
+This README file contains information on the contents of the meta-tq layer.
+This layer provides support for TQ Systems CPU modules and Starterkits with
+ARM CPU.
 
 Please see the corresponding sections below for details.
-
 
 Dependencies
 ============
@@ -23,11 +26,12 @@ optionally the layer can make use of features from meta-freescale
 Patches
 =======
 
-Please submit any patches against the tq layer to the
+Please submit patches against the meta-tq layer to the
 the maintainer:
 
 Maintainer: Markus Niebel <Markus.Niebel@tq-group.com>
 
+Additionally you can us github's collaboration features.
 
 Table of Contents
 =================
@@ -55,7 +59,7 @@ other layers needed. e.g.:
 
 The layer can be used together with the Freescale / NXP layers if needed.
 Therefore the MACHINEOVERRIDE variable is prepared inside the <modulename>.conf
-file. See following examople:
+file. See following example:
 
 BBLAYERS = " \
   ${BSPDIR}/sources/poky/meta \
@@ -73,7 +77,7 @@ BBLAYERS = " \
 II. Machines
 ============
 
-support for the following machines
+support for the following machines is contained in this version:
 
 SOC		SOM		Base board	MACHINE
 
