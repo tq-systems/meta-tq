@@ -1359,7 +1359,7 @@ CONFIG_HWMON=y
 # CONFIG_SENSORS_GL520SM is not set
 # CONFIG_SENSORS_G760A is not set
 # CONFIG_SENSORS_G762 is not set
-CONFIG_SENSORS_GPIO_FAN=y
+# CONFIG_SENSORS_GPIO_FAN is not set
 # CONFIG_SENSORS_HIH6130 is not set
 # CONFIG_SENSORS_IT87 is not set
 # CONFIG_SENSORS_JC42 is not set
@@ -1669,8 +1669,8 @@ CONFIG_IR_GPIO_CIR=y
 #
 # Customise DVB Frontends
 #
-CONFIG_DVB_TUNER_DIB0070=y
-CONFIG_DVB_TUNER_DIB0090=y
+# CONFIG_DVB_TUNER_DIB0070 is not set
+# CONFIG_DVB_TUNER_DIB0090 is not set
 
 #
 # Tools to develop new frontends
@@ -2148,7 +2148,7 @@ CONFIG_DMA_OF=y
 # DMA Clients
 #
 # CONFIG_ASYNC_TX_DMA is not set
-CONFIG_DMATEST=y
+# CONFIG_DMATEST is not set
 # CONFIG_AUXDISPLAY is not set
 # CONFIG_UIO is not set
 # CONFIG_VIRT_DRIVERS is not set
