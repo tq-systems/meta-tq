@@ -20,8 +20,10 @@ SRC_URI = "git://github.com/tq-systems/linux-tqmaxx.git;protocol=https;branch=${
 SRCBRANCH = "TQMaxx2-v4.1.15-rel_imx_4.1.15_2.0.0_ga"
 SRCREV = "6297c9dcc0bc74e51b41865fe8291a05293622a6"
 
-SRCBRANCH_tqma6q-nav = "NAV-v4.1.15-rel_imx_4.1.15_2.0.0_ga"
-SRCREV_tqma6q-nav = "b57ce170e24af5e39be75b75217f39051d4e5f2d"
+#SRCBRANCH_tqma6q-nav = "NAV-v4.1.15-rel_imx_4.1.15_2.0.0_ga"
+#SRCREV_tqma6q-nav = "f9f69c718d0dde59527e029a454d5ec9e0c1c1ee"
+SRCBRANCH_tqma6q-nav = "nav2/work"
+SRCREV_tqma6q-nav = "be4f0b42ca3dba5cfca1625342c053194b0a40e4"
 
 COMPATIBLE_MACHINE = "tqma7x-mba7"
 COMPATIBLE_MACHINE .= "|tqma6ulx-mba6ulx|tqma6ulx-lga-mba6ulx"
