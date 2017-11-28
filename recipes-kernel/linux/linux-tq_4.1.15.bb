@@ -23,7 +23,7 @@ SRCREV = "1fbadbaddb092b912570bf0aa8a58e8aa81dfe23"
 #SRCBRANCH_tqma6q-nav = "NAV-v4.1.15-rel_imx_4.1.15_2.0.0_ga"
 #SRCREV_tqma6q-nav = "f9f69c718d0dde59527e029a454d5ec9e0c1c1ee"
 SRCBRANCH_tqma6q-nav = "nav2/work"
-SRCREV_tqma6q-nav = "be4f0b42ca3dba5cfca1625342c053194b0a40e4"
+SRCREV_tqma6q-nav = "00509d6afeb7e831842e19ffa135e4f2b0ae60a6"
 
 COMPATIBLE_MACHINE = "tqma7-mba7"
 COMPATIBLE_MACHINE .= "|tqma6ul-mba6ul|tqma6ulxl-mba6ul"
