@@ -29,12 +29,15 @@ UBOOT_CONFIG = "sd qspi"
 EXTRA_IMAGEDEPENDS += "u-boot"
 IMAGE_FSTYPES ?= "tar.gz ext4 wic"
 
-do_image_wic[depends] += "\
-	mtools-native:do_populate_sysroot \
-	dosfstools-native:do_populate_sysroot \
-	parted-native:do_populate_sysroot \
-	virtual/kernel:do_deploy \
-	u-boot:do_deploy \
+# needed for Rootfs on QSPI
+IMAGE_INSTALL_append = " mtd-utils-jffs2 mtd-utils-ubifs mtd-utils-misc"
+
+WKS_FILE_DEPENDS = "\
+	mtools-native \
+	dosfstools-native \
+	parted-native \
+	virtual/kernel \
+	u-boot \
 	"
 
 # TODO:
