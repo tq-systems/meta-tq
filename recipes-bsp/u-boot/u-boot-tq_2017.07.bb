@@ -6,12 +6,14 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
 PROVIDES = "u-boot"
 
-SRCREV = "dc15197cf00c8accfb80aea1e699137e48c6a042"
-SRCBRANCH = "TQMLS102x-v2016.05"
+SRCREV = "347e2f2660b5e9f3c359cf3d016224d5ca404a6b"
+SRCBRANCH = "TQMLS102x-v2017.07-BSP0107"
 
 SRC_URI = "git://github.com/tq-systems/u-boot-tqmaxx.git;protocol=https;branch=${SRCBRANCH}"
 
 DEPENDS += "swap-file-endianess-native tcl-native"
+
+DEPENDS_append = " dtc-native bc-native"
 
 S = "${WORKDIR}/git"
 
