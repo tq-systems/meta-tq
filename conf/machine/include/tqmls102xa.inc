@@ -14,7 +14,6 @@ PREFERRED_PROVIDER_virtual/bootloader_ls102xa ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/kernel_ls102xa ?= "linux-tq"
 
 # Define the default image type
-IMAGE_CLASSES ?= "image_types_uboot"
 KERNEL_IMAGETYPE ?= "zImage"
 
 UBOOT_ENTRYPOINT_ls102xa = "0x80008000"
