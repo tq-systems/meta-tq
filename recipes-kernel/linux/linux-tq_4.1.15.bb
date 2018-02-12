@@ -24,7 +24,7 @@ SRCBRANCH_tqma6q-nav = "NAV-v4.1.15-rel_imx_4.1.15_2.0.0_ga"
 SRCREV_tqma6q-nav = "b57ce170e24af5e39be75b75217f39051d4e5f2d"
 
 COMPATIBLE_MACHINE = "tqma7-mba7"
-COMPATIBLE_MACHINE .= "|tqma6ul-mba6ul|tqma6ulxl-mba6ul"
+COMPATIBLE_MACHINE .= "|tqma6ulx-mba6ulx|tqma6ulxl-mba6ul"
 COMPATIBLE_MACHINE .= "|tqma6q-nav"
 COMPATIBLE_MACHINE .= "|tqma6qp-mba6x|tqma6q-mba6x|tqma6dl-mba6x|tqma6s-mba6x"
 
