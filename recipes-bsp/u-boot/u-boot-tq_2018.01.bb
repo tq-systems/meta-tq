@@ -8,10 +8,7 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 SRCREV = "0371136cc61d9f3bba795c2d35af061a641bdd69"
 SRCBRANCH = "private/gateware_lange_stefan/TQMa57xx_devel"
 
-# TODO: Test and use following SRC_URI with github meta-tq layer
-#SRC_URI = "git://github.com/tq-systems/u-boot-tqmaxx.git;protocol=https;branch=${SRCBRANCH}"
-# TODO: remove this SRC_URI when working with github meta-tq layer
-SRC_URI = "git:///opt/tqma57xx-bsp/u-boot-tqmaxx/.git;branch=${SRCBRANCH}"
+SRC_URI = "git://github.com/tq-systems/u-boot-tqmaxx.git;protocol=https;branch=${SRCBRANCH}"
 
 S = "${WORKDIR}/git"
 
