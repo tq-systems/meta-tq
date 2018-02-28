@@ -5,7 +5,7 @@ LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
 # TODO: adopt SRCREV and SRCBRANCH when available on github */
-SRCREV = "0371136cc61d9f3bba795c2d35af061a641bdd69"
+SRCREV = "ff53add599acd131e7af1fd3bebd9eb87c67d8f8"
 SRCBRANCH = "private/gateware_lange_stefan/TQMa57xx_devel"
 
 SRC_URI = "git://github.com/tq-systems/u-boot-tqmaxx.git;protocol=https;branch=${SRCBRANCH}"
