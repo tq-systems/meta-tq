@@ -88,6 +88,6 @@ i.MX6DL		TQMa6DL		MBa6x		tqma6dl-mba6x (TQMa6DL HW REV.010x ... 040x / MBa6x HW 
 i.MX6S		TQMa6S		MBa6x		tqma6s-mba6x (TQMa6S HW REV.010x ... 040x / MBa6x HW REV.020x)
 i.MX6UL		TQMa6ULx	MBaULx		tqma6ulx-mba6ulx (TQMa6UL HW REV.030x / MBa6ULx HW REV.020x)
 i.MX6UL		TQMa6ULxL	MBaULx		tqma6ulx-lga-mba6ulx (TQMa6ULxL HW REV.020x / MBa6ULx HW REV.020x)
-i.MX7[S,D]	TQMa7<S,D>	MBa7x		tqma7-mba7 (TQMa7[S,D] HW REV.010x / MBa7x HW REV.020x)
+i.MX7[S,D]	TQMa7<S,D>	MBa7x		tqma7x-mba7 (TQMa7[S,D] HW REV.010x / MBa7x HW REV.020x)
 LS102[0,1]a	TQMLS102[0,1]a>	MBLS102xa	tqmls102xa-mbls102xa (TQMLS102[0,1]a HW REV.020x / MBLS102xa HW REV.020x)
 
