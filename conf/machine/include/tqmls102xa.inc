@@ -31,6 +31,8 @@ MACHINE_FEATURES_append = " alsa pci sata rtc usbhost vfat ext2 ext3 ext4 serial
 EXTRA_IMAGEDEPENDS += "u-boot"
 IMAGE_FSTYPES ?= "tar.gz ext4 wic ubi"
 
+DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
+
 # needed for Rootfs on QSPI
 IMAGE_INSTALL_append = " mtd-utils-jffs2 mtd-utils-ubifs mtd-utils-misc"
 
