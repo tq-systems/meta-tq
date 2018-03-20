@@ -27,7 +27,24 @@ UBOOT_CONFIG = "sd qspi"
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "u-boot"
-IMAGE_FSTYPES ?= "tar.gz ext4 wic"
+IMAGE_FSTYPES ?= "tar.gz ext4 wic ubi"
+
+DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
+
+# needed for Rootfs on QSPI
+IMAGE_INSTALL_append = " mtd-utils-jffs2 mtd-utils-ubifs mtd-utils-misc"
+
+# from PTXdist BSP:
+# PTXCONF_IMAGE_ROOT_UBIFS_PEB_SIZE="65536"
+# PTXCONF_IMAGE_ROOT_UBIFS_MINIMUM_IO_UNIT_SIZE="1"
+# PTXCONF_IMAGE_ROOT_UBIFS_SUB_PAGE_SIZE="1"
+# PTXCONF_IMAGE_ROOT_UBIFS_VID_HEADER_OFFSET="64"
+# PTXCONF_IMAGE_ROOT_UBIFS_LEB_SIZE="65408"
+
+MKUBIFS_ARGS = " -m 1 -e 65408 -c 896 "
+UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
+# needs to be set to have it consistent for kernel command line
+UBI_VOLNAME = "root"
 
 do_image_wic[depends] += "\
 	mtools-native:do_populate_sysroot \
