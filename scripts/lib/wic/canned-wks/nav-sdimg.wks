@@ -18,3 +18,5 @@ part dtb --source rawcopy --sourceparams="file=zImage-imx6q-nav-hdmi.dtb" --ondi
 part kernel --source rawcopy --sourceparams="file=zImage" --ondisk mmcblk --no-table --align 4096
 part /boot --source bootimg-partition --ondisk mmcblk --fstype=vfat --label boot --active --align 4096  --size 16M --extra-space 0
 part / --source rootfs --ondisk mmcblk --fstype=ext4 --label root --align 4096
+
+bootloader --ptable msdos

@@ -15,3 +15,5 @@
 part u-boot --source rawcopy --sourceparams="file=u-boot.bin-sd" --ondisk mmcblk --no-table --align 4
 part /boot --source bootimg-partition --ondisk mmcblk --fstype=vfat --label boot --active --align 4096 --size 16M --extra-space 0
 part / --source rootfs --ondisk mmcblk --fstype=ext4 --label root --align 4096
+
+bootloader --ptable msdos
