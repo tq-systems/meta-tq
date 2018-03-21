@@ -16,7 +16,7 @@ part u-boot --source rawcopy --sourceparams="file=u-boot.imx" --ondisk mmcblk --
 part env --source rawcopy --sourceparams="file=zImage-imx6q-nav.dtb" --ondisk mmcblk --no-table --align 1024
 part dtb --source rawcopy --sourceparams="file=zImage-imx6q-nav-hdmi.dtb" --ondisk mmcblk --no-table --align 2048
 part kernel --source rawcopy --sourceparams="file=zImage" --ondisk mmcblk --no-table --align 4096
-part /boot --source bootimg-partition --ondisk mmcblk --fstype=vfat --label boot --active --align 4096  --size 16M --extra-space 0
+part /boot --source bootimg-partition --ondisk mmcblk --fstype=vfat --label boot --active --align 4096 --size 16M --extra-space 0 --overhead-factor 1
 part / --source rootfs --ondisk mmcblk --fstype=ext4 --label root --align 4096
 
 bootloader --ptable msdos
