@@ -46,12 +46,12 @@ UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
 # needs to be set to have it consistent for kernel command line
 UBI_VOLNAME = "root"
 
-do_image_wic[depends] += "\
-	mtools-native:do_populate_sysroot \
-	dosfstools-native:do_populate_sysroot \
-	parted-native:do_populate_sysroot \
-	virtual/kernel:do_deploy \
-	u-boot:do_deploy \
+WKS_FILE_DEPENDS = "\
+	mtools-native \
+	dosfstools-native \
+	parted-native \
+	virtual/kernel \
+	u-boot \
 	"
 
 # TODO:
