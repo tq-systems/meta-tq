@@ -19,7 +19,7 @@ This layer depends on:
 
 optionally the layer can make use of features from meta-freescale
 
-  URI: https://github.com/Freescale/meta-fsl-arm.git
+  URI: https://github.com/Freescale/meta-freescale.git
   layers: meta-freeescale
   branch: pyro
 
