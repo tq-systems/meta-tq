@@ -24,7 +24,7 @@ UBOOT_ENTRYPOINT_ls102xa = "0x80008000"
 MACHINE_EXTRA_RRECOMMENDS = " kernel-modules kernel-devicetree udev-extraconf"
 
 # provide info about machine's capabilities
-MACHINE_FEATURES_append = " alsa pci sata rtc usbhost vfat ext2 ext3 ext4 serial"
+MACHINE_FEATURES_append = " alsa ext2 pci rtc serial usbhost vfat"
 
 # Image Options
 #
