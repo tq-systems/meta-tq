@@ -8,12 +8,12 @@
 #  - ---------- ------- -------- --------- ------------- -------------
 # | |  u-boot  |  env  | resvd  |  /boot  |    rootfs   |
 #  - ---------- ------- -------- --------- ------------- -------------
-# ^ ^          ^       ^        ^
-# | |          |       |        |
-# 0 4kiB     1MiB    2MiB     4MiB
+# ^ ^          ^       ^        ^         ^             ^
+# | |          |       |        |         |             |
+# 0 4kiB     1MiB    2MiB     4MiB      24MiB        280MiB
 #
 part u-boot --source rawcopy --sourceparams="file=u-boot.bin-sd" --ondisk mmcblk --no-table --align 4
-part /boot --source bootimg-partition --ondisk mmcblk --fstype=vfat --label boot --active --align 4096 --size 20M --extra-space 0 --overhead-factor 1
-part / --source rootfs --ondisk mmcblk --fstype=ext4 --label root --align 4096 --size 256M --extra-space 0 --overhead-factor 1
+part /boot --source bootimg-partition --ondisk mmcblk --fstype=vfat --label boot --active --align 4096 --fixed-size 20M
+part / --source rootfs --ondisk mmcblk --fstype=ext4 --label root --align 4096 --fixed-size 256M
 
 bootloader --ptable msdos
