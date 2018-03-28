@@ -14,7 +14,7 @@ KERNEL_DEVICETREE ?= " \
 # IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
 #
 IMAGE_BOOT_FILES ?= "\
-	${KERNEL_IMAGETYPE} \
+	${KERNEL_IMAGETYPE};linuximage \
 	${KERNEL_IMAGETYPE}-imx6dl-mba6a.dtb;imx6dl-mba6a.dtb \
 	${KERNEL_IMAGETYPE}-imx6dl-mba6a-hdmi.dtb;imx6dl-mba6a-hdmi.dtb \
 	${KERNEL_IMAGETYPE}-imx6dl-mba6a-lvds.dtb;imx6dl-mba6a-lvds.dtb \
