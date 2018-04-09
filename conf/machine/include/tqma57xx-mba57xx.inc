@@ -13,3 +13,4 @@ IMAGE_BOOT_FILES ?= "\
 	${KERNEL_IMAGETYPE} \
 	${KERNEL_IMAGETYPE}-tqma572x-mba57xx.dtb;tqma572x-mba57xx.dtb \
 	MLO u-boot.img"
+SERIAL_CONSOLES ?= "115200;ttyO2"
