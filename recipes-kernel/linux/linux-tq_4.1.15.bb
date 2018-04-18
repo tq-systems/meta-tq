@@ -18,7 +18,7 @@ SRC_URI = "git://github.com/tq-systems/linux-tqmaxx.git;protocol=https;branch=${
            file://defconfig"
 
 SRCBRANCH = "TQMaxx2-v4.1.15-rel_imx_4.1.15_2.0.0_ga"
-SRCREV = "6297c9dcc0bc74e51b41865fe8291a05293622a6"
+SRCREV = "10ec4a9f992d216369a7f1877b045a7594a321a8"
 
 SRCBRANCH_tqma6q-nav = "TQMaxx2-NAV-v4.1.15-rel_imx_4.1.15_2.0.0_ga"
 SRCREV_tqma6q-nav = "58ce624280c2ca170374b6fcc349819c4a087050"
