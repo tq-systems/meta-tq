@@ -11,9 +11,6 @@ DEPENDS += "lzop-native bc-native"
 #
 PROVIDES = "virtual/kernel linux-mainline"
 
-require recipes-kernel/linux/linux-dtb.inc
-
-
 SRC_URI = "git://github.com/tq-systems/linux-tqmaxx.git;protocol=https;branch=${SRCBRANCH} \
            file://defconfig"
 
