@@ -13,10 +13,10 @@ SRC_URI = " \
 
 # TODO: adopt SRCREV and SRCBRANCH when available on github */
 SRCBRANCH = "TQMa57xx-linux-ti-v4.9.77-rt61"
-SRCREV = "3598123589fe7d2cbc4e1b3ab4fa4ce8c0ed0419"
+SRCREV = "45787c7ab5865fb2ff50a65b1924c95015f9fbbf"
 
 KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
 
-COMPATIBLE_MACHINE = "(tqma572x-mba57xx)"
+COMPATIBLE_MACHINE = "tqma572x-mba57xx|tqma571x-mba57xx"
 
 S = "${WORKDIR}/git"

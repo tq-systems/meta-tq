@@ -2,6 +2,7 @@
 
 KERNEL_DEVICETREE ?= " \
                         tqma572x-mba57xx.dtb \
+			tqma571x-mba57xx.dtb \
 "
 
 # Files are needed in IMAGE_BOOT_FILES because /boot is on an extra partition.
@@ -12,5 +13,6 @@ KERNEL_DEVICETREE ?= " \
 IMAGE_BOOT_FILES ?= "\
 	${KERNEL_IMAGETYPE} \
 	${KERNEL_IMAGETYPE}-tqma572x-mba57xx.dtb;tqma572x-mba57xx.dtb \
+	${KERNEL_IMAGETYPE}-tqma571x-mba57xx.dtb;tqma571x-mba57xx.dtb \
 	MLO u-boot.img"
 SERIAL_CONSOLES ?= "115200;ttyO2"
