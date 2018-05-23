@@ -1,2 +1,12 @@
 This README file contains information on the contents of the
 meta-tq layer.
+
+II. Machines
+============
+
+support for the following machines is contained in this version:
+
+SOC		SOM			Base board	MACHINE
+
+AM571[6,8]	TQMa5718/TQMa5716	MBa57xx		tqma571x-mba57xx
+AM572[6,8]	TQMa5728/TQMa5726       MBa57xx         tqma572x-mba57xx
