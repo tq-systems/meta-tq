@@ -1,6 +1,6 @@
 # Common definitions for TQ-Group TQMa6UL modules
 
-MACHINEOVERRIDES =. "mx6ul:"
+MACHINEOVERRIDES =. "mx6:mx6ul:"
 
 DEFAULTTUNE ?= "cortexa7thf-neon"
 require conf/machine/include/tune-cortexa7.inc
