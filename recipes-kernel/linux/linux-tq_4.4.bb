@@ -15,8 +15,8 @@ inherit kernel
 SRC_URI = "git://github.com/tq-systems/linux-tqmaxx.git;protocol=https;branch=${SRCBRANCH} \
            file://defconfig"
 
-SRCBRANCH = "TQMLS102x-linux-v4.4-BSP0107"
-SRCREV = "9db5761b20024e01d7c52d28d070870623b71a5d"
+SRCBRANCH = "TQMLS102x-linux-v4.4-BSP0109"
+SRCREV = "bc5598ec6b6a9f81520ec4d707c3187f60171a07"
 
 COMPATIBLE_MACHINE = "(tqmls102xa-mbls102xa)"
 
