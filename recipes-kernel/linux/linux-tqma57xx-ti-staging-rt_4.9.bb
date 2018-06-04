@@ -6,20 +6,12 @@ inherit kernel
 
 require recipes-kernel/linux/linux-dtb.inc
 
-# TODO: Test and use following SRC_URI with github meta-tq layer
-# SRC_URI = "git://github.com/tq-systems/linux-tqmaxx.git;protocol=https;branch=${SRCBRANCH} \
-#	     file://defconfig"
-# Also, TQMa57xx defconfig must be put to
-# meta-tq/recipes-kernel/linux/linux-tq-xxxx/tqma57xx/defconfig
-# then.
-# Currently existing file is only a link to
-# /opt/tqma57xx-bsp/linux-tqmaxx/arch/arm/configs/tqma57xx_defconfig
+SRC_URI = " \
+    ${TQ_GIT}/linux-tqmaxx;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+    file://defconfig \
+"
 
-SRC_URI = "git:///opt/tqma57xx-bsp/linux-tqmaxx/.git;branch=${SRCBRANCH} \
-	   file://defconfig"
-
-# TODO: adopt SRCREV and SRCBRANCH when available on github */
-SRCBRANCH = "private/gateware_lange_stefan/TQMa57xx_devel"
+SRCBRANCH = "private/gateware_graefe_konrad/TQMa57xx_devel"
 SRCREV = "45787c7ab5865fb2ff50a65b1924c95015f9fbbf"
 
 KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
