@@ -58,3 +58,6 @@ WKS_FILE_DEPENDS = "\
 	u-boot \
 	"
 
+# optionally source the machine specific features for multimedia etc. from
+# meta-freescale
+include conf/machine/include/qoriq-arm.inc
