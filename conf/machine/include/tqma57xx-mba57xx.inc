@@ -10,9 +10,9 @@ KERNEL_DEVICETREE ?= " \
 # achieve this in your BSP layer adding them via
 # IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
 #
-IMAGE_BOOT_FILES ?= "\
-	${KERNEL_IMAGETYPE} \
+IMAGE_BOOT_FILES_append = "\
 	${KERNEL_IMAGETYPE}-tqma572x-mba57xx.dtb;tqma572x-mba57xx.dtb \
 	${KERNEL_IMAGETYPE}-tqma571x-mba57xx.dtb;tqma571x-mba57xx.dtb \
-	MLO u-boot.img"
+"
+
 SERIAL_CONSOLES ?= "115200;ttyO2"
