@@ -12,8 +12,10 @@ PROVIDES = "virtual/kernel linux-mainline"
 
 inherit kernel
 
-SRC_URI = "git://github.com/tq-systems/linux-tqmaxx.git;protocol=https;branch=${SRCBRANCH} \
-           file://defconfig"
+SRC_URI = "\
+  ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+  file://defconfig \
+"
 
 SRCBRANCH = "TQMLS102x-linux-v4.4-BSP0109"
 SRCREV = "bc5598ec6b6a9f81520ec4d707c3187f60171a07"

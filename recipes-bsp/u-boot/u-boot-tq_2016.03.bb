@@ -9,12 +9,10 @@ PROVIDES = "u-boot"
 SRCREV = "82958ffcc05a8331aa1f5670c90d07632c32fa7b"
 SRCBRANCH = "TQMaxx2-v2016.03-rel_imx_4.1.15_2.0.0_ga"
 
-# SRCREV_tqma6q-nav = "6f9af19725574331e5269bbb5f7e4e4caf3f61dc"
-# SRCBRANCH_tqma6q-nav = "NAV-imx_v2016.03_4.1.15_2.0.0_ga"
 SRCREV_tqma6q-nav = "53a419a26d372f5419d9f5e1768d750df85a43ee"
 SRCBRANCH_tqma6q-nav = "nav2/work"
 
-SRC_URI = "git://github.com/tq-systems/u-boot-tqmaxx.git;protocol=https;branch=${SRCBRANCH}"
+SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 
 S = "${WORKDIR}/git"
 

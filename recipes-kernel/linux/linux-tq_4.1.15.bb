@@ -11,8 +11,10 @@ DEPENDS += "lzop-native bc-native"
 #
 PROVIDES = "virtual/kernel linux-mainline"
 
-SRC_URI = "git://github.com/tq-systems/linux-tqmaxx.git;protocol=https;branch=${SRCBRANCH} \
-           file://defconfig"
+SRC_URI = "\
+  ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+  file://defconfig \
+"
 
 SRCBRANCH = "TQMaxx2-v4.1.15-rel_imx_4.1.15_2.0.0_ga"
 SRCREV = "6297c9dcc0bc74e51b41865fe8291a05293622a6"
