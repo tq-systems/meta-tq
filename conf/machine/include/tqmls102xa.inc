@@ -9,6 +9,8 @@ require conf/machine/include/tune-cortexa7.inc
 
 # TQ u-boot and kernel
 #
+require conf/machine/include/tqmxx.inc
+
 PREFERRED_PROVIDER_u-boot_ls102xa ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/bootloader_ls102xa ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/kernel_ls102xa ?= "linux-tq"

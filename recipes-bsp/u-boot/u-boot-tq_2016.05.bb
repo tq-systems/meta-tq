@@ -9,7 +9,7 @@ PROVIDES = "u-boot"
 SRCREV = "dc15197cf00c8accfb80aea1e699137e48c6a042"
 SRCBRANCH = "TQMLS102x-v2016.05"
 
-SRC_URI = "git://github.com/tq-systems/u-boot-tqmaxx.git;protocol=https;branch=${SRCBRANCH}"
+SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 
 DEPENDS += "swap-file-endianess-native tcl-native"
 

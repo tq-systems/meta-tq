@@ -13,9 +13,10 @@ PROVIDES = "virtual/kernel linux-mainline"
 
 require recipes-kernel/linux/linux-dtb.inc
 
-
-SRC_URI = "git://github.com/tq-systems/linux-tqmaxx.git;protocol=https;branch=${SRCBRANCH} \
-           file://defconfig"
+SRC_URI = "\
+  ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+  file://defconfig \
+"
 
 SRCBRANCH = "TQMaxx2-v4.1.15-rel_imx_4.1.15_2.0.0_ga"
 SRCREV = "10ec4a9f992d216369a7f1877b045a7594a321a8"

@@ -14,7 +14,7 @@ SRCBRANCH = "TQMaxx2-v2016.03-rel_imx_4.1.15_2.0.0_ga"
 SRCREV_tqma6q-nav = "53a419a26d372f5419d9f5e1768d750df85a43ee"
 SRCBRANCH_tqma6q-nav = "nav2/work"
 
-SRC_URI = "git://github.com/tq-systems/u-boot-tqmaxx.git;protocol=https;branch=${SRCBRANCH}"
+SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 
 S = "${WORKDIR}/git"
 

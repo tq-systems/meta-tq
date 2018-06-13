@@ -14,9 +14,10 @@ inherit kernel
 
 require recipes-kernel/linux/linux-dtb.inc
 
-
-SRC_URI = "git://github.com/tq-systems/linux-tqmaxx.git;protocol=https;branch=${SRCBRANCH} \
-           file://defconfig"
+SRC_URI = "\
+  ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+  file://defconfig \
+"
 
 SRCBRANCH = "TQMLS102x-linux-v4.4"
 SRCREV = "d732ef64066f74b98604bcf068ca8717ea91a761"
