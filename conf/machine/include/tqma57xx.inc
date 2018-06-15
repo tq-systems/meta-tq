@@ -8,6 +8,8 @@ MACHINE_EXTRA_RRECOMMENDS = " kernel-modules kernel-devicetree"
 
 # TQ u-boot and kernel
 #
+require conf/machine/include/tqmxx.inc
+
 PREFERRED_PROVIDER_virtual/kernel = "linux-tqma57xx-ti-staging-rt"
 KERNEL_IMAGETYPE = "zImage"
 
