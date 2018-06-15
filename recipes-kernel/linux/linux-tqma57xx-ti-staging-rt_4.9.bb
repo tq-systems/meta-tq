@@ -10,9 +10,9 @@ require recipes-kernel/linux/linux-dtb.inc
 # TODO: 
 # - move to correct named branch before pushing to github
 # - rename recipe to linux-tq or linux-tq-rt (in case we support also kernel w/o rt)
-SRC_URI = " \
-    ${TQ_GIT}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
-    file://defconfig \
+SRC_URI = "\
+  ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+  file://defconfig \
 "
 
 SRCBRANCH = "external/private/gateware_graefe_konrad/TQMa57xx_devel"
