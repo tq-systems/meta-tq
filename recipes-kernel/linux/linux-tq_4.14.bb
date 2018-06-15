@@ -15,6 +15,7 @@ DEPENDS_append = " libgcc"
 
 SRC_URI = "\
   ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+  file://fragment.cfg \
 "
 
 SRCBRANCH = "TQMLS1012AL-bringup-LSDK-18.03-V4.14"
@@ -31,7 +32,7 @@ KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
 
 KERNEL_DEFCONFIG ?= "defconfig"
 DELTA_KERNEL_DEFCONFIG ?= ""
-DELTA_KERNEL_DEFCONFIG_tqmls1012al-mbls1012al = "lsdk.config"
+DELTA_KERNEL_DEFCONFIG_tqmls1012al-mbls1012al = "lsdk.config fragment.cfg"
 
 do_merge_delta_config[dirs] = "${B}"
 
