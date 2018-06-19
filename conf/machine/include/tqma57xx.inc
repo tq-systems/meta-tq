@@ -22,7 +22,7 @@ UBOOT_SUFFIX ?= "img"
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 
-IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
+IMAGE_INSTALL_append = " kernel kernel-devicetree kernel-image-zimage"
 
 IMAGE_BOOT_FILES = "\
 	MLO \
