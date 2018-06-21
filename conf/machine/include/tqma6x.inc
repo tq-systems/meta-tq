@@ -27,6 +27,9 @@ EXTRA_IMAGEDEPENDS += "u-boot"
 
 IMAGE_FSTYPES ?= "tar.gz ext4 wic"
 
+# need to have the kernel modules in rootfs
+IMAGE_INSTALL_append = " kernel-modules"
+
 WKS_FILE_DEPENDS = "\
 	mtools-native \
 	dosfstools-native \
