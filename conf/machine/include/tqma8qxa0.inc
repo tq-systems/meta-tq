@@ -38,6 +38,9 @@ IMX_BOOT_SEEK = "33"
 EXTRA_IMAGEDEPENDS += "u-boot"
 IMAGE_FSTYPES_append = " tar.gz ext4 wic"
 
+# need to have the kernel modules in rootfs
+IMAGE_INSTALL_append = " kernel-modules"
+
 do_image_wic[depends] += " \
 	mtools-native:do_populate_sysroot \
 	dosfstools-native:do_populate_sysroot \
