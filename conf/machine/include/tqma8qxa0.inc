@@ -35,7 +35,7 @@ IMX_BOOT_SEEK = "33"
 
 # Image Options
 #
-EXTRA_IMAGEDEPENDS += "u-boot"
+EXTRA_IMAGEDEPENDS += "u-boot imx-boot imx-sc-firmware"
 IMAGE_FSTYPES_append = " tar.gz ext4 wic"
 
 # need to have the kernel modules in rootfs
