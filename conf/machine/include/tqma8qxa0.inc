@@ -47,6 +47,7 @@ do_image_wic[depends] += " \
 	parted-native:do_populate_sysroot \
 	virtual/kernel:do_deploy \
 	imx-boot:do_deploy \
+	imx-sc-firmware:do_deploy \
 	"
 
 WKS_FILE ?= "tqma8x-sdimg.wks"
