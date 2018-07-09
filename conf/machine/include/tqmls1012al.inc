@@ -23,7 +23,7 @@ KERNEL_IMAGETYPES = "itbImage"
 
 UBOOT_ENTRYPOINT = "0x80008000"
 
-DTB_LOAD = "0x90000000"
+DTB_LOAD = "0x81600000"
 
 # Machine specific options
 #
