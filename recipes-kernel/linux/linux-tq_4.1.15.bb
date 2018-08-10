@@ -19,7 +19,7 @@ SRC_URI = "\
 "
 
 SRCBRANCH = "TQMaxx2-v4.1.15-rel_imx_4.1.15_2.0.0_ga"
-SRCREV = "10ec4a9f992d216369a7f1877b045a7594a321a8"
+SRCREV = "9a44bb8b3e7c87c45c7a942ad52f48aa5ecde141"
 
 SRCBRANCH_tqma6q-nav = "TQMaxx2-NAV-v4.1.15-rel_imx_4.1.15_2.0.0_ga"
 SRCREV_tqma6q-nav = "58ce624280c2ca170374b6fcc349819c4a087050"
