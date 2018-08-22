@@ -15,6 +15,7 @@ require conf/machine/include/tqmxx.inc
 PREFERRED_PROVIDER_u-boot_ls1012a ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/kernel_ls1012a ?= "linux-tq"
+PREFERRED_PROVIDER_virtual/kernel ?= "linux-tq"
 
 # Define the default image type
 KERNEL_IMAGETYPE ?= "Image"
