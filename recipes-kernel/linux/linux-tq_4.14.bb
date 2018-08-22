@@ -22,6 +22,9 @@ SRCREV = "7265353d3b62d66ffdab6f911999d70756b4dce0"
 
 S = "${WORKDIR}/git"
 
+# not put Images into /boot of rootfs, install kernel-image if needed
+RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
+
 KERNEL_CC_append = " ${TOOLCHAIN_OPTIONS}"
 KERNEL_LD_append = " ${TOOLCHAIN_OPTIONS}"
 KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
