@@ -1,6 +1,7 @@
 require recipes-bsp/u-boot/u-boot.inc
 
 DESCRIPTION = "u-boot for TQ-Group Freescale LS102xA based modules"
+SECTION = "bootloader"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
