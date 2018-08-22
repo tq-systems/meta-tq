@@ -41,7 +41,7 @@ do_merge_delta_config() {
     done
     cp .config ${WORKDIR}/defconfig
 }
-addtask merge_delta_config before do_preconfigure after do_patch
+addtask merge_delta_config before do_configure after do_patch
 
 COMPATIBLE_MACHINE = "(tqmls1012al-mbls1012al)"
 
