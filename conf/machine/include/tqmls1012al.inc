@@ -22,6 +22,8 @@ KERNEL_IMAGETYPE ?= "Image"
 KERNEL_CLASSES  = " kernel-itbimage "
 KERNEL_IMAGETYPES = "itbImage"
 
+CORE_IMAGE_EXTRA_INSTALL_append_qoriq = " ppfe-firmware"
+
 UBOOT_ENTRYPOINT = "0x80008000"
 
 DTB_LOAD = "0x81600000"
