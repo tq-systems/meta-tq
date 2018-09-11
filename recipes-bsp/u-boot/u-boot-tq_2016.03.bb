@@ -22,6 +22,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 COMPATIBLE_MACHINE = "tqma7x-mba7"
 COMPATIBLE_MACHINE .= "|tqma6ulx-mba6ulx|tqma6ulx-lga-mba6ulx"
+COMPATIBLE_MACHINE .= "|tqma6ullx-mba6ulx"
 COMPATIBLE_MACHINE .= "|tqma6q-nav"
 COMPATIBLE_MACHINE .= "|tqma6qp-mba6x|tqma6q-mba6x|tqma6dl-mba6x|tqma6s-mba6x"
 
