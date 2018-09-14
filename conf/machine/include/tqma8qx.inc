@@ -33,6 +33,21 @@ IMAGE_BOOTLOADER = "imx-boot"
 # for sdcard image rule
 IMX_BOOT_SEEK = "32"
 
+# Image Options
+#
+EXTRA_IMAGEDEPENDS += "u-boot"
+IMAGE_FSTYPES_append = " tar.gz ext4 wic"
+
+do_image_wic[depends] += " \
+	mtools-native:do_populate_sysroot \
+	dosfstools-native:do_populate_sysroot \
+	parted-native:do_populate_sysroot \
+	virtual/kernel:do_deploy \
+	imx-boot:do_deploy \
+	"
+
+WKS_FILE ?= "tqma8x-sdimg.wks"
+
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale
 
