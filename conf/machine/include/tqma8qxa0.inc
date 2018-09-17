@@ -55,4 +55,6 @@ WKS_FILE ?= "tqma8x-sdimg.wks"
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale
 
+MACHINEOVERRIDES =. "imx:"
+
 include conf/machine/include/imx-base.inc
