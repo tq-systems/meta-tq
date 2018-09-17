@@ -47,7 +47,7 @@ do_image_wic[depends] += " \
 	imx-boot:do_deploy \
 	"
 
-WKS_FILE ?= "tqma8x-sdimg.wks"
+WKS_FILE ?= "tqma8x-b0-sdimg.wks"
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale
