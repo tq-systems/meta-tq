@@ -22,7 +22,7 @@ SRC_URI = " \
 
 # TODO: adopt SRCREV and SRCBRANCH when available on github */
 SRCBRANCH = "TQMa57xx-linux-ti-v4.9.77-rt61"
-SRCREV = "45787c7ab5865fb2ff50a65b1924c95015f9fbbf"
+SRCREV = "b3573ebf458f9bdd1235c24a86759fd92cd9fcc1"
 
 KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
 
