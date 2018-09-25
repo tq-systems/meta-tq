@@ -1,6 +1,13 @@
 # Common definitions for TQ-Group TQMa57xx modules
 
-require conf/machine/include/dra7xx.inc
+include conf/machine/include/dra7xx.inc
+
+SOC_FAMILY_append = ":dra7xx"
+
+MACHINE_FEATURES += "pci"
+
+DEFAULTTUNE ?= "armv7athf-neon"
+require conf/machine/include/tune-cortexa15.inc
 
 # Machine specific options
 #
@@ -16,10 +23,17 @@ KERNEL_IMAGETYPE = "zImage"
 PREFERRED_PROVIDER_u-boot = "u-boot-tq"
 PREFERRED_PROVIDER_virtual/bootloader = "u-boot-tq"
 
+UBOOT_ARCH = "arm"
+UBOOT_ENTRYPOINT = "0x80008000"
+UBOOT_LOADADDRESS = "0x80008000"
 UBOOT_SUFFIX ?= "img"
 
 # Image Options
 #
+KERNEL_IMAGETYPE = "zImage"
+KERNEL_IMAGETYPES = "zImage uImage"
+KERNEL_CLASSES += "kernel-uimage"
+
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 
 IMAGE_INSTALL_append = " kernel kernel-modules"
@@ -40,3 +54,10 @@ do_image_wic[depends] += "\
 	virtual/kernel:do_deploy \
 	u-boot-tq:do_deploy \
 	"
+
+# Use the expected value of the ubifs filesystem's volume name in the kernel
+# and u-boot.
+UBI_VOLNAME = "rootfs"
+
+# List common SoC features
+MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx mmip dsp"
