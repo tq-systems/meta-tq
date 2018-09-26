@@ -13,9 +13,16 @@ KERNEL_DEVICETREE ?= " \
 # IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
 #
 IMAGE_BOOT_FILES_append = "\
+	${KERNEL_IMAGETYPE}-am572x-mba57xx.dtb;am572x-mba57xx.dtb \
+	${KERNEL_IMAGETYPE}-am571x-mba57xx.dtb;am571x-mba57xx.dtb \
+	${KERNEL_IMAGETYPE}-am572x-mba57xx-lcd.dtb;am572x-mba57xx-lcd.dtb \
+	${KERNEL_IMAGETYPE}-am571x-mba57xx-lcd.dtb;am571x-mba57xx-lcd.dtb \
+"
+
+IMAGE_BOOT_FILES ?= "\
 	${KERNEL_IMAGETYPE} \
-	${KERNEL_IMAGETYPE}-tqma572x-mba57xx.dtb;tqma572x-mba57xx.dtb \
-	${KERNEL_IMAGETYPE}-tqma571x-mba57xx.dtb;tqma571x-mba57xx.dtb \
+	${KERNEL_IMAGETYPE}-am572x-mba57xx.dtb;am572x-mba57xx.dtb \
+	${KERNEL_IMAGETYPE}-am571x-mba57xx.dtb;am571x-mba57xx.dtb \
 	${KERNEL_IMAGETYPE}-am572x-mba57xx-lcd.dtb;am572x-mba57xx-lcd.dtb \
 	${KERNEL_IMAGETYPE}-am571x-mba57xx-lcd.dtb;am571x-mba57xx-lcd.dtb \
 	MLO u-boot.img \
