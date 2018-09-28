@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 PROVIDES += "u-boot"
 DEPENDS_append = " dtc-native"
 
-SRCREV = "03977f85d7b399833b681a86118b3c85b0c3ae31"
-SRCBRANCH = "TQMa8xX-v2017.03-rel_imx_4.9.88_2.2.0_8qxp_beta2"
+SRCREV = "a4a18ed146ec41f71d7710eed439da086b2474ec"
+SRCBRANCH = "TQMa8xx-bringup-imx_v2017.03_4.9.88_imx8qxp_beta2"
 
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 

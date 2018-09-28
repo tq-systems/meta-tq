@@ -16,9 +16,8 @@ SRC_URI = "\
   file://defconfig \
 "
 
-SRCBRANCH = "imx_4.9.88_imx8qxp_beta2"
-SRCREV = "05f46d3f9b4a8987edac62a52528d52f47cfa42d"
-LOCALVERSION = "-${SRCBRANCH}"
+SRCBRANCH = "TQMa8xx-bringup-imx_4.9.88_imx8qxp_beta2"
+SRCREV = "618794a8fc3fd49bfe8b99f3bedea5cc6da6205c"
 
 COMPATIBLE_MACHINE = "tqma8qx-mba8qx|tqma8qxa0-mba8qx"
 
