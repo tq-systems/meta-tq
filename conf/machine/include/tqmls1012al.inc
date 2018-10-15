@@ -39,7 +39,7 @@ MACHINE_FEATURES_append = " ext2 pci rtc serial usbhost vfat"
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "u-boot ppa ppfe-firmware"
-IMAGE_FSTYPES ?= "tar.gz ext4 ubi"
+IMAGE_FSTYPES = "ubi tar.gz ext4 wic"
 
 DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
 
@@ -59,6 +59,13 @@ MKUBIFS_ARGS = " -m 1 -e 65408 -c 896 "
 UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
 # needs to be set to have it consistent for kernel command line
 UBI_VOLNAME = "root"
+
+WKS_FILE_DEPENDS = "\
+        mtools-native \
+        dosfstools-native \
+        parted-native \
+        virtual/kernel \
+        "
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale
