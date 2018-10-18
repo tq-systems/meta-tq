@@ -39,7 +39,8 @@ MACHINE_FEATURES_append = " ext2 pci rtc serial usbhost vfat"
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "u-boot ppa ppfe-firmware"
-IMAGE_FSTYPES = "ubi tar.gz ext4 wic"
+IMAGE_FSTYPES_append = " ubi tar.gz ext4 wic "
+IMAGE_FSTYPES_remove = " jffs2 ext2.gz ext2.gz.u-boot "
 
 DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
 
