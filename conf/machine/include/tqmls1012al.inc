@@ -43,6 +43,9 @@ IMAGE_FSTYPES_append = " ubi tar.gz ext4 wic "
 IMAGE_FSTYPES_remove = " jffs2 ext2.gz ext2.gz.u-boot "
 
 DISTRO_FEATURES_remove = " wayland weston x11 "
+MACHINE_FEATURES_append = " usbhost pci ext2 serial vfat "
+DISTRO_FEATURES_BACKFILL_CONSIDERED = " pulseaudio bluez5 gobject-introspection-data "
+DISTRO_FEATURES_remove = " alsa bluetooth irda pcmcia usbgadget pulseaudio "
 
 # needed for Rootfs on QSPI
 IMAGE_INSTALL_append = " mtd-utils-jffs2 mtd-utils-ubifs mtd-utils-misc"
