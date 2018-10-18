@@ -42,7 +42,7 @@ EXTRA_IMAGEDEPENDS += "u-boot ppa ppfe-firmware"
 IMAGE_FSTYPES_append = " ubi tar.gz ext4 wic "
 IMAGE_FSTYPES_remove = " jffs2 ext2.gz ext2.gz.u-boot "
 
-DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
+DISTRO_FEATURES_remove = " wayland weston x11 "
 
 # needed for Rootfs on QSPI
 IMAGE_INSTALL_append = " mtd-utils-jffs2 mtd-utils-ubifs mtd-utils-misc"
