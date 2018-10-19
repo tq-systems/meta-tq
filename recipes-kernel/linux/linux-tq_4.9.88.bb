@@ -11,10 +11,11 @@ PROVIDES = "virtual/kernel"
 
 inherit kernel
 
-SRC_URI = "\
-  ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
-  file://defconfig \
-"
+SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+           file://defconfig \
+           file://0001-aarch64-dt-rewrite-trees-for-TQMa8QX.patch \
+           file://0002-arm64-dt-fsl-imx8qxp-tqma8qx-mba8qx-enable-ethernet.patch \
+           "
 
 SRCBRANCH = "TQMa8xx-bringup-imx_4.9.88_imx8qxp_beta2"
 SRCREV = "618794a8fc3fd49bfe8b99f3bedea5cc6da6205c"
