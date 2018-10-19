@@ -12,7 +12,9 @@ DEPENDS_append = " dtc-native"
 SRCREV = "bc6a293a61f37f7882229d1e99d73f7416dcb168"
 SRCBRANCH = "TQMa8xx-bringup-imx_v2017.03_4.9.88_imx8qxp_beta2"
 
-SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
+SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+           file://0015-tqma8qx-next-fix-for-defaul-fdt_file.patch \
+           "
 
 S = "${WORKDIR}/git"
 
