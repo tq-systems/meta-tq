@@ -38,6 +38,9 @@ IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2"
 # need to have the kernel modules in rootfs
 IMAGE_INSTALL_append = " kernel-modules"
 
+# Do not update fstab file when using wic images
+WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
+
 do_image_wic[depends] += " \
 	mtools-native:do_populate_sysroot \
 	dosfstools-native:do_populate_sysroot \

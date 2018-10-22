@@ -13,5 +13,5 @@
 # 0 33kiB        4MiB    8MiB       72MiB
 #
 part u-boot --source rawcopy --sourceparams="file=iMX8QX-a0-bootstream.bin" --ondisk mmcblk --no-table --align 33
-part /boot --source bootimg-partition --ondisk mmcblk --fstype=vfat --label boot --active --align 8192 --size 64M --extra-space 0
-part / --source rootfs --ondisk mmcblk --fstype=ext4 --label root --align 4096
+part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 8192 --size 64M --extra-space 0
+part / --source rootfs --fstype=ext4 --label root --align 4096
