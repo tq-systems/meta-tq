@@ -5,6 +5,7 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
            file://disable-non-fsl-architecture.cfg \
            file://disable-non-used-network-devices.cfg \
            file://optimize-filesystem-selection.cfg \
+           file://gpio-enablement.cfg \
            file://0001-aarch64-dt-rewrite-trees-for-TQMa8QX.patch \
            file://0002-arm64-dt-fsl-imx8qxp-tqma8qx-mba8qx-enable-ethernet.patch \
            file://0001-arm64-platforms-select-CLKSRC_MMIO-and-RESET_CONTROL.patch \
