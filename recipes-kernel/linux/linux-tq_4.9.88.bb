@@ -8,7 +8,14 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
            file://gpio-enablement.cfg \
            file://0001-aarch64-dt-rewrite-trees-for-TQMa8QX.patch \
            file://0002-arm64-dt-fsl-imx8qxp-tqma8qx-mba8qx-enable-ethernet.patch \
-           file://0001-arm64-platforms-select-CLKSRC_MMIO-and-RESET_CONTROL.patch \
+           file://0003-arm64-platforms-select-CLKSRC_MMIO-and-RESET_CONTROL.patch \
+           file://0004-net-phy-dp83867-add-support-for-MAC-impedance-config.patch \
+           file://0005-net-phy-dp83867-Add-lane-swapping-support-in-the-DP8.patch \
+           file://0006-net-phy-dp83867-add-workaround-for-incorrect-RX_CTRL.patch \
+           file://0007-net-phy-dp83867-support-led-configuration.patch \
+           file://0008-arm64-dt-fsl-imx8qxp-tqma8qx-mba8qx-add-strap-quirk-.patch \
+           file://0009-arm64-dt-fsl-imx8qxp-tqma8qx-mba8qx-configure-phy-le.patch \
+           file://0010-arm64-dt-fsl-imx8qxp-tqma8qx-add-and-populate-i2c1.patch \
            "
 
 SRCBRANCH = "TQMa8xx-bringup-imx_4.9.88_imx8qxp_beta2"

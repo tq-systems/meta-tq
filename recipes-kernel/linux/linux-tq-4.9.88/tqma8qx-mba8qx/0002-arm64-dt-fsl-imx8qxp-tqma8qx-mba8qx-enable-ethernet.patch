@@ -1,9 +1,11 @@
-From ebc25911221fe247105fdf937b827fd3d9eecb84 Mon Sep 17 00:00:00 2001
+From 749ed29c757cacaf3fb2620b1f755c0001e90408 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 17 Oct 2018 18:29:03 +0200
-Subject: [PATCH 2/2] arm64: dt: fsl-imx8qxp-tqma8qx-mba8qx: enable ethernet
+Subject: [PATCH] arm64: dt: fsl-imx8qxp-tqma8qx-mba8qx: enable ethernet
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+
+%% original patch: 0002-arm64-dt-fsl-imx8qxp-tqma8qx-mba8qx-enable-ethernet.patch
 ---
  .../freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi | 85 +++++++++++++++++++
  1 file changed, 85 insertions(+)
@@ -111,6 +113,3 @@ index 14bfd2ff4c36..81b35f364470 100644
  &usdhc2 {
  	pinctrl-names = "default", "state_100mhz", "state_200mhz";
  	pinctrl-0 = <&pinctrl_usdhc2>, <&pinctrl_usdhc2_gpio>;
--- 
-2.17.1
-

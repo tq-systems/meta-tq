@@ -58,6 +58,3 @@ index ef3f5cf9ac23..69219e5b7dbf 100644
  	select PINCTRL
  	select PINCTRL_IMX
  	select PINCTRL_IMX8MM
--- 
-2.17.1
-

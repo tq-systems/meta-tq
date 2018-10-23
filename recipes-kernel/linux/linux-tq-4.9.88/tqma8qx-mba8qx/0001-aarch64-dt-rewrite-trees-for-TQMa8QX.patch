@@ -1,12 +1,14 @@
-From 8bff3e06c4bea899bf2e54fa77184e4bb70b76e2 Mon Sep 17 00:00:00 2001
+From 8ca637f7b21f99be4d1798189c57efe205b7862c Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 17 Oct 2018 18:22:00 +0200
-Subject: [PATCH 1/2] aarch64: dt: rewrite trees for TQMa8QX
+Subject: [PATCH] aarch64: dt: rewrite trees for TQMa8QX
 
 - split module and baseboard
 - cleanup and remove not implemented interfaces
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+
+%% original patch: 0001-aarch64-dt-rewrite-trees-for-TQMa8QX.patch
 ---
  arch/arm64/boot/dts/freescale/Makefile        |   4 +-
  .../fsl-imx8qxp-tqma8qx-a0-mba8qx.dts         |  20 ++
@@ -460,6 +462,3 @@ index 72066f70f6e2..d3b9397184ee 100644
 -	status = "disabled";
 -};
 -
--- 
-2.17.1
-

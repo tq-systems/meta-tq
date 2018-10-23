@@ -1,0 +1,104 @@
+From b949f3d5ef47f40c77921357896a26c9868c3a97 Mon Sep 17 00:00:00 2001
+From: Lukasz Majewski <lukma@denx.de>
+Date: Tue, 7 Feb 2017 06:20:23 +0100
+Subject: [PATCH] net: phy: dp83867: Add lane swapping support in the DP83867
+ TI's PHY driver
+
+This patch adds support for enabling or disabling the lane swapping (called
+"port mirroring" in PHY's CFG4 register) feature of the DP83867 TI's PHY
+device.
+
+One use case is when bootstrap configuration enables this feature (because
+of e.g. LED_0 wrong wiring) so then one needs to disable it in software
+(at u-boot/Linux).
+
+Signed-off-by: Lukasz Majewski <lukma@denx.de>
+Reviewed-by: Andrew Lunn <andrew@lunn.ch>
+Signed-off-by: David S. Miller <davem@davemloft.net>
+(cherry picked from commit fc6d39c39581f3c12c95f166ce95ef8beb2047e8)
+---
+ drivers/net/phy/dp83867.c | 38 ++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
+
+diff --git a/drivers/net/phy/dp83867.c b/drivers/net/phy/dp83867.c
+index eb806ceae568..19865530e0b1 100644
+--- a/drivers/net/phy/dp83867.c
++++ b/drivers/net/phy/dp83867.c
+@@ -32,6 +32,7 @@
+ #define DP83867_CFG3		0x1e
+ 
+ /* Extended Registers */
++#define DP83867_CFG4            0x0031
+ #define DP83867_RGMIICTL	0x0032
+ #define DP83867_STRAP_STS1	0x006E
+ #define DP83867_RGMIIDCTL	0x0086
+@@ -75,11 +76,21 @@
+ #define DP83867_IO_MUX_CFG_IO_IMPEDANCE_MAX	0x0
+ #define DP83867_IO_MUX_CFG_IO_IMPEDANCE_MIN	0x1f
+ 
++/* CFG4 bits */
++#define DP83867_CFG4_PORT_MIRROR_EN              BIT(0)
++
++enum {
++	DP83867_PORT_MIRROING_KEEP,
++	DP83867_PORT_MIRROING_EN,
++	DP83867_PORT_MIRROING_DIS,
++};
++
+ struct dp83867_private {
+ 	int rx_id_delay;
+ 	int tx_id_delay;
+ 	int fifo_depth;
+ 	int io_impedance;
++	int port_mirroring;
+ };
+ 
+ static int dp83867_ack_interrupt(struct phy_device *phydev)
+@@ -116,6 +127,24 @@ static int dp83867_config_intr(struct phy_device *phydev)
+ 	return phy_write(phydev, MII_DP83867_MICR, micr_status);
+ }
+ 
++static int dp83867_config_port_mirroring(struct phy_device *phydev)
++{
++	struct dp83867_private *dp83867 =
++		(struct dp83867_private *)phydev->priv;
++	u16 val;
++
++	val = phy_read_mmd_indirect(phydev, DP83867_CFG4, DP83867_DEVADDR);
++
++	if (dp83867->port_mirroring == DP83867_PORT_MIRROING_EN)
++		val |= DP83867_CFG4_PORT_MIRROR_EN;
++	else
++		val &= ~DP83867_CFG4_PORT_MIRROR_EN;
++
++	phy_write_mmd_indirect(phydev, DP83867_CFG4, DP83867_DEVADDR, val);
++
++	return 0;
++}
++
+ #ifdef CONFIG_OF_MDIO
+ static int dp83867_of_init(struct phy_device *phydev)
+ {
+@@ -149,6 +178,12 @@ static int dp83867_of_init(struct phy_device *phydev)
+ 	     phydev->interface == PHY_INTERFACE_MODE_RGMII_TXID))
+ 		return ret;
+ 
++	if (of_property_read_bool(of_node, "enet-phy-lane-swap"))
++		dp83867->port_mirroring = DP83867_PORT_MIRROING_EN;
++
++	if (of_property_read_bool(of_node, "enet-phy-lane-no-swap"))
++		dp83867->port_mirroring = DP83867_PORT_MIRROING_DIS;
++
+ 	return of_property_read_u32(of_node, "ti,fifo-depth",
+ 				   &dp83867->fifo_depth);
+ }
+@@ -249,6 +284,9 @@ static int dp83867_config_init(struct phy_device *phydev)
+ 		phy_write(phydev, DP83867_CFG3, val);
+ 	}
+ 
++	if (dp83867->port_mirroring != DP83867_PORT_MIRROING_KEEP)
++		dp83867_config_port_mirroring(phydev);
++
+ 	return 0;
+ }
+ 
