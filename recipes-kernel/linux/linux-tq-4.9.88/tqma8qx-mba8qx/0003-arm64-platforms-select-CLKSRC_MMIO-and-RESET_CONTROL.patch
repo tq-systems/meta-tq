@@ -1,4 +1,4 @@
-From 4dcb7a6fc37fd7d73f4df4f0a579c6015e01d352 Mon Sep 17 00:00:00 2001
+From 8c5abff25dffee795c6d5a347f9ca69afef79eff Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Tue, 23 Oct 2018 12:07:09 +0200
 Subject: [PATCH] arm64: platforms: select CLKSRC_MMIO and RESET_CONTROLLER for

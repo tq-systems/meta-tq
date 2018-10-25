@@ -1,4 +1,4 @@
-From 75b659faf5ee5c3e5769199fe5e09b05b94c6001 Mon Sep 17 00:00:00 2001
+From 60c5934eb353469d3e505d2c70a2f43c5f9f1623 Mon Sep 17 00:00:00 2001
 From: Mugunthan V N <mugunthanvnm@ti.com>
 Date: Tue, 18 Oct 2016 16:50:18 +0530
 Subject: [PATCH] net: phy: dp83867: add support for MAC impedance

@@ -1,4 +1,4 @@
-From 0220f80159baa2379f0788a6e38d82b2a205faa9 Mon Sep 17 00:00:00 2001
+From ee77150579e6f8695e667fee4c693f999b1dbcf6 Mon Sep 17 00:00:00 2001
 From: Murali Karicheri <m-karicheri2@ti.com>
 Date: Tue, 4 Jul 2017 16:23:24 +0530
 Subject: [PATCH] net: phy: dp83867: add workaround for incorrect RX_CTRL pin

@@ -1,27 +1,27 @@
-From 8ca637f7b21f99be4d1798189c57efe205b7862c Mon Sep 17 00:00:00 2001
+From 208062627c1da637aa472d3516dda28055e7498d Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 17 Oct 2018 18:22:00 +0200
-Subject: [PATCH] aarch64: dt: rewrite trees for TQMa8QX
+Subject: [PATCH] arm64: dt: rewrite trees for TQMa8QX
 
 - split module and baseboard
 - cleanup and remove not implemented interfaces
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
-
-%% original patch: 0001-aarch64-dt-rewrite-trees-for-TQMa8QX.patch
 ---
  arch/arm64/boot/dts/freescale/Makefile        |   4 +-
- .../fsl-imx8qxp-tqma8qx-a0-mba8qx.dts         |  20 ++
+ .../fsl-imx8qxp-tqma8qx-a0-mba8qx.dts         |  20 +
  ...8qx-a0.dts => fsl-imx8qxp-tqma8qx-a0.dtsi} |   2 -
- .../freescale/fsl-imx8qxp-tqma8qx-mba8qx.dts  |  19 ++
- .../freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi | 125 +++++++++++++
- ...p-tqma8qx.dts => fsl-imx8qxp-tqma8qx.dtsi} | 173 +-----------------
- 6 files changed, 167 insertions(+), 176 deletions(-)
+ .../freescale/fsl-imx8qxp-tqma8qx-mba8qx.dts  |  19 +
+ .../freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi | 125 +++++++
+ .../dts/freescale/fsl-imx8qxp-tqma8qx.dts     | 343 ------------------
+ .../dts/freescale/fsl-imx8qxp-tqma8qx.dtsi    | 163 +++++++++
+ 7 files changed, 329 insertions(+), 347 deletions(-)
  create mode 100644 arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-a0-mba8qx.dts
  rename arch/arm64/boot/dts/freescale/{fsl-imx8qxp-tqma8qx-a0.dts => fsl-imx8qxp-tqma8qx-a0.dtsi} (94%)
  create mode 100644 arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dts
  create mode 100644 arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi
- rename arch/arm64/boot/dts/freescale/{fsl-imx8qxp-tqma8qx.dts => fsl-imx8qxp-tqma8qx.dtsi} (50%)
+ delete mode 100644 arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dts
+ create mode 100644 arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dtsi
 
 diff --git a/arch/arm64/boot/dts/freescale/Makefile b/arch/arm64/boot/dts/freescale/Makefile
 index b0bcb92276db..e7e677ab8f53 100644
@@ -236,38 +236,63 @@ index 000000000000..14bfd2ff4c36
 +	vmmc-supply = <&reg_usdhc2_vmmc>;
 +	status = "okay";
 +};
-diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dts b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dtsi
-similarity index 50%
-rename from arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dts
-rename to arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dtsi
-index 72066f70f6e2..d3b9397184ee 100644
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dts b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dts
+deleted file mode 100644
+index 72066f70f6e2..000000000000
 --- a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dts
-+++ b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dtsi
-@@ -12,8 +12,6 @@
-  * GNU General Public License for more details.
-  */
- 
++++ /dev/null
+@@ -1,343 +0,0 @@
+-/*
+- * Copyright 2018 TQ Systems GmbH
+- *
+- * This program is free software; you can redistribute it and/or
+- * modify it under the terms of the GNU General Public License
+- * as published by the Free Software Foundation; either version 2
+- * of the License, or (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- * GNU General Public License for more details.
+- */
+-
 -/dts-v1/;
 -
- /* First 128KB is for PSCI ATF. */
- /* Last 127M is for M4/RPMSG */
- /memreserve/ 0x80000000 0x08000000;
-@@ -24,11 +22,6 @@
- 	model = "TQ Systems i.MX8QXP TQMa8xX";
- 	compatible = "fsl,tqma8qx", "fsl,imx8qxp";
- 
+-/* First 128KB is for PSCI ATF. */
+-/* Last 127M is for M4/RPMSG */
+-/memreserve/ 0x80000000 0x08000000;
+-
+-#include "fsl-imx8qxp.dtsi"
+-
+-/ {
+-	model = "TQ Systems i.MX8QXP TQMa8xX";
+-	compatible = "fsl,tqma8qx", "fsl,imx8qxp";
+-
 -	chosen {
 -		bootargs = "console=ttyLP1,115200 earlycon=lpuart32,0x5a070000,115200";
 -		stdout-path = &lpuart1;
 -	};
 -
- 	regulators {
- 		compatible = "simple-bus";
- 		#address-cells = <1>;
-@@ -49,58 +42,7 @@
- 
- &iomuxc {
- 	pinctrl-names = "default";
+-	regulators {
+-		compatible = "simple-bus";
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-
+-		reg_usdhc2_vmmc: usdhc2_vmmc {
+-			compatible = "regulator-fixed";
+-			regulator-name = "SD1_SPWR";
+-			regulator-min-microvolt = <3000000>;
+-			regulator-max-microvolt = <3000000>;
+-			gpio = <&gpio4 19 GPIO_ACTIVE_HIGH>;
+-			enable-active-high;
+-			startup-delay-us = <100>;
+-			off-on-delay-us = <12000>;
+-		};
+-	};
+-};
+-
+-&iomuxc {
+-	pinctrl-names = "default";
 -	imx8qxp-mek {
 -
 -		pinctrl_lpuart0: lpuart0grp {
@@ -320,14 +345,61 @@ index 72066f70f6e2..d3b9397184ee 100644
 -			>;
 -		};
 -
-+	imx8qxp-tqma8qx {
- 		pinctrl_lpi2c1: lpi1cgrp {
- 			fsl,pins = <
- 				SC_P_USB_SS3_TC1_ADMA_I2C1_SCL	0x06000020
-@@ -156,50 +98,6 @@
- 			>;
- 		};
- 
+-		pinctrl_lpi2c1: lpi1cgrp {
+-			fsl,pins = <
+-				SC_P_USB_SS3_TC1_ADMA_I2C1_SCL	0x06000020
+-				SC_P_USB_SS3_TC3_ADMA_I2C1_SDA	0x06000020
+-			>;
+-		};
+-
+-		pinctrl_usdhc1: usdhc1grp {
+-			fsl,pins = <
+-				SC_P_EMMC0_CLK_CONN_EMMC0_CLK		0x06000041
+-				SC_P_EMMC0_CMD_CONN_EMMC0_CMD		0x00000021
+-				SC_P_EMMC0_DATA0_CONN_EMMC0_DATA0	0x00000021
+-				SC_P_EMMC0_DATA1_CONN_EMMC0_DATA1	0x00000021
+-				SC_P_EMMC0_DATA2_CONN_EMMC0_DATA2	0x00000021
+-				SC_P_EMMC0_DATA3_CONN_EMMC0_DATA3	0x00000021
+-				SC_P_EMMC0_DATA4_CONN_EMMC0_DATA4	0x00000021
+-				SC_P_EMMC0_DATA5_CONN_EMMC0_DATA5	0x00000021
+-				SC_P_EMMC0_DATA6_CONN_EMMC0_DATA6	0x00000021
+-				SC_P_EMMC0_DATA7_CONN_EMMC0_DATA7	0x00000021
+-				SC_P_EMMC0_STROBE_CONN_EMMC0_STROBE	0x06000041
+-			>;
+-		};
+-
+-		pinctrl_usdhc1_100mhz: usdhc1grp100mhz {
+-			fsl,pins = <
+-				SC_P_EMMC0_CLK_CONN_EMMC0_CLK		0x06000040
+-				SC_P_EMMC0_CMD_CONN_EMMC0_CMD		0x00000020
+-				SC_P_EMMC0_DATA0_CONN_EMMC0_DATA0	0x00000020
+-				SC_P_EMMC0_DATA1_CONN_EMMC0_DATA1	0x00000020
+-				SC_P_EMMC0_DATA2_CONN_EMMC0_DATA2	0x00000020
+-				SC_P_EMMC0_DATA3_CONN_EMMC0_DATA3	0x00000020
+-				SC_P_EMMC0_DATA4_CONN_EMMC0_DATA4	0x00000020
+-				SC_P_EMMC0_DATA5_CONN_EMMC0_DATA5	0x00000020
+-				SC_P_EMMC0_DATA6_CONN_EMMC0_DATA6	0x00000020
+-				SC_P_EMMC0_DATA7_CONN_EMMC0_DATA7	0x00000020
+-				SC_P_EMMC0_STROBE_CONN_EMMC0_STROBE	0x06000040
+-			>;
+-		};
+-
+-		pinctrl_usdhc1_200mhz: usdhc1grp200mhz {
+-			fsl,pins = <
+-				SC_P_EMMC0_CLK_CONN_EMMC0_CLK		0x06000040
+-				SC_P_EMMC0_CMD_CONN_EMMC0_CMD		0x00000020
+-				SC_P_EMMC0_DATA0_CONN_EMMC0_DATA0	0x00000020
+-				SC_P_EMMC0_DATA1_CONN_EMMC0_DATA1	0x00000020
+-				SC_P_EMMC0_DATA2_CONN_EMMC0_DATA2	0x00000020
+-				SC_P_EMMC0_DATA3_CONN_EMMC0_DATA3	0x00000020
+-				SC_P_EMMC0_DATA4_CONN_EMMC0_DATA4	0x00000020
+-				SC_P_EMMC0_DATA5_CONN_EMMC0_DATA5	0x00000020
+-				SC_P_EMMC0_DATA6_CONN_EMMC0_DATA6	0x00000020
+-				SC_P_EMMC0_DATA7_CONN_EMMC0_DATA7	0x00000020
+-				SC_P_EMMC0_STROBE_CONN_EMMC0_STROBE	0x06000040
+-			>;
+-		};
+-
 -		pinctrl_usdhc2_gpio: usdhc2gpiogrp {
 -			fsl,pins = <
 -				SC_P_USDHC1_RESET_B_LSIO_GPIO4_IO19	0x06000021
@@ -372,13 +444,29 @@ index 72066f70f6e2..d3b9397184ee 100644
 -			>;
 -		};
 -
- 		pinctrl_flexspi0: flexspi0grp {
- 			fsl,pins = <
- 				SC_P_QSPI0A_DATA0_LSIO_QSPI0A_DATA0	0x0600004c
-@@ -223,18 +121,6 @@
- 	};
- };
- 
+-		pinctrl_flexspi0: flexspi0grp {
+-			fsl,pins = <
+-				SC_P_QSPI0A_DATA0_LSIO_QSPI0A_DATA0	0x0600004c
+-				SC_P_QSPI0A_DATA1_LSIO_QSPI0A_DATA1	0x0600004c
+-				SC_P_QSPI0A_DATA2_LSIO_QSPI0A_DATA2	0x0600004c
+-				SC_P_QSPI0A_DATA3_LSIO_QSPI0A_DATA3	0x0600004c
+-				SC_P_QSPI0A_DQS_LSIO_QSPI0A_DQS		0x0600004c
+-				SC_P_QSPI0A_SS0_B_LSIO_QSPI0A_SS0_B	0x0600004c
+-				SC_P_QSPI0A_SS1_B_LSIO_QSPI0A_SS1_B	0x0600004c
+-				SC_P_QSPI0A_SCLK_LSIO_QSPI0A_SCLK	0x0600004c
+-				SC_P_QSPI0B_SCLK_LSIO_QSPI0B_SCLK	0x0600004c
+-				SC_P_QSPI0B_DATA0_LSIO_QSPI0B_DATA0	0x0600004c
+-				SC_P_QSPI0B_DATA1_LSIO_QSPI0B_DATA1	0x0600004c
+-				SC_P_QSPI0B_DATA2_LSIO_QSPI0B_DATA2	0x0600004c
+-				SC_P_QSPI0B_DATA3_LSIO_QSPI0B_DATA3	0x0600004c
+-				SC_P_QSPI0B_DQS_LSIO_QSPI0B_DQS		0x0600004c
+-				SC_P_QSPI0B_SS0_B_LSIO_QSPI0B_SS0_B	0x0600004c
+-				SC_P_QSPI0B_SS1_B_LSIO_QSPI0B_SS1_B	0x0600004c
+-			>;
+-		};
+-	};
+-};
+-
 -&lpuart0 {
 -	pinctrl-names = "default";
 -	pinctrl-0 = <&pinctrl_lpuart0>;
@@ -391,13 +479,22 @@ index 72066f70f6e2..d3b9397184ee 100644
 -	status = "okay";
 -};
 -
- &gpio0 {
- 	status = "okay";
- };
-@@ -251,41 +137,6 @@
- 	status = "okay";
- };
- 
+-&gpio0 {
+-	status = "okay";
+-};
+-
+-&gpio1 {
+-	status = "okay";
+-};
+-
+-&gpio3 {
+-	status = "okay";
+-};
+-
+-&gpio4 {
+-	status = "okay";
+-};
+-
 -&fec1 {
 -	pinctrl-names = "default";
 -	pinctrl-0 = <&pinctrl_fec1>;
@@ -433,13 +530,39 @@ index 72066f70f6e2..d3b9397184ee 100644
 -	status = "okay";
 -};
 -
- &flexspi0 {
- 	pinctrl-names = "default";
- 	pinctrl-0 = <&pinctrl_flexspi0>;
-@@ -319,25 +170,3 @@
- 	non-removable;
- 	status = "okay";
- };
+-&flexspi0 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_flexspi0>;
+-	status = "okay";
+-
+-	flash0: mt35xu512aba@0 {
+-		reg = <0>;
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		compatible = "spi-flash";
+-		spi-max-frequency = <29000000>;
+-		spi-nor,ddr-quad-read-dummy = <8>;
+-	};
+-};
+-
+-&i2c1 {
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+-	clock-frequency = <100000>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_lpi2c1>;
+-	status = "disabled";
+-};
+-
+-&usdhc1 {
+-	pinctrl-names = "default", "state_100mhz", "state_200mhz";
+-	pinctrl-0 = <&pinctrl_usdhc1>;
+-	pinctrl-1 = <&pinctrl_usdhc1_100mhz>;
+-	pinctrl-2 = <&pinctrl_usdhc1_200mhz>;
+-	bus-width = <8>;
+-	non-removable;
+-	status = "okay";
+-};
 -
 -&usdhc2 {
 -	pinctrl-names = "default", "state_100mhz", "state_200mhz";
@@ -462,3 +585,172 @@ index 72066f70f6e2..d3b9397184ee 100644
 -	status = "disabled";
 -};
 -
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dtsi
+new file mode 100644
+index 000000000000..f85868d6c209
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dtsi
+@@ -0,0 +1,163 @@
++/*
++ * Copyright 2018 TQ Systems GmbH
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++
++/* First 128KB is for PSCI ATF. */
++/* Last 127M is for M4/RPMSG */
++/memreserve/ 0x80000000 0x08000000;
++
++#include "fsl-imx8qxp.dtsi"
++
++/ {
++	model = "TQ Systems i.MX8QXP TQMa8xX";
++	compatible = "fsl,tqma8qx", "fsl,imx8qxp";
++
++	regulators {
++		compatible = "simple-bus";
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		reg_usdhc2_vmmc: usdhc2_vmmc {
++			compatible = "regulator-fixed";
++			regulator-name = "SD1_SPWR";
++			regulator-min-microvolt = <3000000>;
++			regulator-max-microvolt = <3000000>;
++			gpio = <&gpio4 19 GPIO_ACTIVE_HIGH>;
++			enable-active-high;
++			startup-delay-us = <100>;
++			off-on-delay-us = <12000>;
++		};
++	};
++};
++
++&iomuxc {
++	pinctrl-names = "default";
++	imx8qxp-tqma8qx {
++		pinctrl_lpi2c1: lpi1cgrp {
++			fsl,pins = <
++				SC_P_USB_SS3_TC1_ADMA_I2C1_SCL	0x06000020
++				SC_P_USB_SS3_TC3_ADMA_I2C1_SDA	0x06000020
++			>;
++		};
++
++		pinctrl_usdhc1: usdhc1grp {
++			fsl,pins = <
++				SC_P_EMMC0_CLK_CONN_EMMC0_CLK		0x06000041
++				SC_P_EMMC0_CMD_CONN_EMMC0_CMD		0x00000021
++				SC_P_EMMC0_DATA0_CONN_EMMC0_DATA0	0x00000021
++				SC_P_EMMC0_DATA1_CONN_EMMC0_DATA1	0x00000021
++				SC_P_EMMC0_DATA2_CONN_EMMC0_DATA2	0x00000021
++				SC_P_EMMC0_DATA3_CONN_EMMC0_DATA3	0x00000021
++				SC_P_EMMC0_DATA4_CONN_EMMC0_DATA4	0x00000021
++				SC_P_EMMC0_DATA5_CONN_EMMC0_DATA5	0x00000021
++				SC_P_EMMC0_DATA6_CONN_EMMC0_DATA6	0x00000021
++				SC_P_EMMC0_DATA7_CONN_EMMC0_DATA7	0x00000021
++				SC_P_EMMC0_STROBE_CONN_EMMC0_STROBE	0x06000041
++			>;
++		};
++
++		pinctrl_usdhc1_100mhz: usdhc1grp100mhz {
++			fsl,pins = <
++				SC_P_EMMC0_CLK_CONN_EMMC0_CLK		0x06000040
++				SC_P_EMMC0_CMD_CONN_EMMC0_CMD		0x00000020
++				SC_P_EMMC0_DATA0_CONN_EMMC0_DATA0	0x00000020
++				SC_P_EMMC0_DATA1_CONN_EMMC0_DATA1	0x00000020
++				SC_P_EMMC0_DATA2_CONN_EMMC0_DATA2	0x00000020
++				SC_P_EMMC0_DATA3_CONN_EMMC0_DATA3	0x00000020
++				SC_P_EMMC0_DATA4_CONN_EMMC0_DATA4	0x00000020
++				SC_P_EMMC0_DATA5_CONN_EMMC0_DATA5	0x00000020
++				SC_P_EMMC0_DATA6_CONN_EMMC0_DATA6	0x00000020
++				SC_P_EMMC0_DATA7_CONN_EMMC0_DATA7	0x00000020
++				SC_P_EMMC0_STROBE_CONN_EMMC0_STROBE	0x06000040
++			>;
++		};
++
++		pinctrl_usdhc1_200mhz: usdhc1grp200mhz {
++			fsl,pins = <
++				SC_P_EMMC0_CLK_CONN_EMMC0_CLK		0x06000040
++				SC_P_EMMC0_CMD_CONN_EMMC0_CMD		0x00000020
++				SC_P_EMMC0_DATA0_CONN_EMMC0_DATA0	0x00000020
++				SC_P_EMMC0_DATA1_CONN_EMMC0_DATA1	0x00000020
++				SC_P_EMMC0_DATA2_CONN_EMMC0_DATA2	0x00000020
++				SC_P_EMMC0_DATA3_CONN_EMMC0_DATA3	0x00000020
++				SC_P_EMMC0_DATA4_CONN_EMMC0_DATA4	0x00000020
++				SC_P_EMMC0_DATA5_CONN_EMMC0_DATA5	0x00000020
++				SC_P_EMMC0_DATA6_CONN_EMMC0_DATA6	0x00000020
++				SC_P_EMMC0_DATA7_CONN_EMMC0_DATA7	0x00000020
++				SC_P_EMMC0_STROBE_CONN_EMMC0_STROBE	0x06000040
++			>;
++		};
++
++		pinctrl_flexspi0: flexspi0grp {
++			fsl,pins = <
++				SC_P_QSPI0A_DATA0_LSIO_QSPI0A_DATA0	0x0600004c
++				SC_P_QSPI0A_DATA1_LSIO_QSPI0A_DATA1	0x0600004c
++				SC_P_QSPI0A_DATA2_LSIO_QSPI0A_DATA2	0x0600004c
++				SC_P_QSPI0A_DATA3_LSIO_QSPI0A_DATA3	0x0600004c
++				SC_P_QSPI0A_DQS_LSIO_QSPI0A_DQS		0x0600004c
++				SC_P_QSPI0A_SS0_B_LSIO_QSPI0A_SS0_B	0x0600004c
++				SC_P_QSPI0A_SS1_B_LSIO_QSPI0A_SS1_B	0x0600004c
++				SC_P_QSPI0A_SCLK_LSIO_QSPI0A_SCLK	0x0600004c
++				SC_P_QSPI0B_SCLK_LSIO_QSPI0B_SCLK	0x0600004c
++				SC_P_QSPI0B_DATA0_LSIO_QSPI0B_DATA0	0x0600004c
++				SC_P_QSPI0B_DATA1_LSIO_QSPI0B_DATA1	0x0600004c
++				SC_P_QSPI0B_DATA2_LSIO_QSPI0B_DATA2	0x0600004c
++				SC_P_QSPI0B_DATA3_LSIO_QSPI0B_DATA3	0x0600004c
++				SC_P_QSPI0B_DQS_LSIO_QSPI0B_DQS		0x0600004c
++				SC_P_QSPI0B_SS0_B_LSIO_QSPI0B_SS0_B	0x0600004c
++				SC_P_QSPI0B_SS1_B_LSIO_QSPI0B_SS1_B	0x0600004c
++			>;
++		};
++	};
++};
++
++&gpio0 {
++	status = "okay";
++};
++
++&gpio1 {
++	status = "okay";
++};
++
++&gpio3 {
++	status = "okay";
++};
++
++&gpio4 {
++	status = "okay";
++};
++
++&flexspi0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_flexspi0>;
++	status = "okay";
++
++	flash0: mt35xu512aba@0 {
++		reg = <0>;
++		#address-cells = <1>;
++		#size-cells = <1>;
++		compatible = "spi-flash";
++		spi-max-frequency = <29000000>;
++		spi-nor,ddr-quad-read-dummy = <8>;
++	};
++};
++
++&usdhc1 {
++	pinctrl-names = "default", "state_100mhz", "state_200mhz";
++	pinctrl-0 = <&pinctrl_usdhc1>;
++	pinctrl-1 = <&pinctrl_usdhc1_100mhz>;
++	pinctrl-2 = <&pinctrl_usdhc1_200mhz>;
++	bus-width = <8>;
++	non-removable;
++	status = "okay";
++};

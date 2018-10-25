@@ -1,4 +1,4 @@
-From b949f3d5ef47f40c77921357896a26c9868c3a97 Mon Sep 17 00:00:00 2001
+From 25a9b8a1cf9902604949d8e69f70c1eb7df8db9c Mon Sep 17 00:00:00 2001
 From: Lukasz Majewski <lukma@denx.de>
 Date: Tue, 7 Feb 2017 06:20:23 +0100
 Subject: [PATCH] net: phy: dp83867: Add lane swapping support in the DP83867

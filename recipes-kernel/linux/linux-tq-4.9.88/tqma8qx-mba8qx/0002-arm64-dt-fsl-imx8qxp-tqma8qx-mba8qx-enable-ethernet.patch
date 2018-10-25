@@ -1,11 +1,9 @@
-From 749ed29c757cacaf3fb2620b1f755c0001e90408 Mon Sep 17 00:00:00 2001
+From 703a67977590ca8009a5d7239f0a8d2266b7895a Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 17 Oct 2018 18:29:03 +0200
 Subject: [PATCH] arm64: dt: fsl-imx8qxp-tqma8qx-mba8qx: enable ethernet
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
-
-%% original patch: 0002-arm64-dt-fsl-imx8qxp-tqma8qx-mba8qx-enable-ethernet.patch
 ---
  .../freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi | 85 +++++++++++++++++++
  1 file changed, 85 insertions(+)

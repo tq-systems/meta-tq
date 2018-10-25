@@ -1,4 +1,4 @@
-From 25ab848ccca5ac12f281d7d562b3c995097f0506 Mon Sep 17 00:00:00 2001
+From ee5e6a631d7bdd93c0842958e530256aa8905016 Mon Sep 17 00:00:00 2001
 From: Marco Felsch <Marco.Felsch@tq-group.com>
 Date: Fri, 9 Sep 2016 14:21:40 +0200
 Subject: [PATCH] net: phy: dp83867: support led configuration
