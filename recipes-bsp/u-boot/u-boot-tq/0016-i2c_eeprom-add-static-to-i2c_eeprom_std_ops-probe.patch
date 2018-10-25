@@ -1,0 +1,36 @@
+From 30351d31a1f76733c7d9cdf84b0f4057e0a2386a Mon Sep 17 00:00:00 2001
+From: Masahiro Yamada <yamada.masahiro@socionext.com>
+Date: Thu, 22 Jun 2017 16:51:22 +0900
+Subject: [PATCH] i2c_eeprom: add static to i2c_eeprom_std_ops/probe
+
+These are only used in drivers/mis/i2c_eeprom.c
+
+Signed-off-by: Masahiro Yamada <yamada.masahiro@socionext.com>
+Reviewed-by: Bin Meng <bmeng.cn@gmail.com>
+(cherry picked from commit 5e75ea15067ab8118a16f5b5f278ccae87819683)
+---
+ drivers/misc/i2c_eeprom.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/misc/i2c_eeprom.c b/drivers/misc/i2c_eeprom.c
+index da6e2b05f7..a14e83225b 100644
+--- a/drivers/misc/i2c_eeprom.c
++++ b/drivers/misc/i2c_eeprom.c
+@@ -42,7 +42,7 @@ static int i2c_eeprom_std_write(struct udevice *dev, int offset,
+ 	return -ENODEV;
+ }
+ 
+-struct i2c_eeprom_ops i2c_eeprom_std_ops = {
++static const struct i2c_eeprom_ops i2c_eeprom_std_ops = {
+ 	.read	= i2c_eeprom_std_read,
+ 	.write	= i2c_eeprom_std_write,
+ };
+@@ -59,7 +59,7 @@ static int i2c_eeprom_std_ofdata_to_platdata(struct udevice *dev)
+ 	return 0;
+ }
+ 
+-int i2c_eeprom_std_probe(struct udevice *dev)
++static int i2c_eeprom_std_probe(struct udevice *dev)
+ {
+ 	return 0;
+ }

@@ -1,7 +1,7 @@
-From 2048159b9fd82e62653cc8bc705685047c167ee2 Mon Sep 17 00:00:00 2001
+From 549935084bb4b29d77513790495885dc66db980f Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Fri, 19 Oct 2018 17:20:16 +0200
-Subject: [PATCH 15/15] tqma8qx: next fix for defaul fdt_file
+Subject: [PATCH] tqma8qx: next fix for default fdt_file
 
 now that we have proper files in linux, fix again.
 
@@ -23,6 +23,3 @@ index a81688aa83..efff1213f1 100644
  	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
  	"mmcpart=" __stringify(CONFIG_SYS_MMC_IMG_LOAD_PART) "\0" \
  	"mmcroot=" CONFIG_MMCROOT " rootwait rw\0" \
--- 
-2.17.1
-

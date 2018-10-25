@@ -13,7 +13,22 @@ SRCREV = "bc6a293a61f37f7882229d1e99d73f7416dcb168"
 SRCBRANCH = "TQMa8xx-bringup-imx_v2017.03_4.9.88_imx8qxp_beta2"
 
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
-           file://0015-tqma8qx-next-fix-for-defaul-fdt_file.patch \
+           file://0001-tqma8qx-next-fix-for-default-fdt_file.patch \
+           file://0002-tqma8qx-enable-FAT_WRITE.patch \
+           file://0003-tqma8qx-enable-some-commands.patch \
+           file://0004-tqma8qx-env-add-update-scripts-for-kernel-and-u-boot.patch \
+           file://0005-tqma8qx-configure-memtest.patch \
+           file://0006-tqma8qx-enable-usb-in-defconfig.patch \
+           file://0007-tqma8qx-enable-i2c-devices-in-defconfig.patch \
+           file://0008-tqma8qx-enable-i2c1-in-dt.patch \
+           file://0009-tqma8qx-enable-usb-in-dt.patch \
+           file://0010-tqma8qx-add-devices-to-i2c1-bus.patch \
+           file://0011-tqma8qx-mba8qx-add-devices-to-i2c1-bus.patch \
+           file://0012-rtc-Add-DM-support-to-ds1307.patch \
+           file://0013-tqma8qx-config-enable-rtc-driver-and-date-command-su.patch \
+           file://0014-tqma8qx-dt-enable-rtc.patch \
+           file://0015-i2c_eeprom-add-read-and-write-functions.patch \
+           file://0016-i2c_eeprom-add-static-to-i2c_eeprom_std_ops-probe.patch \
            "
 
 S = "${WORKDIR}/git"

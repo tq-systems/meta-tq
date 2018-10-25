@@ -1,0 +1,59 @@
+From 76ed368b02cad3f71d0561a2bc81f037fb0cad69 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 24 Oct 2018 17:48:19 +0200
+Subject: [PATCH] tqma8qx: env: add update scripts for kernel and u-boot
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ include/configs/tqma8qx.h | 31 +++++++++++++++++++++++++------
+ 1 file changed, 25 insertions(+), 6 deletions(-)
+
+diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
+index 8f7e0f911a..958613e94b 100644
+--- a/include/configs/tqma8qx.h
++++ b/include/configs/tqma8qx.h
+@@ -156,11 +156,7 @@
+ 		"video=imxdpufb5:off video=imxdpufb6:off video=imxdpufb7:off\0" \
+ 	"netboot=echo Booting from net ...; " \
+ 		"run netargs;  " \
+-		"if test ${ip_dyn} = yes; then " \
+-			"setenv get_cmd dhcp; " \
+-		"else " \
+-			"setenv get_cmd tftp; " \
+-		"fi; " \
++		"run set_getcmd; " \
+ 		"if test ${sec_boot} = yes; then " \
+ 			"${get_cmd} ${cntr_addr} ${cntr_file}; " \
+ 			"if run auth_os; then " \
+@@ -179,7 +175,30 @@
+ 			"else " \
+ 				"booti; " \
+ 			"fi;" \
+-		"fi;\0"
++		"fi;\0" \
++	"update_kernel=run set_getcmd; "                                       \
++		"if ${get_cmd} ${image}; then "                                \
++			"if itest ${filesize} > 0; then "                      \
++				"echo Write kernel image to mmc ${mmcdev}:${firmwarepart}...; " \
++				"save mmc ${mmcdev}:${firmwarepart} ${loadaddr} " \
++					"${image} ${filesize}; "               \
++			"fi; "                                                 \
++		"fi; "                                                         \
++		"setenv filesize; setenv get_cmd \0"                           \
++	"update_fdt=run set_getcmd; "                                          \
++		"if ${get_cmd} ${fdt_file}; then "                             \
++			"if itest ${filesize} > 0; then "                      \
++				"echo Write fdt image to mmc ${mmcdev}:${firmwarepart}...; " \
++				"save mmc ${mmcdev}:${firmwarepart} ${loadaddr} " \
++					"${fdt_file} ${filesize}; "            \
++			"fi; "                                                 \
++		"fi; "                                                         \
++		"setenv filesize; setenv get_cmd \0"                           \
++	"set_getcmd=if test \"${ip_dyn}\" = yes; then "                        \
++			"setenv get_cmd dhcp; "                                \
++		"else "                                                        \
++			"setenv get_cmd tftp; "                                \
++		"fi; \0"
+ 
+ #define CONFIG_BOOTCOMMAND \
+ 	   "mmc dev ${mmcdev}; if mmc rescan; then " \
