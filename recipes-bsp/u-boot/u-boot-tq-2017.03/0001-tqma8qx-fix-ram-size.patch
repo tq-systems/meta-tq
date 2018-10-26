@@ -1,0 +1,25 @@
+From 9693d67cc44e1fc95efe8fe6d4ffdefb1cb15515 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Fri, 26 Oct 2018 10:00:28 +0200
+Subject: [PATCH] tqma8qx: fix ram size
+
+board has only 1 GiB of RAM
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ include/configs/tqma8qx.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
+index e828f96fb6..16fe2edfc4 100644
+--- a/include/configs/tqma8qx.h
++++ b/include/configs/tqma8qx.h
+@@ -272,7 +272,7 @@
+ #define CONFIG_SYS_SDRAM_BASE		0x80000000
+ #define CONFIG_NR_DRAM_BANKS		1
+ #define PHYS_SDRAM_1			0x80000000
+-#define PHYS_SDRAM_1_SIZE		0x80000000	/* 2 GB */
++#define PHYS_SDRAM_1_SIZE		SZ_1G	/* 1 GB */
+ /* needed for loop in CPU code */
+ #define PHYS_SDRAM_2			0x800000000
+ #define PHYS_SDRAM_2_SIZE		0x0000000	/* not placed */

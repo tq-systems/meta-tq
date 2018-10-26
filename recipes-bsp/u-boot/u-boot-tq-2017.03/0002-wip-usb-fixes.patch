@@ -1,4 +1,4 @@
-From e9953e5176393208539ef4bf8f066aa16a249a4c Mon Sep 17 00:00:00 2001
+From 6353ba0e06fcfa9b182cc9a32137abe317e21266 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Fri, 26 Oct 2018 11:03:22 +0200
 Subject: [PATCH] wip: usb fixes

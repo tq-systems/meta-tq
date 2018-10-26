@@ -13,7 +13,8 @@ SRCREV = "35762d3707833f1510b918473aedcd3ccb385d98"
 SRCBRANCH = "TQMa8xx-bringup-imx_v2017.03_4.9.88_imx8qxp_beta2"
 
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
-           file://0001-wip-usb-fixes.patch \
+           file://0001-tqma8qx-fix-ram-size.patch \
+           file://0002-wip-usb-fixes.patch \
            "
 
 S = "${WORKDIR}/git"
