@@ -1,4 +1,4 @@
-From 30351d31a1f76733c7d9cdf84b0f4057e0a2386a Mon Sep 17 00:00:00 2001
+From dc0dbaf8959bcb85467e744eca94edc48940d54e Mon Sep 17 00:00:00 2001
 From: Masahiro Yamada <yamada.masahiro@socionext.com>
 Date: Thu, 22 Jun 2017 16:51:22 +0900
 Subject: [PATCH] i2c_eeprom: add static to i2c_eeprom_std_ops/probe

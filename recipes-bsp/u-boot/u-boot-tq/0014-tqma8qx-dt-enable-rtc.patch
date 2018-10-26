@@ -1,4 +1,4 @@
-From 46065e99fb9ff6ca1f73d9790bc74d95f4388568 Mon Sep 17 00:00:00 2001
+From 1de8a30b05a335a2da217734adcf673487ad51c6 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 25 Oct 2018 12:35:51 +0200
 Subject: [PATCH] tqma8qx: dt: enable rtc

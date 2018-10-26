@@ -1,4 +1,4 @@
-From b5d0e227e2a765bb0af2741d98c5a72ccdb30330 Mon Sep 17 00:00:00 2001
+From 6b00295f5c9faf64da24625494ba6fba12f89cdf Mon Sep 17 00:00:00 2001
 From: Jonas Karlman <jonas@kwiboo.se>
 Date: Sat, 22 Apr 2017 08:57:41 +0000
 Subject: [PATCH] i2c_eeprom: add read and write functions

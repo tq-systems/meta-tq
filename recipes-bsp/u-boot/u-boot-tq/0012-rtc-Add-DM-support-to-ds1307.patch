@@ -1,4 +1,4 @@
-From c394e2036164b30051504377d58ee4fcebec7722 Mon Sep 17 00:00:00 2001
+From 9c74d3de6c023beb515dc68f6a36aafa44a2dab0 Mon Sep 17 00:00:00 2001
 From: Chris Packham <judge.packham@gmail.com>
 Date: Sat, 29 Apr 2017 15:20:29 +1200
 Subject: [PATCH] rtc: Add DM support to ds1307

@@ -29,6 +29,9 @@ SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branc
            file://0014-tqma8qx-dt-enable-rtc.patch \
            file://0015-i2c_eeprom-add-read-and-write-functions.patch \
            file://0016-i2c_eeprom-add-static-to-i2c_eeprom_std_ops-probe.patch \
+           file://0017-cmd-mtest-give-more-info.patch \
+           file://0018-wip-usb-fixes.patch \
+           file://0019-tqma8qx-fix-ram-size.patch \
            "
 
 S = "${WORKDIR}/git"

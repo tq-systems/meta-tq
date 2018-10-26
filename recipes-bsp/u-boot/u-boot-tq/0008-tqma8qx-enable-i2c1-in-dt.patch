@@ -1,4 +1,4 @@
-From 2644003475e7f6062a3faf272b7bd144a6bb1a53 Mon Sep 17 00:00:00 2001
+From df43f3a43770ad0ac8a73e371b0c86bd01a89b49 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 25 Oct 2018 11:35:39 +0200
 Subject: [PATCH] tqma8qx: enable i2c1 in dt

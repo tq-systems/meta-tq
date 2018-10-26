@@ -1,0 +1,24 @@
+From 35762d3707833f1510b918473aedcd3ccb385d98 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Fri, 26 Oct 2018 10:55:57 +0200
+Subject: [PATCH] cmd: mtest: give more info
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ cmd/mem.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/cmd/mem.c b/cmd/mem.c
+index 83d34faf2d..073a0f4bf6 100644
+--- a/cmd/mem.c
++++ b/cmd/mem.c
+@@ -1014,7 +1014,8 @@ static int do_mem_mtest(cmd_tbl_t *cmdtp, int flag, int argc,
+ 		return -1;
+ 	}
+ 
+-	printf("Testing %08lx ... %08lx:\n", start, end);
++	printf("Testing (%s) %08lx ... %08lx:\n", (alt_test) ? "ext" : "quick",
++		start, end);
+ 	debug("%s:%d: start %#08lx end %#08lx\n", __func__, __LINE__,
+ 	      start, end);
+ 

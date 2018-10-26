@@ -1,4 +1,4 @@
-From 9426af0dbc60a903fce9e3fa463254587bb17b75 Mon Sep 17 00:00:00 2001
+From 19a642beb27a9ec2ae359ef6be0684e7ae095213 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 25 Oct 2018 11:33:19 +0200
 Subject: [PATCH] tqma8qx: enable i2c devices in defconfig
