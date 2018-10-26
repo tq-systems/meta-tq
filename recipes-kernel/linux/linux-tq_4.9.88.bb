@@ -23,6 +23,7 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
            file://0011-arm64-dt-fsl-imx8qxp-tqma8qx-mba8qx-add-usb-otg-1.patch \
            file://0012-arm64-dt-fsl-imx8qxp-tqma8qx-mba8qx-add-jc42-on-mba8.patch \
            file://0013-arm64-dt-fsl-imx8qxp-tqma8qx-mba8qx-add-gpio-expande.patch \
+           file://0014-arm64-dt-fsl-imx8qxp-tqma8qx-limit-cma-reserved-size.patch \
            "
 
 SRCBRANCH = "TQMa8xx-bringup-imx_4.9.88_imx8qxp_beta2"
