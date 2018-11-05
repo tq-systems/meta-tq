@@ -1,0 +1,83 @@
+From 88ed460063cb0249b942116f621944de744e536b Mon Sep 17 00:00:00 2001
+From: Gary Bisson <gary.bisson@boundarydevices.com>
+Date: Fri, 2 Dec 2016 09:52:08 +0100
+Subject: [PATCH] drm/panel: simple: Add support for Tianma TM070JDHG30
+
+The Tianma TM070JDHG30 is a 7" LVDS display with a resolution of
+1280x800.
+
+	http://usa.tianma.com/products-technology/product/tm070jdhg30-00
+
+You can also find this product along with a FT5x06 touch controller
+from Boundary Devices:
+
+	https://boundarydevices.com/product/bd070lic2/
+
+Signed-off-by: Gary Bisson <gary.bisson@boundarydevices.com>
+Acked-by: Rob Herring <robh@kernel.org>
+Signed-off-by: Thierry Reding <treding@nvidia.com>
+(cherry picked from commit adb973ef53a711524d44cf92b6e039e91c82d987)
+---
+ .../display/panel/tianma,tm070jdhg30.txt      |  7 +++++
+ drivers/gpu/drm/panel/panel-simple.c          | 27 +++++++++++++++++++
+ 2 files changed, 34 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/display/panel/tianma,tm070jdhg30.txt
+
+diff --git a/Documentation/devicetree/bindings/display/panel/tianma,tm070jdhg30.txt b/Documentation/devicetree/bindings/display/panel/tianma,tm070jdhg30.txt
+new file mode 100644
+index 000000000000..eb9501a82e25
+--- /dev/null
++++ b/Documentation/devicetree/bindings/display/panel/tianma,tm070jdhg30.txt
+@@ -0,0 +1,7 @@
++Tianma Micro-electronics TM070JDHG30 7.0" WXGA TFT LCD panel
++
++Required properties:
++- compatible: should be "tianma,tm070jdhg30"
++
++This binding is compatible with the simple-panel binding, which is specified
++in simple-panel.txt in this directory.
+diff --git a/drivers/gpu/drm/panel/panel-simple.c b/drivers/gpu/drm/panel/panel-simple.c
+index 52f427d2724d..b6c521528c44 100644
+--- a/drivers/gpu/drm/panel/panel-simple.c
++++ b/drivers/gpu/drm/panel/panel-simple.c
+@@ -1509,6 +1509,30 @@ static const struct panel_desc starry_kr122ea0sra = {
+ 	},
+ };
+ 
++static const struct display_timing tianma_tm070jdhg30_timing = {
++	.pixelclock = { 62600000, 68200000, 78100000 },
++	.hactive = { 1280, 1280, 1280 },
++	.hfront_porch = { 15, 64, 159 },
++	.hback_porch = { 5, 5, 5 },
++	.hsync_len = { 1, 1, 256 },
++	.vactive = { 800, 800, 800 },
++	.vfront_porch = { 3, 40, 99 },
++	.vback_porch = { 2, 2, 2 },
++	.vsync_len = { 1, 1, 128 },
++	.flags = DISPLAY_FLAGS_DE_HIGH,
++};
++
++static const struct panel_desc tianma_tm070jdhg30 = {
++	.timings = &tianma_tm070jdhg30_timing,
++	.num_timings = 1,
++	.bpc = 8,
++	.size = {
++		.width = 151,
++		.height = 95,
++	},
++	.bus_format = MEDIA_BUS_FMT_RGB888_1X7X4_SPWG,
++};
++
+ static const struct drm_display_mode tpk_f07a_0102_mode = {
+ 	.clock = 33260,
+ 	.hdisplay = 800,
+@@ -1729,6 +1753,9 @@ static const struct of_device_id platform_of_match[] = {
+ 	}, {
+ 		.compatible = "starry,kr122ea0sra",
+ 		.data = &starry_kr122ea0sra,
++	}, {
++		.compatible = "tianma,tm070jdhg30",
++		.data = &tianma_tm070jdhg30,
+ 	}, {
+ 		.compatible = "tpk,f07a-0102",
+ 		.data = &tpk_f07a_0102,

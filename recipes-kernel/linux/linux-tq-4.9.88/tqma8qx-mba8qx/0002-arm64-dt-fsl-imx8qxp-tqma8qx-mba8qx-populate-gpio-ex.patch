@@ -1,0 +1,60 @@
+From 8073428e46417b8f5a942a94362208d62d4cbbde Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 29 Oct 2018 11:15:25 +0100
+Subject: [PATCH] arm64: dt: fsl-imx8qxp-tqma8qx-mba8qx: populate gpio expander
+
+- led
+- buzzer
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ .../freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi | 27 +++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi
+index c084e56e1a85..c8f6775c2f18 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi
+@@ -23,6 +23,29 @@
+ 		stdout-path = &lpuart1;
+ 	};
+ 
++	beeper: gpio-beeper {
++		compatible = "gpio-beeper";
++		gpios = <&expander 0 GPIO_ACTIVE_HIGH>;
++		status = "okay";
++	};
++
++	gpio-leds {
++		compatible = "gpio-leds";
++		status = "okay";
++
++		led1 {
++			label = "leda";
++			gpios = <&expander 1 GPIO_ACTIVE_LOW>;
++			linux,default-trigger = "default-on";
++		};
++
++		led2 {
++			label = "ledb";
++			gpios = <&expander 2 GPIO_ACTIVE_LOW>;
++			linux,default-trigger = "heartbeat";
++		};
++	};
++
+ 	regulators {
+ 		compatible = "simple-bus";
+ 		#address-cells = <1>;
+@@ -73,8 +96,12 @@
+ 		reg = <0x70>;
+ 		pinctrl-names = "default";
+ 		pinctrl-0 = <&pinctrl_pca9538>;
++		gpio-controller;
++		#gpio-cells = <2>;
++/*
+ 		interrupt-parent = <&gpio3>;
+ 		interrupts = <8 IRQ_TYPE_LEVEL_LOW>;
++*/
+ 	};
+ };
+ 
