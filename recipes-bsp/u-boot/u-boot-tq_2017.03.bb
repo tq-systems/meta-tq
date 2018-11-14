@@ -14,7 +14,12 @@ SRCBRANCH = "TQMa8xx-bringup-imx_v2017.03_4.9.88_imx8qxp_beta2"
 
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
            file://0001-tqma8qx-fix-ram-size.patch \
-           file://0002-wip-usb-fixes.patch \
+           file://0002-tqma8qx-mba8qx-dt-fixes-for-usb-otg1.patch \
+           file://0003-arm-dt-fsl-imx8qxp-tqma8qx-mba8qx-remove-unused-lpua.patch \
+           file://0004-tqma8qx-remove-unused-pinmux-defines.patch \
+           file://0005-tqma8qx-move-board_quiesce_devices-to-mainboard-file.patch \
+           file://0006-tqma8qx-fix-header-guard-in-board-config-header.patch \
+           file://0007-tqma8qx-mba8qx-use-gpio-pad-ctrl-define-for-enet-res.patch \
            "
 
 S = "${WORKDIR}/git"
