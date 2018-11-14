@@ -1,5 +1,5 @@
 
-DESCRIPTION = "u-boot for TQ-Group NXP i.MX8x based modules"
+DESCRIPTION = "u-boot for TQ-Group NXP i.MX8xX based modules"
 
 require recipes-bsp/u-boot/u-boot.inc
 
@@ -28,6 +28,6 @@ BOOT_TOOLS = "imx-boot-tools"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "tqma8qx-mba8qx|tqma8qxa0-mba8qx"
+COMPATIBLE_MACHINE = "tqma8qx-mba8qx|tqma8qxa0-mba8qx|tqma8qxs-mb-smarc-2|tqma8qxsa0-mb-smarc-2"
 
 UBOOT_NAME_mx8 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
