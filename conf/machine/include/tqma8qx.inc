@@ -9,4 +9,3 @@ require conf/machine/include/tqma8qx-common.inc
 IMX_BOOT_SEEK = "32"
 
 WKS_FILE ?= "tqma8x-b0-sdimg.wks"
-
