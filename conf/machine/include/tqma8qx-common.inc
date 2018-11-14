@@ -1,4 +1,4 @@
-# Common definitions for all TQ-Group TQMa8QX modules
+# Common definitions for all TQ-Group TQMa8QX / TQMa8QXS modules
 
 require conf/machine/include/arm/arch-arm64.inc
 
