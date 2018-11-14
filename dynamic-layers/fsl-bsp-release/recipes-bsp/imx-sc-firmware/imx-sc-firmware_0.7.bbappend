@@ -5,3 +5,6 @@ SRC_URI = "file://${PN}.tar.gz"
 
 SC_FIRMWARE_NAME_tqma8qx-mba8qx = "mx8qx-tqma8qx-mba8qx-scfw-tcm.bin"
 SC_FIRMWARE_NAME_tqma8qxa0-mba8qx = "mx8qx-a0-tqma8qx-mba8qx-scfw-tcm.bin"
+
+SC_FIRMWARE_NAME_tqma8qxs-mb-smarc-2 = "mx8qx-tqma8qx-mba8qx-scfw-tcm.bin"
+SC_FIRMWARE_NAME_tqma8qxsa0-mb-smarc-2 = "mx8qx-a0-tqma8qx-mba8qx-scfw-tcm.bin"
