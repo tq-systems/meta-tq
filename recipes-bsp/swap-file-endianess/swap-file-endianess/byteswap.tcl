@@ -18,7 +18,7 @@ if {$old_rem != 0} {
 	        append old_bin y
 	}
 }
-for {set i 0} {$i<[expr $old_length-8]} {incr i $num_b} {
+for {set i 0} {$i<[expr $old_length-7]} {incr i $num_b} {
         for {set j $num_b} {$j>0} {incr j -1} {
                 append new_bin [string index $old_bin [expr $i+($j-1)]]
         }
