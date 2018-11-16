@@ -10,18 +10,11 @@ IMXBOOT_TARGETS_mx8qxp = "flash flash_dcd"
 
 # optionally provide RAM DCD name if RAM bringup not implemented in SCFW
 DCD_NAME_tqma8qxa0-mba8qx = "tqma8xx_ddr3_dcd_933MHz_ecc.cfg.tmp"
-DCD_NAME_tqma8qx-mba8qx = "tqma8xx_ddr3_dcd_933MHz_ecc.cfg.tmp"
 
-DCD_NAME_tqma8qxsa0-mb-smarc-2 = "tqma8xx_ddr3_dcd_933MHz_ecc.cfg.tmp"
-DCD_NAME_tqma8qxs-mb-smarc-2 = "tqma8xx_ddr3_dcd_933MHz_ecc.cfg.tmp"
-
+##
+# create link to real bootstream image in deply dir, needed for wic image
+##
 do_deploy_append() {
-#    if [ "${SOC_TARGET}" = "iMX8QX" ]; then
-#        if [ "${MACHINE}" = "tqma8qxa0-mba8qx" ]; then
-#            install -m 0644 ${S}/${SOC_TARGET}/${DCD_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
-#        fi
-#    fi
-
     cd ${DEPLOYDIR}
     if [ "${SOC_TARGET}" = "iMX8QX" ]; then
         if [ "${MACHINE}" = "tqma8qxa0-mba8qx" ]; then
