@@ -20,6 +20,9 @@ SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branc
            file://0005-tqma8qx-move-board_quiesce_devices-to-mainboard-file.patch \
            file://0006-tqma8qx-fix-header-guard-in-board-config-header.patch \
            file://0007-tqma8qx-mba8qx-use-gpio-pad-ctrl-define-for-enet-res.patch \
+           file://0008-add-tqma8qxs-with-mb-smarc-2.patch \
+           file://0009-tqma8qx-default-DT-to-B0-Stepping.patch \
+           file://0010-tqma8qxs-default-fdt_file-to-BO-stepping-CPU.patch \
            "
 
 S = "${WORKDIR}/git"

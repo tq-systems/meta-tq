@@ -1,0 +1,23 @@
+From 01d517ac24b7b0c5e7ddd4aa8e2d9dac56e0ab64 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Fri, 16 Nov 2018 10:47:07 +0100
+Subject: [PATCH] tqma8qxs: default fdt_file to BO stepping CPU
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ include/configs/tqma8qxs.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/configs/tqma8qxs.h b/include/configs/tqma8qxs.h
+index d0a596ccf3..648f78830a 100644
+--- a/include/configs/tqma8qxs.h
++++ b/include/configs/tqma8qxs.h
+@@ -129,7 +129,7 @@
+ 	"cntr_addr=0x88000000\0"			\
+ 	"cntr_file=os_cntr_signed.bin\0" \
+ 	"boot_fdt=try\0" \
+-	"fdt_file=fsl-imx8qxp-tqma8qxs-a0-mb-smarc-2.dtb\0" \
++	"fdt_file=fsl-imx8qxp-tqma8qxs-mb-smarc-2.dtb\0" \
+ 	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
+ 	"mmcpart=" __stringify(CONFIG_SYS_MMC_IMG_LOAD_PART) "\0" \
+ 	"mmcroot=" CONFIG_MMCROOT " rootwait rw\0" \
