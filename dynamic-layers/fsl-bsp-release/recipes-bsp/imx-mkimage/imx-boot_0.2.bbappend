@@ -3,8 +3,6 @@
 # imx-mkimage for target processor
 IMXBOOT_TARGETS_tqma8qxa0-mba8qx = "flash_a0"
 IMXBOOT_TARGETS_tqma8qx-mba8qx = "flash"
-
-IMXBOOT_TARGETS_tqma8qxsa0-mb-smarc-2 = "flash_a0"
 IMXBOOT_TARGETS_tqma8qxs-mb-smarc-2 = "flash"
 
 IMXBOOT_TARGETS_mx8qxpa0 = "flash_a0 flash_dcd_a0"
@@ -31,9 +29,6 @@ do_deploy_append() {
         fi
         if [ "${MACHINE}" = "tqma8qx-mba8qx" ]; then
             ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-b0-bootstream.bin
-        fi
-        if [ "${MACHINE}" = "tqma8qxsa0-mb-smarc-2" ]; then
-            ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-a0-bootstream.bin
         fi
         if [ "${MACHINE}" = "tqma8qxs-mb-smarc-2" ]; then
             ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-b0-bootstream.bin
