@@ -8,7 +8,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${ORIG_PN}-${PV}:${THISDIR}/${ORIG_PN}:"
 SRC_URI += "file://defconfig"
 
 SRCBRANCH = "TQMaxx2-v4.1.15-rel_imx_4.1.15_2.0.0_ga"
-SRCREV = "717bf16a5b68ffafc3fc9f8d6fd1eb5b44ed1452"
+SRCREV = "9397fb9d5d29d83a0beb1b5d0003563dd1156a38"
 # remove whatever the linux-imx-mfgtool recipe will add and leave only stuff
 # from python magic from mfgtool kernel recipe
 LOCALVERSION = ""
