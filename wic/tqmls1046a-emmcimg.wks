@@ -1,0 +1,20 @@
+# short-description: Create eMMC image with a boot partition
+# long-description:
+# Create an image that can be written onto board eMMC using dd for use
+# with TQMLS1046a modules
+# It uses u-boot as boot loader
+#
+# The disk layout used is:
+#  - ---------- ------- ------------- --------- ------------- -------------
+# | |  u-boot  |  env  | fman-ucode  |  /boot  |    rootfs   |
+#  - ---------- ------- ------------- --------- ------------- -------------
+# ^ ^          ^       ^             ^         ^             ^
+# | |          |       |             |         |             |
+# 0 4kiB     3MiB    9MiB          16MiB     48MiB        304MiB
+#
+part u-boot --source rawcopy --sourceparams="file=u-boot.bin-emmc" --ondisk mmcblk0 --no-table --align 4
+part fman-ucode --source rawcopy --sourceparams="file=fsl_fman_ucode_ls1046_r1.0_106_4_18.bin" --ondisk mmcblk0 --no-table --align 9216
+part /boot --source bootimg-partition --ondisk mmcblk0 --fstype=vfat --label boot --active --align 16384 --fixed-size 32M
+part / --source rootfs --ondisk mmcblk0 --fstype=ext4 --label root --align 4096 --fixed-size 256M
+
+bootloader --ptable msdos
