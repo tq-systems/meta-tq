@@ -43,6 +43,6 @@ BOOT_TOOLS = "imx-boot-tools"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "tqma8qx-mba8qx|tqma8qxa0-mba8qx|tqma8qxs-mb-smarc-2"
+COMPATIBLE_MACHINE = "tqma8qx-mba8qx|tqma8qxs-mb-smarc-2"
 
 UBOOT_NAME_mx8 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"

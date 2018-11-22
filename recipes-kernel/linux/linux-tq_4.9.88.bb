@@ -49,4 +49,4 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
 SRCBRANCH = "TQMa8xx-bringup-imx_4.9.88_imx8qxp_beta2"
 SRCREV = "ea63398e3571b41f651122a202cf9733514c1bc8"
 
-COMPATIBLE_MACHINE = "tqma8qx-mba8qx|tqma8qxa0-mba8qx|tqma8qxs-mb-smarc-2"
+COMPATIBLE_MACHINE = "tqma8qx-mba8qx|tqma8qxs-mb-smarc-2"
