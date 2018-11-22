@@ -1,0 +1,65 @@
+From 29b259966d4762951f03cc0c2539a35f4b3f949b Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 19 Nov 2018 17:53:39 +0100
+Subject: [PATCH] arm: dt: fsl-imx8qxp-tqma8qxs-mb-smarc-2: add usb
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ .../dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts   | 37 +++++++++++++++++++
+ 1 file changed, 37 insertions(+)
+
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts b/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
+index a4067cca19..aa0dd9b931 100644
+--- a/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
+@@ -142,6 +142,20 @@
+ 			>;
+ 		};
+ 
++		pinctrl_usbotg1: usbotg1grp {
++			fsl,pins = <
++				SC_P_USB_SS3_TC0_CONN_USB_OTG1_PWR	0x06000020
++				SC_P_USB_SS3_TC2_CONN_USB_OTG1_OC	0x06000020
++			>;
++		};
++
++		pinctrl_usbotg2: usbotg2grp {
++			fsl,pins = <
++				SC_P_USB_SS3_TC1_CONN_USB_OTG2_PWR	0x06000020
++				SC_P_USB_SS3_TC3_CONN_USB_OTG2_OC	0x06000020
++			>;
++		};
++
+ 		pinctrl_usdhc2_gpio: usdhc2gpiogrp {
+ 			fsl,pins = <
+ 				SC_P_USDHC1_RESET_B_LSIO_GPIO4_IO19	0x06000021
+@@ -194,6 +208,29 @@
+ 	status = "okay";
+ };
+ 
++&usbotg1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usbotg1>;
++/*
++	srp-disable;
++	hnp-disable;
++	adp-disable;
++*/
++	power-polarity-active-high;
++/*
++ * TODO: error in USB driver, only when dr_mode is not given,
++ * PD code for PHY will be executed
++ */
++/*	dr_mode = "host"; */
++	status = "okay";
++};
++
++&usb2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_usbotg2>;
++	status = "disabled";
++};
++
+ &usdhc2 {
+ 	pinctrl-names = "default", "state_100mhz", "state_200mhz";
+ 	pinctrl-0 = <&pinctrl_usdhc2>, <&pinctrl_usdhc2_gpio>;

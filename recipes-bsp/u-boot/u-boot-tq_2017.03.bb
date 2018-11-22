@@ -19,10 +19,22 @@ SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branc
            file://0004-tqma8qx-remove-unused-pinmux-defines.patch \
            file://0005-tqma8qx-move-board_quiesce_devices-to-mainboard-file.patch \
            file://0006-tqma8qx-fix-header-guard-in-board-config-header.patch \
-           file://0007-tqma8qx-mba8qx-use-gpio-pad-ctrl-define-for-enet-res.patch \
-           file://0008-add-tqma8qxs-with-mb-smarc-2.patch \
+           file://0007-tqma8qx-remove-ethernet-and-sdhci-related-code.patch \
+           file://0008-tqma8qx-Kconfig-select-dm-drivers.patch \
            file://0009-tqma8qx-default-DT-to-B0-Stepping.patch \
-           file://0010-tqma8qxs-default-fdt_file-to-BO-stepping-CPU.patch \
+           file://0010-arm-dt-fsl-imx8qxp-tqma8qx-fsl-imx8qxp-tqma8qx-mba8q.patch \
+           file://0011-arm-dt-fsl-imx8qxp-tqma8qx-remove-unused-SD-regulato.patch \
+           file://0012-arm-dt-fsl-imx8qxp-tqma8qx-mba8qx-fix-SD1-regulator.patch \
+           file://0013-arm-dt-fsl-imx8qxp-tqma8qx-mba8qx-reorder-nodes-alph.patch \
+           file://0014-add-tqma8qxs-with-mb-smarc-2.patch \
+           file://0015-arm-dt-fsl-imx8qxp-tqma8qxs-add-i2c1.patch \
+           file://0016-arm-dt-fsl-imx8qxp-tqma8qxs-mb-smarc-2-add-fec.patch \
+           file://0017-arm-dt-fsl-imx8qxp-tqma8qxs-mb-smarc-2-add-i2c1.patch \
+           file://0018-arm-dt-fsl-imx8qxp-tqma8qxs-mb-smarc-2-add-usb.patch \
+           file://0019-tqma8qxs-remove-ethernet-and-sdhci-related-code.patch \
+           file://0020-tqma8qxs-Kconfig-select-dm-drivers-needed-for-boot.patch \
+           file://0021-arm-dt-fsl-imx8qxp-tqma8qxs-mb-smarc-2-prepare-SD3-H.patch \
+           file://0022-arm-dt-fsl-imx8qxp-tqma8qxs-prepare-e-MMC-HS-mode.patch \
            "
 
 S = "${WORKDIR}/git"

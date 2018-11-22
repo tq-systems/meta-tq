@@ -1,14 +1,14 @@
-From 2c95211524247943d3fa410a675b364f311e503a Mon Sep 17 00:00:00 2001
+From fed32608ccb0b8c5a46bc7078829795c1a45f380 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
-Date: Mon, 12 Nov 2018 17:41:51 +0100
+Date: Mon, 19 Nov 2018 17:34:42 +0100
 Subject: [PATCH] add tqma8qxs with mb-smarc-2
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
  arch/arm/cpu/armv8/imx8/Kconfig               |   6 +
  arch/arm/dts/Makefile                         |   3 +-
- .../dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts   | 249 +++++++++++++
- arch/arm/dts/fsl-imx8qxp-tqma8qxs.dtsi        | 191 ++++++++++
+ .../dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts   | 118 +++++++
+ arch/arm/dts/fsl-imx8qxp-tqma8qxs.dtsi        | 103 ++++++
  board/tqc/tqma8qxs/Kconfig                    |  58 +++
  board/tqc/tqma8qxs/Makefile                   |   9 +
  board/tqc/tqma8qxs/tqma8qxs-mb-smarc-2.c      | 325 +++++++++++++++++
@@ -16,7 +16,7 @@ Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
  configs/tqma8qxs_mb_smarc_2_mmc_defconfig     |  63 ++++
  include/configs/tqma8qxs-mb-smarc-2.h         |  27 ++
  include/configs/tqma8qxs.h                    | 333 ++++++++++++++++++
- 11 files changed, 1457 insertions(+), 1 deletion(-)
+ 11 files changed, 1238 insertions(+), 1 deletion(-)
  create mode 100644 arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
  create mode 100644 arch/arm/dts/fsl-imx8qxp-tqma8qxs.dtsi
  create mode 100644 board/tqc/tqma8qxs/Kconfig
@@ -28,12 +28,12 @@ Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
  create mode 100644 include/configs/tqma8qxs.h
 
 diff --git a/arch/arm/cpu/armv8/imx8/Kconfig b/arch/arm/cpu/armv8/imx8/Kconfig
-index e3a0a8dee9..5b121b3a28 100644
+index 3134fb4e98..adb2b8a8cf 100644
 --- a/arch/arm/cpu/armv8/imx8/Kconfig
 +++ b/arch/arm/cpu/armv8/imx8/Kconfig
-@@ -69,6 +69,11 @@ config TARGET_TQMA8QX
- 	select BOARD_LATE_INIT
- 	select IMX8QXP
+@@ -74,6 +74,11 @@ config TARGET_TQMA8QX
+ 	select CONFIG_FSL_LPUART
+ 	select CONFIG_DM_MMC
  
 +config TARGET_TQMA8QXS
 +	bool "Support TQMa8xXS board"
@@ -43,7 +43,7 @@ index e3a0a8dee9..5b121b3a28 100644
  endchoice
  
  source "board/freescale/imx8qm_arm2/Kconfig"
-@@ -76,5 +81,6 @@ source "board/freescale/imx8qm_mek/Kconfig"
+@@ -81,5 +86,6 @@ source "board/freescale/imx8qm_mek/Kconfig"
  source "board/freescale/imx8qxp_arm2/Kconfig"
  source "board/freescale/imx8qxp_mek/Kconfig"
  source "board/tqc/tqma8qx/Kconfig"
@@ -66,10 +66,10 @@ index aa72212f4f..9fc47d1f73 100644
  	keystone-k2l-evm.dtb \
 diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts b/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
 new file mode 100644
-index 0000000000..cabdaccb9d
+index 0000000000..911cf5ba37
 --- /dev/null
 +++ b/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
-@@ -0,0 +1,249 @@
+@@ -0,0 +1,118 @@
 +/*
 + * Copyright 2018 TQ Systems GmbH
 + *
@@ -91,7 +91,7 @@ index 0000000000..cabdaccb9d
 +
 +/ {
 +	model = "TQ Systems i.MX8QXP TQMa8xXS on MB-SMARC-2";
-+	compatible = "tqc,tqma8qx-mb-smarc-2", "tqc,tqma8qxs", "fsl,imx8qxp";
++	compatible = "tq,tqma8qxs-mb-smarc-2", "tq,tqma8qxs", "fsl,imx8qxp";
 +
 +	chosen {
 +		bootargs = "console=ttyLP0,115200 earlycon=lpuart32,0x5a060000,115200";
@@ -105,11 +105,10 @@ index 0000000000..cabdaccb9d
 +
 +		reg_usdhc2_vmmc: usdhc2_vmmc {
 +			compatible = "regulator-fixed";
-+			regulator-name = "SD1_SPWR";
-+			regulator-min-microvolt = <3000000>;
-+			regulator-max-microvolt = <3000000>;
-+			gpio = <&gpio4 19 GPIO_ACTIVE_HIGH>;
-+			enable-active-high;
++			regulator-name = "SD1_PWR";
++			regulator-min-microvolt = <3300000>;
++			regulator-max-microvolt = <3300000>;
++			gpio = <&gpio4 19 GPIO_ACTIVE_LOW>;
 +			startup-delay-us = <100>;
 +			off-on-delay-us = <12000>;
 +		};
@@ -117,59 +116,11 @@ index 0000000000..cabdaccb9d
 +};
 +
 +&iomuxc {
-+	pinctrl-names = "default";
 +	tqma8qxs-mb-smarc-2 {
-+
 +		pinctrl_lpuart0: lpuart0grp {
 +			fsl,pins = <
 +				SC_P_UART0_RX_ADMA_UART0_RX	0x06000020
 +				SC_P_UART0_TX_ADMA_UART0_TX	0x06000020
-+			>;
-+		};
-+
-+		pinctrl_fec1: fec1grp {
-+			fsl,pins = <
-+				SC_P_ENET0_MDC_CONN_ENET0_MDC			0x06000048
-+				SC_P_ENET0_MDIO_CONN_ENET0_MDIO			0x06000048
-+				SC_P_ENET0_RGMII_TX_CTL_CONN_ENET0_RGMII_TX_CTL	0x06000048
-+				SC_P_ENET0_RGMII_TXC_CONN_ENET0_RGMII_TXC	0x06000048
-+				SC_P_ENET0_RGMII_TXD0_CONN_ENET0_RGMII_TXD0	0x06000048
-+				SC_P_ENET0_RGMII_TXD1_CONN_ENET0_RGMII_TXD1	0x06000048
-+				SC_P_ENET0_RGMII_TXD2_CONN_ENET0_RGMII_TXD2	0x06000048
-+				SC_P_ENET0_RGMII_TXD3_CONN_ENET0_RGMII_TXD3	0x06000048
-+				SC_P_ENET0_RGMII_RXC_CONN_ENET0_RGMII_RXC	0x06000048
-+				SC_P_ENET0_RGMII_RX_CTL_CONN_ENET0_RGMII_RX_CTL	0x06000048
-+				SC_P_ENET0_RGMII_RXD0_CONN_ENET0_RGMII_RXD0	0x06000048
-+				SC_P_ENET0_RGMII_RXD1_CONN_ENET0_RGMII_RXD1	0x06000048
-+				SC_P_ENET0_RGMII_RXD2_CONN_ENET0_RGMII_RXD2	0x06000048
-+				SC_P_ENET0_RGMII_RXD3_CONN_ENET0_RGMII_RXD3	0x06000048
-+
-+				SC_P_CSI_EN_LSIO_GPIO3_IO02			0x06000048
-+			>;
-+		};
-+
-+		pinctrl_fec2: fec2grp {
-+			fsl,pins = <
-+				SC_P_ESAI0_SCKR_CONN_ENET1_RGMII_TX_CTL		0x06000048
-+				SC_P_ESAI0_FSR_CONN_ENET1_RGMII_TXC		0x06000048
-+				SC_P_ESAI0_TX4_RX1_CONN_ENET1_RGMII_TXD0	0x06000048
-+				SC_P_ESAI0_TX5_RX0_CONN_ENET1_RGMII_TXD1	0x06000048
-+				SC_P_ESAI0_FST_CONN_ENET1_RGMII_TXD2		0x06000048
-+				SC_P_ESAI0_SCKT_CONN_ENET1_RGMII_TXD3		0x06000048
-+				SC_P_ESAI0_TX0_CONN_ENET1_RGMII_RXC		0x06000048
-+				SC_P_SPDIF0_TX_CONN_ENET1_RGMII_RX_CTL		0x06000048
-+				SC_P_SPDIF0_RX_CONN_ENET1_RGMII_RXD0		0x06000048
-+				SC_P_ESAI0_TX3_RX2_CONN_ENET1_RGMII_RXD1	0x06000048
-+				SC_P_ESAI0_TX2_RX3_CONN_ENET1_RGMII_RXD2	0x06000048
-+				SC_P_ESAI0_TX1_CONN_ENET1_RGMII_RXD3		0x06000048
-+
-+				SC_P_CSI_RESET_LSIO_GPIO3_IO03			0x06000048
-+			>;
-+		};
-+
-+		pinctrl_pca9538: pca9538grp {
-+			fsl,pins = <
-+				SC_P_MIPI_CSI0_GPIO0_00_LSIO_GPIO3_IO08		0x06000020
 +			>;
 +		};
 +
@@ -216,13 +167,6 @@ index 0000000000..cabdaccb9d
 +				SC_P_USDHC1_VSELECT_CONN_USDHC1_VSELECT	0x06000020
 +			>;
 +		};
-+
-+		pinctrl_usbotg1: usbotg1grp {
-+			fsl,pins = <
-+				SC_P_USB_SS3_TC0_CONN_USB_OTG1_PWR	0x06000020
-+				SC_P_USB_SS3_TC2_CONN_USB_OTG1_OC	0x06000020
-+			>;
-+		};
 +	};
 +};
 +
@@ -230,66 +174,6 @@ index 0000000000..cabdaccb9d
 +	pinctrl-names = "default";
 +	pinctrl-0 = <&pinctrl_lpuart0>;
 +	status = "okay";
-+};
-+
-+&fec1 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_fec1>;
-+	phy-mode = "rgmii-id";
-+	phy-handle = <&ethphy0>;
-+	phy-reset-gpios = <&gpio3 2 GPIO_ACTIVE_LOW>;
-+	phy-reset-duration = <500>;
-+	fsl,magic-packet;
-+	status = "disabled";
-+
-+	mdio {
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		ethphy0: ethernet-phy@0 {
-+			compatible = "ethernet-phy-ieee802.3-c22";
-+			reg = <0>;
-+			ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
-+			ti,tx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
-+		};
-+
-+		ethphy3: ethernet-phy@3 {
-+			compatible = "ethernet-phy-ieee802.3-c22";
-+			reg = <3>;
-+			ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
-+			ti,tx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
-+		};
-+	};
-+};
-+
-+&fec2 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_fec2>;
-+	phy-mode = "rgmii-id";
-+	phy-handle = <&ethphy3>;
-+	fsl,magic-packet;
-+	phy-reset-gpios = <&gpio3 3 GPIO_ACTIVE_LOW>;
-+	phy-reset-duration = <500>;
-+
-+	status = "disabled";
-+};
-+
-+&i2c1 {
-+	eeprom2: 24c02@54 {
-+		compatible = "atmel,24c02";
-+		reg = <0x54>;
-+		pagesize = <16>;
-+		status = "okay";
-+	};
-+
-+	expander: pca9538@70 {
-+		compatible = "nxp,pca9538";
-+		reg = <0x70>;
-+		pinctrl-names = "default";
-+		pinctrl-0 = <&pinctrl_pca9538>;
-+		interrupt-parent = <&gpio3>;
-+		interrupts = <8 IRQ_TYPE_LEVEL_LOW>;
-+	};
 +};
 +
 +&usdhc2 {
@@ -300,31 +184,16 @@ index 0000000000..cabdaccb9d
 +	bus-width = <4>;
 +	cd-gpios = <&gpio4 22 GPIO_ACTIVE_LOW>;
 +	wp-gpios = <&gpio4 21 GPIO_ACTIVE_HIGH>;
++	no-1-8-v;
 +	vmmc-supply = <&reg_usdhc2_vmmc>;
 +	status = "okay";
 +};
-+
-+&usbotg1 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_usbotg1>;
-+	srp-disable;
-+	hnp-disable;
-+	adp-disable;
-+	power-polarity-active-high;
-+	disable-over-current;
-+/*	dr_mode = "host"; */
-+	status = "disabled";
-+};
-+
-+&usb2 {
-+	status = "disabled";
-+};
 diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8qxs.dtsi b/arch/arm/dts/fsl-imx8qxp-tqma8qxs.dtsi
 new file mode 100644
-index 0000000000..48897e22b9
+index 0000000000..69679e5733
 --- /dev/null
 +++ b/arch/arm/dts/fsl-imx8qxp-tqma8qxs.dtsi
-@@ -0,0 +1,191 @@
+@@ -0,0 +1,103 @@
 +/*
 + * Copyright 2018 TQ Systems GmbH
 + *
@@ -347,36 +216,12 @@ index 0000000000..48897e22b9
 +
 +/ {
 +	model = "TQ Systems i.MX8QXP TQMa8xXS";
-+	compatible = "fsl,tqma8qxs", "fsl,imx8qxp";
-+
-+	regulators {
-+		compatible = "simple-bus";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		reg_usdhc2_vmmc: usdhc2_vmmc {
-+			compatible = "regulator-fixed";
-+			regulator-name = "SD1_SPWR";
-+			regulator-min-microvolt = <3000000>;
-+			regulator-max-microvolt = <3000000>;
-+			gpio = <&gpio4 19 GPIO_ACTIVE_HIGH>;
-+			enable-active-high;
-+			startup-delay-us = <100>;
-+			off-on-delay-us = <12000>;
-+		};
-+	};
++	compatible = "tq,tqma8qxs", "fsl,imx8qxp";
 +};
 +
 +&iomuxc {
 +	pinctrl-names = "default";
 +	imx8qxp-tqma8qxs {
-+		pinctrl_lpi2c1: lpi2c1grp {
-+			fsl,pins = <
-+				SC_P_MIPI_DSI0_GPIO0_00_ADMA_I2C1_SCL	0x06000020
-+				SC_P_MIPI_DSI0_GPIO0_01_ADMA_I2C1_SDA	0x06000020
-+			>;
-+		};
-+
 +		pinctrl_usdhc1: usdhc1grp {
 +			fsl,pins = <
 +				SC_P_EMMC0_CLK_CONN_EMMC0_CLK		0x06000041
@@ -424,27 +269,6 @@ index 0000000000..48897e22b9
 +				SC_P_EMMC0_STROBE_CONN_EMMC0_STROBE	0x06000040
 +			>;
 +		};
-+
-+		pinctrl_flexspi0: flexspi0grp {
-+			fsl,pins = <
-+				SC_P_QSPI0A_DATA0_LSIO_QSPI0A_DATA0	0x0600004c
-+				SC_P_QSPI0A_DATA1_LSIO_QSPI0A_DATA1	0x0600004c
-+				SC_P_QSPI0A_DATA2_LSIO_QSPI0A_DATA2	0x0600004c
-+				SC_P_QSPI0A_DATA3_LSIO_QSPI0A_DATA3	0x0600004c
-+				SC_P_QSPI0A_DQS_LSIO_QSPI0A_DQS		0x0600004c
-+				SC_P_QSPI0A_SS0_B_LSIO_QSPI0A_SS0_B	0x0600004c
-+				SC_P_QSPI0A_SS1_B_LSIO_QSPI0A_SS1_B	0x0600004c
-+				SC_P_QSPI0A_SCLK_LSIO_QSPI0A_SCLK	0x0600004c
-+				SC_P_QSPI0B_SCLK_LSIO_QSPI0B_SCLK	0x0600004c
-+				SC_P_QSPI0B_DATA0_LSIO_QSPI0B_DATA0	0x0600004c
-+				SC_P_QSPI0B_DATA1_LSIO_QSPI0B_DATA1	0x0600004c
-+				SC_P_QSPI0B_DATA2_LSIO_QSPI0B_DATA2	0x0600004c
-+				SC_P_QSPI0B_DATA3_LSIO_QSPI0B_DATA3	0x0600004c
-+				SC_P_QSPI0B_DQS_LSIO_QSPI0B_DQS		0x0600004c
-+				SC_P_QSPI0B_SS0_B_LSIO_QSPI0B_SS0_B	0x0600004c
-+				SC_P_QSPI0B_SS1_B_LSIO_QSPI0B_SS1_B	0x0600004c
-+			>;
-+		};
 +	};
 +};
 +
@@ -462,49 +286,6 @@ index 0000000000..48897e22b9
 +
 +&gpio4 {
 +	status = "okay";
-+};
-+
-+&flexspi0 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_flexspi0>;
-+	status = "disabled";
-+
-+	flash0: mt35xu512aba@0 {
-+		reg = <0>;
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		compatible = "spi-flash";
-+		spi-max-frequency = <29000000>;
-+		spi-nor,ddr-quad-read-dummy = <8>;
-+	};
-+};
-+
-+&i2c1 {
-+	#address-cells = <1>;
-+	#size-cells = <0>;
-+	clock-frequency = <100000>;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_lpi2c1>;
-+	status = "disabled";
-+
-+	eeprom1: 24c02@51 {
-+		compatible = "atmel,24c02";
-+		reg = <0x51>;
-+		pagesize = <16>;
-+		status = "okay";
-+	};
-+
-+	eeprom0: m24c64@57 {
-+		compatible = "st,24c64", "atmel,24c64", "at24";
-+		reg = <0x57>;
-+		pagesize = <32>;
-+		status = "okay";
-+	};
-+
-+	rtc1: ds1339@68 {
-+		compatible = "ds1339", "dallas,ds1339", "dallas,ds1337";
-+		reg = <0x68>;
-+	};
 +};
 +
 +&usdhc1 {
@@ -597,7 +378,7 @@ index 0000000000..b03d2d2ea0
 +
 diff --git a/board/tqc/tqma8qxs/tqma8qxs-mb-smarc-2.c b/board/tqc/tqma8qxs/tqma8qxs-mb-smarc-2.c
 new file mode 100644
-index 0000000000..ef14336959
+index 0000000000..90ecff15a8
 --- /dev/null
 +++ b/board/tqc/tqma8qxs/tqma8qxs-mb-smarc-2.c
 @@ -0,0 +1,325 @@
@@ -871,7 +652,7 @@ index 0000000000..ef14336959
 +
 +int tqc_bb_checkboard(void)
 +{
-+	puts("Board: TQMa8QX on MBa8QX (iMX8QXP)\n");
++	puts("Board: TQMa8QXS on MB-SMARC-2 (iMX8QXP)\n");
 +
 +	return 0;
 +}
@@ -904,7 +685,7 @@ index 0000000000..ef14336959
 +int tqc_bb_board_late_init(void)
 +{
 +#ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
-+	setenv("board_name", "MBa8QX");
++	setenv("board_name", "MB-SMARC-2");
 +	setenv("board_rev", "iMX8QXP");
 +#endif
 +	return 0;
@@ -1230,7 +1011,7 @@ index 0000000000..8078fb880f
 +#endif /* __TQMA8QXS_MB_SMARC_2_H */
 diff --git a/include/configs/tqma8qxs.h b/include/configs/tqma8qxs.h
 new file mode 100644
-index 0000000000..d0a596ccf3
+index 0000000000..648f78830a
 --- /dev/null
 +++ b/include/configs/tqma8qxs.h
 @@ -0,0 +1,333 @@
@@ -1365,7 +1146,7 @@ index 0000000000..d0a596ccf3
 +	"cntr_addr=0x88000000\0"			\
 +	"cntr_file=os_cntr_signed.bin\0" \
 +	"boot_fdt=try\0" \
-+	"fdt_file=fsl-imx8qxp-tqma8qxs-a0-mb-smarc-2.dtb\0" \
++	"fdt_file=fsl-imx8qxp-tqma8qxs-mb-smarc-2.dtb\0" \
 +	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
 +	"mmcpart=" __stringify(CONFIG_SYS_MMC_IMG_LOAD_PART) "\0" \
 +	"mmcroot=" CONFIG_MMCROOT " rootwait rw\0" \
