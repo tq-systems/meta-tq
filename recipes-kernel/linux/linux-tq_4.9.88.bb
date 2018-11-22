@@ -36,7 +36,14 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
            file://0020-arm64-dt-fsl-imx8qxp-tqma8qx-mba8qx-fix-led-gpio-pol.patch \
            file://0021-arm64-dt-fsl-imx8qxp-tqma8qx-mba8qx-add-can.patch \
            file://0022-arm64-dt-fsl-imx8qxp-tqma8qx-mba8qx-add-hog-pins-for.patch \
-           file://0023-arm64-dt-add-fsl-imx8qxp-tqma8qxs.patch \
+           file://0023-arm64-dt-fsl-imx8qxp-tqma8qx-fix-compatible-entries.patch \
+           file://0024-arm64-dt-fsl-imx8qxp-tqma8qx-fix-VMMC-regulator-for-.patch \
+           file://0025-arm64-dt-add-fsl-imx8qxp-tqma8qxs.patch \
+           file://0026-remove-fsl-imx8qxp-tqma8qxs-mb-smarc-2.dtsi.patch \
+           file://0027-arm64-dt-fsl-imx8qxp-tqma8qxs-add-supplies-for-e-MMC.patch \
+           file://0028-arm64-dt-fsl-imx8qxp-tqma8qxs-add-i2c1.patch \
+           file://0029-arm64-dt-fsl-imx8qxp-tqma8qxs-add-ethernet-support.patch \
+           file://0030-arm64-dt-fsl-imx8qxp-tqma8qxs-add-usb-otg-supprt.patch \
            "
 
 SRCBRANCH = "TQMa8xx-bringup-imx_4.9.88_imx8qxp_beta2"

@@ -1,0 +1,65 @@
+From 421dcb1b5dbe7ec9cc5659b9d6b3707a2b060f84 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 22 Nov 2018 13:59:47 +0100
+Subject: [PATCH] arm64: dt: fsl-imx8qxp-tqma8qx: fix VMMC regulator for
+ SD-Card
+
+- no enable GPIO
+- fix name
+- remove from module part, is a baseboard feature
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ .../freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi   | 10 +++-------
+ .../boot/dts/freescale/fsl-imx8qxp-tqma8qx.dtsi | 17 -----------------
+ 2 files changed, 3 insertions(+), 24 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi
+index 4b171747c317..136e262e60fc 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi
+@@ -53,13 +53,9 @@
+ 
+ 		reg_usdhc2_vmmc: usdhc2_vmmc {
+ 			compatible = "regulator-fixed";
+-			regulator-name = "SD1_SPWR";
+-			regulator-min-microvolt = <3000000>;
+-			regulator-max-microvolt = <3000000>;
+-			gpio = <&gpio4 19 GPIO_ACTIVE_HIGH>;
+-			enable-active-high;
+-			startup-delay-us = <100>;
+-			off-on-delay-us = <12000>;
++			regulator-name = "SD1_PWR";
++			regulator-min-microvolt = <3300000>;
++			regulator-max-microvolt = <3300000>;
+ 			status = "okay";
+ 		};
+ 
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dtsi
+index c7b0d48ee686..f4ec41e6562e 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dtsi
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dtsi
+@@ -35,23 +35,6 @@
+ 			linux,cma-default;
+ 		};
+ 	};
+-
+-	regulators {
+-		compatible = "simple-bus";
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-
+-		reg_usdhc2_vmmc: usdhc2_vmmc {
+-			compatible = "regulator-fixed";
+-			regulator-name = "SD1_SPWR";
+-			regulator-min-microvolt = <3000000>;
+-			regulator-max-microvolt = <3000000>;
+-			gpio = <&gpio4 19 GPIO_ACTIVE_HIGH>;
+-			enable-active-high;
+-			startup-delay-us = <100>;
+-			off-on-delay-us = <12000>;
+-		};
+-	};
+ };
+ 
+ &iomuxc {
