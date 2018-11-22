@@ -1,5 +1,7 @@
 # Common definitions for all TQ-Group TQMa8QX / TQMa8QXS modules
 
+MACHINEOVERRIDES =. "mx8:mx8qxp:"
+
 require conf/machine/include/arm/arch-arm64.inc
 
 # Don't include kernels in standard images
@@ -40,6 +42,11 @@ IMAGE_INSTALL_append = " kernel-modules"
 
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
+
+# for sdcard image rule
+IMX_BOOT_SEEK = "32"
+
+WKS_FILE ?= "tqma8x-b0-sdimg.wks"
 
 do_image_wic[depends] += " \
 	mtools-native:do_populate_sysroot \
