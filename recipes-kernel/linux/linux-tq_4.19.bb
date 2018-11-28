@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 inherit kernel
 
-DEPENDS += "lzop-native bc-native"
+DEPENDS += "lzop-native bc-native openssl-native"
 #
 # append linux-mainline if we provide mainline kernel versions
 #
