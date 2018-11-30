@@ -13,7 +13,7 @@ Dependencies
 This layer depends on:
 
   URI: git://git.yoctoproject.org/poky
-  branch: rocko
+  branch: sumo
   layers: meta
   revision: HEAD
 
@@ -21,7 +21,7 @@ optionally the layer can make use of features from meta-freescale
 
   URI: https://github.com/Freescale/meta-freescale.git
   layers: meta-freeescale
-  branch: rocko
+  branch: sumo
 
 Patches
 =======
