@@ -5,7 +5,7 @@ IMXBOOT_TARGETS_tqma8qx-mba8qx = "flash"
 IMXBOOT_TARGETS_tqma8qxs-mb-smarc-2 = "flash"
 
 IMXBOOT_TARGETS_mx8qxpa0 = "flash_a0 flash_dcd_a0"
-IMXBOOT_TARGETS_mx8qxp = "flash flash_dcd"
+IMXBOOT_TARGETS_mx8qxp = "flash"
 
 # DCD_NAME is optional - provide RAM DCD name if RAM bringup not implemented in SCFW
 
