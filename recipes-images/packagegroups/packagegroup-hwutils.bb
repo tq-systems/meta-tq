@@ -8,4 +8,5 @@ RDEPENDS_${PN} = " \
     mmc-utils \
     i2c-tools \
     pciutils \
+    lmsensors-sensors \
     "
