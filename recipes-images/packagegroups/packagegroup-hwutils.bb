@@ -8,5 +8,5 @@ RDEPENDS_${PN} = " \
     mmc-utils \
     i2c-tools \
     pciutils \
-    lmsensors-sensors \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'openembedded-layer', ' lmsensors-sensors', '', d)} \
     "
