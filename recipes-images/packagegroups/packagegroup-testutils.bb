@@ -10,4 +10,5 @@ RDEPENDS_${PN} = " \
     perf \
     strace \
     gdbserver \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'openembedded-layer', ' htop', '', d)} \
     "
