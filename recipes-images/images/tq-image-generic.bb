@@ -1,6 +1,6 @@
 require recipes-core/images/core-image-minimal.bb
 
-SUMMARY =  "This is a generic image for TQ SOM with no special features."
+SUMMARY =  "This is a generic image for TQ SOM with some test / debug features."
 
 IMAGE_LINGUAS = " en-us "
 
@@ -13,4 +13,5 @@ IMAGE_INSTALL += "\
     packagegroup-fsutils \
     packagegroup-netutils \
     packagegroup-sysutils \
+    packagegroup-testutils \
 "
