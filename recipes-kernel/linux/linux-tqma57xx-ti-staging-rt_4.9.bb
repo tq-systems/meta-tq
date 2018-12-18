@@ -10,9 +10,6 @@ DEPENDS += "lzop-native bc-native"
 #
 PROVIDES = "virtual/kernel"
 
-require recipes-kernel/linux/linux-dtb.inc
-
-
 # TODO: 
 # - rename recipe to linux-tq or linux-tq-rt (in case we support also kernel w/o rt)
 SRC_URI = " \
