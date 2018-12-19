@@ -35,3 +35,5 @@ IMAGE_BOOT_FILES ?= "\
 "
 
 SERIAL_CONSOLES ?= "115200;ttyO2"
+
+WKS_FILE ?= "tqma57xx-sdimg.wks"
