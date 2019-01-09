@@ -90,7 +90,13 @@ i.MX6UL		TQMa6ULx	MBaULx		tqma6ulx-mba6ulx (TQMa6UL HW REV.030x / MBa6ULx HW REV
 i.MX6UL		TQMa6ULxL	MBaULx		tqma6ulx-lga-mba6ulx (TQMa6ULxL HW REV.020x / MBa6ULx HW REV.020x)
 i.MX7[S,D]	TQMa7<S,D>	MBa7x		tqma7x-mba7 (TQMa7[S,D] HW REV.010x / MBa7x HW REV.020x)
 LS102[0,1]a	TQMLS102[0,1]a>	MBLS102xa	tqmls102xa-mbls102xa (TQMLS102[0,1]a HW REV.020x / MBLS102xa HW REV.020x)
-LS1012a		TQMLS1012al	MBLS1012al	tqmls1012al-mbls1012al (TQMLS1012al HW REV. 100/ MBLS1012al HW REV.101)
+LS1012a		TQMLS1012AL	MBLS1012AL	tqmls1012al-mbls1012al (TQMLS1012AL HW REV. 100/ MBLS1012AL HW REV.101)
+
+Full Support for TQMLS1012al / MBLS1012AL needs NXP supplied layers
+at the moment:
+- meta-qoriq-demos
+- meta-freescale
+These layers have additional dependencies.
 
 III. Modify U-Boot / Kernel sources
 ===================================
