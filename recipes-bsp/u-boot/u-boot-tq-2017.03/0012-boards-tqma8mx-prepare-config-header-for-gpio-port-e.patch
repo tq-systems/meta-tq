@@ -1,7 +1,7 @@
-From cbe482af56628c262397159dce8ca99db950f3ad Mon Sep 17 00:00:00 2001
+From df913e5ccd1d24f2cddaf6a90ad7490a1a20f16a Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Tue, 15 Jan 2019 12:50:39 +0100
-Subject: [PATCH 16/24] boards: tqma8mx: prepare config header for gpio port
+Subject: [PATCH 12/25] boards: tqma8mx: prepare config header for gpio port
  expander
 
 this needs some tweaking in the config settings to separate between
@@ -9,32 +9,53 @@ SPL and U-Boot
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
- include/configs/tqma8mx-mba8mx.h |  6 ++++++
- include/configs/tqma8mx.h        | 34 ++++++++++++++++++++++++++------
- 2 files changed, 34 insertions(+), 6 deletions(-)
+ configs/tqma8mq_mba8mx_mmc_defconfig | 13 -----------
+ include/configs/tqma8mx-mba8mx.h     |  5 +++++
+ include/configs/tqma8mx.h            | 32 +++++++++++++++++++++++-----
+ 3 files changed, 32 insertions(+), 18 deletions(-)
 
+diff --git a/configs/tqma8mq_mba8mx_mmc_defconfig b/configs/tqma8mq_mba8mx_mmc_defconfig
+index 6ae2aaecd2..d1c117dd47 100644
+--- a/configs/tqma8mq_mba8mx_mmc_defconfig
++++ b/configs/tqma8mq_mba8mx_mmc_defconfig
+@@ -16,21 +16,8 @@ CONFIG_CMD_GPIO=y
+ # CONFIG_CMD_NFS is not set
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_TIME=y
+-CONFIG_CMD_PMIC=y
+-CONFIG_CMD_REGULATOR=y
+ CONFIG_CMD_UBI=y
+ CONFIG_OF_CONTROL=y
+-# CONFIG_BLK is not set
+-CONFIG_DM_GPIO=y
+-CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_MXC=y
+-CONFIG_DM_MMC=y
+-# CONFIG_DM_MMC_OPS is not set
+-CONFIG_DM_PMIC=y
+-CONFIG_DM_PMIC_PFUZE100=y
+-CONFIG_DM_REGULATOR=y
+-CONFIG_DM_REGULATOR_PFUZE100=y
+-CONFIG_DM_REGULATOR_FIXED=y
+-CONFIG_DM_REGULATOR_GPIO=y
+ CONFIG_NXP_TMU=y
+ CONFIG_REGEX=y
 diff --git a/include/configs/tqma8mx-mba8mx.h b/include/configs/tqma8mx-mba8mx.h
-index dae548543a..344ac57a2c 100644
+index d60cadd818..54958cfac5 100644
 --- a/include/configs/tqma8mx-mba8mx.h
 +++ b/include/configs/tqma8mx-mba8mx.h
-@@ -25,9 +25,15 @@
- 
- #define CONFIG_PHY_GIGE
- #define IMX_FEC_BASE			0x30BE0000
-+/*
- #define CONFIG_PHYLIB
- #define CONFIG_PHY_TI
-+*/
- #endif
+@@ -7,4 +7,9 @@
+ #if !defined(__TQMA8MX_MBA8MX_H)
+ #define __TQMA8MX_MBA8MX_H
  
 +#if !defined(CONFIG_SPL_BUILD)
 +#define CONFIG_DM_GPIO
 +#define CONFIG_DM_PCA953X
 +#endif
- 
++
  #endif /* __TQMA8MX_MBA8MX_H */
 diff --git a/include/configs/tqma8mx.h b/include/configs/tqma8mx.h
-index 10452dfdcd..5d414ea4a3 100644
+index 1bb62bc55a..d06e581efa 100644
 --- a/include/configs/tqma8mx.h
 +++ b/include/configs/tqma8mx.h
 @@ -50,11 +50,8 @@
@@ -50,14 +71,14 @@ index 10452dfdcd..5d414ea4a3 100644
  #define CONFIG_SYS_I2C_MXC_I2C1		/* enable I2C bus 1 */
  #define CONFIG_SYS_I2C_MXC_I2C2		/* enable I2C bus 2 */
  #define CONFIG_SYS_I2C_MXC_I2C3		/* enable I2C bus 3 */
-@@ -65,13 +62,38 @@
+@@ -65,6 +62,31 @@
  #define CONFIG_POWER_I2C
  #define CONFIG_POWER_PFUZE100
  #define CONFIG_POWER_PFUZE100_I2C_ADDR 0x08
 +
 +#else
 +
-+/* 
++/*
 + * TODO: DM stuff here to prevent SPL messing with missing stuff
 + * - pmic support
 + * - gpio expander support via dt
@@ -82,14 +103,6 @@ index 10452dfdcd..5d414ea4a3 100644
  #endif
  
  #define CONFIG_REMAKE_ELF
- 
- #define CONFIG_BOARD_EARLY_INIT_F
- #define CONFIG_BOARD_POSTCLK_INIT
--#define CONFIG_BOARD_LATE_INIT
-+/* #define CONFIG_BOARD_LATE_INIT */
- 
- /* Flat Device Tree Definitions */
- #define CONFIG_OF_BOARD_SETUP
 @@ -263,7 +285,7 @@
  #define CONFIG_CMD_FUSE
  

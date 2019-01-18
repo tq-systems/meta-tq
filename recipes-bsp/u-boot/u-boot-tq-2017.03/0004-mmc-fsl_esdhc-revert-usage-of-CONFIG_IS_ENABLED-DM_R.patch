@@ -1,7 +1,7 @@
-From 36dbb23370ca07ed60ef7f4d70664ca24ab3248a Mon Sep 17 00:00:00 2001
+From f8a7bbf82ac8897ba0fb9a8b7de0cf863534b312 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Tue, 15 Jan 2019 12:27:29 +0100
-Subject: [PATCH 14/24] mmc: fsl_esdhc: revert usage of
+Subject: [PATCH 04/25] mmc: fsl_esdhc: revert usage of
  CONFIG_IS_ENABLED(DM_REGULATOR)
 
 Enables to define DM_REGULATOR in config header. Some drivers can not be properly

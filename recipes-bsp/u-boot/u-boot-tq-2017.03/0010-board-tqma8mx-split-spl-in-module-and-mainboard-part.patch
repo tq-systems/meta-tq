@@ -1,15 +1,15 @@
-From bbe1ee55233b701c99181158381175303a8902e8 Mon Sep 17 00:00:00 2001
+From 673d9b1654790d9d301b44a8186b9013cc0bab31 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 16 Jan 2019 10:44:14 +0100
-Subject: [PATCH 21/24] board: tqma8mx: split spl in module and mainboard part
+Subject: [PATCH 10/25] board: tqma8mx: split spl in module and mainboard part
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
  board/tqc/tqma8mx/Makefile         |  1 +
- board/tqc/tqma8mx/spl-mba8mx.c     | 93 ++++++++++++++++++++++++++++++
- board/tqc/tqma8mx/spl.c            | 82 ++++++++++----------------
+ board/tqc/tqma8mx/spl-mba8mx.c     | 94 ++++++++++++++++++++++++++++++
+ board/tqc/tqma8mx/spl.c            | 86 ++++++++++-----------------
  board/tqc/tqma8mx/tqma8mx-mba8mx.c |  3 +
- 4 files changed, 126 insertions(+), 53 deletions(-)
+ 4 files changed, 130 insertions(+), 54 deletions(-)
  create mode 100644 board/tqc/tqma8mx/spl-mba8mx.c
 
 diff --git a/board/tqc/tqma8mx/Makefile b/board/tqc/tqma8mx/Makefile
@@ -25,10 +25,10 @@ index 244ee02140..eafd3c5f96 100644
  endif
 diff --git a/board/tqc/tqma8mx/spl-mba8mx.c b/board/tqc/tqma8mx/spl-mba8mx.c
 new file mode 100644
-index 0000000000..8d96150a33
+index 0000000000..98dfd91582
 --- /dev/null
 +++ b/board/tqc/tqma8mx/spl-mba8mx.c
-@@ -0,0 +1,93 @@
+@@ -0,0 +1,94 @@
 +/*
 + * Copyright 2017 NXP
 + *
@@ -42,6 +42,7 @@ index 0000000000..8d96150a33
 +#include <asm/imx-common/gpio.h>
 +#include <asm/imx-common/iomux-v3.h>
 +#include <asm/io.h>
++#include <asm/gpio.h>
 +#include <errno.h>
 +#include <fsl_esdhc.h>
 +#include <mmc.h>
@@ -93,7 +94,7 @@ index 0000000000..8d96150a33
 +
 +int tqc_bb_board_mmc_init(bd_t *bis)
 +{
-+	int i, ret;
++	int ret;
 +
 +	puts("board_mmc_init\n");
 +	/*
@@ -123,10 +124,19 @@ index 0000000000..8d96150a33
 +	puts("tqc_bb_board_init_f\n");
 +}
 diff --git a/board/tqc/tqma8mx/spl.c b/board/tqc/tqma8mx/spl.c
-index 6e54429e45..f395cfcf27 100644
+index 94392e77a2..d61592abe6 100644
 --- a/board/tqc/tqma8mx/spl.c
 +++ b/board/tqc/tqma8mx/spl.c
-@@ -47,9 +47,7 @@ struct i2c_pads_info i2c_pad_info1 = {
+@@ -21,6 +21,8 @@
+ /* #include "../common/pfuze.h" */
+ #include <spl.h>
+ 
++#include "../common/tqc_bb.h"
++
+ #include "ddr/ddr.h"
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+@@ -46,9 +48,7 @@ struct i2c_pads_info i2c_pad_info1 = {
  	},
  };
  
@@ -136,7 +146,7 @@ index 6e54429e45..f395cfcf27 100644
  
  int board_mmc_getcd(struct mmc *mmc)
  {
-@@ -60,12 +58,11 @@ int board_mmc_getcd(struct mmc *mmc)
+@@ -59,12 +59,11 @@ int board_mmc_getcd(struct mmc *mmc)
  	case USDHC1_BASE_ADDR:
  		ret = 1;
  		break;
@@ -152,7 +162,7 @@ index 6e54429e45..f395cfcf27 100644
  }
  
  #define USDHC_PAD_CTRL	(PAD_CTL_DSE6 | PAD_CTL_HYS | PAD_CTL_PUE | \
-@@ -86,20 +83,8 @@ static iomux_v3_cfg_t const usdhc1_pads[] = {
+@@ -85,63 +84,34 @@ static iomux_v3_cfg_t const usdhc1_pads[] = {
  	IMX8MQ_PAD_SD1_RESET_B__GPIO2_IO10 | MUX_PAD_CTRL(NO_PAD_CTRL),
  };
  
@@ -175,7 +185,12 @@ index 6e54429e45..f395cfcf27 100644
  };
  
  int board_mmc_init(bd_t *bis)
-@@ -113,38 +98,21 @@ int board_mmc_init(bd_t *bis)
+ {
+-	int i, ret;
++	int ret;
+ 	/*
+ 	 * According to the board_mmc_init() the following map is done:
+ 	 * (U-Boot device node)    (Physical Port)
  	 * mmc0                    USDHC1
  	 * mmc1                    USDHC2
  	 */
@@ -228,10 +243,10 @@ index 6e54429e45..f395cfcf27 100644
  }
  
  #ifdef CONFIG_POWER
-@@ -194,11 +162,11 @@ void spl_board_init(void)
- {
- 	puts("spl_board_init\n");
+@@ -189,11 +159,11 @@ int power_init_board(void)
  
+ void spl_board_init(void)
+ {
 +	/* TrustZone Address Space Controller */
  	enable_tzc380();
  
@@ -242,7 +257,7 @@ index 6e54429e45..f395cfcf27 100644
  	power_init_board();
  
  	/* DDR initialization */
-@@ -209,6 +177,9 @@ void spl_board_init(void)
+@@ -204,6 +174,9 @@ void spl_board_init(void)
  		puts("Back to ROM, SDP\n");
  		restore_boot_params();
  	}
@@ -252,7 +267,7 @@ index 6e54429e45..f395cfcf27 100644
  	puts("Normal Boot\n");
  }
  
-@@ -222,6 +193,9 @@ int board_fit_config_name_match(const char *name)
+@@ -217,6 +190,9 @@ int board_fit_config_name_match(const char *name)
  }
  #endif
  
@@ -262,20 +277,20 @@ index 6e54429e45..f395cfcf27 100644
  void board_init_f(ulong dummy)
  {
  	/* Clear global data */
-@@ -233,6 +207,8 @@ void board_init_f(ulong dummy)
+@@ -228,6 +204,8 @@ void board_init_f(ulong dummy)
  
  	timer_init();
  
 +	tqc_bb_board_init_f(dummy);
 +
  	preloader_console_init();
- 	puts("TQMa8MQ SPL\n");
+ 
  	/* Clear the BSS. */
 diff --git a/board/tqc/tqma8mx/tqma8mx-mba8mx.c b/board/tqc/tqma8mx/tqma8mx-mba8mx.c
-index 9119ee4c4c..815fb172dd 100644
+index 599c77d8fb..5b305a37bd 100644
 --- a/board/tqc/tqma8mx/tqma8mx-mba8mx.c
 +++ b/board/tqc/tqma8mx/tqma8mx-mba8mx.c
-@@ -43,6 +43,9 @@ static iomux_v3_cfg_t const uart_pads[] = {
+@@ -41,6 +41,9 @@ static iomux_v3_cfg_t const uart_pads[] = {
  	IMX8MQ_PAD_UART1_TXD__UART1_TX | MUX_PAD_CTRL(UART_PAD_CTRL),
  };
  

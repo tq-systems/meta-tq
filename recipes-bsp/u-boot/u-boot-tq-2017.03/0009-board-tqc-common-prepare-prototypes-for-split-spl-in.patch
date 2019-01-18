@@ -1,7 +1,7 @@
-From 9f9968082b5cfe78c277c687326bea42b80c8083 Mon Sep 17 00:00:00 2001
+From cb7c13d6ead45651d96e7d8e246d20d242d6a4ab Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 16 Jan 2019 10:40:12 +0100
-Subject: [PATCH 20/24] board/tqc: common: prepare prototypes for split spl
+Subject: [PATCH 09/25] board/tqc: common: prepare prototypes for split spl
  into module / baseboard part
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>

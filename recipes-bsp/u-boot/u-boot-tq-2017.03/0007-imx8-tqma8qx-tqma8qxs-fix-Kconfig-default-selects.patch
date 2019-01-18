@@ -1,15 +1,15 @@
-From c9a6bf57c3a852fedd9c4176ccd0575bda58977c Mon Sep 17 00:00:00 2001
+From 29351eca8445762c7706e03353f6ec9f017add62 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
-Date: Mon, 14 Jan 2019 15:19:30 +0100
-Subject: [PATCH 12/24] board: tqma8qx / tqma8qxs: fix KConfig select
- statements
+Date: Thu, 17 Jan 2019 15:31:38 +0100
+Subject: [PATCH 07/25] imx8: tqma8qx / tqma8qxs: fix Kconfig default selects
 
 remove CONFIG_ prefix added by accident
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
  arch/arm/cpu/armv8/imx8/Kconfig | 20 ++++++++++----------
- 1 file changed, 10 insertions(+), 10 deletions(-)
+ board/tqc/tqma8qx/Kconfig       |  1 -
+ 2 files changed, 10 insertions(+), 11 deletions(-)
 
 diff --git a/arch/arm/cpu/armv8/imx8/Kconfig b/arch/arm/cpu/armv8/imx8/Kconfig
 index 0a1d182c0e..23cec0cea1 100644
@@ -47,6 +47,18 @@ index 0a1d182c0e..23cec0cea1 100644
  
  endchoice
  
+diff --git a/board/tqc/tqma8qx/Kconfig b/board/tqc/tqma8qx/Kconfig
+index 029a25ee6a..9699a6d76e 100644
+--- a/board/tqc/tqma8qx/Kconfig
++++ b/board/tqc/tqma8qx/Kconfig
+@@ -22,7 +22,6 @@ config TQMA8QX_MX8QXP
+ 
+ endchoice
+ 
+-
+ choice
+ 	prompt "TQMa8QX base board variant"
+ 	default MBA8QX
 -- 
 2.17.1
 

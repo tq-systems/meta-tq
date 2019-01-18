@@ -1,7 +1,7 @@
-From f7f7de2f083e976d51d888cdb0616650e68361a2 Mon Sep 17 00:00:00 2001
+From 70b6592433818fa124062078f216e07b43a236c0 Mon Sep 17 00:00:00 2001
 From: Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>
 Date: Mon, 3 Sep 2018 10:17:35 +0200
-Subject: [PATCH 11/24] serial: mxc: Add match string for i.mx6 quad/dual lite
+Subject: [PATCH 03/25] serial: mxc: Add match string for i.mx6 quad/dual lite
  serial
 
 Signed-off-by: Bernhard Messerklinger <bernhard.messerklinger@br-automation.com>

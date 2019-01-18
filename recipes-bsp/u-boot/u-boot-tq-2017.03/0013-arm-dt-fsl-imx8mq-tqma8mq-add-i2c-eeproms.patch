@@ -1,7 +1,7 @@
-From e0820aa57bf72f8cf27531c0e94fca579b0f3d2d Mon Sep 17 00:00:00 2001
+From fe888088c77bc980badb1d427103ab8ab0cb7de4 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 16 Jan 2019 10:55:49 +0100
-Subject: [PATCH 24/24] arm: dt: fsl-imx8mq-tqma8mq: add i2c eeproms
+Subject: [PATCH 13/25] arm: dt: fsl-imx8mq-tqma8mq: add i2c eeproms
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
@@ -9,7 +9,7 @@ Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
  1 file changed, 14 insertions(+)
 
 diff --git a/arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi b/arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi
-index bd152ebe9b..944e42a7f7 100644
+index 30b22cb7e6..ca6d24af57 100644
 --- a/arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi
 +++ b/arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi
 @@ -199,6 +199,20 @@
@@ -32,7 +32,7 @@ index bd152ebe9b..944e42a7f7 100644
 +	};
  };
  
- &qspi {
+ /* TODO: not working */
 -- 
 2.17.1
 
