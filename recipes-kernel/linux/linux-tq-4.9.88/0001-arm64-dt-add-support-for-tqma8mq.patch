@@ -1,0 +1,452 @@
+From 18d9ce2ab610a4edea25fca46ecf01382daf1e93 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 17 Jan 2019 17:53:31 +0100
+Subject: [PATCH 01/11] arm64: dt: add support for tqma8mq
+
+- baseboard mba8mx
+- SD-Card / e-MMC
+- UART
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/Makefile        |   3 +-
+ .../freescale/fsl-imx8mq-tqma8mq-mba8mx.dts   | 169 +++++++++++++
+ .../dts/freescale/fsl-imx8mq-tqma8mq.dtsi     | 236 ++++++++++++++++++
+ 3 files changed, 407 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx.dts
+ create mode 100644 arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
+
+diff --git a/arch/arm64/boot/dts/freescale/Makefile b/arch/arm64/boot/dts/freescale/Makefile
+index 3d5657c376d8..2d15a6232ec6 100644
+--- a/arch/arm64/boot/dts/freescale/Makefile
++++ b/arch/arm64/boot/dts/freescale/Makefile
+@@ -73,7 +73,8 @@ dtb-$(CONFIG_ARCH_FSL_IMX8MQ) += fsl-imx8mq-ddr3l-arm2.dtb \
+ 				 fsl-imx8mq-evk-dual-display.dtb \
+ 				 fsl-imx8mq-evk-ak4497.dtb \
+ 				 fsl-imx8mq-evk-audio-tdm.dtb \
+-				 fsl-imx8mq-evk-drm.dtb
++				 fsl-imx8mq-evk-drm.dtb \
++				 fsl-imx8mq-tqma8mq-mba8mx.dtb
+ dtb-$(CONFIG_ARCH_FSL_IMX8MM) += fsl-imx8mm-evk.dtb
+ 
+ always		:= $(dtb-y)
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx.dts b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx.dts
+new file mode 100644
+index 000000000000..9df19b23aafe
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx.dts
+@@ -0,0 +1,169 @@
++/*
++ * Copyright (C) 2016 Freescale Semiconductor, Inc.
++ * Copyright 2017 NXP
++ * Copyright 2019 TQ Systems GmbH
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++
++/dts-v1/;
++
++#include "fsl-imx8mq-tqma8mq.dtsi"
++
++/ {
++	model = "TQ Systems GmbH i.MX8MQ TQMa8MQ on MBa8MX";
++	compatible = "tq,imx8mq-tqma8mq-mba8mx", "tq,imx8mq-tqma8mq", "fsl,imx8mq";
++
++	chosen {
++		bootargs = "console=ttymxc0,115200 earlycon=ec_imx6q,0x30860000,115200";
++		stdout-path = &uart1;
++	};
++
++	regulators {
++		compatible = "simple-bus";
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		reg_usdhc2_vmmc: usdhc2_vmmc@0 {
++			compatible = "regulator-fixed";
++			regulator-name = "VSD_3V3";
++			reg = <0>;
++			regulator-min-microvolt = <3300000>;
++			regulator-max-microvolt = <3300000>;
++			gpio = <&gpio2 19 GPIO_ACTIVE_HIGH>;
++			enable-active-high;
++		};
++	};
++};
++
++&iomuxc {
++	pinctrl-names = "default";
++
++	imx8mq-evk {
++		pinctrl_i2c2: i2c2grp {
++			fsl,pins = <
++				MX8MQ_IOMUXC_I2C2_SCL_I2C2_SCL			0x4000007f
++				MX8MQ_IOMUXC_I2C2_SDA_I2C2_SDA			0x4000007f
++			>;
++		};
++
++		pinctrl_uart1: uart1grp {
++			fsl,pins = <
++				MX8MQ_IOMUXC_UART1_RXD_UART1_DCE_RX		0x79
++				MX8MQ_IOMUXC_UART1_TXD_UART1_DCE_TX		0x79
++			>;
++		};
++
++		pinctrl_usdhc2_gpio: usdhc2grpgpio {
++			fsl,pins = <
++				MX8MQ_IOMUXC_SD2_CD_B_GPIO2_IO12	0x41
++				MX8MQ_IOMUXC_SD2_RESET_B_GPIO2_IO19	0x41
++			>;
++		};
++
++		pinctrl_usdhc2: usdhc2grp {
++			fsl,pins = <
++				MX8MQ_IOMUXC_SD2_CLK_USDHC2_CLK			0x83
++				MX8MQ_IOMUXC_SD2_CMD_USDHC2_CMD			0xc3
++				MX8MQ_IOMUXC_SD2_DATA0_USDHC2_DATA0		0xc3
++				MX8MQ_IOMUXC_SD2_DATA1_USDHC2_DATA1		0xc3
++				MX8MQ_IOMUXC_SD2_DATA2_USDHC2_DATA2		0xc3
++				MX8MQ_IOMUXC_SD2_DATA3_USDHC2_DATA3		0xc3
++				MX8MQ_IOMUXC_GPIO1_IO04_USDHC2_VSELECT		0xc1
++			>;
++		};
++
++		pinctrl_usdhc2_100mhz: usdhc2grp100mhz {
++			fsl,pins = <
++				MX8MQ_IOMUXC_SD2_CLK_USDHC2_CLK			0x85
++				MX8MQ_IOMUXC_SD2_CMD_USDHC2_CMD			0xc5
++				MX8MQ_IOMUXC_SD2_DATA0_USDHC2_DATA0		0xc5
++				MX8MQ_IOMUXC_SD2_DATA1_USDHC2_DATA1		0xc5
++				MX8MQ_IOMUXC_SD2_DATA2_USDHC2_DATA2		0xc5
++				MX8MQ_IOMUXC_SD2_DATA3_USDHC2_DATA3		0xc5
++				MX8MQ_IOMUXC_GPIO1_IO04_USDHC2_VSELECT		0xc1
++			>;
++		};
++
++		pinctrl_usdhc2_200mhz: usdhc2grp200mhz {
++			fsl,pins = <
++				MX8MQ_IOMUXC_SD2_CLK_USDHC2_CLK			0x87
++				MX8MQ_IOMUXC_SD2_CMD_USDHC2_CMD			0xc7
++				MX8MQ_IOMUXC_SD2_DATA0_USDHC2_DATA0		0xc7
++				MX8MQ_IOMUXC_SD2_DATA1_USDHC2_DATA1		0xc7
++				MX8MQ_IOMUXC_SD2_DATA2_USDHC2_DATA2		0xc7
++				MX8MQ_IOMUXC_SD2_DATA3_USDHC2_DATA3		0xc7
++				MX8MQ_IOMUXC_GPIO1_IO04_USDHC2_VSELECT		0xc1
++			>;
++		};
++	};
++};
++
++&i2c2 {
++	clock-frequency = <100000>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c2>;
++	status = "disabled";
++};
++
++&uart1 { /* console */
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart1>;
++	assigned-clocks = <&clk IMX8MQ_CLK_UART1_SRC>;
++	assigned-clock-parents = <&clk IMX8MQ_CLK_25M>;
++	status = "okay";
++};
++
++&usdhc2 {
++	pinctrl-names = "default", "state_100mhz", "state_200mhz";
++	pinctrl-0 = <&pinctrl_usdhc2>, <&pinctrl_usdhc2_gpio>;
++	pinctrl-1 = <&pinctrl_usdhc2_100mhz>, <&pinctrl_usdhc2_gpio>;
++	pinctrl-2 = <&pinctrl_usdhc2_200mhz>, <&pinctrl_usdhc2_gpio>;
++	bus-width = <4>;
++	cd-gpios = <&gpio2 12 GPIO_ACTIVE_LOW>;
++	vmmc-supply = <&reg_usdhc2_vmmc>;
++	status = "okay";
++};
++
++
++/* TODO: not working */
++&usb3_phy0 {
++	status = "disabled";
++};
++
++&usb3_0 {
++	status = "disabled";
++};
++
++&usb_dwc3_0 {
++	status = "disabled";
++	dr_mode = "peripheral";
++};
++
++&usb3_phy1 {
++	status = "okay";
++};
++
++&usb3_1 {
++	status = "okay";
++};
++
++&usb_dwc3_1 {
++	status = "okay";
++	dr_mode = "host";
++};
++
++&wdog1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_wdog>;
++	fsl,ext-reset-output;
++	status = "okay";
++};
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
+new file mode 100644
+index 000000000000..30b22cb7e619
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
+@@ -0,0 +1,236 @@
++/*
++ * Copyright (C) 2016 Freescale Semiconductor, Inc.
++ * Copyright 2017 NXP
++ * Copyright 2019 TQ Systems GmbH
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++
++/* First 128KB is for PSCI ATF. */
++/memreserve/ 0x40000000 0x00020000;
++
++#include "fsl-imx8mq.dtsi"
++
++/ {
++	model = "TQ Systems GmbH i.MX8MQ TQMa8MQ";
++	compatible = "tq,imx8mq-tqma8mq", "fsl,imx8mq";
++
++	chosen {
++	};
++};
++
++&iomuxc {
++	pinctrl-names = "default";
++
++	imx8mq-tqma8mq {
++		pinctrl_i2c1: i2c1grp {
++			fsl,pins = <
++				MX8MQ_IOMUXC_I2C1_SCL_I2C1_SCL			0x4000007f
++				MX8MQ_IOMUXC_I2C1_SDA_I2C1_SDA			0x4000007f
++			>;
++		};
++
++		pinctrl_qspi: qspigrp {
++			fsl,pins = <
++				MX8MQ_IOMUXC_NAND_ALE_QSPI_A_SCLK	0x82
++				MX8MQ_IOMUXC_NAND_CE0_B_QSPI_A_SS0_B	0x82
++				MX8MQ_IOMUXC_NAND_DATA00_QSPI_A_DATA0	0x82
++				MX8MQ_IOMUXC_NAND_DATA01_QSPI_A_DATA1	0x82
++				MX8MQ_IOMUXC_NAND_DATA02_QSPI_A_DATA2	0x82
++				MX8MQ_IOMUXC_NAND_DATA03_QSPI_A_DATA3	0x82
++			>;
++		};
++
++		pinctrl_usdhc1: usdhc1grp {
++			fsl,pins = <
++				MX8MQ_IOMUXC_SD1_CLK_USDHC1_CLK			0x83
++				MX8MQ_IOMUXC_SD1_CMD_USDHC1_CMD			0xc3
++				MX8MQ_IOMUXC_SD1_DATA0_USDHC1_DATA0		0xc3
++				MX8MQ_IOMUXC_SD1_DATA1_USDHC1_DATA1		0xc3
++				MX8MQ_IOMUXC_SD1_DATA2_USDHC1_DATA2		0xc3
++				MX8MQ_IOMUXC_SD1_DATA3_USDHC1_DATA3		0xc3
++				MX8MQ_IOMUXC_SD1_DATA4_USDHC1_DATA4		0xc3
++				MX8MQ_IOMUXC_SD1_DATA5_USDHC1_DATA5		0xc3
++				MX8MQ_IOMUXC_SD1_DATA6_USDHC1_DATA6		0xc3
++				MX8MQ_IOMUXC_SD1_DATA7_USDHC1_DATA7		0xc3
++				MX8MQ_IOMUXC_SD1_STROBE_USDHC1_STROBE 		0x83
++				MX8MQ_IOMUXC_SD1_RESET_B_USDHC1_RESET_B		0xc1
++			>;
++		};
++
++		pinctrl_usdhc1_100mhz: usdhc1grp100mhz {
++			fsl,pins = <
++				MX8MQ_IOMUXC_SD1_CLK_USDHC1_CLK			0x85
++				MX8MQ_IOMUXC_SD1_CMD_USDHC1_CMD			0xc5
++				MX8MQ_IOMUXC_SD1_DATA0_USDHC1_DATA0		0xc5
++				MX8MQ_IOMUXC_SD1_DATA1_USDHC1_DATA1		0xc5
++				MX8MQ_IOMUXC_SD1_DATA2_USDHC1_DATA2		0xc5
++				MX8MQ_IOMUXC_SD1_DATA3_USDHC1_DATA3		0xc5
++				MX8MQ_IOMUXC_SD1_DATA4_USDHC1_DATA4		0xc5
++				MX8MQ_IOMUXC_SD1_DATA5_USDHC1_DATA5		0xc5
++				MX8MQ_IOMUXC_SD1_DATA6_USDHC1_DATA6		0xc5
++				MX8MQ_IOMUXC_SD1_DATA7_USDHC1_DATA7		0xc5
++				MX8MQ_IOMUXC_SD1_STROBE_USDHC1_STROBE 		0x85
++				MX8MQ_IOMUXC_SD1_RESET_B_USDHC1_RESET_B		0xc1
++			>;
++		};
++
++		pinctrl_usdhc1_200mhz: usdhc1grp200mhz {
++			fsl,pins = <
++				MX8MQ_IOMUXC_SD1_CLK_USDHC1_CLK			0x87
++				MX8MQ_IOMUXC_SD1_CMD_USDHC1_CMD			0xc7
++				MX8MQ_IOMUXC_SD1_DATA0_USDHC1_DATA0		0xc7
++				MX8MQ_IOMUXC_SD1_DATA1_USDHC1_DATA1		0xc7
++				MX8MQ_IOMUXC_SD1_DATA2_USDHC1_DATA2		0xc7
++				MX8MQ_IOMUXC_SD1_DATA3_USDHC1_DATA3		0xc7
++				MX8MQ_IOMUXC_SD1_DATA4_USDHC1_DATA4		0xc7
++				MX8MQ_IOMUXC_SD1_DATA5_USDHC1_DATA5		0xc7
++				MX8MQ_IOMUXC_SD1_DATA6_USDHC1_DATA6		0xc7
++				MX8MQ_IOMUXC_SD1_DATA7_USDHC1_DATA7		0xc7
++				MX8MQ_IOMUXC_SD1_STROBE_USDHC1_STROBE 		0x87
++				MX8MQ_IOMUXC_SD1_RESET_B_USDHC1_RESET_B		0xc1
++			>;
++		};
++
++		pinctrl_wdog: wdoggrp {
++			fsl,pins = <
++				MX8MQ_IOMUXC_GPIO1_IO02_WDOG1_WDOG_B 0xc6
++			>;
++		};
++	};
++};
++
++&i2c1 {
++	clock-frequency = <100000>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_i2c1>;
++	status = "okay";
++
++	pmic: pfuze100@08 {
++		compatible = "fsl,pfuze100";
++		reg = <0x08>;
++
++		regulators {
++			sw1a_reg: sw1ab {
++				regulator-min-microvolt = <300000>;
++				regulator-max-microvolt = <1875000>;
++				regulator-always-on;
++			};
++
++			sw1c_reg: sw1c {
++				regulator-min-microvolt = <300000>;
++				regulator-max-microvolt = <1875000>;
++				regulator-always-on;
++			};
++
++			sw2_reg: sw2 {
++				regulator-min-microvolt = <800000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-always-on;
++			};
++
++			sw3a_reg: sw3ab {
++				regulator-min-microvolt = <400000>;
++				regulator-max-microvolt = <1975000>;
++				regulator-always-on;
++			};
++
++			sw4_reg: sw4 {
++				regulator-min-microvolt = <800000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-always-on;
++			};
++
++			swbst_reg: swbst {
++				regulator-min-microvolt = <5000000>;
++				regulator-max-microvolt = <5150000>;
++			};
++
++			snvs_reg: vsnvs {
++				regulator-min-microvolt = <1000000>;
++				regulator-max-microvolt = <3000000>;
++				regulator-always-on;
++			};
++
++			vref_reg: vrefddr {
++				regulator-always-on;
++			};
++
++			vgen1_reg: vgen1 {
++				regulator-min-microvolt = <800000>;
++				regulator-max-microvolt = <1550000>;
++			};
++
++			vgen2_reg: vgen2 {
++				regulator-min-microvolt = <800000>;
++				regulator-max-microvolt = <1550000>;
++				regulator-always-on;
++			};
++
++			vgen3_reg: vgen3 {
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-always-on;
++			};
++
++			vgen4_reg: vgen4 {
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-always-on;
++			};
++
++			vgen5_reg: vgen5 {
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <3300000>;
++				regulator-always-on;
++			};
++
++			vgen6_reg: vgen6 {
++				regulator-min-microvolt = <1800000>;
++				regulator-max-microvolt = <3300000>;
++			};
++		};
++	};
++};
++
++/* TODO: not working */
++&qspi {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_qspi>;
++	status = "disabled";
++
++	flash0: n25q256a@0 {
++		reg = <0>;
++		#address-cells = <1>;
++		#size-cells = <1>;
++		compatible = "micron,n25q256a";
++		spi-max-frequency = <29000000>;
++		spi-nor,ddr-quad-read-dummy = <6>;
++	};
++};
++
++&usdhc1 {
++	pinctrl-names = "default", "state_100mhz", "state_200mhz";
++	pinctrl-0 = <&pinctrl_usdhc1>;
++	pinctrl-1 = <&pinctrl_usdhc1_100mhz>;
++	pinctrl-2 = <&pinctrl_usdhc1_200mhz>;
++	bus-width = <8>;
++	non-removable;
++	status = "okay";
++};
++
++/* TODO: wdog reset has issues */
++&wdog1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_wdog>;
++	fsl,ext-reset-output;
++	status = "okay";
++};
+-- 
+2.17.1
+
