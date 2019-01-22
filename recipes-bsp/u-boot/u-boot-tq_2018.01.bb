@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 
 # TODO: rename branch before pushing to github
-SRCREV = "b8cdca2be1f646f3373a05f0ceb1df0b9e10f84c"
+SRCREV = "9b3eefb75d4e81f402305845ff77cd349ea793c9"
 SRCBRANCH = "TQMa57xx-u-boot-v2018.01"
 
 S = "${WORKDIR}/git"
