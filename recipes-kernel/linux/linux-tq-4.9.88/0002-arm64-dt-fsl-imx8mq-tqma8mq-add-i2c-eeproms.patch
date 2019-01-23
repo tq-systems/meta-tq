@@ -1,7 +1,7 @@
-From 63d61d793869f56183f52cc94fb32933ad489a91 Mon Sep 17 00:00:00 2001
+From aeed7252ab5fcf21b9f687e3c6a4c03626cc6c6b Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 17 Jan 2019 17:55:48 +0100
-Subject: [PATCH 02/11] arm64: dt: fsl-imx8mq-tqma8mq: add i2c eeproms
+Subject: [PATCH 02/13] arm64: dt: fsl-imx8mq-tqma8mq: add i2c eeproms
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---

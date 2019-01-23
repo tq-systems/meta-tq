@@ -1,27 +1,24 @@
-From 4ba2b6efc33ad841761b50e5889276f05f50cc07 Mon Sep 17 00:00:00 2001
+From 799000202e460b4ba8944e9c7b6a47d9f902314f Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Fri, 18 Jan 2019 12:11:26 +0100
-Subject: [PATCH 10/11] arm64: dt: fsl-imx8mq-tqma8mq: restrict reserved mem
+Subject: [PATCH 09/13] arm64: dt: fsl-imx8mq-tqma8mq: restrict reserved mem
  for CMA
 
 module has only 1GiB memory, limit CMA size to 256 MiB
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
- .../boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi  | 17 ++++++++++++++++-
- 1 file changed, 16 insertions(+), 1 deletion(-)
+ .../boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi    | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
-index 59a1d7b1bccb..263047a1771c 100644
+index 4352a31ed7bd..263047a1771c 100644
 --- a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
 +++ b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
-@@ -31,7 +31,22 @@
- 		regulator-name = "TQMA8MX_VCC3V3";
- 		regulator-min-microvolt = <3300000>;
+@@ -33,6 +33,21 @@
  		regulator-max-microvolt = <3300000>;
--		enable-always-on;
-+		regulator-always-on;
-+	};
+ 		regulator-always-on;
+ 	};
 +
 +	reserved-memory {
 +		#address-cells = <2>;
@@ -36,9 +33,10 @@ index 59a1d7b1bccb..263047a1771c 100644
 +			alloc-ranges = <0 0x40000000 0 0x40000000>;
 +			linux,cma-default;
 +		};
- 	};
++	};
  };
  
+ &iomuxc {
 -- 
 2.17.1
 

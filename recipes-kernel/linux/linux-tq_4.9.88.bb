@@ -21,10 +21,12 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
            file://0005-arm64-dt-fsl-imx8mq-tqma8mq-add-regulators-for-e-MMC.patch \
            file://0006-arm64-dt-fsl-imx8mq-tqma8mq-mba8mx-regulators-dont-n.patch \
            file://0007-arm64-dt-fsl-imx8mq-tqma8mq-mba8mx-fixup-SD-Card.patch \
-           file://0008-arm64-dt-fsl-imx8mq-tqma8mq-mba8mx-fixup-ethernet.patch \
            file://0009-arm64-dt-fsl-imx8mq-tqma8mq-mba8mx-disable-SD-CARD-V.patch \
            file://0010-arm64-dt-fsl-imx8mq-tqma8mq-restrict-reserved-mem-fo.patch \
            file://0011-arm64-dt-fsl-imx8mq-tqma8mq-disable-e-MMC-HS-modi.patch \
+           file://0011-arm64-dt-fsl-imx8mq-tqma8mq-enable-gpu-including-pow.patch \
+           file://0012-arm64-dt-fsl-imx8mq-tqma8mq-enable-vpu-including-pow.patch \
+           file://0013-arm64-dt-fsl-imx8mq-tqma8mq-mba8mx-add-hdmi-support.patch \
            "
 
 SRCBRANCH = "TQMa8xx-bringup-imx_4.9.88_imx8qxp_beta2"

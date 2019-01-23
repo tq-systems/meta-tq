@@ -1,15 +1,15 @@
-From 9f77a7c04f0a5a8cfcf1670bb647acdefd28f222 Mon Sep 17 00:00:00 2001
+From 80199eb4f85e99e512cf8b94b708ad5e44641f54 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 17 Jan 2019 17:58:57 +0100
-Subject: [PATCH 04/11] arm: dt: tqma8mq-mba8mx: add ethernet support
+Subject: [PATCH 04/13] arm: dt: tqma8mq-mba8mx: add ethernet support
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
- .../freescale/fsl-imx8mq-tqma8mq-mba8mx.dts   | 47 +++++++++++++++++++
- 1 file changed, 47 insertions(+)
+ .../freescale/fsl-imx8mq-tqma8mq-mba8mx.dts   | 46 +++++++++++++++++++
+ 1 file changed, 46 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx.dts b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx.dts
-index 8bffce9bbd58..bea2e2362b5f 100644
+index bd518406c2cb..bd961f08ae78 100644
 --- a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx.dts
 +++ b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx.dts
 @@ -17,6 +17,7 @@
@@ -20,7 +20,7 @@ index 8bffce9bbd58..bea2e2362b5f 100644
  
  / {
  	model = "TQ Systems GmbH i.MX8MQ TQMa8MQ on MBa8MX";
-@@ -44,10 +45,56 @@
+@@ -44,10 +45,55 @@
  	};
  };
  
@@ -70,13 +70,12 @@ index 8bffce9bbd58..bea2e2362b5f 100644
 +				MX8MQ_IOMUXC_ENET_RXC_ENET1_RGMII_RXC	0x91
 +				MX8MQ_IOMUXC_ENET_RX_CTL_ENET1_RGMII_RX_CTL	0x91
 +				MX8MQ_IOMUXC_ENET_TX_CTL_ENET1_RGMII_TX_CTL	0x1f
-+				MX8MQ_IOMUXC_GPIO1_IO09_GPIO1_IO9	0x19
 +			>;
 +		};
 +
- 		pinctrl_i2c2: i2c2grp {
+ 		pinctrl_uart1: uart1grp {
  			fsl,pins = <
- 				MX8MQ_IOMUXC_I2C2_SCL_I2C2_SCL			0x4000007f
+ 				MX8MQ_IOMUXC_UART1_RXD_UART1_DCE_RX		0x79
 -- 
 2.17.1
 

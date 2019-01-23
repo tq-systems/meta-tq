@@ -1,7 +1,7 @@
-From c1b2d8b4ab76103c851501c7722a0423ed4f1bea Mon Sep 17 00:00:00 2001
+From c85a9e41f855a0e651c144586236851642810343 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Fri, 18 Jan 2019 12:17:01 +0100
-Subject: [PATCH 11/11] arm64: dt: fsl-imx8mq-tqma8mq: disable e-MMC HS modi
+Subject: [PATCH 10/13] arm64: dt: fsl-imx8mq-tqma8mq: disable e-MMC HS modi
 
 must check design and tuning settings
 

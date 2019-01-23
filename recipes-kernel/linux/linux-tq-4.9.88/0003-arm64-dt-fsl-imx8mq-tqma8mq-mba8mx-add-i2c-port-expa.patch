@@ -1,7 +1,7 @@
-From 1af24e72bf97e0dfa6e06b409613d1bd7df30069 Mon Sep 17 00:00:00 2001
+From 1c7b990067dd87979a540754f7e2955637ac5738 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 17 Jan 2019 17:56:24 +0100
-Subject: [PATCH 03/11] arm64: dt: fsl-imx8mq-tqma8mq-mba8mx: add i2c port
+Subject: [PATCH 03/13] arm64: dt: fsl-imx8mq-tqma8mq-mba8mx: add i2c port
  expander
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
@@ -10,10 +10,10 @@ Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
  1 file changed, 16 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx.dts b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx.dts
-index 9df19b23aafe..8bffce9bbd58 100644
+index 6200d79c4bc6..bd518406c2cb 100644
 --- a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx.dts
 +++ b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx.dts
-@@ -107,6 +107,22 @@
+@@ -100,6 +100,22 @@
  	};
  };
  
@@ -33,9 +33,9 @@ index 9df19b23aafe..8bffce9bbd58 100644
 +	};
 +};
 +
- &i2c2 {
- 	clock-frequency = <100000>;
+ &uart1 { /* console */
  	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_uart1>;
 -- 
 2.17.1
 
