@@ -1,0 +1,42 @@
+From 7902f699b0910290d771527a37ca89ca0d90d972 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 10 Jan 2019 11:58:10 +0100
+Subject: [PATCH 01/24] mtd/ubi: allow via Kconfig
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ drivers/mtd/ubi/Kconfig | 1 +
+ lib/Kconfig             | 5 +++++
+ 2 files changed, 6 insertions(+)
+
+diff --git a/drivers/mtd/ubi/Kconfig b/drivers/mtd/ubi/Kconfig
+index 0c82395317..165273e438 100644
+--- a/drivers/mtd/ubi/Kconfig
++++ b/drivers/mtd/ubi/Kconfig
+@@ -3,6 +3,7 @@ menu "UBI support"
+ config MTD_UBI
+ 	bool "Enable UBI - Unsorted block images"
+ 	select CRC32
++	select RBTREE
+ 	help
+ 	  UBI is a software layer above MTD layer which admits of LVM-like
+ 	  logical volumes on top of MTD devices, hides some complexities of
+diff --git a/lib/Kconfig b/lib/Kconfig
+index e2d2a73721..ca3aaeca96 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -47,6 +47,11 @@ config REGEX
+ 	  regex support to some commands, for example "env grep" and
+ 	  "setexpr".
+ 
++config RBTREE
++	bool "enable rbtree support"
++	help
++	  rbtree is needed for UBI support
++
+ config LIB_RAND
+ 	bool "Pseudo-random library support "
+ 	help
+-- 
+2.17.1
+

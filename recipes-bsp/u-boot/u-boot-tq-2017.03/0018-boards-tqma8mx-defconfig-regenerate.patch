@@ -1,0 +1,52 @@
+From c9c85cadc5d47d22bce168fe8370d38e0688872f Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Tue, 15 Jan 2019 12:55:52 +0100
+Subject: [PATCH 18/24] boards: tqma8mx: defconfig: regenerate
+
+result of moving stuff to config header
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ configs/tqma8mq_mba8mx_mmc_defconfig | 16 ----------------
+ 1 file changed, 16 deletions(-)
+
+diff --git a/configs/tqma8mq_mba8mx_mmc_defconfig b/configs/tqma8mq_mba8mx_mmc_defconfig
+index 0f88302718..26427e466f 100644
+--- a/configs/tqma8mq_mba8mx_mmc_defconfig
++++ b/configs/tqma8mq_mba8mx_mmc_defconfig
+@@ -7,7 +7,6 @@ CONFIG_FIT=y
+ CONFIG_SPL_LOAD_FIT=y
+ CONFIG_SYS_EXTRA_OPTIONS="IMX_CONFIG=arch/arm/imx-common/spl_sd.cfg"
+ CONFIG_ARCH_MISC_INIT=y
+-CONFIG_SPL=y
+ CONFIG_HUSH_PARSER=y
+ CONFIG_CMD_MEMTEST=y
+ CONFIG_CMD_MEMINFO=y
+@@ -18,24 +17,9 @@ CONFIG_CMD_MII=y
+ CONFIG_CMD_PING=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_TIME=y
+-CONFIG_CMD_PMIC=y
+-CONFIG_CMD_REGULATOR=y
+ CONFIG_CMD_UBI=y
+ CONFIG_OF_CONTROL=y
+ # CONFIG_BLK is not set
+-CONFIG_DM_GPIO=y
+-CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_MXC=y
+-CONFIG_DM_MMC=y
+ # CONFIG_DM_MMC_OPS is not set
+-CONFIG_DM_ETH=y
+-CONFIG_PINCTRL=y
+-CONFIG_PINCTRL_IMX8M=y
+-CONFIG_DM_PMIC=y
+-CONFIG_DM_PMIC_PFUZE100=y
+-CONFIG_DM_REGULATOR=y
+-CONFIG_DM_REGULATOR_PFUZE100=y
+-CONFIG_DM_REGULATOR_FIXED=y
+-CONFIG_DM_REGULATOR_GPIO=y
+-CONFIG_DM_THERMAL=y
+ CONFIG_NXP_TMU=y
+-- 
+2.17.1
+

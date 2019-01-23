@@ -1,0 +1,104 @@
+From cbe482af56628c262397159dce8ca99db950f3ad Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Tue, 15 Jan 2019 12:50:39 +0100
+Subject: [PATCH 16/24] boards: tqma8mx: prepare config header for gpio port
+ expander
+
+this needs some tweaking in the config settings to separate between
+SPL and U-Boot
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ include/configs/tqma8mx-mba8mx.h |  6 ++++++
+ include/configs/tqma8mx.h        | 34 ++++++++++++++++++++++++++------
+ 2 files changed, 34 insertions(+), 6 deletions(-)
+
+diff --git a/include/configs/tqma8mx-mba8mx.h b/include/configs/tqma8mx-mba8mx.h
+index dae548543a..344ac57a2c 100644
+--- a/include/configs/tqma8mx-mba8mx.h
++++ b/include/configs/tqma8mx-mba8mx.h
+@@ -25,9 +25,15 @@
+ 
+ #define CONFIG_PHY_GIGE
+ #define IMX_FEC_BASE			0x30BE0000
++/*
+ #define CONFIG_PHYLIB
+ #define CONFIG_PHY_TI
++*/
+ #endif
+ 
++#if !defined(CONFIG_SPL_BUILD)
++#define CONFIG_DM_GPIO
++#define CONFIG_DM_PCA953X
++#endif
+ 
+ #endif /* __TQMA8MX_MBA8MX_H */
+diff --git a/include/configs/tqma8mx.h b/include/configs/tqma8mx.h
+index 10452dfdcd..5d414ea4a3 100644
+--- a/include/configs/tqma8mx.h
++++ b/include/configs/tqma8mx.h
+@@ -50,11 +50,8 @@
+ 
+ #define CONFIG_SPL_ABORT_ON_RAW_IMAGE /* For RAW image gives a error info not panic */
+ 
+-#undef CONFIG_DM_MMC
+-#undef CONFIG_DM_PMIC
+-#undef CONFIG_DM_PMIC_PFUZE100
+-
+ #define CONFIG_SYS_I2C
++#define CONFIG_SYS_I2C_SPEED		100000
+ #define CONFIG_SYS_I2C_MXC_I2C1		/* enable I2C bus 1 */
+ #define CONFIG_SYS_I2C_MXC_I2C2		/* enable I2C bus 2 */
+ #define CONFIG_SYS_I2C_MXC_I2C3		/* enable I2C bus 3 */
+@@ -65,13 +62,38 @@
+ #define CONFIG_POWER_I2C
+ #define CONFIG_POWER_PFUZE100
+ #define CONFIG_POWER_PFUZE100_I2C_ADDR 0x08
++
++#else
++
++/* 
++ * TODO: DM stuff here to prevent SPL messing with missing stuff
++ * - pmic support
++ * - gpio expander support via dt
++ * - i2c eeprom support via dt
++ */
++#define CONFIG_CMD_PMIC
++#define CONFIG_CMD_REGULATOR
++
++#define CONFIG_DM_I2C
++#define CONFIG_DM_GPIO
++#define CONFIG_DM_MMC
++
++#define CONFIG_DM_PMIC
++#define CONFIG_DM_PMIC_PFUZE100
++#define CONFIG_PMIC_CHILDREN
++#define CONFIG_DM_REGULATOR
++#define CONFIG_DM_REGULATOR_PFUZE100
++#define CONFIG_DM_REGULATOR_FIXED
++#define CONFIG_DM_REGULATOR_GPIO
++#define CONFIG_I2C_EEPROM
++
+ #endif
+ 
+ #define CONFIG_REMAKE_ELF
+ 
+ #define CONFIG_BOARD_EARLY_INIT_F
+ #define CONFIG_BOARD_POSTCLK_INIT
+-#define CONFIG_BOARD_LATE_INIT
++/* #define CONFIG_BOARD_LATE_INIT */
+ 
+ /* Flat Device Tree Definitions */
+ #define CONFIG_OF_BOARD_SETUP
+@@ -263,7 +285,7 @@
+ #define CONFIG_CMD_FUSE
+ 
+ /* I2C Configs */
+-#define CONFIG_SYS_I2C_SPEED		  100000
++/* #define CONFIG_SYS_I2C_SPEED		  100000 */
+ 
+ /* USB configs */
+ #ifndef CONFIG_SPL_BUILD
+-- 
+2.17.1
+

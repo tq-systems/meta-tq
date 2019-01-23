@@ -1,0 +1,38 @@
+From e0820aa57bf72f8cf27531c0e94fca579b0f3d2d Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 16 Jan 2019 10:55:49 +0100
+Subject: [PATCH 24/24] arm: dt: fsl-imx8mq-tqma8mq: add i2c eeproms
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi b/arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi
+index bd152ebe9b..944e42a7f7 100644
+--- a/arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi
++++ b/arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi
+@@ -199,6 +199,20 @@
+ 			};
+ 		};
+ 	};
++
++	eeprom1: 24c02@53 {
++		compatible = "atmel,24c02";
++		reg = <0x51>;
++		pagesize = <16>;
++		status = "okay";
++	};
++
++	eeprom0: m24c64@57 {
++		compatible = "st,24c64", "atmel,24c64", "at24";
++		reg = <0x57>;
++		pagesize = <32>;
++		status = "okay";
++	};
+ };
+ 
+ &qspi {
+-- 
+2.17.1
+
