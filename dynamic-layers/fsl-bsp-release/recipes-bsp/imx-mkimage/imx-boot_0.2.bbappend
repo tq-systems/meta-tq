@@ -33,5 +33,10 @@ do_deploy_append() {
             ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-b0-bootstream.bin
         fi
     fi
+    if [ "${SOC_TARGET}" = "iMX8M" ]; then
+        if [ "${MACHINE}" = "tqma8mq-mba8mx" ]; then
+            ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-bootstream.bin
+        fi
+    fi
     cd -
 }

@@ -20,3 +20,4 @@ SRCBRANCH = "TQMa8xx-bringup-imx_4.9.88_imx8qxp_beta2"
 SRCREV = "ae872be1823271f04aa68dfb158084fff969e79c"
 
 COMPATIBLE_MACHINE = "tqma8qx-mba8qx|tqma8qxs-mb-smarc-2"
+COMPATIBLE_MACHINE .= "|tqma8mq-mba8mx"
