@@ -1,7 +1,7 @@
 From 82c27342e579712fae4a9a644af08534278263a2 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Fri, 11 Jan 2019 09:40:27 +0100
-Subject: [PATCH 11/25] board: tqma8mx: debug spl
+Subject: [PATCH 11/37] board: tqma8mx: debug spl
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---

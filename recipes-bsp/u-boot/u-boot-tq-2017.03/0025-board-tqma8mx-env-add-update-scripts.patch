@@ -1,7 +1,7 @@
 From f05ef5b0d6be6f62cf2dbeefc1b4d64c3705a141 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Fri, 18 Jan 2019 10:11:18 +0100
-Subject: [PATCH 25/25] board: tqma8mx: env: add update scripts
+Subject: [PATCH 25/37] board: tqma8mx: env: add update scripts
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---

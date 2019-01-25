@@ -1,641 +1,98 @@
-From e1902e7b87ab796ca10a51ff7ccc8ce32585ab0b Mon Sep 17 00:00:00 2001
+From f54dc2e5c8377fb42af22e406edb8d6ddb5b961e Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
-Date: Thu, 17 Jan 2019 15:33:39 +0100
-Subject: [PATCH 08/37] add i.MX8MQ modul tqma8mq with base board mba8mx
+Date: Thu, 24 Jan 2019 17:59:35 +0100
+Subject: [PATCH 36/37] board: tqma8mq: support second ram config
 
-- base on copy of DT and DDR code from imx8mx-evk
-- use first working LPDDR4 Timing
-- UART / SD / e-MMC
-
-- splitted sources for module and baseboard for DT and U-Boot
+for now only as a compile time option
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
- arch/arm/cpu/armv8/imx8m/Kconfig              |  14 +
- arch/arm/dts/Makefile                         |   3 +-
- arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts    | 169 ++++
- arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi          | 236 +++++
- board/tqc/tqma8mx/Kconfig                     |  56 ++
- board/tqc/tqma8mx/Makefile                    |  14 +
- board/tqc/tqma8mx/ddr/ddr.h                   |  34 +
- board/tqc/tqma8mx/ddr/ddr_init.c              | 245 +++++
- board/tqc/tqma8mx/ddr/ddrphy_train.c          | 915 ++++++++++++++++++
- board/tqc/tqma8mx/ddr/helper.c                | 104 ++
- board/tqc/tqma8mx/ddr/lpddr4_dvfs.h           |  78 ++
- .../ddr/wait_ddrphy_training_complete.c       |  96 ++
- board/tqc/tqma8mx/spl.c                       | 237 +++++
- board/tqc/tqma8mx/tqma8mx-mba8mx.c            | 178 ++++
- board/tqc/tqma8mx/tqma8mx.c                   |  94 ++
- configs/tqma8mq_mba8mx_mmc_defconfig          |  36 +
- include/configs/tqma8mx-mba8mx.h              |  10 +
- include/configs/tqma8mx.h                     | 298 ++++++
- 18 files changed, 2816 insertions(+), 1 deletion(-)
- create mode 100644 arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts
- create mode 100644 arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi
- create mode 100644 board/tqc/tqma8mx/Kconfig
- create mode 100644 board/tqc/tqma8mx/Makefile
- create mode 100644 board/tqc/tqma8mx/ddr/ddr.h
- create mode 100644 board/tqc/tqma8mx/ddr/ddr_init.c
- create mode 100644 board/tqc/tqma8mx/ddr/ddrphy_train.c
- create mode 100644 board/tqc/tqma8mx/ddr/helper.c
- create mode 100755 board/tqc/tqma8mx/ddr/lpddr4_dvfs.h
- create mode 100644 board/tqc/tqma8mx/ddr/wait_ddrphy_training_complete.c
- create mode 100644 board/tqc/tqma8mx/spl.c
- create mode 100644 board/tqc/tqma8mx/tqma8mx-mba8mx.c
- create mode 100644 board/tqc/tqma8mx/tqma8mx.c
- create mode 100644 configs/tqma8mq_mba8mx_mmc_defconfig
- create mode 100644 include/configs/tqma8mx-mba8mx.h
- create mode 100644 include/configs/tqma8mx.h
+ board/tqc/tqma8mx/Kconfig                     |  16 +-
+ board/tqc/tqma8mx/Makefile                    |   3 +-
+ .../tqc/tqma8mx/{ddr => ddr-micron-2g}/ddr.h  |   0
+ board/tqc/tqma8mx/ddr-micron-2g/ddr_init.c    | 245 +++++
+ .../tqc/tqma8mx/ddr-micron-2g/ddrphy_train.c  | 950 ++++++++++++++++++
+ .../tqma8mx/{ddr => ddr-micron-2g}/helper.c   |   0
+ .../{ddr => ddr-micron-2g}/lpddr4_dvfs.h      |   0
+ .../wait_ddrphy_training_complete.c           |   0
+ board/tqc/tqma8mx/ddr-samsung-2g/ddr.h        |  34 +
+ .../{ddr => ddr-samsung-2g}/ddr_init.c        |   8 +-
+ .../{ddr => ddr-samsung-2g}/ddrphy_train.c    |   4 +-
+ board/tqc/tqma8mx/ddr-samsung-2g/helper.c     | 104 ++
+ .../tqc/tqma8mx/ddr-samsung-2g/lpddr4_dvfs.h  |  78 ++
+ .../wait_ddrphy_training_complete.c           |  96 ++
+ board/tqc/tqma8mx/spl.c                       |  56 +-
+ ... => tqma8mq_2gmicron_mba8mx_mmc_defconfig} |   2 +-
+ include/configs/tqma8mx.h                     |   6 +-
+ 17 files changed, 1573 insertions(+), 29 deletions(-)
+ rename board/tqc/tqma8mx/{ddr => ddr-micron-2g}/ddr.h (100%)
+ create mode 100644 board/tqc/tqma8mx/ddr-micron-2g/ddr_init.c
+ create mode 100644 board/tqc/tqma8mx/ddr-micron-2g/ddrphy_train.c
+ rename board/tqc/tqma8mx/{ddr => ddr-micron-2g}/helper.c (100%)
+ rename board/tqc/tqma8mx/{ddr => ddr-micron-2g}/lpddr4_dvfs.h (100%)
+ rename board/tqc/tqma8mx/{ddr => ddr-micron-2g}/wait_ddrphy_training_complete.c (100%)
+ create mode 100644 board/tqc/tqma8mx/ddr-samsung-2g/ddr.h
+ rename board/tqc/tqma8mx/{ddr => ddr-samsung-2g}/ddr_init.c (95%)
+ rename board/tqc/tqma8mx/{ddr => ddr-samsung-2g}/ddrphy_train.c (97%)
+ create mode 100644 board/tqc/tqma8mx/ddr-samsung-2g/helper.c
+ create mode 100755 board/tqc/tqma8mx/ddr-samsung-2g/lpddr4_dvfs.h
+ create mode 100644 board/tqc/tqma8mx/ddr-samsung-2g/wait_ddrphy_training_complete.c
+ rename configs/{tqma8mql_mba8mx_mmc_defconfig => tqma8mq_2gmicron_mba8mx_mmc_defconfig} (95%)
 
-diff --git a/arch/arm/cpu/armv8/imx8m/Kconfig b/arch/arm/cpu/armv8/imx8m/Kconfig
-index a6ffef294d..6b8deefd03 100644
---- a/arch/arm/cpu/armv8/imx8m/Kconfig
-+++ b/arch/arm/cpu/armv8/imx8m/Kconfig
-@@ -27,6 +27,19 @@ config TARGET_IMX8MQ_DDR4_ARM2
- 	select IMX8M
- 	select SUPPORT_SPL
+diff --git a/board/tqc/tqma8mx/Kconfig b/board/tqc/tqma8mx/Kconfig
+index ecb063eb21..1241718296 100644
+--- a/board/tqc/tqma8mx/Kconfig
++++ b/board/tqc/tqma8mx/Kconfig
+@@ -10,20 +10,20 @@ config SYS_CONFIG_NAME
+ 	default "tqma8mx"
  
-+config TARGET_TQMA8MX
-+	bool "tqma8mx"
-+	select IMX8M
-+	select BOARD_LATE_INIT
-+	select BOARD_EARLY_INIT_F
-+	select PINCTRL
-+	select PINCTRL_IMX8M
-+	select DM_THERMAL
-+	select DM_SERIAL
-+	select MISC
-+	select SUPPORT_SPL
-+	select SPL
-+
+ choice
+-	prompt "TQMa8MX CPU variant"
+-	default TQMA8MX_MX8MQ
++	prompt "TQMa8MX Memory variant"
++	default TQMA8MX_2G_SAMSUNG
+ 	help
+ 	  Select cpu variant for TQMa8MX
+ 
+-config TQMA8MX_MX8MQ
+-	bool "TQMa8MX with i.MX8MQ"
++config TQMA8MX_2G_SAMSUNG
++	bool "TQMa8MX with 2GB LPDDR4 Samsung"
+ 	help
+-	  Select i.MX8MQ with 1 GiB LPDDR4
++	  Select module with 2GB LPDDR4 Samsung"
+ 
+-config TQMA8MX_MX8MQL
+-	bool "TQMa8MX with i.MX8MQL"
++config TQMA8MX_2G_MICRON
++	bool "TQMa8MX with 2GB LPDDR4 Micron"
+ 	help
+-	  Select i.MX8MQL with 2 GiB LPDDR4
++	  Select module with 2GB LPDDR4 Micron"
+ 
  endchoice
  
- config SYS_SOC
-@@ -35,5 +48,6 @@ config SYS_SOC
- source "board/freescale/imx8mq_phanbell/Kconfig"
- source "board/freescale/imx8mq_evk/Kconfig"
- source "board/freescale/imx8mq_arm2/Kconfig"
-+source "board/tqc/tqma8mx/Kconfig"
- 
- endif
-diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
-index 9fc47d1f73..12b48c91ec 100644
---- a/arch/arm/dts/Makefile
-+++ b/arch/arm/dts/Makefile
-@@ -389,7 +389,8 @@ dtb-$(CONFIG_ARCH_MX7ULP) += imx7ulp-evk.dtb \
- dtb-$(CONFIG_ARCH_IMX8M) += fsl-imx8mq-evk.dtb \
- 		fsl-imx8mq-ddr3l-arm2.dtb \
- 		fsl-imx8mq-phanbell.dtb \
--		fsl-imx8mq-ddr4-arm2.dtb
-+		fsl-imx8mq-ddr4-arm2.dtb \
-+		fsl-imx8mq-tqma8mq-mba8mx.dtb
- 
- dtb-$(CONFIG_ARCH_IMX8) += fsl-imx8qm-lpddr4-arm2.dtb \
- 		fsl-imx8qm-ddr4-arm2.dtb \
-diff --git a/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts b/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts
-new file mode 100644
-index 0000000000..9df19b23aa
---- /dev/null
-+++ b/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts
-@@ -0,0 +1,169 @@
-+/*
-+ * Copyright (C) 2016 Freescale Semiconductor, Inc.
-+ * Copyright 2017 NXP
-+ * Copyright 2019 TQ Systems GmbH
-+ *
-+ * This program is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU General Public License
-+ * as published by the Free Software Foundation; either version 2
-+ * of the License, or (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ */
-+
-+/dts-v1/;
-+
-+#include "fsl-imx8mq-tqma8mq.dtsi"
-+
-+/ {
-+	model = "TQ Systems GmbH i.MX8MQ TQMa8MQ on MBa8MX";
-+	compatible = "tq,imx8mq-tqma8mq-mba8mx", "tq,imx8mq-tqma8mq", "fsl,imx8mq";
-+
-+	chosen {
-+		bootargs = "console=ttymxc0,115200 earlycon=ec_imx6q,0x30860000,115200";
-+		stdout-path = &uart1;
-+	};
-+
-+	regulators {
-+		compatible = "simple-bus";
-+		#address-cells = <1>;
-+		#size-cells = <0>;
-+
-+		reg_usdhc2_vmmc: usdhc2_vmmc@0 {
-+			compatible = "regulator-fixed";
-+			regulator-name = "VSD_3V3";
-+			reg = <0>;
-+			regulator-min-microvolt = <3300000>;
-+			regulator-max-microvolt = <3300000>;
-+			gpio = <&gpio2 19 GPIO_ACTIVE_HIGH>;
-+			enable-active-high;
-+		};
-+	};
-+};
-+
-+&iomuxc {
-+	pinctrl-names = "default";
-+
-+	imx8mq-evk {
-+		pinctrl_i2c2: i2c2grp {
-+			fsl,pins = <
-+				MX8MQ_IOMUXC_I2C2_SCL_I2C2_SCL			0x4000007f
-+				MX8MQ_IOMUXC_I2C2_SDA_I2C2_SDA			0x4000007f
-+			>;
-+		};
-+
-+		pinctrl_uart1: uart1grp {
-+			fsl,pins = <
-+				MX8MQ_IOMUXC_UART1_RXD_UART1_DCE_RX		0x79
-+				MX8MQ_IOMUXC_UART1_TXD_UART1_DCE_TX		0x79
-+			>;
-+		};
-+
-+		pinctrl_usdhc2_gpio: usdhc2grpgpio {
-+			fsl,pins = <
-+				MX8MQ_IOMUXC_SD2_CD_B_GPIO2_IO12	0x41
-+				MX8MQ_IOMUXC_SD2_RESET_B_GPIO2_IO19	0x41
-+			>;
-+		};
-+
-+		pinctrl_usdhc2: usdhc2grp {
-+			fsl,pins = <
-+				MX8MQ_IOMUXC_SD2_CLK_USDHC2_CLK			0x83
-+				MX8MQ_IOMUXC_SD2_CMD_USDHC2_CMD			0xc3
-+				MX8MQ_IOMUXC_SD2_DATA0_USDHC2_DATA0		0xc3
-+				MX8MQ_IOMUXC_SD2_DATA1_USDHC2_DATA1		0xc3
-+				MX8MQ_IOMUXC_SD2_DATA2_USDHC2_DATA2		0xc3
-+				MX8MQ_IOMUXC_SD2_DATA3_USDHC2_DATA3		0xc3
-+				MX8MQ_IOMUXC_GPIO1_IO04_USDHC2_VSELECT		0xc1
-+			>;
-+		};
-+
-+		pinctrl_usdhc2_100mhz: usdhc2grp100mhz {
-+			fsl,pins = <
-+				MX8MQ_IOMUXC_SD2_CLK_USDHC2_CLK			0x85
-+				MX8MQ_IOMUXC_SD2_CMD_USDHC2_CMD			0xc5
-+				MX8MQ_IOMUXC_SD2_DATA0_USDHC2_DATA0		0xc5
-+				MX8MQ_IOMUXC_SD2_DATA1_USDHC2_DATA1		0xc5
-+				MX8MQ_IOMUXC_SD2_DATA2_USDHC2_DATA2		0xc5
-+				MX8MQ_IOMUXC_SD2_DATA3_USDHC2_DATA3		0xc5
-+				MX8MQ_IOMUXC_GPIO1_IO04_USDHC2_VSELECT		0xc1
-+			>;
-+		};
-+
-+		pinctrl_usdhc2_200mhz: usdhc2grp200mhz {
-+			fsl,pins = <
-+				MX8MQ_IOMUXC_SD2_CLK_USDHC2_CLK			0x87
-+				MX8MQ_IOMUXC_SD2_CMD_USDHC2_CMD			0xc7
-+				MX8MQ_IOMUXC_SD2_DATA0_USDHC2_DATA0		0xc7
-+				MX8MQ_IOMUXC_SD2_DATA1_USDHC2_DATA1		0xc7
-+				MX8MQ_IOMUXC_SD2_DATA2_USDHC2_DATA2		0xc7
-+				MX8MQ_IOMUXC_SD2_DATA3_USDHC2_DATA3		0xc7
-+				MX8MQ_IOMUXC_GPIO1_IO04_USDHC2_VSELECT		0xc1
-+			>;
-+		};
-+	};
-+};
-+
-+&i2c2 {
-+	clock-frequency = <100000>;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_i2c2>;
-+	status = "disabled";
-+};
-+
-+&uart1 { /* console */
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_uart1>;
-+	assigned-clocks = <&clk IMX8MQ_CLK_UART1_SRC>;
-+	assigned-clock-parents = <&clk IMX8MQ_CLK_25M>;
-+	status = "okay";
-+};
-+
-+&usdhc2 {
-+	pinctrl-names = "default", "state_100mhz", "state_200mhz";
-+	pinctrl-0 = <&pinctrl_usdhc2>, <&pinctrl_usdhc2_gpio>;
-+	pinctrl-1 = <&pinctrl_usdhc2_100mhz>, <&pinctrl_usdhc2_gpio>;
-+	pinctrl-2 = <&pinctrl_usdhc2_200mhz>, <&pinctrl_usdhc2_gpio>;
-+	bus-width = <4>;
-+	cd-gpios = <&gpio2 12 GPIO_ACTIVE_LOW>;
-+	vmmc-supply = <&reg_usdhc2_vmmc>;
-+	status = "okay";
-+};
-+
-+
-+/* TODO: not working */
-+&usb3_phy0 {
-+	status = "disabled";
-+};
-+
-+&usb3_0 {
-+	status = "disabled";
-+};
-+
-+&usb_dwc3_0 {
-+	status = "disabled";
-+	dr_mode = "peripheral";
-+};
-+
-+&usb3_phy1 {
-+	status = "okay";
-+};
-+
-+&usb3_1 {
-+	status = "okay";
-+};
-+
-+&usb_dwc3_1 {
-+	status = "okay";
-+	dr_mode = "host";
-+};
-+
-+&wdog1 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_wdog>;
-+	fsl,ext-reset-output;
-+	status = "okay";
-+};
-diff --git a/arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi b/arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi
-new file mode 100644
-index 0000000000..30b22cb7e6
---- /dev/null
-+++ b/arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi
-@@ -0,0 +1,236 @@
-+/*
-+ * Copyright (C) 2016 Freescale Semiconductor, Inc.
-+ * Copyright 2017 NXP
-+ * Copyright 2019 TQ Systems GmbH
-+ *
-+ * This program is free software; you can redistribute it and/or
-+ * modify it under the terms of the GNU General Public License
-+ * as published by the Free Software Foundation; either version 2
-+ * of the License, or (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ */
-+
-+/* First 128KB is for PSCI ATF. */
-+/memreserve/ 0x40000000 0x00020000;
-+
-+#include "fsl-imx8mq.dtsi"
-+
-+/ {
-+	model = "TQ Systems GmbH i.MX8MQ TQMa8MQ";
-+	compatible = "tq,imx8mq-tqma8mq", "fsl,imx8mq";
-+
-+	chosen {
-+	};
-+};
-+
-+&iomuxc {
-+	pinctrl-names = "default";
-+
-+	imx8mq-tqma8mq {
-+		pinctrl_i2c1: i2c1grp {
-+			fsl,pins = <
-+				MX8MQ_IOMUXC_I2C1_SCL_I2C1_SCL			0x4000007f
-+				MX8MQ_IOMUXC_I2C1_SDA_I2C1_SDA			0x4000007f
-+			>;
-+		};
-+
-+		pinctrl_qspi: qspigrp {
-+			fsl,pins = <
-+				MX8MQ_IOMUXC_NAND_ALE_QSPI_A_SCLK	0x82
-+				MX8MQ_IOMUXC_NAND_CE0_B_QSPI_A_SS0_B	0x82
-+				MX8MQ_IOMUXC_NAND_DATA00_QSPI_A_DATA0	0x82
-+				MX8MQ_IOMUXC_NAND_DATA01_QSPI_A_DATA1	0x82
-+				MX8MQ_IOMUXC_NAND_DATA02_QSPI_A_DATA2	0x82
-+				MX8MQ_IOMUXC_NAND_DATA03_QSPI_A_DATA3	0x82
-+			>;
-+		};
-+
-+		pinctrl_usdhc1: usdhc1grp {
-+			fsl,pins = <
-+				MX8MQ_IOMUXC_SD1_CLK_USDHC1_CLK			0x83
-+				MX8MQ_IOMUXC_SD1_CMD_USDHC1_CMD			0xc3
-+				MX8MQ_IOMUXC_SD1_DATA0_USDHC1_DATA0		0xc3
-+				MX8MQ_IOMUXC_SD1_DATA1_USDHC1_DATA1		0xc3
-+				MX8MQ_IOMUXC_SD1_DATA2_USDHC1_DATA2		0xc3
-+				MX8MQ_IOMUXC_SD1_DATA3_USDHC1_DATA3		0xc3
-+				MX8MQ_IOMUXC_SD1_DATA4_USDHC1_DATA4		0xc3
-+				MX8MQ_IOMUXC_SD1_DATA5_USDHC1_DATA5		0xc3
-+				MX8MQ_IOMUXC_SD1_DATA6_USDHC1_DATA6		0xc3
-+				MX8MQ_IOMUXC_SD1_DATA7_USDHC1_DATA7		0xc3
-+				MX8MQ_IOMUXC_SD1_STROBE_USDHC1_STROBE 		0x83
-+				MX8MQ_IOMUXC_SD1_RESET_B_USDHC1_RESET_B		0xc1
-+			>;
-+		};
-+
-+		pinctrl_usdhc1_100mhz: usdhc1grp100mhz {
-+			fsl,pins = <
-+				MX8MQ_IOMUXC_SD1_CLK_USDHC1_CLK			0x85
-+				MX8MQ_IOMUXC_SD1_CMD_USDHC1_CMD			0xc5
-+				MX8MQ_IOMUXC_SD1_DATA0_USDHC1_DATA0		0xc5
-+				MX8MQ_IOMUXC_SD1_DATA1_USDHC1_DATA1		0xc5
-+				MX8MQ_IOMUXC_SD1_DATA2_USDHC1_DATA2		0xc5
-+				MX8MQ_IOMUXC_SD1_DATA3_USDHC1_DATA3		0xc5
-+				MX8MQ_IOMUXC_SD1_DATA4_USDHC1_DATA4		0xc5
-+				MX8MQ_IOMUXC_SD1_DATA5_USDHC1_DATA5		0xc5
-+				MX8MQ_IOMUXC_SD1_DATA6_USDHC1_DATA6		0xc5
-+				MX8MQ_IOMUXC_SD1_DATA7_USDHC1_DATA7		0xc5
-+				MX8MQ_IOMUXC_SD1_STROBE_USDHC1_STROBE 		0x85
-+				MX8MQ_IOMUXC_SD1_RESET_B_USDHC1_RESET_B		0xc1
-+			>;
-+		};
-+
-+		pinctrl_usdhc1_200mhz: usdhc1grp200mhz {
-+			fsl,pins = <
-+				MX8MQ_IOMUXC_SD1_CLK_USDHC1_CLK			0x87
-+				MX8MQ_IOMUXC_SD1_CMD_USDHC1_CMD			0xc7
-+				MX8MQ_IOMUXC_SD1_DATA0_USDHC1_DATA0		0xc7
-+				MX8MQ_IOMUXC_SD1_DATA1_USDHC1_DATA1		0xc7
-+				MX8MQ_IOMUXC_SD1_DATA2_USDHC1_DATA2		0xc7
-+				MX8MQ_IOMUXC_SD1_DATA3_USDHC1_DATA3		0xc7
-+				MX8MQ_IOMUXC_SD1_DATA4_USDHC1_DATA4		0xc7
-+				MX8MQ_IOMUXC_SD1_DATA5_USDHC1_DATA5		0xc7
-+				MX8MQ_IOMUXC_SD1_DATA6_USDHC1_DATA6		0xc7
-+				MX8MQ_IOMUXC_SD1_DATA7_USDHC1_DATA7		0xc7
-+				MX8MQ_IOMUXC_SD1_STROBE_USDHC1_STROBE 		0x87
-+				MX8MQ_IOMUXC_SD1_RESET_B_USDHC1_RESET_B		0xc1
-+			>;
-+		};
-+
-+		pinctrl_wdog: wdoggrp {
-+			fsl,pins = <
-+				MX8MQ_IOMUXC_GPIO1_IO02_WDOG1_WDOG_B 0xc6
-+			>;
-+		};
-+	};
-+};
-+
-+&i2c1 {
-+	clock-frequency = <100000>;
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_i2c1>;
-+	status = "okay";
-+
-+	pmic: pfuze100@08 {
-+		compatible = "fsl,pfuze100";
-+		reg = <0x08>;
-+
-+		regulators {
-+			sw1a_reg: sw1ab {
-+				regulator-min-microvolt = <300000>;
-+				regulator-max-microvolt = <1875000>;
-+				regulator-always-on;
-+			};
-+
-+			sw1c_reg: sw1c {
-+				regulator-min-microvolt = <300000>;
-+				regulator-max-microvolt = <1875000>;
-+				regulator-always-on;
-+			};
-+
-+			sw2_reg: sw2 {
-+				regulator-min-microvolt = <800000>;
-+				regulator-max-microvolt = <3300000>;
-+				regulator-always-on;
-+			};
-+
-+			sw3a_reg: sw3ab {
-+				regulator-min-microvolt = <400000>;
-+				regulator-max-microvolt = <1975000>;
-+				regulator-always-on;
-+			};
-+
-+			sw4_reg: sw4 {
-+				regulator-min-microvolt = <800000>;
-+				regulator-max-microvolt = <3300000>;
-+				regulator-always-on;
-+			};
-+
-+			swbst_reg: swbst {
-+				regulator-min-microvolt = <5000000>;
-+				regulator-max-microvolt = <5150000>;
-+			};
-+
-+			snvs_reg: vsnvs {
-+				regulator-min-microvolt = <1000000>;
-+				regulator-max-microvolt = <3000000>;
-+				regulator-always-on;
-+			};
-+
-+			vref_reg: vrefddr {
-+				regulator-always-on;
-+			};
-+
-+			vgen1_reg: vgen1 {
-+				regulator-min-microvolt = <800000>;
-+				regulator-max-microvolt = <1550000>;
-+			};
-+
-+			vgen2_reg: vgen2 {
-+				regulator-min-microvolt = <800000>;
-+				regulator-max-microvolt = <1550000>;
-+				regulator-always-on;
-+			};
-+
-+			vgen3_reg: vgen3 {
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <3300000>;
-+				regulator-always-on;
-+			};
-+
-+			vgen4_reg: vgen4 {
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <3300000>;
-+				regulator-always-on;
-+			};
-+
-+			vgen5_reg: vgen5 {
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <3300000>;
-+				regulator-always-on;
-+			};
-+
-+			vgen6_reg: vgen6 {
-+				regulator-min-microvolt = <1800000>;
-+				regulator-max-microvolt = <3300000>;
-+			};
-+		};
-+	};
-+};
-+
-+/* TODO: not working */
-+&qspi {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_qspi>;
-+	status = "disabled";
-+
-+	flash0: n25q256a@0 {
-+		reg = <0>;
-+		#address-cells = <1>;
-+		#size-cells = <1>;
-+		compatible = "micron,n25q256a";
-+		spi-max-frequency = <29000000>;
-+		spi-nor,ddr-quad-read-dummy = <6>;
-+	};
-+};
-+
-+&usdhc1 {
-+	pinctrl-names = "default", "state_100mhz", "state_200mhz";
-+	pinctrl-0 = <&pinctrl_usdhc1>;
-+	pinctrl-1 = <&pinctrl_usdhc1_100mhz>;
-+	pinctrl-2 = <&pinctrl_usdhc1_200mhz>;
-+	bus-width = <8>;
-+	non-removable;
-+	status = "okay";
-+};
-+
-+/* TODO: wdog reset has issues */
-+&wdog1 {
-+	pinctrl-names = "default";
-+	pinctrl-0 = <&pinctrl_wdog>;
-+	fsl,ext-reset-output;
-+	status = "okay";
-+};
-diff --git a/board/tqc/tqma8mx/Kconfig b/board/tqc/tqma8mx/Kconfig
-new file mode 100644
-index 0000000000..8348b011ee
---- /dev/null
-+++ b/board/tqc/tqma8mx/Kconfig
-@@ -0,0 +1,56 @@
-+if TARGET_TQMA8MX
-+
-+config SYS_BOARD
-+	default "tqma8mx"
-+
-+config SYS_VENDOR
-+	default "tqc"
-+
-+config SYS_CONFIG_NAME
-+	default "tqma8mx"
-+
-+choice
-+	prompt "TQMa8MX CPU variant"
-+	default TQMA8MX_MX8MQ
-+	help
-+	  Select cpu variant for TQMa8MX
-+
-+config TQMA8MX_MX8MQ
-+	bool "TQMa8MX with i.MX8MQ"
-+	help
-+	  Select the CPU variant
-+
-+endchoice
-+
-+choice
-+	prompt "TQMa8MX base board variant"
-+	default MBA8MX
-+	help
-+	  Select base board for TQMa8MX
-+
-+config MBA8MX
-+	bool "TQMa8MX on MBa8MX Starterkit"
-+	select TQC_SDMMC
-+	help
-+	  Select the MBa8MX starterkit. This features a GigE Phy, USB, SD-Card
-+	  etc.
-+
-+endchoice
-+
-+choice
-+	prompt "TQMa8MX boot device"
-+	default TQMBA8MX_SDCARD
-+	help
-+	  Select boot device for TQMa8MX
-+
-+config TQMBA8MX_SDCARD
-+	bool "TQMa8MX from SD / e-MMC"
-+	select SD_BOOT
-+	help
-+	  Select booting from SD / e-MMC
-+
-+endchoice
-+
-+source "board/tqc/common/Kconfig"
-+
-+endif
 diff --git a/board/tqc/tqma8mx/Makefile b/board/tqc/tqma8mx/Makefile
-new file mode 100644
-index 0000000000..244ee02140
---- /dev/null
+index 9bd7bcebe7..6d78a6d8a3 100644
+--- a/board/tqc/tqma8mx/Makefile
 +++ b/board/tqc/tqma8mx/Makefile
-@@ -0,0 +1,14 @@
-+#
-+# Copyright 2016 Freescale Semiconductor
-+# Copyright 2018 TQ Systems GmbH
-+#
-+# SPDX-License-Identifier:      GPL-2.0+
-+#
-+
-+obj-y += tqma8mx.o
-+obj-$(CONFIG_MBA8MX) += tqma8mx-mba8mx.o
-+
-+ifdef CONFIG_SPL_BUILD
-+obj-y += spl.o
-+obj-y += ddr/ddr_init.o ddr/ddrphy_train.o ddr/helper.o
-+endif
-diff --git a/board/tqc/tqma8mx/ddr/ddr.h b/board/tqc/tqma8mx/ddr/ddr.h
+@@ -11,5 +11,6 @@ obj-$(CONFIG_MBA8MX) += tqma8mx-mba8mx.o
+ ifdef CONFIG_SPL_BUILD
+ obj-y += spl.o
+ obj-$(CONFIG_MBA8MX) += spl-mba8mx.o
+-obj-$(CONFIG_TQMA8MX_MX8MQL) += ddr/ddr_init.o ddr/ddrphy_train.o ddr/helper.o
++obj-$(CONFIG_TQMA8MX_2G_SAMSUNG) += ddr-samsung-2g/ddr_init.o ddr-samsung-2g/ddrphy_train.o ddr-samsung-2g/helper.o
++obj-$(CONFIG_TQMA8MX_2G_MICRON) += ddr-micron-2g/ddr_init.o ddr-micron-2g/ddrphy_train.o ddr-micron-2g/helper.o
+ endif
+diff --git a/board/tqc/tqma8mx/ddr/ddr.h b/board/tqc/tqma8mx/ddr-micron-2g/ddr.h
+similarity index 100%
+rename from board/tqc/tqma8mx/ddr/ddr.h
+rename to board/tqc/tqma8mx/ddr-micron-2g/ddr.h
+diff --git a/board/tqc/tqma8mx/ddr-micron-2g/ddr_init.c b/board/tqc/tqma8mx/ddr-micron-2g/ddr_init.c
 new file mode 100644
-index 0000000000..9acb29c7a5
+index 0000000000..c71bf09b52
 --- /dev/null
-+++ b/board/tqc/tqma8mx/ddr/ddr.h
-@@ -0,0 +1,34 @@
-+/*
-+ * Copyright 2017 NXP
-+ *
-+ * SPDX-License-Identifier:	GPL-2.0+
-+ */
-+
-+enum fw_type {
-+	FW_1D_IMAGE,
-+	FW_2D_IMAGE,
-+};
-+
-+void ddr_init(void);
-+void ddr_load_train_code(enum fw_type type);
-+void lpddr4_800M_cfg_phy(void);
-+
-+static inline void reg32_write(unsigned long addr, u32 val)
-+{
-+	writel(val, addr);
-+}
-+
-+static inline uint32_t reg32_read(unsigned long addr)
-+{
-+	return readl(addr);
-+}
-+
-+static void inline dwc_ddrphy_apb_wr(unsigned long addr, u32 val)
-+{
-+    writel(val, addr);
-+}
-+
-+static inline void reg32setbit(unsigned long addr, u32 bit)
-+{
-+	setbits_le32(addr, (1 << bit));
-+}
-diff --git a/board/tqc/tqma8mx/ddr/ddr_init.c b/board/tqc/tqma8mx/ddr/ddr_init.c
-new file mode 100644
-index 0000000000..03c4b73366
---- /dev/null
-+++ b/board/tqc/tqma8mx/ddr/ddr_init.c
++++ b/board/tqc/tqma8mx/ddr-micron-2g/ddr_init.c
 @@ -0,0 +1,245 @@
 +/*
 + * Copyright 2017 NXP
@@ -668,9 +125,9 @@ index 0000000000..03c4b73366
 +#endif
 +#define SILICON_TRAIN
 +
-+void ddr_cfg_phy(void);
++void ddr_cfg_phy_micron_2g(void);
 +volatile unsigned int tmp, tmp_t, i;
-+void ddr_init(void)
++void ddr_init_micron_2g(void)
 +{
 +	/** Initialize DDR clock and DDRC registers **/
 +	reg32_write(0x3038a088,0x7070000);
@@ -701,7 +158,7 @@ index 0000000000..03c4b73366
 +	reg32_write(0x30391000,0x8f000006);
 +	reg32_write(0x3d400304,0x1);
 +	reg32_write(0x3d400030,0x1);
-+	reg32_write(0x3d400000,0xa1081020);
++	reg32_write(0x3d400000,0xa3080020);
 +	reg32_write(0x3d400028,0x0);
 +	reg32_write(0x3d400020,0x203);
 +	reg32_write(0x3d400024,0x186a000);
@@ -737,12 +194,12 @@ index 0000000000..03c4b73366
 +	reg32_write(0x3d4001c4,0x1);
 +	reg32_write(0x3d4000f4,0x639);
 +	reg32_write(0x3d400108,0x70e1214);
-+	reg32_write(0x3d400200,0x1f);
-+	reg32_write(0x3d40020c,0x1f000000);
++	reg32_write(0x3d400200,0x16);
++	reg32_write(0x3d40020c,0x0);
 +	reg32_write(0x3d400210,0x1f1f);
-+	reg32_write(0x3d400204,0x70707);
-+	reg32_write(0x3d400214,0x6060606);
-+	reg32_write(0x3d400218,0x6060606);
++	reg32_write(0x3d400204,0x80808);
++	reg32_write(0x3d400214,0x7070707);
++	reg32_write(0x3d400218,0xf070707);
 +	reg32_write(0x3d402020,0x1);
 +	reg32_write(0x3d402024,0x518b00);
 +	reg32_write(0x3d402050,0x20d040);
@@ -830,7 +287,7 @@ index 0000000000..03c4b73366
 +	reg32_write(0x3c04c29c,0x0);
 +
 +	/* Configure DDR PHY's registers */
-+	ddr_cfg_phy();
++	ddr_cfg_phy_micron_2g();
 +
 +	reg32_write(DDRC_RFSHCTL3(0), 0x00000000);
 +	reg32_write(DDRC_SWCTL(0), 0x0000);
@@ -882,13 +339,12 @@ index 0000000000..03c4b73366
 +	tmp = reg32_read(DDRC_RFSHCTL3(0)) & ~0x1;
 +	reg32_write(DDRC_RFSHCTL3(0), tmp);
 +}
-\ No newline at end of file
-diff --git a/board/tqc/tqma8mx/ddr/ddrphy_train.c b/board/tqc/tqma8mx/ddr/ddrphy_train.c
+diff --git a/board/tqc/tqma8mx/ddr-micron-2g/ddrphy_train.c b/board/tqc/tqma8mx/ddr-micron-2g/ddrphy_train.c
 new file mode 100644
-index 0000000000..666c4cd510
+index 0000000000..e17b887053
 --- /dev/null
-+++ b/board/tqc/tqma8mx/ddr/ddrphy_train.c
-@@ -0,0 +1,915 @@
++++ b/board/tqc/tqma8mx/ddr-micron-2g/ddrphy_train.c
+@@ -0,0 +1,950 @@
 +/*
 + * Copyright 2017 NXP
 + *
@@ -904,7 +360,7 @@ index 0000000000..666c4cd510
 +#include "ddr.h"
 +
 +extern void wait_ddrphy_training_complete(void);
-+void ddr_cfg_phy(void) {
++void ddr_cfg_phy_micron_2g(void) {
 +	unsigned int tmp, tmp_t;
 +
 +	//Init DDRPHY register...
@@ -918,10 +374,18 @@ index 0000000000..666c4cd510
 +	reg32_write(0x3c04057c,0x1ff);
 +	reg32_write(0x3c04417c,0x1ff);
 +	reg32_write(0x3c04457c,0x1ff);
++	reg32_write(0x3c04817c,0x1ff);
++	reg32_write(0x3c04857c,0x1ff);
++	reg32_write(0x3c04c17c,0x1ff);
++	reg32_write(0x3c04c57c,0x1ff);
 +	reg32_write(0x3c44017c,0x1ff);
 +	reg32_write(0x3c44057c,0x1ff);
 +	reg32_write(0x3c44417c,0x1ff);
 +	reg32_write(0x3c44457c,0x1ff);
++	reg32_write(0x3c44817c,0x1ff);
++	reg32_write(0x3c44857c,0x1ff);
++	reg32_write(0x3c44c17c,0x1ff);
++	reg32_write(0x3c44c57c,0x1ff);
 +	reg32_write(0x3c000154,0x1ff);
 +	reg32_write(0x3c004154,0x1ff);
 +	reg32_write(0x3c008154,0x1ff);
@@ -948,18 +412,34 @@ index 0000000000..666c4cd510
 +	reg32_write(0x3c040534,0xe00);
 +	reg32_write(0x3c044134,0xe00);
 +	reg32_write(0x3c044534,0xe00);
++	reg32_write(0x3c048134,0xe00);
++	reg32_write(0x3c048534,0xe00);
++	reg32_write(0x3c04c134,0xe00);
++	reg32_write(0x3c04c534,0xe00);
 +	reg32_write(0x3c440134,0xe00);
 +	reg32_write(0x3c440534,0xe00);
 +	reg32_write(0x3c444134,0xe00);
 +	reg32_write(0x3c444534,0xe00);
++	reg32_write(0x3c448134,0xe00);
++	reg32_write(0x3c448534,0xe00);
++	reg32_write(0x3c44c134,0xe00);
++	reg32_write(0x3c44c534,0xe00);
 +	reg32_write(0x3c040124,0xfbe);
 +	reg32_write(0x3c040524,0xfbe);
 +	reg32_write(0x3c044124,0xfbe);
 +	reg32_write(0x3c044524,0xfbe);
++	reg32_write(0x3c048124,0xfbe);
++	reg32_write(0x3c048524,0xfbe);
++	reg32_write(0x3c04c124,0xfbe);
++	reg32_write(0x3c04c524,0xfbe);
 +	reg32_write(0x3c440124,0xfbe);
 +	reg32_write(0x3c440524,0xfbe);
 +	reg32_write(0x3c444124,0xfbe);
 +	reg32_write(0x3c444524,0xfbe);
++	reg32_write(0x3c448124,0xfbe);
++	reg32_write(0x3c448524,0xfbe);
++	reg32_write(0x3c44c124,0xfbe);
++	reg32_write(0x3c44c524,0xfbe);
 +	reg32_write(0x3c00010c,0x63);
 +	reg32_write(0x3c00410c,0x63);
 +	reg32_write(0x3c00810c,0x63);
@@ -985,10 +465,15 @@ index 0000000000..666c4cd510
 +	reg32_write(0x3c04850c,0x5a1);
 +	reg32_write(0x3c04c10c,0x5a1);
 +	reg32_write(0x3c04c50c,0x5a1);
++	reg32_write(0x3c4802c8,0xdc);
 +	reg32_write(0x3c44010c,0x5a1);
 +	reg32_write(0x3c44050c,0x5a1);
 +	reg32_write(0x3c44410c,0x5a1);
 +	reg32_write(0x3c44450c,0x5a1);
++	reg32_write(0x3c44810c,0x5a1);
++	reg32_write(0x3c44850c,0x5a1);
++	reg32_write(0x3c44c10c,0x5a1);
++	reg32_write(0x3c44c50c,0x5a1);
 +	reg32_write(0x3c0803e8,0x1);
 +	reg32_write(0x3c4803e8,0x1);
 +	reg32_write(0x3c080064,0x1);
@@ -1022,7 +507,7 @@ index 0000000000..666c4cd510
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54009,0xc8);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5400b,0x2);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5400d,0x100);
-+	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54012,0x110);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54012,0x310);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54019,0x2dd4);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5401a,0x31);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5401b,0x4a66);
@@ -1033,6 +518,8 @@ index 0000000000..666c4cd510
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54021,0x4a66);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54022,0x4a08);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54024,0x16);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5402b,0x1000);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5402c,0x3);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54032,0xd400);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54033,0x312d);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54034,0x6600);
@@ -1097,7 +584,7 @@ index 0000000000..666c4cd510
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54009,0xc8);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5400b,0x2);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5400d,0x100);
-+	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54012,0x110);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54012,0x310);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54019,0x994);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5401a,0x31);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5401b,0x4a66);
@@ -1108,6 +595,8 @@ index 0000000000..666c4cd510
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54021,0x4a66);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54022,0x4a08);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54024,0x16);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5402b,0x1000);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5402c,0x3);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54032,0x9400);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54033,0x3109);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54034,0x6600);
@@ -1171,7 +660,7 @@ index 0000000000..666c4cd510
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5400b,0x2);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5400f,0x100);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54010,0x1f7f);
-+	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54012,0x110);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54012,0x310);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54019,0x2dd4);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5401a,0x31);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5401b,0x4a66);
@@ -1182,6 +671,8 @@ index 0000000000..666c4cd510
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54021,0x4a66);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54022,0x4a08);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54024,0x16);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5402b,0x1000);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5402c,0x3);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54032,0xd400);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54033,0x312d);
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54034,0x6600);
@@ -1804,12 +1295,121 @@ index 0000000000..666c4cd510
 +	//disable APB bus to access DDRPHY RAM
 +	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0xd0000, 0x1);
 +}
+diff --git a/board/tqc/tqma8mx/ddr/helper.c b/board/tqc/tqma8mx/ddr-micron-2g/helper.c
+similarity index 100%
+rename from board/tqc/tqma8mx/ddr/helper.c
+rename to board/tqc/tqma8mx/ddr-micron-2g/helper.c
+diff --git a/board/tqc/tqma8mx/ddr/lpddr4_dvfs.h b/board/tqc/tqma8mx/ddr-micron-2g/lpddr4_dvfs.h
+similarity index 100%
+rename from board/tqc/tqma8mx/ddr/lpddr4_dvfs.h
+rename to board/tqc/tqma8mx/ddr-micron-2g/lpddr4_dvfs.h
+diff --git a/board/tqc/tqma8mx/ddr/wait_ddrphy_training_complete.c b/board/tqc/tqma8mx/ddr-micron-2g/wait_ddrphy_training_complete.c
+similarity index 100%
+rename from board/tqc/tqma8mx/ddr/wait_ddrphy_training_complete.c
+rename to board/tqc/tqma8mx/ddr-micron-2g/wait_ddrphy_training_complete.c
+diff --git a/board/tqc/tqma8mx/ddr-samsung-2g/ddr.h b/board/tqc/tqma8mx/ddr-samsung-2g/ddr.h
+new file mode 100644
+index 0000000000..9acb29c7a5
+--- /dev/null
++++ b/board/tqc/tqma8mx/ddr-samsung-2g/ddr.h
+@@ -0,0 +1,34 @@
++/*
++ * Copyright 2017 NXP
++ *
++ * SPDX-License-Identifier:	GPL-2.0+
++ */
++
++enum fw_type {
++	FW_1D_IMAGE,
++	FW_2D_IMAGE,
++};
++
++void ddr_init(void);
++void ddr_load_train_code(enum fw_type type);
++void lpddr4_800M_cfg_phy(void);
++
++static inline void reg32_write(unsigned long addr, u32 val)
++{
++	writel(val, addr);
++}
++
++static inline uint32_t reg32_read(unsigned long addr)
++{
++	return readl(addr);
++}
++
++static void inline dwc_ddrphy_apb_wr(unsigned long addr, u32 val)
++{
++    writel(val, addr);
++}
++
++static inline void reg32setbit(unsigned long addr, u32 bit)
++{
++	setbits_le32(addr, (1 << bit));
++}
+diff --git a/board/tqc/tqma8mx/ddr/ddr_init.c b/board/tqc/tqma8mx/ddr-samsung-2g/ddr_init.c
+similarity index 95%
+rename from board/tqc/tqma8mx/ddr/ddr_init.c
+rename to board/tqc/tqma8mx/ddr-samsung-2g/ddr_init.c
+index 03c4b73366..d033979b6f 100644
+--- a/board/tqc/tqma8mx/ddr/ddr_init.c
++++ b/board/tqc/tqma8mx/ddr-samsung-2g/ddr_init.c
+@@ -29,9 +29,9 @@
+ #endif
+ #define SILICON_TRAIN
+ 
+-void ddr_cfg_phy(void);
++void ddr_cfg_phy_samsung_2g(void);
+ volatile unsigned int tmp, tmp_t, i;
+-void ddr_init(void)
++void ddr_init_samsung_2g(void)
+ {
+ 	/** Initialize DDR clock and DDRC registers **/
+ 	reg32_write(0x3038a088,0x7070000);
+@@ -191,7 +191,7 @@ void ddr_init(void)
+ 	reg32_write(0x3c04c29c,0x0);
+ 
+ 	/* Configure DDR PHY's registers */
+-	ddr_cfg_phy();
++	ddr_cfg_phy_samsung_2g();
+ 
+ 	reg32_write(DDRC_RFSHCTL3(0), 0x00000000);
+ 	reg32_write(DDRC_SWCTL(0), 0x0000);
+@@ -242,4 +242,4 @@ void ddr_init(void)
+ 	/* enable DDR auto-refresh mode */
+ 	tmp = reg32_read(DDRC_RFSHCTL3(0)) & ~0x1;
+ 	reg32_write(DDRC_RFSHCTL3(0), tmp);
+-}
 \ No newline at end of file
-diff --git a/board/tqc/tqma8mx/ddr/helper.c b/board/tqc/tqma8mx/ddr/helper.c
++}
+diff --git a/board/tqc/tqma8mx/ddr/ddrphy_train.c b/board/tqc/tqma8mx/ddr-samsung-2g/ddrphy_train.c
+similarity index 97%
+rename from board/tqc/tqma8mx/ddr/ddrphy_train.c
+rename to board/tqc/tqma8mx/ddr-samsung-2g/ddrphy_train.c
+index 666c4cd510..fb919a6041 100644
+--- a/board/tqc/tqma8mx/ddr/ddrphy_train.c
++++ b/board/tqc/tqma8mx/ddr-samsung-2g/ddrphy_train.c
+@@ -13,7 +13,7 @@
+ #include "ddr.h"
+ 
+ extern void wait_ddrphy_training_complete(void);
+-void ddr_cfg_phy(void) {
++void ddr_cfg_phy_samsung_2g(void) {
+ 	unsigned int tmp, tmp_t;
+ 
+ 	//Init DDRPHY register...
+@@ -912,4 +912,4 @@ void ddr_cfg_phy(void) {
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x2006e, 0x0);
+ 	//disable APB bus to access DDRPHY RAM
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0xd0000, 0x1);
+-}
+\ No newline at end of file
++}
+diff --git a/board/tqc/tqma8mx/ddr-samsung-2g/helper.c b/board/tqc/tqma8mx/ddr-samsung-2g/helper.c
 new file mode 100644
 index 0000000000..782009eb39
 --- /dev/null
-+++ b/board/tqc/tqma8mx/ddr/helper.c
++++ b/board/tqc/tqma8mx/ddr-samsung-2g/helper.c
 @@ -0,0 +1,104 @@
 +/*
 + * Copyright 2017 NXP
@@ -1915,11 +1515,11 @@ index 0000000000..782009eb39
 +		printf("check ddr4_pmu_train_dmem code pass\n");
 +	}
 +}
-diff --git a/board/tqc/tqma8mx/ddr/lpddr4_dvfs.h b/board/tqc/tqma8mx/ddr/lpddr4_dvfs.h
+diff --git a/board/tqc/tqma8mx/ddr-samsung-2g/lpddr4_dvfs.h b/board/tqc/tqma8mx/ddr-samsung-2g/lpddr4_dvfs.h
 new file mode 100755
 index 0000000000..0ee2ea9af9
 --- /dev/null
-+++ b/board/tqc/tqma8mx/ddr/lpddr4_dvfs.h
++++ b/board/tqc/tqma8mx/ddr-samsung-2g/lpddr4_dvfs.h
 @@ -0,0 +1,78 @@
 +/*
 + * Copyright 2018 NXP
@@ -1999,11 +1599,11 @@ index 0000000000..0ee2ea9af9
 +#define LPDDR4_2D_SHARE 1
 +
 +#endif  /*__LPDDR4_DVFS_H__ */
-diff --git a/board/tqc/tqma8mx/ddr/wait_ddrphy_training_complete.c b/board/tqc/tqma8mx/ddr/wait_ddrphy_training_complete.c
+diff --git a/board/tqc/tqma8mx/ddr-samsung-2g/wait_ddrphy_training_complete.c b/board/tqc/tqma8mx/ddr-samsung-2g/wait_ddrphy_training_complete.c
 new file mode 100644
 index 0000000000..0b42e58bd1
 --- /dev/null
-+++ b/board/tqc/tqma8mx/ddr/wait_ddrphy_training_complete.c
++++ b/board/tqc/tqma8mx/ddr-samsung-2g/wait_ddrphy_training_complete.c
 @@ -0,0 +1,96 @@
 +/*
 + * Copyright 2017 NXP
@@ -2102,894 +1702,137 @@ index 0000000000..0b42e58bd1
 +	}
 +}
 diff --git a/board/tqc/tqma8mx/spl.c b/board/tqc/tqma8mx/spl.c
-new file mode 100644
-index 0000000000..94392e77a2
---- /dev/null
+index 710f4b8b8e..00d8e83df6 100644
+--- a/board/tqc/tqma8mx/spl.c
 +++ b/board/tqc/tqma8mx/spl.c
-@@ -0,0 +1,237 @@
-+/*
-+ * Copyright 2017 NXP
-+ *
-+ * SPDX-License-Identifier:	GPL-2.0+
-+ */
+@@ -22,22 +22,43 @@
+ #include <spl.h>
+ 
+ #include "../common/tqc_bb.h"
++#include "../common/tqc_eeprom.h"
+ 
+-#include "ddr/ddr.h"
++#if defined(CONFIG_TQMA8MX_2G_SAMSUNG)
++#include "ddr-samsung-2g/ddr.h"
++#elif defined(CONFIG_TQMA8MX_2G_MICRON)
++#include "ddr-micron-2g/ddr.h"
++#else
++#error
++#endif
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+-void spl_dram_init(void)
++void ddr_init_samsung_2g(void);
++void ddr_init_micron_2g(void);
 +
-+#include <common.h>
-+#include <asm/arch/clock.h>
-+#include <asm/arch/ddr_memory_map.h>
-+#include <asm/arch/imx8mq_pins.h>
-+#include <asm/arch/sys_proto.h>
-+#include <asm/imx-common/gpio.h>
-+#include <asm/imx-common/iomux-v3.h>
-+#include <asm/imx-common/mxc_i2c.h>
-+#include <asm/io.h>
-+#include <errno.h>
-+#include <fsl_esdhc.h>
-+#include <mmc.h>
-+#include <power/pmic.h>
-+#include <power/pfuze100_pmic.h>
-+/* #include "../common/pfuze.h" */
-+#include <spl.h>
-+
-+#include "ddr/ddr.h"
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+void spl_dram_init(void)
-+{
-+	/* ddr init */
-+	ddr_init();
-+}
-+
-+#define I2C_PAD_CTRL	(PAD_CTL_DSE6 | PAD_CTL_HYS | PAD_CTL_PUE)
-+#define PC MUX_PAD_CTRL(I2C_PAD_CTRL)
-+struct i2c_pads_info i2c_pad_info1 = {
-+	.scl = {
-+		.i2c_mode = IMX8MQ_PAD_I2C1_SCL__I2C1_SCL | PC,
-+		.gpio_mode = IMX8MQ_PAD_I2C1_SCL__GPIO5_IO14 | PC,
-+		.gp = IMX_GPIO_NR(5, 14),
-+	},
-+	.sda = {
-+		.i2c_mode = IMX8MQ_PAD_I2C1_SDA__I2C1_SDA | PC,
-+		.gpio_mode = IMX8MQ_PAD_I2C1_SDA__GPIO5_IO15 | PC,
-+		.gp = IMX_GPIO_NR(5, 15),
-+	},
++enum {
++	LPDDR4_MICRON,
++	LPDDR4_SAMSUNG,
 +};
 +
-+#define USDHC2_CD_GPIO	IMX_GPIO_NR(2, 12)
-+#define USDHC1_PWR_GPIO IMX_GPIO_NR(2, 10)
-+#define USDHC2_PWR_GPIO IMX_GPIO_NR(2, 19)
-+
-+int board_mmc_getcd(struct mmc *mmc)
-+{
-+	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
-+	int ret = 0;
-+
-+	switch (cfg->esdhc_base) {
-+	case USDHC1_BASE_ADDR:
-+		ret = 1;
++void spl_dram_init(int type)
+ {
+ 	puts("spl_dram_init\n");
+ 	/* ddr init */
+-#if defined(CONFIG_TQMA8MX_MX8MQ)
+-	panic("no DDR timing for TQMa8MQ / 1 GiB LPDDR4\n")
+-#elif defined(CONFIG_TQMA8MX_MX8MQL)
+-	ddr_init();
+-#else
+-#error
++	switch(type) {
++#if defined(CONFIG_TQMA8MX_2G_SAMSUNG)
++	case LPDDR4_SAMSUNG:
++		ddr_init_samsung_2g();
 +		break;
-+	case USDHC2_BASE_ADDR:
-+		ret = !gpio_get_value(USDHC2_CD_GPIO);
-+		return ret;
++#elif defined(CONFIG_TQMA8MX_2G_MICRON)
++	case LPDDR4_MICRON:
++		ddr_init_micron_2g();
++		break;
+ #endif
++	default:
++		panic("no DDR timing given memory variant\n");
 +	}
+ }
+ 
+ #define I2C_PAD_CTRL	(PAD_CTL_DSE6 | PAD_CTL_HYS | PAD_CTL_PUE)
+@@ -168,6 +189,9 @@ int power_init_board(void)
+ 
+ void spl_board_init(void)
+ {
++	uchar rcw[32];
++	char *ram_type;
 +
-+	return 1;
-+}
+ 	puts("spl_board_init\n");
+ 
+ 	/* TrustZone Address Space Controller */
+@@ -177,9 +201,21 @@ void spl_board_init(void)
+ 	setup_i2c(0, CONFIG_SYS_I2C_SPEED, 0x7f, &i2c_pad_info1);
+ 	power_init_board();
+ 
+-	/* DDR initialization */
+-	spl_dram_init();
++	if (tqc_read_eeprom_buf(0, 0x51, 1, 0, 32, rcw))
++		puts("ERROR: rcw read failed\n");
 +
-+#define USDHC_PAD_CTRL	(PAD_CTL_DSE6 | PAD_CTL_HYS | PAD_CTL_PUE | \
-+			 PAD_CTL_FSEL2)
-+#define USDHC_GPIO_PAD_CTRL (PAD_CTL_PUE | PAD_CTL_DSE1)
-+
-+static iomux_v3_cfg_t const usdhc1_pads[] = {
-+	IMX8MQ_PAD_SD1_CLK__USDHC1_CLK | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	IMX8MQ_PAD_SD1_CMD__USDHC1_CMD | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	IMX8MQ_PAD_SD1_DATA0__USDHC1_DATA0 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	IMX8MQ_PAD_SD1_DATA1__USDHC1_DATA1 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	IMX8MQ_PAD_SD1_DATA2__USDHC1_DATA2 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	IMX8MQ_PAD_SD1_DATA3__USDHC1_DATA3 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	IMX8MQ_PAD_SD1_DATA4__USDHC1_DATA4 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	IMX8MQ_PAD_SD1_DATA5__USDHC1_DATA5 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	IMX8MQ_PAD_SD1_DATA6__USDHC1_DATA6 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	IMX8MQ_PAD_SD1_DATA7__USDHC1_DATA7 | MUX_PAD_CTRL(USDHC_PAD_CTRL),
-+	IMX8MQ_PAD_SD1_RESET_B__GPIO2_IO10 | MUX_PAD_CTRL(NO_PAD_CTRL),
-+};
-+
-+static iomux_v3_cfg_t const usdhc2_pads[] = {
-+	IMX8MQ_PAD_SD2_CLK__USDHC2_CLK | MUX_PAD_CTRL(USDHC_PAD_CTRL), /* 0xd6 */
-+	IMX8MQ_PAD_SD2_CMD__USDHC2_CMD | MUX_PAD_CTRL(USDHC_PAD_CTRL), /* 0xd6 */
-+	IMX8MQ_PAD_SD2_DATA0__USDHC2_DATA0 | MUX_PAD_CTRL(USDHC_PAD_CTRL), /* 0xd6 */
-+	IMX8MQ_PAD_SD2_DATA1__USDHC2_DATA1 | MUX_PAD_CTRL(USDHC_PAD_CTRL), /* 0xd6 */
-+	IMX8MQ_PAD_SD2_DATA2__USDHC2_DATA2 | MUX_PAD_CTRL(USDHC_PAD_CTRL), /* 0x16 */
-+	IMX8MQ_PAD_SD2_DATA3__USDHC2_DATA3 | MUX_PAD_CTRL(USDHC_PAD_CTRL), /* 0xd6 */
-+	IMX8MQ_PAD_SD2_CD_B__GPIO2_IO12 | MUX_PAD_CTRL(USDHC_GPIO_PAD_CTRL),
-+	IMX8MQ_PAD_SD2_RESET_B__GPIO2_IO19 | MUX_PAD_CTRL(USDHC_GPIO_PAD_CTRL),
-+};
-+
-+static struct fsl_esdhc_cfg usdhc_cfg[2] = {
-+	{USDHC1_BASE_ADDR, 0, 8},
-+	{USDHC2_BASE_ADDR, 0, 4},
-+};
-+
-+int board_mmc_init(bd_t *bis)
-+{
-+	int i, ret;
-+	/*
-+	 * According to the board_mmc_init() the following map is done:
-+	 * (U-Boot device node)    (Physical Port)
-+	 * mmc0                    USDHC1
-+	 * mmc1                    USDHC2
-+	 */
-+	for (i = 0; i < CONFIG_SYS_FSL_USDHC_NUM; i++) {
-+		switch (i) {
-+		case 0:
-+			usdhc_cfg[0].sdhc_clk = mxc_get_clock(USDHC1_CLK_ROOT);
-+			imx_iomux_v3_setup_multiple_pads(
-+				usdhc1_pads, ARRAY_SIZE(usdhc1_pads));
-+			gpio_request(USDHC1_PWR_GPIO, "usdhc1_reset");
-+			gpio_direction_output(USDHC1_PWR_GPIO, 0);
-+			udelay(500);
-+			gpio_direction_output(USDHC1_PWR_GPIO, 1);
-+			break;
-+		case 1:
-+			usdhc_cfg[1].sdhc_clk = mxc_get_clock(USDHC2_CLK_ROOT);
-+			imx_iomux_v3_setup_multiple_pads(
-+				usdhc2_pads, ARRAY_SIZE(usdhc2_pads));
-+			gpio_request(USDHC2_PWR_GPIO, "usdhc2_reset");
-+			gpio_direction_output(USDHC2_PWR_GPIO, 0);
-+			udelay(500);
-+			gpio_direction_output(USDHC2_PWR_GPIO, 1);
-+			break;
-+		default:
-+			printf("Warning: you configured more USDHC controllers"
-+				"(%d) than supported by the board\n", i + 1);
-+			return -EINVAL;
-+		}
-+
-+		ret = fsl_esdhc_initialize(bis, &usdhc_cfg[i]);
-+		if (ret)
-+			return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+#ifdef CONFIG_POWER
-+#define I2C_PMIC	0
-+int power_init_board(void)
-+{
-+	struct pmic *p;
-+	int ret;
-+	unsigned int reg;
-+
-+	ret = power_pfuze100_init(I2C_PMIC);
-+	if (ret)
-+		return -ENODEV;
-+
-+	p = pmic_get("PFUZE100");
-+	ret = pmic_probe(p);
-+	if (ret)
-+		return -ENODEV;
-+
-+	pmic_reg_read(p, PFUZE100_DEVICEID, &reg);
-+	printf("PMIC:  PFUZE100 ID=0x%02x\n", reg);
-+
-+#if 0
-+	pmic_reg_read(p, PFUZE100_SW3AVOL, &reg);
-+	if ((reg & 0x3f) != 0x18) {
-+		reg &= ~0x3f;
-+		reg |= 0x18;
-+		pmic_reg_write(p, PFUZE100_SW3AVOL, reg);
-+	}
-+
-+	ret = pfuze_mode_init(p, APS_PFM);
-+	if (ret < 0)
-+		return ret;
-+
-+	/* set SW3A standby mode to off */
-+	pmic_reg_read(p, PFUZE100_SW3AMODE, &reg);
-+	reg &= ~0xf;
-+	reg |= APS_OFF;
-+	pmic_reg_write(p, PFUZE100_SW3AMODE, reg);
-+#endif
-+
-+	return 0;
-+}
-+#endif
-+
-+void spl_board_init(void)
-+{
-+	enable_tzc380();
-+
-+	/* Adjust pmic voltage to 1.0V for 800M */
-+	setup_i2c(0, CONFIG_SYS_I2C_SPEED, 0x7f, &i2c_pad_info1);
-+
-+	power_init_board();
-+
++	env_init();
++	ram_type = getenv("ram_type");
++/*	if (strcmp(ram_type, "K4F6E3S4HM-GFCL03V")) */
+ 
 +	/* DDR initialization */
-+	spl_dram_init();
-+
-+	/* Serial download mode */
-+	if (is_usb_boot()) {
-+		puts("Back to ROM, SDP\n");
-+		restore_boot_params();
-+	}
-+	puts("Normal Boot\n");
-+}
-+
-+#ifdef CONFIG_SPL_LOAD_FIT
-+int board_fit_config_name_match(const char *name)
-+{
-+	/* Just empty function now - can't decide what to choose */
-+	debug("%s: %s\n", __func__, name);
-+
-+	return 0;
-+}
++#if defined(CONFIG_TQMA8MX_2G_MICRON)
++	spl_dram_init(LPDDR4_MICRON);
++#elif defined(CONFIG_TQMA8MX_2G_SAMSUNG)
++	spl_dram_init(LPDDR4_SAMSUNG);
++#else
++#error
 +#endif
-+
-+void board_init_f(ulong dummy)
-+{
-+	/* Clear global data */
-+	memset((void *)gd, 0, sizeof(gd_t));
-+
-+	arch_cpu_init();
-+
-+	board_early_init_f();
-+
-+	timer_init();
-+
-+	preloader_console_init();
-+
-+	/* Clear the BSS. */
-+	memset(__bss_start, 0, __bss_end - __bss_start);
-+
-+	board_init_r(NULL, 0);
-+}
-diff --git a/board/tqc/tqma8mx/tqma8mx-mba8mx.c b/board/tqc/tqma8mx/tqma8mx-mba8mx.c
-new file mode 100644
-index 0000000000..599c77d8fb
---- /dev/null
-+++ b/board/tqc/tqma8mx/tqma8mx-mba8mx.c
-@@ -0,0 +1,178 @@
-+/*
-+ * Copyright 2016 Freescale Semiconductor, Inc.
-+ * Copyright 2017-2018 NXP
-+ *
-+ * SPDX-License-Identifier:	GPL-2.0+
-+ */
-+
-+#include <common.h>
-+#include <malloc.h>
-+#include <errno.h>
-+#include <asm/io.h>
-+#include <asm/imx-common/iomux-v3.h>
-+#include <asm-generic/gpio.h>
-+#include <fsl_esdhc.h>
-+#include <mmc.h>
-+#include <asm/arch/imx8mq_pins.h>
-+#include <asm/arch/sys_proto.h>
-+#include <asm/imx-common/gpio.h>
-+#include <asm/imx-common/mxc_i2c.h>
-+#include <asm/arch/clock.h>
-+#include <spl.h>
-+#include <dm.h>
-+#include <usb.h>
-+#include <dwc3-uboot.h>
-+
-+#include "../common/tqc_bb.h"
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+
-+#define UART_PAD_CTRL	(PAD_CTL_DSE6 | PAD_CTL_FSEL1)
-+
-+#define WDOG_PAD_CTRL	(PAD_CTL_DSE6 | PAD_CTL_HYS | PAD_CTL_PUE)
-+
-+static iomux_v3_cfg_t const wdog_pads[] = {
-+	IMX8MQ_PAD_GPIO1_IO02__WDOG1_WDOG_B | MUX_PAD_CTRL(WDOG_PAD_CTRL),
-+};
-+
-+static iomux_v3_cfg_t const uart_pads[] = {
-+	IMX8MQ_PAD_UART1_RXD__UART1_RX | MUX_PAD_CTRL(UART_PAD_CTRL),
-+	IMX8MQ_PAD_UART1_TXD__UART1_TX | MUX_PAD_CTRL(UART_PAD_CTRL),
-+};
-+
-+int tqc_bb_board_early_init_f(void)
-+{
-+	struct wdog_regs *wdog = (struct wdog_regs *)WDOG1_BASE_ADDR;
-+
-+	imx_iomux_v3_setup_multiple_pads(wdog_pads, ARRAY_SIZE(wdog_pads));
-+
-+	set_wdog_reset(wdog);
-+
-+	imx_iomux_v3_setup_multiple_pads(uart_pads, ARRAY_SIZE(uart_pads));
-+
-+	return 0;
-+}
-+
-+#ifdef CONFIG_OF_BOARD_SETUP
-+int tqc_bb_ft_board_setup(void *blob, bd_t *bd)
-+{
-+	return 0;
-+}
-+#endif
-+
-+#ifdef CONFIG_USB_DWC3
-+
-+#define USB_PHY_CTRL0			0xF0040
-+#define USB_PHY_CTRL0_REF_SSP_EN	BIT(2)
-+
-+#define USB_PHY_CTRL1			0xF0044
-+#define USB_PHY_CTRL1_RESET		BIT(0)
-+#define USB_PHY_CTRL1_COMMONONN		BIT(1)
-+#define USB_PHY_CTRL1_ATERESET		BIT(3)
-+#define USB_PHY_CTRL1_VDATSRCENB0	BIT(19)
-+#define USB_PHY_CTRL1_VDATDETENB0	BIT(20)
-+
-+#define USB_PHY_CTRL2			0xF0048
-+#define USB_PHY_CTRL2_TXENABLEN0	BIT(8)
-+
-+static struct dwc3_device dwc3_device_data = {
-+	.maximum_speed = USB_SPEED_SUPER,
-+	.base = USB1_BASE_ADDR,
-+	.dr_mode = USB_DR_MODE_PERIPHERAL,
-+	.index = 0,
-+	.power_down_scale = 2,
-+};
-+
-+int usb_gadget_handle_interrupts(void)
-+{
-+	dwc3_uboot_handle_interrupt(0);
-+	return 0;
-+}
-+
-+static void dwc3_nxp_usb_phy_init(struct dwc3_device *dwc3)
-+{
-+	u32 RegData;
-+
-+	RegData = readl(dwc3->base + USB_PHY_CTRL1);
-+	RegData &= ~(USB_PHY_CTRL1_VDATSRCENB0 | USB_PHY_CTRL1_VDATDETENB0 |
-+			USB_PHY_CTRL1_COMMONONN);
-+	RegData |= USB_PHY_CTRL1_RESET | USB_PHY_CTRL1_ATERESET;
-+	writel(RegData, dwc3->base + USB_PHY_CTRL1);
-+
-+	RegData = readl(dwc3->base + USB_PHY_CTRL0);
-+	RegData |= USB_PHY_CTRL0_REF_SSP_EN;
-+	writel(RegData, dwc3->base + USB_PHY_CTRL0);
-+
-+	RegData = readl(dwc3->base + USB_PHY_CTRL2);
-+	RegData |= USB_PHY_CTRL2_TXENABLEN0;
-+	writel(RegData, dwc3->base + USB_PHY_CTRL2);
-+
-+	RegData = readl(dwc3->base + USB_PHY_CTRL1);
-+	RegData &= ~(USB_PHY_CTRL1_RESET | USB_PHY_CTRL1_ATERESET);
-+	writel(RegData, dwc3->base + USB_PHY_CTRL1);
-+}
-+#endif
-+
-+#if defined(CONFIG_USB_DWC3) || defined(CONFIG_USB_XHCI_IMX8M)
-+int board_usb_init(int index, enum usb_init_type init)
-+{
-+	int ret = 0;
-+	imx8m_usb_power(index, true);
-+
-+	if (index == 0 && init == USB_INIT_DEVICE) {
-+#ifdef CONFIG_USB_TCPC
-+		ret = tcpc_setup_ufp_mode(&port);
-+#endif
-+		dwc3_nxp_usb_phy_init(&dwc3_device_data);
-+		return dwc3_uboot_init(&dwc3_device_data);
-+	} else if (index == 0 && init == USB_INIT_HOST) {
-+#ifdef CONFIG_USB_TCPC
-+		ret = tcpc_setup_dfp_mode(&port);
-+#endif
-+		return ret;
-+	}
-+
-+	return 0;
-+}
-+
-+int board_usb_cleanup(int index, enum usb_init_type init)
-+{
-+	int ret = 0;
-+	if (index == 0 && init == USB_INIT_DEVICE) {
-+		dwc3_uboot_exit(index);
-+	} else if (index == 0 && init == USB_INIT_HOST) {
-+#ifdef CONFIG_USB_TCPC
-+		ret = tcpc_disable_src_vbus(&port);
-+#endif
-+	}
-+
-+	imx8m_usb_power(index, false);
-+
-+	return ret;
-+}
-+#endif
-+
-+
-+int tqc_bb_board_init(void)
-+{
-+#ifdef CONFIG_USB_TCPC
-+	setup_typec();
-+#endif
-+	return 0;
-+}
-+
-+int tqc_bb_board_late_init(void)
-+{
-+#ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
-+	setenv("board_name", "MBa8MQ");
-+	setenv("board_rev", "iMX8MQ");
-+#endif
-+
-+#ifdef CONFIG_ENV_IS_IN_MMC
-+	board_late_mmc_env_init();
-+#endif
-+
-+	return 0;
-+}
-+
-diff --git a/board/tqc/tqma8mx/tqma8mx.c b/board/tqc/tqma8mx/tqma8mx.c
-new file mode 100644
-index 0000000000..4ad78fdf03
---- /dev/null
-+++ b/board/tqc/tqma8mx/tqma8mx.c
-@@ -0,0 +1,94 @@
-+/*
-+ * Copyright 2016 Freescale Semiconductor, Inc.
-+ * Copyright 2017-2018 NXP
-+ *
-+ * SPDX-License-Identifier:	GPL-2.0+
-+ */
-+
-+#include <common.h>
-+#include <malloc.h>
-+#include <errno.h>
-+#include <asm/io.h>
-+#include <asm/imx-common/iomux-v3.h>
-+#include <asm-generic/gpio.h>
-+#include <fsl_esdhc.h>
-+#include <mmc.h>
-+#include <asm/arch/imx8mq_pins.h>
-+#include <asm/arch/sys_proto.h>
-+#include <asm/imx-common/gpio.h>
-+#include <asm/imx-common/mxc_i2c.h>
-+#include <asm/arch/clock.h>
-+#include <spl.h>
-+#include <power/pmic.h>
-+#include <power/pfuze100_pmic.h>
-+#include <dm.h>
-+// #include "../common/pfuze.h"
-+#include "../common/tqc_bb.h"
-+
-+DECLARE_GLOBAL_DATA_PTR;
-+
-+#define QSPI_PAD_CTRL	(PAD_CTL_DSE2 | PAD_CTL_HYS)
-+
-+#ifdef CONFIG_FSL_QSPI
-+static iomux_v3_cfg_t const qspi_pads[] = {
-+	IMX8MQ_PAD_NAND_ALE__QSPI_A_SCLK | MUX_PAD_CTRL(QSPI_PAD_CTRL),
-+	IMX8MQ_PAD_NAND_CE0_B__QSPI_A_SS0_B | MUX_PAD_CTRL(QSPI_PAD_CTRL),
-+
-+	IMX8MQ_PAD_NAND_DATA00__QSPI_A_DATA0 | MUX_PAD_CTRL(QSPI_PAD_CTRL),
-+	IMX8MQ_PAD_NAND_DATA01__QSPI_A_DATA1 | MUX_PAD_CTRL(QSPI_PAD_CTRL),
-+	IMX8MQ_PAD_NAND_DATA02__QSPI_A_DATA2 | MUX_PAD_CTRL(QSPI_PAD_CTRL),
-+	IMX8MQ_PAD_NAND_DATA03__QSPI_A_DATA3 | MUX_PAD_CTRL(QSPI_PAD_CTRL),
-+};
-+
-+int board_qspi_init(void)
-+{
-+	imx_iomux_v3_setup_multiple_pads(qspi_pads, ARRAY_SIZE(qspi_pads));
-+
-+	set_clk_qspi();
-+
-+	return 0;
-+}
-+#endif
-+
-+int board_early_init_f(void)
-+{
-+	return tqc_bb_board_early_init_f();
-+}
-+
-+#ifdef CONFIG_BOARD_POSTCLK_INIT
-+int board_postclk_init(void)
-+{
-+	/* TODO */
-+	return 0;
-+}
-+#endif
-+
-+int dram_init(void)
-+{
-+	/* rom_pointer[1] contains the size of TEE occupies */
-+	if (rom_pointer[1])
-+		gd->ram_size = PHYS_SDRAM_SIZE - rom_pointer[1];
-+	else
-+		gd->ram_size = PHYS_SDRAM_SIZE;
-+
-+	return 0;
-+}
-+
-+#ifdef CONFIG_OF_BOARD_SETUP
-+int ft_board_setup(void *blob, bd_t *bd)
-+{
-+	return tqc_bb_ft_board_setup(blob, bd);
-+}
-+#endif
-+
-+int board_init(void)
-+{
-+	board_qspi_init();
-+
-+	return tqc_bb_board_init();
-+}
-+
-+int board_late_init(void)
-+{
-+	return tqc_bb_board_late_init();
-+}
-diff --git a/configs/tqma8mq_mba8mx_mmc_defconfig b/configs/tqma8mq_mba8mx_mmc_defconfig
-new file mode 100644
-index 0000000000..6ae2aaecd2
---- /dev/null
-+++ b/configs/tqma8mq_mba8mx_mmc_defconfig
-@@ -0,0 +1,36 @@
-+CONFIG_ARM=y
-+CONFIG_ARCH_IMX8M=y
-+CONFIG_SYS_MALLOC_F_LEN=0x2000
-+CONFIG_TARGET_TQMA8MX=y
-+CONFIG_DEFAULT_DEVICE_TREE="fsl-imx8mq-tqma8mq-mba8mx"
-+CONFIG_FIT=y
-+CONFIG_SPL_LOAD_FIT=y
-+CONFIG_SYS_EXTRA_OPTIONS="IMX_CONFIG=arch/arm/imx-common/spl_sd.cfg"
-+CONFIG_ARCH_MISC_INIT=y
-+CONFIG_HUSH_PARSER=y
-+CONFIG_CMD_MEMTEST=y
-+CONFIG_CMD_MEMINFO=y
-+CONFIG_CMD_I2C=y
-+CONFIG_CMD_GPIO=y
-+# CONFIG_CMD_NET is not set
-+# CONFIG_CMD_NFS is not set
-+CONFIG_CMD_CACHE=y
-+CONFIG_CMD_TIME=y
-+CONFIG_CMD_PMIC=y
-+CONFIG_CMD_REGULATOR=y
-+CONFIG_CMD_UBI=y
-+CONFIG_OF_CONTROL=y
-+# CONFIG_BLK is not set
-+CONFIG_DM_GPIO=y
-+CONFIG_DM_I2C=y
-+CONFIG_SYS_I2C_MXC=y
-+CONFIG_DM_MMC=y
-+# CONFIG_DM_MMC_OPS is not set
-+CONFIG_DM_PMIC=y
-+CONFIG_DM_PMIC_PFUZE100=y
-+CONFIG_DM_REGULATOR=y
-+CONFIG_DM_REGULATOR_PFUZE100=y
-+CONFIG_DM_REGULATOR_FIXED=y
-+CONFIG_DM_REGULATOR_GPIO=y
-+CONFIG_NXP_TMU=y
-+CONFIG_REGEX=y
-diff --git a/include/configs/tqma8mx-mba8mx.h b/include/configs/tqma8mx-mba8mx.h
-new file mode 100644
-index 0000000000..d60cadd818
---- /dev/null
-+++ b/include/configs/tqma8mx-mba8mx.h
-@@ -0,0 +1,10 @@
-+/*
-+ * Copyright 2019 TQ Systems GmbH
-+ *
-+ * SPDX-License-Identifier:	GPL-2.0+
-+ */
-+
-+#if !defined(__TQMA8MX_MBA8MX_H)
-+#define __TQMA8MX_MBA8MX_H
-+
-+#endif /* __TQMA8MX_MBA8MX_H */
+ 	/* Serial download mode */
+ 	if (is_usb_boot()) {
+ 		puts("Back to ROM, SDP\n");
+diff --git a/configs/tqma8mql_mba8mx_mmc_defconfig b/configs/tqma8mq_2gmicron_mba8mx_mmc_defconfig
+similarity index 95%
+rename from configs/tqma8mql_mba8mx_mmc_defconfig
+rename to configs/tqma8mq_2gmicron_mba8mx_mmc_defconfig
+index 30fd4a481c..672c6fb127 100644
+--- a/configs/tqma8mql_mba8mx_mmc_defconfig
++++ b/configs/tqma8mq_2gmicron_mba8mx_mmc_defconfig
+@@ -2,7 +2,7 @@ CONFIG_ARM=y
+ CONFIG_ARCH_IMX8M=y
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+ CONFIG_TARGET_TQMA8MX=y
+-CONFIG_TQMA8MX_MX8MQL=y
++CONFIG_TQMA8MX_2G_MICRON=y
+ CONFIG_DEFAULT_DEVICE_TREE="fsl-imx8mq-tqma8mq-mba8mx"
+ CONFIG_FIT=y
+ CONFIG_SPL_LOAD_FIT=y
 diff --git a/include/configs/tqma8mx.h b/include/configs/tqma8mx.h
-new file mode 100644
-index 0000000000..1bb62bc55a
---- /dev/null
+index b69c12fde3..de56b70e2d 100644
+--- a/include/configs/tqma8mx.h
 +++ b/include/configs/tqma8mx.h
-@@ -0,0 +1,298 @@
-+/*
-+ * Copyright 2017 NXP
-+ * Copyright 2019 TQ Systems GmbH
-+ *
-+ * SPDX-License-Identifier:	GPL-2.0+
-+ */
-+
-+#ifndef __TQMA8MX_H
-+#define __TQMA8MX_H
-+
-+#include <linux/sizes.h>
-+#include <asm/arch/imx-regs.h>
-+
-+#ifdef CONFIG_SECURE_BOOT
-+#define CONFIG_CSF_SIZE			0x2000 /* 8K region */
-+#endif
-+
-+#define CONFIG_SPL_FRAMEWORK
-+#define CONFIG_SPL_TEXT_BASE		0x7E1000
-+#define CONFIG_SPL_MAX_SIZE		(124 * 1024)
-+#define CONFIG_SYS_MONITOR_LEN		(512 * 1024)
-+#if defined(CONFIG_SD_BOOT)
-+#define CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_USE_SECTOR
-+#define CONFIG_SYS_MMCSD_RAW_MODE_U_BOOT_SECTOR	0x300
-+#define CONFIG_SYS_MMCSD_FS_BOOT_PARTITION	1
-+#else
-+#error
-+#endif
-+
-+#ifdef CONFIG_SPL_BUILD
-+/*#define CONFIG_ENABLE_DDR_TRAINING_DEBUG*/
-+#define CONFIG_SPL_WATCHDOG_SUPPORT
-+#define CONFIG_SPL_DRIVERS_MISC_SUPPORT
-+#define CONFIG_SPL_POWER_SUPPORT
-+#define CONFIG_SPL_I2C_SUPPORT
-+#define CONFIG_SPL_BOARD_INIT
-+#define CONFIG_SPL_LDSCRIPT		"arch/arm/cpu/armv8/u-boot-spl.lds"
-+#define CONFIG_SPL_STACK		0x187FF0
-+#define CONFIG_SPL_LIBCOMMON_SUPPORT
-+#define CONFIG_SPL_LIBGENERIC_SUPPORT
-+#define CONFIG_SPL_SERIAL_SUPPORT
-+#define CONFIG_SPL_GPIO_SUPPORT
-+#define CONFIG_SPL_MMC_SUPPORT
-+#define CONFIG_SPL_BSS_START_ADDR      0x00180000
-+#define CONFIG_SPL_BSS_MAX_SIZE        0x2000	/* 8 KB */
-+#define CONFIG_SYS_SPL_MALLOC_START    0x00182000
-+#define CONFIG_SYS_SPL_MALLOC_SIZE     0x2000	/* 8 KB */
-+#define CONFIG_SYS_ICACHE_OFF
-+#define CONFIG_SYS_DCACHE_OFF
-+
-+#define CONFIG_SPL_ABORT_ON_RAW_IMAGE /* For RAW image gives a error info not panic */
-+
-+#undef CONFIG_DM_MMC
-+#undef CONFIG_DM_PMIC
-+#undef CONFIG_DM_PMIC_PFUZE100
-+
-+#define CONFIG_SYS_I2C
-+#define CONFIG_SYS_I2C_MXC_I2C1		/* enable I2C bus 1 */
-+#define CONFIG_SYS_I2C_MXC_I2C2		/* enable I2C bus 2 */
-+#define CONFIG_SYS_I2C_MXC_I2C3		/* enable I2C bus 3 */
-+
-+#define CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
-+
-+#define CONFIG_POWER
-+#define CONFIG_POWER_I2C
-+#define CONFIG_POWER_PFUZE100
-+#define CONFIG_POWER_PFUZE100_I2C_ADDR 0x08
-+#endif
-+
-+#define CONFIG_REMAKE_ELF
-+
-+/* #define CONFIG_BOARD_EARLY_INIT_F */
-+#define CONFIG_BOARD_POSTCLK_INIT
-+/* #define CONFIG_BOARD_LATE_INIT */
-+
-+/* Flat Device Tree Definitions */
-+#define CONFIG_OF_BOARD_SETUP
-+
-+#undef CONFIG_CMD_EXPORTENV
-+#undef CONFIG_CMD_IMPORTENV
-+#undef CONFIG_CMD_IMLS
-+
-+#undef CONFIG_CMD_CRC32
-+#undef CONFIG_BOOTM_NETBSD
-+
-+#define CONFIG_MFG_ENV_SETTINGS \
-+	"mfgtool_args=setenv bootargs console=${console},${baudrate} " \
-+		"rdinit=/linuxrc " \
-+		"g_mass_storage.stall=0 g_mass_storage.removable=1 " \
-+		"g_mass_storage.idVendor=0x066F g_mass_storage.idProduct=0x37FF "\
-+		"g_mass_storage.iSerialNumber=\"\" "\
-+		"clk_ignore_unused "\
-+		"\0" \
-+	"initrd_addr=0x43800000\0" \
-+	"initrd_high=0xffffffff\0" \
-+	"bootcmd_mfg=run mfgtool_args;booti ${loadaddr} ${initrd_addr} ${fdt_addr};\0" \
-+/* Initial environment variables */
-+#define CONFIG_EXTRA_ENV_SETTINGS		\
-+	CONFIG_MFG_ENV_SETTINGS \
-+	"script=boot.scr\0" \
-+	"image=Image\0" \
-+	"console=ttymxc0,115200 earlycon=ec_imx6q,0x30860000,115200\0" \
-+	"fdt_addr=0x43000000\0"			\
-+	"fdt_high=0xffffffffffffffff\0"		\
-+	"boot_fdt=try\0" \
-+	"fdt_file=fsl-imx8mq-evk.dtb\0" \
-+	"initrd_addr=0x43800000\0"		\
-+	"initrd_high=0xffffffffffffffff\0" \
-+	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
-+	"mmcpart=" __stringify(CONFIG_SYS_MMC_IMG_LOAD_PART) "\0" \
-+	"mmcroot=" CONFIG_MMCROOT " rootwait rw\0" \
-+	"mmcautodetect=yes\0" \
-+	"mmcargs=setenv bootargs console=${console} root=${mmcroot}\0 " \
-+	"loadbootscript=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};\0" \
-+	"bootscript=echo Running bootscript from mmc ...; " \
-+		"source\0" \
-+	"loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}\0" \
-+	"loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
-+	"mmcboot=echo Booting from mmc ...; " \
-+		"run mmcargs; " \
-+		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
-+			"if run loadfdt; then " \
-+				"booti ${loadaddr} - ${fdt_addr}; " \
-+			"else " \
-+				"echo WARN: Cannot load the DT; " \
-+			"fi; " \
-+		"else " \
-+			"echo wait for boot; " \
-+		"fi;\0" \
-+	"netargs=setenv bootargs console=${console} " \
-+		"root=/dev/nfs " \
-+		"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp\0" \
-+	"netboot=echo Booting from net ...; " \
-+		"run netargs;  " \
-+		"if test ${ip_dyn} = yes; then " \
-+			"setenv get_cmd dhcp; " \
-+		"else " \
-+			"setenv get_cmd tftp; " \
-+		"fi; " \
-+		"${get_cmd} ${loadaddr} ${image}; " \
-+		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
-+			"if ${get_cmd} ${fdt_addr} ${fdt_file}; then " \
-+				"booti ${loadaddr} - ${fdt_addr}; " \
-+			"else " \
-+				"echo WARN: Cannot load the DT; " \
-+			"fi; " \
-+		"else " \
-+			"booti; " \
-+		"fi;\0"
-+
-+#define CONFIG_BOOTCOMMAND \
-+	   "mmc dev ${mmcdev}; if mmc rescan; then " \
-+		   "if run loadbootscript; then " \
-+			   "run bootscript; " \
-+		   "else " \
-+			   "if run loadimage; then " \
-+				   "run mmcboot; " \
-+			   "else run netboot; " \
-+			   "fi; " \
-+		   "fi; " \
-+	   "else booti ${loadaddr} - ${fdt_addr}; fi"
-+
-+/* Link Definitions */
-+#define CONFIG_LOADADDR			0x40480000
-+#define CONFIG_SYS_TEXT_BASE		0x40200000
-+
-+#define CONFIG_SYS_LOAD_ADDR           CONFIG_LOADADDR
-+
-+#define CONFIG_SYS_INIT_RAM_ADDR        0x40000000
-+#define CONFIG_SYS_INIT_RAM_SIZE        0x80000
-+#define CONFIG_SYS_INIT_SP_OFFSET \
-+        (CONFIG_SYS_INIT_RAM_SIZE - GENERATED_GBL_DATA_SIZE)
-+#define CONFIG_SYS_INIT_SP_ADDR \
-+        (CONFIG_SYS_INIT_RAM_ADDR + CONFIG_SYS_INIT_SP_OFFSET)
-+
-+#define CONFIG_ENV_OVERWRITE
-+
-+#if defined(CONFIG_SD_BOOT)
-+#define CONFIG_ENV_OFFSET		(64 * SZ_64K)
-+#define CONFIG_ENV_SIZE			0x1000
-+#define CONFIG_ENV_IS_IN_MMC
-+#define CONFIG_SYS_MMC_ENV_DEV		1   /* USDHC2 */
-+#elif defined(CONFIG_QSPI_BOOT)
-+#error
-+#else
-+#error
-+#endif
-+
-+#define CONFIG_MMCROOT			"/dev/mmcblk1p2"  /* USDHC2 */
-+
-+/* Size of malloc() pool */
-+#define CONFIG_SYS_MALLOC_LEN		((CONFIG_ENV_SIZE + (2*1024) + (16*1024)) * 1024)
-+
-+#define CONFIG_SYS_SDRAM_BASE           0x40000000
-+#define PHYS_SDRAM                      0x40000000
-+#define PHYS_SDRAM_SIZE			0x40000000 /* 1GB DDR */
-+#define CONFIG_NR_DRAM_BANKS		1
-+
-+#define CONFIG_SYS_MEMTEST_START	(CONFIG_SYS_SDRAM_BASE + SZ_128M)
-+#define CONFIG_SYS_MEMTEST_END		(CONFIG_SYS_MEMTEST_START + SZ_512M)
-+
-+
-+#define CONFIG_BAUDRATE			115200
-+
-+#define CONFIG_MXC_UART
-+#define CONFIG_MXC_UART_BASE		UART1_BASE_ADDR
-+
-+/* Monitor Command Prompt */
-+#undef CONFIG_SYS_PROMPT
-+#define CONFIG_SYS_PROMPT		"u-boot=> "
-+#define CONFIG_SYS_LONGHELP
-+#define CONFIG_SYS_PROMPT_HUSH_PS2     "> "
-+#define CONFIG_AUTO_COMPLETE
-+#define CONFIG_SYS_CBSIZE              2048
-+#define CONFIG_SYS_MAXARGS             64
-+#define CONFIG_SYS_BARGSIZE CONFIG_SYS_CBSIZE
-+#define CONFIG_SYS_PBSIZE		(CONFIG_SYS_CBSIZE + \
-+					sizeof(CONFIG_SYS_PROMPT) + 16)
-+#define CONFIG_CMDLINE_EDITING
-+
-+#define CONFIG_IMX_BOOTAUX
-+
-+#define CONFIG_CMD_MMC
-+#define CONFIG_FSL_ESDHC
-+#define CONFIG_FSL_USDHC
-+
-+#define CONFIG_SYS_FSL_USDHC_NUM	2
-+#define CONFIG_SYS_FSL_ESDHC_ADDR       0
-+
-+#define CONFIG_DOS_PARTITION
-+#define CONFIG_CMD_EXT2
-+#define CONFIG_CMD_EXT4
-+#define CONFIG_CMD_EXT4_WRITE
-+#define CONFIG_CMD_FAT
-+
-+#define CONFIG_SUPPORT_EMMC_BOOT	/* eMMC specific */
-+#define CONFIG_SYS_MMC_IMG_LOAD_PART	1
-+
-+#define CONFIG_FSL_QSPI    /* enable the QUADSPI driver */
-+#ifdef CONFIG_FSL_QSPI
-+#define CONFIG_CMD_SF
-+#define	CONFIG_SPI_FLASH
-+#define	CONFIG_SPI_FLASH_STMICRO
-+#define	CONFIG_SPI_FLASH_BAR
-+#define	CONFIG_SF_DEFAULT_BUS		0
-+#define	CONFIG_SF_DEFAULT_CS		0
-+#define	CONFIG_SF_DEFAULT_SPEED		40000000
-+#define	CONFIG_SF_DEFAULT_MODE		SPI_MODE_0
-+
-+#define FSL_QSPI_FLASH_SIZE		(SZ_32M)
-+#define FSL_QSPI_FLASH_NUM		1
-+
-+/* needed for UBI support */
-+#define CONFIG_CMD_MTDPARTS
-+#define CONFIG_MTD_PARTITIONS
-+#define CONFIG_MTD_DEVICE
-+
-+#endif
-+
-+#define CONFIG_MXC_GPIO
-+
-+#define CONFIG_MXC_OCOTP
-+#define CONFIG_CMD_FUSE
-+
-+/* I2C Configs */
-+#define CONFIG_SYS_I2C_SPEED		  100000
-+
-+/* USB configs */
-+#ifndef CONFIG_SPL_BUILD
-+#define CONFIG_HAS_FSL_XHCI_USB
-+
-+#ifdef CONFIG_HAS_FSL_XHCI_USB
-+#define CONFIG_USB_XHCI_IMX8M
-+#define CONFIG_USB_XHCI_DWC3
-+#define CONFIG_USB_XHCI_HCD
-+#define CONFIG_USB_MAX_CONTROLLER_COUNT         2
-+#define CONFIG_SYS_USB_XHCI_MAX_ROOT_PORTS      2
-+#endif
-+
-+#define CONFIG_CMD_USB
-+#define CONFIG_USB_STORAGE
-+#define CONFIG_CMD_EXT2
-+
-+#define CONFIG_USB_DWC3
-+#define CONFIG_USB_DWC3_GADGET
-+#define CONFIG_USBD_HS
-+
-+#endif
-+
-+#define CONFIG_OF_SYSTEM_SETUP
-+
-+#if defined(CONFIG_MBA8MX)
-+#include "tqma8mx-mba8mx.h"
-+#else
-+#error
-+#endif
-+
-+#endif
+@@ -28,6 +28,7 @@
+ #endif
+ 
+ #ifdef CONFIG_SPL_BUILD
++#define CONFIG_SPL_ENV_SUPPORT
+ /*#define CONFIG_ENABLE_DDR_TRAINING_DEBUG*/
+ #define CONFIG_SPL_WATCHDOG_SUPPORT
+ #define CONFIG_SPL_DRIVERS_MISC_SUPPORT
+@@ -240,11 +241,10 @@
+ #define CONFIG_SYS_SDRAM_BASE		0x40000000
+ #define PHYS_SDRAM			0x40000000
+ 
+-#if defined(CONFIG_TQMA8MX_MX8MQ)
+-#define PHYS_SDRAM_SIZE			0x40000000 /* 1GB LPDDR4 */
+-#elif defined(CONFIG_TQMA8MX_MX8MQL)
++#if defined(CONFIG_TQMA8MX_2G_MICRON) || defined(CONFIG_TQMA8MX_2G_SAMSUNG)
+ #define PHYS_SDRAM_SIZE			0x80000000 /* 2GB LPDDR4 */
+ #else
++#define PHYS_SDRAM_SIZE			0x40000000 /* 1GB LPDDR4 */
+ #error
+ #endif
+ 
 -- 
 2.17.1
 

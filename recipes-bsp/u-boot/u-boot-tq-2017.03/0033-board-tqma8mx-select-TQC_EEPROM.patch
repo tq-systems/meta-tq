@@ -1,0 +1,25 @@
+From 3def9eb8cd096d50f9123c6ae359bd8155946e68 Mon Sep 17 00:00:00 2001
+From: Ye Li <ye.li@nxp.com>
+Date: Mon, 10 Sep 2018 20:24:22 -0700
+Subject: [PATCH 33/37] board: tqma8mx: select TQC_EEPROM
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/cpu/armv8/imx8m/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm/cpu/armv8/imx8m/Kconfig b/arch/arm/cpu/armv8/imx8m/Kconfig
+index 6b8deefd03..76216f4091 100644
+--- a/arch/arm/cpu/armv8/imx8m/Kconfig
++++ b/arch/arm/cpu/armv8/imx8m/Kconfig
+@@ -39,6 +39,7 @@ config TARGET_TQMA8MX
+ 	select MISC
+ 	select SUPPORT_SPL
+ 	select SPL
++	select TQC_EEPROM
+ 
+ endchoice
+ 
+-- 
+2.17.1
+

@@ -1,7 +1,7 @@
 From 22581c561689465416bbf3b0aa83cf3627685423 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 16 Jan 2019 20:15:52 +0100
-Subject: [PATCH 16/25] board: tqma8mx: prepare RGMII / FEC interface
+Subject: [PATCH 16/37] board: tqma8mx: prepare RGMII / FEC interface
 
 use correct clock for FEC / ENET
 

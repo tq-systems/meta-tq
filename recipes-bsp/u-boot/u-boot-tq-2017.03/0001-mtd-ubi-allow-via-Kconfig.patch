@@ -1,7 +1,7 @@
 From 7902f699b0910290d771527a37ca89ca0d90d972 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 10 Jan 2019 11:58:10 +0100
-Subject: [PATCH 01/25] mtd/ubi: allow via Kconfig
+Subject: [PATCH 01/37] mtd/ubi: allow via Kconfig
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---

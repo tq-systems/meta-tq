@@ -2,7 +2,7 @@ From e5d745bc251472610b54d72ea21c2cef4e8dc642 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?S=C3=A9bastien=20Szymanski?=
  <sebastien.szymanski@armadeus.com>
 Date: Tue, 7 Mar 2017 14:33:24 +0100
-Subject: [PATCH 02/25] dm: imx: serial: add i.MX6UL support
+Subject: [PATCH 02/37] dm: imx: serial: add i.MX6UL support
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit

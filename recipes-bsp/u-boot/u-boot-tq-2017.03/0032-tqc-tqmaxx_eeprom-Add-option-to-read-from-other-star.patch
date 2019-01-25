@@ -1,0 +1,30 @@
+From 4d500050f865693722d4873ca5669d426d3eaaa8 Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Mon, 14 Jan 2019 17:00:48 +0100
+Subject: [PATCH 32/37] tqc: tqmaxx_eeprom: Add option to read from other
+ starting value
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+(cherry picked from commit 1eb4c73789e537e215dd246cc97e854956ecb4c5)
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/common/tqc_eeprom.h | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/board/tqc/common/tqc_eeprom.h b/board/tqc/common/tqc_eeprom.h
+index 42fd0a5e31..52a88c283c 100644
+--- a/board/tqc/common/tqc_eeprom.h
++++ b/board/tqc/common/tqc_eeprom.h
+@@ -27,6 +27,9 @@ int tqc_parse_eeprom_serial(struct tqc_eeprom_data *eeprom, char *buf,
+ int tqc_parse_eeprom_id(struct tqc_eeprom_data *eeprom, char *buf,
+ 			size_t len);
+ int tqc_show_eeprom(struct tqc_eeprom_data *eeprom, const char *id);
++int tqc_read_eeprom_at(unsigned int bus, unsigned int addr,
++		       struct tqc_eeprom_data *eeprom,
++		       unsigned int offset);
+ int tqc_read_eeprom(unsigned int bus, unsigned int addr,
+ 		    struct tqc_eeprom_data *eeprom);
+ 
+-- 
+2.17.1
+

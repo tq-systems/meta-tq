@@ -1,7 +1,7 @@
 From 16731059606719f564a6d9ddd04549a2470845ab Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Fri, 18 Jan 2019 10:10:01 +0100
-Subject: [PATCH 24/25] board: tqma8mx: fix dt name in env
+Subject: [PATCH 24/37] board: tqma8mx: fix dt name in env
 
 allows booting tqma8mq-mba8mx
 

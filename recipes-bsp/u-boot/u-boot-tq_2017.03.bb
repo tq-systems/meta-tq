@@ -38,6 +38,18 @@ SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branc
            file://0023-board-tqma8mx-mark-USB0-as-not-supported.patch \
            file://0024-board-tqma8mx-fix-dt-name-in-env.patch \
            file://0025-board-tqma8mx-env-add-update-scripts.patch \
+           file://0026-MLK-19433-1-imx-Add-macro-for-chip-rev-2.1.patch \
+           file://0027-arch-imx8m-add-defines-for-ROM-Version.patch \
+           file://0028-MLK-19526-1-imx8mq-Add-CPU-ID-for-iMX8MD-and-iMX8MQL.patch \
+           file://0029-tqma8mql-add-2-GiB-variant.patch \
+           file://0030-tqc-common-eeprom-fix-checkpatch-warnings-and-checks.patch \
+           file://0031-tq-common-eeprom-update-header.patch \
+           file://0032-tqc-tqmaxx_eeprom-Add-option-to-read-from-other-star.patch \
+           file://0033-board-tqma8mx-select-TQC_EEPROM.patch \
+           file://0034-tqc-tqc_eeprom-remove-CONFIG_SYS_I2C_EEPROM_ADDR_LEN.patch \
+           file://0035-tqc-tqc_eeprom-add-spl-support.patch \
+           file://0036-board-tqma8mq-support-second-ram-config.patch \
+           file://0037-arm-dt-fsl-imx8mq-tqma8mq-fix-eeprom-node-name.patch \
            "
 
 S = "${WORKDIR}/git"
