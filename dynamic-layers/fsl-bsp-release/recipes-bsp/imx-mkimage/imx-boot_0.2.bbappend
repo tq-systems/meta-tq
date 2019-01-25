@@ -37,6 +37,9 @@ do_deploy_append() {
         if [ "${MACHINE}" = "tqma8mq-mba8mx" ]; then
             ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-bootstream.bin
         fi
+        if [ "${MACHINE}" = "tqma8mq-2gm-mba8mx" ]; then
+            ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-bootstream.bin
+        fi
     fi
     cd -
 }
