@@ -1,7 +1,7 @@
-From 80199eb4f85e99e512cf8b94b708ad5e44641f54 Mon Sep 17 00:00:00 2001
+From 5c56c4723136be316983b58e69578048c0d1ba13 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 17 Jan 2019 17:58:57 +0100
-Subject: [PATCH 04/13] arm: dt: tqma8mq-mba8mx: add ethernet support
+Subject: [PATCH 04/16] arm: dt: tqma8mq-mba8mx: add ethernet support
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---

@@ -1,7 +1,7 @@
-From 799000202e460b4ba8944e9c7b6a47d9f902314f Mon Sep 17 00:00:00 2001
+From 5e22a7181796a696348cb1a38e9187367d99f107 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Fri, 18 Jan 2019 12:11:26 +0100
-Subject: [PATCH 09/13] arm64: dt: fsl-imx8mq-tqma8mq: restrict reserved mem
+Subject: [PATCH 09/16] arm64: dt: fsl-imx8mq-tqma8mq: restrict reserved mem
  for CMA
 
 module has only 1GiB memory, limit CMA size to 256 MiB
@@ -12,7 +12,7 @@ Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
  1 file changed, 15 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
-index 4352a31ed7bd..263047a1771c 100644
+index 6be8c5085f7c..079741ccd53f 100644
 --- a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
 +++ b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
 @@ -33,6 +33,21 @@

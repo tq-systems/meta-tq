@@ -1,7 +1,7 @@
 From 5ea52a75568b9e1b95845f30fbabcd4dcb69ea1a Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Mon, 21 Jan 2019 13:43:20 +0100
-Subject: [PATCH 01/13] arm64: dt: add support for tqma8mq
+Subject: [PATCH 01/16] arm64: dt: add support for tqma8mq
 
 - baseboard mba8mx
 - SD-Card / e-MMC

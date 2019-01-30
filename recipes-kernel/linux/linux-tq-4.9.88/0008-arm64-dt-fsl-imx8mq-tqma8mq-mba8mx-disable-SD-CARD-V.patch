@@ -1,7 +1,7 @@
-From ad150f8deb1547e13c4866e75fdd759f0e9b6339 Mon Sep 17 00:00:00 2001
+From d0903b365c4d4620cb02750374f0aa7b50570b5c Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Fri, 18 Jan 2019 12:10:05 +0100
-Subject: [PATCH 08/13] arm64: dt: fsl-imx8mq-tqma8mq-mba8mx: disable SD-CARD
+Subject: [PATCH 08/16] arm64: dt: fsl-imx8mq-tqma8mq-mba8mx: disable SD-CARD
  VSELECT
 
 HW issue workaround

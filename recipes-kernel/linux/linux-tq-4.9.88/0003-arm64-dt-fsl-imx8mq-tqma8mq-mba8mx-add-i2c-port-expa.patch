@@ -1,7 +1,7 @@
-From 1c7b990067dd87979a540754f7e2955637ac5738 Mon Sep 17 00:00:00 2001
+From b4d55a6341df7dc3b8e9559f8d2288e54a926f57 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 17 Jan 2019 17:56:24 +0100
-Subject: [PATCH 03/13] arm64: dt: fsl-imx8mq-tqma8mq-mba8mx: add i2c port
+Subject: [PATCH 03/16] arm64: dt: fsl-imx8mq-tqma8mq-mba8mx: add i2c port
  expander
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>

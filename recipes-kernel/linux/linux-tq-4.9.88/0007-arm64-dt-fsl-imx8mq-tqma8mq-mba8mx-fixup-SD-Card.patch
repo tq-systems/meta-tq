@@ -1,7 +1,7 @@
-From 63e73f7bc72ba9c6899863224a2b0002c2b9553b Mon Sep 17 00:00:00 2001
+From f0a48cefc8b49dde3a4cf9e9fe99dc2d5e9f38b9 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 17 Jan 2019 18:02:34 +0100
-Subject: [PATCH 07/13] arm64: dt: fsl-imx8mq-tqma8mq-mba8mx: fixup SD-Card
+Subject: [PATCH 07/16] arm64: dt: fsl-imx8mq-tqma8mq-mba8mx: fixup SD-Card
 
 - fixed regulator
 - no WP

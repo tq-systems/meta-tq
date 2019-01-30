@@ -1,7 +1,7 @@
-From 4e1b79e246247c5b2ec06d44a131b4f4798a33da Mon Sep 17 00:00:00 2001
+From d84c2919af9eddd1bc30016cf0dfe2f3752fcf02 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 17 Jan 2019 18:00:19 +0100
-Subject: [PATCH 05/13] arm64: dt: fsl-imx8mq-tqma8mq: add regulators for e-MMC
+Subject: [PATCH 05/16] arm64: dt: fsl-imx8mq-tqma8mq: add regulators for e-MMC
  device
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
@@ -10,7 +10,7 @@ Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
  1 file changed, 11 insertions(+), 1 deletion(-)
 
 diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
-index ca6d24af5707..4352a31ed7bd 100644
+index da4b72f1ae1c..6be8c5085f7c 100644
 --- a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
 +++ b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
 @@ -25,6 +25,14 @@
