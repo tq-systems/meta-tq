@@ -1,20 +1,7 @@
 require linux-tq-common.inc
 
 SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
-           file://defconfig \
-           file://disable-non-fsl-architecture.cfg \
-           file://disable-non-used-network-devices.cfg \
-           file://optimize-filesystem-selection.cfg \
-           file://disable-bluetooth.cfg \
-           file://disable-efi.cfg \
-           file://usb-serial-port.cfg \
-           file://gpio-enablement.cfg \
-           file://tqma8qx-regulator-support.cfg \
-           file://enable-led-features.cfg \
-           file://tqma8qx-i2c-devices.cfg \
-           file://tqma8qx-input-support.cfg \
            file://tqma8qx-display-support.cfg \
-           file://disable-vivante-galcore.cfg \
            file://0001-arm64-dt-add-support-for-tqma8mq.patch \
            file://0002-arm64-dt-fsl-imx8mq-tqma8mq-add-i2c-eeproms.patch \
            file://0003-arm64-dt-fsl-imx8mq-tqma8mq-mba8mx-add-i2c-port-expa.patch \
