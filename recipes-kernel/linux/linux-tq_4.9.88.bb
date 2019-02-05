@@ -2,6 +2,7 @@ require linux-tq-common.inc
 
 SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
            file://tqma8qx-display-support.cfg \
+           file://tqma8x-network-support.cfg \
            file://0001-arm64-dt-add-support-for-tqma8mq.patch \
            file://0002-arm64-dt-fsl-imx8mq-tqma8mq-add-i2c-eeproms.patch \
            file://0003-arm64-dt-fsl-imx8mq-tqma8mq-mba8mx-add-i2c-port-expa.patch \
