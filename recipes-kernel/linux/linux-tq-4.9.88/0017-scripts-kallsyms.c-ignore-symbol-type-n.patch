@@ -1,0 +1,71 @@
+From 34fb05787856f401a9cfeb5eebe7251098864714 Mon Sep 17 00:00:00 2001
+From: Guenter Roeck <linux@roeck-us.net>
+Date: Fri, 13 Oct 2017 15:57:58 -0700
+Subject: [PATCH 17/17] scripts/kallsyms.c: ignore symbol type 'n'
+
+gcc on aarch64 may emit synbols of type 'n' if the kernel is built with
+'-frecord-gcc-switches'.  In most cases, those symbols are reported with
+nm as
+
+	000000000000000e n $d
+
+and with objdump as
+
+	0000000000000000 l    d  .GCC.command.line	0000000000000000 .GCC.command.line
+	000000000000000e l       .GCC.command.line	0000000000000000 $d
+
+Those symbols are detected in is_arm_mapping_symbol() and ignored.
+However, if "--prefix-symbols=<prefix>" is configured as well, the
+situation is different.  For example, in efi/libstub, arm64 images are
+built with
+
+	'--prefix-alloc-sections=.init --prefix-symbols=__efistub_'.
+
+In combination with '-frecord-gcc-switches', the symbols are now reported
+by nm as:
+
+	000000000000000e n __efistub_$d
+and by objdump as:
+	0000000000000000 l    d  .GCC.command.line	0000000000000000 .GCC.command.line
+	000000000000000e l       .GCC.command.line	0000000000000000 __efistub_$d
+
+Those symbols are no longer ignored and included in the base address
+calculation.  This results in a base address of 000000000000000e, which
+in turn causes kallsyms to abort with
+
+    kallsyms failure:
+	relative symbol value 0xffffff900800a000 out of range in relative mode
+
+The problem is seen in little endian arm64 builds with CONFIG_EFI
+enabled and with '-frecord-gcc-switches' set in KCFLAGS.
+
+Explicitly ignore symbols of type 'n' since those are clearly debug
+symbols.
+
+Link: http://lkml.kernel.org/r/1507136063-3139-1-git-send-email-linux@roeck-us.net
+Signed-off-by: Guenter Roeck <linux@roeck-us.net>
+Acked-by: Ard Biesheuvel <ard.biesheuvel@linaro.org>
+Cc: Josh Poimboeuf <jpoimboe@redhat.com>
+Signed-off-by: Andrew Morton <akpm@linux-foundation.org>
+Signed-off-by: Linus Torvalds <torvalds@linux-foundation.org>
+(cherry picked from commit 51962a9d437f0d580c04cd2c4abc2bd417200da2)
+---
+ scripts/kallsyms.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/scripts/kallsyms.c b/scripts/kallsyms.c
+index 1f22a186c18c..b4ae537db119 100644
+--- a/scripts/kallsyms.c
++++ b/scripts/kallsyms.c
+@@ -159,7 +159,7 @@ static int read_symbol(FILE *in, struct sym_entry *s)
+ 	else if (str[0] == '$')
+ 		return -1;
+ 	/* exclude debugging symbols */
+-	else if (stype == 'N')
++	else if (stype == 'N' || stype == 'n')
+ 		return -1;
+ 
+ 	/* include the type field in the symbol name, so that it gets
+-- 
+2.17.1
+
