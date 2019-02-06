@@ -1,8 +1,8 @@
 From c6fc633a443e6fc803904b80c70c6671a5fef9f5 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 17 Jan 2019 18:01:33 +0100
-Subject: [PATCH 06/16] arm64: dt: fsl-imx8mq-tqma8mq-mba8mx: regulators dont
- need to have a bus
+Subject: [PATCH] arm64: dt: fsl-imx8mq-tqma8mq-mba8mx: regulators dont need to
+ have a bus
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
@@ -41,6 +41,3 @@ index bd961f08ae78..226500f9cebf 100644
  	};
  };
  
--- 
-2.17.1
-

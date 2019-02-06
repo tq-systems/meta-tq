@@ -1,7 +1,7 @@
 From 34fb05787856f401a9cfeb5eebe7251098864714 Mon Sep 17 00:00:00 2001
 From: Guenter Roeck <linux@roeck-us.net>
 Date: Fri, 13 Oct 2017 15:57:58 -0700
-Subject: [PATCH 17/17] scripts/kallsyms.c: ignore symbol type 'n'
+Subject: [PATCH] scripts/kallsyms.c: ignore symbol type 'n'
 
 gcc on aarch64 may emit synbols of type 'n' if the kernel is built with
 '-frecord-gcc-switches'.  In most cases, those symbols are reported with
@@ -66,6 +66,3 @@ index 1f22a186c18c..b4ae537db119 100644
  		return -1;
  
  	/* include the type field in the symbol name, so that it gets
--- 
-2.17.1
-

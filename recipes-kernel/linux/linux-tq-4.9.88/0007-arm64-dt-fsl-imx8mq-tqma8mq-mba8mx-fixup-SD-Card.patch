@@ -1,7 +1,7 @@
 From f0a48cefc8b49dde3a4cf9e9fe99dc2d5e9f38b9 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 17 Jan 2019 18:02:34 +0100
-Subject: [PATCH 07/16] arm64: dt: fsl-imx8mq-tqma8mq-mba8mx: fixup SD-Card
+Subject: [PATCH] arm64: dt: fsl-imx8mq-tqma8mq-mba8mx: fixup SD-Card
 
 - fixed regulator
 - no WP
@@ -40,6 +40,3 @@ index 226500f9cebf..988d9934344d 100644
  	vmmc-supply = <&reg_usdhc2_vmmc>;
  	status = "okay";
  };
--- 
-2.17.1
-

@@ -1,7 +1,7 @@
 From 5c56c4723136be316983b58e69578048c0d1ba13 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 17 Jan 2019 17:58:57 +0100
-Subject: [PATCH 04/16] arm: dt: tqma8mq-mba8mx: add ethernet support
+Subject: [PATCH] arm: dt: tqma8mq-mba8mx: add ethernet support
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
@@ -76,6 +76,3 @@ index bd518406c2cb..bd961f08ae78 100644
  		pinctrl_uart1: uart1grp {
  			fsl,pins = <
  				MX8MQ_IOMUXC_UART1_RXD_UART1_DCE_RX		0x79
--- 
-2.17.1
-

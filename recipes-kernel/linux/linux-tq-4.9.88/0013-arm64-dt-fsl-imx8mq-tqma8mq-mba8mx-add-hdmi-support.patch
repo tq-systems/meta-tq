@@ -1,7 +1,7 @@
 From 4157d719a2aa4f84f58e07d4a2ac1f874f672531 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Mon, 21 Jan 2019 13:37:46 +0100
-Subject: [PATCH 13/16] arm64: dt: fsl-imx8mq-tqma8mq-mba8mx: add hdmi support
+Subject: [PATCH] arm64: dt: fsl-imx8mq-tqma8mq-mba8mx: add hdmi support
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
@@ -88,6 +88,3 @@ index 000000000000..7eb9b67f9424
 +	assigned-clock-rates = <0>, <24576000>;
 +	status = "okay";
 +};
--- 
-2.17.1
-

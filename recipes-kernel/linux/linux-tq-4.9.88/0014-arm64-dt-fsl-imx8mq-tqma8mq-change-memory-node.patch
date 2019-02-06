@@ -1,7 +1,7 @@
 From 98f3041e2442e2c8ddf18e07ce9c24367312379f Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 30 Jan 2019 16:26:11 +0100
-Subject: [PATCH 14/16] arm64: dt: fsl-imx8mq-tqma8mq: change memory node
+Subject: [PATCH] arm64: dt: fsl-imx8mq-tqma8mq: change memory node
 
 use smallest variant planned for TQMa8MQ modules
 while at it, adopt linux,cma node to this setting
@@ -41,6 +41,3 @@ index af9654eaa5a3..3d25c3c802b9 100644
  			linux,cma-default;
  		};
  	};
--- 
-2.17.1
-

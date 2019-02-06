@@ -1,7 +1,7 @@
 From 36debf959b418124faaa18e2867df80458debc38 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 30 Jan 2019 16:29:19 +0100
-Subject: [PATCH 16/16] arm: dt: fsl-imx8mq-tqma8mx: add OPP for CPU cluster
+Subject: [PATCH] arm: dt: fsl-imx8mq-tqma8mx: add OPP for CPU cluster
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
@@ -48,6 +48,3 @@ index 6621af7f44bf..c69e3b82279b 100644
  &gpu {
  	status = "okay";
  };
--- 
-2.17.1
-

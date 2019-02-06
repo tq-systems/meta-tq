@@ -1,8 +1,8 @@
 From 039185030c161c39c8fe3aa50b6d63d6f17d74ae Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 30 Jan 2019 16:52:31 +0100
-Subject: [PATCH 15/16] arm64: dt: fsl-imx8mq-tqma8mq: enable mu but leave
- rpmsg disabled
+Subject: [PATCH] arm64: dt: fsl-imx8mq-tqma8mq: enable mu but leave rpmsg
+ disabled
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
@@ -45,6 +45,3 @@ index 3d25c3c802b9..6621af7f44bf 100644
  &usdhc1 {
  	pinctrl-names = "default", "state_100mhz", "state_200mhz";
  	pinctrl-0 = <&pinctrl_usdhc1>;
--- 
-2.17.1
-
