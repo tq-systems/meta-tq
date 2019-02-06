@@ -43,7 +43,11 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
 SRCBRANCH = "TQMa8xx-bringup-imx_4.9.88_imx8qxp_beta2"
 SRCREV = "ae872be1823271f04aa68dfb158084fff969e79c"
 
-addtask copy_defconfig after do_unpack before do_preconfigure
+#####
+# copies the defconfig from the kernel tree
+# fsl kernel has a do_preconfigure step from fsl-kernel-localversion class
+#####
+addtask copy_defconfig after do_unpack before do_configure
 do_copy_defconfig () {
     install -d ${B}
 
