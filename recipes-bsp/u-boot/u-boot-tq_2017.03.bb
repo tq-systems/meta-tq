@@ -57,6 +57,10 @@ SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branc
            file://0042-board-tqma8mq-update-RAM-timing-for-samsung-2BiB-con.patch \
            file://0043-board-tqma8mq-configure-alternative-mem-test.patch \
            file://0044-arm-dt-fsl-imx8qxp-tqma8qx-mba8qx-fix-RGMII-skew.patch \
+           file://0045-mtd-spi_flash-do-not-call-EN4B-for-4B-address-set.patch \
+           file://0046-arm-dt-fsl-imx8qxp-tqma8qx-increase-QSPI-frequency.patch \
+           file://0047-arm-dt-fsl-imx8qxp-tqma8qxs-mb-smarc-2-enable-qspi.patch \
+           file://0048-arm-dt-fsl-imx8mq-tqma8mq-enable-QSPI.patch \
            "
 
 S = "${WORKDIR}/git"

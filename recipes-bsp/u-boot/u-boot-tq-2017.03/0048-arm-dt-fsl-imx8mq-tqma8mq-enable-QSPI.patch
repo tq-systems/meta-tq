@@ -1,0 +1,33 @@
+From fe164e62e5af2eff71c654673cb9c1b4ecd69a3b Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 7 Feb 2019 16:04:11 +0100
+Subject: [PATCH] arm: dt: fsl-imx8mq-tqma8mq: enable QSPI
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi b/arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi
+index 6be8c5085f..e14ab287f6 100644
+--- a/arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi
++++ b/arch/arm/dts/fsl-imx8mq-tqma8mq.dtsi
+@@ -227,14 +227,14 @@
+ &qspi {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_qspi>;
+-	status = "disabled";
++	status = "okay";
+ 
+-	flash0: n25q256a@0 {
++	flash0: flash@0 {
+ 		reg = <0>;
+ 		#address-cells = <1>;
+ 		#size-cells = <1>;
+-		compatible = "micron,n25q256a";
+-		spi-max-frequency = <29000000>;
++		compatible = "spi-flash";
++		spi-max-frequency = <66000000>;
+ 		spi-nor,ddr-quad-read-dummy = <6>;
+ 	};
+ };
