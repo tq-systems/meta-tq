@@ -1,0 +1,39 @@
+From 3012f511ac5662f5443acb3d046960883eb7afc0 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 30 Jan 2019 16:21:06 +0100
+Subject: [PATCH 42/42] board: tqma8mq: configure alternative mem test
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ include/configs/tqma8mx.h | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/include/configs/tqma8mx.h b/include/configs/tqma8mx.h
+index de56b70e2d..ff3505f240 100644
+--- a/include/configs/tqma8mx.h
++++ b/include/configs/tqma8mx.h
+@@ -250,9 +250,19 @@
+ 
+ #define CONFIG_NR_DRAM_BANKS		1
+ 
++#define CONFIG_CMD_MEMTEST
++#if defined(CONFIG_CMD_MEMTEST)
++/*
++ * Use alternative / extended memtest,
++ * leave 128 MiB free at start
++ * U-Boot is loaded to 0x40200000 (offset 2 MiB)
++ * and relocated at end of configured RAM
++ */
++#define CONFIG_SYS_ALT_MEMTEST
+ #define CONFIG_SYS_MEMTEST_START	(CONFIG_SYS_SDRAM_BASE + SZ_128M)
+-#define CONFIG_SYS_MEMTEST_END		(CONFIG_SYS_MEMTEST_START + SZ_512M)
+-
++#define CONFIG_SYS_MEMTEST_END		(CONFIG_SYS_MEMTEST_START + (PHYS_SDRAM_SIZE / 4) * 3)
++#define CONFIG_SYS_MEMTEST_SCRATCH CONFIG_SYS_MEMTEST_END
++#endif
+ 
+ #define CONFIG_BAUDRATE			115200
+ 
+-- 
+2.17.1
+

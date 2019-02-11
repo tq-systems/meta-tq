@@ -50,6 +50,11 @@ SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branc
            file://0035-tqc-tqc_eeprom-add-spl-support.patch \
            file://0036-board-tqma8mq-support-second-ram-config.patch \
            file://0037-arm-dt-fsl-imx8mq-tqma8mq-fix-eeprom-node-name.patch \
+           file://0038-board-tqma8mx-update-timing-for-micron-2g-config.patch \
+           file://0039-cpu-imx8m-do-not-disable-HDMI-and-DCSS-in-dt_fixup-f.patch \
+           file://0040-HACK-tqma8mq-add-video-support.patch \
+           file://0041-board-tqma8mq-update-RAM-timing-for-samsung-2BiB-con.patch \
+           file://0042-board-tqma8mq-configure-alternative-mem-test.patch \
            "
 
 S = "${WORKDIR}/git"

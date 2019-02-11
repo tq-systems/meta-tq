@@ -1,0 +1,141 @@
+From 34b74f13fcfb80744d69f72e69db003419fe273e Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 28 Jan 2019 14:43:15 +0100
+Subject: [PATCH 38/42] board: tqma8mx: update timing for micron 2g config
+
+new values from register programming aid v21 / mscale stress tool 1.1.x
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8mx/ddr-micron-2g/ddr_init.c    | 11 +++--
+ .../tqc/tqma8mx/ddr-micron-2g/ddrphy_train.c  | 42 +++++++++----------
+ 2 files changed, 29 insertions(+), 24 deletions(-)
+
+diff --git a/board/tqc/tqma8mx/ddr-micron-2g/ddr_init.c b/board/tqc/tqma8mx/ddr-micron-2g/ddr_init.c
+index c71bf09b52..485eae9c07 100644
+--- a/board/tqc/tqma8mx/ddr-micron-2g/ddr_init.c
++++ b/board/tqc/tqma8mx/ddr-micron-2g/ddr_init.c
+@@ -34,6 +34,11 @@ volatile unsigned int tmp, tmp_t, i;
+ void ddr_init_micron_2g(void)
+ {
+ 	/** Initialize DDR clock and DDRC registers **/
++	reg32_write(0x30330234,0x0);
++	reg32_write(0x30330238,0x0);
++	reg32_write(0x3033049c,0xe);
++	reg32_write(0x303304a0,0xe);
++	reg32_write(0x303304f4,0x0);
+ 	reg32_write(0x3038a088,0x7070000);
+ 	reg32_write(0x3038a084,0x4030000);
+ 	reg32_write(0x303a00ec,0xffff);
+@@ -65,7 +70,7 @@ void ddr_init_micron_2g(void)
+ 	reg32_write(0x3d400000,0xa3080020);
+ 	reg32_write(0x3d400028,0x0);
+ 	reg32_write(0x3d400020,0x203);
+-	reg32_write(0x3d400024,0x186a000);
++	reg32_write(0x3d400024,0x3e800);
+ 	reg32_write(0x3d400064,0x6100e0);
+ 	reg32_write(0x3d4000d0,0xc003061c);
+ 	reg32_write(0x3d4000d4,0x9e0000);
+@@ -97,7 +102,7 @@ void ddr_init_micron_2g(void)
+ 	reg32_write(0x3d4001c0,0x1);
+ 	reg32_write(0x3d4001c4,0x1);
+ 	reg32_write(0x3d4000f4,0x639);
+-	reg32_write(0x3d400108,0x70e1214);
++	reg32_write(0x3d400108,0x70e1617);
+ 	reg32_write(0x3d400200,0x16);
+ 	reg32_write(0x3d40020c,0x0);
+ 	reg32_write(0x3d400210,0x1f1f);
+@@ -105,7 +110,7 @@ void ddr_init_micron_2g(void)
+ 	reg32_write(0x3d400214,0x7070707);
+ 	reg32_write(0x3d400218,0xf070707);
+ 	reg32_write(0x3d402020,0x1);
+-	reg32_write(0x3d402024,0x518b00);
++	reg32_write(0x3d402024,0xd0c0);
+ 	reg32_write(0x3d402050,0x20d040);
+ 	reg32_write(0x3d402064,0x14002f);
+ 	reg32_write(0x3d4020dc,0x940009);
+diff --git a/board/tqc/tqma8mx/ddr-micron-2g/ddrphy_train.c b/board/tqc/tqma8mx/ddr-micron-2g/ddrphy_train.c
+index e17b887053..0b9fb030c6 100644
+--- a/board/tqc/tqma8mx/ddr-micron-2g/ddrphy_train.c
++++ b/board/tqc/tqma8mx/ddr-micron-2g/ddrphy_train.c
+@@ -55,9 +55,9 @@ void ddr_cfg_phy_micron_2g(void) {
+ 	reg32_write(0x3c4800b8,0x1);
+ 	reg32_write(0x3c240810,0x0);
+ 	reg32_write(0x3c640810,0x0);
+-	reg32_write(0x3c080090,0xab);
++	reg32_write(0x3c080090,0x1ab);
+ 	reg32_write(0x3c0800e8,0x0);
+-	reg32_write(0x3c480090,0xab);
++	reg32_write(0x3c480090,0x1ab);
+ 	reg32_write(0x3c0800e8,0x0);
+ 	reg32_write(0x3c080158,0x3);
+ 	reg32_write(0x3c480158,0xa);
+@@ -77,22 +77,22 @@ void ddr_cfg_phy_micron_2g(void) {
+ 	reg32_write(0x3c448534,0xe00);
+ 	reg32_write(0x3c44c134,0xe00);
+ 	reg32_write(0x3c44c534,0xe00);
+-	reg32_write(0x3c040124,0xfbe);
+-	reg32_write(0x3c040524,0xfbe);
+-	reg32_write(0x3c044124,0xfbe);
+-	reg32_write(0x3c044524,0xfbe);
+-	reg32_write(0x3c048124,0xfbe);
+-	reg32_write(0x3c048524,0xfbe);
+-	reg32_write(0x3c04c124,0xfbe);
+-	reg32_write(0x3c04c524,0xfbe);
+-	reg32_write(0x3c440124,0xfbe);
+-	reg32_write(0x3c440524,0xfbe);
+-	reg32_write(0x3c444124,0xfbe);
+-	reg32_write(0x3c444524,0xfbe);
+-	reg32_write(0x3c448124,0xfbe);
+-	reg32_write(0x3c448524,0xfbe);
+-	reg32_write(0x3c44c124,0xfbe);
+-	reg32_write(0x3c44c524,0xfbe);
++	reg32_write(0x3c040124,0xeba);
++	reg32_write(0x3c040524,0xeba);
++	reg32_write(0x3c044124,0xeba);
++	reg32_write(0x3c044524,0xeba);
++	reg32_write(0x3c048124,0xeba);
++	reg32_write(0x3c048524,0xeba);
++	reg32_write(0x3c04c124,0xeba);
++	reg32_write(0x3c04c524,0xeba);
++	reg32_write(0x3c440124,0xeba);
++	reg32_write(0x3c440524,0xeba);
++	reg32_write(0x3c444124,0xeba);
++	reg32_write(0x3c444524,0xeba);
++	reg32_write(0x3c448124,0xeba);
++	reg32_write(0x3c448524,0xeba);
++	reg32_write(0x3c44c124,0xeba);
++	reg32_write(0x3c44c524,0xeba);
+ 	reg32_write(0x3c00010c,0x63);
+ 	reg32_write(0x3c00410c,0x63);
+ 	reg32_write(0x3c00810c,0x63);
+@@ -154,7 +154,7 @@ void ddr_cfg_phy_micron_2g(void) {
+ 
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54003,0xc80);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54004,0x2);
+-	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54005,0x1e28);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54005,0x2228);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54006,0x11);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54008,0x131f);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54009,0xc8);
+@@ -231,7 +231,7 @@ void ddr_cfg_phy_micron_2g(void) {
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54002,0x1);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54003,0x29c);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54004,0x2);
+-	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54005,0x1e28);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54005,0x2228);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54006,0x11);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54008,0x121f);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54009,0xc8);
+@@ -306,7 +306,7 @@ void ddr_cfg_phy_micron_2g(void) {
+ 
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54003,0xc80);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54004,0x2);
+-	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54005,0x1e28);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54005,0x2228);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54006,0x11);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54008,0x61);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54009,0xc8);
+-- 
+2.17.1
+

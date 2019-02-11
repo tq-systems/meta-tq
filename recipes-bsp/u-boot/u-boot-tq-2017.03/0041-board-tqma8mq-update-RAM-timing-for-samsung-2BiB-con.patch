@@ -1,0 +1,214 @@
+From ad51878d10a0100b987f4bb1c017f3cbe09cfa2d Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 30 Jan 2019 15:48:02 +0100
+Subject: [PATCH 41/42] board: tqma8mq: update RAM timing for samsung 2BiB
+ config
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8mx/ddr-samsung-2g/ddr_init.c   | 21 ++++---
+ .../tqc/tqma8mx/ddr-samsung-2g/ddrphy_train.c | 61 +++++++++++++++----
+ 2 files changed, 61 insertions(+), 21 deletions(-)
+
+diff --git a/board/tqc/tqma8mx/ddr-samsung-2g/ddr_init.c b/board/tqc/tqma8mx/ddr-samsung-2g/ddr_init.c
+index d033979b6f..a9ec711256 100644
+--- a/board/tqc/tqma8mx/ddr-samsung-2g/ddr_init.c
++++ b/board/tqc/tqma8mx/ddr-samsung-2g/ddr_init.c
+@@ -34,6 +34,11 @@ volatile unsigned int tmp, tmp_t, i;
+ void ddr_init_samsung_2g(void)
+ {
+ 	/** Initialize DDR clock and DDRC registers **/
++	reg32_write(0x30330234,0x0);
++	reg32_write(0x30330238,0x0);
++	reg32_write(0x3033049c,0xe);
++	reg32_write(0x303304a0,0xe);
++	reg32_write(0x303304f4,0x0);
+ 	reg32_write(0x3038a088,0x7070000);
+ 	reg32_write(0x3038a084,0x4030000);
+ 	reg32_write(0x303a00ec,0xffff);
+@@ -62,10 +67,10 @@ void ddr_init_samsung_2g(void)
+ 	reg32_write(0x30391000,0x8f000006);
+ 	reg32_write(0x3d400304,0x1);
+ 	reg32_write(0x3d400030,0x1);
+-	reg32_write(0x3d400000,0xa1081020);
++	reg32_write(0x3d400000,0xa1080020);
+ 	reg32_write(0x3d400028,0x0);
+ 	reg32_write(0x3d400020,0x203);
+-	reg32_write(0x3d400024,0x186a000);
++	reg32_write(0x3d400024,0x3e800);
+ 	reg32_write(0x3d400064,0x6100e0);
+ 	reg32_write(0x3d4000d0,0xc003061c);
+ 	reg32_write(0x3d4000d4,0x9e0000);
+@@ -97,15 +102,15 @@ void ddr_init_samsung_2g(void)
+ 	reg32_write(0x3d4001c0,0x1);
+ 	reg32_write(0x3d4001c4,0x1);
+ 	reg32_write(0x3d4000f4,0x639);
+-	reg32_write(0x3d400108,0x70e1214);
++	reg32_write(0x3d400108,0x70e1617);
+ 	reg32_write(0x3d400200,0x1f);
+-	reg32_write(0x3d40020c,0x1f000000);
++	reg32_write(0x3d40020c,0x0);
+ 	reg32_write(0x3d400210,0x1f1f);
+-	reg32_write(0x3d400204,0x70707);
+-	reg32_write(0x3d400214,0x6060606);
+-	reg32_write(0x3d400218,0x6060606);
++	reg32_write(0x3d400204,0x80808);
++	reg32_write(0x3d400214,0x7070707);
++	reg32_write(0x3d400218,0x7070707);
+ 	reg32_write(0x3d402020,0x1);
+-	reg32_write(0x3d402024,0x518b00);
++	reg32_write(0x3d402024,0xd0c0);
+ 	reg32_write(0x3d402050,0x20d040);
+ 	reg32_write(0x3d402064,0x14002f);
+ 	reg32_write(0x3d4020dc,0x940009);
+diff --git a/board/tqc/tqma8mx/ddr-samsung-2g/ddrphy_train.c b/board/tqc/tqma8mx/ddr-samsung-2g/ddrphy_train.c
+index fb919a6041..04088e952c 100644
+--- a/board/tqc/tqma8mx/ddr-samsung-2g/ddrphy_train.c
++++ b/board/tqc/tqma8mx/ddr-samsung-2g/ddrphy_train.c
+@@ -27,10 +27,18 @@ void ddr_cfg_phy_samsung_2g(void) {
+ 	reg32_write(0x3c04057c,0x1ff);
+ 	reg32_write(0x3c04417c,0x1ff);
+ 	reg32_write(0x3c04457c,0x1ff);
++	reg32_write(0x3c04817c,0x1ff);
++	reg32_write(0x3c04857c,0x1ff);
++	reg32_write(0x3c04c17c,0x1ff);
++	reg32_write(0x3c04c57c,0x1ff);
+ 	reg32_write(0x3c44017c,0x1ff);
+ 	reg32_write(0x3c44057c,0x1ff);
+ 	reg32_write(0x3c44417c,0x1ff);
+ 	reg32_write(0x3c44457c,0x1ff);
++	reg32_write(0x3c44817c,0x1ff);
++	reg32_write(0x3c44857c,0x1ff);
++	reg32_write(0x3c44c17c,0x1ff);
++	reg32_write(0x3c44c57c,0x1ff);
+ 	reg32_write(0x3c000154,0x1ff);
+ 	reg32_write(0x3c004154,0x1ff);
+ 	reg32_write(0x3c008154,0x1ff);
+@@ -47,9 +55,9 @@ void ddr_cfg_phy_samsung_2g(void) {
+ 	reg32_write(0x3c4800b8,0x1);
+ 	reg32_write(0x3c240810,0x0);
+ 	reg32_write(0x3c640810,0x0);
+-	reg32_write(0x3c080090,0xab);
++	reg32_write(0x3c080090,0x1ab);
+ 	reg32_write(0x3c0800e8,0x0);
+-	reg32_write(0x3c480090,0xab);
++	reg32_write(0x3c480090,0x1ab);
+ 	reg32_write(0x3c0800e8,0x0);
+ 	reg32_write(0x3c080158,0x3);
+ 	reg32_write(0x3c480158,0xa);
+@@ -57,18 +65,34 @@ void ddr_cfg_phy_samsung_2g(void) {
+ 	reg32_write(0x3c040534,0xe00);
+ 	reg32_write(0x3c044134,0xe00);
+ 	reg32_write(0x3c044534,0xe00);
++	reg32_write(0x3c048134,0xe00);
++	reg32_write(0x3c048534,0xe00);
++	reg32_write(0x3c04c134,0xe00);
++	reg32_write(0x3c04c534,0xe00);
+ 	reg32_write(0x3c440134,0xe00);
+ 	reg32_write(0x3c440534,0xe00);
+ 	reg32_write(0x3c444134,0xe00);
+ 	reg32_write(0x3c444534,0xe00);
+-	reg32_write(0x3c040124,0xfbe);
+-	reg32_write(0x3c040524,0xfbe);
+-	reg32_write(0x3c044124,0xfbe);
+-	reg32_write(0x3c044524,0xfbe);
+-	reg32_write(0x3c440124,0xfbe);
+-	reg32_write(0x3c440524,0xfbe);
+-	reg32_write(0x3c444124,0xfbe);
+-	reg32_write(0x3c444524,0xfbe);
++	reg32_write(0x3c448134,0xe00);
++	reg32_write(0x3c448534,0xe00);
++	reg32_write(0x3c44c134,0xe00);
++	reg32_write(0x3c44c534,0xe00);
++	reg32_write(0x3c040124,0xeba);
++	reg32_write(0x3c040524,0xeba);
++	reg32_write(0x3c044124,0xeba);
++	reg32_write(0x3c044524,0xeba);
++	reg32_write(0x3c048124,0xeba);
++	reg32_write(0x3c048524,0xeba);
++	reg32_write(0x3c04c124,0xeba);
++	reg32_write(0x3c04c524,0xeba);
++	reg32_write(0x3c440124,0xeba);
++	reg32_write(0x3c440524,0xeba);
++	reg32_write(0x3c444124,0xeba);
++	reg32_write(0x3c444524,0xeba);
++	reg32_write(0x3c448124,0xeba);
++	reg32_write(0x3c448524,0xeba);
++	reg32_write(0x3c44c124,0xeba);
++	reg32_write(0x3c44c524,0xeba);
+ 	reg32_write(0x3c00010c,0x63);
+ 	reg32_write(0x3c00410c,0x63);
+ 	reg32_write(0x3c00810c,0x63);
+@@ -94,10 +118,15 @@ void ddr_cfg_phy_samsung_2g(void) {
+ 	reg32_write(0x3c04850c,0x5a1);
+ 	reg32_write(0x3c04c10c,0x5a1);
+ 	reg32_write(0x3c04c50c,0x5a1);
++	reg32_write(0x3c4802c8,0xdc);
+ 	reg32_write(0x3c44010c,0x5a1);
+ 	reg32_write(0x3c44050c,0x5a1);
+ 	reg32_write(0x3c44410c,0x5a1);
+ 	reg32_write(0x3c44450c,0x5a1);
++	reg32_write(0x3c44810c,0x5a1);
++	reg32_write(0x3c44850c,0x5a1);
++	reg32_write(0x3c44c10c,0x5a1);
++	reg32_write(0x3c44c50c,0x5a1);
+ 	reg32_write(0x3c0803e8,0x1);
+ 	reg32_write(0x3c4803e8,0x1);
+ 	reg32_write(0x3c080064,0x1);
+@@ -125,7 +154,7 @@ void ddr_cfg_phy_samsung_2g(void) {
+ 
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54003,0xc80);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54004,0x2);
+-	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54005,0x1e28);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54005,0x2228);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54006,0x11);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54008,0x131f);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54009,0xc8);
+@@ -142,6 +171,8 @@ void ddr_cfg_phy_samsung_2g(void) {
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54021,0x4a66);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54022,0x4a08);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54024,0x16);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5402b,0x1000);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5402c,0x1);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54032,0xd400);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54033,0x312d);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54034,0x6600);
+@@ -200,7 +231,7 @@ void ddr_cfg_phy_samsung_2g(void) {
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54002,0x1);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54003,0x29c);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54004,0x2);
+-	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54005,0x1e28);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54005,0x2228);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54006,0x11);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54008,0x121f);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54009,0xc8);
+@@ -217,6 +248,8 @@ void ddr_cfg_phy_samsung_2g(void) {
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54021,0x4a66);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54022,0x4a08);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54024,0x16);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5402b,0x1000);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5402c,0x1);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54032,0x9400);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54033,0x3109);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54034,0x6600);
+@@ -273,7 +306,7 @@ void ddr_cfg_phy_samsung_2g(void) {
+ 
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54003,0xc80);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54004,0x2);
+-	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54005,0x1e28);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54005,0x2228);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54006,0x11);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54008,0x61);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54009,0xc8);
+@@ -291,6 +324,8 @@ void ddr_cfg_phy_samsung_2g(void) {
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54021,0x4a66);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54022,0x4a08);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54024,0x16);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5402b,0x1000);
++	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x5402c,0x1);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54032,0xd400);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54033,0x312d);
+ 	reg32_write(IP2APB_DDRPHY_IPS_BASE_ADDR(0) + 4 * 0x54034,0x6600);
+-- 
+2.17.1
+
