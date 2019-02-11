@@ -1,7 +1,7 @@
 From 626645eafb8d527da99ab13333768d7f8d7e0cbc Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 24 Jan 2019 14:36:56 +0100
-Subject: [PATCH 35/37] tqc: tqc_eeprom: add spl support
+Subject: [PATCH] tqc: tqc_eeprom: add spl support
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
@@ -131,6 +131,3 @@ index 7e7962959b..f78dd7cd37 100644
 +#endif /* CONFIG_SPL_BUILD */
  
  #endif
--- 
-2.17.1
-

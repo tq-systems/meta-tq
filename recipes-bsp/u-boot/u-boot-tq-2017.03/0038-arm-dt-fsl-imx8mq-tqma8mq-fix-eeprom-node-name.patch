@@ -1,7 +1,7 @@
 From 55ac3999ef19969ee62533f7b63f588e56821f31 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 24 Jan 2019 18:01:48 +0100
-Subject: [PATCH 37/37] arm: dt: fsl-imx8mq-tqma8mq: fix eeprom node name
+Subject: [PATCH] arm: dt: fsl-imx8mq-tqma8mq: fix eeprom node name
 
 keep node address and name in sync
 
@@ -23,6 +23,3 @@ index 4352a31ed7..6be8c5085f 100644
  		compatible = "atmel,24c02";
  		reg = <0x51>;
  		pagesize = <16>;
--- 
-2.17.1
-

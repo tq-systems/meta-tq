@@ -1,7 +1,7 @@
 From 165d3045bdb9f52b3c029a4e13355a8868fd2591 Mon Sep 17 00:00:00 2001
 From: Max Merchel <Max.Merchel@tq-group.com>
 Date: Fri, 23 Nov 2018 09:48:33 +0100
-Subject: [PATCH 31/37] tq common: eeprom: update header
+Subject: [PATCH] tq common: eeprom: update header
 
 Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
 (cherry picked from commit 153359707477027268ad258ff33580c58cf240f5)
@@ -41,6 +41,3 @@ index 119456ec62..42fd0a5e31 100644
   */
  
  #ifndef __TQC_EEPROM_H__
--- 
-2.17.1
-

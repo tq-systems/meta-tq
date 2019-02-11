@@ -1,8 +1,8 @@
 From a2ee09bb6d365d5024ff46a49dfa56e5164b9ce2 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 24 Jan 2019 15:10:53 +0100
-Subject: [PATCH 34/37] tqc: tqc_eeprom: remove CONFIG_SYS_I2C_EEPROM_ADDR_LEN
- from generic read
+Subject: [PATCH] tqc: tqc_eeprom: remove CONFIG_SYS_I2C_EEPROM_ADDR_LEN from
+ generic read
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
@@ -80,6 +80,3 @@ index 52a88c283c..7e7962959b 100644
 +#endif
  
  #endif
--- 
-2.17.1
-

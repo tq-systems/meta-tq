@@ -1,8 +1,7 @@
 From d4de2f100f72b9e213b426ba6b36fa42a7e6c852 Mon Sep 17 00:00:00 2001
 From: Ye Li <ye.li@nxp.com>
 Date: Mon, 10 Sep 2018 20:22:52 -0700
-Subject: [PATCH 28/37] MLK-19526-1 imx8mq: Add CPU ID for iMX8MD and
- iMX8MQLite
+Subject: [PATCH] MLK-19526-1 imx8mq: Add CPU ID for iMX8MD and iMX8MQLite
 
 iMX8MQ has two variant versions: iMX8MD and iMX8MQLite. Add dummy CPU ID
 for these two, and check the fuses to get correct versions.
@@ -394,6 +393,3 @@ index 431e297145..f37b9d47b6 100644
  #define is_imx8qm() (is_cpu_type(MXC_CPU_IMX8QM))
  #define is_imx8qxp() (is_cpu_type(MXC_CPU_IMX8QXP))
  #define is_imx8dx() (is_cpu_type(MXC_CPU_IMX8DX))
--- 
-2.17.1
-

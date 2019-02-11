@@ -1,7 +1,7 @@
 From 29351eca8445762c7706e03353f6ec9f017add62 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 17 Jan 2019 15:31:38 +0100
-Subject: [PATCH 07/37] imx8: tqma8qx / tqma8qxs: fix Kconfig default selects
+Subject: [PATCH] imx8: tqma8qx / tqma8qxs: fix Kconfig default selects
 
 remove CONFIG_ prefix added by accident
 
@@ -59,6 +59,3 @@ index 029a25ee6a..9699a6d76e 100644
  choice
  	prompt "TQMa8QX base board variant"
  	default MBA8QX
--- 
-2.17.1
-

@@ -1,8 +1,7 @@
 From df913e5ccd1d24f2cddaf6a90ad7490a1a20f16a Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Tue, 15 Jan 2019 12:50:39 +0100
-Subject: [PATCH 12/37] boards: tqma8mx: prepare config header for gpio port
- expander
+Subject: [PATCH] boards: tqma8mx: prepare config header for gpio port expander
 
 this needs some tweaking in the config settings to separate between
 SPL and U-Boot
@@ -112,6 +111,3 @@ index 1bb62bc55a..d06e581efa 100644
  
  /* USB configs */
  #ifndef CONFIG_SPL_BUILD
--- 
-2.17.1
-

@@ -1,7 +1,7 @@
 From 14d23644e272f0cfacfe526c70201d384454bd95 Mon Sep 17 00:00:00 2001
 From: Ye Li <ye.li@nxp.com>
 Date: Mon, 3 Sep 2018 00:44:31 -0700
-Subject: [PATCH 26/37] MLK-19433-1 imx: Add macro for chip rev 2.1
+Subject: [PATCH] MLK-19433-1 imx: Add macro for chip rev 2.1
 
 Add common CHIP_REV_2_1 for chip revision 2.1
 
@@ -24,6 +24,3 @@ index 3bc08e4ee6..dd392a1233 100644
  #define CHIP_REV_2_5            0x25
  #define CHIP_REV_3_0            0x30
  
--- 
-2.17.1
-

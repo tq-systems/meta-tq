@@ -1,7 +1,7 @@
 From 71a1ba4f137f9d11b5b9d171efb4983259a2b4c0 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 24 Jan 2019 10:24:56 +0100
-Subject: [PATCH 27/37] arch-imx8m: add defines for ROM Version
+Subject: [PATCH] arch-imx8m: add defines for ROM Version
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
@@ -21,6 +21,3 @@ index f424afde28..f3c1c53b0f 100644
  
  #define M4_BOOTROM_BASE_ADDR	0x007E0000
  
--- 
-2.17.1
-

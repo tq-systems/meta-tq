@@ -1,7 +1,7 @@
 From 67b91aafd549839f66ef5116cd6ff71ad3f34c8b Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 17 Jan 2019 09:57:08 +0100
-Subject: [PATCH 17/37] boards: tqma8mx-mba8mx: enable net support per config
+Subject: [PATCH] boards: tqma8mx-mba8mx: enable net support per config
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
@@ -72,6 +72,3 @@ index 54958cfac5..9226fff01f 100644
  #if !defined(CONFIG_SPL_BUILD)
  #define CONFIG_DM_GPIO
  #define CONFIG_DM_PCA953X
--- 
-2.17.1
-

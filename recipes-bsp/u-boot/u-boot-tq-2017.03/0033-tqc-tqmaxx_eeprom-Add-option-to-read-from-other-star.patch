@@ -1,8 +1,8 @@
 From 4d500050f865693722d4873ca5669d426d3eaaa8 Mon Sep 17 00:00:00 2001
 From: Max Merchel <Max.Merchel@tq-group.com>
 Date: Mon, 14 Jan 2019 17:00:48 +0100
-Subject: [PATCH 32/37] tqc: tqmaxx_eeprom: Add option to read from other
- starting value
+Subject: [PATCH] tqc: tqmaxx_eeprom: Add option to read from other starting
+ value
 
 Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
 (cherry picked from commit 1eb4c73789e537e215dd246cc97e854956ecb4c5)
@@ -25,6 +25,3 @@ index 42fd0a5e31..52a88c283c 100644
  int tqc_read_eeprom(unsigned int bus, unsigned int addr,
  		    struct tqc_eeprom_data *eeprom);
  
--- 
-2.17.1
-

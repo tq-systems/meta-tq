@@ -1,7 +1,7 @@
 From f4b18df98f1de21ecd3a9b15e1d481ece866051a Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 24 Jan 2019 10:27:22 +0100
-Subject: [PATCH 29/37] tqma8mql: add 2 GiB variant
+Subject: [PATCH] tqma8mql: add 2 GiB variant
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
@@ -116,6 +116,3 @@ index ba23f85028..b69c12fde3 100644
  #define CONFIG_NR_DRAM_BANKS		1
  
  #define CONFIG_SYS_MEMTEST_START	(CONFIG_SYS_SDRAM_BASE + SZ_128M)
--- 
-2.17.1
-

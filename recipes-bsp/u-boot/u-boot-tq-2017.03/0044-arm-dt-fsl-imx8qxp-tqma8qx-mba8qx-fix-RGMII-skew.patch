@@ -1,0 +1,38 @@
+From ad11c714f2375c44e7f8694aa2a89f27d6301edd Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 6 Feb 2019 15:13:36 +0100
+Subject: [PATCH] arm: dt: fsl-imx8qxp-tqma8qx-mba8qx: fix RGMII skew
+
+fixes Jira TQMA8XX-43
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts b/arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts
+index 71a45ebb09..d031591f29 100644
+--- a/arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts
+@@ -175,8 +175,8 @@
+ 		ethphy0: ethernet-phy@0 {
+ 			compatible = "ethernet-phy-ieee802.3-c22";
+ 			reg = <0>;
+-			ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
+-			ti,tx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
++			ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_25_NS>;
++			ti,tx-internal-delay = <DP83867_RGMIIDCTL_2_25_NS>;
+ 			ti,dp83867-rxctrl-strap-quirk;
+ 			ti,led-function = <0xc100>; /* LED1: Link, LED2: activity */
+ 			ti,led-ctrl = <0x1001>;     /* active low, LED1/2 driven by phy */
+@@ -185,8 +185,8 @@
+ 		ethphy3: ethernet-phy@3 {
+ 			compatible = "ethernet-phy-ieee802.3-c22";
+ 			reg = <3>;
+-			ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
+-			ti,tx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
++			ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_25_NS>;
++			ti,tx-internal-delay = <DP83867_RGMIIDCTL_2_25_NS>;
+ 			ti,dp83867-rxctrl-strap-quirk;
+ 			ti,led-function = <0xc100>; /* LED1: Link, LED2: activity */
+ 			ti,led-ctrl = <0x1001>;     /* active low, LED1/2 driven by phy */

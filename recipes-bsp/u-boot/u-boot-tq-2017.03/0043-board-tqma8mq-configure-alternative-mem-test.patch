@@ -1,7 +1,7 @@
 From 3012f511ac5662f5443acb3d046960883eb7afc0 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 30 Jan 2019 16:21:06 +0100
-Subject: [PATCH 42/42] board: tqma8mq: configure alternative mem test
+Subject: [PATCH] board: tqma8mq: configure alternative mem test
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
@@ -34,6 +34,3 @@ index de56b70e2d..ff3505f240 100644
  
  #define CONFIG_BAUDRATE			115200
  
--- 
-2.17.1
-

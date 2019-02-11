@@ -1,8 +1,8 @@
 From 0b620e7fe57e291abaf49e04049bb7f59c93d2d3 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Tue, 15 Jan 2019 12:30:30 +0100
-Subject: [PATCH 05/37] power: pmic-uclass: allow selection of
- CONFIG_PMIC_CHILDREN via config header
+Subject: [PATCH] power: pmic-uclass: allow selection of CONFIG_PMIC_CHILDREN
+ via config header
 
 temporary workaround to enable devicetree setup in u-boot for other I2C drivers
 
@@ -24,6 +24,3 @@ index 0f7fa517f9..5bdcf496e0 100644
  int pmic_bind_children(struct udevice *pmic, int offset,
  		       const struct pmic_child_info *child_info)
  {
--- 
-2.17.1
-

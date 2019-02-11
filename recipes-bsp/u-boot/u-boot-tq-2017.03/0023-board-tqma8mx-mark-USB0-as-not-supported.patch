@@ -1,7 +1,7 @@
 From 88219f3f78c0196905ced25b38fb404ae50590dd Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Fri, 18 Jan 2019 10:08:53 +0100
-Subject: [PATCH 23/37] board: tqma8mx: mark USB0 as not supported
+Subject: [PATCH] board: tqma8mx: mark USB0 as not supported
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
@@ -47,6 +47,3 @@ index e71423477c..804a8cc258 100644
  	if (index == 0 && init == USB_INIT_DEVICE) {
  		dwc3_uboot_exit(index);
  	} else if (index == 0 && init == USB_INIT_HOST) {
--- 
-2.17.1
-

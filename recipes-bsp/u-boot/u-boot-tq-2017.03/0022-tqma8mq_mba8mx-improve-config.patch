@@ -1,7 +1,7 @@
 From 2635f5d000ca60abd4b53a4b13909be0ad86065d Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 17 Jan 2019 17:28:52 +0100
-Subject: [PATCH 22/37] tqma8mq_mba8mx: improve config
+Subject: [PATCH] tqma8mq_mba8mx: improve config
 
 move more things to defconfig
 
@@ -95,6 +95,3 @@ index d06e581efa..5a1571d76e 100644
  
  #define CONFIG_USB_DWC3
  #define CONFIG_USB_DWC3_GADGET
--- 
-2.17.1
-

@@ -1,7 +1,7 @@
 From 673d9b1654790d9d301b44a8186b9013cc0bab31 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 16 Jan 2019 10:44:14 +0100
-Subject: [PATCH 10/37] board: tqma8mx: split spl in module and mainboard part
+Subject: [PATCH] board: tqma8mx: split spl in module and mainboard part
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
@@ -300,6 +300,3 @@ index 599c77d8fb..5b305a37bd 100644
  int tqc_bb_board_early_init_f(void)
  {
  	struct wdog_regs *wdog = (struct wdog_regs *)WDOG1_BASE_ADDR;
--- 
-2.17.1
-

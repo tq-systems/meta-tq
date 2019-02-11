@@ -1,7 +1,7 @@
 From dc09993b5bb3087987ce92072eb8c5ea264918bb Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 24 Jan 2019 10:27:59 +0100
-Subject: [PATCH 40/42] HACK: tqma8mq: add video support
+Subject: [PATCH] HACK: tqma8mq: add video support
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
@@ -100,6 +100,3 @@ index 9226fff01f..ec5991cba2 100644
 +#endif
 +
  #endif /* __TQMA8MX_MBA8MX_H */
--- 
-2.17.1
-
