@@ -2,12 +2,14 @@
 DESCRIPTION = "u-boot for TQ-Group NXP i.MX8xX based modules"
 
 require recipes-bsp/u-boot/u-boot.inc
+inherit pythonnative
+
+PROVIDES += "u-boot"
+DEPENDS_append = " python dtc-native bc-native"
+
 
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
-
-PROVIDES += "u-boot"
-DEPENDS_append = " dtc-native bc-native"
 
 SRCREV = "0776ee377dca253eaf13c8301d9bfdfe3cf04a07"
 SRCBRANCH = "TQMa8xx-bringup-imx_v2017.03_4.9.88_imx8qxp_beta2"
@@ -69,7 +71,7 @@ S = "${WORKDIR}/git"
 
 BOOT_TOOLS = "imx-boot-tools"
 
-do_deploy_append_mx8mq () {
+do_deploy_append_mx8m () {
     # Deploy the mkimage, u-boot-nodtb.bin and fsl-imx8mq-XX.dtb for mkimage to generate boot binary
     if [ -n "${UBOOT_CONFIG}" ]
     then
@@ -82,7 +84,7 @@ do_deploy_append_mx8mq () {
                     install -d ${DEPLOYDIR}/${BOOT_TOOLS}
                     install -m 0777 ${B}/${config}/arch/arm/dts/${UBOOT_DTB_NAME}  ${DEPLOYDIR}/${BOOT_TOOLS}
                     install -m 0777 ${B}/${config}/tools/mkimage  ${DEPLOYDIR}/${BOOT_TOOLS}/mkimage_uboot
-                    install -m 0777 ${B}/${config}/u-boot-nodtb.bin  ${DEPLOYDIR}/${BOOT_TOOLS}
+                    install -m 0777 ${B}/${config}/u-boot-nodtb.bin  ${DEPLOYDIR}/${BOOT_TOOLS}/u-boot-nodtb.bin-${MACHINE}-${UBOOT_CONFIG}
                 fi
             done
             unset  j
