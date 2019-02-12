@@ -61,6 +61,8 @@ SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branc
            file://0046-arm-dt-fsl-imx8qxp-tqma8qx-increase-QSPI-frequency.patch \
            file://0047-arm-dt-fsl-imx8qxp-tqma8qxs-mb-smarc-2-enable-qspi.patch \
            file://0048-arm-dt-fsl-imx8mq-tqma8mq-enable-QSPI.patch \
+           file://0049-Pass-empty-CFLAGS-on-invocation-of-libfdt-setup.py.patch \
+           file://0050-tools-allow-to-override-python.patch \
            "
 
 S = "${WORKDIR}/git"
