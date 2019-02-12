@@ -7,6 +7,9 @@ MACHINEOVERRIDES =. "ls102xa:"
 DEFAULTTUNE ?= "cortexa7thf-neon"
 require conf/machine/include/tune-cortexa7.inc
 
+# Don't include kernels in standard images
+RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
+
 # TQ u-boot and kernel
 #
 require conf/machine/include/tqmxx.inc

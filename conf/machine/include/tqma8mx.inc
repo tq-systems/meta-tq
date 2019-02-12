@@ -5,7 +5,7 @@ MACHINEOVERRIDES =. "mx8:mx8m:mx8mq:"
 require conf/machine/include/arm/arch-arm64.inc
 
 # Don't include kernels in standard images
-RDEPENDS_kernel-base = ""
+RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
 
 LOADADDR = ""
 

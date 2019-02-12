@@ -28,6 +28,9 @@ UBOOT_MAKE_TARGET ?= "u-boot.imx"
 EXTRA_IMAGEDEPENDS += "u-boot"
 IMAGE_FSTYPES ?= "tar.gz ext4 wic ubi"
 
+# Don't include kernels in standard images
+RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
+
 DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
 
 # needed for Rootfs on QSPI

@@ -8,6 +8,9 @@ require conf/machine/include/tune-cortexa9.inc
 MACHINE_EXTRA_RRECOMMENDS = " kernel-modules kernel-devicetree"
 MACHINE_FEATURES_append = " alsa ext2 pci rtc serial usbhost vfat"
 
+# Don't include kernels in standard images
+RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
+
 # TQ u-boot and kernel
 #
 require conf/machine/include/tqmxx.inc
