@@ -43,6 +43,6 @@ IMAGE_BOOT_FILES ?= "\
 	MLO u-boot.img \
 "
 
-SERIAL_CONSOLES ?= "115200;ttyO2"
+SERIAL_CONSOLES ?= "115200;ttyS2"
 
 WKS_FILE ?= "tqma57xx-sdimg.wks"
