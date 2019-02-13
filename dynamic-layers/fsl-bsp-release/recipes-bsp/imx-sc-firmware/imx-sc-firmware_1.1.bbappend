@@ -9,3 +9,6 @@ SC_FIRMWARE_NAME_tqma8qx-mba8qx = "mx8qx-tqma8qx-mba8qx-scfw-tcm.bin"
 
 # TODO: need own firmware later ...
 SC_FIRMWARE_NAME_tqma8qxs-mb-smarc-2 = "mx8qx-tqma8qx-mba8qx-scfw-tcm.bin"
+
+# temporary workaround
+S = "${WORKDIR}/${PN}-0.7"
