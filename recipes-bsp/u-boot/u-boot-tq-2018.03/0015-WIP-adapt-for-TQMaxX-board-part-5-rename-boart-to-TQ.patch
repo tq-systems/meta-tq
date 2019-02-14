@@ -1,0 +1,276 @@
+From 0d8f7b880ddeefc6b968f35323d207e71b0696a5 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 27 Sep 2018 15:00:17 +0200
+Subject: [PATCH] WIP: adapt for TQMaxX board part 5 - rename boart to TQMa8QX
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/Makefile                         |  2 +-
+ ...xp-tqmtest.dts => fsl-imx8qxp-tqma8qx.dts} |  6 +--
+ arch/arm/mach-imx/imx8/Kconfig                |  5 ++-
+ board/freescale/{tqmtest => tqma8qx}/Kconfig  |  6 +--
+ board/freescale/tqma8qx/Makefile              |  7 ++++
+ .../imx8qxp_mek.c => tqma8qx/tqma8qx.c}       | 42 ++-----------------
+ board/freescale/tqmtest/Makefile              |  7 ----
+ .../{tqmtest_defconfig => tqma8qx_defconfig}  |  4 +-
+ include/configs/{tqmtest.h => tqma8qx.h}      | 10 +----
+ 9 files changed, 23 insertions(+), 66 deletions(-)
+ rename arch/arm/dts/{fsl-imx8qxp-tqmtest.dts => fsl-imx8qxp-tqma8qx.dts} (98%)
+ rename board/freescale/{tqmtest => tqma8qx}/Kconfig (69%)
+ create mode 100644 board/freescale/tqma8qx/Makefile
+ rename board/freescale/{tqmtest/imx8qxp_mek.c => tqma8qx/tqma8qx.c} (89%)
+ delete mode 100644 board/freescale/tqmtest/Makefile
+ rename configs/{tqmtest_defconfig => tqma8qx_defconfig} (93%)
+ rename include/configs/{tqmtest.h => tqma8qx.h} (97%)
+
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 073028b52c..2ee33a99ef 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -477,7 +477,7 @@ dtb-$(CONFIG_ARCH_IMX8) += fsl-imx8dx-ddr3-arm2.dtb \
+ 		fsl-imx8qm-mek-xen.dtb \
+ 		fsl-imx8qxp-lpddr4-arm2.dtb \
+ 		fsl-imx8qxp-mek.dtb \
+-		fsl-imx8qxp-tqmtest.dtb \
++		fsl-imx8qxp-tqma8qx.dtb \
+ 		fsl-imx8qxp-tqma8xx-mba8xx.dtb
+ 
+ dtb-$(CONFIG_RCAR_GEN3) += \
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqmtest.dts b/arch/arm/dts/fsl-imx8qxp-tqma8qx.dts
+similarity index 98%
+rename from arch/arm/dts/fsl-imx8qxp-tqmtest.dts
+rename to arch/arm/dts/fsl-imx8qxp-tqma8qx.dts
+index a446593c43..ac4f908d11 100644
+--- a/arch/arm/dts/fsl-imx8qxp-tqmtest.dts
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8qx.dts
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright 2017 NXP
++ * Copyright 2018 TQ Systems GmbH
+  *
+  * This program is free software; you can redistribute it and/or
+  * modify it under the terms of the GNU General Public License
+@@ -21,8 +21,8 @@
+ #include "fsl-imx8qxp.dtsi"
+ 
+ / {
+-	model = "Freescale i.MX8QXP MEK";
+-	compatible = "fsl,tqmtest", "fsl,imx8qxp";
++	model = "TQ Systems i.MX8QXP TQMa8xX";
++	compatible = "fsl,tqma8qx", "fsl,imx8qxp";
+ 
+ 	chosen {
+ 		bootargs = "console=ttyLP1,115200 earlycon=lpuart32,0x5a070000,115200";
+diff --git a/arch/arm/mach-imx/imx8/Kconfig b/arch/arm/mach-imx/imx8/Kconfig
+index fbc5f375b0..b95939c5ea 100644
+--- a/arch/arm/mach-imx/imx8/Kconfig
++++ b/arch/arm/mach-imx/imx8/Kconfig
+@@ -77,8 +77,8 @@ config TARGET_IMX8QXP_MEK
+ 	select SUPPORT_SPL
+ 	select IMX8QXP
+ 
+-config TARGET_TQMTEST
+-	bool "TQ test board"
++config TARGET_TQMA8QX
++	bool "Support TQMa8xX board"
+ 	select BOARD_LATE_INIT
+ 	select IMX8QXP
+ 
+@@ -107,6 +107,7 @@ source "board/freescale/imx8qm_arm2/Kconfig"
+ source "board/freescale/imx8qm_mek/Kconfig"
+ source "board/freescale/imx8qxp_arm2/Kconfig"
+ source "board/freescale/imx8qxp_mek/Kconfig"
++source "board/freescale/tqma8qx/Kconfig"
+ source "board/tqc/tqma8xx/Kconfig"
+ 
+ endif
+diff --git a/board/freescale/tqmtest/Kconfig b/board/freescale/tqma8qx/Kconfig
+similarity index 69%
+rename from board/freescale/tqmtest/Kconfig
+rename to board/freescale/tqma8qx/Kconfig
+index 41c6e3e64c..91558b63a2 100644
+--- a/board/freescale/tqmtest/Kconfig
++++ b/board/freescale/tqma8qx/Kconfig
+@@ -1,13 +1,13 @@
+-if TARGET_TQMTEST
++if TARGET_TQMA8QX
+ 
+ config SYS_BOARD
+-	default "tqmtest"
++	default "tqma8qx"
+ 
+ config SYS_VENDOR
+ 	default "freescale"
+ 
+ config SYS_CONFIG_NAME
+-	default "tqmtest"
++	default "tqma8qx"
+ 
+ source "board/freescale/common/Kconfig"
+ 
+diff --git a/board/freescale/tqma8qx/Makefile b/board/freescale/tqma8qx/Makefile
+new file mode 100644
+index 0000000000..e0e7a180de
+--- /dev/null
++++ b/board/freescale/tqma8qx/Makefile
+@@ -0,0 +1,7 @@
++#
++# Copyright 2018 TQ Systems
++#
++# SPDX-License-Identifier:	GPL-2.0+
++#
++
++obj-y += tqma8qx.o
+diff --git a/board/freescale/tqmtest/imx8qxp_mek.c b/board/freescale/tqma8qx/tqma8qx.c
+similarity index 89%
+rename from board/freescale/tqmtest/imx8qxp_mek.c
+rename to board/freescale/tqma8qx/tqma8qx.c
+index 2da912161f..1a4a3dde44 100644
+--- a/board/freescale/tqmtest/imx8qxp_mek.c
++++ b/board/freescale/tqma8qx/tqma8qx.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright 2017-2018 NXP
++ * Copyright 2018 TQ Systems GmbH
+  *
+  * SPDX-License-Identifier:	GPL-2.0+
+  */
+@@ -12,8 +12,6 @@
+ #include <libfdt.h>
+ #include <environment.h>
+ #include <fsl_esdhc.h>
+-#include <i2c.h>
+-#include "pca953x.h"
+ 
+ #include <asm/io.h>
+ #include <asm/gpio.h>
+@@ -21,11 +19,8 @@
+ #include <asm/imx-common/sci/sci.h>
+ #include <asm/arch/imx8-pins.h>
+ #include <dm.h>
+-#include <usb.h>
+ #include <asm/arch/iomux.h>
+ #include <asm/arch/sys_proto.h>
+-#include <asm/imx-common/video.h>
+-#include <asm/arch/video_common.h>
+ #include <power-domain.h>
+ #include "../common/tcpc.h"
+ #include <cdns3-uboot.h>
+@@ -197,35 +192,13 @@ static iomux_cfg_t board_gpios[] = {
+ 
+ static void board_gpio_init(void)
+ {
+-#if 0
+-	int ret;
+-	struct gpio_desc desc;
+ 
+-	ret = dm_gpio_lookup_name("gpio@1a_3", &desc);
+-	if (ret)
+-		return;
+-
+-	ret = dm_gpio_request(&desc, "bb_per_rst_b");
+-	if (ret)
+-		return;
+-
+-	dm_gpio_set_dir_flags(&desc, GPIOD_IS_OUT);
+-	dm_gpio_set_value(&desc, 0);
+-	udelay(50);
+-	dm_gpio_set_value(&desc, 1);
+-
+-	imx8_iomux_setup_multiple_pads(board_gpios, ARRAY_SIZE(board_gpios));
+-
+-	/* enable i2c port expander assert reset line */
+-	gpio_request(IOEXP_RESET, "ioexp_rst");
+-	gpio_direction_output(IOEXP_RESET, 1);
+-#endif
+ }
+ #endif
+ 
+ int checkboard(void)
+ {
+-	puts("Board: TQMTEST\n");
++	puts("Board: TQMa8QX\n");
+ 
+ 	print_bootinfo();
+ 
+@@ -305,7 +278,7 @@ int board_mmc_get_env_dev(int devno)
+ int board_late_init(void)
+ {
+ #ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
+-	setenv("board_name", "TQMTEST");
++	setenv("board_name", "TQMa8QX");
+ 	setenv("board_rev", "iMX8QXP");
+ #endif
+ 
+@@ -321,12 +294,3 @@ int board_late_init(void)
+ 	return 0;
+ }
+ 
+-#ifdef CONFIG_FSL_FASTBOOT
+-#ifdef CONFIG_ANDROID_RECOVERY
+-int is_recovery_key_pressing(void)
+-{
+-	return 0; /*TODO*/
+-}
+-#endif /*CONFIG_ANDROID_RECOVERY*/
+-#endif /*CONFIG_FSL_FASTBOOT*/
+-
+diff --git a/board/freescale/tqmtest/Makefile b/board/freescale/tqmtest/Makefile
+deleted file mode 100644
+index f9ee8aeff3..0000000000
+--- a/board/freescale/tqmtest/Makefile
++++ /dev/null
+@@ -1,7 +0,0 @@
+-#
+-# Copyright 2017 NXP
+-#
+-# SPDX-License-Identifier:	GPL-2.0+
+-#
+-
+-obj-y += imx8qxp_mek.o
+diff --git a/configs/tqmtest_defconfig b/configs/tqma8qx_defconfig
+similarity index 93%
+rename from configs/tqmtest_defconfig
+rename to configs/tqma8qx_defconfig
+index f09768e514..b01926957c 100644
+--- a/configs/tqmtest_defconfig
++++ b/configs/tqma8qx_defconfig
+@@ -1,9 +1,9 @@
+ CONFIG_ARM=y
+ CONFIG_ARCH_IMX8=y
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+-CONFIG_TARGET_TQMTEST=y
++CONFIG_TARGET_TQMA8QX=y
+ CONFIG_IMX_BOOTAUX=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-imx8qxp-tqmtest"
++CONFIG_DEFAULT_DEVICE_TREE="fsl-imx8qxp-tqma8qx"
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_SD_BOOT=y
+ CONFIG_BOOTDELAY=3
+diff --git a/include/configs/tqmtest.h b/include/configs/tqma8qx.h
+similarity index 97%
+rename from include/configs/tqmtest.h
+rename to include/configs/tqma8qx.h
+index e2278bf3d6..a6c5d83421 100644
+--- a/include/configs/tqmtest.h
++++ b/include/configs/tqma8qx.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright 2017-2018 NXP
++ * Copyright 2018 TQ Systems GmbH
+  *
+  * SPDX-License-Identifier:	GPL-2.0+
+  */
+@@ -279,12 +279,4 @@
+ #define BOOTAUX_RESERVED_MEM_BASE 0x88000000
+ #define BOOTAUX_RESERVED_MEM_SIZE 0x08000000 /* Reserve from second 128MB */
+ 
+-#if 0
+-#if defined(CONFIG_ANDROID_SUPPORT)
+-#include "imx8qxp_mek_android.h"
+-#elif defined (CONFIG_ANDROID_AUTO_SUPPORT)
+-#include "imx8qxp_mek_android_auto.h"
+-#endif
+-#endif
+-
+ #endif /* __IMX8QXP_MEK_H */

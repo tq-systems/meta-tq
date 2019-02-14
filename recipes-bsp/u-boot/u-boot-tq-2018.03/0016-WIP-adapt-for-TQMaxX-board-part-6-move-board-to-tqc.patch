@@ -1,0 +1,96 @@
+From 694f21ae60cda5d7b93b6dd75658e88cea792499 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 27 Sep 2018 15:38:24 +0200
+Subject: [PATCH] WIP: adapt for TQMaxX board part 6 - move board to tqc
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/mach-imx/imx8/Kconfig             |  2 +-
+ board/tqc/common/Makefile                  | 14 ++++++++++++--
+ board/{freescale => tqc}/tqma8qx/Kconfig   |  4 ++--
+ board/{freescale => tqc}/tqma8qx/Makefile  |  0
+ board/{freescale => tqc}/tqma8qx/tqma8qx.c |  1 -
+ 5 files changed, 15 insertions(+), 6 deletions(-)
+ rename board/{freescale => tqc}/tqma8qx/Kconfig (67%)
+ rename board/{freescale => tqc}/tqma8qx/Makefile (100%)
+ rename board/{freescale => tqc}/tqma8qx/tqma8qx.c (99%)
+
+diff --git a/arch/arm/mach-imx/imx8/Kconfig b/arch/arm/mach-imx/imx8/Kconfig
+index b95939c5ea..b1a1daa8ba 100644
+--- a/arch/arm/mach-imx/imx8/Kconfig
++++ b/arch/arm/mach-imx/imx8/Kconfig
+@@ -107,7 +107,7 @@ source "board/freescale/imx8qm_arm2/Kconfig"
+ source "board/freescale/imx8qm_mek/Kconfig"
+ source "board/freescale/imx8qxp_arm2/Kconfig"
+ source "board/freescale/imx8qxp_mek/Kconfig"
+-source "board/freescale/tqma8qx/Kconfig"
++source "board/tqc/tqma8qx/Kconfig"
+ source "board/tqc/tqma8xx/Kconfig"
+ 
+ endif
+diff --git a/board/tqc/common/Makefile b/board/tqc/common/Makefile
+index e40f255072..31421ed9dc 100644
+--- a/board/tqc/common/Makefile
++++ b/board/tqc/common/Makefile
+@@ -4,9 +4,19 @@
+ # SPDX-License-Identifier:	GPL-2.0+
+ #
+ 
++MINIMAL=
++
++ifdef CONFIG_SPL_BUILD
++ifdef CONFIG_SPL_INIT_MINIMAL
++MINIMAL=y
++endif
++endif
++
++ifdef MINIMAL
+ # necessary to create built-in.o
+ obj- := __dummy__.o
+-
++else
+ obj-$(CONFIG_TQC_EEPROM) += tqc_eeprom.o
+ obj-$(CONFIG_TQC_EMMC) += tqc_emmc.o
+-obj-$(CONFIG_TQC_SDMMC) += tqc_sdmmc.o
++obj-y += tqc_sdmmc.o
++endif
+diff --git a/board/freescale/tqma8qx/Kconfig b/board/tqc/tqma8qx/Kconfig
+similarity index 67%
+rename from board/freescale/tqma8qx/Kconfig
+rename to board/tqc/tqma8qx/Kconfig
+index 91558b63a2..2e6771e164 100644
+--- a/board/freescale/tqma8qx/Kconfig
++++ b/board/tqc/tqma8qx/Kconfig
+@@ -4,11 +4,11 @@ config SYS_BOARD
+ 	default "tqma8qx"
+ 
+ config SYS_VENDOR
+-	default "freescale"
++	default "tqc"
+ 
+ config SYS_CONFIG_NAME
+ 	default "tqma8qx"
+ 
+-source "board/freescale/common/Kconfig"
++source "board/tqc/common/Kconfig"
+ 
+ endif
+diff --git a/board/freescale/tqma8qx/Makefile b/board/tqc/tqma8qx/Makefile
+similarity index 100%
+rename from board/freescale/tqma8qx/Makefile
+rename to board/tqc/tqma8qx/Makefile
+diff --git a/board/freescale/tqma8qx/tqma8qx.c b/board/tqc/tqma8qx/tqma8qx.c
+similarity index 99%
+rename from board/freescale/tqma8qx/tqma8qx.c
+rename to board/tqc/tqma8qx/tqma8qx.c
+index 1a4a3dde44..a9234e30cd 100644
+--- a/board/freescale/tqma8qx/tqma8qx.c
++++ b/board/tqc/tqma8qx/tqma8qx.c
+@@ -22,7 +22,6 @@
+ #include <asm/arch/iomux.h>
+ #include <asm/arch/sys_proto.h>
+ #include <power-domain.h>
+-#include "../common/tcpc.h"
+ #include <cdns3-uboot.h>
+ 
+ DECLARE_GLOBAL_DATA_PTR;

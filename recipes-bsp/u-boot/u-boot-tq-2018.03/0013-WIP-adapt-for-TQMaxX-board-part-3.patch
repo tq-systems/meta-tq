@@ -1,0 +1,312 @@
+From 54d53e0c47b3b9b5bf32cec9f0a2629767089656 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 27 Sep 2018 12:23:26 +0200
+Subject: [PATCH] WIP: adapt for TQMaxX board part 3
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8qxp-tqmtest.dts  | 105 +-------------------------
+ board/freescale/tqmtest/imx8qxp_mek.c |   2 +
+ configs/tqmtest_defconfig             |  63 +++++++---------
+ include/configs/tqmtest.h             |   8 +-
+ 4 files changed, 35 insertions(+), 143 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqmtest.dts b/arch/arm/dts/fsl-imx8qxp-tqmtest.dts
+index 26d97d3ffd..a446593c43 100644
+--- a/arch/arm/dts/fsl-imx8qxp-tqmtest.dts
++++ b/arch/arm/dts/fsl-imx8qxp-tqmtest.dts
+@@ -24,13 +24,6 @@
+ 	model = "Freescale i.MX8QXP MEK";
+ 	compatible = "fsl,tqmtest", "fsl,imx8qxp";
+ 
+-	aliases {
+-		i2c4 = &bb_i2c1;
+-		i2c5 = &mfi_i2c1;
+-		i2c6 = &i2cexp1_i2c1;
+-		i2c7 = &i2cexp2_i2c1;
+-	};
+-
+ 	chosen {
+ 		bootargs = "console=ttyLP1,115200 earlycon=lpuart32,0x5a070000,115200";
+ 		stdout-path = &lpuart1;
+@@ -51,17 +44,6 @@
+ 			startup-delay-us = <100>;
+ 			off-on-delay-us = <12000>;
+ 		};
+-
+-		reg_usb_otg1_vbus: regulator@0 {
+-			compatible = "regulator-fixed";
+-			reg = <0>;
+-			regulator-name = "usb_otg1_vbus";
+-			regulator-min-microvolt = <5000000>;
+-			regulator-max-microvolt = <5000000>;
+-			gpio = <&pca9557_b 2 GPIO_ACTIVE_HIGH>;
+-			enable-active-high;
+-		};
+-
+ 	};
+ };
+ 
+@@ -238,20 +220,6 @@
+ 				SC_P_QSPI0B_SS1_B_LSIO_QSPI0B_SS1_B	0x0600004c
+ 			>;
+ 		};
+-
+-		pinctrl_i2c0_mipi_lvds0: mipi_lvds0_i2c0_grp {
+-			fsl,pins = <
+-				SC_P_MIPI_DSI0_I2C0_SCL_MIPI_DSI0_I2C0_SCL 0xc6000020
+-				SC_P_MIPI_DSI0_I2C0_SDA_MIPI_DSI0_I2C0_SDA 0xc6000020
+-			>;
+-		};
+-
+-		pinctrl_i2c0_mipi_lvds1: mipi_lvds1_i2c0_grp {
+-			fsl,pins = <
+-				SC_P_MIPI_DSI1_I2C0_SCL_MIPI_DSI1_I2C0_SCL 0xc6000020
+-				SC_P_MIPI_DSI1_I2C0_SDA_MIPI_DSI1_I2C0_SDA 0xc6000020
+-			>;
+-		};
+ 	};
+ };
+ 
+@@ -290,7 +258,7 @@
+ 	phy-handle = <&ethphy0>;
+ 	fsl,ar8031-phy-fixup;
+ 	fsl,magic-packet;
+-	status = "okay";
++	status = "disabled";
+ 
+ 	mdio {
+ 		#address-cells = <1>;
+@@ -339,71 +307,7 @@
+ 	clock-frequency = <100000>;
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_lpi2c1>;
+-	status = "okay";
+-
+-	pca9646_switch: mux@71 {
+-		compatible = "nxp,pca9544";
+-		reg = <0x71>;
+-		u-boot,i2c-offset-len = <0>;
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-
+-		bb_i2c1: i2c@0 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			reg = <0x0>;
+-		};
+-
+-		mfi_i2c1: i2c@1 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			reg = <0x1>;
+-		};
+-
+-		i2cexp1_i2c1: i2c@2 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			reg = <0x2>;
+-		};
+-
+-		i2cexp2_i2c1: i2c@3 {
+-			#address-cells = <1>;
+-			#size-cells = <0>;
+-			reg = <0x3>;
+-
+-			pca9557_a: gpio@1a {
+-				compatible = "nxp,pca9557";
+-				reg = <0x1a>;
+-				gpio-controller;
+-				#gpio-cells = <2>;
+-			};
+-
+-			pca9557_b: gpio@1d {
+-				compatible = "nxp,pca9557";
+-				reg = <0x1d>;
+-				gpio-controller;
+-				#gpio-cells = <2>;
+-			};
+-		};
+-	};
+-};
+-
+-&i2c0_mipi_lvds0 {
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_i2c0_mipi_lvds0>;
+-	clock-frequency = <100000>;
+-	status = "okay";
+-};
+-
+-&i2c0_mipi_lvds1 {
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_i2c0_mipi_lvds1>;
+-	clock-frequency = <100000>;
+-	status = "okay";
++	status = "disabled";
+ };
+ 
+ &usdhc1 {
+@@ -429,15 +333,14 @@
+ };
+ 
+ &usbotg1 {
+-	vbus-supply = <&reg_usb_otg1_vbus>;
+ 	srp-disable;
+ 	hnp-disable;
+ 	adp-disable;
+ 	power-polarity-active-high;
+ 	disable-over-current;
+-	status = "okay";
++	status = "disabled";
+ };
+ 
+ &usb2 {
+-	status = "okay";
++	status = "disabled";
+ };
+diff --git a/board/freescale/tqmtest/imx8qxp_mek.c b/board/freescale/tqmtest/imx8qxp_mek.c
+index a00269efe8..2da912161f 100644
+--- a/board/freescale/tqmtest/imx8qxp_mek.c
++++ b/board/freescale/tqmtest/imx8qxp_mek.c
+@@ -197,6 +197,7 @@ static iomux_cfg_t board_gpios[] = {
+ 
+ static void board_gpio_init(void)
+ {
++#if 0
+ 	int ret;
+ 	struct gpio_desc desc;
+ 
+@@ -218,6 +219,7 @@ static void board_gpio_init(void)
+ 	/* enable i2c port expander assert reset line */
+ 	gpio_request(IOEXP_RESET, "ioexp_rst");
+ 	gpio_direction_output(IOEXP_RESET, 1);
++#endif
+ }
+ #endif
+ 
+diff --git a/configs/tqmtest_defconfig b/configs/tqmtest_defconfig
+index a58d17a1f3..f5e193156f 100644
+--- a/configs/tqmtest_defconfig
++++ b/configs/tqmtest_defconfig
+@@ -1,60 +1,51 @@
+ CONFIG_ARM=y
+ CONFIG_ARCH_IMX8=y
+-CONFIG_DEFAULT_DEVICE_TREE="fsl-imx8qxp-tqmtest"
+-CONFIG_TARGET_TQMTEST=y
+-CONFIG_CMD_IMPORTENV=n
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
+-CONFIG_DM=y
+-CONFIG_CMD_CACHE=y
+-
+-CONFIG_DM_SERIAL=y
+-CONFIG_FSL_LPUART=y
+-CONFIG_OF_CONTROL=y
+-CONFIG_DM_I2C=y
+-# CONFIG_DM_I2C_COMPAT is not set
+-CONFIG_SYS_I2C_IMX_LPI2C=y
++CONFIG_TARGET_TQMTEST=y
++CONFIG_IMX_BOOTAUX=y
++CONFIG_DEFAULT_DEVICE_TREE="fsl-imx8qxp-tqmtest"
++CONFIG_BOOTDELAY=3
++# CONFIG_CMD_IMPORTENV is not set
++CONFIG_CMD_MMC=y
++CONFIG_CMD_SF=y
+ CONFIG_CMD_I2C=y
+-CONFIG_I2C_MUX=y
+-CONFIG_I2C_MUX_PCA954x=y
+-
+ CONFIG_CMD_GPIO=y
+-CONFIG_DM_GPIO=y
+-CONFIG_DM_PCA953X=y
+-CONFIG_BOOTDELAY=3
+-CONFIG_IMX_BOOTAUX=y
+-
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_MII=y
++CONFIG_CMD_PING=y
++CONFIG_CMD_CACHE=y
+ CONFIG_CMD_EXT2=y
+ CONFIG_CMD_EXT4=y
+ CONFIG_CMD_EXT4_WRITE=y
+ CONFIG_CMD_FAT=y
+ CONFIG_CMD_FS_GENERIC=y
+ # CONFIG_BLK is not set
+-CONFIG_CMD_MMC=y
++CONFIG_DM_GPIO=y
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_IMX_LPI2C=y
+ CONFIG_DM_MMC=y
+ # CONFIG_DM_MMC_OPS is not set
+-CONFIG_FSL_FSPI=y
+-CONFIG_DM_SPI=y
+ CONFIG_DM_SPI_FLASH=y
+ CONFIG_SPI_FLASH=y
+ CONFIG_SPI_FLASH_4BYTES_ADDR=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_SPANSION=y
+ CONFIG_SPI_FLASH_STMICRO=y
+-CONFIG_CMD_SF=y
+-
+-CONFIG_CMD_PING=y
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_MII=y
++CONFIG_SPI_FLASH_WINBOND=y
++# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
++CONFIG_SPI_FLASH_MTD=y
+ CONFIG_DM_ETH=y
+-# CONFIG_EFI_LOADER is not set
+-
+-CONFIG_DM_REGULATOR=y
+-CONFIG_DM_REGULATOR_FIXED=y
+-CONFIG_DM_REGULATOR_GPIO=y
+-
+ CONFIG_PINCTRL=y
+ CONFIG_PINCTRL_IMX8=y
+-
+ CONFIG_POWER_DOMAIN=y
+ CONFIG_IMX8_POWER_DOMAIN=y
+-
++CONFIG_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_DM_SERIAL=y
++CONFIG_FSL_LPUART=y
++CONFIG_DM_SPI=y
++CONFIG_FSL_FSPI=y
+ CONFIG_DM_THERMAL=y
+ CONFIG_IMX_SC_THERMAL=y
++# CONFIG_EFI_LOADER is not set
+diff --git a/include/configs/tqmtest.h b/include/configs/tqmtest.h
+index 089b05bb71..4398b93339 100644
+--- a/include/configs/tqmtest.h
++++ b/include/configs/tqmtest.h
+@@ -256,12 +256,6 @@
+ /* Generic Timer Definitions */
+ #define COUNTER_FREQUENCY		8000000	/* 8MHz */
+ 
+-#ifndef CONFIG_DM_PCA953X
+-#define CONFIG_PCA953X
+-#define CONFIG_CMD_PCA953X
+-#define CONFIG_CMD_PCA953X_INFO
+-#endif
+-
+ #define CONFIG_IMX_SMMU
+ 
+ /* MT35XU512ABA1G12 has only one Die, so QSPI0 B won't work */
+@@ -281,10 +275,12 @@
+ #define BOOTAUX_RESERVED_MEM_BASE 0x88000000
+ #define BOOTAUX_RESERVED_MEM_SIZE 0x08000000 /* Reserve from second 128MB */
+ 
++#if 0
+ #if defined(CONFIG_ANDROID_SUPPORT)
+ #include "imx8qxp_mek_android.h"
+ #elif defined (CONFIG_ANDROID_AUTO_SUPPORT)
+ #include "imx8qxp_mek_android_auto.h"
+ #endif
++#endif
+ 
+ #endif /* __IMX8QXP_MEK_H */

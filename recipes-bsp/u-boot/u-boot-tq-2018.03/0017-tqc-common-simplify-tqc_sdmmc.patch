@@ -1,0 +1,43 @@
+From 90d1062e887e1b8e64ec7e3d5c33288dff0a50ad Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 14 Feb 2019 10:32:18 +0100
+Subject: [PATCH] tqc/common: simplify tqc_sdmmc
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/common/tqc_sdmmc.c | 12 ++----------
+ 1 file changed, 2 insertions(+), 10 deletions(-)
+
+diff --git a/board/tqc/common/tqc_sdmmc.c b/board/tqc/common/tqc_sdmmc.c
+index 2de2a75aa1..755a0a7d6d 100644
+--- a/board/tqc/common/tqc_sdmmc.c
++++ b/board/tqc/common/tqc_sdmmc.c
+@@ -1,5 +1,6 @@
+ /*
+  * Copyright (C) 2016 Freescale Semiconductor, Inc.
++ * Copyright (C) 2018-2019 TQ Systems GmbH
+  *
+  * SPDX-License-Identifier:	GPL-2.0+
+  */
+@@ -29,20 +30,11 @@ __weak int mmc_map_to_kernel_blk(int dev_no)
+ 
+ void board_late_mmc_env_init(void)
+ {
+-	char cmd[32];
+-	char mmcblk[32];
+ 	u32 dev_no = mmc_get_env_dev();
+ 
+ 	if (!check_mmc_autodetect())
+ 		return;
+ 
+ 	env_set_ulong("mmcdev", dev_no);
+-
+-	/* Set mmcblk env */
+-	sprintf(mmcblk, "/dev/mmcblk%dp2 rootwait rw",
+-		mmc_map_to_kernel_blk(dev_no));
+-	env_set("mmcroot", mmcblk);
+-
+-	sprintf(cmd, "mmc dev %d", dev_no);
+-	run_command(cmd, 0);
++	env_set_ulong("mmcblkdev", mmc_map_to_kernel_blk(dev_no));
+ }

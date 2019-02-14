@@ -1,0 +1,22 @@
+From d0f614bcc9423c8838b514b7e611fdbc02264412 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 14 Feb 2019 09:58:51 +0100
+Subject: [PATCH] build fixes
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ include/configs/tqma8xx.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/include/configs/tqma8xx.h b/include/configs/tqma8xx.h
+index a7185bd349..86f997bc2e 100644
+--- a/include/configs/tqma8xx.h
++++ b/include/configs/tqma8xx.h
+@@ -130,6 +130,7 @@
+ /* Default environment is in SD */
+ #define CONFIG_ENV_SIZE			0x1000
+ #define CONFIG_ENV_IS_NOWHERE
++#define CONFIG_SYS_MMC_ENV_DEV		1
+ 
+ /* Size of malloc() pool */
+ #define CONFIG_SYS_MALLOC_LEN		((CONFIG_ENV_SIZE + (32*1024)) * 1024)

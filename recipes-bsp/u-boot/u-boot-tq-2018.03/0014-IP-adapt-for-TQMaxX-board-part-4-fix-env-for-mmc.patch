@@ -1,0 +1,82 @@
+From 5c1cd9bb0f01da16a0fdf0d53c75f82e415ccd85 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 27 Sep 2018 13:11:31 +0200
+Subject: [PATCH] IP: adapt for TQMaxX board part 4 - fix env for mmc
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ configs/tqmtest_defconfig | 12 +++++-------
+ include/configs/tqmtest.h | 12 ++++++++----
+ 2 files changed, 13 insertions(+), 11 deletions(-)
+
+diff --git a/configs/tqmtest_defconfig b/configs/tqmtest_defconfig
+index f5e193156f..f09768e514 100644
+--- a/configs/tqmtest_defconfig
++++ b/configs/tqmtest_defconfig
+@@ -4,21 +4,19 @@ CONFIG_SYS_MALLOC_F_LEN=0x2000
+ CONFIG_TARGET_TQMTEST=y
+ CONFIG_IMX_BOOTAUX=y
+ CONFIG_DEFAULT_DEVICE_TREE="fsl-imx8qxp-tqmtest"
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_SD_BOOT=y
+ CONFIG_BOOTDELAY=3
++CONFIG_VERSION_VARIABLE=y
+ # CONFIG_CMD_IMPORTENV is not set
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_SF=y
+ CONFIG_CMD_I2C=y
+ CONFIG_CMD_GPIO=y
+-CONFIG_CMD_DHCP=y
+-CONFIG_CMD_MII=y
+-CONFIG_CMD_PING=y
+ CONFIG_CMD_CACHE=y
+-CONFIG_CMD_EXT2=y
+-CONFIG_CMD_EXT4=y
+ CONFIG_CMD_EXT4_WRITE=y
+-CONFIG_CMD_FAT=y
+-CONFIG_CMD_FS_GENERIC=y
++# CONFIG_ISO_PARTITION is not set
++# CONFIG_EFI_PARTITION is not set
+ # CONFIG_BLK is not set
+ CONFIG_DM_GPIO=y
+ CONFIG_DM_I2C=y
+diff --git a/include/configs/tqmtest.h b/include/configs/tqmtest.h
+index 4398b93339..e2278bf3d6 100644
+--- a/include/configs/tqmtest.h
++++ b/include/configs/tqmtest.h
+@@ -205,18 +205,20 @@
+ 
+ /* Default environment is in SD */
+ #define CONFIG_ENV_SIZE			0x2000
+-#ifdef CONFIG_QSPI_BOOT
++#if defined(CONFIG_QSPI_BOOT)
+ #define CONFIG_ENV_IS_IN_SPI_FLASH
+-#define CONFIG_ENV_OFFSET       (4 * 1024 * 1024)
++#define CONFIG_ENV_OFFSET	(4 * 1024 * 1024)
+ #define CONFIG_ENV_SECT_SIZE	(128 * 1024)
+ #define CONFIG_ENV_SPI_BUS	CONFIG_SF_DEFAULT_BUS
+ #define CONFIG_ENV_SPI_CS	CONFIG_SF_DEFAULT_CS
+ #define CONFIG_ENV_SPI_MODE	CONFIG_SF_DEFAULT_MODE
+ #define CONFIG_ENV_SPI_MAX_HZ	CONFIG_SF_DEFAULT_SPEED
+-#else
++#elif defined(CONFIG_SD_BOOT)
+ #define CONFIG_ENV_IS_IN_MMC
+-#define CONFIG_ENV_OFFSET       (64 * SZ_64K)
++#define CONFIG_ENV_OFFSET		(4 * SZ_1M)
+ #define CONFIG_SYS_MMC_ENV_PART		0	/* user area */
++#else
++#error
+ #endif
+ 
+ #define CONFIG_SYS_MMC_IMG_LOAD_PART	1
+@@ -243,8 +245,10 @@
+ 
+ /* Monitor Command Prompt */
+ #define CONFIG_SYS_LONGHELP
++/*
+ #define CONFIG_HUSH_PARSER
+ #define CONFIG_SYS_PROMPT_HUSH_PS2     "> "
++*/
+ #define CONFIG_AUTO_COMPLETE
+ #define CONFIG_SYS_CBSIZE              2048
+ #define CONFIG_SYS_MAXARGS             64

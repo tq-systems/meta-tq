@@ -1,0 +1,244 @@
+From b017869e1c4bf59dcb83c70a8856b691fa3e06e9 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 24 Sep 2018 17:21:31 +0200
+Subject: [PATCH] tqma8qx: wip: slim u-boot dts
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8qxp-tqma8xx-mba8xx.dts | 131 +-------------------
+ arch/arm/dts/fsl-imx8qxp-tqma8xx.dtsi       |  35 ------
+ 2 files changed, 5 insertions(+), 161 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8xx-mba8xx.dts b/arch/arm/dts/fsl-imx8qxp-tqma8xx-mba8xx.dts
+index f88662cb0f..c1aa17e77c 100644
+--- a/arch/arm/dts/fsl-imx8qxp-tqma8xx-mba8xx.dts
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8xx-mba8xx.dts
+@@ -28,30 +28,8 @@
+ 	};
+ 
+ 	chosen {
+-		bootargs = "console=ttyLP0,115200 earlycon=lpuart32,0x5a060000,115200";
+-		stdout-path = &lpuart0;
+-	};
+-
+-	regulators {
+-		reg_usdhc2_vmmc: usdhc2_vmmc {
+-			compatible = "regulator-fixed";
+-			regulator-name = "SD1_SPWR";
+-			regulator-min-microvolt = <3000000>;
+-			regulator-max-microvolt = <3000000>;
+-			gpio = <&gpio4 19 GPIO_ACTIVE_HIGH>;
+-			enable-active-high;
+-			startup-delay-us = <100>;
+-			off-on-delay-us = <12000>;
+-		};
+-
+-		reg_usb_otg1_vbus: regulator@0 {
+-			compatible = "regulator-fixed";
+-			reg = <0>;
+-			regulator-name = "usb_otg1_vbus";
+-			regulator-min-microvolt = <5000000>;
+-			regulator-max-microvolt = <5000000>;
+-		};
+-
++		bootargs = "console=ttyLP1,115200 earlycon=lpuart32,5a070000,115200";
++		stdout-path = &lpuart1;
+ 	};
+ };
+ 
+@@ -59,7 +37,7 @@
+ 	pinctrl-names = "default";
+ 	tqma8xx-mba8xx {
+ 
+-		pinctrl_lpuart0: lpuart0grp {
++		pinctrl_lpuart1: lpuart1grp {
+ 			fsl,pins = <
+ 				SC_P_UART1_RX_ADMA_UART1_RX	0x06000020
+ 				SC_P_UART1_TX_ADMA_UART1_TX	0x06000020
+@@ -85,30 +63,6 @@
+ 			>;
+ 		};
+ 
+-		pinctrl_fec2: fec2grp {
+-			fsl,pins = <
+-				SC_P_ESAI0_SCKR_CONN_ENET1_RGMII_TX_CTL		0x06000048
+-				SC_P_ESAI0_FSR_CONN_ENET1_RGMII_TXC		0x06000048
+-				SC_P_ESAI0_TX4_RX1_CONN_ENET1_RGMII_TXD0	0x06000048
+-				SC_P_ESAI0_TX5_RX0_CONN_ENET1_RGMII_TXD1	0x06000048
+-				SC_P_ESAI0_FST_CONN_ENET1_RGMII_TXD2		0x06000048
+-				SC_P_ESAI0_SCKT_CONN_ENET1_RGMII_TXD3		0x06000048
+-				SC_P_ESAI0_TX0_CONN_ENET1_RGMII_RXC		0x06000048
+-				SC_P_SPDIF0_TX_CONN_ENET1_RGMII_RX_CTL		0x06000048
+-				SC_P_SPDIF0_RX_CONN_ENET1_RGMII_RXD0		0x06000048
+-				SC_P_ESAI0_TX3_RX2_CONN_ENET1_RGMII_RXD1	0x06000048
+-				SC_P_ESAI0_TX2_RX3_CONN_ENET1_RGMII_RXD2	0x06000048
+-				SC_P_ESAI0_TX1_CONN_ENET1_RGMII_RXD3		0x06000048
+-			>;
+-		};
+-
+-		pinctrl_lpi2c1: lpi1cgrp {
+-			fsl,pins = <
+-				SC_P_USB_SS3_TC1_ADMA_I2C1_SCL	0x06000020
+-				SC_P_USB_SS3_TC3_ADMA_I2C1_SDA	0x06000020
+-			>;
+-		};
+-
+ 		pinctrl_usdhc2_gpio: usdhc2gpiogrp {
+ 			fsl,pins = <
+ 				SC_P_USDHC1_RESET_B_LSIO_GPIO4_IO19	0x06000021
+@@ -156,69 +110,9 @@
+ 	};
+ };
+ 
+-&lpuart0 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_lpuart0>;
+-	status = "okay";
+-};
+-
+-&gpio0 {
+-	status = "okay";
+-};
+-
+-&gpio1 {
+-	status = "okay";
+-};
+-
+-&gpio3 {
+-	status = "okay";
+-};
+-
+-&gpio4 {
+-	status = "okay";
+-};
+-
+-&fec1 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_fec1>;
+-	phy-mode = "rgmii";
+-	phy-handle = <&ethphy0>;
+-	fsl,ar8031-phy-fixup;
+-	fsl,magic-packet;
+-	status = "okay";
+-
+-	mdio {
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-
+-		ethphy0: ethernet-phy@0 {
+-			compatible = "ethernet-phy-ieee802.3-c22";
+-			reg = <0>;
+-		};
+-
+-		ethphy1: ethernet-phy@1 {
+-			compatible = "ethernet-phy-ieee802.3-c22";
+-			reg = <1>;
+-		};
+-	};
+-};
+-
+-&fec2 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_fec2>;
+-	phy-mode = "rgmii";
+-	phy-handle = <&ethphy1>;
+-	fsl,ar8031-phy-fixup;
+-	fsl,magic-packet;
+-	status = "okay";
+-};
+-
+-&i2c1 {
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+-	clock-frequency = <100000>;
++&lpuart1 {
+ 	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_lpi2c1>;
++	pinctrl-0 = <&pinctrl_lpuart1>;
+ 	status = "okay";
+ };
+ 
+@@ -230,20 +124,5 @@
+ 	bus-width = <4>;
+ 	cd-gpios = <&gpio4 22 GPIO_ACTIVE_LOW>;
+ 	wp-gpios = <&gpio4 21 GPIO_ACTIVE_HIGH>;
+-	vmmc-supply = <&reg_usdhc2_vmmc>;
+-	status = "okay";
+-};
+-
+-&usbotg1 {
+-	vbus-supply = <&reg_usb_otg1_vbus>;
+-	srp-disable;
+-	hnp-disable;
+-	adp-disable;
+-	power-polarity-active-high;
+-	disable-over-current;
+-	status = "okay";
+-};
+-
+-&usb2 {
+ 	status = "okay";
+ };
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8xx.dtsi b/arch/arm/dts/fsl-imx8qxp-tqma8xx.dtsi
+index b14727cec3..0977135e07 100644
+--- a/arch/arm/dts/fsl-imx8qxp-tqma8xx.dtsi
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8xx.dtsi
+@@ -22,14 +22,9 @@
+ 	};
+ 
+ 	chosen {
+-		bootargs = "console=ttyLP0,115200 earlycon=lpuart32,0x5a060000,115200";
+-		stdout-path = &lpuart0;
+ 	};
+ 
+ 	regulators {
+-		compatible = "simple-bus";
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+ 	};
+ };
+ 
+@@ -107,12 +102,6 @@
+ 	};
+ };
+ 
+-&lpuart0 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_lpuart0>;
+-	status = "okay";
+-};
+-
+ &gpio0 {
+ 	status = "okay";
+ };
+@@ -129,30 +118,6 @@
+ 	status = "okay";
+ };
+ 
+-&flexspi0 {
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_flexspi0>;
+-	status = "okay";
+-
+-	flash0: mt35xu512aba@0 {
+-		reg = <0>;
+-		#address-cells = <1>;
+-		#size-cells = <1>;
+-		compatible = "spi-flash";
+-		spi-max-frequency = <29000000>;
+-		spi-nor,ddr-quad-read-dummy = <8>;
+-	};
+-};
+-
+-&i2c1 {
+-	#address-cells = <1>;
+-	#size-cells = <0>;
+-	clock-frequency = <100000>;
+-	pinctrl-names = "default";
+-	pinctrl-0 = <&pinctrl_lpi2c1>;
+-	status = "okay";
+-};
+-
+ &usdhc1 {
+ 	pinctrl-names = "default", "state_100mhz", "state_200mhz";
+ 	pinctrl-0 = <&pinctrl_usdhc1>;

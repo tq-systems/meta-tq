@@ -1,0 +1,179 @@
+From 9c1024b7a203390bb85a1ffd4a60d89eaf2e63b6 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 27 Sep 2018 10:42:04 +0200
+Subject: [PATCH] serial: serial_lpuart: prepare using different uarts for mx8
+ based cpu
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/include/asm/arch-imx8/clock.h    |  1 +
+ arch/arm/include/asm/arch-imx8/imx-regs.h | 17 ++++++++++++++-
+ arch/arm/include/asm/arch-imx8/lpuart.h   | 26 +++++++++++++++++++++++
+ arch/arm/mach-imx/imx8/clock.c            | 26 +++++++++++++++++++++++
+ drivers/serial/serial_lpuart.c            | 11 +++++++---
+ 5 files changed, 77 insertions(+), 4 deletions(-)
+ create mode 100644 arch/arm/include/asm/arch-imx8/lpuart.h
+
+diff --git a/arch/arm/include/asm/arch-imx8/clock.h b/arch/arm/include/asm/arch-imx8/clock.h
+index 87eb7d1781..524bc0da0a 100644
+--- a/arch/arm/include/asm/arch-imx8/clock.h
++++ b/arch/arm/include/asm/arch-imx8/clock.h
+@@ -26,6 +26,7 @@ enum mxc_clock {
+ 
+ u32 mxc_get_clock(enum mxc_clock clk);
+ u32 get_lpuart_clk(void);
++u32 get_lpuart_clk_n(void *base);
+ int enable_i2c_clk(unsigned char enable, unsigned i2c_num);
+ u32 imx_get_i2cclk(unsigned i2c_num);
+ void enable_usboh3_clk(unsigned char enable);
+diff --git a/arch/arm/include/asm/arch-imx8/imx-regs.h b/arch/arm/include/asm/arch-imx8/imx-regs.h
+index 3bc6714648..ee0cc4f6eb 100644
+--- a/arch/arm/include/asm/arch-imx8/imx-regs.h
++++ b/arch/arm/include/asm/arch-imx8/imx-regs.h
+@@ -10,7 +10,22 @@
+ 
+ #define MU_BASE_ADDR(id)	((0x5D1B0000UL + (id*0x10000)))
+ 
+-#define LPUART_BASE			0x5A060000
++#define LPUART_BASE		0x5A060000
++
++#ifdef CONFIG_IMX8QXP
++#define LPUART1_BASE		0x5A060000
++#define LPUART2_BASE		0x5A070000
++#define LPUART3_BASE		0x5A080000
++#define LPUART4_BASE		0x5A090000
++#endif
++
++#ifdef CONFIG_IMX8QM
++#define LPUART1_BASE		0x5A060000
++#define LPUART2_BASE		0x5A070000
++#define LPUART3_BASE		0x5A080000
++#define LPUART4_BASE		0x5A090000
++#define LPUART5_BASE		0x5A0A0000
++#endif
+ 
+ #define GPT1_BASE_ADDR		0x5D140000
+ #define SCU_LPUART_BASE		0x33220000
+diff --git a/arch/arm/include/asm/arch-imx8/lpuart.h b/arch/arm/include/asm/arch-imx8/lpuart.h
+new file mode 100644
+index 0000000000..c2cc8881f9
+--- /dev/null
++++ b/arch/arm/include/asm/arch-imx8/lpuart.h
+@@ -0,0 +1,26 @@
++/*
++ * Copyright 2017 NXP
++ *
++ * SPDX-License-Identifier:	GPL-2.0+
++ *
++ */
++#ifndef __ASM_ARCH_IMX8_LPUART_H__
++#define __ASM_ARCH_IMX8_LPUART_H__
++
++#include <asm/mach-imx/sci/sci.h>
++
++struct imx_lpuart_map {
++	void *base;
++	sc_rsrc_t rsrc;
++};
++
++static struct imx_lpuart_map imx_lpuart_desc[] = {
++	{(void*)LPUART1_BASE, SC_R_UART_0},
++	{(void*)LPUART2_BASE, SC_R_UART_1},
++	{(void*)LPUART3_BASE, SC_R_UART_2},
++	{(void*)LPUART4_BASE, SC_R_UART_3},
++#ifdef CONFIG_IMX8QM
++	{(void*)LPUART5_BASE, SC_R_UART_4},
++#endif
++};
++#endif /* __ASM_ARCH_IMX8_LPUART_H__ */
+diff --git a/arch/arm/mach-imx/imx8/clock.c b/arch/arm/mach-imx/imx8/clock.c
+index 98e06513d3..17c437e914 100644
+--- a/arch/arm/mach-imx/imx8/clock.c
++++ b/arch/arm/mach-imx/imx8/clock.c
+@@ -10,6 +10,8 @@
+ #include <asm/mach-imx/sci/sci.h>
+ #include <asm/arch/imx8-pins.h>
+ #include <asm/arch/i2c.h>
++#include <asm/arch/imx-regs.h>
++#include <asm/arch/lpuart.h>
+ #include <asm/arch/sys_proto.h>
+ #include <asm/arch/cpu.h>
+ #include <asm/arch/lpcg.h>
+@@ -52,6 +54,7 @@ unsigned int mxc_get_clock(enum mxc_clock clk)
+ 
+ 	switch (clk) {
+ 	case MXC_UART_CLK:
++		/* BUGBUG: works only for boards using LPUART0 as console */
+ 		err = sc_pm_get_clock_rate((sc_ipc_t)gd->arch.ipc_channel_handle,
+ 				SC_R_UART_0, 2, &clkrate);
+ 		if (err != SC_ERR_NONE) {
+@@ -166,6 +169,29 @@ int enable_i2c_clk(unsigned char enable, unsigned i2c_num)
+ 	return 0;
+ }
+ 
++u32 get_lpuart_clk_n(void *base)
++{
++	sc_err_t err;
++	unsigned n;
++	sc_ipc_t ipc;
++	u32 clock_rate;
++
++	for (n = 0; n < ARRAY_SIZE(imx_lpuart_desc); ++n) {
++		if (imx_lpuart_desc[n].base == base)
++			break;
++	}
++
++	if (n >= ARRAY_SIZE(imx_lpuart_desc))
++		return 0;
++
++	ipc = gd->arch.ipc_channel_handle;
++	err = sc_pm_get_clock_rate(ipc, imx_lpuart_desc[n].rsrc, 2, &clock_rate);
++	if (err != SC_ERR_NONE)
++		return 0;
++
++	return clock_rate;
++}
++
+ u32 imx_get_i2cclk(unsigned i2c_num)
+ {
+ 	sc_err_t err;
+diff --git a/drivers/serial/serial_lpuart.c b/drivers/serial/serial_lpuart.c
+index 23f8fb8f97..e4de1ff255 100644
+--- a/drivers/serial/serial_lpuart.c
++++ b/drivers/serial/serial_lpuart.c
+@@ -101,11 +101,16 @@ u32 __weak get_lpuart_clk(void)
+ 	return CONFIG_SYS_CLK_FREQ;
+ }
+ 
++u32 __weak get_lpuart_clk_n(void *reg)
++{
++	return get_lpuart_clk();
++}
++
+ static void _lpuart_serial_setbrg(struct lpuart_serial_platdata *plat,
+ 				  int baudrate)
+ {
+ 	struct lpuart_fsl *base = plat->reg;
+-	u32 clk = get_lpuart_clk();
++	u32 clk = get_lpuart_clk_n(plat->reg);
+ 	u16 sbr;
+ 
+ 	sbr = (u16)(clk / (16 * baudrate));
+@@ -173,7 +178,7 @@ static void _lpuart32_serial_setbrg_7ulp(struct lpuart_serial_platdata *plat,
+ {
+ 	struct lpuart_fsl_reg32 *base = plat->reg;
+ 	u32 sbr, osr, baud_diff, tmp_osr, tmp_sbr, tmp_diff, tmp;
+-	u32 clk = get_lpuart_clk();
++	u32 clk = get_lpuart_clk_n(plat->reg);
+ 
+ 	baud_diff = baudrate;
+ 	osr = 0;
+@@ -231,7 +236,7 @@ static void _lpuart32_serial_setbrg(struct lpuart_serial_platdata *plat,
+ 				    int baudrate)
+ {
+ 	struct lpuart_fsl_reg32 *base = plat->reg;
+-	u32 clk = get_lpuart_clk();
++	u32 clk = get_lpuart_clk_n(plat->reg);
+ 	u32 sbr;
+ 
+ 	sbr = (clk / (16 * baudrate));

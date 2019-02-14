@@ -1,0 +1,1663 @@
+From 4141a44888045e492776d10c2d42cda91bc45671 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 14 Feb 2019 07:46:11 +0100
+Subject: [PATCH] tqma8xx: initial board support
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/Makefile                       |   3 +-
+ arch/arm/dts/fsl-imx8qxp-tqma8xx-mba8xx.dts | 249 ++++++++++
+ arch/arm/dts/fsl-imx8qxp-tqma8xx.dtsi       | 165 +++++++
+ arch/arm/mach-imx/imx8/Kconfig              |  20 +
+ board/tqc/tqma8xx/Kconfig                   |  31 ++
+ board/tqc/tqma8xx/Makefile                  |   9 +
+ board/tqc/tqma8xx/tqma8xx-mba8xx.c          | 490 ++++++++++++++++++++
+ board/tqc/tqma8xx/tqma8xx.c                 | 246 ++++++++++
+ configs/tqma8xx-mba8xx_defconfig            |  53 +++
+ include/configs/tqma8xx.h                   | 295 ++++++++++++
+ 10 files changed, 1560 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/fsl-imx8qxp-tqma8xx-mba8xx.dts
+ create mode 100644 arch/arm/dts/fsl-imx8qxp-tqma8xx.dtsi
+ create mode 100644 board/tqc/tqma8xx/Kconfig
+ create mode 100644 board/tqc/tqma8xx/Makefile
+ create mode 100644 board/tqc/tqma8xx/tqma8xx-mba8xx.c
+ create mode 100644 board/tqc/tqma8xx/tqma8xx.c
+ create mode 100644 configs/tqma8xx-mba8xx_defconfig
+ create mode 100644 include/configs/tqma8xx.h
+
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index 845de59272..b1a7e65c49 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -476,7 +476,8 @@ dtb-$(CONFIG_ARCH_IMX8) += fsl-imx8dx-ddr3-arm2.dtb \
+ 		fsl-imx8qm-mek.dtb \
+ 		fsl-imx8qm-mek-xen.dtb \
+ 		fsl-imx8qxp-lpddr4-arm2.dtb \
+-		fsl-imx8qxp-mek.dtb
++		fsl-imx8qxp-mek.dtb \
++		fsl-imx8qxp-tqma8xx-mba8xx.dtb
+ 
+ dtb-$(CONFIG_RCAR_GEN3) += \
+ 	r8a7795-h3ulcb.dtb \
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8xx-mba8xx.dts b/arch/arm/dts/fsl-imx8qxp-tqma8xx-mba8xx.dts
+new file mode 100644
+index 0000000000..f88662cb0f
+--- /dev/null
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8xx-mba8xx.dts
+@@ -0,0 +1,249 @@
++/*
++ * Copyright 2017 NXP
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++
++/dts-v1/;
++
++/* First 128KB is for PSCI ATF. */
++/* Last 127M is for M4/RPMSG */
++/memreserve/ 0x80000000 0x08000000;
++
++#include "fsl-imx8qxp-tqma8xx.dtsi"
++
++/ {
++	model = "Freescale i.MX8QXP TQMa8xX on MBa8xX";
++	compatible = "tqc,tqma8xx-mba8xx", "fsl,imx8qxp";
++
++	aliases {
++	};
++
++	chosen {
++		bootargs = "console=ttyLP0,115200 earlycon=lpuart32,0x5a060000,115200";
++		stdout-path = &lpuart0;
++	};
++
++	regulators {
++		reg_usdhc2_vmmc: usdhc2_vmmc {
++			compatible = "regulator-fixed";
++			regulator-name = "SD1_SPWR";
++			regulator-min-microvolt = <3000000>;
++			regulator-max-microvolt = <3000000>;
++			gpio = <&gpio4 19 GPIO_ACTIVE_HIGH>;
++			enable-active-high;
++			startup-delay-us = <100>;
++			off-on-delay-us = <12000>;
++		};
++
++		reg_usb_otg1_vbus: regulator@0 {
++			compatible = "regulator-fixed";
++			reg = <0>;
++			regulator-name = "usb_otg1_vbus";
++			regulator-min-microvolt = <5000000>;
++			regulator-max-microvolt = <5000000>;
++		};
++
++	};
++};
++
++&iomuxc {
++	pinctrl-names = "default";
++	tqma8xx-mba8xx {
++
++		pinctrl_lpuart0: lpuart0grp {
++			fsl,pins = <
++				SC_P_UART1_RX_ADMA_UART1_RX	0x06000020
++				SC_P_UART1_TX_ADMA_UART1_TX	0x06000020
++			>;
++		};
++
++		pinctrl_fec1: fec1grp {
++			fsl,pins = <
++				SC_P_ENET0_MDC_CONN_ENET0_MDC			0x06000048
++				SC_P_ENET0_MDIO_CONN_ENET0_MDIO			0x06000048
++				SC_P_ENET0_RGMII_TX_CTL_CONN_ENET0_RGMII_TX_CTL	0x06000048
++				SC_P_ENET0_RGMII_TXC_CONN_ENET0_RGMII_TXC	0x06000048
++				SC_P_ENET0_RGMII_TXD0_CONN_ENET0_RGMII_TXD0	0x06000048
++				SC_P_ENET0_RGMII_TXD1_CONN_ENET0_RGMII_TXD1	0x06000048
++				SC_P_ENET0_RGMII_TXD2_CONN_ENET0_RGMII_TXD2	0x06000048
++				SC_P_ENET0_RGMII_TXD3_CONN_ENET0_RGMII_TXD3	0x06000048
++				SC_P_ENET0_RGMII_RXC_CONN_ENET0_RGMII_RXC	0x06000048
++				SC_P_ENET0_RGMII_RX_CTL_CONN_ENET0_RGMII_RX_CTL	0x06000048
++				SC_P_ENET0_RGMII_RXD0_CONN_ENET0_RGMII_RXD0	0x06000048
++				SC_P_ENET0_RGMII_RXD1_CONN_ENET0_RGMII_RXD1	0x06000048
++				SC_P_ENET0_RGMII_RXD2_CONN_ENET0_RGMII_RXD2	0x06000048
++				SC_P_ENET0_RGMII_RXD3_CONN_ENET0_RGMII_RXD3	0x06000048
++			>;
++		};
++
++		pinctrl_fec2: fec2grp {
++			fsl,pins = <
++				SC_P_ESAI0_SCKR_CONN_ENET1_RGMII_TX_CTL		0x06000048
++				SC_P_ESAI0_FSR_CONN_ENET1_RGMII_TXC		0x06000048
++				SC_P_ESAI0_TX4_RX1_CONN_ENET1_RGMII_TXD0	0x06000048
++				SC_P_ESAI0_TX5_RX0_CONN_ENET1_RGMII_TXD1	0x06000048
++				SC_P_ESAI0_FST_CONN_ENET1_RGMII_TXD2		0x06000048
++				SC_P_ESAI0_SCKT_CONN_ENET1_RGMII_TXD3		0x06000048
++				SC_P_ESAI0_TX0_CONN_ENET1_RGMII_RXC		0x06000048
++				SC_P_SPDIF0_TX_CONN_ENET1_RGMII_RX_CTL		0x06000048
++				SC_P_SPDIF0_RX_CONN_ENET1_RGMII_RXD0		0x06000048
++				SC_P_ESAI0_TX3_RX2_CONN_ENET1_RGMII_RXD1	0x06000048
++				SC_P_ESAI0_TX2_RX3_CONN_ENET1_RGMII_RXD2	0x06000048
++				SC_P_ESAI0_TX1_CONN_ENET1_RGMII_RXD3		0x06000048
++			>;
++		};
++
++		pinctrl_lpi2c1: lpi1cgrp {
++			fsl,pins = <
++				SC_P_USB_SS3_TC1_ADMA_I2C1_SCL	0x06000020
++				SC_P_USB_SS3_TC3_ADMA_I2C1_SDA	0x06000020
++			>;
++		};
++
++		pinctrl_usdhc2_gpio: usdhc2gpiogrp {
++			fsl,pins = <
++				SC_P_USDHC1_RESET_B_LSIO_GPIO4_IO19	0x06000021
++				SC_P_USDHC1_WP_LSIO_GPIO4_IO21		0x06000021
++				SC_P_USDHC1_CD_B_LSIO_GPIO4_IO22	0x06000021
++			>;
++		};
++
++		pinctrl_usdhc2: usdhc2grp {
++			fsl,pins = <
++				SC_P_USDHC1_CLK_CONN_USDHC1_CLK		0x06000041
++				SC_P_USDHC1_CMD_CONN_USDHC1_CMD		0x06000021
++				SC_P_USDHC1_DATA0_CONN_USDHC1_DATA0	0x06000021
++				SC_P_USDHC1_DATA1_CONN_USDHC1_DATA1	0x06000021
++				SC_P_USDHC1_DATA2_CONN_USDHC1_DATA2	0x06000021
++				SC_P_USDHC1_DATA3_CONN_USDHC1_DATA3	0x06000021
++				SC_P_USDHC1_VSELECT_CONN_USDHC1_VSELECT	0x06000021
++			>;
++		};
++
++		pinctrl_usdhc2_100mhz: usdhc2grp100mhz {
++			fsl,pins = <
++				SC_P_USDHC1_CLK_CONN_USDHC1_CLK		0x06000040
++				SC_P_USDHC1_CMD_CONN_USDHC1_CMD		0x06000020
++				SC_P_USDHC1_DATA0_CONN_USDHC1_DATA0	0x06000020
++				SC_P_USDHC1_DATA1_CONN_USDHC1_DATA1	0x06000020
++				SC_P_USDHC1_DATA2_CONN_USDHC1_DATA2	0x06000020
++				SC_P_USDHC1_DATA3_CONN_USDHC1_DATA3	0x06000020
++				SC_P_USDHC1_VSELECT_CONN_USDHC1_VSELECT	0x06000020
++			>;
++		};
++
++		pinctrl_usdhc2_200mhz: usdhc2grp200mhz {
++			fsl,pins = <
++				SC_P_USDHC1_CLK_CONN_USDHC1_CLK		0x06000040
++				SC_P_USDHC1_CMD_CONN_USDHC1_CMD		0x06000020
++				SC_P_USDHC1_DATA0_CONN_USDHC1_DATA0	0x06000020
++				SC_P_USDHC1_DATA1_CONN_USDHC1_DATA1	0x06000020
++				SC_P_USDHC1_DATA2_CONN_USDHC1_DATA2	0x06000020
++				SC_P_USDHC1_DATA3_CONN_USDHC1_DATA3	0x06000020
++				SC_P_USDHC1_VSELECT_CONN_USDHC1_VSELECT	0x06000020
++			>;
++		};
++
++	};
++};
++
++&lpuart0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_lpuart0>;
++	status = "okay";
++};
++
++&gpio0 {
++	status = "okay";
++};
++
++&gpio1 {
++	status = "okay";
++};
++
++&gpio3 {
++	status = "okay";
++};
++
++&gpio4 {
++	status = "okay";
++};
++
++&fec1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_fec1>;
++	phy-mode = "rgmii";
++	phy-handle = <&ethphy0>;
++	fsl,ar8031-phy-fixup;
++	fsl,magic-packet;
++	status = "okay";
++
++	mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		ethphy0: ethernet-phy@0 {
++			compatible = "ethernet-phy-ieee802.3-c22";
++			reg = <0>;
++		};
++
++		ethphy1: ethernet-phy@1 {
++			compatible = "ethernet-phy-ieee802.3-c22";
++			reg = <1>;
++		};
++	};
++};
++
++&fec2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_fec2>;
++	phy-mode = "rgmii";
++	phy-handle = <&ethphy1>;
++	fsl,ar8031-phy-fixup;
++	fsl,magic-packet;
++	status = "okay";
++};
++
++&i2c1 {
++	#address-cells = <1>;
++	#size-cells = <0>;
++	clock-frequency = <100000>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_lpi2c1>;
++	status = "okay";
++};
++
++&usdhc2 {
++	pinctrl-names = "default", "state_100mhz", "state_200mhz";
++	pinctrl-0 = <&pinctrl_usdhc2>, <&pinctrl_usdhc2_gpio>;
++	pinctrl-1 = <&pinctrl_usdhc2_100mhz>, <&pinctrl_usdhc2_gpio>;
++	pinctrl-2 = <&pinctrl_usdhc2_200mhz>, <&pinctrl_usdhc2_gpio>;
++	bus-width = <4>;
++	cd-gpios = <&gpio4 22 GPIO_ACTIVE_LOW>;
++	wp-gpios = <&gpio4 21 GPIO_ACTIVE_HIGH>;
++	vmmc-supply = <&reg_usdhc2_vmmc>;
++	status = "okay";
++};
++
++&usbotg1 {
++	vbus-supply = <&reg_usb_otg1_vbus>;
++	srp-disable;
++	hnp-disable;
++	adp-disable;
++	power-polarity-active-high;
++	disable-over-current;
++	status = "okay";
++};
++
++&usb2 {
++	status = "okay";
++};
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8xx.dtsi b/arch/arm/dts/fsl-imx8qxp-tqma8xx.dtsi
+new file mode 100644
+index 0000000000..b14727cec3
+--- /dev/null
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8xx.dtsi
+@@ -0,0 +1,165 @@
++/*
++ * Copyright 2017 NXP
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++
++#include "fsl-imx8qxp.dtsi"
++
++/ {
++	model = "TQ Systems TQMa8XX";
++	compatible = "tqc,tqma8xx", "fsl,imx8qxp";
++
++	aliases {
++	};
++
++	chosen {
++		bootargs = "console=ttyLP0,115200 earlycon=lpuart32,0x5a060000,115200";
++		stdout-path = &lpuart0;
++	};
++
++	regulators {
++		compatible = "simple-bus";
++		#address-cells = <1>;
++		#size-cells = <0>;
++	};
++};
++
++&iomuxc {
++	pinctrl-names = "default";
++	tqma8xx {
++		pinctrl_usdhc1: usdhc1grp {
++			fsl,pins = <
++				SC_P_EMMC0_CLK_CONN_EMMC0_CLK		0x06000041
++				SC_P_EMMC0_CMD_CONN_EMMC0_CMD		0x00000021
++				SC_P_EMMC0_DATA0_CONN_EMMC0_DATA0	0x00000021
++				SC_P_EMMC0_DATA1_CONN_EMMC0_DATA1	0x00000021
++				SC_P_EMMC0_DATA2_CONN_EMMC0_DATA2	0x00000021
++				SC_P_EMMC0_DATA3_CONN_EMMC0_DATA3	0x00000021
++				SC_P_EMMC0_DATA4_CONN_EMMC0_DATA4	0x00000021
++				SC_P_EMMC0_DATA5_CONN_EMMC0_DATA5	0x00000021
++				SC_P_EMMC0_DATA6_CONN_EMMC0_DATA6	0x00000021
++				SC_P_EMMC0_DATA7_CONN_EMMC0_DATA7	0x00000021
++				SC_P_EMMC0_STROBE_CONN_EMMC0_STROBE	0x06000041
++			>;
++		};
++
++		pinctrl_usdhc1_100mhz: usdhc1grp100mhz {
++			fsl,pins = <
++				SC_P_EMMC0_CLK_CONN_EMMC0_CLK		0x06000040
++				SC_P_EMMC0_CMD_CONN_EMMC0_CMD		0x00000020
++				SC_P_EMMC0_DATA0_CONN_EMMC0_DATA0	0x00000020
++				SC_P_EMMC0_DATA1_CONN_EMMC0_DATA1	0x00000020
++				SC_P_EMMC0_DATA2_CONN_EMMC0_DATA2	0x00000020
++				SC_P_EMMC0_DATA3_CONN_EMMC0_DATA3	0x00000020
++				SC_P_EMMC0_DATA4_CONN_EMMC0_DATA4	0x00000020
++				SC_P_EMMC0_DATA5_CONN_EMMC0_DATA5	0x00000020
++				SC_P_EMMC0_DATA6_CONN_EMMC0_DATA6	0x00000020
++				SC_P_EMMC0_DATA7_CONN_EMMC0_DATA7	0x00000020
++				SC_P_EMMC0_STROBE_CONN_EMMC0_STROBE	0x06000040
++			>;
++		};
++
++		pinctrl_usdhc1_200mhz: usdhc1grp200mhz {
++			fsl,pins = <
++				SC_P_EMMC0_CLK_CONN_EMMC0_CLK		0x06000040
++				SC_P_EMMC0_CMD_CONN_EMMC0_CMD		0x00000020
++				SC_P_EMMC0_DATA0_CONN_EMMC0_DATA0	0x00000020
++				SC_P_EMMC0_DATA1_CONN_EMMC0_DATA1	0x00000020
++				SC_P_EMMC0_DATA2_CONN_EMMC0_DATA2	0x00000020
++				SC_P_EMMC0_DATA3_CONN_EMMC0_DATA3	0x00000020
++				SC_P_EMMC0_DATA4_CONN_EMMC0_DATA4	0x00000020
++				SC_P_EMMC0_DATA5_CONN_EMMC0_DATA5	0x00000020
++				SC_P_EMMC0_DATA6_CONN_EMMC0_DATA6	0x00000020
++				SC_P_EMMC0_DATA7_CONN_EMMC0_DATA7	0x00000020
++				SC_P_EMMC0_STROBE_CONN_EMMC0_STROBE	0x06000040
++			>;
++		};
++
++		pinctrl_flexspi0: flexspi0grp {
++			fsl,pins = <
++				SC_P_QSPI0A_DATA0_LSIO_QSPI0A_DATA0	0x0600004c
++				SC_P_QSPI0A_DATA1_LSIO_QSPI0A_DATA1	0x0600004c
++				SC_P_QSPI0A_DATA2_LSIO_QSPI0A_DATA2	0x0600004c
++				SC_P_QSPI0A_DATA3_LSIO_QSPI0A_DATA3	0x0600004c
++				SC_P_QSPI0A_DQS_LSIO_QSPI0A_DQS		0x0600004c
++				SC_P_QSPI0A_SS0_B_LSIO_QSPI0A_SS0_B	0x0600004c
++				SC_P_QSPI0A_SS1_B_LSIO_QSPI0A_SS1_B	0x0600004c
++				SC_P_QSPI0A_SCLK_LSIO_QSPI0A_SCLK	0x0600004c
++				SC_P_QSPI0B_SCLK_LSIO_QSPI0B_SCLK	0x0600004c
++				SC_P_QSPI0B_DATA0_LSIO_QSPI0B_DATA0	0x0600004c
++				SC_P_QSPI0B_DATA1_LSIO_QSPI0B_DATA1	0x0600004c
++				SC_P_QSPI0B_DATA2_LSIO_QSPI0B_DATA2	0x0600004c
++				SC_P_QSPI0B_DATA3_LSIO_QSPI0B_DATA3	0x0600004c
++				SC_P_QSPI0B_DQS_LSIO_QSPI0B_DQS		0x0600004c
++				SC_P_QSPI0B_SS0_B_LSIO_QSPI0B_SS0_B	0x0600004c
++				SC_P_QSPI0B_SS1_B_LSIO_QSPI0B_SS1_B	0x0600004c
++			>;
++		};
++	};
++};
++
++&lpuart0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_lpuart0>;
++	status = "okay";
++};
++
++&gpio0 {
++	status = "okay";
++};
++
++&gpio1 {
++	status = "okay";
++};
++
++&gpio3 {
++	status = "okay";
++};
++
++&gpio4 {
++	status = "okay";
++};
++
++&flexspi0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_flexspi0>;
++	status = "okay";
++
++	flash0: mt35xu512aba@0 {
++		reg = <0>;
++		#address-cells = <1>;
++		#size-cells = <1>;
++		compatible = "spi-flash";
++		spi-max-frequency = <29000000>;
++		spi-nor,ddr-quad-read-dummy = <8>;
++	};
++};
++
++&i2c1 {
++	#address-cells = <1>;
++	#size-cells = <0>;
++	clock-frequency = <100000>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_lpi2c1>;
++	status = "okay";
++};
++
++&usdhc1 {
++	pinctrl-names = "default", "state_100mhz", "state_200mhz";
++	pinctrl-0 = <&pinctrl_usdhc1>;
++	pinctrl-1 = <&pinctrl_usdhc1_100mhz>;
++	pinctrl-2 = <&pinctrl_usdhc1_200mhz>;
++	bus-width = <8>;
++	non-removable;
++	status = "okay";
++};
++
+diff --git a/arch/arm/mach-imx/imx8/Kconfig b/arch/arm/mach-imx/imx8/Kconfig
+index d26ed18f02..990a2290b7 100644
+--- a/arch/arm/mach-imx/imx8/Kconfig
++++ b/arch/arm/mach-imx/imx8/Kconfig
+@@ -77,11 +77,31 @@ config TARGET_IMX8QXP_MEK
+ 	select SUPPORT_SPL
+ 	select IMX8QXP
+ 
++config TARGET_TQMA8XX
++	bool "Support TQMa8xX board"
++	select BOARD_LATE_INIT
++	select IMX8QXP
++	select PSCI_RESET
++	select IMX_BOOTAUX
++	select ARM64_SUPPORT_AARCH32
++	select SYS_MALLOC_F
++	select ARCH_FIXUP_FDT_MEMORY
++	select MMC
++	select GENERIC_MMC
++	select DM_MMC
++	select PINCTRL
++	select PINCTRL_FULL
++	select PINCTRL_GENERIC
++	select PINMUX
++	select PINCTRL_IMX8
++	select POWER_DOMAIN
++
+ endchoice
+ 
+ source "board/freescale/imx8qm_arm2/Kconfig"
+ source "board/freescale/imx8qm_mek/Kconfig"
+ source "board/freescale/imx8qxp_arm2/Kconfig"
+ source "board/freescale/imx8qxp_mek/Kconfig"
++source "board/tqc/tqma8xx/Kconfig"
+ 
+ endif
+diff --git a/board/tqc/tqma8xx/Kconfig b/board/tqc/tqma8xx/Kconfig
+new file mode 100644
+index 0000000000..9a63d5cca9
+--- /dev/null
++++ b/board/tqc/tqma8xx/Kconfig
+@@ -0,0 +1,31 @@
++if TARGET_TQMA8XX
++
++config SYS_BOARD
++	default "tqma8xx"
++
++config SYS_VENDOR
++	default "tqc"
++
++config SYS_CONFIG_NAME
++	default "tqma8xx"
++
++choice
++	prompt "TQMa8xX base board variant"
++	default MBA8XX
++	help
++	  Select base board for TQMa8xX
++
++config MBA8XX
++	bool "TQMa8xX on MBa8xX Starterkit"
++	select TQC_SDMMC
++	select DM_ETH
++	select NETDEVICES
++	help
++	  Select the MBa8xX starterkit. This features a GigE Phy, USB, SD-Card
++	  etc.
++
++endchoice
++
++source "board/tqc/common/Kconfig"
++
++endif
+diff --git a/board/tqc/tqma8xx/Makefile b/board/tqc/tqma8xx/Makefile
+new file mode 100644
+index 0000000000..87534d2e02
+--- /dev/null
++++ b/board/tqc/tqma8xx/Makefile
+@@ -0,0 +1,9 @@
++#
++# Copyright 2018 TQ Systems GmbH
++#
++# SPDX-License-Identifier:	GPL-2.0+
++#
++
++obj-y += tqma8xx.o
++obj-$(CONFIG_MBA8XX) += tqma8xx-mba8xx.o
++
+diff --git a/board/tqc/tqma8xx/tqma8xx-mba8xx.c b/board/tqc/tqma8xx/tqma8xx-mba8xx.c
+new file mode 100644
+index 0000000000..0fc04e51bc
+--- /dev/null
++++ b/board/tqc/tqma8xx/tqma8xx-mba8xx.c
+@@ -0,0 +1,490 @@
++/*
++ * Copyright 2017 NXP
++ *
++ * SPDX-License-Identifier:	GPL-2.0+
++ */
++#include <common.h>
++#include <malloc.h>
++#include <errno.h>
++#include <netdev.h>
++#include <fsl_ifc.h>
++#include <fdt_support.h>
++#include <libfdt.h>
++#include <environment.h>
++#include <fsl_esdhc.h>
++#include <i2c.h>
++#include "pca953x.h"
++
++#include <asm/io.h>
++#include <asm/gpio.h>
++#include <asm/arch/clock.h>
++#include <asm/imx-common/sci/sci.h>
++#include <asm/arch/imx8-pins.h>
++#include <dm.h>
++#include <usb.h>
++#include <asm/arch/iomux.h>
++#include <asm/arch/sys_proto.h>
++#include <power-domain.h>
++
++#include "../common/tqc_bb.h"
++#include "../common/tqc_eeprom.h"
++
++
++DECLARE_GLOBAL_DATA_PTR;
++
++#define ESDHC_PAD_CTRL	((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define ESDHC_CLK_PAD_CTRL	((SC_PAD_CONFIG_OUT_IN << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++
++#define ENET_INPUT_PAD_CTRL	((SC_PAD_CONFIG_OD_IN << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_18V_10MA << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define ENET_NORMAL_PAD_CTRL	((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_18V_10MA << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define FSPI_PAD_CTRL	((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define GPIO_PAD_CTRL	((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define I2C_PAD_CTRL	((SC_PAD_CONFIG_OUT_IN << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_LOW << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define UART_PAD_CTRL	((SC_PAD_CONFIG_OUT_IN << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++static iomux_cfg_t uart1_pads[] = {
++	SC_P_UART1_RX | MUX_MODE_ALT(0) | MUX_PAD_CTRL(UART_PAD_CTRL),
++	SC_P_UART1_TX | MUX_MODE_ALT(0) | MUX_PAD_CTRL(UART_PAD_CTRL),
++};
++
++static void setup_iomux_uart(void)
++{
++	imx8_iomux_setup_multiple_pads(uart1_pads, ARRAY_SIZE(uart1_pads));
++}
++
++int tqc_bb_board_early_init_f(void)
++{
++	sc_ipc_t ipcHndl = 0;
++	sc_err_t sciErr = 0;
++
++	ipcHndl = gd->arch.ipc_channel_handle;
++
++	/* Power up UART0 */
++	sciErr = sc_pm_set_resource_power_mode(ipcHndl, SC_R_UART_0, SC_PM_PW_MODE_ON);
++	if (sciErr != SC_ERR_NONE)
++		return 0;
++
++	/* Set UART0 clock root to 80 MHz */
++	sc_pm_clock_rate_t rate = 80000000;
++	sciErr = sc_pm_set_clock_rate(ipcHndl, SC_R_UART_0, 2, &rate);
++	if (sciErr != SC_ERR_NONE)
++		return 0;
++
++	/* Enable UART0 clock root */
++	sciErr = sc_pm_clock_enable(ipcHndl, SC_R_UART_0, 2, true, false);
++	if (sciErr != SC_ERR_NONE)
++		return 0;
++
++	setup_iomux_uart();
++
++	return 0;
++}
++
++#ifdef CONFIG_FSL_ESDHC
++
++#define USDHC1_CD_GPIO	IMX_GPIO_NR(4, 22)
++
++static struct fsl_esdhc_cfg usdhc_cfg = {USDHC2_BASE_ADDR, 0, 4};
++
++static iomux_cfg_t usdhc1_sd[] = {
++	SC_P_USDHC1_CLK | MUX_PAD_CTRL(ESDHC_CLK_PAD_CTRL),
++	SC_P_USDHC1_CMD | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_USDHC1_DATA0 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_USDHC1_DATA1 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_USDHC1_DATA2 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_USDHC1_DATA3 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_USDHC1_WP    | MUX_PAD_CTRL(ESDHC_PAD_CTRL), /* Mux for WP */
++	SC_P_USDHC1_CD_B  | MUX_MODE_ALT(4) | MUX_PAD_CTRL(ESDHC_PAD_CTRL), /* Mux for CD,  GPIO4 IO22 */
++	SC_P_USDHC1_RESET_B | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_USDHC1_VSELECT | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++};
++
++int tqc_bb_board_mmc_init(bd_t *bis)
++{
++	int i, ret;
++	struct power_domain pd;
++
++	/*
++	 * According to the board_mmc_init() the following map is done:
++	 * (U-boot device node)    (Physical Port)
++	 * mmc0                    USDHC1
++	 * mmc1                    USDHC2
++	 */
++	if (!power_domain_lookup_name("conn_sdhc1", &pd))
++		power_domain_on(&pd);
++	imx8_iomux_setup_multiple_pads(usdhc1_sd, ARRAY_SIZE(usdhc1_sd));
++	init_clk_usdhc(1);
++	usdhc_cfg.sdhc_clk = mxc_get_clock(MXC_ESDHC2_CLK);
++	gpio_request(USDHC1_CD_GPIO, "sd1_cd");
++	gpio_direction_input(USDHC1_CD_GPIO);
++	ret = fsl_esdhc_initialize(bis, &usdhc_cfg);
++	if (ret) {
++		printf("Warning: failed to initialize mmc dev %d\n", i);
++	}
++
++	return 0;
++}
++
++int tqc_bb_board_mmc_getcd(struct mmc *mmc)
++{
++	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
++	int ret = 0;
++
++	switch (cfg->esdhc_base) {
++	case USDHC2_BASE_ADDR:
++		ret = !gpio_get_value(USDHC1_CD_GPIO);
++		break;
++	}
++
++	return ret;
++}
++
++#endif /* CONFIG_FSL_ESDHC */
++
++
++#ifdef CONFIG_FEC_MXC
++#include <miiphy.h>
++
++static iomux_cfg_t pad_enet1[] = {
++	SC_P_SPDIF0_TX | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_SPDIF0_RX | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ESAI0_TX3_RX2 | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ESAI0_TX2_RX3 | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ESAI0_TX1 | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ESAI0_TX0 | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ESAI0_SCKR | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ESAI0_TX4_RX1 | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ESAI0_TX5_RX0 | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ESAI0_FST  | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ESAI0_SCKT | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ESAI0_FSR  | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++
++	/* Shared MDIO */
++	SC_P_ENET0_MDC | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ENET0_MDIO | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++};
++
++static iomux_cfg_t pad_enet0[] = {
++	SC_P_ENET0_RGMII_RX_CTL | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ENET0_RGMII_RXD0 | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ENET0_RGMII_RXD1 | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ENET0_RGMII_RXD2 | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ENET0_RGMII_RXD3 | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ENET0_RGMII_RXC | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ENET0_RGMII_TX_CTL | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ENET0_RGMII_TXD0 | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ENET0_RGMII_TXD1 | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ENET0_RGMII_TXD2 | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ENET0_RGMII_TXD3 | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ENET0_RGMII_TXC | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++
++	/* Shared MDIO */
++	SC_P_ENET0_MDC | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ENET0_MDIO | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++};
++
++static void setup_iomux_fec(void)
++{
++	if (0 == CONFIG_FEC_ENET_DEV)
++		imx8_iomux_setup_multiple_pads(pad_enet0, ARRAY_SIZE(pad_enet0));
++	else
++		imx8_iomux_setup_multiple_pads(pad_enet1, ARRAY_SIZE(pad_enet1));
++}
++
++static void enet_device_phy_reset(void)
++{
++	struct gpio_desc desc;
++	int ret;
++
++	/* The BB_PER_RST_B will reset the ENET1 PHY */
++	if (0 == CONFIG_FEC_ENET_DEV) {
++		ret = dm_gpio_lookup_name("gpio@1a_4", &desc);
++		if (ret)
++			return;
++
++		ret = dm_gpio_request(&desc, "enet0_reset");
++		if (ret)
++			return;
++
++		dm_gpio_set_dir_flags(&desc, GPIOD_IS_OUT);
++		dm_gpio_set_value(&desc, 0);
++		udelay(50);
++		dm_gpio_set_value(&desc, 1);
++	}
++
++	/* The board has a long delay for this reset to become stable */
++	mdelay(200);
++}
++
++int board_eth_init(bd_t *bis)
++{
++	int ret;
++	struct power_domain pd;
++
++	printf("[%s] %d\n", __func__, __LINE__);
++
++	if (CONFIG_FEC_ENET_DEV) {
++		if (!power_domain_lookup_name("conn_enet1", &pd))
++			power_domain_on(&pd);
++	} else {
++		if (!power_domain_lookup_name("conn_enet0", &pd))
++			power_domain_on(&pd);
++	}
++
++	setup_iomux_fec();
++
++	ret = fecmxc_initialize_multi(bis, CONFIG_FEC_ENET_DEV,
++		CONFIG_FEC_MXC_PHYADDR, IMX_FEC_BASE);
++	if (ret)
++		printf("FEC1 MXC: %s:failed\n", __func__);
++
++	return ret;
++}
++
++int board_phy_config(struct phy_device *phydev)
++{
++	phy_write(phydev, MDIO_DEVAD_NONE, 0x1d, 0x1f);
++	phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, 0x8);
++
++	phy_write(phydev, MDIO_DEVAD_NONE, 0x1d, 0x00);
++	phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, 0x82ee);
++	phy_write(phydev, MDIO_DEVAD_NONE, 0x1d, 0x05);
++	phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, 0x100);
++
++	if (phydev->drv->config)
++		phydev->drv->config(phydev);
++
++	return 0;
++}
++
++static int setup_fec(int ind)
++{
++	/* Reset ENET PHY */
++	enet_device_phy_reset();
++
++	return 0;
++}
++#endif
++
++#ifdef CONFIG_MXC_GPIO
++#define IOEXP_RESET IMX_GPIO_NR(1, 1)
++
++static iomux_cfg_t board_gpios[] = {
++	SC_P_SPI2_SDO | MUX_MODE_ALT(4) | MUX_PAD_CTRL(GPIO_PAD_CTRL),
++	SC_P_ENET0_REFCLK_125M_25M | MUX_MODE_ALT(4) | MUX_PAD_CTRL(GPIO_PAD_CTRL),
++};
++
++static void board_gpio_init(void)
++{
++#if 0
++	int ret;
++	struct gpio_desc desc;
++
++	ret = dm_gpio_lookup_name("gpio@1a_3", &desc);
++	if (ret)
++		return;
++
++	ret = dm_gpio_request(&desc, "bb_per_rst_b");
++	if (ret)
++		return;
++
++	dm_gpio_set_dir_flags(&desc, GPIOD_IS_OUT);
++	dm_gpio_set_value(&desc, 0);
++	udelay(50);
++	dm_gpio_set_value(&desc, 1);
++
++	imx8_iomux_setup_multiple_pads(board_gpios, ARRAY_SIZE(board_gpios));
++
++	/* enable i2c port expander assert reset line */
++	gpio_request(IOEXP_RESET, "ioexp_rst");
++	gpio_direction_output(IOEXP_RESET, 1);
++#endif
++}
++#endif
++
++int tqc_bb_checkboard(void)
++{
++	puts("Board: iMX8QXP MEK\n");
++
++	print_bootinfo();
++
++	/* Note:  After reloc, ipcHndl will no longer be valid.  If handle
++	 *        returned by sc_ipc_open matches SC_IPC_CH, use this
++	 *        macro (valid after reloc) for subsequent SCI calls.
++	 */
++	if (gd->arch.ipc_channel_handle != SC_IPC_CH)
++		printf("\nSCI error! Invalid handle\n");
++
++#ifdef SCI_FORCE_ABORT
++	sc_rpc_msg_t abort_msg;
++
++	puts("Send abort request\n");
++	RPC_SIZE(&abort_msg) = 1;
++	RPC_SVC(&abort_msg) = SC_RPC_SVC_ABORT;
++	sc_ipc_write(SC_IPC_CH, &abort_msg);
++
++	/* Close IPC channel */
++	sc_ipc_close(SC_IPC_CH);
++#endif /* SCI_FORCE_ABORT */
++
++	return 0;
++}
++
++#ifdef CONFIG_FSL_HSIO
++
++#warning
++
++#endif
++
++#ifdef CONFIG_USB_XHCI_IMX8
++
++#define USB_TYPEC_SEL IMX_GPIO_NR(5, 9)
++static iomux_cfg_t ss_mux_gpio[] = {
++	SC_P_ENET0_REFCLK_125M_25M | MUX_MODE_ALT(4) | MUX_PAD_CTRL(GPIO_PAD_CTRL),
++};
++
++static void setup_typec(void)
++{
++#if 0
++	struct udevice *bus;
++	uint8_t chip = 0x50;
++	int ret;
++	struct gpio_desc typec_en_desc;
++
++	imx8_iomux_setup_multiple_pads(ss_mux_gpio, ARRAY_SIZE(ss_mux_gpio));
++	gpio_request(USB_TYPEC_SEL, "typec_sel");
++
++	ret = dm_gpio_lookup_name("gpio@1a_7", &typec_en_desc);
++	if (ret) {
++		printf("%s lookup gpio@1a_7 failed ret = %d\n", __func__, ret);
++		return;
++	}
++
++	ret = dm_gpio_request(&typec_en_desc, "typec_en");
++	if (ret) {
++		printf("%s request typec_en failed ret = %d\n", __func__, ret);
++		return;
++	}
++
++	/* Enable SS MUX */
++	dm_gpio_set_dir_flags(&typec_en_desc, GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
++
++	ret = uclass_get_device_by_seq(UCLASS_I2C, 1, &bus);
++	if (ret) {
++		printf("%s: Can't find bus\n", __func__);
++		return;
++	}
++
++	ret = dm_i2c_probe(bus, chip, 0, &tcpc_i2c_dev);
++	if (ret) {
++		printf("%s: Can't find device id=0x%x\n",
++			__func__, chip);
++		return;
++	}
++#endif
++}
++
++#if 0
++void ss_mux_select(enum typec_cc_polarity pol)
++{
++	if (pol == TYPEC_POLARITY_CC1)
++		gpio_direction_output(USB_TYPEC_SEL, 0);
++	else
++		gpio_direction_output(USB_TYPEC_SEL, 1);
++}
++
++int board_usb_init(int index, enum usb_init_type init)
++{
++	int ret = 0;
++
++	if (init == USB_INIT_HOST && tcpc_i2c_dev)
++		ret = tcpc_setup_dfp_mode(tcpc_i2c_dev, &ss_mux_select);
++
++	return ret;
++
++}
++
++int board_usb_cleanup(int index, enum usb_init_type init)
++{
++	int ret = 0;
++
++	if (init == USB_INIT_HOST && tcpc_i2c_dev)
++		ret = tcpc_disable_vbus(tcpc_i2c_dev);
++
++	return ret;
++}
++#endif
++#endif
++
++int tqc_bb_board_init(void)
++{
++#ifdef CONFIG_MXC_GPIO
++	board_gpio_init();
++#endif
++
++#ifdef CONFIG_FEC_MXC
++	setup_fec(CONFIG_FEC_ENET_DEV);
++#endif
++
++#ifdef CONFIG_USB_XHCI_IMX8
++	setup_typec();
++#endif
++
++	return 0;
++}
++
++void tqc_bb_board_quiesce_devices()
++{
++	const char *power_on_devices[] = {
++		"dma_lpuart0",
++
++		/* HIFI DSP boot */
++		"audio_sai0",
++		"audio_ocram",
++	};
++
++	power_off_pd_devices(power_on_devices, ARRAY_SIZE(power_on_devices));
++}
++
++
++#ifdef CONFIG_OF_BOARD_SETUP
++int tqc_bb_ft_board_setup(void *blob, bd_t *bd)
++{
++	return 0;
++}
++#endif
++
++int board_mmc_get_env_dev(int devno)
++{
++	return devno;
++}
++
++int tqc_bb_board_late_init(void)
++{
++#ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
++	setenv("board_name", "MEK");
++	setenv("board_rev", "iMX8QXP");
++#endif
++
++#ifdef CONFIG_ENV_IS_IN_MMC
++	board_late_mmc_env_init();
++#endif
++
++	return 0;
++}
++
+diff --git a/board/tqc/tqma8xx/tqma8xx.c b/board/tqc/tqma8xx/tqma8xx.c
+new file mode 100644
+index 0000000000..640ca5c5a6
+--- /dev/null
++++ b/board/tqc/tqma8xx/tqma8xx.c
+@@ -0,0 +1,246 @@
++/*
++ * Copyright 2017 NXP
++ *
++ * SPDX-License-Identifier:	GPL-2.0+
++ */
++#include <common.h>
++#include <malloc.h>
++#include <errno.h>
++#include <netdev.h>
++#include <fsl_ifc.h>
++#include <fdt_support.h>
++#include <libfdt.h>
++#include <environment.h>
++#include <fsl_esdhc.h>
++#include <i2c.h>
++#include "pca953x.h"
++
++#include <asm/io.h>
++#include <asm/gpio.h>
++#include <asm/arch/clock.h>
++#include <asm/imx-common/sci/sci.h>
++#include <asm/arch/imx8-pins.h>
++#include <dm.h>
++#include <imx8_hsio.h>
++#include <usb.h>
++#include <asm/arch/iomux.h>
++#include <asm/arch/sys_proto.h>
++#include <power-domain.h>
++
++#include "../common/tqc_bb.h"
++#include "../common/tqc_eeprom.h"
++
++DECLARE_GLOBAL_DATA_PTR;
++
++#define ESDHC_PAD_CTRL	((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define ESDHC_CLK_PAD_CTRL	((SC_PAD_CONFIG_OUT_IN << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++
++#define ENET_INPUT_PAD_CTRL	((SC_PAD_CONFIG_OD_IN << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_18V_10MA << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define ENET_NORMAL_PAD_CTRL	((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_18V_10MA << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define FSPI_PAD_CTRL	((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define GPIO_PAD_CTRL	((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define I2C_PAD_CTRL	((SC_PAD_CONFIG_OUT_IN << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_LOW << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++int board_early_init_f(void)
++{
++	sc_ipc_t ipcHndl = 0;
++	sc_err_t sciErr = 0;
++
++	ipcHndl = gd->arch.ipc_channel_handle;
++
++	tqc_bb_board_early_init_f();
++
++	return 0;
++}
++
++#ifdef CONFIG_FSL_ESDHC
++
++#define USDHC1_CD_GPIO	IMX_GPIO_NR(4, 22)
++
++static struct fsl_esdhc_cfg usdhc_cfg = {USDHC1_BASE_ADDR, 0, 8};
++
++static iomux_cfg_t emmc0[] = {
++	SC_P_EMMC0_CLK | MUX_PAD_CTRL(ESDHC_CLK_PAD_CTRL),
++	SC_P_EMMC0_CMD | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_EMMC0_DATA0 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_EMMC0_DATA1 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_EMMC0_DATA2 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_EMMC0_DATA3 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_EMMC0_DATA4 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_EMMC0_DATA5 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_EMMC0_DATA6 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_EMMC0_DATA7 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_EMMC0_STROBE | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++};
++
++int board_mmc_init(bd_t *bis)
++{
++	int i, ret;
++	struct power_domain pd;
++
++	/*
++	 * According to the board_mmc_init() the following map is done:
++	 * (U-boot device node)    (Physical Port)
++	 * mmc0                    USDHC1
++	 * mmc1                    USDHC2
++	 */
++	if (!power_domain_lookup_name("conn_sdhc0", &pd))
++		power_domain_on(&pd);
++	imx8_iomux_setup_multiple_pads(emmc0, ARRAY_SIZE(emmc0));
++	init_clk_usdhc(0);
++	usdhc_cfg.sdhc_clk = mxc_get_clock(MXC_ESDHC_CLK);
++
++	ret = fsl_esdhc_initialize(bis, &usdhc_cfg);
++	if (ret) {
++		printf("Warning: failed to initialize mmc dev %d\n", i);
++	}
++
++	tqc_bb_board_mmc_init(bis);
++
++	return 0;
++}
++
++int board_mmc_getcd(struct mmc *mmc)
++{
++	struct fsl_esdhc_cfg *cfg = (struct fsl_esdhc_cfg *)mmc->priv;
++	int ret = 0;
++
++	if (cfg->esdhc_base == USDHC1_BASE_ADDR)
++		ret = 1; /* eMMC */
++	else
++		ret = tqc_bb_board_mmc_getcd(mmc);
++
++	return ret;
++}
++
++#endif /* CONFIG_FSL_ESDHC */
++
++#ifdef CONFIG_MXC_GPIO
++#define IOEXP_RESET IMX_GPIO_NR(1, 1)
++
++static iomux_cfg_t board_gpios[] = {
++	SC_P_SPI2_SDO | MUX_MODE_ALT(4) | MUX_PAD_CTRL(GPIO_PAD_CTRL),
++	SC_P_ENET0_REFCLK_125M_25M | MUX_MODE_ALT(4) | MUX_PAD_CTRL(GPIO_PAD_CTRL),
++};
++
++static void board_gpio_init(void)
++{
++	int ret;
++	struct gpio_desc desc;
++
++	ret = dm_gpio_lookup_name("gpio@1a_3", &desc);
++	if (ret)
++		return;
++
++	ret = dm_gpio_request(&desc, "bb_per_rst_b");
++	if (ret)
++		return;
++
++	dm_gpio_set_dir_flags(&desc, GPIOD_IS_OUT);
++	dm_gpio_set_value(&desc, 0);
++	udelay(50);
++	dm_gpio_set_value(&desc, 1);
++
++	imx8_iomux_setup_multiple_pads(board_gpios, ARRAY_SIZE(board_gpios));
++
++	/* enable i2c port expander assert reset line */
++	gpio_request(IOEXP_RESET, "ioexp_rst");
++	gpio_direction_output(IOEXP_RESET, 1);
++}
++#endif
++
++int checkboard(void)
++{
++	puts("Board: iMX8QXP MEK\n");
++
++	print_bootinfo();
++
++	/* Note:  After reloc, ipcHndl will no longer be valid.  If handle
++	 *        returned by sc_ipc_open matches SC_IPC_CH, use this
++	 *        macro (valid after reloc) for subsequent SCI calls.
++	 */
++	if (gd->arch.ipc_channel_handle != SC_IPC_CH)
++		printf("\nSCI error! Invalid handle\n");
++
++#ifdef SCI_FORCE_ABORT
++	sc_rpc_msg_t abort_msg;
++
++	puts("Send abort request\n");
++	RPC_SIZE(&abort_msg) = 1;
++	RPC_SVC(&abort_msg) = SC_RPC_SVC_ABORT;
++	sc_ipc_write(SC_IPC_CH, &abort_msg);
++
++	/* Close IPC channel */
++	sc_ipc_close(SC_IPC_CH);
++#endif /* SCI_FORCE_ABORT */
++
++	return 0;
++}
++
++
++
++int board_init(void)
++{
++#ifdef CONFIG_MXC_GPIO
++	board_gpio_init();
++#endif
++
++	tqc_bb_board_init();
++
++	return 0;
++}
++
++void board_quiesce_devices()
++{
++	tqc_bb_board_quiesce_devices();
++}
++
++void detail_board_ddr_info(void)
++{
++	puts("\nDDR    ");
++}
++
++/*
++ * Board specific reset that is system reset.
++ */
++void reset_cpu(ulong addr)
++{
++	puts("SCI reboot request");
++	sc_pm_reboot(SC_IPC_CH, SC_PM_RESET_TYPE_COLD);
++	while (1)
++		putc('.');
++}
++
++#ifdef CONFIG_OF_BOARD_SETUP
++int ft_board_setup(void *blob, bd_t *bd)
++{
++	tqc_bb_ft_board_setup(blob, bd);
++	return 0;
++}
++#endif
++
++int board_late_init(void)
++{
++#ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
++	setenv("board_name", "MEK");
++	setenv("board_rev", "iMX8QXP");
++#endif
++
++	tqc_bb_board_late_init();
++
++	return 0;
++}
++
+diff --git a/configs/tqma8xx-mba8xx_defconfig b/configs/tqma8xx-mba8xx_defconfig
+new file mode 100644
+index 0000000000..70b68a17be
+--- /dev/null
++++ b/configs/tqma8xx-mba8xx_defconfig
+@@ -0,0 +1,53 @@
++CONFIG_ARM=y
++CONFIG_ARCH_IMX8=y
++CONFIG_SYS_MALLOC_F_LEN=0x2000
++CONFIG_TARGET_TQMA8XX=y
++CONFIG_DEFAULT_DEVICE_TREE="fsl-imx8qxp-tqma8xx-mba8xx"
++CONFIG_BOOTDELAY=3
++CONFIG_CONSOLE_MUX=y
++# CONFIG_CMD_IMPORTENV is not set
++CONFIG_CMD_MMC=y
++CONFIG_CMD_SF=y
++CONFIG_CMD_I2C=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_USB_MASS_STORAGE=y
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_MII=y
++CONFIG_CMD_PING=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_FAT=y
++# CONFIG_BLK is not set
++CONFIG_DM_GPIO=y
++CONFIG_DM_PCA953X=y
++CONFIG_DM_I2C=y
++CONFIG_SYS_I2C_IMX_LPI2C=y
++CONFIG_I2C_MUX=y
++CONFIG_I2C_MUX_PCA954x=y
++# CONFIG_DM_MMC_OPS is not set
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH=y
++CONFIG_SPI_FLASH_4BYTES_ADDR=y
++CONFIG_SPI_FLASH_STMICRO=y
++CONFIG_IMX8_POWER_DOMAIN=y
++CONFIG_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_DM_SERIAL=y
++CONFIG_FSL_LPUART=y
++CONFIG_DM_SPI=y
++CONFIG_FSL_FSPI=y
++CONFIG_DM_THERMAL=y
++CONFIG_IMX_SC_THERMAL=y
++CONFIG_USB=y
++CONFIG_DM_USB=y
++CONFIG_USB_XHCI_HCD=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_USB_STORAGE=y
++CONFIG_USB_GADGET=y
++CONFIG_CI_UDC=y
++CONFIG_USB_GADGET_DOWNLOAD=y
++CONFIG_G_DNL_MANUFACTURER="FSL"
++CONFIG_G_DNL_VENDOR_NUM=0x0525
++CONFIG_G_DNL_PRODUCT_NUM=0xa4a5
++# CONFIG_EFI_LOADER is not set
+diff --git a/include/configs/tqma8xx.h b/include/configs/tqma8xx.h
+new file mode 100644
+index 0000000000..5b66582e7f
+--- /dev/null
++++ b/include/configs/tqma8xx.h
+@@ -0,0 +1,295 @@
++/*
++ * Copyright 2018 TQ Systemss GmbH
++ *
++ * SPDX-License-Identifier:	GPL-2.0+
++ */
++
++#ifndef __TQMA8XX_H
++#define __TQMA8XX_H
++
++#include <linux/sizes.h>
++#include <asm/arch/imx-regs.h>
++
++#define CONFIG_REMAKE_ELF
++
++#define CONFIG_BOARD_EARLY_INIT_F
++#define CONFIG_ARCH_MISC_INIT
++
++/* Flat Device Tree Definitions */
++#define CONFIG_OF_BOARD_SETUP
++
++#undef CONFIG_CMD_EXPORTENV
++#undef CONFIG_CMD_IMPORTENV
++#undef CONFIG_CMD_IMLS
++
++#undef CONFIG_CMD_CRC32
++#undef CONFIG_BOOTM_NETBSD
++
++#define CONFIG_FSL_ESDHC
++#define CONFIG_FSL_USDHC
++#define CONFIG_SYS_FSL_ESDHC_ADDR	0
++#define USDHC1_BASE_ADDR		0x5B010000
++#define USDHC2_BASE_ADDR		0x5B020000
++#define CONFIG_SUPPORT_EMMC_BOOT	/* eMMC specific */
++
++#define CONFIG_ENV_OVERWRITE
++
++
++#define CONFIG_FSL_HSIO
++#ifdef CONFIG_FSL_HSIO
++#
++#endif
++
++#define CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
++
++/* FUSE command */
++#define CONFIG_CMD_FUSE
++
++/* GPIO configs */
++#define CONFIG_MXC_GPIO
++
++/* ENET Config */
++#define CONFIG_MII
++
++#define CONFIG_FEC_MXC
++#define CONFIG_FEC_XCV_TYPE		RGMII
++#define FEC_QUIRK_ENET_MAC
++
++#define CONFIG_PHY_GIGE /* Support for 1000BASE-X */
++#define CONFIG_PHYLIB
++#define CONFIG_PHY_ATHEROS
++
++/* ENET0 connects AR8031 on CPU board, ENET1 connects to base board and MUX with ESAI, default is ESAI */
++#define CONFIG_FEC_ENET_DEV 0
++
++#if (CONFIG_FEC_ENET_DEV == 0)
++#define IMX_FEC_BASE			0x5B040000
++#define CONFIG_FEC_MXC_PHYADDR          0x0
++#define CONFIG_ETHPRIME                 "eth0"
++#elif (CONFIG_FEC_ENET_DEV == 1)
++#define IMX_FEC_BASE			0x5B050000
++#define CONFIG_FEC_MXC_PHYADDR          0x1
++#define CONFIG_ETHPRIME                 "eth1"
++#endif
++
++/* ENET0 MDIO are shared */
++#define CONFIG_FEC_MXC_MDIO_BASE	0x5B040000
++
++/* Boot M4 */
++#define M4_BOOT_ENV \
++	"m4_0_image=m4_0.bin\0" \
++	"loadm4image_0=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${m4_0_image}\0" \
++	"m4boot_0=run loadm4image_0; dcache flush; bootaux ${loadaddr} 0\0" \
++
++#ifdef CONFIG_NAND_BOOT
++#define MFG_NAND_PARTITION "mtdparts=gpmi-nand:64m(boot),16m(kernel),16m(dtb),1m(misc),-(rootfs) "
++#else
++#define MFG_NAND_PARTITION ""
++#endif
++
++#define CONFIG_MFG_ENV_SETTINGS \
++	"mfgtool_args=setenv bootargs console=${console},${baudrate} " \
++		"rdinit=/linuxrc " \
++		"g_mass_storage.stall=0 g_mass_storage.removable=1 " \
++		"g_mass_storage.idVendor=0x066F g_mass_storage.idProduct=0x37FF "\
++		"g_mass_storage.iSerialNumber=\"\" "\
++		MFG_NAND_PARTITION \
++		"video=imxdpufb5:off video=imxdpufb6:off video=imxdpufb7:off "\
++		"clk_ignore_unused "\
++		"\0" \
++	"initrd_addr=0x83800000\0" \
++	"initrd_high=0xffffffff\0" \
++	"bootcmd_mfg=run mfgtool_args;booti ${loadaddr} ${initrd_addr} ${fdt_addr};\0" \
++
++#define XEN_ENV \
++	"xen_addr=0x80200000\0" \
++	"xen_file=xen\0" \
++	"xenargs=setenv bootargs console=dtuart dtuart=/serial@5a060000 dom0_mem=1024M \0" \
++	"loadxen=fatload mmc ${mmcdev}:${mmcpart} ${xen_addr} ${xen_file}\0" \
++	"xenboot=setenv loadaddr 0x80a00000; setenv fdt_file fsl-imx8qxp-mek-dom0.dtb; "\
++	"setenv bootargs console=dtuart dtuart=/serial@5a060000 dom0_mem=1024M; " \
++	"run loadfdt; run loadxen; run loadimage; fdt addr ${fdt_addr}; "\
++	"fdt set /chosen/module@0 reg <0x00000000 ${loadaddr} 0x00000000 0x${filesize}>; " \
++	"booti ${xen_addr} - ${fdt_addr} \0" \
++
++/* Initial environment variables */
++#define CONFIG_EXTRA_ENV_SETTINGS		\
++	CONFIG_MFG_ENV_SETTINGS \
++	M4_BOOT_ENV \
++	XEN_ENV \
++	"script=boot.scr\0" \
++	"image=Image\0" \
++	"panel=NULL\0" \
++	"console=ttyLP0,115200 earlycon=lpuart32,0x5a060000,115200\0" \
++	"fdt_addr=0x83000000\0"			\
++	"fdt_high=0xffffffffffffffff\0"		\
++	"boot_fdt=try\0" \
++	"fdt_file=fsl-imx8qxp-mek.dtb\0" \
++	"initrd_addr=0x83800000\0"		\
++	"initrd_high=0xffffffffffffffff\0" \
++	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
++	"mmcpart=" __stringify(CONFIG_SYS_MMC_IMG_LOAD_PART) "\0" \
++	"mmcroot=" CONFIG_MMCROOT " rootwait rw\0" \
++	"mmcautodetect=yes\0" \
++	"mmcargs=setenv bootargs console=${console},${baudrate} root=${mmcroot} " \
++	"video=imxdpufb5:off video=imxdpufb6:off video=imxdpufb7:off\0" \
++	"loadbootscript=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};\0" \
++	"bootscript=echo Running bootscript from mmc ...; " \
++		"source\0" \
++	"loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}\0" \
++	"loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
++	"mmcboot=echo Booting from mmc ...; " \
++		"run mmcargs; " \
++		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
++			"if run loadfdt; then " \
++				"booti ${loadaddr} - ${fdt_addr}; " \
++			"else " \
++				"echo WARN: Cannot load the DT; " \
++			"fi; " \
++		"else " \
++			"echo wait for boot; " \
++		"fi;\0" \
++	"netargs=setenv bootargs console=${console} " \
++		"root=/dev/nfs " \
++		"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp " \
++		"video=imxdpufb5:off video=imxdpufb6:off video=imxdpufb7:off\0" \
++	"netboot=echo Booting from net ...; " \
++		"run netargs;  " \
++		"if test ${ip_dyn} = yes; then " \
++			"setenv get_cmd dhcp; " \
++		"else " \
++			"setenv get_cmd tftp; " \
++		"fi; " \
++		"${get_cmd} ${loadaddr} ${image}; " \
++		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
++			"if ${get_cmd} ${fdt_addr} ${fdt_file}; then " \
++				"booti ${loadaddr} - ${fdt_addr}; " \
++			"else " \
++				"echo WARN: Cannot load the DT; " \
++			"fi; " \
++		"else " \
++			"booti; " \
++		"fi;\0"
++
++#define CONFIG_BOOTCOMMAND \
++	   "mmc dev ${mmcdev}; if mmc rescan; then " \
++		   "if run loadbootscript; then " \
++			   "run bootscript; " \
++		   "else " \
++			   "if run loadimage; then " \
++				   "run mmcboot; " \
++			   "else run netboot; " \
++			   "fi; " \
++		   "fi; " \
++	   "else booti ${loadaddr} - ${fdt_addr}; fi"
++
++/* Link Definitions */
++#define CONFIG_LOADADDR			0x80280000
++#define CONFIG_SYS_TEXT_BASE		0x80020000
++
++#define CONFIG_SYS_LOAD_ADDR           CONFIG_LOADADDR
++
++#define CONFIG_SYS_INIT_SP_ADDR         0x80200000
++
++
++/* Default environment is in SD */
++#define CONFIG_ENV_SIZE			0x1000
++#ifdef CONFIG_QSPI_BOOT
++#define CONFIG_ENV_IS_IN_SPI_FLASH
++#define CONFIG_ENV_OFFSET       (4 * 1024 * 1024)
++#define CONFIG_ENV_SECT_SIZE	(128 * 1024)
++#define CONFIG_ENV_SPI_BUS	CONFIG_SF_DEFAULT_BUS
++#define CONFIG_ENV_SPI_CS	CONFIG_SF_DEFAULT_CS
++#define CONFIG_ENV_SPI_MODE	CONFIG_SF_DEFAULT_MODE
++#define CONFIG_ENV_SPI_MAX_HZ	CONFIG_SF_DEFAULT_SPEED
++#else
++#define CONFIG_ENV_IS_IN_MMC
++#define CONFIG_ENV_OFFSET       (64 * SZ_64K)
++#define CONFIG_SYS_MMC_ENV_PART		0	/* user area */
++#endif
++
++#define CONFIG_SYS_MMC_IMG_LOAD_PART	1
++
++/* On LPDDR4 board, USDHC1 is for eMMC, USDHC2 is for SD on CPU board
++  */
++#define CONFIG_SYS_MMC_ENV_DEV		1   /* USDHC2 */
++#define CONFIG_MMCROOT			"/dev/mmcblk1p2"  /* USDHC2 */
++#define CONFIG_SYS_FSL_USDHC_NUM	2
++
++/* Size of malloc() pool */
++#define CONFIG_SYS_MALLOC_LEN		((CONFIG_ENV_SIZE + (32*1024)) * 1024)
++
++#define CONFIG_SYS_SDRAM_BASE		0x80000000
++#define CONFIG_NR_DRAM_BANKS		3
++#define PHYS_SDRAM_1			0x80000000
++#define PHYS_SDRAM_2			0x880000000
++#define PHYS_SDRAM_1_SIZE		0x80000000	/* 2 GB */
++/* LPDDR4 board total DDR is 3GB */
++#define PHYS_SDRAM_2_SIZE		0x40000000	/* 1 GB */
++
++/* Serial */
++#define CONFIG_BAUDRATE			115200
++
++/* Monitor Command Prompt */
++#define CONFIG_SYS_LONGHELP
++#define CONFIG_HUSH_PARSER
++#define CONFIG_SYS_PROMPT_HUSH_PS2     "> "
++#define CONFIG_AUTO_COMPLETE
++#define CONFIG_SYS_CBSIZE              1024
++#define CONFIG_SYS_MAXARGS             64
++#define CONFIG_SYS_BARGSIZE CONFIG_SYS_CBSIZE
++#define CONFIG_SYS_PBSIZE		(CONFIG_SYS_CBSIZE + \
++					sizeof(CONFIG_SYS_PROMPT) + 16)
++#define CONFIG_CMDLINE_EDITING
++
++/* Generic Timer Definitions */
++#define COUNTER_FREQUENCY		8000000	/* 8MHz */
++
++#ifndef CONFIG_DM_PCA953X
++#define CONFIG_PCA953X
++#define CONFIG_CMD_PCA953X
++#define CONFIG_CMD_PCA953X_INFO
++#endif
++
++#define CONFIG_IMX_SMMU
++
++/* MT35XU512ABA1G12 has only one Die, so QSPI0 B won't work */
++#ifdef CONFIG_FSL_FSPI
++#define CONFIG_SF_DEFAULT_BUS		0
++#define CONFIG_SF_DEFAULT_CS		0
++#define CONFIG_SF_DEFAULT_SPEED	40000000
++#define CONFIG_SF_DEFAULT_MODE		SPI_MODE_0
++#define FSL_FSPI_FLASH_SIZE		SZ_64M
++#define FSL_FSPI_FLASH_NUM		1
++#define FSPI0_BASE_ADDR			0x5d120000
++#define FSPI0_AMBA_BASE			0
++#define CONFIG_SYS_FSL_FSPI_AHB
++#endif
++
++/* USB Config */
++#ifdef CONFIG_CMD_USB
++#define CONFIG_USB_MAX_CONTROLLER_COUNT 2
++
++/* USB 3.0 controller configs */
++#ifdef CONFIG_USB_XHCI_IMX8
++#define CONFIG_SYS_USB_XHCI_MAX_ROOT_PORTS	2
++#endif
++
++/* USB OTG controller configs */
++#ifdef CONFIG_USB_EHCI_HCD
++#define CONFIG_USB_HOST_ETHER
++#define CONFIG_USB_ETHER_ASIX
++#define CONFIG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
++#endif
++#endif /* CONFIG_CMD_USB */
++
++#ifdef CONFIG_USB_GADGET
++#define CONFIG_USBD_HS
++#define CONFIG_USB_FUNCTION_MASS_STORAGE
++#endif
++
++#define CONFIG_OF_SYSTEM_SETUP
++#define BOOTAUX_RESERVED_MEM_BASE 0x88000000
++#define BOOTAUX_RESERVED_MEM_SIZE 0x08000000 /* Reserve from second 128MB */
++
++#endif /* __TQMA8XX_H */

@@ -1,0 +1,32 @@
+From fb1fe2d1a3a24622b090c1cc49166e0f2263e583 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 24 Sep 2018 17:22:13 +0200
+Subject: [PATCH] tqma8xx: wip: board bringup
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ include/configs/tqma8xx.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/include/configs/tqma8xx.h b/include/configs/tqma8xx.h
+index 86f997bc2e..8d2fdcf0cb 100644
+--- a/include/configs/tqma8xx.h
++++ b/include/configs/tqma8xx.h
+@@ -16,7 +16,7 @@
+ #define CONFIG_ARCH_MISC_INIT
+ 
+ /* Flat Device Tree Definitions */
+-#define CONFIG_OF_BOARD_SETUP
++/* #define CONFIG_OF_BOARD_SETUP */
+ 
+ #undef CONFIG_CMD_EXPORTENV
+ #undef CONFIG_CMD_IMPORTENV
+@@ -163,7 +163,7 @@
+ 
+ #define CONFIG_IMX_SMMU
+ 
+-#define CONFIG_OF_SYSTEM_SETUP
++/* #define CONFIG_OF_SYSTEM_SETUP */
+ 
+ #define BOOTAUX_RESERVED_MEM_BASE 0x88000000
+ #define BOOTAUX_RESERVED_MEM_SIZE 0x08000000 /* Reserve from second 128MB */

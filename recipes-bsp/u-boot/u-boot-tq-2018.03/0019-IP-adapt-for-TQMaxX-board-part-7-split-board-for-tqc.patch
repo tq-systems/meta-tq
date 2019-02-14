@@ -1,0 +1,485 @@
+From 1a3fb016384b615a18e2c116f16674cd802af532 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Fri, 28 Sep 2018 17:07:33 +0200
+Subject: [PATCH] IP: adapt for TQMaxX board part 7 - split board for tqc_bb
+ support
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8qx/Kconfig          |  44 +++++++
+ board/tqc/tqma8qx/Makefile         |   4 +-
+ board/tqc/tqma8qx/tqma8qx-mba8qx.c | 177 +++++++++++++++++++++++++++++
+ board/tqc/tqma8qx/tqma8qx.c        | 115 ++++---------------
+ configs/tqma8qx_defconfig          |   1 -
+ 5 files changed, 247 insertions(+), 94 deletions(-)
+ create mode 100644 board/tqc/tqma8qx/tqma8qx-mba8qx.c
+
+diff --git a/board/tqc/tqma8qx/Kconfig b/board/tqc/tqma8qx/Kconfig
+index 2e6771e164..029a25ee6a 100644
+--- a/board/tqc/tqma8qx/Kconfig
++++ b/board/tqc/tqma8qx/Kconfig
+@@ -9,6 +9,50 @@ config SYS_VENDOR
+ config SYS_CONFIG_NAME
+ 	default "tqma8qx"
+ 
++choice
++	prompt "TQMa8QX CPU variant"
++	default TQMA8QX_MX8QXP
++	help
++	  Select cpu variant for TQMa8QX
++
++config TQMA8QX_MX8QXP
++	bool "TQMa8QX with i.MX8QXP"
++	help
++	  Select the CPU variant
++
++endchoice
++
++
++choice
++	prompt "TQMa8QX base board variant"
++	default MBA8QX
++	help
++	  Select base board for TQMa8QX
++
++config MBA8QX
++	bool "TQMa8QX on MBa8QX Starterkit"
++	select TQC_SDMMC
++	help
++	  Select the MBa8QX starterkit. This features a GigE Phy, USB, SD-Card
++	  etc.
++
++endchoice
++
++choice
++	prompt "TQMa8QX boot device"
++	default TQMBA8QX_SDCARD
++	help
++	  Select boot device for TQMa8QX
++
++config TQMBA8QX_SDCARD
++	bool "TQMa8QX from SD / e-MMC"
++	select SD_BOOT
++	help
++	  Select booting from SD / e-MMC
++
++endchoice
++
++
+ source "board/tqc/common/Kconfig"
+ 
+ endif
+diff --git a/board/tqc/tqma8qx/Makefile b/board/tqc/tqma8qx/Makefile
+index e0e7a180de..62ef156eb6 100644
+--- a/board/tqc/tqma8qx/Makefile
++++ b/board/tqc/tqma8qx/Makefile
+@@ -1,7 +1,9 @@
+ #
+-# Copyright 2018 TQ Systems
++# Copyright 2018 TQ Systems GmbH
+ #
+ # SPDX-License-Identifier:	GPL-2.0+
+ #
+ 
+ obj-y += tqma8qx.o
++obj-$(CONFIG_MBA8QX) += tqma8qx-mba8qx.o
++
+diff --git a/board/tqc/tqma8qx/tqma8qx-mba8qx.c b/board/tqc/tqma8qx/tqma8qx-mba8qx.c
+new file mode 100644
+index 0000000000..00f7fe36ee
+--- /dev/null
++++ b/board/tqc/tqma8qx/tqma8qx-mba8qx.c
+@@ -0,0 +1,177 @@
++/*
++ * Copyright 2017 NXP
++ *
++ * SPDX-License-Identifier:	GPL-2.0+
++ */
++#include <common.h>
++#include <malloc.h>
++#include <errno.h>
++#include <fsl_ifc.h>
++#include <fdt_support.h>
++#include <libfdt.h>
++#include <environment.h>
++#include <fsl_esdhc.h>
++
++#include <asm/io.h>
++#include <asm/arch/clock.h>
++#include <asm/imx-common/sci/sci.h>
++#include <asm/arch/imx8-pins.h>
++#include <dm.h>
++#include <asm/arch/iomux.h>
++#include <asm/arch/sys_proto.h>
++#include <power-domain.h>
++
++#include "../common/tqc_bb.h"
++#include "../common/tqc_eeprom.h"
++
++
++DECLARE_GLOBAL_DATA_PTR;
++
++#define ESDHC_PAD_CTRL	((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define ESDHC_CLK_PAD_CTRL	((SC_PAD_CONFIG_OUT_IN << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++
++#define ENET_INPUT_PAD_CTRL	((SC_PAD_CONFIG_OD_IN << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_18V_10MA << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define ENET_NORMAL_PAD_CTRL	((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_18V_10MA << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define FSPI_PAD_CTRL	((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define GPIO_PAD_CTRL	((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define I2C_PAD_CTRL	((SC_PAD_CONFIG_OUT_IN << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_LOW << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define UART_PAD_CTRL	((SC_PAD_CONFIG_OUT_IN << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++static iomux_cfg_t uart1_pads[] = {
++	SC_P_UART1_RX | MUX_MODE_ALT(0) | MUX_PAD_CTRL(UART_PAD_CTRL),
++	SC_P_UART1_TX | MUX_MODE_ALT(0) | MUX_PAD_CTRL(UART_PAD_CTRL),
++};
++
++static void setup_iomux_uart(void)
++{
++	imx8_iomux_setup_multiple_pads(uart1_pads, ARRAY_SIZE(uart1_pads));
++}
++
++int tqc_bb_board_early_init_f(void)
++{
++	sc_ipc_t ipcHndl = 0;
++	sc_err_t sciErr = 0;
++
++	ipcHndl = gd->arch.ipc_channel_handle;
++
++	/* Power up UART1 */
++	sciErr = sc_pm_set_resource_power_mode(ipcHndl, SC_R_UART_1, SC_PM_PW_MODE_ON);
++	if (sciErr != SC_ERR_NONE)
++		return 0;
++
++	/* Set UART1 clock root to 80 MHz */
++	sc_pm_clock_rate_t rate = 80000000;
++	sciErr = sc_pm_set_clock_rate(ipcHndl, SC_R_UART_1, 2, &rate);
++	if (sciErr != SC_ERR_NONE)
++		return 0;
++
++	/* Enable UART1 clock root */
++	sciErr = sc_pm_clock_enable(ipcHndl, SC_R_UART_1, 2, true, false);
++	if (sciErr != SC_ERR_NONE)
++		return 0;
++
++	setup_iomux_uart();
++
++	return 0;
++}
++
++static iomux_cfg_t usdhc1_sd[] = {
++	SC_P_USDHC1_CLK | MUX_PAD_CTRL(ESDHC_CLK_PAD_CTRL),
++	SC_P_USDHC1_CMD | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_USDHC1_DATA0 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_USDHC1_DATA1 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_USDHC1_DATA2 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_USDHC1_DATA3 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_USDHC1_WP    | MUX_PAD_CTRL(ESDHC_PAD_CTRL), /* Mux for WP */
++	SC_P_USDHC1_CD_B  | MUX_MODE_ALT(4) | MUX_PAD_CTRL(ESDHC_PAD_CTRL), /* Mux for CD,  GPIO4 IO22 */
++	SC_P_USDHC1_RESET_B | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++	SC_P_USDHC1_VSELECT | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
++};
++
++#define USDHC1_CD_GPIO	IMX_GPIO_NR(4, 22)
++
++static struct fsl_esdhc_cfg usdhc_cfg = {
++	USDHC2_BASE_ADDR, 0, 4,
++};
++
++int tqc_bb_board_mmc_init(bd_t *bis)
++{
++	int i, ret;
++	struct power_domain pd;
++
++	/*
++	 * According to the board_mmc_init() the following map is done:
++	 * (U-boot device node)    (Physical Port)
++	 * mmc0                    USDHC1
++	 * mmc1                    USDHC2
++	 */
++	if (!power_domain_lookup_name("conn_sdhc1", &pd))
++		power_domain_on(&pd);
++	imx8_iomux_setup_multiple_pads(usdhc1_sd, ARRAY_SIZE(usdhc1_sd));
++	init_clk_usdhc(1);
++	usdhc_cfg.sdhc_clk = mxc_get_clock(MXC_ESDHC2_CLK);
++	gpio_request(USDHC1_CD_GPIO, "sd1_cd");
++	gpio_direction_input(USDHC1_CD_GPIO);
++
++	ret = fsl_esdhc_initialize(bis, &usdhc_cfg);
++	if (ret) {
++		printf("Warning: failed to initialize mmc dev %d\n", i);
++		return ret;
++	}
++
++	return ret;
++}
++
++
++int tqc_bb_checkboard(void)
++{
++	puts("Board: TQMa8QX on MBa8QX (iMX8QXP)\n");
++
++	return 0;
++}
++
++int tqc_bb_board_init(void)
++{
++	return 0;
++}
++
++#ifdef CONFIG_OF_BOARD_SETUP
++int tqc_bb_ft_board_setup(void *blob, bd_t *bd)
++{
++	return 0;
++}
++#endif
++
++int board_mmc_get_env_dev(int devno)
++{
++	return devno;
++}
++
++int tqc_bb_board_late_init(void)
++{
++#ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
++	setenv("board_name", "MBa8QX");
++	setenv("board_rev", "iMX8QXP");
++#endif
++	return 0;
++
++#ifdef CONFIG_ENV_IS_IN_MMC
++	board_late_mmc_env_init();
++#endif
++}
++
+diff --git a/board/tqc/tqma8qx/tqma8qx.c b/board/tqc/tqma8qx/tqma8qx.c
+index a9234e30cd..41549ac7e0 100644
+--- a/board/tqc/tqma8qx/tqma8qx.c
++++ b/board/tqc/tqma8qx/tqma8qx.c
+@@ -24,6 +24,8 @@
+ #include <power-domain.h>
+ #include <cdns3-uboot.h>
+ 
++#include "../common/tqc_bb.h"
++
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+ #define ESDHC_PAD_CTRL	((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
+@@ -38,46 +40,13 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define GPIO_PAD_CTRL	((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
+ 						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
+ 
++
+ #define I2C_PAD_CTRL	((SC_PAD_CONFIG_OUT_IN << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
+ 						| (SC_PAD_28FDSOI_DSE_DV_LOW << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
+ 
+-#define UART_PAD_CTRL	((SC_PAD_CONFIG_OUT_IN << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
+-						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
+-
+-static iomux_cfg_t uart1_pads[] = {
+-	SC_P_UART1_RX | MUX_PAD_CTRL(UART_PAD_CTRL),
+-	SC_P_UART1_TX | MUX_PAD_CTRL(UART_PAD_CTRL),
+-};
+-
+-static void setup_iomux_uart(void)
+-{
+-	imx8_iomux_setup_multiple_pads(uart1_pads, ARRAY_SIZE(uart1_pads));
+-}
+-
+ int board_early_init_f(void)
+ {
+-	sc_ipc_t ipcHndl = 0;
+-	sc_err_t sciErr = 0;
+-
+-	ipcHndl = gd->arch.ipc_channel_handle;
+-
+-	/* Power up UART1 */
+-	sciErr = sc_pm_set_resource_power_mode(ipcHndl, SC_R_UART_1, SC_PM_PW_MODE_ON);
+-	if (sciErr != SC_ERR_NONE)
+-		return 0;
+-
+-	/* Set UART1 clock root to 80 MHz */
+-	sc_pm_clock_rate_t rate = 80000000;
+-	sciErr = sc_pm_set_clock_rate(ipcHndl, SC_R_UART_1, 2, &rate);
+-	if (sciErr != SC_ERR_NONE)
+-		return 0;
+-
+-	/* Enable UART1 clock root */
+-	sciErr = sc_pm_clock_enable(ipcHndl, SC_R_UART_1, 2, true, false);
+-	if (sciErr != SC_ERR_NONE)
+-		return 0;
+-
+-	setup_iomux_uart();
++	tqc_bb_board_early_init_f();
+ 
+ 	return 0;
+ }
+@@ -86,9 +55,8 @@ int board_early_init_f(void)
+ 
+ #define USDHC1_CD_GPIO	IMX_GPIO_NR(4, 22)
+ 
+-static struct fsl_esdhc_cfg usdhc_cfg[CONFIG_SYS_FSL_USDHC_NUM] = {
+-	{USDHC1_BASE_ADDR, 0, 8},
+-	{USDHC2_BASE_ADDR, 0, 4},
++static struct fsl_esdhc_cfg usdhc_cfg = {
++	USDHC1_BASE_ADDR, 0, 8,
+ };
+ 
+ static iomux_cfg_t emmc0[] = {
+@@ -105,19 +73,6 @@ static iomux_cfg_t emmc0[] = {
+ 	SC_P_EMMC0_STROBE | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
+ };
+ 
+-static iomux_cfg_t usdhc1_sd[] = {
+-	SC_P_USDHC1_CLK | MUX_PAD_CTRL(ESDHC_CLK_PAD_CTRL),
+-	SC_P_USDHC1_CMD | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
+-	SC_P_USDHC1_DATA0 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
+-	SC_P_USDHC1_DATA1 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
+-	SC_P_USDHC1_DATA2 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
+-	SC_P_USDHC1_DATA3 | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
+-	SC_P_USDHC1_WP    | MUX_PAD_CTRL(ESDHC_PAD_CTRL), /* Mux for WP */
+-	SC_P_USDHC1_CD_B  | MUX_MODE_ALT(4) | MUX_PAD_CTRL(ESDHC_PAD_CTRL), /* Mux for CD,  GPIO4 IO22 */
+-	SC_P_USDHC1_RESET_B | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
+-	SC_P_USDHC1_VSELECT | MUX_PAD_CTRL(ESDHC_PAD_CTRL),
+-};
+-
+ int board_mmc_init(bd_t *bis)
+ {
+ 	int i, ret;
+@@ -129,37 +84,19 @@ int board_mmc_init(bd_t *bis)
+ 	 * mmc0                    USDHC1
+ 	 * mmc1                    USDHC2
+ 	 */
+-	for (i = 0; i < CONFIG_SYS_FSL_USDHC_NUM; i++) {
+-		switch (i) {
+-		case 0:
+-			if (!power_domain_lookup_name("conn_sdhc0", &pd))
+-				power_domain_on(&pd);
+-			imx8_iomux_setup_multiple_pads(emmc0, ARRAY_SIZE(emmc0));
+-			init_clk_usdhc(0);
+-			usdhc_cfg[i].sdhc_clk = mxc_get_clock(MXC_ESDHC_CLK);
+-			break;
+-		case 1:
+-			if (!power_domain_lookup_name("conn_sdhc1", &pd))
+-				power_domain_on(&pd);
+-			imx8_iomux_setup_multiple_pads(usdhc1_sd, ARRAY_SIZE(usdhc1_sd));
+-			init_clk_usdhc(1);
+-			usdhc_cfg[i].sdhc_clk = mxc_get_clock(MXC_ESDHC2_CLK);
+-			gpio_request(USDHC1_CD_GPIO, "sd1_cd");
+-			gpio_direction_input(USDHC1_CD_GPIO);
+-			break;
+-		default:
+-			printf("Warning: you configured more USDHC controllers"
+-				"(%d) than supported by the board\n", i + 1);
+-			return 0;
+-		}
+-		ret = fsl_esdhc_initialize(bis, &usdhc_cfg[i]);
+-		if (ret) {
+-			printf("Warning: failed to initialize mmc dev %d\n", i);
+-			return ret;
+-		}
++	if (!power_domain_lookup_name("conn_sdhc0", &pd))
++		power_domain_on(&pd);
++	imx8_iomux_setup_multiple_pads(emmc0, ARRAY_SIZE(emmc0));
++	init_clk_usdhc(0);
++	usdhc_cfg.sdhc_clk = mxc_get_clock(MXC_ESDHC_CLK);
++
++	ret = fsl_esdhc_initialize(bis, &usdhc_cfg);
++	if (ret) {
++		printf("Warning: failed to initialize mmc dev %d\n", i);
++		return ret;
+ 	}
+ 
+-	return 0;
++	return tqc_bb_board_mmc_init(bis);
+ }
+ 
+ int board_mmc_getcd(struct mmc *mmc)
+@@ -209,7 +146,6 @@ int checkboard(void)
+ 		printf("\nSCI error! Invalid handle\n");
+ 
+ #ifdef SCI_FORCE_ABORT
+-#error
+ 	sc_rpc_msg_t abort_msg;
+ 
+ 	puts("Send abort request\n");
+@@ -221,7 +157,7 @@ int checkboard(void)
+ 	sc_ipc_close(SC_IPC_CH);
+ #endif /* SCI_FORCE_ABORT */
+ 
+-	return 0;
++	return tqc_bb_checkboard();
+ }
+ 
+ int board_init(void)
+@@ -230,6 +166,8 @@ int board_init(void)
+ 	board_gpio_init();
+ #endif
+ 
++	tqc_bb_board_init();
++
+ 	return 0;
+ }
+ 
+@@ -265,15 +203,10 @@ void reset_cpu(ulong addr)
+ #ifdef CONFIG_OF_BOARD_SETUP
+ int ft_board_setup(void *blob, bd_t *bd)
+ {
+-	return 0;
++	return tqc_bb_ft_board_setup(blob, bd);
+ }
+ #endif
+ 
+-int board_mmc_get_env_dev(int devno)
+-{
+-	return devno;
+-}
+-
+ int board_late_init(void)
+ {
+ #ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
+@@ -281,15 +214,13 @@ int board_late_init(void)
+ 	setenv("board_rev", "iMX8QXP");
+ #endif
+ 
++	tqc_bb_board_late_init();
++
+ 	setenv("sec_boot", "no");
+ #ifdef CONFIG_AHAB_BOOT
+ 	setenv("sec_boot", "yes");
+ #endif
+ 
+-#ifdef CONFIG_ENV_IS_IN_MMC
+-	board_late_mmc_env_init();
+-#endif
+-
+ 	return 0;
+ }
+ 
+diff --git a/configs/tqma8qx_defconfig b/configs/tqma8qx_defconfig
+index b01926957c..4b40a223d5 100644
+--- a/configs/tqma8qx_defconfig
++++ b/configs/tqma8qx_defconfig
+@@ -5,7 +5,6 @@ CONFIG_TARGET_TQMA8QX=y
+ CONFIG_IMX_BOOTAUX=y
+ CONFIG_DEFAULT_DEVICE_TREE="fsl-imx8qxp-tqma8qx"
+ CONFIG_DISTRO_DEFAULTS=y
+-CONFIG_SD_BOOT=y
+ CONFIG_BOOTDELAY=3
+ CONFIG_VERSION_VARIABLE=y
+ # CONFIG_CMD_IMPORTENV is not set

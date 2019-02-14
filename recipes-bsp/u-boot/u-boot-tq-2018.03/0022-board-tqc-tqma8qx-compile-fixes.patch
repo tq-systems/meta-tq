@@ -1,0 +1,97 @@
+From 3b70629bc2434f3c7724693e18b92d1668ca8124 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 14 Feb 2019 10:53:37 +0100
+Subject: [PATCH] board: tqc/tqma8qx: compile fixes
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8qx/tqma8qx-mba8qx.c | 10 +++++-----
+ board/tqc/tqma8qx/tqma8qx.c        | 14 +++++++-------
+ 2 files changed, 12 insertions(+), 12 deletions(-)
+
+diff --git a/board/tqc/tqma8qx/tqma8qx-mba8qx.c b/board/tqc/tqma8qx/tqma8qx-mba8qx.c
+index 00f7fe36ee..2f2b51dee6 100644
+--- a/board/tqc/tqma8qx/tqma8qx-mba8qx.c
++++ b/board/tqc/tqma8qx/tqma8qx-mba8qx.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright 2017 NXP
++ * Copyright 2018-2019 TQ Systems GmbH
+  *
+  * SPDX-License-Identifier:	GPL-2.0+
+  */
+@@ -8,13 +8,13 @@
+ #include <errno.h>
+ #include <fsl_ifc.h>
+ #include <fdt_support.h>
+-#include <libfdt.h>
++#include <linux/libfdt.h>
+ #include <environment.h>
+ #include <fsl_esdhc.h>
+ 
+ #include <asm/io.h>
+ #include <asm/arch/clock.h>
+-#include <asm/imx-common/sci/sci.h>
++#include <asm/mach-imx/sci/sci.h>
+ #include <asm/arch/imx8-pins.h>
+ #include <dm.h>
+ #include <asm/arch/iomux.h>
+@@ -165,8 +165,8 @@ int board_mmc_get_env_dev(int devno)
+ int tqc_bb_board_late_init(void)
+ {
+ #ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
+-	setenv("board_name", "MBa8QX");
+-	setenv("board_rev", "iMX8QXP");
++	env_set("board_name", "MBa8QX");
++	env_set("board_rev", "iMX8QXP");
+ #endif
+ 	return 0;
+ 
+diff --git a/board/tqc/tqma8qx/tqma8qx.c b/board/tqc/tqma8qx/tqma8qx.c
+index 41549ac7e0..04c90b79b6 100644
+--- a/board/tqc/tqma8qx/tqma8qx.c
++++ b/board/tqc/tqma8qx/tqma8qx.c
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright 2018 TQ Systems GmbH
++ * Copyright 2018-2019 TQ Systems GmbH
+  *
+  * SPDX-License-Identifier:	GPL-2.0+
+  */
+@@ -9,14 +9,14 @@
+ #include <netdev.h>
+ #include <fsl_ifc.h>
+ #include <fdt_support.h>
+-#include <libfdt.h>
++#include <linux/libfdt.h>
+ #include <environment.h>
+ #include <fsl_esdhc.h>
+ 
+ #include <asm/io.h>
+ #include <asm/gpio.h>
+ #include <asm/arch/clock.h>
+-#include <asm/imx-common/sci/sci.h>
++#include <asm/mach-imx/sci/sci.h>
+ #include <asm/arch/imx8-pins.h>
+ #include <dm.h>
+ #include <asm/arch/iomux.h>
+@@ -210,15 +210,15 @@ int ft_board_setup(void *blob, bd_t *bd)
+ int board_late_init(void)
+ {
+ #ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
+-	setenv("board_name", "TQMa8QX");
+-	setenv("board_rev", "iMX8QXP");
++	env_set("board_name", "TQMa8QX");
++	env_set("board_rev", "iMX8QXP");
+ #endif
+ 
+ 	tqc_bb_board_late_init();
+ 
+-	setenv("sec_boot", "no");
++	env_set("sec_boot", "no");
+ #ifdef CONFIG_AHAB_BOOT
+-	setenv("sec_boot", "yes");
++	env_set("sec_boot", "yes");
+ #endif
+ 
+ 	return 0;
