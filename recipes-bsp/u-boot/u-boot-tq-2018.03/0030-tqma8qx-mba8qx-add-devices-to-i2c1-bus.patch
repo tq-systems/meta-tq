@@ -1,0 +1,52 @@
+From 91ddca5d007dd87496c51b2fde42512ccd945c38 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 25 Oct 2018 12:16:17 +0200
+Subject: [PATCH] tqma8qx-mba8qx: add devices to i2c1 bus
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts | 24 +++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts b/arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts
+index bbccd7c812..7319fa2339 100644
+--- a/arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts
+@@ -102,6 +102,12 @@
+ 			>;
+ 		};
+ 
++		pinctrl_pca9538: pca9538grp {
++			fsl,pins = <
++				SC_P_MIPI_CSI0_GPIO0_00_LSIO_GPIO3_IO08		0x06000020
++			>;
++		};
++
+ 		pinctrl_usdhc2_gpio: usdhc2gpiogrp {
+ 			fsl,pins = <
+ 				SC_P_USDHC1_RESET_B_LSIO_GPIO4_IO19	0x06000021
+@@ -209,6 +215,24 @@
+ 	status = "okay";
+ };
+ 
++&i2c1 {
++	eeprom2: 24c02@54 {
++		compatible = "atmel,24c02";
++		reg = <0x54>;
++		pagesize = <16>;
++		status = "okay";
++	};
++
++	expander: pca9538@70 {
++		compatible = "nxp,pca9538";
++		reg = <0x70>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_pca9538>;
++		interrupt-parent = <&gpio3>;
++		interrupts = <8 IRQ_TYPE_LEVEL_LOW>;
++	};
++};
++
+ &usdhc2 {
+ 	pinctrl-names = "default", "state_100mhz", "state_200mhz";
+ 	pinctrl-0 = <&pinctrl_usdhc2>, <&pinctrl_usdhc2_gpio>;

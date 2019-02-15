@@ -1,0 +1,29 @@
+From 9592bba88539118629c8a5244ab7571a928015b9 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 24 Oct 2018 17:49:00 +0200
+Subject: [PATCH] tqma8qx: configure memtest
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ include/configs/tqma8qx.h | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
+index a5547945f9..abf649cbdc 100644
+--- a/include/configs/tqma8qx.h
++++ b/include/configs/tqma8qx.h
+@@ -307,6 +307,14 @@
+ #define BOOTAUX_RESERVED_MEM_BASE 0x88000000
+ #define BOOTAUX_RESERVED_MEM_SIZE 0x08000000 /* Reserve from second 128MB */
+ 
++#define CONFIG_CMD_MEMTEST
++#if defined(CONFIG_CMD_MEMTEST)
++#define CONFIG_SYS_ALT_MEMTEST
++#define CONFIG_SYS_MEMTEST_START  (BOOTAUX_RESERVED_MEM_BASE)
++#define CONFIG_SYS_MEMTEST_END    (CONFIG_SYS_MEMTEST_START + (PHYS_SDRAM_1_SIZE / 4) * 3)
++#define CONFIG_SYS_MEMTEST_SCRATCH CONFIG_SYS_MEMTEST_END
++#endif
++
+ #if defined(CONFIG_MBA8QX)
+ #include "tqma8qx-mba8qx.h"
+ #else

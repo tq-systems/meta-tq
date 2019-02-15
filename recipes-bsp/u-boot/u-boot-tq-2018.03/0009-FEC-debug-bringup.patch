@@ -1,0 +1,362 @@
+From 340b5cc19189722cacafd952207f4a34cd4cd741 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 14 Feb 2019 17:26:53 +0100
+Subject: [PATCH] FEC: debug bringup
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/freescale/imx8qxp_mek/imx8qxp_mek.c | 20 ++++++++++++++++++++
+ drivers/net/fec_mxc.c                     |  8 ++++++++
+ drivers/net/phy/phy.c                     | 14 ++++++++++++--
+ drivers/net/phy/ti.c                      | 16 ++++++++++++++++
+ drivers/pinctrl/nxp/pinctrl-imx.c         |  2 +-
+ net/eth-uclass.c                          |  5 +++++
+ net/eth_common.c                          |  6 ++++++
+ net/eth_legacy.c                          |  8 +++++++-
+ 8 files changed, 75 insertions(+), 4 deletions(-)
+
+diff --git a/board/freescale/imx8qxp_mek/imx8qxp_mek.c b/board/freescale/imx8qxp_mek/imx8qxp_mek.c
+index 71e882b899..8447417570 100644
+--- a/board/freescale/imx8qxp_mek/imx8qxp_mek.c
++++ b/board/freescale/imx8qxp_mek/imx8qxp_mek.c
+@@ -244,10 +244,14 @@ static iomux_cfg_t pad_enet0[] = {
+ 
+ static void setup_iomux_fec(void)
+ {
++printf("%s +++\n", __func__);
++
+ 	if (0 == CONFIG_FEC_ENET_DEV)
+ 		imx8_iomux_setup_multiple_pads(pad_enet0, ARRAY_SIZE(pad_enet0));
+ 	else
+ 		imx8_iomux_setup_multiple_pads(pad_enet1, ARRAY_SIZE(pad_enet1));
++
++printf("%s --\n", __func__);
+ }
+ 
+ static void enet_device_phy_reset(void)
+@@ -255,6 +259,8 @@ static void enet_device_phy_reset(void)
+ 	struct gpio_desc desc;
+ 	int ret;
+ 
++printf("%s +++\n", __func__);
++
+ 	/* The BB_PER_RST_B will reset the ENET1 PHY */
+ 	if (0 == CONFIG_FEC_ENET_DEV) {
+ 		ret = dm_gpio_lookup_name("gpio@1a_4", &desc);
+@@ -273,6 +279,8 @@ static void enet_device_phy_reset(void)
+ 
+ 	/* The board has a long delay for this reset to become stable */
+ 	mdelay(200);
++
++printf("%s ---\n", __func__);
+ }
+ 
+ int board_eth_init(bd_t *bis)
+@@ -280,6 +288,8 @@ int board_eth_init(bd_t *bis)
+ 	int ret;
+ 	struct power_domain pd;
+ 
++printf("%s +++\n", __func__);
++
+ 	printf("[%s] %d\n", __func__, __LINE__);
+ 
+ 	if (CONFIG_FEC_ENET_DEV) {
+@@ -297,11 +307,15 @@ int board_eth_init(bd_t *bis)
+ 	if (ret)
+ 		printf("FEC1 MXC: %s:failed\n", __func__);
+ 
++printf("%s ---\n", __func__);
++
+ 	return ret;
+ }
+ 
+ int board_phy_config(struct phy_device *phydev)
+ {
++printf("%s +++\n", __func__);
++
+ 	phy_write(phydev, MDIO_DEVAD_NONE, 0x1d, 0x1f);
+ 	phy_write(phydev, MDIO_DEVAD_NONE, 0x1e, 0x8);
+ 
+@@ -313,13 +327,17 @@ int board_phy_config(struct phy_device *phydev)
+ 	if (phydev->drv->config)
+ 		phydev->drv->config(phydev);
+ 
++printf("%s ---\n", __func__);
++
+ 	return 0;
+ }
+ 
+ static int setup_fec(int ind)
+ {
++printf("%s +++\n", __func__);
+ 	/* Reset ENET PHY */
+ 	enet_device_phy_reset();
++printf("%s ---\n", __func__);
+ 
+ 	return 0;
+ }
+@@ -573,7 +591,9 @@ int board_init(void)
+ #endif
+ 
+ #ifdef CONFIG_FEC_MXC
++printf("-> setup_fec\n");
+ 	setup_fec(CONFIG_FEC_ENET_DEV);
++printf("<- setup_fec\n");
+ #endif
+ 
+ #if defined(CONFIG_USB) && defined(CONFIG_USB_TCPC)
+diff --git a/drivers/net/fec_mxc.c b/drivers/net/fec_mxc.c
+index cc23aeacf5..d82747bc5f 100644
+--- a/drivers/net/fec_mxc.c
++++ b/drivers/net/fec_mxc.c
+@@ -1266,6 +1266,8 @@ static int fecmxc_probe(struct udevice *dev)
+ 	uint32_t start;
+ 	int ret;
+ 
++printf("%s +++\n", __func__);
++
+ #ifdef CONFIG_MX6
+ 	if (mx6_enet_fused((uint32_t)priv->eth)) {
+ 		printf("Ethernet@0x%x is fused, disable it\n", (uint32_t)priv->eth);
+@@ -1310,6 +1312,8 @@ static int fecmxc_probe(struct udevice *dev)
+ 	if (ret)
+ 		goto err_phy;
+ 
++printf("%s ---\n", __func__);
++
+ 	return 0;
+ 
+ err_phy:
+@@ -1339,6 +1343,8 @@ static int fecmxc_ofdata_to_platdata(struct udevice *dev)
+ 	struct fec_priv *priv = dev_get_priv(dev);
+ 	const char *phy_mode;
+ 
++printf("%s +++\n", __func__);
++
+ 	pdata->iobase = (phys_addr_t)devfdt_get_addr(dev);
+ 	priv->eth = (struct ethernet_regs *)pdata->iobase;
+ 
+@@ -1357,6 +1363,8 @@ static int fecmxc_ofdata_to_platdata(struct udevice *dev)
+ 	 * and implemet the enet reset code on .probe call
+ 	 */
+ 
++printf("%s ---\n", __func__);
++
+ 	return 0;
+ }
+ 
+diff --git a/drivers/net/phy/phy.c b/drivers/net/phy/phy.c
+index 1d8e81be2d..afa66c7a60 100644
+--- a/drivers/net/phy/phy.c
++++ b/drivers/net/phy/phy.c
+@@ -254,7 +254,7 @@ int genphy_update_link(struct phy_device *phydev)
+ 			}
+ 
+ 			if (ctrlc()) {
+-				puts("user interrupt!\n");
++				printf("user interrupt!\n");
+ 				phydev->link = 0;
+ 				return -EINTR;
+ 			}
+@@ -465,6 +465,8 @@ static LIST_HEAD(phy_drivers);
+ 
+ int phy_init(void)
+ {
++printf("%s +++\n", __func__);
++
+ #ifdef CONFIG_B53_SWITCH
+ 	phy_b53_init();
+ #endif
+@@ -531,11 +533,16 @@ int phy_init(void)
+ #ifdef CONFIG_PHY_FIXED
+ 	phy_fixed_init();
+ #endif
++
++printf("%s ---\n", __func__);
++
+ 	return 0;
+ }
+ 
+ int phy_register(struct phy_driver *drv)
+ {
++printf("%s +++\n", __func__);
++
+ 	INIT_LIST_HEAD(&drv->list);
+ 	list_add_tail(&drv->list, &phy_drivers);
+ 
+@@ -553,6 +560,8 @@ int phy_register(struct phy_driver *drv)
+ 	if (drv->writeext)
+ 		drv->writeext += gd->reloc_off;
+ #endif
++printf("%s ---\n", __func__);
++
+ 	return 0;
+ }
+ 
+@@ -735,6 +744,7 @@ static struct phy_device *get_phy_device_by_mask(struct mii_dev *bus,
+ {
+ 	int i;
+ 	struct phy_device *phydev;
++printf("%s +++\n", __func__);
+ 
+ 	phydev = search_for_existing_phy(bus, phy_mask, interface);
+ 	if (phydev)
+@@ -821,7 +831,7 @@ int phy_reset(struct phy_device *phydev)
+ 	}
+ 
+ 	if (reg & BMCR_RESET) {
+-		puts("PHY reset timed out\n");
++		printf("PHY reset timed out\n");
+ 		return -1;
+ 	}
+ 
+diff --git a/drivers/net/phy/ti.c b/drivers/net/phy/ti.c
+index 6ad31a0465..3add1e2566 100644
+--- a/drivers/net/phy/ti.c
++++ b/drivers/net/phy/ti.c
+@@ -177,6 +177,8 @@ static int dp83867_of_init(struct phy_device *phydev)
+ 	int node = dev_of_offset(dev);
+ 	const void *fdt = gd->fdt_blob;
+ 
++printf("%s +++\n", __func__);
++
+ 	if (fdtdec_get_bool(fdt, node, "ti,max-output-impedance"))
+ 		dp83867->io_impedance = DP83867_IO_MUX_CFG_IO_IMPEDANCE_MAX;
+ 	else if (fdtdec_get_bool(fdt, node, "ti,min-output-impedance"))
+@@ -193,6 +195,8 @@ static int dp83867_of_init(struct phy_device *phydev)
+ 	dp83867->fifo_depth = fdtdec_get_uint(gd->fdt_blob, dev_of_offset(dev),
+ 				 "ti,fifo-depth", -1);
+ 
++printf("%s ---\n", __func__);
++
+ 	return 0;
+ }
+ #else
+@@ -215,6 +219,8 @@ static int dp83867_config(struct phy_device *phydev)
+ 	unsigned int val, delay, cfg2;
+ 	int ret;
+ 
++printf("%s +++\n", __func__);
++
+ 	if (!phydev->priv) {
+ 		dp83867 = kzalloc(sizeof(*dp83867), GFP_KERNEL);
+ 		if (!dp83867)
+@@ -302,10 +308,16 @@ static int dp83867_config(struct phy_device *phydev)
+ 	}
+ 
+ 	genphy_config_aneg(phydev);
++
++printf("%s ---\n", __func__);
++
+ 	return 0;
+ 
+ err_out:
+ 	kfree(dp83867);
++
++printf("%s (err) ---\n", __func__);
++
+ 	return ret;
+ }
+ 
+@@ -321,6 +333,10 @@ static struct phy_driver DP83867_driver = {
+ 
+ int phy_ti_init(void)
+ {
++printf("%s +++\n", __func__);
++
+ 	phy_register(&DP83867_driver);
++
++printf("%s ---\n", __func__);
+ 	return 0;
+ }
+diff --git a/drivers/pinctrl/nxp/pinctrl-imx.c b/drivers/pinctrl/nxp/pinctrl-imx.c
+index c09b0d6f09..2b5ce9465f 100644
+--- a/drivers/pinctrl/nxp/pinctrl-imx.c
++++ b/drivers/pinctrl/nxp/pinctrl-imx.c
+@@ -29,7 +29,7 @@ static int imx_pinctrl_set_state(struct udevice *dev, struct udevice *config)
+ 	u32 mux_shift = info->mux_mask ? ffs(info->mux_mask) - 1 : 0;
+ 	int i, j = 0;
+ 
+-	dev_dbg(dev, "%s: %s\n", __func__, config->name);
++	dev_info(dev, "%s: %s\n", __func__, config->name);
+ 
+ 	if (info->flags & IMX8_USE_SCU)
+ 		pin_size = SHARE_IMX8_PIN_SIZE;
+diff --git a/net/eth-uclass.c b/net/eth-uclass.c
+index bdb012b377..314d2a2e05 100644
+--- a/net/eth-uclass.c
++++ b/net/eth-uclass.c
+@@ -398,7 +398,10 @@ int eth_initialize(void)
+ 	int num_devices = 0;
+ 	struct udevice *dev;
+ 
++printf("%s +++\n", __func__);
++printf("->eth_common_init\n");
+ 	eth_common_init();
++printf("<-eth_common_init\n");
+ 
+ 	/*
+ 	 * Devices need to write the hwaddr even if not started so that Linux
+@@ -442,6 +445,8 @@ int eth_initialize(void)
+ 		putc('\n');
+ 	}
+ 
++printf("%s ---\n", __func__);
++
+ 	return num_devices;
+ }
+ 
+diff --git a/net/eth_common.c b/net/eth_common.c
+index 66d0d22966..6af312a109 100644
+--- a/net/eth_common.c
++++ b/net/eth_common.c
+@@ -60,14 +60,20 @@ int eth_env_set_enetaddr_by_index(const char *base_name, int index,
+ 
+ void eth_common_init(void)
+ {
++printf("%s +++\n", __func__);
+ 	bootstage_mark(BOOTSTAGE_ID_NET_ETH_START);
+ #if defined(CONFIG_MII) || defined(CONFIG_CMD_MII) || defined(CONFIG_PHYLIB)
++puts("->miiphy_init\n");
+ 	miiphy_init();
++puts("<-miiphy_init\n");
+ #endif
+ 
+ #ifdef CONFIG_PHYLIB
++puts("->phy_init\n");
+ 	phy_init();
++puts("<-phy_init\n");
+ #endif
++printf("%s ---\n", __func__);
+ }
+ 
+ int eth_mac_skip(int index)
+diff --git a/net/eth_legacy.c b/net/eth_legacy.c
+index be0cf64a3d..f674e5a014 100644
+--- a/net/eth_legacy.c
++++ b/net/eth_legacy.c
+@@ -238,17 +238,23 @@ int eth_unregister(struct eth_device *dev)
+ int eth_initialize(void)
+ {
+ 	int num_devices = 0;
+-
++#error
+ 	eth_devices = NULL;
+ 	eth_current = NULL;
++
++printf("%s +++\n", __func__);
++printf("->eth_common_init\n");
+ 	eth_common_init();
++printf("<-eth_common_init\n");
+ 	/*
+ 	 * If board-specific initialization exists, call it.
+ 	 * If not, call a CPU-specific one
+ 	 */
++printf("->board_eth_init\n");
+ 	if (board_eth_init != __def_eth_init) {
+ 		if (board_eth_init(gd->bd) < 0)
+ 			printf("Board Net Initialization Failed\n");
++printf("->cpu_eth_init\n");
+ 	} else if (cpu_eth_init != __def_eth_init) {
+ 		if (cpu_eth_init(gd->bd) < 0)
+ 			printf("CPU Net Initialization Failed\n");

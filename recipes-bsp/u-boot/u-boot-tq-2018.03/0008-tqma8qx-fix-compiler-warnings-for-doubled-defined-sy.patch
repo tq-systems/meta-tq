@@ -1,0 +1,53 @@
+From db9c0cb0bc7dd0f31051ad80c9e9f7a28ef0e52a Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 14 Feb 2019 15:39:21 +0100
+Subject: [PATCH] tqma8qx: fix compiler warnings for doubled defined symbols
+
+remains from port to sumo
+---
+ include/configs/tqma8qx.h | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
+index 334c5dc6cd..2ca9d30650 100644
+--- a/include/configs/tqma8qx.h
++++ b/include/configs/tqma8qx.h
+@@ -175,6 +175,7 @@
+ 			"fi;" \
+ 		"fi;\0"
+ 
++#if !defined(CONFIG_BOOTCOMMAND)
+ #define CONFIG_BOOTCOMMAND \
+ 	   "mmc dev ${mmcdev}; if mmc rescan; then " \
+ 		   "if run loadbootscript; then " \
+@@ -193,6 +194,7 @@
+ 			 "fi; " \
+ 		   "fi; " \
+ 	   "else booti ${loadaddr} - ${fdt_addr}; fi"
++#endif
+ 
+ /* Link Definitions */
+ #define CONFIG_LOADADDR			0x80280000
+@@ -244,18 +246,19 @@
+ #define CONFIG_BAUDRATE			115200
+ 
+ /* Monitor Command Prompt */
+-#define CONFIG_SYS_LONGHELP
+ /*
++#define CONFIG_SYS_LONGHELP
+ #define CONFIG_HUSH_PARSER
+ #define CONFIG_SYS_PROMPT_HUSH_PS2     "> "
+-*/
+ #define CONFIG_AUTO_COMPLETE
++*/
++
+ #define CONFIG_SYS_CBSIZE              2048
+ #define CONFIG_SYS_MAXARGS             64
+ #define CONFIG_SYS_BARGSIZE CONFIG_SYS_CBSIZE
+ #define CONFIG_SYS_PBSIZE		(CONFIG_SYS_CBSIZE + \
+ 					sizeof(CONFIG_SYS_PROMPT) + 16)
+-#define CONFIG_CMDLINE_EDITING
++/* #define CONFIG_CMDLINE_EDITING */
+ 
+ /* Generic Timer Definitions */
+ #define COUNTER_FREQUENCY		8000000	/* 8MHz */

@@ -1,0 +1,23 @@
+From 29efe953d597cd66eb55a0726b840479a2663ce7 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 24 Oct 2018 17:14:34 +0200
+Subject: [PATCH] tqma8qx: enable FAT_WRITE
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ include/configs/tqma8qx.h | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
+index 061be22670..271f754fc8 100644
+--- a/include/configs/tqma8qx.h
++++ b/include/configs/tqma8qx.h
+@@ -15,6 +15,8 @@
+ #define CONFIG_BOARD_EARLY_INIT_F
+ #define CONFIG_ARCH_MISC_INIT
+ 
++#define CONFIG_FAT_WRITE
++
+ /* Flat Device Tree Definitions */
+ #define CONFIG_OF_BOARD_SETUP
+ 

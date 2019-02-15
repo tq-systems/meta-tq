@@ -1,0 +1,32 @@
+From e90ede73c54e69c45454d403c477cc80f6c971eb Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 14 Feb 2019 15:36:17 +0100
+Subject: [PATCH] tqc/common: fix prototypes in baseboard API header
+
+- add missing declaration
+- restrict API solely for i.MX8
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/common/tqc_bb.h | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/board/tqc/common/tqc_bb.h b/board/tqc/common/tqc_bb.h
+index e0de23ff98..eeca8c0ea4 100644
+--- a/board/tqc/common/tqc_bb.h
++++ b/board/tqc/common/tqc_bb.h
+@@ -18,10 +18,12 @@ int tqc_bb_board_early_init_f(void);
+ int tqc_bb_board_init(void);
+ int tqc_bb_board_late_init(void);
+ int tqc_bb_checkboard(void);
+-void tqc_bb_board_quiesce_devices();
+-
+ const char *tqc_bb_get_boardname(void);
+ 
++#if defined(MX8QX)
++void tqc_bb_board_quiesce_devices(void);
++#endif
++
+ /*
+  * Device Tree Support
+  */

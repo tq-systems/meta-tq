@@ -1,0 +1,54 @@
+From 07c676b43ce2c68646541c14556b5fd739fbd9fc Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 25 Oct 2018 11:32:11 +0200
+Subject: [PATCH] tqma8qx: enable usb in defconfig
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ configs/tqma8qx_mba8qx_mmc_defconfig |  6 ++++++
+ include/configs/tqma8qx.h            | 10 ++++++++++
+ 2 files changed, 16 insertions(+)
+
+diff --git a/configs/tqma8qx_mba8qx_mmc_defconfig b/configs/tqma8qx_mba8qx_mmc_defconfig
+index 18b7aea284..e097d80331 100644
+--- a/configs/tqma8qx_mba8qx_mmc_defconfig
++++ b/configs/tqma8qx_mba8qx_mmc_defconfig
+@@ -19,6 +19,7 @@ CONFIG_CMD_I2C=y
+ # CONFIG_CMD_LOADS is not set
+ CONFIG_CMD_MMC=y
+ CONFIG_CMD_SF=y
++CONFIG_CMD_USB=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_EXT4_WRITE=y
+ # CONFIG_ISO_PARTITION is not set
+@@ -53,4 +54,9 @@ CONFIG_DM_SPI=y
+ CONFIG_FSL_FSPI=y
+ CONFIG_DM_THERMAL=y
+ CONFIG_IMX_SC_THERMAL=y
++CONFIG_USB=y
++CONFIG_DM_USB=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_MXC_USB_OTG_HACTIVE=y
++CONFIG_USB_STORAGE=y
+ # CONFIG_EFI_LOADER is not set
+diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
+index abf649cbdc..3f209248bc 100644
+--- a/include/configs/tqma8qx.h
++++ b/include/configs/tqma8qx.h
+@@ -34,6 +34,16 @@
+ #define USDHC2_BASE_ADDR                0x5B020000
+ #define CONFIG_SUPPORT_EMMC_BOOT	/* eMMC specific */
+ 
++/* USB Config */
++#ifdef CONFIG_CMD_USB
++#define CONFIG_USB_MAX_CONTROLLER_COUNT 1
++
++/* USB OTG controller configs */
++#ifdef CONFIG_USB_EHCI_HCD
++#define CONFIG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
++#endif
++#endif /* CONFIG_CMD_USB */
++
+ #define CONFIG_ENV_OVERWRITE
+ 
+ #define CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG

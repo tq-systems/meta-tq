@@ -1,0 +1,37 @@
+From f149b68e36d5f6d2ec6bf82ca93e7e13835aab0c Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 25 Oct 2018 11:35:39 +0200
+Subject: [PATCH] tqma8qx: enable i2c1 in dt
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8qxp-tqma8qx.dtsi | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8qx.dtsi b/arch/arm/dts/fsl-imx8qxp-tqma8qx.dtsi
+index d3b9397184..6c8b6b93ce 100644
+--- a/arch/arm/dts/fsl-imx8qxp-tqma8qx.dtsi
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8qx.dtsi
+@@ -43,10 +43,10 @@
+ &iomuxc {
+ 	pinctrl-names = "default";
+ 	imx8qxp-tqma8qx {
+-		pinctrl_lpi2c1: lpi1cgrp {
++		pinctrl_lpi2c1: lpi2c1grp {
+ 			fsl,pins = <
+-				SC_P_USB_SS3_TC1_ADMA_I2C1_SCL	0x06000020
+-				SC_P_USB_SS3_TC3_ADMA_I2C1_SDA	0x06000020
++				SC_P_MIPI_DSI0_GPIO0_00_ADMA_I2C1_SCL	0x06000020
++				SC_P_MIPI_DSI0_GPIO0_01_ADMA_I2C1_SDA	0x06000020
+ 			>;
+ 		};
+ 
+@@ -158,7 +158,7 @@
+ 	clock-frequency = <100000>;
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_lpi2c1>;
+-	status = "disabled";
++	status = "okay";
+ };
+ 
+ &usdhc1 {

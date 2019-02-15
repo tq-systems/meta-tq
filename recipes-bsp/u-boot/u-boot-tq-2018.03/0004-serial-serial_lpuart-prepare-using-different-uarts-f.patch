@@ -1,4 +1,4 @@
-From 9c1024b7a203390bb85a1ffd4a60d89eaf2e63b6 Mon Sep 17 00:00:00 2001
+From f03c25184bf1e2e722836bfa00ecbacea6e6a18f Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 27 Sep 2018 10:42:04 +0200
 Subject: [PATCH] serial: serial_lpuart: prepare using different uarts for mx8
