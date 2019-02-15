@@ -1,4 +1,4 @@
-From 4fe3d71ac3ffe367271edd4cfa5e46d5f8eeff80 Mon Sep 17 00:00:00 2001
+From 8d24b1596439a0bc16fe3439ed307d919eb035b0 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Fri, 26 Oct 2018 10:55:57 +0200
 Subject: [PATCH] cmd: mtest: give more info

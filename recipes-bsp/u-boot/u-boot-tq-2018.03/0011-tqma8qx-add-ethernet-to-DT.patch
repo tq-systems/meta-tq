@@ -1,4 +1,4 @@
-From f1875363d6a50e8ebfd87d8b668c2ccb55944f14 Mon Sep 17 00:00:00 2001
+From 80ab75ec8ad1a84f8d53561ff5c093399b65a427 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 4 Oct 2018 12:21:36 +0200
 Subject: [PATCH] tqma8qx: add ethernet to DT

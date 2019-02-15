@@ -1,4 +1,4 @@
-From 1829d1c67a4bf98001a7a32cb63f58e6a95f2587 Mon Sep 17 00:00:00 2001
+From c656409de2c5724e1cad25e9d9c51f23c4a5de7c Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 4 Oct 2018 16:53:09 +0200
 Subject: [PATCH] arm: dt: fsl-imx8qxp-tqma8qx-mba8qx: add reset-gpio to

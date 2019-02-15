@@ -49,7 +49,7 @@ SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branc
            file://0033-cmd-mtest-give-more-info.patch \
            file://0034-mmc-allow-selection-of-CONFIG_FSL_ESDHC-per-Kconfig.patch \
            file://0035-tqma8qx_mba8qx-select-mmc-stuff-in-defconfig.patch \
-           file://0036-tqma8qx_mba8qx-add-CONFIG_BOARD_EARLY_INIT_F-to-defc.patch \
+           file://0036-tqma8qx_mba8qx-add-init-hooks-to-defconfig.patch \
 "
 
 S = "${WORKDIR}/git"

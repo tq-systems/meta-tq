@@ -1,4 +1,4 @@
-From 6d7bbdca3dc3ebfc9d60b43c380b8b53a24dc4c7 Mon Sep 17 00:00:00 2001
+From bb074071e58ad6f64a842240d19edd505c19ab65 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 25 Oct 2018 11:33:19 +0200
 Subject: [PATCH] tqma8qx: enable i2c devices in defconfig
@@ -9,7 +9,7 @@ Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
  1 file changed, 4 insertions(+)
 
 diff --git a/configs/tqma8qx_mba8qx_mmc_defconfig b/configs/tqma8qx_mba8qx_mmc_defconfig
-index e097d80331..cbbe8a35d9 100644
+index ddd14c1e31..bc5ad4bb7b 100644
 --- a/configs/tqma8qx_mba8qx_mmc_defconfig
 +++ b/configs/tqma8qx_mba8qx_mmc_defconfig
 @@ -26,8 +26,12 @@ CONFIG_CMD_EXT4_WRITE=y

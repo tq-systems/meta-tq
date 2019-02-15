@@ -1,4 +1,4 @@
-From 77f54c9abf36d21eb59b75d27c855f7c9f98394a Mon Sep 17 00:00:00 2001
+From 727f7d2a151594ef4d5ba7f5eff81091f238b4b0 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 24 Oct 2018 17:48:19 +0200
 Subject: [PATCH] tqma8qx: env: add update scripts for kernel and u-boot
@@ -9,7 +9,7 @@ Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
  1 file changed, 25 insertions(+), 6 deletions(-)
 
 diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
-index 271f754fc8..a5547945f9 100644
+index 952390ea32..08438531b5 100644
 --- a/include/configs/tqma8qx.h
 +++ b/include/configs/tqma8qx.h
 @@ -156,11 +156,7 @@

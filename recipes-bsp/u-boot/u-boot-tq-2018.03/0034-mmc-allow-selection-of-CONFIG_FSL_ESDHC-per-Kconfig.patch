@@ -1,4 +1,4 @@
-From 76606d6eccc806dfdde24919d3ab5eeab785e58a Mon Sep 17 00:00:00 2001
+From 4880115112bc52e57549ce11cad4ab9b12d31a06 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Fri, 15 Feb 2019 09:25:07 +0100
 Subject: [PATCH] mmc: allow selection of CONFIG_FSL_ESDHC per Kconfig

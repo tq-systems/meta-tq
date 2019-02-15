@@ -1,4 +1,4 @@
-From ed8fc950bfd192fbcd06674b6fa31ec293ffe6c2 Mon Sep 17 00:00:00 2001
+From e34f7746d995c1a4ffc6c40a50eda4294b893d30 Mon Sep 17 00:00:00 2001
 From: Michael Trimarchi <michael@amarulasolutions.com>
 Date: Sun, 17 Jun 2018 15:22:39 +0200
 Subject: [PATCH] eth: dm: fec: Add gpio phy reset binding

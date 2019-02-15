@@ -1,4 +1,4 @@
-From afae6377eccf8a29f0da51cdfdafc344cc8d6cd6 Mon Sep 17 00:00:00 2001
+From 6d23cacbd621c8fdbbd210b8c623a506469a1c05 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 25 Oct 2018 12:35:10 +0200
 Subject: [PATCH] tqma8qx: config: enable rtc driver and date command support
@@ -10,10 +10,10 @@ Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
  2 files changed, 4 insertions(+)
 
 diff --git a/configs/tqma8qx_mba8qx_mmc_defconfig b/configs/tqma8qx_mba8qx_mmc_defconfig
-index cbbe8a35d9..a700734976 100644
+index bc5ad4bb7b..042f8549d0 100644
 --- a/configs/tqma8qx_mba8qx_mmc_defconfig
 +++ b/configs/tqma8qx_mba8qx_mmc_defconfig
-@@ -52,6 +52,8 @@ CONFIG_IMX8_POWER_DOMAIN=y
+@@ -53,6 +53,8 @@ CONFIG_IMX8_POWER_DOMAIN=y
  CONFIG_DM_REGULATOR=y
  CONFIG_DM_REGULATOR_FIXED=y
  CONFIG_DM_REGULATOR_GPIO=y
@@ -23,14 +23,14 @@ index cbbe8a35d9..a700734976 100644
  CONFIG_FSL_LPUART=y
  CONFIG_DM_SPI=y
 diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
-index 3f209248bc..8a7d3209e9 100644
+index b01d5d8609..83cc88db4f 100644
 --- a/include/configs/tqma8qx.h
 +++ b/include/configs/tqma8qx.h
 @@ -44,6 +44,8 @@
  #endif
  #endif /* CONFIG_CMD_USB */
  
-+#define CONFIG_CMD_DATE
++/* #define CONFIG_CMD_DATE */
 +
  #define CONFIG_ENV_OVERWRITE
  

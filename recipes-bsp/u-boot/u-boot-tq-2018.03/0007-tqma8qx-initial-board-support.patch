@@ -1,6 +1,6 @@
-From d212a57d2cb4bc04712cad6ea9ef9da67ba72e6c Mon Sep 17 00:00:00 2001
+From 066d76de3b23fca26050a2d8a778107497b3205f Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
-Date: Fri, 15 Feb 2019 07:06:40 +0100
+Date: Fri, 15 Feb 2019 12:37:40 +0100
 Subject: [PATCH] tqma8qx: initial board support
 
 This module can be used with i.MX[DX,DXP,QXP] and features
@@ -1076,7 +1076,7 @@ index 0000000000..c1025b4faa
 +#endif /* __TQMA8QX_MBA8QX_H */
 diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
 new file mode 100644
-index 0000000000..334c5dc6cd
+index 0000000000..6c494d88ab
 --- /dev/null
 +++ b/include/configs/tqma8qx.h
 @@ -0,0 +1,288 @@
@@ -1317,7 +1317,7 @@ index 0000000000..334c5dc6cd
 +#define CONFIG_SYS_SDRAM_BASE		0x80000000
 +#define CONFIG_NR_DRAM_BANKS		1
 +#define PHYS_SDRAM_1			0x80000000
-+#define PHYS_SDRAM_1_SIZE		0x80000000	/* 2 GB */
++#define PHYS_SDRAM_1_SIZE		SZ_1G	/* 1 GB */
 +/* needed for loop in CPU code */
 +#define PHYS_SDRAM_2			0x800000000
 +#define PHYS_SDRAM_2_SIZE		0x0000000	/* not placed */

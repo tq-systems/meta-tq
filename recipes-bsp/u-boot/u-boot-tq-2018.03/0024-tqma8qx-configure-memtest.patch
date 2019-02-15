@@ -1,4 +1,4 @@
-From 9592bba88539118629c8a5244ab7571a928015b9 Mon Sep 17 00:00:00 2001
+From 2134494ccab6c96a30d266001c83e9707c862e04 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 24 Oct 2018 17:49:00 +0200
 Subject: [PATCH] tqma8qx: configure memtest
@@ -9,7 +9,7 @@ Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
  1 file changed, 8 insertions(+)
 
 diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
-index a5547945f9..abf649cbdc 100644
+index 08438531b5..72f6c5146c 100644
 --- a/include/configs/tqma8qx.h
 +++ b/include/configs/tqma8qx.h
 @@ -307,6 +307,14 @@

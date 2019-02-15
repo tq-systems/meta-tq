@@ -1,18 +1,27 @@
-From 2780a8fd417eed16442da75a122b6281943fbe50 Mon Sep 17 00:00:00 2001
+From dfdd650ec5b5c287ac060ef734084734ad05cb4d Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
-Date: Fri, 15 Feb 2019 09:26:27 +0100
+Date: Fri, 15 Feb 2019 13:16:59 +0100
 Subject: [PATCH] tqma8qx_mba8qx: select mmc stuff in defconfig
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
- configs/tqma8qx_mba8qx_mmc_defconfig | 6 ++++++
- 1 file changed, 6 insertions(+)
+ configs/tqma8qx_mba8qx_mmc_defconfig | 7 ++++++-
+ include/configs/tqma8qx.h            | 3 ++-
+ 2 files changed, 8 insertions(+), 2 deletions(-)
 
 diff --git a/configs/tqma8qx_mba8qx_mmc_defconfig b/configs/tqma8qx_mba8qx_mmc_defconfig
-index a700734976..7a36bcd0e7 100644
+index 042f8549d0..ddb2edee10 100644
 --- a/configs/tqma8qx_mba8qx_mmc_defconfig
 +++ b/configs/tqma8qx_mba8qx_mmc_defconfig
-@@ -33,6 +33,12 @@ CONFIG_SYS_I2C_IMX_LPI2C=y
+@@ -23,7 +23,6 @@ CONFIG_CMD_USB=y
+ CONFIG_CMD_CACHE=y
+ CONFIG_CMD_EXT4_WRITE=y
+ # CONFIG_ISO_PARTITION is not set
+-# CONFIG_BLK is not set
+ CONFIG_DM_GPIO=y
+ CONFIG_MXC_GPIO=y
+ CONFIG_DM_PCA953X=y
+@@ -33,6 +32,12 @@ CONFIG_SYS_I2C_IMX_LPI2C=y
  CONFIG_MISC=y
  CONFIG_I2C_EEPROM=y
  CONFIG_DM_MMC=y
@@ -25,3 +34,22 @@ index a700734976..7a36bcd0e7 100644
  CONFIG_DM_SPI_FLASH=y
  CONFIG_SPI_FLASH=y
  CONFIG_SPI_FLASH_4BYTES_ADDR=y
+diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
+index 83cc88db4f..d49f3cd4ba 100644
+--- a/include/configs/tqma8qx.h
++++ b/include/configs/tqma8qx.h
+@@ -27,12 +27,13 @@
+ #undef CONFIG_CMD_CRC32
+ #undef CONFIG_BOOTM_NETBSD
+ 
+-#define CONFIG_FSL_ESDHC
++#if defined(CONFIG_FSL_ESDHC)
+ #define CONFIG_FSL_USDHC
+ #define CONFIG_SYS_FSL_ESDHC_ADDR       0
+ #define USDHC1_BASE_ADDR                0x5B010000
+ #define USDHC2_BASE_ADDR                0x5B020000
+ #define CONFIG_SUPPORT_EMMC_BOOT	/* eMMC specific */
++#endif
+ 
+ /* USB Config */
+ #ifdef CONFIG_CMD_USB

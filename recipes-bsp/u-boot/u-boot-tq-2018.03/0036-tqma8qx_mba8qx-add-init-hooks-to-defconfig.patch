@@ -1,0 +1,40 @@
+From a87ac9bae9c4bebbeb0d8f99510bca44929f5684 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Fri, 15 Feb 2019 09:27:10 +0100
+Subject: [PATCH] tqma8qx_mba8qx: add init hooks to defconfig
+
+CONFIG_BOARD_EARLY_INIT_F
+CONFIG_ARCH_MISC_INIT
+---
+ configs/tqma8qx_mba8qx_mmc_defconfig | 2 ++
+ include/configs/tqma8qx.h            | 2 ++
+ 2 files changed, 4 insertions(+)
+
+diff --git a/configs/tqma8qx_mba8qx_mmc_defconfig b/configs/tqma8qx_mba8qx_mmc_defconfig
+index ddb2edee10..aa905a2292 100644
+--- a/configs/tqma8qx_mba8qx_mmc_defconfig
++++ b/configs/tqma8qx_mba8qx_mmc_defconfig
+@@ -8,6 +8,8 @@ CONFIG_DEFAULT_DEVICE_TREE="fsl-imx8qxp-tqma8qx-mba8qx"
+ CONFIG_DISTRO_DEFAULTS=y
+ CONFIG_BOOTDELAY=3
+ CONFIG_VERSION_VARIABLE=y
++CONFIG_ARCH_MISC_INIT=y
++CONFIG_BOARD_EARLY_INIT_F=y
+ CONFIG_CMD_LICENSE=y
+ # CONFIG_CMD_IMPORTENV is not set
+ CONFIG_CMD_MEMINFO=y
+diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
+index d49f3cd4ba..70f90ca35f 100644
+--- a/include/configs/tqma8qx.h
++++ b/include/configs/tqma8qx.h
+@@ -12,8 +12,10 @@
+ 
+ #define CONFIG_REMAKE_ELF
+ 
++/*
+ #define CONFIG_BOARD_EARLY_INIT_F
+ #define CONFIG_ARCH_MISC_INIT
++*/
+ 
+ /* #define CONFIG_FAT_WRITE */
+ 

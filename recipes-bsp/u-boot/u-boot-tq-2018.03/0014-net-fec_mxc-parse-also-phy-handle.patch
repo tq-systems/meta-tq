@@ -1,4 +1,4 @@
-From 5cc587d6b41fbc2e835b867be61812a7479d559c Mon Sep 17 00:00:00 2001
+From 975b54d1268e53b480f5f751533806722368f546 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 4 Oct 2018 17:35:48 +0200
 Subject: [PATCH] net: fec_mxc: parse also phy-handle

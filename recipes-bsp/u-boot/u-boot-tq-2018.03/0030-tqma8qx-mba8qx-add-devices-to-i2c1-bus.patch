@@ -1,4 +1,4 @@
-From 91ddca5d007dd87496c51b2fde42512ccd945c38 Mon Sep 17 00:00:00 2001
+From a95b6ca19435788940427d86c61229e7f56de1d9 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 25 Oct 2018 12:16:17 +0200
 Subject: [PATCH] tqma8qx-mba8qx: add devices to i2c1 bus
