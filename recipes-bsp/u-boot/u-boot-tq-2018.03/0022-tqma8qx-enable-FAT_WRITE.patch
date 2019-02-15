@@ -1,4 +1,4 @@
-From f1346fb08e6ba4f4fb5a5a29bb408b27167b0550 Mon Sep 17 00:00:00 2001
+From 7e9415efffe90ac4f684b9b12b71701f6b496af3 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 24 Oct 2018 17:14:34 +0200
 Subject: [PATCH] tqma8qx: enable FAT_WRITE
@@ -20,7 +20,7 @@ index 2ebbe877cb..3af7878fc6 100644
 +CONFIG_FAT_WRITE=y
  # CONFIG_EFI_LOADER is not set
 diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
-index 6848fdce8c..952390ea32 100644
+index b9ba12350a..f1dbd9dab9 100644
 --- a/include/configs/tqma8qx.h
 +++ b/include/configs/tqma8qx.h
 @@ -15,6 +15,8 @@

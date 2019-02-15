@@ -1,0 +1,51 @@
+From db0f77439802861704c0fd79c8187fa9f1dd6464 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 19 Nov 2018 15:56:45 +0100
+Subject: [PATCH] arm: dt: fsl-imx8qxp-tqma8qxs: prepare e-MMC HS mode
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8qxp-tqma8qxs.dtsi | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8qxs.dtsi b/arch/arm/dts/fsl-imx8qxp-tqma8qxs.dtsi
+index 724e7f57a7..f057c7b614 100644
+--- a/arch/arm/dts/fsl-imx8qxp-tqma8qxs.dtsi
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8qxs.dtsi
+@@ -21,6 +21,28 @@
+ / {
+ 	model = "TQ Systems i.MX8QXP TQMa8xXS";
+ 	compatible = "tq,tqma8qxs", "fsl,imx8qxp";
++
++	regulators {
++		compatible = "simple-bus";
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		reg_usdhc1_vmmc: usdhc1_vmmc {
++			compatible = "regulator-fixed";
++			regulator-name = "MMC0_3V3";
++			regulator-min-microvolt = <3300000>;
++			regulator-max-microvolt = <3300000>;
++			regulator-always-on;
++		};
++
++		reg_usdhc1_vqmmc: usdhc1_vqmmc {
++			compatible = "regulator-fixed";
++			regulator-name = "MMC0_1V8";
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <1800000>;
++			regulator-always-on;
++		};
++	};
+ };
+ 
+ &iomuxc {
+@@ -134,5 +156,7 @@
+ 	pinctrl-2 = <&pinctrl_usdhc1_200mhz>;
+ 	bus-width = <8>;
+ 	non-removable;
++	vmmc-supply = <&reg_usdhc1_vmmc>;
++	vqmmc-supply = <&reg_usdhc1_vqmmc>;
+ 	status = "okay";
+ };

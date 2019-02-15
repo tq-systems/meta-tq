@@ -1,4 +1,4 @@
-From 5fcb2667eea9c4d7c722ab53515105b4c61a1d8a Mon Sep 17 00:00:00 2001
+From d5f13e5e4f6332d1a786822d51f596492f19609e Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Fri, 5 Oct 2018 12:42:16 +0200
 Subject: [PATCH] net: fec_mxc: rewrite fec_phy_init

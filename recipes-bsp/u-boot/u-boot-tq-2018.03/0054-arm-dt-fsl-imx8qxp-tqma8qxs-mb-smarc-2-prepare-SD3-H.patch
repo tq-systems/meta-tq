@@ -1,0 +1,36 @@
+From 8b528b881b3af927f425099be3cb3896762ed9ce Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 19 Nov 2018 15:54:51 +0100
+Subject: [PATCH] arm: dt: fsl-imx8qxp-tqma8qxs-mb-smarc-2: prepare SD3 / HS104
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts b/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
+index aa0dd9b931..4f48d2dc4f 100644
+--- a/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
+@@ -40,6 +40,13 @@
+ 			startup-delay-us = <100>;
+ 			off-on-delay-us = <12000>;
+ 		};
++
++		reg_usdhc2_vqmmc: usdhc2_vqmmc {
++			compatible = "regulator-fixed";
++			regulator-name = "SD1_VQMMC";
++			regulator-min-microvolt = <1800000>;
++			regulator-max-microvolt = <3300000>;
++		};
+ 	};
+ };
+ 
+@@ -241,5 +248,7 @@
+ 	wp-gpios = <&gpio4 21 GPIO_ACTIVE_HIGH>;
+ 	no-1-8-v;
+ 	vmmc-supply = <&reg_usdhc2_vmmc>;
++/* TODO: does not work (yet) */
++/*	vqmmc-supply = <&reg_usdhc2_vqmmc>; */
+ 	status = "okay";
+ };

@@ -1,0 +1,105 @@
+From 95808899240a5ff7eb9f45ec849f6e897054d411 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 19 Nov 2018 18:08:12 +0100
+Subject: [PATCH] arm: dt: fsl-imx8qxp-tqma8qxs-mb-smarc-2: add fec
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ .../dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts   | 82 +++++++++++++++++++
+ 1 file changed, 82 insertions(+)
+
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts b/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
+index 911cf5ba37..68453ecd49 100644
+--- a/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
+@@ -43,8 +43,90 @@
+ 	};
+ };
+ 
++&fec1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_fec1>;
++	phy-mode = "rgmii-id";
++	phy-handle = <&ethphy0>;
++	phy-reset-gpios = <&gpio3 2 GPIO_ACTIVE_LOW>;
++	phy-reset-duration = <500>;
++	fsl,magic-packet;
++	status = "okay";
++
++	mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		ethphy0: ethernet-phy@0 {
++			compatible = "ethernet-phy-ieee802.3-c22";
++			reg = <0>;
++			ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
++			ti,tx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
++		};
++
++		ethphy3: ethernet-phy@3 {
++			compatible = "ethernet-phy-ieee802.3-c22";
++			reg = <3>;
++			ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
++			ti,tx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
++		};
++	};
++};
++
++&fec2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_fec2>;
++	phy-mode = "rgmii-id";
++	phy-handle = <&ethphy3>;
++	fsl,magic-packet;
++	phy-reset-gpios = <&gpio3 3 GPIO_ACTIVE_LOW>;
++	phy-reset-duration = <500>;
++
++	status = "okay";
++};
++
+ &iomuxc {
+ 	tqma8qxs-mb-smarc-2 {
++		pinctrl_fec1: fec1grp {
++			fsl,pins = <
++				SC_P_ENET0_MDC_CONN_ENET0_MDC			0x06000048
++				SC_P_ENET0_MDIO_CONN_ENET0_MDIO			0x06000048
++				SC_P_ENET0_RGMII_TX_CTL_CONN_ENET0_RGMII_TX_CTL	0x06000048
++				SC_P_ENET0_RGMII_TXC_CONN_ENET0_RGMII_TXC	0x06000048
++				SC_P_ENET0_RGMII_TXD0_CONN_ENET0_RGMII_TXD0	0x06000048
++				SC_P_ENET0_RGMII_TXD1_CONN_ENET0_RGMII_TXD1	0x06000048
++				SC_P_ENET0_RGMII_TXD2_CONN_ENET0_RGMII_TXD2	0x06000048
++				SC_P_ENET0_RGMII_TXD3_CONN_ENET0_RGMII_TXD3	0x06000048
++				SC_P_ENET0_RGMII_RXC_CONN_ENET0_RGMII_RXC	0x06000048
++				SC_P_ENET0_RGMII_RX_CTL_CONN_ENET0_RGMII_RX_CTL	0x06000048
++				SC_P_ENET0_RGMII_RXD0_CONN_ENET0_RGMII_RXD0	0x06000048
++				SC_P_ENET0_RGMII_RXD1_CONN_ENET0_RGMII_RXD1	0x06000048
++				SC_P_ENET0_RGMII_RXD2_CONN_ENET0_RGMII_RXD2	0x06000048
++				SC_P_ENET0_RGMII_RXD3_CONN_ENET0_RGMII_RXD3	0x06000048
++
++				SC_P_CSI_EN_LSIO_GPIO3_IO02			0x06000048
++			>;
++		};
++
++		pinctrl_fec2: fec2grp {
++			fsl,pins = <
++				SC_P_ESAI0_SCKR_CONN_ENET1_RGMII_TX_CTL		0x06000048
++				SC_P_ESAI0_FSR_CONN_ENET1_RGMII_TXC		0x06000048
++				SC_P_ESAI0_TX4_RX1_CONN_ENET1_RGMII_TXD0	0x06000048
++				SC_P_ESAI0_TX5_RX0_CONN_ENET1_RGMII_TXD1	0x06000048
++				SC_P_ESAI0_FST_CONN_ENET1_RGMII_TXD2		0x06000048
++				SC_P_ESAI0_SCKT_CONN_ENET1_RGMII_TXD3		0x06000048
++				SC_P_ESAI0_TX0_CONN_ENET1_RGMII_RXC		0x06000048
++				SC_P_SPDIF0_TX_CONN_ENET1_RGMII_RX_CTL		0x06000048
++				SC_P_SPDIF0_RX_CONN_ENET1_RGMII_RXD0		0x06000048
++				SC_P_ESAI0_TX3_RX2_CONN_ENET1_RGMII_RXD1	0x06000048
++				SC_P_ESAI0_TX2_RX3_CONN_ENET1_RGMII_RXD2	0x06000048
++				SC_P_ESAI0_TX1_CONN_ENET1_RGMII_RXD3		0x06000048
++
++				SC_P_CSI_RESET_LSIO_GPIO3_IO03			0x06000048
++			>;
++		};
++
+ 		pinctrl_lpuart0: lpuart0grp {
+ 			fsl,pins = <
+ 				SC_P_UART0_RX_ADMA_UART0_RX	0x06000020

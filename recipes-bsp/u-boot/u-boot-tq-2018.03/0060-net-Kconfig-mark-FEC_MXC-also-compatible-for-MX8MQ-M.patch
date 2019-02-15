@@ -1,0 +1,23 @@
+From 0d272a7d9de8d205598d5983a313b9f6587c80d6 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 17 Jan 2019 09:52:50 +0100
+Subject: [PATCH] net: Kconfig: mark FEC_MXC also compatible for MX8MQ / MX8QXP
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ drivers/net/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index c4cbe34798..5de15a3257 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -160,7 +160,7 @@ config FEC_MXC_MDIO_BASE
+ 
+ config FEC_MXC
+ 	bool "FEC Ethernet controller"
+-	depends on MX5 || MX6 || MX7
++	depends on MX5 || MX6 || MX7 || IMX8M || IMX8QXP
+ 	help
+ 	  This driver supports the 10/100 Fast Ethernet controller for
+ 	  NXP i.MX processors.

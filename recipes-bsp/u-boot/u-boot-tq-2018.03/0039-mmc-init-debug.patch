@@ -1,0 +1,309 @@
+From d265bde424ff82bb13ad20c44abcb99c5a54d3de Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Fri, 15 Feb 2019 10:23:16 +0100
+Subject: [PATCH] mmc init debug
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/mach-imx/imx8/clock.c |  4 ++++
+ drivers/mmc/fsl_esdhc.c        | 30 ++++++++++++++++++++++++++++++
+ drivers/mmc/mmc-uclass.c       |  2 ++
+ drivers/mmc/mmc.c              | 33 +++++++++++++++++++++++++++++++--
+ 4 files changed, 67 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/mach-imx/imx8/clock.c b/arch/arm/mach-imx/imx8/clock.c
+index 17c437e914..032634f575 100644
+--- a/arch/arm/mach-imx/imx8/clock.c
++++ b/arch/arm/mach-imx/imx8/clock.c
+@@ -354,6 +354,8 @@ void init_clk_usdhc(u32 index)
+ 	u32 instances = 2;
+ #endif
+ 
++printf("%s +++\n", __func__);
++
+ 	sc_err_t err;
+ 	sc_ipc_t ipc;
+ 	sc_pm_clock_rate_t actual = 400000000;
+@@ -403,6 +405,8 @@ void init_clk_usdhc(u32 index)
+ 	}
+ 
+ 	LPCG_AllClockOn(USDHC_0_LPCG + index * 0x10000);
++
++printf("%s ---\n", __func__);
+ }
+ 
+ void init_clk_fec(int index)
+diff --git a/drivers/mmc/fsl_esdhc.c b/drivers/mmc/fsl_esdhc.c
+index cb454d55b1..042e0badd6 100644
+--- a/drivers/mmc/fsl_esdhc.c
++++ b/drivers/mmc/fsl_esdhc.c
+@@ -1000,6 +1000,8 @@ static int esdhc_init_common(struct fsl_esdhc_priv *priv, struct mmc *mmc)
+ 	struct fsl_esdhc *regs = priv->esdhc_regs;
+ 	ulong start;
+ 
++printf("%s: +++\n", __func__);
++
+ 	/* Reset the entire host controller */
+ 	esdhc_setbits32(&regs->sysctl, SYSCTL_RSTA);
+ 
+@@ -1010,7 +1012,11 @@ static int esdhc_init_common(struct fsl_esdhc_priv *priv, struct mmc *mmc)
+ 			return -ETIMEDOUT;
+ 	}
+ 
++printf("%s: timer ok \n", __func__);
++
+ #if defined(CONFIG_FSL_USDHC)
++printf("%s: USDHC\n", __func__);
++
+ 	/* RSTA doesn't reset MMC_BOOT register, so manually reset it */
+ 	esdhc_write32(&regs->mmcboot, 0x0);
+ 	/* Reset MIX_CTRL and CLK_TUNE_CTRL_STATUS regs to 0 */
+@@ -1039,6 +1045,8 @@ static int esdhc_init_common(struct fsl_esdhc_priv *priv, struct mmc *mmc)
+ 	esdhc_setbits32(&regs->vendorspec, VENDORSPEC_HCKEN | VENDORSPEC_IPGEN);
+ #endif
+ 
++printf("%s: prep detect\n", __func__);
++
+ 	/* Set the initial clock speed */
+ 	mmc_set_clock(mmc, 400000, false);
+ 
+@@ -1051,6 +1059,8 @@ static int esdhc_init_common(struct fsl_esdhc_priv *priv, struct mmc *mmc)
+ 	/* Set timout to the maximum value */
+ 	esdhc_clrsetbits32(&regs->sysctl, SYSCTL_TIMEOUT_MASK, 14 << 16);
+ 
++printf("%s: ---\n", __func__);
++
+ 	return 0;
+ }
+ 
+@@ -1059,20 +1069,29 @@ static int esdhc_getcd_common(struct fsl_esdhc_priv *priv)
+ 	struct fsl_esdhc *regs = priv->esdhc_regs;
+ 	int timeout = 1000;
+ 
++printf("%s +++\n", __func__);
++
+ #ifdef CONFIG_ESDHC_DETECT_QUIRK
+ 	if (CONFIG_ESDHC_DETECT_QUIRK)
+ 		return 1;
+ #endif
+ 
+ #if CONFIG_IS_ENABLED(DM_MMC)
++printf("%s non_removable %d\n", __func__, priv->non_removable);
++
+ 	if (priv->non_removable)
+ 		return 1;
+ #ifdef CONFIG_DM_GPIO
++
++printf("%s try gpio %d\n", __func__, dm_gpio_is_valid(&priv->cd_gpio));
++
+ 	if (dm_gpio_is_valid(&priv->cd_gpio))
+ 		return dm_gpio_get_value(&priv->cd_gpio);
+ #endif
+ #endif
+ 
++printf("%s try PRSSTAT\n", __func__);
++
+ 	while (!(esdhc_read32(&regs->prsstat) & PRSSTAT_CINS) && --timeout)
+ 		udelay(1000);
+ 
+@@ -1433,6 +1452,8 @@ static int fsl_esdhc_probe(struct udevice *dev)
+ 	struct mmc *mmc;
+ 	int ret;
+ 
++printf("%s: +++\n", __func__);
++
+ 	addr = dev_read_addr(dev);
+ 	if (addr == FDT_ADDR_T_NONE)
+ 		return -EINVAL;
+@@ -1444,6 +1465,8 @@ static int fsl_esdhc_probe(struct udevice *dev)
+ 	}
+ #endif
+ 
++printf("%s: setup regs\n", __func__);
++
+ 	priv->esdhc_regs = (struct fsl_esdhc *)addr;
+ 	priv->dev = dev;
+ 	priv->mode = -1;
+@@ -1492,6 +1515,8 @@ static int fsl_esdhc_probe(struct udevice *dev)
+ 	priv->vs18_enable = 0;
+ 
+ #ifdef CONFIG_DM_REGULATOR
++printf("%s: setup regulator\n", __func__);
++
+ 	/*
+ 	 * If emmc I/O has a fixed voltage at 1.8V, this must be provided,
+ 	 * otherwise, emmc will work abnormally.
+@@ -1533,6 +1558,7 @@ static int fsl_esdhc_probe(struct udevice *dev)
+ 	 * correctly get the seq as 2 and 3, then let mxc_get_clock
+ 	 * work as expected.
+ 	 */
++printf("%s: setup clk(%d)\n", __func__, dev->seq);
+ 
+ 	init_clk_usdhc(dev->seq);
+ 
+@@ -1542,17 +1568,21 @@ static int fsl_esdhc_probe(struct udevice *dev)
+ 		return -EINVAL;
+ 	}
+ 
++printf("%s: -> fsl_esdhc_init\n", __func__);
+ 	ret = fsl_esdhc_init(priv, plat);
+ 	if (ret) {
+ 		dev_err(dev, "fsl_esdhc_init failure\n");
+ 		return ret;
+ 	}
++printf("%s: <- fsl_esdhc_init\n", __func__);
+ 
+ 	mmc = &plat->mmc;
+ 	mmc->cfg = &plat->cfg;
+ 	mmc->dev = dev;
+ 	upriv->mmc = mmc;
+ 
++printf("%s: -> esdhc_init_common\n", __func__);
++
+ 	return esdhc_init_common(priv, mmc);
+ }
+ 
+diff --git a/drivers/mmc/mmc-uclass.c b/drivers/mmc/mmc-uclass.c
+index cf628a8b25..c96745583f 100644
+--- a/drivers/mmc/mmc-uclass.c
++++ b/drivers/mmc/mmc-uclass.c
+@@ -97,6 +97,8 @@ int dm_mmc_get_cd(struct udevice *dev)
+ {
+ 	struct dm_mmc_ops *ops = mmc_get_ops(dev);
+ 
++printf("%s +++\n", __func__);
++
+ 	if (!ops->get_cd)
+ 		return -ENOSYS;
+ 	return ops->get_cd(dev);
+diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
+index 4a80f556a0..4d84d41330 100644
+--- a/drivers/mmc/mmc.c
++++ b/drivers/mmc/mmc.c
+@@ -36,11 +36,16 @@ struct mmc *find_mmc_device(int dev_num)
+ void mmc_do_preinit(void)
+ {
+ 	struct mmc *m = &mmc_static;
++
++printf("%s +++\n", __func__);
+ #ifdef CONFIG_FSL_ESDHC_ADAPTER_IDENT
++#error
+ 	mmc_set_preinit(m, 1);
+ #endif
+ 	if (m->preinit)
+ 		mmc_start_init(m);
++
++printf("%s ---\n", __func__);
+ }
+ 
+ struct blk_desc *mmc_get_blk_desc(struct mmc *mmc)
+@@ -1163,6 +1168,7 @@ int mmc_hwpart_config(struct mmc *mmc,
+ #endif
+ 
+ #if !CONFIG_IS_ENABLED(DM_MMC)
++#error
+ int mmc_getcd(struct mmc *mmc)
+ {
+ 	int cd;
+@@ -2544,15 +2550,20 @@ static int mmc_power_init(struct mmc *mmc)
+ #if CONFIG_IS_ENABLED(DM_REGULATOR)
+ 	int ret;
+ 
++printf("%s +++ \n", __func__);
++
+ 	ret = device_get_supply_regulator(mmc->dev, "vmmc-supply",
+ 					  &mmc->vmmc_supply);
+ 	if (ret)
+-		pr_debug("%s: No vmmc supply\n", mmc->dev->name);
++		pr_info("%s: No vmmc supply\n", mmc->dev->name);
+ 
+ 	ret = device_get_supply_regulator(mmc->dev, "vqmmc-supply",
+ 					  &mmc->vqmmc_supply);
+ 	if (ret)
+-		pr_debug("%s: No vqmmc supply\n", mmc->dev->name);
++		pr_info("%s: No vqmmc supply\n", mmc->dev->name);
++
++printf("%s --- \n", __func__);
++
+ #endif
+ #else /* !CONFIG_DM_MMC */
+ 	/*
+@@ -2637,6 +2648,8 @@ int mmc_start_init(struct mmc *mmc)
+ 	bool uhs_en = supports_uhs(mmc->cfg->host_caps);
+ 	int err;
+ 
++printf("%s +++\n", __func__);
++
+ 	/*
+ 	 * all hosts are capable of 1 bit bus-width and able to use the legacy
+ 	 * timings.
+@@ -2661,13 +2674,18 @@ int mmc_start_init(struct mmc *mmc)
+ 		return -ENOMEDIUM;
+ 	}
+ 
++printf("%s CD OK\n", __func__);
++
+ 	if (mmc->has_init)
+ 		return 0;
+ 
+ #ifdef CONFIG_FSL_ESDHC_ADAPTER_IDENT
++#error
+ 	mmc_adapter_card_type_ident();
+ #endif
++printf("%s -> mmc_power_init \n", __func__);
+ 	err = mmc_power_init(mmc);
++printf("%s -> mmc_power_init (%d)\n", __func__, err);
+ 	if (err)
+ 		return err;
+ 
+@@ -2815,6 +2833,8 @@ static int mmc_probe(bd_t *bis)
+ 	struct uclass *uc;
+ 	struct udevice *dev;
+ 
++printf("%s: +++\n", __func__);
++
+ 	ret = uclass_get(UCLASS_MMC, &uc);
+ 	if (ret)
+ 		return ret;
+@@ -2826,6 +2846,7 @@ static int mmc_probe(bd_t *bis)
+ 	 */
+ 	for (i = 0; ; i++) {
+ 		ret = uclass_get_device_by_seq(UCLASS_MMC, i, &dev);
++printf("%s: seq %d, ret %d\n", __func__, i, ret);
+ 		if (ret == -ENODEV)
+ 			break;
+ 	}
+@@ -2835,6 +2856,8 @@ static int mmc_probe(bd_t *bis)
+ 			pr_err("%s - probe failed: %d\n", dev->name, ret);
+ 	}
+ 
++printf("%s: ---\n", __func__);
++
+ 	return 0;
+ }
+ #else
+@@ -2857,10 +2880,14 @@ int mmc_initialize(bd_t *bis)
+ 
+ #if !CONFIG_IS_ENABLED(BLK)
+ #if !CONFIG_IS_ENABLED(MMC_TINY)
++printf("%s: -> mmc_list_init\n", __func__);
+ 	mmc_list_init();
++printf("%s: <- mmc_list_init\n", __func__);
+ #endif
+ #endif
++printf("%s: -> mmc_probe\n", __func__);
+ 	ret = mmc_probe(bis);
++printf("%s: <- mmc_probe (%d)\n", __func__, ret);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -2868,7 +2895,9 @@ int mmc_initialize(bd_t *bis)
+ 	print_mmc_devices(',');
+ #endif
+ 
++printf("%s: -> mmc_do_preinit\n", __func__);
+ 	mmc_do_preinit();
++printf("%s: <- mmc_do_preinit\n", __func__);
+ 	return 0;
+ }
+ 

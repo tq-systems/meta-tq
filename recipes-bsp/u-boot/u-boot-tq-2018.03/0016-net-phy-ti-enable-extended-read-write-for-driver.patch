@@ -1,4 +1,4 @@
-From adbbb8beff9f44b09e5ccb1edb94d19392915bab Mon Sep 17 00:00:00 2001
+From b558f245d381bb67cc61989c4cd82ef83f85de0e Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Mon, 29 Aug 2016 15:01:50 +0200
 Subject: [PATCH] net: phy: ti: enable extended read / write for driver

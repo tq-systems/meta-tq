@@ -1,0 +1,29 @@
+From 6aff21f405c28aa38c4789dbc697e5068547614f Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 19 Nov 2018 18:01:51 +0100
+Subject: [PATCH] arm: dt: fsl-imx8qxp-tqma8qxs-mb-smarc-2: add i2c1
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts b/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
+index 68453ecd49..a4067cca19 100644
+--- a/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
+@@ -85,6 +85,14 @@
+ 	status = "okay";
+ };
+ 
++&i2c1 {
++	eeprom2: 24c32@ae {
++		compatible = "atmel,24c32";
++		reg = <0xae>;
++		pagesize = <16>;
++	};
++};
++
+ &iomuxc {
+ 	tqma8qxs-mb-smarc-2 {
+ 		pinctrl_fec1: fec1grp {

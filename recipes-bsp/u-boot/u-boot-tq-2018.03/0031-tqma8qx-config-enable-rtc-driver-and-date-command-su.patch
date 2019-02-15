@@ -1,4 +1,4 @@
-From 6d23cacbd621c8fdbbd210b8c623a506469a1c05 Mon Sep 17 00:00:00 2001
+From 2c28c7f2928e818994b19f797c7521a910b570a8 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 25 Oct 2018 12:35:10 +0200
 Subject: [PATCH] tqma8qx: config: enable rtc driver and date command support
@@ -23,7 +23,7 @@ index bc5ad4bb7b..042f8549d0 100644
  CONFIG_FSL_LPUART=y
  CONFIG_DM_SPI=y
 diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
-index b01d5d8609..83cc88db4f 100644
+index d34e452802..6c352cfe0c 100644
 --- a/include/configs/tqma8qx.h
 +++ b/include/configs/tqma8qx.h
 @@ -44,6 +44,8 @@

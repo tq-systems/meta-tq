@@ -1,4 +1,4 @@
-From 3914bcbf60beeebb9452b0f46d79b5d2d510be72 Mon Sep 17 00:00:00 2001
+From dfe0104e64fb4deb4574e6a40d6c4869735a5c9d Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Fri, 5 Oct 2018 14:01:04 +0200
 Subject: [PATCH] phy: ti: debug bringup

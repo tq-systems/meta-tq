@@ -1,4 +1,4 @@
-From 14a3615d3bcd3a4e96163409ff7b5e5ef8ab43fb Mon Sep 17 00:00:00 2001
+From 2b6e77ff3adcb08c2deed1819727d918499df031 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 14 Feb 2019 16:41:09 +0100
 Subject: [PATCH] tqma8qx-mba8qx: update defconfig
@@ -62,7 +62,7 @@ index 685343e232..bd82fb65f3 100644
  
  #define MX8QX_FEC1_BASE			0x5B040000U
 diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
-index a4dd8e4f4c..6848fdce8c 100644
+index b339dcd0ca..b9ba12350a 100644
 --- a/include/configs/tqma8qx.h
 +++ b/include/configs/tqma8qx.h
 @@ -40,7 +40,7 @@

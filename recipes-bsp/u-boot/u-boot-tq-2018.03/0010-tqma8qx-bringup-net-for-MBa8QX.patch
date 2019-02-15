@@ -1,4 +1,4 @@
-From e4cf043ea288ae06fa6d0f3d677e81e03915ac47 Mon Sep 17 00:00:00 2001
+From a74a6d9801d9f1dcda16c400e121fe7e32dec883 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 4 Oct 2018 12:20:26 +0200
 Subject: [PATCH] tqma8qx: bringup net for MBa8QX

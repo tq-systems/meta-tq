@@ -1,4 +1,4 @@
-From b2e6d5bbfcce58eb5d2c69693b97af377fe861c0 Mon Sep 17 00:00:00 2001
+From 4c97de0839adae79302288134a5906d377653c79 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 4 Oct 2018 18:20:02 +0200
 Subject: [PATCH] arm: dt: fsl-imx8qxp-tqma8qx-mba8qx: correct phy-mode for

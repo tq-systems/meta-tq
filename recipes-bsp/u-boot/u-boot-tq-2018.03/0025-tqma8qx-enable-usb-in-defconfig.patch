@@ -1,4 +1,4 @@
-From 68c836c47905b055f4d5e7664af7e6329df135a2 Mon Sep 17 00:00:00 2001
+From 85c517091059e9d542d1cce3139aa02ca0b800e7 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 25 Oct 2018 11:32:11 +0200
 Subject: [PATCH] tqma8qx: enable usb in defconfig
@@ -33,7 +33,7 @@ index 3af7878fc6..ddd14c1e31 100644
  CONFIG_FAT_WRITE=y
  # CONFIG_EFI_LOADER is not set
 diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
-index 72f6c5146c..b01d5d8609 100644
+index af5dc93a3f..d34e452802 100644
 --- a/include/configs/tqma8qx.h
 +++ b/include/configs/tqma8qx.h
 @@ -34,6 +34,16 @@
