@@ -1,4 +1,4 @@
-From 95808899240a5ff7eb9f45ec849f6e897054d411 Mon Sep 17 00:00:00 2001
+From e8faaea34d0ace9bef291240beb2d7279345f8dd Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Mon, 19 Nov 2018 18:08:12 +0100
 Subject: [PATCH] arm: dt: fsl-imx8qxp-tqma8qxs-mb-smarc-2: add fec

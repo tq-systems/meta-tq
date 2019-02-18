@@ -1,4 +1,4 @@
-From 734515c982bc4fc7ca71e562eedb5eaf50055734 Mon Sep 17 00:00:00 2001
+From 996369ccccf7ad8820f88fa7aa8c5c6a297cdd31 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Tue, 15 Jan 2019 12:27:29 +0100
 Subject: [PATCH] mmc: fsl_esdhc: revert usage of
@@ -13,7 +13,7 @@ Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/mmc/fsl_esdhc.c b/drivers/mmc/fsl_esdhc.c
-index 042e0badd6..4fa105b7dc 100644
+index cb454d55b1..149b370b50 100644
 --- a/drivers/mmc/fsl_esdhc.c
 +++ b/drivers/mmc/fsl_esdhc.c
 @@ -139,7 +139,7 @@ struct fsl_esdhc_priv {

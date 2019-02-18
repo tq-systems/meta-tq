@@ -50,6 +50,30 @@ SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branc
            file://0034-mmc-allow-selection-of-CONFIG_FSL_ESDHC-per-Kconfig.patch \
            file://0035-tqma8qx_mba8qx-select-mmc-stuff-in-defconfig.patch \
            file://0036-tqma8qx_mba8qx-add-init-hooks-to-defconfig.patch \
+           file://0037-tqma8qx-mba8qx-dt-fixes-for-usb-otg1.patch \
+           file://0038-arm-dt-fsl-imx8qxp-tqma8qx-mba8qx-remove-unused-lpua.patch \
+           file://0039-mmc-init-debug.patch \
+           file://0040-tqma8qx-remove-unused-pinmux-defines.patch \
+           file://0041-tqma8qx-move-board_quiesce_devices-to-mainboard-file.patch \
+           file://0042-tqma8qx-remove-ethernet-and-sdhci-related-code.patch \
+           file://0043-tqma8qx-Kconfig-select-dm-drivers.patch \
+           file://0044-tqma8qx-default-DT-to-B0-Stepping.patch \
+           file://0045-arm-dt-fsl-imx8qxp-tqma8qx-fsl-imx8qxp-tqma8qx-mba8q.patch \
+           file://0046-arm-dt-fsl-imx8qxp-tqma8qx-remove-unused-SD-regulato.patch \
+           file://0047-arm-dt-fsl-imx8qxp-tqma8qx-mba8qx-fix-SD1-regulator.patch \
+           file://0048-arm-dt-fsl-imx8qxp-tqma8qx-mba8qx-reorder-nodes-alph.patch \
+           file://0049-add-tqma8qxs-with-mb-smarc-2.patch \
+           file://0050-arm-dt-fsl-imx8qxp-tqma8qxs-add-i2c1.patch \
+           file://0051-arm-dt-fsl-imx8qxp-tqma8qxs-mb-smarc-2-add-fec.patch \
+           file://0052-arm-dt-fsl-imx8qxp-tqma8qxs-mb-smarc-2-add-i2c1.patch \
+           file://0053-arm-dt-fsl-imx8qxp-tqma8qxs-mb-smarc-2-add-usb.patch \
+           file://0054-arm-dt-fsl-imx8qxp-tqma8qxs-mb-smarc-2-prepare-SD3-H.patch \
+           file://0055-arm-dt-fsl-imx8qxp-tqma8qxs-prepare-e-MMC-HS-mode.patch \
+           file://0056-mtd-ubi-allow-via-Kconfig.patch \
+           file://0057-serial-mxc-Add-match-string-for-i.mx6-quad-dual-lite.patch \
+           file://0058-mmc-fsl_esdhc-revert-usage-of-CONFIG_IS_ENABLED-DM_R.patch \
+           file://0059-power-pmic-uclass-allow-selection-of-CONFIG_PMIC_CHI.patch \
+           file://0060-net-Kconfig-mark-FEC_MXC-also-compatible-for-MX8MQ-M.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -81,10 +105,9 @@ do_deploy_append_mx8m () {
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-#COMPATIBLE_MACHINE = "tqma8qx-mba8qx|tqma8qxs-mb-smarc-2"
 #COMPATIBLE_MACHINE .= "|tqma8mq-mba8mx|tqma8mq-2gm-mba8mx"
 
 # empty for now
-COMPATIBLE_MACHINE = "tqma8qx-mba8qx"
+COMPATIBLE_MACHINE = "tqma8qx-mba8qx|tqma8qxs-mb-smarc-2"
 
 UBOOT_NAME_mx8 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"

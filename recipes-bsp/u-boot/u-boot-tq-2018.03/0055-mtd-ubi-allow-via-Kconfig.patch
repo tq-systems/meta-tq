@@ -1,4 +1,4 @@
-From 0df9b78daa22247148bde502a202291913ea77df Mon Sep 17 00:00:00 2001
+From a4e6b002ae424abf4feb89f4b2904bd057bf8f6c Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 10 Jan 2019 11:58:10 +0100
 Subject: [PATCH] mtd/ubi: allow via Kconfig

@@ -1,4 +1,4 @@
-From 0d272a7d9de8d205598d5983a313b9f6587c80d6 Mon Sep 17 00:00:00 2001
+From 0b6aa9b7a2c27c74d6cea4a96c53f002e43d72a4 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 17 Jan 2019 09:52:50 +0100
 Subject: [PATCH] net: Kconfig: mark FEC_MXC also compatible for MX8MQ / MX8QXP

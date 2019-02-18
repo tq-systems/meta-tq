@@ -1,4 +1,4 @@
-From d265bde424ff82bb13ad20c44abcb99c5a54d3de Mon Sep 17 00:00:00 2001
+From df681d386320d34d2a809689f897c3c07f9fbb86 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Fri, 15 Feb 2019 10:23:16 +0100
 Subject: [PATCH] mmc init debug
@@ -8,8 +8,8 @@ Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
  arch/arm/mach-imx/imx8/clock.c |  4 ++++
  drivers/mmc/fsl_esdhc.c        | 30 ++++++++++++++++++++++++++++++
  drivers/mmc/mmc-uclass.c       |  2 ++
- drivers/mmc/mmc.c              | 33 +++++++++++++++++++++++++++++++--
- 4 files changed, 67 insertions(+), 2 deletions(-)
+ drivers/mmc/mmc.c              | 32 ++++++++++++++++++++++++++++++--
+ 4 files changed, 66 insertions(+), 2 deletions(-)
 
 diff --git a/arch/arm/mach-imx/imx8/clock.c b/arch/arm/mach-imx/imx8/clock.c
 index 17c437e914..032634f575 100644
@@ -34,7 +34,7 @@ index 17c437e914..032634f575 100644
  
  void init_clk_fec(int index)
 diff --git a/drivers/mmc/fsl_esdhc.c b/drivers/mmc/fsl_esdhc.c
-index cb454d55b1..042e0badd6 100644
+index 149b370b50..4fa105b7dc 100644
 --- a/drivers/mmc/fsl_esdhc.c
 +++ b/drivers/mmc/fsl_esdhc.c
 @@ -1000,6 +1000,8 @@ static int esdhc_init_common(struct fsl_esdhc_priv *priv, struct mmc *mmc)
@@ -177,7 +177,7 @@ index cf628a8b25..c96745583f 100644
  		return -ENOSYS;
  	return ops->get_cd(dev);
 diff --git a/drivers/mmc/mmc.c b/drivers/mmc/mmc.c
-index 4a80f556a0..4d84d41330 100644
+index 4a80f556a0..4eae854c92 100644
 --- a/drivers/mmc/mmc.c
 +++ b/drivers/mmc/mmc.c
 @@ -36,11 +36,16 @@ struct mmc *find_mmc_device(int dev_num)
@@ -197,15 +197,7 @@ index 4a80f556a0..4d84d41330 100644
  }
  
  struct blk_desc *mmc_get_blk_desc(struct mmc *mmc)
-@@ -1163,6 +1168,7 @@ int mmc_hwpart_config(struct mmc *mmc,
- #endif
- 
- #if !CONFIG_IS_ENABLED(DM_MMC)
-+#error
- int mmc_getcd(struct mmc *mmc)
- {
- 	int cd;
-@@ -2544,15 +2550,20 @@ static int mmc_power_init(struct mmc *mmc)
+@@ -2544,15 +2549,20 @@ static int mmc_power_init(struct mmc *mmc)
  #if CONFIG_IS_ENABLED(DM_REGULATOR)
  	int ret;
  
@@ -228,7 +220,7 @@ index 4a80f556a0..4d84d41330 100644
  #endif
  #else /* !CONFIG_DM_MMC */
  	/*
-@@ -2637,6 +2648,8 @@ int mmc_start_init(struct mmc *mmc)
+@@ -2637,6 +2647,8 @@ int mmc_start_init(struct mmc *mmc)
  	bool uhs_en = supports_uhs(mmc->cfg->host_caps);
  	int err;
  
@@ -237,7 +229,7 @@ index 4a80f556a0..4d84d41330 100644
  	/*
  	 * all hosts are capable of 1 bit bus-width and able to use the legacy
  	 * timings.
-@@ -2661,13 +2674,18 @@ int mmc_start_init(struct mmc *mmc)
+@@ -2661,13 +2673,18 @@ int mmc_start_init(struct mmc *mmc)
  		return -ENOMEDIUM;
  	}
  
@@ -256,7 +248,7 @@ index 4a80f556a0..4d84d41330 100644
  	if (err)
  		return err;
  
-@@ -2815,6 +2833,8 @@ static int mmc_probe(bd_t *bis)
+@@ -2815,6 +2832,8 @@ static int mmc_probe(bd_t *bis)
  	struct uclass *uc;
  	struct udevice *dev;
  
@@ -265,7 +257,7 @@ index 4a80f556a0..4d84d41330 100644
  	ret = uclass_get(UCLASS_MMC, &uc);
  	if (ret)
  		return ret;
-@@ -2826,6 +2846,7 @@ static int mmc_probe(bd_t *bis)
+@@ -2826,6 +2845,7 @@ static int mmc_probe(bd_t *bis)
  	 */
  	for (i = 0; ; i++) {
  		ret = uclass_get_device_by_seq(UCLASS_MMC, i, &dev);
@@ -273,7 +265,7 @@ index 4a80f556a0..4d84d41330 100644
  		if (ret == -ENODEV)
  			break;
  	}
-@@ -2835,6 +2856,8 @@ static int mmc_probe(bd_t *bis)
+@@ -2835,6 +2855,8 @@ static int mmc_probe(bd_t *bis)
  			pr_err("%s - probe failed: %d\n", dev->name, ret);
  	}
  
@@ -282,7 +274,7 @@ index 4a80f556a0..4d84d41330 100644
  	return 0;
  }
  #else
-@@ -2857,10 +2880,14 @@ int mmc_initialize(bd_t *bis)
+@@ -2857,10 +2879,14 @@ int mmc_initialize(bd_t *bis)
  
  #if !CONFIG_IS_ENABLED(BLK)
  #if !CONFIG_IS_ENABLED(MMC_TINY)
@@ -297,7 +289,7 @@ index 4a80f556a0..4d84d41330 100644
  	if (ret)
  		return ret;
  
-@@ -2868,7 +2895,9 @@ int mmc_initialize(bd_t *bis)
+@@ -2868,7 +2894,9 @@ int mmc_initialize(bd_t *bis)
  	print_mmc_devices(',');
  #endif
  

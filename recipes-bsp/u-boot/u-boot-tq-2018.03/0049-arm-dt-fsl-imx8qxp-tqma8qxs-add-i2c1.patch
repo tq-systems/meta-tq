@@ -1,4 +1,4 @@
-From a655a19bac3a0fccf2d9d94de4a200d97ebf4a3a Mon Sep 17 00:00:00 2001
+From 130f453a15c4e6e511e416076b8840fa28675cac Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Mon, 19 Nov 2018 17:37:45 +0100
 Subject: [PATCH] arm: dt: fsl-imx8qxp-tqma8qxs: add i2c1

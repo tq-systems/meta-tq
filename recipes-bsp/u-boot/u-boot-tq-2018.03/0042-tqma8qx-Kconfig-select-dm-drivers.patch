@@ -1,4 +1,4 @@
-From 85680098ecb29632b77881255013a93325798496 Mon Sep 17 00:00:00 2001
+From e039c4c4a252c5650e2fae071b8c1f0974e91d70 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 22 Nov 2018 12:27:48 +0100
 Subject: [PATCH] tqma8qx: Kconfig: select dm drivers

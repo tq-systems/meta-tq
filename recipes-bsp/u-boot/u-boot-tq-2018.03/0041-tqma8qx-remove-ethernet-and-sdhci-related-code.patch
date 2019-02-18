@@ -1,4 +1,4 @@
-From cfd496bfba86517ecbcf2262680255cf9e2d6d85 Mon Sep 17 00:00:00 2001
+From 305597b53d78e219ba5968f6ebdfb5974477f518 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 22 Nov 2018 12:23:32 +0100
 Subject: [PATCH] tqma8qx: remove ethernet and sdhci related code

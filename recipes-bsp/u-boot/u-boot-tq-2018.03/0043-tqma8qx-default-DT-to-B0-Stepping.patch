@@ -1,4 +1,4 @@
-From f23cce57fc0d3d2717634c562f052a5a64404cc6 Mon Sep 17 00:00:00 2001
+From 6e9d8fb6927c86e2c7fab0c646d7e8ddd393a811 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Fri, 16 Nov 2018 10:41:24 +0100
 Subject: [PATCH] tqma8qx: default DT to B0 Stepping

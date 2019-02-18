@@ -1,4 +1,4 @@
-From 8f59091fa540f98137c1e03df6c069f2712242ea Mon Sep 17 00:00:00 2001
+From ff31ad25198e549a12460ac8d9233858e08e21d1 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Mon, 19 Nov 2018 12:53:31 +0100
 Subject: [PATCH] arm: dt: fsl-imx8qxp-tqma8qx / fsl-imx8qxp-tqma8qx-mba8qx:

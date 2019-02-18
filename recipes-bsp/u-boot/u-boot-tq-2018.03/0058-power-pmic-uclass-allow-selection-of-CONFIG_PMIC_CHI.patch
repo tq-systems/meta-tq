@@ -1,4 +1,4 @@
-From 0a6f66b55f13e67ed6df71d77c7c6326204158bc Mon Sep 17 00:00:00 2001
+From c6344fa94f271dec587700c275b7420b2df27e89 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Tue, 15 Jan 2019 12:30:30 +0100
 Subject: [PATCH] power: pmic-uclass: allow selection of CONFIG_PMIC_CHILDREN
