@@ -1,0 +1,56 @@
+From aa22a75f3a55b2b6952694d99762c42d8ddfa971 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 4 Oct 2018 16:53:09 +0200
+Subject: [PATCH] arm: dt: fsl-imx8qxp-tqma8qx-mba8qx: add reset-gpio to
+ ethernet
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts b/arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts
+index 4cc443c9f5..4d9b1caf3d 100644
+--- a/arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts
+@@ -77,6 +77,8 @@
+ 				SC_P_ENET0_RGMII_RXD1_CONN_ENET0_RGMII_RXD1	0x06000048
+ 				SC_P_ENET0_RGMII_RXD2_CONN_ENET0_RGMII_RXD2	0x06000048
+ 				SC_P_ENET0_RGMII_RXD3_CONN_ENET0_RGMII_RXD3	0x06000048
++
++				SC_P_CSI_EN_LSIO_GPIO3_IO02			0x06000048
+ 			>;
+ 		};
+ 
+@@ -94,6 +96,8 @@
+ 				SC_P_ESAI0_TX3_RX2_CONN_ENET1_RGMII_RXD1	0x06000048
+ 				SC_P_ESAI0_TX2_RX3_CONN_ENET1_RGMII_RXD2	0x06000048
+ 				SC_P_ESAI0_TX1_CONN_ENET1_RGMII_RXD3		0x06000048
++
++				SC_P_CSI_RESET_LSIO_GPIO3_IO03			0x06000048
+ 			>;
+ 		};
+ 
+@@ -160,7 +164,9 @@
+ 	pinctrl-0 = <&pinctrl_fec1>;
+ 	phy-mode = "rgmii";
+ 	phy-handle = <&ethphy0>;
+-/*	fsl,magic-packet; */
++	phy-reset-gpios = <&gpio3 2 GPIO_ACTIVE_LOW>;
++	phy-reset-duration = <500>;
++	fsl,magic-packet;
+ 	status = "okay";
+ 
+ 	mdio {
+@@ -184,7 +190,10 @@
+ 	pinctrl-0 = <&pinctrl_fec2>;
+ 	phy-mode = "rgmii";
+ 	phy-handle = <&ethphy3>;
+-/*	fsl,magic-packet; */
++	fsl,magic-packet;
++	phy-reset-gpios = <&gpio3 3 GPIO_ACTIVE_LOW>;
++	phy-reset-duration = <500>;
++
+ 	status = "okay";
+ };
+ 

@@ -1,0 +1,27 @@
+From 57ae9fc9bca5b5149db04dfa46d7ac0744ee63ad Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Tue, 15 Jan 2019 12:27:29 +0100
+Subject: [PATCH] mmc: fsl_esdhc: revert usage of
+ CONFIG_IS_ENABLED(DM_REGULATOR)
+
+Enables to define DM_REGULATOR in config header. Some drivers can not be properly
+selected for non SPL if SPL is also defined
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ drivers/mmc/fsl_esdhc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/mmc/fsl_esdhc.c b/drivers/mmc/fsl_esdhc.c
+index cb454d55b1..149b370b50 100644
+--- a/drivers/mmc/fsl_esdhc.c
++++ b/drivers/mmc/fsl_esdhc.c
+@@ -139,7 +139,7 @@ struct fsl_esdhc_priv {
+ 	u32 tuning_start_tap;
+ 	u32 strobe_dll_delay_target;
+ 	u32 signal_voltage;
+-#if IS_ENABLED(CONFIG_DM_REGULATOR)
++#ifdef CONFIG_DM_REGULATOR
+ 	struct udevice *vqmmc_dev;
+ 	struct udevice *vmmc_dev;
+ #endif

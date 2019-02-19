@@ -1,0 +1,221 @@
+From b54af8449a8ce861e4f74f8c75b79c6f4998c59c Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 4 Oct 2018 12:20:26 +0200
+Subject: [PATCH] tqma8qx: bringup net for MBa8QX
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8qx/tqma8qx-mba8qx.c | 151 +++++++++++++++++++++++++++--
+ include/configs/tqma8qx-mba8qx.h   |  15 +++
+ 2 files changed, 160 insertions(+), 6 deletions(-)
+
+diff --git a/board/tqc/tqma8qx/tqma8qx-mba8qx.c b/board/tqc/tqma8qx/tqma8qx-mba8qx.c
+index c63789508a..9ac7280c22 100644
+--- a/board/tqc/tqma8qx/tqma8qx-mba8qx.c
++++ b/board/tqc/tqma8qx/tqma8qx-mba8qx.c
+@@ -4,22 +4,24 @@
+  * SPDX-License-Identifier:	GPL-2.0+
+  */
+ #include <common.h>
+-#include <malloc.h>
++#include <dm.h>
++#include <environment.h>
+ #include <errno.h>
+-#include <fsl_ifc.h>
+ #include <fdt_support.h>
+-#include <linux/libfdt.h>
+-#include <environment.h>
+ #include <fsl_esdhc.h>
++#include <fsl_ifc.h>
++#include <linux/libfdt.h>
++#include <malloc.h>
++#include <netdev.h>
++#include <power-domain.h>
+ 
++#include <asm/gpio.h>
+ #include <asm/io.h>
+ #include <asm/arch/clock.h>
+ #include <asm/mach-imx/sci/sci.h>
+ #include <asm/arch/imx8-pins.h>
+-#include <dm.h>
+ #include <asm/arch/iomux.h>
+ #include <asm/arch/sys_proto.h>
+-#include <asm/gpio.h>
+ #include <power-domain.h>
+ 
+ #include "../common/tqc_bb.h"
+@@ -138,6 +140,135 @@ int tqc_bb_board_mmc_init(bd_t *bis)
+ 	return ret;
+ }
+ 
++static iomux_cfg_t pad_enet1[] = {
++	SC_P_SPDIF0_EXT_CLK | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++
++	SC_P_SPDIF0_TX | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_SPDIF0_RX | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ESAI0_TX3_RX2 | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ESAI0_TX2_RX3 | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ESAI0_TX1 | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ESAI0_TX0 | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ESAI0_SCKR | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ESAI0_TX4_RX1 | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ESAI0_TX5_RX0 | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ESAI0_FST  | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ESAI0_SCKT | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ESAI0_FSR  | MUX_MODE_ALT(3) | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++#if 0
++	/* Shared MDIO */
++	SC_P_ENET0_MDC | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ENET0_MDIO | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++#endif
++	SC_P_CSI_RESET | MUX_MODE_ALT(4) | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++};
++
++static iomux_cfg_t pad_enet0[] = {
++	SC_P_ENET0_REFCLK_125M_25M | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++
++	SC_P_ENET0_RGMII_RX_CTL | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ENET0_RGMII_RXD0 | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ENET0_RGMII_RXD1 | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ENET0_RGMII_RXD2 | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ENET0_RGMII_RXD3 | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ENET0_RGMII_RXC | MUX_PAD_CTRL(ENET_INPUT_PAD_CTRL),
++	SC_P_ENET0_RGMII_TX_CTL | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ENET0_RGMII_TXD0 | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ENET0_RGMII_TXD1 | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ENET0_RGMII_TXD2 | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ENET0_RGMII_TXD3 | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ENET0_RGMII_TXC | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++
++	/* Shared MDIO */
++	SC_P_ENET0_MDC | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++	SC_P_ENET0_MDIO | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++
++	SC_P_CSI_EN | MUX_MODE_ALT(4) | MUX_PAD_CTRL(ENET_NORMAL_PAD_CTRL),
++};
++
++struct fec_port_info {
++	unsigned id;
++	unsigned base;
++	unsigned phy_addr;
++	const char *pwr_domain;
++	const char *rst_gpio_name;
++	const char *rst_gpio_label;
++	iomux_cfg_t *pad_cfg;
++	size_t num_pads;
++};
++
++static const struct fec_port_info fpi[] = {
++	{
++		.id = 0U,
++		.base = MX8QX_FEC1_BASE,
++		.phy_addr = 0U,
++		.pwr_domain = "conn_enet0",
++		.rst_gpio_label = "gpio@3_02",
++		.rst_gpio_name = "enet0_reset",
++		.pad_cfg = pad_enet0,
++		.num_pads = ARRAY_SIZE(pad_enet0),
++	}, {
++		.id = 1,
++		.base = MX8QX_FEC2_BASE,
++		.phy_addr = 3,
++		.pwr_domain = "conn_enet1",
++		.rst_gpio_label = "gpio@3_03",
++		.rst_gpio_name = "enet1_reset",
++		.pad_cfg = pad_enet1,
++		.num_pads = ARRAY_SIZE(pad_enet1),
++	},
++};
++
++static void enet_phy_reset_one(const struct fec_port_info *fpi)
++{
++	struct gpio_desc desc;
++	int ret;
++
++	ret = dm_gpio_lookup_name(fpi->rst_gpio_name, &desc);
++	if (ret)
++		return;
++
++	ret = dm_gpio_request(&desc, fpi->rst_gpio_label);
++	if (ret)
++		return;
++
++	dm_gpio_set_dir_flags(&desc, GPIOD_IS_OUT);
++	dm_gpio_set_value(&desc, 0);
++	udelay(50);
++	dm_gpio_set_value(&desc, 1);
++
++	/* TODO: */
++	/* The board has a long delay for this reset to become stable */
++	mdelay(200);
++}
++
++int board_eth_init(bd_t *bis)
++{
++	int ret;
++	unsigned idx;
++	struct power_domain pd;
++
++	printf("[%s] %d\n", __func__, __LINE__);
++
++	for (idx = 0; idx < ARRAY_SIZE(fpi); ++idx) {
++		const struct fec_port_info *fpti = &fpi[idx];
++
++		if (!power_domain_lookup_name(fpti->pwr_domain, &pd))
++			power_domain_on(&pd);
++
++		imx8_iomux_setup_multiple_pads(fpti->pad_cfg, fpti->num_pads);
++
++		enet_phy_reset_one(fpti);
++
++		ret = fecmxc_initialize_multi(bis, fpti->id, fpti->phy_addr,
++					      fpti->base);
++
++		if (ret)
++			printf("FEC%u MXC: %s:failed\n", fpti->id, __func__);
++	}
++
++	return 0;
++}
+ 
+ int tqc_bb_checkboard(void)
+ {
+@@ -148,6 +279,14 @@ int tqc_bb_checkboard(void)
+ 
+ int tqc_bb_board_init(void)
+ {
++	unsigned idx;
++
++	for (idx = 0; idx < ARRAY_SIZE(fpi); ++idx) {
++		const struct fec_port_info *fpti = &fpi[idx];
++
++		enet_phy_reset_one(fpti);
++	}
++
+ 	return 0;
+ }
+ 
+diff --git a/include/configs/tqma8qx-mba8qx.h b/include/configs/tqma8qx-mba8qx.h
+index c1025b4faa..685343e232 100644
+--- a/include/configs/tqma8qx-mba8qx.h
++++ b/include/configs/tqma8qx-mba8qx.h
+@@ -7,4 +7,19 @@
+ #if !defined(__TQMA8QX_MBA8QX_H)
+ #define __TQMA8QX_MBA8QX_H
+ 
++#define CONFIG_FEC_MXC
++#define CONFIG_FEC_XCV_TYPE		RGMII
++#define FEC_QUIRK_ENET_MAC
++
++#define CONFIG_PHY_GIGE /* Support for 1000BASE-X */
++#define CONFIG_PHYLIB
++#define CONFIG_PHY_TI
++#define CONFIG_MII
++
++#define MX8QX_FEC1_BASE			0x5B040000U
++#define MX8QX_FEC2_BASE			0x5B050000U
++#define CONFIG_FEC_MXC_MDIO_BASE	MX8QX_FEC1_BASE
++
++#define CONFIG_FEC_MXC_PHYADDR		0x1F
++
+ #endif /* __TQMA8QX_MBA8QX_H */

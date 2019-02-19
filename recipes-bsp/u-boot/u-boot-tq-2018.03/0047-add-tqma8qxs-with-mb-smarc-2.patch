@@ -1,0 +1,1103 @@
+From 7dff416b058c3ec5444e01666be2555351698e34 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Fri, 15 Feb 2019 15:10:21 +0100
+Subject: [PATCH] add tqma8qxs with mb-smarc-2
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/Makefile                         |   3 +-
+ .../dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts   | 118 ++++++
+ arch/arm/dts/fsl-imx8qxp-tqma8qxs.dtsi        | 103 ++++++
+ arch/arm/mach-imx/imx8/Kconfig                |  13 +
+ board/tqc/tqma8qxs/Kconfig                    |  58 +++
+ board/tqc/tqma8qxs/Makefile                   |   9 +
+ board/tqc/tqma8qxs/tqma8qxs-mb-smarc-2.c      | 128 +++++++
+ board/tqc/tqma8qxs/tqma8qxs.c                 | 121 +++++++
+ configs/tqma8qxs_mb_smarc_2_mmc_defconfig     |  71 ++++
+ include/configs/tqma8qxs-mb-smarc-2.h         |  30 ++
+ include/configs/tqma8qxs.h                    | 338 ++++++++++++++++++
+ 11 files changed, 991 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
+ create mode 100644 arch/arm/dts/fsl-imx8qxp-tqma8qxs.dtsi
+ create mode 100644 board/tqc/tqma8qxs/Kconfig
+ create mode 100644 board/tqc/tqma8qxs/Makefile
+ create mode 100644 board/tqc/tqma8qxs/tqma8qxs-mb-smarc-2.c
+ create mode 100644 board/tqc/tqma8qxs/tqma8qxs.c
+ create mode 100644 configs/tqma8qxs_mb_smarc_2_mmc_defconfig
+ create mode 100644 include/configs/tqma8qxs-mb-smarc-2.h
+ create mode 100644 include/configs/tqma8qxs.h
+
+diff --git a/arch/arm/dts/Makefile b/arch/arm/dts/Makefile
+index e8b7947bff..c531d1ee14 100644
+--- a/arch/arm/dts/Makefile
++++ b/arch/arm/dts/Makefile
+@@ -477,7 +477,8 @@ dtb-$(CONFIG_ARCH_IMX8) += fsl-imx8dx-ddr3-arm2.dtb \
+ 		fsl-imx8qm-mek-xen.dtb \
+ 		fsl-imx8qxp-lpddr4-arm2.dtb \
+ 		fsl-imx8qxp-mek.dtb \
+-		fsl-imx8qxp-tqma8qx-mba8qx.dtb
++		fsl-imx8qxp-tqma8qx-mba8qx.dtb \
++		fsl-imx8qxp-tqma8qxs-mb-smarc-2.dtb
+ 
+ dtb-$(CONFIG_RCAR_GEN3) += \
+ 	r8a7795-h3ulcb.dtb \
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts b/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
+new file mode 100644
+index 0000000000..911cf5ba37
+--- /dev/null
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8qxs-mb-smarc-2.dts
+@@ -0,0 +1,118 @@
++/*
++ * Copyright 2018 TQ Systems GmbH
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++
++/dts-v1/;
++
++#include "fsl-imx8qxp-tqma8qxs.dtsi"
++#include <dt-bindings/net/ti-dp83867.h>
++
++/ {
++	model = "TQ Systems i.MX8QXP TQMa8xXS on MB-SMARC-2";
++	compatible = "tq,tqma8qxs-mb-smarc-2", "tq,tqma8qxs", "fsl,imx8qxp";
++
++	chosen {
++		bootargs = "console=ttyLP0,115200 earlycon=lpuart32,0x5a060000,115200";
++		stdout-path = &lpuart0;
++	};
++
++	regulators {
++		compatible = "simple-bus";
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		reg_usdhc2_vmmc: usdhc2_vmmc {
++			compatible = "regulator-fixed";
++			regulator-name = "SD1_PWR";
++			regulator-min-microvolt = <3300000>;
++			regulator-max-microvolt = <3300000>;
++			gpio = <&gpio4 19 GPIO_ACTIVE_LOW>;
++			startup-delay-us = <100>;
++			off-on-delay-us = <12000>;
++		};
++	};
++};
++
++&iomuxc {
++	tqma8qxs-mb-smarc-2 {
++		pinctrl_lpuart0: lpuart0grp {
++			fsl,pins = <
++				SC_P_UART0_RX_ADMA_UART0_RX	0x06000020
++				SC_P_UART0_TX_ADMA_UART0_TX	0x06000020
++			>;
++		};
++
++		pinctrl_usdhc2_gpio: usdhc2gpiogrp {
++			fsl,pins = <
++				SC_P_USDHC1_RESET_B_LSIO_GPIO4_IO19	0x06000021
++				SC_P_USDHC1_WP_LSIO_GPIO4_IO21		0x06000021
++				SC_P_USDHC1_CD_B_LSIO_GPIO4_IO22	0x06000021
++			>;
++		};
++
++		pinctrl_usdhc2: usdhc2grp {
++			fsl,pins = <
++				SC_P_USDHC1_CLK_CONN_USDHC1_CLK		0x06000041
++				SC_P_USDHC1_CMD_CONN_USDHC1_CMD		0x06000021
++				SC_P_USDHC1_DATA0_CONN_USDHC1_DATA0	0x06000021
++				SC_P_USDHC1_DATA1_CONN_USDHC1_DATA1	0x06000021
++				SC_P_USDHC1_DATA2_CONN_USDHC1_DATA2	0x06000021
++				SC_P_USDHC1_DATA3_CONN_USDHC1_DATA3	0x06000021
++				SC_P_USDHC1_VSELECT_CONN_USDHC1_VSELECT	0x06000021
++			>;
++		};
++
++		pinctrl_usdhc2_100mhz: usdhc2grp100mhz {
++			fsl,pins = <
++				SC_P_USDHC1_CLK_CONN_USDHC1_CLK		0x06000040
++				SC_P_USDHC1_CMD_CONN_USDHC1_CMD		0x06000020
++				SC_P_USDHC1_DATA0_CONN_USDHC1_DATA0	0x06000020
++				SC_P_USDHC1_DATA1_CONN_USDHC1_DATA1	0x06000020
++				SC_P_USDHC1_DATA2_CONN_USDHC1_DATA2	0x06000020
++				SC_P_USDHC1_DATA3_CONN_USDHC1_DATA3	0x06000020
++				SC_P_USDHC1_VSELECT_CONN_USDHC1_VSELECT	0x06000020
++			>;
++		};
++
++		pinctrl_usdhc2_200mhz: usdhc2grp200mhz {
++			fsl,pins = <
++				SC_P_USDHC1_CLK_CONN_USDHC1_CLK		0x06000040
++				SC_P_USDHC1_CMD_CONN_USDHC1_CMD		0x06000020
++				SC_P_USDHC1_DATA0_CONN_USDHC1_DATA0	0x06000020
++				SC_P_USDHC1_DATA1_CONN_USDHC1_DATA1	0x06000020
++				SC_P_USDHC1_DATA2_CONN_USDHC1_DATA2	0x06000020
++				SC_P_USDHC1_DATA3_CONN_USDHC1_DATA3	0x06000020
++				SC_P_USDHC1_VSELECT_CONN_USDHC1_VSELECT	0x06000020
++			>;
++		};
++	};
++};
++
++&lpuart0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_lpuart0>;
++	status = "okay";
++};
++
++&usdhc2 {
++	pinctrl-names = "default", "state_100mhz", "state_200mhz";
++	pinctrl-0 = <&pinctrl_usdhc2>, <&pinctrl_usdhc2_gpio>;
++	pinctrl-1 = <&pinctrl_usdhc2_100mhz>, <&pinctrl_usdhc2_gpio>;
++	pinctrl-2 = <&pinctrl_usdhc2_200mhz>, <&pinctrl_usdhc2_gpio>;
++	bus-width = <4>;
++	cd-gpios = <&gpio4 22 GPIO_ACTIVE_LOW>;
++	wp-gpios = <&gpio4 21 GPIO_ACTIVE_HIGH>;
++	no-1-8-v;
++	vmmc-supply = <&reg_usdhc2_vmmc>;
++	status = "okay";
++};
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8qxs.dtsi b/arch/arm/dts/fsl-imx8qxp-tqma8qxs.dtsi
+new file mode 100644
+index 0000000000..69679e5733
+--- /dev/null
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8qxs.dtsi
+@@ -0,0 +1,103 @@
++/*
++ * Copyright 2018 TQ Systems GmbH
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++
++/* First 128KB is for PSCI ATF. */
++/* Last 127M is for M4/RPMSG */
++/memreserve/ 0x80000000 0x08000000;
++
++#include "fsl-imx8qxp.dtsi"
++
++/ {
++	model = "TQ Systems i.MX8QXP TQMa8xXS";
++	compatible = "tq,tqma8qxs", "fsl,imx8qxp";
++};
++
++&iomuxc {
++	pinctrl-names = "default";
++	imx8qxp-tqma8qxs {
++		pinctrl_usdhc1: usdhc1grp {
++			fsl,pins = <
++				SC_P_EMMC0_CLK_CONN_EMMC0_CLK		0x06000041
++				SC_P_EMMC0_CMD_CONN_EMMC0_CMD		0x00000021
++				SC_P_EMMC0_DATA0_CONN_EMMC0_DATA0	0x00000021
++				SC_P_EMMC0_DATA1_CONN_EMMC0_DATA1	0x00000021
++				SC_P_EMMC0_DATA2_CONN_EMMC0_DATA2	0x00000021
++				SC_P_EMMC0_DATA3_CONN_EMMC0_DATA3	0x00000021
++				SC_P_EMMC0_DATA4_CONN_EMMC0_DATA4	0x00000021
++				SC_P_EMMC0_DATA5_CONN_EMMC0_DATA5	0x00000021
++				SC_P_EMMC0_DATA6_CONN_EMMC0_DATA6	0x00000021
++				SC_P_EMMC0_DATA7_CONN_EMMC0_DATA7	0x00000021
++				SC_P_EMMC0_STROBE_CONN_EMMC0_STROBE	0x06000041
++			>;
++		};
++
++		pinctrl_usdhc1_100mhz: usdhc1grp100mhz {
++			fsl,pins = <
++				SC_P_EMMC0_CLK_CONN_EMMC0_CLK		0x06000040
++				SC_P_EMMC0_CMD_CONN_EMMC0_CMD		0x00000020
++				SC_P_EMMC0_DATA0_CONN_EMMC0_DATA0	0x00000020
++				SC_P_EMMC0_DATA1_CONN_EMMC0_DATA1	0x00000020
++				SC_P_EMMC0_DATA2_CONN_EMMC0_DATA2	0x00000020
++				SC_P_EMMC0_DATA3_CONN_EMMC0_DATA3	0x00000020
++				SC_P_EMMC0_DATA4_CONN_EMMC0_DATA4	0x00000020
++				SC_P_EMMC0_DATA5_CONN_EMMC0_DATA5	0x00000020
++				SC_P_EMMC0_DATA6_CONN_EMMC0_DATA6	0x00000020
++				SC_P_EMMC0_DATA7_CONN_EMMC0_DATA7	0x00000020
++				SC_P_EMMC0_STROBE_CONN_EMMC0_STROBE	0x06000040
++			>;
++		};
++
++		pinctrl_usdhc1_200mhz: usdhc1grp200mhz {
++			fsl,pins = <
++				SC_P_EMMC0_CLK_CONN_EMMC0_CLK		0x06000040
++				SC_P_EMMC0_CMD_CONN_EMMC0_CMD		0x00000020
++				SC_P_EMMC0_DATA0_CONN_EMMC0_DATA0	0x00000020
++				SC_P_EMMC0_DATA1_CONN_EMMC0_DATA1	0x00000020
++				SC_P_EMMC0_DATA2_CONN_EMMC0_DATA2	0x00000020
++				SC_P_EMMC0_DATA3_CONN_EMMC0_DATA3	0x00000020
++				SC_P_EMMC0_DATA4_CONN_EMMC0_DATA4	0x00000020
++				SC_P_EMMC0_DATA5_CONN_EMMC0_DATA5	0x00000020
++				SC_P_EMMC0_DATA6_CONN_EMMC0_DATA6	0x00000020
++				SC_P_EMMC0_DATA7_CONN_EMMC0_DATA7	0x00000020
++				SC_P_EMMC0_STROBE_CONN_EMMC0_STROBE	0x06000040
++			>;
++		};
++	};
++};
++
++&gpio0 {
++	status = "okay";
++};
++
++&gpio1 {
++	status = "okay";
++};
++
++&gpio3 {
++	status = "okay";
++};
++
++&gpio4 {
++	status = "okay";
++};
++
++&usdhc1 {
++	pinctrl-names = "default", "state_100mhz", "state_200mhz";
++	pinctrl-0 = <&pinctrl_usdhc1>;
++	pinctrl-1 = <&pinctrl_usdhc1_100mhz>;
++	pinctrl-2 = <&pinctrl_usdhc1_200mhz>;
++	bus-width = <8>;
++	non-removable;
++	status = "okay";
++};
+diff --git a/arch/arm/mach-imx/imx8/Kconfig b/arch/arm/mach-imx/imx8/Kconfig
+index 94acde426b..261c2b8182 100644
+--- a/arch/arm/mach-imx/imx8/Kconfig
++++ b/arch/arm/mach-imx/imx8/Kconfig
+@@ -88,6 +88,18 @@ config TARGET_TQMA8QX
+ 	select FSL_LPUART
+ 	select DM_MMC
+ 
++config TARGET_TQMA8QXS
++	bool "Support TQMa8xXS board"
++	select BOARD_LATE_INIT
++	select IMX8QXP
++	select ARCH_MISC_INIT
++	select BOARD_EARLY_INIT_F
++	select DM_GPIO
++	select DM_ETH
++	select DM_SERIAL
++	select FSL_LPUART
++	select DM_MMC
++
+ endchoice
+ 
+ source "board/freescale/imx8qm_arm2/Kconfig"
+@@ -95,5 +107,6 @@ source "board/freescale/imx8qm_mek/Kconfig"
+ source "board/freescale/imx8qxp_arm2/Kconfig"
+ source "board/freescale/imx8qxp_mek/Kconfig"
+ source "board/tqc/tqma8qx/Kconfig"
++source "board/tqc/tqma8qxs/Kconfig"
+ 
+ endif
+diff --git a/board/tqc/tqma8qxs/Kconfig b/board/tqc/tqma8qxs/Kconfig
+new file mode 100644
+index 0000000000..b97f56cbb2
+--- /dev/null
++++ b/board/tqc/tqma8qxs/Kconfig
+@@ -0,0 +1,58 @@
++if TARGET_TQMA8QXS
++
++config SYS_BOARD
++	default "tqma8qxs"
++
++config SYS_VENDOR
++	default "tqc"
++
++config SYS_CONFIG_NAME
++	default "tqma8qxs"
++
++choice
++	prompt "TQMa8QXS CPU variant"
++	default TQMA8QXS_MX8QXP
++	help
++	  Select cpu variant for TQMa8QXS
++
++config TQMA8QXS_MX8QXP
++	bool "TQMa8QXS with i.MX8QXP"
++	help
++	  Select the CPU variant
++
++endchoice
++
++
++choice
++	prompt "TQMa8QXS base board variant"
++	default TQMa8QXS_MB_SMARC_2
++	help
++	  Select base board for TQMa8QXS
++
++config TQMa8QXS_MB_SMARC_2
++	bool "TQMa8QXS on MB_SMARC_2 Board"
++	select TQC_SDMMC
++	help
++	  Select the MB_SMARC_2 board. This is a SMARC2 mainboard
++	  etc.
++
++endchoice
++
++choice
++	prompt "TQMa8QXS boot device"
++	default TQMA8QXS_BOOT_SDCARD
++	help
++	  Select boot device for TQMa8QXS
++
++config TQMA8QXS_BOOT_SDCARD
++	bool "TQMa8QXS from SD / e-MMC"
++	select SD_BOOT
++	help
++	  Select booting from SD / e-MMC
++
++endchoice
++
++
++source "board/tqc/common/Kconfig"
++
++endif
+diff --git a/board/tqc/tqma8qxs/Makefile b/board/tqc/tqma8qxs/Makefile
+new file mode 100644
+index 0000000000..b03d2d2ea0
+--- /dev/null
++++ b/board/tqc/tqma8qxs/Makefile
+@@ -0,0 +1,9 @@
++#
++# Copyright 2018 TQ Systems GmbH
++#
++# SPDX-License-Identifier:	GPL-2.0+
++#
++
++obj-y += tqma8qxs.o
++obj-$(CONFIG_TQMa8QXS_MB_SMARC_2) += tqma8qxs-mb-smarc-2.o
++
+diff --git a/board/tqc/tqma8qxs/tqma8qxs-mb-smarc-2.c b/board/tqc/tqma8qxs/tqma8qxs-mb-smarc-2.c
+new file mode 100644
+index 0000000000..e437c95a1b
+--- /dev/null
++++ b/board/tqc/tqma8qxs/tqma8qxs-mb-smarc-2.c
+@@ -0,0 +1,128 @@
++/*
++ * Copyright 2018-2019 TQ Systems GmbH
++ *
++ * SPDX-License-Identifier:	GPL-2.0+
++ */
++#include <common.h>
++#include <dm.h>
++#include <environment.h>
++#include <errno.h>
++#include <fdt_support.h>
++#include <fsl_esdhc.h>
++#include <fsl_ifc.h>
++#include <linux/libfdt.h>
++#include <malloc.h>
++#include <netdev.h>
++#include <power-domain.h>
++
++#include <asm/gpio.h>
++#include <asm/io.h>
++#include <asm/arch/clock.h>
++#include <asm/mach-imx/sci/sci.h>
++#include <asm/arch/imx8-pins.h>
++#include <asm/arch/iomux.h>
++#include <asm/arch/lpcg.h>
++#include <asm/arch/sys_proto.h>
++#include <power-domain.h>
++
++#include "../common/tqc_bb.h"
++#include "../common/tqc_eeprom.h"
++
++
++DECLARE_GLOBAL_DATA_PTR;
++
++#define FSPI_PAD_CTRL	((SC_PAD_CONFIG_NORMAL << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++#define UART_PAD_CTRL	((SC_PAD_CONFIG_OUT_IN << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
++						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
++
++static iomux_cfg_t uart0_pads[] = {
++	SC_P_UART1_RX | MUX_MODE_ALT(0) | MUX_PAD_CTRL(UART_PAD_CTRL),
++	SC_P_UART1_TX | MUX_MODE_ALT(0) | MUX_PAD_CTRL(UART_PAD_CTRL),
++};
++
++static void setup_iomux_uart(void)
++{
++	imx8_iomux_setup_multiple_pads(uart0_pads, ARRAY_SIZE(uart0_pads));
++}
++
++int tqc_bb_board_early_init_f(void)
++{
++	sc_ipc_t ipcHndl = 0;
++	sc_err_t sciErr = 0;
++
++	ipcHndl = gd->arch.ipc_channel_handle;
++
++	/* Power up UART0 */
++	sciErr = sc_pm_set_resource_power_mode(ipcHndl, SC_R_UART_0, SC_PM_PW_MODE_ON);
++	if (sciErr != SC_ERR_NONE)
++		return 0;
++
++	/* Set UART0 clock root to 80 MHz */
++	sc_pm_clock_rate_t rate = 80000000;
++	sciErr = sc_pm_set_clock_rate(ipcHndl, SC_R_UART_0, 2, &rate);
++	if (sciErr != SC_ERR_NONE)
++		return 0;
++
++	/* Enable UART0 clock root */
++	sciErr = sc_pm_clock_enable(ipcHndl, SC_R_UART_0, 2, true, false);
++	if (sciErr != SC_ERR_NONE)
++		return 0;
++
++	LPCG_AllClockOn(LPUART_0_LPCG);
++
++	setup_iomux_uart();
++
++	return 0;
++}
++
++int tqc_bb_checkboard(void)
++{
++	puts("Board: TQMa8QXS on MB-SMARC-2 (iMX8QXP)\n");
++
++	return 0;
++}
++
++int tqc_bb_board_init(void)
++{
++	return 0;
++}
++
++#ifdef CONFIG_OF_BOARD_SETUP
++int tqc_bb_ft_board_setup(void *blob, bd_t *bd)
++{
++	return 0;
++}
++#endif
++
++int board_mmc_get_env_dev(int devno)
++{
++	return devno;
++}
++
++int tqc_bb_board_late_init(void)
++{
++#ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
++	env_set("board_name", "MB-SMARC-2");
++	env_set("board_rev", "iMX8QXP");
++#endif
++	return 0;
++
++#ifdef CONFIG_ENV_IS_IN_MMC
++	board_late_mmc_env_init();
++#endif
++}
++
++void board_quiesce_devices()
++{
++	const char *power_on_devices[] = {
++		"dma_lpuart0",
++
++		/* HIFI DSP boot */
++		"audio_sai0",
++		"audio_ocram",
++	};
++
++	power_off_pd_devices(power_on_devices, ARRAY_SIZE(power_on_devices));
++}
+diff --git a/board/tqc/tqma8qxs/tqma8qxs.c b/board/tqc/tqma8qxs/tqma8qxs.c
+new file mode 100644
+index 0000000000..291eb99bc5
+--- /dev/null
++++ b/board/tqc/tqma8qxs/tqma8qxs.c
+@@ -0,0 +1,121 @@
++/*
++ * Copyright 2018-2019 TQ Systems GmbH
++ *
++ * SPDX-License-Identifier:	GPL-2.0+
++ */
++#include <common.h>
++#include <malloc.h>
++#include <errno.h>
++#include <netdev.h>
++#include <fsl_ifc.h>
++#include <fdt_support.h>
++#include <linux/libfdt.h>
++#include <environment.h>
++#include <fsl_esdhc.h>
++
++#include <asm/io.h>
++#include <asm/gpio.h>
++#include <asm/arch/clock.h>
++#include <asm/mach-imx/sci/sci.h>
++#include <asm/arch/imx8-pins.h>
++#include <dm.h>
++#include <asm/arch/iomux.h>
++#include <asm/arch/sys_proto.h>
++#include <power-domain.h>
++#include <cdns3-uboot.h>
++
++#include "../common/tqc_bb.h"
++
++DECLARE_GLOBAL_DATA_PTR;
++
++int board_early_init_f(void)
++{
++	tqc_bb_board_early_init_f();
++
++	return 0;
++}
++
++static void board_gpio_init(void)
++{
++
++}
++
++int checkboard(void)
++{
++	puts("Board: TQMa8QXS\n");
++
++	print_bootinfo();
++
++	/* Note:  After reloc, ipcHndl will no longer be valid.  If handle
++	 *        returned by sc_ipc_open matches SC_IPC_CH, use this
++	 *        macro (valid after reloc) for subsequent SCI calls.
++	 */
++	if (gd->arch.ipc_channel_handle != SC_IPC_CH)
++		printf("\nSCI error! Invalid handle\n");
++
++#ifdef SCI_FORCE_ABORT
++	sc_rpc_msg_t abort_msg;
++
++	puts("Send abort request\n");
++	RPC_SIZE(&abort_msg) = 1;
++	RPC_SVC(&abort_msg) = SC_RPC_SVC_ABORT;
++	sc_ipc_write(SC_IPC_CH, &abort_msg);
++
++	/* Close IPC channel */
++	sc_ipc_close(SC_IPC_CH);
++#endif /* SCI_FORCE_ABORT */
++
++	return tqc_bb_checkboard();
++}
++
++int board_init(void)
++{
++#ifdef CONFIG_MXC_GPIO
++	board_gpio_init();
++#endif
++
++	tqc_bb_board_init();
++
++	return 0;
++}
++
++void detail_board_ddr_info(void)
++{
++	puts("\nDDR    ");
++}
++
++/*
++ * Board specific reset that is system reset.
++ */
++void reset_cpu(ulong addr)
++{
++	puts("SCI reboot request");
++	sc_pm_reboot(SC_IPC_CH, SC_PM_RESET_TYPE_COLD);
++	while (1)
++		putc('.');
++}
++
++#ifdef CONFIG_OF_BOARD_SETUP
++int ft_board_setup(void *blob, bd_t *bd)
++{
++	return tqc_bb_ft_board_setup(blob, bd);
++}
++#endif
++
++int board_late_init(void)
++{
++#ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
++	env_set("board_name", "TQMa8QXS");
++	env_set("board_rev", "iMX8QXP");
++#endif
++
++	tqc_bb_board_late_init();
++
++	env_set("sec_boot", "no");
++#ifdef CONFIG_AHAB_BOOT
++	env_set("sec_boot", "yes");
++#endif
++
++	return 0;
++}
++
+diff --git a/configs/tqma8qxs_mb_smarc_2_mmc_defconfig b/configs/tqma8qxs_mb_smarc_2_mmc_defconfig
+new file mode 100644
+index 0000000000..c411b1bcf2
+--- /dev/null
++++ b/configs/tqma8qxs_mb_smarc_2_mmc_defconfig
+@@ -0,0 +1,71 @@
++CONFIG_ARM=y
++CONFIG_ARCH_IMX8=y
++CONFIG_SYS_TEXT_BASE=0x80020000
++CONFIG_SYS_MALLOC_F_LEN=0x2000
++CONFIG_TARGET_TQMA8QXS=y
++CONFIG_IMX_BOOTAUX=y
++CONFIG_DEFAULT_DEVICE_TREE="fsl-imx8qxp-tqma8qxs-mb-smarc-2"
++CONFIG_DISTRO_DEFAULTS=y
++CONFIG_BOOTDELAY=3
++CONFIG_VERSION_VARIABLE=y
++CONFIG_CMD_LICENSE=y
++# CONFIG_CMD_IMPORTENV is not set
++CONFIG_CMD_MEMINFO=y
++# CONFIG_CMD_FLASH is not set
++CONFIG_CMD_GPIO=y
++CONFIG_CMD_GPT=y
++CONFIG_CMD_I2C=y
++# CONFIG_CMD_LOADB is not set
++# CONFIG_CMD_LOADS is not set
++CONFIG_CMD_MMC=y
++CONFIG_CMD_SF=y
++CONFIG_CMD_USB=y
++CONFIG_CMD_CACHE=y
++CONFIG_CMD_EXT4_WRITE=y
++# CONFIG_ISO_PARTITION is not set
++CONFIG_MXC_GPIO=y
++CONFIG_DM_PCA953X=y
++CONFIG_DM_I2C=y
++CONFIG_DM_I2C_COMPAT=y
++CONFIG_SYS_I2C_IMX_LPI2C=y
++CONFIG_MISC=y
++CONFIG_I2C_EEPROM=y
++CONFIG_MMC_IO_VOLTAGE=y
++CONFIG_MMC_UHS_SUPPORT=y
++CONFIG_MMC_HS400_ES_SUPPORT=y
++CONFIG_MMC_HS400_SUPPORT=y
++CONFIG_SPL_MMC_HS200_SUPPORT=y
++CONFIG_FSL_ESDHC=y
++CONFIG_DM_SPI_FLASH=y
++CONFIG_SPI_FLASH=y
++CONFIG_SPI_FLASH_4BYTES_ADDR=y
++CONFIG_SPI_FLASH_MACRONIX=y
++CONFIG_SPI_FLASH_SPANSION=y
++CONFIG_SPI_FLASH_STMICRO=y
++CONFIG_SPI_FLASH_WINBOND=y
++# CONFIG_SPI_FLASH_USE_4K_SECTORS is not set
++CONFIG_SPI_FLASH_MTD=y
++CONFIG_PHYLIB=y
++CONFIG_PHY_TI=y
++CONFIG_DM_ETH=y
++CONFIG_PHY_GIGE=y
++CONFIG_PINCTRL=y
++CONFIG_PINCTRL_IMX8=y
++CONFIG_POWER_DOMAIN=y
++CONFIG_IMX8_POWER_DOMAIN=y
++CONFIG_DM_REGULATOR=y
++CONFIG_DM_REGULATOR_FIXED=y
++CONFIG_DM_REGULATOR_GPIO=y
++CONFIG_DM_RTC=y
++CONFIG_RTC_DS1307=y
++CONFIG_DM_SPI=y
++CONFIG_FSL_FSPI=y
++CONFIG_DM_THERMAL=y
++CONFIG_IMX_SC_THERMAL=y
++CONFIG_USB=y
++CONFIG_DM_USB=y
++CONFIG_USB_EHCI_HCD=y
++CONFIG_MXC_USB_OTG_HACTIVE=y
++CONFIG_USB_STORAGE=y
++CONFIG_FAT_WRITE=y
++# CONFIG_EFI_LOADER is not set
+diff --git a/include/configs/tqma8qxs-mb-smarc-2.h b/include/configs/tqma8qxs-mb-smarc-2.h
+new file mode 100644
+index 0000000000..a094b8ffb4
+--- /dev/null
++++ b/include/configs/tqma8qxs-mb-smarc-2.h
+@@ -0,0 +1,30 @@
++/*
++ * Copyright 2018 TQ Systems GmbH
++ *
++ * SPDX-License-Identifier:	GPL-2.0+
++ */
++
++#if !defined(__TQMA8QXS_MB_SMARC_2_H)
++#define __TQMA8QXS_MB_SMARC_2_H
++
++/* TODO: move to module ... */
++
++#define CONFIG_FEC_MXC
++#define CONFIG_FEC_XCV_TYPE		RGMII
++#define FEC_QUIRK_ENET_MAC
++
++/*
++#define CONFIG_PHY_GIGE
++#define CONFIG_PHYLIB
++#define CONFIG_PHY_TI
++*/
++
++#define CONFIG_MII
++
++#define MX8QX_FEC1_BASE			0x5B040000U
++#define MX8QX_FEC2_BASE			0x5B050000U
++#define CONFIG_FEC_MXC_MDIO_BASE	MX8QX_FEC1_BASE
++
++#define CONFIG_FEC_MXC_PHYADDR		0x1F
++
++#endif /* __TQMA8QXS_MB_SMARC_2_H */
+diff --git a/include/configs/tqma8qxs.h b/include/configs/tqma8qxs.h
+new file mode 100644
+index 0000000000..df9999f93c
+--- /dev/null
++++ b/include/configs/tqma8qxs.h
+@@ -0,0 +1,338 @@
++/*
++ * Copyright 2018 TQ Systems GmbH
++ *
++ * SPDX-License-Identifier:	GPL-2.0+
++ */
++
++#ifndef __TQMA8QXS_H
++#define __TQMA8QXS_H
++
++#include <linux/sizes.h>
++#include <asm/arch/imx-regs.h>
++
++#define CONFIG_REMAKE_ELF
++
++/*
++#define CONFIG_BOARD_EARLY_INIT_F
++#define CONFIG_ARCH_MISC_INIT
++
++#define CONFIG_FAT_WRITE
++*/
++
++/* Flat Device Tree Definitions */
++#define CONFIG_OF_BOARD_SETUP
++
++#undef CONFIG_CMD_EXPORTENV
++#undef CONFIG_CMD_IMPORTENV
++#undef CONFIG_CMD_IMLS
++
++#undef CONFIG_CMD_CRC32
++#undef CONFIG_BOOTM_NETBSD
++
++#if defined(CONFIG_FSL_ESDHC)
++#define CONFIG_FSL_USDHC
++#define CONFIG_SYS_FSL_ESDHC_ADDR       0
++#define USDHC1_BASE_ADDR                0x5B010000
++#define USDHC2_BASE_ADDR                0x5B020000
++#define CONFIG_SUPPORT_EMMC_BOOT	/* eMMC specific */
++#endif
++
++/* USB Config */
++#ifdef CONFIG_CMD_USB
++#define CONFIG_USB_MAX_CONTROLLER_COUNT 1
++
++/* USB OTG controller configs */
++#ifdef CONFIG_USB_EHCI_HCD
++#define CONFIG_MXC_USB_PORTSC		(PORT_PTS_UTMI | PORT_PTS_PTW)
++#endif
++#endif /* CONFIG_CMD_USB */
++
++/* #define CONFIG_CMD_DATE */
++
++#define CONFIG_ENV_OVERWRITE
++
++#define CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
++
++/* FUSE command */
++#define CONFIG_CMD_FUSE
++
++/* GPIO configs */
++/* #define CONFIG_MXC_GPIO */
++
++#ifdef CONFIG_AHAB_BOOT
++#define AHAB_ENV "sec_boot=yes\0"
++#else
++#define AHAB_ENV "sec_boot=no\0"
++#endif
++
++/* Boot M4 */
++#define M4_BOOT_ENV \
++	"m4_0_image=m4_0.bin\0" \
++	"loadm4image_0=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${m4_0_image}\0" \
++	"m4boot_0=run loadm4image_0; dcache flush; bootaux ${loadaddr} 0\0" \
++
++#define CONFIG_MFG_ENV_SETTINGS \
++	"mfgtool_args=setenv bootargs console=${console},${baudrate} " \
++		"rdinit=/linuxrc " \
++		"g_mass_storage.stall=0 g_mass_storage.removable=1 " \
++		"g_mass_storage.idVendor=0x066F g_mass_storage.idProduct=0x37FF "\
++		"g_mass_storage.iSerialNumber=\"\" "\
++		"video=imxdpufb5:off video=imxdpufb6:off video=imxdpufb7:off "\
++		"clk_ignore_unused "\
++		"\0" \
++	"initrd_addr=0x83100000\0" \
++	"initrd_high=0xffffffff\0" \
++	"bootcmd_mfg=run mfgtool_args;booti ${loadaddr} ${initrd_addr} ${fdt_addr};\0" \
++
++#define XEN_BOOT_ENV \
++            "xenhyper_bootargs=console=dtuart dtuart=/serial@5a060000 dom0_mem=1024M dom0_max_vcpus=2 dom0_vcpus_pin=true\0" \
++            "xenlinux_bootargs= \0" \
++            "xenlinux_console=hvc0 earlycon=xen\0" \
++            "xenlinux_addr=0x85000000\0" \
++            "xenboot_common=" \
++                "${get_cmd} ${loadaddr} xen;" \
++                "${get_cmd} ${fdt_addr} fsl-imx8qxp-mek-dom0.dtb;" \
++                "${get_cmd} ${xenlinux_addr} ${image};" \
++                "fdt addr ${fdt_addr};" \
++                "fdt resize 256;" \
++                "fdt set /chosen/module@0 reg <0x00000000 ${xenlinux_addr} 0x00000000 0x${filesize}>; " \
++                "fdt set /chosen/module@0 bootargs \"${bootargs} ${xenlinux_bootargs}\"; " \
++                "setenv bootargs ${xenhyper_bootargs};" \
++                "booti ${loadaddr} - ${fdt_addr};" \
++            "\0" \
++            "xennetboot=" \
++                "setenv get_cmd dhcp;" \
++                "setenv console ${xenlinux_console};" \
++                "run netargs;" \
++                "run xenboot_common;" \
++            "\0" \
++            "xenmmcboot=" \
++                "setenv get_cmd \"fatload mmc ${mmcdev}:${mmcpart}\";" \
++                "setenv console ${xenlinux_console};" \
++                "run mmcargs;" \
++                "run xenboot_common;" \
++            "\0" \
++
++/* Initial environment variables */
++#define CONFIG_EXTRA_ENV_SETTINGS		\
++	CONFIG_MFG_ENV_SETTINGS \
++	M4_BOOT_ENV \
++	XEN_BOOT_ENV \
++	AHAB_ENV \
++	"ethaddr=00:0D:03:44:44:44\0" \
++	"eth1addr=00:0D:03:44:44:45\0" \
++	"ipaddr=10.250.109.22\0" \
++	"serverip=10.250.109.1\0" \
++	"script=boot.scr\0" \
++	"image=Image\0" \
++	"panel=NULL\0" \
++	"console=ttyLP0,115200 earlycon=lpuart32,0x5a060000,115200\0" \
++	"fdt_addr=0x83000000\0"			\
++	"fdt_high=0xffffffffffffffff\0"		\
++	"cntr_addr=0x88000000\0"			\
++	"cntr_file=os_cntr_signed.bin\0" \
++	"boot_fdt=try\0" \
++	"fdt_file=fsl-imx8qxp-tqma8qxs-mb-smarc-2.dtb\0" \
++	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \
++	"mmcpart=" __stringify(CONFIG_SYS_MMC_IMG_LOAD_PART) "\0" \
++	"mmcroot=" CONFIG_MMCROOT " rootwait rw\0" \
++	"mmcautodetect=yes\0" \
++	"mmcargs=setenv bootargs console=${console},${baudrate} root=${mmcroot} " \
++	"video=imxdpufb5:off video=imxdpufb6:off video=imxdpufb7:off\0" \
++	"loadbootscript=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${script};\0" \
++	"bootscript=echo Running bootscript from mmc ...; " \
++		"source\0" \
++	"loadimage=fatload mmc ${mmcdev}:${mmcpart} ${loadaddr} ${image}\0" \
++	"loadfdt=fatload mmc ${mmcdev}:${mmcpart} ${fdt_addr} ${fdt_file}\0" \
++	"loadcntr=fatload mmc ${mmcdev}:${mmcpart} ${cntr_addr} ${cntr_file}\0" \
++	"auth_os=auth_cntr ${cntr_addr}\0" \
++	"mmcboot=echo Booting from mmc ...; " \
++		"run mmcargs; " \
++		"if test ${sec_boot} = yes; then " \
++			"if run auth_os; then " \
++				"booti ${loadaddr} - ${fdt_addr}; " \
++			"else " \
++				"echo ERR: failed to authenticate; " \
++			"fi; " \
++		"else " \
++			"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
++				"if run loadfdt; then " \
++					"booti ${loadaddr} - ${fdt_addr}; " \
++				"else " \
++					"echo WARN: Cannot load the DT; " \
++				"fi; " \
++			"else " \
++				"echo wait for boot; " \
++			"fi;" \
++		"fi;\0" \
++	"netargs=setenv bootargs console=${console} " \
++		"root=/dev/nfs " \
++		"ip=dhcp nfsroot=${serverip}:${nfsroot},v3,tcp " \
++		"video=imxdpufb5:off video=imxdpufb6:off video=imxdpufb7:off\0" \
++	"netboot=echo Booting from net ...; " \
++		"run netargs;  " \
++		"run set_getcmd; " \
++		"if test ${sec_boot} = yes; then " \
++			"${get_cmd} ${cntr_addr} ${cntr_file}; " \
++			"if run auth_os; then " \
++				"booti ${loadaddr} - ${fdt_addr}; " \
++			"else " \
++				"echo ERR: failed to authenticate; " \
++			"fi; " \
++		"else " \
++			"${get_cmd} ${loadaddr} ${image}; " \
++			"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
++				"if ${get_cmd} ${fdt_addr} ${fdt_file}; then " \
++					"booti ${loadaddr} - ${fdt_addr}; " \
++				"else " \
++					"echo WARN: Cannot load the DT; " \
++				"fi; " \
++			"else " \
++				"booti; " \
++			"fi;" \
++		"fi;\0" \
++	"update_kernel=run set_getcmd; "                                       \
++		"if ${get_cmd} ${image}; then "                                \
++			"if itest ${filesize} > 0; then "                      \
++				"echo Write kernel image to mmc ${mmcdev}:${firmwarepart}...; " \
++				"save mmc ${mmcdev}:${firmwarepart} ${loadaddr} " \
++					"${image} ${filesize}; "               \
++			"fi; "                                                 \
++		"fi; "                                                         \
++		"setenv filesize; setenv get_cmd \0"                           \
++	"update_fdt=run set_getcmd; "                                          \
++		"if ${get_cmd} ${fdt_file}; then "                             \
++			"if itest ${filesize} > 0; then "                      \
++				"echo Write fdt image to mmc ${mmcdev}:${firmwarepart}...; " \
++				"save mmc ${mmcdev}:${firmwarepart} ${loadaddr} " \
++					"${fdt_file} ${filesize}; "            \
++			"fi; "                                                 \
++		"fi; "                                                         \
++		"setenv filesize; setenv get_cmd \0"                           \
++	"set_getcmd=if test \"${ip_dyn}\" = yes; then "                        \
++			"setenv get_cmd dhcp; "                                \
++		"else "                                                        \
++			"setenv get_cmd tftp; "                                \
++		"fi; \0"
++
++#if !defined(CONFIG_BOOTCOMMAND)
++#define CONFIG_BOOTCOMMAND \
++	   "mmc dev ${mmcdev}; if mmc rescan; then " \
++		   "if run loadbootscript; then " \
++			   "run bootscript; " \
++		   "else " \
++			   "if test ${sec_boot} = yes; then " \
++				   "if run loadcntr; then " \
++					   "run mmcboot; " \
++				   "else run netboot; " \
++				   "fi; " \
++			    "else " \
++				   "if run loadimage; then " \
++					   "run mmcboot; " \
++				   "else run netboot; " \
++				   "fi; " \
++			 "fi; " \
++		   "fi; " \
++	   "else booti ${loadaddr} - ${fdt_addr}; fi"
++#endif
++
++/* Link Definitions */
++#define CONFIG_LOADADDR			0x80280000
++#define CONFIG_SYS_TEXT_BASE		0x80020000
++
++#define CONFIG_SYS_LOAD_ADDR           CONFIG_LOADADDR
++
++#define CONFIG_SYS_INIT_SP_ADDR         0x80200000
++
++
++/* Default environment is in SD */
++#define CONFIG_ENV_SIZE			0x2000
++#if defined(CONFIG_QSPI_BOOT)
++#define CONFIG_ENV_IS_IN_SPI_FLASH
++#define CONFIG_ENV_OFFSET	(4 * 1024 * 1024)
++#define CONFIG_ENV_SECT_SIZE	(128 * 1024)
++#define CONFIG_ENV_SPI_BUS	CONFIG_SF_DEFAULT_BUS
++#define CONFIG_ENV_SPI_CS	CONFIG_SF_DEFAULT_CS
++#define CONFIG_ENV_SPI_MODE	CONFIG_SF_DEFAULT_MODE
++#define CONFIG_ENV_SPI_MAX_HZ	CONFIG_SF_DEFAULT_SPEED
++#elif defined(CONFIG_SD_BOOT)
++#define CONFIG_ENV_IS_IN_MMC
++#define CONFIG_ENV_OFFSET		(4 * SZ_1M)
++#define CONFIG_SYS_MMC_ENV_PART		0	/* user area */
++#else
++#error
++#endif
++
++#define CONFIG_SYS_MMC_IMG_LOAD_PART	1
++
++/* On LPDDR4 board, USDHC1 is for eMMC, USDHC2 is for SD on CPU board
++  */
++#define CONFIG_SYS_MMC_ENV_DEV		1   /* USDHC2 */
++#define CONFIG_MMCROOT			"/dev/mmcblk1p2"  /* USDHC2 */
++#define CONFIG_SYS_FSL_USDHC_NUM	2
++
++/* Size of malloc() pool */
++#define CONFIG_SYS_MALLOC_LEN		((CONFIG_ENV_SIZE + (32*1024)) * 1024)
++
++#define CONFIG_SYS_SDRAM_BASE		0x80000000
++#define CONFIG_NR_DRAM_BANKS		1
++#define PHYS_SDRAM_1			0x80000000
++#define PHYS_SDRAM_1_SIZE		SZ_1G	/* 1 GB */
++/* needed for loop in CPU code */
++#define PHYS_SDRAM_2			0x800000000
++#define PHYS_SDRAM_2_SIZE		0x0000000	/* not placed */
++
++/* Serial */
++#define CONFIG_BAUDRATE			115200
++
++/* Monitor Command Prompt */
++/* #define CONFIG_SYS_LONGHELP */
++/*
++#define CONFIG_HUSH_PARSER
++#define CONFIG_SYS_PROMPT_HUSH_PS2     "> "
++*/
++/* #define CONFIG_AUTO_COMPLETE */
++#define CONFIG_SYS_CBSIZE              2048
++#define CONFIG_SYS_MAXARGS             64
++#define CONFIG_SYS_BARGSIZE CONFIG_SYS_CBSIZE
++#define CONFIG_SYS_PBSIZE		(CONFIG_SYS_CBSIZE + \
++					sizeof(CONFIG_SYS_PROMPT) + 16)
++/* #define CONFIG_CMDLINE_EDITING */
++
++/* Generic Timer Definitions */
++#define COUNTER_FREQUENCY		8000000	/* 8MHz */
++
++#define CONFIG_IMX_SMMU
++
++/* MT35XU512ABA1G12 has only one Die, so QSPI0 B won't work */
++#ifdef CONFIG_FSL_FSPI
++#define CONFIG_SF_DEFAULT_BUS		0
++#define CONFIG_SF_DEFAULT_CS		0
++#define CONFIG_SF_DEFAULT_SPEED	40000000
++#define CONFIG_SF_DEFAULT_MODE		SPI_MODE_0
++#define FSL_FSPI_FLASH_SIZE		SZ_64M
++#define FSL_FSPI_FLASH_NUM		1
++#define FSPI0_BASE_ADDR			0x5d120000
++#define FSPI0_AMBA_BASE			0
++#define CONFIG_SYS_FSL_FSPI_AHB
++#endif
++
++#define CONFIG_OF_SYSTEM_SETUP
++#define BOOTAUX_RESERVED_MEM_BASE 0x88000000
++#define BOOTAUX_RESERVED_MEM_SIZE 0x08000000 /* Reserve from second 128MB */
++
++#define CONFIG_CMD_MEMTEST
++#if defined(CONFIG_CMD_MEMTEST)
++#define CONFIG_SYS_ALT_MEMTEST
++#define CONFIG_SYS_MEMTEST_START  (BOOTAUX_RESERVED_MEM_BASE)
++#define CONFIG_SYS_MEMTEST_END    (CONFIG_SYS_MEMTEST_START + (PHYS_SDRAM_1_SIZE / 4) * 3)
++#define CONFIG_SYS_MEMTEST_SCRATCH CONFIG_SYS_MEMTEST_END
++#endif
++
++#if defined(CONFIG_TQMa8QXS_MB_SMARC_2)
++#include "tqma8qxs-mb-smarc-2.h"
++#else
++#error
++#endif
++
++#endif /* __TQMA8QXS_H */

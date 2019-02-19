@@ -1,0 +1,42 @@
+From 3529cb4a7c432c84de40cc127596a3f6ea57379a Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 17 Jan 2019 13:56:15 +0100
+Subject: [PATCH] arm: dt: fsl-imx8mq-tqma8mq-mba8mx: fixup SD-Card
+
+- fixed regulator
+- no WP
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts b/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts
+index 7d09e3edc2..b0e1d0bed3 100644
+--- a/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts
++++ b/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts
+@@ -33,8 +33,6 @@
+ 		regulator-name = "VSD_3V3";
+ 		regulator-min-microvolt = <3300000>;
+ 		regulator-max-microvolt = <3300000>;
+-		gpio = <&gpio2 19 GPIO_ACTIVE_HIGH>;
+-		enable-active-high;
+ 	};
+ };
+ 
+@@ -105,7 +103,6 @@
+ 		pinctrl_usdhc2_gpio: usdhc2grpgpio {
+ 			fsl,pins = <
+ 				MX8MQ_IOMUXC_SD2_CD_B_GPIO2_IO12	0x41
+-				MX8MQ_IOMUXC_SD2_RESET_B_GPIO2_IO19	0x41
+ 			>;
+ 		};
+ 
+@@ -185,6 +182,7 @@
+ 	pinctrl-2 = <&pinctrl_usdhc2_200mhz>, <&pinctrl_usdhc2_gpio>;
+ 	bus-width = <4>;
+ 	cd-gpios = <&gpio2 12 GPIO_ACTIVE_LOW>;
++	disable-wp;
+ 	vmmc-supply = <&reg_usdhc2_vmmc>;
+ 	status = "okay";
+ };

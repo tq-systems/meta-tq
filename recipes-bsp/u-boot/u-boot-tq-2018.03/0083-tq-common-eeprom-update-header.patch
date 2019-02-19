@@ -1,0 +1,43 @@
+From 4033148ebd68620e506b39f2c3251eaa369f64b5 Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Fri, 23 Nov 2018 09:48:33 +0100
+Subject: [PATCH] tq common: eeprom: update header
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+(cherry picked from commit 153359707477027268ad258ff33580c58cf240f5)
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/common/tqc_eeprom.c | 5 ++---
+ board/tqc/common/tqc_eeprom.h | 5 ++---
+ 2 files changed, 4 insertions(+), 6 deletions(-)
+
+diff --git a/board/tqc/common/tqc_eeprom.c b/board/tqc/common/tqc_eeprom.c
+index b9e34439f5..cb6ce518c5 100644
+--- a/board/tqc/common/tqc_eeprom.c
++++ b/board/tqc/common/tqc_eeprom.c
+@@ -1,8 +1,7 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
+ /*
+- * Copyright (C) 2014 - 2016 TQ Systems GmbH
++ * (C) Copyright 2014 - 2018 TQ Systems GmbH
+  * Markus Niebel <Markus.Niebel@tq-group.com>
+- *
+- * SPDX-License-Identifier:    GPL-2.0+
+  */
+ 
+ #include <common.h>
+diff --git a/board/tqc/common/tqc_eeprom.h b/board/tqc/common/tqc_eeprom.h
+index 119456ec62..42fd0a5e31 100644
+--- a/board/tqc/common/tqc_eeprom.h
++++ b/board/tqc/common/tqc_eeprom.h
+@@ -1,8 +1,7 @@
++/* SPDX-License-Identifier: GPL-2.0+ */
+ /*
+- * Copyright (C) 2014 - 2016 TQ Systems GmbH
++ * (C) Copyright 2014 - 2018 TQ Systems GmbH
+  * Markus Niebel <Markus.Niebel@tq-group.com>
+- *
+- * SPDX-License-Identifier:    GPL-2.0+
+  */
+ 
+ #ifndef __TQC_EEPROM_H__

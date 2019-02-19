@@ -1,0 +1,43 @@
+From 2e7e2843429a2d9afe93888d56cbe7de0ab4a7f8 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 17 Jan 2019 12:14:11 +0100
+Subject: [PATCH] arm: dt: fsl-imx8mq-tqma8mq-mba8mx: regulators dont need to
+ have a bus
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts | 21 +++++++--------------
+ 1 file changed, 7 insertions(+), 14 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts b/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts
+index 6fc137a36e..7d09e3edc2 100644
+--- a/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts
++++ b/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts
+@@ -28,20 +28,13 @@
+ 		stdout-path = &uart1;
+ 	};
+ 
+-	regulators {
+-		compatible = "simple-bus";
+-		#address-cells = <1>;
+-		#size-cells = <0>;
+-
+-		reg_usdhc2_vmmc: usdhc2_vmmc@0 {
+-			compatible = "regulator-fixed";
+-			regulator-name = "VSD_3V3";
+-			reg = <0>;
+-			regulator-min-microvolt = <3300000>;
+-			regulator-max-microvolt = <3300000>;
+-			gpio = <&gpio2 19 GPIO_ACTIVE_HIGH>;
+-			enable-active-high;
+-		};
++	reg_usdhc2_vmmc: usdhc2_vmmc {
++		compatible = "regulator-fixed";
++		regulator-name = "VSD_3V3";
++		regulator-min-microvolt = <3300000>;
++		regulator-max-microvolt = <3300000>;
++		gpio = <&gpio2 19 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
+ 	};
+ };
+ 

@@ -1,0 +1,133 @@
+From 5b7bfbbe35b8e4a80afbf4b15b2041621b6bc4fc Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 24 Jan 2019 14:36:56 +0100
+Subject: [PATCH] tqc: tqc_eeprom: add spl support
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/common/tqc_eeprom.c | 66 ++++++++++++++++++++++-------------
+ board/tqc/common/tqc_eeprom.h | 12 +++++--
+ 2 files changed, 51 insertions(+), 27 deletions(-)
+
+diff --git a/board/tqc/common/tqc_eeprom.c b/board/tqc/common/tqc_eeprom.c
+index dec4f39471..dc74ac18f5 100644
+--- a/board/tqc/common/tqc_eeprom.c
++++ b/board/tqc/common/tqc_eeprom.c
+@@ -11,6 +11,42 @@
+ 
+ #include "tqc_eeprom.h"
+ 
++/*
++ * read_eeprom - read the given EEPROM into memory
++ */
++int tqc_read_eeprom_buf(unsigned int bus, unsigned int i2c_addr,
++			unsigned int alen, unsigned int addr,
++			size_t bsize, uchar *buf)
++{
++	int ret;
++#ifdef CONFIG_DM_I2C
++	struct udevice *dev;
++#else
++	unsigned int oldbus;
++#endif
++
++	if (!buf)
++		return -1;
++
++#ifdef CONFIG_DM_I2C
++	ret = i2c_get_chip_for_busnum(bus, i2c_addr, alen, &dev);
++	if (ret) {
++		debug("%s: Cannot find I2C chip for bus %d\n", __func__, bus);
++		return ret;
++	}
++
++	ret = dm_i2c_read(dev, addr, buf, bsize);
++#else
++	oldbus = i2c_get_bus_num();
++	i2c_set_bus_num(bus);
++	ret = i2c_read(i2c_addr, addr, alen, buf, bsize);
++	i2c_set_bus_num(oldbus);
++#endif
++	return ret;
++}
++
++#if !defined(CONFIG_SPL_BUILD)
++
+ int tqc_parse_eeprom_mac(struct tqc_eeprom_data *eeprom, char *buf,
+ 			 size_t len)
+ {
+@@ -113,31 +149,9 @@ int tqc_read_eeprom_at(unsigned int bus, unsigned int i2c_addr,
+ 		       unsigned int alen, unsigned int addr,
+ 		       struct tqc_eeprom_data *eeprom)
+ {
+-	int ret;
+-#ifdef CONFIG_DM_I2C
+-	struct udevice *dev;
+-#else
+-	unsigned int oldbus;
+-#endif
+-
+-	if (!eeprom)
+-		return -1;
+-
+-#ifdef CONFIG_DM_I2C
+-	ret = i2c_get_chip_for_busnum(bus, i2c_addr, alen, &dev);
+-	if (ret) {
+-		debug("%s: Cannot find I2C chip for bus %d\n", __func__, bus);
+-		return ret;
+-	}
+-
+-	ret = dm_i2c_read(dev, addr, (uchar *)eeprom, sizeof(*eeprom));
+-#else
+-	oldbus = i2c_get_bus_num();
+-	i2c_set_bus_num(bus);
+-	ret = i2c_read(i2c_addr, addr, alen, (uchar *)eeprom, sizeof(*eeprom));
+-	i2c_set_bus_num(oldbus);
+-#endif
+-	return ret;
++	return tqc_read_eeprom_buf(bus, i2c_addr, alen, addr, sizeof(*eeprom),
++				   (uchar *)eeprom)
++;
+ }
+ 
+ #if defined(CONFIG_SYS_I2C_EEPROM_ADDR_LEN)
+@@ -148,3 +162,5 @@ int tqmaxx_read_eeprom(unsigned int bus, unsigned int addr,
+ 				     CONFIG_SYS_I2C_EEPROM_ADDR_LEN, addr eeprom);
+ }
+ #endif
++
++#endif
+diff --git a/board/tqc/common/tqc_eeprom.h b/board/tqc/common/tqc_eeprom.h
+index 7e7962959b..f78dd7cd37 100644
+--- a/board/tqc/common/tqc_eeprom.h
++++ b/board/tqc/common/tqc_eeprom.h
+@@ -1,12 +1,18 @@
+ /* SPDX-License-Identifier: GPL-2.0+ */
+ /*
+- * (C) Copyright 2014 - 2018 TQ Systems GmbH
++ * Copyright (C) 2014 - 2018 TQ Systems GmbH
+  * Markus Niebel <Markus.Niebel@tq-group.com>
+  */
+ 
+ #ifndef __TQC_EEPROM_H__
+ #define __TQC_EEPROM_H__
+ 
++int tqc_read_eeprom_buf(unsigned int bus, unsigned int i2c_addr,
++			unsigned int alen, unsigned int addr,
++			size_t bsize, uchar *buf);
++
++#if !defined(CONFIG_SPL_BUILD)
++
+ /*
+  * static EEPROM layout
+  */
+@@ -33,6 +39,8 @@ int tqc_read_eeprom_at(unsigned int bus, unsigned int i2c_addr,
+ #if defined(CONFIG_SYS_I2C_EEPROM_ADDR_LEN)
+ int tqc_read_eeprom(unsigned int bus, unsigned int i2c_addr,
+ 		    struct tqc_eeprom_data *eeprom);
+-#endif
++#endif /* CONFIG_SYS_I2C_EEPROM_ADDR_LEN */
++
++#endif /* CONFIG_SPL_BUILD */
+ 
+ #endif

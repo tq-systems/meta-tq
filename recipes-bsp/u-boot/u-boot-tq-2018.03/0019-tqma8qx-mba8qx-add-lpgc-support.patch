@@ -1,0 +1,33 @@
+From adba73267fe2f9c9a6625c5456f459de7dfaae52 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 14 Feb 2019 16:39:46 +0100
+Subject: [PATCH] tqma8qx-mba8qx: add lpgc support
+
+use it for console uart as implemented win imx8qxp_mek
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8qx/tqma8qx-mba8qx.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/board/tqc/tqma8qx/tqma8qx-mba8qx.c b/board/tqc/tqma8qx/tqma8qx-mba8qx.c
+index 9ac7280c22..e9d40052c9 100644
+--- a/board/tqc/tqma8qx/tqma8qx-mba8qx.c
++++ b/board/tqc/tqma8qx/tqma8qx-mba8qx.c
+@@ -21,6 +21,7 @@
+ #include <asm/mach-imx/sci/sci.h>
+ #include <asm/arch/imx8-pins.h>
+ #include <asm/arch/iomux.h>
++#include <asm/arch/lpcg.h>
+ #include <asm/arch/sys_proto.h>
+ #include <power-domain.h>
+ 
+@@ -88,6 +89,8 @@ int tqc_bb_board_early_init_f(void)
+ 	if (sciErr != SC_ERR_NONE)
+ 		return 0;
+ 
++	LPCG_AllClockOn(LPUART_1_LPCG);
++
+ 	setup_iomux_uart();
+ 
+ 	return 0;

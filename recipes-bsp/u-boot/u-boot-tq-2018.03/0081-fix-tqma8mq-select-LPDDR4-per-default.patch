@@ -1,0 +1,22 @@
+From d18995b7a9c6c8e196c98d958a785330926451b5 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 18 Feb 2019 11:37:29 +0100
+Subject: [PATCH] fix: tqma8mq select LPDDR4 per default
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/mach-imx/imx8m/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm/mach-imx/imx8m/Kconfig b/arch/arm/mach-imx/imx8m/Kconfig
+index 348f8c6588..19f9297303 100644
+--- a/arch/arm/mach-imx/imx8m/Kconfig
++++ b/arch/arm/mach-imx/imx8m/Kconfig
+@@ -65,6 +65,7 @@ config TARGET_TQMA8MX
+ 	select IMX8MQ
+ 	select BOARD_LATE_INIT
+ 	select BOARD_EARLY_INIT_F
++	select IMX8M_LPDDR4
+ 	select PINCTRL
+ 	select PINCTRL_IMX8M
+ 	select DM_THERMAL

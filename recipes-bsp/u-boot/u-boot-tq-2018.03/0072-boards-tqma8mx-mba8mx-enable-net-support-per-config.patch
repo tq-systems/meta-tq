@@ -1,0 +1,93 @@
+From 3984fa165bbca0e9d319b8ea560866ded1154467 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 17 Jan 2019 09:57:08 +0100
+Subject: [PATCH] boards: tqma8mx-mba8mx: enable net support per config
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8mx/Kconfig            |  9 +++++++++
+ board/tqc/tqma8mx/tqma8mx-mba8mx.c   |  9 ++++++---
+ configs/tqma8mq_mba8mx_mmc_defconfig |  3 ---
+ include/configs/tqma8mx-mba8mx.h     | 14 ++++++++++++++
+ 4 files changed, 29 insertions(+), 6 deletions(-)
+
+diff --git a/board/tqc/tqma8mx/Kconfig b/board/tqc/tqma8mx/Kconfig
+index 8348b011ee..9d5764c98c 100644
+--- a/board/tqc/tqma8mx/Kconfig
++++ b/board/tqc/tqma8mx/Kconfig
+@@ -31,6 +31,15 @@ choice
+ config MBA8MX
+ 	bool "TQMa8MX on MBa8MX Starterkit"
+ 	select TQC_SDMMC
++	select MII
++	select CMD_MII
++	select CMD_PING
++	select CMD_DHCP
++	select CMD_NET
++	select DM_ETH
++	select FEC_MXC
++	select PHYLIB
++	select PHY_TI
+ 	help
+ 	  Select the MBa8MX starterkit. This features a GigE Phy, USB, SD-Card
+ 	  etc.
+diff --git a/board/tqc/tqma8mx/tqma8mx-mba8mx.c b/board/tqc/tqma8mx/tqma8mx-mba8mx.c
+index 00012ce2c6..bcb8bb9c5e 100644
+--- a/board/tqc/tqma8mx/tqma8mx-mba8mx.c
++++ b/board/tqc/tqma8mx/tqma8mx-mba8mx.c
+@@ -67,10 +67,13 @@ int tqc_bb_ft_board_setup(void *blob, bd_t *bd)
+ #ifdef CONFIG_FEC_MXC
+ static int setup_fec(void)
+ {
++	struct iomuxc_gpr_base_regs *const iomuxc_gpr_regs
++		= (struct iomuxc_gpr_base_regs *) IOMUXC_GPR_BASE_ADDR;
++
+ 	/* Use 125M anatop REF_CLK1 for ENET1, not from external */
+-	clrsetbits_le32(IOMUXC_GPR1,
+-			BIT(13) | BIT(17), 0);
+-	return set_clk_enet(ENET_125MHz);
++	clrsetbits_le32(&iomuxc_gpr_regs->gpr[1],
++			IOMUXC_GPR_GPR1_GPR_ENET1_TX_CLK_SEL_SHIFT, 0);
++	return set_clk_enet(ENET_125MHZ);
+ }
+ #endif
+ 
+diff --git a/configs/tqma8mq_mba8mx_mmc_defconfig b/configs/tqma8mq_mba8mx_mmc_defconfig
+index 4bf68ee757..eefdf782ba 100644
+--- a/configs/tqma8mq_mba8mx_mmc_defconfig
++++ b/configs/tqma8mq_mba8mx_mmc_defconfig
+@@ -29,9 +29,6 @@ CONFIG_DM_GPIO=y
+ CONFIG_DM_I2C=y
+ CONFIG_SYS_I2C_MXC=y
+ CONFIG_DM_MMC=y
+-CONFIG_PHYLIB=y
+-CONFIG_PHY_TI=y
+-CONFIG_DM_ETH=y
+ CONFIG_PHY_GIGE=y
+ CONFIG_DM_PMIC=y
+ CONFIG_DM_PMIC_PFUZE100=y
+diff --git a/include/configs/tqma8mx-mba8mx.h b/include/configs/tqma8mx-mba8mx.h
+index dc7966ba5a..c24ea97eab 100644
+--- a/include/configs/tqma8mx-mba8mx.h
++++ b/include/configs/tqma8mx-mba8mx.h
+@@ -7,6 +7,20 @@
+ #if !defined(__TQMA8MX_MBA8MX_H)
+ #define __TQMA8MX_MBA8MX_H
+ 
++/* ENET Config */
++/* ENET1 */
++#if defined(CONFIG_CMD_NET)
++
++#define CONFIG_MII
++#define CONFIG_ETHPRIME			"FEC"
++
++#define CONFIG_FEC_XCV_TYPE		RGMII
++#define CONFIG_FEC_MXC_PHYADDR		0
++#define FEC_QUIRK_ENET_MAC
++
++/* #define CONFIG_PHY_GIGE */
++#endif
++
+ #if !defined(CONFIG_SPL_BUILD)
+ /* #define CONFIG_DM_GPIO */
+ #define CONFIG_DM_PCA953X

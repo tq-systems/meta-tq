@@ -1,0 +1,29 @@
+From 38684baf7fda86d3174aab3b9d6d60dd0a03a466 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Fri, 15 Feb 2019 09:25:07 +0100
+Subject: [PATCH] mmc: allow selection of CONFIG_FSL_ESDHC per Kconfig
+
+this leaves out the treewide switch done in mainline
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ drivers/mmc/Kconfig | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/drivers/mmc/Kconfig b/drivers/mmc/Kconfig
+index c4df67d511..6ee5864f44 100644
+--- a/drivers/mmc/Kconfig
++++ b/drivers/mmc/Kconfig
+@@ -561,6 +561,12 @@ config TEGRA124_MMC_DISABLE_EXT_LOOPBACK
+ 	  TODO(marcel.ziswiler@toradex.com): Move to device tree controlled
+ 	  approach once proper kernel integration made it mainline.
+ 
++config FSL_ESDHC
++	bool "Freescale/NXP eSDHC controller support"
++	help
++	  This selects support for the eSDHC (enhanced secure digital host
++	  controller) found on numerous Freescale/NXP SoCs.
++
+ endmenu
+ 
+ config SYS_FSL_ERRATUM_ESDHC111

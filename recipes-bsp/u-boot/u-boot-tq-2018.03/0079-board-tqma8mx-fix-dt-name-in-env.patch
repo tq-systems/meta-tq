@@ -1,0 +1,25 @@
+From 574de56167a24e8e34b6ecee4b9df008989bbd0a Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Fri, 18 Jan 2019 10:10:01 +0100
+Subject: [PATCH] board: tqma8mx: fix dt name in env
+
+allows booting tqma8mq-mba8mx
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ include/configs/tqma8mx.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/configs/tqma8mx.h b/include/configs/tqma8mx.h
+index 4c178c674a..e10df7e9ec 100644
+--- a/include/configs/tqma8mx.h
++++ b/include/configs/tqma8mx.h
+@@ -132,7 +132,7 @@
+ 	"fdt_addr=0x43000000\0"			\
+ 	"fdt_high=0xffffffffffffffff\0"		\
+ 	"boot_fdt=try\0" \
+-	"fdt_file=fsl-imx8mq-evk.dtb\0" \
++	"fdt_file=fsl-imx8mq-tqma8mq-mba8mx.dtb\0" \
+ 	"initrd_addr=0x43800000\0"		\
+ 	"initrd_high=0xffffffffffffffff\0" \
+ 	"mmcdev="__stringify(CONFIG_SYS_MMC_ENV_DEV)"\0" \

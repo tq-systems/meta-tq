@@ -1,0 +1,24 @@
+From 78861363d41ad79618a88df3ebf09b194c1b9b7d Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 17 Jan 2019 13:57:48 +0100
+Subject: [PATCH] arm: dt: fsl-imx8mq-tqma8mq-mba8mx: fixup ethernet
+
+no CPU GPIO for reset
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts b/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts
+index b0e1d0bed3..ec8f07b365 100644
+--- a/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts
++++ b/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts
+@@ -82,7 +82,6 @@
+ 				MX8MQ_IOMUXC_ENET_RXC_ENET1_RGMII_RXC	0x91
+ 				MX8MQ_IOMUXC_ENET_RX_CTL_ENET1_RGMII_RX_CTL	0x91
+ 				MX8MQ_IOMUXC_ENET_TX_CTL_ENET1_RGMII_TX_CTL	0x1f
+-				MX8MQ_IOMUXC_GPIO1_IO09_GPIO1_IO9	0x19
+ 			>;
+ 		};
+ 

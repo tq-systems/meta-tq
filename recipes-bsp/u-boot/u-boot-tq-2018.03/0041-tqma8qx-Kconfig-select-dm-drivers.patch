@@ -1,0 +1,50 @@
+From 48a1584b393f42b015b058e23bc90603aa33611a Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 22 Nov 2018 12:27:48 +0100
+Subject: [PATCH] tqma8qx: Kconfig: select dm drivers
+
+select drivers needed for boot and basic funcionality
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/mach-imx/imx8/Kconfig | 6 ++++++
+ board/tqc/tqma8qx/Kconfig      | 2 +-
+ 2 files changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/mach-imx/imx8/Kconfig b/arch/arm/mach-imx/imx8/Kconfig
+index c932b96a55..94acde426b 100644
+--- a/arch/arm/mach-imx/imx8/Kconfig
++++ b/arch/arm/mach-imx/imx8/Kconfig
+@@ -81,6 +81,12 @@ config TARGET_TQMA8QX
+ 	bool "Support TQMa8xX board"
+ 	select BOARD_LATE_INIT
+ 	select IMX8QXP
++	select ARCH_MISC_INIT
++	select BOARD_EARLY_INIT_F
++	select DM_GPIO
++	select DM_SERIAL
++	select FSL_LPUART
++	select DM_MMC
+ 
+ endchoice
+ 
+diff --git a/board/tqc/tqma8qx/Kconfig b/board/tqc/tqma8qx/Kconfig
+index 029a25ee6a..b0c54d89b4 100644
+--- a/board/tqc/tqma8qx/Kconfig
++++ b/board/tqc/tqma8qx/Kconfig
+@@ -22,7 +22,6 @@ config TQMA8QX_MX8QXP
+ 
+ endchoice
+ 
+-
+ choice
+ 	prompt "TQMa8QX base board variant"
+ 	default MBA8QX
+@@ -32,6 +31,7 @@ choice
+ config MBA8QX
+ 	bool "TQMa8QX on MBa8QX Starterkit"
+ 	select TQC_SDMMC
++	select DM_ETH
+ 	help
+ 	  Select the MBa8QX starterkit. This features a GigE Phy, USB, SD-Card
+ 	  etc.

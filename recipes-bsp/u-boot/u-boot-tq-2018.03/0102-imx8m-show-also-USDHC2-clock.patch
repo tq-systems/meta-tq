@@ -1,0 +1,23 @@
+From 4c27ad8240d10c030802508be23138abea6421da Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Tue, 19 Feb 2019 12:16:46 +0100
+Subject: [PATCH] imx8m: show also USDHC2 clock
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/mach-imx/imx8m/clock_imx8mq.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/arm/mach-imx/imx8m/clock_imx8mq.c b/arch/arm/mach-imx/imx8m/clock_imx8mq.c
+index 33a4d51f9c..563b1dadc7 100644
+--- a/arch/arm/mach-imx/imx8m/clock_imx8mq.c
++++ b/arch/arm/mach-imx/imx8m/clock_imx8mq.c
+@@ -891,6 +891,8 @@ int do_mx8m_showclocks(cmd_tbl_t *cmdtp, int flag, int argc,
+ 	printf("UART1          %8d MHz\n", freq / 1000000);
+ 	freq = mxc_get_clock(USDHC1_CLK_ROOT);
+ 	printf("USDHC1         %8d MHz\n", freq / 1000000);
++	freq = mxc_get_clock(USDHC2_CLK_ROOT);
++	printf("USDHC2         %8d MHz\n", freq / 1000000);
+ 	freq = mxc_get_clock(QSPI_CLK_ROOT);
+ 	printf("QSPI           %8d MHz\n", freq / 1000000);
+ 	return 0;

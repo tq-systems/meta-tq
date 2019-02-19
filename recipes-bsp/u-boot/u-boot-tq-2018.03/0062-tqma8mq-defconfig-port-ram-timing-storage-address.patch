@@ -1,0 +1,22 @@
+From 77c92f52fca743525989de792225d08f294b758d Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 18 Feb 2019 14:35:22 +0100
+Subject: [PATCH] tqma8mq: defconfig: port ram timing storage address
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ configs/tqma8mq_mba8mx_mmc_defconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/configs/tqma8mq_mba8mx_mmc_defconfig b/configs/tqma8mq_mba8mx_mmc_defconfig
+index d123da5429..92ba3cde49 100644
+--- a/configs/tqma8mq_mba8mx_mmc_defconfig
++++ b/configs/tqma8mq_mba8mx_mmc_defconfig
+@@ -2,6 +2,7 @@ CONFIG_ARM=y
+ CONFIG_ARCH_IMX8M=y
+ CONFIG_SYS_TEXT_BASE=0x40200000
+ CONFIG_SYS_MALLOC_F_LEN=0x2000
++CONFIG_SAVED_DRAM_TIMING_BASE=0x40000000
+ CONFIG_TARGET_TQMA8MX=y
+ CONFIG_DEFAULT_DEVICE_TREE="fsl-imx8mq-tqma8mq-mba8mx"
+ CONFIG_FIT=y

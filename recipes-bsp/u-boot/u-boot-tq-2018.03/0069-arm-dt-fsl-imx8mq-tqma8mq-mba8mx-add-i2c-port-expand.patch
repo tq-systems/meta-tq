@@ -1,0 +1,37 @@
+From 54fa19cc8fe333de0c3df402c84af982a1a1f884 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 16 Jan 2019 19:49:20 +0100
+Subject: [PATCH] arm: dt: fsl-imx8mq-tqma8mq-mba8mx: add i2c port expander
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+diff --git a/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts b/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts
+index 449a41d503..98b29d91a2 100644
+--- a/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts
++++ b/arch/arm/dts/fsl-imx8mq-tqma8mq-mba8mx.dts
+@@ -107,6 +107,22 @@
+ 	};
+ };
+ 
++&i2c1 {
++	expander1: pca9555@24 {
++		compatible = "nxp,pca9555";
++		reg = <0x24>;
++		gpio-controller;
++		#gpio-cells = <2>;
++	};
++
++	expander2: pca9555@25 {
++		compatible = "nxp,pca9555";
++		reg = <0x25>;
++		gpio-controller;
++		#gpio-cells = <2>;
++	};
++};
++
+ &i2c2 {
+ 	clock-frequency = <100000>;
+ 	pinctrl-names = "default";

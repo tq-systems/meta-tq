@@ -1,0 +1,33 @@
+From 37c79b567ba8359d1efdc03a64fc3a646408ba41 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 19 Nov 2018 12:58:17 +0100
+Subject: [PATCH] arm: dt: fsl-imx8qxp-tqma8qx-mba8qx: fix SD1 regulator
+
+- no gpio, therefore also no timing
+- 3.3 Volt
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts b/arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts
+index 16228159e9..9d01afc901 100644
+--- a/arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8qx-mba8qx.dts
+@@ -34,12 +34,9 @@
+ 		reg_usdhc2_vmmc: usdhc2_vmmc {
+ 			compatible = "regulator-fixed";
+ 			regulator-name = "SD1_SPWR";
+-			regulator-min-microvolt = <3000000>;
+-			regulator-max-microvolt = <3000000>;
+-			gpio = <&gpio4 19 GPIO_ACTIVE_HIGH>;
+-			enable-active-high;
+-			startup-delay-us = <100>;
+-			off-on-delay-us = <12000>;
++			regulator-min-microvolt = <3300000>;
++			regulator-max-microvolt = <3300000>;
++			status = "okay";
+ 		};
+ 	};
+ };

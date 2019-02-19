@@ -1,0 +1,28 @@
+From 4f253c03e60d7311cc8d392ec2ac301bc577419e Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 18 Feb 2019 19:13:30 +0100
+Subject: [PATCH] net: fec_mxc: [hack] gpio framework does not handle active
+ low at the moment
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ drivers/net/fec_mxc.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/net/fec_mxc.c b/drivers/net/fec_mxc.c
+index 369ed5dd83..3f85a5a4cd 100644
+--- a/drivers/net/fec_mxc.c
++++ b/drivers/net/fec_mxc.c
+@@ -1295,9 +1295,10 @@ static void fec_gpio_reset(struct fec_priv *priv)
+ {
+ 	debug("fec_gpio_reset: fec_gpio_reset(dev)\n");
+ 	if (dm_gpio_is_valid(&priv->phy_reset_gpio)) {
+-		dm_gpio_set_value(&priv->phy_reset_gpio, 1);
+-		udelay(priv->reset_delay);
+ 		dm_gpio_set_value(&priv->phy_reset_gpio, 0);
++		mdelay(priv->reset_delay);
++		dm_gpio_set_value(&priv->phy_reset_gpio, 1);
++		mdelay(1);
+ 	}
+ }
+ #endif

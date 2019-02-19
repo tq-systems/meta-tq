@@ -1,0 +1,82 @@
+From 8506338770f11c52ca0aef53f559c3814c379c02 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 24 Jan 2019 15:10:53 +0100
+Subject: [PATCH] tqc: tqc_eeprom: remove CONFIG_SYS_I2C_EEPROM_ADDR_LEN from
+ generic read
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/common/tqc_eeprom.c | 22 +++++++++++++++-------
+ board/tqc/common/tqc_eeprom.h | 10 ++++++----
+ 2 files changed, 21 insertions(+), 11 deletions(-)
+
+diff --git a/board/tqc/common/tqc_eeprom.c b/board/tqc/common/tqc_eeprom.c
+index cb6ce518c5..dec4f39471 100644
+--- a/board/tqc/common/tqc_eeprom.c
++++ b/board/tqc/common/tqc_eeprom.c
+@@ -109,8 +109,9 @@ int tqc_show_eeprom(struct tqc_eeprom_data *eeprom, const char *id)
+ /*
+  * read_eeprom - read the given EEPROM into memory
+  */
+-int tqc_read_eeprom(unsigned int bus, unsigned int addr,
+-		    struct tqc_eeprom_data *eeprom)
++int tqc_read_eeprom_at(unsigned int bus, unsigned int i2c_addr,
++		       unsigned int alen, unsigned int addr,
++		       struct tqc_eeprom_data *eeprom)
+ {
+ 	int ret;
+ #ifdef CONFIG_DM_I2C
+@@ -123,20 +124,27 @@ int tqc_read_eeprom(unsigned int bus, unsigned int addr,
+ 		return -1;
+ 
+ #ifdef CONFIG_DM_I2C
+-	ret = i2c_get_chip_for_busnum(bus, addr, CONFIG_SYS_I2C_EEPROM_ADDR_LEN,
+-				      &dev);
++	ret = i2c_get_chip_for_busnum(bus, i2c_addr, alen, &dev);
+ 	if (ret) {
+ 		debug("%s: Cannot find I2C chip for bus %d\n", __func__, bus);
+ 		return ret;
+ 	}
+ 
+-	ret = dm_i2c_read(dev, 0, (uchar *)eeprom, sizeof(*eeprom));
++	ret = dm_i2c_read(dev, addr, (uchar *)eeprom, sizeof(*eeprom));
+ #else
+ 	oldbus = i2c_get_bus_num();
+ 	i2c_set_bus_num(bus);
+-	ret = i2c_read(addr, 0, CONFIG_SYS_I2C_EEPROM_ADDR_LEN,
+-		       (uchar *)eeprom, sizeof(*eeprom));
++	ret = i2c_read(i2c_addr, addr, alen, (uchar *)eeprom, sizeof(*eeprom));
+ 	i2c_set_bus_num(oldbus);
+ #endif
+ 	return ret;
+ }
++
++#if defined(CONFIG_SYS_I2C_EEPROM_ADDR_LEN)
++int tqmaxx_read_eeprom(unsigned int bus, unsigned int addr,
++		       struct tqmaxx_eeprom_data *eeprom)
++{
++	return tqmaxx_read_eeprom_at(bus, i2c_addr,
++				     CONFIG_SYS_I2C_EEPROM_ADDR_LEN, addr eeprom);
++}
++#endif
+diff --git a/board/tqc/common/tqc_eeprom.h b/board/tqc/common/tqc_eeprom.h
+index 52a88c283c..7e7962959b 100644
+--- a/board/tqc/common/tqc_eeprom.h
++++ b/board/tqc/common/tqc_eeprom.h
+@@ -27,10 +27,12 @@ int tqc_parse_eeprom_serial(struct tqc_eeprom_data *eeprom, char *buf,
+ int tqc_parse_eeprom_id(struct tqc_eeprom_data *eeprom, char *buf,
+ 			size_t len);
+ int tqc_show_eeprom(struct tqc_eeprom_data *eeprom, const char *id);
+-int tqc_read_eeprom_at(unsigned int bus, unsigned int addr,
+-		       struct tqc_eeprom_data *eeprom,
+-		       unsigned int offset);
+-int tqc_read_eeprom(unsigned int bus, unsigned int addr,
++int tqc_read_eeprom_at(unsigned int bus, unsigned int i2c_addr,
++		       unsigned int alen, unsigned int addr,
++		       struct tqc_eeprom_data *eeprom);
++#if defined(CONFIG_SYS_I2C_EEPROM_ADDR_LEN)
++int tqc_read_eeprom(unsigned int bus, unsigned int i2c_addr,
+ 		    struct tqc_eeprom_data *eeprom);
++#endif
+ 
+ #endif

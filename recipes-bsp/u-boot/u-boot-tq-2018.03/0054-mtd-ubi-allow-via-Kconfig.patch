@@ -1,0 +1,26 @@
+From 54465b71b9c0d20b86c3b81a0031d2941680448d Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 10 Jan 2019 11:58:10 +0100
+Subject: [PATCH] mtd/ubi: allow via Kconfig
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ lib/Kconfig | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/lib/Kconfig b/lib/Kconfig
+index aff37a9a8d..a0e9a9517e 100644
+--- a/lib/Kconfig
++++ b/lib/Kconfig
+@@ -81,6 +81,11 @@ config REGEX
+ 	  regex support to some commands, for example "env grep" and
+ 	  "setexpr".
+ 
++config RBTREE
++	bool "enable rbtree support"
++	help
++	  rbtree is needed for UBI support
++
+ choice
+ 	prompt "Pseudo-random library support type"
+ 	depends on NET_RANDOM_ETHADDR || RANDOM_UUID || CMD_UUID

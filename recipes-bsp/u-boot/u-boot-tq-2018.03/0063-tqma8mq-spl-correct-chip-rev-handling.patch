@@ -1,0 +1,42 @@
+From e3a940d1b417599b423057aaa77e5b5babbe1815 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 18 Feb 2019 14:35:00 +0100
+Subject: [PATCH] tqma8mq: spl: correct chip rev handling
+
+currently we support only rev 2.0
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8mx/spl.c | 15 +++++++--------
+ 1 file changed, 7 insertions(+), 8 deletions(-)
+
+diff --git a/board/tqc/tqma8mx/spl.c b/board/tqc/tqma8mx/spl.c
+index 2a3bfae273..de87d61a2f 100644
+--- a/board/tqc/tqma8mx/spl.c
++++ b/board/tqc/tqma8mx/spl.c
+@@ -25,18 +25,17 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
+-/* extern struct dram_timing_info dram_timing_b0; */
+-
+ void spl_dram_init(void)
+ {
++	u32 rev = get_cpu_rev() & 0xfff;
++
++	printf("SPL: CPU rev. %u.%u\n", (rev & 0xf0) >> 4, rev & 0xf);
+ 	/* ddr init */
+-	if ((get_cpu_rev() & 0xfff) == CHIP_REV_2_1)
+-		ddr_init(&dram_timing);
+-	else {
+-		debug("spl_init() - not timing fpor this chip rev: %x\n",
+-		      (get_cpu_rev() & 0xfff));
++	if (rev == CHIP_REV_2_1) {
++		printf("SPL: no timing for this chip rev\n");
+ 		hang();
+-		/* ddr_init(&dram_timing_b0); */
++	} else {
++		ddr_init(&dram_timing);
+ 	}
+ }
+ 
