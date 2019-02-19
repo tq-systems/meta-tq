@@ -1,6 +1,8 @@
 require linux-tq-common.inc
 
 SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+           file://tqma8qx-display-support.cfg \
+           file://tqma8x-network-support.cfg \
            "
 
 ################

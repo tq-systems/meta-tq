@@ -1,0 +1,30 @@
+From 7b1e8824c70d52ce39e3b7fa5296e684ecb54121 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Fri, 18 Jan 2019 15:43:37 +0100
+Subject: [PATCH] arm64: dt: fsl-imx8mq-tqma8mq: enable vpu including power
+ domain
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
+index 15a4b0bb7efb..af9654eaa5a3 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
+@@ -278,6 +278,14 @@
+ 	status = "okay";
+ };
+ 
++&vpu {
++	status = "okay";
++};
++
++&vpu_pd {
++	power-supply = <&sw1c_reg>;
++};
++
+ /* TODO: wdog reset has issues */
+ &wdog1 {
+ 	pinctrl-names = "default";
