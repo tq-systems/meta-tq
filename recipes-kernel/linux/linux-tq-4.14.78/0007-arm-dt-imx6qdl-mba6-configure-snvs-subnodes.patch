@@ -1,0 +1,34 @@
+From 75f754b4384507c42a336bc39fc794f364ae1c10 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 10 Sep 2018 11:12:05 +0200
+Subject: [PATCH 007/188] arm: dt: imx6qdl-mba6: configure snvs subnodes
+
+configure subnodes as needed for this board
+
+- enable poweroff to make the button work
+- disable rtc as we have a deticated i2c rtc
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/boot/dts/imx6qdl-mba6.dtsi | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx6qdl-mba6.dtsi b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+index 7bab139d1e9d..933ded251edc 100644
+--- a/arch/arm/boot/dts/imx6qdl-mba6.dtsi
++++ b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+@@ -150,6 +150,14 @@
+ 	};
+ };
+ 
++&snvs_poweroff {
++	status = "okay";
++};
++
++&snvs_rtc {
++	status = "disabled";
++};
++
+ &uart2 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_uart2>;

@@ -1,0 +1,32 @@
+From c054aa601485bb405d88db63b126c97701e34ee6 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 10 Sep 2018 11:12:28 +0200
+Subject: [PATCH 032/188] ASoC: fsl: fix Kconfig for audio card with
+ tlv320aic32x4
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ sound/soc/fsl/Kconfig | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/sound/soc/fsl/Kconfig b/sound/soc/fsl/Kconfig
+index 8099cad637e9..54f822ad4c15 100644
+--- a/sound/soc/fsl/Kconfig
++++ b/sound/soc/fsl/Kconfig
+@@ -569,13 +569,13 @@ config SND_SOC_IMX_PDM_MIC
+ 
+ config SND_SOC_IMX_TLV320AIC32x4
+ 	tristate "SoC Audio support for i.MX boards with tlv320aic32x4"
+-	depends on OF && I2C
++	depends on OF && (I2C || SPI)
++	select SND_SOC_TLV320AIC32X4_I2C if I2C
++	select SND_SOC_TLV320AIC32X4_SPI if SPI_MASTER
+ 	select SND_SOC_IMX_PCM_DMA
+ 	select SND_SOC_IMX_AUDMUX
+ 	select SND_SOC_FSL_SSI
+ 	select SND_SOC_FSL_UTILS
+-	select SND_SOC_TLV320AIC32X4
+-	select SND_SOC_TLV320AIC32X4_I2C
+ 	help
+ 	  Say Y if you want to add support for SoC audio on an i.MX board with
+ 	  a tlv320aic32x4 codec.

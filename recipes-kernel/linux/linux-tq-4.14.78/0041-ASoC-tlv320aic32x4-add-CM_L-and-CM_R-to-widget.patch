@@ -1,0 +1,25 @@
+From d6172f2419035365f1ab9118d86b784622dbf070 Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Mon, 10 Sep 2018 11:12:33 +0200
+Subject: [PATCH 041/188] ASoC: tlv320aic32x4: add CM_L and CM_R to widget
+
+as SND_SOC_DAPM_INPUT() to snd_soc_dapm_widget
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>(imported from commit 548abb77fc6fce977ef903398863258eb0ff692c)
+---
+ sound/soc/codecs/tlv320aic32x4.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/sound/soc/codecs/tlv320aic32x4.c b/sound/soc/codecs/tlv320aic32x4.c
+index fd3b30d48e33..4eb578caad3d 100644
+--- a/sound/soc/codecs/tlv320aic32x4.c
++++ b/sound/soc/codecs/tlv320aic32x4.c
+@@ -462,6 +462,8 @@ static const struct snd_soc_dapm_widget aic32x4_dapm_widgets[] = {
+ 	SND_SOC_DAPM_INPUT("IN2_R"),
+ 	SND_SOC_DAPM_INPUT("IN3_L"),
+ 	SND_SOC_DAPM_INPUT("IN3_R"),
++	SND_SOC_DAPM_INPUT("CM_L"),
++	SND_SOC_DAPM_INPUT("CM_R"),
+ };
+ 
+ static const struct snd_soc_dapm_route aic32x4_dapm_routes[] = {

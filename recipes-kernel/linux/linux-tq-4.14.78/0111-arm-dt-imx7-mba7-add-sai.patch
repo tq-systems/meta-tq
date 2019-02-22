@@ -1,0 +1,51 @@
+From 19b1cf9979d0969b7623d9964490d335a4014da8 Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Tue, 29 Jan 2019 12:19:19 +0100
+Subject: [PATCH 111/188] arm: dt: imx7-mba7: add sai
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ arch/arm/boot/dts/imx7-mba7.dtsi | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-mba7.dtsi b/arch/arm/boot/dts/imx7-mba7.dtsi
+index bd8cfb47cbe8..edfd5e5941ff 100644
+--- a/arch/arm/boot/dts/imx7-mba7.dtsi
++++ b/arch/arm/boot/dts/imx7-mba7.dtsi
+@@ -387,6 +387,19 @@
+ 			>;
+ 		};
+ 
++		pinctrl_sai1: sai1grp {
++			fsl,pins = <
++				MX7D_PAD_SAI1_MCLK__SAI1_MCLK		0x11
++				MX7D_PAD_SAI1_RX_BCLK__SAI1_RX_BCLK	0x1c
++				MX7D_PAD_SAI1_RX_DATA__SAI1_RX_DATA0	0x1c
++				MX7D_PAD_SAI1_RX_SYNC__SAI2_RX_SYNC	0x1c
++
++				MX7D_PAD_SAI1_TX_BCLK__SAI1_TX_BCLK	0x1c
++				MX7D_PAD_SAI1_TX_DATA__SAI1_TX_DATA0	0x14
++				MX7D_PAD_SAI1_TX_SYNC__SAI1_TX_SYNC	0x14
++			>;
++		};
++
+ 		pinctrl_uart3: uart3grp {
+ 			fsl,pins = <
+ 				MX7D_PAD_UART3_RX_DATA__UART3_DCE_RX	0x7e
+@@ -491,6 +504,16 @@
+ 	};
+ };
+ 
++&sai1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_sai1>;
++	assigned-clocks = <&clks IMX7D_SAI1_ROOT_SRC>,
++			  <&clks IMX7D_SAI1_ROOT_CLK>;
++	assigned-clock-parents = <&clks IMX7D_PLL_AUDIO_POST_DIV>;
++	assigned-clock-rates = <0>, <36864000>;
++	status = "okay";
++};
++
+ &uart3 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_uart3>;

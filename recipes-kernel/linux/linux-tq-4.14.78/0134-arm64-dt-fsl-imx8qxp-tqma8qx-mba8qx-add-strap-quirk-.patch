@@ -1,0 +1,31 @@
+From 71adac4e532ced03dda1da496759c98ab97c2fbe Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Tue, 19 Feb 2019 17:22:20 +0100
+Subject: [PATCH 134/188] arm64: dt: fsl-imx8qxp-tqma8qx-mba8qx: add strap
+ quirk workaround for ti phy
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi
+index 81b35f364470..3fa674cf6696 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi
+@@ -172,6 +172,7 @@
+ 			reg = <0>;
+ 			ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
+ 			ti,tx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
++			ti,dp83867-rxctrl-strap-quirk;
+ 		};
+ 
+ 		ethphy3: ethernet-phy@3 {
+@@ -179,6 +180,7 @@
+ 			reg = <3>;
+ 			ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
+ 			ti,tx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
++			ti,dp83867-rxctrl-strap-quirk;
+ 		};
+ 	};
+ };

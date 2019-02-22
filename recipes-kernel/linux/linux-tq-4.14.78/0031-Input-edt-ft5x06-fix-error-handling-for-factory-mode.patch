@@ -1,0 +1,58 @@
+From e4c3b2d69012cd03e4ea6186c645bfebce739745 Mon Sep 17 00:00:00 2001
+From: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+Date: Mon, 10 Sep 2018 11:12:25 +0200
+Subject: [PATCH 031/188] Input: edt-ft5x06 - fix error handling for factory
+ mode on non-M06
+
+When attempting enter factory mode on firmware that does not support it,
+we'd error out, but leave the device with interrupts disabled, and thus
+touch not working. Fix it by moving the check before we disable
+interrupts/allocate memory for debug buffers.
+
+Fixes: fd335ab04b3f ("Input: edt-ft5x06 - add support for M09 firmware version")
+Reviewed-by: Andi Shyti <andi@etezian.org>
+Signed-off-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+(cherry picked from commit 4b3e910d7f430ab76dd37131bb75129878950163)
+---
+ drivers/input/touchscreen/edt-ft5x06.c | 14 ++++++--------
+ 1 file changed, 6 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/input/touchscreen/edt-ft5x06.c b/drivers/input/touchscreen/edt-ft5x06.c
+index c53a3d7239e7..1e18ca0d1b4e 100644
+--- a/drivers/input/touchscreen/edt-ft5x06.c
++++ b/drivers/input/touchscreen/edt-ft5x06.c
+@@ -511,6 +511,12 @@ static int edt_ft5x06_factory_mode(struct edt_ft5x06_ts_data *tsdata)
+ 	int ret;
+ 	int error;
+ 
++	if (tsdata->version != EDT_M06) {
++		dev_err(&client->dev,
++			"No factory mode support for non-M06 devices\n");
++		return -EINVAL;
++	}
++
+ 	disable_irq(client->irq);
+ 
+ 	if (!tsdata->raw_buffer) {
+@@ -524,9 +530,6 @@ static int edt_ft5x06_factory_mode(struct edt_ft5x06_ts_data *tsdata)
+ 	}
+ 
+ 	/* mode register is 0x3c when in the work mode */
+-	if (tsdata->version != EDT_M06)
+-		goto m09_out;
+-
+ 	error = edt_ft5x06_register_write(tsdata, WORK_REGISTER_OPMODE, 0x03);
+ 	if (error) {
+ 		dev_err(&client->dev,
+@@ -559,11 +562,6 @@ static int edt_ft5x06_factory_mode(struct edt_ft5x06_ts_data *tsdata)
+ 	enable_irq(client->irq);
+ 
+ 	return error;
+-
+-m09_out:
+-	dev_err(&client->dev, "No factory mode support for M09/M12/GENERIC_FT\n");
+-	return -EINVAL;
+-
+ }
+ 
+ static int edt_ft5x06_work_mode(struct edt_ft5x06_ts_data *tsdata)

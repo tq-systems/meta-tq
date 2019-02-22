@@ -1,0 +1,42 @@
+From 7546fdc6351572cdf2a05ed86d978c0833f1b48e Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 10 Sep 2018 11:12:08 +0200
+Subject: [PATCH 014/188] arm: dt: imx6qdl-mba6: add gpio beeper
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/boot/dts/imx6qdl-mba6.dtsi | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx6qdl-mba6.dtsi b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+index 4ad928de7965..cf72cd1c7f21 100644
+--- a/arch/arm/boot/dts/imx6qdl-mba6.dtsi
++++ b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+@@ -18,6 +18,14 @@
+ 		stdout-path = &uart2;
+ 	};
+ 
++	beeper: gpio-beeper {
++		compatible = "gpio-beeper";
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_gpiobeeper>;
++		gpios = <&gpio1 21 GPIO_ACTIVE_HIGH>;
++		status = "okay";
++	};
++
+ 	gpio_buttons: gpio-buttons {
+ 		compatible = "gpio-keys";
+ 		#address-cells = <1>;
+@@ -153,6 +161,12 @@
+ 			>;
+ 		};
+ 
++		pinctrl_gpiobeeper: gpiobeepergrp {
++			fsl,pins = <
++				MX6QDL_PAD_SD1_DAT3__GPIO1_IO21 0xb099
++			>;
++		};
++
+ 		pinctrl_gpiobuttons: gpiobuttongrp {
+ 			fsl,pins = <
+ 				MX6QDL_PAD_GPIO_17__GPIO7_IO12 0x0001b099

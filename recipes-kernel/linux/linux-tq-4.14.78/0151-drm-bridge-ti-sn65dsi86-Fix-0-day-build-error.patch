@@ -1,0 +1,44 @@
+From 43e15500aaade1b571757eb19bd11e732fa09371 Mon Sep 17 00:00:00 2001
+From: Guenter Roeck <groeck@chromium.org>
+Date: Wed, 15 Aug 2018 15:49:14 -0400
+Subject: [PATCH 151/188] drm/bridge: ti-sn65dsi86: Fix 0-day build error
+
+0day reports:
+
+>> drivers/gpu/drm/bridge/ti-sn65dsi86.o: In function
+mipi_dsi_detach'
+>> drivers/gpu/drm/bridge/ti-sn65dsi86.c:630: undefined reference to
+ti_sn_bridge_attach':
+>> drivers/gpu/drm/bridge/ti-sn65dsi86.c:249: undefined reference to
+mipi_dsi_device_register_full'
+>> drivers/gpu/drm/bridge/ti-sn65dsi86.c:276: undefined reference to
+mipi_dsi_device_unregister'
+
+Quite obviously the driver depends on DRM_MIPI_DSI.
+We can not use depends since the driver configuration uses select,
+so we'll have to select the missing dependency instead.
+
+Cc: Sean Paul <seanpaul@chromium.org>
+Cc: Dylan Reid <dgreid@chromium.org>
+Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+Signed-off-by: Guenter Roeck <groeck@chromium.org>
+Signed-off-by: Sean Paul <seanpaul@chromium.org>
+Link: https://patchwork.freedesktop.org/patch/msgid/20180815194923.3258-1-sean@poorly.run
+
+(cherry picked from commit d2c53b337ef53bb874d4be076b6d51ae1498ab2a)
+---
+ drivers/gpu/drm/bridge/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/gpu/drm/bridge/Kconfig b/drivers/gpu/drm/bridge/Kconfig
+index b13e84628ea9..eaad11f1f73d 100644
+--- a/drivers/gpu/drm/bridge/Kconfig
++++ b/drivers/gpu/drm/bridge/Kconfig
+@@ -126,6 +126,7 @@ config DRM_TI_SN65DSI86
+ 	select DRM_KMS_HELPER
+ 	select REGMAP_I2C
+ 	select DRM_PANEL
++	select DRM_MIPI_DSI
+ 	help
+ 	  Texas Instruments SN65DSI86 DSI to eDP Bridge driver
+ 

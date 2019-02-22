@@ -1,0 +1,184 @@
+From 0a9b49a9457ad394aef45493200048d11dca5a4c Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Tue, 30 Oct 2018 09:09:59 +0100
+Subject: [PATCH 153/188] arm64: dt: fsl-imx8qxp-tqma8qx-mba8qx: add device
+ tree for lvds
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/Makefile        |  4 +-
+ ...qxp-tqma8qx-a0-mba8qx-lvds-tm070jvhg33.dts | 21 +++++
+ ...mx8qxp-tqma8qx-mba8qx-lvds-tm070jvhg33.dts | 20 ++++
+ ...x8qxp-tqma8qx-mba8qx-lvds-tm070jvhg33.dtsi | 93 +++++++++++++++++++
+ 4 files changed, 137 insertions(+), 1 deletion(-)
+ create mode 100644 arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-a0-mba8qx-lvds-tm070jvhg33.dts
+ create mode 100644 arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx-lvds-tm070jvhg33.dts
+ create mode 100644 arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx-lvds-tm070jvhg33.dtsi
+
+diff --git a/arch/arm64/boot/dts/freescale/Makefile b/arch/arm64/boot/dts/freescale/Makefile
+index e87793ad9c3f..130161466258 100644
+--- a/arch/arm64/boot/dts/freescale/Makefile
++++ b/arch/arm64/boot/dts/freescale/Makefile
+@@ -91,7 +91,9 @@ dtb-$(CONFIG_ARCH_FSL_IMX8QXP) += fsl-imx8qxp-lpddr4-arm2.dtb \
+ 				  fsl-imx8dx-lpddr4-arm2.dtb \
+ 				  fsl-imx8dxp-lpddr4-arm2.dtb \
+ 				  fsl-imx8qxp-tqma8qx-mba8qx.dtb \
+-				  fsl-imx8qxp-tqma8qx-a0-mba8qx.dtb
++				  fsl-imx8qxp-tqma8qx-mba8qx-lvds-tm070jvhg33.dtb \
++				  fsl-imx8qxp-tqma8qx-a0-mba8qx.dtb \
++				  fsl-imx8qxp-tqma8qx-a0-mba8qx-lvds-tm070jvhg33.dtb
+ dtb-$(CONFIG_ARCH_FSL_IMX8MQ) += fsl-imx8mq-ddr3l-arm2.dtb \
+ 				 fsl-imx8mq-ddr4-arm2.dtb \
+ 				 fsl-imx8mq-ddr4-arm2-gpmi-nand.dtb \
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-a0-mba8qx-lvds-tm070jvhg33.dts b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-a0-mba8qx-lvds-tm070jvhg33.dts
+new file mode 100644
+index 000000000000..09b2695599c6
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-a0-mba8qx-lvds-tm070jvhg33.dts
+@@ -0,0 +1,21 @@
++/*
++ * Copyright 2018 TQ Systems GmbH
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++
++/dts-v1/;
++
++#include "fsl-imx8qxp-tqma8qx.dtsi"
++#include "fsl-imx8qxp-tqma8qx-a0.dtsi"
++#include "fsl-imx8qxp-tqma8qx-mba8qx.dtsi"
++#include "fsl-imx8qxp-tqma8qx-mba8qx-lvds-tm070jvhg33.dtsi"
++
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx-lvds-tm070jvhg33.dts b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx-lvds-tm070jvhg33.dts
+new file mode 100644
+index 000000000000..6cace9ffc2e4
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx-lvds-tm070jvhg33.dts
+@@ -0,0 +1,20 @@
++/*
++ * Copyright 2018 TQ Systems GmbH
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++
++/dts-v1/;
++
++#include "fsl-imx8qxp-tqma8qx.dtsi"
++#include "fsl-imx8qxp-tqma8qx-mba8qx.dtsi"
++#include "fsl-imx8qxp-tqma8qx-mba8qx-lvds-tm070jvhg33.dtsi"
++
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx-lvds-tm070jvhg33.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx-lvds-tm070jvhg33.dtsi
+new file mode 100644
+index 000000000000..5cf45a0363b4
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx-lvds-tm070jvhg33.dtsi
+@@ -0,0 +1,93 @@
++/*
++ * Copyright 2018 TQ Systems GmbH
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++
++/ {
++	backlight_lvds0: backlight-lvds0 {
++		compatible = "pwm-backlight";
++		/* TODO: not enable yet */
++		/* pwms = <&pwm4 0 5000000>; */
++		brightness-levels = <0 4 8 16 32 64 128 255>;
++		default-brightness-level = <7>;
++		power-supply = <&reg_mba8qx_12v>;
++		status = "disabled";
++	};
++
++	/* TODO: use pwm backlight as soon as drivers are available */
++	backlight_gpio0: backlight-gpio0 {
++		compatible = "gpio-backlight";
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_gpiobl>;
++		gpios = <&gpio1 7 GPIO_ACTIVE_HIGH>;
++		default-on;
++		status = "okay";
++	};
++
++	panel-lvds0 {
++		compatible = "tianma,tm070jvhg33", "tianma,tm070jdhg30";
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_lbdpanel>;
++		backlight = <&backlight_gpio0>;
++		power-supply = <&reg_mba8qx_12v>;
++		enable-gpios = <&gpio1 30 0>;
++		status = "okay";
++
++		port {
++			panel_in_lvds0: endpoint {
++				remote-endpoint = <&lvds0_out>;
++			};
++		};
++	};
++};
++
++&iomuxc {
++	tqma8qx-mba8qx {
++
++		pinctrl_gpiobl: gpioblgrp {
++			fsl,pins = <
++				/* TODO: LCD_CONTRAST -> DSI PMW */
++				SC_P_SPI0_CS1_LSIO_GPIO1_IO07		0x06000021
++			>;
++		};
++
++		pinctrl_lbdpanel: lbdpanelgrp {
++			fsl,pins = <
++				/* TODO: LCD_BLT_EN -> DSI_GPIO */
++				SC_P_MIPI_DSI1_I2C0_SDA_LSIO_GPIO1_IO30	0x06000021
++			>;
++		};
++	};
++};
++
++&ldb1_phy {
++	status = "okay";
++};
++
++&ldb1 {
++	status = "okay";
++
++	lvds-channel@0 {
++		fsl,data-mapping = "spwg";
++		fsl,data-width = <24>;
++		status = "okay";
++
++		port@1 {
++			reg = <1>;
++
++			lvds0_out: endpoint {
++				remote-endpoint = <&panel_in_lvds0>;
++			};
++		};
++	};
++};
++

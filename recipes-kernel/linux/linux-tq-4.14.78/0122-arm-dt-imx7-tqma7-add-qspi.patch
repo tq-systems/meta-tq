@@ -1,0 +1,100 @@
+From a9690f0755c178762a90b7b6a5d4724bd94110f0 Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Thu, 24 Jan 2019 14:49:25 +0100
+Subject: [PATCH 122/188] arm: dt: imx7-tqma7: add qspi
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ arch/arm/boot/dts/imx7-mba7.dtsi  | 32 +++++++++++++++++++++++++++++++
+ arch/arm/boot/dts/imx7-tqma7.dtsi | 28 +++++++++++++++++++++++++++
+ 2 files changed, 60 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-mba7.dtsi b/arch/arm/boot/dts/imx7-mba7.dtsi
+index cbcfac568db3..b5059c78ead7 100644
+--- a/arch/arm/boot/dts/imx7-mba7.dtsi
++++ b/arch/arm/boot/dts/imx7-mba7.dtsi
+@@ -281,6 +281,38 @@
+ 	};
+ };
+ 
++&flash0 {
++	uboot@0 {
++		label = "U-Boot";
++		reg = <0x0 0xd0000>;
++	};
++
++	env1@d0000 {
++		label = "ENV1";
++		reg = <0xd0000 0x10000>;
++	};
++
++	env2@e0000 {
++		label = "ENV2";
++		reg = <0xe0000 0x10000>;
++	};
++
++	dtb@f0000 {
++		label = "DTB";
++		reg = <0xf0000 0x10000>;
++	};
++
++	linux@100000 {
++		label = "Linux";
++		reg = <0x100000 0x700000>;
++	};
++
++	rootfs@800000 {
++		label = "RootFS";
++		reg = <0x800000 0x3800000>;
++	};
++};
++
+ &flexcan1 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_flexcan1>;
+diff --git a/arch/arm/boot/dts/imx7-tqma7.dtsi b/arch/arm/boot/dts/imx7-tqma7.dtsi
+index d84d8195072e..7369837da197 100644
+--- a/arch/arm/boot/dts/imx7-tqma7.dtsi
++++ b/arch/arm/boot/dts/imx7-tqma7.dtsi
+@@ -159,6 +159,20 @@
+ 			>;
+ 		};
+ 
++		pinctrl_qspi1: qspi1grp {
++			fsl,pins = <
++				MX7D_PAD_EPDC_DATA00__QSPI_A_DATA0	0x5A
++				MX7D_PAD_EPDC_DATA01__QSPI_A_DATA1	0x5A
++				MX7D_PAD_EPDC_DATA02__QSPI_A_DATA2	0x5A
++				MX7D_PAD_EPDC_DATA03__QSPI_A_DATA3	0x5A
++				MX7D_PAD_EPDC_DATA05__QSPI_A_SCLK	0x11
++				MX7D_PAD_EPDC_DATA06__QSPI_A_SS0_B	0x54
++				MX7D_PAD_EPDC_DATA07__QSPI_A_SS1_B	0x54
++				/* #QSPI_RESET */
++				MX7D_PAD_EPDC_DATA04__GPIO2_IO4		0x40000052
++			>;
++		};
++
+ 		pinctrl_usdhc3: usdhc3grp {
+ 			fsl,pins = <
+ 				MX7D_PAD_SD3_CMD__SD3_CMD		0x59
+@@ -209,6 +223,20 @@
+ 	};
+ };
+ 
++&qspi1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_qspi1>;
++	status = "okay";
++
++	flash0: spinor@0 {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		compatible = "jedec,spi-nor";
++		spi-max-frequency = <29000000>;
++		reg = <0>;
++	};
++};
++
+ &sdma {
+ 	status = "okay";
+ };

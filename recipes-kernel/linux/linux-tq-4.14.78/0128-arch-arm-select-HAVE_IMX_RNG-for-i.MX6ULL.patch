@@ -1,0 +1,25 @@
+From a2c9f7f82b267ab01445a70feb269f2246c6cd7b Mon Sep 17 00:00:00 2001
+From: Michael Krummsdorf <michael.krummsdorf@tq-group.com>
+Date: Tue, 19 Feb 2019 16:59:17 +0100
+Subject: [PATCH 128/188] arch: arm: select HAVE_IMX_RNG for i.MX6ULL
+
+The config is necessary to select and compile
+drivers/char/hw_random/imx-rng driver.
+
+Signed-off-by: Michael Krummsdorf <michael.krummsdorf@tq-group.com>
+---
+ arch/arm/mach-imx/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm/mach-imx/Kconfig b/arch/arm/mach-imx/Kconfig
+index df2db68824fb..d4f79615f651 100644
+--- a/arch/arm/mach-imx/Kconfig
++++ b/arch/arm/mach-imx/Kconfig
+@@ -565,6 +565,7 @@ config SOC_IMX6UL
+ config SOC_IMX6ULL
+ 	bool "i.MX6 ULL support"
+ 	select SOC_IMX6UL
++	select HAVE_IMX_RNG
+ 
+ 	help
+ 	  This enables support for Freescale i.MX6 ULL processor.

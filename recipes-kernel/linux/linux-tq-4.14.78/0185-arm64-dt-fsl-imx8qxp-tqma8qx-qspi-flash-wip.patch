@@ -1,0 +1,32 @@
+From 198b220fec55d8e1158b72be7c71f1b93e27e97e Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Tue, 19 Feb 2019 15:17:30 +0100
+Subject: [PATCH 185/188] arm64: dt: fsl-imx8qxp-tqma8qx: qspi flash wip
+
+- generic node name
+- increase max frequency
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dtsi | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dtsi
+index 542cf1a47e54..d370ff7bc329 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dtsi
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx.dtsi
+@@ -139,12 +139,12 @@
+ 	pinctrl-0 = <&pinctrl_flexspi0>;
+ 	status = "okay";
+ 
+-	flash0: mt35xu512aba@0 {
++	flash0: flash@0 {
+ 		reg = <0>;
+ 		#address-cells = <1>;
+ 		#size-cells = <1>;
+ 		compatible = "spi-flash";
+-		spi-max-frequency = <29000000>;
++		spi-max-frequency = <66000000>;
+ 		spi-nor,ddr-quad-read-dummy = <8>;
+ 	};
+ };

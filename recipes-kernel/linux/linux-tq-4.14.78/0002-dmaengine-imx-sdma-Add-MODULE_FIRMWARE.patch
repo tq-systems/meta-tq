@@ -1,0 +1,30 @@
+From 07a26e907f80b80c3838356b353a45f96a1652f5 Mon Sep 17 00:00:00 2001
+From: Nicolas Chauvet <kwizart@gmail.com>
+Date: Mon, 10 Sep 2018 11:12:00 +0200
+Subject: [PATCH 002/188] dmaengine: imx-sdma: Add MODULE_FIRMWARE
+
+This avoid the following error when using an initramfs on wandboard quad
+Direct firmware load for imx/sdma/sdma-imx6q.bin failed with error -2
+
+Signed-off-by: Nicolas Chauvet <kwizart@gmail.com>
+Signed-off-by: Vinod Koul <vinod.koul@intel.com>
+(cherry picked from commit c0879342efc41bc79a0836cc06ce2af22ec496c9)
+---
+ drivers/dma/imx-sdma.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/drivers/dma/imx-sdma.c b/drivers/dma/imx-sdma.c
+index dffc54f7ebba..fb1dadf56470 100644
+--- a/drivers/dma/imx-sdma.c
++++ b/drivers/dma/imx-sdma.c
+@@ -2588,4 +2588,10 @@ module_platform_driver(sdma_driver);
+ 
+ MODULE_AUTHOR("Sascha Hauer, Pengutronix <s.hauer@pengutronix.de>");
+ MODULE_DESCRIPTION("i.MX SDMA driver");
++#if IS_ENABLED(CONFIG_SOC_IMX6Q)
++MODULE_FIRMWARE("imx/sdma/sdma-imx6q.bin");
++#endif
++#if IS_ENABLED(CONFIG_SOC_IMX7D)
++MODULE_FIRMWARE("imx/sdma/sdma-imx7d.bin");
++#endif
+ MODULE_LICENSE("GPL");

@@ -1,0 +1,22 @@
+From 9ddcf126491d066e23716d467de49348cfbb6b4e Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Mon, 21 Jan 2019 09:08:16 +0100
+Subject: [PATCH 070/188] dm rq: add missing header blk.h
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ drivers/md/dm-rq.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/md/dm-rq.c b/drivers/md/dm-rq.c
+index eadfcfd106ff..e66b8b8ca400 100644
+--- a/drivers/md/dm-rq.c
++++ b/drivers/md/dm-rq.c
+@@ -9,6 +9,7 @@
+ 
+ #include <linux/elevator.h> /* for rq_end_sector() */
+ #include <linux/blk-mq.h>
++#include "../../block/blk.h"
+ 
+ #define DM_MSG_PREFIX "core-rq"
+ 

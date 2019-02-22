@@ -1,0 +1,143 @@
+From 07581a7111455692894623cad743c174a4e62195 Mon Sep 17 00:00:00 2001
+From: Michael Krummsdorf <michael.krummsdorf@tq-group.com>
+Date: Wed, 6 Feb 2019 16:41:17 +0100
+Subject: [PATCH 100/188] dt: mba6ulx: migrate g1 trees
+
+- from TQMaxx2-v4.1.15-rel_imx_4.1.15_2.0.0_ga: 9397fb9d5d29
+
+Signed-off-by: Michael Krummsdorf <michael.krummsdorf@tq-group.com>
+---
+ arch/arm/boot/dts/Makefile                  |  2 +
+ arch/arm/boot/dts/imx6ul-mba6ul-g1.dtsi     | 52 +++++++++++++++++++++
+ arch/arm/boot/dts/imx6ul-mba6ulx-g1.dts     | 18 +++++++
+ arch/arm/boot/dts/imx6ul-mba6ulx-lga-g1.dts | 18 +++++++
+ 4 files changed, 90 insertions(+)
+ create mode 100644 arch/arm/boot/dts/imx6ul-mba6ul-g1.dtsi
+ create mode 100644 arch/arm/boot/dts/imx6ul-mba6ulx-g1.dts
+ create mode 100644 arch/arm/boot/dts/imx6ul-mba6ulx-lga-g1.dts
+
+diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
+index 7d5e52dd0aa8..f4325b64d16d 100644
+--- a/arch/arm/boot/dts/Makefile
++++ b/arch/arm/boot/dts/Makefile
+@@ -576,12 +576,14 @@ dtb-$(CONFIG_SOC_IMX6UL) += \
+ 	imx6ul-mba6ulx-lga-con.dtb \
+ 	imx6ul-mba6ulx-lga-dmb-ct21.dtb \
+ 	imx6ul-mba6ulx-lga-dmb-ct44.dtb \
++	imx6ul-mba6ulx-lga-g1.dtb \
+ 	imx6ul-mba6ulx-lga-glyn-etm0700g0edh6.dtb \
+ 	imx6ul-mba6ulx-lga-lvds.dtb \
+ 	imx6ul-mba6ulx.dtb \
+ 	imx6ul-mba6ulx-con.dtb \
+ 	imx6ul-mba6ulx-dmb-ct21.dtb \
+ 	imx6ul-mba6ulx-dmb-ct44.dtb \
++	imx6ul-mba6ulx-g1.dtb \
+ 	imx6ul-mba6ulx-glyn-etm0700g0edh6.dtb \
+ 	imx6ul-mba6ulx-lvds.dtb
+ dtb-$(CONFIG_SOC_IMX6ULL) += \
+diff --git a/arch/arm/boot/dts/imx6ul-mba6ul-g1.dtsi b/arch/arm/boot/dts/imx6ul-mba6ul-g1.dtsi
+new file mode 100644
+index 000000000000..4de76bb70278
+--- /dev/null
++++ b/arch/arm/boot/dts/imx6ul-mba6ul-g1.dtsi
+@@ -0,0 +1,52 @@
++/*
++ * Copyright 2018 Markus Niebel, TQ Systems GmbH
++ *
++ * The code contained herein is licensed under the GNU General Public
++ * License. You may obtain a copy of the GNU General Public License
++ * Version 2 or later at the following locations:
++ *
++ * http://www.opensource.org/licenses/gpl-license.html
++ * http://www.gnu.org/copyleft/gpl.html
++ */
++
++&fec1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_enet1>, <&pinctrl_enet1_mdc>;
++	status = "okay";
++
++	mdio {
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		ethphy0: ethernet-phy@0 {
++			compatible = "ethernet-phy-ieee802.3-c22";
++			max-speed = <100>;
++			reg = <0>;
++		};
++
++		ethphy1: ethernet-phy@1 {
++			compatible = "ethernet-phy-ieee802.3-c22";
++			max-speed = <100>;
++			reg = <1>;
++		};
++	};
++};
++
++&fec2 {
++	status = "disabled";
++
++	/delete-node/ mdio;
++};
++
++&iomuxc {
++	imx6ul-mba6ul {
++		pinctrl_enet1_mdc: enet1mdcgrp {
++			fsl,pins = <
++				/* mdio */
++				MX6UL_PAD_GPIO1_IO07__ENET1_MDC		0x1b0b0
++				MX6UL_PAD_GPIO1_IO06__ENET1_MDIO	0x1b0b0
++			>;
++		};
++	};
++};
++
+diff --git a/arch/arm/boot/dts/imx6ul-mba6ulx-g1.dts b/arch/arm/boot/dts/imx6ul-mba6ulx-g1.dts
+new file mode 100644
+index 000000000000..ade77fe6abb0
+--- /dev/null
++++ b/arch/arm/boot/dts/imx6ul-mba6ulx-g1.dts
+@@ -0,0 +1,18 @@
++/*
++ * Copyright 2018 Markus Niebel, TQ Systems GmbH
++ *
++ * The code contained herein is licensed under the GNU General Public
++ * License. You may obtain a copy of the GNU General Public License
++ * Version 2 or later at the following locations:
++ *
++ * http://www.opensource.org/licenses/gpl-license.html
++ * http://www.gnu.org/copyleft/gpl.html
++ */
++
++#include "imx6ul-mba6ulx.dts"
++#include "imx6ul-mba6ul-g1.dtsi"
++
++/ {
++	model = "TQ Systems i.MX6 UltraLite Baseboard with TQMa6ULx";
++	compatible = "tqc,imx6ul-mba6ul1", "fsl,imx6ul";
++};
+diff --git a/arch/arm/boot/dts/imx6ul-mba6ulx-lga-g1.dts b/arch/arm/boot/dts/imx6ul-mba6ulx-lga-g1.dts
+new file mode 100644
+index 000000000000..5001d7b210b0
+--- /dev/null
++++ b/arch/arm/boot/dts/imx6ul-mba6ulx-lga-g1.dts
+@@ -0,0 +1,18 @@
++/*
++ * Copyright 2016 Marco Felsch, TQ Systems GmbH
++ *
++ * The code contained herein is licensed under the GNU General Public
++ * License. You may obtain a copy of the GNU General Public License
++ * Version 2 or later at the following locations:
++ *
++ * http://www.opensource.org/licenses/gpl-license.html
++ * http://www.gnu.org/copyleft/gpl.html
++ */
++
++#include "imx6ul-mba6ulx-lga.dts"
++#include "imx6ul-mba6ul-g1.dtsi"
++
++/ {
++	model = "TQ Systems i.MX6 UltraLite Baseboard with TQMa6ULxL";
++	compatible = "tqc,imx6ul-mba6ul1l", "fsl,imx6ul";
++};

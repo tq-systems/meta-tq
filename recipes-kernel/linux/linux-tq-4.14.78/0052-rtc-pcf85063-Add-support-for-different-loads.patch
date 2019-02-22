@@ -1,0 +1,58 @@
+From b96cc9012e36ffd348d55f318848f59f9b093832 Mon Sep 17 00:00:00 2001
+From: Michael Krummsdorf <michael.krummsdorf@tq-group.com>
+Date: Wed, 17 Jan 2018 13:52:35 +0100
+Subject: [PATCH 052/188] rtc: pcf85063: Add support for different loads
+
+Signed-off-by: Michael Krummsdorf <michael.krummsdorf@tq-group.com>
+---
+ drivers/rtc/rtc-pcf85063.c | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+diff --git a/drivers/rtc/rtc-pcf85063.c b/drivers/rtc/rtc-pcf85063.c
+index a06dff994c83..fc4d55e777ba 100644
+--- a/drivers/rtc/rtc-pcf85063.c
++++ b/drivers/rtc/rtc-pcf85063.c
+@@ -28,7 +28,12 @@
+ 
+ #define PCF85063_REG_CTRL1		0x00 /* status */
+ #define PCF85063_REG_CTRL1_STOP		BIT(5)
++#define PCF85063_REG_CTRL1_CAP_SEL	BIT(0)
+ #define PCF85063_REG_CTRL2		0x01
++#define PCF85063_REG_CTRL2_CLKOUT_32KHZ	0x00
++#define PCF85063_REG_CTRL2_CLKOUT_LOW	0x07
++#define PCF85063_REG_OFFSET		0x02
++#define PCF85063_REG_OFFSET_MODE	0x80
+ 
+ #define PCF85063_REG_SC			0x04 /* datetime */
+ #define PCF85063_REG_SC_OS		0x80
+@@ -192,6 +197,12 @@ static int pcf85063_probe(struct i2c_client *client,
+ {
+ 	struct rtc_device *rtc;
+ 	int err;
++	unsigned char regs[3];
++
++	/* Control & status */
++	regs[PCF85063_REG_CTRL1] = 0x00;
++	regs[PCF85063_REG_CTRL2] = PCF85063_REG_CTRL2_CLKOUT_32KHZ;
++	regs[PCF85063_REG_OFFSET] = PCF85063_REG_OFFSET_MODE;
+ 
+ 	dev_dbg(&client->dev, "%s\n", __func__);
+ 
+@@ -208,6 +219,17 @@ static int pcf85063_probe(struct i2c_client *client,
+ 				       pcf85063_driver.driver.name,
+ 				       &pcf85063_rtc_ops, THIS_MODULE);
+ 
++	if (of_property_match_string(client->dev.of_node,
++				     "nxp,quartz_load", "12.5pF") == 0)
++		regs[PCF85063_REG_CTRL1] |= PCF85063_REG_CTRL1_CAP_SEL;
++
++	/* write register's data */
++	err = i2c_smbus_write_i2c_block_data(client, PCF85063_REG_CTRL1,
++					    sizeof(regs), regs);
++	if (err < 0) {
++		dev_err(&client->dev, "device setup error\n");
++		return err;
++	}
+ 	return PTR_ERR_OR_ZERO(rtc);
+ }
+ 

@@ -1,0 +1,69 @@
+From a56520bcb14588ed72fcf6e34bdb62658f7e8b0e Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 22 Nov 2018 14:16:03 +0100
+Subject: [PATCH 164/188] arm64: dt: fsl-imx8qxp-tqma8qxs: add i2c1
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ .../dts/freescale/fsl-imx8qxp-tqma8qxs.dtsi   | 46 +++++++++++++++++++
+ 1 file changed, 46 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qxs.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qxs.dtsi
+index d2095652e6ce..830dbf59bec4 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qxs.dtsi
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qxs.dtsi
+@@ -54,8 +54,54 @@
+ 
+ };
+ 
++&i2c1 {
++	#address-cells = <1>;
++	#size-cells = <0>;
++	clock-frequency = <100000>;
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_lpi2c1>;
++	status = "okay";
++
++	/*
++	 * NXP SE97BTP with temperature sensor + eeprom
++	 * ATTENTION: do not use correct dt compatible since this will conflict
++	 * with hwmon sysfs ABI and break device registration
++	 */
++	sensor0: jc42@19 {
++		compatible = "jc42";
++		reg = <0x19>;
++		status = "okay";
++	};
++
++	eeprom1: 24c02@51 {
++		compatible = "atmel,24c02";
++		reg = <0x51>;
++		pagesize = <16>;
++		status = "okay";
++	};
++
++	eeprom0: m24c64@57 {
++		compatible = "st,24c64", "atmel,24c64", "at24";
++		reg = <0x57>;
++		pagesize = <32>;
++		status = "okay";
++	};
++
++	rtc1: ds1339@68 {
++		compatible = "ds1339", "dallas,ds1339", "dallas,ds1337";
++		reg = <0x68>;
++	};
++};
++
+ &iomuxc {
+ 	imx8qxp-tqma8qxs {
++		pinctrl_lpi2c1: lpi2c1grp {
++			fsl,pins = <
++				SC_P_MIPI_DSI0_GPIO0_00_ADMA_I2C1_SCL	0x06000020
++				SC_P_MIPI_DSI0_GPIO0_01_ADMA_I2C1_SDA	0x06000020
++			>;
++		};
++
+ 		pinctrl_usdhc1: usdhc1grp {
+ 			fsl,pins = <
+ 				SC_P_EMMC0_CLK_CONN_EMMC0_CLK		0x06000041

@@ -1,0 +1,23 @@
+From 58831e60fcde63e3cce945015fac709d6f2fbe79 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 26 Nov 2018 17:55:41 +0100
+Subject: [PATCH 062/188] arm: dt: imx6qdl-mba6: [cosmetic] add vin-supply to
+ audio regulator
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/boot/dts/imx6qdl-mba6.dtsi | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm/boot/dts/imx6qdl-mba6.dtsi b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+index 3b70b402445a..46cdd10a9fe6 100644
+--- a/arch/arm/boot/dts/imx6qdl-mba6.dtsi
++++ b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+@@ -118,6 +118,7 @@
+ 			regulator-name = "vcc3v3-audio";
+ 			regulator-min-microvolt = <3300000>;
+ 			regulator-max-microvolt = <3300000>;
++			vin_supply = <&reg_mba6_3p3v>;
+ 		};
+ 	};
+ 

@@ -1,0 +1,52 @@
+From 3a38375c328d8345c3579a4493509ae04932de59 Mon Sep 17 00:00:00 2001
+From: Michael Krummsdorf <michael.krummsdorf@tq-group.com>
+Date: Wed, 13 Feb 2019 13:31:13 +0100
+Subject: [PATCH 126/188] dt: mba6ul: use usbotg pwr pin function
+
+Without GPIO, no separate regulator is required.
+
+Signed-off-by: Michael Krummsdorf <michael.krummsdorf@tq-group.com>
+---
+ arch/arm/boot/dts/mba6ul-common.dtsi | 15 +--------------
+ 1 file changed, 1 insertion(+), 14 deletions(-)
+
+diff --git a/arch/arm/boot/dts/mba6ul-common.dtsi b/arch/arm/boot/dts/mba6ul-common.dtsi
+index 5764014a7145..67a77e0b2fe3 100644
+--- a/arch/arm/boot/dts/mba6ul-common.dtsi
++++ b/arch/arm/boot/dts/mba6ul-common.dtsi
+@@ -120,17 +120,6 @@
+ 			vin_supply = <&reg_mba6ul_5v0>;
+ 		};
+ 
+-		reg_otg1vbus_5v0: regulator@4 {
+-			compatible = "regulator-fixed";
+-			reg = <4>;
+-			gpio = <&gpio1 4 GPIO_ACTIVE_HIGH>;
+-			enable-active-high;
+-			regulator-name = "otg1-vbus-supply-5v0";
+-			regulator-min-microvolt = <5000000>;
+-			regulator-max-microvolt = <5000000>;
+-			vin_supply = <&reg_mba6ul_5v0>;
+-		};
+-
+ 		reg_fec_3v3: regulator@5 {
+ 			compatible = "regulator-fixed";
+ 			regulator-name = "fec-3v3";
+@@ -530,8 +519,7 @@
+ 			fsl,pins = <
+ 				MX6UL_PAD_GPIO1_IO00__ANATOP_OTG1_ID	0x00017059
+ 				MX6UL_PAD_GPIO1_IO01__USB_OTG1_OC	0x0001b0b0
+-				/* PWR */
+-				MX6UL_PAD_GPIO1_IO04__GPIO1_IO04	0x0001b099
++				MX6UL_PAD_GPIO1_IO04__USB_OTG1_PWR	0x0001b099
+ 			>;
+ 		};
+ 
+@@ -634,7 +622,6 @@
+ &usbotg1 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_usb_otg1>;
+-	vbus-supply = <&reg_otg1vbus_5v0>;
+ 	dr_mode = "otg";
+ 	status = "okay";
+ };

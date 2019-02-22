@@ -1,0 +1,63 @@
+From d6e54c0262efb5ace5af044ed30c29bf5efcaaac Mon Sep 17 00:00:00 2001
+From: Michael Krummsdorf <michael.krummsdorf@tq-group.com>
+Date: Wed, 17 Jan 2018 15:17:01 +0100
+Subject: [PATCH 046/188] net: phy: dp83867: add support for LEDCR3
+
+Signed-off-by: Michael Krummsdorf <michael.krummsdorf@tq-group.com>
+---
+ Documentation/devicetree/bindings/net/ti,dp83867.txt | 1 +
+ drivers/net/phy/dp83867.c                            | 8 ++++++++
+ 2 files changed, 9 insertions(+)
+
+diff --git a/Documentation/devicetree/bindings/net/ti,dp83867.txt b/Documentation/devicetree/bindings/net/ti,dp83867.txt
+index 986529af43b9..6324a5c4b07f 100644
+--- a/Documentation/devicetree/bindings/net/ti,dp83867.txt
++++ b/Documentation/devicetree/bindings/net/ti,dp83867.txt
+@@ -27,6 +27,7 @@ Optional property:
+ 				                          for applicable values
+ 	- ti,led-cfg1		  - Value of LED configuration register 1
+ 	- ti,led-cfg2		  - Value of LED configuration register 2
++	- ti,led-cfg3		  - Value of LED configuration register 3
+ 
+ Note: ti,min-output-impedance and ti,max-output-impedance are mutually
+       exclusive. When both properties are present ti,max-output-impedance
+diff --git a/drivers/net/phy/dp83867.c b/drivers/net/phy/dp83867.c
+index 6813361ca9cb..06162a0d4165 100644
+--- a/drivers/net/phy/dp83867.c
++++ b/drivers/net/phy/dp83867.c
+@@ -30,6 +30,7 @@
+ #define MII_DP83867_ISR		0x13
+ #define DP83867_LEDCR1		0x18
+ #define DP83867_LEDCR2		0x19
++#define DP83867_LEDCR3		0x1A
+ #define DP83867_CTRL		0x1f
+ #define DP83867_CFG3		0x1e
+ 
+@@ -96,6 +97,7 @@ struct dp83867_private {
+ 	bool rxctrl_strap_quirk;
+ 	int led_cfg1;
+ 	int led_cfg2;
++	int led_cfg3;
+ };
+ 
+ static int dp83867_ack_interrupt(struct phy_device *phydev)
+@@ -202,6 +204,11 @@ static int dp83867_of_init(struct phy_device *phydev)
+ 	if (ret)
+ 		dev_dbg(dev, "could not find ti,led-cfg2\n");
+ 
++	ret = of_property_read_u32(of_node, "ti,led-cfg3",
++				&dp83867->led_cfg3);
++	if (ret)
++		dev_dbg(dev, "could not find ti,led-cfg3\n");
++
+ 	ret = of_property_read_u32(of_node, "ti,fifo-depth",
+ 				   &dp83867->fifo_depth);
+ 	if (ret)
+@@ -318,6 +325,7 @@ static int dp83867_config_init(struct phy_device *phydev)
+ 
+ 	phy_write(phydev, DP83867_LEDCR1, dp83867->led_cfg1);
+ 	phy_write(phydev, DP83867_LEDCR2, dp83867->led_cfg2);
++	phy_write(phydev, DP83867_LEDCR3, dp83867->led_cfg3);
+ 
+ 	return 0;
+ }

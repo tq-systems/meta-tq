@@ -1,0 +1,26 @@
+From c71ef3bf33107a0cb275f260a62b49fb91cb5cfb Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 10 Sep 2018 11:12:11 +0200
+Subject: [PATCH 020/188] arm: dt: imx6qdl-mba6: [HACK]: add phy-reset-delay to
+ fec
+
+add a non upstream property to handle prolonged phy-reset due to
+RC delay on MBa6
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/boot/dts/imx6qdl-mba6.dtsi | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm/boot/dts/imx6qdl-mba6.dtsi b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+index 2b7035b7f6f8..e9478fb22905 100644
+--- a/arch/arm/boot/dts/imx6qdl-mba6.dtsi
++++ b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+@@ -176,6 +176,7 @@
+ 	phy-mode = "rgmii-id";
+ 	phy-reset-gpios = <&gpio1 25 GPIO_ACTIVE_LOW>;
+ 	phy-reset-duration = <1>;
++	phy-reset-delay = <100>;
+ 	mac-address = [00 00 00 00 00 00];
+ 	local-mac-address = [00 00 00 00 00 00];
+ 	phy-handle = <&ethphy>;

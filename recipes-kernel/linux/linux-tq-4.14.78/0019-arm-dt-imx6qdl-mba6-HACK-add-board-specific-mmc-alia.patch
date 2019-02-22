@@ -1,0 +1,29 @@
+From 1b7ca4e166028750b994c8676dbec1a3e220fa8f Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 10 Sep 2018 11:12:11 +0200
+Subject: [PATCH 019/188] arm: dt: imx6qdl-mba6: [HACK] add board specific mmc
+ alias
+
+ATTENTION: not from mainline
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/boot/dts/imx6qdl-mba6.dtsi | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx6qdl-mba6.dtsi b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+index 1a6afa9090db..2b7035b7f6f8 100644
+--- a/arch/arm/boot/dts/imx6qdl-mba6.dtsi
++++ b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+@@ -15,6 +15,11 @@
+ #include <dt-bindings/sound/fsl-imx-audmux.h>
+ 
+ / {
++	aliases {
++		mmc1 = &usdhc2;
++		mmc0 = &usdhc3;
++	};
++
+ 	chosen {
+ 		linux,stdout-path = &uart2;
+ 		stdout-path = &uart2;

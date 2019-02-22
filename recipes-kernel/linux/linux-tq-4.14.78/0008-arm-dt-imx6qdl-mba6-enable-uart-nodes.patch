@@ -1,0 +1,80 @@
+From a02c25013eb4d9ccacba2721a8cb97af9f12022b Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 10 Sep 2018 11:12:05 +0200
+Subject: [PATCH 008/188] arm: dt: imx6qdl-mba6: enable uart nodes
+
+The additional UARTS are available on extension headers.
+Make them usable.
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/boot/dts/imx6qdl-mba6.dtsi | 49 +++++++++++++++++++++++++++++
+ 1 file changed, 49 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx6qdl-mba6.dtsi b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+index 933ded251edc..8d92d4b74bc7 100644
+--- a/arch/arm/boot/dts/imx6qdl-mba6.dtsi
++++ b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+@@ -132,6 +132,33 @@
+ 			>;
+ 		};
+ 
++		pinctrl_uart3: uart3grp {
++			fsl,pins = <
++				MX6QDL_PAD_SD4_CLK__UART3_RX_DATA 0x1b0b1
++				MX6QDL_PAD_SD4_CMD__UART3_TX_DATA 0x1b0b1
++				MX6QDL_PAD_EIM_D30__UART3_CTS_B   0x1b0b1
++				MX6QDL_PAD_EIM_D31__UART3_RTS_B   0x1b0b1
++			>;
++		};
++
++		pinctrl_uart4: uart4grp {
++			fsl,pins = <
++				MX6QDL_PAD_CSI0_DAT12__UART4_TX_DATA 0x1b0b1
++				MX6QDL_PAD_CSI0_DAT13__UART4_RX_DATA 0x1b0b1
++				MX6QDL_PAD_CSI0_DAT16__UART4_RTS_B 0x1b0b1
++				MX6QDL_PAD_CSI0_DAT17__UART4_CTS_B 0x1b0b1
++			>;
++		};
++
++		pinctrl_uart5: uart5grp {
++			fsl,pins = <
++				MX6QDL_PAD_CSI0_DAT14__UART5_TX_DATA 0x1b0b1
++				MX6QDL_PAD_CSI0_DAT15__UART5_RX_DATA 0x1b0b1
++				MX6QDL_PAD_CSI0_DAT18__UART5_RTS_B 0x1b0b1
++				MX6QDL_PAD_CSI0_DAT19__UART5_CTS_B 0x1b0b1
++			>;
++		};
++
+ 		pinctrl_usdhc2: usdhc2grp {
+ 			fsl,pins = <
+ 				/* CLK: 47k Pup SPD_LOW DSE 40Ohm SRE_FAST HYS */
+@@ -164,6 +191,28 @@
+ 	status = "okay";
+ };
+ 
++
++&uart3 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart3>;
++	fsl,uart-has-rtscts;
++	status = "okay";
++};
++
++&uart4 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart4>;
++	fsl,uart-has-rtscts;
++	status = "okay";
++};
++
++&uart5 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart5>;
++	fsl,uart-has-rtscts;
++	status = "okay";
++};
++
+ &usdhc2 { /* Baseboard Slot */
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_usdhc2>;

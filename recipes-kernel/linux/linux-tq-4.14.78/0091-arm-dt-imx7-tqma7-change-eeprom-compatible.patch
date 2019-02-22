@@ -1,0 +1,25 @@
+From c02d36d61e5b8730ebcdf8acd1a3ff34c47001a1 Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Tue, 29 Jan 2019 14:25:08 +0100
+Subject: [PATCH 091/188] arm: dt: imx7-tqma7: change eeprom compatible
+
+change compatible from eeprom to not use the deprecated variant
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ arch/arm/boot/dts/imx7-tqma7.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx7-tqma7.dtsi b/arch/arm/boot/dts/imx7-tqma7.dtsi
+index d42d43bf9309..8ab7f8006421 100644
+--- a/arch/arm/boot/dts/imx7-tqma7.dtsi
++++ b/arch/arm/boot/dts/imx7-tqma7.dtsi
+@@ -114,7 +114,7 @@
+ 	};
+ 
+ 	eeprom0: m24c64@50 {
+-		compatible = "st,24c64", "at24";
++		compatible = "atmel,24c64";
+ 		reg = <0x50>;
+ 		pagesize = <32>;
+ 		status = "okay";

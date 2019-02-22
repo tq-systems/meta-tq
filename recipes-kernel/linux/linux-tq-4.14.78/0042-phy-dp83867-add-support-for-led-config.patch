@@ -1,0 +1,73 @@
+From 0fce0e3821f4647112120cee0a977575bd859634 Mon Sep 17 00:00:00 2001
+From: Michael Krummsdorf <michael.krummsdorf@tq-group.com>
+Date: Wed, 17 Jan 2018 11:03:58 +0100
+Subject: [PATCH 042/188] phy: dp83867: add support for led config
+
+Signed-off-by: Michael Krummsdorf <michael.krummsdorf@tq-group.com>
+---
+ .../devicetree/bindings/net/ti,dp83867.txt      |  2 ++
+ drivers/net/phy/dp83867.c                       | 17 +++++++++++++++++
+ 2 files changed, 19 insertions(+)
+
+diff --git a/Documentation/devicetree/bindings/net/ti,dp83867.txt b/Documentation/devicetree/bindings/net/ti,dp83867.txt
+index 02c4353b5cf2..9abce2178c17 100644
+--- a/Documentation/devicetree/bindings/net/ti,dp83867.txt
++++ b/Documentation/devicetree/bindings/net/ti,dp83867.txt
+@@ -10,6 +10,8 @@ Required properties:
+ 		PHY_INTERFACE_MODE_RGMII_ID or PHY_INTERFACE_MODE_RGMII_TXID
+ 	- ti,fifo-depth - Transmitt FIFO depth- see dt-bindings/net/ti-dp83867.h
+ 		for applicable values
++	- led-cfg1 - Value of LED configuration register 1
++	- led-cfg2 - Value of LED configuration register 2
+ 
+ Optional property:
+ 	- ti,min-output-impedance - MAC Interface Impedance control to set
+diff --git a/drivers/net/phy/dp83867.c b/drivers/net/phy/dp83867.c
+index c1ab976cc800..a40f3b6e15f1 100644
+--- a/drivers/net/phy/dp83867.c
++++ b/drivers/net/phy/dp83867.c
+@@ -28,6 +28,8 @@
+ #define MII_DP83867_PHYCTRL	0x10
+ #define MII_DP83867_MICR	0x12
+ #define MII_DP83867_ISR		0x13
++#define DP83867_LEDCR1		0x18
++#define DP83867_LEDCR2		0x19
+ #define DP83867_CTRL		0x1f
+ #define DP83867_CFG3		0x1e
+ 
+@@ -92,6 +94,8 @@ struct dp83867_private {
+ 	int io_impedance;
+ 	int port_mirroring;
+ 	bool rxctrl_strap_quirk;
++	int led_cfg1;
++	int led_cfg2;
+ };
+ 
+ static int dp83867_ack_interrupt(struct phy_device *phydev)
+@@ -188,6 +192,16 @@ static int dp83867_of_init(struct phy_device *phydev)
+ 	if (of_property_read_bool(of_node, "enet-phy-lane-no-swap"))
+ 		dp83867->port_mirroring = DP83867_PORT_MIRROING_DIS;
+ 
++	ret = of_property_read_u32(of_node, "led-cfg1",
++				&dp83867->led_cfg1);
++	if (ret)
++		return ret;
++
++	ret = of_property_read_u32(of_node, "led-cfg2",
++				&dp83867->led_cfg2);
++	if (ret)
++		return ret;
++
+ 	return of_property_read_u32(of_node, "ti,fifo-depth",
+ 				   &dp83867->fifo_depth);
+ }
+@@ -283,6 +297,9 @@ static int dp83867_config_init(struct phy_device *phydev)
+ 			phy_write_mmd(phydev, DP83867_DEVADDR,
+ 				      DP83867_IO_MUX_CFG, val);
+ 		}
++
++		phy_write(phydev, DP83867_LEDCR1, dp83867->led_cfg1);
++		phy_write(phydev, DP83867_LEDCR2, dp83867->led_cfg2);
+ 	}
+ 
+ 	/* Enable Interrupt output INT_OE in CFG3 register */

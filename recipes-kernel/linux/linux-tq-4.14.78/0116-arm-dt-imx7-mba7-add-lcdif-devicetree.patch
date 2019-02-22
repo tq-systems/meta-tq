@@ -1,0 +1,131 @@
+From 6e1669e6e18230a6e9ae055f53bb5630b03519fc Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Mon, 4 Feb 2019 10:19:01 +0100
+Subject: [PATCH 116/188] arm: dt: imx7-mba7: add lcdif devicetree
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ arch/arm/boot/dts/imx7-mba7-lcdif.dtsi | 114 +++++++++++++++++++++++++
+ 1 file changed, 114 insertions(+)
+ create mode 100644 arch/arm/boot/dts/imx7-mba7-lcdif.dtsi
+
+diff --git a/arch/arm/boot/dts/imx7-mba7-lcdif.dtsi b/arch/arm/boot/dts/imx7-mba7-lcdif.dtsi
+new file mode 100644
+index 000000000000..35a34cc7c6b6
+--- /dev/null
++++ b/arch/arm/boot/dts/imx7-mba7-lcdif.dtsi
+@@ -0,0 +1,114 @@
++// SPDX-License-Identifier: GPL-2.0+ OR MIT
++/*
++ * Copyright (C) 2016 - 2019 TQ Systems GmbH
++ * Author: Marco Felsch
++ * Author: Markus Niebel <Markus.Niebel@tq-group.com>
++ */
++
++/ {
++	backlight: pwm_backlight {
++		compatible = "pwm-backlight";
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_pwmbacklight1>;
++		pwms = <&pwm1 0 5000000 0>;
++		enable-gpios = <&gpio1 2 GPIO_ACTIVE_HIGH>;
++		power-supply = <&reg_mba_12v0>;
++		status = "disabled";
++	};
++
++	pxp_v4l2_out {
++		compatible = "fsl,imx7d-pxp-v4l2", "fsl,imx6sx-pxp-v4l2", "fsl,imx6sl-pxp-v4l2";
++		status = "okay";
++	};
++};
++
++&epxp {
++	status = "okay";
++};
++
++&i2c2 {
++	polytouch: edt-ft5x04@38 {
++		compatible = "edt,edt-ft5406", "edt,edt-ft5x06";
++		reg = <0x38>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_polytouch0 &pinctrl_polytouch1> ;
++		interrupt-parent = <&gpio4>;
++		interrupts = <19 IRQ_TYPE_EDGE_FALLING>;
++		wake-gpios = <&gpio1 3 GPIO_ACTIVE_HIGH>;
++		reset-gpios = <&gpio3 4 GPIO_ACTIVE_LOW>;
++		gain = <20>;
++		status = "disabled";
++	};
++};
++
++&iomuxc {
++	imx7d-mba7 {
++		pinctrl_lcdif_dat: lcdifdatgrp {
++			fsl,pins = <
++				MX7D_PAD_LCD_DATA00__LCD_DATA0		0x71
++				MX7D_PAD_LCD_DATA01__LCD_DATA1		0x71
++				MX7D_PAD_LCD_DATA02__LCD_DATA2		0x71
++				MX7D_PAD_LCD_DATA03__LCD_DATA3		0x71
++				MX7D_PAD_LCD_DATA04__LCD_DATA4		0x71
++				MX7D_PAD_LCD_DATA05__LCD_DATA5		0x71
++				MX7D_PAD_LCD_DATA06__LCD_DATA6		0x71
++				MX7D_PAD_LCD_DATA07__LCD_DATA7		0x71
++				MX7D_PAD_LCD_DATA08__LCD_DATA8		0x71
++				MX7D_PAD_LCD_DATA09__LCD_DATA9		0x71
++				MX7D_PAD_LCD_DATA10__LCD_DATA10		0x71
++				MX7D_PAD_LCD_DATA11__LCD_DATA11		0x71
++				MX7D_PAD_LCD_DATA12__LCD_DATA12		0x71
++				MX7D_PAD_LCD_DATA13__LCD_DATA13		0x71
++				MX7D_PAD_LCD_DATA14__LCD_DATA14		0x71
++				MX7D_PAD_LCD_DATA15__LCD_DATA15		0x71
++				MX7D_PAD_LCD_DATA16__LCD_DATA16		0x71
++				MX7D_PAD_LCD_DATA17__LCD_DATA17		0x71
++				MX7D_PAD_LCD_DATA18__LCD_DATA18		0x71
++				MX7D_PAD_LCD_DATA19__LCD_DATA19		0x71
++				MX7D_PAD_LCD_DATA20__LCD_DATA20		0x71
++				MX7D_PAD_LCD_DATA21__LCD_DATA21		0x71
++				MX7D_PAD_LCD_DATA22__LCD_DATA22		0x71
++				MX7D_PAD_LCD_DATA23__LCD_DATA23		0x71
++			>;
++		};
++
++		pinctrl_lcdif_ctrl0: lcdifctrl0grp {
++			fsl,pins = <
++				MX7D_PAD_LCD_CLK__LCD_CLK		0x71
++				MX7D_PAD_LCD_ENABLE__LCD_ENABLE		0x71
++				MX7D_PAD_LCD_VSYNC__LCD_VSYNC		0x71
++				MX7D_PAD_LCD_HSYNC__LCD_HSYNC		0x71
++			>;
++		};
++
++		pinctrl_polytouch0: polytouch0grp {
++			fsl,pins = <
++				MX7D_PAD_LCD_RESET__GPIO3_IO4		0x71
++				MX7D_PAD_ECSPI1_SS0__GPIO4_IO19		0x7c /* #irq */
++			>;
++		};
++	};
++};
++
++&iomuxc_lpsr {
++	imx7d-mba7 {
++		pinctrl_pwmbacklight1: pwmbacklight1grp {
++			fsl,pins = <
++				MX7D_PAD_LPSR_GPIO1_IO02__GPIO1_IO2	0x10 /* LCD_BLT_EN */
++			>;
++		};
++
++		pinctrl_polytouch1: polytouch1grp {
++			fsl,pins = <
++				MX7D_PAD_LPSR_GPIO1_IO03__GPIO1_IO3	0x10 /* LCD_PWR_EN */
++			>;
++		};
++	};
++};
++
++&lcdif {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_lcdif_dat
++		     &pinctrl_lcdif_ctrl0>;
++	status = "disabled";
++};

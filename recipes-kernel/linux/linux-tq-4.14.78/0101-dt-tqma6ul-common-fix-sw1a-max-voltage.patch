@@ -1,0 +1,23 @@
+From e6631e71c027d7442fbfb1bc434ef0463e156493 Mon Sep 17 00:00:00 2001
+From: Michael Krummsdorf <michael.krummsdorf@tq-group.com>
+Date: Fri, 8 Feb 2019 11:43:13 +0100
+Subject: [PATCH 101/188] dt: tqma6ul-common: fix sw1a max voltage
+
+Signed-off-by: Michael Krummsdorf <michael.krummsdorf@tq-group.com>
+---
+ arch/arm/boot/dts/tqma6ul-common.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/tqma6ul-common.dtsi b/arch/arm/boot/dts/tqma6ul-common.dtsi
+index 77929d90c62b..11e9e0f8709d 100644
+--- a/arch/arm/boot/dts/tqma6ul-common.dtsi
++++ b/arch/arm/boot/dts/tqma6ul-common.dtsi
+@@ -38,7 +38,7 @@
+ 		regulators {
+ 			reg_sw1a: sw1a {
+ 				regulator-min-microvolt = <700000>;
+-				regulator-max-microvolt = <1475000>;
++				regulator-max-microvolt = <3300000>;
+ 				regulator-boot-on;
+ 				regulator-ramp-delay = <6250>;
+ 				/* not used */

@@ -1,0 +1,28 @@
+From 76c5fc045e70bb944cc85a68bd61723869392099 Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Tue, 29 Jan 2019 14:10:47 +0100
+Subject: [PATCH 090/188] Documentation: DT: add entry for TQMa7-MBa7x boards
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ Documentation/devicetree/bindings/arm/tq-boards.txt | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/Documentation/devicetree/bindings/arm/tq-boards.txt b/Documentation/devicetree/bindings/arm/tq-boards.txt
+index 83037bd7deb5..14389e8e8ca5 100644
+--- a/Documentation/devicetree/bindings/arm/tq-boards.txt
++++ b/Documentation/devicetree/bindings/arm/tq-boards.txt
+@@ -19,3 +19,13 @@ TQMa6-MBa6q variant b
+ 
+ TQMa6-MBa6qp
+ 	compatible = "tq,mba6b", "tq,tqma6qp", "fsl,imx6qp";
++
++------------
++TQMa7 module
++------------
++
++TQMa7-MBa7d
++	compatible = "tqc,imx7d-mba7", "tqc,imx7d-tqma7", "fsl,imx7d";
++
++TQMa7-MBa7s
++	compatible = "tqc,imx7s-mba7", "tqc,imx7s-tqma7", "fsl,imx7s";

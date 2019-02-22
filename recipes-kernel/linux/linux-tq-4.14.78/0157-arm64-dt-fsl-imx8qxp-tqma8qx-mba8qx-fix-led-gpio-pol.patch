@@ -1,0 +1,31 @@
+From 389f6b5f7e8a65ad2dabd23c71013897c6778671 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 8 Nov 2018 18:33:32 +0100
+Subject: [PATCH 157/188] arm64: dt: fsl-imx8qxp-tqma8qx-mba8qx: fix led gpio
+ polarity
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi
+index aa16e175af79..214d68315c53 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi
+@@ -35,13 +35,13 @@
+ 
+ 		led1 {
+ 			label = "leda";
+-			gpios = <&expander 1 GPIO_ACTIVE_LOW>;
++			gpios = <&expander 1 GPIO_ACTIVE_HIGH>;
+ 			linux,default-trigger = "default-on";
+ 		};
+ 
+ 		led2 {
+ 			label = "ledb";
+-			gpios = <&expander 2 GPIO_ACTIVE_LOW>;
++			gpios = <&expander 2 GPIO_ACTIVE_HIGH>;
+ 			linux,default-trigger = "heartbeat";
+ 		};
+ 	};

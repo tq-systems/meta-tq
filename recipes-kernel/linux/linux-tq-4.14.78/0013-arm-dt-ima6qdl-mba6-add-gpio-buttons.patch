@@ -1,0 +1,70 @@
+From a4c1711e12495905a58fe9e580c774229172d578 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 10 Sep 2018 11:12:08 +0200
+Subject: [PATCH 013/188] arm: dt: ima6qdl-mba6: add gpio-buttons
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/boot/dts/imx6qdl-mba6.dtsi | 36 +++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx6qdl-mba6.dtsi b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+index e5487ffe316f..4ad928de7965 100644
+--- a/arch/arm/boot/dts/imx6qdl-mba6.dtsi
++++ b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+@@ -10,12 +10,40 @@
+  * http://www.gnu.org/copyleft/gpl.html
+  */
+ 
++#include <dt-bindings/gpio/gpio.h>
++
+ / {
+ 	chosen {
+ 		linux,stdout-path = &uart2;
+ 		stdout-path = &uart2;
+ 	};
+ 
++	gpio_buttons: gpio-buttons {
++		compatible = "gpio-keys";
++		#address-cells = <1>;
++		#size-cells = <0>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_gpiobuttons>;
++
++		button1 {
++			label = "s6";
++			linux,code = <64>; /* KEY_F6 */
++			gpios = <&gpio7 13 GPIO_ACTIVE_LOW>;
++		};
++
++		button2 {
++			label = "s7";
++			linux,code = <65>; /* KEY_F7 */
++			gpios = <&gpio7 12 GPIO_ACTIVE_LOW>;
++		};
++
++		button3 {
++			label = "s8";
++			linux,code = <66>; /* KEY_F8 */
++			gpios = <&gpio1 8 GPIO_ACTIVE_LOW>;
++		};
++	};
++
+ 	regulators {
+ 		reg_mba6_3p3v: regulator@1 {
+ 			compatible = "regulator-fixed";
+@@ -125,6 +153,14 @@
+ 			>;
+ 		};
+ 
++		pinctrl_gpiobuttons: gpiobuttongrp {
++			fsl,pins = <
++				MX6QDL_PAD_GPIO_17__GPIO7_IO12 0x0001b099
++				MX6QDL_PAD_GPIO_18__GPIO7_IO13 0x0001b099
++				MX6QDL_PAD_GPIO_8__GPIO1_IO08 0x0001b099
++			>;
++		};
++
+ 		pinctrl_hog: hoggrp {
+ 			fsl,pins = <
+ 				MX6QDL_PAD_GPIO_16__GPIO7_IO11 0x0001b099 /* LCD.PWR_EN */

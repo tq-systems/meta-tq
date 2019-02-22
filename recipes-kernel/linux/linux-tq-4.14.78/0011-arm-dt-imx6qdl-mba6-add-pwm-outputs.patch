@@ -1,0 +1,67 @@
+From 3a33f8d2fcea6694ce8ad0dd2d8dde0bd9aeeb93 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 10 Sep 2018 11:12:07 +0200
+Subject: [PATCH 011/188] arm: dt: imx6qdl-mba6: add pwm outputs
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/boot/dts/imx6qdl-mba6.dtsi | 39 +++++++++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx6qdl-mba6.dtsi b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+index d8b8c832e454..1490fb85c1ff 100644
+--- a/arch/arm/boot/dts/imx6qdl-mba6.dtsi
++++ b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+@@ -164,6 +164,27 @@
+ 			>;
+ 		};
+ 
++		pinctrl_pwm1: pwm1grp {
++			fsl,pins = <
++				/* 100 k PD, DSE 120 OHM, SPPEED LO */
++				MX6QDL_PAD_GPIO_9__PWM1_OUT 0x00003050
++			>;
++		};
++
++		pinctrl_pwm3: pwm3grp {
++			fsl,pins = <
++				/* 100 k PD, DSE 120 OHM, SPPEED LO */
++				MX6QDL_PAD_SD4_DAT1__PWM3_OUT 0x00003050
++			>;
++		};
++
++		pinctrl_pwm4: pwm4grp {
++			fsl,pins = <
++				/* 100 k PD, DSE 120 OHM, SPPEED LO */
++				MX6QDL_PAD_SD4_DAT2__PWM4_OUT 0x00003050
++			>;
++		};
++
+ 		pinctrl_reg_otgpwr: regotgpwrgrp {
+ 			fsl,pins = <
+ 				/* OTG_PWR */
+@@ -230,6 +251,24 @@
+ 	};
+ };
+ 
++&pwm1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_pwm1>;
++	status = "okay";
++};
++
++&pwm3 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_pwm3>;
++	status = "okay";
++};
++
++&pwm4 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_pwm4>;
++	status = "okay";
++};
++
+ &snvs_poweroff {
+ 	status = "okay";
+ };

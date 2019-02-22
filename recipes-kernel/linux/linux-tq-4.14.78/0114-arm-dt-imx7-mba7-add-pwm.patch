@@ -1,0 +1,40 @@
+From 0cb104c59c98a8b21012ad9954840b09566c211b Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Tue, 29 Jan 2019 12:14:35 +0100
+Subject: [PATCH 114/188] arm: dt: imx7-mba7: add pwm
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ arch/arm/boot/dts/imx7-mba7.dtsi | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-mba7.dtsi b/arch/arm/boot/dts/imx7-mba7.dtsi
+index f4e0b8c129c1..d5a3266791d2 100644
+--- a/arch/arm/boot/dts/imx7-mba7.dtsi
++++ b/arch/arm/boot/dts/imx7-mba7.dtsi
+@@ -524,6 +524,12 @@
+ 
+ &iomuxc_lpsr {
+ 	imx7-mba7 {
++		pinctrl_pwm1: pwm1grp {
++			fsl,pins = <
++				MX7D_PAD_LPSR_GPIO1_IO01__PWM1_OUT	0x50 /* LCD_CONTRAST */
++			>;
++		};
++
+ 		pinctrl_usbotg1: usbotg1grp {
+ 			fsl,pins = <
+ 				MX7D_PAD_LPSR_GPIO1_IO04__USB_OTG1_OC	0x5c
+@@ -539,6 +545,12 @@
+ 	};
+ };
+ 
++&pwm1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_pwm1>;
++	status = "okay";
++};
++
+ &sai1 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_sai1>;

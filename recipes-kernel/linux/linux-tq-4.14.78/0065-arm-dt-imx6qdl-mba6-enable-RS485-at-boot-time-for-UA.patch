@@ -1,0 +1,23 @@
+From a84f90f20f99a908cf5c471e6bfa27e1a3dfd6af Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Tue, 4 Dec 2018 10:10:20 +0100
+Subject: [PATCH 065/188] arm: dt: imx6qdl-mba6: enable RS485 at boot time for
+ UART4
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/boot/dts/imx6qdl-mba6.dtsi | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/arch/arm/boot/dts/imx6qdl-mba6.dtsi b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+index 3e0acf6131f3..d769cadb521b 100644
+--- a/arch/arm/boot/dts/imx6qdl-mba6.dtsi
++++ b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+@@ -512,6 +512,7 @@
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_uart4>;
+ 	uart-has-rtscts;
++	linux,rs485-enabled-at-boot-time;
+ 	status = "okay";
+ };
+ 

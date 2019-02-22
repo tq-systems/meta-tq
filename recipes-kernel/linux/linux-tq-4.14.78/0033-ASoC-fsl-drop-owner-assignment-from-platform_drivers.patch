@@ -1,0 +1,27 @@
+From 92b0944658477a193577bc7b3a0d928e23ca6dfc Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 10 Sep 2018 11:12:29 +0200
+Subject: [PATCH 033/188] ASoC: fsl: drop owner assignment from
+ platform_drivers
+
+A platform_driver does not need to set an owner,
+it will be populated by the driver core.
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+(cherry picked from commit fe4ceabb737b454fedfeabe906233148630bf10c)
+---
+ sound/soc/fsl/imx-tlv320aic32x4.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/sound/soc/fsl/imx-tlv320aic32x4.c b/sound/soc/fsl/imx-tlv320aic32x4.c
+index 978a2666c691..25a1365ec81d 100644
+--- a/sound/soc/fsl/imx-tlv320aic32x4.c
++++ b/sound/soc/fsl/imx-tlv320aic32x4.c
+@@ -152,7 +152,6 @@ MODULE_DEVICE_TABLE(of, imx_tlv320aic_dt_ids);
+ static struct platform_driver imx_tlv320aic_driver = {
+ 	.driver = {
+ 		.name = "imx-tlv320aic32x4",
+-		.owner = THIS_MODULE,
+ 		.of_match_table = imx_tlv320aic_dt_ids,
+ 	},
+ 	.probe = imx_tlv320aic_probe,

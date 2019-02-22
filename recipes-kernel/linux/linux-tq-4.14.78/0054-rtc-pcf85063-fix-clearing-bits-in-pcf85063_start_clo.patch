@@ -1,0 +1,28 @@
+From 5108c23bc48bbc24d5b2b83d4502c8468a82be30 Mon Sep 17 00:00:00 2001
+From: Michael McCormick <michael.mccormick@enatel.net>
+Date: Fri, 14 Dec 2018 13:45:19 +0100
+Subject: [PATCH 054/188] rtc: pcf85063: fix clearing bits in
+ pcf85063_start_clock
+
+Bit clear operation was missing ~
+
+Signed-off-by: Michael McCormick <michael.mccormick@enatel.net>
+Signed-off-by: Alexandre Belloni <alexandre.belloni@bootlin.com>
+(imported from commit 051abf552468d4b80c0ccf8c69667bfab672cec0)
+---
+ drivers/rtc/rtc-pcf85063.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/rtc/rtc-pcf85063.c b/drivers/rtc/rtc-pcf85063.c
+index 85d51ebd91b1..06a95901f9d4 100644
+--- a/drivers/rtc/rtc-pcf85063.c
++++ b/drivers/rtc/rtc-pcf85063.c
+@@ -75,7 +75,7 @@ static int pcf85063_start_clock(struct i2c_client *client, u8 ctrl1)
+ 	s32 ret;
+ 
+ 	/* start the clock */
+-	ctrl1 &= PCF85063_REG_CTRL1_STOP;
++	ctrl1 &= ~PCF85063_REG_CTRL1_STOP;
+ 
+ 	ret = i2c_smbus_write_byte_data(client, PCF85063_REG_CTRL1, ctrl1);
+ 	if (ret < 0) {

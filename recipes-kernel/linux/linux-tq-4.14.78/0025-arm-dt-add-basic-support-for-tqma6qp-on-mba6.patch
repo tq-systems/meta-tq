@@ -1,0 +1,82 @@
+From 4ef3621e6913cf8c1748731b377d70197896a791 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 10 Sep 2018 11:12:16 +0200
+Subject: [PATCH 025/188] arm: dt: add basic support for tqma6qp on mba6
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/boot/dts/Makefile           |  1 +
+ arch/arm/boot/dts/imx6qp-mba6b.dts   | 22 ++++++++++++++++++++++
+ arch/arm/boot/dts/imx6qp-tqma6b.dtsi | 22 ++++++++++++++++++++++
+ 3 files changed, 45 insertions(+)
+ create mode 100644 arch/arm/boot/dts/imx6qp-mba6b.dts
+ create mode 100644 arch/arm/boot/dts/imx6qp-tqma6b.dtsi
+
+diff --git a/arch/arm/boot/dts/Makefile b/arch/arm/boot/dts/Makefile
+index a41fdf3308ad..e2138464a720 100644
+--- a/arch/arm/boot/dts/Makefile
++++ b/arch/arm/boot/dts/Makefile
+@@ -489,6 +489,7 @@ dtb-$(CONFIG_SOC_IMX6Q) += \
+ 	imx6q-wandboard.dtb \
+ 	imx6q-wandboard-revb1.dtb \
+ 	imx6q-zii-rdu2.dtb \
++	imx6qp-mba6b.dtb \
+ 	imx6qp-nitrogen6_max.dtb \
+ 	imx6qp-nitrogen6_som2.dtb \
+ 	imx6qp-sabreauto.dtb \
+diff --git a/arch/arm/boot/dts/imx6qp-mba6b.dts b/arch/arm/boot/dts/imx6qp-mba6b.dts
+new file mode 100644
+index 000000000000..5288332f0cc8
+--- /dev/null
++++ b/arch/arm/boot/dts/imx6qp-mba6b.dts
+@@ -0,0 +1,22 @@
++/*
++ * Copyright 2015 Markus Niebel TQ Systems GmbH
++ *
++ * The code contained herein is licensed under the GNU General Public
++ * License. You may obtain a copy of the GNU General Public License
++ * Version 2 or later at the following locations:
++ *
++ * http://www.opensource.org/licenses/gpl-license.html
++ * http://www.gnu.org/copyleft/gpl.html
++ */
++/dts-v1/;
++
++#include <dt-bindings/gpio/gpio.h>
++#include "imx6qp-tqma6b.dtsi"
++#include "imx6qdl-mba6.dtsi"
++#include "imx6qdl-mba6b.dtsi"
++#include "imx6q-mba6.dtsi"
++
++/ {
++	model = "TQ TQMa6QP on MBa6x";
++	compatible = "tq,mba6b", "fsl,imx6q";
++};
+diff --git a/arch/arm/boot/dts/imx6qp-tqma6b.dtsi b/arch/arm/boot/dts/imx6qp-tqma6b.dtsi
+new file mode 100644
+index 000000000000..0126a173ee39
+--- /dev/null
++++ b/arch/arm/boot/dts/imx6qp-tqma6b.dtsi
+@@ -0,0 +1,22 @@
++/*
++ * Copyright 2013 Sascha Hauer, Pengutronix
++ *
++ * The code contained herein is licensed under the GNU General Public
++ * License. You may obtain a copy of the GNU General Public License
++ * Version 2 or later at the following locations:
++ *
++ * http://www.opensource.org/licenses/gpl-license.html
++ * http://www.gnu.org/copyleft/gpl.html
++ */
++
++#include "imx6q.dtsi"
++#include "imx6qp.dtsi"
++#include "imx6qdl-tqma6b.dtsi"
++#include "imx6qdl-tqma6.dtsi"
++
++/ {
++	memory {
++		reg = <0x10000000 0x40000000>;
++	};
++};
++

@@ -1,0 +1,51 @@
+From 3e07bb2ab1621e4f4d65ad7fe2f8c474f970cf76 Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Thu, 24 Jan 2019 14:53:44 +0100
+Subject: [PATCH 078/188] arm: dt: imx7-tqma7: add watchdog
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ arch/arm/boot/dts/imx7-mba7.dtsi | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-mba7.dtsi b/arch/arm/boot/dts/imx7-mba7.dtsi
+index 578f4a1200cb..69221cbc8c0c 100644
+--- a/arch/arm/boot/dts/imx7-mba7.dtsi
++++ b/arch/arm/boot/dts/imx7-mba7.dtsi
+@@ -175,6 +175,9 @@
+ 
+ 		pinctrl_hog_mba7_1: hogmba71grp {
+ 			fsl,pins = <
++				/* TODO: WDOG2_B / WDOG2_RESET not usable */
++				MX7D_PAD_ENET1_RX_CLK__GPIO7_IO13	0x4000007c
++				MX7D_PAD_ENET1_CRS__GPIO7_IO14		0x40000074
+ 				/* #BOOT_EN */
+ 				MX7D_PAD_UART2_TX_DATA__GPIO4_IO3	0x40000010
+ 			>;
+@@ -246,6 +249,16 @@
+ 	};
+ };
+ 
++&iomuxc_lpsr {
++	imx7-mba7 {
++		pinctrl_wdog1: wdog1grp {
++			fsl,pins = <
++				MX7D_PAD_LPSR_GPIO1_IO00__WDOG1_WDOG_B	0x30
++			>;
++		};
++	};
++};
++
+ &uart6 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_uart6>;
+@@ -270,3 +283,9 @@
+ 	no-1-8-v;
+ 	status = "okay";
+ };
++
++&wdog1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_wdog1>;
++	fsl,wdog_b;
++};

@@ -1,0 +1,64 @@
+From c76a9b12b244384c341af405e1edf6bce01d849c Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Tue, 19 Feb 2019 15:20:54 +0100
+Subject: [PATCH 187/188] arm64: dt: fsl-imx8qxp-tqma8qxs: add qspi
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ .../dts/freescale/fsl-imx8qxp-tqma8qxs.dtsi   | 36 +++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qxs.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qxs.dtsi
+index dd1cc5c327cb..275dd26f6372 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qxs.dtsi
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qxs.dtsi
+@@ -108,6 +108,21 @@
+ 	status = "disabled";
+ };
+ 
++&flexspi0 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_flexspi0>;
++	status = "okay";
++
++	flash0: flash@0 {
++		reg = <0>;
++		#address-cells = <1>;
++		#size-cells = <1>;
++		compatible = "spi-flash";
++		spi-max-frequency = <66000000>;
++		spi-nor,ddr-quad-read-dummy = <8>;
++	};
++};
++
+ &i2c1 {
+ 	#address-cells = <1>;
+ 	#size-cells = <0>;
+@@ -189,6 +204,27 @@
+ 			>;
+ 		};
+ 
++		pinctrl_flexspi0: flexspi0grp {
++			fsl,pins = <
++				SC_P_QSPI0A_DATA0_LSIO_QSPI0A_DATA0	0x0600004c
++				SC_P_QSPI0A_DATA1_LSIO_QSPI0A_DATA1	0x0600004c
++				SC_P_QSPI0A_DATA2_LSIO_QSPI0A_DATA2	0x0600004c
++				SC_P_QSPI0A_DATA3_LSIO_QSPI0A_DATA3	0x0600004c
++				SC_P_QSPI0A_DQS_LSIO_QSPI0A_DQS		0x0600004c
++				SC_P_QSPI0A_SS0_B_LSIO_QSPI0A_SS0_B	0x0600004c
++				SC_P_QSPI0A_SS1_B_LSIO_QSPI0A_SS1_B	0x0600004c
++				SC_P_QSPI0A_SCLK_LSIO_QSPI0A_SCLK	0x0600004c
++				SC_P_QSPI0B_SCLK_LSIO_QSPI0B_SCLK	0x0600004c
++				SC_P_QSPI0B_DATA0_LSIO_QSPI0B_DATA0	0x0600004c
++				SC_P_QSPI0B_DATA1_LSIO_QSPI0B_DATA1	0x0600004c
++				SC_P_QSPI0B_DATA2_LSIO_QSPI0B_DATA2	0x0600004c
++				SC_P_QSPI0B_DATA3_LSIO_QSPI0B_DATA3	0x0600004c
++				SC_P_QSPI0B_DQS_LSIO_QSPI0B_DQS		0x0600004c
++				SC_P_QSPI0B_SS0_B_LSIO_QSPI0B_SS0_B	0x0600004c
++				SC_P_QSPI0B_SS1_B_LSIO_QSPI0B_SS1_B	0x0600004c
++			>;
++		};
++
+ 		pinctrl_lpi2c1: lpi2c1grp {
+ 			fsl,pins = <
+ 				SC_P_MIPI_DSI0_GPIO0_00_ADMA_I2C1_SCL	0x06000020

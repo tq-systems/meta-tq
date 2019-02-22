@@ -1,0 +1,25 @@
+From 8ad0f75830ab4eaaa6a88d4538cde42b98d2f5c5 Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Tue, 22 Jan 2019 12:59:48 +0100
+Subject: [PATCH 075/188] arm: dt: imx7-mba7: activate usb
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ arch/arm/boot/dts/imx7-mba7.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-mba7.dtsi b/arch/arm/boot/dts/imx7-mba7.dtsi
+index 571102cfce8a..8a7c3403b0bd 100644
+--- a/arch/arm/boot/dts/imx7-mba7.dtsi
++++ b/arch/arm/boot/dts/imx7-mba7.dtsi
+@@ -173,6 +173,10 @@
+ 	status = "okay";
+ };
+ 
++&usbh {
++	status = "okay";
++};
++
+ &usdhc1 {
+ 	pinctrl-names = "default", "state_100mhz", "state_200mhz";
+ 	pinctrl-0 = <&pinctrl_usdhc1>, <&pinctrl_usdhc1_gpio>;

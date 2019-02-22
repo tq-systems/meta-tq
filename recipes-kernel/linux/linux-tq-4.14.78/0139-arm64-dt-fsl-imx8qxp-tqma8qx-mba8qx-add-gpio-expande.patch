@@ -1,0 +1,44 @@
+From 0944fe635308ba3bceff17ece57d9ad9010db445 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 24 Oct 2018 16:43:47 +0200
+Subject: [PATCH 139/188] arm64: dt: fsl-imx8qxp-tqma8qx-mba8qx: add gpio
+ expander
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ .../dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi
+index 887878675192..c4964fffaf5c 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi
+@@ -59,6 +59,15 @@
+ 		pagesize = <16>;
+ 		status = "okay";
+ 	};
++
++	expander: pca9538@70 {
++		compatible = "nxp,pca9538";
++		reg = <0x70>;
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_pca9538>;
++		interrupt-parent = <&gpio3>;
++		interrupts = <8 IRQ_TYPE_LEVEL_LOW>;
++	};
+ };
+ 
+ &iomuxc {
+@@ -119,6 +128,12 @@
+ 			>;
+ 		};
+ 
++		pinctrl_pca9538: pca9538grp {
++			fsl,pins = <
++				SC_P_MIPI_CSI0_GPIO0_00_LSIO_GPIO3_IO08		0x06000020
++			>;
++		};
++
+ 		pinctrl_usdhc2_gpio: usdhc2gpiogrp {
+ 			fsl,pins = <
+ 				SC_P_USDHC1_RESET_B_LSIO_GPIO4_IO19	0x06000021

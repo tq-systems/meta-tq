@@ -1,0 +1,26 @@
+From 73de90c433f2c90ae9b8577995cb3a235539074d Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Mon, 21 Jan 2019 09:06:49 +0100
+Subject: [PATCH 069/188] usb: chipidea: imx: add missing header consumer.h
+
+fix [-Werror=implicit-function-declaration]
+of function 'pinctrl_pm_select_sleep_state' and
+of function 'pinctrl_pm_select_default_state'
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ drivers/usb/chipidea/ci_hdrc_imx.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/usb/chipidea/ci_hdrc_imx.c b/drivers/usb/chipidea/ci_hdrc_imx.c
+index fb596ea19c0c..aaefe861ed5b 100644
+--- a/drivers/usb/chipidea/ci_hdrc_imx.c
++++ b/drivers/usb/chipidea/ci_hdrc_imx.c
+@@ -15,6 +15,7 @@
+ #include <linux/module.h>
+ #include <linux/of_platform.h>
+ #include <linux/of_gpio.h>
++#include <linux/pinctrl/consumer.h>
+ #include <linux/platform_device.h>
+ #include <linux/pm_runtime.h>
+ #include <linux/dma-mapping.h>

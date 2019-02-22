@@ -1,0 +1,48 @@
+From 5be3a39079eac342c988d78cb81f628cd1c66843 Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Mon, 28 Jan 2019 15:30:48 +0100
+Subject: [PATCH 086/188] arm: dt: imx7-mba7: add gpio buttens
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ arch/arm/boot/dts/imx7-mba7.dtsi | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-mba7.dtsi b/arch/arm/boot/dts/imx7-mba7.dtsi
+index 7fdaa9c31263..ce1ae65b417f 100644
+--- a/arch/arm/boot/dts/imx7-mba7.dtsi
++++ b/arch/arm/boot/dts/imx7-mba7.dtsi
+@@ -25,6 +25,33 @@
+ 		stdout-path = &uart6;
+ 	};
+ 
++	gpio_buttons: gpio_keys {
++		compatible = "gpio-keys";
++		#address-cells = <1>;
++		#size-cells = <0>;
++
++		button@0 {
++			/* #SWITCH_A */
++			label = "S11";
++			linux,code = <KEY_1>;
++			gpios = <&gpioexp 13 GPIO_ACTIVE_LOW>;
++		};
++
++		button@1 {
++			/* #SWITCH_B */
++			label = "S12";
++			linux,code = <KEY_2>;
++			gpios = <&gpioexp 14 GPIO_ACTIVE_LOW>;
++		};
++
++		button@2 {
++			/* #SWITCH_C */
++			label = "S13";
++			linux,code = <KEY_3>;
++			gpios = <&gpioexp 15 GPIO_ACTIVE_LOW>;
++		};
++	};
++
+ 	gpio-leds {
+ 		compatible = "gpio-leds";
+ 		status = "okay";

@@ -1,0 +1,25 @@
+From 26f0387b301c030e92f8cb283c66f58816ca8b31 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Tue, 19 Feb 2019 17:22:20 +0100
+Subject: [PATCH 133/188] net: dp83867.c: prevent doubled write to LED config
+ regs
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ drivers/net/phy/dp83867.c | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/drivers/net/phy/dp83867.c b/drivers/net/phy/dp83867.c
+index 06162a0d4165..2f32fedadbf6 100644
+--- a/drivers/net/phy/dp83867.c
++++ b/drivers/net/phy/dp83867.c
+@@ -308,9 +308,6 @@ static int dp83867_config_init(struct phy_device *phydev)
+ 			phy_write_mmd(phydev, DP83867_DEVADDR,
+ 				      DP83867_IO_MUX_CFG, val);
+ 		}
+-
+-		phy_write(phydev, DP83867_LEDCR1, dp83867->led_cfg1);
+-		phy_write(phydev, DP83867_LEDCR2, dp83867->led_cfg2);
+ 	}
+ 
+ 	/* Enable Interrupt output INT_OE in CFG3 register */

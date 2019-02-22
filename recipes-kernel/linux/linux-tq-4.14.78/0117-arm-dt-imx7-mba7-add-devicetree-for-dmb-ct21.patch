@@ -1,0 +1,109 @@
+From 299254e38a5a713b1f137468c9e2108b664122a4 Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Mon, 4 Feb 2019 10:05:56 +0100
+Subject: [PATCH 117/188] arm: dt: imx7-mba7: add devicetree for dmb ct21
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ arch/arm/boot/dts/imx7-mba7-dmb-ct21.dtsi | 56 +++++++++++++++++++++++
+ arch/arm/boot/dts/imx7d-mba7-dmb-ct21.dts | 10 ++++
+ arch/arm/boot/dts/imx7s-mba7-dmb-ct21.dts | 10 ++++
+ 3 files changed, 76 insertions(+)
+ create mode 100644 arch/arm/boot/dts/imx7-mba7-dmb-ct21.dtsi
+ create mode 100644 arch/arm/boot/dts/imx7d-mba7-dmb-ct21.dts
+ create mode 100644 arch/arm/boot/dts/imx7s-mba7-dmb-ct21.dts
+
+diff --git a/arch/arm/boot/dts/imx7-mba7-dmb-ct21.dtsi b/arch/arm/boot/dts/imx7-mba7-dmb-ct21.dtsi
+new file mode 100644
+index 000000000000..bfc90046ac67
+--- /dev/null
++++ b/arch/arm/boot/dts/imx7-mba7-dmb-ct21.dtsi
+@@ -0,0 +1,56 @@
++// SPDX-License-Identifier: GPL-2.0+ OR MIT
++/*
++ * Copyright (C) 2016 - 2019 TQ Systems GmbH
++ * Author: Marco Felsch
++ * Author: Markus Niebel <Markus.Niebel@tq-group.com>
++ */
++
++/ {
++	/* S070WV106H-CT21 */
++	display_ct21: display {
++		bits-per-pixel = <32>; /* 32: RGB888/666 mode */
++		bus-width = <18>;
++
++		display-timings {
++			native-mode = <&timing1>;
++			/* S070WS12H-O-CT21 rev. 2.0 2016/02/18
++			 * S070PWS19HP-FC21 ver 2.0 2017/2/21
++			 * Truecolor FB needed - pin config on display adapter
++			 */
++			timing1: 1024x600p62 {
++				clock-frequency = <45000000 51200000 57000000>;
++				hactive = <1024>;
++				vactive = <600>;
++				hfront-porch = <140 160 180>;
++				hsync-len = <20>;
++				hback-porch = <140>;
++				vfront-porch = <2 12 22>;
++				vsync-len = <3>;
++				vback-porch = <20>;
++				de-active = <1>;
++				pixelclk-active = <0>;
++			};
++		};
++	};
++};
++
++&backlight {
++	pwms = <&pwm1 0 20000 0>; /* 50 kHz */
++	brightness-levels = <0 2 4 8 16 32 64 128 255>;
++	default-brightness-level = <8>;
++	status = "okay";
++};
++
++&lcdif {
++	display = <&display_ct21>;
++	status = "okay";
++};
++
++&polytouch {
++	gain = <20>;
++
++	touchscreen-size-x = <1024>;
++	touchscreen-size-y = <600>;
++
++	status = "okay";
++};
+diff --git a/arch/arm/boot/dts/imx7d-mba7-dmb-ct21.dts b/arch/arm/boot/dts/imx7d-mba7-dmb-ct21.dts
+new file mode 100644
+index 000000000000..ed6c7c02311f
+--- /dev/null
++++ b/arch/arm/boot/dts/imx7d-mba7-dmb-ct21.dts
+@@ -0,0 +1,10 @@
++// SPDX-License-Identifier: GPL-2.0+ OR MIT
++/*
++ * Copyright (C) 2016 - 2019 TQ Systems GmbH
++ * Author: Marco Felsch
++ * Author: Markus Niebel <Markus.Niebel@tq-group.com>
++ */
++
++#include "imx7d-mba7.dts"
++#include "imx7-mba7-lcdif.dtsi"
++#include "imx7-mba7-dmb-ct21.dtsi"
+diff --git a/arch/arm/boot/dts/imx7s-mba7-dmb-ct21.dts b/arch/arm/boot/dts/imx7s-mba7-dmb-ct21.dts
+new file mode 100644
+index 000000000000..072d3ed6e268
+--- /dev/null
++++ b/arch/arm/boot/dts/imx7s-mba7-dmb-ct21.dts
+@@ -0,0 +1,10 @@
++// SPDX-License-Identifier: GPL-2.0+ OR MIT
++/*
++ * Copyright (C) 2016 - 2019 TQ Systems GmbH
++ * Author: Marco Felsch
++ * Author: Markus Niebel <Markus.Niebel@tq-group.com>
++ */
++
++#include "imx7s-mba7.dts"
++#include "imx7-mba7-lcdif.dtsi"
++#include "imx7-mba7-dmb-ct21.dtsi"

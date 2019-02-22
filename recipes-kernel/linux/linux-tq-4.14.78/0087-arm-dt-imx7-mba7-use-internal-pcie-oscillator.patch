@@ -1,0 +1,27 @@
+From b3b7cadc01290dbfb86fb3acc011377322908e04 Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Thu, 31 Jan 2019 11:30:12 +0100
+Subject: [PATCH 087/188] arm: dt: imx7-mba7: use internal pcie oscillator
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ arch/arm/boot/dts/imx7d-mba7.dtsi | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx7d-mba7.dtsi b/arch/arm/boot/dts/imx7d-mba7.dtsi
+index 9bd957ecb019..caf050175fb8 100644
+--- a/arch/arm/boot/dts/imx7d-mba7.dtsi
++++ b/arch/arm/boot/dts/imx7d-mba7.dtsi
+@@ -83,6 +83,11 @@
+ 	reset-gpio = <&gpio5 12 GPIO_ACTIVE_LOW>;
+ 	disable-gpio = <&gpio2 29 GPIO_ACTIVE_LOW>;
+ 	power-on-gpio = <&gpio2 30 GPIO_ACTIVE_LOW>;
+-	ext_osc = <1>;
++	/*
++	 * ext_osc (external oscillator) is an u32 property and not a
++	 * boolen property. 0 is the internel oscillator an >0 is an
++	 * external oscillator.
++	 */
++	ext_osc = <0>;
+ 	status = "okay";
+ };

@@ -1,0 +1,21 @@
+From a81cfccbbe9bf73c5de81e9f7c1762dc99dca9a7 Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Fri, 8 Feb 2019 11:22:20 +0100
+Subject: [PATCH 106/188] arm: dt: imx7-tqma7: fix watchdog reset
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ arch/arm/boot/dts/imx7-mba7.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx7-mba7.dtsi b/arch/arm/boot/dts/imx7-mba7.dtsi
+index ce1ae65b417f..98f243577636 100644
+--- a/arch/arm/boot/dts/imx7-mba7.dtsi
++++ b/arch/arm/boot/dts/imx7-mba7.dtsi
+@@ -392,5 +392,5 @@
+ &wdog1 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_wdog1>;
+-	fsl,wdog_b;
++	fsl,ext-reset-output;
+ };

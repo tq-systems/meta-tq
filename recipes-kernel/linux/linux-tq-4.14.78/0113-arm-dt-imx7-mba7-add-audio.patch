@@ -1,0 +1,60 @@
+From 465239ae7947f4814c71ebdf039b3d35ac82a154 Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Tue, 29 Jan 2019 12:25:53 +0100
+Subject: [PATCH 113/188] arm: dt: imx7-mba7: add audio
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ arch/arm/boot/dts/imx7-mba7.dtsi | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-mba7.dtsi b/arch/arm/boot/dts/imx7-mba7.dtsi
+index ad43b5016fe7..f4e0b8c129c1 100644
+--- a/arch/arm/boot/dts/imx7-mba7.dtsi
++++ b/arch/arm/boot/dts/imx7-mba7.dtsi
+@@ -74,6 +74,15 @@
+ 		#address-cells = <1>;
+ 		#size-cells = <0>;
+ 
++		reg_audio_3v3: regulator@a {
++			compatible = "regulator-fixed";
++			reg = <0xa>;
++			regulator-name = "VCC3V3_AUDIO";
++			regulator-min-microvolt = <3300000>;
++			regulator-max-microvolt = <3300000>;
++			regulator-always-on;
++		};
++
+ 		reg_sd1_vmmc: regulator@0 {
+ 			compatible = "regulator-fixed";
+ 			reg = <0>;
+@@ -167,6 +176,13 @@
+ 			vin-supply = <&sw2_reg>;
+ 		};
+ 	};
++
++	sound {
++		compatible = "fsl,imx-audio-tlv320aic32x4";
++		model = "imx7-mba7-tlv320aic32";
++		ssi-controller = <&sai1>;
++		audio-codec = <&codec>;
++	};
+ };
+ 
+ &adc1 {
+@@ -281,6 +297,15 @@
+ 	pinctrl-0 = <&pinctrl_i2c2>;
+ 	status = "okay";
+ 
++	codec: tlv320aic32x4@18 {
++		compatible = "ti,tlv320aic32x4";
++		reg = <0x18>;
++		clocks = <&clks IMX7D_AUDIO_MCLK_ROOT_CLK>;
++		clock-names = "mclk";
++		ldoin-supply = <&reg_audio_3v3>;
++		iov-supply = <&reg_audio_3v3>;
++	};
++
+ 	gpioexp: pca9555@20 {
+ 		compatible = "nxp,pca9555";
+ 		reg = <0x20>;

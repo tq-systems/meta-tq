@@ -1,0 +1,25 @@
+From eb00d47619e8317a1aad2f671ce6d71a8a8e660b Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Tue, 29 Jan 2019 10:49:46 +0100
+Subject: [PATCH 107/188] arm: dt: imx7-tqma7: add sdma
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ arch/arm/boot/dts/imx7-tqma7.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-tqma7.dtsi b/arch/arm/boot/dts/imx7-tqma7.dtsi
+index 8ab7f8006421..d84d8195072e 100644
+--- a/arch/arm/boot/dts/imx7-tqma7.dtsi
++++ b/arch/arm/boot/dts/imx7-tqma7.dtsi
+@@ -209,6 +209,10 @@
+ 	};
+ };
+ 
++&sdma {
++	status = "okay";
++};
++
+ &usdhc3 {
+ 	pinctrl-names = "default", "state_100mhz", "state_200mhz";
+ 	pinctrl-0 = <&pinctrl_usdhc3>;

@@ -1,0 +1,31 @@
+From a94a08cf2a5ed15e97fe26a84a7500339bb497a3 Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Tue, 29 Jan 2019 12:43:07 +0100
+Subject: [PATCH 115/188] arm: dt: imx7-mba7: add lvds regulator
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ arch/arm/boot/dts/imx7-mba7.dtsi | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-mba7.dtsi b/arch/arm/boot/dts/imx7-mba7.dtsi
+index d5a3266791d2..cbcfac568db3 100644
+--- a/arch/arm/boot/dts/imx7-mba7.dtsi
++++ b/arch/arm/boot/dts/imx7-mba7.dtsi
+@@ -114,6 +114,16 @@
+ 			enable-active-high;
+ 		};
+ 
++		reg_lvds_transmitter: regulator@8 {
++			compatible = "regulator-fixed";
++			reg = <8>;
++			regulator-name = "#SHTDN_LVDS";
++			regulator-min-microvolt = <3300000>;
++			regulator-max-microvolt = <3300000>;
++			gpio = <&gpioexp 1 GPIO_ACTIVE_HIGH>;
++			enable-active-high;
++		};
++
+ 		reg_mba_12v0: regulator@7 {
+ 			compatible = "regulator-fixed";
+ 			reg = <7>;

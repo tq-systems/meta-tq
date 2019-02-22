@@ -1,0 +1,50 @@
+From 2d765e9a69171b686eee05c9fc91e2e2d38d2a4b Mon Sep 17 00:00:00 2001
+From: Michael Krummsdorf <michael.krummsdorf@tq-group.com>
+Date: Fri, 8 Feb 2019 13:56:27 +0100
+Subject: [PATCH 103/188] mtd: fsl-quadspi: add dt-property to disable dtr
+ modes
+
+Signed-off-by: Michael Krummsdorf <michael.krummsdorf@tq-group.com>
+---
+ Documentation/devicetree/bindings/mtd/fsl-quadspi.txt | 1 +
+ drivers/mtd/spi-nor/fsl-quadspi.c                     | 8 +++++++-
+ 2 files changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/Documentation/devicetree/bindings/mtd/fsl-quadspi.txt b/Documentation/devicetree/bindings/mtd/fsl-quadspi.txt
+index 951655466a11..b2c0cad8e384 100644
+--- a/Documentation/devicetree/bindings/mtd/fsl-quadspi.txt
++++ b/Documentation/devicetree/bindings/mtd/fsl-quadspi.txt
+@@ -29,6 +29,7 @@ Optional properties:
+ 			      bus, you should enable this property.
+ 			      (Please check the board's schematic.)
+   - big-endian : That means the IP register is big endian
++  - fsl,qspi-no-dtr-modes : Masks out Double Transfer Rate modes from HWCAPS
+ 
+ Part II - The DT nodes for each SPI NOR flash
+ ------------------------------
+diff --git a/drivers/mtd/spi-nor/fsl-quadspi.c b/drivers/mtd/spi-nor/fsl-quadspi.c
+index a2360558a26b..af466db5b79a 100644
+--- a/drivers/mtd/spi-nor/fsl-quadspi.c
++++ b/drivers/mtd/spi-nor/fsl-quadspi.c
+@@ -1101,7 +1101,7 @@ static void fsl_qspi_unprep(struct spi_nor *nor, enum spi_nor_ops ops)
+ 
+ static int fsl_qspi_probe(struct platform_device *pdev)
+ {
+-	const struct spi_nor_hwcaps hwcaps = {
++	struct spi_nor_hwcaps hwcaps = {
+ 		.mask = SNOR_HWCAPS_READ_1_1_4 |
+ 			SNOR_HWCAPS_READ_1_4_4_DTR |
+ 			SNOR_HWCAPS_PP,
+@@ -1203,6 +1203,12 @@ static int fsl_qspi_probe(struct platform_device *pdev)
+ 	if (of_get_property(np, "fsl,qspi-has-second-chip", NULL))
+ 		q->has_second_chip = true;
+ 
++	if (of_get_property(np, "fsl,qspi-no-dtr-modes", NULL))
++		hwcaps.mask &= ~(SNOR_HWCAPS_READ_1_1_1_DTR |
++				 SNOR_HWCAPS_READ_1_2_2_DTR |
++				 SNOR_HWCAPS_READ_1_4_4_DTR |
++				 SNOR_HWCAPS_READ_1_8_8_DTR);
++
+ 	mutex_init(&q->lock);
+ 
+ 	/* iterate the subnodes. */

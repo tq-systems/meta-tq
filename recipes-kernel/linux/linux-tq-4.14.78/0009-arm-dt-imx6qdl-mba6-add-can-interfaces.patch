@@ -1,0 +1,54 @@
+From ee897a18c04a5f6a243339888df1463edbe17980 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 10 Sep 2018 11:12:06 +0200
+Subject: [PATCH 009/188] arm: dt: imx6qdl-mba6: add can interfaces
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/boot/dts/imx6qdl-mba6.dtsi | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx6qdl-mba6.dtsi b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+index 8d92d4b74bc7..feed55ce4f70 100644
+--- a/arch/arm/boot/dts/imx6qdl-mba6.dtsi
++++ b/arch/arm/boot/dts/imx6qdl-mba6.dtsi
+@@ -28,6 +28,18 @@
+ 	};
+ };
+ 
++&can1 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_can1>;
++	status = "okay";
++};
++
++&can2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_can2>;
++	status = "okay";
++};
++
+ &fec {
+ 	phy-mode = "rgmii-id";
+ 	phy-reset-gpios = <&gpio1 25 GPIO_ACTIVE_LOW>;
+@@ -58,6 +70,20 @@
+ 	pinctrl-0 = <&pinctrl_hog>;
+ 
+ 	mba6 {
++		pinctrl_can1: can1grp {
++			fsl,pins = <
++				MX6QDL_PAD_KEY_COL2__FLEXCAN1_TX 0xb099
++				MX6QDL_PAD_KEY_ROW2__FLEXCAN1_RX 0xb099
++			>;
++		};
++
++		pinctrl_can2: can2grp {
++			fsl,pins = <
++				MX6QDL_PAD_KEY_COL4__FLEXCAN2_TX 0xb099
++				MX6QDL_PAD_KEY_ROW4__FLEXCAN2_RX 0xb099
++			>;
++		};
++
+ 		pinctrl_enet: enetgrp {
+ 			fsl,pins = <
+ 				/* FEC phy IRQ */

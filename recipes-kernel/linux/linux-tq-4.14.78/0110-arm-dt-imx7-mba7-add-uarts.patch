@@ -1,0 +1,110 @@
+From 95e8969153d9af1413c28965d11b6b923a6ddcb4 Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Tue, 29 Jan 2019 11:25:39 +0100
+Subject: [PATCH 110/188] arm: dt: imx7-mba7: add uarts
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ arch/arm/boot/dts/imx7-mba7.dtsi | 68 ++++++++++++++++++++++++++++++++
+ 1 file changed, 68 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx7-mba7.dtsi b/arch/arm/boot/dts/imx7-mba7.dtsi
+index 7cde15c668d9..bd8cfb47cbe8 100644
+--- a/arch/arm/boot/dts/imx7-mba7.dtsi
++++ b/arch/arm/boot/dts/imx7-mba7.dtsi
+@@ -387,6 +387,31 @@
+ 			>;
+ 		};
+ 
++		pinctrl_uart3: uart3grp {
++			fsl,pins = <
++				MX7D_PAD_UART3_RX_DATA__UART3_DCE_RX	0x7e
++				MX7D_PAD_UART3_TX_DATA__UART3_DCE_TX	0x76
++				MX7D_PAD_UART3_CTS_B__UART3_DCE_CTS	0x76
++				MX7D_PAD_UART3_RTS_B__UART3_DCE_RTS	0x7e
++			>;
++		};
++
++		pinctrl_uart4: uart4grp {
++			fsl,pins = <
++				MX7D_PAD_SAI2_TX_SYNC__UART4_DCE_RX	0x7e
++				MX7D_PAD_SAI2_TX_BCLK__UART4_DCE_TX	0x76
++				MX7D_PAD_SAI2_RX_DATA__UART4_DCE_CTS	0x76
++				MX7D_PAD_SAI2_TX_DATA__UART4_DCE_RTS	0x7e
++			>;
++		};
++
++		pinctrl_uart5: uart5grp {
++			fsl,pins = <
++				MX7D_PAD_I2C4_SCL__UART5_DCE_RX		0x7e
++				MX7D_PAD_I2C4_SDA__UART5_DCE_TX		0x76
++			>;
++		};
++
+ 		pinctrl_uart6: uart6grp {
+ 			fsl,pins = <
+ 				MX7D_PAD_EPDC_DATA08__UART6_DCE_RX	0x7d
+@@ -396,6 +421,16 @@
+ 			>;
+ 		};
+ 
++		pinctrl_uart7: uart7grp {
++			fsl,pins = <
++				MX7D_PAD_EPDC_DATA12__UART7_DCE_RX	0x7e
++				MX7D_PAD_EPDC_DATA13__UART7_DCE_TX	0x76
++				MX7D_PAD_EPDC_DATA15__UART7_DCE_CTS	0x76
++				/* RTS is not connected */
++				MX7D_PAD_EPDC_DATA14__UART7_DCE_RTS	0x7e
++			>;
++		};
++
+ 		pinctrl_usdhc1_gpio: usdhc1grp_gpio {
+ 			fsl,pins = <
+ 				MX7D_PAD_SD1_WP__GPIO5_IO1		0x7c /* WP */
+@@ -456,6 +491,30 @@
+ 	};
+ };
+ 
++&uart3 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart3>;
++	assigned-clocks = <&clks IMX7D_UART3_ROOT_SRC>;
++	assigned-clock-parents = <&clks IMX7D_OSC_24M_CLK>;
++	status = "okay";
++};
++
++&uart4 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart4>;
++	assigned-clocks = <&clks IMX7D_UART4_ROOT_SRC>;
++	assigned-clock-parents = <&clks IMX7D_OSC_24M_CLK>;
++	status = "okay";
++};
++
++&uart5 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart5>;
++	assigned-clocks = <&clks IMX7D_UART5_ROOT_SRC>;
++	assigned-clock-parents = <&clks IMX7D_OSC_24M_CLK>;
++	status = "okay";
++};
++
+ &uart6 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_uart6>;
+@@ -464,6 +523,15 @@
+ 	status = "okay";
+ };
+ 
++&uart7 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_uart7>;
++	assigned-clocks = <&clks IMX7D_UART7_ROOT_SRC>;
++	assigned-clock-parents = <&clks IMX7D_OSC_24M_CLK>;
++	fsl,uart-has-rtscts;
++	status = "okay";
++};
++
+ &usbh {
+ 	status = "okay";
+ };

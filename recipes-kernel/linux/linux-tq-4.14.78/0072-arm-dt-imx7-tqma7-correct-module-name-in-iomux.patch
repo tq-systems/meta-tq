@@ -1,0 +1,23 @@
+From c80d302df7735bd218a447af0f5a43f8d18941c9 Mon Sep 17 00:00:00 2001
+From: Max Merchel <Max.Merchel@tq-group.com>
+Date: Fri, 25 Jan 2019 08:19:27 +0100
+Subject: [PATCH 072/188] arm: dt: imx7-tqma7: correct module name in iomux
+
+Signed-off-by: Max Merchel <Max.Merchel@tq-group.com>
+---
+ arch/arm/boot/dts/imx7-tqma7.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx7-tqma7.dtsi b/arch/arm/boot/dts/imx7-tqma7.dtsi
+index 2be6073034cd..8c1a8b2c66e6 100644
+--- a/arch/arm/boot/dts/imx7-tqma7.dtsi
++++ b/arch/arm/boot/dts/imx7-tqma7.dtsi
+@@ -39,7 +39,7 @@
+ };
+ 
+ &iomuxc {
+-	imx7d-tqma7 {
++	imx7-tqma7 {
+ 		pinctrl_i2c1: i2c1grp {
+ 			fsl,pins = <
+ 				MX7D_PAD_I2C1_SDA__I2C1_SDA	0x40000078
