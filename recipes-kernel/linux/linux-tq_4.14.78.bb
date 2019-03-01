@@ -16,8 +16,8 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
 ####################
 
 
-SRCBRANCH = "TQMa8xx-rel_imx_4.14.78_1.0.0_ga"
-SRCREV = "66620c3d281c5a5b27cbb7a51276d2f94f619f1c"
+SRCBRANCH = "TQMa8xx-bringup-rel_imx_4.14.78_1.0.0_ga"
+SRCREV = "651575fdcdb4aa9e587e34167da256e11435494b"
 
 #####
 # copies the defconfig from the kernel tree
@@ -33,8 +33,7 @@ do_copy_defconfig () {
     cp ${S}/arch/arm64/configs/defconfig ${B}/../defconfig
 }
 
-#COMPATIBLE_MACHINE = "tqma8qxs-mb-smarc-2"
-#COMPATIBLE_MACHINE .= "|tqma8mq-mba8mx|tqma8mq-2gm-mba8mx"
-COMPATIBLE_MACHINE = "tqma8qx-mba8qx"
+COMPATIBLE_MACHINE = "tqma8qx-mba8qx|tqma8qxs-mb-smarc-2"
+COMPATIBLE_MACHINE .= "|tqma8mq-mba8mx|tqma8mq-2gm-mba8mx"
 
 EXTRA_OEMAKE_append_mx8 = " ARCH=arm64"
