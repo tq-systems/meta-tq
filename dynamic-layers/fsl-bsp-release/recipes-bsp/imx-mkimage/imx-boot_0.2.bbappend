@@ -25,21 +25,30 @@ do_compile_prepend () {
 ##
 do_deploy_append() {
     cd ${DEPLOYDIR}
+
     if [ "${SOC_TARGET}" = "iMX8QX" ]; then
-        if [ "${MACHINE}" = "tqma8qx-mba8qx" ]; then
-            ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-b0-bootstream.bin
-        fi
-        if [ "${MACHINE}" = "tqma8qxs-mb-smarc-2" ]; then
-            ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-b0-bootstream.bin
-        fi
+        case ${MACHINE} in
+            tqma8qxs* |\
+            tqma8qx*)
+                ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-b0-bootstream.bin
+                ;;
+            *)
+                break
+                ;;
+        esac
     fi
+
     if [ "${SOC_TARGET}" = "iMX8M" ]; then
-        if [ "${MACHINE}" = "tqma8mq-mba8mx" ]; then
-            ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-bootstream.bin
-        fi
-        if [ "${MACHINE}" = "tqma8mq-2gm-mba8mx" ]; then
-            ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-bootstream.bin
-        fi
+       case ${MACHINE} in
+            tqma8mx* |\
+            tqma8mq*)
+                ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-bootstream.bin
+                ;;
+            *)
+                break
+                ;;
+        esac
     fi
+
     cd -
 }
