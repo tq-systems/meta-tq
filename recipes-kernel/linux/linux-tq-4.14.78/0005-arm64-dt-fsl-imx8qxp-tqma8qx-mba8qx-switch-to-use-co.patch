@@ -1,0 +1,73 @@
+From e3d250c676c2ee36dfd379433e6e166da94115f4 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 11 Mar 2019 17:50:24 +0100
+Subject: [PATCH] arm64: dt: fsl-imx8qxp-tqma8qx-mba8qx: switch to use correct
+ nomenclatura
+
+part 2 of renaming
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/fsl-imx8dx-tqma8dx-mba8xx.dts     | 2 +-
+ arch/arm64/boot/dts/freescale/fsl-imx8dxp-tqma8dxp-mba8xx.dts   | 2 +-
+ .../freescale/fsl-imx8qxp-tqma8qxp-mba8xx-lvds-tm070jvhg33.dts  | 2 +-
+ arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qxp-mba8xx.dts   | 2 +-
+ .../{fsl-imx8qxp-tqma8qx-mba8qx.dtsi => mba8xx-common.dtsi}     | 0
+ 5 files changed, 4 insertions(+), 4 deletions(-)
+ rename arch/arm64/boot/dts/freescale/{fsl-imx8qxp-tqma8qx-mba8qx.dtsi => mba8xx-common.dtsi} (100%)
+
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8dx-tqma8dx-mba8xx.dts b/arch/arm64/boot/dts/freescale/fsl-imx8dx-tqma8dx-mba8xx.dts
+index ef808f56beca..366ff61c1adc 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-imx8dx-tqma8dx-mba8xx.dts
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8dx-tqma8dx-mba8xx.dts
+@@ -15,7 +15,7 @@
+ /dts-v1/;
+ 
+ #include "fsl-imx8dx-tqma8dx.dtsi"
+-#include "fsl-imx8qxp-tqma8qx-mba8qx.dtsi"
++#include "mba8xx-common.dtsi"
+ 
+ / {
+ 	model = "TQ Systems i.MX8DX TQMa8DX on MBa8xX";
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8dxp-tqma8dxp-mba8xx.dts b/arch/arm64/boot/dts/freescale/fsl-imx8dxp-tqma8dxp-mba8xx.dts
+index 483078d9318c..1d6583fa4d4a 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-imx8dxp-tqma8dxp-mba8xx.dts
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8dxp-tqma8dxp-mba8xx.dts
+@@ -15,7 +15,7 @@
+ /dts-v1/;
+ 
+ #include "fsl-imx8dxp-tqma8dxp.dtsi"
+-#include "fsl-imx8qxp-tqma8qx-mba8qx.dtsi"
++#include "mba8xx-common.dtsi"
+ 
+ / {
+ 	model = "TQ Systems i.MX8DXP TQMa8DXP on MBa8xX";
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qxp-mba8xx-lvds-tm070jvhg33.dts b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qxp-mba8xx-lvds-tm070jvhg33.dts
+index 74e283225dca..f62274d8ddd2 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qxp-mba8xx-lvds-tm070jvhg33.dts
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qxp-mba8xx-lvds-tm070jvhg33.dts
+@@ -15,6 +15,6 @@
+ /dts-v1/;
+ 
+ #include "fsl-imx8qxp-tqma8qxp.dtsi"
+-#include "fsl-imx8qxp-tqma8qx-mba8qx.dtsi"
++#include "mba8xx-common.dtsi"
+ #include "fsl-imx8qxp-tqma8qx-mba8qx-lvds-tm070jvhg33.dtsi"
+ 
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qxp-mba8xx.dts b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qxp-mba8xx.dts
+index 31f8eb6e927a..40071bb6af19 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qxp-mba8xx.dts
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qxp-mba8xx.dts
+@@ -15,7 +15,7 @@
+ /dts-v1/;
+ 
+ #include "fsl-imx8qxp-tqma8qxp.dtsi"
+-#include "fsl-imx8qxp-tqma8qx-mba8qx.dtsi"
++#include "mba8xx-common.dtsi"
+ 
+ / {
+ 	model = "TQ Systems i.MX8QXP TQMa8QXP on MBa8xX";
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi b/arch/arm64/boot/dts/freescale/mba8xx-common.dtsi
+similarity index 100%
+rename from arch/arm64/boot/dts/freescale/fsl-imx8qxp-tqma8qx-mba8qx.dtsi
+rename to arch/arm64/boot/dts/freescale/mba8xx-common.dtsi
