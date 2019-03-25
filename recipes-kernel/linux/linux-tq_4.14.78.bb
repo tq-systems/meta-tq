@@ -3,6 +3,7 @@ require linux-tq-common.inc
 SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
            file://tqma8x-display-support.cfg \
            file://tqma8x-network-support.cfg \
+           file://tqma8x-i2c-devices.cfg \
            "
 
 ################
@@ -11,7 +12,6 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
 #           file://gpio-enablement.cfg \
 #           file://tqma8qx-regulator-support.cfg \
 #           file://enable-led-features.cfg \
-#           file://tqma8qx-i2c-devices.cfg \
 #           file://tqma8qx-input-support.cfg \
 ####################
 
