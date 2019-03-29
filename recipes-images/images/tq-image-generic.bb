@@ -15,3 +15,6 @@ IMAGE_INSTALL += "\
     packagegroup-sysutils \
     packagegroup-testutils \
 "
+
+# force openssh to prevent conflict with dropbear
+EXTRA_IMAGE_FEATURES += " ssh-server-openssh"
