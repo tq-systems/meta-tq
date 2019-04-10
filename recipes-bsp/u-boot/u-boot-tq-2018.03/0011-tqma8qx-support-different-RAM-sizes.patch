@@ -1,0 +1,69 @@
+From 5c7774c265be446f9a4904dc1db0d7d5ffa39538 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 10 Apr 2019 18:17:18 +0200
+Subject: [PATCH] tqma8qx: support different RAM sizes
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8qx/Kconfig | 24 ++++++++++++++++++++++++
+ include/configs/tqma8qx.h | 12 +++++++++++-
+ 2 files changed, 35 insertions(+), 1 deletion(-)
+
+diff --git a/board/tqc/tqma8qx/Kconfig b/board/tqc/tqma8qx/Kconfig
+index 0753709630..9034af89b7 100644
+--- a/board/tqc/tqma8qx/Kconfig
++++ b/board/tqc/tqma8qx/Kconfig
+@@ -27,6 +27,30 @@ config TQMA8QX_MX8DX
+ 
+ endchoice
+ 
++choice
++	prompt "TQMa8QX RAM size"
++	default TQMA8QX_RAM_1014MB if TQMA8QX_MX8QXP
++	default TQMA8QX_RAM_512MB if TQMA8QX_MX8DX
++	help
++	  Select RAM size for TQMa8QX
++
++config TQMA8QX_RAM_512MB
++	bool "TQMa8QX with 512 MiB RAM"
++	help
++	  Select variant with 512 MiB RAM
++
++config TQMA8QX_RAM_1024MB
++	bool "TQMa8QX with 1024 MiB RAM"
++	help
++	  Select variant with 1024 MiB RAM
++
++config TQMA8QX_RAM_2048MB
++	bool "TQMa8QX with 2048 MiB RAM"
++	help
++	  Select variant with 2048 MiB RAM
++
++endchoice
++
+ choice
+ 	prompt "TQMa8QX base board variant"
+ 	default TQMA8QX_MBA8XX
+diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
+index 2b4d7f40c5..93d0a01f9f 100644
+--- a/include/configs/tqma8qx.h
++++ b/include/configs/tqma8qx.h
+@@ -307,7 +307,17 @@
+ #define CONFIG_SYS_SDRAM_BASE		0x80000000
+ #define CONFIG_NR_DRAM_BANKS		1
+ #define PHYS_SDRAM_1			0x80000000
+-#define PHYS_SDRAM_1_SIZE		SZ_1G	/* 1 GB */
++
++#if defined(CONFIG_TQMA8QX_RAM_512MB)
++#define PHYS_SDRAM_1_SIZE		SZ_512M
++#elif defined(CONFIG_TQMA8QX_RAM_1014MB)
++#define PHYS_SDRAM_1_SIZE		SZ_1G
++#elif defined(CONFIG_TQMA8QX_RAM_2048MB)
++#define PHYS_SDRAM_1_SIZE		SZ_2G
++#else
++#error
++#endif
++
+ /* needed for loop in CPU code */
+ #define PHYS_SDRAM_2			0x800000000
+ #define PHYS_SDRAM_2_SIZE		0x0000000	/* not placed */

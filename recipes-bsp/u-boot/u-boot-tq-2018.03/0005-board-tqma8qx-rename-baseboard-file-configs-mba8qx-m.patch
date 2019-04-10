@@ -1,0 +1,89 @@
+From 29ab57c2d10773d5528abf2a3297685071606e81 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 10 Apr 2019 14:46:55 +0200
+Subject: [PATCH] board: tqma8qx: rename baseboard file / configs mba8qx ->
+ mba8xx
+
+make it more clear, that we support i.MX8[Q/D]XP and i.MX8DX
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8qx/Kconfig                                | 6 +++---
+ board/tqc/tqma8qx/Makefile                               | 2 +-
+ board/tqc/tqma8qx/{tqma8qx-mba8qx.c => tqma8qx-mba8xx.c} | 0
+ include/configs/{tqma8qx-mba8qx.h => tqma8qx-mba8xx.h}   | 4 ++--
+ include/configs/tqma8qx.h                                | 4 ++--
+ 5 files changed, 8 insertions(+), 8 deletions(-)
+ rename board/tqc/tqma8qx/{tqma8qx-mba8qx.c => tqma8qx-mba8xx.c} (100%)
+ rename include/configs/{tqma8qx-mba8qx.h => tqma8qx-mba8xx.h} (89%)
+
+diff --git a/board/tqc/tqma8qx/Kconfig b/board/tqc/tqma8qx/Kconfig
+index 2d6be16ca2..ab710716d3 100644
+--- a/board/tqc/tqma8qx/Kconfig
++++ b/board/tqc/tqma8qx/Kconfig
+@@ -29,12 +29,12 @@ endchoice
+ 
+ choice
+ 	prompt "TQMa8QX base board variant"
+-	default MBA8QX
++	default TQMA8QX_MBA8XX
+ 	help
+ 	  Select base board for TQMa8QX
+ 
+-config MBA8QX
+-	bool "TQMa8QX on MBa8QX Starterkit"
++config TQMA8QX_MBA8XX
++	bool "TQMa8QX on MBa8xX Starterkit"
+ 	select TQC_SDMMC
+ 	select DM_ETH
+ 	help
+diff --git a/board/tqc/tqma8qx/Makefile b/board/tqc/tqma8qx/Makefile
+index 62ef156eb6..43f8cd935c 100644
+--- a/board/tqc/tqma8qx/Makefile
++++ b/board/tqc/tqma8qx/Makefile
+@@ -5,5 +5,5 @@
+ #
+ 
+ obj-y += tqma8qx.o
+-obj-$(CONFIG_MBA8QX) += tqma8qx-mba8qx.o
++obj-$(CONFIG_TQMA8QX_MBA8XX) += tqma8qx-mba8xx.o
+ 
+diff --git a/board/tqc/tqma8qx/tqma8qx-mba8qx.c b/board/tqc/tqma8qx/tqma8qx-mba8xx.c
+similarity index 100%
+rename from board/tqc/tqma8qx/tqma8qx-mba8qx.c
+rename to board/tqc/tqma8qx/tqma8qx-mba8xx.c
+diff --git a/include/configs/tqma8qx-mba8qx.h b/include/configs/tqma8qx-mba8xx.h
+similarity index 89%
+rename from include/configs/tqma8qx-mba8qx.h
+rename to include/configs/tqma8qx-mba8xx.h
+index 29c32e4611..66cf11cdba 100644
+--- a/include/configs/tqma8qx-mba8qx.h
++++ b/include/configs/tqma8qx-mba8xx.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright 2018 TQ Systems GmbH
++ * Copyright 2018 - 2019 TQ Systems GmbH
+  *
+  * SPDX-License-Identifier:	GPL-2.0+
+  */
+@@ -26,4 +26,4 @@
+ 	"console=ttyLP1,115200 earlycon=lpuart32,5a070000,115200\0" \
+ 	"fdt_file=fsl-imx8qxp-tqma8qxp-mba8xx.dtb\0"
+ 
+-#endif /* __TQMA8QX_MBA8QX_H */
++#endif /* __TQMA8QX_MBA8XX_H */
+diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
+index 91279714f2..f958a60eec 100644
+--- a/include/configs/tqma8qx.h
++++ b/include/configs/tqma8qx.h
+@@ -363,8 +363,8 @@
+ #define CONFIG_SYS_MEMTEST_SCRATCH CONFIG_SYS_MEMTEST_END
+ #endif
+ 
+-#if defined(CONFIG_MBA8QX)
+-#include "tqma8qx-mba8qx.h"
++#if defined(CONFIG_TQMA8QX_MBA8XX)
++#include "tqma8qx-mba8xx.h"
+ #else
+ #error
+ #endif

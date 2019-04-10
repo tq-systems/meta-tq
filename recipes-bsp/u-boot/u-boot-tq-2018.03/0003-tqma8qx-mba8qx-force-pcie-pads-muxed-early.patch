@@ -1,0 +1,50 @@
+From 9f86638243d3e879386d9c14931b2094061be95d Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 10 Apr 2019 13:35:45 +0200
+Subject: [PATCH] tqma8qx-mba8qx: force pcie pads muxed early
+
+bring the pads in correct config early to prevent damage due to pins high before enabling pcie power
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8qx/tqma8qx-mba8qx.c | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+
+diff --git a/board/tqc/tqma8qx/tqma8qx-mba8qx.c b/board/tqc/tqma8qx/tqma8qx-mba8qx.c
+index 416f1c0538..f6a348807e 100644
+--- a/board/tqc/tqma8qx/tqma8qx-mba8qx.c
++++ b/board/tqc/tqma8qx/tqma8qx-mba8qx.c
+@@ -37,6 +37,24 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define UART_PAD_CTRL	((SC_PAD_CONFIG_OUT_IN << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
+ 						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
+ 
++#define PCIE_PAD_CTRL	((SC_PAD_CONFIG_OD_IN << PADRING_CONFIG_SHIFT))
++
++static const iomux_cfg_t board_pcie_pins[] = {
++/*
++	SC_P_PCIE_CTRL0_PERST_B | MUX_MODE_ALT(4) | MUX_PAD_CTRL(PCIE_PAD_CTRL),
++	SC_P_PCIE_CTRL0_CLKREQ_B | MUX_MODE_ALT(4) | MUX_PAD_CTRL(PCIE_PAD_CTRL),
++	SC_P_PCIE_CTRL0_WAKE_B  | MUX_MODE_ALT(4) | MUX_PAD_CTRL(PCIE_PAD_CTRL),
++*/
++	SC_P_PCIE_CTRL0_CLKREQ_B | MUX_MODE_ALT(0) | MUX_PAD_CTRL(PCIE_PAD_CTRL),
++	SC_P_PCIE_CTRL0_WAKE_B | MUX_MODE_ALT(0) | MUX_PAD_CTRL(PCIE_PAD_CTRL),
++	SC_P_PCIE_CTRL0_PERST_B | MUX_MODE_ALT(0) | MUX_PAD_CTRL(PCIE_PAD_CTRL),
++};
++
++static void setup_iomux_pcie(void)
++{
++	imx8_iomux_setup_multiple_pads(board_pcie_pins, ARRAY_SIZE(board_pcie_pins));
++}
++
+ static iomux_cfg_t uart1_pads[] = {
+ 	SC_P_UART1_RX | MUX_MODE_ALT(0) | MUX_PAD_CTRL(UART_PAD_CTRL),
+ 	SC_P_UART1_TX | MUX_MODE_ALT(0) | MUX_PAD_CTRL(UART_PAD_CTRL),
+@@ -74,6 +92,8 @@ int tqc_bb_board_early_init_f(void)
+ 
+ 	setup_iomux_uart();
+ 
++	setup_iomux_pcie();
++
+ 	return 0;
+ }
+ 

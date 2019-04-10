@@ -1,0 +1,23 @@
+From e0ad23883213248e260b0541f2f3aba6b3156d49 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 10 Apr 2019 15:04:22 +0200
+Subject: [PATCH] boards: tqma8qx: use device tree configured in KConfig for
+ env
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ include/configs/tqma8qx-mba8xx.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/include/configs/tqma8qx-mba8xx.h b/include/configs/tqma8qx-mba8xx.h
+index 66cf11cdba..7e1e026fc5 100644
+--- a/include/configs/tqma8qx-mba8xx.h
++++ b/include/configs/tqma8qx-mba8xx.h
+@@ -24,6 +24,6 @@
+ 
+ #define BB_ENV_SETTINGS \
+ 	"console=ttyLP1,115200 earlycon=lpuart32,5a070000,115200\0" \
+-	"fdt_file=fsl-imx8qxp-tqma8qxp-mba8xx.dtb\0"
++	"fdt_file=" CONFIG_DEFAULT_FDT_FILE "\0"
+ 
+ #endif /* __TQMA8QX_MBA8XX_H */

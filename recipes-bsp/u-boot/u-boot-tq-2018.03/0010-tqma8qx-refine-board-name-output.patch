@@ -1,0 +1,74 @@
+From d643e536cc7f9b302c5137a26eae334583368cb3 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 10 Apr 2019 16:41:07 +0200
+Subject: [PATCH] tqma8qx: refine board name output
+
+Now that we have a working board TQMa8DX variant, fix output of board name.
+Handel also CPU name, since SCU does not deliver correct CPU ID for unkown
+reason.
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8qx/tqma8qx-mba8xx.c |  2 +-
+ board/tqc/tqma8qx/tqma8qx.c        |  6 ++----
+ include/configs/tqma8qx.h          | 10 ++++++++++
+ 3 files changed, 13 insertions(+), 5 deletions(-)
+
+diff --git a/board/tqc/tqma8qx/tqma8qx-mba8xx.c b/board/tqc/tqma8qx/tqma8qx-mba8xx.c
+index f6a348807e..bcb47cf407 100644
+--- a/board/tqc/tqma8qx/tqma8qx-mba8xx.c
++++ b/board/tqc/tqma8qx/tqma8qx-mba8xx.c
+@@ -99,7 +99,7 @@ int tqc_bb_board_early_init_f(void)
+ 
+ int tqc_bb_checkboard(void)
+ {
+-	puts("Board: TQMa8QX on MBa8QX (iMX8QXP)\n");
++	puts("Board: " TQMA8_BOARD_NAME " on MBa8Xx (" TQMA8_BOARD_REV ")\n");
+ 
+ 	return 0;
+ }
+diff --git a/board/tqc/tqma8qx/tqma8qx.c b/board/tqc/tqma8qx/tqma8qx.c
+index ac0c810eb5..c839fa9fa6 100644
+--- a/board/tqc/tqma8qx/tqma8qx.c
++++ b/board/tqc/tqma8qx/tqma8qx.c
+@@ -42,8 +42,6 @@ static void board_gpio_init(void)
+ 
+ int checkboard(void)
+ {
+-	puts("Board: TQMa8QX\n");
+-
+ 	print_bootinfo();
+ 
+ 	/* Note:  After reloc, ipcHndl will no longer be valid.  If handle
+@@ -105,8 +103,8 @@ int ft_board_setup(void *blob, bd_t *bd)
+ int board_late_init(void)
+ {
+ #ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
+-	env_set("board_name", "TQMa8QX");
+-	env_set("board_rev", "iMX8QXP");
++	env_set("board_name", TQMA8_BOARD_NAME);
++	env_set("board_rev", TQMA8_BOARD_REV);
+ #endif
+ 
+ 	tqc_bb_board_late_init();
+diff --git a/include/configs/tqma8qx.h b/include/configs/tqma8qx.h
+index f958a60eec..2b4d7f40c5 100644
+--- a/include/configs/tqma8qx.h
++++ b/include/configs/tqma8qx.h
+@@ -363,6 +363,16 @@
+ #define CONFIG_SYS_MEMTEST_SCRATCH CONFIG_SYS_MEMTEST_END
+ #endif
+ 
++#if defined(CONFIG_TQMA8QX_MX8QXP)
++#define TQMA8_BOARD_NAME	"TQMa8QXP"
++#define TQMA8_BOARD_REV		"iMX8QXP"
++#elif defined(CONFIG_TQMA8QX_MX8DX)
++#define TQMA8_BOARD_NAME	"TQMa8DX"
++#define TQMA8_BOARD_REV		"iMX8DX"
++#else
++#error
++#endif
++
+ #if defined(CONFIG_TQMA8QX_MBA8XX)
+ #include "tqma8qx-mba8xx.h"
+ #else

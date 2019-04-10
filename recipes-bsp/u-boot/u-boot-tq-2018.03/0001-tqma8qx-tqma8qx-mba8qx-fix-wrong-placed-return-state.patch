@@ -1,0 +1,24 @@
+From 08d6a4338af9aaa0f1fd1ad5d520b0a1dfbf6e82 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 10 Apr 2019 10:39:37 +0200
+Subject: [PATCH] tqma8qx: tqma8qx-mba8qx: fix wrong placed return statement
+
+prevents execution of board_late_mmc_env_init
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8qx/tqma8qx-mba8qx.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/board/tqc/tqma8qx/tqma8qx-mba8qx.c b/board/tqc/tqma8qx/tqma8qx-mba8qx.c
+index e3a7cb69d0..416f1c0538 100644
+--- a/board/tqc/tqma8qx/tqma8qx-mba8qx.c
++++ b/board/tqc/tqma8qx/tqma8qx-mba8qx.c
+@@ -107,7 +107,6 @@ int tqc_bb_board_late_init(void)
+ 	env_set("board_name", "MBa8QX");
+ 	env_set("board_rev", "iMX8QXP");
+ #endif
+-	return 0;
+ 
+ #ifdef CONFIG_ENV_IS_IN_MMC
+ 	board_late_mmc_env_init();

@@ -1,0 +1,30 @@
+From 36667a07d41ba72c6ec49f307168db80c4781c79 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 10 Apr 2019 14:48:30 +0200
+Subject: [PATCH] board: tqma8qx: select default u-boot and linux device tree
+ files from Kconfig
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8qx/Kconfig | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/board/tqc/tqma8qx/Kconfig b/board/tqc/tqma8qx/Kconfig
+index ab710716d3..0753709630 100644
+--- a/board/tqc/tqma8qx/Kconfig
++++ b/board/tqc/tqma8qx/Kconfig
+@@ -43,6 +43,14 @@ config TQMA8QX_MBA8XX
+ 
+ endchoice
+ 
++config DEFAULT_DEVICE_TREE
++	default "fsl-imx8dx-tqma8dx-mba8xx" if TQMA8QX_MX8DX && TQMA8QX_MBA8XX
++	default "fsl-imx8qxp-tqma8qxp-mba8xx" if TQMA8QX_MX8QXP && TQMA8QX_MBA8XX
++
++config DEFAULT_FDT_FILE
++	default "fsl-imx8dx-tqma8dx-mba8xx.dtb" if TQMA8QX_MX8DX && TQMA8QX_MBA8XX
++	default "fsl-imx8qxp-tqma8qxp-mba8xx.dtb" if TQMA8QX_MX8QXP && TQMA8QX_MBA8XX
++
+ choice
+ 	prompt "TQMa8QX boot device"
+ 	default TQMBA8QX_SDCARD

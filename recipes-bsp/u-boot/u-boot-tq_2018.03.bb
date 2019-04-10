@@ -15,6 +15,18 @@ SRCBRANCH = "TQMa8xx-bringup-v2018.03-rel_imx_4.14.78_1.0.0_ga"
 
 SRC_URI = " \
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+    file://0001-tqma8qx-tqma8qx-mba8qx-fix-wrong-placed-return-state.patch \
+    file://0002-tqma8qx-mba8qx-fix-default-fdt-file-in-env.patch \
+    file://0003-tqma8qx-mba8qx-force-pcie-pads-muxed-early.patch \
+    file://0004-boards-add-support-for-TQMa8DX-variant.patch \
+    file://0005-board-tqma8qx-rename-baseboard-file-configs-mba8qx-m.patch \
+    file://0006-board-tqma8qx-select-default-u-boot-and-linux-device.patch \
+    file://0007-board-tqma8qx-regen-defconfig-for-tqma8qx-mba8qx-mmc.patch \
+    file://0008-boards-tqma8qx-use-device-tree-configured-in-KConfig.patch \
+    file://0009-boards-tqma8qx-add-defconfig-for-TQMa8DX-on-MBa8xX-w.patch \
+    file://0010-tqma8qx-refine-board-name-output.patch \
+    file://0011-tqma8qx-support-different-RAM-sizes.patch \
+    file://0012-board-rename-tqma8qx-tqma8xx.patch \
 "
 
 S = "${WORKDIR}/git"
