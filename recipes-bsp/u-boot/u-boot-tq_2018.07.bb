@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
 
 PROVIDES = "u-boot"
 
-SRCREV = "57d68a33a8f3452519401f9a100b69fdd089ee23"
+SRCREV = "fdae5776fa770aedd20c29880eb5337353e3855b"
 SRCBRANCH = "TQMLS10xxA-u-boot-v2018.07"
 
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
@@ -50,9 +50,7 @@ do_compile_append () {
                         *qspi*)
                             tclsh ${STAGING_BINDIR_NATIVE}/byteswap.tcl ${config}/u-boot-pbl.bin ${config}/u-boot-pbl.swap.bin 8
                             cp ${config}/u-boot-pbl.swap.bin ${config}/u-boot-${type}.${UBOOT_SUFFIX};;
-                        *emmc*)
-                            cp ${config}/u-boot-with-spl-pbl.bin ${config}/u-boot-${type}.${UBOOT_SUFFIX};;
-                        *sdcard*)
+                        *esdhc*)
                             cp ${config}/u-boot-with-spl-pbl.bin ${config}/u-boot-${type}.${UBOOT_SUFFIX};;
                     esac
                 fi
