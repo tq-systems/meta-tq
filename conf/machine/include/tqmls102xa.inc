@@ -11,9 +11,9 @@ require conf/machine/include/tune-cortexa7.inc
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_u-boot_ls102xa ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader_ls102xa ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/kernel_ls102xa ?= "linux-tq"
+PREFERRED_PROVIDER_u-boot ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/kernel ?= "linux-tq"
 
 # Define the default image type
 KERNEL_IMAGETYPE ?= "zImage"
