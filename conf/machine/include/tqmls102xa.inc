@@ -2,7 +2,7 @@
 
 require conf/machine/include/soc-family.inc
 
-MACHINEOVERRIDES =. "ls102xa:"
+MACHINEOVERRIDES =. "ls102xa:tqmls102xa:"
 
 DEFAULTTUNE ?= "cortexa7thf-neon"
 require conf/machine/include/tune-cortexa7.inc
