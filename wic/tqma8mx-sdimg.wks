@@ -1,7 +1,7 @@
 # short-description: Create SD card image with a boot partition
 # long-description:
 # Create an image that can be written onto a SD card using dd for use
-# with i.MX8QX A0 SoC family
+# with i.MX8MX SoC family
 # It uses u-boot
 #
 # The disk layout used is:
