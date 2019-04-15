@@ -12,8 +12,8 @@
 # | |          |       |       |         |         |
 # 0 1kiB     1MiB    2MiB    4MiB      8MiB      24MiB
 #
-part u-boot --source rawcopy --sourceparams="file=u-boot.imx" --ondisk mmcblk --no-table --align 1
-part / --source rootfs --ondisk mmcblk --fstype=ext4 --label root --align 4096
-part / --source rootfs --ondisk mmcblk --fstype=ext4 --label root --align 4096
+part u-boot --source rawcopy --sourceparams="file=u-boot.imx" --no-table --align 1
+part / --source rootfs --fstype=ext4 --label root --align 4096
+part / --source rootfs --fstype=ext4 --label root --align 4096
 
 bootloader --ptable msdos
