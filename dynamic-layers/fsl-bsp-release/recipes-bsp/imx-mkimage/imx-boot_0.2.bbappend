@@ -28,9 +28,8 @@ do_deploy_append() {
 
     if [ "${SOC_TARGET}" = "iMX8QX" ]; then
         case ${MACHINE} in
-            tqma8qxs* |\
-            tqma8dx* | \
-            tqma8qx*)
+            tqma8qx* |\
+            tqma8x*)
                 ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-b0-bootstream.bin
                 ;;
             *)
