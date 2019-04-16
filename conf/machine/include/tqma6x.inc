@@ -3,6 +3,8 @@
 DEFAULTTUNE ?= "cortexa9thf-neon"
 require conf/machine/include/tune-cortexa9.inc
 
+MACHINEOVERRIDES =. "tqma6x:"
+
 # Machine specific options
 #
 MACHINE_EXTRA_RRECOMMENDS = " kernel-modules kernel-devicetree"
