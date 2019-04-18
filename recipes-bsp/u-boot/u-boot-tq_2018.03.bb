@@ -15,6 +15,18 @@ SRCBRANCH = "TQMa8xx-bringup-v2018.03-rel_imx_4.14.78_1.0.0_ga"
 
 SRC_URI = " \
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+    file://0001-boards-add-support-for-TQMa8XDS-variant.patch \
+    file://0002-board-tqma8qxs-select-default-u-boot-and-linux-devic.patch \
+    file://0003-board-tqma8qxs-regen-defconfig-for-tqma8qxs-mb-smarc.patch \
+    file://0004-boards-tqma8qxs-use-device-tree-configured-in-KConfi.patch \
+    file://0005-boards-tqma8xxs-add-defconfig-for-TQMa8XDS-on-MB-SMA.patch \
+    file://0006-tqma8qxs-refine-board-name-output.patch \
+    file://0007-tqma8qxs-support-different-RAM-sizes.patch \
+    file://0008-board-rename-tqma8qxs-tqma8xxs.patch \
+    file://0009-tqma8mx-implement-board_mmc_env_dev-and-mmc_map_to_k.patch \
+    file://0010-tqma8xx-implement-mmc_map_to_kernel_blk.patch \
+    file://0011-tqma8xxs-implement-mmc_map_to_kernel_blk.patch \
+    file://0012-tqma8-config-label-SYS_MMC_ENV_DEV-invalid.patch \
 "
 
 S = "${WORKDIR}/git"

@@ -1,0 +1,74 @@
+From 1448c383d1617c55f7bed4d1e05b7438e4867b34 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 17 Apr 2019 19:01:38 +0200
+Subject: [PATCH] tqma8qxs: refine board name output
+
+Now that we have a working board TQMa8XDS variant, fix output of board name.
+Handle also CPU name, since SCU does not deliver correct CPU ID for unkown
+reason.
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8qxs/tqma8qxs-mb-smarc-2.c |  2 +-
+ board/tqc/tqma8qxs/tqma8qxs.c            |  6 ++----
+ include/configs/tqma8qxs.h               | 10 ++++++++++
+ 3 files changed, 13 insertions(+), 5 deletions(-)
+
+diff --git a/board/tqc/tqma8qxs/tqma8qxs-mb-smarc-2.c b/board/tqc/tqma8qxs/tqma8qxs-mb-smarc-2.c
+index f450dc3eaa..f4dd3156bb 100644
+--- a/board/tqc/tqma8qxs/tqma8qxs-mb-smarc-2.c
++++ b/board/tqc/tqma8qxs/tqma8qxs-mb-smarc-2.c
+@@ -79,7 +79,7 @@ int tqc_bb_board_early_init_f(void)
+ 
+ int tqc_bb_checkboard(void)
+ {
+-	puts("Board: TQMa8QXS on MB-SMARC-2 (iMX8QXP)\n");
++	puts("Board: " TQMA8_BOARD_NAME " on MB-SMARC-2 (" TQMA8_BOARD_REV ")\n");
+ 
+ 	return 0;
+ }
+diff --git a/board/tqc/tqma8qxs/tqma8qxs.c b/board/tqc/tqma8qxs/tqma8qxs.c
+index 291eb99bc5..c839fa9fa6 100644
+--- a/board/tqc/tqma8qxs/tqma8qxs.c
++++ b/board/tqc/tqma8qxs/tqma8qxs.c
+@@ -42,8 +42,6 @@ static void board_gpio_init(void)
+ 
+ int checkboard(void)
+ {
+-	puts("Board: TQMa8QXS\n");
+-
+ 	print_bootinfo();
+ 
+ 	/* Note:  After reloc, ipcHndl will no longer be valid.  If handle
+@@ -105,8 +103,8 @@ int ft_board_setup(void *blob, bd_t *bd)
+ int board_late_init(void)
+ {
+ #ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
+-	env_set("board_name", "TQMa8QXS");
+-	env_set("board_rev", "iMX8QXP");
++	env_set("board_name", TQMA8_BOARD_NAME);
++	env_set("board_rev", TQMA8_BOARD_REV);
+ #endif
+ 
+ 	tqc_bb_board_late_init();
+diff --git a/include/configs/tqma8qxs.h b/include/configs/tqma8qxs.h
+index 408ba66734..c9b1aca714 100644
+--- a/include/configs/tqma8qxs.h
++++ b/include/configs/tqma8qxs.h
+@@ -355,6 +355,16 @@
+ #define CONFIG_SYS_MEMTEST_SCRATCH CONFIG_SYS_MEMTEST_END
+ #endif
+ 
++#if defined(CONFIG_TQMA8QXS_CPU_MX8QXP)
++#define TQMA8_BOARD_NAME	"TQMa8XQPS"
++#define TQMA8_BOARD_REV		"iMX8XQPS"
++#elif defined(CONFIG_TQMA8QXS_CPU_MX8DX)
++#define TQMA8_BOARD_NAME	"TQMa8XDS"
++#define TQMA8_BOARD_REV		"iMX8XDS"
++#else
++#error
++#endif
++
+ #if defined(CONFIG_TQMA8QXS_MB_SMARC_2)
+ #include "tqma8qxs-mb-smarc-2.h"
+ #else
