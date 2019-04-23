@@ -4,7 +4,7 @@ DESCRIPTION = "u-boot for TQ-Group Freescale / NXP LS102xA based modules"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
-PROVIDES = "u-boot"
+PROVIDES += "u-boot"
 
 SRCREV = "adfbf1d223228ccccac01092fd9051be0e532acb"
 SRCBRANCH = "TQMLS102xA-u-boot-v2017.11-BSP0110"

@@ -4,7 +4,7 @@ DESCRIPTION = "u-boot for TQ-Group Freescale i.MX based modules"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
-PROVIDES = "u-boot"
+PROVIDES += "u-boot"
 
 SRCREV = "a3302afb1aaec7f9a50ddcebd6f0658bbdf0d705"
 SRCBRANCH = "TQMaxx2-v2016.03-rel_imx_4.1.15_2.0.0_ga"
