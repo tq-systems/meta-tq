@@ -14,11 +14,11 @@ MACHINE_FEATURES_append = " alsa ext2 rtc serial usbhost vfat"
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_virtual/kernel ?= "linux-tq"
+PREFERRED_PROVIDER_virtual/kernel_tqma6ullx = "linux-tq"
 KERNEL_IMAGETYPE = "zImage"
 
-PREFERRED_PROVIDER_u-boot = "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-tq"
+PREFERRED_PROVIDER_u-boot_tqma6ullx = "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader_tqma6ullx = "u-boot-tq"
 
 UBOOT_SUFFIX ?= "imx"
 UBOOT_MAKE_TARGET ?= "u-boot.imx"
@@ -28,7 +28,11 @@ UBOOT_CONFIG = "sd qspi"
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "u-boot"
-IMAGE_FSTYPES ?= "tar.gz ext4 wic ubi"
+IMAGE_FSTYPES_append = " tar.gz ext4 wic ubi"
+IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2"
+
+# Don't include kernels in standard images
+RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
 
 DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
 
@@ -49,16 +53,16 @@ UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
 # needs to be set to have it consistent for kernel command line
 UBI_VOLNAME = "root"
 
-WKS_FILE_DEPENDS = "\
-	mtools-native \
-	dosfstools-native \
-	parted-native \
-	virtual/kernel \
-	u-boot \
-	"
+# Do not update fstab file when using wic images
+WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
-# TODO:
-#IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
+do_image_wic[depends] += " \
+	mtools-native:do_populate_sysroot \
+	dosfstools-native:do_populate_sysroot \
+	parted-native:do_populate_sysroot \
+	virtual/kernel:do_deploy \
+	u-boot:do_deploy \
+	"
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale

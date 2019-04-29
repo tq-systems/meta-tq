@@ -17,11 +17,11 @@ RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_virtual/kernel ?= "linux-tq"
-KERNEL_IMAGETYPE = "zImage"
+PREFERRED_PROVIDER_virtual/kernel_tqma6x = "linux-tq"
+KERNEL_IMAGETYPE_tqma6x = "zImage"
 
-PREFERRED_PROVIDER_u-boot = "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-tq"
+PREFERRED_PROVIDER_u-boot_tqma6x = "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader_tqma6x = "u-boot-tq"
 
 UBOOT_SUFFIX ?= "imx"
 UBOOT_MAKE_TARGET ?= "u-boot.imx"
@@ -30,17 +30,21 @@ UBOOT_MAKE_TARGET ?= "u-boot.imx"
 #
 EXTRA_IMAGEDEPENDS += "u-boot"
 
-IMAGE_FSTYPES ?= "tar.gz ext4 wic"
+IMAGE_FSTYPES_append = " tar.gz ext4 wic"
+IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2"
 
 # need to have the kernel modules in rootfs
 IMAGE_INSTALL_append = " kernel-modules"
 
-WKS_FILE_DEPENDS = "\
-	mtools-native \
-	dosfstools-native \
-	parted-native \
-	virtual/kernel \
-	u-boot \
+# Do not update fstab file when using wic images
+WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
+
+do_image_wic[depends] += " \
+	mtools-native:do_populate_sysroot \
+	dosfstools-native:do_populate_sysroot \
+	parted-native:do_populate_sysroot \
+	virtual/kernel:do_deploy \
+	u-boot:do_deploy \
 	"
 
 # optionally source the machine specific features for multimedia etc. from
