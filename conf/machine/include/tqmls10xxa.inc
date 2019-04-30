@@ -5,6 +5,10 @@ require conf/machine/include/arm/arch-arm64.inc
 # Define the default image type
 KERNEL_IMAGETYPE ?= "Image"
 
+PREFERRED_PROVIDER_u-boot = "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader = "u-boot-tq"
+PREFERRED_PROVIDER_virtual/kernel = "linux-tq"
+
 # Machine specific options
 #
 MACHINE_EXTRA_RRECOMMENDS = " kernel-modules kernel-devicetree udev-extraconf"

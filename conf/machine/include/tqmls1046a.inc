@@ -8,10 +8,6 @@ MACHINEOVERRIDES =. "fsl-lsch2:ls1046a:tqmls10xxa:"
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_u-boot_ls1046a ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader_ls1046a ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/kernel_ls1046a ?= "linux-tq"
-
 UBOOT_ENTRYPOINT_ls1046a = "0x80008000"
 
 # Image Options
