@@ -4,6 +4,8 @@ include conf/machine/include/dra7xx.inc
 
 SOC_FAMILY_append = ":dra7xx"
 
+MACHINEOVERRIDES =. "tqma57xx:"
+
 MACHINE_FEATURES += "pci"
 
 DEFAULTTUNE ?= "armv7athf-neon"
