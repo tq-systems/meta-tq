@@ -19,6 +19,11 @@ S = "${WORKDIR}/git"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
+SCMVERSION ??= "y"
+LOCALVERSION ??= "+tq"
+
+UBOOT_LOCALVERSION = "${LOCALVERSION}"
+
 do_configure_prepend() {
     if [ "x${UBOOT_RCW_CONFIG}" != "x" ]; then
         unset i j
@@ -35,6 +40,18 @@ do_configure_prepend() {
             done
             unset i
         fi
+    fi
+}
+
+do_compile_prepend() {
+    if [ "${SCMVERSION}" = "y" ]; then
+        # Add GIT revision to the local version
+        head=`cd ${S} ; git describe --tags --always 2> /dev/null`
+        printf "%s%s" "+" $head > ${S}/.scmversion
+        printf "%s%s" "+" $head > ${B}/.scmversion
+    else
+        printf "%s" "${UBOOT_LOCALVERSION}" > ${S}/.scmversion
+        printf "%s" "${UBOOT_LOCALVERSION}" > ${B}/.scmversion
     fi
 }
 
