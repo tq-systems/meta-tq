@@ -16,6 +16,6 @@ S = "${WORKDIR}/git"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "tqma572x-mba57xx|tqma571x-mba57xx|tqma574x-mba57xx"
+COMPATIBLE_MACHINE = "tqma57xx"
 
 SPL_BINARY = "MLO"
