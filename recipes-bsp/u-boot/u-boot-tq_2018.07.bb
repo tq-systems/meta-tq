@@ -65,4 +65,4 @@ PACKAGES += "${PN}-images"
 FILES_${PN}-images += "/boot"
 
 
-COMPATIBLE_MACHINE = "(tqmls10xxa)"
+COMPATIBLE_MACHINE = "tqmls10xxa"
