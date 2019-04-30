@@ -25,7 +25,7 @@ UBOOT_MAKE_TARGET ?= "u-boot.imx"
 
 # Image Options
 #
-EXTRA_IMAGEDEPENDS += "u-boot"
+EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 
 IMAGE_FSTYPES ?= "tar.gz ext4 wic"
 
@@ -37,7 +37,7 @@ WKS_FILE_DEPENDS = "\
 	dosfstools-native \
 	parted-native \
 	virtual/kernel \
-	u-boot \
+	virtual/bootloader \
 	"
 
 # optionally source the machine specific features for multimedia etc. from

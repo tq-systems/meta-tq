@@ -28,7 +28,7 @@ UBOOT_CONFIG = "sd qspi"
 
 # Image Options
 #
-EXTRA_IMAGEDEPENDS += "u-boot"
+EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 IMAGE_FSTYPES ?= "tar.gz ext4 wic ubi"
 
 DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
@@ -55,7 +55,7 @@ WKS_FILE_DEPENDS = "\
 	dosfstools-native \
 	parted-native \
 	virtual/kernel \
-	u-boot \
+	virtual/bootloader \
 	"
 
 # TODO:

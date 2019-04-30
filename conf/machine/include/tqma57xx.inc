@@ -54,7 +54,7 @@ do_image_wic[depends] += "\
 	dosfstools-native:do_populate_sysroot \
 	parted-native:do_populate_sysroot \
 	virtual/kernel:do_deploy \
-	u-boot-tq:do_deploy \
+	virtual/bootloader:do_deploy \
 	"
 
 # Use the expected value of the ubifs filesystem's volume name in the kernel
