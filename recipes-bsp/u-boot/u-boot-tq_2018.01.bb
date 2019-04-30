@@ -8,7 +8,6 @@ SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branc
 
 PROVIDES += "u-boot"
 
-# TODO: rename branch before pushing to github
 SRCREV = "9b3eefb75d4e81f402305845ff77cd349ea793c9"
 SRCBRANCH = "TQMa57xx-u-boot-v2018.01"
 
