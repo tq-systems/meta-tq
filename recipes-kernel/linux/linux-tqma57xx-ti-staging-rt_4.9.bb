@@ -8,7 +8,7 @@ DEPENDS += "lzop-native bc-native"
 #
 # append linux-mainline if we provide mainline kernel versions
 #
-PROVIDES = "virtual/kernel"
+PROVIDES += "linux-tq"
 
 # TODO: 
 # - rename recipe to linux-tq or linux-tq-rt (in case we support also kernel w/o rt)

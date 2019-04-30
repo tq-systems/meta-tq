@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 inherit kernel
 
-DEPENDS += "lzop-native bc-native openssl-native"
+DEPENDS += " lzop-native bc-native openssl-native"
 #
 # append linux-mainline if we provide mainline kernel versions
 #
-PROVIDES = "virtual/kernel linux-mainline"
+PROVIDES += "linux-mainline linux-tq"
 
 SRC_URI = "\
   ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
