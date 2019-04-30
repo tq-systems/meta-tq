@@ -19,7 +19,7 @@ SRC_URI = "\
 SRCBRANCH = "TQMLS10xxA-linux-4.19.0"
 SRCREV = "be0b126e6947db33c0938068918bda808e8098fd"
 
+
 COMPATIBLE_MACHINE = "tqmls10xxa"
-COMPATIBLE_MACHINE .= "|tqmls1046a-mbls10xxa"
 
 S = "${WORKDIR}/git"
