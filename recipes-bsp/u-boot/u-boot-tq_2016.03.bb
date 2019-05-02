@@ -21,7 +21,6 @@ S = "${WORKDIR}/git"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 COMPATIBLE_MACHINE = "tqma7x"
-COMPATIBLE_MACHINE .= "|tqma6ulx"
-COMPATIBLE_MACHINE .= "|tqma6ullx"
-COMPATIBLE_MACHINE .= "|tqma6x"
-
+COMPATIBLE_MACHINE_append = "|tqma6ulx"
+COMPATIBLE_MACHINE_append = "|tqma6ullx"
+COMPATIBLE_MACHINE_append = "|tqma6x"
