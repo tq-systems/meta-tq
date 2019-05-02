@@ -65,17 +65,16 @@ WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
 WKS_FILE ?= "tqma8mx-sdimg.wks"
 
-do_image_wic[depends] += " \
-	mtools-native:do_populate_sysroot \
-	dosfstools-native:do_populate_sysroot \
-	parted-native:do_populate_sysroot \
-	virtual/kernel:do_deploy \
-	imx-boot:do_deploy \
+WKS_FILE_DEPENDS = "\
+	mtools-native \
+	dosfstools-native \
+	parted-native \
+	virtual/kernel \
+	virtual/bootloader \
+	imx-boot \
 	"
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale
-
-MACHINEOVERRIDES =. "imx:"
 
 include conf/machine/include/imx-base.inc
