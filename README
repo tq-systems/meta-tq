@@ -23,6 +23,12 @@ optionally the layer can make use of features from meta-freescale
   layers: meta-freeescale
   branch: sumo
 
+optionally the layer can make use of features from meta-ti
+
+  URI: git://git.yoctoproject.org/meta-ti
+  layers: meta-ti
+  branch: thud (states compatibility to sumo)
+
 Patches
 =======
 
