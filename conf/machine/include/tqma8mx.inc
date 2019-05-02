@@ -1,6 +1,6 @@
 # Common definitions for TQ-Group TQMa8MX modules
 
-MACHINEOVERRIDES =. "mx8:mx8m:mx8mq:tqma8mq:"
+MACHINEOVERRIDES =. "imx:mx8:mx8m:mx8mq:tqma8mq:"
 
 require conf/machine/include/arm/arch-arm64.inc
 
@@ -18,11 +18,11 @@ MACHINE_FEATURES_append = " pci alsa"
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_virtual/kernel_mx8 ?= "linux-tq"
+PREFERRED_PROVIDER_virtual/kernel_tqma8mq ?= "linux-tq"
 KERNEL_IMAGETYPE = "Image"
 
-PREFERRED_PROVIDER_u-boot_mx8 ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader_mx8 ?= "u-boot-tq"
+PREFERRED_PROVIDER_u-boot_tqma8mq ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader_tqma8mq ?= "u-boot-tq"
 SPL_BINARY = "spl/u-boot-spl.bin"
 
 # Set DDR FIRMWARE
