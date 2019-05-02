@@ -6,7 +6,7 @@ DEPENDS += "lzop-native bc-native openssl-native"
 #
 # append linux-mainline if we provide mainline kernel versions
 #
-PROVIDES = "virtual/kernel"
+PROVIDES += "linux-tq"
 
 inherit kernel
 inherit cml1
