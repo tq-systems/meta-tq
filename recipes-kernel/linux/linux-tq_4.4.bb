@@ -8,7 +8,7 @@ DEPENDS += "lzop-native bc-native"
 #
 # append linux-mainline if we provide mainine kernel versions
 #
-PROVIDES = "virtual/kernel linux-mainline"
+PROVIDES += "linux-mainline"
 
 inherit kernel
 
