@@ -48,13 +48,14 @@ IMX_BOOT_SEEK = "32"
 
 WKS_FILE ?= "tqma8x-b0-sdimg.wks"
 
-do_image_wic[depends] += " \
-	mtools-native:do_populate_sysroot \
-	dosfstools-native:do_populate_sysroot \
-	parted-native:do_populate_sysroot \
-	virtual/kernel:do_deploy \
-	imx-boot:do_deploy \
-	imx-sc-firmware:do_deploy \
+WKS_FILE_DEPENDS = "\
+	mtools-native \
+	dosfstools-native \
+	parted-native \
+	virtual/kernel \
+	virtual/bootloader \
+	imx-boot \
+	imx-sc-firmware \
 	"
 
 # optionally source the machine specific features for multimedia etc. from
