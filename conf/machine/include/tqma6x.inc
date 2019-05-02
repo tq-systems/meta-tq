@@ -28,7 +28,7 @@ UBOOT_MAKE_TARGET ?= "u-boot.imx"
 
 # Image Options
 #
-EXTRA_IMAGEDEPENDS += "u-boot"
+EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 
 IMAGE_FSTYPES_append = " tar.gz ext4 wic"
 IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2"

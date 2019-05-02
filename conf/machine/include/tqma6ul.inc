@@ -27,7 +27,7 @@ UBOOT_CONFIG = "sd qspi"
 
 # Image Options
 #
-EXTRA_IMAGEDEPENDS += "u-boot"
+EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 IMAGE_FSTYPES_append = " tar.gz ext4 wic ubi"
 IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2"
 
