@@ -63,6 +63,6 @@ WKS_FILE_DEPENDS = "\
 	dosfstools-native \
 	parted-native \
 	virtual/kernel \
-	u-boot \
+	virtual/bootloader \
 	"
 
