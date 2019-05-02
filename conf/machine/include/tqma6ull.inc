@@ -56,12 +56,12 @@ UBI_VOLNAME = "root"
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
-do_image_wic[depends] += " \
-	mtools-native:do_populate_sysroot \
-	dosfstools-native:do_populate_sysroot \
-	parted-native:do_populate_sysroot \
-	virtual/kernel:do_deploy \
-	u-boot:do_deploy \
+WKS_FILE_DEPENDS = "\
+	mtools-native \
+	dosfstools-native \
+	parted-native \
+	virtual/kernel \
+	virtual/bootloader \
 	"
 
 # optionally source the machine specific features for multimedia etc. from
