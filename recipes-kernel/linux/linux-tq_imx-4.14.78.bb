@@ -20,7 +20,7 @@ SRCBRANCH = "TQMaxx2-v4.14-rel_imx_4.14.78_1.0.0_ga"
 SRCREV = "cc75908ad3ee9004074d81c5076ecb113cc2aa06"
 
 COMPATIBLE_MACHINE = "tqma7x"
-COMPATIBLE_MACHINE .= "|tqma6ulx"
-COMPATIBLE_MACHINE .= "|tqma6ullx"
+COMPATIBLE_MACHINE_append = "|tqma6ulx"
+COMPATIBLE_MACHINE_append = "|tqma6ullx"
 
 S = "${WORKDIR}/git"
