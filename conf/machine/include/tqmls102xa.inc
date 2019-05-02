@@ -2,7 +2,7 @@
 
 require conf/machine/include/soc-family.inc
 
-MACHINEOVERRIDES =. "ls102xa:"
+MACHINEOVERRIDES =. "ls102xa:tqmls102xa:"
 
 DEFAULTTUNE ?= "cortexa7thf-neon"
 require conf/machine/include/tune-cortexa7.inc
@@ -14,9 +14,9 @@ RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_u-boot_ls102xa ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader_ls102xa ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/kernel_ls102xa ?= "linux-tq"
+PREFERRED_PROVIDER_u-boot_tqmls102xa ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader_tqmls102xa ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/kernel_tqmls102xa ?= "linux-tq"
 
 # Define the default image type
 KERNEL_IMAGETYPE ?= "zImage"
