@@ -49,12 +49,12 @@ IMAGE_BOOT_FILES = "\
 
 IMAGE_FSTYPES ?= "tar.gz ext4 wic"
 
-do_image_wic[depends] += "\
-	mtools-native:do_populate_sysroot \
-	dosfstools-native:do_populate_sysroot \
-	parted-native:do_populate_sysroot \
-	virtual/kernel:do_deploy \
-	virtual/bootloader:do_deploy \
+WKS_FILE_DEPENDS = "\
+	mtools-native \
+	dosfstools-native \
+	parted-native \
+	virtual/kernel \
+	virtual/bootloader \
 	"
 
 # Use the expected value of the ubifs filesystem's volume name in the kernel
