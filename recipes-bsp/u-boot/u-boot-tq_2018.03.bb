@@ -46,7 +46,8 @@ do_deploy_append_mx8m () {
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "tqma8xx|tqma8xxs"
-COMPATIBLE_MACHINE .= "|tqma8mq"
+COMPATIBLE_MACHINE = "tqma8xx"
+COMPATIBLE_MACHINE_append = "|tqma8xxs"
+COMPATIBLE_MACHINE_append = "|tqma8mq"
 
 UBOOT_NAME_mx8 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
