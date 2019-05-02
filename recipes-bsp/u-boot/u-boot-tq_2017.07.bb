@@ -45,5 +45,4 @@ do_compile_append () {
 PACKAGES += "${PN}-images"
 FILES_${PN}-images += "/boot"
 
-
-COMPATIBLE_MACHINE = "(tqmls102xa-mbls102xa)"
+COMPATIBLE_MACHINE = "tqmls102xa"
