@@ -33,7 +33,8 @@ do_copy_defconfig () {
     cp ${S}/arch/arm64/configs/defconfig ${B}/../defconfig
 }
 
-COMPATIBLE_MACHINE = "tqma8xx|tqma8xxs"
-COMPATIBLE_MACHINE .= "|tqma8mq"
+COMPATIBLE_MACHINE = "tqma8xx"
+COMPATIBLE_MACHINE_append = "|tqma8xxs"
+COMPATIBLE_MACHINE_append = "|tqma8mq"
 
 EXTRA_OEMAKE_append_mx8 = " ARCH=arm64"
