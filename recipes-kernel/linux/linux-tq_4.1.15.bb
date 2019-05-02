@@ -23,8 +23,8 @@ SRCBRANCH_tqma6q-nav = "TQMaxx2-NAV-v4.1.15-rel_imx_4.1.15_2.0.0_ga"
 SRCREV_tqma6q-nav = "58ce624280c2ca170374b6fcc349819c4a087050"
 
 COMPATIBLE_MACHINE = "tqma7x"
-COMPATIBLE_MACHINE .= "|tqma6ulx"
-COMPATIBLE_MACHINE .= "|tqma6ullx"
-COMPATIBLE_MACHINE .= "|tqma6x"
+COMPATIBLE_MACHINE_append = "|tqma6ulx"
+COMPATIBLE_MACHINE_append = "|tqma6ullx"
+COMPATIBLE_MACHINE_append = "|tqma6x"
 
 S = "${WORKDIR}/git"
