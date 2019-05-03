@@ -7,6 +7,11 @@ SRC_URI_append = " \
 
 LIC_FILES_CHKSUM="file://COPYING;md5=6dfb32a488e5fd6bae52fbf6c7ebb086"
 
+# clear vars to prevent default assignments
+BOARD_TYPE_mx8 = ""
+SC_FIRMWARE_NAME_mx8qxp = "invalid"
+SC_FIRMWARE_NAME_mx8qm = "invalid"
+
 SC_FIRMWARE_NAME_tqma8xqp-mba8xx = "mx8qx-tqma8qx-mba8xx-scfw-tcm.bin"
 SC_FIRMWARE_NAME_tqma8xd-mba8xx = "mx8qx-tqma8dx-mba8xx-scfw-tcm.bin"
 
