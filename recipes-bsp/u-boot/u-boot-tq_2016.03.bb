@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
 PROVIDES += "u-boot"
 
-SRCREV = "a3302afb1aaec7f9a50ddcebd6f0658bbdf0d705"
+SRCREV = "bb029b695300de49270cda863a8fe53f61c90a7d"
 SRCBRANCH = "TQMaxx2-v2016.03-rel_imx_4.1.15_2.0.0_ga"
 
 # SRCREV_tqma6q-nav = "6f9af19725574331e5269bbb5f7e4e4caf3f61dc"
