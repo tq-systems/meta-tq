@@ -33,8 +33,6 @@ UBOOT_SUFFIX ?= "img"
 # Image Options
 #
 KERNEL_IMAGETYPE = "zImage"
-KERNEL_IMAGETYPES = "zImage uImage"
-KERNEL_CLASSES += "kernel-uimage"
 
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 
