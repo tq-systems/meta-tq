@@ -5,6 +5,7 @@ SRC_URI += "\
 	file://enable-CHAT.cfg \
 	file://enable-DEVMEM.cfg \
 	file://enable-VERBOSE_USAGE.cfg \
+	file://enable-DD_STATUS_LINE.cfg \
 "
 
 # necessary to prevent above change being reverted during "do_compile"
