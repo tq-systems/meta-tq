@@ -18,29 +18,10 @@ KERNEL_DEVICETREE ?= " \
 # IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
 #
 IMAGE_BOOT_FILES_append = "\
-	${KERNEL_IMAGETYPE}-am572x-mba57xx.dtb;am572x-mba57xx.dtb \
-	${KERNEL_IMAGETYPE}-am571x-mba57xx.dtb;am571x-mba57xx.dtb \
-	${KERNEL_IMAGETYPE}-am574x-mba57xx.dtb;am574x-mba57xx.dtb \
-	${KERNEL_IMAGETYPE}-am572x-mba57xx-lcd.dtb;am572x-mba57xx-lcd.dtb \
-	${KERNEL_IMAGETYPE}-am571x-mba57xx-lcd.dtb;am571x-mba57xx-lcd.dtb \
-	${KERNEL_IMAGETYPE}-am574x-mba57xx-lcd.dtb;am574x-mba57xx-lcd.dtb \
-	${KERNEL_IMAGETYPE}-am572x-mba57xx-lvds-tm070jvhg33.dtb;am572x-mba57xx-lvds-tm070jvhg33.dtb \
-	${KERNEL_IMAGETYPE}-am571x-mba57xx-lvds-tm070jvhg33.dtb;am571x-mba57xx-lvds-tm070jvhg33.dtb \
-	${KERNEL_IMAGETYPE}-am574x-mba57xx-lvds-tm070jvhg33.dtb;am574x-mba57xx-lvds-tm070jvhg33.dtb \
-"
-
-IMAGE_BOOT_FILES ?= "\
 	${KERNEL_IMAGETYPE} \
-	${KERNEL_IMAGETYPE}-am572x-mba57xx.dtb;am572x-mba57xx.dtb \
-	${KERNEL_IMAGETYPE}-am571x-mba57xx.dtb;am571x-mba57xx.dtb \
-	${KERNEL_IMAGETYPE}-am574x-mba57xx.dtb;am574x-mba57xx.dtb \
-	${KERNEL_IMAGETYPE}-am572x-mba57xx-lcd.dtb;am572x-mba57xx-lcd.dtb \
-	${KERNEL_IMAGETYPE}-am571x-mba57xx-lcd.dtb;am571x-mba57xx-lcd.dtb \
-	${KERNEL_IMAGETYPE}-am574x-mba57xx-lcd.dtb;am574x-mba57xx-lcd.dtb \
-	${KERNEL_IMAGETYPE}-am572x-mba57xx-lvds-tm070jvhg33.dtb;am572x-mba57xx-lvds-tm070jvhg33.dtb \
-	${KERNEL_IMAGETYPE}-am571x-mba57xx-lvds-tm070jvhg33.dtb;am571x-mba57xx-lvds-tm070jvhg33.dtb \
-	${KERNEL_IMAGETYPE}-am574x-mba57xx-lvds-tm070jvhg33.dtb;am574x-mba57xx-lvds-tm070jvhg33.dtb \
-	MLO u-boot.img \
+	${KERNEL_DEVICETREE} \
+	MLO \
+	u-boot.img \
 "
 
 SERIAL_CONSOLES ?= "115200;ttyS2"
