@@ -14,6 +14,8 @@ SC_FIRMWARE_NAME_mx8qm = "invalid"
 
 SC_FIRMWARE_NAME_tqma8xqp-mba8xx = "mx8qx-tqma8xqp-mba8xx-scfw-tcm.bin"
 SC_FIRMWARE_NAME_tqma8xd-mba8xx = "mx8qx-tqma8xd-mba8xx-scfw-tcm.bin"
+# TODO: maybe different config needed
+SC_FIRMWARE_NAME_tqma8xqp-mbpa8xx = "mx8qx-tqma8xqp-mba8xx-scfw-tcm.bin"
 
 # TODO: need own firmware later ...
 # SC_FIRMWARE_NAME_tqma8qxps-mb-smarc-2 = "mx8qx-tqma8qx-mba8xx-scfw-tcm.bin"
