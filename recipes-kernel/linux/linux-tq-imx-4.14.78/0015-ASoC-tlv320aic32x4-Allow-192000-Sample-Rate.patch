@@ -1,0 +1,29 @@
+From 2c51a091dbd7d6c3c9862bc8cc1f281c1ee01d4c Mon Sep 17 00:00:00 2001
+From: Annaliese McDermond <nh6z@nh6z.net>
+Date: Thu, 9 May 2019 10:21:04 +0200
+Subject: [PATCH 15/18] ASoC: tlv320aic32x4: Allow 192000 Sample Rate
+
+The clocking and processing blocks are now properly set up to
+support 192000 sample rates.  Allow drivers to ask for that.
+
+Signed-off-by: Annaliese McDermond <nh6z@nh6z.net>
+Signed-off-by: Mark Brown <broonie@kernel.org>
+(cherry picked from commit 6d56ee1550b8a81bc63c80051ff78d8d704b09ba)
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ sound/soc/codecs/tlv320aic32x4.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/sound/soc/codecs/tlv320aic32x4.c b/sound/soc/codecs/tlv320aic32x4.c
+index 16f9978abb30..8425377327fc 100644
+--- a/sound/soc/codecs/tlv320aic32x4.c
++++ b/sound/soc/codecs/tlv320aic32x4.c
+@@ -863,7 +863,7 @@ static int aic32x4_set_bias_level(struct snd_soc_codec *codec,
+ 	return 0;
+ }
+ 
+-#define AIC32X4_RATES	SNDRV_PCM_RATE_8000_96000
++#define AIC32X4_RATES	SNDRV_PCM_RATE_8000_192000
+ #define AIC32X4_FORMATS (SNDRV_PCM_FMTBIT_S16_LE | SNDRV_PCM_FMTBIT_S20_3LE \
+ 			 | SNDRV_PCM_FMTBIT_S24_3LE | SNDRV_PCM_FMTBIT_S32_LE)
+ 

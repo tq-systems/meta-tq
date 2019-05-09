@@ -1,0 +1,44 @@
+From e5c29a79916da1bb8f141cbe5a571f82249bb185 Mon Sep 17 00:00:00 2001
+From: b-ak <anur.bhargav@gmail.com>
+Date: Thu, 9 May 2019 10:20:38 +0200
+Subject: [PATCH 01/18] ASoC: tlv320aic32x4: Kernel OOPS while entering DAPM
+ standby mode
+
+During the bootup of the kernel, the DAPM bias level is in the OFF
+state. As soon as the DAPM framework kicks in it pushes the codec
+into STANDBY state.
+
+The probe function doesn't prepare the clock, and STANDBY state
+does a clk_disable_unprepare() without checking the previous state.
+This leads to an OOPS.
+
+Not transitioning from an OFF state to the STANDBY state fixes the
+problem.
+
+Signed-off-by: b-ak <anur.bhargav@gmail.com>
+Signed-off-by: Mark Brown <broonie@kernel.org>
+Cc: stable@vger.kernel.org
+(cherry picked from commit 667e9334fa64da2273e36ce131b05ac9e47c5769)
+
+backport to 4.14
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ sound/soc/codecs/tlv320aic32x4.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/sound/soc/codecs/tlv320aic32x4.c b/sound/soc/codecs/tlv320aic32x4.c
+index 4eb578caad3d..e41eba939302 100644
+--- a/sound/soc/codecs/tlv320aic32x4.c
++++ b/sound/soc/codecs/tlv320aic32x4.c
+@@ -826,6 +826,10 @@ static int aic32x4_set_bias_level(struct snd_soc_codec *codec,
+ 	case SND_SOC_BIAS_PREPARE:
+ 		break;
+ 	case SND_SOC_BIAS_STANDBY:
++		/* Initial cold start */
++		if (snd_soc_codec_get_bias_level(codec) == SND_SOC_BIAS_OFF)
++			break;
++
+ 		/* Switch off BCLK_N Divider */
+ 		snd_soc_update_bits(codec, AIC32X4_BCLKN,
+ 				    AIC32X4_BCLKEN, 0);
