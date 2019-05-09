@@ -5,12 +5,6 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
            file://tqma8x-network-support.cfg \
            file://tqma8x-i2c-devices.cfg \
            file://tqma8x-input-devices.cfg \
-           file://0001-arm64-dt-fsl-imx8-dx-dxp-qxp-tqma8-xd-xdp-xqp-mba8xx.patch \
-           file://0002-arm64-dt-mba8xx-common.dtsi-fix-pcie-GPIO.patch \
-           file://0003-arm64-dt-mb-smarc-2-common-regulators-dont-need-simp.patch \
-           file://0004-arm64-dt-mb-smarc-2-common-add-more-regulators.patch \
-           file://0005-arm64-dt-fsl-imx8-dx-dxp-qxp-tqma8-xd-xdp-xqp-mba8xx.patch \
-           file://0006-arm64-dt-rename-tqma8qxps-tqma8xqps.patch \
            "
 
 ################
@@ -23,7 +17,7 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
 
 
 SRCBRANCH = "TQMa8xx-bringup-rel_imx_4.14.78_1.0.0_ga"
-SRCREV = "2e908d22ddb10584581c2fd68f934897b6336e66"
+SRCREV = "7c468d8ea83d5a106904c98af5414236aa40d847"
 
 #####
 # copies the defconfig from the kernel tree
