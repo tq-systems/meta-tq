@@ -17,7 +17,7 @@ SRC_URI = "\
 "
 
 SRCBRANCH = "TQMaxx2-v4.14-rel_imx_4.14.78_1.0.0_ga"
-SRCREV = "cc75908ad3ee9004074d81c5076ecb113cc2aa06"
+SRCREV = "b6a3c5f948ba7f321bc69d73f811053f18e472ca"
 
 COMPATIBLE_MACHINE = "tqma7x"
 COMPATIBLE_MACHINE_append = "|tqma6ulx"
