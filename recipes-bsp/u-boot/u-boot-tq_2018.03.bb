@@ -15,6 +15,9 @@ SRCBRANCH = "TQMa8xx-bringup-v2018.03-rel_imx_4.14.78_1.0.0_ga"
 
 SRC_URI = " \
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+    file://0001-boards-tqma8xx-add-initial-support-for-MBpa8Xx.patch \
+    file://0002-arm64-dt-fsl-imx8qxp-tqma8xqp-mbpa8xx-add-led-suppor.patch \
+    file://0003-tqma8xqp_mbpa8xx-add-led-support-to-defconfig.patch \
 "
 
 S = "${WORKDIR}/git"
