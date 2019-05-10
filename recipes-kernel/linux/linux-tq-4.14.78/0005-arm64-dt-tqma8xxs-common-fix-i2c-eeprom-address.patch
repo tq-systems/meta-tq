@@ -1,0 +1,28 @@
+From 4ae289df011395a5f4dd3e2dff7daf8286d873f4 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 8 May 2019 08:52:12 +0200
+Subject: [PATCH 5/7] arm64: dt: tqma8xxs-common: fix i2c eeprom address
+
+was using address of eeprom on mb-smarc-2 by accident
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/tqma8xxs-common.dtsi | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/tqma8xxs-common.dtsi b/arch/arm64/boot/dts/freescale/tqma8xxs-common.dtsi
+index 5456994a7a12..0ca7c46b1177 100644
+--- a/arch/arm64/boot/dts/freescale/tqma8xxs-common.dtsi
++++ b/arch/arm64/boot/dts/freescale/tqma8xxs-common.dtsi
+@@ -141,9 +141,9 @@
+ 		status = "okay";
+ 	};
+ 
+-	eeprom0: m24c64@57 {
++	eeprom0: m24c64@50 {
+ 		compatible = "st,24c64", "atmel,24c64", "at24";
+-		reg = <0x57>;
++		reg = <0x50>;
+ 		pagesize = <32>;
+ 		status = "okay";
+ 	};
