@@ -1,0 +1,25 @@
+From 035f76264389e55c3b3eb9ae9b4f7767422c7d51 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 13 May 2019 14:24:46 +0200
+Subject: [PATCH] arm64: dt: mbpa8xx-common: [WIP] SD-Card gpio fixes
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi b/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
+index acfc83739ebb..3f10f8f41ab1 100644
+--- a/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
++++ b/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
+@@ -259,8 +259,8 @@
+ 	pinctrl-1 = <&pinctrl_usdhc2_100mhz>, <&pinctrl_usdhc2_gpio>;
+ 	pinctrl-2 = <&pinctrl_usdhc2_200mhz>, <&pinctrl_usdhc2_gpio>;
+ 	bus-width = <4>;
+-	cd-gpios = <&gpio4 22 GPIO_ACTIVE_LOW>;
+-	wp-gpios = <&gpio4 21 GPIO_ACTIVE_HIGH>;
++	/* cd-gpios = <&gpio4 22 GPIO_ACTIVE_LOW>; */
++	/* wp-gpios = <&gpio4 21 GPIO_ACTIVE_HIGH>; */
+ 	vmmc-supply = <&reg_mbpa8xx_3v3>;
+ 	status = "okay";
+ };

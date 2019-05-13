@@ -9,9 +9,17 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
            file://0002-arm64-dt-tqma8xxs-cosmetic-use-tqma8xxs-in-iomux-gro.patch \
            file://0003-arm64-dt-tqma8xx-cosmetic-use-tqma8xx-in-iomux-group.patch \
            file://0004-arm64-dt-mba8xx-common-fix-compatible-for-i2c-temp-s.patch \
-           file://0005-arm64-dt-tqma8xxs-common-fix-i2c-eeprom-address.patch \
-           file://0006-arm64-dt-mb-smarc-2-common-add-eeprom-24c32.patch \
-           file://0007-arm64-dt-add-support-for-fsl-imx8qxp-tqma8xqp-mbpa8x.patch \
+           file://0005-arm64-dt-tqma8xx-common-cosmetic-remove-superflous-p.patch \
+           file://0006-arm64-dt-tqma8xxs-common-fix-i2c-eeprom-address.patch \
+           file://0007-arm64-dt-mb-smarc-2-common-add-eeprom-24c32.patch \
+           file://0008-arm64-dt-add-support-for-fsl-imx8qxp-tqma8xqp-mbpa8x.patch \
+           file://0009-arm64-dt-fsl-imx8qxp-tqma8xqp-mbpa8xx-add-led-suppor.patch \
+           file://0010-arm64-dt-mbpa8xx-common-add-temp-sensor-support.patch \
+           file://0011-arm64-dt-mbpa8xx-common-add-revision-dt-gpio-as-hog-.patch \
+           file://0012-arm64-dt-mbpa8xx-common-add-CAN0.patch \
+           file://0013-arm64-dt-mbpa8xx-common-add-UART0-2-with-RX-TX.patch \
+           file://0014-arm64-dt-mbpa8xx-common-add-reset-GPIOs-as-hog-pins.patch \
+           file://0015-arm64-dt-mbpa8xx-common-WIP-SD-Card-gpio-fixes.patch \
            "
 
 ################

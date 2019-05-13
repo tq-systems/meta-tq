@@ -1,0 +1,31 @@
+From 7108f8cf4d214129a385ad3967f117cc047391c3 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 13 May 2019 11:50:20 +0200
+Subject: [PATCH] arm64: dt: mbpa8xx-common: add temp sensor support
+
+add TI TMP102 @ I2C1
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi b/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
+index 436b62216ced..926b3a4706dc 100644
+--- a/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
++++ b/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
+@@ -173,6 +173,14 @@
+ 	};
+ };
+ 
++&i2c1 {
++	sensor1: tmp102@48 {
++		compatible = "ti,tmp102";
++		reg = <0x48>;
++		status = "okay";
++	};
++};
++
+ &lpuart1 {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_lpuart1>;

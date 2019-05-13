@@ -1,8 +1,7 @@
 From dfc34143392673e96bc5d2b690896283c0686f23 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 8 May 2019 08:55:00 +0200
-Subject: [PATCH 4/7] arm64: dt: mba8xx-common: fix compatible for i2c temp
- sensor
+Subject: [PATCH] arm64: dt: mba8xx-common: fix compatible for i2c temp sensor
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---

@@ -1,7 +1,7 @@
-From 4ae289df011395a5f4dd3e2dff7daf8286d873f4 Mon Sep 17 00:00:00 2001
+From 3b2afc48aab0590cd1e78438864860ad7d1c9f6d Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Wed, 8 May 2019 08:52:12 +0200
-Subject: [PATCH 5/7] arm64: dt: tqma8xxs-common: fix i2c eeprom address
+Subject: [PATCH] arm64: dt: tqma8xxs-common: fix i2c eeprom address
 
 was using address of eeprom on mb-smarc-2 by accident
 

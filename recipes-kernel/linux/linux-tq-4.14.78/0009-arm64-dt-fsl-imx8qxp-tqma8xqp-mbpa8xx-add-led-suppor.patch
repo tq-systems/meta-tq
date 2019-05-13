@@ -1,0 +1,69 @@
+From 5636093b9361ce92a41c35a6cc7418b9e084213c Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 13 May 2019 10:22:01 +0200
+Subject: [PATCH] arm64: dt: fsl-imx8qxp-tqma8xqp-mbpa8xx: add led support
+
+add bicolor gpio led on MBpa8Xx
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ .../boot/dts/freescale/mbpa8xx-common.dtsi    | 39 +++++++++++++++++++
+ 1 file changed, 39 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi b/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
+index 3786df9f8b46..436b62216ced 100644
+--- a/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
++++ b/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
+@@ -21,6 +21,36 @@
+ 		stdout-path = &lpuart1;
+ 	};
+ 
++	leds {
++		compatible = "gpio-leds";
++		pinctrl-names = "default";
++		pinctrl-0 = <&pinctrl_led>;
++
++		led1_gn {
++			label = "led1-gn";
++			gpios = <&gpio3 3 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "heartbeat";
++		};
++
++		led1_rt {
++			label = "led1-rt";
++			gpios = <&gpio3 5 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "default-on";
++		};
++
++		led2_gn {
++			label = "led2-gn";
++			gpios = <&gpio3 6 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "default-on";
++		};
++
++		led2_rt {
++			label = "led2-rt";
++			gpios = <&gpio3 7 GPIO_ACTIVE_HIGH>;
++			linux,default-trigger = "default-on";
++		};
++	};
++
+ 	reg_mbpa8xx_3v3: mbpa8xx_3v3 {
+ 		compatible = "regulator-fixed";
+ 		regulator-name = "SD1_SPWR";
+@@ -53,6 +83,15 @@
+ 			>;
+ 		};
+ 
++		pinctrl_led: ledggrp {
++			fsl,pins = <
++				SC_P_CSI_RESET_LSIO_GPIO3_IO03			0x06000048
++				SC_P_MIPI_CSI0_I2C0_SCL_LSIO_GPIO3_IO05		0x06000048
++				SC_P_MIPI_CSI0_I2C0_SDA_LSIO_GPIO3_IO06		0x06000048
++				SC_P_MIPI_CSI0_GPIO0_01_LSIO_GPIO3_IO07		0x06000048
++			>;
++		};
++
+ 		pinctrl_lpuart1: lpuart1grp {
+ 			fsl,pins = <
+ 				SC_P_UART1_RX_ADMA_UART1_RX		0x06000020

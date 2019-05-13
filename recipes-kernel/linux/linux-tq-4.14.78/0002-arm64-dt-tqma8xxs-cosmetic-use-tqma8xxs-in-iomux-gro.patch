@@ -1,8 +1,7 @@
 From 4da74af586209711d84fb64381947f3d63a54f57 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Tue, 7 May 2019 12:56:13 +0200
-Subject: [PATCH 2/7] arm64: dt: tqma8xxs [cosmetic]: use tqma8xxs in iomux
- groups
+Subject: [PATCH] arm64: dt: tqma8xxs [cosmetic]: use tqma8xxs in iomux groups
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---

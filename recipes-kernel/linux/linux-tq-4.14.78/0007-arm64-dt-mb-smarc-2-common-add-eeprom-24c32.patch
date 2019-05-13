@@ -1,7 +1,7 @@
-From 41b34d6d678f3872d13d048820a94c208196e33e Mon Sep 17 00:00:00 2001
+From 2b17bc1d0cdd1a169b17cf156f5187282d3c14b4 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Tue, 7 May 2019 14:27:53 +0200
-Subject: [PATCH 6/7] arm64: dt: mb-smarc-2-common: add eeprom 24c32
+Subject: [PATCH] arm64: dt: mb-smarc-2-common: add eeprom 24c32
 
 this eeprom is primary intended to be used for EDID data @ x86 but can be
 used free for ARM
