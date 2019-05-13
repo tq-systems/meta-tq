@@ -1,0 +1,94 @@
+From 9c02435f3546491032ce3754cef61580ead0f741 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 13 May 2019 17:29:14 +0200
+Subject: [PATCH] net: phy: ti: add support for LEDCR1 .. 3
+
+implemented an optional DT prop
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ doc/device-tree-bindings/net/ti,dp83867.txt |  5 ++++
+ drivers/net/phy/ti.c                        | 26 +++++++++++++++++++++
+ 2 files changed, 31 insertions(+)
+
+diff --git a/doc/device-tree-bindings/net/ti,dp83867.txt b/doc/device-tree-bindings/net/ti,dp83867.txt
+index cb77fdf082..3317591df1 100644
+--- a/doc/device-tree-bindings/net/ti,dp83867.txt
++++ b/doc/device-tree-bindings/net/ti,dp83867.txt
+@@ -9,6 +9,11 @@ Required properties:
+ 	- ti,fifo-depth - Transmitt FIFO depth- see dt-bindings/net/ti-dp83867.h
+ 		for applicable values
+ 
++Optional property:
++	- ti,led-cfg1 - Value of LED configuration register 1
++	- ti,led-cfg2 - Value of LED configuration register 2
++	- ti,led-cfg3 - Value of LED configuration register 3
++
+ Default child nodes are standard Ethernet PHY device
+ nodes as described in doc/devicetree/bindings/net/ethernet.txt
+ 
+diff --git a/drivers/net/phy/ti.c b/drivers/net/phy/ti.c
+index 4bef6dce42..635832e172 100644
+--- a/drivers/net/phy/ti.c
++++ b/drivers/net/phy/ti.c
+@@ -22,6 +22,9 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define MII_DP83867_MICR	0x12
+ #define MII_DP83867_CFG2	0x14
+ #define MII_DP83867_BISCR	0x16
++#define DP83867_LEDCR1		0x18
++#define DP83867_LEDCR2		0x19
++#define DP83867_LEDCR3		0x1A
+ #define DP83867_CTRL		0x1f
+ 
+ /* Extended Registers */
+@@ -96,6 +99,9 @@ struct dp83867_private {
+ 	int tx_id_delay;
+ 	int fifo_depth;
+ 	int io_impedance;
++	unsigned int led_cfg1;
++	unsigned int led_cfg2;
++	unsigned int led_cfg3;
+ };
+ 
+ /**
+@@ -210,6 +216,13 @@ static int dp83867_of_init(struct phy_device *phydev)
+ 	dp83867->fifo_depth = fdtdec_get_uint(gd->fdt_blob, dev_of_offset(dev),
+ 				 "ti,fifo-depth", -1);
+ 
++	dp83867->led_cfg1 = fdtdec_get_uint(gd->fdt_blob, dev_of_offset(dev),
++				 "ti,led-cfg1", -EINVAL);
++	dp83867->led_cfg2 = fdtdec_get_uint(gd->fdt_blob, dev_of_offset(dev),
++				 "ti,led-cfg2", -EINVAL);
++	dp83867->led_cfg3 = fdtdec_get_uint(gd->fdt_blob, dev_of_offset(dev),
++				 "ti,led-cfg3", -EINVAL);
++
+ 	return 0;
+ }
+ #else
+@@ -221,6 +234,9 @@ static int dp83867_of_init(struct phy_device *phydev)
+ 	dp83867->tx_id_delay = DEFAULT_TX_ID_DELAY;
+ 	dp83867->fifo_depth = DEFAULT_FIFO_DEPTH;
+ 	dp83867->io_impedance = -EINVAL;
++	dp83867->led_cfg1 = -EINVAL;
++	dp83867->led_cfg2 = -EINVAL;
++	dp83867->led_cfg3 = -EINVAL;
+ 
+ 	return 0;
+ }
+@@ -327,6 +343,16 @@ static int dp83867_config(struct phy_device *phydev)
+ 		}
+ 	}
+ 
++	if (dp83867->led_cfg1 >= 0)
++		phy_write(phydev, MDIO_DEVAD_NONE, DP83867_LEDCR1,
++			  dp83867->led_cfg1);
++	if (dp83867->led_cfg2 >= 0)
++		phy_write(phydev, MDIO_DEVAD_NONE, DP83867_LEDCR2,
++			  dp83867->led_cfg2);
++	if (dp83867->led_cfg3 >= 0)
++		phy_write(phydev, MDIO_DEVAD_NONE, DP83867_LEDCR3,
++			  dp83867->led_cfg3);
++
+ 	genphy_config_aneg(phydev);
+ 	return 0;
+ 

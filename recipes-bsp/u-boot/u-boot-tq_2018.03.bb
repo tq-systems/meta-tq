@@ -18,6 +18,12 @@ SRC_URI = " \
     file://0001-boards-tqma8xx-add-initial-support-for-MBpa8Xx.patch \
     file://0002-arm64-dt-fsl-imx8qxp-tqma8xqp-mbpa8xx-add-led-suppor.patch \
     file://0003-tqma8xqp_mbpa8xx-add-led-support-to-defconfig.patch \
+    file://0004-arm-dt-fsl-imx8qxp-tqma8xqp-mbpa8xx-mark-SD-as-non-r.patch \
+    file://0005-arm-dt-fsl-imx8qxp-tqma8xqp-mbpa8xx-add-revision-det.patch \
+    file://0006-arm-dt-add-reset-GPIO-as-hog-pins.patch \
+    file://0007-board-tqma8xx-mbpa8xx-handle-board-gpio-init.patch \
+    file://0008-arm-dt-fsl-imx8qxp-tqma8xqp-mbpa8xx-fix-ethernet-LED.patch \
+    file://0009-net-phy-ti-add-support-for-LEDCR1-.-3.patch \
 "
 
 S = "${WORKDIR}/git"

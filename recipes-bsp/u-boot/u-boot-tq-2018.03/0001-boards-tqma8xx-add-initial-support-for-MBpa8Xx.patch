@@ -1,19 +1,19 @@
-From a1631450509d301a1b387da122b8cf20ac23401b Mon Sep 17 00:00:00 2001
+From 56ef130557087cceec0599128bc82a904b7655c4 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
-Date: Thu, 9 May 2019 11:15:55 +0200
-Subject: [PATCH 1/3] boards: tqma8xx: add initial support for MBpa8Xx
+Date: Mon, 13 May 2019 13:24:47 +0200
+Subject: [PATCH] boards: tqma8xx: add initial support for MBpa8Xx
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
  arch/arm/dts/Makefile                         |   1 +
- arch/arm/dts/fsl-imx8qxp-tqma8xqp-mbpa8xx.dts | 174 ++++++++++++++++++
+ arch/arm/dts/fsl-imx8qxp-tqma8xqp-mbpa8xx.dts | 173 ++++++++++++++++++
  board/tqc/tqma8xx/Kconfig                     |  11 ++
  board/tqc/tqma8xx/Makefile                    |   1 +
  board/tqc/tqma8xx/tqma8xx-mbpa8xx.c           | 141 ++++++++++++++
  configs/tqma8xqp_mbpa8xx_mmc_defconfig        |  59 ++++++
  include/configs/tqma8xx-mbpa8xx.h             |  26 +++
  include/configs/tqma8xx.h                     |   2 +
- 8 files changed, 415 insertions(+)
+ 8 files changed, 414 insertions(+)
  create mode 100644 arch/arm/dts/fsl-imx8qxp-tqma8xqp-mbpa8xx.dts
  create mode 100644 board/tqc/tqma8xx/tqma8xx-mbpa8xx.c
  create mode 100644 configs/tqma8xqp_mbpa8xx_mmc_defconfig
@@ -33,10 +33,10 @@ index d83e92578c..efe915bbd4 100644
  dtb-$(CONFIG_RCAR_GEN3) += \
 diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8xqp-mbpa8xx.dts b/arch/arm/dts/fsl-imx8qxp-tqma8xqp-mbpa8xx.dts
 new file mode 100644
-index 0000000000..033ecc1d19
+index 0000000000..9be653fbe1
 --- /dev/null
 +++ b/arch/arm/dts/fsl-imx8qxp-tqma8xqp-mbpa8xx.dts
-@@ -0,0 +1,174 @@
+@@ -0,0 +1,173 @@
 +/*
 + * Copyright 2019 TQ Systems GmbH
 + * Markus Niebel
@@ -76,8 +76,7 @@ index 0000000000..033ecc1d19
 +};
 +
 +&iomuxc {
-+	pinctrl-names = "default";
-+	tqma8qx-mba8qx {
++	tqma8xx-mbpa8xx {
 +		pinctrl_lpuart1: lpuart1grp {
 +			fsl,pins = <
 +				SC_P_UART1_RX_ADMA_UART1_RX	0x06000020
@@ -212,7 +211,7 @@ index 0000000000..033ecc1d19
 +	status = "okay";
 +};
 diff --git a/board/tqc/tqma8xx/Kconfig b/board/tqc/tqma8xx/Kconfig
-index e54901cf0b..6a8bda6d5a 100644
+index e54901cf0b..3ad0b91479 100644
 --- a/board/tqc/tqma8xx/Kconfig
 +++ b/board/tqc/tqma8xx/Kconfig
 @@ -65,15 +65,26 @@ config TQMA8XX_BB_MBA8XX
@@ -238,7 +237,7 @@ index e54901cf0b..6a8bda6d5a 100644
  config DEFAULT_FDT_FILE
  	default "fsl-imx8dx-tqma8xd-mba8xx.dtb" if TQMA8XX_CPU_MX8DX && TQMA8XX_BB_MBA8XX
  	default "fsl-imx8qxp-tqma8xqp-mba8xx.dtb" if TQMA8XX_CPU_MX8QXP && TQMA8XX_BB_MBA8XX
-+	default "fsl-imx8qxp-tqma8xqp-mbpa8xx" if TQMA8XX_CPU_MX8QXP && TQMA8XX_BB_MBPA8XX
++	default "fsl-imx8qxp-tqma8xqp-mbpa8xx.dtb" if TQMA8XX_CPU_MX8QXP && TQMA8XX_BB_MBPA8XX
  
  choice
  	prompt "TQMa8Xx boot device"

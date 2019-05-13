@@ -1,7 +1,7 @@
-From 4896400def4bbc8619d18dc33c420b9021ab043d Mon Sep 17 00:00:00 2001
+From e659828a413308f353d0c037635b69830e50c570 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 9 May 2019 16:21:23 +0200
-Subject: [PATCH 3/3] tqma8xqp_mbpa8xx: add led support to defconfig
+Subject: [PATCH] tqma8xqp_mbpa8xx: add led support to defconfig
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---

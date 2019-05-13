@@ -1,18 +1,18 @@
-From 0d18eaca7133fedac6b172e8b439f616ba788b86 Mon Sep 17 00:00:00 2001
+From e22ecc9314f0a86b6b29aca6b6fe2e6f31217ef7 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 9 May 2019 15:53:02 +0200
-Subject: [PATCH 2/3] arm64: dt: fsl-imx8qxp-tqma8xqp-mbpa8xx: add led support
+Subject: [PATCH] arm64: dt: fsl-imx8qxp-tqma8xqp-mbpa8xx: add led support
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
- arch/arm/dts/fsl-imx8qxp-tqma8xqp-mbpa8xx.dts | 32 ++++++++++++++++++-
- 1 file changed, 31 insertions(+), 1 deletion(-)
+ arch/arm/dts/fsl-imx8qxp-tqma8xqp-mbpa8xx.dts | 33 ++++++++++++++++++-
+ 1 file changed, 32 insertions(+), 1 deletion(-)
 
 diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8xqp-mbpa8xx.dts b/arch/arm/dts/fsl-imx8qxp-tqma8xqp-mbpa8xx.dts
-index 033ecc1d19..1e0aacb588 100644
+index 9be653fbe1..67ab66c242 100644
 --- a/arch/arm/dts/fsl-imx8qxp-tqma8xqp-mbpa8xx.dts
 +++ b/arch/arm/dts/fsl-imx8qxp-tqma8xqp-mbpa8xx.dts
-@@ -27,6 +27,36 @@
+@@ -27,6 +27,37 @@
  		stdout-path = &lpuart1;
  	};
  
@@ -20,6 +20,7 @@ index 033ecc1d19..1e0aacb588 100644
 +		compatible = "gpio-leds";
 +		pinctrl-names = "default";
 +		pinctrl-0 = <&pinctrl_led>;
++		status = "okay";
 +
 +		led1_gn {
 +			label = "led1-gn";
@@ -49,7 +50,7 @@ index 033ecc1d19..1e0aacb588 100644
  	reg_mbpa8xx_3v3: mbpa8xx_3v3 {
  		compatible = "regulator-fixed";
  		regulator-name = "SD1_SPWR";
-@@ -67,7 +97,7 @@
+@@ -66,7 +97,7 @@
  			>;
  		};
  
