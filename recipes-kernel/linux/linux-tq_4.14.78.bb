@@ -5,6 +5,7 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
            file://tqma8x-network-support.cfg \
            file://tqma8x-i2c-devices.cfg \
            file://tqma8x-input-devices.cfg \
+           file://tqma8x-bpf-support.cfg \
            file://0001-arm64-dt-add-dt-variant-for-TQMa8Xx-prototypes-witho.patch \
            file://0002-arm64-dt-tqma8xxs-cosmetic-use-tqma8xxs-in-iomux-gro.patch \
            file://0003-arm64-dt-tqma8xx-cosmetic-use-tqma8xx-in-iomux-group.patch \
