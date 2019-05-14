@@ -8,7 +8,7 @@ MACHINEOVERRIDES =. "tqma6x:"
 # Machine specific options
 #
 MACHINE_EXTRA_RRECOMMENDS = " kernel-modules kernel-devicetree"
-MACHINE_FEATURES_append = " alsa ext2 pci rtc serial usbhost vfat"
+MACHINE_FEATURES_append = " can alsa ext2 pci rtc serial usbhost vfat"
 
 # Don't include kernels in standard images
 RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
