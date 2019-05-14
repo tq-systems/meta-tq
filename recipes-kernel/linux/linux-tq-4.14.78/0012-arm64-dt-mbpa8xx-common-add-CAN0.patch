@@ -1,4 +1,4 @@
-From 2f3eb74d2a79474bf5b5009d7d62f605f3d5c5ff Mon Sep 17 00:00:00 2001
+From 7f44d70eb300aa03b337b134918343668760fcae Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Mon, 13 May 2019 12:16:52 +0200
 Subject: [PATCH] arm64: dt: mbpa8xx-common: add CAN0
@@ -9,10 +9,10 @@ Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
  1 file changed, 15 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi b/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
-index 8d15b43e18e3..134a44c70842 100644
+index c67ebb5c1194..9b41ec938081 100644
 --- a/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
 +++ b/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
-@@ -60,6 +60,14 @@
+@@ -61,6 +61,14 @@
  	};
  };
  
@@ -27,7 +27,7 @@ index 8d15b43e18e3..134a44c70842 100644
  &iomuxc {
  	pinctrl-names = "default";
  	pinctrl-0 = <&pinctrl_hog>;
-@@ -86,6 +94,13 @@
+@@ -87,6 +95,13 @@
  			>;
  		};
  

@@ -20,7 +20,10 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
            file://0012-arm64-dt-mbpa8xx-common-add-CAN0.patch \
            file://0013-arm64-dt-mbpa8xx-common-add-UART0-2-with-RX-TX.patch \
            file://0014-arm64-dt-mbpa8xx-common-add-reset-GPIOs-as-hog-pins.patch \
-           file://0015-arm64-dt-mbpa8xx-common-WIP-SD-Card-gpio-fixes.patch \
+           file://0015-arm64-dt-mbpa8xx-common-SD-Card-gpio-fixes.patch \
+           file://0016-arm64-dt-mbpa8xx-common-add-UART3.patch \
+           file://0017-arm64-dt-mbpa8xx-common-fix-ethernet-PHY-leds.patch \
+           file://0018-arm64-dt-mbpa8xx-common-enable-USB-host-support.patch \
            "
 
 ################

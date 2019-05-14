@@ -1,20 +1,20 @@
-From 5636093b9361ce92a41c35a6cc7418b9e084213c Mon Sep 17 00:00:00 2001
+From 93d15821bf894e624c8bac1116cbc04137d4ec8a Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
-Date: Mon, 13 May 2019 10:22:01 +0200
+Date: Tue, 14 May 2019 16:32:12 +0200
 Subject: [PATCH] arm64: dt: fsl-imx8qxp-tqma8xqp-mbpa8xx: add led support
 
 add bicolor gpio led on MBpa8Xx
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
- .../boot/dts/freescale/mbpa8xx-common.dtsi    | 39 +++++++++++++++++++
- 1 file changed, 39 insertions(+)
+ .../boot/dts/freescale/mbpa8xx-common.dtsi    | 40 +++++++++++++++++++
+ 1 file changed, 40 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi b/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
-index 3786df9f8b46..436b62216ced 100644
+index 3786df9f8b46..0beffdaf2978 100644
 --- a/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
 +++ b/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
-@@ -21,6 +21,36 @@
+@@ -21,6 +21,37 @@
  		stdout-path = &lpuart1;
  	};
  
@@ -22,6 +22,7 @@ index 3786df9f8b46..436b62216ced 100644
 +		compatible = "gpio-leds";
 +		pinctrl-names = "default";
 +		pinctrl-0 = <&pinctrl_led>;
++		status = "okay";
 +
 +		led1_gn {
 +			label = "led1-gn";
@@ -51,7 +52,7 @@ index 3786df9f8b46..436b62216ced 100644
  	reg_mbpa8xx_3v3: mbpa8xx_3v3 {
  		compatible = "regulator-fixed";
  		regulator-name = "SD1_SPWR";
-@@ -53,6 +83,15 @@
+@@ -53,6 +84,15 @@
  			>;
  		};
  

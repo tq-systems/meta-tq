@@ -1,4 +1,4 @@
-From 2d2f8a733d6f186c2cb46f8b93aa391f256a29bb Mon Sep 17 00:00:00 2001
+From a5123f564e9efb39f3151f6e722827fc6b82d3d9 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Mon, 13 May 2019 14:27:49 +0200
 Subject: [PATCH] arm64: dt: mbpa8xx-common: add revision dt gpio as hog pins
@@ -9,10 +9,10 @@ Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
  1 file changed, 12 insertions(+)
 
 diff --git a/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi b/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
-index 926b3a4706dc..8d15b43e18e3 100644
+index 4d1f67795042..c67ebb5c1194 100644
 --- a/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
 +++ b/arch/arm64/boot/dts/freescale/mbpa8xx-common.dtsi
-@@ -61,6 +61,9 @@
+@@ -62,6 +62,9 @@
  };
  
  &iomuxc {
@@ -22,7 +22,7 @@ index 926b3a4706dc..8d15b43e18e3 100644
  	tqma8xx-mbpa8xx {
  		pinctrl_fec1: fec1grp {
  			fsl,pins = <
-@@ -83,6 +86,15 @@
+@@ -84,6 +87,15 @@
  			>;
  		};
  
