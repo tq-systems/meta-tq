@@ -5,11 +5,5 @@ inherit packagegroup
 
 RDEPENDS_${PN} = " \
     iproute2 \
-    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'openembedded-layer', ' canutils', '', d)} \
+    ${@bb.utils.contains('BBFILE_COLLECTIONS', 'openembedded-layer', ' can-utils', '', d)} \
     "
-
-
-# canutils and can-utils have conflicts - both provide candump and cansend
-###
-#     ${@bb.utils.contains('BBFILE_COLLECTIONS', 'openembedded-layer', ' can-utils', '', d)} \
-###
