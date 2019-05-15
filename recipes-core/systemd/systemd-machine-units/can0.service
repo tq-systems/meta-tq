@@ -1,10 +1,14 @@
+# FD mode needs to be enabled for the driver to function.
+# For 2.0B legacy mode, arbitration bit rate (bitrate) and
+# payload bit rate (dbitrate) have the same value - not higher than 1Mbps.
+# CAN frames are limited to max 8 bytes in this case
 [Unit]
 Description=can0 interface setup
 
 [Service]
 Type=simple
 RemainAfterExit=yes
-ExecStart=/sbin/ip link set can0 up type can bitrate 500000
+ExecStart=/sbin/ip link set can0 up type can bitrate 500000 dbitrate 500000 fd on
 ExecStop=/sbin/ip link set can0 down
 
 [Install]
