@@ -26,4 +26,6 @@ COMPATIBLE_MACHINE_append = "|tqma6x"
 COMPATIBLE_MACHINE_append = "|tqma6ulx"
 COMPATIBLE_MACHINE_append = "|tqma6ullx"
 
+DEFAULT_PREFERENCE_tqma6q-nav = "-99"
+
 S = "${WORKDIR}/git"
