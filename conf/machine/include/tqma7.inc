@@ -14,11 +14,11 @@ MACHINE_FEATURES_append = " alsa ext2 pci rtc serial usbhost vfat"
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-tq"
+PREFERRED_PROVIDER_virtual/kernel_tqma7x = "linux-tq"
 KERNEL_IMAGETYPE = "zImage"
 
-PREFERRED_PROVIDER_u-boot = "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-tq"
+PREFERRED_PROVIDER_u-boot_tqma7x = "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader_tqma7x = "u-boot-tq"
 
 UBOOT_SUFFIX ?= "imx"
 UBOOT_MAKE_TARGET ?= "u-boot.imx"
