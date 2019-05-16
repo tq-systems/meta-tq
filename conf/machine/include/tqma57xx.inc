@@ -47,6 +47,9 @@ IMAGE_BOOT_FILES = "\
 
 IMAGE_FSTYPES ?= "tar.gz ext4 wic"
 
+# Do not update fstab file when using wic images
+WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
+
 WKS_FILE_DEPENDS = "\
 	mtools-native \
 	dosfstools-native \

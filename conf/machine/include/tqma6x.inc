@@ -27,10 +27,14 @@ UBOOT_MAKE_TARGET ?= "u-boot.imx"
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 
-IMAGE_FSTYPES ?= "tar.gz ext4 wic"
+IMAGE_FSTYPES_append = " tar.gz ext4 wic"
+IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2"
 
 # need to have the kernel modules in rootfs
 IMAGE_INSTALL_append = " kernel-modules"
+
+# Do not update fstab file when using wic images
+WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
 WKS_FILE_DEPENDS = "\
 	mtools-native \
