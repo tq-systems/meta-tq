@@ -21,6 +21,10 @@ SRCREV = "9397fb9d5d29d83a0beb1b5d0003563dd1156a38"
 
 SRCBRANCH_tqma6q-nav = "TQMaxx2-NAV-v4.1.15-rel_imx_4.1.15_2.0.0_ga"
 SRCREV_tqma6q-nav = "58ce624280c2ca170374b6fcc349819c4a087050"
+SRC_URI_tqma6q-nav = "\
+  git://github.com/tq-systems/linux-tqmaxx.git;protocol=https;branch=${SRCBRANCH} \
+  file://defconfig \
+"
 
 COMPATIBLE_MACHINE = "tqma7x"
 COMPATIBLE_MACHINE_append = "|tqma6ulx"
