@@ -1,9 +1,18 @@
 # Common definitions for TQ-Group TQMa6 modules
 
-DEFAULTTUNE ?= "cortexa9thf-neon"
-require conf/machine/include/tune-cortexa9.inc
+# optionally source the machine specific features for multimedia etc. from
+# meta-freescale
+
+MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT = "1"
+MACHINE_USES_VIVANTE_KERNEL_DRIVER_MODULE = "0"
 
 MACHINEOVERRIDES =. "tqma6x:"
+MACHINEOVERRIDES =. "imx:mx6:"
+
+include conf/machine/include/imx-base.inc
+
+DEFAULTTUNE ?= "cortexa9thf-neon"
+require conf/machine/include/tune-cortexa9.inc
 
 # Machine specific options
 #
@@ -43,11 +52,3 @@ WKS_FILE_DEPENDS = "\
 	virtual/kernel \
 	virtual/bootloader \
 	"
-
-# optionally source the machine specific features for multimedia etc. from
-# meta-freescale
-
-MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT = "1"
-MACHINE_USES_VIVANTE_KERNEL_DRIVER_MODULE = "0"
-
-include conf/machine/include/imx-base.inc
