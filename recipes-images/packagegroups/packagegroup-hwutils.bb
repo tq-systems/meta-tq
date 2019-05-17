@@ -7,7 +7,7 @@ RDEPENDS_${PN} = " \
     usbutils \
     mmc-utils \
     i2c-tools \
-    pciutils \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'pci', ' pciutils', '', d)} \
     ${@bb.utils.contains('BBFILE_COLLECTIONS', 'openembedded-layer', ' spitools', '', d)} \
     ${@bb.utils.contains('BBFILE_COLLECTIONS', 'openembedded-layer', ' lmsensors-sensors', '', d)} \
     "
