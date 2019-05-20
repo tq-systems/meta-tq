@@ -1,6 +1,12 @@
 # Common definitions for TQ-Group TQMa6UL modules
 
-MACHINEOVERRIDES =. "mx6:mx6ul:tqma6ulx:"
+# optionally source the machine specific features for multimedia etc. from
+# meta-freescale
+
+MACHINEOVERRIDES =. "tqma6ulx:"
+MACHINEOVERRIDES =. "imx:mx6:mx6ul:"
+
+include conf/machine/include/imx-base.inc
 
 DEFAULTTUNE ?= "cortexa7thf-neon"
 require conf/machine/include/tune-cortexa7.inc
