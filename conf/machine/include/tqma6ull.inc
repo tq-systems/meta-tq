@@ -1,8 +1,14 @@
 # Common definitions for TQ-Group TQMa6ULL modules
 
-MACHINEOVERRIDES =. "mx6:mx6ull:tqma6ullx:"
+# optionally source the machine specific features for multimedia etc. from
+# meta-freescale
 
-DEFAULTTUNE ?= "cortexa7thf-neon"
+MACHINEOVERRIDES =. "tqma6ullx:"
+MACHINEOVERRIDES =. "imx:mx6:mx6ull:"
+
+include conf/machine/include/imx-base.inc
+
+DEFAULTTUNE_mx6ull ?= "cortexa7thf-neon"
 require conf/machine/include/tune-cortexa7.inc
 
 # Machine specific options
@@ -64,7 +70,3 @@ WKS_FILE_DEPENDS = "\
 
 # TODO:
 #IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
-
-# optionally source the machine specific features for multimedia etc. from
-# meta-freescale
-include conf/machine/include/imx-base.inc
