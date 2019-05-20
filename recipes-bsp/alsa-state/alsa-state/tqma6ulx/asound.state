@@ -1,0 +1,394 @@
+state.imx6ulmba6ultlv {
+	control.1 {
+		iface MIXER
+		name 'PCM Playback Volume'
+		value.0 80
+		value.1 80
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 175'
+			dbmin -6350
+			dbmax 2400
+			dbvalue.0 -2350
+			dbvalue.1 -2350
+		}
+	}
+	control.2 {
+		iface MIXER
+		name 'HP Driver Gain Volume'
+		value.0 6
+		value.1 6
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 35'
+			dbmin -600
+			dbmax 2900
+			dbvalue.0 0
+			dbvalue.1 0
+		}
+	}
+	control.3 {
+		iface MIXER
+		name 'LO Driver Gain Volume'
+		value.0 26
+		value.1 26
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 35'
+			dbmin -600
+			dbmax 2900
+			dbvalue.0 2000
+			dbvalue.1 2000
+		}
+	}
+	control.4 {
+		iface MIXER
+		name 'HP DAC Playback Switch'
+		value.0 false
+		value.1 false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 2
+		}
+	}
+	control.5 {
+		iface MIXER
+		name 'LO DAC Playback Switch'
+		value.0 true
+		value.1 true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 2
+		}
+	}
+	control.6 {
+		iface MIXER
+		name 'Mic PGA Switch'
+		value.0 true
+		value.1 true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 2
+		}
+	}
+	control.7 {
+		iface MIXER
+		name 'ADCFGA Left Mute Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.8 {
+		iface MIXER
+		name 'ADCFGA Right Mute Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.9 {
+		iface MIXER
+		name 'ADC Level Volume'
+		value.0 44
+		value.1 44
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 64'
+			dbmin -1200
+			dbmax 2000
+			dbvalue.0 1000
+			dbvalue.1 1000
+		}
+	}
+	control.10 {
+		iface MIXER
+		name 'PGA Level Volume'
+		value.0 39
+		value.1 39
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 95'
+			dbmin 0
+			dbmax 4750
+			dbvalue.0 1950
+			dbvalue.1 1950
+		}
+	}
+	control.11 {
+		iface MIXER
+		name 'Auto-mute Switch'
+		value 0
+		comment {
+			access 'read write'
+			type INTEGER
+			count 1
+			range '0 - 7'
+		}
+	}
+	control.12 {
+		iface MIXER
+		name 'AGC Left Switch'
+		value true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.13 {
+		iface MIXER
+		name 'AGC Right Switch'
+		value true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.14 {
+		iface MIXER
+		name 'AGC Target Level'
+		value.0 0
+		value.1 0
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 7'
+		}
+	}
+	control.15 {
+		iface MIXER
+		name 'AGC Gain Hysteresis'
+		value.0 0
+		value.1 0
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 3'
+		}
+	}
+	control.16 {
+		iface MIXER
+		name 'AGC Hysteresis'
+		value.0 0
+		value.1 0
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 3'
+		}
+	}
+	control.17 {
+		iface MIXER
+		name 'AGC Noise Threshold'
+		value.0 0
+		value.1 0
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 31'
+		}
+	}
+	control.18 {
+		iface MIXER
+		name 'AGC Max PGA'
+		value.0 0
+		value.1 0
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 127'
+		}
+	}
+	control.19 {
+		iface MIXER
+		name 'AGC Attack Time'
+		value.0 7
+		value.1 7
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 31'
+		}
+	}
+	control.20 {
+		iface MIXER
+		name 'AGC Decay Time'
+		value.0 0
+		value.1 0
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 31'
+		}
+	}
+	control.21 {
+		iface MIXER
+		name 'AGC Noise Debounce'
+		value.0 0
+		value.1 0
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 31'
+		}
+	}
+	control.22 {
+		iface MIXER
+		name 'AGC Signal Debounce'
+		value.0 0
+		value.1 0
+		comment {
+			access 'read write'
+			type INTEGER
+			count 2
+			range '0 - 15'
+		}
+	}
+	control.23 {
+		iface MIXER
+		name 'Right Input Mixer IN1_R P Switch'
+		value true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.24 {
+		iface MIXER
+		name 'Right Input Mixer IN2_R P Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.25 {
+		iface MIXER
+		name 'Right Input Mixer IN3_R P Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.26 {
+		iface MIXER
+		name 'Left Input Mixer IN1_L P Switch'
+		value true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.27 {
+		iface MIXER
+		name 'Left Input Mixer IN2_L P Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.28 {
+		iface MIXER
+		name 'Left Input Mixer IN3_L P Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.29 {
+		iface MIXER
+		name 'LOR Output Mixer R_DAC Switch'
+		value true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.30 {
+		iface MIXER
+		name 'HPR Output Mixer R_DAC Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.31 {
+		iface MIXER
+		name 'HPR Output Mixer IN1_R Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.32 {
+		iface MIXER
+		name 'LOL Output Mixer L_DAC Switch'
+		value true
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.33 {
+		iface MIXER
+		name 'HPL Output Mixer L_DAC Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+	control.34 {
+		iface MIXER
+		name 'HPL Output Mixer IN1_L Switch'
+		value false
+		comment {
+			access 'read write'
+			type BOOLEAN
+			count 1
+		}
+	}
+}
