@@ -12,8 +12,8 @@ SRCBRANCH = "TQMLS10xxA-u-boot-v2018.07"
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 
 DEPENDS += "swap-file-endianess-native tcl-native"
-
-DEPENDS_append = " dtc-native bc-native"
+DEPENDS += "dtc-native bc-native"
+DEPENDS += "flex-native bison-native"
 
 S = "${WORKDIR}/git"
 
