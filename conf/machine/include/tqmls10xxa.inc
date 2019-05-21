@@ -21,9 +21,22 @@ MACHINE_FEATURES_append = " ext2 pci rtc serial usbhost vfat"
 EXTRA_IMAGEDEPENDS += "virtual/bootloader fm-ucode"
 IMAGE_FSTYPES ?= "tar.gz ext4 wic ubi"
 
-DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
+# DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
+IMAGE_FSTYPES_remove += "${@bb.utils.contains('DISTRO_FEATURES', 'vulkan', 'ubi', '', d)}"
+IMAGE_FSTYPES_remove += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'ubi', '', d)}"
+IMAGE_FSTYPES_remove += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'ubi', '', d)}"
 
 # needed for Rootfs on QSPI
 IMAGE_INSTALL_append = " mtd-utils-jffs2 mtd-utils-ubifs mtd-utils-misc"
 IMAGE_INSTALL_append = " kernel-modules"
 
+# Do not update fstab file when using wic images
+WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
+
+WKS_FILE_DEPENDS = "\
+	mtools-native \
+	dosfstools-native \
+	parted-native \
+	virtual/kernel \
+	virtual/bootloader \
+	"
