@@ -10,7 +10,10 @@ PROVIDES += "u-boot"
 SRCREV = "adfbf1d223228ccccac01092fd9051be0e532acb"
 SRCBRANCH = "TQMLS102xA-u-boot-v2017.11-BSP0110"
 
-SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
+SRC_URI = " \
+    ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+    file://0001-tools-Include-U-Boot-libfdt-headers-from-their-actua.patch \
+"
 
 DEPENDS += "swap-file-endianess-native tcl-native"
 
@@ -20,7 +23,7 @@ S = "${WORKDIR}/git"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-do_compile_append () {
+do_compile_append_tqmls102xa () {
  unset i j
     if [ "x${UBOOT_CONFIG}" != "x" ]; then
         for config in ${UBOOT_MACHINE}; do
