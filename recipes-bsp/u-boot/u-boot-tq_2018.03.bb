@@ -15,6 +15,9 @@ SRCBRANCH = "TQMa8xx-bringup-v2018.03-rel_imx_4.14.78_1.0.0_ga"
 
 SRC_URI = " \
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+    file://0001-arm64-dt-fsl-imx8mq-tqma8mq-mba8mx-fix-ethernet-phy-.patch \
+    file://0002-arm64-dt-fsl-imx8qxp-tqma8xqp-mba8xx-fix-ethernet-ph.patch \
+    file://0003-arm64-dt-fsl-imx8qxp-tqma8xqps-fix-ethernet-phy-LED.patch \
 "
 
 S = "${WORKDIR}/git"

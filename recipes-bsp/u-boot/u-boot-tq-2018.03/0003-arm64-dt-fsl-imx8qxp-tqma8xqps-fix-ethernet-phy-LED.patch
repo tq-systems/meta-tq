@@ -1,0 +1,32 @@
+From 14f5d46220817eab6ee1896a84ba764512280da3 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Wed, 15 May 2019 18:00:10 +0200
+Subject: [PATCH] arm64: dt: fsl-imx8qxp-tqma8xqps: fix ethernet phy LED
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8qxp-tqma8xqps.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/arm/dts/fsl-imx8qxp-tqma8xqps.dtsi b/arch/arm/dts/fsl-imx8qxp-tqma8xqps.dtsi
+index 604f5bae43..2835137137 100644
+--- a/arch/arm/dts/fsl-imx8qxp-tqma8xqps.dtsi
++++ b/arch/arm/dts/fsl-imx8qxp-tqma8xqps.dtsi
+@@ -200,6 +200,8 @@
+ 			reg = <0>;
+ 			ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
+ 			ti,tx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
++			ti,led-cfg1 = <0x0100>; /* LED1: Link, LED2: activity */
++			ti,led-cfg2 = <0x1441>; /* active high, LED1/2 driven by phy */
+ 		};
+ 
+ 		ethphy3: ethernet-phy@3 {
+@@ -207,6 +209,8 @@
+ 			reg = <3>;
+ 			ti,rx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
+ 			ti,tx-internal-delay = <DP83867_RGMIIDCTL_2_50_NS>;
++			ti,led-cfg1 = <0x0100>; /* LED1: Link, LED2: activity */
++			ti,led-cfg2 = <0x1441>; /* active high, LED1/2 driven by phy */
+ 		};
+ 	};
+ };
