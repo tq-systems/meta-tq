@@ -12,7 +12,7 @@ LOADADDR = ""
 # Machine specific options
 #
 MACHINE_EXTRA_RRECOMMENDS = " kernel-modules kernel-devicetree"
-MACHINE_FEATURES_append = " can pci alsa"
+MACHINE_FEATURES_append = " can pci alsa rtc serial ext2 ext3 vfat usbhost"
 
 # TQ u-boot and kernel
 #
