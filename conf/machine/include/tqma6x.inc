@@ -32,6 +32,8 @@ PREFERRED_PROVIDER_virtual/bootloader_tqma6x = "u-boot-tq"
 UBOOT_SUFFIX ?= "imx"
 UBOOT_MAKE_TARGET ?= "u-boot.imx"
 
+PREFERRED_VERSION_weston_mx6_imx ?= "5.0.0.imx"
+
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
