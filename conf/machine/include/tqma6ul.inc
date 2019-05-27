@@ -4,7 +4,7 @@
 # meta-freescale
 
 MACHINEOVERRIDES =. "tqma6ulx:"
-MACHINEOVERRIDES =. "imx:mx6:mx6ul:"
+MACHINEOVERRIDES =. "mx6:mx6ul:"
 
 include conf/machine/include/imx-base.inc
 
