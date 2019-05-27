@@ -40,8 +40,14 @@ FILES_${PN} = "${libdir}/libg2d* /opt"
 FILES_${PN}-dev = "${includedir}"
 INSANE_SKIP_${PN} = "ldflags"
 
+# Same compatible list as linux-tq_imx-4.14.78
+COMPATIBLE_MACHINE_TQ = "tqma7x"
+COMPATIBLE_MACHINE_TQ_append = "|tqma6x"
+COMPATIBLE_MACHINE_TQ_append = "|tqma6ulx"
+COMPATIBLE_MACHINE_TQ_append = "|tqma6ullx"
+
 # Compatible with i.MX with 2D GPU but no DPU
 COMPATIBLE_MACHINE_2D          = "(^$)"
-COMPATIBLE_MACHINE_2D_imxgpu2d = "${MACHINE}"
+COMPATIBLE_MACHINE_2D_imxgpu2d = "${COMPATIBLE_MACHINE_TQ}"
 COMPATIBLE_MACHINE             = "${COMPATIBLE_MACHINE_2D}"
 COMPATIBLE_MACHINE_imxdpu      = "(^$)"

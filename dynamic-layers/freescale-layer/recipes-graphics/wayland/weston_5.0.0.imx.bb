@@ -162,3 +162,9 @@ USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "--system weston-launch"
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
+
+# Same compatible list as linux-tq_imx-4.14.78
+COMPATIBLE_MACHINE = "tqma7x"
+COMPATIBLE_MACHINE_append = "|tqma6x"
+COMPATIBLE_MACHINE_append = "|tqma6ulx"
+COMPATIBLE_MACHINE_append = "|tqma6ullx"
