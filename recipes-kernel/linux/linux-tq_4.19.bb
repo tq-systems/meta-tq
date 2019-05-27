@@ -17,7 +17,7 @@ SRC_URI = "\
 "
 
 SRCBRANCH = "TQMLS10xxA-linux-4.19.0"
-SRCREV = "f650a3a62df58a9029f8c9abad1a15cdba82287c"
+SRCREV = "5da7d6a9898bdea94a61d67ea50dabf9294038a7"
 
 
 COMPATIBLE_MACHINE = "tqmls10xxa"
