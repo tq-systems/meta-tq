@@ -13,7 +13,7 @@ require conf/machine/include/tune-cortexa15.inc
 
 # Machine specific options
 #
-MACHINE_EXTRA_RRECOMMENDS = " kernel-modules kernel-devicetree"
+MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree"
 
 # TQ u-boot and kernel
 #

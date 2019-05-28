@@ -16,7 +16,7 @@ require conf/machine/include/tune-cortexa9.inc
 
 # Machine specific options
 #
-MACHINE_EXTRA_RRECOMMENDS = " kernel-modules kernel-devicetree"
+MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree"
 MACHINE_FEATURES_append = " alsa ext2 pci rtc serial usbhost vfat can"
 
 # TQ u-boot and kernel
