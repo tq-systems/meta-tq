@@ -18,11 +18,3 @@ UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
 UBI_VOLNAME = "root"
 
 WKS_FILE ?= "tqmls1043a-sdimg.wks"
-
-WKS_FILE_DEPENDS = "\
-	mtools-native \
-	dosfstools-native \
-	parted-native \
-	virtual/kernel \
-	virtual/bootloader \
-	"
