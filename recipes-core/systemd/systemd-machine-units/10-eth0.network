@@ -1,0 +1,11 @@
+[Match]
+Name=eth0
+
+[Network]
+DHCP=ipv4
+Address=192.168.0.100/24
+
+[DHCP]
+# add CriticalConnection - with networkd, the IP address will not
+# change after this service was reloaded. Just reboot the system.
+CriticalConnection=true
