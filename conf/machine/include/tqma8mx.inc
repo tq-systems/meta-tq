@@ -11,7 +11,7 @@ LOADADDR = ""
 
 # Machine specific options
 #
-MACHINE_EXTRA_RRECOMMENDS = " kernel-modules kernel-devicetree"
+MACHINE_EXTRA_RRECOMMENDS += " kernel-modules kernel-devicetree"
 MACHINE_FEATURES_append = " pci alsa"
 
 # TQ u-boot and kernel
