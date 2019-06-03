@@ -19,11 +19,11 @@ MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree"
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_virtual/kernel = "linux-tqma57xx-ti-staging-rt"
+PREFERRED_PROVIDER_virtual/kernel_tqma57xx = "linux-tq"
 KERNEL_IMAGETYPE = "zImage"
 
-PREFERRED_PROVIDER_u-boot = "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-tq"
+PREFERRED_PROVIDER_u-boot_tqma57xx = "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader_tqma57xx = "u-boot-tq"
 
 UBOOT_ARCH = "arm"
 UBOOT_ENTRYPOINT = "0x80008000"
