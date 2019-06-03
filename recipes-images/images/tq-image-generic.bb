@@ -9,6 +9,7 @@ LICENSE = "MIT"
 inherit distro_features_check
 
 IMAGE_INSTALL += "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' packagegroup-systemd', '', d)} \
     packagegroup-hwutils \
     packagegroup-fsutils \
     packagegroup-netutils \
