@@ -13,21 +13,37 @@ Dependencies
 This layer depends on:
 
   URI: git://git.yoctoproject.org/poky
-  branch: sumo
+  branch: warrior
   layers: meta
   revision: HEAD
 
-optionally the layer can make use of features from meta-freescale
+optionally the layer can make use of features from meta-freescale /
+meta-freeescale-distro if using i.MX6, i.MX6UL, i.MX7 based machines
+(tqma6[s,dl,q,qp]-mba6x, tqma6ul[l]x-mba6ulx, tqma6ul[l]x-lga-mba6ulx etc.)
 
-  URI: https://github.com/Freescale/meta-freescale.git
+  URI: https://git.yoctoproject.org/git/meta-freescale
   layers: meta-freeescale
-  branch: sumo
+  branch: warrior
 
-optionally the layer can make use of features from meta-ti
+  URI: https://github.com/Freescale/meta-freescale-distro.git
+  layers: meta-freeescale
+  branch: warrior
+
+Attention: following distros defined in meta-freescale-distro are not comatible
+to machines in meta-tq:
+
+fsl-framebuffer
+fsl-wayland
+fsl-x11
+fsl-xwayland
+
+optionally the layer can make use of features from meta-ti if using AM57xx
+based machines (tqma57[1,2,4]x-mba57xx etc.)
 
   URI: git://git.yoctoproject.org/meta-ti
   layers: meta-ti
-  branch: thud (states compatibility to sumo)
+  branch: master (states compatibility to warrior with commit
+          59e66caff2568ab32f59596f1aeab8ea27649941)
 
 Patches
 =======
