@@ -2,7 +2,7 @@ require recipes-core/images/core-image-minimal.bb
 
 SUMMARY =  "This is a generic image for TQ SOM with some test / debug features."
 
-IMAGE_LINGUAS = " en-us "
+IMAGE_LINGUAS_append = " en-us "
 
 LICENSE = "MIT"
 
