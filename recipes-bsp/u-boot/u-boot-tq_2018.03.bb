@@ -10,14 +10,11 @@ DEPENDS_append = " python dtc-native bc-native"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
-SRCREV = "9b56ad98a1387466386e418d0420652ab04f2fad"
+SRCREV = "14f5d46220817eab6ee1896a84ba764512280da3"
 SRCBRANCH = "TQMa8xx-bringup-v2018.03-rel_imx_4.14.78_1.0.0_ga"
 
 SRC_URI = " \
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
-    file://0001-arm64-dt-fsl-imx8mq-tqma8mq-mba8mx-fix-ethernet-phy-.patch \
-    file://0002-arm64-dt-fsl-imx8qxp-tqma8xqp-mba8xx-fix-ethernet-ph.patch \
-    file://0003-arm64-dt-fsl-imx8qxp-tqma8xqps-fix-ethernet-phy-LED.patch \
 "
 
 S = "${WORKDIR}/git"
