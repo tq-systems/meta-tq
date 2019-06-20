@@ -9,7 +9,10 @@ Description=can0 interface setup
 [Service]
 Type=simple
 RemainAfterExit=yes
-ExecStart=/sbin/ip link set can0 up type can bitrate 500000 dbitrate 2000000 fd on
+# use this as template for FAN FD support
+# ExecStart=/sbin/ip link set can0 up type can bitrate 500000 dbitrate 2000000 fd on
+# CAN 2.0B legacy
+ExecStart=/sbin/ip link set can0 up type can bitrate 500000 fd off
 ExecStop=/sbin/ip link set can0 down
 
 [Install]
