@@ -22,6 +22,8 @@ SRCBRANCH = "TQMaxx2-v4.14-rel_imx_4.14.78_1.0.0_ga"
 SRCREV ?= "bb0360f3f557ef3e49c5aa1eab236a87e911e61f"
 
 SRCREV_tqma7x = "bb0360f3f557ef3e49c5aa1eab236a87e911e61f"
+SRCREV_tqma6ulx = "8034ee52a335aaf9e14b9a23ee1630bc3f5b01ca"
+SRCREV_tqma6ullx = "8034ee52a335aaf9e14b9a23ee1630bc3f5b01ca"
 
 COMPATIBLE_MACHINE = "tqma7x"
 COMPATIBLE_MACHINE_append = "|tqma6x"
