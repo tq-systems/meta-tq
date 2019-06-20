@@ -1,6 +1,7 @@
-# FD mode needs to be enabled for the driver to function.
+# FD mode can be disabled, and in fact is has to for STK rev.0
 # For 2.0B legacy mode, arbitration bit rate (bitrate) and
 # payload bit rate (dbitrate) have the same value - not higher than 1Mbps.
+# This is automatically the case for fd off
 # CAN frames are limited to max 8 bytes in this case
 [Unit]
 Description=can0 interface setup
@@ -8,7 +9,7 @@ Description=can0 interface setup
 [Service]
 Type=simple
 RemainAfterExit=yes
-ExecStart=/sbin/ip link set can0 up type can bitrate 500000 dbitrate 500000 fd on
+ExecStart=/sbin/ip link set can0 up type can bitrate 500000 fd off
 ExecStop=/sbin/ip link set can0 down
 
 [Install]
