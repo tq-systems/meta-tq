@@ -6,6 +6,7 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
            file://tqma8x-i2c-devices.cfg \
            file://tqma8x-input-devices.cfg \
            file://tqma8x-bpf-support.cfg \
+           file://tqma8x-audio-support.cfg \
            "
 
 ################
