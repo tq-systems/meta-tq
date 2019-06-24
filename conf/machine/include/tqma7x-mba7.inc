@@ -25,4 +25,4 @@ IMAGE_BOOT_FILES = "\
 	${KERNEL_DEVICETREE} \
 "
 
-WKS_FILE ?= "tqmaxx-sdimg.wks"
+WKS_FILE = "tqmaxx-sdimg.wks"
