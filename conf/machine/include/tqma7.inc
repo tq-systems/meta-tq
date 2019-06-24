@@ -2,6 +2,10 @@
 
 MACHINEOVERRIDES =. "mx7:mx7d:tqma7x:"
 
+# optionally source the machine specific features for multimedia etc. from
+# meta-freescale
+include conf/machine/include/imx-base.inc
+
 DEFAULTTUNE ?= "cortexa7thf-neon"
 require conf/machine/include/tune-cortexa7.inc
 
@@ -60,7 +64,3 @@ WKS_FILE_DEPENDS = "\
 	virtual/kernel \
 	virtual/bootloader \
 	"
-
-# optionally source the machine specific features for multimedia etc. from
-# meta-freescale
-include conf/machine/include/imx-base.inc
