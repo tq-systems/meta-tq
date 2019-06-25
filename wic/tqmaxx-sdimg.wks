@@ -15,6 +15,6 @@
 #
 part u-boot --source rawcopy --sourceparams="file=u-boot.imx-sd" --no-table --align 1
 part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 4096 --fixed-size 32M
-part / --source rootfs --fstype=ext4 --label root --align 4096 --fixed-size 512M
+part / --source rootfs --fstype=ext4 --label root --align 4096
 
 bootloader --ptable msdos
