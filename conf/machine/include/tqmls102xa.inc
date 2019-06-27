@@ -52,6 +52,9 @@ UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
 # needs to be set to have it consistent for kernel command line
 UBI_VOLNAME = "root"
 
+# Do not update fstab file when using wic images
+WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
+
 WKS_FILE ?= "tqmls102xa-sdimg.wks"
 
 WKS_FILE_DEPENDS = "\
