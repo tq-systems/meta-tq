@@ -1,15 +1,16 @@
 # Common definitions for TQ-Group TQMa57xx modules
-
+# optional from meta-ti
+# will handle SOC_FAMILY_append ?= ":dra7xx" needed for TI recipes
 include conf/machine/include/dra7xx.inc
 
-SOC_FAMILY_append = ":dra7xx"
-
+# needed for easier compatible / preferred_provider
 MACHINEOVERRIDES =. "tqma57xx:"
 
 MACHINE_FEATURES += "pci"
 
-DEFAULTTUNE ?= "armv7athf-neon"
-require conf/machine/include/tune-cortexa15.inc
+# prevent inclusion if meta-ti is present - otherwise we get nasty double inclusion warnings
+DEFAULTTUNE ?= "${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-ti", "", "armv7athf-neon", d)}"
+require ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-ti", '', 'conf/machine/include/tune-cortexa15.inc', d)}
 
 # Machine specific options
 #
