@@ -9,6 +9,10 @@ IMXBOOT_TARGETS_mx8qxp = "flash"
 
 # DCD_NAME is optional - provide RAM DCD name if RAM bringup not implemented in SCFW
 
+DEPENDS += " \
+    virtual/bootloader \
+"
+
 # HACK that imx-mkimage runs
 # The soc.mak file has hardcoded u-boot devicetree names. For the perelease we
 # use a HACK and rename the our devictree equal to NXP EVK devicetree.
