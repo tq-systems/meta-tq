@@ -19,7 +19,7 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
 
 
 SRCBRANCH = "TQMa8xx-bringup-rel_imx_4.14.78_1.0.0_ga"
-SRCREV = "7b71bdc2ea0ee5725151e463fe48aa60d0862e0c"
+SRCREV = "53a2015c93958af44c21b1dfa6d7f3872c89be46"
 
 #####
 # copies the defconfig from the kernel tree
