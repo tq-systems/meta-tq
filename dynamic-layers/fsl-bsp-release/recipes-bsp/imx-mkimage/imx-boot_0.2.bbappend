@@ -34,6 +34,7 @@ do_deploy_append() {
         case ${MACHINE} in
             tqma8qx* |\
             tqma8x*)
+                bbnote "IMAGE_IMXBOOT_TARGET=${IMAGE_IMXBOOT_TARGET}"
                 ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-b0-bootstream.bin
                 ;;
             *)
@@ -46,6 +47,7 @@ do_deploy_append() {
        case ${MACHINE} in
             tqma8mx* |\
             tqma8mq*)
+                bbnote "IMAGE_IMXBOOT_TARGET=${IMAGE_IMXBOOT_TARGET}"
                 ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-bootstream.bin
                 ;;
             *)
