@@ -8,6 +8,8 @@ KERNEL_DEVICETREE = "\
 	freescale/fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-tm070jvhg33-en_gpio.dtb \
 	freescale/fsl-imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb \
 	freescale/fsl-imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33-en_gpio.dtb \
+	freescale/fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01-en_gpio.dtb \
+	freescale/fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01-18bit-en_gpio.dtb \
 "
 
 # Set Serial console
@@ -27,5 +29,7 @@ IMAGE_BOOT_FILES ?= "\
 	${KERNEL_IMAGETYPE}-fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-tm070jvhg33-en_gpio.dtb;fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-tm070jvhg33-en_gpio.dtb \
 	${KERNEL_IMAGETYPE}-fsl-imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb;fsl-imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb \
 	${KERNEL_IMAGETYPE}-fsl-imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33-en_gpio.dtb;fsl-imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33-en_gpio.dtb \
+	${KERNEL_IMAGETYPE}-fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01-en_gpio.dtb;fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01-en_gpio.dtb \
+	${KERNEL_IMAGETYPE}-fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01-18bit-en_gpio.dtb;fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01-18bit-en_gpio.dtb \
 	"
 
