@@ -10,7 +10,7 @@ DEPENDS_append = " python dtc-native bc-native"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
-SRCREV = "14f5d46220817eab6ee1896a84ba764512280da3"
+SRCREV = "91393e710a3b0fe99ee689c8b5655654fed50346"
 SRCBRANCH = "TQMa8xx-bringup-v2018.03-rel_imx_4.14.78_1.0.0_ga"
 
 SRC_URI = " \
