@@ -1,0 +1,75 @@
+/*
+ * Copyright 2019 TQ-Systems GmbH
+ */
+
+/dts-v1/;
+/ {
+	resources {
+		icid_pools {
+			icid_pool@1 {
+				num = <100>;
+				base_icid = <0>;
+			};
+		};
+	};
+	mc_general {
+		log {
+			mode = "LOG_MODE_ON";
+			level = "LOG_LEVEL_WARNING";
+		};
+		console {
+			mode = "CONSOLE_MODE_ON";
+			uart_id = <3>;
+		};
+	};
+	aiop {
+		log {
+			mode = "LOG_MODE_ON";
+		};
+		console {
+			mode = "CONSOLE_MODE_ON";
+			uart_id = <4>;
+		};
+	};
+	controllers {
+		qbman {
+			/* Transform this number of 8-WQ channels into four times
+			 * as many 2-WQ channels. This allows the creation of a
+			 * larger number of DPCONs.
+			 */
+			wq_ch_conversion = <24>;
+		};
+	};
+	board_info {
+		ports {
+			/* only XFI is supported on MAC1 */
+			mac@2 {
+				link_type = "MAC_LINK_TYPE_PHY";
+			};
+			mac@3 {
+				link_type = "MAC_LINK_TYPE_PHY";
+			};
+			mac@4 {
+				link_type = "MAC_LINK_TYPE_PHY";
+			};
+			mac@5 {
+				link_type = "MAC_LINK_TYPE_PHY";
+			};
+			mac@6 {
+				link_type = "MAC_LINK_TYPE_PHY";
+			};
+			mac@7 {
+				link_type = "MAC_LINK_TYPE_PHY";
+			};
+			mac@8 {
+				link_type = "MAC_LINK_TYPE_PHY";
+			};
+			mac@9 {
+				link_type = "MAC_LINK_TYPE_PHY";
+			};
+			mac@10 {
+				link_type = "MAC_LINK_TYPE_PHY";
+			};
+		};
+	};
+};

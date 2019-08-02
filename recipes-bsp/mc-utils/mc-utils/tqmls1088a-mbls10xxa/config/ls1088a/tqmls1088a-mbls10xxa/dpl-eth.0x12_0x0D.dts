@@ -1,0 +1,209 @@
+/*
+ * Copyright 2019 TQ-Systems GmbH
+ */
+
+/*
+ * "Bootstrap DPL" for TQMLS1088A on MBLS10xxA featuring SerDes 0x12_0x0D.
+ * This together with the available DPMCP objects should be enough to boot Linux
+ * and to allow the dynamic addition of other objects to the Linux container,
+ * using the 'restool' utility.
+ */
+
+/dts-v1/;
+/ {
+	dpl-version = <10>;
+	/*****************************************************************
+	 * Containers
+	 *****************************************************************/
+	containers {
+		dprc@1 {
+			compatible = "fsl,dprc";
+			parent = "none";
+			options = "DPRC_CFG_OPT_SPAWN_ALLOWED" , "DPRC_CFG_OPT_ALLOC_ALLOWED", "DPRC_CFG_OPT_IRQ_CFG_ALLOWED";
+			objects {
+				/* ------------- MACs --------------*/
+				obj_set@dpmac {
+					type = "dpmac";
+					ids = <1 2 3 4 5 6 7 8 9 10>;
+				};
+
+				/* ------------ DPNIs --------------*/
+				obj@200 {
+					obj_name = "dpni@0";
+				};
+
+				/* ------------ DPBPs --------------*/
+				obj@300 {
+					obj_name="dpbp@1";
+				};
+
+				/* ------------ DPIOs --------------*/
+				obj_set@dpio {
+					type = "dpio";
+					ids = <1 2 3 4 5 6 7 8>;
+				};
+
+				/* ------------ DPMCPs --------------*/
+				obj_set@dpmcp {
+					type = "dpmcp";
+					ids = <1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25>;
+				};
+
+				/* ------------ DPCON --------------*/
+				obj@500 {
+					obj_name="dpcon@1";
+				};
+
+				/* ------------ DPRTC --------------*/
+				obj@800 {
+					obj_name="dprtc@0";
+				};
+			};
+		};
+	};
+
+	/*****************************************************************
+	 * Objects
+	 *****************************************************************/
+	objects {
+
+		/* ------------ DPNI --------------*/
+		dpni@0 {
+			options = "";
+			num_queues = <1>;
+			num_tcs = <1>;
+		};
+
+		/* ------------ DPBP --------------*/
+		dpbp@1 {
+		};
+
+		/* ------------ DPIO --------------*/
+		dpio@1 {
+			compatible = "fsl,dpio";
+			channel_mode = "DPIO_LOCAL_CHANNEL";
+			num_priorities = <8>;
+		};
+		dpio@2 {
+			channel_mode = "DPIO_LOCAL_CHANNEL";
+			num_priorities = <8>;
+		};
+		dpio@3 {
+			channel_mode = "DPIO_LOCAL_CHANNEL";
+			num_priorities = <8>;
+		};
+		dpio@4 {
+			channel_mode = "DPIO_LOCAL_CHANNEL";
+			num_priorities = <8>;
+		};
+		dpio@5 {
+			channel_mode = "DPIO_LOCAL_CHANNEL";
+			num_priorities = <8>;
+		};
+		dpio@6 {
+			channel_mode = "DPIO_LOCAL_CHANNEL";
+			num_priorities = <8>;
+		};
+		dpio@7 {
+			channel_mode = "DPIO_LOCAL_CHANNEL";
+			num_priorities = <8>;
+		};
+		dpio@8 {
+			channel_mode = "DPIO_LOCAL_CHANNEL";
+			num_priorities = <8>;
+		};
+
+		/* ------------ DPMAC --------------*/
+		dpmac@1 {
+		};
+		dpmac@2 {
+		};
+		dpmac@3 {
+		};
+		dpmac@4 {
+		};
+		dpmac@5 {
+		};
+		dpmac@6 {
+		};
+		dpmac@7 {
+		};
+		dpmac@8 {
+		};
+		dpmac@9 {
+		};
+		dpmac@10 {
+		};
+
+		/* ------------ DPMCP --------------*/
+		dpmcp@1 {
+		};
+		dpmcp@2 {
+		};
+		dpmcp@3 {
+		};
+		dpmcp@4 {
+		};
+		dpmcp@5 {
+		};
+		dpmcp@6 {
+		};
+		dpmcp@7 {
+		};
+		dpmcp@8 {
+		};
+		dpmcp@9 {
+		};
+		dpmcp@10 {
+		};
+		dpmcp@11 {
+		};
+		dpmcp@12 {
+		};
+		dpmcp@13 {
+		};
+		dpmcp@14 {
+		};
+		dpmcp@15 {
+		};
+		dpmcp@16 {
+		};
+		dpmcp@17 {
+		};
+		dpmcp@18 {
+		};
+		dpmcp@19 {
+		};
+		dpmcp@20 {
+		};
+		dpmcp@21 {
+		};
+		dpmcp@22 {
+		};
+		dpmcp@23 {
+		};
+		dpmcp@24 {
+		};
+		dpmcp@25 {
+		};
+
+		/* ------------ DPCON --------------*/
+		dpcon@1 {
+			num_priorities=<2>;
+		};
+
+		/* ------------ DPRTC --------------*/
+		dprtc@0 {
+		};
+	};
+
+	/*****************************************************************
+	 * Connections
+	 *****************************************************************/
+	connections {
+		connection@2{
+			endpoint1 = "dpni@0";
+			endpoint2 = "dpmac@4";
+		};
+	};
+};
