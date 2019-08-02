@@ -13,7 +13,12 @@ PROVIDES += "linux-mainline linux-tq"
 
 SRC_URI = "\
   ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
-  file://defconfig \
+"
+SRC_URI_append_tqmls1043a-mbls10xxa += "\
+  file://defconfig;md5=9dc87e929994ceb86a9fdfb03a87504e \
+"
+SRC_URI_append_tqmls1046a-mbls10xxa += "\
+  file://defconfig;md5=9dc87e929994ceb86a9fdfb03a87504e \
 "
 
 SRCBRANCH = "TQMLS10xxA-linux-4.19.0"

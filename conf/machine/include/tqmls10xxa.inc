@@ -18,7 +18,10 @@ MACHINE_FEATURES_append = " ext2 pci rtc serial usbhost vfat"
 
 # Image Options
 #
-EXTRA_IMAGEDEPENDS += "virtual/bootloader fm-ucode"
+EXTRA_IMAGEDEPENDS += "virtual/bootloader"
+EXTRA_IMAGEDEPENDS_append_fsl-lsch2 += "fm-ucode"
+EXTRA_IMAGEDEPENDS_append_fsl-lsch3 += "rcw mc-utils management-complex"
+
 IMAGE_FSTYPES ?= "tar.gz ext4 wic ubi"
 
 # DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
