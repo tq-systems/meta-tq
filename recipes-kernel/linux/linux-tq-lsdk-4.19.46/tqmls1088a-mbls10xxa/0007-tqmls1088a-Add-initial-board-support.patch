@@ -1,0 +1,273 @@
+From d4431c66f1fb0efda4d0743bc726e555a74c0493 Mon Sep 17 00:00:00 2001
+From: Timo Herbrecher <t.herbrecher@gateware.de>
+Date: Fri, 5 Jul 2019 10:56:19 +0200
+Subject: [PATCH 7/7] tqmls1088a: Add initial board support
+
+Add initial board support for TQMLS1088A processing module based on NXP
+LS1088A CPU on MBLS10xxA baseboard.
+
+Signed-off-by: Timo Herbrecher <t.herbrecher@gateware.de>
+---
+ arch/arm64/boot/dts/freescale/Makefile        |  1 +
+ .../freescale/fsl-tqmls1088a-mbls10xxa.dts    | 44 +++++++++
+ .../boot/dts/freescale/fsl-tqmls1088a.dtsi    | 84 ++++++++++++++++
+ .../fsl-tqmls10xxa-mbls10xxa-mc.dtsi          | 96 +++++++++++++++++++
+ 4 files changed, 225 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/freescale/fsl-tqmls1088a-mbls10xxa.dts
+ create mode 100644 arch/arm64/boot/dts/freescale/fsl-tqmls1088a.dtsi
+ create mode 100644 arch/arm64/boot/dts/freescale/fsl-tqmls10xxa-mbls10xxa-mc.dtsi
+
+diff --git a/arch/arm64/boot/dts/freescale/Makefile b/arch/arm64/boot/dts/freescale/Makefile
+index b870317d2d3f..2a4148f91382 100644
+--- a/arch/arm64/boot/dts/freescale/Makefile
++++ b/arch/arm64/boot/dts/freescale/Makefile
+@@ -31,3 +31,4 @@ dtb-$(CONFIG_ARCH_LAYERSCAPE) += fsl-lx2160a-qds.dtb
+ dtb-$(CONFIG_ARCH_LAYERSCAPE) += fsl-lx2160a-rdb.dtb
+ dtb-$(CONFIG_ARCH_LAYERSCAPE) += fsl-tqmls1043a-mbls10xxa.dtb
+ dtb-$(CONFIG_ARCH_LAYERSCAPE) += fsl-tqmls1046a-mbls10xxa.dtb
++dtb-$(CONFIG_ARCH_LAYERSCAPE) += fsl-tqmls1088a-mbls10xxa.dtb
+diff --git a/arch/arm64/boot/dts/freescale/fsl-tqmls1088a-mbls10xxa.dts b/arch/arm64/boot/dts/freescale/fsl-tqmls1088a-mbls10xxa.dts
+new file mode 100644
+index 000000000000..76db78948c1a
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/fsl-tqmls1088a-mbls10xxa.dts
+@@ -0,0 +1,44 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Device Tree file for TQMLS1088A SoM on MBLS10xxA from TQ
++ *
++ * Copyright 2019 TQ-Systems GmbH
++ */
++
++/dts-v1/;
++
++#include <dt-bindings/gpio/gpio.h>
++
++#include "fsl-tqmls1088a.dtsi"
++#include "fsl-tqmls10xxa-mbls10xxa.dtsi"
++
++/ {
++	model = "TQ TQMLS1088A SoM on MBLS10xxA board";
++	compatible = "tqc,tqmls1088a", "fsl,ls1088a";
++
++	aliases {
++		serial0 = &duart0;
++		serial1 = &duart1;
++		rgmii_s1 = &rgmii_phy1;
++		rgmii_s2 = &rgmii_phy2;
++		qsgmii_s1_p1 = &qsgmii1_phy1;
++		qsgmii_s1_p2 = &qsgmii1_phy2;
++		qsgmii_s1_p3 = &qsgmii1_phy3;
++		qsgmii_s1_p4 = &qsgmii1_phy4;
++		qsgmii_s2_p1 = &qsgmii2_phy1;
++		qsgmii_s2_p2 = &qsgmii2_phy2;
++		qsgmii_s2_p3 = &qsgmii2_phy3;
++		qsgmii_s2_p4 = &qsgmii2_phy4;
++	};
++
++	chosen {
++		stdout-path = "serial1:115200n8";
++	};
++};
++
++&esdhc {
++	cd-gpios = <&gpio3 12 GPIO_ACTIVE_LOW>;
++	wp-gpios = <&gpio3 13 GPIO_ACTIVE_HIGH>;
++};
++
++#include "fsl-tqmls10xxa-mbls10xxa-mc.dtsi"
+diff --git a/arch/arm64/boot/dts/freescale/fsl-tqmls1088a.dtsi b/arch/arm64/boot/dts/freescale/fsl-tqmls1088a.dtsi
+new file mode 100644
+index 000000000000..57c3f38f8cca
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/fsl-tqmls1088a.dtsi
+@@ -0,0 +1,84 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Device Tree Include file for LS1046A based SoM of TQ
++ *
++ * Copyright 2019 TQ-Systems GmbH
++ */
++
++#include "fsl-ls1088a.dtsi"
++#include "fsl-tqmls10xxa.dtsi"
++
++&qspi {
++	num-cs = <2>;
++	bus-num = <0>;
++	status = "okay";
++	fsl,qspi-has-second-chip;
++
++	qflash0: mx66u51235f@0 {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		compatible = "jedec,spi-nor";
++		spi-max-frequency = <62500000>;
++		reg = <0>;
++
++		partitions {
++			compatible = "fixed-partitions";
++			#address-cells = <1>;
++			#size-cells = <1>;
++
++			rcwpbi@0 {
++				label = "RCW/PBI";
++				reg = <0x0 0x10000>;
++			};
++
++			uboot@10000 {
++				label = "U-Boot";
++				reg = <0x10000 0xc0000>;
++			};
++
++			env@d0000 {
++				label = "U-Boot Environment";
++				reg = <0xd0000 0x10000>;
++			};
++
++			dpaadpl@e0000 {
++				label = "DPAA2 DPL";
++				reg = <0xe0000 0x10000>;
++			};
++
++			dpaadpc@f0000 {
++				label = "DPAA2 DPC";
++				reg = <0xf0000 0x10000>;
++			};
++
++			mcfw@100000 {
++				label = "DPAA2 MC Firmware";
++				reg = <0x100000 0x1f0000>;
++			};
++
++			dtb@2f0000 {
++				label = "DTB";
++				reg = <0x2f0000 0x10000>;
++			};
++
++			linux@300000 {
++				label = "Linux";
++				reg = <0x300000 0x1500000>;
++			};
++
++			rootfs@1800000 {
++				label = "RootFS";
++				reg = <0x1800000 0x2800000>;
++			};
++		};
++	};
++
++	qflash1: mx66u51235f@1 {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		compatible = "jedec,spi-nor";
++		spi-max-frequency = <62500000>;
++		reg = <1>;
++	};
++};
++
+diff --git a/arch/arm64/boot/dts/freescale/fsl-tqmls10xxa-mbls10xxa-mc.dtsi b/arch/arm64/boot/dts/freescale/fsl-tqmls10xxa-mbls10xxa-mc.dtsi
+new file mode 100644
+index 000000000000..09e8ff46692a
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/fsl-tqmls10xxa-mbls10xxa-mc.dtsi
+@@ -0,0 +1,96 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Device Tree Include file for MBLS10xxA from TQ (MC related sections)
++ *
++ * Copyright 2019 TQ-Systems GmbH
++ */
++
++#include <dt-bindings/net/ti-dp83867.h>
++
++&emdio1 {
++	rgmii_phy1: ethernet-phy@0e {
++		reg = <0x0e>;
++		ti,rx-internal-delay = <DP83867_RGMIIDCTL_1_50_NS>;
++		ti,tx-internal-delay = <DP83867_RGMIIDCTL_1_50_NS>;
++		ti,fifo-depth = <DP83867_PHYCR_FIFO_DEPTH_8_B_NIB>;
++	};
++
++	rgmii_phy2: ethernet-phy@0c {
++		reg = <0x0c>;
++		ti,rx-internal-delay = <DP83867_RGMIIDCTL_1_50_NS>;
++		ti,tx-internal-delay = <DP83867_RGMIIDCTL_1_50_NS>;
++		ti,fifo-depth = <DP83867_PHYCR_FIFO_DEPTH_8_B_NIB>;
++	};
++
++	qsgmii1_phy1: ethernet-phy@1c {
++		reg = <0x1c>;
++	};
++
++	qsgmii1_phy2: ethernet-phy@1d {
++		reg = <0x1d>;
++	};
++
++	qsgmii1_phy3: ethernet-phy@1e {
++		reg = <0x1e>;
++	};
++
++	qsgmii1_phy4: ethernet-phy@1f {
++		reg = <0x1f>;
++	};
++
++	qsgmii2_phy1: ethernet-phy@00 {
++		reg = <0x00>;
++	};
++
++	qsgmii2_phy2: ethernet-phy@01 {
++		reg = <0x01>;
++	};
++
++	qsgmii2_phy3: ethernet-phy@02 {
++		reg = <0x02>;
++	};
++
++	qsgmii2_phy4: ethernet-phy@03 {
++		reg = <0x03>;
++	};
++};
++
++&dpmac1 {
++	phy-connection-type = "sgmii";
++};
++
++&dpmac2 {
++	phy-connection-type = "sgmii";
++};
++
++&dpmac3 {
++	phy-connection-type = "sgmii";
++};
++
++&dpmac4 {
++	phy-connection-type = "sgmii";
++};
++
++&dpmac5 {
++	phy-connection-type = "sgmii";
++};
++
++&dpmac6 {
++	phy-connection-type = "sgmii";
++};
++
++&dpmac7 {
++	phy-connection-type = "sgmii";
++};
++
++&dpmac8 {
++	phy-connection-type = "sgmii";
++};
++
++&dpmac9 {
++	phy-connection-type = "sgmii";
++};
++
++&dpmac10 {
++	phy-connection-type = "sgmii";
++};
+-- 
+2.17.1
+

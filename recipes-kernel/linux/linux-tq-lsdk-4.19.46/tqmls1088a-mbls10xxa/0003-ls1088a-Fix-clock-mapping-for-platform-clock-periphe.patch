@@ -1,0 +1,111 @@
+From 6b353024ef5156c42847177412d3f08896c3ad82 Mon Sep 17 00:00:00 2001
+From: Timo Herbrecher <t.herbrecher@gateware.de>
+Date: Fri, 5 Jul 2019 10:51:01 +0200
+Subject: [PATCH 3/7] ls1088a: Fix clock mapping for platform clock peripherals
+
+Fix clock routing and divider settings based on reference manual.
+
+Signed-off-by: Timo Herbrecher <t.herbrecher@gateware.de>
+---
+ .../arm64/boot/dts/freescale/fsl-ls1088a.dtsi | 22 +++++++++----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/fsl-ls1088a.dtsi b/arch/arm64/boot/dts/freescale/fsl-ls1088a.dtsi
+index 382a560effbf..536caf7d9bd4 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-ls1088a.dtsi
++++ b/arch/arm64/boot/dts/freescale/fsl-ls1088a.dtsi
+@@ -233,7 +233,7 @@
+ 		duart0: serial@21c0500 {
+ 			compatible = "fsl,ns16550", "ns16550a";
+ 			reg = <0x0 0x21c0500 0x0 0x100>;
+-			clocks = <&clockgen 4 3>;
++			clocks = <&clockgen 4 1>;
+ 			interrupts = <0 32 IRQ_TYPE_LEVEL_HIGH>;
+ 			status = "disabled";
+ 		};
+@@ -241,7 +241,7 @@
+ 		duart1: serial@21c0600 {
+ 			compatible = "fsl,ns16550", "ns16550a";
+ 			reg = <0x0 0x21c0600 0x0 0x100>;
+-			clocks = <&clockgen 4 3>;
++			clocks = <&clockgen 4 1>;
+ 			interrupts = <0 32 IRQ_TYPE_LEVEL_HIGH>;
+ 			status = "disabled";
+ 		};
+@@ -413,7 +413,7 @@
+ 				<0x7 0x100520 0x0 0x4>;
+ 			reg-names = "ahci", "sata-ecc";
+ 			interrupts = <0 133 IRQ_TYPE_LEVEL_HIGH>;
+-			clocks = <&clockgen 4 3>;
++			clocks = <&clockgen 4 1>;
+ 			dma-coherent;
+ 			status = "disabled";
+ 		};
+@@ -549,56 +549,56 @@
+ 		cluster1_core0_watchdog: wdt@c000000 {
+ 			compatible = "arm,sp805-wdt", "arm,primecell";
+ 			reg = <0x0 0xc000000 0x0 0x1000>;
+-			clocks = <&clockgen 4 3>, <&clockgen 4 3>;
++			clocks = <&clockgen 4 1>, <&clockgen 4 1>;
+ 			clock-names = "apb_pclk", "wdog_clk";
+ 		};
+ 
+ 		cluster1_core1_watchdog: wdt@c010000 {
+ 			compatible = "arm,sp805-wdt", "arm,primecell";
+ 			reg = <0x0 0xc010000 0x0 0x1000>;
+-			clocks = <&clockgen 4 3>, <&clockgen 4 3>;
++			clocks = <&clockgen 4 1>, <&clockgen 4 1>;
+ 			clock-names = "apb_pclk", "wdog_clk";
+ 		};
+ 
+ 		cluster1_core2_watchdog: wdt@c020000 {
+ 			compatible = "arm,sp805-wdt", "arm,primecell";
+ 			reg = <0x0 0xc020000 0x0 0x1000>;
+-			clocks = <&clockgen 4 3>, <&clockgen 4 3>;
++			clocks = <&clockgen 4 1>, <&clockgen 4 1>;
+ 			clock-names = "apb_pclk", "wdog_clk";
+ 		};
+ 
+ 		cluster1_core3_watchdog: wdt@c030000 {
+ 			compatible = "arm,sp805-wdt", "arm,primecell";
+ 			reg = <0x0 0xc030000 0x0 0x1000>;
+-			clocks = <&clockgen 4 3>, <&clockgen 4 3>;
++			clocks = <&clockgen 4 1>, <&clockgen 4 1>;
+ 			clock-names = "apb_pclk", "wdog_clk";
+ 		};
+ 
+ 		cluster2_core0_watchdog: wdt@c100000 {
+ 			compatible = "arm,sp805-wdt", "arm,primecell";
+ 			reg = <0x0 0xc100000 0x0 0x1000>;
+-			clocks = <&clockgen 4 3>, <&clockgen 4 3>;
++			clocks = <&clockgen 4 1>, <&clockgen 4 1>;
+ 			clock-names = "apb_pclk", "wdog_clk";
+ 		};
+ 
+ 		cluster2_core1_watchdog: wdt@c110000 {
+ 			compatible = "arm,sp805-wdt", "arm,primecell";
+ 			reg = <0x0 0xc110000 0x0 0x1000>;
+-			clocks = <&clockgen 4 3>, <&clockgen 4 3>;
++			clocks = <&clockgen 4 1>, <&clockgen 4 1>;
+ 			clock-names = "apb_pclk", "wdog_clk";
+ 		};
+ 
+ 		cluster2_core2_watchdog: wdt@c120000 {
+ 			compatible = "arm,sp805-wdt", "arm,primecell";
+ 			reg = <0x0 0xc120000 0x0 0x1000>;
+-			clocks = <&clockgen 4 3>, <&clockgen 4 3>;
++			clocks = <&clockgen 4 1>, <&clockgen 4 1>;
+ 			clock-names = "apb_pclk", "wdog_clk";
+ 		};
+ 
+ 		cluster2_core3_watchdog: wdt@c130000 {
+ 			compatible = "arm,sp805-wdt", "arm,primecell";
+ 			reg = <0x0 0xc130000 0x0 0x1000>;
+-			clocks = <&clockgen 4 3>, <&clockgen 4 3>;
++			clocks = <&clockgen 4 1>, <&clockgen 4 1>;
+ 			clock-names = "apb_pclk", "wdog_clk";
+ 		};
+ 
+-- 
+2.17.1
+

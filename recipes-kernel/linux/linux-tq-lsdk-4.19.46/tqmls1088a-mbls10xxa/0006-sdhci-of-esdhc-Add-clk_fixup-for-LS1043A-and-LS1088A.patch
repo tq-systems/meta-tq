@@ -1,0 +1,55 @@
+From 43ec0e82538d1e3e6c104b5e12f73737731b0e4a Mon Sep 17 00:00:00 2001
+From: Timo Herbrecher <t.herbrecher@gateware.de>
+Date: Fri, 5 Jul 2019 10:48:15 +0200
+Subject: [PATCH 6/7] sdhci-of-esdhc: Add clk_fixup for LS1043A and LS1088A
+
+Limit clock on high-speed modes for LS1043A and LS1088A regarding
+datasheet.
+
+Signed-off-by: Timo Herbrecher <t.herbrecher@gateware.de>
+---
+ drivers/mmc/host/sdhci-of-esdhc.c | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+
+diff --git a/drivers/mmc/host/sdhci-of-esdhc.c b/drivers/mmc/host/sdhci-of-esdhc.c
+index 9ff7cac76c72..3864b49ae12f 100644
+--- a/drivers/mmc/host/sdhci-of-esdhc.c
++++ b/drivers/mmc/host/sdhci-of-esdhc.c
+@@ -44,12 +44,24 @@ static const struct esdhc_clk_fixup ls1021a_esdhc_clk = {
+ 	.max_clk[MMC_TIMING_SD_HS] = 46500000,
+ };
+ 
++static const struct esdhc_clk_fixup ls1043a_esdhc_clk = {
++	.sd_dflt_max_clk = 25000000,
++	.max_clk[MMC_TIMING_UHS_SDR104] = 116700000,
++	.max_clk[MMC_TIMING_MMC_HS200] = 116700000,
++};
++
+ static const struct esdhc_clk_fixup ls1046a_esdhc_clk = {
+ 	.sd_dflt_max_clk = 25000000,
+ 	.max_clk[MMC_TIMING_UHS_SDR104] = 167000000,
+ 	.max_clk[MMC_TIMING_MMC_HS200] = 167000000,
+ };
+ 
++static const struct esdhc_clk_fixup ls1088a_esdhc_clk = {
++	.sd_dflt_max_clk = 25000000,
++	.max_clk[MMC_TIMING_UHS_SDR104] = 167000000,
++	.max_clk[MMC_TIMING_MMC_HS200] = 167000000,
++};
++
+ static const struct esdhc_clk_fixup ls1012a_esdhc_clk = {
+ 	.sd_dflt_max_clk = 25000000,
+ 	.max_clk[MMC_TIMING_UHS_SDR104] = 125000000,
+@@ -65,7 +77,9 @@ static const struct esdhc_clk_fixup p1010_esdhc_clk = {
+ 
+ static const struct of_device_id sdhci_esdhc_of_match[] = {
+ 	{ .compatible = "fsl,ls1021a-esdhc", .data = &ls1021a_esdhc_clk},
++	{ .compatible = "fsl,ls1043a-esdhc", .data = &ls1043a_esdhc_clk},
+ 	{ .compatible = "fsl,ls1046a-esdhc", .data = &ls1046a_esdhc_clk},
++	{ .compatible = "fsl,ls1088a-esdhc", .data = &ls1088a_esdhc_clk},
+ 	{ .compatible = "fsl,ls1012a-esdhc", .data = &ls1012a_esdhc_clk},
+ 	{ .compatible = "fsl,p1010-esdhc",   .data = &p1010_esdhc_clk},
+ 	{ .compatible = "fsl,mpc8379-esdhc" },
+-- 
+2.17.1
+
