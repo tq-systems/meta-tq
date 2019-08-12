@@ -15,6 +15,11 @@ SRCBRANCH = "TQMa8xx-bringup-v2018.03-rel_imx_4.14.78_1.0.0_ga"
 
 SRC_URI = " \
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+    file://0001-tqma8mx-add-comments-and-sync-lpddr4-timing-to-lates.patch \
+    file://0002-tqma8mx-drop-support-for-second-2-GiB-memory-variant.patch \
+    file://0003-tqma8mx-consolidate-lpddr-configs.patch \
+    file://0004-tqma8mx-add-memory-timings-for-HW-rev.020x.patch \
+    file://0005-tqma8mx-rework-board_late_init-and-add-checkboard.patch \
 "
 
 S = "${WORKDIR}/git"

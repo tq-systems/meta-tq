@@ -1,0 +1,91 @@
+From 7538c0d1af0f8e98f4b51175ec7e8b1ac08ddfae Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Fri, 9 Aug 2019 14:39:00 +0200
+Subject: [PATCH] tqma8mx: rework board_late_init and add checkboard
+
+use real name of SOM based on CPU type and move some stuff to
+module part at the cost of one baseboard function
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8mx/tqma8mx-mba8mx.c | 11 ++++++-----
+ board/tqc/tqma8mx/tqma8mx.c        | 29 +++++++++++++++++++++++++++++
+ 2 files changed, 35 insertions(+), 5 deletions(-)
+
+diff --git a/board/tqc/tqma8mx/tqma8mx-mba8mx.c b/board/tqc/tqma8mx/tqma8mx-mba8mx.c
+index 85f98910b0..75283c066e 100644
+--- a/board/tqc/tqma8mx/tqma8mx-mba8mx.c
++++ b/board/tqc/tqma8mx/tqma8mx-mba8mx.c
+@@ -27,6 +27,7 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++#define TQMA8MX_BB_NAME "MBa8Mx"
+ 
+ #define UART_PAD_CTRL	(PAD_CTL_DSE6 | PAD_CTL_FSEL1)
+ 
+@@ -210,11 +211,6 @@ int mmc_map_to_kernel_blk(int dev_no)
+ 
+ int tqc_bb_board_late_init(void)
+ {
+-#ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
+-	env_set("board_name", "MBa8MQ");
+-	env_set("board_rev", "iMX8MQ");
+-#endif
+-
+ #ifdef CONFIG_ENV_IS_IN_MMC
+ 	board_late_mmc_env_init();
+ #endif
+@@ -222,6 +218,11 @@ int tqc_bb_board_late_init(void)
+ 	return 0;
+ }
+ 
++const char *tqc_bb_get_boardname(void)
++{
++	return TQMA8MX_BB_NAME;
++}
++
+ #if defined(CONFIG_VIDEO_IMXDCSS)
+ #include <asm/mach-imx/video.h>
+ #include <asm/arch/video_common.h>
+diff --git a/board/tqc/tqma8mx/tqma8mx.c b/board/tqc/tqma8mx/tqma8mx.c
+index b44843f259..19e5a176f9 100644
+--- a/board/tqc/tqma8mx/tqma8mx.c
++++ b/board/tqc/tqma8mx/tqma8mx.c
+@@ -88,7 +88,36 @@ int board_init(void)
+ 	return tqc_bb_board_init();
+ }
+ 
++const char *tqma8mx_get_boardname(void)
++{
++	switch (get_cpu_type()) {
++	case MXC_CPU_IMX8MD:
++		return "TQMa8MD";
++		break;
++	case MXC_CPU_IMX8MQ:
++		return "TQMa8MQ";
++		break;
++	case MXC_CPU_IMX8MQL:
++		return "TQMa8MQL";
++		break;
++	default:
++		return "??";
++	};
++}
++
+ int board_late_init(void)
+ {
++#ifdef CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
++	env_set("board_name", tqc_bb_get_boardname());
++	env_set("board_rev", tqma8mx_get_boardname);
++#endif
++
+ 	return tqc_bb_board_late_init();
+ }
++
++int checkboard(void)
++{
++	printf("Board: %s on a %s\n", tqma8mx_get_boardname(),
++	       tqc_bb_get_boardname());
++	return 0;
++}

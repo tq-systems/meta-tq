@@ -1,0 +1,55 @@
+From 045faa343772b4c8ca71ab9bafc96a922b39d941 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Fri, 9 Aug 2019 09:34:47 +0200
+Subject: [PATCH] tqma8mx: add comments and sync lpddr4 timing to latest test
+ results
+
+- no substantial changes
+- add comments
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8mx/lpddr4_timing_1g.c  | 2 ++
+ board/tqc/tqma8mx/lpddr4_timing_2gm.c | 2 ++
+ board/tqc/tqma8mx/lpddr4_timing_2gs.c | 2 ++
+ 3 files changed, 6 insertions(+)
+
+diff --git a/board/tqc/tqma8mx/lpddr4_timing_1g.c b/board/tqc/tqma8mx/lpddr4_timing_1g.c
+index 833613ed4b..19ee9cc426 100644
+--- a/board/tqc/tqma8mx/lpddr4_timing_1g.c
++++ b/board/tqc/tqma8mx/lpddr4_timing_1g.c
+@@ -5,6 +5,8 @@
+  *
+  * Generated code from MX8M_DDR_tool
+  * Align with uboot-imx_v2018.03_4.14.78_1.0.0_ga
++ * REV.0003 1GB_K4F8E3S4HB-MFCJ03V-SEC813
++ * from MX8M_LPDDR4_RPA_v23.xlsx / MX8 DDR Stress Test V2.10
+  */
+ 
+ #include <linux/kernel.h>
+diff --git a/board/tqc/tqma8mx/lpddr4_timing_2gm.c b/board/tqc/tqma8mx/lpddr4_timing_2gm.c
+index 144639d7e6..9adbab9c1c 100644
+--- a/board/tqc/tqma8mx/lpddr4_timing_2gm.c
++++ b/board/tqc/tqma8mx/lpddr4_timing_2gm.c
+@@ -5,6 +5,8 @@
+  *
+  * Generated code from MX8M_DDR_tool
+  * Align with uboot-imx_v2018.03_4.14.78_1.0.0_ga
++ * REV.0003 2GB_K4F6E304HB-MGCJ000-SEC831_ZZZ
++ * from MX8M_LPDDR4_RPA_v23.xlsx / MX8 DDR Stress Test V2.10
+  */
+ 
+ #include <linux/kernel.h>
+diff --git a/board/tqc/tqma8mx/lpddr4_timing_2gs.c b/board/tqc/tqma8mx/lpddr4_timing_2gs.c
+index 837c7fc39a..d4e076ef17 100644
+--- a/board/tqc/tqma8mx/lpddr4_timing_2gs.c
++++ b/board/tqc/tqma8mx/lpddr4_timing_2gs.c
+@@ -5,6 +5,8 @@
+  *
+  * Generated code from MX8M_DDR_tool
+  * Align with uboot-imx_v2018.03_4.14.78_1.0.0_ga
++ * REV.0003 2GB_K4F6E3S4HM-GFCL03V-SEC804
++ * from MX8M_LPDDR4_RPA_v23.xlsx / MX8 DDR Stress Test V2.10
+  */
+ 
+ #include <linux/kernel.h>
