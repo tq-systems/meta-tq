@@ -7,6 +7,9 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
            file://tqma8x-input-devices.cfg \
            file://tqma8x-bpf-support.cfg \
            file://tqma8x-audio-support.cfg \
+           file://0001-arm64-dt-fsl-imx8mq-tqma8mq-mba8mx-prevent-a-lot-of-.patch \
+           file://0002-arm64-dt-fsl-imx8mq-tqma8mq-add-regulator-for-CPU-ov.patch \
+           file://0003-arm64-dt-fsl-imx8mq-tqma8mq-add-cpu-dvfs.patch \
            "
 
 ################
