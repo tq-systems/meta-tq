@@ -20,6 +20,9 @@ SRC_URI = " \
     file://0003-tqma8mx-consolidate-lpddr-configs.patch \
     file://0004-tqma8mx-add-memory-timings-for-HW-rev.020x.patch \
     file://0005-tqma8mx-rework-board_late_init-and-add-checkboard.patch \
+    file://0006-tqma8mx-make-tqma8mx_get_boardname-static.patch \
+    file://0007-tqma8mx-ft_board_setup-for-older-CPU-revisions.patch \
+    file://0008-tqma8mx-environment-prevent-loading-fdt-twice-during.patch \
 "
 
 S = "${WORKDIR}/git"

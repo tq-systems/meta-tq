@@ -1,0 +1,23 @@
+From 6c1cc633e8231e02c81fb82854b5a3d66fd00ccd Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Tue, 13 Aug 2019 10:00:19 +0200
+Subject: [PATCH] tqma8mx: environment: prevent loading fdt twice during
+ mmcboot
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ include/configs/tqma8mx.h | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/include/configs/tqma8mx.h b/include/configs/tqma8mx.h
+index a422e93ea9..6355041019 100644
+--- a/include/configs/tqma8mx.h
++++ b/include/configs/tqma8mx.h
+@@ -149,7 +149,6 @@
+ 		"setenv bootargs; " \
+ 		"run mmcargs; " \
+ 		"run loadimage; " \
+-		"run loadfdt; " \
+ 		"if test ${boot_fdt} = yes || test ${boot_fdt} = try; then " \
+ 			"if run loadfdt; then " \
+ 				"booti ${loadaddr} - ${fdt_addr}; " \
