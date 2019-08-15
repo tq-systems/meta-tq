@@ -23,6 +23,7 @@ SRC_URI = " \
     file://0006-tqma8mx-make-tqma8mx_get_boardname-static.patch \
     file://0007-tqma8mx-ft_board_setup-for-older-CPU-revisions.patch \
     file://0008-tqma8mx-environment-prevent-loading-fdt-twice-during.patch \
+    file://0009-tqma8mx-ft_board_setup-improvements-for-older-CPU-re.patch \
 "
 
 S = "${WORKDIR}/git"
