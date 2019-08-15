@@ -10,6 +10,10 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
            file://0001-arm64-dt-fsl-imx8mq-tqma8mq-mba8mx-prevent-a-lot-of-.patch \
            file://0002-arm64-dt-fsl-imx8mq-tqma8mq-add-regulator-for-CPU-ov.patch \
            file://0003-arm64-dt-fsl-imx8mq-tqma8mq-add-cpu-dvfs.patch \
+           file://0004-arm64-dt-fsl-imx8mq-tqma8mq-add-settling-delay-to-dv.patch \
+           file://0005-arm64-dt-fsl-imx8mq-tqma8mq-dvfs-regulator-should-be.patch \
+           file://0006-arm64-dt-fsl-imx8mq-tqma8mq-add-overdrive-regulator.patch \
+           file://0007-overdrive-split-dt-for-test.patch \
            "
 
 ################

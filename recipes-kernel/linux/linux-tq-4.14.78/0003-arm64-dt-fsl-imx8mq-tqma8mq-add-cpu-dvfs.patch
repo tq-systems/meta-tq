@@ -1,4 +1,4 @@
-From 18d4cd07b3300b21244ca3fa164607429b3f7413 Mon Sep 17 00:00:00 2001
+From 38234c9299e208b773c392816910b8dc4534a173 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Mon, 12 Aug 2019 12:41:06 +0200
 Subject: [PATCH] arm64: dt: fsl-imx8mq-tqma8mq: add cpu dvfs
@@ -11,14 +11,23 @@ to use higher CPU frequencies
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
 ---
- arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ .../boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi      | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
 
 diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
-index a8b12351e332..3e10412d18f9 100644
+index 0198007f5267..b2b5a6e5f162 100644
 --- a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
 +++ b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
-@@ -79,6 +79,17 @@
+@@ -70,7 +70,7 @@
+ 		regulator-type = "voltage";
+ 		gpios = <&gpio1 6 GPIO_ACTIVE_HIGH>;
+ 		states = <900000 0x1 1000000 0x0>;
+-		status = "disabled";
++		status = "okay";
+ 	};
+ 
+ 	thermal-zones {
+@@ -80,6 +80,17 @@
  	};
  };
  
