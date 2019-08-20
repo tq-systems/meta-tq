@@ -1,0 +1,114 @@
+From e77c4f225530df8ff8ff79b6a401fa6d41f5c1be Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Tue, 20 Aug 2019 16:55:53 +0200
+Subject: [PATCH] arm64: dt: fsl-imx8mq-tqma8mq: restore full frequencyscaling
+ default tree
+
+and add a testing tree without scaling
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/Makefile          |  2 +-
+ ...dts => fsl-imx8mq-tqma8mq-mba8mx-nodvfs.dts} | 17 ++++++++---------
+ .../fsl-imx8mq-tqma8mq-mba8mx-overdrive.dts     |  5 +++++
+ .../boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi  | 13 ++++++++++++-
+ 4 files changed, 26 insertions(+), 11 deletions(-)
+ rename arch/arm64/boot/dts/freescale/{fsl-imx8mq-tqma8mq-mba8mx-freqfull.dts => fsl-imx8mq-tqma8mq-mba8mx-nodvfs.dts} (78%)
+
+diff --git a/arch/arm64/boot/dts/freescale/Makefile b/arch/arm64/boot/dts/freescale/Makefile
+index 54ea61598783..bc79b502427f 100644
+--- a/arch/arm64/boot/dts/freescale/Makefile
++++ b/arch/arm64/boot/dts/freescale/Makefile
+@@ -137,7 +137,7 @@ dtb-$(CONFIG_ARCH_FSL_IMX8MQ) += fsl-imx8mq-ddr3l-arm2.dtb \
+ 				 fsl-imx8mq-evk-edp.dtb \
+ 				 fsl-imx8mq-tqma8mq-mba8mx.dtb \
+ 				 fsl-imx8mq-tqma8mq-mba8mx-overdrive.dtb \
+-				 fsl-imx8mq-tqma8mq-mba8mx-freqfull.dtb \
++				 fsl-imx8mq-tqma8mq-mba8mx-nodvfs.dtb \
+ 				 fsl-imx8mq-tqma8mq-mba8mx-cma.dtb \
+ 				 fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-tm070jvhg33.dtb \
+ 				 fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-tm070jvhg33-en_gpio.dtb \
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx-freqfull.dts b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx-nodvfs.dts
+similarity index 78%
+rename from arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx-freqfull.dts
+rename to arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx-nodvfs.dts
+index eeef824ec3b5..d7fa23ecf6cb 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx-freqfull.dts
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx-nodvfs.dts
+@@ -15,16 +15,15 @@
+ #include "fsl-imx8mq-tqma8mq-mba8mx.dts"
+ 
+ &reg_tqma8mx_dvfs {
+-	status = "okay";
++	status = "disabled";
++};
++
++&reg_tqma8mx_overdrive {
++	status = "disabled";
+ };
+ 
+ &A53_0 {
+-	operating-points = <
+-		/* kHz    uV */
+-		1500000 1000000
+-		1300000 1000000
+-		1000000 900000
+-		800000  900000
+-	>;
+-	dc-supply = <&reg_tqma8mx_dvfs>;
++	/delete-property/ operating-points;
++	/delete-property/ dc-supply;
++	/delete-property/ arm-supply;
+ };
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx-overdrive.dts b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx-overdrive.dts
+index 1966348bc4bb..9b398471b4a4 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx-overdrive.dts
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq-mba8mx-overdrive.dts
+@@ -18,6 +18,10 @@
+ 	status = "okay";
+ };
+ 
++&reg_tqma8mx_dvfs {
++	status = "disabled";
++};
++
+ &A53_0 {
+ 	operating-points = <
+ 		/* kHz    uV */
+@@ -27,4 +31,5 @@
+ 		800000  1000000
+ 	>;
+ 	arm-supply = <&reg_tqma8mx_overdrive>;
++	/delete-property/ dc-supply;
+ };
+diff --git a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
+index 86fca20ac417..1d07501d7538 100644
+--- a/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
++++ b/arch/arm64/boot/dts/freescale/fsl-imx8mq-tqma8mq.dtsi
+@@ -71,7 +71,7 @@
+ 		regulator-settling-time-us = <150000>;
+ 		gpios = <&gpio1 6 GPIO_ACTIVE_LOW>;
+ 		states = <900000 0x1 1000000 0x0>;
+-		status = "disabled";
++		status = "okay";
+ 	};
+ 
+ 	reg_tqma8mx_overdrive: tqma8mx-vdd-overdrive {
+@@ -94,6 +94,17 @@
+ 	};
+ };
+ 
++&A53_0 {
++	operating-points = <
++		/* kHz    uV */
++		1500000 1000000
++		1300000 1000000
++		1000000 900000
++		800000  900000
++	>;
++	dc-supply = <&reg_tqma8mx_dvfs>;
++};
++
+ &gpu {
+ 	status = "okay";
+ };

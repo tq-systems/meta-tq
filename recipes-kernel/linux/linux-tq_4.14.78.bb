@@ -14,6 +14,7 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
            file://0005-arm64-dt-fsl-imx8mq-tqma8mq-dvfs-regulator-should-be.patch \
            file://0006-arm64-dt-fsl-imx8mq-tqma8mq-add-overdrive-regulator.patch \
            file://0007-overdrive-split-dt-for-test.patch \
+           file://0008-arm64-dt-fsl-imx8mq-tqma8mq-restore-full-frequencysc.patch \
            "
 
 ################

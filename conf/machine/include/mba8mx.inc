@@ -10,7 +10,7 @@ KERNEL_DEVICETREE = "\
 	freescale/fsl-imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33-en_gpio.dtb \
 	freescale/fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01-en_gpio.dtb \
 	freescale/fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01-18bit-en_gpio.dtb \
-	freescale/fsl-imx8mq-tqma8mq-mba8mx-freqfull.dtb \
+	freescale/fsl-imx8mq-tqma8mq-mba8mx-nodvfs.dtb \
 	freescale/fsl-imx8mq-tqma8mq-mba8mx-overdrive.dtb \
 "
 
@@ -25,7 +25,7 @@ SERIAL_CONSOLES = "115200;ttymxc0"
 IMAGE_BOOT_FILES ?= "\
 	${KERNEL_IMAGETYPE} \
 	${KERNEL_IMAGETYPE}-fsl-imx8mq-tqma8mq-mba8mx.dtb;fsl-imx8mq-tqma8mq-mba8mx.dtb \
-	${KERNEL_IMAGETYPE}-fsl-imx8mq-tqma8mq-mba8mx-freqfull.dtb;fsl-imx8mq-tqma8mq-mba8mx-freqfull.dtb \
+	${KERNEL_IMAGETYPE}-fsl-imx8mq-tqma8mq-mba8mx-nodvfs.dtb;fsl-imx8mq-tqma8mq-mba8mx-nodvfs.dtb \
 	${KERNEL_IMAGETYPE}-fsl-imx8mq-tqma8mq-mba8mx-overdrive.dtb;fsl-imx8mq-tqma8mq-mba8mx-overdrive.dtb \
 	${KERNEL_IMAGETYPE}-fsl-imx8mq-tqma8mq-mba8mx-hdmi.dtb;fsl-imx8mq-tqma8mq-mba8mx-hdmi.dtb \
 	${KERNEL_IMAGETYPE}-fsl-imx8mq-tqma8mq-mba8mx-sd-hs104.dtb;fsl-imx8mq-tqma8mq-mba8mx-sd-hs104.dtb \
