@@ -24,6 +24,8 @@ SRC_URI = " \
     file://0007-tqma8mx-ft_board_setup-for-older-CPU-revisions.patch \
     file://0008-tqma8mx-environment-prevent-loading-fdt-twice-during.patch \
     file://0009-tqma8mx-ft_board_setup-improvements-for-older-CPU-re.patch \
+    file://0010-tqma8mx-tqma8mx-1-2-gb-lpddr4_timing-update-to-rev.0.patch \
+    file://0011-tqma8mx-optimize-ft_board_setup.patch \
 "
 
 S = "${WORKDIR}/git"

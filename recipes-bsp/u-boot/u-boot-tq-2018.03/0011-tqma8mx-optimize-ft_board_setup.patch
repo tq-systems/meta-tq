@@ -1,0 +1,90 @@
+From 8f42848e4d633f7be342f99fa6cd6188b0aaad74 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Tue, 20 Aug 2019 14:40:50 +0200
+Subject: [PATCH] tqma8mx: optimize ft_board_setup
+
+remove code duplication
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma8mx/tqma8mx.c | 56 +++++++++++++++++++++++++------------
+ 1 file changed, 38 insertions(+), 18 deletions(-)
+
+diff --git a/board/tqc/tqma8mx/tqma8mx.c b/board/tqc/tqma8mx/tqma8mx.c
+index 2feeea7d0e..6332beaee5 100644
+--- a/board/tqc/tqma8mx/tqma8mx.c
++++ b/board/tqc/tqma8mx/tqma8mx.c
+@@ -75,9 +75,35 @@ int dram_init(void)
+ }
+ 
+ #ifdef CONFIG_OF_BOARD_SETUP
++static void tqc_delete_node(void *blob, const char *nodepath) {
++	int nodeoff;
++	int rc;
++
++	nodeoff = fdt_path_offset(blob, nodepath);
++	if (nodeoff < 0) {
++		printf("Unable to find %s\n", nodepath);
++	} else {
++		rc = fdt_del_node(blob, nodeoff);
++		if (rc < 0)
++			printf("Unable to delete %s, err=%s\n",
++				nodepath, fdt_strerror(rc));
++	}
++}
++
++static const char *rev010x_delete_nodes[] = {
++	"/tqma8mx-vdd-arm",
++	"/reg_tqma8mx_overdrive",
++};
++
++static const char *rev020x_delete_nodes[] = {
++	"pcie@0x33800000",
++	"pcie@0x33c00000",
++};
++
+ int ft_board_setup(void *blob, bd_t *bd)
+ {
+ 	u32 rev = get_cpu_rev() & 0xfff;
++	int i;
+ 
+ 	/*
+ 	 * TODO: only temporary supported. REV.010x with old CPU rev.
+@@ -103,25 +129,19 @@ int ft_board_setup(void *blob, bd_t *bd)
+ 					fdt_strerror(rc));
+ 		}
+ 
+-		nodeoff = fdt_path_offset(blob, "/tqma8mx-vdd-arm");
+-		if (nodeoff < 0) {
+-			printf("Unable to find /tqma8mx-vdd-arm\n");
+-		} else {
+-			rc = fdt_del_node(blob, nodeoff);
+-			if (rc < 0)
+-				printf("Unable to delete /tqma8mx-vdd-arm, err=%s\n",
+-					fdt_strerror(rc));
+-		}
++		for (i = 0; i < ARRAY_SIZE(rev010x_delete_nodes); ++i)
++			tqc_delete_node(blob, rev010x_delete_nodes[i]);
++	} else {
++		/*
++		 * TODO: should be deleted as soon as we know why PCIe causes
++		 * stalls
++		 */
++/*
++		printf("[HACK]: cleanup dt for new CPU rev.\n");
+ 
+-		nodeoff = fdt_path_offset(blob, "/reg_tqma8mx_overdrive");
+-		if (nodeoff < 0) {
+-			printf("Unable to find /reg_tqma8mx_overdrive\n");
+-		} else {
+-			rc = fdt_del_node(blob, nodeoff);
+-			if (rc < 0)
+-				printf("Unable to delete /reg_tqma8mx_overdrive, err=%s\n",
+-					fdt_strerror(rc));
+-		}
++		for (i = 0; i < ARRAY_SIZE(rev020x_delete_nodes); ++i)
++			tqc_delete_node(blob, rev020x_delete_nodes[i]);
++*/
+ 	}
+ 
+ 	return tqc_bb_ft_board_setup(blob, bd);
