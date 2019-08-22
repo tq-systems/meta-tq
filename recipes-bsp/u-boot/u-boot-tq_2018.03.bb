@@ -10,22 +10,11 @@ DEPENDS_append = " python dtc-native bc-native"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
-SRCREV = "91393e710a3b0fe99ee689c8b5655654fed50346"
+SRCREV = "2611bfd9f7fdf845dfedf6dba79a920485c432f5"
 SRCBRANCH = "TQMa8xx-bringup-v2018.03-rel_imx_4.14.78_1.0.0_ga"
 
 SRC_URI = " \
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
-    file://0001-tqma8mx-add-comments-and-sync-lpddr4-timing-to-lates.patch \
-    file://0002-tqma8mx-drop-support-for-second-2-GiB-memory-variant.patch \
-    file://0003-tqma8mx-consolidate-lpddr-configs.patch \
-    file://0004-tqma8mx-add-memory-timings-for-HW-rev.020x.patch \
-    file://0005-tqma8mx-rework-board_late_init-and-add-checkboard.patch \
-    file://0006-tqma8mx-make-tqma8mx_get_boardname-static.patch \
-    file://0007-tqma8mx-ft_board_setup-for-older-CPU-revisions.patch \
-    file://0008-tqma8mx-environment-prevent-loading-fdt-twice-during.patch \
-    file://0009-tqma8mx-ft_board_setup-improvements-for-older-CPU-re.patch \
-    file://0010-tqma8mx-tqma8mx-1-2-gb-lpddr4_timing-update-to-rev.0.patch \
-    file://0011-tqma8mx-optimize-ft_board_setup.patch \
 "
 
 S = "${WORKDIR}/git"
