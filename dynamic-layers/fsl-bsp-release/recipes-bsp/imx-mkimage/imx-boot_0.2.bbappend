@@ -1,11 +1,14 @@
 
 # declare bootstream to be built. See target names in soc.mak provided by
 # imx-mkimage for target processor
+IMXBOOT_TARGETS_tqma8x = "flash_b0"
 IMXBOOT_TARGETS_tqma8xx = "flash"
 IMXBOOT_TARGETS_tqma8xxs = "flash"
 
 IMXBOOT_TARGETS_mx8qxpa0 = "flash_a0 flash_dcd_a0"
 IMXBOOT_TARGETS_mx8qxp = "flash"
+
+IMXBOOT_TARGETS_mx8qm = "flash_b0"
 
 # DCD_NAME is optional - provide RAM DCD name if RAM bringup not implemented in SCFW
 
@@ -32,10 +35,10 @@ do_deploy_append() {
 
     if [ "${SOC_TARGET}" = "iMX8QX" ]; then
         case ${MACHINE} in
-            tqma8qx* |\
-            tqma8x*)
+            tqma8xq* |\
+            tqma8xd*)
                 bbnote "IMAGE_IMXBOOT_TARGET=${IMAGE_IMXBOOT_TARGET}"
-                ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-b0-bootstream.bin
+                ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} iMX8-b0-bootstream.bin
                 ;;
             *)
                 break
@@ -49,6 +52,18 @@ do_deploy_append() {
             tqma8mq*)
                 bbnote "IMAGE_IMXBOOT_TARGET=${IMAGE_IMXBOOT_TARGET}"
                 ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-bootstream.bin
+                ;;
+            *)
+                break
+                ;;
+        esac
+    fi
+
+    if [ "${SOC_TARGET}" = "iMX8QM" ]; then
+       case ${MACHINE} in
+            tqma8qm*)
+                bbnote "IMAGE_IMXBOOT_TARGET=${IMAGE_IMXBOOT_TARGET}"
+                ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} iMX8-b0-bootstream.bin
                 ;;
             *)
                 break
