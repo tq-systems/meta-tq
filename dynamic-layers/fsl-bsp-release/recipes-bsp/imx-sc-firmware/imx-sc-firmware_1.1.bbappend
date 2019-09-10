@@ -22,6 +22,8 @@ SC_FIRMWARE_NAME_tqma8xqp-mbpa8xx = "mx8qx-tqma8xqp-mba8xx-scfw-tcm.bin"
 SC_FIRMWARE_NAME_tqma8xqps-mb-smarc-2 = "mx8qx-tqma8xqps-mb-smarc-2-scfw-tcm.bin"
 SC_FIRMWARE_NAME_tqma8xds-mb-smarc-2 = "mx8qx-tqma8xds-mb-smarc-2-scfw-tcm.bin"
 
+SC_FIRMWARE_NAME_tqma8qm-mba8x = "mx8qm-tqma8qm-scfw-tcm.bin"
+
 do_compile_prepend () {
     cp ${WORKDIR}/${PN}-tq-${PV}/*.bin ${S}
 }
