@@ -17,6 +17,9 @@ SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch
 #           file://enable-led-features.cfg \
 ####################
 
+SRC_URI_append = " \
+  file://0001-arm64-dt-fsl-imx8qm-add-support-for-TQMa8QM-SOM-with.patch \
+"
 
 SRCBRANCH = "TQMa8xx-bringup-rel_imx_4.14.78_1.0.0_ga"
 SRCREV = "5534448ebda29a2982129ebe0b4c0f735b6b6dfe"
@@ -38,5 +41,6 @@ do_copy_defconfig () {
 COMPATIBLE_MACHINE = "tqma8xx"
 COMPATIBLE_MACHINE_append = "|tqma8xxs"
 COMPATIBLE_MACHINE_append = "|tqma8mq"
+COMPATIBLE_MACHINE_append = "|tqma8qm"
 
 EXTRA_OEMAKE_append_mx8 = " ARCH=arm64"
