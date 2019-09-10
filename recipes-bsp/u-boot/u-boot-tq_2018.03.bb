@@ -17,6 +17,15 @@ SRC_URI = " \
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
 "
 
+SRC_URI_append = " \
+  file://0001-tqc-add-initial-support-for-TQMa8QM.patch \
+  file://0002-tqc-initial-support-for-TQMa8QM-part-2.patch \
+  file://0003-tqc-initial-support-for-TQMa8QM-part-3.patch \
+  file://0004-tqc-initial-support-for-TQMa8QM-part-4.patch \
+  file://0005-gpio-fix-typo-in-Kconfig.patch \
+  file://0006-tqc-initial-support-for-TQMa8QM-part-5.patch \
+"
+
 S = "${WORKDIR}/git"
 
 BOOT_TOOLS = "imx-boot-tools"
@@ -49,5 +58,6 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE = "tqma8xx"
 COMPATIBLE_MACHINE_append = "|tqma8xxs"
 COMPATIBLE_MACHINE_append = "|tqma8mq"
+COMPATIBLE_MACHINE_append = "|tqma8qm"
 
 UBOOT_NAME_mx8 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"

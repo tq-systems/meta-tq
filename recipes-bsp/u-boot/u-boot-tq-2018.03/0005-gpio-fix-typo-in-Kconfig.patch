@@ -1,0 +1,23 @@
+From 6c081f9ffbd1c38438fb7477eb7df590f6e84f9c Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Tue, 10 Sep 2019 13:17:02 +0200
+Subject: [PATCH] gpio: fix typo in Kconfig
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ drivers/gpio/Kconfig | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/gpio/Kconfig b/drivers/gpio/Kconfig
+index cc75aece6a..8c7c2d9876 100644
+--- a/drivers/gpio/Kconfig
++++ b/drivers/gpio/Kconfig
+@@ -109,7 +109,7 @@ config MSM_GPIO
+ 	  - MSM8916
+ 
+ config MXC_GPIO
+-	bool "Freescale/NXP MXC UART driver"
++	bool "Freescale/NXP MXC GPIO driver"
+ 	help
+ 	  Support GPIO controllers on various i.MX platforms
+ 
