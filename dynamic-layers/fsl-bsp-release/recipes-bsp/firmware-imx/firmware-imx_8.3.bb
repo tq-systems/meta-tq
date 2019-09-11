@@ -122,3 +122,7 @@ FILES_${PN}-brcm = "${base_libdir}/firmware/bcm/*/*.bin ${base_libdir}/firmware/
 FILES_${PN}-scfw = "${base_libdir}/firmware/scfw/"
 FILES_${PN}-sdma = " ${base_libdir}/firmware/imx/sdma"
 FILES_${PN}-easrc = "${base_libdir}/firmware/imx/easrc/"
+
+COMPATIBLE_MACHINE = "tqma8xx"
+COMPATIBLE_MACHINE_append = "|tqma8xxs"
+COMPATIBLE_MACHINE_append = "|tqma8qm"
