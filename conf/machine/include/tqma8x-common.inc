@@ -62,3 +62,6 @@ WKS_FILE_DEPENDS = "\
 # meta-freescale
 
 include conf/machine/include/imx-base.inc
+
+# need to do after imx-base, not included in firmware-imx-8.3
+MACHINE_FIRMWARE_remove = "firmware-imx-brcm"
