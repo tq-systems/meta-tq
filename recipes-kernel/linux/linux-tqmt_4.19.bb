@@ -13,9 +13,12 @@ PROVIDES += "linux-mainline linux-tqmt"
 
 SRC_URI = "\
 	${TQ_GIT_BASEURL}/linux-tqmt.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+	file://defconfig \
 "
 SRCBRANCH = "TQMT104x-linux-v4.19"
 SRCREV = "77a7e3bc2d4388a2a9bf4dd089f1a5ab76bd8269"
+
+KERNEL_DEFCONFIG = "${WORKDIR}/defconfig"
 
 KERNEL_IMAGETYPE = "uImage"
 
