@@ -32,7 +32,9 @@ WKS_FILE_DEPENDS = "\
 	"
 
 WKS_FILE ?= "tqmt104x-sdimg.wks"
-FSL_FMAN_UCODE ?= "fsl_fman_ucode_t1040_r1.1_108_5_9.bin"
+
+# fman_ucode is hardcoded in tqmt104x-sdimg.wks
+FSL_FMAN_UCODE ?= "fsl_fman_ucode_t1040_r1.1_107_4_2.bin"
 
 # Image Options
 #
