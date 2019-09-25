@@ -20,7 +20,7 @@ MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree"
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_virtual/kernel_tqma57xx = "linux-tq"
+PREFERRED_PROVIDER_virtual/kernel_tqma57xx = "linux-tq-ti"
 KERNEL_IMAGETYPE = "zImage"
 
 PREFERRED_PROVIDER_u-boot_tqma57xx = "u-boot-tq"
