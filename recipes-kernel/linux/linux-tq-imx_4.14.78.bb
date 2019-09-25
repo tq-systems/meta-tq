@@ -11,7 +11,7 @@ DEPENDS += "lzop-native bc-native"
 #
 # append linux-mainline if we provide mainline kernel versions
 #
-PROVIDES += "linux-tq"
+PROVIDES += "linux-imx linux-tq-imx"
 
 SRC_URI = "\
   ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
