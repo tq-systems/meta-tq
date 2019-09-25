@@ -18,7 +18,11 @@ MACHINE_FEATURES_append = " alsa ext2 pci rtc serial usbhost vfat can"
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_virtual/kernel_tqma7x = "linux-tq-imx"
+# select kernel depending on configs
+# linux-tq (mainline) if meta-freescale is not used
+#
+PREFERRED_PROVIDER_virtual/kernel_tqma7x ?= \
+  "${@bb.utils.contains('BBFILE_COLLECTIONS', 'freescale-layer', 'linux-tq-imx', 'linux-tq', d)}"
 KERNEL_IMAGETYPE = "zImage"
 
 PREFERRED_PROVIDER_u-boot_tqma7x = "u-boot-tq"
