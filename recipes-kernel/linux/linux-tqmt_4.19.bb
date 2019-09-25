@@ -16,7 +16,7 @@ SRC_URI = "\
 	file://defconfig \
 "
 SRCBRANCH = "TQMT104x-linux-v4.19"
-SRCREV = "5366f757c4a0600be73f73e7443e5b5afa0ca07a"
+SRCREV = "f0acb2f2c2ba1f0e339c385b18476108cec1dc17"
 
 KERNEL_DEFCONFIG = "${WORKDIR}/defconfig"
 
