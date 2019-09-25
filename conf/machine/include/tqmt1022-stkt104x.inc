@@ -24,6 +24,6 @@ KERNEL_DEVICETREE ?= " \
 # IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
 #
 IMAGE_BOOT_FILES ?= "\
-    ${KERNEL_IMAGETYPE};tqmt1022-linuximage \
+    ${KERNEL_IMAGETYPE};linuximage \
     tqmt1022-stkt104x.dtb\
     "

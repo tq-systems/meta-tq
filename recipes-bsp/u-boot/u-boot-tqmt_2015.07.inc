@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
 # TODO (workaround) changed for local build
 SRC_URI = "${TQ_GIT_BASEURL}/uboot-tqmt.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 
-SRCREV = "598f6c2796964eab8a3be163d60da7d9257ad3a2"
+SRCREV = "cf0fc92df56891967604f994fbd95a1a063a363f"
 SRCBRANCH = "TQMTxxxx-u-boot-v2015.07"
 
 PV_append = "-tqmt"
