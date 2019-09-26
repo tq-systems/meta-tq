@@ -3,6 +3,8 @@ SUMMARY = "Linux kernel for TQ-Group Freescale i.MX based modules"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
+FILESEXTRAPATHS_prepend = "${THISDIR}/${PN}-${PV}:"
+
 inherit kernel
 
 DEPENDS += "lzop-native bc-native"
