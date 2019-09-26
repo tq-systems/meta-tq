@@ -1,0 +1,204 @@
+From e74472e3c0d4e9b733f29bbe4bd50b2042f7986e Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Tue, 10 Sep 2019 12:21:04 +0200
+Subject: [PATCH] tqc: initial support for TQMa8QM - part 3
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8qm-tqma8qm.dtsi |  2 +-
+ arch/arm/mach-imx/imx8/Kconfig       |  1 +
+ board/tqc/tqma8x/tqma8x-mba8x.c      | 79 +++++-----------------------
+ include/configs/tqma8x.h             | 10 ++--
+ 4 files changed, 20 insertions(+), 72 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-imx8qm-tqma8qm.dtsi b/arch/arm/dts/fsl-imx8qm-tqma8qm.dtsi
+index 36d241a208..4da96daf89 100644
+--- a/arch/arm/dts/fsl-imx8qm-tqma8qm.dtsi
++++ b/arch/arm/dts/fsl-imx8qm-tqma8qm.dtsi
+@@ -24,7 +24,7 @@
+ 	clock-frequency = <100000>;
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_lpi2c1>;
+-	status = "okay";
++	status = "disabled";
+ 
+ };
+ 
+diff --git a/arch/arm/mach-imx/imx8/Kconfig b/arch/arm/mach-imx/imx8/Kconfig
+index 8c28f6e0b9..3b501fd6f3 100644
+--- a/arch/arm/mach-imx/imx8/Kconfig
++++ b/arch/arm/mach-imx/imx8/Kconfig
+@@ -86,6 +86,7 @@ config TARGET_TQMA8X
+ 	select PINCTRL
+ 	select PINCTRL_FULL
+ 	select PINCTRL_IMX8
++	select IMX_SMMU
+ 	select OF_CONTROL
+ 	select DM
+ 	select DM_GPIO
+diff --git a/board/tqc/tqma8x/tqma8x-mba8x.c b/board/tqc/tqma8x/tqma8x-mba8x.c
+index a816a45924..d01cd0f66d 100644
+--- a/board/tqc/tqma8x/tqma8x-mba8x.c
++++ b/board/tqc/tqma8x/tqma8x-mba8x.c
+@@ -36,32 +36,14 @@ DECLARE_GLOBAL_DATA_PTR;
+ #define UART_PAD_CTRL	((SC_PAD_CONFIG_OUT_IN << PADRING_CONFIG_SHIFT) | (SC_PAD_ISO_OFF << PADRING_LPCONFIG_SHIFT) \
+ 						| (SC_PAD_28FDSOI_DSE_DV_HIGH << PADRING_DSE_SHIFT) | (SC_PAD_28FDSOI_PS_PU << PADRING_PULL_SHIFT))
+ 
+-#define PCIE_PAD_CTRL	((SC_PAD_CONFIG_OD_IN << PADRING_CONFIG_SHIFT))
+-
+-static const iomux_cfg_t board_pcie_pins[] = {
+-/*
+-	SC_P_PCIE_CTRL0_PERST_B | MUX_MODE_ALT(4) | MUX_PAD_CTRL(PCIE_PAD_CTRL),
+-	SC_P_PCIE_CTRL0_CLKREQ_B | MUX_MODE_ALT(4) | MUX_PAD_CTRL(PCIE_PAD_CTRL),
+-	SC_P_PCIE_CTRL0_WAKE_B  | MUX_MODE_ALT(4) | MUX_PAD_CTRL(PCIE_PAD_CTRL),
+-*/
+-	SC_P_PCIE_CTRL0_CLKREQ_B | MUX_MODE_ALT(0) | MUX_PAD_CTRL(PCIE_PAD_CTRL),
+-	SC_P_PCIE_CTRL0_WAKE_B | MUX_MODE_ALT(0) | MUX_PAD_CTRL(PCIE_PAD_CTRL),
+-	SC_P_PCIE_CTRL0_PERST_B | MUX_MODE_ALT(0) | MUX_PAD_CTRL(PCIE_PAD_CTRL),
+-};
+-
+-static void setup_iomux_pcie(void)
+-{
+-// 	imx8_iomux_setup_multiple_pads(board_pcie_pins, ARRAY_SIZE(board_pcie_pins));
+-}
+-
+-static iomux_cfg_t uart1_pads[] = {
+-	SC_P_UART1_RX | MUX_MODE_ALT(0) | MUX_PAD_CTRL(UART_PAD_CTRL),
+-	SC_P_UART1_TX | MUX_MODE_ALT(0) | MUX_PAD_CTRL(UART_PAD_CTRL),
++static iomux_cfg_t uart0_pads[] = {
++	SC_P_UART0_RX | MUX_MODE_ALT(0) | MUX_PAD_CTRL(UART_PAD_CTRL),
++	SC_P_UART0_TX | MUX_MODE_ALT(0) | MUX_PAD_CTRL(UART_PAD_CTRL),
+ };
+ 
+ static void setup_iomux_uart(void)
+ {
+-	imx8_iomux_setup_multiple_pads(uart1_pads, ARRAY_SIZE(uart1_pads));
++	imx8_iomux_setup_multiple_pads(uart0_pads, ARRAY_SIZE(uart0_pads));
+ }
+ 
+ int tqc_bb_board_early_init_f(void)
+@@ -71,28 +53,26 @@ int tqc_bb_board_early_init_f(void)
+ 
+ 	ipcHndl = gd->arch.ipc_channel_handle;
+ 
+-	/* Power up UART1 */
+-	sciErr = sc_pm_set_resource_power_mode(ipcHndl, SC_R_UART_1, SC_PM_PW_MODE_ON);
++	/* Power up UART0 */
++	sciErr = sc_pm_set_resource_power_mode(ipcHndl, SC_R_UART_0, SC_PM_PW_MODE_ON);
+ 	if (sciErr != SC_ERR_NONE)
+ 		return 0;
+ 
+-	/* Set UART1 clock root to 80 MHz */
++	/* Set UART0 clock root to 80 MHz */
+ 	sc_pm_clock_rate_t rate = 80000000;
+-	sciErr = sc_pm_set_clock_rate(ipcHndl, SC_R_UART_1, 2, &rate);
++	sciErr = sc_pm_set_clock_rate(ipcHndl, SC_R_UART_0, 2, &rate);
+ 	if (sciErr != SC_ERR_NONE)
+ 		return 0;
+ 
+-	/* Enable UART1 clock root */
+-	sciErr = sc_pm_clock_enable(ipcHndl, SC_R_UART_1, 2, true, false);
++	/* Enable UART0 clock root */
++	sciErr = sc_pm_clock_enable(ipcHndl, SC_R_UART_0, 2, true, false);
+ 	if (sciErr != SC_ERR_NONE)
+ 		return 0;
+ 
+-	LPCG_AllClockOn(LPUART_1_LPCG);
++	LPCG_AllClockOn(LPUART_0_LPCG);
+ 
+ 	setup_iomux_uart();
+ 
+-	setup_iomux_pcie();
+-
+ 	return 0;
+ }
+ 
+@@ -103,42 +83,9 @@ int tqc_bb_checkboard(void)
+ 	return 0;
+ }
+ 
+-static const struct tqc_gpio_init_data mba8x_gid[] = {
+-	{
+-		.name = "GPIO3_5",
+-		.label = "REV_0",
+-		.flags = GPIOD_IS_IN,
+-	}, {
+-		.name = "GPIO3_6",
+-		.label = "REV_1",
+-		.flags = GPIOD_IS_IN,
+-	}, {
+-		.name = "GPIO3_7",
+-		.label = "REV_2",
+-		.flags = GPIOD_IS_IN,
+-	}, {
+-		.name = "GPIO1_13",
+-		.label = "KEY_A#",
+-		.flags = GPIOD_IS_IN,
+-	}, {
+-		.name = "GPIO1_14",
+-		.label = "KEY_B#",
+-		.flags = GPIOD_IS_IN,
+-	}, {
+-		.name = "GPIO1_26",
+-		.label = "GPIO1_26",
+-		.flags = GPIOD_IS_IN,
+-	}, {
+-		.name = "GPIO4_19",
+-		.label = "GPIO4_19",
+-		.flags = GPIOD_IS_IN,
+-	},
+-};
+-
+ int tqc_bb_board_init(void)
+ {
+-// 	return tqc_board_gpio_init(mba8x_gid, ARRAY_SIZE(mba8x_gid));
+-
++	return 0;
+ }
+ 
+ #ifdef CONFIG_OF_BOARD_SETUP
+@@ -179,7 +126,7 @@ int tqc_bb_board_late_init(void)
+ void board_quiesce_devices()
+ {
+ 	const char *power_on_devices[] = {
+-		"dma_lpuart1",
++		"dma_lpuart0",
+ 	};
+ 
+ 	power_off_pd_devices(power_on_devices, ARRAY_SIZE(power_on_devices));
+diff --git a/include/configs/tqma8x.h b/include/configs/tqma8x.h
+index eb6a1ee56e..258a4f85b2 100644
+--- a/include/configs/tqma8x.h
++++ b/include/configs/tqma8x.h
+@@ -282,9 +282,9 @@
+ #define CONFIG_LOADADDR			0x80280000
+ #define CONFIG_SYS_TEXT_BASE		0x80020000
+ 
+-#define CONFIG_SYS_LOAD_ADDR           CONFIG_LOADADDR
++#define CONFIG_SYS_LOAD_ADDR		CONFIG_LOADADDR
+ 
+-#define CONFIG_SYS_INIT_SP_ADDR         0x80200000
++#define CONFIG_SYS_INIT_SP_ADDR		0x80200000
+ 
+ 
+ /* Default environment is in SD */
+@@ -316,7 +316,7 @@
+ #define CONFIG_SYS_MALLOC_LEN		((CONFIG_ENV_SIZE + (32*1024)) * 1024)
+ 
+ #define CONFIG_SYS_SDRAM_BASE		0x80000000
+-#define CONFIG_NR_DRAM_BANKS		1
++#define CONFIG_NR_DRAM_BANKS		4
+ #define PHYS_SDRAM_1			0x80000000
+ 
+ #if defined(CONFIG_TQMA8X_RAM_2048MB)
+@@ -326,8 +326,8 @@
+ #endif
+ 
+ /* needed for loop in CPU code */
+-#define PHYS_SDRAM_2			0x800000000
+-#define PHYS_SDRAM_2_SIZE		0x0000000	/* not placed */
++#define PHYS_SDRAM_2			0x880000000
++#define PHYS_SDRAM_2_SIZE		0x00000000	/* not placed */
+ 
+ /* Serial */
+ #define CONFIG_BAUDRATE			115200
