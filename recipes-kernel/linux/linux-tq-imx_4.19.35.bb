@@ -1,9 +1,10 @@
 SUMMARY = "Linux kernel for TQ-Group Freescale i.MX based modules"
 
+# optional include from meta-freescale
 include recipes-kernel/linux/linux-imx.inc
 
 LICENSE = "GPLv2"
-LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 inherit kernel
 
@@ -18,12 +19,8 @@ SRC_URI = "\
   file://defconfig \
 "
 
-SRCBRANCH = "TQMaxx2-v4.14-rel_imx_4.14.78_1.0.0_ga"
-SRCREV ?= "bb0360f3f557ef3e49c5aa1eab236a87e911e61f"
-
-SRCREV_tqma7x = "bb0360f3f557ef3e49c5aa1eab236a87e911e61f"
-SRCREV_tqma6ulx = "8034ee52a335aaf9e14b9a23ee1630bc3f5b01ca"
-SRCREV_tqma6ullx = "8034ee52a335aaf9e14b9a23ee1630bc3f5b01ca"
+SRCBRANCH = "TQMa8-bringup-rel_imx_4.19.35_1.0.0_ga"
+SRCREV ?= "5f02a1e1af11c0f98b59b9bb57296b602a61ff06"
 
 COMPATIBLE_MACHINE = "tqma7x"
 COMPATIBLE_MACHINE_append = "|tqma6x"
