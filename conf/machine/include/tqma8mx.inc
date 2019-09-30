@@ -18,6 +18,8 @@ MACHINE_FEATURES_append = " pci alsa"
 #
 require conf/machine/include/tqmxx.inc
 
+PREFFERED_VERSION_imx-atf = "1.5"
+
 PREFERRED_PROVIDER_virtual/kernel_tqma8mq ?= "linux-tq-imx"
 KERNEL_IMAGETYPE ?= "Image"
 

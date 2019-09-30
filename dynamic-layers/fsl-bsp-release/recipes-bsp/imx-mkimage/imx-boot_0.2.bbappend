@@ -1,6 +1,10 @@
 
 # declare bootstream to be built. See target names in soc.mak provided by
 # imx-mkimage for target processor
+
+# HACK: use imx-atf 1.5
+ATF_MACHINE_NAME_mx8qxp = "bl31-imx8qxp.bin"
+
 IMXBOOT_TARGETS_tqma8x = "flash_b0"
 IMXBOOT_TARGETS_tqma8xx = "flash"
 IMXBOOT_TARGETS_tqma8xxs = "flash"
