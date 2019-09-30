@@ -78,8 +78,6 @@ addtask deploy before do_install after do_compile
 
 FILES_${PN} = "/boot"
 
-PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = ""
-COMPATIBLE_MACHINE_append = "|tqma8xx"
+COMPATIBLE_MACHINE = "tqma8xx"
 COMPATIBLE_MACHINE_append = "|tqma8xxs"
 COMPATIBLE_MACHINE_append = "|tqma8qm"
