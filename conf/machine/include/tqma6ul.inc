@@ -71,7 +71,3 @@ WKS_FILE_DEPENDS = "\
 
 # TODO:
 #IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
-
-# optionally source the machine specific features for multimedia etc. from
-# meta-freescale
-include conf/machine/include/imx-base.inc
