@@ -20,11 +20,14 @@ MACHINE_FEATURES_append = " alsa ext2 rtc serial usbhost vfat can"
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_virtual/kernel_tqma6ullx = "linux-tq-imx"
+PREFERRED_PROVIDER_virtual/kernel_tqma6ullx ?= "linux-tq-imx"
 KERNEL_IMAGETYPE = "zImage"
 
-PREFERRED_PROVIDER_u-boot_tqma6ullx = "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader_tqma6ullx = "u-boot-tq"
+# Don't include kernels in standard images
+RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
+
+PREFERRED_PROVIDER_u-boot_tqma6ullx ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader_tqma6ullx ?= "u-boot-tq"
 
 UBOOT_SUFFIX ?= "imx"
 UBOOT_MAKE_TARGET ?= "u-boot.imx"
@@ -34,10 +37,9 @@ UBOOT_CONFIG = "sd qspi"
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-IMAGE_FSTYPES_append = " tar.gz ext4 wic"
+IMAGE_FSTYPES_append = " tar.gz ext4 wic ubi"
 IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2 wic.gz"
 
-# DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
 IMAGE_FSTYPES_remove += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'ubi', '', d)}"
 IMAGE_FSTYPES_remove += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'ubi', '', d)}"
 
