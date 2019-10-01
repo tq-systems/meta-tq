@@ -10,6 +10,8 @@ FILESEXTRAPATHS_prepend = "${THISDIR}/${PN}-${PV}:"
 
 inherit kernel
 
+include linux-tq-common.inc
+
 DEPENDS += "lzop-native bc-native"
 #
 # append linux-mainline if we provide mainline kernel versions
@@ -34,6 +36,10 @@ SRC_URI_mx8 = "\
   file://tqma8x-input-devices.cfg \
   file://tqma8x-bpf-support.cfg \
   file://tqma8x-audio-support.cfg \
+"
+
+SRC_URI_append_tqma8mq = "\
+  file://tqma8mx-no-pm.cfg \
 "
 
 ################
