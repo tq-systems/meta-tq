@@ -23,6 +23,9 @@ require conf/machine/include/tqmxx.inc
 PREFERRED_PROVIDER_virtual/kernel_tqma57xx = "linux-tq-ti"
 KERNEL_IMAGETYPE = "zImage"
 
+# Don't include kernels in standard images
+RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
+
 PREFERRED_PROVIDER_u-boot_tqma57xx = "u-boot-tq"
 PREFERRED_PROVIDER_virtual/bootloader_tqma57xx = "u-boot-tq"
 
