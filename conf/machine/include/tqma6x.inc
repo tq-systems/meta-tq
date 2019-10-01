@@ -23,10 +23,13 @@ require conf/machine/include/tqmxx.inc
 PREFERRED_PROVIDER_virtual/kernel_tqma6x ?= \
   "${@bb.utils.contains('BBFILE_COLLECTIONS', 'freescale-layer', 'linux-tq-imx', 'linux-tq', d)}"
 
-KERNEL_IMAGETYPE = "zImage"
+KERNEL_IMAGETYPE_tqma6x ?= "zImage"
 
-PREFERRED_PROVIDER_u-boot_tqma6x = "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader_tqma6x = "u-boot-tq"
+# Don't include kernels in standard images
+RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
+
+PREFERRED_PROVIDER_u-boot_tqma6x ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader_tqma6x ?= "u-boot-tq"
 
 UBOOT_SUFFIX ?= "imx"
 UBOOT_MAKE_TARGET ?= "u-boot.imx"
