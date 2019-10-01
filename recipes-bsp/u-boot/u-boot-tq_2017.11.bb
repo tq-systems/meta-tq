@@ -50,3 +50,4 @@ PACKAGES += "${PN}-images"
 FILES_${PN}-images += "/boot"
 
 COMPATIBLE_MACHINE = "tqmls102xa"
+COMPATIBLE_MACHINE_append = "|tqma6x"
