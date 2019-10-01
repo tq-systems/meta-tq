@@ -21,8 +21,8 @@ require conf/machine/include/tqmxx.inc
 PREFERRED_PROVIDER_virtual/kernel_mx8 ?= "linux-tq"
 KERNEL_IMAGETYPE = "Image"
 
-PREFERRED_PROVIDER_u-boot_mx8 ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader_mx8 ?= "u-boot-tq"
+PREFERRED_PROVIDER_u-boot_mx8 ?= "u-boot-tq-imx"
+PREFERRED_PROVIDER_virtual/bootloader_mx8 ?= "u-boot-tq-imx"
 
 UBOOT_MAKE_TARGET = "u-boot.bin"
 UBOOT_SUFFIX = "bin"

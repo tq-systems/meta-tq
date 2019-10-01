@@ -21,8 +21,8 @@ require conf/machine/include/tqmxx.inc
 PREFERRED_PROVIDER_virtual/kernel_tqma8mq ?= "linux-tq"
 KERNEL_IMAGETYPE = "Image"
 
-PREFERRED_PROVIDER_u-boot_tqma8mq ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader_tqma8mq ?= "u-boot-tq"
+PREFERRED_PROVIDER_u-boot_tqma8mq ?= "u-boot-tq-imx"
+PREFERRED_PROVIDER_virtual/bootloader_tqma8mq ?= "u-boot-tq-imx"
 SPL_BINARY = "spl/u-boot-spl.bin"
 
 # Set DDR FIRMWARE
