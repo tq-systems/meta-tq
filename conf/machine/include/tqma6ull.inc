@@ -20,8 +20,8 @@ KERNEL_IMAGETYPE = "zImage"
 # Don't include kernels in standard images
 RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
 
-PREFERRED_PROVIDER_u-boot_tqma6ullx ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader_tqma6ullx ?= "u-boot-tq"
+PREFERRED_PROVIDER_u-boot_tqma6ullx ?= "u-boot-tq-imx"
+PREFERRED_PROVIDER_virtual/bootloader_tqma6ullx ?= "u-boot-tq-imx"
 
 UBOOT_SUFFIX ?= "imx"
 UBOOT_MAKE_TARGET ?= "u-boot.imx"
