@@ -13,37 +13,9 @@ Dependencies
 This layer depends on:
 
   URI: git://git.yoctoproject.org/poky
-  branch: warrior
-  layers: meta
+  branch: thud-tqma8x
+  layers: meta, meta-freescale, meta-nxp-bsp-release
   revision: HEAD
-
-optionally the layer can make use of features from meta-freescale /
-meta-freeescale-distro if using i.MX6, i.MX6UL, i.MX7 based machines
-(tqma6[s,dl,q,qp]-mba6x, tqma6ul[l]x-mba6ulx, tqma6ul[l]x-lga-mba6ulx etc.)
-
-  URI: https://git.yoctoproject.org/git/meta-freescale
-  layers: meta-freeescale
-  branch: warrior
-
-  URI: https://github.com/Freescale/meta-freescale-distro.git
-  layers: meta-freeescale
-  branch: warrior
-
-Attention: following distros defined in meta-freescale-distro are not comatible
-to machines in meta-tq:
-
-fsl-framebuffer
-fsl-wayland
-fsl-x11
-fsl-xwayland
-
-optionally the layer can make use of features from meta-ti if using AM57xx
-based machines (tqma57[1,2,4]x-mba57xx etc.)
-
-  URI: git://git.yoctoproject.org/meta-ti
-  layers: meta-ti
-  branch: master (states compatibility to warrior with commit
-          59e66caff2568ab32f59596f1aeab8ea27649941)
 
 Patches
 =======
@@ -120,6 +92,14 @@ II. Machines
 support for the following machines is contained in this version:
 
 	SOC		SOM			Base board	MACHINE
+[y]	i.MX8M[D,Q]	TQMA8M[D,Q]		MBa8Mx		tqm8mx-1gm-mba8mx (TQMa8M[D,Q] with 1 GiB RAM, HW REV.010x/020x)
+[y]	i.MX8MQL	TQMA8MQL		MBa8Mx		tqm8mx-2gm-mba8mx (TQMa8MQL with 2 GiB RAM, HW REV.010x/020x)
+[y]	i.MX8DX		TQMA8XD			MBa8Xx		tqm8xd-mba8xx (TQMa8XD with 512 MiB RAM)
+[y]	i.MX8QXP	TQMA8XQP		MBa8Xx		tqm8xqp-mba8xx (TQMa8XQP with 1 GiB RAM)
+[y]	i.MX8QXP	TQMA8XQP		MBpa8Xx		tqm8xqp-mbpa8xx (TQMa8XQP with 1 GiB RAM)
+[y]	i.MX8DX		TQMA8XDS		MB-SMARC-2	tqm8xds-mb-smarc-2 (TQMa8XDS with 512 MiB RAM)
+[y]	i.MX8QXP	TQMA8XQPS		MB-SMARC-2	tqm8xqps-mb-smarc-2 (TQMa8XQPS with 1 GiB RAM)
+
 [b]	i.MX6[QP,DP]	TQMa6QP/TQMa6DP		MBa6x		tqma6qp-mba6x (TQMa6[QP,DP] HW REV.040x / MBa6x HW REV.020x)
 [b]	i.MX6[Q,D]	TQMa6D/TQMa6Q		MBa6x		tqma6q-mba6x (TQMa6[D,Q] HW REV.010x ... 040x / MBa6x HW REV.020x)
 [y]	i.MX6[Q,D]	TQMa6D/TQMa6Q		NAV		tqma6q-nav (TQMa6[D,Q] HW REV.030x ... 040x / NAV REV.020x)
