@@ -1,16 +1,18 @@
 # Common definitions for TQ-Group MBa8Mx baseboard for TQMa8Mx modules
 
-KERNEL_DEVICETREE = "\
-	freescale/fsl-imx8mq-tqma8mq-mba8mx.dtb \
-	freescale/fsl-imx8mq-tqma8mq-mba8mx-hdmi.dtb \
-	freescale/fsl-imx8mq-tqma8mq-mba8mx-sd-hs104.dtb \
-	freescale/fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-tm070jvhg33.dtb \
-	freescale/fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-tm070jvhg33-en_gpio.dtb \
-	freescale/fsl-imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb \
-	freescale/fsl-imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33-en_gpio.dtb \
-	freescale/fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01-en_gpio.dtb \
-	freescale/fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01-18bit-en_gpio.dtb \
-"
+BOARD_DEVICETREE_FILES = "\
+	fsl-imx8mq-tqma8mq-mba8mx.dtb \
+	fsl-imx8mq-tqma8mq-mba8mx-hdmi.dtb \
+	fsl-imx8mq-tqma8mq-mba8mx-sd-hs104.dtb \
+	fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-tm070jvhg33.dtb \
+	fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-tm070jvhg33-en_gpio.dtb \
+	fsl-imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb \
+	fsl-imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33-en_gpio.dtb \
+	fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01-en_gpio.dtb \
+	fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01-18bit-en_gpio.dtb \
+	"
+
+KERNEL_DEVICETREE = ""
 
 # Set Serial console
 SERIAL_CONSOLES = "115200;ttymxc0"
@@ -22,14 +24,16 @@ SERIAL_CONSOLES = "115200;ttymxc0"
 #
 IMAGE_BOOT_FILES ?= "\
 	${KERNEL_IMAGETYPE} \
-	fsl-imx8mq-tqma8mq-mba8mx.dtb;fsl-imx8mq-tqma8mq-mba8mx.dtb \
-	fsl-imx8mq-tqma8mq-mba8mx-hdmi.dtb;fsl-imx8mq-tqma8mq-mba8mx-hdmi.dtb \
-	fsl-imx8mq-tqma8mq-mba8mx-sd-hs104.dtb;fsl-imx8mq-tqma8mq-mba8mx-sd-hs104.dtb \
-	fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-tm070jvhg33.dtb;fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-tm070jvhg33.dtb \
-	fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-tm070jvhg33-en_gpio.dtb;fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-tm070jvhg33-en_gpio.dtb \
-	fsl-imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb;fsl-imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb \
-	fsl-imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33-en_gpio.dtb;fsl-imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33-en_gpio.dtb \
-	fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01-en_gpio.dtb;fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01-en_gpio.dtb \
-	fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01-18bit-en_gpio.dtb;fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01-18bit-en_gpio.dtb \
+	${BOARD_DEVICETREE_FILES} \
 	"
 
+KERNEL_DEVICETREE_PATH_PREFIX = "freescale/"
+
+# sets KERNEL_DEVICETREE
+python () {
+	dt_list = d.getVar("BOARD_DEVICETREE_FILES").split()
+	dt_prefix = d.getVar("KERNEL_DEVICETREE_PATH_PREFIX")
+	dt_prefix += "% s"
+	dt_list =  [dt_prefix % i for i in dt_list]
+	d.setVar("KERNEL_DEVICETREE", ' '.join(dt_list))
+}
