@@ -10,20 +10,11 @@ DEPENDS_append = " python dtc-native bc-native"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
-SRCREV = "2611bfd9f7fdf845dfedf6dba79a920485c432f5"
+SRCREV = "7617701438f24594ce7a02425832cbea5efa68a7"
 SRCBRANCH = "TQMa8xx-bringup-v2018.03-rel_imx_4.14.78_1.0.0_ga"
 
 SRC_URI = " \
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
-"
-
-SRC_URI_append = " \
-  file://0001-tqc-add-initial-support-for-TQMa8QM.patch \
-  file://0002-tqc-initial-support-for-TQMa8QM-part-2.patch \
-  file://0003-tqc-initial-support-for-TQMa8QM-part-3.patch \
-  file://0004-tqc-initial-support-for-TQMa8QM-part-4.patch \
-  file://0005-gpio-fix-typo-in-Kconfig.patch \
-  file://0006-tqc-initial-support-for-TQMa8QM-part-5.patch \
 "
 
 S = "${WORKDIR}/git"
