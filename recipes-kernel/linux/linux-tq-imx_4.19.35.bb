@@ -1,14 +1,14 @@
 SUMMARY = "Linux kernel for TQ-Group Freescale i.MX based modules"
 
-# optional include from meta-freescale
-include recipes-kernel/linux/linux-imx.inc
-
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 FILESEXTRAPATHS_prepend = "${THISDIR}/${PN}-${PV}:"
 
 inherit kernel
+# todo: make it optional
+inherit fsl-kernel-localversion
+inherit fsl-vivante-kernel-driver-handler
 
 include linux-tq-common.inc
 
@@ -18,7 +18,11 @@ DEPENDS += "lzop-native bc-native"
 #
 PROVIDES += "linux-imx linux-tq-imx"
 
-SRCBRANCH = "TQMa8-bringup-rel_imx_4.19.35_1.0.0_ga"
+# Put a local version until we have a true SRCREV to point to
+LOCALVERSION ?= ""
+SCMVERSION ?= "y"
+
+SRCBRANCH ?= "TQMa8-bringup-rel_imx_4.19.35_1.0.0_ga"
 SRCREV ?= "5f02a1e1af11c0f98b59b9bb57296b602a61ff06"
 
 SRC_URI = "\
