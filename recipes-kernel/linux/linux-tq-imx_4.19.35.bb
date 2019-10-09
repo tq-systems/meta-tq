@@ -22,8 +22,8 @@ PROVIDES += "linux-imx linux-tq-imx"
 LOCALVERSION ?= ""
 SCMVERSION ?= "y"
 
-SRCBRANCH ?= "TQMa8-bringup-rel_imx_4.19.35_1.0.0_ga"
-SRCREV ?= "5f02a1e1af11c0f98b59b9bb57296b602a61ff06"
+SRCBRANCH ?= "TQMa8-rel_imx_4.19.35_1.0.0_ga"
+SRCREV ?= "52e7bac4db5f4a5ed579b15bfd5b616e5af743c3"
 
 SRC_URI = "\
   ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
