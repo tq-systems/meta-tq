@@ -1,6 +1,6 @@
 # Common definitions for all TQ-Group TQMa8Xx / TQMa8XxS modules
 
-MACHINEOVERRIDES =. "imx:mx8:mx8qxp:"
+MACHINEOVERRIDES =. "mx8:mx8qxp:"
 
 require conf/machine/include/arm/arch-arm64.inc
 
