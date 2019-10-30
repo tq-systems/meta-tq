@@ -5,8 +5,6 @@ SRC_URI_append = " \
     file://${PN}-tq.tar.gz \
 "
 
-LIC_FILES_CHKSUM="file://COPYING;md5=6dfb32a488e5fd6bae52fbf6c7ebb086"
-
 # clear vars to prevent default assignments
 BOARD_TYPE_mx8 = ""
 SC_FIRMWARE_NAME_mx8qxp = "invalid"
@@ -24,6 +22,8 @@ SC_FIRMWARE_NAME_tqma8xds-mb-smarc-2 = "mx8qx-tqma8xds-mb-smarc-2-scfw-tcm.bin"
 
 SC_FIRMWARE_NAME_tqma8qm-mba8x = "mx8qm-tqma8qm-scfw-tcm.bin"
 
-do_compile_prepend () {
-    cp ${WORKDIR}/${PN}-tq-${PV}/*.bin ${S}
+do_deploy_prepend () {
+# TODO: need new version number
+#    cp ${WORKDIR}/${PN}-tq-${PV}/*.bin ${S}
+    cp ${WORKDIR}/${PN}-tq-1.1/*.bin ${S}
 }
