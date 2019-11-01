@@ -17,8 +17,13 @@ RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_virtual/kernel_tqma6x = "linux-tq-imx"
-KERNEL_IMAGETYPE_tqma6x = "zImage"
+# select kernel depending on configs
+# linux-tq (mainline) if meta-freescale is not used
+#
+PREFERRED_PROVIDER_virtual/kernel_tqma6x ?= \
+  "${@bb.utils.contains('BBFILE_COLLECTIONS', 'freescale-layer', 'linux-tq-imx', 'linux-tq', d)}"
+
+KERNEL_IMAGETYPE = "zImage"
 
 PREFERRED_PROVIDER_u-boot_tqma6x = "u-boot-tq"
 PREFERRED_PROVIDER_virtual/bootloader_tqma6x = "u-boot-tq"
