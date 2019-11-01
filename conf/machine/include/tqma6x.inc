@@ -17,7 +17,7 @@ RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_virtual/kernel_tqma6x = "linux-tq"
+PREFERRED_PROVIDER_virtual/kernel_tqma6x = "linux-tq-imx"
 KERNEL_IMAGETYPE_tqma6x = "zImage"
 
 PREFERRED_PROVIDER_u-boot_tqma6x = "u-boot-tq"
