@@ -13,9 +13,9 @@ SCMVERSION ?= "y"
 
 inherit kernel
 inherit cml1
+
 # todo: make it optional
-inherit fsl-kernel-localversion
-inherit fsl-vivante-kernel-driver-handler
+require ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-freescale", 'linux-tq-imx-conditional.inc', '', d)}
 
 KERNEL_TREE_DEFCONFIG ??= ""
 
