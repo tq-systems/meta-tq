@@ -39,7 +39,7 @@ FSL_FMAN_UCODE ?= "fsl_fman_ucode_t1040_r1.1_107_4_2.bin"
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader fm-ucode"
-IMAGE_FSTYPES_append = " tar.gz ext4 wic"
+IMAGE_FSTYPES_append = " tar.gz ext4 wic jffs2"
 
 KERNEL_IMAGETYPE = "uImage"
 SERIAL_CONSOLES ?= "115200;ttyS0 115200;ttyS1 115200;ttyEHV0"
