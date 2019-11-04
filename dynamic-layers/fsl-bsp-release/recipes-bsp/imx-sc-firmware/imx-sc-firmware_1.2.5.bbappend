@@ -25,5 +25,5 @@ SC_FIRMWARE_NAME_tqma8qm-mba8x = "mx8qm-tqma8qm-scfw-tcm.bin"
 do_deploy_prepend () {
 # TODO: need new version number
 #    cp ${WORKDIR}/${PN}-tq-${PV}/*.bin ${S}
-    cp ${WORKDIR}/${PN}-tq-1.1/*.bin ${S}
+    cp ${WORKDIR}/${PN}-tq-1.2.2/*.bin ${S}
 }
