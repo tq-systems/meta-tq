@@ -8,8 +8,8 @@ PREFERRED_VERSION_openssl = ""
 #
 
 UBOOT_CONFIG ??= "sdcard nor"
-UBOOT_CONFIG[nor] = "TQMT1040_defconfig"
-UBOOT_CONFIG[sdcard] = "TQMT1040_SDCARD_defconfig"
+UBOOT_CONFIG[nor] ?= "TQMT1040_defconfig"
+UBOOT_CONFIG[sdcard] ?= "TQMT1040_SDCARD_defconfig"
 
 FSL_RCW ?= "TQMT1040_SERDES66"
 
