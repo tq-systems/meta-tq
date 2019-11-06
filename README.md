@@ -38,10 +38,12 @@ Additionally you can use github's collaboration features.
 
 ## Table of Contents
 
-  I. Adding the meta-tq layer to your build  
- II. Supported machines  
+1. Adding the meta-tq layer to your build  
+2. Supported machines  
+3. Support for wic  
+4. Support custom mainboards  
 
-### I. Adding the meta-tq layer to your build
+### 1. Adding the meta-tq layer to your build
 
 In order to use this layer, you need to make the build system aware of
 it.
@@ -62,9 +64,9 @@ other layers needed. e.g.:
   "
 `
 
-### II. Supported machines
+### 2. Supported machines
 
-support for the following machines is contained in this version:
+Support for the following machines is contained in this version:
 
 	SOC		SOM		Base board	MACHINE
 [y]	i.MX8M[D,Q]	TQMA8M[D,Q]	MBa8Mx		tqm8mx-1gm-mba8mx (TQMa8M[D,Q] with 1 GiB RAM, HW REV.010x/020x)
@@ -93,3 +95,22 @@ support for the following machines is contained in this version:
 
 Note: for TQMa6UL1 and baseboard using this module variant with i.MX6ULG1
       a dedicated device tree is supplied
+
+### 3. Support for wic
+
+To generate bootable images for SD / e-MMC wic is supported. Config files are
+located in wic directory. Machine files are preconfigured to generate wic images.
+
+### 4. Support custom mainboards
+
+To allow reusing of defines and settings all machine configuration files are
+splitted in SOM and mainboard specific parts. Most of the settings can easily
+be overwritten due to the usage of `?=` assignments.
+
+To support a custom mainboard for one of the supported SOM, the recommended way
+is
+
+* create your own layer
+* define your own machine (you can start with a copy of the TQ starter kit for
+the SOM)
+* include SOM specific settings from meta-tq (`conf/machine/include`)
