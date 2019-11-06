@@ -1,5 +1,4 @@
-OpenEmbedded/Yocto hardware support layer for TQ Systems ARM SOM
-================================================================
+# OpenEmbedded/Yocto hardware support layer for TQ Systems ARM SOM
 
 This README file contains information on the contents of the meta-tq layer.
 This layer provides support for TQ Systems CPU modules and Starterkits with
@@ -7,69 +6,63 @@ ARM CPU.
 
 Please see the corresponding sections below for details.
 
-Dependencies
-============
+## Overview
 
-This layer depends on:
+### Dependencies
+
+This layer in the checked out branch depends on:
 
   URI: git://git.yoctoproject.org/poky
-  branch: sumo-tqma8x
-  layers: meta, meta-freescale, meta-nxp-bsp-release
+  branch: sumo
   revision: HEAD
+  layers: meta, meta-poky
 
-Patches
-=======
+  URI: git://git.yoctoproject.org/meta-freescale
+  branch: sumo
+  revision: HEAD
+  layers: meta-freescale
+
+  URI: https://source.codeaurora.org/external/imx/meta-fsl-bsp-release
+  branch: sumo-4.14.98-2.2.0
+  revision: HEAD
+  layers: meta-bsp
+
+### Patches
 
 Please submit patches against the meta-tq layer to the
-the maintainer:
+maintainer:
 
 Maintainer: Markus Niebel <Markus.Niebel@tq-group.com>
 
-Additionally you can us github's collaboration features.
+Additionally you can use github's collaboration features.
 
-Table of Contents
-=================
+## Table of Contents
 
-  I. Adding the tq layer to your build
- II. Supported machines
+  I. Adding the meta-tq layer to your build  
+ II. Supported machines  
 
-
-I. Adding the meta-tq layer to your build
-=========================================
+### I. Adding the meta-tq layer to your build
 
 In order to use this layer, you need to make the build system aware of
 it.
 
-Assuming the tq layer exists at the top-level of your
+Assuming the tq layer exists in subdir sources at the top-level of your
 yocto build tree, you can add it to the build system by adding the
 location of the tq layer to bblayers.conf, along with any
 other layers needed. e.g.:
 
+`
   BBLAYERS ?= " \
-    /path/to/yocto/meta \
-    /path/to/yocto/meta-poky \
-    /path/to/yocto/meta-tq \
-    "
+    /<path to build tree>/sources/poky/meta \
+    /<path to build tree>/sources/poky/meta-poky \
+    /<path to build tree>/sources/meta-freescale \
+    /<path to build tree>/sources/meta-tq \
+    /<path to build tree>/sources/meta-fsl-bsp-release/imx/meta-bsp \
+    ...
+  "
+`
 
-The layer can be used together with the Freescale / NXP layers if needed.
-Therefore the MACHINEOVERRIDE variable is prepared inside the <modulename>.conf
-file. See following example:
-
-BBLAYERS = " \
-  ${BSPDIR}/sources/poky/meta \
-  ${BSPDIR}/sources/poky/meta-poky \
-  \
-  ${BSPDIR}/sources/meta-openembedded/meta-oe \
-  ${BSPDIR}/sources/meta-openembedded/meta-multimedia \
-  \
-  ${BSPDIR}/sources/meta-freescale \
-  ${BSPDIR}/sources/meta-freescale-distro \
-  \
-  ${BSPDIR}/sources/meta-tq \
-"
-
-II. Machines
-============
+### II. Supported machines
 
 support for the following machines is contained in this version:
 
