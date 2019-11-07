@@ -1,0 +1,41 @@
+
+sumo.TQMa8.BSP.SW.0012
+
+recipes: change recipe name for TQMa8 linux (linux-tq -> linux-tq-imx)
+recipes: temporary use older versions of imx-atf for TQMa8
+machines: cleanup assignments in machine files
+linux: update to rel_imx_4.14.98_2.2.0
+recipes: prepare using NXP release rel_imx_4.14.98_2.2.0
+machines: experimental support for TQMA8QM
+linux: experimental support for TQMA8QM
+u-boot: experimental support for TQMA8QM
+
+sumo.TQMa8.BSP.SW.0010
+
+linux: support HW REV.020x of TQMa8Mx
+u-boot: support HW REV.020x of TQMa8Mx
+
+sumo.TQMa8.BSP.SW.0009
+
+machines: additional LVDS display for MBa8Xx
+linux: additional LVDS display for MBa8Xx
+linux: experimental sound support for MBa8Mx
+
+sumo.TQMa8.BSP.SW.0008
+
+machines: additional LVDS display for MBa8Mx
+recipes: fix dependencies in imx-boot
+linux: backport flexcan fixes
+linux: additional LVDS display for MBa8Mx
+linux: enable audio codec in kernel config
+recipes: fix can support for MBPa8Xx in systemd-machine-units
+
+sumo.TQMa8.BSP.SW.0007
+
+linux: backport audio codec features / fixes
+recipes: drop hard systemd dependency on systemd-machine-units
+machines: experimental support for ARMv7A machines
+linux: fix ethernet LEDs for MBa8Mx / MBa8Xx
+u-boot: fix ethernet LEDs for MBa8Mx / MBa8Xx
+linux: integrate patches for MBPa8xx
+u-boot: integrate patches for MBPa8xx
