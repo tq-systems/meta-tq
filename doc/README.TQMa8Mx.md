@@ -116,7 +116,7 @@ Example for Linux:
 
 Example for U-Boot:
 
-`
+```
 # 33k -> 66 Blocks -> 0x42
 
 tftp <bootstream>
@@ -125,7 +125,7 @@ setexpr bsz $bsz / 200
 printenv bsz
 mmc dev 0
 mmc write 42 $bsz
-`
+```
 
 ### Update components via U-Boot
 
