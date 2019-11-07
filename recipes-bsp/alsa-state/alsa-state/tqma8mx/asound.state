@@ -34,8 +34,8 @@ state.imx8mqmba8mxtlv {
 	control.3 {
 		iface MIXER
 		name 'LO Driver Gain Volume'
-		value.0 6
-		value.1 6
+		value.0 30
+		value.1 30
 		comment {
 			access 'read write'
 			type INTEGER
@@ -43,8 +43,8 @@ state.imx8mqmba8mxtlv {
 			range '0 - 35'
 			dbmin -600
 			dbmax 2900
-			dbvalue.0 0
-			dbvalue.1 0
+			dbvalue.0 2400
+			dbvalue.1 2400
 		}
 	}
 	control.4 {
@@ -103,8 +103,8 @@ state.imx8mqmba8mxtlv {
 	control.9 {
 		iface MIXER
 		name 'ADC Level Volume'
-		value.0 24
-		value.1 24
+		value.0 22
+		value.1 22
 		comment {
 			access 'read write'
 			type INTEGER
@@ -112,8 +112,8 @@ state.imx8mqmba8mxtlv {
 			range '0 - 64'
 			dbmin -1200
 			dbmax 2000
-			dbvalue.0 0
-			dbvalue.1 0
+			dbvalue.0 -100
+			dbvalue.1 -100
 		}
 	}
 	control.10 {
@@ -404,7 +404,7 @@ state.imx8mqmba8mxtlv {
 	control.34 {
 		iface MIXER
 		name 'IN1_L to Right Mixer Negative Resistor'
-		value '10 kOhm'
+		value Off
 		comment {
 			access 'read write'
 			type ENUMERATED
@@ -474,7 +474,7 @@ state.imx8mqmba8mxtlv {
 	control.39 {
 		iface MIXER
 		name 'IN1_R to Left Mixer Positive Resistor'
-		value '10 kOhm'
+		value Off
 		comment {
 			access 'read write'
 			type ENUMERATED
