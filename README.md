@@ -120,6 +120,6 @@ is
 
 ### 5. SOM specific documentation
 
-Under the given links SOM specific information can be found
+Under the given links SOM specific information can be found:
 
-[TQMA8M\[D,Q\] and	TQMA8MQL:](doc/README.TQMa8Mx.md)
+[TQMA8M\[D,Q\] and	TQMA8MQL](doc/README.TQMa8Mx.md)
