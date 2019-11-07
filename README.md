@@ -91,12 +91,12 @@ Support for the following machines is contained in this version:
 [*]	LS102[0,1]a	TQMLS102[0,1]a>	MBLS102xa	tqmls102xa-mbls102xa (TQMLS102[0,1]a HW REV.020x / MBLS102xa HW REV.020x)
 ```
 
-\[y\]: supported
-\[b\]: build tested only
-\[\*\]: not buildable in this version
+\[y\]: supported  
+\[b\]: build tested only  
+\[\*\]: not buildable in this version  
 
-*Note:* for TQMa6UL1 and baseboard using this module variant with i.MX6ULG1
-        a dedicated device tree is supplied
+**Note:** for TQMa6UL1 and baseboards using this module variant with i.MX6ULG1
+          a dedicated device tree is supplied
 
 ### 3. Support for wic
 
