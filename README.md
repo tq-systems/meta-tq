@@ -12,20 +12,20 @@ Please see the corresponding sections below for details.
 
 This layer in the checked out branch depends on:
 
-  URI: git://git.yoctoproject.org/poky
-  branch: sumo
-  revision: HEAD
-  layers: meta, meta-poky
+URI: git://git.yoctoproject.org/poky  
+branch: sumo  
+revision: HEAD  
+layers: meta, meta-poky  
 
-  URI: git://git.yoctoproject.org/meta-freescale
-  branch: sumo
-  revision: HEAD
-  layers: meta-freescale
+URI: git://git.yoctoproject.org/meta-freescale  
+branch: sumo  
+revision: HEAD  
+layers: meta-freescale  
 
-  URI: https://source.codeaurora.org/external/imx/meta-fsl-bsp-release
-  branch: sumo-4.14.98-2.2.0
-  revision: HEAD
-  layers: meta-bsp
+URI: https://source.codeaurora.org/external/imx/meta-fsl-bsp-release  
+branch: sumo-4.14.98-2.2.0  
+revision: HEAD  
+layers: meta-bsp  
 
 ### Patches
 
@@ -38,10 +38,10 @@ Additionally you can use github's collaboration features.
 
 ## Table of Contents
 
-1. Adding the meta-tq layer to your build  
-2. Supported machines  
-3. Support for wic  
-4. Support custom mainboards  
+1. Adding the meta-tq layer to your build
+2. Supported machines
+3. Support for wic
+4. Support custom mainboards
 
 ### 1. Adding the meta-tq layer to your build
 
@@ -53,7 +53,7 @@ yocto build tree, you can add it to the build system by adding the
 location of the tq layer to bblayers.conf, along with any
 other layers needed. e.g.:
 
-`
+```
   BBLAYERS ?= " \
     /<path to build tree>/sources/poky/meta \
     /<path to build tree>/sources/poky/meta-poky \
@@ -62,12 +62,13 @@ other layers needed. e.g.:
     /<path to build tree>/sources/meta-fsl-bsp-release/imx/meta-bsp \
     ...
   "
-`
+```
 
 ### 2. Supported machines
 
 Support for the following machines is contained in this version:
 
+```
 	SOC		SOM		Base board	MACHINE
 [y]	i.MX8M[D,Q]	TQMA8M[D,Q]	MBa8Mx		tqm8mx-1gm-mba8mx (TQMa8M[D,Q] with 1 GiB RAM, HW REV.010x/020x)
 [y]	i.MX8MQL	TQMA8MQL	MBa8Mx		tqm8mx-2gm-mba8mx (TQMa8MQL with 2 GiB RAM, HW REV.010x/020x)
@@ -88,13 +89,14 @@ Support for the following machines is contained in this version:
 [*]	i.MX6ULL	TQMa6ULLx	MBaULx		tqma6ullx-mba6ulx (TQMa6ULLx HW REV.030x / MBa6ULx HW REV.020x)
 [*]	i.MX7[S,D]	TQMa7<S,D>	MBa7x		tqma7x-mba7 (TQMa7[S,D] HW REV.010x ... 0x020x / MBa7x HW REV.020x)
 [*]	LS102[0,1]a	TQMLS102[0,1]a>	MBLS102xa	tqmls102xa-mbls102xa (TQMLS102[0,1]a HW REV.020x / MBLS102xa HW REV.020x)
+```
 
-[y]: supported
-[b]: build tested only
-[*]: not buildable in this version
+\[y\]: supported
+\[b\]: build tested only
+\[\*\]: not buildable in this version
 
-Note: for TQMa6UL1 and baseboard using this module variant with i.MX6ULG1
-      a dedicated device tree is supplied
+*Note:* for TQMa6UL1 and baseboard using this module variant with i.MX6ULG1
+        a dedicated device tree is supplied
 
 ### 3. Support for wic
 
@@ -112,5 +114,5 @@ is
 
 * create your own layer
 * define your own machine (you can start with a copy of the TQ starter kit for
-the SOM)
+  the SOM)
 * include SOM specific settings from meta-tq (`conf/machine/include`)
