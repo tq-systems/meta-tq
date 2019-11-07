@@ -42,6 +42,7 @@ Additionally you can use github's collaboration features.
 2. Supported machines
 3. Support for wic
 4. Support custom mainboards
+5. SOM specific documentation
 
 ### 1. Adding the meta-tq layer to your build
 
@@ -116,3 +117,9 @@ is
 * define your own machine (you can start with a copy of the TQ starter kit for
   the SOM)
 * include SOM specific settings from meta-tq (`conf/machine/include`)
+
+### 5. SOM specific documentation
+
+Under the given links SOM specific information can be found
+
+[TQMA8M\[D,Q\] and	TQMA8MQL:](doc/README.TQMa8Mx.md)
