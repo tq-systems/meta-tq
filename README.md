@@ -122,4 +122,6 @@ is
 
 Under the given links SOM specific information can be found:
 
-[TQMA8M\[D,Q\] and	TQMA8MQL](doc/README.TQMa8Mx.md)
+[TQMA8M\[D,Q\] and TQMA8MQL](doc/README.TQMa8Mx.md)
+[TQMA8XQP](doc/README.TQMa8Xx.md)
+[TQMA8QM](doc/README.TQMa8x.md)
