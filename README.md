@@ -12,12 +12,12 @@ Please see the corresponding sections below for details.
 
 This layer in the checked out branch depends on:
 
-URI: git://git.yoctoproject.org/poky  
+URI: https://git.yoctoproject.org/poky  
 branch: sumo  
 revision: HEAD  
 layers: meta, meta-poky  
 
-URI: git://git.yoctoproject.org/meta-freescale  
+URI: https://git.yoctoproject.org/meta-freescale  
 branch: sumo  
 revision: HEAD  
 layers: meta-freescale  
