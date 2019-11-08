@@ -71,14 +71,14 @@ Support for the following machines is contained in this version:
 
 ```
 	SOC		SOM		Base board	MACHINE
-[y]	i.MX8M[D,Q]	TQMA8M[D,Q]	MBa8Mx		tqm8mx-1gm-mba8mx (TQMa8M[D,Q] with 1 GiB RAM, HW REV.010x/020x)
-[y]	i.MX8MQL	TQMA8MQL	MBa8Mx		tqm8mx-2gm-mba8mx (TQMa8MQL with 2 GiB RAM, HW REV.010x/020x)
-[b]	i.MX8QM		TQMA8QM		MBa8x		tqm8qm-mba8x (TQMa8QM with 2 GiB RAM, HW REV.010x)
-[b]	i.MX8DX		TQMA8XD		MBa8Xx		tqm8xd-mba8xx (TQMa8XD with 512 MiB RAM)
-[b]	i.MX8QXP	TQMA8XQP	MBa8Xx		tqm8xqp-mba8xx (TQMa8XQP with 1 GiB RAM)
-[b]	i.MX8QXP	TQMA8XQP	MBpa8Xx		tqm8xqp-mbpa8xx (TQMa8XQP with 1 GiB RAM)
-[b]	i.MX8DX		TQMA8XDS	MB-SMARC-2	tqm8xds-mb-smarc-2 (TQMa8XDS with 512 MiB RAM)
-[b]	i.MX8QXP	TQMA8XQPS	MB-SMARC-2	tqm8xqps-mb-smarc-2 (TQMa8XQPS with 1 GiB RAM)
+[y]	i.MX8M[D,Q]	TQMA8M[D,Q]	MBa8Mx		tqma8mx-1gm-mba8mx (TQMa8M[D,Q] with 1 GiB RAM, HW REV.010x/020x)
+[y]	i.MX8MQL	TQMA8MQL	MBa8Mx		tqma8mx-2gm-mba8mx (TQMa8MQL with 2 GiB RAM, HW REV.010x/020x)
+[b]	i.MX8QM		TQMA8QM		MBa8x		tqma8qm-mba8x (TQMa8QM with 2 GiB RAM, HW REV.010x)
+[b]	i.MX8DX		TQMA8XD		MBa8Xx		tqma8xd-mba8xx (TQMa8XD with 512 MiB RAM)
+[b]	i.MX8QXP	TQMA8XQP	MBa8Xx		tqma8xqp-mba8xx (TQMa8XQP with 1 GiB RAM)
+[b]	i.MX8QXP	TQMA8XQP	MBpa8Xx		tqma8xqp-mbpa8xx (TQMa8XQP with 1 GiB RAM)
+[b]	i.MX8DX		TQMA8XDS	MB-SMARC-2	tqma8xds-mb-smarc-2 (TQMa8XDS with 512 MiB RAM)
+[b]	i.MX8QXP	TQMA8XQPS	MB-SMARC-2	tqma8xqps-mb-smarc-2 (TQMa8XQPS with 1 GiB RAM)
 
 [*]	i.MX6[QP,DP]	TQMa6QP/TQMa6DP	MBa6x		tqma6qp-mba6x (TQMa6[QP,DP] HW REV.040x / MBa6x HW REV.020x)
 [*]	i.MX6[Q,D]	TQMa6D/TQMa6Q	MBa6x		tqma6q-mba6x (TQMa6[D,Q] HW REV.010x ... 040x / MBa6x HW REV.020x)
