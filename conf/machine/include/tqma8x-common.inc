@@ -14,8 +14,6 @@ LOADADDR = ""
 MACHINE_EXTRA_RRECOMMENDS += " kernel-modules kernel-devicetree"
 MACHINE_FEATURES_append = " can pci alsa rtc serial ext2 ext3 vfat usbhost"
 
-PREFFERED_VERSION_imx-atf = "1.5"
-
 # TQ u-boot and kernel
 #
 require conf/machine/include/tqmxx.inc
