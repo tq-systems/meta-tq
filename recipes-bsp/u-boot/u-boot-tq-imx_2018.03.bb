@@ -1,5 +1,5 @@
 
-DESCRIPTION = "u-boot for TQ-Group NXP i.MX8xX based modules"
+DESCRIPTION = "u-boot for TQ-Group NXP i.MX8 based modules"
 
 require recipes-bsp/u-boot/u-boot.inc
 inherit pythonnative
@@ -10,20 +10,11 @@ DEPENDS_append = " python dtc-native bc-native"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
-SRCREV = "2611bfd9f7fdf845dfedf6dba79a920485c432f5"
-SRCBRANCH = "TQMa8xx-bringup-v2018.03-rel_imx_4.14.78_1.0.0_ga"
+SRCREV = "79327ff1f5ff38d40414a3c8f5cb1ced05b51c4a"
+SRCBRANCH = "TQMa8xx-bringup-v2018.03-rel_imx_4.14.98_2.2.0"
 
 SRC_URI = " \
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
-"
-
-SRC_URI_append = " \
-  file://0001-tqc-add-initial-support-for-TQMa8QM.patch \
-  file://0002-tqc-initial-support-for-TQMa8QM-part-2.patch \
-  file://0003-tqc-initial-support-for-TQMa8QM-part-3.patch \
-  file://0004-tqc-initial-support-for-TQMa8QM-part-4.patch \
-  file://0005-gpio-fix-typo-in-Kconfig.patch \
-  file://0006-tqc-initial-support-for-TQMa8QM-part-5.patch \
 "
 
 S = "${WORKDIR}/git"
