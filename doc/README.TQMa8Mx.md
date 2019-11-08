@@ -7,12 +7,12 @@ This README contains some useful information for TQMa8Mx on MBa8Mx
 ### U-Boot:
 
 * based on uboot-imx (https://source.codeaurora.org/external/imx/uboot-imx)
-* branched from rel_imx_4.14.78_1.0.0_ga / imx_v2018.03_4.14.78_1.0.0_ga
+* branched from rel\_imx\_4.14.78\_1.0.0\_ga / imx\_v2018.03\_4.14.78\_1.0.0\_ga
 
 ### Linux:
 
 * based on linux-imx (https://source.codeaurora.org/external/imx/linux-imx)
-* branched from rel_imx_4.14.98_2.2.0
+* branched from rel\_imx\_4.14.98\_2.2.0
 
 ## Supported Features
 
@@ -42,37 +42,39 @@ This README contains some useful information for TQMa8Mx on MBa8Mx
 * GPU
 * LVDS (needs DSI to LVDS Adapter)
 * ENET (GigE via Phy on MBa8Mx)
-* PCIe (mini-PCIe on MBa8x)
+* PCIe (mini-PCIe on MBa8Mx)
+
+## Known Issues
+
+missing capacitive load in DT for RTC
+Audio not working
 
 ## SD-Card Boot
 
 ### Dip Switches
 
-S6 : 11010111
-
-S5 : 11111111
-
-S7 : 1111
-
-S8 : 0010
-
-S9 : 0101
-
-S10: 0000
+S6 : 11010111  
+S5 : 11111111  
+S7 : 1111  
+S8 : 0010  
+S9 : 0101  
+S10: 0000  
 
 ### Bootable SD-Card
 
-Complete system inage:
+Complete system image:
 
 write *.wic Image to SD (offset 0)
 
 Write bootstream only:
 
-write imx-boot-tqma8mq-mba8mx-sd.bin at offset 33 kiB (0x8400) to SD-Card
+Bootstreams built using yocto are named `imx-boot-<module>-<baseboard>-sd.bin`
+
+write bootstream at offset 33 kiB (0x8400) to SD-Card
 
 Example for Linux:
 
-`sudo dd if=imx-boot-tqma8mq-mba8mx-sd.bin of=/dev/sd<x> bs=1k seek=33 conv=fsync`
+`sudo dd if=imx-boot-<module>-<baseboard>-sd.bin of=/dev/sd<x> bs=1k seek=33 conv=fsync`
 
 ### Update components via U-Boot
 
@@ -89,30 +91,26 @@ provide the file via TFTP and update via `run update_kernel`
 
 ### Dip Switches
 
-S6 : 11111011
+S6 : 11111011  
+S5 : 11111111  
+S7 : 1111  
+S8 : 0010  
+S9 : 0101  
+S10: 0000  
 
-S5 : 11111111
+### Bootable e-MMC
 
-S7 : 1111
-
-S8 : 0010
-
-S9 : 0101
-
-S10: 0000
-
-### Bootable e-MMC-Card
-
-write *.wic Image to e-MMC (offset 0)
+write *.wic image to e-MMC (offset 0)
 
 Write bootstream only:
 
-Boot from SD-Card and write imx-boot-tqma8mq-mba8mx-sd.bin at
-offset 33 kiB (0x8400) to e-MMC
+Bootstreams built using yocto are named `imx-boot-<module>-<baseboard>-sd.bin`
+
+Boot from SD-Card and write bootstream at offset 33 kiB (0x8400) to e-MMC
 
 Example for Linux:
 
-`sudo dd if=imx-boot-tqma8mq-mba8mx-sd.bin of=/dev/mmcblk0 bs=1k seek=33 conv=fsync`
+`sudo dd if=imx-boot-<module>-<baseboard>-sd.bin of=/dev/mmcblk0 bs=1k seek=33 conv=fsync`
 
 Example for U-Boot:
 
@@ -128,6 +126,9 @@ mmc write 42 $bsz
 ```
 
 ### Update components via U-Boot
+
+To update components on boot media following u-boot environment scripts are
+prepared. These can be used to update the items using a network connection.
 
 Bootstream: set env var `uboot` to name of your bootstream image, provide the
 bootstream via TFTP and update via `run update_uboot`
