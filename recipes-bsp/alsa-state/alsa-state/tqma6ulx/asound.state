@@ -34,8 +34,8 @@ state.imx6ulmba6ultlv {
 	control.3 {
 		iface MIXER
 		name 'LO Driver Gain Volume'
-		value.0 26
-		value.1 26
+		value.0 30
+		value.1 30
 		comment {
 			access 'read write'
 			type INTEGER
@@ -43,8 +43,8 @@ state.imx6ulmba6ultlv {
 			range '0 - 35'
 			dbmin -600
 			dbmax 2900
-			dbvalue.0 2000
-			dbvalue.1 2000
+			dbvalue.0 2400
+			dbvalue.1 2400
 		}
 	}
 	control.4 {
@@ -72,8 +72,8 @@ state.imx6ulmba6ultlv {
 	control.6 {
 		iface MIXER
 		name 'Mic PGA Switch'
-		value.0 true
-		value.1 true
+		value.0 false
+		value.1 false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -103,8 +103,8 @@ state.imx6ulmba6ultlv {
 	control.9 {
 		iface MIXER
 		name 'ADC Level Volume'
-		value.0 44
-		value.1 44
+		value.0 22
+		value.1 22
 		comment {
 			access 'read write'
 			type INTEGER
@@ -112,15 +112,15 @@ state.imx6ulmba6ultlv {
 			range '0 - 64'
 			dbmin -1200
 			dbmax 2000
-			dbvalue.0 1000
-			dbvalue.1 1000
+			dbvalue.0 -100
+			dbvalue.1 -100
 		}
 	}
 	control.10 {
 		iface MIXER
 		name 'PGA Level Volume'
-		value.0 39
-		value.1 39
+		value.0 0
+		value.1 0
 		comment {
 			access 'read write'
 			type INTEGER
@@ -128,8 +128,8 @@ state.imx6ulmba6ultlv {
 			range '0 - 95'
 			dbmin 0
 			dbmax 4750
-			dbvalue.0 1950
-			dbvalue.1 1950
+			dbvalue.0 0
+			dbvalue.1 0
 		}
 	}
 	control.11 {
@@ -146,7 +146,7 @@ state.imx6ulmba6ultlv {
 	control.12 {
 		iface MIXER
 		name 'AGC Left Switch'
-		value true
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -156,7 +156,7 @@ state.imx6ulmba6ultlv {
 	control.13 {
 		iface MIXER
 		name 'AGC Right Switch'
-		value true
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -214,8 +214,8 @@ state.imx6ulmba6ultlv {
 	control.18 {
 		iface MIXER
 		name 'AGC Max PGA'
-		value.0 0
-		value.1 0
+		value.0 127
+		value.1 127
 		comment {
 			access 'read write'
 			type INTEGER
@@ -226,8 +226,8 @@ state.imx6ulmba6ultlv {
 	control.19 {
 		iface MIXER
 		name 'AGC Attack Time'
-		value.0 7
-		value.1 7
+		value.0 0
+		value.1 0
 		comment {
 			access 'read write'
 			type INTEGER
@@ -273,8 +273,8 @@ state.imx6ulmba6ultlv {
 	}
 	control.23 {
 		iface MIXER
-		name 'Right Input Mixer IN1_R P Switch'
-		value true
+		name 'HPL Output Mixer L_DAC Switch'
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -283,7 +283,7 @@ state.imx6ulmba6ultlv {
 	}
 	control.24 {
 		iface MIXER
-		name 'Right Input Mixer IN2_R P Switch'
+		name 'HPL Output Mixer IN1_L Switch'
 		value false
 		comment {
 			access 'read write'
@@ -293,8 +293,8 @@ state.imx6ulmba6ultlv {
 	}
 	control.25 {
 		iface MIXER
-		name 'Right Input Mixer IN3_R P Switch'
-		value false
+		name 'LOL Output Mixer L_DAC Switch'
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -302,46 +302,6 @@ state.imx6ulmba6ultlv {
 		}
 	}
 	control.26 {
-		iface MIXER
-		name 'Left Input Mixer IN1_L P Switch'
-		value true
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.27 {
-		iface MIXER
-		name 'Left Input Mixer IN2_L P Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.28 {
-		iface MIXER
-		name 'Left Input Mixer IN3_L P Switch'
-		value false
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.29 {
-		iface MIXER
-		name 'LOR Output Mixer R_DAC Switch'
-		value true
-		comment {
-			access 'read write'
-			type BOOLEAN
-			count 1
-		}
-	}
-	control.30 {
 		iface MIXER
 		name 'HPR Output Mixer R_DAC Switch'
 		value false
@@ -351,7 +311,7 @@ state.imx6ulmba6ultlv {
 			count 1
 		}
 	}
-	control.31 {
+	control.27 {
 		iface MIXER
 		name 'HPR Output Mixer IN1_R Switch'
 		value false
@@ -361,9 +321,9 @@ state.imx6ulmba6ultlv {
 			count 1
 		}
 	}
-	control.32 {
+	control.28 {
 		iface MIXER
-		name 'LOL Output Mixer L_DAC Switch'
+		name 'LOR Output Mixer R_DAC Switch'
 		value true
 		comment {
 			access 'read write'
@@ -371,24 +331,200 @@ state.imx6ulmba6ultlv {
 			count 1
 		}
 	}
-	control.33 {
+	control.29 {
 		iface MIXER
-		name 'HPL Output Mixer L_DAC Switch'
-		value false
+		name 'IN1_R to Right Mixer Positive Resistor'
+		value '10 kOhm'
 		comment {
 			access 'read write'
-			type BOOLEAN
+			type ENUMERATED
 			count 1
+			item.0 Off
+			item.1 '10 kOhm'
+			item.2 '20 kOhm'
+			item.3 '40 kOhm'
+		}
+	}
+	control.30 {
+		iface MIXER
+		name 'IN2_R to Right Mixer Positive Resistor'
+		value Off
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 Off
+			item.1 '10 kOhm'
+			item.2 '20 kOhm'
+			item.3 '40 kOhm'
+		}
+	}
+	control.31 {
+		iface MIXER
+		name 'IN3_R to Right Mixer Positive Resistor'
+		value Off
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 Off
+			item.1 '10 kOhm'
+			item.2 '20 kOhm'
+			item.3 '40 kOhm'
+		}
+	}
+	control.32 {
+		iface MIXER
+		name 'IN2_L to Right Mixer Positive Resistor'
+		value Off
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 Off
+			item.1 '10 kOhm'
+			item.2 '20 kOhm'
+			item.3 '40 kOhm'
+		}
+	}
+	control.33 {
+		iface MIXER
+		name 'CM_R to Right Mixer Negative Resistor'
+		value '10 kOhm'
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 Off
+			item.1 '10 kOhm'
+			item.2 '20 kOhm'
+			item.3 '40 kOhm'
 		}
 	}
 	control.34 {
 		iface MIXER
-		name 'HPL Output Mixer IN1_L Switch'
-		value false
+		name 'IN1_L to Right Mixer Negative Resistor'
+		value Off
 		comment {
 			access 'read write'
-			type BOOLEAN
+			type ENUMERATED
 			count 1
+			item.0 Off
+			item.1 '10 kOhm'
+			item.2 '20 kOhm'
+			item.3 '40 kOhm'
+		}
+	}
+	control.35 {
+		iface MIXER
+		name 'IN3_L to Right Mixer Negative Resistor'
+		value Off
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 Off
+			item.1 '10 kOhm'
+			item.2 '20 kOhm'
+			item.3 '40 kOhm'
+		}
+	}
+	control.36 {
+		iface MIXER
+		name 'IN1_L to Left Mixer Positive Resistor'
+		value '10 kOhm'
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 Off
+			item.1 '10 kOhm'
+			item.2 '20 kOhm'
+			item.3 '40 kOhm'
+		}
+	}
+	control.37 {
+		iface MIXER
+		name 'IN2_L to Left Mixer Positive Resistor'
+		value Off
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 Off
+			item.1 '10 kOhm'
+			item.2 '20 kOhm'
+			item.3 '40 kOhm'
+		}
+	}
+	control.38 {
+		iface MIXER
+		name 'IN3_L to Left Mixer Positive Resistor'
+		value Off
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 Off
+			item.1 '10 kOhm'
+			item.2 '20 kOhm'
+			item.3 '40 kOhm'
+		}
+	}
+	control.39 {
+		iface MIXER
+		name 'IN1_R to Left Mixer Positive Resistor'
+		value Off
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 Off
+			item.1 '10 kOhm'
+			item.2 '20 kOhm'
+			item.3 '40 kOhm'
+		}
+	}
+	control.40 {
+		iface MIXER
+		name 'CM_L to Left Mixer Negative Resistor'
+		value '10 kOhm'
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 Off
+			item.1 '10 kOhm'
+			item.2 '20 kOhm'
+			item.3 '40 kOhm'
+		}
+	}
+	control.41 {
+		iface MIXER
+		name 'IN2_R to Left Mixer Negative Resistor'
+		value Off
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 Off
+			item.1 '10 kOhm'
+			item.2 '20 kOhm'
+			item.3 '40 kOhm'
+		}
+	}
+	control.42 {
+		iface MIXER
+		name 'IN3_R to Left Mixer Negative Resistor'
+		value Off
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 Off
+			item.1 '10 kOhm'
+			item.2 '20 kOhm'
+			item.3 '40 kOhm'
 		}
 	}
 }

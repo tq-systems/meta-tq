@@ -83,7 +83,7 @@ state.imx6tqma6xtlv32 {
 	control.7 {
 		iface MIXER
 		name 'ADCFGA Left Mute Switch'
-		value true
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -93,7 +93,7 @@ state.imx6tqma6xtlv32 {
 	control.8 {
 		iface MIXER
 		name 'ADCFGA Right Mute Switch'
-		value true
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -334,7 +334,7 @@ state.imx6tqma6xtlv32 {
 	control.29 {
 		iface MIXER
 		name 'IN1_R to Right Mixer Positive Resistor'
-		value Off
+		value '10 kOhm'
 		comment {
 			access 'read write'
 			type ENUMERATED
@@ -404,7 +404,7 @@ state.imx6tqma6xtlv32 {
 	control.34 {
 		iface MIXER
 		name 'IN1_L to Right Mixer Negative Resistor'
-		value Off
+		value '10 kOhm'
 		comment {
 			access 'read write'
 			type ENUMERATED
@@ -432,7 +432,7 @@ state.imx6tqma6xtlv32 {
 	control.36 {
 		iface MIXER
 		name 'IN1_L to Left Mixer Positive Resistor'
-		value Off
+		value '10 kOhm'
 		comment {
 			access 'read write'
 			type ENUMERATED
@@ -474,7 +474,7 @@ state.imx6tqma6xtlv32 {
 	control.39 {
 		iface MIXER
 		name 'IN1_R to Left Mixer Positive Resistor'
-		value Off
+		value '10 kOhm'
 		comment {
 			access 'read write'
 			type ENUMERATED
