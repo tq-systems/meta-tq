@@ -5,7 +5,7 @@ Releases are named with thefollowing scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
-## [Unreleased]
+## sumo.TQMa8.BSP.SW.0013
 
 ### Added
 
@@ -13,7 +13,7 @@ Releases are named with thefollowing scheme:
 
 ### Removed
 
-* recipes: remove backported versions of imx-atf, us now imx\_4.14.98\_2.2.0
+* recipes: remove backported versions of imx-atf, use now imx\_4.14.98\_2.2.0
 
 ### Changed
 
