@@ -55,12 +55,14 @@ location of the tq layer to bblayers.conf, along with any
 other layers needed. e.g.:
 
 ```
+BSPDIR := "${@os.path.abspath(os.path.dirname(d.getVar('FILE', True)) + '/../..')}"
+
   BBLAYERS ?= " \
-    /<path to build tree>/sources/poky/meta \
-    /<path to build tree>/sources/poky/meta-poky \
-    /<path to build tree>/sources/meta-freescale \
-    /<path to build tree>/sources/meta-tq \
-    /<path to build tree>/sources/meta-fsl-bsp-release/imx/meta-bsp \
+    ${BSPDIR}/sources/poky/meta \
+    ${BSPDIR}/sources/poky/meta-poky \
+    ${BSPDIR}/sources/meta-freescale \
+    ${BSPDIR}/sources/meta-tq \
+    ${BSPDIR}/sources/meta-fsl-bsp-release/imx/meta-bsp \
     ...
   "
 ```
