@@ -5,7 +5,7 @@ Releases are named with thefollowing scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
-## [Unreleased]
+## warrior.MBa6ULxL.BSP.0101
 
 ### Added
 
@@ -16,7 +16,7 @@ Releases are named with thefollowing scheme:
 
 * convert README to markdown
 * update Linux for TQMa6ULx / TQMa6ULLx / TQMa6ULxL / TQMa6x / TQMa7x
-  remove version pinning for warrior.TQMa7x.BSP.SW.0108 / warrior.TQMa6ULx.BSP.SW.0107
+* update U-Boot for TQMa6ULx / TQMa6ULLx / TQMa6ULxL / TQMa6x / TQMa7x
 
 ### Fixed
 
