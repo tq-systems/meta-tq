@@ -1,8 +1,13 @@
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:${THISDIR}/${PN}:"
 
+# Need tq_imx-scfw-v1.2.7-b3357 ore greater for build 
+# (use SC_FIRMWARE_VERSION_TQ in package name)
+
+SC_FIRMWARE_VERSION_TQ := "tq-TQMa8.NXP-v1.2.7.B3357.0022"
+
 SRC_URI_append = " \
-    file://${PN}-tq.tar.gz \
+    file://${PN}-${SC_FIRMWARE_VERSION_TQ}.tar.gz \
 "
 
 # clear vars to prevent default assignments
@@ -23,7 +28,5 @@ SC_FIRMWARE_NAME_tqma8xds-mb-smarc-2 = "mx8qx-tqma8xds-mb-smarc-2-scfw-tcm.bin"
 SC_FIRMWARE_NAME_tqma8qm-mba8x = "mx8qm-tqma8qm-scfw-tcm.bin"
 
 do_deploy_prepend () {
-# TODO: need new version number
-#    cp ${WORKDIR}/${PN}-tq-${PV}/*.bin ${S}
-    cp ${WORKDIR}/${PN}-tq-1.2.2/*.bin ${S}
+    cp ${WORKDIR}/${PN}-${SC_FIRMWARE_VERSION_TQ}/*.bin ${S}
 }
