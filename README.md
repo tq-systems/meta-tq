@@ -144,13 +144,14 @@ Support for the following machines is contained in this version:
 [y]	AM571[6,8]	TQMa5718/TQMa5716	MBa57xx		tqma571x-mba57xx
 [y]	AM572[6,8]	TQMa5728/TQMa5726	MBa57xx		tqma572x-mba57xx
 [y]	AM574[6,8]	TQMa5748/TQMa5746	MBa57xx		tqma574x-mba57xx
-[b]	T1022		TQMT1022		STK104x		tqmt1022-64bit-stkt104x
-[b]	T1040		TQMT1022		STK104x		tqmt1040-64bit-stkt104x
-[b]	T1042		TQMT1022		STK104x		tqmt1042-64bit-stkt104x
+[p]	T1022		TQMT1022		STK104x		tqmt1022-64bit-stkt104x
+[p]	T1040		TQMT1040		STK104x		tqmt1040-64bit-stkt104x
+[p]	T1042		TQMT1042		STK104x		tqmt1042-64bit-stkt104x
 ```
 
 \[y\]: supported  
 \[b\]: build tested only  
+\[p\]: prerelease  
 \[\*\]: not buildable in this version  
 
 **Note:** for TQMa6UL1 and baseboards using this module variant with i.MX6ULG1
