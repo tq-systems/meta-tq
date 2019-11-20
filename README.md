@@ -101,6 +101,7 @@ BBLAYERS = " \
   \
   ${BSPDIR}/sources/meta-tq \
 "
+```
 
 The layer can be used together with the meta-ti layer if needed and am57xx based
 boards are used. Therefore the `MACHINEOVERRIDE` variable is prepared inside the
