@@ -7,7 +7,7 @@ DEPENDS += "swap-file-endianess-native tcl-native"
 
 inherit deploy
 
-SRCREV = "7912fdf6d503045b99b23929dff263b48281d9c4"
+SRCREV = "9f3db9ede3a5edec257c44c804131c168f281b97"
 SRCBRANCH = "TQMLS10xxA-rcw"
 
 SRC_URI = "${TQ_GIT_BASEURL}/rcw.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
