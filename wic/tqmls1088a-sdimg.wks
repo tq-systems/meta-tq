@@ -19,6 +19,6 @@ part mc_app --source rawcopy --sourceparams="file=mc.itb" --no-table --align 102
 part mc_dpl --source rawcopy --sourceparams="file=mc-dpl.dtb" --no-table --align 13312
 part mc_dpc --source rawcopy --sourceparams="file=mc-dpc.dtb" --no-table --align 14336
 part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 16384 --fixed-size 32M
-part / --source rootfs --fstype=ext4 --label root --align 4096 --fixed-size 256M
+part / --source rootfs --fstype=ext4 --label root --align 4096 --fixed-size 512M
 
 bootloader --ptable msdos
