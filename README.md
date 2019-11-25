@@ -49,7 +49,7 @@ Additionally you can use github's collaboration features.
 In order to use this layer, you need to make the build system aware of
 it.
 
-Assuming the tq layer exists in subdir sources at the top-level of your
+Assuming all layers existing in a subdir sources at the top-level of your
 yocto build tree, you can add it to the build system by adding the
 location of the tq layer to bblayers.conf, along with any
 other layers needed. e.g.:
