@@ -5,6 +5,12 @@ Releases are named with thefollowing scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## Unreleased versions
+
+### Changed
+
+* u-boot: new RAM timing for TQMa8Mx
+
 ## sumo.TQMa8.BSP.SW.0013
 
 ### Added
