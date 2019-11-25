@@ -48,6 +48,7 @@ This README contains some useful information for TQMa8x on MBa8x
 
 wrong capacitive load in DT for RTC
 only boot tested
+errors and hangs during first start with a fresh image
 
 ## SD-Card Boot
 

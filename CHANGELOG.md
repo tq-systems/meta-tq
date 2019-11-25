@@ -10,6 +10,8 @@ Releases are named with thefollowing scheme:
 ### Changed
 
 * u-boot: new RAM timing for TQMa8Mx
+* scfw: update to version 1.2.7 
+* rework imx-sc-firmware recipe (use git tag in package name = needs tq_imx-scfw-v1.2.7-b3357 or later)
 
 ## sumo.TQMa8.BSP.SW.0013
 
