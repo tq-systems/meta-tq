@@ -10,8 +10,19 @@ Releases are named with thefollowing scheme:
 ### Changed
 
 * u-boot: new RAM timing for TQMa8Mx
-* scfw: update to version 1.2.7 
+* scfw: update to version 1.2.7
 * rework imx-sc-firmware recipe (use git tag in package name = needs tq_imx-scfw-v1.2.7-b3357 or later)
+
+### Added
+
+* add support for MBa8Mx Rev.020x
+* tqma8mx: u-boot: QSPI support
+* tqma8mx: u-boot: USB support for MBa8x
+* tqma8mx: u-boot: manufacturer EEPROM
+
+### Removed
+
+* drop support for MBa8Mx Rev.010x
 
 ## sumo.TQMa8.BSP.SW.0013
 
