@@ -18,15 +18,22 @@ This README contains some useful information for TQMa8Mx on MBa8Mx
 
 ### U-Boot:
 
+_MBa8x HW Rev.020x only_
+
 * RAM configs 1GB / 2 GB
 * CPU variants i.MX8MQ / i.MX8MQL
 * Fuses
 * speed grade / temperature grade detection
 * GPIO
 * I2C
+  * system EEPROM parsing
+  * GPIO expander
 * ENET (GigE via Phy on MBa8Mx)
 * Bootdevices: e-MMC / SD-Card
 * HDMI (fixed resolution)
+* QSPI NOR
+* USB Host (USB1 via Hub 2.0 and 3.0)
+* USB Dual Role (USB0, 2.0 Host only)
 
 ### Linux:
 
