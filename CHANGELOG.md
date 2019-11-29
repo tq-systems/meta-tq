@@ -9,15 +9,19 @@ Releases are named with thefollowing scheme:
 
 ### Changed
 
+* tqma8mx: linux: update audio dt for new kernel version
 * u-boot: new RAM timing for TQMa8Mx
 * scfw: update to version 1.2.7
 * rework imx-sc-firmware recipe (use git tag in package name = needs tq_imx-scfw-v1.2.7-b3357 or later)
 
 ### Added
 
-* add support for MBa8Mx Rev.020x
+* tqma8mx: add support for MBa8Mx Rev.020x
+* tqma8mx: linux: QSPI support
+* tqma8mx: linux: SD3 / USDHC support
+* tqma8mx: linux: rtc / rtc alarm
 * tqma8mx: u-boot: QSPI support
-* tqma8mx: u-boot: USB support for MBa8x
+* tqma8mx: u-boot: USB HUB support for MBa8x Rev.020x
 * tqma8mx: u-boot: manufacturer EEPROM
 
 ### Removed

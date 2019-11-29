@@ -41,20 +41,28 @@ _MBa8x HW Rev.020x only_
 * CPU variants i.MX8MQ / i.MX8MQL
 * speed grade / temperature grade detection
 * DVFS (CPU overdrive mode)
+* suspend (deep / s2idle)
 * I2C
   * Temperature Sensors
-  * RTC
+  * RTC (wakealarm)
   * EEPROMS
+* QSPI NOR
+* ENET (GigE via Phy on MBa8Mx)
+* Audio via codec
+* USB Host / Hub
+
+TODO:
+
 * HDMI
 * GPU
 * LVDS (needs DSI to LVDS Adapter)
-* ENET (GigE via Phy on MBa8Mx)
 * PCIe (mini-PCIe on MBa8Mx)
+* USB OTG / DRD
 
 ## Known Issues
 
-missing capacitive load in DT for RTC
-Audio not working
+* HDMI audio not working
+* reboot after SD3 / USDHC activated under linux does not work
 
 ## SD-Card Boot
 
