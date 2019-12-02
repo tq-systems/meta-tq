@@ -24,6 +24,10 @@ Releases are named with thefollowing scheme:
 * tqma8mx: u-boot: USB HUB support for MBa8x Rev.020x
 * tqma8mx: u-boot: manufacturer EEPROM
 
+### Fixed
+
+* tqma8xx: fix QSPI probe write a byte to flash (MACRONIX)
+
 ### Removed
 
 * drop support for MBa8Mx Rev.010x
