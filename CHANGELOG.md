@@ -1,9 +1,26 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-Releases are named with thefollowing scheme:
+Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
+
+## warrior.TQMLS10xx.BSP.SW.0100
+
+### Added
+
+* support for TQMLS1088
+* support for TQMLS1046 with 8G RAM
+
+### Changed
+
+* update U-Boot for TQMLS1043a and TQMLS1046a
+* update Linux for TQMLS1043a and TQMLS1046a
+* common defconfig file for TQMLS1043a and TQMLS1046a
+
+### Fixed
+
+* README.md: formatting
 
 ## warrior.MBa6ULxL.BSP.0101
 
