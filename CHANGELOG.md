@@ -16,6 +16,7 @@ Releases are named with thefollowing scheme:
 
 ### Added
 
+* tqma8xx: u-boot: enable QSPI Boot
 * tqma8mx: add support for MBa8Mx Rev.020x
 * tqma8mx: linux: QSPI support
 * tqma8mx: linux: SD3 / USDHC support

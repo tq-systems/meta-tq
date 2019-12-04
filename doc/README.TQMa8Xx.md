@@ -129,3 +129,25 @@ provide the blob via TFTP and update via `run update_fdt`
 Linux kernel: set env var `image` to name of your kernel image,
 provide the file via TFTP and update via `run update_kernel`
 
+## QSPI Boot
+
+### Dip Switches
+
+S1 : 0110
+
+### Build with Yocto
+
+set UBOOT_CONFIG ??= "fspi" in xxx.conf file
+set IMXBOOT_TARGETS_tqma8xx = "flash_flexspi" in imx-boot_0.2.bbappend
+
+### Write bootstream to QSPI
+
+- copy xxx.bin-flash_flexspi from deploy folder on sd card
+
+Vom U-Boot aus: 
+- fatload mmc 1:1 ${loadaddr} xxx.bin-flash_flexspi
+- sf erase 0x0 ${filesize}
+- sf write ${loadaddr} 0x00 ${filesize}
+- (optional) sf read 0x80300000 0x00 ${filesize}
+- (optional) cmp.b 0x80300000 ${loadaddr} ${filesize}
+
