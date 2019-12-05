@@ -5,6 +5,23 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## Unreleased Version
+
+### Changed
+
+* TQMa6ULLx\[L\]: finally qualified RAM-Timing for (no functional change)
+* linux-tq: improved kernel defconfig for TQMa6x
+
+### Added
+
+* linux-tq: HDMI support for TQMa6x
+* tqma6x: enable hdmi support dtb
+
+###Fixed
+
+* linux-tq: DT style fixes for TQMa6x / TQMa6UL\[L\]x\[L\] / TQMa7x
+* doc fixes for machine with i.MX6ULL
+
 ## warrior.TQMLS10xx.BSP.SW.0100
 
 ### Added
