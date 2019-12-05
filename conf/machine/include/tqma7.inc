@@ -30,6 +30,8 @@ UBOOT_MAKE_TARGET ?= "u-boot.imx"
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
+# we do not generate QSPI configuration header yet, so complete QSPI boot flow not available with yocto yet
+IMAGE_FSTYPES_append = " tar.gz ext4 wic ubi"
 IMAGE_FSTYPES_append = " tar.gz ext4 wic"
 IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2 wic.gz"
 

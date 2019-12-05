@@ -35,7 +35,8 @@ UBOOT_CONFIG = "sd qspi"
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-IMAGE_FSTYPES_append = " tar.gz ext4 wic"
+# we do not generate QSPI configuration header yet, so complete QSPI boot flow not available with yocto yet
+IMAGE_FSTYPES_append = " tar.gz ext4 wic ubi"
 IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2 wic.gz"
 
 # DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
