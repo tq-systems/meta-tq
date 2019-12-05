@@ -2,11 +2,12 @@
 
 KERNEL_DEVICETREE = " \
 	imx6dl-mba6a.dtb \
+	imx6dl-mba6a-hdmi.dtb \
 	imx6dl-mba6b.dtb \
+	imx6dl-mba6b-hdmi.dtb \
 "
 
 ###
-#	imx6dl-mba6a-hdmi.dtb \
 #	imx6dl-mba6a-lvds.dtb \
 #	imx6dl-mba6a-otg.dtb \
 #	imx6dl-mba6a-dmb-ct21.dtb \
