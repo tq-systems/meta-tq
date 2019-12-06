@@ -73,14 +73,14 @@ Support for the following machines is contained in this version:
 
 ```
 	SOC		SOM		Base board	MACHINE
-[y]	i.MX8M[D,Q]	TQMA8M[D,Q]	MBa8Mx		tqma8mx-1gm-mba8mx (TQMa8M[D,Q] with 1 GiB RAM, HW REV.010x/020x, MBa8Mx HW REV.020x)
-[y]	i.MX8MQL	TQMA8MQL	MBa8Mx		tqma8mx-2gm-mba8mx (TQMa8MQL with 2 GiB RAM, HW REV.010x/020x, MBa8Mx HW REV.020x)
-[b]	i.MX8QM		TQMA8QM		MBa8x		tqma8qm-mba8x (TQMa8QM with 2 GiB RAM, HW REV.010x)
-[b]	i.MX8DX		TQMA8XD		MBa8Xx		tqma8xd-mba8xx (TQMa8XD with 512 MiB RAM)
-[b]	i.MX8QXP	TQMA8XQP	MBa8Xx		tqma8xqp-mba8xx (TQMa8XQP with 1 GiB RAM)
-[b]	i.MX8QXP	TQMA8XQP	MBpa8Xx		tqma8xqp-mbpa8xx (TQMa8XQP with 1 GiB RAM)
-[b]	i.MX8DX		TQMA8XDS	MB-SMARC-2	tqma8xds-mb-smarc-2 (TQMa8XDS with 512 MiB RAM)
-[b]	i.MX8QXP	TQMA8XQPS	MB-SMARC-2	tqma8xqps-mb-smarc-2 (TQMa8XQPS with 1 GiB RAM)
+[y]	i.MX8M[D,Q]	TQMa8M[D,Q]	MBa8Mx		tqma8mx-1gm-mba8mx (TQMa8M[D,Q] with 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x)
+[y]	i.MX8MQL	TQMa8MQL	MBa8Mx		tqma8mx-2gm-mba8mx (TQMa8MQL with 2 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x)
+[b]	i.MX8QM		TQMa8QM		MBa8x		tqma8qm-mba8x (TQMa8QM with 2 GiB RAM, HW REV.010x)
+[b]	i.MX8DX		TQMa8XD		MBa8Xx		tqma8xd-mba8xx (TQMa8XD with 512 MiB RAM)
+[b]	i.MX8QXP	TQMa8XQP	MBa8Xx		tqma8xqp-mba8xx (TQMa8XQP with 1 GiB RAM)
+[b]	i.MX8QXP	TQMa8XQP	MBpa8Xx		tqma8xqp-mbpa8xx (TQMa8XQP with 1 GiB RAM)
+[b]	i.MX8DX		TQMa8XDS	MB-SMARC-2	tqma8xds-mb-smarc-2 (TQMa8XDS with 512 MiB RAM)
+[b]	i.MX8QXP	TQMa8XQPS	MB-SMARC-2	tqma8xqps-mb-smarc-2 (TQMa8XQPS with 1 GiB RAM)
 
 [*]	i.MX6[QP,DP]	TQMa6QP/TQMa6DP	MBa6x		tqma6qp-mba6x (TQMa6[QP,DP] HW REV.040x / MBa6x HW REV.020x)
 [*]	i.MX6[Q,D]	TQMa6D/TQMa6Q	MBa6x		tqma6q-mba6x (TQMa6[D,Q] HW REV.010x ... 040x / MBa6x HW REV.020x)
@@ -90,7 +90,7 @@ Support for the following machines is contained in this version:
 [*]	i.MX6UL		TQMa6ULx	MBaULx		tqma6ulx-mba6ulx (TQMa6UL HW REV.030x / MBa6ULx HW REV.020x)
 [*]	i.MX6UL		TQMa6ULxL	MBaULx		tqma6ulx-lga-mba6ulx (TQMa6ULxL HW REV.020x / MBa6ULx HW REV.020x)
 [*]	i.MX6ULL	TQMa6ULLx	MBaULx		tqma6ullx-mba6ulx (TQMa6ULLx HW REV.030x / MBa6ULx HW REV.020x)
-[*]	i.MX7[S,D]	TQMa7<S,D>	MBa7x		tqma7x-mba7 (TQMa7[S,D] HW REV.010x ... 0x020x / MBa7x HW REV.020x)
+[*]	i.MX7[S,D]	TQMa7[S,D]	MBa7x		tqma7x-mba7 (TQMa7[S,D] HW REV.010x ... 0x020x / MBa7x HW REV.020x)
 [*]	LS102[0,1]a	TQMLS102[0,1]a>	MBLS102xa	tqmls102xa-mbls102xa (TQMLS102[0,1]a HW REV.020x / MBLS102xa HW REV.020x)
 ```
 
