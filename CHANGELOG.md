@@ -21,9 +21,17 @@ Releases are named with thefollowing scheme:
 * tqma8mx: linux: QSPI support
 * tqma8mx: linux: SD3 / USDHC support
 * tqma8mx: linux: rtc / rtc alarm
+* tqma8mx: linux: USB OTG (USB 2.0 only)
+* tqma8mx: linux: HDMI audio
+* tqma8mx: linux: PCIe Slot
+* tqma8mx: linux: GPIO buttons
+* tqma8mx: linux: GPIO LED
+* tqma8mx: linux: LVDS via DSI bridge on MBa8x REV.0x20x
+* tqma8mx: MBa8x REV.020x fully supported
 * tqma8mx: u-boot: QSPI support
 * tqma8mx: u-boot: USB HUB support for MBa8x Rev.020x
 * tqma8mx: u-boot: manufacturer EEPROM
+* tqma8mx: u-boot: lot of GPIO are requested and preconfigured
 
 ### Fixed
 
