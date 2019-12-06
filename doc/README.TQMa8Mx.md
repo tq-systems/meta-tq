@@ -7,7 +7,7 @@ This README contains some useful information for TQMa8Mx on MBa8Mx
 ### U-Boot:
 
 * based on uboot-imx (https://source.codeaurora.org/external/imx/uboot-imx)
-* branched from rel\_imx\_4.14.78\_1.0.0\_ga / imx\_v2018.03\_4.14.78\_1.0.0\_ga
+* branched from rel\_imx\_4.14.98\_2.2.0\_ga / imx\_v2018.03\_4.14.98\_2.2.0\_ga
 
 ### Linux:
 
@@ -25,15 +25,21 @@ _MBa8x HW Rev.020x only_
 * Fuses
 * speed grade / temperature grade detection
 * GPIO
+  * LED
+  * Button
+  * BOOT_CFG
+  * MUX CFG
 * I2C
   * system EEPROM parsing
   * GPIO expander
 * ENET (GigE via Phy on MBa8Mx)
 * Bootdevices: e-MMC / SD-Card
 * HDMI (fixed resolution)
-* QSPI NOR
-* USB Host (USB1 via Hub 2.0 and 3.0)
-* USB Dual Role (USB0, 2.0 Host only)
+* QSPI NOR (4 byte adressing, SPI mode)
+* USB Host (USB1 via hub 2.0 and 3.0)
+* USB Dual Role (USB0, 2.0 host only - hard coded in driver)
+  * Cable Detect / ID
+  * switchable VBUS
 
 ### Linux:
 
@@ -44,25 +50,48 @@ _MBa8x HW Rev.020x only_
 * suspend (deep / s2idle)
 * I2C
   * Temperature Sensors
-  * RTC (wakealarm)
+  * RTC (with wakealarm)
   * EEPROMS
+  * GPIO expanders
+* GPIO
+  * LED
+  * Button
+  * HOG
 * QSPI NOR
 * ENET (GigE via Phy on MBa8Mx)
-* Audio via codec
-* USB Host / Hub
-
-TODO:
-
+* Audio
+  * via codec
+  * HDMI audio (with pulse audio)
+* USB
+  * USB 3.0 Host / Hub
+  * USB DRD (USB 2.0 OTG only, Cable Detect, VBUS)
 * HDMI
 * GPU
-* LVDS (needs DSI to LVDS Adapter)
-* PCIe (mini-PCIe on MBa8Mx)
-* USB OTG / DRD
+* DSI
+  * LVDS
+* PCIe
+  * mini-PCIe on MBa8Mx
+  * PCIe (Slot)
+
+## TODO:
+
+* DSI to DP bridge
+* DSI over LCDIF
+* VPU not tested
+* MIPI CSI
+* MIKRO Bus
+* SIM
+* PCIe only tested with Gen 1
 
 ## Known Issues
 
-* HDMI audio not working
+* HDMI does not work after reboot
 * reboot after SD3 / USDHC activated under linux does not work
+* LVDS shows wrong colors on Tianma display kit (HW issue on display)
+* USB OTG / DRD
+  * USB OTG OC not handled yet
+  * instable ID / Cable detect for open receptable
+  * no USB 3.0
 
 ## SD-Card Boot
 
