@@ -19,7 +19,7 @@ DEPENDS += " \
 
 # HACK that imx-mkimage runs
 # The soc.mak file has hardcoded u-boot devicetree names. For the perelease we
-# use a HACK and rename the our devictree equal to NXP EVK devicetree.
+# use a HACK and rename our devictree equal to NXP EVK devicetree.
 # https://git.phytec.de/meta-phytec / 247f8c6def52ea414ca1697f32e62427cad87056
 
 do_compile_prepend () {
