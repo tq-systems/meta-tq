@@ -9,7 +9,8 @@ Releases are named with thefollowing scheme:
 
 ### Changed
 
-* tqma8mx: linux: update audio dt for new kernel version
+* conf: use device tree name logic for kernel and image also for non TQMa8Mx boards
+* tqma8mx: linux: update audio settings in dt for new kernel version
 * u-boot: new RAM timing for TQMa8Mx
 * scfw: update to version 1.2.7
 * rework imx-sc-firmware recipe (use git tag in package name = needs tq_imx-scfw-v1.2.7-b3357 or later)
@@ -27,19 +28,31 @@ Releases are named with thefollowing scheme:
 * tqma8mx: linux: GPIO buttons
 * tqma8mx: linux: GPIO LED
 * tqma8mx: linux: LVDS via DSI bridge on MBa8x REV.0x20x
-* tqma8mx: MBa8x REV.020x fully supported
 * tqma8mx: u-boot: QSPI support
 * tqma8mx: u-boot: USB HUB support for MBa8x Rev.020x
 * tqma8mx: u-boot: manufacturer EEPROM
 * tqma8mx: u-boot: lot of GPIO are requested and preconfigured
+* tqma8xxs: CAN support
 
 ### Fixed
 
-* tqma8xx: fix QSPI probe write a byte to flash (MACRONIX)
+* tqma8xx: u-boot: fix QSPI probe write a byte to flash (MACRONIX)
 
 ### Removed
 
 * drop support for MBa8Mx Rev.010x
+* drop support for TMa8Mx Rev.010x
+
+## sumo.TQMa8.BSP.SW.0014
+
+### Changed
+
+* tqma8mx: u-boot: new RAM timing
+
+### Fixed
+
+* tqma8mx: system stall after long up time
+* tqma8mx: u-boot: correct board name handling
 
 ## sumo.TQMa8.BSP.SW.0013
 
