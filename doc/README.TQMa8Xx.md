@@ -7,7 +7,7 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 ### U-Boot:
 
 * based on uboot-imx (https://source.codeaurora.org/external/imx/uboot-imx)
-* branched from rel\_imx\_4.14.78\_1.0.0\_ga / imx\_v2018.03\_4.14.78\_1.0.0\_ga
+* branched from rel\_imx\_4.14.98\_2.2.0\_ga / imx\_v2018.03\_4.14.98\_2.2.0\_ga
 
 ### Linux:
 
