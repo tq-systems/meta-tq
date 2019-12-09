@@ -11,6 +11,8 @@ BOARD_DEVICETREE_FILES = "\
 
 KERNEL_DEVICETREE = ""
 
+require conf/machine/include/tqma8-common.inc
+
 # Set Serial console
 SERIAL_CONSOLES = "115200;ttymxc0"
 
@@ -23,14 +25,3 @@ IMAGE_BOOT_FILES ?= "\
 	${KERNEL_IMAGETYPE} \
 	${BOARD_DEVICETREE_FILES} \
 	"
-
-KERNEL_DEVICETREE_PATH_PREFIX = "freescale/"
-
-# sets KERNEL_DEVICETREE
-python () {
-	dt_list = d.getVar("BOARD_DEVICETREE_FILES").split()
-	dt_prefix = d.getVar("KERNEL_DEVICETREE_PATH_PREFIX")
-	dt_prefix += "% s"
-	dt_list =  [dt_prefix % i for i in dt_list]
-	d.setVar("KERNEL_DEVICETREE", ' '.join(dt_list))
-}
