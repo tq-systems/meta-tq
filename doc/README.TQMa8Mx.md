@@ -85,12 +85,9 @@ _MBa8x HW Rev.020x only_
 
 ## Known Issues
 
-* HDMI does not work after reboot
-* reboot after SD3 / USDHC activated under linux does not work
 * LVDS shows wrong colors on Tianma display kit (HW issue on display)
 * USB OTG / DRD
   * USB OTG OC not handled yet
-  * instable ID / Cable detect for open receptable
   * no USB 3.0
 
 ## SD-Card Boot
