@@ -17,10 +17,11 @@ SRC_URI = " \
     file://defconfig \
 "
 
-# TODO: adopt SRCREV and SRCBRANCH when available on github */
-SRCBRANCH = "TQMa57xx-linux-ti-v4.9.77-rt61"
-SRCREV = "26d125619aadd1d80433ef57feb050c2024069c3"
+SRCBRANCH = "TQMa57xx-TI-linux-v4.9"
+SRCREV = "5795016a5c4cf28997f530f7da4ab05b3988cba6"
 
+# we still need this, since meta-ti sets KERNEL_IMAGETYPES to contain uImage
+# and forces building this ancient image which forces us to provide this var
 KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
 
 COMPATIBLE_MACHINE = "tqma57xx"
