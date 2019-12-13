@@ -126,31 +126,30 @@ BBLAYERS = " \
 Support for the following machines is contained in this version:
 
 ```
-	SOC		SOM			Base board	MACHINE
-[b]	i.MX6[QP,DP]	TQMa6QP/TQMa6DP		MBa6x		tqma6qp-mba6x (TQMa6[QP,DP] HW REV.040x / MBa6x HW REV.020x)
-[b]	i.MX6[Q,D]	TQMa6D/TQMa6Q		MBa6x		tqma6q-mba6x (TQMa6[D,Q] HW REV.010x ... 040x / MBa6x HW REV.020x)
-[y]	i.MX6[Q,D]	TQMa6D/TQMa6Q		NAV		tqma6q-nav (TQMa6[D,Q] HW REV.030x ... 040x / NAV REV.020x)
-[b]	i.MX6DL		TQMa6DL			MBa6x		tqma6dl-mba6x (TQMa6DL HW REV.010x ... 040x / MBa6x HW REV.020x)
-[b]	i.MX6S		TQMa6S			MBa6x		tqma6s-mba6x (TQMa6S HW REV.010x ... 040x / MBa6x HW REV.020x)
-[y]	i.MX6UL		TQMa6ULx		MBaULx		tqma6ulx-mba6ulx (TQMa6UL HW REV.030x / MBa6ULx HW REV.020x)
-[y]	i.MX6UL		TQMa6ULxL		MBaULx		tqma6ulx-lga-mba6ulx (TQMa6ULxL HW REV.020x / MBa6ULx HW REV.020x)
-[y]	i.MX6UL		TQMa6ULxL		MBaULxL		tqma6ulx-lga-mba6ulxl (TQMa6ULxL HW REV.020x / MBa6ULxL HW REV.020x)
-[y]	i.MX6ULL	TQMa6ULLx		MBaULx		tqma6ullx-mba6ulx (TQMa6ULLx HW REV.030x / MBa6ULx HW REV.020x)
-[y]	i.MX6ULL	TQMa6ULLxL		MBaULx		tqma6ullx-lga-mba6ulx (TQMa6ULLxL HW REV.020x / MBa6ULx HW REV.020x)
-[y]	i.MX7[S,D]	TQMa7[S,D]		MBa7x		tqma7x-512mb-mba7 (TQMa7[S,D] HW REV.010x ... 0x020x with 512 MiB RAM / MBa7x HW REV.020x)
-[y]	i.MX7[S,D]	TQMa7[S,D]		MBa7x		tqma7x-1gb-mba7 (TQMa7[S,D] HW REV.010x ... 0x020x with 1 GiB RAM / MBa7x HW REV.020x)
-[y]	i.MX7[S,D]	TQMa7[S,D]		MBa7x		tqma7x-2gb-mba7 (TQMa7[S,D] HW REV.010x ... 0x020x with 2 GiB RAM / MBa7x HW REV.020x)
-[y]	LS1043A		TQMLS1043A		MBLS10xxA	tqmls1043a-mbls10xxa (TQMLS1043a / MBLS10xxa)
-[y]	LS1046A		TQMLS1046A		MBLS10xxA	tqmls1046a-mbls10xxa (TQMLS1046a with 2 GiB RAM / MBLS10xxa)
-[y]	LS1046A		TQMLS1046A		MBLS10xxA	tqmls1046a_8g-mbls10xxa (TQMLS1046a with 8 GiB RAM / MBLS10xxa)
-[y]	LS1088A		TQMLS1088A		MBLS10xxA	tqmls1088a-mbls10xxa (TQMLS1088a / MBLS10xxa)
-[y]	LS102[0,1]A	TQMLS102[0,1]A>		MBLS102xA	tqmls102xa-mbls102xa (TQMLS102[0,1]A HW REV.020x / MBLS102xA HW REV.020x)
-[y]	AM571[6,8]	TQMa5718/TQMa5716	MBa57xx		tqma571x-mba57xx
-[y]	AM572[6,8]	TQMa5728/TQMa5726	MBa57xx		tqma572x-mba57xx
-[y]	AM574[6,8]	TQMa5748/TQMa5746	MBa57xx		tqma574x-mba57xx
-[p]	T1022		TQMT1022		STK104x		tqmt1022-64bit-stkt104x
-[p]	T1040		TQMT1040		STK104x		tqmt1040-64bit-stkt104x
-[p]	T1042		TQMT1042		STK104x		tqmt1042-64bit-stkt104x
+	SOC			SOM			Base board	MACHINE
+[b]	i.MX6[QP,DP]		TQMa6QP/TQMa6DP		MBa6x		tqma6qp-mba6x (TQMa6[QP,DP] HW REV.040x / MBa6x HW REV.020x)
+[b]	i.MX6[Q,D]		TQMa6D/TQMa6Q		MBa6x		tqma6q-mba6x (TQMa6[D,Q] HW REV.010x ... 040x / MBa6x HW REV.020x)
+[y]	i.MX6[Q,D]		TQMa6D/TQMa6Q		NAV		tqma6q-nav (TQMa6[D,Q] HW REV.030x ... 040x / NAV REV.020x)
+[b]	i.MX6DL			TQMa6DL			MBa6x		tqma6dl-mba6x (TQMa6DL HW REV.010x ... 040x / MBa6x HW REV.020x)
+[b]	i.MX6S			TQMa6S			MBa6x		tqma6s-mba6x (TQMa6S HW REV.010x ... 040x / MBa6x HW REV.020x)
+[y]	i.MX6UL			TQMa6ULx		MBaULx		tqma6ulx-mba6ulx (TQMa6UL HW REV.030x / MBa6ULx HW REV.020x)
+[y]	i.MX6UL			TQMa6ULxL		MBaULx		tqma6ulx-lga-mba6ulx (TQMa6ULxL HW REV.020x / MBa6ULx HW REV.020x)
+[y]	i.MX6UL			TQMa6ULxL		MBaULxL		tqma6ulx-lga-mba6ulxl (TQMa6ULxL HW REV.020x / MBa6ULxL HW REV.020x)
+[y]	i.MX6ULL		TQMa6ULLx		MBaULx		tqma6ullx-mba6ulx (TQMa6ULLx HW REV.030x / MBa6ULx HW REV.020x)
+[y]	i.MX6ULL		TQMa6ULLxL		MBaULx		tqma6ullx-lga-mba6ulx (TQMa6ULLxL HW REV.020x / MBa6ULx HW REV.020x)
+[y]	i.MX7[S,D]		TQMa7[S,D]		MBa7x		tqma7x-512mb-mba7 (TQMa7[S,D] HW REV.010x ... 0x020x with 512 MiB RAM / MBa7x HW REV.020x)
+[y]	i.MX7[S,D]		TQMa7[S,D]		MBa7x		tqma7x-1gb-mba7 (TQMa7[S,D] HW REV.010x ... 0x020x with 1 GiB RAM / MBa7x HW REV.020x)
+[y]	i.MX7[S,D]		TQMa7[S,D]		MBa7x		tqma7x-2gb-mba7 (TQMa7[S,D] HW REV.010x ... 0x020x with 2 GiB RAM / MBa7x HW REV.020x)
+[y]	LS1043A			TQMLS1043A		MBLS10xxA	tqmls1043a-mbls10xxa (TQMLS1043a / MBLS10xxa)
+[y]	LS1046A			TQMLS1046A		MBLS10xxA	tqmls1046a-mbls10xxa (TQMLS1046a with 2 GiB RAM / MBLS10xxa)
+[y]	LS1046A			TQMLS1046A		MBLS10xxA	tqmls1046a_8g-mbls10xxa (TQMLS1046a with 8 GiB RAM / MBLS10xxa)
+[y]	LS1088A			TQMLS1088A		MBLS10xxA	tqmls1088a-mbls10xxa (TQMLS1088a / MBLS10xxa)
+[y]	LS102[0,1]A		TQMLS102[0,1]A		MBLS102xA	tqmls102xa-mbls102xa (TQMLS102[0,1]A HW REV.020x / MBLS102xA HW REV.020x)
+[y]	AM57[1,2,4][6,8]	TQMa57[1,2,4][6,8]	MBa57xx		tqma57xx-mba57xx (TQMa57[1,2,4][6,8] / MBa57xx)
+[y]	AM574[6,8]		TQMa574[6,8] ECC	MBa57xx		tqma574x-ecc-mba57xx (TQMa574[6,8] with ECC / MBa57xx)
+[p]	T1022			TQMT1022		STK104x		tqmt1022-64bit-stkt104x
+[p]	T1040			TQMT1040		STK104x		tqmt1040-64bit-stkt104x
+[p]	T1042			TQMT1042		STK104x		tqmt1042-64bit-stkt104x
 ```
 
 \[y\]: supported  
