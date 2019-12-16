@@ -44,6 +44,7 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 * LVDS
 * ENET (GigE via Phy on MBa8Xx)
 * PCIe (mini-PCIe on MBa8Xx)
+* create Bootstreams for mmc and qspi
 
 ## Known Issues
 

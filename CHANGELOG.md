@@ -34,6 +34,7 @@ Releases are named with thefollowing scheme:
 * tqma8mx: u-boot: lot of GPIO are requested and preconfigured
 * tqma8xxs: CAN support
 * tqma8xxs: linux: LVDS support
+* tqma8xxs: u-boot: enable QSPI Boot
 
 ### Fixed
 

@@ -48,6 +48,7 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
   * EEPROMS
 * GPU
 * ENET (GigE via Phy on MBa8Xx)
+* create Bootstreams for mmc and qspi
 
 ## Known Issues
 
@@ -59,7 +60,7 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 
 ### Dip Switches
 
-S1 : 0011
+S3 : 0110
 
 ### Bootable SD-Card
 
@@ -139,7 +140,7 @@ provide the file via TFTP and update via `run update_kernel`
 
 ### Dip Switches
 
-S1 : 0110
+S3 : 1100
 
 ### Build with Yocto
 
@@ -151,8 +152,9 @@ set IMXBOOT_TARGETS_tqma8xx = "flash_flexspi" in imx-boot_0.2.bbappend
 - copy xxx.bin-flash_flexspi from deploy folder on sd card
 
 Vom U-Boot aus: 
+- sf probe
 - fatload mmc 1:1 ${loadaddr} xxx.bin-flash_flexspi
-- sf erase 0x0 ${filesize}
+- sf erase 0x0 100000
 - sf write ${loadaddr} 0x00 ${filesize}
 - (optional) sf read 0x80300000 0x00 ${filesize}
 - (optional) cmp.b 0x80300000 ${loadaddr} ${filesize}
