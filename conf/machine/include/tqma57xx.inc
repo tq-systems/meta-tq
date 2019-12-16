@@ -20,11 +20,11 @@ MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree"
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_virtual/kernel_tqma57xx = "linux-tq"
-KERNEL_IMAGETYPE = "zImage"
+PREFERRED_PROVIDER_virtual/kernel_tqma57xx ?= "linux-tq"
+KERNEL_IMAGETYPE ?= "zImage"
 
-PREFERRED_PROVIDER_u-boot_tqma57xx = "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader_tqma57xx = "u-boot-tq"
+PREFERRED_PROVIDER_u-boot_tqma57xx ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader_tqma57xx ?= "u-boot-tq"
 
 UBOOT_ARCH = "arm"
 UBOOT_ENTRYPOINT = "0x80008000"
@@ -33,8 +33,6 @@ UBOOT_SUFFIX ?= "img"
 
 # Image Options
 #
-KERNEL_IMAGETYPE = "zImage"
-
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 
 IMAGE_INSTALL_append = " kernel kernel-modules"
