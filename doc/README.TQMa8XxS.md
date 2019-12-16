@@ -35,6 +35,7 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 
 * CAN
 * QSPI
+* LVDS
 
 **TODO, not tested with new BSP**
 
@@ -46,7 +47,6 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
   * RTC
   * EEPROMS
 * GPU
-* LVDS
 * ENET (GigE via Phy on MBa8Xx)
 
 ## Known Issues
@@ -156,4 +156,18 @@ Vom U-Boot aus:
 - sf write ${loadaddr} 0x00 ${filesize}
 - (optional) sf read 0x80300000 0x00 ${filesize}
 - (optional) cmp.b 0x80300000 ${loadaddr} ${filesize}
+
+## LVDS (tm070jvhg33)
+
+Hardware:
+* Backlight Spannungsversorgung 12V (V_BKLT_OUT) über Brücke in Stecker X14 oder 0Ohm Wiederstand R4
+* DIP Switch zur auswahl LVDS/eDP prüfen (S2)
+* 3 Signale zur Backlight ansteuerung über smarc (LCD0_BKLT_EN, LCD0_VDD_EN, LCD0_BKLT_PWM)
+
+Software:
+* In Rev100 ist LCD0_BKLT_PWM aus Prozessor Pins gelegt für die es keinen pwm devicetree eintrag gibt
+* LCD0_BKLT_PWM vorerst über gpio-pwm realisiert
+* LCD0_VDD_EN wird über "reg_panel_vdd" geschaltet
+* LCD0_BKLT_EN über "enable-gpios" des panel geschaltet
+
 
