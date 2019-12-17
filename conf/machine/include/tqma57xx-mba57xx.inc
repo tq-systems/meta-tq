@@ -18,7 +18,7 @@ KERNEL_DEVICETREE ?= " \
 # IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
 #
 IMAGE_BOOT_FILES_append = "\
-	${KERNEL_IMAGETYPE} \
+	${KERNEL_IMAGETYPE};linuximage \
 	${KERNEL_DEVICETREE} \
 	MLO \
 	u-boot.img \
