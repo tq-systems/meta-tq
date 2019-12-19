@@ -26,6 +26,7 @@ SC_FIRMWARE_NAME_tqma8xqps-mb-smarc-2 = "mx8qx-tqma8xqps-mb-smarc-2-scfw-tcm.bin
 SC_FIRMWARE_NAME_tqma8xds-mb-smarc-2 = "mx8qx-tqma8xds-mb-smarc-2-scfw-tcm.bin"
 
 SC_FIRMWARE_NAME_tqma8qm-mba8x = "mx8qm-tqma8qm-4gb-scfw-tcm.bin"
+SC_FIRMWARE_NAME_tqma8qm-8gb-mba8x = "mx8qm-tqma8qm-8gb-scfw-tcm.bin"
 
 do_deploy_prepend () {
     cp ${WORKDIR}/${PN}-${SC_FIRMWARE_VERSION_TQ}/*.bin ${S}
