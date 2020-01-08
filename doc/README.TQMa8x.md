@@ -18,37 +18,48 @@ This README contains some useful information for TQMa8x on MBa8x
 
 ### U-Boot:
 
+* RAM configs 4GB / 8GB
+* CPU variants i.MX8QM
+* Bootdevices: e-MMC / SD-Card
+* I2C
+* GPIO
+* USB
+
 **TODO**
 
-* RAM configs 2GB
-* CPU variants i.MX8QM
-* Fuses
 * speed grade / temperature grade detection
-* GPIO
-* I2C
+* Fuses
 * ENET (GigE via Phy on MBa8x)
-* Bootdevices: e-MMC / SD-Card
+* QSPI Boot
 
 ### Linux:
 
-**TODO**
-
-* RAM configs 2GB
+* RAM configs 4GB / 8GB
 * CPU variants i.MX8MQ
-* speed grade / temperature grade detection
 * I2C
   * Temperature Sensors
   * RTC
   * EEPROMS
+* SPI
+  * spi user space device on all CS
+
+**TODO**
+
+* speed grade / temperature grade detection
 * GPU
 * LVDS
 * ENET (GigE via Phy on MBa8x)
+* USB
+* PCIE
+* HDMI
 
 ## Known Issues
 
-wrong capacitive load in DT for RTC
-only boot tested
-errors and hangs during first start with a fresh image
+* sometimes hangs during first start with a fresh image
+* random hangs starting boot loader when cold boot (only SCU comes up)
+* USB support in U-Boot
+  * USB3 stick on micro-B (X29 needs usb start + usb reset)
+  * USB3 ID pin handling not fully implemented
 
 ## SD-Card Boot
 
@@ -90,7 +101,10 @@ provide the file via TFTP and update via `run update_kernel`
 
 ### Dip Switches
 
-**TODO**
+```
+      543210  
+SW1 : 001000  
+``
 
 ### Bootable e-MMC
 
@@ -132,4 +146,15 @@ provide the blob via TFTP and update via `run update_fdt`
 
 Linux kernel: set env var `image` to name of your kernel image,
 provide the file via TFTP and update via `run update_kernel`
+
+## QSPI Boot
+
+**TODO**
+
+### Dip Switches
+
+```
+      543210  
+SW1 :   
+```
 

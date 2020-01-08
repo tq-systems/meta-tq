@@ -6,7 +6,7 @@ SRC_URI = "\
 "
 
 SRCBRANCH = "TQMaxx-bringup-imx_4.14.98_2.2.0"
-SRCREV = "9983ae4e89ed330d58ab7897d23f3becf7f5cc08"
+SRCREV = "f29010d88bc507689b7b103ce2729387db104e64"
 
 SRC_URI_mx8 = "\
   ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
