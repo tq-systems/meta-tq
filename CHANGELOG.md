@@ -14,6 +14,9 @@ tqma8qm: update SCU firmware to support 8GB variant
 
 ### Added
 
+* tqma8qm: linux: add spi support
+* tqma8qm: linux: QSPI support
+* tqma8qm: u-boot: enable QSPI Boot
 * tqma8qm: add support for 8GB variant
 * tqma8xxs: linux: LVDS support
 
