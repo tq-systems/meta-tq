@@ -24,13 +24,14 @@ This README contains some useful information for TQMa8x on MBa8x
 * I2C
 * GPIO
 * USB
+* Fuses
+* ENET (GigE via Phy on MBa8x)
+* QSPI Boot
 
 **TODO**
 
 * speed grade / temperature grade detection
-* Fuses
-* ENET (GigE via Phy on MBa8x)
-* QSPI Boot
+* generation of multiple bootstreams under yocto
 
 ### Linux:
 
