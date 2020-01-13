@@ -32,6 +32,7 @@ This README contains some useful information for TQMa8x on MBa8x
 
 * speed grade / temperature grade detection
 * generation of multiple bootstreams under yocto
+* Cortex M4
 
 ### Linux:
 
@@ -43,16 +44,18 @@ This README contains some useful information for TQMa8x on MBa8x
   * EEPROMS
 * SPI
   * spi user space device on all CS
+* USB
+* PCIE
+* ENET (GigE via Phy on MBa8x)
 
 **TODO**
 
 * speed grade / temperature grade detection
 * GPU
 * LVDS
-* ENET (GigE via Phy on MBa8x)
-* USB
-* PCIE
 * HDMI
+* Audio
+* Cortex M4
 
 ## Known Issues
 
@@ -61,6 +64,9 @@ This README contains some useful information for TQMa8x on MBa8x
 * USB support in U-Boot
   * USB3 stick on micro-B (X29 needs usb start + usb reset)
   * USB3 ID pin handling not fully implemented
+* USB support in Linux
+  * USB3 ID pin handling not implemented (missing DRD/OTG support in driver)
+  * USB3 devices not clean detected - clock and power issues?
 
 ## SD-Card Boot
 

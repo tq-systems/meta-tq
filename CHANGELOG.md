@@ -14,6 +14,14 @@ tqma8qm: update SCU firmware to support 8GB variant
 
 ### Added
 
+* tqma8qm: linux: add PCIEa support
+* tqma8qm: linux: add USB support
+* tqma8qm: linux: add SPI support
+* tqma8qm: linux: add USB support
+* tqma8qm: u-boot: PCIe GPIO sideband pins
+* tqma8qm: u-boot: GPIO LED and button
+* tqma8qm: tqma8xx: u-boot: fix for flexspi write SR
+* tqma8qm: SCU: PCIe external clock
 * tqma8qm: u-boot: add USB support
 * tqma8qm: linux: add spi support
 * tqma8qm: linux: QSPI support
