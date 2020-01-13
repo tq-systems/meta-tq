@@ -14,6 +14,7 @@ tqma8qm: update SCU firmware to support 8GB variant
 
 ### Added
 
+* tqma8qm: linux: add CAN support
 * tqma8qm: linux: add PCIEa support
 * tqma8qm: linux: add USB support
 * tqma8qm: linux: add SPI support

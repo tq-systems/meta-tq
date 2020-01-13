@@ -67,6 +67,8 @@ This README contains some useful information for TQMa8x on MBa8x
 * USB support in Linux
   * USB3 ID pin handling not implemented (missing DRD/OTG support in driver)
   * USB3 devices not clean detected - clock and power issues?
+* counting of i2c devices bus starts at i2c-2 (because i2c-0 and i2c-1 are reserved for i2c_rpbus)
+* can bitrate limited to 125000 (in can0/can1.service)
 
 ## SD-Card Boot
 
