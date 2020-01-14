@@ -30,6 +30,7 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 * I2C
 * ENET (GigE via Phy on MBa8Xx)
 * Bootdevices: e-MMC / SD-Card
+* create multiple Bootstreams for mmc and qspi
 
 ### Linux:
 
@@ -48,7 +49,6 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
   * EEPROMS
 * GPU
 * ENET (GigE via Phy on MBa8Xx)
-* create Bootstreams for mmc and qspi
 
 ## Known Issues
 
@@ -144,32 +144,46 @@ S3 : 1100
 
 ### Build with Yocto
 
-set UBOOT_CONFIG ??= "fspi" in xxx.conf file
-set IMXBOOT_TARGETS_tqma8xx = "flash_flexspi" in imx-boot_0.2.bbappend
+*Note:* QSPI boot stream currently not built by default. Following manual
+changes needed:
+
+set `UBOOT_CONFIG ??= "fspi"` in xxx.conf file
+set `IMXBOOT_TARGETS_tqma8xx = "flash_flexspi"` in `imx-boot_0.2.bbappend`
+
+Find the resulting QSPI bootstream image in the deploy folder named as
+`xxx.bin-flash_flexspi`.
 
 ### Write bootstream to QSPI
 
-- copy xxx.bin-flash_flexspi from deploy folder on sd card
+To install QSPI bootstream from U-Boot running on SD, copy the QSPI bootstream from
+deploy folder onto SD-Card partition 1 (firmware partition) or load via tftp
 
-Vom U-Boot aus: 
-- sf probe
-- fatload mmc 1:1 ${loadaddr} xxx.bin-flash_flexspi
-- sf erase 0x0 100000
-- sf write ${loadaddr} 0x00 ${filesize}
-- (optional) sf read 0x80300000 0x00 ${filesize}
-- (optional) cmp.b 0x80300000 ${loadaddr} ${filesize}
+```
+setenv uboot xxx.bin-flash_flexspi
+# load from firmware partition
+load mmc 1:1 ${loadaddr} ${uboot}
+# load via tftp
+tftp ${uboot}
+sf probe
+sf erase 0x0 100000
+sf write ${loadaddr} 0x00 ${filesize}
+# optional verfify
+sf read 0x80300000 0x00 ${filesize}
+cmp.b 0x80300000 ${loadaddr} ${filesize}
+```
 
 ## LVDS (tm070jvhg33)
 
-Hardware:
-* Backlight Spannungsversorgung 12V (V_BKLT_OUT) über Brücke in Stecker X14 oder 0Ohm Wiederstand R4
-* DIP Switch zur auswahl LVDS/eDP prüfen (S2)
-* 3 Signale zur Backlight ansteuerung über smarc (LCD0_BKLT_EN, LCD0_VDD_EN, LCD0_BKLT_PWM)
+*Hardware requirements:*
 
-Software:
-* In Rev100 ist LCD0_BKLT_PWM aus Prozessor Pins gelegt für die es keinen pwm devicetree eintrag gibt
-* LCD0_BKLT_PWM vorerst über gpio-pwm realisiert
-* LCD0_VDD_EN wird über "reg_panel_vdd" geschaltet
-* LCD0_BKLT_EN über "enable-gpios" des panel geschaltet
+* Backlight supply 12V (V_BKLT_OUT) via bridge in connector X14 or 0Ohm 
+  resistance R4
+* DIP switch (S2) to select LVDS/eDP
+* 3 signals for backlight control (LCD0\_BKLT\_EN, LCD0\_VDD\_EN, LCD0\_BKLT\_PWM)
 
+*Software:*
 
+* with hardware REV.010x `LCD0_BKLT_PWM` is routed to pins that are not pwm 
+  capable yet - therefore `LCD0_BKLT_PWM` is bound to gpio-backlight driver
+* `LCD0_VDD_EN` is controlled via regulator device `reg_panel_vdd`
+* `LCD0_BKLT_EN` is controlled via `enable-gpios` of panel device

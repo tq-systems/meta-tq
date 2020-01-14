@@ -18,7 +18,9 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 
 ### U-Boot:
 
-**TODO**
+* QSPI
+
+**TODO, not tested with new BSP**
 
 * RAM configs 1GB / 512 MB
 * CPU variants i.MX8QXP / i.MX8DX
@@ -28,10 +30,11 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 * I2C
 * ENET (GigE via Phy on MBa8Xx)
 * Bootdevices: e-MMC / SD-Card
+* create multiple Bootstreams for mmc and qspi
 
 ### Linux:
 
-**TODO**
+**TODO, not tested with new BSP**
 
 * RAM configs 1GB / 512 MB
 * CPU variants i.MX8QXP / i.MX8DX
@@ -138,17 +141,30 @@ S1 : 0110
 
 ### Build with Yocto
 
-set UBOOT_CONFIG ??= "fspi" in xxx.conf file
-set IMXBOOT_TARGETS_tqma8xx = "flash_flexspi" in imx-boot_0.2.bbappend
+*Note:* QSPI boot stream currently not built by default. Following manual
+changes needed:
+
+set `UBOOT_CONFIG ??= "fspi"` in xxx.conf file
+set `IMXBOOT_TARGETS_tqma8xx = "flash_flexspi"` in `imx-boot_0.2.bbappend`
+
+Find the resulting QSPI bootstream image in the deploy folder named as
+`xxx.bin-flash_flexspi`.
 
 ### Write bootstream to QSPI
 
-- copy xxx.bin-flash_flexspi from deploy folder on sd card
+To install QSPI bootstream from U-Boot running on SD, copy the QSPI bootstream from
+deploy folder onto SD-Card partition 1 (firmware partition) or load via tftp
 
-Vom U-Boot aus: 
-- fatload mmc 1:1 ${loadaddr} xxx.bin-flash_flexspi
-- sf erase 0x0 ${filesize}
-- sf write ${loadaddr} 0x00 ${filesize}
-- (optional) sf read 0x80300000 0x00 ${filesize}
-- (optional) cmp.b 0x80300000 ${loadaddr} ${filesize}
-
+```
+setenv uboot xxx.bin-flash_flexspi
+# load from firmware partition
+load mmc 1:1 ${loadaddr} ${uboot}
+# load via tftp
+tftp ${uboot}
+sf probe
+sf erase 0x0 100000
+sf write ${loadaddr} 0x00 ${filesize}
+# optional verfify
+sf read 0x80300000 0x00 ${filesize}
+cmp.b 0x80300000 ${loadaddr} ${filesize}
+```

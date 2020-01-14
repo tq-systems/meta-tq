@@ -20,13 +20,13 @@ This README contains some useful information for TQMa8x on MBa8x
 
 * RAM configs 4GB / 8GB
 * CPU variants i.MX8QM
-* Bootdevices: e-MMC / SD-Card
+* Bootdevices: e-MMC / SD-Card / QSPI
 * I2C
 * GPIO
 * USB
 * Fuses
 * ENET (GigE via Phy on MBa8x)
-* QSPI Boot
+* QSPI
 
 **TODO**
 
@@ -56,10 +56,15 @@ This README contains some useful information for TQMa8x on MBa8x
 * HDMI
 * Audio
 * Cortex M4
+* QSPI
+* SATA
+* VPU
+* GPU
 
 ## Known Issues
 
-* sometimes hangs during first start with a fresh image
+* sometimes hangs in linux during first start with a fresh image
+* ENET1 randomly not communicating under U-Boot / Linux
 * random hangs starting boot loader when cold boot (only SCU comes up)
 * USB support in U-Boot
   * USB3 stick on micro-B (X29 needs usb start + usb reset)
@@ -67,8 +72,10 @@ This README contains some useful information for TQMa8x on MBa8x
 * USB support in Linux
   * USB3 ID pin handling not implemented (missing DRD/OTG support in driver)
   * USB3 devices not clean detected - clock and power issues?
-* counting of i2c devices bus starts at i2c-2 (because i2c-0 and i2c-1 are reserved for i2c_rpbus)
-* can bitrate limited to 125000 (in can0/can1.service)
+* counting of i2c devices bus starts at i2c-2 (because i2c-0 and i2c-1
+  are reserved for i2c_rpmsgbus)
+* can bitrate limited to 125000 (in can0/can1.service), no CAN FD
+  due to hardware limitations in module rev.010x
 
 ## SD-Card Boot
 
@@ -167,16 +174,30 @@ SW1 : 011110
 
 ### Build with Yocto
 
-set UBOOT_CONFIG ??= "fspi" in xxx.conf file
-set IMXBOOT_TARGETS_tqma8x = "flash_flexspi" in imx-boot_0.2.bbappend
+*Note:* QSPI boot stream currently not built by default. Following manual
+changes needed:
+
+set `UBOOT_CONFIG ??= "fspi"` in xxx.conf file
+set `IMXBOOT_TARGETS_tqma8xx = "flash_flexspi"` in `imx-boot_0.2.bbappend`
+
+Find the resulting QSPI bootstream image in the deploy folder named as
+`xxx.bin-flash_flexspi`.
 
 ### Write bootstream to QSPI
 
-- copy xxx.bin-flash_flexspi from deploy folder on sd card
+To install QSPI bootstream from U-Boot running on SD, copy the QSPI bootstream from
+deploy folder onto SD-Card partition 1 (firmware partition) or load via tftp
 
-Vom U-Boot aus: 
-- fatload mmc 1:1 ${loadaddr} xxx.bin-flash_flexspi
-- sf erase 0x0 0x100000
-- sf write ${loadaddr} 0x00 ${filesize}
-- (optional) sf read 0x80300000 0x00 ${filesize}
-- (optional) cmp.b 0x80300000 ${loadaddr} ${filesize}
+```
+setenv uboot xxx.bin-flash_flexspi
+# load from firmware partition
+load mmc 1:1 ${loadaddr} ${uboot}
+# load via tftp
+tftp ${uboot}
+sf probe
+sf erase 0x0 100000
+sf write ${loadaddr} 0x00 ${filesize}
+# optional verfify
+sf read 0x80300000 0x00 ${filesize}
+cmp.b 0x80300000 ${loadaddr} ${filesize}
+```
