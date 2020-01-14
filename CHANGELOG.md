@@ -14,8 +14,10 @@ tqma8qm: update SCU firmware to support 8GB variant
 
 ### Added
 
+* systemd-machine-units: add tqma8qm support
+* systemd-machine-units: reduce default can bitrate
 * tqma8qm: linux: add CAN support
-* tqma8qm: linux: add PCIEa support
+* tqma8qm: linux: add PCIE support
 * tqma8qm: linux: add USB support
 * tqma8qm: linux: add SPI support
 * tqma8qm: linux: add USB support
@@ -25,7 +27,7 @@ tqma8qm: update SCU firmware to support 8GB variant
 * tqma8qm: SCU: PCIe external clock
 * tqma8qm: u-boot: add USB support
 * tqma8qm: linux: add spi support
-* tqma8qm: linux: QSPI support
+* tqma8qm: linux: QSPI support (not completely funcional)
 * tqma8qm: u-boot: enable QSPI Boot
 * tqma8qm: add support for 8GB variant
 * tqma8xxs: linux: LVDS support
