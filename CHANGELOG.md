@@ -5,10 +5,16 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
-## Unreleased Version
+## warrior.TQMa57xx.BSP.SW.0008
 
 ### Changed
 
+* tqma57xx: rename kernelimage in firmware partition (sync with PTXdist BSP)
+* tqma57xx: update kernelconfig to BSP REV.0008
+* tqma57xx: update linux-ti to branch TQMa57xx-TI-linux-v4.9 (BSP REV.0008)
+* tqma57xx: simplify machine definitions, need only 2 different
+* tqma57xx: update u-boot version to 2019.04
+* prueth-fw: simplify recipe and allow usage for different mainboards
 * TQMa6ULLx\[L\]: finally qualified RAM-Timing for (no functional change)
 * linux-tq: improved kernel defconfig for TQMa6x
 
@@ -17,7 +23,7 @@ Releases are named with the following scheme:
 * linux-tq: HDMI support for TQMa6x
 * tqma6x: enable hdmi support dtb
 
-###Fixed
+### Fixed
 
 * linux-tq: DT style fixes for TQMa6x / TQMa6UL\[L\]x\[L\] / TQMa7x
 * doc fixes for machine with i.MX6ULL
