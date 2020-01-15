@@ -5,6 +5,22 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## warrior.TQMa6ULx.BSP.SW.0110-rc1
+
+## Added
+
+* tqma6ul\[l\]x: add configs for 512 MB variant
+
+## Changed
+
+* tqma\[6,6ul,6ull,7\]: add SDMA firmware to MACHINE\_EXTRA\_RRECOMMENDS
+* tqma6ul\[l\]x\[l\]: simplify machine configs
+* u-boot-tq_2016.03: update to support 512 MB variant of tqma6ul\[l\]x
+
+## Fixed
+
+* tqma6ul: fix duplicate inclusion of imx-base when using with meta-freescale
+
 ## warrior.TQMa57xx.BSP.SW.0008
 
 ### Changed
