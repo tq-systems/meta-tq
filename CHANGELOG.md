@@ -5,7 +5,7 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
-## warrior.TQMa6ULx.BSP.SW.0110-rc1
+## warrior.TQMa6ULx.BSP.SW.0110
 
 ## Added
 
@@ -19,6 +19,7 @@ Releases are named with the following scheme:
 
 ## Fixed
 
+* tqma\[6,6ul,6ull,7\]: assignment of providers for bootloader / kernel should use "?="
 * tqma6ul: fix duplicate inclusion of imx-base when using with meta-freescale
 
 ## warrior.TQMa57xx.BSP.SW.0008
