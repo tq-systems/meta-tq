@@ -13,7 +13,7 @@ tqma8qm: rename tqma8mq-mba8mx -> tqma8mq-4gb-mba8mx
 tqma8qm: update SCU firmware to support 8GB variant
 
 ### Added
-
+* tqma8qm: linux: LVDS support
 * systemd-machine-units: add tqma8qm support
 * systemd-machine-units: reduce default can bitrate
 * tqma8qm: linux: add CAN support
