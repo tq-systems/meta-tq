@@ -23,7 +23,8 @@ This README contains some useful information for TQMa8x on MBa8x
 * Bootdevices: e-MMC / SD-Card / QSPI
 * I2C
 * GPIO
-* USB
+* USB 2.0 / USB Hub (needs modification on MBa8x)
+* USB 3.0 / Micro B (see issues)
 * Fuses
 * ENET (GigE via Phy on MBa8x)
 * QSPI
@@ -44,7 +45,8 @@ This README contains some useful information for TQMa8x on MBa8x
   * EEPROMS
 * SPI
   * spi user space device on all CS
-* USB
+* USB 2.0 / USB Hub (needs modification on MBa8x)
+* USB 3.0 / Micro B (see issues)
 * PCIE
 * ENET (GigE via Phy on MBa8x)
 
