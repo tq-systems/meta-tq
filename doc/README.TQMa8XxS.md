@@ -18,48 +18,70 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 
 ### U-Boot:
 
+* RAM configs 1GB
+* CPU variant i.MX8QXP
 * QSPI
-
-**TODO, not tested with new BSP**
-
-* RAM configs 1GB / 512 MB
-* CPU variants i.MX8QXP / i.MX8DX
-* Fuses
-* speed grade / temperature grade detection
+  * Read
+  * Write
+  * Boot
+* SD
+  * Read
+  * Write
+  * Boot
+* e-MMC
+  * Read
+  * Write
+  * Boot
 * GPIO
 * I2C
-* ENET (GigE via Phy on MBa8Xx)
-* Bootdevices: e-MMC / SD-Card
+* ENET 1/2
+* Fuses
+
+**TODO or not tested with new BSP**
+
+* Fuses
+* RAM configs 512 MB
+* CPU variants i.MX8DX
+* speed grade / temperature grade detection
 * create multiple Bootstreams for mmc and qspi
 
 ### Linux:
 
-* CAN
-* QSPI
-* LVDS
-
-**TODO, not tested with new BSP**
-
-* RAM configs 1GB / 512 MB
-* CPU variants i.MX8QXP / i.MX8DX
+* RAM configs 1GB
+* CPU variants i.MX8QXP
 * speed grade / temperature grade detection
+* e-MMC
+* SD-CARD
+* DVFS
+* CAN
+* LVDS (Tianma 1240 x 800, GPIO Backlight)
+* ENET 1/2
 * I2C
   * Temperature Sensors
   * RTC
   * EEPROMS
 * GPU
-* ENET (GigE via Phy on MBa8Xx)
+
+**TODO or not tested with new BSP**
+
+* RAM configs 512 MB
+* CPU variants i.MX8DX
+* speed grade / temperature grade detection
+* VPU
+* DP
+* M4
+* Audio
 
 ## Known Issues
 
-* only boot tested
 * PCIe not working
-
+* QSPI under Linux not working correctly
 
 ## SD-Card Boot
 
 ### Dip Switches
 
+     1234
 S3 : 0110
 
 ### Bootable SD-Card
@@ -93,7 +115,8 @@ provide the file via TFTP and update via `run update_kernel`
 
 ### Dip Switches
 
-**TODO**
+     1234
+S3 : 1000
 
 ### Bootable e-MMC
 
@@ -140,6 +163,7 @@ provide the file via TFTP and update via `run update_kernel`
 
 ### Dip Switches
 
+     1234
 S3 : 1100
 
 ### Build with Yocto
