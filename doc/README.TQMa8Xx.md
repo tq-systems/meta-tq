@@ -18,45 +18,69 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 
 ### U-Boot:
 
-* QSPI
-
-**TODO, not tested with new BSP**
-
-* RAM configs 1GB / 512 MB
-* CPU variants i.MX8QXP / i.MX8DX
+* RAM configs 1GB
+* CPU variants i.MX8QXP
 * Fuses
-* speed grade / temperature grade detection
 * GPIO
+* QSPI
 * I2C
+* e-MMC / SD
+  * Read
+  * Write
+  * Boot
+* USB Hub
 * ENET (GigE via Phy on MBa8Xx)
-* Bootdevices: e-MMC / SD-Card
+  * ENET 1
+  * ENET 2
+
+**TODO or not tested with new BSP**
+
+* RAM 512 MB
+* CPU variants i.MX8DX
+* speed grade / temperature grade detection
 * create multiple Bootstreams for mmc and qspi
 
 ### Linux:
 
-**TODO, not tested with new BSP**
-
-* RAM configs 1GB / 512 MB
-* CPU variants i.MX8QXP / i.MX8DX
-* speed grade / temperature grade detection
+* RAM configs 1GB
+* CPU variants i.MX8QXP
 * I2C
   * Temperature Sensors
   * RTC
   * EEPROMS
 * GPU
+* LED
+* GPIO
 * LVDS
-* ENET (GigE via Phy on MBa8Xx)
+* DVFS
 * PCIe (mini-PCIe on MBa8Xx)
-* create Bootstreams for mmc and qspi
+* ENET (GigE via Phy on MBa8Xx)
+  * ENET 1
+  * ENET 2
+
+**TODO or not tested with new BSP**
+
+* RAM configs 512 MB
+* CPU variants i.MX8DX
+* speed grade / temperature grade detection
+* Beeper
+* Audio
+* DP bridge
+* Suspend / Wakeup
 
 ## Known Issues
 
-only boot tested
+* USB Hub
+  * HW Limitations (USB 2 / 3)
+  * USB Hub erkennt unter U-Boot Stick erst bei zweiter Initialisierung
+* QSPI not working correctly under Linux
 
 ## SD-Card Boot
 
 ### Dip Switches
 
+MODE 3210
+DIP  0123
 S1 : 0011
 
 ### Bootable SD-Card
@@ -90,7 +114,9 @@ provide the file via TFTP and update via `run update_kernel`
 
 ### Dip Switches
 
-**TODO**
+MODE 3210
+DIP  0123
+S1 : 0010
 
 ### Bootable e-MMC
 
@@ -137,6 +163,8 @@ provide the file via TFTP and update via `run update_kernel`
 
 ### Dip Switches
 
+MODE 3210
+DIP  0123
 S1 : 0110
 
 ### Build with Yocto
