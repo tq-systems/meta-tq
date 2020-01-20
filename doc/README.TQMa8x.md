@@ -51,6 +51,8 @@ This README contains some useful information for TQMa8x on MBa8x
 * ENET (GigE via Phy on MBa8x)
 * GPU
 * LVDS
+* GPIO LED and button
+  * wakeup from GPIO button
 
 **TODO**
 
@@ -200,4 +202,19 @@ sf write ${loadaddr} 0x00 ${filesize}
 # optional verfify
 sf read 0x80300000 0x00 ${filesize}
 cmp.b 0x80300000 ${loadaddr} ${filesize}
+```
+
+## Test sleepmode and wakeup
+
+Use rtc1 (on module) to wakeup after 20 seconds:
+```
+echo enabled > /sys/class/rtc/rtc1/device/power/wakeup
+echo 0 > /sys/class/rtc/rtc1/wakealarm
+echo +20 > /sys/class/rtc/rtc1/wakealarm
+echo mem > /sys/power/state
+```
+Send linux to sleep mode and press one of the gpio buttons SWITCH_A or SWITCH_B afterwards
+
+```
+echo mem > /sys/power/state
 ```
