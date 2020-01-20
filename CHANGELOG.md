@@ -5,6 +5,17 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## warrior.TQMa6x.BSP.SW.0115
+
+## Changed
+
+* tqma6\[q,s,dl,qp\]: use "?=" to assign UBOOT_CONFIG
+* tqma6x\[q,s,dl,qp\]: add spinor u-boot config to default value of UBOOT_CONFIG
+* tqma6qp-mba6x: enable SPI u-boot
+* tqma7x: fixes for booting mainline kernel
+* tqma6x: u-boot: increase default kernel space on SPI NOR to 10 MiB
+* tqma6ul\[l\]x\[l\]: u-boot: emphasize cpu arch mismatch warning
+
 ## warrior.TQMa6ULx.BSP.SW.0110
 
 ## Added
