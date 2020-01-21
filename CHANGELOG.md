@@ -9,6 +9,7 @@ Releases are named with thefollowing scheme:
 
 ### Changed
 
+tqma8qm: linux: support both LVDS outputs
 tqma8qm: rename tqma8mq-mba8mx -> tqma8mq-4gb-mba8mx
 tqma8qm: update SCU firmware to support 8GB variant
 

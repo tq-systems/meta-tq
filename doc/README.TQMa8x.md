@@ -50,7 +50,7 @@ This README contains some useful information for TQMa8x on MBa8x
 * PCIE
 * ENET (GigE via Phy on MBa8x)
 * GPU
-* LVDS
+* LVDS0/LVDS1
 * GPIO LED and button
   * wakeup from GPIO button
 
@@ -218,3 +218,13 @@ Send linux to sleep mode and press one of the gpio buttons SWITCH_A or SWITCH_B 
 ```
 echo mem > /sys/power/state
 ```
+
+## LVDS
+
+Each LVDS output could be activated independend by using the corresponding devicetree.
+The actual configuration works with the Tianma Display (tm070jvhg33).
+
+|       |                                                |
+|-------|------------------------------------------------|
+| LVDS0 | fsl-imx8qm-tqma8qm-mba8x-lvds0-tm070jvhg33.dtb |
+| LVDS1 | fsl-imx8qm-tqma8qm-mba8x-lvds0-tm070jvhg33.dtb |
