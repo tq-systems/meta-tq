@@ -9,7 +9,8 @@ USE_VT = "0"
 
 BOARD_DEVICETREE_FILES = "\
 	fsl-imx8qm-tqma8qm-mba8x.dtb \
-	fsl-imx8qm-tqma8qm-mba8x-lvds-tm070jvhg33.dtb \
+	fsl-imx8qm-tqma8qm-mba8x-lvds0-tm070jvhg33.dtb \
+	fsl-imx8qm-tqma8qm-mba8x-lvds1-tm070jvhg33.dtb \
 "
 
 require conf/machine/include/tqma8-common.inc
