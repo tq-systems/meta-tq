@@ -9,7 +9,7 @@ PROVIDES += "u-boot"
 
 DEPENDS_append = " xxd-native"
 
-SRCREV = "b7aabd46f89435c01c67dbfd7e59e41be118cc9d"
+SRCREV = "c10cb4d6caf21b4ae1f2819794d93b2e037dba25"
 SRCBRANCH = "TQMaxx2-v2016.03-rel_imx_4.1.15_2.0.0_ga"
 
 SRCREV_tqma6q-nav = "53a419a26d372f5419d9f5e1768d750df85a43ee"
