@@ -11,6 +11,12 @@ BOARD_DEVICETREE_FILES = "\
 	fsl-imx8qm-tqma8qm-mba8x.dtb \
 	fsl-imx8qm-tqma8qm-mba8x-lvds0-tm070jvhg33.dtb \
 	fsl-imx8qm-tqma8qm-mba8x-lvds1-tm070jvhg33.dtb \
+	fsl-imx8qm-tqma8qm-mba8x-dp.dtb \
+"
+
+BOARD_FIRMWARE_FILES = "\
+	dpfw.bin \
+	hdmirxfw.bin \
 "
 
 require conf/machine/include/tqma8-common.inc
@@ -23,4 +29,5 @@ require conf/machine/include/tqma8-common.inc
 IMAGE_BOOT_FILES ?= "\
 	${KERNEL_IMAGETYPE} \
 	${BOARD_DEVICETREE_FILES} \
+	${BOARD_FIRMWARE_FILES} \
 	"
