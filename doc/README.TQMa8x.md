@@ -53,6 +53,7 @@ This README contains some useful information for TQMa8x on MBa8x
 * LVDS0/LVDS1
 * GPIO LED and button
   * wakeup from GPIO button
+* Display Port
 
 **TODO**
 
