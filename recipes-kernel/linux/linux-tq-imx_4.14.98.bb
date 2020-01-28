@@ -5,8 +5,8 @@ SRC_URI = "\
   file://defconfig \
 "
 
-SRCBRANCH = "TQMaxx-bringup-imx_4.14.98_2.2.0"
-SRCREV = "415a23a2c14102287d8246b713c6fb8134f8a6ab"
+SRCBRANCH = "TQMaxx-imx_4.14.98_2.2.0"
+SRCREV = "0443142a6551b160d367cee30bf93ee706f2b449"
 
 SRC_URI_mx8 = "\
   ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
