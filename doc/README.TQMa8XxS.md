@@ -36,6 +36,7 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 * I2C
 * ENET 1/2
 * Fuses
+* USB (see known issues)
 
 **TODO or not tested with new BSP**
 
@@ -61,6 +62,7 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
   * RTC
   * EEPROMS
 * GPU
+* USB (see known issues)
 
 **TODO or not tested with new BSP**
 
@@ -76,6 +78,8 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 
 * PCIe not working
 * QSPI under Linux not working correctly
+* USB OTG (X4): Overcurrent detection does not work (hardware limitation)
+* USB HUB: all ports signals overcurrent (hardware limitation)
 
 ## SD-Card Boot
 
