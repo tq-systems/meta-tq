@@ -54,15 +54,19 @@ This README contains some useful information for TQMa8x on MBa8x
 * GPIO LED and button
   * wakeup from GPIO button
 * Display Port
+* SATA
+* ADC
+* FTM (PWM)
+* UARTS on pin heads
+* GPIO on pin heads
 
 **TODO**
 
 * speed grade / temperature grade detection
-* HDMI
+* HDMI in
 * Audio
 * Cortex M4
 * QSPI
-* SATA
 * VPU
 
 ## Known Issues
