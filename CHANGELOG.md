@@ -5,20 +5,40 @@ Releases are named with thefollowing scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
-## sumo.TQMa8.BSP.SW.0016
-
 ### Changed
 
-tqma8qm: linux: support both LVDS outputs
-tqma8qm: rename tqma8mq-mba8mx -> tqma8mq-4gb-mba8mx
-tqma8qm: update SCU firmware to support 8GB variant
-
 ### Added
+
+* tqma8xxs: linux: add initial USB support
+* tqma8x: linux: add FTM PWM support
+* tqma8x: linux: add ADC
+* tqma8x: linux: add SATA
+* tqma8x: linux: add GPIO button support incl. wakeup capabilities
+* tqma8x: linux: add LED support
+* tqma8x: u-boot: add support for SCU PMIC info
+* tqma8xx: u-boot: add support for SCU PMIC info
+* tqma8xxs: u-boot: add support for SCU PMIC info
+* tqma8xxs: u-boot: add initial USB support
+* tqma8xxs: u-boot: add support for module EEPROM readout
 * tqma8qm: linux: Display Port support
 * tqma8qm: u-boot: load display port firmware during boot
 * tqma8qm: linux: enable wakeup from GPIO button
 * tqma8qm: linux: GPIO LED and button
-* tqma8qm: linux: LVDS support
+* tqma8qm: linux: LVDS support on both channels
+
+### Fixed
+
+* remove unused patches for u-boot and linux from TQMa8QM first bringup
+
+## sumo.TQMa8.BSP.SW.0016
+
+### Changed
+
+tqma8qm: rename tqma8mq-mba8mx -> tqma8mq-4gb-mba8mx
+tqma8qm: update SCU firmware to support 8GB variant
+
+### Added
+
 * systemd-machine-units: add tqma8qm support
 * systemd-machine-units: reduce default can bitrate
 * tqma8qm: linux: add CAN support
