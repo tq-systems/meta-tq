@@ -9,22 +9,26 @@ Releases are named with thefollowing scheme:
 
 ### Added
 
-* tqma8xxs: linux: add initial USB support
-* tqma8x: linux: add FTM PWM support
-* tqma8x: linux: add ADC
-* tqma8x: linux: add SATA
-* tqma8x: linux: add GPIO button support incl. wakeup capabilities
-* tqma8x: linux: add LED support
-* tqma8x: u-boot: add support for SCU PMIC info
+* tqma8xx: linux: add LPUART3 support
+* tqma8xx: linux: enable wakeup from GPIO button
+* tqma8xx: linux: add SPI support
 * tqma8xx: u-boot: add support for SCU PMIC info
+* tqma8xxs: linux: add initial USB support
 * tqma8xxs: u-boot: add support for SCU PMIC info
 * tqma8xxs: u-boot: add initial USB support
 * tqma8xxs: u-boot: add support for module EEPROM readout
+* tqma8qm: linux: add audio support
+* tqma8qm: linux: add FTM PWM support
+* tqma8qm: linux: add ADC
+* tqma8qm: linux: add SATA
+* tqma8qm: linux: add GPIO button support incl. wakeup capabilities
+* tqma8qm: linux: add LED support
 * tqma8qm: linux: Display Port support
-* tqma8qm: u-boot: load display port firmware during boot
 * tqma8qm: linux: enable wakeup from GPIO button
 * tqma8qm: linux: GPIO LED and button
 * tqma8qm: linux: LVDS support on both channels
+* tqma8qm: u-boot: load display port firmware during boot
+* tqma8qm: u-boot: add support for SCU PMIC info
 
 ### Fixed
 

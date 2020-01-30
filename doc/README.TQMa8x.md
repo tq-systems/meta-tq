@@ -59,12 +59,14 @@ This README contains some useful information for TQMa8x on MBa8x
 * FTM (PWM)
 * UARTS on pin heads
 * GPIO on pin heads
+* Audio
+* DVFS
+  * speed grade
 
 **TODO**
 
-* speed grade / temperature grade detection
+* temperature grade detection
 * HDMI in
-* Audio
 * Cortex M4
 * QSPI
 * VPU
@@ -218,7 +220,7 @@ echo 0 > /sys/class/rtc/rtc1/wakealarm
 echo +20 > /sys/class/rtc/rtc1/wakealarm
 echo mem > /sys/power/state
 ```
-Send linux to sleep mode and press one of the gpio buttons SWITCH_A or SWITCH_B afterwards
+Send linux to sleep mode and press one of the gpio buttons SWITCH\_A or SWITCH\_B afterwards
 
 ```
 echo mem > /sys/power/state
