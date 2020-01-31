@@ -1,17 +1,11 @@
+require u-boot-tq-common_${PV}.inc
 require recipes-bsp/u-boot/u-boot.inc
 
 DESCRIPTION = "u-boot for TQ-Group Freescale LS102xA based modules"
 SECTION = "bootloader"
-LICENSE = "GPLv2+"
-LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
 PROVIDES += "virtual/bootloader"
 PROVIDES += "u-boot"
-
-SRCREV = "361d383a536cb1809a8a69c8fd0991ac9ed84b8a"
-SRCBRANCH = "TQMLS102x-v2017.07-BSP0109"
-
-SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 
 DEPENDS += "swap-file-endianess-native tcl-native"
 
@@ -46,6 +40,3 @@ do_compile_append () {
 
 PACKAGES += "${PN}-images"
 FILES_${PN}-images += "/boot"
-
-
-COMPATIBLE_MACHINE = "(tqmls102xa-mbls102xa)"
