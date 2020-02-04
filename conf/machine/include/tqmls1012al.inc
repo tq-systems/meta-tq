@@ -1,11 +1,12 @@
 # Common definitions for TQ-Group TQMLS1012AL modules
 
-require conf/machine/include/soc-family.inc
-
 MACHINEOVERRIDES =. "fsl-lsch2:ls1012a:"
 
 DEFAULTTUNE ?= "aarch64"
 
+# optionally source the machine specific features for multimedia etc. from
+# meta-freescale
+include conf/machine/include/qoriq-arm64.inc
 require conf/machine/include/arm/arch-arm64.inc
 
 # TQ u-boot and kernel
@@ -70,7 +71,3 @@ WKS_FILE_DEPENDS = "\
         parted-native \
         virtual/kernel \
         "
-
-# optionally source the machine specific features for multimedia etc. from
-# meta-freescale
-require conf/machine/include/qoriq-arm64.inc
