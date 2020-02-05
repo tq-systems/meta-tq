@@ -1,4 +1,8 @@
+# currently TQMaXx / TQMaXxS and TQMa8Mx have no configure option for
+# imx fork of Open TEE OS
+# remove these SOCs from COMPATIBLE_MACHINE list by using their
+# MACHINE_OVERRIDE string
 
-# COMPATIBLE_MACHINE = "(mx6|mx7|mx8qm|mx8mq)"
-# exclude mx8mq and mx8qxp, missing patches for sources
-COMPATIBLE_MACHINE = "(mx6|mx7|mx8qm)"
+COMPATIBLE_MACHINE_remove = "tqma8xx"
+COMPATIBLE_MACHINE_remove = "tqma8xxs"
+COMPATIBLE_MACHINE_remove = "tqma8mx"
