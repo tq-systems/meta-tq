@@ -8,4 +8,6 @@ RDEPENDS_${PN} = " \
     mmc-utils \
     i2c-tools \
     ${@bb.utils.contains('MACHINE_FEATURES', 'pci', ' pciutils', '', d)} \
+    minicom \
+    screen \
     "
