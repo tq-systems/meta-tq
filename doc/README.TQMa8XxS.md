@@ -63,6 +63,7 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
   * EEPROMS
 * GPU
 * USB (see known issues)
+* QSPI NOR 
 
 **TODO or not tested with new BSP**
 
@@ -77,7 +78,6 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 ## Known Issues
 
 * PCIe not working
-* QSPI under Linux not working correctly
 * USB OTG (X4): Overcurrent detection does not work (hardware limitation)
 * USB HUB: all ports signals overcurrent (hardware limitation)
 

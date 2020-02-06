@@ -53,7 +53,7 @@ This README contains some useful information for TQMa8x on MBa8x
 * LVDS0/LVDS1
 * GPIO LED and button
   * wakeup from GPIO button
-* Display Port
+* Display Port (including audio)
 * SATA
 * ADC
 * FTM (PWM)
@@ -62,14 +62,14 @@ This README contains some useful information for TQMa8x on MBa8x
 * Audio
 * DVFS
   * speed grade
+* QSPI NOR
+* VPU
 
 **TODO**
 
 * temperature grade detection
 * HDMI in
 * Cortex M4
-* QSPI
-* VPU
 
 ## Known Issues
 

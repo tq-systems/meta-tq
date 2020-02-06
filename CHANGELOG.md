@@ -7,6 +7,8 @@ Releases are named with thefollowing scheme:
 
 ### Changed
 
+* tqma8mq: linux: increase QSPI NOR frequency
+
 ### Added
 
 * tqma8xx: linux: add LPUART3 support
@@ -17,6 +19,7 @@ Releases are named with thefollowing scheme:
 * tqma8xxs: u-boot: add support for SCU PMIC info
 * tqma8xxs: u-boot: add initial USB support
 * tqma8xxs: u-boot: add support for module EEPROM readout
+* tqma8qm: linux: add displayport audio support
 * tqma8qm: linux: add audio support
 * tqma8qm: linux: add FTM PWM support
 * tqma8qm: linux: add ADC
@@ -29,11 +32,14 @@ Releases are named with thefollowing scheme:
 * tqma8qm: linux: LVDS support on both channels
 * tqma8qm: u-boot: load display port firmware during boot
 * tqma8qm: u-boot: add support for SCU PMIC info
+* tqma8mq: linux: add UARTS 2,3,4
 
 ### Fixed
 
 * remove unused patches for u-boot and linux from TQMa8QM first bringup
-
+* linux: fix QSPI NOR access for tqma8xx, tqma8xxs and tqma8qm
+* linux: fix audio for tqma8xx
+ 
 ## sumo.TQMa8.BSP.SW.0016
 
 ### Changed

@@ -57,6 +57,7 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 * ENET (GigE via Phy on MBa8Xx)
   * ENET 1
   * ENET 2
+* QSPI NOR 
 
 **TODO or not tested with new BSP**
 
@@ -73,7 +74,6 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 * USB Hub
   * HW Limitations (USB 2 / 3)
   * USB Hub erkennt unter U-Boot Stick erst bei zweiter Initialisierung
-* QSPI not working correctly under Linux
 
 ## SD-Card Boot
 
