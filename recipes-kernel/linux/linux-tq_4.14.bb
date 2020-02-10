@@ -4,9 +4,9 @@ LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
 #
-# append linux-mainline if we provide mainine kernel versions
+# append linux-mainline if we provide mainline kernel versions
 #
-PROVIDES = "virtual/kernel"
+PROVIDES += "virtual/kernel linux"
 
 inherit kernel siteinfo
 

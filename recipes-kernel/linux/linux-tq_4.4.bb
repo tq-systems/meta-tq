@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 DEPENDS += "lzop-native bc-native"
 
 #
-# append linux-mainline if we provide mainine kernel versions
+# append linux-mainline if we provide mainline kernel versions
 #
-PROVIDES = "virtual/kernel linux-mainline"
+PROVIDES += "virtual/kernel linux-mainline linux"
 
 inherit kernel
 
