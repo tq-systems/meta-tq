@@ -48,26 +48,32 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
   * Temperature Sensors
   * RTC
   * EEPROMS
+* SPI
+  * spi user space device on all CS
 * GPU
 * LED
 * GPIO
+  * Suspend / Wakeup via GPIO button
 * LVDS
 * DVFS
+  * speed grade
 * PCIe (mini-PCIe on MBa8Xx)
 * ENET (GigE via Phy on MBa8Xx)
   * ENET 1
   * ENET 2
-* QSPI NOR 
+* QSPI NOR
+* UART
+  * console
+  * LPUART3 via unused SAI pins
 
 **TODO or not tested with new BSP**
 
 * RAM configs 512 MB
 * CPU variants i.MX8DX
-* speed grade / temperature grade detection
-* Beeper
+* temperature grade
+* Beeper (PWM entries missing in CPU DT)
 * Audio
-* DP bridge
-* Suspend / Wakeup
+* DSI - DP bridge
 
 ## Known Issues
 
