@@ -60,5 +60,4 @@ do_merge_delta_config() {
 }
 addtask merge_delta_config before do_configure after do_patch
 
-COMPATIBLE_MACHINE = "(tqmls1012al-mbls1012al)"
-
+COMPATIBLE_MACHINE = "tqmls1012al"

@@ -54,4 +54,4 @@ mkdir -p ${DEPLOYDIR}
 PACKAGES += "${PN}-images"
 FILES_${PN}-images += "/boot"
 
-COMPATIBLE_MACHINE = "tqmls1012al-mbls1012al"
+COMPATIBLE_MACHINE = "tqmls1012al"

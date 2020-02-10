@@ -1,5 +1,6 @@
 # Common definitions for TQ-Group TQMLS1012AL modules
 
+MACHINEOVERRIDES =. "tqmls1012al:"
 MACHINEOVERRIDES =. "fsl-lsch2:ls1012a:"
 
 DEFAULTTUNE ?= "aarch64"
@@ -13,10 +14,9 @@ require conf/machine/include/arm/arch-arm64.inc
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_u-boot_ls1012a ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/kernel_ls1012a ?= "linux-tq"
-PREFERRED_PROVIDER_virtual/kernel ?= "linux-tq"
+PREFERRED_PROVIDER_u-boot_tqmls1012al ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader_tqmls1012al ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/kernel_tqmls1012al ?= "linux-tq"
 
 # Define the default image type
 KERNEL_IMAGETYPE ?= "Image"
