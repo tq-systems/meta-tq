@@ -172,8 +172,8 @@ S1 : 0110
 *Note:* QSPI boot stream currently not built by default. Following manual
 changes needed:
 
-set `UBOOT_CONFIG ??= "fspi"` in xxx.conf file
-set `IMXBOOT_TARGETS_tqma8xx = "flash_flexspi"` in `imx-boot_0.2.bbappend`
+set `UBOOT_CONFIG ??= "fspi"` in `conf/machine/tqma8xqp[xd]-mbpa8xx.conf`
+set `IMXBOOT_TARGETS_tqma8xx = "flash_flexspi"` in `dynamic-layers/fsl-bsp-release/recipes-bsp/imx-mkimage/imx-boot_0.2.bbappend`
 
 Find the resulting QSPI bootstream image in the deploy folder named as
 `xxx.bin-flash_flexspi`.
