@@ -58,6 +58,8 @@ _MBa8x HW Rev.020x only_
   * Button
   * HOG
 * QSPI NOR
+  * Read with 1-1-4 SDR
+  * PP / Erase with 1-1-1
 * ENET (GigE via Phy on MBa8Mx)
 * Audio
   * via codec
@@ -72,6 +74,9 @@ _MBa8x HW Rev.020x only_
 * PCIe
   * mini-PCIe on MBa8Mx
   * PCIe (Slot)
+* UART
+  * console
+  * 3 x UART on pinhead
 
 ## TODO:
 
@@ -89,6 +94,7 @@ _MBa8x HW Rev.020x only_
 * USB OTG / DRD
   * USB OTG OC not handled yet
   * no USB 3.0
+* QSPI limited to SDR (driver / chip compatibility)
 
 ## SD-Card Boot
 
