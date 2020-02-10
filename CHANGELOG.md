@@ -9,6 +9,7 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* tqma8qm / tqma8xx / tqma8xxs: update SCU firmware to patch 1.2.10
 * tqma8mq: linux: increase QSPI NOR frequency
 
 ### Added
