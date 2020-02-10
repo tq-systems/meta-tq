@@ -50,10 +50,10 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 
 * RAM configs 1GB
 * CPU variants i.MX8QXP
-* speed grade / temperature grade detection
 * e-MMC
 * SD-CARD
 * DVFS
+  * speed grade
 * CAN
 * LVDS (Tianma 1240 x 800, GPIO Backlight)
 * ENET 1/2
@@ -63,15 +63,16 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
   * EEPROMS
 * GPU
 * USB (see known issues)
+  * DRD (X4)
 * QSPI NOR 
 
 **TODO or not tested with new BSP**
 
 * RAM configs 512 MB
 * CPU variants i.MX8DX
-* speed grade / temperature grade detection
+* temperature grade detection
 * VPU
-* DP
+* DSI - DP bridge
 * M4
 * Audio
 
