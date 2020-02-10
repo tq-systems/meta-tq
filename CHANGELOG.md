@@ -1,9 +1,11 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-Releases are named with thefollowing scheme:
+Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
+
+## sumo.TQMa8.BSP.SW.0017
 
 ### Changed
 
