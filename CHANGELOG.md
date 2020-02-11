@@ -9,11 +9,16 @@ Releases are named with the following scheme:
 
 ### Changed
 
-* tqma8qm / tqma8xx / tqma8xxs: update SCU firmware to patch 1.2.10
+* tqma8qm: update SCU firmware to patch 1.2.10
+* tqma8xx: update SCU firmware to patch 1.2.10
+* tqma8xxs: update SCU firmware to patch 1.2.10
 * tqma8mq: linux: increase QSPI NOR frequency
 
 ### Added
 
+* tqma8qm: SCU: add support for PMIC info
+* tqma8xx: SCU: add support for PMIC info
+* tqma8xxs: SCU: add support for PMIC info
 * tqma8xx: linux: add LPUART3 support
 * tqma8xx: linux: enable wakeup from GPIO button
 * tqma8xx: linux: add SPI support
