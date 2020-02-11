@@ -1,10 +1,10 @@
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:${THISDIR}/${PN}:"
 
-# Need tq_imx-scfw-v1.2.7-b3357 ore greater for build 
+# Need tq_imx-scfw-v1.2.7-b3357 or newer for build
 # (use SC_FIRMWARE_VERSION_TQ in package name)
 
-SC_FIRMWARE_VERSION_TQ := "tq-TQMa8.NXP-v1.2.10.B3385.0025"
+SC_FIRMWARE_VERSION_TQ := "tq-TQMa8.NXP-v1.2.10.B3385.0026"
 
 SRC_URI_append = " \
     file://${PN}-${SC_FIRMWARE_VERSION_TQ}.tar.gz \
