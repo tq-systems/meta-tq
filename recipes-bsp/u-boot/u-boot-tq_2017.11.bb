@@ -13,6 +13,13 @@ SRCBRANCH = "TQMaxx-u-boot-v2017.11"
 SRC_URI = " \
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
     file://0001-tools-Include-U-Boot-libfdt-headers-from-their-actua.patch \
+    file://0002-scripts-dtc-add-fdt_overlay.c-and-fdt_addresses.c-to.patch \
+    file://0003-scripts-dtc-Update-to-upstream-version-v1.4.5-3-gb1a.patch \
+    file://0004-tqma6-increase-of-kernel-size-for-spi-nor.patch \
+    file://0005-pylibfdt-move-pylibfdt-to-scripts-dtc-pylibfdt-and-r.patch \
+    file://0006-pylibfdt-compile-pylibfdt-only-when-dtoc-binman-is-n.patch \
+    file://0007-host-tools-use-python2-explicitly-for-shebang.patch \
+    file://0008-pylibfdt-Add-missing-CC-and-LD-to-Makefile.patch \
 "
 
 DEPENDS += "swap-file-endianess-native tcl-native"

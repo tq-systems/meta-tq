@@ -1,0 +1,232 @@
+From 51ccf2583ebaccb64c894d686e7dfb6139bcac7c Mon Sep 17 00:00:00 2001
+From: Masahiro Yamada <yamada.masahiro@socionext.com>
+Date: Tue, 17 Oct 2017 13:42:43 +0900
+Subject: [PATCH 5/8] pylibfdt: move pylibfdt to scripts/dtc/pylibfdt and
+ refactor makefile
+
+The pylibfdt is used by dtoc (and, indirectly by binman), but there
+is no reason why it must be generated in the tools/ directory.
+
+Recently, U-Boot switched over to the bundled DTC, and the directory
+structure under scripts/dtc/ now mirrors the upstream DTC project.
+So, scripts/dtc/pylibfdt is the best location.
+
+I also rewrote the Makefile in a cleaner Kbuild style.
+
+The scripts from the upstream have been moved as follows:
+
+  lib/libfdt/pylibfdt/setup.py -> scripts/dtc/pylibfdt/setup.py
+  lib/libfdt/pylibfdt/libfdt.i -> scripts/dtc/pylibfdt/libfdt.i_shipped
+
+The .i_shipped is coped to .i during building because the .i must be
+located in the objtree when we build it out of tree.
+
+Signed-off-by: Masahiro Yamada <yamada.masahiro@socionext.com>
+(cherry picked from commit 15b97f5c5e6d88e0560c6928f3acd01c999a494d)
+---
+ Makefile                                      |  2 +-
+ scripts/Makefile.spl                          |  4 +--
+ scripts/dtc/Makefile                          |  3 ++
+ scripts/dtc/pylibfdt/.gitignore               |  4 +++
+ scripts/dtc/pylibfdt/Makefile                 | 30 +++++++++++++++++++
+ .../dtc/pylibfdt/libfdt.i_shipped             |  0
+ {lib/libfdt => scripts/dtc}/pylibfdt/setup.py |  0
+ tools/.gitignore                              |  4 ---
+ tools/Makefile                                | 30 -------------------
+ tools/binman/binman.py                        |  2 +-
+ 10 files changed, 41 insertions(+), 38 deletions(-)
+ create mode 100644 scripts/dtc/pylibfdt/.gitignore
+ create mode 100644 scripts/dtc/pylibfdt/Makefile
+ rename lib/libfdt/pylibfdt/libfdt.i => scripts/dtc/pylibfdt/libfdt.i_shipped (100%)
+ rename {lib/libfdt => scripts/dtc}/pylibfdt/setup.py (100%)
+
+diff --git a/Makefile b/Makefile
+index eb568dd91b..e04883b2f1 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1393,7 +1393,7 @@ $(timestamp_h): $(srctree)/Makefile FORCE
+ 	$(call filechk,timestamp.h)
+ 
+ checkbinman: tools
+-	@if ! ( echo 'import libfdt' | ( PYTHONPATH=tools $(PYTHON) )); then \
++	@if ! ( echo 'import libfdt' | ( PYTHONPATH=scripts/dtc/pylibfdt $(PYTHON) )); then \
+ 		echo >&2; \
+ 		echo >&2 '*** binman needs the Python libfdt library.'; \
+ 		echo >&2 '*** Either install it on your system, or try:'; \
+diff --git a/scripts/Makefile.spl b/scripts/Makefile.spl
+index 49b27ac926..065bb259d5 100644
+--- a/scripts/Makefile.spl
++++ b/scripts/Makefile.spl
+@@ -257,7 +257,7 @@ quiet_cmd_fdtgrep = FDTGREP $@
+ $(obj)/$(SPL_BIN).dtb: dts/dt.dtb $(objtree)/tools/fdtgrep FORCE
+ 	$(call if_changed,fdtgrep)
+ 
+-pythonpath = PYTHONPATH=tools
++pythonpath = PYTHONPATH=scripts/dtc/pylibfdt
+ 
+ quiet_cmd_dtocc = DTOC C  $@
+ cmd_dtocc = $(pythonpath) $(srctree)/tools/dtoc/dtoc -d $(obj)/$(SPL_BIN).dtb -o $@ platdata
+@@ -381,7 +381,7 @@ ifneq ($(cmd_files),)
+ endif
+ 
+ checkdtoc: tools
+-	@if ! ( echo 'import libfdt' | ( PYTHONPATH=tools $(PYTHON) )); then \
++	@if ! ( echo 'import libfdt' | ( PYTHONPATH=scripts/dtc/pylibfdt $(PYTHON) )); then \
+ 		echo '*** dtoc needs the Python libfdt library. Either '; \
+ 		echo '*** install it on your system, or try:'; \
+ 		echo '***'; \
+diff --git a/scripts/dtc/Makefile b/scripts/dtc/Makefile
+index 2a48022c41..f4a16ed2a5 100644
+--- a/scripts/dtc/Makefile
++++ b/scripts/dtc/Makefile
+@@ -29,3 +29,6 @@ $(obj)/dtc-lexer.lex.o: $(obj)/dtc-parser.tab.h
+ 
+ # generated files need to be cleaned explicitly
+ clean-files	:= dtc-lexer.lex.c dtc-parser.tab.c dtc-parser.tab.h
++
++# Added for U-Boot
++subdir-y += pylibfdt
+diff --git a/scripts/dtc/pylibfdt/.gitignore b/scripts/dtc/pylibfdt/.gitignore
+new file mode 100644
+index 0000000000..033f23dfdd
+--- /dev/null
++++ b/scripts/dtc/pylibfdt/.gitignore
+@@ -0,0 +1,4 @@
++/_libfdt.so
++/libfdt.py
++/libfdt.pyc
++/libfdt_wrap.c
+diff --git a/scripts/dtc/pylibfdt/Makefile b/scripts/dtc/pylibfdt/Makefile
+new file mode 100644
+index 0000000000..01d5e0ffe3
+--- /dev/null
++++ b/scripts/dtc/pylibfdt/Makefile
+@@ -0,0 +1,30 @@
++# Unfortunately setup.py below cannot handle srctree being ".." which it often
++# is. It fails with an error like:
++# Fatal error: can't create build/temp.linux-x86_64-2.7/../lib/libfdt/fdt.o:
++#    No such file or directory
++# To fix this, use an absolute path.
++LIBFDT_srcdir = $(abspath $(srctree)/$(src)/../libfdt)
++
++include $(LIBFDT_srcdir)/Makefile.libfdt
++
++# Unfortunately setup.py (or actually the Python distutil implementation) puts
++# files into the same directory as the .i file. We cannot touch the source
++# directory, so we "ship" .i file into the objtree.
++PYLIBFDT_srcs = $(addprefix $(LIBFDT_srcdir)/,$(LIBFDT_SRCS)) \
++		$(obj)/libfdt.i
++
++quiet_cmd_pymod = PYMOD   $@
++      cmd_pymod = unset CC; unset CROSS_COMPILE; unset CFLAGS;\
++		LDFLAGS="$(HOSTLDFLAGS)" \
++		VERSION="u-boot-$(UBOOTVERSION)" \
++		CPPFLAGS="$(HOSTCFLAGS) -I$(LIBFDT_srcdir)" OBJDIR=$(obj) \
++		SOURCES="$(PYLIBFDT_srcs)" \
++		SWIG_OPTS="-I$(LIBFDT_srcdir) -I$(LIBFDT_srcdir)/.." \
++		$(PYTHON) $< --quiet build_ext --inplace
++
++$(obj)/_libfdt.so: $(src)/setup.py $(PYLIBFDT_srcs) FORCE
++	$(call if_changed,pymod)
++
++always += _libfdt.so
++
++clean-files += libfdt.i _libfdt.so libfdt.py libfdt_wrap.c
+diff --git a/lib/libfdt/pylibfdt/libfdt.i b/scripts/dtc/pylibfdt/libfdt.i_shipped
+similarity index 100%
+rename from lib/libfdt/pylibfdt/libfdt.i
+rename to scripts/dtc/pylibfdt/libfdt.i_shipped
+diff --git a/lib/libfdt/pylibfdt/setup.py b/scripts/dtc/pylibfdt/setup.py
+similarity index 100%
+rename from lib/libfdt/pylibfdt/setup.py
+rename to scripts/dtc/pylibfdt/setup.py
+diff --git a/tools/.gitignore b/tools/.gitignore
+index 5293d44697..6a487d2202 100644
+--- a/tools/.gitignore
++++ b/tools/.gitignore
+@@ -1,4 +1,3 @@
+-/_libfdt.so
+ /atmel_pmecc_params
+ /bin2header
+ /bmp_logo
+@@ -17,9 +16,6 @@
+ /img2srec
+ /kwboot
+ /lib/
+-/libfdt.py
+-/libfdt.pyc
+-/libfdt_wrap.c
+ /mips-relocs
+ /mkenvimage
+ /mkexynosspl
+diff --git a/tools/Makefile b/tools/Makefile
+index b5f4008892..85c8ac0f85 100644
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -63,15 +63,6 @@ LIBFDT_CSRCS := fdt.c fdt_ro.c fdt_wip.c fdt_sw.c fdt_rw.c fdt_strerror.c  \
+ 			fdt_empty_tree.c fdt_addresses.c fdt_overlay.c \
+ 			fdt_region.c
+ 
+-# Unfortunately setup.py below cannot handle srctree being ".." which it often
+-# is. It fails with an error like:
+-# Fatal error: can't create build/temp.linux-x86_64-2.7/../lib/libfdt/fdt.o:
+-#    No such file or directory
+-# To fix this, use an absolute path.
+-libfdt_tree := $(shell readlink -f $(srctree)/lib/libfdt)
+-
+-LIBFDT_SRCS := $(addprefix $(libfdt_tree)/, $(LIBFDT_CSRCS))
+-LIBFDT_SWIG := $(addprefix $(libfdt_tree)/, pylibfdt/libfdt.i)
+ LIBFDT_OBJS := $(addprefix lib/libfdt/, $(patsubst %.c, %.o, $(LIBFDT_CSRCS)))
+ 
+ RSA_OBJS-$(CONFIG_FIT_SIGNATURE) := $(addprefix lib/rsa/, \
+@@ -123,23 +114,6 @@ mkimage-objs   := $(dumpimage-mkimage-objs) mkimage.o
+ fit_info-objs   := $(dumpimage-mkimage-objs) fit_info.o
+ fit_check_sign-objs   := $(dumpimage-mkimage-objs) fit_check_sign.o
+ 
+-# Unfortunately setup.py (or actually the Python distutil implementation)
+-# puts files into the same directory as the .i file. We cannot touch the source
+-# directory, so we copy the .i file into the tools/ build subdirectory before
+-# calling setup. This directory is safe to write to. This ensures that we get
+-# all three files in $(obj)/tools: _libfdt.so, libfdt.py and libfdt_wrap.c
+-# The latter is a temporary file which we could actually remove.
+-tools/_libfdt.so: $(LIBFDT_SRCS) $(LIBFDT_SWIG)
+-	$(Q)cp $(LIBFDT_SWIG) tools/.
+-	$(Q)unset CC; \
+-	unset CROSS_COMPILE; \
+-	LDFLAGS="$(HOSTLDFLAGS)" CFLAGS= VERSION="u-boot-$(UBOOTVERSION)" \
+-		CPPFLAGS="$(_hostc_flags)" OBJDIR=tools \
+-		SOURCES="$(LIBFDT_SRCS) tools/libfdt.i" \
+-		SWIG_OPTS="-I$(srctree)/lib/libfdt -I$(srctree)/lib" \
+-		$(PYTHON) $(libfdt_tree)/pylibfdt/setup.py --quiet build_ext \
+-			--build-lib tools
+-
+ ifneq ($(CONFIG_MX23)$(CONFIG_MX28),)
+ # Add CONFIG_MXS into host CFLAGS, so we can check whether or not register
+ # the mxsimage support within tools/mxsimage.c .
+@@ -231,10 +205,6 @@ clean-dirs := lib common
+ 
+ always := $(hostprogs-y)
+ 
+-# Build a libfdt Python module if swig is available
+-# Use 'sudo apt-get install swig libpython-dev' to enable this
+-always += $(if $(shell which swig 2> /dev/null),_libfdt.so)
+-
+ # Generated LCD/video logo
+ LOGO_H = $(objtree)/include/bmp_logo.h
+ LOGO_DATA_H = $(objtree)/include/bmp_logo_data.h
+diff --git a/tools/binman/binman.py b/tools/binman/binman.py
+index 09dc36a3f7..e75a59d951 100755
+--- a/tools/binman/binman.py
++++ b/tools/binman/binman.py
+@@ -21,7 +21,7 @@ for dirname in ['../patman', '../dtoc', '..']:
+     sys.path.insert(0, os.path.join(our_path, dirname))
+ 
+ # Bring in the libfdt module
+-sys.path.insert(0, 'tools')
++sys.path.insert(0, 'scripts/dtc/pylibfdt')
+ 
+ # Also allow entry-type modules to be brought in from the etype directory.
+ sys.path.insert(0, os.path.join(our_path, 'etype'))
+-- 
+2.17.1
+

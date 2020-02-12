@@ -1,0 +1,36 @@
+From cb6ecb4969d629725589057708f53c9f3a8c3b9d Mon Sep 17 00:00:00 2001
+From: Rob Herring <robh@kernel.org>
+Date: Tue, 17 Oct 2017 13:42:41 +0900
+Subject: [PATCH 2/8] scripts/dtc: add fdt_overlay.c and fdt_addresses.c to
+ sync script
+
+libfdt has gained some new files. We need to include them in the
+kernel's copy.
+
+Reported-by: Kyle Yan <kyan@codeaurora.org>
+Signed-off-by: Rob Herring <robh@kernel.org>
+Signed-off-by: Masahiro Yamada <yamada.masahiro@socionext.com>
+
+[ Linux commit: 4322323058f010274564006d61945187a15b6361 ]
+---
+ scripts/dtc/update-dtc-source.sh | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/scripts/dtc/update-dtc-source.sh b/scripts/dtc/update-dtc-source.sh
+index b8ebcc6722..f3e5c59605 100755
+--- a/scripts/dtc/update-dtc-source.sh
++++ b/scripts/dtc/update-dtc-source.sh
+@@ -34,7 +34,9 @@ DTC_SOURCE="checks.c data.c dtc.c dtc.h flattree.c fstree.c livetree.c srcpos.c
+ 		srcpos.h treesource.c util.c util.h version_gen.h Makefile.dtc \
+ 		dtc-lexer.l dtc-parser.y"
+ DTC_GENERATED="dtc-lexer.lex.c dtc-parser.tab.c dtc-parser.tab.h"
+-LIBFDT_SOURCE="Makefile.libfdt fdt.c fdt.h fdt_empty_tree.c fdt_ro.c fdt_rw.c fdt_strerror.c fdt_sw.c fdt_wip.c libfdt.h libfdt_env.h libfdt_internal.h"
++LIBFDT_SOURCE="Makefile.libfdt fdt.c fdt.h fdt_addresses.c fdt_empty_tree.c \
++		fdt_overlay.c fdt_ro.c fdt_rw.c fdt_strerror.c fdt_sw.c \
++		fdt_wip.c libfdt.h libfdt_env.h libfdt_internal.h"
+ 
+ get_last_dtc_version() {
+ 	git log --oneline scripts/dtc/ | grep 'upstream' | head -1 | sed -e 's/^.* \(.*\)/\1/'
+-- 
+2.17.1
+

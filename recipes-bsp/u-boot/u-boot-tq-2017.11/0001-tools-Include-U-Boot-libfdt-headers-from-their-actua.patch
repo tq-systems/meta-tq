@@ -1,7 +1,8 @@
-From f4be4076935bc70c749906fae3b8572f08c3621d Mon Sep 17 00:00:00 2001
+From 82416f7b6cc599adabdd1589d01fb7b6c8012ee3 Mon Sep 17 00:00:00 2001
 From: Paul Kocialkowski <contact@paulk.fr>
 Date: Fri, 2 Mar 2018 23:13:42 +0100
-Subject: [PATCH] tools: Include U-Boot libfdt headers from their actual path
+Subject: [PATCH 1/8] tools: Include U-Boot libfdt headers from their actual
+ path
 
 There are no headers for libfdt in lib/libfdt, as they are instead
 located in scripts/dtc/libfdt. Specifying lib/libfdt for headers
@@ -27,3 +28,6 @@ index 5db2a54225..b5f4008892 100644
  		-I$(srctree)/tools \
  		-DUSE_HOSTCC \
  		-D__KERNEL_STRICT_NAMES \
+-- 
+2.17.1
+
