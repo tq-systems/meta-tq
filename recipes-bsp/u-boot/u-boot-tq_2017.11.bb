@@ -18,6 +18,7 @@ SRC_URI = " \
 DEPENDS += "swap-file-endianess-native tcl-native"
 
 DEPENDS_append = " dtc-native bc-native"
+DEPENDS += "flex-native bison-native"
 
 S = "${WORKDIR}/git"
 
