@@ -1,36 +1,35 @@
-From 70dc75d3da86dea8b6ebdaedfa76e625a076678e Mon Sep 17 00:00:00 2001
+From a5aa9b294c66dda696e524c72c1597fb69a9ac1e Mon Sep 17 00:00:00 2001
 From: Chunrong Guo <chunrong.guo@nxp.com>
-Date: Wed, 31 Oct 2018 17:56:24 +0800
+Date: Tue, 16 Apr 2019 10:55:42 +0200
 Subject: [PATCH] glibc: support e5500 and e6500
 
-Signed-off-by: BJ DevOps Team <bjdevops@NXP1.onmicrosoft.com>
+Signed-off-by: C.r. Guo <nxa13725@lsv07005.swis.us-cdc01.nxp.com>
 ---
- sysdeps/powerpc/powerpc64/be/e5500/Implies         |   2 +
- sysdeps/powerpc/powerpc64/be/e5500/fpu/e_sqrt.c    | 137 +++++++++++++++++++++
- sysdeps/powerpc/powerpc64/be/e5500/fpu/e_sqrtf.c   | 103 ++++++++++++++++
- .../powerpc/powerpc64/be/e5500/multiarch/Implies   |   1 +
- sysdeps/powerpc/powerpc64/be/e6500/Implies         |   2 +
- sysdeps/powerpc/powerpc64/be/e6500/fpu/e_sqrt.c    | 137 +++++++++++++++++++++
- sysdeps/powerpc/powerpc64/be/e6500/fpu/e_sqrtf.c   | 103 ++++++++++++++++
- .../powerpc/powerpc64/be/e6500/multiarch/Implies   |   1 +
- 8 files changed, 486 insertions(+)
+ sysdeps/powerpc/powerpc64/be/e5500/Implies       |   1 +
+ sysdeps/powerpc/powerpc64/be/e5500/fpu/e_sqrt.c  | 137 ++++++++++++++++++++++
+ sysdeps/powerpc/powerpc64/be/e5500/fpu/e_sqrtf.c | 103 ++++++++++++++++
+ sysdeps/powerpc/powerpc64/be/e6500/Implies       |   1 +
+ sysdeps/powerpc/powerpc64/be/e6500/fpu/e_sqrt.c  | 143 +++++++++++++++++++++++
+ sysdeps/powerpc/powerpc64/be/e6500/fpu/e_sqrtf.c | 110 +++++++++++++++++
+ sysdeps/powerpc/powerpc64/e5500/Implies          |   1 +
+ sysdeps/powerpc/powerpc64/e6500/Implies          |   1 +
+ 8 files changed, 497 insertions(+)
  create mode 100644 sysdeps/powerpc/powerpc64/be/e5500/Implies
  create mode 100644 sysdeps/powerpc/powerpc64/be/e5500/fpu/e_sqrt.c
  create mode 100644 sysdeps/powerpc/powerpc64/be/e5500/fpu/e_sqrtf.c
- create mode 100644 sysdeps/powerpc/powerpc64/be/e5500/multiarch/Implies
  create mode 100644 sysdeps/powerpc/powerpc64/be/e6500/Implies
  create mode 100644 sysdeps/powerpc/powerpc64/be/e6500/fpu/e_sqrt.c
  create mode 100644 sysdeps/powerpc/powerpc64/be/e6500/fpu/e_sqrtf.c
- create mode 100644 sysdeps/powerpc/powerpc64/be/e6500/multiarch/Implies
+ create mode 100644 sysdeps/powerpc/powerpc64/e5500/Implies
+ create mode 100644 sysdeps/powerpc/powerpc64/e6500/Implies
 
 diff --git a/sysdeps/powerpc/powerpc64/be/e5500/Implies b/sysdeps/powerpc/powerpc64/be/e5500/Implies
 new file mode 100644
-index 0000000..a795586
+index 0000000..187b6f3
 --- /dev/null
 +++ b/sysdeps/powerpc/powerpc64/be/e5500/Implies
-@@ -0,0 +1,2 @@
+@@ -0,0 +1 @@
 +powerpc/powerpc64/e5500
-+
 diff --git a/sysdeps/powerpc/powerpc64/be/e5500/fpu/e_sqrt.c b/sysdeps/powerpc/powerpc64/be/e5500/fpu/e_sqrt.c
 new file mode 100644
 index 0000000..13a8197
@@ -283,27 +282,19 @@ index 0000000..fae2d81
 +}
 +
 +strong_alias (__ieee754_sqrtf, __sqrtf_finite)
-diff --git a/sysdeps/powerpc/powerpc64/be/e5500/multiarch/Implies b/sysdeps/powerpc/powerpc64/be/e5500/multiarch/Implies
-new file mode 100644
-index 0000000..30edcf7
---- /dev/null
-+++ b/sysdeps/powerpc/powerpc64/be/e5500/multiarch/Implies
-@@ -0,0 +1 @@
-+powerpc/powerpc64/multiarch
 diff --git a/sysdeps/powerpc/powerpc64/be/e6500/Implies b/sysdeps/powerpc/powerpc64/be/e6500/Implies
 new file mode 100644
-index 0000000..9b8fc07
+index 0000000..2319b84
 --- /dev/null
 +++ b/sysdeps/powerpc/powerpc64/be/e6500/Implies
-@@ -0,0 +1,2 @@
+@@ -0,0 +1 @@
 +powerpc/powerpc64/e6500
-+
 diff --git a/sysdeps/powerpc/powerpc64/be/e6500/fpu/e_sqrt.c b/sysdeps/powerpc/powerpc64/be/e6500/fpu/e_sqrt.c
 new file mode 100644
-index 0000000..13a8197
+index 0000000..7038a70
 --- /dev/null
 +++ b/sysdeps/powerpc/powerpc64/be/e6500/fpu/e_sqrt.c
-@@ -0,0 +1,137 @@
+@@ -0,0 +1,143 @@
 +/* Double-precision floating point square root.
 +   Copyright (C) 2010 Free Software Foundation, Inc.
 +   This file is part of the GNU C Library.
@@ -345,8 +336,14 @@ index 0000000..13a8197
 +   We find the actual square root and half of its reciprocal
 +   simultaneously.  */
 +
++#ifdef __STDC__
 +double
 +__slow_ieee754_sqrt (double b)
++#else
++double
++__slow_ieee754_sqrt (b)
++     double b;
++#endif
 +{
 +  if (__builtin_expect (b > 0, 1))
 +    {
@@ -437,16 +434,16 @@ index 0000000..13a8197
 +double
 +__ieee754_sqrt (double x)
 +{
-+  return __slow_ieee754_sqrt (x);
++   return __slow_ieee754_sqrt (x);
 +}
 +
 +strong_alias (__ieee754_sqrt, __sqrt_finite)
 diff --git a/sysdeps/powerpc/powerpc64/be/e6500/fpu/e_sqrtf.c b/sysdeps/powerpc/powerpc64/be/e6500/fpu/e_sqrtf.c
 new file mode 100644
-index 0000000..fae2d81
+index 0000000..10de1f0
 --- /dev/null
 +++ b/sysdeps/powerpc/powerpc64/be/e6500/fpu/e_sqrtf.c
-@@ -0,0 +1,103 @@
+@@ -0,0 +1,110 @@
 +/* Single-precision floating point square root.
 +   Copyright (C) 2010 Free Software Foundation, Inc.
 +   This file is part of the GNU C Library.
@@ -486,8 +483,14 @@ index 0000000..fae2d81
 +   We find the reciprocal square root and use that to compute the actual
 +   square root.  */
 +
++#ifdef __STDC__
 +float
 +__slow_ieee754_sqrtf (float b)
++#else
++float
++__slow_ieee754_sqrtf (b)
++     float b;
++#endif
 +{
 +  if (__builtin_expect (b > 0, 1))
 +    {
@@ -542,6 +545,7 @@ index 0000000..fae2d81
 +    }
 +  return f_washf (b);
 +}
++
 +#undef __ieee754_sqrtf
 +float
 +__ieee754_sqrtf (float x)
@@ -550,12 +554,20 @@ index 0000000..fae2d81
 +}
 +
 +strong_alias (__ieee754_sqrtf, __sqrtf_finite)
-diff --git a/sysdeps/powerpc/powerpc64/be/e6500/multiarch/Implies b/sysdeps/powerpc/powerpc64/be/e6500/multiarch/Implies
+diff --git a/sysdeps/powerpc/powerpc64/e5500/Implies b/sysdeps/powerpc/powerpc64/e5500/Implies
 new file mode 100644
-index 0000000..30edcf7
+index 0000000..187b6f3
 --- /dev/null
-+++ b/sysdeps/powerpc/powerpc64/be/e6500/multiarch/Implies
++++ b/sysdeps/powerpc/powerpc64/e5500/Implies
 @@ -0,0 +1 @@
-+powerpc/powerpc64/multiarch
++powerpc/powerpc64/e5500
+diff --git a/sysdeps/powerpc/powerpc64/e6500/Implies b/sysdeps/powerpc/powerpc64/e6500/Implies
+new file mode 100644
+index 0000000..2319b84
+--- /dev/null
++++ b/sysdeps/powerpc/powerpc64/e6500/Implies
+@@ -0,0 +1 @@
++powerpc/powerpc64/e6500
 -- 
-1.8.3.1
+2.7.4
+
