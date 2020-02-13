@@ -85,6 +85,7 @@ This README contains some useful information for TQMa8x on MBa8x
   are reserved for i2c_rpmsgbus)
 * can bitrate limited to 125000 (in can0/can1.service), no CAN FD
   due to hardware limitations in module rev.010x
+* environment from QSPI fails sometimes
 
 ## SD-Card Boot
 
@@ -155,7 +156,7 @@ setexpr bsz $filesize + 1ff
 setexpr bsz $bsz / 200
 printenv bsz
 mmc dev 0
-mmc write 40 $bsz
+mmc write ${loadaddr} 40 $bsz
 ```
 
 ### Update components via U-Boot
