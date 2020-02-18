@@ -35,7 +35,9 @@ _MBa8x HW Rev.020x only_
 * ENET (GigE via Phy on MBa8Mx)
 * Bootdevices: e-MMC / SD-Card
 * HDMI (fixed resolution)
-* QSPI NOR (4 byte adressing, SPI mode)
+* QSPI NOR
+  * 4 byte adressing, SPI mode
+  * see Known Issues
 * USB Host (USB1 via hub 2.0 and 3.0)
 * USB Dual Role (USB0, 2.0 host only - hard coded in driver)
   * Cable Detect / ID
@@ -60,6 +62,7 @@ _MBa8x HW Rev.020x only_
 * QSPI NOR
   * Read with 1-1-4 SDR
   * PP / Erase with 1-1-1
+  * see Known Issues
 * ENET (GigE via Phy on MBa8Mx)
 * Audio
   * via codec
@@ -77,6 +80,8 @@ _MBa8x HW Rev.020x only_
 * UART
   * console
   * 3 x UART on pinhead
+* SPI
+  * via spidev in userland
 
 ## TODO:
 
@@ -86,7 +91,7 @@ _MBa8x HW Rev.020x only_
 * MIPI CSI
 * MIKRO Bus
 * SIM
-* PCIe only tested with Gen 1
+* PCIe Slot only tested with Gen 1 (miniPCIe with Gen2)
 
 ## Known Issues
 
@@ -95,6 +100,7 @@ _MBa8x HW Rev.020x only_
   * USB OTG OC not handled yet
   * no USB 3.0
 * QSPI limited to SDR (driver / chip compatibility)
+* QSPI NOR has bit errors for read / write (under investigation)
 
 ## SD-Card Boot
 
