@@ -148,7 +148,7 @@ setexpr bsz $filesize + 1ff
 setexpr bsz $bsz / 200
 printenv bsz
 mmc dev 0
-mmc write 40 $bsz
+mmc write ${loadaddr} 40 ${bsz}
 ```
 
 ### Update components via U-Boot
