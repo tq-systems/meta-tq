@@ -101,6 +101,7 @@ _MBa8x HW Rev.020x only_
   * no USB 3.0
 * QSPI limited to SDR (driver / chip compatibility)
 * QSPI NOR has bit errors for read / write (under investigation)
+* Mikrobus Modul RTC5 on ecspi1 don't answer
 
 ## SD-Card Boot
 

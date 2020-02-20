@@ -64,12 +64,15 @@ This README contains some useful information for TQMa8x on MBa8x
   * speed grade
 * QSPI NOR
 * VPU
+* Mikrobus (Module RTC5)
+* PWM
 
 **TODO**
 
 * temperature grade detection
 * HDMI in
 * Cortex M4
+
 
 ## Known Issues
 
@@ -86,6 +89,8 @@ This README contains some useful information for TQMa8x on MBa8x
 * can bitrate limited to 125000 (in can0/can1.service), no CAN FD
   due to hardware limitations in module rev.010x
 * environment from QSPI fails sometimes
+* VPU codecs not avaiable [TQMAACHTX-103]
+* PWM only works after the second enable command (echo 1 > /pwmX/enable)
 
 ## SD-Card Boot
 

@@ -5,6 +5,13 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## Next release
+
+### Added
+
+* tqma8qm: linux: add support for PWM
+* tqma8qm: linux: add support for mikrobus module RTC5
+
 ## sumo.TQMa8.BSP.SW.0017
 
 ### Changed
