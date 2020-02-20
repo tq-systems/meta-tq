@@ -18,6 +18,7 @@ SRC_URI_mx8 = "\
   file://tqma8x-audio-support.cfg \
   file://tqma8x-usb-special-drivers.cfg \
   file://tqma8x-adc-hwmon-support.cfg \
+  file://tqma8x-mikrobus-rtc5.cfg \
 "
 
 ################
