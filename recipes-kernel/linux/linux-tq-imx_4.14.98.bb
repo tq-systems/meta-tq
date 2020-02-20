@@ -6,7 +6,7 @@ SRC_URI = "\
 "
 
 SRCBRANCH = "TQMaxx-imx_4.14.98_2.2.0"
-SRCREV = "f684b85325945e07cd2921e40112d016e4f0f96a"
+SRCREV = "f085819b2d84464b21a772ef8a8131a54b249bff"
 
 SRC_URI_mx8 = "\
   ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
