@@ -7,6 +7,7 @@ BOARD_DEVICETREE_FILES = "\
 	fsl-imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb \
 	fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01.dtb \
 	fsl-imx8mq-tqma8mq-mba8mx-dcss-lvds-g150xne-l01-18bit.dtb \
+	fsl-imx8mq-tqma8mq-mba8mx-mikrobus-rtc5.dtb \
 	"
 
 KERNEL_DEVICETREE = ""
