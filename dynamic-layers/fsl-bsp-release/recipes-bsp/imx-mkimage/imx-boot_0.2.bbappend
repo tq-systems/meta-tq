@@ -1,16 +1,3 @@
-
-# declare bootstream to be built. See target names in soc.mak provided by
-# imx-mkimage for target processor
-
-IMXBOOT_TARGETS_tqma8x = "flash_b0"
-IMXBOOT_TARGETS_tqma8xx = "flash"
-IMXBOOT_TARGETS_tqma8xxs = "flash"
-
-IMXBOOT_TARGETS_mx8qxpa0 = "flash_a0 flash_dcd_a0"
-IMXBOOT_TARGETS_mx8qxp = "flash"
-
-IMXBOOT_TARGETS_mx8qm = "flash_b0"
-
 # DCD_NAME is optional - provide RAM DCD name if RAM bringup not implemented in SCFW
 
 DEPENDS += " \
