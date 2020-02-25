@@ -30,6 +30,8 @@ UBOOT_SUFFIX = "bin"
 # for sdcard image rule
 BOOT_SPACE = "65536"
 IMAGE_BOOTLOADER = "imx-boot"
+# for sdcard + wic image rule
+IMX_BOOT_SEEK = "32"
 
 # Image Options
 #
@@ -43,10 +45,7 @@ IMAGE_INSTALL_append = " kernel-modules"
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
-# for sdcard image rule
-IMX_BOOT_SEEK = "32"
-
-WKS_FILE ?= "tqma8x-b0-sdimg.wks"
+WKS_FILE ?= "tqma8-sdimg.wks.in"
 
 WKS_FILE_DEPENDS = "\
 	mtools-native \

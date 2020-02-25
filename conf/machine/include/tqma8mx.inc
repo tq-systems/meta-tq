@@ -34,13 +34,15 @@ IMAGE_BOOTFILES += "imx8mq_m4_TCM_hello_world.bin imx8mq_m4_TCM_rpmsg_lite_pingp
 # Set imx-mkimage boot target
 IMXBOOT_TARGETS = "flash_evk flash_evk_no_hdmi"
 
-IMAGE_BOOTLOADER = "imx-boot"
-
-BOOT_SPACE = "65536"
-
 LOADADDR = ""
 UBOOT_SUFFIX = "bin"
 UBOOT_MAKE_TARGET = ""
+
+# for sdcard image rule
+BOOT_SPACE = "65536"
+IMAGE_BOOTLOADER = "imx-boot"
+
+# for sdcard + wic image rule
 IMX_BOOT_SEEK = "33"
 
 # TODO:
@@ -63,7 +65,7 @@ IMAGE_INSTALL_append = " kernel-modules"
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
-WKS_FILE ?= "tqma8mx-sdimg.wks"
+WKS_FILE ?= "tqma8-sdimg.wks.in"
 
 WKS_FILE_DEPENDS = "\
 	mtools-native \
