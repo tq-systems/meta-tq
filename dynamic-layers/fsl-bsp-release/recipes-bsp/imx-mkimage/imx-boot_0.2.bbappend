@@ -20,44 +20,6 @@ do_compile_prepend () {
 ##
 do_deploy_append() {
     cd ${DEPLOYDIR}
-
-    if [ "${SOC_TARGET}" = "iMX8QX" ]; then
-        case ${MACHINE} in
-            tqma8xq* |\
-            tqma8xd*)
-                bbnote "IMAGE_IMXBOOT_TARGET=${IMAGE_IMXBOOT_TARGET}"
-                ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} iMX8-b0-bootstream.bin
-                ;;
-            *)
-                break
-                ;;
-        esac
-    fi
-
-    if [ "${SOC_TARGET}" = "iMX8M" ]; then
-       case ${MACHINE} in
-            tqma8mx* |\
-            tqma8mq*)
-                bbnote "IMAGE_IMXBOOT_TARGET=${IMAGE_IMXBOOT_TARGET}"
-                ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${SOC_TARGET}-bootstream.bin
-                ;;
-            *)
-                break
-                ;;
-        esac
-    fi
-
-    if [ "${SOC_TARGET}" = "iMX8QM" ]; then
-       case ${MACHINE} in
-            tqma8qm*)
-                bbnote "IMAGE_IMXBOOT_TARGET=${IMAGE_IMXBOOT_TARGET}"
-                ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} iMX8-b0-bootstream.bin
-                ;;
-            *)
-                break
-                ;;
-        esac
-    fi
-
+    ln -sf ${BOOT_CONFIG_MACHINE}-${IMAGE_IMXBOOT_TARGET} ${BOOT_NAME}
     cd -
 }
