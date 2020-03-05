@@ -15,7 +15,7 @@ KERNEL_DEVICETREE = ""
 require conf/machine/include/tqma8-common.inc
 
 # Set Serial console
-SERIAL_CONSOLES = "115200;ttymxc0"
+SERIAL_CONSOLES = "115200;ttymxc2"
 
 # Files are needed in IMAGE_BOOT_FILES because /boot is on an extra partition.
 # If those files should be installed under /boot inside the rootfs, you can
