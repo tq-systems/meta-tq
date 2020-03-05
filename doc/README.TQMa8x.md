@@ -139,7 +139,14 @@ SW1 : 001000
 
 ### Bootable e-MMC
 
-write *.wic image to e-MMC (offset 0)
+Write *.wic image to e-MMC (offset 0)
+
+Example for Linux:
+
+Boot from SD-Card, copy wic file to USB stick and write *.wic image at offset 0
+to e-MMC.
+
+`sudo dd if=<*.wic> of=/dev/mmcblk0 bs=4M conv=fsync`
 
 Write bootstream only:
 
