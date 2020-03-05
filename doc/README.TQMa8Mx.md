@@ -24,6 +24,7 @@ _MBa8x HW Rev.020x only_
 * CPU variants i.MX8MQ / i.MX8MQL
 * Fuses
 * speed grade / temperature grade detection
+* UART (console on UART3)
 * GPIO
   * LED
   * Button
@@ -78,10 +79,11 @@ _MBa8x HW Rev.020x only_
   * mini-PCIe on MBa8Mx
   * PCIe (Slot)
 * UART
-  * console
-  * 3 x UART on pinhead
+  * console on UART3
+  * 2 x UART via pin head or X15
+  * 1 x UART via mikroBUS
 * SPI
-  * via spidev in userland
+  * 2 x via spidev in userland
 
 ## TODO:
 
@@ -100,7 +102,6 @@ _MBa8x HW Rev.020x only_
   * USB OTG OC not handled yet
   * no USB 3.0
 * QSPI limited to SDR (driver / chip compatibility)
-* QSPI NOR has bit errors for read / write (under investigation)
 * Mikrobus Modul RTC5 on ecspi1 don't answer
 
 ## SD-Card Boot
@@ -109,9 +110,10 @@ _MBa8x HW Rev.020x only_
 
 S6 : 11010111  
 S5 : 11111111  
-S7 : 1111  
-S8 : 0010  
-S9 : 0101  
+SW   1234  
+S7 : 1110 (UART1/2 -> X17, UART3 -> X16)
+S8 : 0010 (SD-Card -> X8)  
+S9 : 0100 (Boot Mode 10b -> Internal Boot, DSI -> LVDS bridge)  
 S10: 0000  
 
 ### Bootable SD-Card
@@ -147,9 +149,10 @@ provide the file via TFTP and update via `run update_kernel`
 
 S6 : 11111011  
 S5 : 11111111  
-S7 : 1111  
-S8 : 0010  
-S9 : 0101  
+SW   1234  
+S7 : 1110 (UART1/2 -> X17, UART3 -> X16)  
+S8 : 0010 (SD-Card -> X8)  
+S9 : 0100 (Boot Mode 10b -> Internal Boot, DSI -> LVDS bridge)  
 S10: 0000  
 
 ### Bootable e-MMC
