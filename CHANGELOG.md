@@ -10,7 +10,30 @@ Releases are named with the following scheme:
 ### Added
 
 * tqma8qm: linux: add support for PWM
-* tqma8qm: linux: add support for mikrobus module RTC5
+* tqma8qm: linux: add support for mikroBUS module RTC5
+
+### Changed
+
+* tqma8mx: machine config: change console UART1 -> UART3
+* tqma8mx: linux: change console UART1 -> UART3
+* tqma8mx: u-boot: change console UART1 -> UART3
+* tqma8mx: linux: QSPI optimized pad settings
+* linux: backport some ASoC patches
+* tqma8mx: unified wic config
+* tqma8x: unified wic config
+* tqma8xx: unified wic config
+* tqma8xxs: unified wic config
+* tqma8mx: u-boot: QSPI optimized pad settings
+* tqma8mx: u-boot: \[cosmetic\] board header cleanup
+
+### Fixed
+
+* linux: ressource leak fixes for imx-tlv320aic32x4
+* tqma8mx: u-boot: QSPI driver 4 byte addressing
+* tqma8mx: u-boot: WDOG_B pin as hog pin
+* tqma8x: u-boot: fix earlycon in kernel command line
+* tqma8xx: u-boot: fix earlycon in kernel command line
+* tqma8xxs: u-boot: fix earlycon in kernel command line
 
 ## sumo.TQMa8.BSP.SW.0017
 
