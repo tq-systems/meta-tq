@@ -75,6 +75,7 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 * DSI - DP bridge
 * M4
 * Audio
+* SPI
 
 ## Known Issues
 
