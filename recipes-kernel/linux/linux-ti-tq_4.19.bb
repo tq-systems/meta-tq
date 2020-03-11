@@ -18,10 +18,6 @@ SRC_URI = " \
 SRCBRANCH = "TQMa57xx-linux-v4.19.94-rt39-ti2019.06-rt"
 SRCREV = "6b9a8c843f219022a6e443b7cd601e30759f5b12"
 
-# we still need this, since meta-ti sets KERNEL_IMAGETYPES to contain uImage
-# and forces building this ancient image which forces us to provide this var
-KERNEL_EXTRA_ARGS += "LOADADDR=${UBOOT_ENTRYPOINT}"
-
 COMPATIBLE_MACHINE = "tqma57xx"
 
 S = "${WORKDIR}/git"

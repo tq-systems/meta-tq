@@ -31,6 +31,10 @@ UBOOT_ENTRYPOINT = "0x80008000"
 UBOOT_LOADADDRESS = "0x80008000"
 UBOOT_SUFFIX ?= "img"
 
+# we still need this, since meta-ti sets KERNEL_IMAGETYPES to contain uImage
+# and forces building this ancient image which forces us to provide this var
+KERNEL_EXTRA_ARGS_prepend = "LOADADDR=${UBOOT_ENTRYPOINT} "
+
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
