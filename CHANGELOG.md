@@ -5,6 +5,19 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## warrior.TQMa57xx.BSP.SW.0009
+
+### Changed
+
+* tqma57xx: update default kernel to TI 2019.06 (based on 4.19+rt)
+* tqma57xx: add alternative kernel mainline 4.19+rt
+* tqma57xx: update u-boot to unify tqma57xx variant configurations
+* tqma57xx: rename MACHINE tqma574x-ecc-mba57xx to tqma57xx-ecc-mba57xx.conf
+  * Makes the MACHINE name match the u-boot defconfig name
+  * The renaming does not imply any functional changes, only TQMa5748 has
+    ECC memory
+* tqma\[6,6ul,6ull,7\]: update u-boot to enable qspi boot
+
 ## warrior.TQMa6x.BSP.SW.0115
 
 ## Changed
