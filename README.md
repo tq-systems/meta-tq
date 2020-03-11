@@ -148,7 +148,7 @@ Support for the following machines is contained in this version:
 [y]	LS1088A			TQMLS1088A		MBLS10xxA	tqmls1088a-mbls10xxa (TQMLS1088a / MBLS10xxa)
 [y]	LS102[0,1]A		TQMLS102[0,1]A		MBLS102xA	tqmls102xa-mbls102xa (TQMLS102[0,1]A HW REV.020x / MBLS102xA HW REV.020x)
 [y]	AM57[1,2,4]8		TQMa57[1,2,4]8		MBa57xx		tqma57xx-mba57xx (TQMa57[1,2,4]8 / MBa57xx)
-[y]	AM5748			TQMa5748 ECC		MBa57xx		tqma574x-ecc-mba57xx (TQMa5748 with ECC / MBa57xx)
+[y]	AM5748			TQMa5748 ECC		MBa57xx		tqma57xx-ecc-mba57xx (TQMa5748 with ECC / MBa57xx)
 [p]	T1022			TQMT1022		STK104x		tqmt1022-64bit-stkt104x
 [p]	T1040			TQMT1040		STK104x		tqmt1040-64bit-stkt104x
 [p]	T1042			TQMT1042		STK104x		tqmt1042-64bit-stkt104x
