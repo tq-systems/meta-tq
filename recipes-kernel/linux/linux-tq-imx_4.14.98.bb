@@ -21,6 +21,7 @@ SRC_URI_mx8 = "\
   file://tqma8x-usb-special-drivers.cfg \
   file://tqma8x-adc-hwmon-support.cfg \
   file://tqma8x-rtc.cfg \
+  file://tqma8x-nonimx-drm-removal.cfg \
 "
 
 ################
