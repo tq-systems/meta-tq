@@ -108,6 +108,7 @@ _MBa8x HW Rev.020x only_
 
 ### Dip Switches
 
+SW   12345678  
 S6 : 11010111  
 S5 : 11111111  
 SW   1234  
@@ -147,6 +148,7 @@ provide the file via TFTP and update via `run update_kernel`
 
 ### Dip Switches
 
+SW   12345678  
 S6 : 11111011  
 S5 : 11111111  
 SW   1234  
