@@ -73,6 +73,7 @@ _MBa8x HW Rev.020x only_
   * USB DRD (USB 2.0 OTG only, Cable Detect, VBUS)
 * HDMI
 * GPU
+* VPU (tested with h264 and vp8)
 * DSI
   * LVDS
 * PCIe
@@ -89,7 +90,6 @@ _MBa8x HW Rev.020x only_
 
 * DSI to DP bridge
 * DSI over LCDIF
-* VPU not tested
 * MIPI CSI
 * MIKRO Bus
 * SIM
@@ -195,4 +195,47 @@ provide the blob via TFTP and update via `run update_fdt`
 
 Linux kernel: set env var `image` to name of your kernel image,
 provide the file via TFTP and update via `run update_kernel`
+
+## Howto
+
+### Sleep Modes
+
+Test sleepmode and wakeup:
+
+Use rtc\[0,1\] to wakeup after 20 seconds:
+
+```
+RTC=rtc[0,1]
+echo enabled > /sys/class/rtc/${RTC}/device/power/wakeup
+echo 0 > /sys/class/rtc/${RTC}/wakealarm
+echo +20 > /sys/class/rtc/${RTC}/wakealarm
+echo mem > /sys/power/state
+```
+
+Send linux to sleep mode and press one of the gpio buttons S\[1,2,3\] afterwards:
+
+```
+echo mem > /sys/power/state
+```
+
+### Audio output
+
+To test audio using gstreamer / pulse audio:
+
+```
+pactl list sinks
+
+pacmd set-default-sink 0
+gst-launch-1.0 audiotestsrc ! pulsesink
+
+pacmd set-default-sink 1
+gst-launch-1.0 audiotestsrc ! pulsesink
+```
+
+### VPU support
+
+```
+pacmd set-default-sink 1
+gst-play-1.0 /mnt/sd/tears_of_steel_1080p.webm
+```
 
