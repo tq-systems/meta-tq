@@ -8,6 +8,8 @@ SRC_URI = "\
 SRCBRANCH = "TQMaxx-imx_4.14.98_2.2.0"
 SRCREV = "d07fa4a7e29f3ca4c454f83685efd6cb2791588f"
 
+KERNEL_TREE_DEFCONFIG_mx8 = "defconfig"
+
 SRC_URI_mx8 = "\
   ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
   file://tqma8x-display-support.cfg \
