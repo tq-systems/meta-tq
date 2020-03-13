@@ -8,15 +8,15 @@ DEPENDS += "lzop-native bc-native openssl-native"
 PROVIDES += "linux-imx linux-tq-imx"
 
 # Put a local version until we have a true SRCREV to point to
-LOCALVERSION ?= ""
-SCMVERSION ?= "y"
+LOCALVERSION = "tq"
+SCMVERSION = "y"
 
 inherit kernel
-inherit cml1
 
 # todo: make it optional
 require ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-freescale", 'linux-tq-imx-conditional.inc', '', d)}
 
+# name the intree defconfig file
 KERNEL_TREE_DEFCONFIG ??= ""
 
 # returns and .cfg filenames from SRC_URI
@@ -26,23 +26,30 @@ def find_cfgs(d):
     for s in sources:
         base, ext = os.path.splitext(os.path.basename(s))
         if ext and ext in [".cfg"]:
-            sources_list.append(s)
+            sources_list.append(os.path.join(d.getVar("WORKDIR", True), (base + ext)))
     return sources_list
 
 do_configure_prepend() {
     defconfig="${WORKDIR}/defconfig"
     config="${B}/.config"
 
-   rm -rf $config
-   set -e
+    # force rebuilding
+    rm -rf $config
 
-   if [ -f "$defconfig" ]; then
-        bbnote "Using defconfig from SRC_URI"
-        cp -f "$defconfig" "$config"
-    elif [ ! -z "${KERNEL_TREE_DEFCONFIG}" ]; then
+    # if we have an intree defconfig, create a .config - has to be done in the source
+    # dir but the final .config is needed in build dir. Source dir needs to be clean
+    # just before the compile step.
+    # We check this befor a defconfig in workdir since this could be supplied
+    # automagically by some basic kernel classes
+    if [ ! -z "${KERNEL_TREE_DEFCONFIG}" ]; then
         bbnote "Using intree defconfig: ${KERNEL_TREE_DEFCONFIG}"
         oe_runmake -C ${S} ${KERNEL_TREE_DEFCONFIG}
-   fi
+        cp ${S}/.config ${config}
+        oe_runmake -C ${S} mrproper
+    elif [ -f "$defconfig" ]; then
+        bbnote "Using defconfig from SRC_URI"
+        cp -f "$defconfig" "$config"
+    fi
 
     # translate the kconfig_mode into something that merge_config.sh
     # understands
@@ -62,11 +69,11 @@ do_configure_prepend() {
 
     fragments="${@' '.join(find_cfgs(d))}"
     if test ! -z "$fragments"; then
-        bbnote "combining kconfig fragments into .config"
+        bbnote "combining kconfig $fragments into $config"
         # Change directory to WORKDIR, because the fragments are located there
         # and filenames in variable $fragments are not absolute.
         # Use subshell to avoid changing the work directory of current shell.
-        (cd "${WORKDIR}" && CFLAGS="${CFLAGS} ${TOOLCHAIN_OPTIONS}" ARCH=${ARCH} ${S}/scripts/kconfig/merge_config.sh -m -O "${B}" "$config" $fragments)
+        (cd "${WORKDIR}" && ${S}/scripts/kconfig/merge_config.sh -m -O "${B}" "$config" $fragments)
     fi
 }
 
