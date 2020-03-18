@@ -20,6 +20,7 @@ SRC_URI = "\
   file://i2c-devices.cfg \
   file://net-devices.cfg \
   file://rtc-support.cfg \
+  file://bpf-support.cfg \
 "
 
 SRCBRANCH = "TQMLS1012AL-bringup-LSDK-18.03-V4.14"
@@ -43,6 +44,7 @@ DELTA_KERNEL_DEFCONFIG_tqmls1012al-mbls1012al = "\
     i2c-devices.cfg \
     net-devices.cfg \
     rtc-support.cfg \
+    bpf-support.cfg \
 "
 
 do_merge_delta_config[dirs] = "${B}"
