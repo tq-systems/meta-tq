@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# This is calculates the environment needed for openembedded rngd.service
+# rng-tools init.d
+# Copy it to @SBINDIR@/make_rng_env
+# Needed for platforms with CPU variants with / without hw_random. An example
+# for such devices are NXP Layerscape E/N variants, where the N-variant lacks
+# the crypto engine containing the hwrng.
+# We check therefore for the presence of /dev/hwrng amd if there we chack for
+# a present rng in /sys/class/misc/hw_random/rng_current
+#
+
+main( ) {
+  local EXTRA_ARGS="-r /dev/hwrng"
+
+  if [ -f "/dev/hwrng" ]; then
+    local ENTROPY_SRC=$(cat /sys/class/misc/hw_random/rng_current 2>/dev/null)
+    if [ -z "${ENTROPY_SRC}" || "none" = "${ENTROPY_SRC}" ]; then
+      EXTRA_ARGS="-n jitter -x hwrng"
+    fi
+  else
+    EXTRA_ARGS="-n jitter -x hwrng"
+  fi
+
+  echo "${EXTRA_ARGS}"
+}
+
+main $@

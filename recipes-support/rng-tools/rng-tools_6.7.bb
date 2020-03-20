@@ -16,6 +16,10 @@ SRC_URI = "\
 "
 SRCREV = "9fc873c5af0e392632e6b736938b811f7ca97251"
 
+SRC_URI_append_qoriq-arm64 = "\
+    file://make_rngd_env \
+"
+
 S = "${WORKDIR}/git"
 
 inherit autotools update-rc.d systemd pkgconfig
@@ -50,3 +54,14 @@ do_install_append() {
         ${D}${sysconfdir}/init.d/rng-tools \
         ${D}${systemd_system_unitdir}/rngd.service
 }
+
+do_install_append_qoriq-arm64() {
+    install -Dm 0755 ${WORKDIR}/make_rngd_env ${D}${sbindir}/make_rngd_env
+}
+
+python () {
+    if not bb.utils.contains('DISTRO_FEATURES', 'sysvinit', True, False, d):
+        d.setVar("INHIBIT_UPDATERCD_BBCLASS", "1")
+}
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"

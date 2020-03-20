@@ -1,0 +1,12 @@
+[Unit]
+Description=Hardware RNG Entropy Gatherer Daemon
+DefaultDependencies=no
+After=systemd-udev-settle.service
+Before=sysinit.target shutdown.target
+Conflicts=shutdown.target
+
+[Service]
+ExecStart=/bin/sh -c "exec @SBINDIR@/rngd -f $$(@SBINDIR@/make_rngd_env)"
+
+[Install]
+WantedBy=multi-user.target
