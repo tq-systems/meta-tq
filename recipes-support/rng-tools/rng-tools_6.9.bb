@@ -14,7 +14,7 @@ SRC_URI = "\
     file://default \
     file://rngd.service \
 "
-SRCREV = "9fc873c5af0e392632e6b736938b811f7ca97251"
+SRCREV = "4a865797a69dd38c64a86aa32884ecc9ba7b4d08"
 
 SRC_URI_append_qoriq-arm64 = "\
     file://make_rngd_env \
