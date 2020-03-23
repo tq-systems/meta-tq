@@ -22,6 +22,7 @@ SRC_URI = "\
   file://rtc-support.cfg \
   file://bpf-support.cfg \
   file://thermal-devices.cfg \
+  file://acpi-disable.cfg \
 "
 
 SRCBRANCH = "TQMLS1012AL-bringup-LSDK-18.03-V4.14"
@@ -47,6 +48,7 @@ DELTA_KERNEL_DEFCONFIG_tqmls1012al-mbls1012al = "\
     rtc-support.cfg \
     bpf-support.cfg \
     thermal-devices.cfg \
+    acpi-disable.cfg \
 "
 
 do_merge_delta_config[dirs] = "${B}"
