@@ -20,6 +20,18 @@ SRC_URI_append_qoriq-arm64 = "\
     file://make_rngd_env \
 "
 
+SRC_URI_append_fsl-lsch2 = "\
+    file://make_rngd_env \
+"
+
+SRC_URI_append_fsl-lsch3 = "\
+    file://make_rngd_env \
+"
+
+SRC_URI_append_ls102xa = "\
+    file://make_rngd_env \
+"
+
 S = "${WORKDIR}/git"
 
 inherit autotools update-rc.d systemd pkgconfig
@@ -55,8 +67,10 @@ do_install_append() {
         ${D}${systemd_system_unitdir}/rngd.service
 }
 
-do_install_append_qoriq-arm64() {
-    install -Dm 0755 ${WORKDIR}/make_rngd_env ${D}${sbindir}/make_rngd_env
+do_install_append() {
+    if [ -f ${WORKDIR}/make_rngd_env ]; then
+        install -Dm 0755 ${WORKDIR}/make_rngd_env ${D}${sbindir}/make_rngd_env
+    fi
 }
 
 python () {
