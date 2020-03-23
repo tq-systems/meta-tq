@@ -27,6 +27,7 @@ SRC_URI = "\
   file://bitbang-support.cfg \
   file://led-support.cfg \
   file://rc_hid_disablement.cfg \
+  file://fbdev-disable.cfg \
 "
 
 SRCBRANCH = "TQMLS1012AL-bringup-LSDK-18.03-V4.14"
@@ -57,6 +58,7 @@ DELTA_KERNEL_DEFCONFIG_tqmls1012al-mbls1012al = "\
     bitbang-support.cfg \
     led-support.cfg \
     rc_hid_disablement.cfg \
+    fbdev-disable.cfg \
 "
 
 do_merge_delta_config[dirs] = "${B}"
