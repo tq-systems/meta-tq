@@ -26,6 +26,7 @@ SRC_URI = "\
   file://hwmon-support.cfg \
   file://bitbang-support.cfg \
   file://led-support.cfg \
+  file://input-support.cfg \
   file://rc_hid_disablement.cfg \
   file://fbdev-disable.cfg \
 "
@@ -57,6 +58,7 @@ DELTA_KERNEL_DEFCONFIG_tqmls1012al-mbls1012al = "\
     hwmon-support.cfg \
     bitbang-support.cfg \
     led-support.cfg \
+    input-support.cfg \
     rc_hid_disablement.cfg \
     fbdev-disable.cfg \
 "
