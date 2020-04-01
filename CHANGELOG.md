@@ -28,6 +28,9 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* tqma8x: linux: fix only one device on PCIe causes kernel hang
+* tqma8x: u-boot: fix ENET randomly not communicating
+* tqma8x: linux: fix ENET randomly not communicating
 * linux: ressource leak fixes for imx-tlv320aic32x4
 * tqma8mx: u-boot: QSPI driver 4 byte addressing
 * tqma8mx: u-boot: WDOG_B pin as hog pin

@@ -77,7 +77,6 @@ This README contains some useful information for TQMa8x on MBa8x
 ## Known Issues
 
 * sometimes hangs in linux during first start with a fresh image
-* ENET1 randomly not communicating under U-Boot / Linux
 * random hangs starting boot loader when cold boot (only SCU comes up)
 * USB support in U-Boot
   * USB3 stick on micro-B (X29 needs usb start + usb reset)
@@ -87,7 +86,7 @@ This README contains some useful information for TQMa8x on MBa8x
 * counting of i2c devices bus starts at i2c-2 (because i2c-0 and i2c-1
   are reserved for i2c_rpmsgbus)
 * can bitrate limited to 125000 (in can0/can1.service), no CAN FD
-  due to hardware limitations in module rev.010x
+  due to hardware limitations on mainboard Rev01xx
 * environment from QSPI fails sometimes
 * VPU codecs not avaiable [TQMAACHTX-103]
 * PWM only works after the second enable command (echo 1 > /pwmX/enable)
