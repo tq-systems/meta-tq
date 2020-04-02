@@ -1,7 +1,5 @@
 # extends fsl-image-<multimedia..*|gui> with additional tools
 
-LICENSE = "MIT"
-
 IMAGE_LINGUAS_append = " en-us "
 
 inherit distro_features_check
