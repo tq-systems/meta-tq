@@ -40,7 +40,6 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 
 **TODO or not tested with new BSP**
 
-* Fuses
 * RAM configs 512 MB
 * CPU variants i.MX8DX
 * speed grade / temperature grade detection
@@ -48,23 +47,30 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 
 ### Linux:
 
-* RAM configs 1GB
-* CPU variants i.MX8QXP
-* e-MMC
-* SD-CARD
+* RAM configs
+  * 1GB
+* CPU variants
+  * i.MX8QXP
+* e-MMC (on module)
+* SD-CARD (SMARC SDIO)
 * DVFS
   * speed grade
-* CAN
-* LVDS (Tianma 1240 x 800, GPIO Backlight)
-* ENET 1/2
-* I2C
+* CAN (SMARC CAN0 / CAN1)
+* LVDS: Tianma 1240 x 800, GPIO Backlight (SMARC LVDS0, needs SOM with LVDS option)
+* ENET 1/2 (SMARC Ethernet GBE0 / GBE1)
+* I2C1 (SMARC I2C_GP)
   * Temperature Sensors
   * RTC
   * EEPROMS
 * GPU
 * USB (see known issues)
-  * DRD (X4)
-* QSPI NOR 
+  * DRD / X4 (SMARC USB0 / OTG)
+* QSPI NOR (on module)
+* SPI
+  * SPI1 (SMARC SPI0, 2 CS)
+* UART
+  * UART0 / Console (SMARC SER0)
+  * SCU / alternative UART with different SCU Firmware (SMARC SER1)
 
 **TODO or not tested with new BSP**
 
@@ -75,7 +81,6 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 * DSI - DP bridge
 * M4
 * Audio
-* SPI
 
 ## Known Issues
 
