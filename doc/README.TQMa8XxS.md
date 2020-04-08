@@ -1,6 +1,6 @@
-# TQMa8Xx
+# TQMa8XxS
 
-This README contains some useful information for TQMa8Xx on MBa8Xx
+This README contains some useful information for TQMa8XxS on MB-SMARC-2
 
 ## Versions
 
