@@ -43,6 +43,7 @@ _MBa8x HW Rev.020x only_
 * USB Dual Role (USB0, 2.0 host only - hard coded in driver)
   * Cable Detect / ID
   * switchable VBUS
+* Bootaux / Cortex M4
 
 ### Linux:
 
@@ -66,7 +67,7 @@ _MBa8x HW Rev.020x only_
   * see Known Issues
 * ENET (GigE via Phy on MBa8Mx)
 * Audio
-  * via codec
+  * via codec / audio out
   * HDMI audio (with pulse audio)
 * USB
   * USB 3.0 Host / Hub
@@ -75,7 +76,8 @@ _MBa8x HW Rev.020x only_
 * GPU
 * VPU (tested with h264 and vp8)
 * DSI
-  * LVDS
+  * LVDS on DCSS
+  * LVDS on eLCDIF
 * PCIe
   * mini-PCIe on MBa8Mx
   * PCIe (Slot)
@@ -89,18 +91,18 @@ _MBa8x HW Rev.020x only_
 ## TODO:
 
 * DSI to DP bridge
-* DSI over LCDIF
 * MIPI CSI
 * MIKRO Bus
 * SIM
-* PCIe Slot only tested with Gen 1 (miniPCIe with Gen2)
+* Audio codec line in / mic in
+* Cortex M4 / RPMSG
 
 ## Known Issues
 
+* LVDS over DSI @ eLCDIF with shifted display under weston
 * LVDS shows wrong colors on Tianma display kit (HW issue on display)
 * USB OTG / DRD
-  * USB OTG OC not handled yet
-  * no USB 3.0
+  * USB OTG OC not handled (polarity mismatch)
 * QSPI limited to SDR (driver / chip compatibility)
 * Mikrobus Modul RTC5 on ecspi1 don't answer
 
@@ -222,6 +224,12 @@ echo mem > /sys/power/state
 
 ### Audio output
 
+To test audio output using alsa:
+
+```
+speaker-test -D hw:<n> -l 1 -c 2 -f 500 -t sine
+```
+
 To test audio using gstreamer / pulse audio:
 
 ```
@@ -232,6 +240,13 @@ gst-launch-1.0 audiotestsrc ! pulsesink
 
 pacmd set-default-sink 1
 gst-launch-1.0 audiotestsrc ! pulsesink
+```
+
+### Audio Line In (codec)
+
+```
+arecord -f cd --duration=12 /tmp/test.wav &
+speaker-test -D hw:0 -l 1 -c 2 -f 500 -t sine
 ```
 
 ### VPU support
