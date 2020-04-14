@@ -9,6 +9,9 @@ Releases are named with the following scheme:
 
 ### Added
 
+* tqma8mx: linux: fix dt for LVDS over DSI @ eLCDIF
+* tqma8mx: linux: increase CMA size to 640 MB
+* linux: fix simple-panel settings for tianma LVDS display
 * tqma8qm: linux: add support for PWM
 * tqma8qm: linux: add support for mikroBUS module RTC5
 
