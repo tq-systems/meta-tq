@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
+## warrior.TQMLS10xx.BSP.SW.0101
+
+## Changed
+
+* tqmls10xxa: use EDAC_LAYERSCAPE error detection
+
+## Fixed
+
+* tqmls1043a: U-Boot: use correct SF_DEFAULT_BUS
+* tqmls10xxa: Linux: fix error message on reboot
+
+## Added
+
+* tqmls1043a: add configs for 2GB variant
 
 ## warrior.TQMa57xx.BSP.SW.0009
 
