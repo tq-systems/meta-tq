@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
 
 PROVIDES += "u-boot"
 
-SRCREV = "d26e190b8d0463da2cbf8e8eebf17c6f0a247886"
+SRCREV = "cb084ac10a4ab8345c48f829462e6077c4587d60"
 SRCBRANCH = "TQMLS10xxA-u-boot-v2018.07"
 
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
