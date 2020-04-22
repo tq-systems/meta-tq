@@ -10,6 +10,9 @@ inherit deploy
 SRCREV = "9f3db9ede3a5edec257c44c804131c168f281b97"
 SRCBRANCH = "TQMLS10xxA-rcw"
 
+SRCREV_tqmls1028a = "a288315076746535139d947dd6a0f2d858b39000"
+SRCBRANCH_tqmls1028a = "TQMLS1028A-rcw-LSDK-18.12"
+
 SRC_URI = "${TQ_GIT_BASEURL}/rcw.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 
 S = "${WORKDIR}/git"
@@ -17,6 +20,7 @@ S = "${WORKDIR}/git"
 export PYTHON = "${USRBINPATH}/python2"
 
 RCW_BOARD = "${MACHINE}"
+RCW_BOARD_tqmls1028a = "tqc"
 
 EXTRA_OEMAKE += "BOARDS=${RCW_BOARD}"
 
