@@ -60,4 +60,4 @@ addtask deploy after do_install
 
 PACKAGES += "${PN}-image"
 FILES_${PN}-image += "/boot"
-COMPATIBLE_MACHINE = "(fsl-lsch3)"
+COMPATIBLE_MACHINE = "tqmls1088a-mbls10xxa"
