@@ -16,21 +16,25 @@ S = "${WORKDIR}/git"
 
 export PYTHON = "${USRBINPATH}/python2"
 
+RCW_BOARD = "${MACHINE}"
+
+EXTRA_OEMAKE += "BOARDS=${RCW_BOARD}"
+
 do_install () {
-    oe_runmake BOARDS=${MACHINE} DESTDIR=${D}/boot/rcw/ install
+    oe_runmake DESTDIR=${D}/boot/rcw/ install
 }
 
 do_deploy () {
     install -d ${DEPLOYDIR}/rcw
     cp -r ${D}/boot/rcw/* ${DEPLOYDIR}/rcw/
-    if [ -f  ${DEPLOYDIR}/rcw/${MACHINE}/${RCWSD} ]; then
-        ln -sfT rcw/${MACHINE}/${RCWSD} ${DEPLOYDIR}/rcw-sdboot.bin
+    if [ -f  ${DEPLOYDIR}/rcw/${RCW_BOARD}/${RCWSD} ]; then
+        ln -sfT rcw/${RCW_BOARD}/${RCWSD} ${DEPLOYDIR}/rcw-sdboot.bin
     fi
-    if [ -f  ${DEPLOYDIR}/rcw/${MACHINE}/${RCWEMMC} ]; then
-        ln -sfT rcw/${MACHINE}/${RCWEMMC} ${DEPLOYDIR}/rcw-emmcboot.bin
+    if [ -f  ${DEPLOYDIR}/rcw/${RCW_BOARD}/${RCWEMMC} ]; then
+        ln -sfT rcw/${RCW_BOARD}/${RCWEMMC} ${DEPLOYDIR}/rcw-emmcboot.bin
     fi
-    if [ -f  ${DEPLOYDIR}/rcw/${MACHINE}/${RCWQSPI} ]; then
-        ln -sfT rcw/${MACHINE}/${RCWQSPI} ${DEPLOYDIR}/rcw-qspiboot.bin
+    if [ -f  ${DEPLOYDIR}/rcw/${RCW_BOARD}/${RCWQSPI} ]; then
+        ln -sfT rcw/${RCW_BOARD}/${RCWQSPI} ${DEPLOYDIR}/rcw-qspiboot.bin
     fi
 }
 addtask deploy after do_install
