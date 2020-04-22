@@ -28,6 +28,7 @@ CFLAGS = "-O2 -Wall -std=c99 -I ${STAGING_INCDIR_NATIVE} -L ${STAGING_LIBDIR_NAT
 IMX_M4_DEMOS        = ""
 IMX_M4_DEMOS_mx8qm  = "imx-m4-demos:do_deploy"
 IMX_M4_DEMOS_mx8x   = "imx-m4-demos:do_deploy"
+IMX_M4_DEMOS_mx8qxp   = "imx-m4-demos:do_deploy"
 
 M4_DEFAULT_IMAGE ?= "m4_image.bin"
 M4_DEFAULT_IMAGE_mx8qxp = "imx8qx_m4_TCM_srtm_demo.bin"
