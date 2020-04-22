@@ -6,6 +6,7 @@ Before=sysinit.target shutdown.target
 Conflicts=shutdown.target
 
 [Service]
+SyslogIdentifier=rngd
 ExecStart=/bin/sh -c "exec @SBINDIR@/rngd -f $$(@SBINDIR@/make_rngd_env)"
 
 [Install]
