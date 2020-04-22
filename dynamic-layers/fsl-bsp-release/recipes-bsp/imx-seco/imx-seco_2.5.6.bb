@@ -6,7 +6,7 @@ SECTION = "base"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=fd4b227530cd88a82af6a5982cfb724d" 
 
-inherit fsl-eula-unpack deploy
+inherit fsl-eula-unpack deploy seco-firmware-name
 
 SRC_URI = "${FSL_MIRROR}/${PN}-${PV}.bin;fsl-eula=true "
 
@@ -17,10 +17,7 @@ do_compile[noexec] = "1"
 
 do_install[noexec] = "1"
 
-SECO_FIRMWARE_NAME ?= "mx8qmb0-ahab-container.img"
-SECO_FIRMWARE_NAME_mx8qm  = "mx8qmb0-ahab-container.img"
-SECO_FIRMWARE_NAME_mx8qxp = "mx8qxb0-ahab-container.img"
-SECO_FIRMWARE_NAME_mx8qxpc0 = "mx8qxc0-ahab-container.img"
+SECO_FIRMWARE_NAME ?= "invalid"
 
 addtask deploy after do_install
 do_deploy () {
