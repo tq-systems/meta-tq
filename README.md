@@ -149,6 +149,8 @@ Support for the following machines is contained in this version:
 [y]	i.MX7[S,D]		TQMa7[S,D]		MBa7x		tqma7x-512mb-mba7 (TQMa7[S,D] HW REV.010x ... 0x020x with 512 MiB RAM / MBa7x HW REV.020x)
 [y]	i.MX7[S,D]		TQMa7[S,D]		MBa7x		tqma7x-1gb-mba7 (TQMa7[S,D] HW REV.010x ... 0x020x with 1 GiB RAM / MBa7x HW REV.020x)
 [y]	i.MX7[S,D]		TQMa7[S,D]		MBa7x		tqma7x-2gb-mba7 (TQMa7[S,D] HW REV.010x ... 0x020x with 2 GiB RAM / MBa7x HW REV.020x)
+[y]	LS1028A			TQMLS1028A		MBLS1028A	tqmls1028a-mbls1028a
+[b]	LS1028A			TQMLS1028A		MBLS1028A-IND	tqmls1028a-mbls1028a-ind
 [y]	LS1043A			TQMLS1043A		MBLS10xxA	tqmls1043a-mbls10xxa (TQMLS1043a / MBLS10xxa)
 [y]	LS1043A			TQMLS1043A		MBLS10xxA	tqmls1043a_2g-mbls10xxa (TQMLS1043a with 2 GiB RAM / MBLS10xxa)
 [y]	LS1046A			TQMLS1046A		MBLS10xxA	tqmls1046a-mbls10xxa (TQMLS1046a with 2 GiB RAM / MBLS10xxa)
