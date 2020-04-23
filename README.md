@@ -13,40 +13,19 @@ Please see the corresponding sections below for details.
 This layer in the checked out branch depends on:
 
 URI: https://git.yoctoproject.org/poky  
-branch: sumo  
+branch: zeus  
 revision: HEAD  
 layers: meta, meta-poky  
 
-Optionally the layer can make use of features from meta-freescale /
-meta-freeescale-distro if using i.MX6, i.MX6UL, i.MX7 based machines
-(tqma6[s,dl,q,qp]-mba6x, tqma6ul[l]x-mba6ulx, tqma6ul[l]x-lga-mba6ulx etc.)
-
-URI: https://git.yoctoproject.org/git/meta-freescale  
-branch: warrior  
+URI: https://git.yoctoproject.org/meta-freescale  
+branch: zeus  
 revision: HEAD  
-layers: meta-freeescale  
+layers: meta-freescale  
 
-URI: https://github.com/Freescale/meta-freescale-distro.git  
-branch: warrior  
+URI: https://source.codeaurora.org/external/imx/meta-imx  
+branch: zeus-5.4.3-1.0.0  
 revision: HEAD  
-layers: meta-freeescale-distro  
-
-**Attention:** following distros defined in meta-freescale-distro are not comatible
-to machines in meta-tq:
-
-- fsl-framebuffer
-- fsl-wayland
-- fsl-x11
-- fsl-xwayland
-
-Optionally the layer can make use of features from meta-ti if using AM57xx
-based machines (tqma57[1,2,4]x-mba57xx etc.)
-
-URI: https://git.yoctoproject.org/git/meta-ti  
-branch: master  
-revision: states compatibility to warrior starting with commit
-          59e66caff2568ab32f59596f1aeab8ea27649941  
-layers: meta-ti  
+layers: meta-bsp  
 
 ### Patches
 
@@ -70,16 +49,20 @@ Additionally you can use github's collaboration features.
 In order to use this layer, you need to make the build system aware of
 it.
 
-Assuming the all layers exist in a subdir sources at the top-level of your
+Assuming all layers existing in a subdir sources at the top-level of your
 yocto build tree, you can add it to the build system by adding the
 location of the tq layer to bblayers.conf, along with any
 other layers needed. e.g.:
 
 ```
+BSPDIR := "${@os.path.abspath(os.path.dirname(d.getVar('FILE', True)) + '/../..')}"
+
   BBLAYERS ?= " \
     ${BSPDIR}/sources/poky/meta \
     ${BSPDIR}/sources/poky/meta-poky \
+    ${BSPDIR}/sources/meta-freescale \
     ${BSPDIR}/sources/meta-tq \
+    ${BSPDIR}/sources/meta-imx/meta-bsp \
     ...
   "
 ```
@@ -127,6 +110,16 @@ Support for the following machines is contained in this version:
 
 ```
 	SOC			SOM			Base board	MACHINE
+[y]	i.MX8M[D,Q]		TQMa8M[D,Q]	MBa8Mx		tqma8mx-1gm-mba8mx (TQMa8M[D,Q] with 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x)
+[y]	i.MX8MQL		TQMa8MQL	MBa8Mx		tqma8mx-2gm-mba8mx (TQMa8MQL with 2 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x)
+[y]	i.MX8QM			TQMa8QM		MBa8x		tqma8qm-4gb-mba8x (TQMa8QM with 4 GiB RAM, HW REV.010x)
+[y]	i.MX8QM			TQMa8QM		MBa8x		tqma8qm-8gb-mba8x (TQMa8QM with 8 GiB RAM, HW REV.010x)
+[b]	i.MX8DX			TQMa8XD		MBa8Xx		tqma8xd-mba8xx (TQMa8XD with 512 MiB RAM)
+[y]	i.MX8QXP		TQMa8XQP	MBa8Xx		tqma8xqp-mba8xx (TQMa8XQP with 1 GiB RAM)
+[y]	i.MX8QXP		TQMa8XQP	MBpa8Xx		tqma8xqp-mbpa8xx (TQMa8XQP with 1 GiB RAM)
+[b]	i.MX8DX			TQMa8XDS	MB-SMARC-2	tqma8xds-mb-smarc-2 (TQMa8XDS with 512 MiB RAM)
+[y]	i.MX8QXP		TQMa8XQPS	MB-SMARC-2	tqma8xqps-mb-smarc-2 (TQMa8XQPS with 1 GiB RAM)
+
 [b]	i.MX6[QP,DP]		TQMa6QP/TQMa6DP		MBa6x		tqma6qp-mba6x (TQMa6[QP,DP] HW REV.040x / MBa6x HW REV.020x)
 [b]	i.MX6[Q,D]		TQMa6D/TQMa6Q		MBa6x		tqma6q-mba6x (TQMa6[D,Q] HW REV.010x ... 040x / MBa6x HW REV.020x)
 [y]	i.MX6[Q,D]		TQMa6D/TQMa6Q		NAV		tqma6q-nav (TQMa6[D,Q] HW REV.030x ... 040x / NAV REV.020x)
