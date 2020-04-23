@@ -58,10 +58,11 @@ WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 # sd -> to boot from SD-Card
 # emmc -> to boot from eMMC
 BOOTMODE ?= "sd"
+RCWIMG ?= "tqc/${@d.getVar('RCW' + d.getVar('BOOTMODE').upper())}"
 
 WKS_FILE ?= "tqmls1028a-sdimg.wks.in"
 
-WICVARS_append = " BOOTMODE"
+WICVARS_append = " BOOTMODE RCWIMG"
 
 WKS_FILE_DEPENDS = "\
 	mtools-native \
