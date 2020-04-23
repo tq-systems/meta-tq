@@ -1,7 +1,7 @@
 
 DESCRIPTION = "u-boot for TQ-Group NXP i.MX8 based modules"
 
-require u-boot-tq-imx-common_${PV}.inc
+require u-boot-imx-tq-common_${PV}.inc
 require recipes-bsp/u-boot/u-boot.inc
 
 inherit pythonnative
