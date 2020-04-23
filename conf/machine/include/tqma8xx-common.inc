@@ -18,7 +18,7 @@ MACHINE_FEATURES_append = " can pci alsa rtc serial ext2 ext3 vfat usbhost"
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_virtual/kernel_mx8 ?= "linux-tq-imx"
+PREFERRED_PROVIDER_virtual/kernel_mx8 ?= "linux-imx-tq"
 KERNEL_IMAGETYPE = "Image"
 
 PREFERRED_PROVIDER_u-boot_mx8 ?= "u-boot-tq-imx"

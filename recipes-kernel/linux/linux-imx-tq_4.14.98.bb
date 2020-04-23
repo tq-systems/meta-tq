@@ -1,4 +1,4 @@
-require linux-tq-imx-common.inc
+require linux-imx-tq-common.inc
 
 SRC_URI = "\
   ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
