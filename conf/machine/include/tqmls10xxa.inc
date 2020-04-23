@@ -43,3 +43,7 @@ WKS_FILE_DEPENDS = "\
 	virtual/kernel \
 	virtual/bootloader \
 	"
+
+# optionally source the machine specific features for multimedia etc. from
+# meta-freescale
+include conf/machine/include/qoriq-arm64.inc
