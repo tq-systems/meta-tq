@@ -1,5 +1,7 @@
 # Common definitions for all TQ-Group TQMa8x / TQMa8xx / TQMa8Mx modules
 
+PREFERRED_PROVIDER_u-boot-fw-utils_mx8 ?= "u-boot-fw-utils-imx-tq"
+
 # provide dt name handling to prevent a lot of copy and paste
 # in kernel prefix where to find dtb
 
