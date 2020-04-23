@@ -53,11 +53,15 @@ UBI_VOLNAME = "root"
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
-# different RCW files for booting CPU from SD card and eMMC require two
-# wks-files for image creation:
-# tqmls1028a-sdimg.wks -> to boot from SD-Card
-# tqmls1028a-emmcimg.wks -> to boot from eMMC
-WKS_FILE ?= "tqmls1028a-sdimg.wks"
+# Different RCW files for booting CPU from SD card and eMMC require
+# setting the correct BOOTMODE:
+# sd -> to boot from SD-Card
+# emmc -> to boot from eMMC
+BOOTMODE ?= "sd"
+
+WKS_FILE ?= "tqmls1028a-sdimg.wks.in"
+
+WICVARS_append = " BOOTMODE"
 
 WKS_FILE_DEPENDS = "\
 	mtools-native \

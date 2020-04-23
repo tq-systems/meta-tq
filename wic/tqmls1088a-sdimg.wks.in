@@ -13,7 +13,7 @@
 # 0 4kiB    1MiB     3MiB   10MiB    13MiB    14MiB    16MiB   48MiB   304MiB
 #
 
-part rcw_pbi --source rawcopy --sourceparams="file=rcw-sdboot.bin" --no-table --align 4
+part rcw_pbi --source rawcopy --sourceparams="file=rcw-${BOOTMODE}boot.bin" --no-table --align 4
 part u-boot --source rawcopy --sourceparams="file=u-boot.bin-esdhc" --no-table --align 1024
 part mc_app --source rawcopy --sourceparams="file=mc_app/mc.itb" --no-table --align 10240
 part mc_dpl --source rawcopy --sourceparams="file=mc-utils/${MC_DPL}" --no-table --align 13312
