@@ -37,7 +37,7 @@ EXTRA_OEMAKE = 'CROSS_COMPILE=${WRAP_TARGET_PREFIX} CC="${WRAP_TARGET_PREFIX}gcc
 EXTRA_OEMAKE += 'HOSTCC="${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS}"'
 
 do_configure_prepend() {
-	if [ "x${UBOOT_CONFIG}" != "x" ] && [ "x${FSL_RCW}" != "x" ]; then
+	if [ "${UBOOT_CONFIG}" ] && [ "${FSL_RCW}" ]; then
 		for config in ${UBOOT_MACHINE}; do
 			sed -i '/CONFIG_RCW_CFG/d' ${S}/configs/${config}
 			echo "CONFIG_RCW_CFG_${FSL_RCW}=y" >> ${S}/configs/${config}
@@ -47,7 +47,7 @@ do_configure_prepend() {
 
 do_deploy_append() {
 	# For sdcard boot, we don't use u-boot.bin, but u-boot-with-spl-pbl.bin
-	if [ "x${UBOOT_CONFIG}" != "x" ]; then
+	if [ "${UBOOT_CONFIG}" ]; then
 		for config in ${UBOOT_MACHINE}; do
 			i=`expr $i + 1`;
 			for type in ${UBOOT_CONFIG}; do
@@ -63,7 +63,7 @@ do_deploy_append() {
 	fi
 
 	# Install RCW
-	if [ "x${UBOOT_CONFIG}" != "x" ] && [ "x${FSL_RCW}" != "x" ]; then
+	if [ "${UBOOT_CONFIG}" ] && [ "${FSL_RCW}" ]; then
 		for config in ${UBOOT_MACHINE}; do
 			i=`expr $i + 1`;
 			for type in ${UBOOT_CONFIG}; do

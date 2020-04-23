@@ -33,7 +33,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 do_compile_append_tqmls102xa () {
  unset i j
-    if [ "x${UBOOT_CONFIG}" != "x" ]; then
+    if [ "${UBOOT_CONFIG}" ]; then
         for config in ${UBOOT_MACHINE}; do
             i=`expr $i + 1`;
             for type in ${UBOOT_CONFIG}; do

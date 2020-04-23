@@ -25,9 +25,9 @@ LOCALVERSION ??= "+tq"
 UBOOT_LOCALVERSION = "${LOCALVERSION}"
 
 do_configure_prepend() {
-    if [ "x${UBOOT_RCW_CONFIG}" != "x" ]; then
+    if [ "${UBOOT_RCW_CONFIG}" ]; then
         unset i j
-        if [ "x${UBOOT_CONFIG}" != "x" ]; then
+        if [ "${UBOOT_CONFIG}" ]; then
             for config in ${UBOOT_MACHINE}; do
                 i=`expr $i + 1`;
                 for type in ${UBOOT_CONFIG}; do
@@ -60,11 +60,11 @@ UBOOT_WITHPBL_fsl-lsch2 = "true"
 
 do_compile_append () {
  unset i j
-    if [ "x${UBOOT_CONFIG}" != "x" ]; then
+    if [ "${UBOOT_CONFIG}" ]; then
         for config in ${UBOOT_MACHINE}; do
             i=`expr $i + 1`;
             for type in ${UBOOT_CONFIG}; do
-                if [ "x${UBOOT_WITHPBL}" != "x" ]; then
+                if [ "${UBOOT_WITHPBL}" ]; then
                     j=`expr $j + 1`;
                     if [ $j -eq $i ]; then
                         case "${config}" in
