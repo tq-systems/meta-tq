@@ -36,7 +36,13 @@ IMAGE_INSTALL_append = " kernel-modules"
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
-WICVARS_append = " MC_DPL MC_DPC"
+# Different RCW files for booting CPU from SD card and eMMC require
+# setting the correct BOOTMODE:
+# sd -> to boot from SD-Card
+# emmc -> to boot from eMMC
+BOOTMODE ?= "sd"
+
+WICVARS_append = " BOOTMODE MC_DPL MC_DPC"
 
 WKS_FILE_DEPENDS = "\
 	mtools-native \
