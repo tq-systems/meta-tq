@@ -9,7 +9,6 @@ MACHINEOVERRIDES =. "fsl-lsch3:ls1088a:tqmls10xxa:"
 require conf/machine/include/tqmxx.inc
 
 UBOOT_ENTRYPOINT_ls1088a = "0x80008000"
-MC_BOARD_tqmls10xxa = "${MACHINE}"
 
 # Image Options
 #
@@ -24,6 +23,6 @@ UBI_VOLNAME = "root"
 
 # different RCW files for booting CPU from SD card and eMMC require two
 # wks-files for image creation:
-# tqmls1088a-sdimg.wks -> to boot from SD-Card
-# tqmls1088a-emmcimg.wks -> to boot from eMMC
-WKS_FILE ?= "tqmls1088a-sdimg.wks"
+# tqmls1088a-sdimg.wks.in -> to boot from SD-Card
+# tqmls1088a-emmcimg.wks.in -> to boot from eMMC
+WKS_FILE ?= "tqmls1088a-sdimg.wks.in"

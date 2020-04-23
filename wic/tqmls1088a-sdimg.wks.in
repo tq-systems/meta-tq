@@ -15,9 +15,9 @@
 
 part rcw_pbi --source rawcopy --sourceparams="file=rcw-sdboot.bin" --no-table --align 4
 part u-boot --source rawcopy --sourceparams="file=u-boot.bin-esdhc" --no-table --align 1024
-part mc_app --source rawcopy --sourceparams="file=mc.itb" --no-table --align 10240
-part mc_dpl --source rawcopy --sourceparams="file=mc-dpl.dtb" --no-table --align 13312
-part mc_dpc --source rawcopy --sourceparams="file=mc-dpc.dtb" --no-table --align 14336
+part mc_app --source rawcopy --sourceparams="file=mc_app/mc.itb" --no-table --align 10240
+part mc_dpl --source rawcopy --sourceparams="file=mc-utils/${MC_DPL}" --no-table --align 13312
+part mc_dpc --source rawcopy --sourceparams="file=mc-utils/${MC_DPC}" --no-table --align 14336
 part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 16384 --fixed-size 32M
 part / --source rootfs --fstype=ext4 --label root --align 4096 --fixed-size 512M
 
