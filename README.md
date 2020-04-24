@@ -13,26 +13,33 @@ Please see the corresponding sections below for details.
 This layer in the checked out branch depends on:
 
 URI: https://git.yoctoproject.org/poky  
-branch: sumo  
+branch: zeus  
 revision: HEAD  
 layers: meta, meta-poky  
 
 Optionally the layer can make use of features from meta-freescale /
 meta-freeescale-distro if using i.MX6, i.MX6UL, i.MX7 based machines
 (tqma6[s,dl,q,qp]-mba6x, tqma6ul[l]x-mba6ulx, tqma6ul[l]x-lga-mba6ulx etc.)
+or Layerscape/QorIQ.
 
 URI: https://git.yoctoproject.org/git/meta-freescale  
-branch: warrior  
+branch: zeus  
 revision: HEAD  
 layers: meta-freeescale  
 
 URI: https://github.com/Freescale/meta-freescale-distro.git  
-branch: warrior  
+branch: zeus  
 revision: HEAD  
 layers: meta-freeescale-distro  
 
-**Attention:** following distros defined in meta-freescale-distro are not comatible
-to machines in meta-tq:
+**Attention:** meta-freescale is mandatory for the following machines:
+
+- tqmls1028a-mbls1028a
+- tqmls1028a-mbls1028a-ind
+- tqmls1088a-mbls10xxa
+
+**Attention:** The following distros defined in meta-freescale-distro are not comatible
+with machines in meta-tq:
 
 - fsl-framebuffer
 - fsl-wayland
