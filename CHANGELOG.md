@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
+
+## Added
+
+* port TQMa8Xx to new u-boot / kernel
+* add recipes for kernel / u-boot based on NXP 5.4.y_1.0.0 reference BSP
+* add machine files for TQMa8 modules (based on old local kernel and u-boot,
+  only basic boot support))
+* update to 1.3.1 bed SCFW firmware
+* add bbappends for recipes from meta-imx
+* add recipes from sumo-tqma8x branch
+
+## Changed
+
+* update to zeus
+
 ## warrior.TQMLS10xx.BSP.SW.0101
 
 ## Changed
