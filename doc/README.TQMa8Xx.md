@@ -53,7 +53,6 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 * GPU
 * LED
 * GPIO
-* LVDS
 * ENET (GigE via Phy on MBa8Xx)
   * ENET 1
   * ENET 2
