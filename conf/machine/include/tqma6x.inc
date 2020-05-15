@@ -25,6 +25,7 @@ MACHINE_FEATURES_append = " alsa ext2 pci rtc serial usbhost vfat can"
 require conf/machine/include/tqmxx.inc
 
 PREFERRED_PROVIDER_virtual/kernel_tqma6x ?= "linux-imx-tq"
+PREFERRED_PROVIDER_virtual/kernel_tqma6x_use-mainline-bsp ?= "linux-tq"
 KERNEL_IMAGETYPE = "zImage"
 
 PREFERRED_PROVIDER_u-boot_tqma6x ?= "u-boot-tq"
