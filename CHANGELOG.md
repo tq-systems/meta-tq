@@ -5,6 +5,20 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+
+## Changed
+
+* tqma8xx: support LVDS
+* tqma8xx: support USB
+* linux-imc-tq_5.4: port simple-panel display timings
+* linux-imc-tq_5.4: backport LVDS bugfixes from 5.4.3\_2.0.0 beta
+* linux-imc-tq_5.4: port LVDS DSI bridge
+* linux-imc-tq_5.4: port audio fixes for TQ Systems starter kits
+* mesa: restrict bbappend to mx8
+* tqma8: disable *.bz2 image types
+
+## zeus.TQMa8.IBPQ.SW.0040
+
 ## Added
 
 * port TQMa8Xx to new u-boot / kernel
