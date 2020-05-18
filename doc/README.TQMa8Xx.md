@@ -60,29 +60,69 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 * UART
   * console
   * LPUART3 via unused SAI pins
+* LVDS
+* GPU
 
 **TODO or not tested with new BSP**
 
 * temperature grade
 * Audio
 * DSI - DP bridge
-* GPU
 * GPIO
   * Suspend / Wakeup via GPIO button
-* LVDS
 * DVFS
   * speed grade
 * PCIe (mini-PCIe on MBa8Xx)
 
 ## Known Issues
 
+## Artifacts
+
+Artifacs can be found at the usual locations for bitbake:
+`${TMPDIR}/deploy/images/tqma8xqp-mba8xx`
+
+* \*.dtb: device tree blobs
+* Image: linux kernel image
+* \*.wic: SD / e-MMC system image
+* \*.rootfs.ext4: RootFS image
+* \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
+* imx-boot-tqma8xqp-mba8xx-sd.bin: boot stream for SD / e-MMC
+
+## Boot Dip Switches
+
+_Note:_
+
+* S1 is for Boot Mode.
+* X means position of DIP, - means don't care
+
+_SD Card_
+
+```
+DIP (S1)	1 2 3 4
+BootMode	3 2 1 0
+ON 		    X X
+OFF 		X X    
+```
+
+_e-MMC_
+
+```
+DIP (S1)	1 2 3 4
+BootMode	3 2 1 0
+ON 		    X  
+OFF 		X X   X
+```
+
+_QSPI_
+
+```
+DIP (S1)	1 2 3 4
+BootMode	3 2 1 0
+ON 		  X X  
+OFF 		X     X
+```
+
 ## SD-Card Boot
-
-### Dip Switches
-
-MODE 3210
-DIP  0123
-S1 : 0011
 
 ### Bootable SD-Card
 
@@ -112,12 +152,6 @@ Linux kernel: set env var `image` to name of your kernel image,
 provide the file via TFTP and update via `run update_kernel`
 
 ## e-MMC Boot
-
-### Dip Switches
-
-MODE 3210
-DIP  0123
-S1 : 0010
 
 ### Bootable e-MMC
 
@@ -161,12 +195,6 @@ Linux kernel: set env var `image` to name of your kernel image,
 provide the file via TFTP and update via `run update_kernel`
 
 ## QSPI Boot
-
-### Dip Switches
-
-MODE 3210
-DIP  0123
-S1 : 0110
 
 ### Build with Yocto
 
