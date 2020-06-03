@@ -5,7 +5,7 @@ SRCBRANCH_tqmls10xxa = "TQMLS10xxA-rcw"
 SRC_URI_tqmls10xxa = "${SRC_URI_TQ}"
 PYTHON_tqmls10xxa = "${USRBINPATH}/python2"
 
-SRCREV_tqmls1028a = "a288315076746535139d947dd6a0f2d858b39000"
+SRCREV_tqmls1028a = "cbda95aa17be64bd5c8c68e9876cccf08c5e1292"
 SRCBRANCH_tqmls1028a = "TQMLS1028A-rcw-LSDK-18.12"
 SRC_URI_tqmls1028a = "${SRC_URI_TQ}"
 M_tqmls1028a = "tqc"
