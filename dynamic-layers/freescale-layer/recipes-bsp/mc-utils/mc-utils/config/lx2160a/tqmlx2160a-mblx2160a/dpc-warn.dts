@@ -1,0 +1,83 @@
+/*
+* Copyright 2018 NXP
+*
+* Redistribution and use in source and binary forms, with or without
+* modification, are permitted provided that the following conditions are met:
+*   * Redistributions of source code must retain the above copyright
+*     notice, this list of conditions and the following disclaimer.
+*   * Redistributions in binary form must reproduce the above copyright
+*     notice, this list of conditions and the following disclaimer in the
+*     documentation and/or other materials provided with the distribution.
+*   * Neither the name of the above-listed copyright holders nor the
+*     names of any contributors may be used to endorse or promote products
+*     derived from this software without specific prior written permission.
+*
+* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+* AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+* IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+* ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE
+* LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+* CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+* SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+* INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+* CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+* ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+* POSSIBILITY OF SUCH DAMAGE.
+*/
+
+/*
+* This DPC showcases one Linux configuration for lx2160a boards.
+*/
+
+/dts-v1/;
+
+/ {
+
+	resources {
+
+		icid_pools {
+
+			icid_pool@1 {
+				num = <0x64>;
+				base_icid = <0x0>;
+			};
+		};
+	};
+
+	mc_general {
+		/* Configure the DDR log */
+		log {
+			mode = "LOG_MODE_ON";
+			level = "LOG_LEVEL_WARNING";
+		};
+		/* Configure the UART log */
+		/* If CONSOLE_MODE_ON all commands take longer time to execute! */
+		console {
+			mode = "CONSOLE_MODE_OFF";
+			uart_id = <0x4>;
+			level = "LOG_LEVEL_WARNING";
+		};
+	};
+
+	controllers {
+
+		qbman {
+			/* Transform this number of 8-WQ channels into four times
+			 * as many 2-WQ channels. This allows the creation of a
+			 * larger number of DPCONs.
+			 */
+			wq_ch_conversion = <32>;
+		};
+	};
+
+	board_info {
+		ports {
+			mac@17 {
+				link_type = "MAC_LINK_TYPE_PHY";
+			};
+			mac@18 {
+				link_type = "MAC_LINK_TYPE_PHY";
+			};
+		};
+	};
+};
