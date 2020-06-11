@@ -2,8 +2,6 @@
 
 MACHINEOVERRIDES =. "imx:mx8:mx8m:mx8mq:tqma8mq:"
 
-require conf/machine/include/arm/arch-arm64.inc
-
 # Don't include kernels in standard images
 RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
 
@@ -80,3 +78,4 @@ WKS_FILE_DEPENDS = "\
 # meta-freescale
 
 include conf/machine/include/imx-base.inc
+require conf/machine/include/tune-cortexa53.inc

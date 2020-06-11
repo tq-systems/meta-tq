@@ -36,15 +36,8 @@ SRC_URI_mx8 = "\
 ####################
 
 COMPATIBLE_MACHINE_append = "tqma8xx"
-
-#COMPATIBLE_MACHINE = "tqma7x"
-#COMPATIBLE_MACHINE_append = "|tqma6x"
-#COMPATIBLE_MACHINE_append = "|tqma6ulx"
-#COMPATIBLE_MACHINE_append = "|tqma6ullx"
-#
-#COMPATIBLE_MACHINE_append = "|tqma8xx"
 #COMPATIBLE_MACHINE_append = "|tqma8xxs"
-#COMPATIBLE_MACHINE_append = "|tqma8mq"
+COMPATIBLE_MACHINE_append = "|tqma8mq"
 #COMPATIBLE_MACHINE_append = "|tqma8qm"
 
 EXTRA_OEMAKE_append_mx8 = " ARCH=arm64"
