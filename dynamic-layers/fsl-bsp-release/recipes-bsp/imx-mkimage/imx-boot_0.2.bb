@@ -91,7 +91,7 @@ REV_OPTION_imx8qxpc0lpddr4arm2 = "REV=C0"
 
 do_compile () {
     if [ "${SOC_TARGET}" = "iMX8M" -o "${SOC_TARGET}" = "iMX8MM" -o "${SOC_TARGET}" = "iMX8MN" ]; then
-        echo 8MQ/8MM boot binary build
+        bbnote 8MQ/8MM/8MN boot binary build
         SOC_DIR="iMX8M"
         for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
             echo "Copy ddr_firmware: ${ddr_firmware} from ${DEPLOY_DIR_IMAGE} -> ${S}/${SOC_DIR} "
@@ -107,7 +107,7 @@ do_compile () {
         cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${S}/${SOC_DIR}/u-boot.bin
 
     elif [ "${SOC_TARGET}" = "iMX8QM" ]; then
-        echo 8QM boot binary build
+        bbnote 8QM boot binary build
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SC_FIRMWARE_NAME} ${S}/${SOC_DIR}/scfw_tcm.bin
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${S}/${SOC_DIR}/bl31.bin
         cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${S}/${SOC_DIR}/u-boot.bin
@@ -123,7 +123,7 @@ do_compile () {
         cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME} ${S}/${SOC_DIR}/
 
     else
-        echo 8QX boot binary build
+        bbnote 8QX boot binary build
         cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_power_mode_switch.bin ${S}/${SOC_DIR}/m40_tcm.bin
         cp ${DEPLOY_DIR_IMAGE}/imx8qx_m4_TCM_power_mode_switch.bin ${S}/${SOC_DIR}/m4_image.bin
         cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME} ${S}/${SOC_DIR}/
@@ -142,8 +142,8 @@ do_compile () {
 
     # mkimage for i.MX8
     for target in ${IMXBOOT_TARGETS}; do
-        echo "building ${SOC_TARGET} - ${REV_OPTION} ${target}"
-        make SOC=${SOC_TARGET} ${REV_OPTION} ${target}
+        bbnote "building ${SOC_TARGET} - ${REV_OPTION} ${target}"
+        make SOC=${SOC_TARGET} ${REV_OPTION}  dtbs=${UBOOT_DTB_NAME} ${target}
         if [ -e "${S}/${SOC_DIR}/flash.bin" ]; then
             cp ${S}/${SOC_DIR}/flash.bin ${S}/${BOOT_CONFIG_MACHINE}-${target}
         fi
