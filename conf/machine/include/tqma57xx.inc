@@ -6,8 +6,6 @@ include conf/machine/include/dra7xx.inc
 # needed for easier compatible / preferred_provider
 MACHINEOVERRIDES =. "tqma57xx:"
 
-MACHINE_FEATURES += "pci"
-
 # prevent inclusion if meta-ti is present - otherwise we get nasty double inclusion warnings
 DEFAULTTUNE ?= "${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-ti", "", "armv7athf-neon", d)}"
 require ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-ti", '', 'conf/machine/include/tune-cortexa15.inc', d)}
@@ -66,4 +64,4 @@ WKS_FILE_DEPENDS = "\
 UBI_VOLNAME = "rootfs"
 
 # List common SoC features
-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx mmip dsp"
+MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx mmip dsp pci"
