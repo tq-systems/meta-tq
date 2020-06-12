@@ -2,8 +2,6 @@
 
 MACHINEOVERRIDES =. "mx8:mx8qxp:"
 
-require conf/machine/include/arm/arch-arm64.inc
-
 # Don't include kernels in standard images
 RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
 
@@ -58,6 +56,7 @@ WKS_FILE_DEPENDS = "\
 # meta-freescale
 
 include conf/machine/include/imx-base.inc
+require conf/machine/include/tune-cortexa35.inc
 
 # need to do after imx-base, not included in firmware-imx-8.3
 MACHINE_FIRMWARE_remove = "firmware-imx-brcm"
