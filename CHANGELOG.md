@@ -5,7 +5,7 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
-## Next release
+## sumo.TQMa8.BSP.SW.0018
 
 ### Added
 
