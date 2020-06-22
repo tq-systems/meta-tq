@@ -204,6 +204,12 @@ provide the file via TFTP and update via `run update_kernel`
 
 ### Sleep Modes
 
+Read supported sleep modes:
+
+```
+cat /sys/power/state
+```
+
 Test sleepmode and wakeup:
 
 Use rtc\[0,1\] to wakeup after 20 seconds:
@@ -220,6 +226,7 @@ Send linux to sleep mode and press one of the gpio buttons S\[1,2,3\] afterwards
 
 ```
 echo mem > /sys/power/state
+echo freeze > /sys/power/state
 ```
 
 ### Audio output
