@@ -35,7 +35,7 @@ do_configure_prepend() {
     # if we have an intree defconfig, create a .config - has to be done in the source
     # dir but the final .config is needed in build dir. Source dir needs to be clean
     # just before the compile step.
-    # We check this befor a defconfig in workdir since this could be supplied
+    # We check this before a defconfig in workdir since this could be supplied
     # automagically by some basic kernel classes
     if [ ! -z "${KERNEL_TREE_DEFCONFIG}" ]; then
         bbnote "Using intree defconfig: ${KERNEL_TREE_DEFCONFIG}"
