@@ -15,6 +15,7 @@ KERNEL_TREE_DEFCONFIG_mx8 = "imx_v8_defconfig"
 
 SRC_URI_mx8 = "\
   ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+  file://local-version.cfg \
   file://tqma8x-display-support.cfg \
   file://tqma8x-network-support.cfg \
   file://tqma8x-i2c-devices.cfg \
