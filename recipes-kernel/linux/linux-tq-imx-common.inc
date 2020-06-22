@@ -7,10 +7,6 @@ DEPENDS += "lzop-native bc-native openssl-native"
 #
 PROVIDES += "linux-imx linux-tq-imx"
 
-# Put a local version until we have a true SRCREV to point to
-LOCALVERSION = "tq"
-SCMVERSION = "y"
-
 inherit kernel
 
 # todo: make it optional
