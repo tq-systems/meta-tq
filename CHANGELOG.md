@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ### Added
 
+* tqma8mx: optimize environment settings
+* u-boot-tq-imx: generate local version
 * tqma8mx: linux: fix dt for LVDS over DSI @ eLCDIF
 * tqma8mx: linux: increase CMA size to 640 MB
 * linux: fix simple-panel settings for tianma LVDS display
@@ -31,6 +33,7 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* linux-tq-imx: fix generating local version
 * tqma8x: linux: fix only one device on PCIe causes kernel hang
 * tqma8x: u-boot: fix ENET randomly not communicating
 * tqma8x: linux: fix ENET randomly not communicating
