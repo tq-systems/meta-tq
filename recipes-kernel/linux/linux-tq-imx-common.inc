@@ -73,4 +73,25 @@ do_configure_prepend() {
     fi
 }
 
+####
+# kernel.bbclass unconditionally creates an empty .scmversion file that prevents
+# using CONFIG_LOCALVERSION_AUTO - we fix this in provifing an append step
+# regenerating the file if is set in final .config
+####
+do_configure_append() {
+    config="${B}/.config"
+
+    bbnote "configure_append"
+
+    # match complete line:
+    grep -Fx "CONFIG_LOCALVERSION_AUTO=y" ${config} > /dev/null
+    if [ "$?" -eq "0" ]; then
+        # Add GIT revision to the local version
+        head=$(git --git-dir=${S}/.git rev-parse --verify --short HEAD 2> /dev/null)
+        printf "%s%s" +g $head > ${B}/.scmversion
+        printf "%s%s" +g $head > ${S}/.scmversion
+        bbnote "fix .scmversion"
+    fi
+}
+
 S = "${WORKDIR}/git"
