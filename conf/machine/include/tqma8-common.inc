@@ -1,4 +1,5 @@
-# Common definitions for all TQ-Group TQMa8x / TQMa8xx / TQMa8Mx modules
+# Common definitions for all TQ-Group TQMa8x / TQMa8xx / TQMa8Mx /
+# TQMa8MxML / TQMa8MxNL modules
 
 PREFERRED_PROVIDER_u-boot-fw-utils_mx8 ?= "u-boot-fw-utils-imx-tq"
 
