@@ -27,6 +27,7 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 * e-MMC / SD
   * Read
   * Write
+  * Boot
 * USB Hub
 * USB OTG
 * ENET (GigE via Phy on MBa8Xx)
