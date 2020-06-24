@@ -13,8 +13,7 @@ SCMVERSION = "y"
 
 inherit kernel
 
-# todo: make it optional
-require ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-freescale", 'linux-imx-tq-conditional.inc', '', d)}
+require ${@bb.utils.contains("BBFILE_COLLECTIONS", "freescale-layer", 'linux-imx-tq-conditional.inc', '', d)}
 
 # name the intree defconfig file
 KERNEL_TREE_DEFCONFIG ??= ""
