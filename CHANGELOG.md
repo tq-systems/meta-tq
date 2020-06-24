@@ -5,19 +5,33 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## Next Release
+
+## Changed
+
+* imx-boot: use version from NXP BSP 5.4.3_2.0.0
+* imx-boot: do not longer use dirty hack for U-Boot DTB of i.MX8M CPU
+
+## Added
+
+* local version gereration or u-boot and kernel
+* initial support for TQMa8MxML
+* initial support for TQMa8MxNL
+* initial port of TQMa8Mx to new U-Boot / Kernel (not feature complete)
+
+## zeus.TQMa8.BSP.SW.0025
 
 ## Changed
 
 * tqma8xx: support LVDS
 * tqma8xx: support USB
-* linux-imc-tq_5.4: port simple-panel display timings
-* linux-imc-tq_5.4: backport LVDS bugfixes from 5.4.3\_2.0.0 beta
-* linux-imc-tq_5.4: port LVDS DSI bridge
-* linux-imc-tq_5.4: port audio fixes for TQ Systems starter kits
+* linux-imx-tq_5.4: port simple-panel display timings
+* linux-imx-tq_5.4: backport LVDS bugfixes from 5.4.3\_2.0.0 beta
+* linux-imx-tq_5.4: port LVDS DSI bridge
+* linux-imx-tq_5.4: port audio fixes for TQ Systems starter kits
 * mesa: restrict bbappend to mx8
 * tqma8: disable *.bz2 image types
-
-## zeus.TQMa8.IBPQ.SW.0040
+* update to zeus
 
 ## Added
 
@@ -28,10 +42,6 @@ Releases are named with the following scheme:
 * update to 1.3.1 bed SCFW firmware
 * add bbappends for recipes from meta-imx
 * add recipes from sumo-tqma8x branch
-
-## Changed
-
-* update to zeus
 
 ## warrior.TQMLS10xx.BSP.SW.0101
 
