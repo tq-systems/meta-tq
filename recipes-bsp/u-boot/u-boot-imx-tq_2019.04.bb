@@ -2,6 +2,7 @@
 DESCRIPTION = "u-boot for TQ-Group NXP i.MX8 based modules"
 
 require u-boot-imx-tq-common_${PV}.inc
+require ${@bb.utils.contains("BBFILE_COLLECTIONS", "freescale-layer", 'u-boot-tq-imx-conditional.inc', '', d)}
 require recipes-bsp/u-boot/u-boot.inc
 
 inherit pythonnative
