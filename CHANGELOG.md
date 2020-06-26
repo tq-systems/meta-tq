@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
+
+## zeus.TQMa57xx.BSP.SW.0011
+
+* tqma57xx: U-Boot: renamed extraversion
+
+## zeus.TQMa57xx.BSP.SW.0010
+
+* tqma57xx: Linux: add TI Linux 5.4 (tagged 07.00.00.05-rt)
+* tqma57xx: U-Boot: update to set pru mac from eeprom
+* tqma57xx: added pci to MACHINE_FEATURES
+
 ## warrior.TQMLS10xx.BSP.SW.0101
 
 ## Changed
