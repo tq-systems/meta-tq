@@ -44,6 +44,6 @@ WKS_FILE_DEPENDS = "\
 	virtual/bootloader \
 	"
 
-# optionally source the machine specific features for multimedia etc. from
+# source the machine specific features for RCW, MC, multimedia etc. from
 # meta-freescale
-include conf/machine/include/qoriq-arm64.inc
+require conf/machine/include/qoriq-arm64.inc
