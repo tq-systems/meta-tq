@@ -97,6 +97,9 @@ _MBa8x HW Rev.020x only_
 ## Known Issues
 
 * Mikrobus Modul RTC5 on ecspi1 don't answer
+* UART4: needs ATF modification, to make it usable for linux
+
+## Build Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
