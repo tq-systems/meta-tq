@@ -14,10 +14,16 @@ Releases are named with the following scheme:
 
 ## Added
 
+* tqma8mq: support LVDS/PCIe with new kernel
 * local version gereration or u-boot and kernel
 * initial support for TQMa8MxML
 * initial support for TQMa8MxNL
 * initial port of TQMa8Mx to new U-Boot / Kernel (not feature complete)
+
+## Fixed
+
+* fix e-MMC supplies for tqma8mq, tqma8mm, tqma8mn
+* fix network problems (caused by wrong regulator settings)
 
 ## zeus.TQMa8.BSP.SW.0025
 
