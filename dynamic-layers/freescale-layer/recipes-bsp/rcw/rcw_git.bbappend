@@ -1,12 +1,15 @@
-SRC_URI_TQ = "${TQ_GIT_BASEURL}/rcw.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
+SRC_URI_tqmls-rcw-common = "${TQ_GIT_BASEURL}/rcw.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
+SRCBRANCH_tqmls-rcw-common = "TQMLS-Integration"
+SRCREV_tqmls-rcw-common = "de8a7805e0e18a8fd27ab00f01eacf47b87cfd91"
+LIC_FILES_CHKSUM_tqmls-rcw-common = "file://LICENSE;md5=44a0d0fad189770cc022af4ac6262cbe"
 
-SRCREV_tqmls10xxa = "9f3db9ede3a5edec257c44c804131c168f281b97"
+SRC_URI_tqmls10xxa = "${SRC_URI_tqmls-rcw-common}"
 SRCBRANCH_tqmls10xxa = "TQMLS10xxA-rcw"
-SRC_URI_tqmls10xxa = "${SRC_URI_TQ}"
+SRCREV_tqmls10xxa = "9f3db9ede3a5edec257c44c804131c168f281b97"
 PYTHON_tqmls10xxa = "${USRBINPATH}/python2"
 
-SRCREV_tqmls1028a = "cbda95aa17be64bd5c8c68e9876cccf08c5e1292"
-SRCBRANCH_tqmls1028a = "TQMLS1028A-rcw-LSDK-18.12"
-SRC_URI_tqmls1028a = "${SRC_URI_TQ}"
-M_tqmls1028a = "tqc"
-PYTHON_tqmls1028a = "${USRBINPATH}/python2"
+OVERRIDES_prepend_tqmls1012al = "tqmls-rcw-common:"
+M_tqmls1012al = "tqmls1012al"
+
+OVERRIDES_prepend_tqmls1028a = "tqmls-rcw-common:"
+M_tqmls1028a = "tqmls1028a"
