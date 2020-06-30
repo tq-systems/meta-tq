@@ -5,18 +5,17 @@
 # It uses u-boot as boot loader
 #
 # The disk layout used is:
-#  - --------- -------- ------- ------- -------- ------- --------
-# | | rcw-pbi | u-boot |  env  |  PPA  | /boot | rootfs |
-#  - --------- -------- ------- ------- -------- ------- --------
-# ^ ^         ^        ^       ^       ^       ^        ^
-# | |         |        |       |       |       |        |
-# 0 4kiB    1MiB     3MiB   4MiB   16MiB   48MiB   304MiB
+#  - ------------- ------------ ------- ------- -------- -------
+# | | rcw-pbi+BL2 | BL3/u-boot |  env  | /boot | rootfs |
+#  - ------------- ------------ ------- ------- -------- -------
+# ^ ^             ^            ^       ^       ^        ^
+# | |             |            |       |       |        |
+# 0 4kiB         1MiB         8MiB    12MiB   44MiB   556MiB
 #
 
-part rcw_pbi --source rawcopy --sourceparams="file=rcw/${RCWIMG}" --no-table --align 4
-part u-boot --source rawcopy --sourceparams="file=u-boot.bin-${BOOTMODE}" --no-table --align 1024
-part ppa --source rawcopy --sourceparams="file=ppa.itb" --no-table --align 4096
-part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 16384 --fixed-size 32M
+part rcw_pbi --source rawcopy --sourceparams="file=atf/bl2_sd.pbl" --no-table --align 4
+part u-boot --source rawcopy --sourceparams="file=atf/fip_uboot.bin" --no-table --align 1024
+part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 12288 --fixed-size 32M
 part / --source rootfs --fstype=ext4 --label root --align 4096 --fixed-size 512M
 
 bootloader --ptable msdos
