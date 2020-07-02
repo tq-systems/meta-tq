@@ -71,6 +71,15 @@ _MBa8x HW Rev.020x only_
 * SPI
   * 2 x via spidev in userland
 * ENET (GigE via Phy on MBa8Mx)
+* USB
+  * USB 3.0 Host / Hub
+  * USB DRD (USB 2.0 OTG only, Cable Detect, VBUS)
+* DSI
+  * LVDS on DCSS
+  * LVDS on eLCDIF
+* PCIe
+  * mini-PCIe on MBa8Mx
+  * PCIe (Slot)
 
 ## TODO:
 
@@ -86,19 +95,11 @@ _MBa8x HW Rev.020x only_
 * Audio
   * via codec / audio out
   * HDMI audio (with pulse audio)
-* USB
-  * USB 3.0 Host / Hub
-  * USB DRD (USB 2.0 OTG only, Cable Detect, VBUS)
 * HDMI
-* GPU
 * VPU (test with h264 and vp8)
 * DSI
-  * LVDS on DCSS
-  * LVDS on eLCDIF
   * DSI to DP bridge
-* PCIe
-  * mini-PCIe on MBa8Mx
-  * PCIe (Slot)
+* GPU
 
 ## Known Issues
 
@@ -109,10 +110,15 @@ _MBa8x HW Rev.020x only_
 * QSPI limited to SDR (driver / chip compatibility)
 * Mikrobus Modul RTC5 on ecspi1 don't answer
 
+## Build Artifacts
+
 Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
 
 * \*.dtb: device tree blobs
+  * imx8mq-mba8mx.dtb
+  * imx8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb
+  * imx8mq-mba8mx-dcss-lvds-tm070jvhg33.dtb
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
