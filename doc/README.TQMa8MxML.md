@@ -37,7 +37,9 @@ _MBa8x HW Rev.020x only_
   * Write
 * ENET (GigE via Phy on MBa8Mx)
 * Bootdevices: e-MMC / SD-Card
-* USB OTG
+* USB
+  * USB 2.0 Host / Hub
+  * USB DRD (USB 2.0 OTG, Cable Detect, VBUS)
 
 **TODO or not tested / supported**
 
@@ -62,16 +64,21 @@ _MBa8x HW Rev.020x only_
 * UART
   * console on UART3
   * 2 x UART via pin head or X15
-* SPI
-  * 2 x via spidev in userland
+C  * PCIe Slot on MBa8Mx
+* USB
+  * USB 2.0 Host / Hub
+  * USB DRD (USB 2.0 OTG, Cable Detect, VBUS)
+* PWM
+  * Buzzer
+  * Backlight for LVDS
+* DSI
+  * DSI to LVDS bridge
+* GPU
 
 ## TODO:
 
-* USB
 * DSI
   * DSI to DP bridge
-  * DSI to LVDS bridge
-* ENET (GigE via Phy on MBa8Mx)
 * DSI to DP bridge
 * MIPI CSI
 * MIKRO Bus
@@ -84,15 +91,7 @@ _MBa8x HW Rev.020x only_
   * see Known Issues
 * Audio
   * via codec / audio out
-  * HDMI audio (with pulse audio)
-* USB
-  * USB 2.0 Host / Hub
-  * USB DRD (USB 2.0 OTG, Cable Detect, VBUS)
-* HDMI
-* GPU
 * VPU (test with h264 and vp8)
-* PCIe
-  * mini-PCIe on MBa8Mx
 
 ## Known Issues
 
@@ -105,6 +104,8 @@ Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
 
 * \*.dtb: device tree blobs
+  * imx8mm-mba8mx.dtb
+  * imx8mm-mba8mx-lcdif-lvds-tm070jvhg33.dtb
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
