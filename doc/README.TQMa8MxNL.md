@@ -64,6 +64,7 @@ _MBa8x HW Rev.020x only_
   * 2 x UART via pin head or X15
 * SPI
   * 2 x via spidev in userland
+* ENET (GigE via Phy on MBa8Mx)
 
 ## TODO:
 
@@ -71,7 +72,6 @@ _MBa8x HW Rev.020x only_
 * DSI
   * DSI to DP bridge
   * DSI to LVDS bridge
-* ENET (GigE via Phy on MBa8Mx)
 * DSI to DP bridge
 * MIPI CSI
 * MIKRO Bus
@@ -91,8 +91,6 @@ _MBa8x HW Rev.020x only_
 * HDMI
 * GPU
 * VPU (test with h264 and vp8)
-* PCIe
-  * mini-PCIe on MBa8Mx
 
 ## Known Issues
 
