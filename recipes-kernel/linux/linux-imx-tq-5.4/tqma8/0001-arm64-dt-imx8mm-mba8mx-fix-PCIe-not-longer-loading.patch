@@ -1,0 +1,28 @@
+From e0f04811fe69fc9d3cfcb3fe26281779890eeec8 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Fri, 3 Jul 2020 11:46:53 +0200
+Subject: [PATCH] arm64: dt: imx8mm-mba8mx: fix PCIe not longer loading
+
+PCIe slot has no disable pin. In fact this pin is used for the
+USB Hub reset.
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/imx8mm-mba8mx.dtsi | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/imx8mm-mba8mx.dtsi b/arch/arm64/boot/dts/freescale/imx8mm-mba8mx.dtsi
+index 6d5eb8f94341e..ac79ce2ae48ad 100644
+--- a/arch/arm64/boot/dts/freescale/imx8mm-mba8mx.dtsi
++++ b/arch/arm64/boot/dts/freescale/imx8mm-mba8mx.dtsi
+@@ -494,7 +494,6 @@
+ };
+ 
+ &pcie0{
+-	disable-gpio = <&expander0 13 GPIO_ACTIVE_LOW>;
+ 	reset-gpio = <&expander0 14 GPIO_ACTIVE_LOW>;
+ 	clocks = <&clk IMX8MM_CLK_PCIE1_ROOT>,
+ 		 <&clk IMX8MM_CLK_PCIE1_AUX>,
+-- 
+2.17.1
+

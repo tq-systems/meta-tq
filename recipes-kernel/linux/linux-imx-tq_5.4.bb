@@ -26,6 +26,7 @@ SRC_URI_mx8 = "\
   file://tqma8x-adc-hwmon-support.cfg \
   file://tqma8x-rtc.cfg \
   file://tqma8x-nonimx-drm-removal.cfg \
+  file://0001-arm64-dt-imx8mm-mba8mx-fix-PCIe-not-longer-loading.patch \
 "
 
 ################
