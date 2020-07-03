@@ -5,10 +5,13 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
-## Next Release
+## zeus.TQMa8.BSP.SW.0026
 
 ## Changed
 
+* linux: backport fixes from 5.4.24_2.1.0 for DSI and USB
+* linux: improve driver for SN65DSI83
+* linux: simple-panel fixes for i.MX8 and LVDS via DSI
 * imx-boot: use version from NXP BSP 5.4.3_2.0.0
 * imx-boot: do not longer use dirty hack for U-Boot DTB of i.MX8M CPU
 
