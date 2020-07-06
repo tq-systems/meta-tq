@@ -8,6 +8,10 @@ Releases are named with the following scheme:
 ## zeus.TQMa57xx.BSP.SW.0011
 
 * tqma57xx: U-Boot: renamed extraversion
+* tqma57xx: U-Boot: update u-boot on vfat partition
+* tqma57xx: U-Boot: implement errata i863 workaround: mmc2 no pullups
+* tqma57xx: Linux: implement errata i863 workaround: mmc2 no pullups
+* tqma57xx: Linux: enable USB2 OTG mode on MBa57xx
 
 ## zeus.TQMa57xx.BSP.SW.0010
 
