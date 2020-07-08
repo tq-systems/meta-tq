@@ -43,7 +43,6 @@ IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
 IMAGE_BOOT_FILES = "\
 	MLO \
 	u-boot.img \
-	${KERNEL_IMAGETYPE} \
 "
 
 IMAGE_FSTYPES ?= "tar.gz ext4 wic"

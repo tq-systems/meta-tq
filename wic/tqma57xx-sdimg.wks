@@ -5,12 +5,12 @@
 # It uses u-boot
 #
 # The disk layout used is:
-#  - ---------- ------- -------- --------- ------------- -------------
-# | |  u-boot  |  env  | resvd  |  /boot  |    rootfs   |
-#  - ---------- ------- -------- --------- ------------- -------------
-# ^ ^          ^       ^        ^
-# | |          |       |        |
-# 0 1kiB     1MiB    2MiB     4MiB
+# -----------------------------------------------------------
+# | MBR ||  env  | redenv | /boot | rootfs |
+# -----------------------------------------------------------
+# ^      ^       ^        ^       ^
+# |      |       |        |       |
+# 0      1280kiB 1344kiB  4MiB    20MiB
 #
 part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 4096 --size 16M --extra-space 0
 part / --source rootfs --fstype=ext4 --label root --align 4096

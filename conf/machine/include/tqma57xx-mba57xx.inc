@@ -23,8 +23,6 @@ KERNEL_DEVICETREE ?= " \
 IMAGE_BOOT_FILES_append = "\
 	${KERNEL_IMAGETYPE};linuximage \
 	${KERNEL_DEVICETREE} \
-	MLO \
-	u-boot.img \
 "
 
 SERIAL_CONSOLES ?= "115200;ttyS2"
