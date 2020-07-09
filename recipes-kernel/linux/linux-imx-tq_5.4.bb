@@ -9,7 +9,7 @@ SRC_URI = "\
 "
 
 SRCBRANCH = "TQMaxx-lf-5.4.y-1.0.0"
-SRCREV = "6ac56d1c44de5bb8713e8dcedae98e4da1867ca6"
+SRCREV = "d68d92698de2969eb0b53a71d41845a435b1528a"
 
 KERNEL_TREE_DEFCONFIG_mx8 = "imx_v8_defconfig"
 
@@ -26,7 +26,6 @@ SRC_URI_mx8 = "\
   file://tqma8x-adc-hwmon-support.cfg \
   file://tqma8x-rtc.cfg \
   file://tqma8x-nonimx-drm-removal.cfg \
-  file://0001-arm64-dt-imx8mm-mba8mx-fix-PCIe-not-longer-loading.patch \
 "
 
 ################
