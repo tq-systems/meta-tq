@@ -5,6 +5,26 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## Changed
+
+* linux: TQMa8MxML: optimized pad settings for SD-Card
+* linux: TQMa8Mx\[M,N\]L: simplify USB OTG (use ID from USB)
+* u-boot: TQMa8MxML: optimized pad settings for SD-Card
+* u-boot: TQMa8Mx\[M,N\]L: simplify USB OTG (use ID from USB)
+
+## Added
+
+* linux: TQMa8Mx\[M,N\]L: USB host support (Hub on MBa8Mx)
+* linux: TQMa8Mx\[M,N\]L: enable QSPI flash
+* linux: TQMa8Mx\[M,N\]L: enable SD104 for SD-Card
+* u-boot: TQMa8Mx\[M,N\]L: USB host support (Hub on MBa8Mx)
+
+## Fixed
+
+* linux: TQMa8MxML: remove pull config from pad settings
+* u-boot: TQMa8MxNL: fix not working USB download in SPL
+* u-boot: TQMa8Mx\[M,N\]L: USB power domain handling
+
 ## zeus.TQMa8.BSP.SW.0026
 
 ## Changed
