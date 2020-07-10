@@ -23,6 +23,7 @@ EXTRA_IMAGEDEPENDS_append_fsl-lsch2 += "fm-ucode"
 EXTRA_IMAGEDEPENDS_append_fsl-lsch3 += "rcw mc-utils management-complex"
 
 IMAGE_FSTYPES ?= "tar.gz ext4 wic ubi"
+IMAGE_FSTYPES_remove = " ext2.gz.u-boot ext2.gz"
 
 # DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
 IMAGE_FSTYPES_remove += "${@bb.utils.contains('DISTRO_FEATURES', 'vulkan', 'ubi', '', d)}"

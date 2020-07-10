@@ -34,7 +34,7 @@ EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 EXTRA_IMAGEDEPENDS += "rcw ppa dp-firmware-cadence"
 
 IMAGE_FSTYPES_append = " tar.gz ext4 wic"
-IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2"
+IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2 ext2.gz.u-boot ext2.gz"
 
 DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
 
