@@ -13,7 +13,7 @@ require conf/machine/include/tqmxx.inc
 
 PREFERRED_PROVIDER_u-boot_tqmls1028a ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/bootloader_tqmls1028a ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqmls1028a ?= "linux-lsdk-tq"
+PREFERRED_PROVIDER_virtual/kernel_tqmls1028a ?= "linux-imx-tq"
 
 # Define the default image type
 KERNEL_IMAGETYPE ?= "Image.gz"
