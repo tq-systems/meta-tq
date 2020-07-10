@@ -23,5 +23,6 @@ COMPATIBLE_MACHINE = "tqma7x"
 COMPATIBLE_MACHINE_append = "|tqma6x"
 COMPATIBLE_MACHINE_append = "|tqma6ulx"
 COMPATIBLE_MACHINE_append = "|tqma6ullx"
+COMPATIBLE_MACHINE_append = "|tqmls1028a"
 
 S = "${WORKDIR}/git"
