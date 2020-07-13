@@ -14,6 +14,9 @@ Releases are named with the following scheme:
 
 ## Added
 
+* u-boot: TQMa8Mx\[M,N\]L: QSPI Support (1-1-1, 4B)
+* linux: TQMa8MQ: sound support
+* linux: TQMa8Mx\[M,N\]L: sound support
 * linux: TQMa8Mx\[M,N\]L: USB host support (Hub on MBa8Mx)
 * linux: TQMa8Mx\[M,N\]L: enable QSPI flash
 * linux: TQMa8Mx\[M,N\]L: enable SD104 for SD-Card

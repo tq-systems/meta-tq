@@ -80,21 +80,23 @@ _MBa8x HW Rev.020x only_
 * PCIe
   * mini-PCIe on MBa8Mx
   * PCIe (Slot)
+* Audio
+  * Codec Line In (X14)
+  * Codec Line Out (X13)
 
 ## TODO:
 
 * MIPI CSI
 * MIKRO Bus
 * SIM
-* Audio codec line in / mic in
 * Cortex M4 / RPMSG
 * QSPI NOR
   * Read with 1-1-4 SDR
   * PP / Erase with 1-1-1
   * see Known Issues
 * Audio
-  * via codec / audio out
   * HDMI audio (with pulse audio)
+  * Audio codec mic in
 * HDMI
 * VPU (test with h264 and vp8)
 * DSI

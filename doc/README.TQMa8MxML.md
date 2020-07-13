@@ -40,6 +40,9 @@ _MBa8x HW Rev.020x only_
 * USB
   * USB 2.0 Host / Hub
   * USB DRD (USB 2.0 OTG, Cable Detect, VBUS)
+* QSPI NOR
+  * Read with 1-1-1 SDR
+  * PP / Erase with 1-1-1
 
 **TODO or not tested / supported**
 
@@ -64,7 +67,7 @@ _MBa8x HW Rev.020x only_
 * UART
   * console on UART3
   * 2 x UART via pin head or X15
-C  * PCIe Slot on MBa8Mx
+* PCIe Slot on MBa8Mx (X36)
 * USB
   * USB 2.0 Host / Hub
   * USB DRD (USB 2.0 OTG, Cable Detect, VBUS)
@@ -74,23 +77,24 @@ C  * PCIe Slot on MBa8Mx
 * DSI
   * DSI to LVDS bridge
 * GPU
+* Audio
+  * Codec Line In (X14)
+  * Codec Line Out (X13)
+* QSPI NOR
+  * Read with 1-1-4 SDR
+  * PP / Erase with 1-1-1
 
 ## TODO:
 
+* Audio
+  * Audio codec mic in
 * DSI
   * DSI to DP bridge
 * DSI to DP bridge
 * MIPI CSI
 * MIKRO Bus
 * SIM
-* Audio codec line in / mic in
 * Cortex M4 / RPMSG
-* QSPI NOR
-  * Read with 1-1-4 SDR
-  * PP / Erase with 1-1-1
-  * see Known Issues
-* Audio
-  * via codec / audio out
 * VPU (test with h264 and vp8)
 
 ## Known Issues

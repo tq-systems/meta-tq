@@ -37,7 +37,12 @@ _MBa8x HW Rev.020x only_
   * Write
 * ENET (GigE via Phy on MBa8Mx)
 * Bootdevices: e-MMC / SD-Card
-* USB OTG
+* USB
+  * USB 2.0 Host / Hub
+  * USB DRD (USB 2.0 OTG, Cable Detect, VBUS)
+* QSPI NOR
+  * Read with 1-1-1 SDR
+  * PP / Erase with 1-1-1
 
 **TODO or not tested / supported**
 
@@ -65,10 +70,18 @@ _MBa8x HW Rev.020x only_
 * SPI
   * 2 x via spidev in userland
 * ENET (GigE via Phy on MBa8Mx)
+* Audio
+  * Codec Line In (X14)
+  * Codec Line Out (X13)
+* USB
+  * USB 2.0 Host / Hub
+  * USB DRD (USB 2.0 OTG, Cable Detect, VBUS)
+* QSPI NOR
+  * Read with 1-1-4 SDR
+  * PP / Erase with 1-1-1
 
 ## TODO:
 
-* USB
 * DSI
   * DSI to DP bridge
   * DSI to LVDS bridge
@@ -76,19 +89,9 @@ _MBa8x HW Rev.020x only_
 * MIPI CSI
 * MIKRO Bus
 * SIM
-* Audio codec line in / mic in
-* Cortex M4 / RPMSG
-* QSPI NOR
-  * Read with 1-1-4 SDR
-  * PP / Erase with 1-1-1
-  * see Known Issues
 * Audio
-  * via codec / audio out
-  * HDMI audio (with pulse audio)
-* USB
-  * USB 2.0 Host / Hub
-  * USB DRD (USB 2.0 OTG, Cable Detect, VBUS)
-* HDMI
+  * Audio codec mic in
+* Cortex M4 / RPMSG
 * GPU
 * VPU (test with h264 and vp8)
 
