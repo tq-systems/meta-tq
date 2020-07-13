@@ -5,6 +5,11 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa57xx.BSP.SW.0012
+
+* tqma57xx: U-Boot: renamed extraversion
+* tqma57xx: U-Boot: patched fatfs support
+
 ## zeus.TQMa57xx.BSP.SW.0011
 
 * tqma57xx: U-Boot: renamed extraversion
