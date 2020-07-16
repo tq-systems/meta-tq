@@ -20,7 +20,7 @@ This README contains some useful information for TQMa8MxML on MBa8Mx
 
 _MBa8x HW Rev.020x only_
 
-* RAM configs: 512MB
+* RAM configs: 1 GiB
 * CPU variants i.MX8MMQ
 * Fuses
 * speed grade / temperature grade detection
@@ -46,13 +46,13 @@ _MBa8x HW Rev.020x only_
 
 **TODO or not tested / supported**
 
-* RAM 1 GB / 2 GB
+* RAM 2 GiB
 * CPU variants i.MX8MMD/S and Lite
 * create Bootstreams for qspi
 
 ### Linux:
 
-* RAM configs 512MB
+* RAM configs: 1 GiB
 * CPU variants i.MX8MMQ
 * speed grade / temperature grade detection
 * I2C
