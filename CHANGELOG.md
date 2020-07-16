@@ -5,8 +5,13 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa8.BSP.SW.0027
+
 ## Changed
 
+* linux: TQMa8MxML: optimized CMA size for 1 GiB RAM
+* machines: rename some machines to unify naming and reflect real mem size
+* u-boot: TQMa8Mx\[M,N\]L: rename defconfigs to unify naming
 * linux: TQMa8MxML: optimized pad settings for SD-Card
 * linux: TQMa8Mx\[M,N\]L: simplify USB OTG (use ID from USB)
 * u-boot: TQMa8MxML: optimized pad settings for SD-Card
@@ -25,6 +30,8 @@ Releases are named with the following scheme:
 
 ## Fixed
 
+* u-boot: TQMa8MxNL: fix RAM Timing for 1GiB
+* u-boot: TQMa8MxML: fix RAM size (default 1GiB instead of 512 MiB)
 * u-boot: TQMa8Mx\[M,N\]L: fix Kconfig for default device tree
 * linux: TQMa8MxML: remove pull config from pad settings
 * u-boot: TQMa8MxNL: fix not working USB download in SPL
