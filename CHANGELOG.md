@@ -14,6 +14,7 @@ Releases are named with the following scheme:
 
 ## Added
 
+* u-boot: TQMa8Mx\[M,N\]L: add support for RTC load capacity configuration
 * u-boot: TQMa8Mx\[M,N\]L: QSPI Support (1-1-1, 4B)
 * linux: TQMa8MQ: sound support
 * linux: TQMa8Mx\[M,N\]L: sound support
@@ -24,6 +25,7 @@ Releases are named with the following scheme:
 
 ## Fixed
 
+* u-boot: TQMa8Mx\[M,N\]L: fix Kconfig for default device tree
 * linux: TQMa8MxML: remove pull config from pad settings
 * u-boot: TQMa8MxNL: fix not working USB download in SPL
 * u-boot: TQMa8Mx\[M,N\]L: USB power domain handling
