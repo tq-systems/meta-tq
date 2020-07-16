@@ -1,0 +1,29 @@
+From 72611b3fd497ab5c623a876248ec160f32bd3a7e Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Thu, 16 Jul 2020 10:08:50 +0200
+Subject: [PATCH 3/4] arm64: dt: [cosmetic] imx8mn-tqma8mnx: remove wrong
+ comment
+
+Documented incompatibility is long gone.
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/imx8mn-tqma8mnx.dtsi | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/imx8mn-tqma8mnx.dtsi b/arch/arm64/boot/dts/freescale/imx8mn-tqma8mnx.dtsi
+index 24f207a7fdb3..d8d3b40bcf66 100644
+--- a/arch/arm64/boot/dts/freescale/imx8mn-tqma8mnx.dtsi
++++ b/arch/arm64/boot/dts/freescale/imx8mn-tqma8mnx.dtsi
+@@ -315,8 +315,6 @@
+ 
+ 	/*
+ 	 * NXP SE97BTP with temperature sensor + eeprom
+-	 * ATTENTION: do not use correct dt compatible since this will conflict
+-	 * with hwmon sysfs ABI and break device registration
+ 	 */
+ 	sensor0: temperature-sensor-eeprom@1b {
+ 		compatible = "nxp,se97", "jedec,jc-42.4-temp";
+-- 
+2.17.1
+

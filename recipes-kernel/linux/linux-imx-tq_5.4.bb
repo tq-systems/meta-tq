@@ -26,6 +26,10 @@ SRC_URI_mx8 = "\
   file://tqma8x-adc-hwmon-support.cfg \
   file://tqma8x-rtc.cfg \
   file://tqma8x-nonimx-drm-removal.cfg \
+  file://0001-mmc-sdhci-esdhc-imx-fix-the-mask-for-tuning-start-po.patch \
+  file://0002-arm64-dt-cosmetic-imx8mm-tqma8mmx-remove-wrong-comme.patch \
+  file://0003-arm64-dt-cosmetic-imx8mn-tqma8mnx-remove-wrong-comme.patch \
+  file://0004-arm64-dt-imx8mm-tqma8mmx-fix-cma-size.patch \
 "
 
 ################
