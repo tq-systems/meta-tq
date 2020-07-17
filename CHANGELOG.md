@@ -5,6 +5,46 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## Unreleased
+
+### Added
+
+* tqma\[6,6ul,6ull,7\], tqmls102xa: added kernel linux-tq 5.4
+* tqma\[6,6ul,6ull,7\], tqmls102xa: added kernel linux-rt-tq 5.4
+* tqma\[6,6ul,6ull,7\], tqmls1028a: added kernel linux-imx-tq 5.4
+  * The corresponding userland packages (imx-gpu-*, libdrm, weston) for the
+    Vivante graphics stack (TQMa6x) have been updated from meta-freescale
+    to match the kernel version
+* tqmls1028a: added u-boot-tq 2019.10 (based on LSDK 20.04)
+
+### Changed
+
+* tqma\[6,6ul,6ull,7\]: A mainline-based kernel (linux-tq) is now chosen by
+  default when use-mainline-bsp is added to MACHINEOVERRIDES
+  (`MACHINEOVERRIDES .= ":use-mainline-bsp"`)
+* tqma\[6ul,6ull,7\]: The kernel configuration was changed to use the better
+  supported mainline graphics stack. The linux-imx mxcfb stack is only used
+  on TQMa6x now.
+* tqmls10xxa, tqmls1028a: the meta-freescale layer has been made mandatory for
+  these machines
+* tqmls10xxa: the variable BOOTMODE can be set to "sd" or "emmc" to choose
+  between SD card and eMMC boot configuration
+* tqmls1028a: SD card and eMMC boot configurations have been merged and are
+  now supported by a single image
+* tqmls1028a: changed to TF-A (Trusted Firmware) boot
+  * The U-Boot environment for SPI-NOR boot moved to offset 5 MiB
+  * The U-Boot environment for eMMC/SD card boot moved to offset 8 MiB
+  * The PPA (Primary Protected Application) package was replaced with ATF
+    (ARM Trusted Firmware)
+  * For more information about the TF-A boot process please refer to the
+    NXP Layerscape SDK User Guide
+
+### Removed
+
+* tqma\[6,7\], tqmls102xa: removed kernel linux-tq 4.14
+* tqma\[6,7\], tqmls102xa: removed kernel linux-rt-tq 4.14
+* tqma\[6,6ul,6ull,7\]: removed kernel linux-imx-tq 4.14
+
 ## zeus.TQMa57xx.BSP.SW.0012
 
 ### Fixed
