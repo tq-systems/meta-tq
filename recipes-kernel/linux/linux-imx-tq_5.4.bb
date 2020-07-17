@@ -17,12 +17,13 @@ SRC_URI = "\
 "
 
 SRCBRANCH = "TQMaxx-fslc-5.4-1.0.0-imx"
-SRCREV = "1cdc87f14b529de09f8d564dd4bdd13a7c79883d"
+SRCREV = "b786446a37043f3164a909e639ab595197079163"
 
 COMPATIBLE_MACHINE = "tqma7x"
 COMPATIBLE_MACHINE_append = "|tqma6x"
 COMPATIBLE_MACHINE_append = "|tqma6ulx"
 COMPATIBLE_MACHINE_append = "|tqma6ullx"
+COMPATIBLE_MACHINE_append = "|tqmls1012al"
 COMPATIBLE_MACHINE_append = "|tqmls1028a"
 
 S = "${WORKDIR}/git"
