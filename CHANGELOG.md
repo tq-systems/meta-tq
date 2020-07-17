@@ -7,35 +7,45 @@ Releases are named with the following scheme:
 
 ## zeus.TQMa57xx.BSP.SW.0012
 
-* tqma57xx: U-Boot: renamed extraversion
+### Fixed
+
 * tqma57xx: U-Boot: patched fatfs support
 
 ## zeus.TQMa57xx.BSP.SW.0011
 
-* tqma57xx: U-Boot: renamed extraversion
+### Changed
+
 * tqma57xx: U-Boot: update u-boot on vfat partition
+
+### Fixed
+
 * tqma57xx: U-Boot: implement errata i863 workaround: mmc2 no pullups
 * tqma57xx: Linux: implement errata i863 workaround: mmc2 no pullups
 * tqma57xx: Linux: enable USB2 OTG mode on MBa57xx
 
 ## zeus.TQMa57xx.BSP.SW.0010
 
+### Added
+
 * tqma57xx: Linux: add TI Linux 5.4 (tagged 07.00.00.05-rt)
+
+### Fixed
+
 * tqma57xx: U-Boot: update to set pru mac from eeprom
 * tqma57xx: added pci to MACHINE_FEATURES
 
 ## warrior.TQMLS10xx.BSP.SW.0101
 
-## Changed
+### Changed
 
 * tqmls10xxa: use EDAC_LAYERSCAPE error detection
 
-## Fixed
+### Fixed
 
 * tqmls1043a: U-Boot: use correct SF_DEFAULT_BUS
 * tqmls10xxa: Linux: fix error message on reboot
 
-## Added
+### Added
 
 * tqmls1043a: add configs for 2GB variant
 
@@ -54,7 +64,7 @@ Releases are named with the following scheme:
 
 ## warrior.TQMa6x.BSP.SW.0115
 
-## Changed
+### Changed
 
 * tqma6\[q,s,dl,qp\]: use "?=" to assign UBOOT_CONFIG
 * tqma6x\[q,s,dl,qp\]: add spinor u-boot config to default value of UBOOT_CONFIG
@@ -65,17 +75,17 @@ Releases are named with the following scheme:
 
 ## warrior.TQMa6ULx.BSP.SW.0110
 
-## Added
+### Added
 
 * tqma6ul\[l\]x: add configs for 512 MB variant
 
-## Changed
+### Changed
 
 * tqma\[6,6ul,6ull,7\]: add SDMA firmware to MACHINE\_EXTRA\_RRECOMMENDS
 * tqma6ul\[l\]x\[l\]: simplify machine configs
 * u-boot-tq_2016.03: update to support 512 MB variant of tqma6ul\[l\]x
 
-## Fixed
+### Fixed
 
 * tqma\[6,6ul,6ull,7\]: assignment of providers for bootloader / kernel should use "?="
 * tqma6ul: fix duplicate inclusion of imx-base when using with meta-freescale
@@ -143,7 +153,7 @@ Releases are named with the following scheme:
 
 ## warrior.TQMLS102xA.BSP.SW.0112
 
-## Changed
+### Changed
 
 * Linux defconfigs for TQMa6ULx / TQMa6ULLx / TQMa6ULxL from PTXdist BSP TQMLS102xA.BSP.SW.0112
 * Linux defconfigs for TQMa7x from PTXdist BSP TQMLS102xA.BSP.SW.0112
@@ -161,11 +171,11 @@ Releases are named with the following scheme:
 
 ## warrior.TQMLS102xA.BSP.SW.0111
 
-## Added
+### Added
 
 * TQMLS102x audio support from PTXdist BSP TQMLS102xA.BSP.SW.0111
 
-## Fixed
+### Fixed
 
 * ptpd recipe warning for architecture when using with meta-freescale
 
