@@ -16,6 +16,7 @@ Releases are named with the following scheme:
     Vivante graphics stack (TQMa6x) have been updated from meta-freescale
     to match the kernel version
 * tqmls1028a: added u-boot-lsdk-tq 2019.10 (based on LSDK 20.04)
+* tqmls1012al: added new embedded module and its starterkit baseboard MBLS1012AL
 
 ### Changed
 
