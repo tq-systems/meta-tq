@@ -41,7 +41,6 @@ SRC_URI_append_tqmls102xa = " \
     file://can1.service \
 "
 
-SYSTEMD_SERVICE_${PN}_tqma6q-nav = ""
 SYSTEMD_SERVICE_${PN}_tqma6x = "can0.service can1.service"
 SYSTEMD_SERVICE_${PN}_tqma6ulx = "can0.service can1.service"
 SYSTEMD_SERVICE_${PN}_tqma6ullx = "can0.service can1.service"
@@ -56,10 +55,6 @@ do_install_append() {
     case ${MACHINE} in
         # place complete machine names first to make sure special settings
         # are prioritized
-        tqma6q-nav )
-            # nothing to do here, only one interface
-            break
-            ;;
         tqma6dl* |\
         tqma6q* |\
         tqma6qp* |\

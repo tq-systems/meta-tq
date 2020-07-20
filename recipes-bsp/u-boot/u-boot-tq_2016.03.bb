@@ -12,17 +12,9 @@ DEPENDS_append = " xxd-native"
 SRCREV = "c10cb4d6caf21b4ae1f2819794d93b2e037dba25"
 SRCBRANCH = "TQMaxx2-v2016.03-rel_imx_4.1.15_2.0.0_ga"
 
-SRCREV_tqma6q-nav = "53a419a26d372f5419d9f5e1768d750df85a43ee"
-SRCBRANCH_tqma6q-nav = "nav2/work"
-
 SRC_URI = "\
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
     "
-
-SRC_URI_tqma6q-nav = "\
-    git://github.com/tq-systems/u-boot-tqmaxx.git;protocol=https;branch=${SRCBRANCH} \
-    file://0001-net-Use-packed-structures-for-networking.patch \
-"
 
 S = "${WORKDIR}/git"
 

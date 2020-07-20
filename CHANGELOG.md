@@ -45,6 +45,7 @@ Releases are named with the following scheme:
 * tqma\[6,7\], tqmls102xa: removed kernel linux-tq 4.14
 * tqma\[6,7\], tqmls102xa: removed kernel linux-rt-tq 4.14
 * tqma\[6,6ul,6ull,7\]: removed kernel linux-imx-tq 4.14
+* tqma6q-nav: removed machine
 
 ## zeus.TQMa57xx.BSP.SW.0012
 
