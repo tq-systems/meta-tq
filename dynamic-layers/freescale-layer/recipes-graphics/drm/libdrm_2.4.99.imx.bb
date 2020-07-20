@@ -20,6 +20,11 @@ S = "${WORKDIR}/git"
 
 DEFAULT_PREFERENCE = "-1"
 
+python () {
+    if d.getVar("PREFERRED_VERSION_" + d.getVar("PN")) != d.getVar("PV"):
+        raise bb.parse.SkipRecipe("libdrm IMX version not enabled")
+}
+
 inherit meson pkgconfig manpages
 
 PACKAGECONFIG ??= "libkms intel radeon amdgpu nouveau vmwgfx omap freedreno vc4 etnaviv install-test-programs"
