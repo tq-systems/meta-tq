@@ -15,7 +15,7 @@ SRC_URI = "\
 "
 
 SRCBRANCH = "TQMaxx-linux-v5.4.y-rt"
-SRCREV = "b1aca47d8a9b9ce73f69879cfd6f26acddb21465"
+SRCREV = "a924f13fea259ff354aed473c19b76f70b03fec1"
 
 COMPATIBLE_MACHINE = "tqmls102xa"
 COMPATIBLE_MACHINE_append = "|tqma7x"
