@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
+## warrior.TQMLS10xx.BSP.SW.0102
+
+## Changed
+
+* tqmls1046a_8g: Update DDR4-RAM Configuration for new Revision
+
 ## warrior.TQMLS10xx.BSP.SW.0101
 
 ## Changed
