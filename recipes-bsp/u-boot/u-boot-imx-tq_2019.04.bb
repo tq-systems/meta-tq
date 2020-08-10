@@ -10,10 +10,6 @@ inherit pythonnative
 PROVIDES += "u-boot"
 DEPENDS_append = " python dtc-native bc-native bison-native"
 
-SRC_URI_append = " \
-  file://0001-tqma8mmx-update-RAM-Timing-for-TQMa8MxNL-1-GiB.patch \
-"
-
 BOOT_TOOLS = "imx-boot-tools"
 
 do_deploy_append_mx8m () {
