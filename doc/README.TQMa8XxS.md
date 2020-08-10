@@ -1,6 +1,6 @@
-# TQMa8Xx
+# TQMa8XxS
 
-This README contains some useful information for TQMa8Xx on MBa8Xx
+This README contains some useful information for TQMa8XxS on MB-SMARC-2
 
 ## Versions
 
@@ -22,10 +22,9 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 
 ### U-Boot:
 
-* RAM configs: 1GB
+* RAM configs: 2GB
 * CPU variants: i.MX8QXP
 * Fuses
-* GPIO
 * QSPI
 * I2C
 * e-MMC / SD
@@ -40,91 +39,80 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 
 **TODO or not tested / supported**
 
-* RAM 512 MB
 * CPU variants i.MX8DX
 * speed grade / temperature grade detection
-* create Bootstreams for qspi
+* create Bootstreams for qspi (see chapter QSPI Boot)
+* GPIO
 
 ### Linux:
 
-* RAM configs 1GB
+* RAM configs 2GB
 * CPU variants i.MX8QXP
 * I2C
-  * Temperature Sensors
+  * Temperature Sensors (without cpu-temp)
   * RTC
   * EEPROMS
-* SPI
-  * spi user space device on all CS
 * GPU
-* LED
-* GPIO
-* ENET (GigE via Phy)
+* ENET (GigE via Phy on MBa8Xx)
   * ENET 1
   * ENET 2
 * QSPI NOR
-* UART
-  * console
-  * LPUART3 via unused SAI pins
 * LVDS
-* GPU
-* PCIe (mini-PCIe)
+* PCIe (mini-PCIe only)
 
 **TODO or not tested with new BSP**
 
 * temperature grade
 * Audio
 * DSI - DP bridge
+* LED
 * GPIO
   * Suspend / Wakeup via GPIO button
 * DVFS
   * speed grade
+* SPI
+  * spi user space device on all CS
 
 ## Known Issues
 
 ## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/tqma8xqp-mba8xx`
+`${TMPDIR}/deploy/images/tqma8xqps-mb-smarc-2`
 
 * \*.dtb: device tree blobs
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* imx-boot-tqma8xqp-mba8xx-sd.bin: boot stream for SD / e-MMC
+* imx-boot-tqma8xqps-mb-smarc-2-sd.bin: boot stream for SD / e-MMC
 
 ## Boot Dip Switches
 
 _Note:_
 
-* S1 is for Boot Mode.
-* X means position of DIP, - means don't care
+* S3 is for Boot Mode.
 
 _SD Card_
 
 ```
-DIP (S1)	1 2 3 4
-BootMode	3 2 1 0
-ON 		    X X
-OFF 		X X    
+            1 2 3 4
+DIP (S3)    0 1 1 0
+
 ```
 
 _e-MMC_
 
 ```
-DIP (S1)	1 2 3 4
-BootMode	3 2 1 0
-ON 		    X  
-OFF 		X X   X
+            1 2 3 4
+DIP (S3)    1 0 0 0
 ```
 
 _QSPI_
 
 ```
-DIP (S1)	1 2 3 4
-BootMode	3 2 1 0
-ON 		  X X  
-OFF 		X     X
+            1 2 3 4
+DIP (S3)    1 1 0 0
 ```
 
 ## SD-Card Boot
@@ -207,7 +195,6 @@ provide the file via TFTP and update via `run update_kernel`
 changes needed:
 
 set `UBOOT_CONFIG ??= "fspi"` in `conf/machine/tqma8xqp[xd]-mbpa8xx.conf`
-set `IMXBOOT_TARGETS_tqma8xx = "flash_flexspi"` in `dynamic-layers/fsl-bsp-release/recipes-bsp/imx-mkimage/imx-boot_0.2.bbappend`
 
 Find the resulting QSPI bootstream image in the deploy folder named as
 `xxx.bin-flash_flexspi`.

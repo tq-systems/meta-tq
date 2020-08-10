@@ -5,6 +5,16 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## Added
+
+* port TQMa8XxS to new u-boot / kernel (rev.0200/lpddr4)
+* linux: TQMa8XxS: support LVDS
+* linux: TQMa8XxS: support CAN
+* linux: TQMa8XxS: support PCIe
+* linux: TQMa8XxS: support USB
+* u-boot: TQMa8XxS: support USB
+* linux: TQMa8Xx: support PCIe
+
 ## zeus.TQMa8.BSP.SW.0027
 
 ## Changed
