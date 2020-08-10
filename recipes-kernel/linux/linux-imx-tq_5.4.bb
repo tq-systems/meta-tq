@@ -9,7 +9,7 @@ SRC_URI = "\
 "
 
 SRCBRANCH = "TQMaxx-lf-5.4.y-1.0.0"
-SRCREV = "adff1069d601f60662fa605c884413179fc0407c"
+SRCREV = "6a488f925ca829667cb3d7777806b701c4f51a32"
 
 KERNEL_TREE_DEFCONFIG_mx8 = "imx_v8_defconfig"
 
@@ -26,10 +26,6 @@ SRC_URI_mx8 = "\
   file://tqma8x-adc-hwmon-support.cfg \
   file://tqma8x-rtc.cfg \
   file://tqma8x-nonimx-drm-removal.cfg \
-  file://0001-mmc-sdhci-esdhc-imx-fix-the-mask-for-tuning-start-po.patch \
-  file://0002-arm64-dt-cosmetic-imx8mm-tqma8mmx-remove-wrong-comme.patch \
-  file://0003-arm64-dt-cosmetic-imx8mn-tqma8mnx-remove-wrong-comme.patch \
-  file://0004-arm64-dt-imx8mm-tqma8mmx-fix-cma-size.patch \
 "
 
 ################
