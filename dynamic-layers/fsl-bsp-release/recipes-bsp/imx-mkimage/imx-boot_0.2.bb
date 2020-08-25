@@ -99,7 +99,9 @@ do_compile () {
         done
         cp ${DEPLOY_DIR_IMAGE}/signed_*_imx8m.bin             ${S}/${SOC_DIR}/
         cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${S}/${SOC_DIR}/u-boot-spl.bin
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${UBOOT_DTB_NAME}   ${S}/${SOC_DIR}/
+        for dtb in ${UBOOT_DTB_NAME}; do
+            cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${dtb}   ${S}/${SOC_DIR}/
+        done
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/u-boot-nodtb.bin-${MACHINE}-${UBOOT_CONFIG}    ${S}/${SOC_DIR}/u-boot-nodtb.bin
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/mkimage_uboot       ${S}/${SOC_DIR}/
 
@@ -143,7 +145,7 @@ do_compile () {
     # mkimage for i.MX8
     for target in ${IMXBOOT_TARGETS}; do
         bbnote "building ${SOC_TARGET} - ${REV_OPTION} ${target}"
-        make SOC=${SOC_TARGET} ${REV_OPTION}  dtbs=${UBOOT_DTB_NAME} ${target}
+        make SOC=${SOC_TARGET} ${REV_OPTION}  dtbs="${UBOOT_DTB_NAME}" ${target}
         if [ -e "${S}/${SOC_DIR}/flash.bin" ]; then
             cp ${S}/${SOC_DIR}/flash.bin ${S}/${BOOT_CONFIG_MACHINE}-${target}
         fi
