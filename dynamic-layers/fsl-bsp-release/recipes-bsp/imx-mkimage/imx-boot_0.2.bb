@@ -20,6 +20,8 @@ DEPENDS_append_mx8m = " u-boot-mkimage-native dtc-native"
 BOOT_NAME = "imx-boot"
 PROVIDES = "${BOOT_NAME}"
 
+DEPLOYDIR_IMXBOOT ?= "${BOOT_TOOLS}"
+
 inherit deploy seco-firmware-name
 
 # Add CFLAGS with native INCDIR & LIBDIR for imx-mkimage build
@@ -59,6 +61,7 @@ ATF_MACHINE_NAME_append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-o
 SECO_FIRMWARE_NAME ?= ""
 
 UBOOT_NAME = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
+UBOOT_SPL_NAME = "${@os.path.basename(d.getVar("SPL_BINARY"))}-${MACHINE}-${UBOOT_CONFIG}"
 BOOT_CONFIG_MACHINE = "${BOOT_NAME}-${MACHINE}-${UBOOT_CONFIG}.bin"
 
 TOOLS_NAME ?= "mkimage_imx8"
@@ -98,7 +101,7 @@ do_compile () {
             cp ${DEPLOY_DIR_IMAGE}/${ddr_firmware}               ${S}/${SOC_DIR}/
         done
         cp ${DEPLOY_DIR_IMAGE}/signed_*_imx8m.bin             ${S}/${SOC_DIR}/
-        cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${S}/${SOC_DIR}/u-boot-spl.bin
+        cp ${DEPLOY_DIR_IMAGE}/${UBOOT_SPL_NAME} ${S}/${SOC_DIR}/u-boot-spl.bin
         for dtb in ${UBOOT_DTB_NAME}; do
             cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${dtb}   ${S}/${SOC_DIR}/
         done
@@ -114,7 +117,7 @@ do_compile () {
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${S}/${SOC_DIR}/bl31.bin
         cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${S}/${SOC_DIR}/u-boot.bin
         if [ ${DEPLOY_OPTEE} ] || [ ${SPL_BINARY} ]; then
-            cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${S}/${SOC_DIR}/u-boot-spl.bin
+            cp ${DEPLOY_DIR_IMAGE}/${UBOOT_SPL_NAME} ${S}/${SOC_DIR}/u-boot-spl.bin
         fi
 
         cp ${DEPLOY_DIR_IMAGE}/imx8qm_m4_0_TCM_rpmsg_lite_pingpong_rtos_linux_remote_m40.bin ${S}/${SOC_DIR}/m40_tcm.bin
@@ -133,7 +136,7 @@ do_compile () {
         cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${S}/${SOC_DIR}/bl31.bin
         cp ${DEPLOY_DIR_IMAGE}/${UBOOT_NAME}                     ${S}/${SOC_DIR}/u-boot.bin
         if [ ${DEPLOY_OPTEE} ] || [ ${SPL_BINARY} ]; then
-            cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${S}/${SOC_DIR}/u-boot-spl.bin
+            cp ${DEPLOY_DIR_IMAGE}/${UBOOT_SPL_NAME} ${S}/${SOC_DIR}/u-boot-spl.bin
         fi
     fi
 
@@ -159,7 +162,6 @@ do_install () {
     done
 }
 
-DEPLOYDIR_IMXBOOT = "${BOOT_TOOLS}"
 do_deploy () {
     install -d ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
 
@@ -183,7 +185,7 @@ do_deploy () {
         install -m 0644 ${S}/${SOC_DIR}/m4_image.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         install -m 0644 ${S}/${SOC_DIR}/m4_1_image.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
 
-        install -m 0755 ${S}/${TOOLS_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}
+        install -m 0755 ${S}/${TOOLS_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         if ${DEPLOY_OPTEE}; then
             install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         fi
@@ -192,7 +194,7 @@ do_deploy () {
         install -m 0644 ${S}/${SOC_DIR}/m40_tcm.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         install -m 0644 ${S}/${SOC_DIR}/m4_image.bin ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
 
-        install -m 0755 ${S}/${TOOLS_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}
+        install -m 0755 ${S}/${TOOLS_NAME} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         if ${DEPLOY_OPTEE}; then
             install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${UBOOT_CONFIG} ${DEPLOYDIR}/${DEPLOYDIR_IMXBOOT}
         fi
