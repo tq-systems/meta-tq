@@ -21,6 +21,7 @@ KERNEL_IMAGETYPE = "Image"
 
 PREFERRED_PROVIDER_u-boot_mx8 ?= "u-boot-imx-tq"
 PREFERRED_PROVIDER_virtual/bootloader_mx8 ?= "u-boot-imx-tq"
+PREFERRED_PROVIDER_u-boot-mfgtool = "u-boot-imx-tq-mfgtool"
 
 # for sdcard image rule
 BOOT_SPACE = "65536"
