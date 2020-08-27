@@ -7,7 +7,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:${THISDIR}/${PN}:"
 SC_FIRMWARE_VERSION_TQ := "tq-TQMa8.NXP-v1.3.1.B4124.0028"
 
 SRC_URI_append = " \
-    file://${PN}-${SC_FIRMWARE_VERSION_TQ}.tar.gz \
+    file://${BPN}-${SC_FIRMWARE_VERSION_TQ}.tar.gz \
 "
 
 # clear vars to prevent default assignments
