@@ -63,4 +63,4 @@ WKS_FILE_DEPENDS = "\
 UBI_VOLNAME = "rootfs"
 
 # List common SoC features
-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx mmip dsp pci"
+MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx mmip dsp pci can"
