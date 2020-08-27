@@ -36,19 +36,22 @@ _MBa8x HW Rev.020x only_
   * Read
   * Write
 * ENET (GigE via Phy on MBa8Mx)
-* Bootdevices: e-MMC / SD-Card
+* Bootdevices:
+  * SD-Card on USDHC2
 * USB
   * USB 2.0 Host / Hub
   * USB DRD (USB 2.0 OTG, Cable Detect, VBUS)
 * QSPI NOR
   * Read with 1-1-1 SDR
-  * PP / Erase with 1-1-1
+  * PP / Erase with 1-1-1 SDR
 
 **TODO or not tested / supported**
 
 * RAM 2 GB
+* e-MMC Boot (needs fusing to support USDHC1)
 * CPU variants i.MX8MND/S and Lite
 * create Bootstreams for qspi
+* Cortex M7
 
 ### Linux:
 
@@ -76,24 +79,26 @@ _MBa8x HW Rev.020x only_
 * USB
   * USB 2.0 Host / Hub
   * USB DRD (USB 2.0 OTG, Cable Detect, VBUS)
+* PWM
+  * Buzzer
+  * Backlight for LVDS
+* DSI
+  * DSI to LVDS bridge
+* GPU
 * QSPI NOR
   * Read with 1-1-4 SDR
-  * PP / Erase with 1-1-1
+  * PP / Erase with 1-1-1 SDR
 
 ## TODO:
 
+* Audio
+  * Audio codec mic in
 * DSI
   * DSI to DP bridge
-  * DSI to LVDS bridge
-* DSI to DP bridge
 * MIPI CSI
 * MIKRO Bus
 * SIM
-* Audio
-  * Audio codec mic in
-* Cortex M4 / RPMSG
-* GPU
-* VPU (test with h264 and vp8)
+* Cortex M7 / RPMSG
 
 ## Known Issues
 
@@ -116,7 +121,7 @@ Artifacs can be found at the usual locations for bitbake:
 
 _Note:_
 
-* S5 / S6: Boot Config
+* S5 / S6: not used for TQMa8MxNL
 * S9:2: BOOT\_MODE0
 * S9:3: BOOT\_MODE1
 * S9:1 and S9:4: not needed for booting
@@ -134,53 +139,71 @@ OFF 	    X X
 
 _BOOT\_MODE_
 
-* Boot from Fuses (needs boot fuses to be set)
+BOOT Mode \[3:0\] is mapped to the following DIP Switches:
+
+* 3: DIP Switch BOOT\_MODE 3 (TQMa8MxML ADAP)
+* 2: DIP Switch BOOT\_MODE 2 (TQMa8MxML ADAP)
+* 1: DIP Switch S9:2 (MBa8Mx)
+* 0: DIP Switch S9:1 (MBa8Mx)
+
+Boot from Fuses (needs boot fuses to be set)
+
+BOOT\_MODE: 0000
 
 ```
-	S9
-DIP 	1 2 3 4
-ON 	       
-OFF 	- X X -
+	BOOT MODE (ADAP)	MBa8Mx
+				S9
+DIP 	3 2			4 3 2 1
+ON 				       
+OFF 	X X			- X X -
 ```
 
-* Serial Downloader
+Serial Downloader
+
+BOOT\_MODE: 0001
 
 ```
-	S9
-DIP 	1 2 3 4
-ON 	    X  
-OFF 	- X   -
+	BOOT MODE (ADAP)	MBa8Mx
+				S9
+DIP 	3 2			4 3 2 1
+ON 				    X  
+OFF 	X X			- X   -
 ```
 
-* Internal Boot (no boot fuses set, use boot config pins)
+e-MMC (needs fuses to be set to use USDHC1)
+
+BOOT\_MODE: 0010
 
 ```
-	S9
-DIP 	1 2 3 4
-ON 	  X    
-OFF 	-   X -
+	BOOT MODE (ADAP)	MBa8Mx
+				S9
+DIP 	3 2			4 3 2 1
+ON 				  X    
+OFF 	X X			-   X -
 ```
 
-_SD Card_
+SD Card (USDHC2)
 
-BOOT\_MODE: Internal Boot
-
-```
-	S6			S5			S9
-DIP 	1 2 3 4 5 6 7 8		1 2 3 4 5 6 7 8		1 2 3 4
-ON 	X X   X   X X X		X X X X X X X X 	  X    
-OFF 	    X   X      		               		-   X -
-```
-
-_e-MMC_
-
-BOOT\_MODE: Internal Boot
+BOOT\_MODE: 0011
 
 ```
-	S6			S5			S9
-DIP 	1 2 3 4 5 6 7 8		1 2 3 4 5 6 7 8		1 2 3 4
-ON 	X X X X X   X X		X X X X X X X X 	  X    
-OFF 	          X    		               		-   X -
+	BOOT MODE (ADAP)	MBa8Mx
+				S9
+DIP 	3 2			4 3 2 1
+ON 				  X X  
+OFF 	X X			-     -
+```
+
+FlexSPI / 3B Read
+
+BOOT\_MODE: 0110
+
+```
+	BOOT MODE (ADAP)	MBa8Mx
+				S9
+DIP 	3 2			4 3 2 1
+ON 	  X			  X    
+OFF 	X  			-   X -
 ```
 
 ## Functional DIP Switches
