@@ -42,13 +42,14 @@ _MBa8x HW Rev.020x only_
   * USB DRD (USB 2.0 OTG, Cable Detect, VBUS)
 * QSPI NOR
   * Read with 1-1-1 SDR
-  * PP / Erase with 1-1-1
+  * PP / Erase with 1-1-1 SDR
 
 **TODO or not tested / supported**
 
 * RAM 2 GiB
 * CPU variants i.MX8MMD/S and Lite
 * create Bootstreams for qspi
+* Cortex M4
 
 ### Linux:
 
@@ -68,6 +69,12 @@ _MBa8x HW Rev.020x only_
   * console on UART3
   * 2 x UART via pin head or X15
 * PCIe Slot on MBa8Mx (X36)
+* SPI
+  * 2 x via spidev in userland
+* ENET (GigE via Phy on MBa8Mx)
+* Audio
+  * Codec Line In (X14)
+  * Codec Line Out (X13)
 * USB
   * USB 2.0 Host / Hub
   * USB DRD (USB 2.0 OTG, Cable Detect, VBUS)
@@ -77,12 +84,9 @@ _MBa8x HW Rev.020x only_
 * DSI
   * DSI to LVDS bridge
 * GPU
-* Audio
-  * Codec Line In (X14)
-  * Codec Line Out (X13)
 * QSPI NOR
   * Read with 1-1-4 SDR
-  * PP / Erase with 1-1-1
+  * PP / Erase with 1-1-1 SDR
 
 ## TODO:
 
@@ -90,7 +94,6 @@ _MBa8x HW Rev.020x only_
   * Audio codec mic in
 * DSI
   * DSI to DP bridge
-* DSI to DP bridge
 * MIPI CSI
 * MIKRO Bus
 * SIM
