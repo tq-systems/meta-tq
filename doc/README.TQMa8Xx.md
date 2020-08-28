@@ -118,13 +118,31 @@ ON 		    X
 OFF 		X X   X
 ```
 
-_QSPI_
+_FLEXSPI_
 
 ```
 DIP (S1)	1 2 3 4
 BootMode	3 2 1 0
 ON 		  X X  
 OFF 		X     X
+```
+
+_Serial Downloader_
+
+```
+DIP (S1)	1 2 3 4
+BootMode	3 2 1 0
+ON 		      X
+OFF 		X X X  
+```
+
+_Boot from Fuses_
+
+```
+DIP (S1)	1 2 3 4
+BootMode	3 2 1 0
+ON 		       
+OFF 		X X X X
 ```
 
 ## SD-Card Boot
@@ -147,14 +165,32 @@ Example for Linux:
 
 ### Update components via U-Boot
 
-Bootstream: set env var `uboot` to name of your bootstream image, provide the
-bootstream via TFTP and update via `run update_uboot`
+_U-Boot environment variables_
 
-Device tree blob: set env var `fdt_file` to name of your device tree blob,
-provide the blob via TFTP and update via `run update_fdt`
+* `uboot`: name of bootstream image (aka flash.bin)
+* `mmcdev`: 0 for e-MMC, 1 for SD-Card
+* `fdt_file`: device tree blob,
+* `image`: kernel image,
 
-Linux kernel: set env var `image` to name of your kernel image,
-provide the file via TFTP and update via `run update_kernel`
+_SD / e-MMC_
+
+Download bootstream from TFTP and update:
+
+`run update_uboot_mmc`
+
+Download device tree blob from TFTP and update:
+
+`run update_fdt_mmc`
+
+Download kernel image from TFTP and update:
+
+`run update_kernel`
+
+_FLEXSPI_
+
+Download bootstream from TFTP and update:
+
+`run update_uboot_spi`
 
 ## e-MMC Boot
 
