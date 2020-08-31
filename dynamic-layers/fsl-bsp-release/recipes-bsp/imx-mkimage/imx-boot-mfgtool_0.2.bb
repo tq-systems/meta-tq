@@ -7,6 +7,9 @@ PROVIDES = "${BOOT_NAME}"
 DEPLOYDIR_IMXBOOT = "${BOOT_NAME}"
 BOOT_CONFIG_MACHINE = "${BOOT_NAME}-${MACHINE}-mfgtool.bin"
 
+# NOTE: flexspi target leads to non working image, so restrict to e-MMC/SD
+IMXBOOT_TARGETS_mx8qxp = "flash_spl"
+
 UBOOT_NAME = "u-boot-${MACHINE}-mfgtool.${UBOOT_SUFFIX}"
 UBOOT_SPL_NAME = "${@os.path.basename(d.getVar("SPL_BINARY"))}-mfgtool-${MACHINE}"
 
