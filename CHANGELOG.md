@@ -5,6 +5,21 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa57xx.BSP.SW.0013
+
+### Changed
+
+* tqma57xx: errata i863 application fixed
+* tqma57xx: Linux: mba57xx dt cleanup
+  * license header to SPDX
+  * spidev: add tq,testdev
+  * enet: move phy props from emac
+  * add arch to top-level compatible strings
+  * drm/panel: replace cdtech display with mainline patch
+  * move touch node to display dts
+  * fixed display dts naming
+  * fixed display brightness
+
 ## zeus.TQMa6x.BSP.SW.0117 / zeus.TQMa7x.BSP.SW.0110 / zeus.TQMa6ULx.BSP.SW.0112 / zeus.TQMLS1012AL.BSP.SW.0006 / zeus.TQMLS102xA.BSP.SW.0114 / zeus.TQMLS1028A.BSP.SW.0101
 
 ### Added
