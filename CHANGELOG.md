@@ -7,6 +7,13 @@ Releases are named with the following scheme:
 
 ## Added
 
+* TQMa8Xx\[S\]: support bootstream for mfgtool config
+* port / append mfgtool dependend recipes
+* imx-boot: support reusage of recipe
+* TQMa8Xx\[S\]: support bootstream for FlexSPI
+* u-boot: TQMa8Xx\[S\]: display CPU info
+* u-boot: TQMa8Xx\[S\]: add mfgtool config
+* u-boot: TQMa8Xx\[S\]: single config for SD / e-MMC / FlexSPI Boot device
 * port TQMa8XxS to new u-boot / kernel (rev.0200/lpddr4)
 * linux: TQMa8XxS: support LVDS
 * linux: TQMa8XxS: support CAN
@@ -14,6 +21,17 @@ Releases are named with the following scheme:
 * linux: TQMa8XxS: support USB
 * u-boot: TQMa8XxS: support USB
 * linux: TQMa8Xx: support PCIe
+
+## Changed
+
+* TQMa8MxML: enable LVDS device tree
+* imx-sc-firmware: update to TQMa8.NXP-v1.3.1.B4124.0029
+* imx-boot: support reusage of recipe
+* imx-boot: support i.MX8M bootstream with multiple DTB
+
+## Fixed
+
+* imx-sc-firmware: fix bitbake warning
 
 ## zeus.TQMa8.BSP.SW.0027
 
