@@ -5,6 +5,8 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa8.BSP.SW.0028
+
 ## Added
 
 * TQMa8Xx\[S\]: support bootstream for mfgtool config
