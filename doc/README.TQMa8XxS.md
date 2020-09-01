@@ -6,7 +6,7 @@ This README contains some useful information for TQMa8XxS on MB-SMARC-2
 
 ### SCFW:
 
-* version: tq-TQMa8.NXP-v1.3.1.B4124.0028
+* version: tq-TQMa8.NXP-v1.3.1.B4124.0029
 
 ### U-Boot:
 
@@ -25,6 +25,7 @@ This README contains some useful information for TQMa8XxS on MB-SMARC-2
 * RAM configs: 2GB
 * CPU variants: i.MX8QXP
 * Fuses
+* GPIO
 * QSPI
 * I2C
 * e-MMC / SD
@@ -36,13 +37,14 @@ This README contains some useful information for TQMa8XxS on MB-SMARC-2
 * ENET (GigE via Phy on MBa8Xx)
   * ENET 1
   * ENET 2
+* Bootstreams
+  * FlexSPI + SD / e-MMC
+  * UUU / mfgtool
 
 **TODO or not tested / supported**
 
 * CPU variants i.MX8DX
-* speed grade / temperature grade detection
-* create Bootstreams for qspi (see chapter QSPI Boot)
-* GPIO
+* speed grade / temperature grade detection (current SCU limitation)
 
 ### Linux:
 
@@ -53,12 +55,15 @@ This README contains some useful information for TQMa8XxS on MB-SMARC-2
   * RTC
   * EEPROMS
 * GPU
-* ENET (GigE via Phy on MBa8Xx)
+* ENET (GigE via Phy on TQMa8XxS)
   * ENET 1
   * ENET 2
 * QSPI NOR
+* UART
+  * console
 * LVDS
-* PCIe (mini-PCIe only)
+* GPU
+* PCIe (mini-PCIe)
 
 **TODO or not tested with new BSP**
 
@@ -85,13 +90,15 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* imx-boot-tqma8xqps-mb-smarc-2-sd.bin: boot stream for SD / e-MMC
+* imx-boot-tqma8xqps-mb-smarc-2-sd.bin: boot stream for SD / e-MMC + FlexSPI
+* imx-boot-mfgtool-tqma8xqps-mb-smarc-2-mfgtool.bin-flash_spl: boot stream for UUU
 
 ## Boot Dip Switches
 
 _Note:_
 
 * S3 is for Boot Mode.
+* X means position of DIP, - means don't care
 
 _SD Card_
 
@@ -115,17 +122,20 @@ _QSPI_
 DIP (S3)    1 1 0 0
 ```
 
+_Serial Downloader_
+
+```
+            1 2 3 4
+DIP (S3)    0 0 0 1
+```
+
 ## SD-Card Boot
 
-### Bootable SD-Card
-
-Complete system image:
+To create a bootable SD-Card with complete system image:
 
 write *.wic Image to SD (offset 0)
 
-Write bootstream only:
-
-Bootstreams built using yocto are named `imx-boot-<module>-<baseboard>-sd.bin`
+To create a bootable SD-Card with boot stream only (file name see above):
 
 write bootstream at offset 32 kiB (0x8000) to SD-Card
 
@@ -133,26 +143,15 @@ Example for Linux:
 
 `sudo dd if=imx-boot-<module>-<baseboard>-sd.bin of=/dev/sd<x> bs=1k seek=32 conv=fsync`
 
-### Update components via U-Boot
-
-Bootstream: set env var `uboot` to name of your bootstream image, provide the
-bootstream via TFTP and update via `run update_uboot`
-
-Device tree blob: set env var `fdt_file` to name of your device tree blob,
-provide the blob via TFTP and update via `run update_fdt`
-
-Linux kernel: set env var `image` to name of your kernel image,
-provide the file via TFTP and update via `run update_kernel`
-
 ## e-MMC Boot
 
-### Bootable e-MMC
+To create a bootable e-MMC with complete system image:
 
 write *.wic image to e-MMC (offset 0)
 
-Write bootstream only:
+To create a bootable e-MMC with boot stream only (file name see above)
 
-Bootstreams built using yocto are named `imx-boot-<module>-<baseboard>-sd.bin`
+write bootstream at offset 32 kiB (0x8000) to e-MMC
 
 Boot from SD-Card and write bootstream at offset 32 kiB (0x8000) to e-MMC
 
@@ -173,47 +172,55 @@ mmc dev 0
 mmc write ${loadaddr} 40 ${bsz}
 ```
 
-### Update components via U-Boot
-
-To update components on boot media following u-boot environment scripts are
-prepared. These can be used to update the items using a network connection.
-
-Bootstream: set env var `uboot` to name of your bootstream image, provide the
-bootstream via TFTP and update via `run update_uboot`
-
-Device tree blob: set env var `fdt_file` to name of your device tree blob,
-provide the blob via TFTP and update via `run update_fdt`
-
-Linux kernel: set env var `image` to name of your kernel image,
-provide the file via TFTP and update via `run update_kernel`
-
 ## QSPI Boot
-
-### Build with Yocto
-
-*Note:* QSPI boot stream currently not built by default. Following manual
-changes needed:
-
-set `UBOOT_CONFIG ??= "fspi"` in `conf/machine/tqma8xqp[xd]-mbpa8xx.conf`
-
-Find the resulting QSPI bootstream image in the deploy folder named as
-`xxx.bin-flash_flexspi`.
 
 ### Write bootstream to QSPI
 
 To install QSPI bootstream from U-Boot running on SD, copy the QSPI bootstream from
-deploy folder onto SD-Card partition 1 (firmware partition) or load via tftp
+deploy folder onto SD-Card partition 1 (firmware partition) or load via tftp.
+File name see above.
 
 ```
-setenv uboot xxx.bin-flash_flexspi
+setenv uboot xxx.bin-flash_spl_flexspi
 # load from firmware partition
 load mmc 1:1 ${loadaddr} ${uboot}
 # load via tftp
 tftp ${uboot}
 sf probe
-sf erase 0x0 100000
-sf write ${loadaddr} 0x00 ${filesize}
+sf update ${loadaddr} 0x00 ${filesize}
 # optional verfify
 sf read 0x80300000 0x00 ${filesize}
 cmp.b 0x80300000 ${loadaddr} ${filesize}
 ```
+
+## Update components via U-Boot
+
+For ease of development a set of variables and scripts are in default env.
+
+_U-Boot environment variables_
+
+* `uboot`: name of bootstream image (aka flash.bin)
+* `mmcdev`: 0 for e-MMC, 1 for SD-Card
+* `fdt_file`: device tree blob,
+* `image`: kernel image,
+
+_SD / e-MMC_
+
+Download bootstream from TFTP and update:
+
+`run update_uboot_mmc`
+
+Download device tree blob from TFTP and update:
+
+`run update_fdt_mmc`
+
+Download kernel image from TFTP and update:
+
+`run update_kernel_mmc`
+
+_FLEXSPI_
+
+Download bootstream from TFTP and update:
+
+`run update_uboot_spi`
+
