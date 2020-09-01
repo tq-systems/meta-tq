@@ -10,7 +10,17 @@ directly suitable for production - also from the aspect of security."
 # add our default stuff
 require tq-image.inc
 
+
+# Defined by imx-base for i.MX MACHINEs
+MACHINE_GSTREAMER_1_0_PLUGIN ??= ""
+
+
 IMAGE_FEATURES_remove = " package-management"
+
+IMAGE_INSTALL_append               = " gstreamer1.0-plugins-base-meta"
+IMAGE_INSTALL_append               = " gstreamer1.0-plugins-good-meta"
+IMAGE_INSTALL_append               = " gstreamer1.0-plugins-bad-meta"
+IMAGE_INSTALL_append               = " ${MACHINE_GSTREAMER_1_0_PLUGIN}"
 
 IMAGE_INSTALL_append               = " weston-examples"
 IMAGE_INSTALL_append_imxgpu3d      = " glmark2"
