@@ -18,6 +18,10 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 * based on linux-imx (https://source.codeaurora.org/external/imx/linux-imx)
 * branched from lf-5.4.y-1.0.0
 
+## Supported machine configurations:
+
+See top level README.md for configurations usable as MACHINE.
+
 ## Supported Features
 
 ### U-Boot:
@@ -86,15 +90,15 @@ This README contains some useful information for TQMa8Xx on MBa8Xx
 ## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/tqma8xqp-mba8xx`
+`${TMPDIR}/deploy/images/${MACHINE}`
 
 * \*.dtb: device tree blobs
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* imx-boot-tqma8xqp-mba8xx-sd.bin: boot stream for SD / e-MMC + FlexSPI
-* imx-boot-mfgtool-tqma8xqp-mba8xx-mfgtool.bin-flash_spl: boot stream for UUU
+* imx-boot-${MACHINE}-sd-flash\_spl.bin: boot stream for SD / e-MMC
+* imx-boot-mfgtool-${MACHINE}-mfgtool.bin-flash\_spl: boot stream for UUU
 
 ## Boot Dip Switches
 

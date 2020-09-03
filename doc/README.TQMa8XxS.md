@@ -18,6 +18,10 @@ This README contains some useful information for TQMa8XxS on MB-SMARC-2
 * based on linux-imx (https://source.codeaurora.org/external/imx/linux-imx)
 * branched from lf-5.4.y-1.0.0
 
+## Supported machine configurations:
+
+See top level README.md for configurations usable as MACHINE.
+
 ## Supported Features
 
 ### U-Boot:
@@ -80,18 +84,21 @@ This README contains some useful information for TQMa8XxS on MB-SMARC-2
 
 ## Known Issues
 
+Port USB3 (X3 on MB-SMARC-2) is host only. Do not plugin an USB 3.0 Micro B plug.
+USB host ports support only USB 2.0 (HW limitation)
+
 ## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/tqma8xqps-mb-smarc-2`
+`${TMPDIR}/deploy/images/${MACHINE}`
 
 * \*.dtb: device tree blobs
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* imx-boot-tqma8xqps-mb-smarc-2-sd.bin: boot stream for SD / e-MMC + FlexSPI
-* imx-boot-mfgtool-tqma8xqps-mb-smarc-2-mfgtool.bin-flash_spl: boot stream for UUU
+* imx-boot-${MACHINE}-sd-flash\_spl.bin: boot stream for SD / e-MMC
+* imx-boot-mfgtool-${MACHINE}-mfgtool.bin-flash\_spl: boot stream for UUU
 
 ## Boot Dip Switches
 
