@@ -30,7 +30,7 @@ IMAGE_BOOTFILES_DEPENDS += "imx-m4-demos:do_deploy"
 IMAGE_BOOTFILES += "imx8mq_m4_TCM_hello_world.bin imx8mq_m4_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin imx8mq_m4_TCM_rpmsg_lite_str_echo_rtos.bin"
 
 # Set imx-mkimage boot target
-IMXBOOT_TARGETS = "flash_evk flash_evk_no_hdmi"
+IMXBOOT_TARGETS ?= "flash_evk flash_evk_no_hdmi"
 
 LOADADDR = ""
 UBOOT_SUFFIX = "bin"

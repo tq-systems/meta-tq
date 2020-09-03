@@ -80,7 +80,7 @@ SOC_DIR_mx8dx = "iMX8QX"
 
 DEPLOY_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false', d)}"
 
-IMXBOOT_TARGETS ?= \
+IMXBOOT_TARGETS ??= \
     "${@bb.utils.contains('UBOOT_CONFIG', 'fspi', 'flash_flexspi', \
         bb.utils.contains('UBOOT_CONFIG', 'nand', 'flash_nand', \
                                                   'flash_multi_cores flash_dcd', d), d)}"
