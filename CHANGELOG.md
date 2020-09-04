@@ -5,6 +5,10 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+### Added
+
+* tqmlx2160a: initial support for tqmlx2160a
+
 ## zeus.TQ.Yocto.BSP.SW.0001
 
 This is a joint release for multiple TQMaxx and TQMLSxx module families. It can
