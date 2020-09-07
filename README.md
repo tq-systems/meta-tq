@@ -136,7 +136,7 @@ Support for the following machines is contained in this version:
 ```
 	SOC			SOM			Base board	MACHINE
 [b]	i.MX6[QP,DP]		TQMa6QP/TQMa6DP		MBa6x		tqma6qp-mba6x (TQMa6[QP,DP] HW REV.040x / MBa6x HW REV.020x)
-[b]	i.MX6[Q,D]		TQMa6D/TQMa6Q		MBa6x		tqma6q-mba6x (TQMa6[D,Q] HW REV.010x ... 040x / MBa6x HW REV.020x)
+[y]	i.MX6[Q,D]		TQMa6D/TQMa6Q		MBa6x		tqma6q-mba6x (TQMa6[D,Q] HW REV.010x ... 040x / MBa6x HW REV.020x)
 [b]	i.MX6DL			TQMa6DL			MBa6x		tqma6dl-mba6x (TQMa6DL HW REV.010x ... 040x / MBa6x HW REV.020x)
 [b]	i.MX6S			TQMa6S			MBa6x		tqma6s-mba6x (TQMa6S HW REV.010x ... 040x / MBa6x HW REV.020x)
 [y]	i.MX6UL			TQMa6ULx		MBaULx		tqma6ulx-mba6ulx (TQMa6UL HW REV.030x / MBa6ULx HW REV.020x)
@@ -152,11 +152,11 @@ Support for the following machines is contained in this version:
 [y]	LS1012A			TQMLS1012AL		MBLS1012AL	tqmls1012al-mbls1012al
 [y]	LS1028A			TQMLS1028A		MBLS1028A	tqmls1028a-mbls1028a
 [b]	LS1028A			TQMLS1028A		MBLS1028A-IND	tqmls1028a-mbls1028a-ind
-[y]	LS1043A			TQMLS1043A		MBLS10xxA	tqmls1043a-mbls10xxa (TQMLS1043a / MBLS10xxa)
-[y]	LS1043A			TQMLS1043A		MBLS10xxA	tqmls1043a_2g-mbls10xxa (TQMLS1043a with 2 GiB RAM / MBLS10xxa)
-[y]	LS1046A			TQMLS1046A		MBLS10xxA	tqmls1046a-mbls10xxa (TQMLS1046a with 2 GiB RAM / MBLS10xxa)
-[y]	LS1046A			TQMLS1046A		MBLS10xxA	tqmls1046a_8g-mbls10xxa (TQMLS1046a with 8 GiB RAM / MBLS10xxa)
-[y]	LS1088A			TQMLS1088A		MBLS10xxA	tqmls1088a-mbls10xxa (TQMLS1088a / MBLS10xxa)
+[b]	LS1043A			TQMLS1043A		MBLS10xxA	tqmls1043a-mbls10xxa (TQMLS1043a / MBLS10xxa)
+[b]	LS1043A			TQMLS1043A		MBLS10xxA	tqmls1043a_2g-mbls10xxa (TQMLS1043a with 2 GiB RAM / MBLS10xxa)
+[b]	LS1046A			TQMLS1046A		MBLS10xxA	tqmls1046a-mbls10xxa (TQMLS1046a with 2 GiB RAM / MBLS10xxa)
+[b]	LS1046A			TQMLS1046A		MBLS10xxA	tqmls1046a_8g-mbls10xxa (TQMLS1046a with 8 GiB RAM / MBLS10xxa)
+[b]	LS1088A			TQMLS1088A		MBLS10xxA	tqmls1088a-mbls10xxa (TQMLS1088a / MBLS10xxa)
 [y]	LS102[0,1]A		TQMLS102[0,1]A		MBLS102xA	tqmls102xa-mbls102xa (TQMLS102[0,1]A HW REV.020x / MBLS102xA HW REV.020x)
 [y]	AM57[1,2,4]8		TQMa57[1,2,4]8		MBa57xx		tqma57xx-mba57xx (TQMa57[1,2,4]8 / MBa57xx)
 [y]	AM5748			TQMa5748 ECC		MBa57xx		tqma57xx-ecc-mba57xx (TQMa5748 with ECC / MBa57xx)
