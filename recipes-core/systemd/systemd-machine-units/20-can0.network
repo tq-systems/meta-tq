@@ -1,0 +1,12 @@
+[Match]
+Name=can0
+
+[CAN]
+BitRate=125000
+
+# CANFD needs systemd >= v246
+# BitRate=500000
+# SamplePoint=80%
+# DataBitRate=2000000
+# DataSamplePoint=80%
+# FDMode=yes
