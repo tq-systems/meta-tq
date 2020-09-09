@@ -26,11 +26,16 @@ See top level README.md for configurations usable as MACHINE.
 
 ### U-Boot:
 
-* RAM configs: 2GB
-* CPU variants: i.MX8QXP
+* RAM configs:
+  * 2GB / TQMa8XQPS
+* CPU variants:
+  * i.MX8QXP
 * Fuses
 * GPIO
 * QSPI
+  * Read
+  * Write
+  * Boot
 * I2C
 * e-MMC / SD
   * Read
@@ -52,8 +57,10 @@ See top level README.md for configurations usable as MACHINE.
 
 ### Linux:
 
-* RAM configs 2GB
-* CPU variants i.MX8QXP
+* RAM configs:
+  * 2GB / TQMa8XQPS
+* CPU variants:
+  * i.MX8QXP
 * I2C
   * Temperature Sensors (without cpu-temp)
   * RTC
@@ -68,6 +75,8 @@ See top level README.md for configurations usable as MACHINE.
 * LVDS
 * GPU
 * PCIe (mini-PCIe)
+* CAN
+  * can0/1 as network interface
 
 **TODO or not tested with new BSP**
 
@@ -84,8 +93,11 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Known Issues
 
-Port USB3 (X3 on MB-SMARC-2) is host only. Do not plugin an USB 3.0 Micro B plug.
-USB host ports support only USB 2.0 (HW limitation)
+* CAN
+  * CAN FD is not automatically configured (systemd limitation)
+* USB
+  * Port USB3 (X3 on MB-SMARC-2) is host only. Do not plugin an USB 3.0 Micro B plug.
+  * USB host ports support only USB 2.0 (HW limitation)
 
 ## Artifacts
 
@@ -230,4 +242,13 @@ _FLEXSPI_
 Download bootstream from TFTP and update:
 
 `run update_uboot_spi`
+
+## CAN
+
+### Troubleshooting
+
+In case of problems first check the bus termination:
+
+* CAN0: (X29): DIP `TERM CAN0`
+* CAN1: (X30): DIP `TERM CAN1`
 
