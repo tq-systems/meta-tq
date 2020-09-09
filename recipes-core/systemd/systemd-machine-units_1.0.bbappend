@@ -41,11 +41,18 @@ SRC_URI_append_tqmls102xa = " \
     file://can1.service \
 "
 
+# TQMLS1028a has two CAN interfaces
+SRC_URI_append_tqmls1028a = " \
+    file://can0.service \
+    file://can1.service \
+"
+
 SYSTEMD_SERVICE_${PN}_tqma6x = "can0.service can1.service"
 SYSTEMD_SERVICE_${PN}_tqma6ulx = "can0.service can1.service"
 SYSTEMD_SERVICE_${PN}_tqma6ullx = "can0.service can1.service"
 SYSTEMD_SERVICE_${PN}_tqma7x = "can0.service can1.service"
 SYSTEMD_SERVICE_${PN}_tqmls102xa = "can0.service can1.service"
+SYSTEMD_SERVICE_${PN}_tqmls1028a = "can0.service can1.service"
 
 do_install_append() {
     install -d ${D}${systemd_unitdir}/network/
@@ -88,6 +95,12 @@ do_install_append() {
             ;;
         tqmls102xa*)
             install -m 0644 "${WORKDIR}/10-eth1.network" ${D}${systemd_unitdir}/network/
+            install -d ${D}${systemd_system_unitdir}/
+            install -m 0644 "${WORKDIR}/can0.service" ${D}${systemd_system_unitdir}/
+            install -m 0644 "${WORKDIR}/can1.service" ${D}${systemd_system_unitdir}/
+            break
+            ;;
+        tqmls1028a*)
             install -d ${D}${systemd_system_unitdir}/
             install -m 0644 "${WORKDIR}/can0.service" ${D}${systemd_system_unitdir}/
             install -m 0644 "${WORKDIR}/can1.service" ${D}${systemd_system_unitdir}/
