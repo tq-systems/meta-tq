@@ -10,6 +10,8 @@ SRC_URI = " \
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
 "
 
+DEPENDS_append = " bison-native"
+
 S = "${WORKDIR}/git"
 
 COMPATIBLE_MACHINE = "tqma8xx"
