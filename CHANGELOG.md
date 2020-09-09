@@ -5,6 +5,39 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## Added
+
+* linux: TQMa8XQP\[4\]: audio support
+* systemd-machine-units: rewrite bbappend to conform to new systemd version.
+  CAN does not need separate units, but a simple network definition. Tested with
+  TQMa8XQP\[S,4\]
+* machines: Add Support for TQMa8XQP4. The new machine needs a different bootstream
+  hence a differen SCU firmware. The rest is equal to the existing TQMa8XQP.
+* u-boot: Support for TQMa8XQP4 as variant of TQMa8Xx (defconfigs, memory defines)
+
+## Changed
+
+* linux: TQMa8: dt: use aliases for RTC. This guarantees that the I2C RTC backuped
+  by coin cell is always rtc0 which is important for some userland tools.
+* alsa-state: Use same asound.state for all TQMa8 boards. Depends on linux support
+* linux: TQMa8Mx / TQMa8MxM\[M,N\]L: dt: change sound card model name. The codec
+  integration is the same. So no need to use different model names. As a plus, we
+  can use a single asound.state for multiple boards
+
+## Fixed
+
+* u-boot-fw-utils-imx-tq: fix missing dependency on bison-native
+* imx-boot: use weak assignments for IMXBOOT_TARGETS to allow overrides and
+  to prevent generating invalid bootstreams in imx-boot-mfgtool_
+* u-boot: TQMa8Xx\[S\]: fixed missing defines for default mtest addresses
+* u-boot: TQMa8XxS: dt: fix wrong setting for pin muxing
+* linux: TQMa8Xx\[S\]: dt: fix wrong setting for pin muxing
+
+## Removed
+
+* linux: TQMa8XxS: drop support for HW REV.010x
+* u-boot: TQMa8XxS: drop support for HW REV.010x
+
 ## zeus.TQMa8.BSP.SW.0028
 
 ## Added
