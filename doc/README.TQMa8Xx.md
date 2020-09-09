@@ -1,6 +1,6 @@
-# TQMa8Xx
+# TQMa8Xx / TQMa8Xx4
 
-This README contains some useful information for TQMa8Xx on MBa8Xx
+This README contains some useful information for TQMa8Xx and TQMa8Xx4 on MBa8Xx
 
 ## Versions
 
@@ -26,11 +26,17 @@ See top level README.md for configurations usable as MACHINE.
 
 ### U-Boot:
 
-* RAM configs: 1GB
-* CPU variants: i.MX8QXP
+* RAM configs:
+  * 1GB / TQMa8XQP
+  * 2GB / TQMa8XQP4
+* CPU variants:
+  * i.MX8QXP
 * Fuses
 * GPIO
 * QSPI
+  * Read
+  * Write
+  * Boot
 * I2C
 * e-MMC / SD
   * Read
@@ -47,16 +53,18 @@ See top level README.md for configurations usable as MACHINE.
 
 **TODO or not tested / supported**
 
-* RAM 512 MB
 * CPU variants i.MX8DX
 * speed grade / temperature grade detection (current SCU limitation)
 
 ### Linux:
 
-* RAM configs 1GB
-* CPU variants i.MX8QXP
+* RAM configs:
+  * 1GB / TQMa8XQP
+  * 2GB / TQMa8XQP4
+* CPU variants:
+  * i.MX8QXP
 * I2C
-  * Temperature Sensors
+  * Temperature Sensors (without cpu-temp)
   * RTC
   * EEPROMS
 * SPI
@@ -74,11 +82,17 @@ See top level README.md for configurations usable as MACHINE.
 * LVDS
 * GPU
 * PCIe (mini-PCIe)
+* Audio
+  * Line Out
+* CAN
+  * can0/1 as network interface
 
 **TODO or not tested with new BSP**
 
 * temperature grade
 * Audio
+  * Mic In untested
+  * Line In untested
 * DSI - DP bridge
 * GPIO
   * Suspend / Wakeup via GPIO button
@@ -86,6 +100,11 @@ See top level README.md for configurations usable as MACHINE.
   * speed grade
 
 ## Known Issues
+
+* CAN
+  * CAN FD is not automatically configured (systemd limitation)
+* SPI
+  * some spidev are configured with to high max frequency
 
 ## Artifacts
 
@@ -246,4 +265,22 @@ _FLEXSPI_
 Download bootstream from TFTP and update:
 
 `run update_uboot_spi`
+
+## CAN
+
+### Troubleshooting
+
+In case of problems first check the bus termination:
+
+* CAN0: SW1
+* CAN1: SW2
+
+### Enable CAN-FD
+
+To enable CAN-FD the following command can be used:
+
+```
+CANIF="can[0,1]"
+ip link set "${CANIF}" up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on‍‍‍‍‍‍‍`
+```
 
