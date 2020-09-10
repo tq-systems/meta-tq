@@ -5,8 +5,11 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
-## Added
+## zeus.TQMa8.BSP.SW.0028
 
+### Added
+
+* u-boot-fw-utils-imx-tq: add default config for TQMa8Xx\[S,4\]
 * linux: TQMa8XQP\[4\]: audio support
 * systemd-machine-units: rewrite bbappend to conform to new systemd version.
   CAN does not need separate units, but a simple network definition. Tested with
@@ -15,7 +18,7 @@ Releases are named with the following scheme:
   hence a differen SCU firmware. The rest is equal to the existing TQMa8XQP.
 * u-boot: Support for TQMa8XQP4 as variant of TQMa8Xx (defconfigs, memory defines)
 
-## Changed
+### Changed
 
 * linux: TQMa8: dt: use aliases for RTC. This guarantees that the I2C RTC backuped
   by coin cell is always rtc0 which is important for some userland tools.
@@ -24,7 +27,7 @@ Releases are named with the following scheme:
   integration is the same. So no need to use different model names. As a plus, we
   can use a single asound.state for multiple boards
 
-## Fixed
+### Fixed
 
 * u-boot-fw-utils-imx-tq: fix missing dependency on bison-native
 * imx-boot: use weak assignments for IMXBOOT_TARGETS to allow overrides and
@@ -33,14 +36,14 @@ Releases are named with the following scheme:
 * u-boot: TQMa8XxS: dt: fix wrong setting for pin muxing
 * linux: TQMa8Xx\[S\]: dt: fix wrong setting for pin muxing
 
-## Removed
+### Removed
 
 * linux: TQMa8XxS: drop support for HW REV.010x
 * u-boot: TQMa8XxS: drop support for HW REV.010x
 
 ## zeus.TQMa8.BSP.SW.0028
 
-## Added
+### Added
 
 * TQMa8Xx\[S\]: support bootstream for mfgtool config
 * port / append mfgtool dependend recipes
@@ -57,20 +60,20 @@ Releases are named with the following scheme:
 * u-boot: TQMa8XxS: support USB
 * linux: TQMa8Xx: support PCIe
 
-## Changed
+### Changed
 
 * TQMa8MxML: enable LVDS device tree
 * imx-sc-firmware: update to TQMa8.NXP-v1.3.1.B4124.0029
 * imx-boot: support reusage of recipe
 * imx-boot: support i.MX8M bootstream with multiple DTB
 
-## Fixed
+### Fixed
 
 * imx-sc-firmware: fix bitbake warning
 
 ## zeus.TQMa8.BSP.SW.0027
 
-## Changed
+### Changed
 
 * linux: TQMa8MxML: optimized CMA size for 1 GiB RAM
 * machines: rename some machines to unify naming and reflect real mem size
@@ -80,7 +83,7 @@ Releases are named with the following scheme:
 * u-boot: TQMa8MxML: optimized pad settings for SD-Card
 * u-boot: TQMa8Mx\[M,N\]L: simplify USB OTG (use ID from USB)
 
-## Added
+### Added
 
 * u-boot: TQMa8Mx\[M,N\]L: add support for RTC load capacity configuration
 * u-boot: TQMa8Mx\[M,N\]L: QSPI Support (1-1-1, 4B)
@@ -91,7 +94,7 @@ Releases are named with the following scheme:
 * linux: TQMa8Mx\[M,N\]L: enable SD104 for SD-Card
 * u-boot: TQMa8Mx\[M,N\]L: USB host support (Hub on MBa8Mx)
 
-## Fixed
+### Fixed
 
 * u-boot: TQMa8MxNL: fix RAM Timing for 1GiB
 * u-boot: TQMa8MxML: fix RAM size (default 1GiB instead of 512 MiB)
@@ -102,7 +105,7 @@ Releases are named with the following scheme:
 
 ## zeus.TQMa8.BSP.SW.0026
 
-## Changed
+### Changed
 
 * linux: backport fixes from 5.4.24_2.1.0 for DSI and USB
 * linux: improve driver for SN65DSI83
@@ -110,7 +113,7 @@ Releases are named with the following scheme:
 * imx-boot: use version from NXP BSP 5.4.3_2.0.0
 * imx-boot: do not longer use dirty hack for U-Boot DTB of i.MX8M CPU
 
-## Added
+### Added
 
 * tqma8mq: support LVDS/PCIe with new kernel
 * local version gereration or u-boot and kernel
@@ -118,14 +121,14 @@ Releases are named with the following scheme:
 * initial support for TQMa8MxNL
 * initial port of TQMa8Mx to new U-Boot / Kernel (not feature complete)
 
-## Fixed
+### Fixed
 
 * fix e-MMC supplies for tqma8mq, tqma8mm, tqma8mn
 * fix network problems (caused by wrong regulator settings)
 
 ## zeus.TQMa8.BSP.SW.0025
 
-## Changed
+### Changed
 
 * tqma8xx: support LVDS
 * tqma8xx: support USB
@@ -137,7 +140,7 @@ Releases are named with the following scheme:
 * tqma8: disable *.bz2 image types
 * update to zeus
 
-## Added
+### Added
 
 * port TQMa8Xx to new u-boot / kernel
 * add recipes for kernel / u-boot based on NXP 5.4.y_1.0.0 reference BSP
@@ -149,16 +152,16 @@ Releases are named with the following scheme:
 
 ## warrior.TQMLS10xx.BSP.SW.0101
 
-## Changed
+### Changed
 
 * tqmls10xxa: use EDAC_LAYERSCAPE error detection
 
-## Fixed
+### Fixed
 
 * tqmls1043a: U-Boot: use correct SF_DEFAULT_BUS
 * tqmls10xxa: Linux: fix error message on reboot
 
-## Added
+### Added
 
 * tqmls1043a: add configs for 2GB variant
 
@@ -177,7 +180,7 @@ Releases are named with the following scheme:
 
 ## warrior.TQMa6x.BSP.SW.0115
 
-## Changed
+### Changed
 
 * tqma6\[q,s,dl,qp\]: use "?=" to assign UBOOT_CONFIG
 * tqma6x\[q,s,dl,qp\]: add spinor u-boot config to default value of UBOOT_CONFIG
@@ -188,17 +191,17 @@ Releases are named with the following scheme:
 
 ## warrior.TQMa6ULx.BSP.SW.0110
 
-## Added
+### Added
 
 * tqma6ul\[l\]x: add configs for 512 MB variant
 
-## Changed
+### Changed
 
 * tqma\[6,6ul,6ull,7\]: add SDMA firmware to MACHINE\_EXTRA\_RRECOMMENDS
 * tqma6ul\[l\]x\[l\]: simplify machine configs
 * u-boot-tq_2016.03: update to support 512 MB variant of tqma6ul\[l\]x
 
-## Fixed
+### Fixed
 
 * tqma\[6,6ul,6ull,7\]: assignment of providers for bootloader / kernel should use "?="
 * tqma6ul: fix duplicate inclusion of imx-base when using with meta-freescale
@@ -266,7 +269,7 @@ Releases are named with the following scheme:
 
 ## warrior.TQMLS102xA.BSP.SW.0112
 
-## Changed
+### Changed
 
 * Linux defconfigs for TQMa6ULx / TQMa6ULLx / TQMa6ULxL from PTXdist BSP TQMLS102xA.BSP.SW.0112
 * Linux defconfigs for TQMa7x from PTXdist BSP TQMLS102xA.BSP.SW.0112
@@ -284,11 +287,11 @@ Releases are named with the following scheme:
 
 ## warrior.TQMLS102xA.BSP.SW.0111
 
-## Added
+### Added
 
 * TQMLS102x audio support from PTXdist BSP TQMLS102xA.BSP.SW.0111
 
-## Fixed
+### Fixed
 
 * ptpd recipe warning for architecture when using with meta-freescale
 
