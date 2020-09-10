@@ -14,7 +14,7 @@ SRC_URI = " \
 "
 
 SRCBRANCH_tqmlx2160a = "TQMLX2160a-linux-v5.4-LSDK-20.04"
-SRCREV_tqmlx2160a = "345ead1ab678578eba3f625a3eefb30fe4b7e534"
+SRCREV_tqmlx2160a = "d7ad129a7ccbb0573381c88a16fb4421b6b1e4b2"
 
 COMPATIBLE_MACHINE = "tqmlx2160a"
 
