@@ -9,7 +9,7 @@ SRC_URI = "\
 "
 
 SRCBRANCH = "TQMaxx-lf-5.4.y-1.0.0"
-SRCREV = "f434cfa5f9d3dfa73e48cc1b6143853b135b95e3"
+SRCREV = "f2bc43de529c204f466f9a85e35be51465f3d501"
 
 KERNEL_TREE_DEFCONFIG_mx8 = "imx_v8_defconfig"
 
