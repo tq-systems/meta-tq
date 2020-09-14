@@ -170,7 +170,10 @@ Support for the following machines is contained in this version:
 \[p\]: prerelease  
 \[\*\]: not buildable in this version  
 
-See also the machine-specific README file for the [TQMA7\[S,D\]](doc/README.TQMa7x.md).
+See also the machine-specific README file:
+
+- [TQMA6\[Q,D\]](doc/README.TQMa6x.md)
+- [TQMA7\[S,D\]](doc/README.TQMa7x.md)
 
 **Note:** for TQMa6UL1 and baseboards using this module variant with i.MX6ULG1
           a dedicated device tree is supplied
