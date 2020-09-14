@@ -83,7 +83,6 @@ See top level README.md for configurations usable as MACHINE.
 * GPU
 * PCIe (mini-PCIe)
 * Audio
-  * Line Out
 * CAN
   * can0/1 as network interface
 
@@ -98,6 +97,7 @@ See top level README.md for configurations usable as MACHINE.
   * Suspend / Wakeup via GPIO button
 * DVFS
   * speed grade
+* SCU Thermal Sensor
 
 ## Known Issues
 
@@ -105,6 +105,8 @@ See top level README.md for configurations usable as MACHINE.
   * CAN FD is not automatically configured (systemd limitation)
 * SPI
   * some spidev are configured with to high max frequency
+* Audio
+  * aplay sometimes stalls for unknown reason
 
 ## Artifacts
 
