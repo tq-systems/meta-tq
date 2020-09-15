@@ -174,6 +174,7 @@ See also the machine-specific README file:
 
 - [TQMA6\[Q,D\]](doc/README.TQMa6x.md)
 - [TQMA7\[S,D\]](doc/README.TQMa7x.md)
+- [TQMLS102\[0,1\]A](doc/README.TQMLS102xa.md)
 
 **Note:** for TQMa6UL1 and baseboards using this module variant with i.MX6ULG1
           a dedicated device tree is supplied
