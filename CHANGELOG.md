@@ -5,6 +5,41 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQ.Yocto.BSP.SW.0001
+
+This is a joint release for multiple TQMaxx and TQMLSxx module families. It can
+also be found under the following tag names:
+
+* zeus.TQMa6x.BSP.SW.0118
+* zeus.TQMa7x.BSP.SW.0111
+* zeus.TQMa6ULx.BSP.SW.0113
+* zeus.TQMLS1012AL.BSP.SW.0007
+* zeus.TQMLS102xA.BSP.SW.0115
+* zeus.TQMLS1028A.BSP.SW.0102
+
+### Added
+* tqmls1012al: enabled U-Boot mtest command
+
+### Changed
+* tqma6: marked ERR006687 as fixed to avoid unnecessary software workaround
+* tqmls1028a: modified U-Boot default environment for DisplayPort and
+  SPI-NOR boot
+
+### Fixed
+
+* Fixed a resource allocation issue in the TLV320AIC32x4 audio codec
+  driver that could lead to warnings and lockups during boot or shutdown
+* Fixed incorrect clock setup in the TLV320AIC32x4 audio codec driver
+  causing too slow or too fast playback and recording after a soft reboot
+  * The two above issues affect all TQ starterkit mainboards with analog
+    audio support
+* tqma6: enabled default-on LED trigger in kernel defconfig
+* tqma\[6ul,6ull,7\]: fixed a QSPI driver bug causing frequent corruptions
+  of filesystems on SPI-NOR flash
+* tqma6ul: fixed USB support with parallel LCD device tree on MBa6ULxL
+* tqma7: enabled cpufreq driver in kernel defconfig
+* tqmls1028a: set up CAN interfaces on boot
+
 ## zeus.TQMa57xx.BSP.SW.0013
 
 ### Changed
