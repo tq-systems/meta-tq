@@ -52,10 +52,13 @@ Optionally the layer can make use of features from meta-ti if using AM57xx
 based machines (tqma57[1,2,4]x-mba57xx etc.)
 
 URI: https://git.yoctoproject.org/git/meta-ti  
-branch: master  
-revision: states compatibility to warrior starting with commit
-          59e66caff2568ab32f59596f1aeab8ea27649941  
+branch: zeus  
+revision: HEAD  
 layers: meta-ti  
+
+**Attention:** meta-ti depends on meta-arm and meta-arm-toolchain. The correct
+branch of meta-arm to be used depends on revision. Yocto zeus support started
+in branch master and is currently maintained in branch dunfell
 
 ### Patches
 
@@ -123,6 +126,9 @@ BBLAYERS = " \
   \
   ${BSPDIR}/sources/meta-openembedded/meta-oe \
   ${BSPDIR}/sources/meta-openembedded/meta-multimedia \
+  \
+  ${BSPDIR}/sources/meta-arm \
+  ${BSPDIR}/sources/meta-arm-toolchain \
   \
   ${BSPDIR}/sources/meta-ti \
   \
