@@ -11,3 +11,5 @@ RDEPENDS_${PN} = " \
     minicom \
     screen \
     "
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
