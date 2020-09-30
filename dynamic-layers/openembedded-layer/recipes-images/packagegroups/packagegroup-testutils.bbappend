@@ -3,4 +3,10 @@ RDEPENDS_${PN}_append = " \
     atop \
     dstat \
     iotop \
+    memtester \
+    evtest \
+    stress-ng \
+    nano \
+    fb-test \
+    stressapptest \
 "
