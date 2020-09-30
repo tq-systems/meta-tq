@@ -25,13 +25,13 @@ SRC_URI = "git://git.ti.com/atf/arm-trusted-firmware.git;branch=${BRANCH}"
 SRCREV ?= "e516a389ac12fbe1597f61fea80ed3f230b9c5fd"
 
 # Make ATF "aware" of OPTEE, no build dependency
-#PACKAGECONFIG[optee] = "SPD=opteed"
+PACKAGECONFIG[optee] = "SPD=opteed"
 
 COMPATIBLE_MACHINE = "tqma65xx"
 ATFPLATFORM_tqma65xx = "k3"
 ATFBOARD_tqma65xx = "generic"
 
-#PACKAGECONFIG_tqma65xx = "optee"
+PACKAGECONFIG_tqma65xx = "optee"
 
 CFLAGS[unexport] = "1"
 LDFLAGS[unexport] = "1"

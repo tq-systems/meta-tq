@@ -3,12 +3,9 @@
 
 
 KERNEL_DEVICETREE ?= " \
-    tq/tqma654-base-board.dtb tq/tqma654-gp.dtbo \
-    tq/tqma654-evm-hdmi.dtbo tq/tqma654-idk.dtbo \
-    tq/tqma654-evm-oldi-lcd1evm.dtbo tq/tqma654-evm-tc358876.dtbo \
-    tq/tqma654-pcie-usb2.dtbo tq/tqma654-pcie-usb3.dtbo \
-    tq/tqma654-base-board-jailhouse.dtbo \
-    tq/tqma654-evm-prupwm.dtbo \
+    tq/am654-mba65xx.dtb \
+    tq/am654-mba65xx-interfaces.dtbo \
+    tq/am654-mba65xx-jailhouse.dtbo \
 "
 
 # Files are needed in IMAGE_BOOT_FILES because /boot is on an extra partition.

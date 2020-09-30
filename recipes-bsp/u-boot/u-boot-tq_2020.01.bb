@@ -1,6 +1,5 @@
 # UBOOT_LOCALVERSION can be set to add a tag to the end of the
 # U-boot version string.  such as the commit id
-# Ask TQ Group for sysfw.itb and tiboot3.bin files needed for u-boot
 def get_git_revision(p):
     import subprocess
 
@@ -40,8 +39,7 @@ PACKAGECONFIG[atf] = "ATF=${STAGING_DIR_HOST}/boot/bl31.bin,,arm-trusted-firmwar
 PACKAGECONFIG[optee] = "TEE=${STAGING_DIR_HOST}/boot/bl32.bin,,optee-os"
 
 # optee-os is not a direct dependency, do not enable optee by default
-PACKAGECONFIG_append_tqma65xx= " atf"
-
+PACKAGECONFIG_append_tqma65xx= " atf optee"
 EXTRA_OEMAKE += "${PACKAGECONFIG_CONFARGS}"
 
 PROVIDES += "u-boot-tq"

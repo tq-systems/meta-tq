@@ -8,5 +8,9 @@ IMAGE_INSTALL = "\
     "
     
 IMAGE_INSTALL_append = " can-utils \
+                         mtd-utils \
+                         memtester \
+                         optee-client \
+                         optee-test \
                         "
 inherit core-image

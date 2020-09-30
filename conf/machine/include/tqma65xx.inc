@@ -30,6 +30,10 @@ UBOOT_ENTRYPOINT = "0x80008000"
 UBOOT_LOADADDRESS = "0x80008000"
 UBOOT_SUFFIX ?= "img"
 
+OPTEEMACHINE = "k3"
+OPTEEFLAVOR = "am65x"
+OPTEEOUTPUTMACHINE = "k3"
+
 # we still need this, since meta-ti sets KERNEL_IMAGETYPES to contain uImage
 # and forces building this ancient image which forces us to provide this var
 KERNEL_EXTRA_ARGS_prepend = "LOADADDR=${UBOOT_ENTRYPOINT} "
@@ -55,3 +59,7 @@ UBI_VOLNAME = "rootfs"
 
 # List common SoC features
 MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx mmip dsp pci"
+
+
+IMAGE_BOOT_FILES ?= "${SPL_BINARY} u-boot.${UBOOT_SUFFIX} tiboot3.bin sysfw.itb"
+do_image_tar[mcdepends] += "mc::k3r5:virtual/bootloader:do_deploy mc::k3r5:ti-sci-fw:do_deploy"
