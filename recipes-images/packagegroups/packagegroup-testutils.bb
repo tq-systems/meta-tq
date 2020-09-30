@@ -15,4 +15,8 @@ RDEPENDS_${PN} = " \
     perf \
     strace \
     gdbserver \
+    mc \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'alsa', ' alsa-utils-speakertest', '', d)} \
     "
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
