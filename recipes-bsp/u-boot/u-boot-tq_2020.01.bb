@@ -42,7 +42,7 @@ PACKAGECONFIG[optee] = "TEE=${STAGING_DIR_HOST}/boot/bl32.bin,,optee-os"
 PACKAGECONFIG_append_tqma65xx= " atf optee"
 EXTRA_OEMAKE += "${PACKAGECONFIG_CONFARGS}"
 
-PROVIDES += "u-boot-tq"
+PROVIDES += "u-boot"
 PKG_${PN} = "u-boot"
 PKG_${PN}-dev = "u-boot-dev"
 PKG_${PN}-dbg = "u-boot-dbg"

@@ -8,7 +8,7 @@ DEPENDS = "openssl-native u-boot-mkimage-native dtc-native"
 CLEANBROKEN = "1"
 PR = "r0"
 
-COMPATIBLE_MACHINE = "k3r5"
+COMPATIBLE_MACHINE = "tqma65xx"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
