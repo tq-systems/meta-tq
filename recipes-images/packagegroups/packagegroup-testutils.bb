@@ -1,6 +1,8 @@
 DESCRIPTION = "test and debugging tools"
 LICENSE = "MIT"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 inherit packagegroup
 
 #the following builds cross gdb and gdbserver
@@ -18,5 +20,3 @@ RDEPENDS_${PN} = " \
     mc \
     ${@bb.utils.contains('MACHINE_FEATURES', 'alsa', ' alsa-utils-speakertest', '', d)} \
     "
-
-PACKAGE_ARCH = "${MACHINE_ARCH}"

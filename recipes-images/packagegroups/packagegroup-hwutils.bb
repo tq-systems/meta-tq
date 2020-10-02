@@ -1,6 +1,8 @@
 DESCRIPTION = "tools needed to test basic hw support"
 LICENSE = "MIT"
 
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 inherit packagegroup
 
 RDEPENDS_${PN} = " \
@@ -11,5 +13,3 @@ RDEPENDS_${PN} = " \
     minicom \
     screen \
     "
-
-PACKAGE_ARCH = "${MACHINE_ARCH}"
