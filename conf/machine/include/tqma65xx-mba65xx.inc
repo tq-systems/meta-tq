@@ -8,6 +8,7 @@ KERNEL_DEVICETREE ?= " \
     tq/am654-mba65xx-eth-prg0.dtbo \
     tq/am654-mba65xx-eth-prg1.dtbo \
     tq/am654-mba65xx-audio.dtbo \
+    tq/am654-mba65xx-lvds-display.dtbo \
 "
 
 # Files are needed in IMAGE_BOOT_FILES because /boot is on an extra partition.
