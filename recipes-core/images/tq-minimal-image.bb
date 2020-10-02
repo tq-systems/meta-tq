@@ -12,5 +12,6 @@ IMAGE_INSTALL_append = " can-utils \
                          memtester \
                          optee-client \
                          optee-test \
+                         prueth-fw-am65x-sr2 \
                         "
 inherit core-image
