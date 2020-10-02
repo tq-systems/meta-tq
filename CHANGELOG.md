@@ -5,7 +5,37 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
-## zeus.TQMa8.BSP.SW.0028
+### Added
+
+* u-boot: TQMa8Mx\[M,N\]L add flexspi boot support
+* u-boot: TQMa8Mx\[M,N\]L add env support for bootstream update on flexspi
+* u-boot: TQMa8Mx\[M,N\]L add env support for CortexM core boot and update
+* linux: TQMa8Mx\[M,N\]L add devicetree for RPMSG support
+* linux: TQMa8XxS: add SPI support in DT
+
+### Changed
+
+* u-boot: TQMa8Mx\[M,N\]L fix compatible and model names in devicetree
+* linux: TQMa8Mx\[M,N\]L fix compatible and model names in devicetree
+* linux: TQMa8Mx\[M,N\]L fix devicetree bindings for module
+
+### Fixed
+
+* linux: i.MX8MM: backport fix for voltage @ 1.6GHz operating point
+* linux: TQMa8Mx\[M,N\]L switch to gpio CS for SPI (device tree change,
+  should fix spi communication issues)
+* linux: TQMa8Mx switch to gpio CS for SPI (device tree change,
+  should fix spi communication issues)
+* linux: i.MX8QXP: increase clock for LPSPI1, use same PER base clocks as other
+  LPSPI instance. Fixes clock mismatch for spidev on TQMa8XxS
+
+### Removed
+
+* linux: devicetree: remove `local-mac-address` prop from fec for TQ SOM
+  `mac-address` has the highest priority per binding doc and should contain
+  the last used address
+
+## zeus.TQMa8.BSP.SW.0029
 
 ### Added
 
