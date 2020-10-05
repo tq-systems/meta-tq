@@ -7,6 +7,7 @@ BOARD_DEVICETREE_FILES = "\
     imx8mq-mba8mx.dtb \
     imx8mq-mba8mx-dcss-lvds-tm070jvhg33.dtb \
     imx8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb \
+    imx8mq-mba8mx-rpmsg.dtb \
 "
 
 ####
