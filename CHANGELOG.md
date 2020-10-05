@@ -7,6 +7,11 @@ Releases are named with the following scheme:
 
 ### Added
 
+* machines: TQMa8Mx / TQMa8Mx\[M,N\]L: include RPMSG examle device tree
+* machines: add configuration for TQMa8Mx with 4 GiB RAM
+* machines: TQMa8MxNL: build FlexSPI bootstream by default
+* linux: TQMa8Mx: add dt examle for M4 / RPMSG
+* u-boot: TQMa8Mx: support for variant with 4 GiB RAM
 * u-boot: TQMa8Mx\[M,N\]L add flexspi boot support
 * u-boot: TQMa8Mx\[M,N\]L add env support for bootstream update on flexspi
 * u-boot: TQMa8Mx\[M,N\]L add env support for CortexM core boot and update
@@ -15,12 +20,26 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* machines: TQMa8Mx: rename an include (mba8mx.inc -> tqma8mx-mba8mx.inc)
+* linux: TQMa8Xx[S]: fix compatible names in devicetree
+* u-boot: TQMa8Mx: use devicetree to configure MMC env settings
+* u-boot: TQMa8Mx: increase env size to 32 kiB (equal to TQMa8Mx\[M,N\]L)
+* u-boot: TQMa8Mx: cleanup and cosmetic in config header
+* u-boot: tqc/common: tqc-rtc improvements (offset, clkout)
+* u-boot: TQMa8Xx[S]: fix compatible names in devicetree
 * u-boot: TQMa8Mx\[M,N\]L fix compatible and model names in devicetree
 * linux: TQMa8Mx\[M,N\]L fix compatible and model names in devicetree
 * linux: TQMa8Mx\[M,N\]L fix devicetree bindings for module
 
 ### Fixed
 
+* linux: TQMa8Xx: fix dt bindings
+* linux: TQMa8Mx\[M,N\]L: remove USER\_LED\_3 (not usable for these SOM)
+* linux: i.MX8MQ: backport device tree fixes from NXP upstream
+  * MLK-24483-2: ecspi compatible to imx51-ecspi
+  * MLK-24383: Change the noc clock setting
+* u-boot: TQMa8Mx: fix compiler warning in spl
+* u-boot: TQMa8Mx\[M,N\]L: fix spelling errors in multiple places
 * linux: i.MX8MM: backport fix for voltage @ 1.6GHz operating point
 * linux: TQMa8Mx\[M,N\]L switch to gpio CS for SPI (device tree change,
   should fix spi communication issues)
