@@ -112,6 +112,7 @@ Support for the following machines is contained in this version:
 	SOC			SOM			Base board	MACHINE
 [y]	i.MX8M[D,Q]		TQMa8M[D,Q]		MBa8Mx		tqma8mx-1gb-mba8mx (TQMa8M[D,Q] with 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x)
 [y]	i.MX8MQL		TQMa8MQL		MBa8Mx		tqma8mx-2gb-mba8mx (TQMa8MQL with 2 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x)
+[y]	i.MX8MQL		TQMa8MQL		MBa8Mx		tqma8mx-4gb-mba8mx (TQMa8MQL with 4 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x)
 [y]	i.MX8MMQ		TQMa8MMQL		MBa8Mx		tqma8mxml-1gb-mba8mx (TQMa8MQML with 1 GiB RAM, HW REV.010x, MBa8Mx HW REV.020x)
 [y]	i.MX8MNQ		TQMa8MNQL		MBa8Mx		tqma8mxnl-1gb-mba8mx (TQMa8MNQL with 1 GiB RAM, HW REV.010x, MBa8Mx HW REV.020x)
 [-]	i.MX8QM			TQMa8QM			MBa8x		tqma8qm-4gb-mba8x (TQMa8QM with 4 GiB RAM, HW REV.010x)
