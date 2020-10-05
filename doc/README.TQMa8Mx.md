@@ -20,7 +20,7 @@ This README contains some useful information for TQMa8Mx on MBa8Mx
 
 _MBa8x HW Rev.020x only_
 
-* RAM configs 1GB / 2 GB
+* RAM configs 1 GiB / 2 GiB / 4 GiB
 * CPU variants i.MX8MQ / i.MX8MQL
 * Fuses
 * speed grade / temperature grade detection
@@ -46,11 +46,13 @@ _MBa8x HW Rev.020x only_
 * USB Dual Role (USB0, 2.0 host only - hard coded in driver)
   * Cable Detect / ID
   * switchable VBUS
-* Bootaux / Cortex M4
+* Cortex M4
+  * env settings for starting from TCM
+  * examples with UART4 as debug console
 
 ### Linux:
 
-* RAM configs 1GB / 2 GB
+* RAM configs 1 GiB / 2 GiB / 4 GiB
 * CPU variants i.MX8MQ / i.MX8MQL
 * speed grade / temperature grade detection
 * DVFS (CPU overdrive mode)
@@ -83,13 +85,15 @@ _MBa8x HW Rev.020x only_
 * Audio
   * Codec Line In (X14)
   * Codec Line Out (X13)
+* Cortex M4
+  * examples running from TCM
+  * use UART4 as debug console
 
 ## TODO:
 
 * MIPI CSI
 * MIKRO Bus
 * SIM
-* Cortex M4 / RPMSG
 * QSPI NOR
   * Read with 1-1-4 SDR
   * PP / Erase with 1-1-1
@@ -121,6 +125,7 @@ Artifacs can be found at the usual locations for bitbake:
   * imx8mq-mba8mx.dtb
   * imx8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb
   * imx8mq-mba8mx-dcss-lvds-tm070jvhg33.dtb
+  * imx8mq-mba8mx-rpmsg.dtb
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
@@ -131,9 +136,9 @@ Artifacs can be found at the usual locations for bitbake:
 
 _Note:_
 
-* S5 / S6: Boot Config
-* S9:2: BOOT\_MODE0
-* S9:3: BOOT\_MODE1
+* S5 / S6: Boot Config (inverted)
+* S9:2: BOOT\_MODE0 (inverted)
+* S9:3: BOOT\_MODE1 (inverted)
 * S9:1 and S9:4: not needed for booting
 * S10: Board config
 * X means position of DIP, - means don't care
