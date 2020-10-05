@@ -20,7 +20,7 @@ This README contains some useful information for TQMa8MxNL on MBa8Mx
 
 _MBa8x HW Rev.020x only_
 
-* RAM configs: 1GB
+* RAM configs: 1 GiB
 * CPU variants i.MX8MNQ
 * Fuses
 * speed grade / temperature grade detection
@@ -38,24 +38,26 @@ _MBa8x HW Rev.020x only_
 * ENET (GigE via Phy on MBa8Mx)
 * Bootdevices:
   * SD-Card on USDHC2
+  * QSPI-NOR on FlexSPI
 * USB
   * USB 2.0 Host / Hub
   * USB DRD (USB 2.0 OTG, Cable Detect, VBUS)
 * QSPI NOR
   * Read with 1-1-1 SDR
   * PP / Erase with 1-1-1 SDR
+* Cortex M7
+  * env settings for starting from TCM
+  * examples with UART4 as debug console
 
 **TODO or not tested / supported**
 
 * RAM 2 GB
 * e-MMC Boot (needs fusing to support USDHC1)
 * CPU variants i.MX8MND/S and Lite
-* create Bootstreams for qspi
-* Cortex M7
 
 ### Linux:
 
-* RAM configs 1GB
+* RAM configs 1 GiB
 * CPU variants i.MX8MNQ
 * speed grade / temperature grade detection
 * I2C
@@ -88,6 +90,9 @@ _MBa8x HW Rev.020x only_
 * QSPI NOR
   * Read with 1-1-4 SDR
   * PP / Erase with 1-1-1 SDR
+* Cortex M7
+  * examples running from TCM
+  * use UART4 as debug console
 
 ## TODO:
 
@@ -98,12 +103,12 @@ _MBa8x HW Rev.020x only_
 * MIPI CSI
 * MIKRO Bus
 * SIM
-* Cortex M7 / RPMSG
 
 ## Known Issues
 
 * Mikrobus Modul RTC5 on ecspi1 don't answer
-* UART4: needs ATF modification, to make it usable for linux
+* UART4: needs ATF modification, to make it usable for linux. Primary used as
+  debug UART for Cortex M7
 
 ## Build Artifacts
 
@@ -111,6 +116,9 @@ Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
 
 * \*.dtb: device tree blobs
+  * imx8mn-mba8mx.dtb
+  * imx8mn-mba8mx-lcdif-lvds-tm070jvhg33.dtb
+  * imx8mn-mba8mx-rpmsg.dtb
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
@@ -265,13 +273,13 @@ Example for Linux:
 ### Update components via U-Boot
 
 Bootstream: set env var `uboot` to name of your bootstream image, provide the
-bootstream via TFTP and update via `run update_uboot`
+bootstream via TFTP and update via `run update_uboot_mmc`
 
 Device tree blob: set env var `fdt_file` to name of your device tree blob,
-provide the blob via TFTP and update via `run update_fdt`
+provide the blob via TFTP and update via `run update_fdt_mmc`
 
 Linux kernel: set env var `image` to name of your kernel image,
-provide the file via TFTP and update via `run update_kernel`
+provide the file via TFTP and update via `run update_kernel_mmc`
 
 ## e-MMC Boot
 
@@ -308,11 +316,38 @@ To update components on boot media following u-boot environment scripts are
 prepared. These can be used to update the items using a network connection.
 
 Bootstream: set env var `uboot` to name of your bootstream image, provide the
-bootstream via TFTP and update via `run update_uboot`
+bootstream via TFTP and update via `run update_uboot_mmc`
 
 Device tree blob: set env var `fdt_file` to name of your device tree blob,
-provide the blob via TFTP and update via `run update_fdt`
+provide the blob via TFTP and update via `run update_fdt_mmc`
 
 Linux kernel: set env var `image` to name of your kernel image,
-provide the file via TFTP and update via `run update_kernel`
+provide the file via TFTP and update via `run update_kernel_mmc`
+
+## FlexSPI / QSPI Boot
+
+### Bootable QSPI NOR
+
+Write bootstream only:
+
+Bootstreams built using yocto are named `imx-boot-<module>-<baseboard>-sd.bin-flash_evk_flexspi`
+and are padded to be written at offset 0x0 of QSPI-NOR.
+
+Boot from SD-Card and write bootstream at offset 0x0 to QSPI-NOR
+
+Example for U-Boot:
+
+```
+tftp <bootstream>
+sf probe
+sf update ${loadaddr} 0 ${filesize}
+```
+
+### Update components via U-Boot
+
+To update components on boot media following u-boot environment scripts are
+prepared. These can be used to update the items using a network connection.
+
+Bootstream: set env var `uboot` to name of your bootstream image, provide the
+bootstream via TFTP and update via `run update_uboot_spi`
 
