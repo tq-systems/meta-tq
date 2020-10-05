@@ -36,20 +36,24 @@ _MBa8x HW Rev.020x only_
   * Read
   * Write
 * ENET (GigE via Phy on MBa8Mx)
-* Bootdevices: e-MMC / SD-Card
+* Bootdevices:
+  * SD-Card on USDHC2
+  * e-MMC on USDHC1
+  * QSPI-NOR on FlexSPI
 * USB
   * USB 2.0 Host / Hub
   * USB DRD (USB 2.0 OTG, Cable Detect, VBUS)
 * QSPI NOR
   * Read with 1-1-1 SDR
   * PP / Erase with 1-1-1 SDR
+* Cortex M4
+  * env settings for starting from TCM
+  * examples with UART4 as debug console
 
 **TODO or not tested / supported**
 
 * RAM 2 GiB
 * CPU variants i.MX8MMD/S and Lite
-* create Bootstreams for qspi
-* Cortex M4
 
 ### Linux:
 
@@ -87,6 +91,9 @@ _MBa8x HW Rev.020x only_
 * QSPI NOR
   * Read with 1-1-4 SDR
   * PP / Erase with 1-1-1 SDR
+* Cortex M4
+  * examples running from TCM
+  * use UART4 as debug console
 
 ## TODO:
 
@@ -97,13 +104,17 @@ _MBa8x HW Rev.020x only_
 * MIPI CSI
 * MIKRO Bus
 * SIM
-* Cortex M4 / RPMSG
 * VPU (test with h264 and vp8)
 
 ## Known Issues
 
 * Mikrobus Modul RTC5 on ecspi1 don't answer
-* UART4: needs ATF modification, to make it usable for linux
+* UART4: needs ATF modification, to make it usable for linux. Primary used as
+  debug UART for Cortex M4
+* Bootstream for QSPI on FlexSPI: not buildable out of the box. U-Boot SPL needs different
+  linker settings for SD / e-MMC and FlexSPI. Current recipes for boot stream generation
+  can only use a single U-Boot config. Set `UBOOT_CONFIG` to `fspi` to build FlexSPI
+  boot stream
 
 ## Build Artifacts
 
@@ -113,17 +124,19 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.dtb: device tree blobs
   * imx8mm-mba8mx.dtb
   * imx8mm-mba8mx-lcdif-lvds-tm070jvhg33.dtb
+  * imx8mm-mba8mx-rpmsg.dtb
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * imx-boot-${MACHINE}-sd.bin: boot stream for SD / e-MMC
+* imx-boot-${MACHINE}-fspi.bin: boot stream for SD / e-MMC
 
 ## Boot Dip Switches
 
 _Note:_
 
-* S5 / S6: Boot Config
+* S5 / S6: Boot Config, _inverted_
 * S9:2: BOOT\_MODE0
 * S9:3: BOOT\_MODE1
 * S9:1 and S9:4: not needed for booting
@@ -249,13 +262,13 @@ Example for Linux:
 ### Update components via U-Boot
 
 Bootstream: set env var `uboot` to name of your bootstream image, provide the
-bootstream via TFTP and update via `run update_uboot`
+bootstream via TFTP and update via `run update_uboot_mmc`
 
 Device tree blob: set env var `fdt_file` to name of your device tree blob,
-provide the blob via TFTP and update via `run update_fdt`
+provide the blob via TFTP and update via `run update_fdt_mmc`
 
 Linux kernel: set env var `image` to name of your kernel image,
-provide the file via TFTP and update via `run update_kernel`
+provide the file via TFTP and update via `run update_kernel_mmc`
 
 ## e-MMC Boot
 
@@ -292,11 +305,38 @@ To update components on boot media following u-boot environment scripts are
 prepared. These can be used to update the items using a network connection.
 
 Bootstream: set env var `uboot` to name of your bootstream image, provide the
-bootstream via TFTP and update via `run update_uboot`
+bootstream via TFTP and update via `run update_uboot_mmc`
 
 Device tree blob: set env var `fdt_file` to name of your device tree blob,
-provide the blob via TFTP and update via `run update_fdt`
+provide the blob via TFTP and update via `run update_fdt_mmc`
 
 Linux kernel: set env var `image` to name of your kernel image,
-provide the file via TFTP and update via `run update_kernel`
+provide the file via TFTP and update via `run update_kernel_mmc`
+
+## FlexSPI / QSPI Boot
+
+### Bootable QSPI NOR
+
+Write bootstream only:
+
+Bootstreams built using yocto are named `imx-boot-<module>-<baseboard>-fspi.bin`
+and are padded to be written at offset 0x0 of QSPI-NOR.
+
+Boot from SD-Card and write bootstream at offset 0x0 to QSPI-NOR
+
+Example for U-Boot:
+
+```
+tftp <bootstream>
+sf probe
+sf update ${loadaddr} 0 ${filesize}
+```
+
+### Update components via U-Boot
+
+To update components on boot media following u-boot environment scripts are
+prepared. These can be used to update the items using a network connection.
+
+Bootstream: set env var `uboot` to name of your bootstream image, provide the
+bootstream via TFTP and update via `run update_uboot_spi`
 
