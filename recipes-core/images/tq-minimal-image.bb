@@ -10,6 +10,7 @@ IMAGE_INSTALL = "\
 IMAGE_INSTALL_append = " can-utils \
                          mtd-utils \
                          memtester \
+                         iperf3 \
                          optee-client \
                          optee-test \
                          prueth-fw-am65x-sr2 \

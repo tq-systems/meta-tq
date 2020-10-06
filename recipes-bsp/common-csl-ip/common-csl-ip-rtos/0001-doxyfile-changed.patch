@@ -1,0 +1,224 @@
+From 089565b47e897f96151238fb81154d57130e13a6 Mon Sep 17 00:00:00 2001
+From: Vitaly Kuzmichev <vkuzmichev@dev.rtsoft.ru>
+Date: Wed, 30 Sep 2020 15:48:45 +0300
+Subject: [PATCH] doxyfile changed
+
+---
+ docs/doxyfile.xdt | 93 ++++++++++++++++++++++++-----------------------
+ 1 file changed, 48 insertions(+), 45 deletions(-)
+
+diff --git a/docs/doxyfile.xdt b/docs/doxyfile.xdt
+index 9c704560..1b7d5b24 100644
+--- a/docs/doxyfile.xdt
++++ b/docs/doxyfile.xdt
+@@ -18,7 +18,6 @@ PROJECT_NUMBER         = `packageVersion`
+ OUTPUT_DIRECTORY       = ./docs/doxygen
+ CREATE_SUBDIRS         = NO
+ OUTPUT_LANGUAGE        = English
+-USE_WINDOWS_ENCODING   = YES
+ BRIEF_MEMBER_DESC      = YES
+ REPEAT_BRIEF           = YES
+ ABBREVIATE_BRIEF       = "The $name class" \
+@@ -35,20 +34,19 @@ ABBREVIATE_BRIEF       = "The $name class" \
+ ALWAYS_DETAILED_SEC    = NO
+ INLINE_INHERITED_MEMB  = NO
+ FULL_PATH_NAMES        = NO
+-STRIP_FROM_PATH        = 
+-STRIP_FROM_INC_PATH    = 
++STRIP_FROM_PATH        =
++STRIP_FROM_INC_PATH    =
+ SHORT_NAMES            = NO
+ JAVADOC_AUTOBRIEF      = NO
+ MULTILINE_CPP_IS_BRIEF = NO
+-DETAILS_AT_TOP         = NO
+ INHERIT_DOCS           = YES
+ SEPARATE_MEMBER_PAGES  = NO
+ TAB_SIZE               = 8
+-ALIASES                = 
++ALIASES                =
+ OPTIMIZE_OUTPUT_FOR_C  = YES
+ OPTIMIZE_OUTPUT_JAVA   = NO
+ BUILTIN_STL_SUPPORT    = NO
+-DISTRIBUTE_GROUP_DOC   = NO
++DISTRIBUTE_GROUP_DOC   = YES
+ SUBGROUPING            = YES
+ #---------------------------------------------------------------------------
+ # Build related configuration options
+@@ -74,11 +72,10 @@ GENERATE_TODOLIST      = YES
+ GENERATE_TESTLIST      = YES
+ GENERATE_BUGLIST       = YES
+ GENERATE_DEPRECATEDLIST= YES
+-ENABLED_SECTIONS       = 
++ENABLED_SECTIONS       =
+ MAX_INITIALIZER_LINES  = 30
+ SHOW_USED_FILES        = YES
+-SHOW_DIRECTORIES       = NO
+-FILE_VERSION_FILTER    = 
++FILE_VERSION_FILTER    =
+ #---------------------------------------------------------------------------
+ # configuration options related to warning and progress messages
+ #---------------------------------------------------------------------------
+@@ -88,24 +85,34 @@ WARN_IF_UNDOCUMENTED   = YES
+ WARN_IF_DOC_ERROR      = YES
+ WARN_NO_PARAMDOC       = NO
+ WARN_FORMAT            = "$file:$line: $text"
+-WARN_LOGFILE           = 
++WARN_LOGFILE           =
+ #---------------------------------------------------------------------------
+ # configuration options related to the input files
+ #---------------------------------------------------------------------------
+-INPUT                  = ./src \
+-                         .
++INPUT                  = ./hw_types.h \
++                         ./cslr.h \
++                         ./csl_dss.h \
++                         ./csl_types.h \
++                         ./csl_fvid2_dataTypes.h \
++						 ./src/ip/dss/V3/csl_dssTop.h \
++						 ./src/ip/dss/V3/csl_dssCommon.h \
++						 ./src/ip/dss/V3/csl_dssVideoPipe.h \
++						 ./src/ip/dss/V3/csl_dssOverlay.h \
++						 ./src/ip/dss/V3/csl_dssVideoPort.h \
+ 
+ FILE_PATTERNS          = *.h
+-RECURSIVE              = YES
+-EXCLUDE                = YES 
++
++RECURSIVE              = NO
++EXCLUDE                = YES
+ EXCLUDE_SYMLINKS       = NO
+-EXCLUDE_PATTERNS       = cslr_*.h csl2_mainpage.h
+-EXAMPLE_PATH           = 
++EXCLUDE_PATTERNS       = cslr_*.h
++
++EXAMPLE_PATH           = ./docs/
+ EXAMPLE_PATTERNS       = *
+ EXAMPLE_RECURSIVE      = NO
+-IMAGE_PATH             = 
+-INPUT_FILTER           = 
+-FILTER_PATTERNS        = 
++IMAGE_PATH             =
++INPUT_FILTER           =
++FILTER_PATTERNS        =
+ FILTER_SOURCE_FILES    = NO
+ #---------------------------------------------------------------------------
+ # configuration options related to source browsing
+@@ -123,7 +130,7 @@ VERBATIM_HEADERS       = NO
+ #---------------------------------------------------------------------------
+ ALPHABETICAL_INDEX     = NO
+ COLS_IN_ALPHA_INDEX    = 5
+-IGNORE_PREFIX          = 
++IGNORE_PREFIX          =
+ #---------------------------------------------------------------------------
+ # configuration options related to the HTML output
+ #---------------------------------------------------------------------------
+@@ -132,11 +139,10 @@ HTML_OUTPUT            = html
+ HTML_FILE_EXTENSION    = .html
+ HTML_HEADER            = ./docs/tiheader.htm
+ HTML_FOOTER            = ./docs/tifooter.htm
+-HTML_STYLESHEET        = 
+-HTML_ALIGN_MEMBERS     = YES
+-GENERATE_HTMLHELP      = YES
++HTML_STYLESHEET        =
++GENERATE_HTMLHELP      = NO
+ CHM_FILE               = ..\..\csldocs.chm
+-HHC_LOCATION           =
++HHC_LOCATION           = hhc.exe
+ GENERATE_CHI           = NO
+ BINARY_TOC             = NO
+ TOC_EXPAND             = NO
+@@ -153,8 +159,8 @@ LATEX_CMD_NAME         = latex
+ MAKEINDEX_CMD_NAME     = makeindex
+ COMPACT_LATEX          = NO
+ PAPER_TYPE             = a4wide
+-EXTRA_PACKAGES         = 
+-LATEX_HEADER           = 
++EXTRA_PACKAGES         =
++LATEX_HEADER           =
+ PDF_HYPERLINKS         = YES
+ USE_PDFLATEX           = YES
+ LATEX_BATCHMODE        = NO
+@@ -166,8 +172,8 @@ GENERATE_RTF           = NO
+ RTF_OUTPUT             = rtf
+ COMPACT_RTF            = NO
+ RTF_HYPERLINKS         = NO
+-RTF_STYLESHEET_FILE    = 
+-RTF_EXTENSIONS_FILE    = 
++RTF_STYLESHEET_FILE    =
++RTF_EXTENSIONS_FILE    =
+ #---------------------------------------------------------------------------
+ # configuration options related to the man page output
+ #---------------------------------------------------------------------------
+@@ -180,8 +186,6 @@ MAN_LINKS              = NO
+ #---------------------------------------------------------------------------
+ GENERATE_XML           = NO
+ XML_OUTPUT             = xml
+-XML_SCHEMA             = 
+-XML_DTD                = 
+ XML_PROGRAMLISTING     = YES
+ #---------------------------------------------------------------------------
+ # configuration options for the AutoGen Definitions output
+@@ -193,29 +197,29 @@ GENERATE_AUTOGEN_DEF   = NO
+ GENERATE_PERLMOD       = NO
+ PERLMOD_LATEX          = NO
+ PERLMOD_PRETTY         = YES
+-PERLMOD_MAKEVAR_PREFIX = 
++PERLMOD_MAKEVAR_PREFIX =
+ #---------------------------------------------------------------------------
+-# Configuration options related to the preprocessor   
++# Configuration options related to the preprocessor
+ #---------------------------------------------------------------------------
+ ENABLE_PREPROCESSING   = YES
+ MACRO_EXPANSION        = NO
+ EXPAND_ONLY_PREDEF     = NO
+ SEARCH_INCLUDES        = YES
+-INCLUDE_PATH           = 
+-INCLUDE_FILE_PATTERNS  = 
+-PREDEFINED             = 
+-EXPAND_AS_DEFINED      = 
++INCLUDE_PATH           =
++INCLUDE_FILE_PATTERNS  =
++PREDEFINED             =
++EXPAND_AS_DEFINED      =
+ SKIP_FUNCTION_MACROS   = YES
+ #---------------------------------------------------------------------------
+-# Configuration::additions related to external references   
++# Configuration::additions related to external references
+ #---------------------------------------------------------------------------
+-TAGFILES               = 
+-GENERATE_TAGFILE       = 
++TAGFILES               =
++GENERATE_TAGFILE       =
+ ALLEXTERNALS           = NO
+ EXTERNAL_GROUPS        = YES
+ PERL_PATH              = /usr/bin/perl
+ #---------------------------------------------------------------------------
+-# Configuration options related to the dot tool   
++# Configuration options related to the dot tool
+ #---------------------------------------------------------------------------
+ CLASS_DIAGRAMS         = NO
+ HIDE_UNDOC_RELATIONS   = YES
+@@ -232,16 +236,15 @@ CALLER_GRAPH           = NO
+ GRAPHICAL_HIERARCHY    = YES
+ DIRECTORY_GRAPH        = YES
+ DOT_IMAGE_FORMAT       = png
+-DOT_PATH               = 
+-DOTFILE_DIRS           = 
+-MAX_DOT_GRAPH_WIDTH    = 1024
+-MAX_DOT_GRAPH_HEIGHT   = 1024
++DOT_PATH               =
++DOTFILE_DIRS           =
+ MAX_DOT_GRAPH_DEPTH    = 1000
+ DOT_TRANSPARENT        = YES
+ DOT_MULTI_TARGETS      = NO
+ GENERATE_LEGEND        = YES
+ DOT_CLEANUP            = YES
+ #---------------------------------------------------------------------------
+-# Configuration::additions related to the search engine   
++# Configuration::additions related to the search engine
+ #---------------------------------------------------------------------------
+ SEARCHENGINE           = NO
++
+-- 
+2.17.1
+
