@@ -57,7 +57,7 @@ IMAGE_INSTALL_remove = " packagegroup-fsl-optee-imx"
 
 # Image Options
 #
-EXTRA_IMAGEDEPENDS += "u-boot imx-boot"
+EXTRA_IMAGEDEPENDS += "u-boot imx-boot cortexm-demos"
 IMAGE_FSTYPES_append = " tar.gz ext4 wic"
 IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2"
 
