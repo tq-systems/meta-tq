@@ -18,7 +18,7 @@ This README contains some useful information for TQMa8Mx on MBa8Mx
 
 ### U-Boot:
 
-_MBa8x HW Rev.020x only_
+_MBa8x HW Rev.020x/30x only_
 
 * RAM configs 1 GiB / 2 GiB / 4 GiB
 * CPU variants i.MX8MQ / i.MX8MQL
@@ -88,6 +88,11 @@ _MBa8x HW Rev.020x only_
 * Cortex M4
   * examples running from TCM
   * use UART4 as debug console
+* QSPI NOR
+  * Read with 1-1-4 SDR
+  * PP / Erase with 1-1-1
+* GPU
+* VPU
 
 ## TODO:
 
@@ -95,24 +100,20 @@ _MBa8x HW Rev.020x only_
 * MIKRO Bus
 * SIM
 * QSPI NOR
-  * Read with 1-1-4 SDR
-  * PP / Erase with 1-1-1
   * see Known Issues
 * Audio
-  * HDMI audio (with pulse audio)
-  * Audio codec mic in
+  * HDMI audio not tested
+  * Audio codec mic in not tested
 * HDMI
-* VPU (test with h264 and vp8)
 * DSI
   * DSI to DP bridge
-* GPU
 
 ## Known Issues
 
-* LVDS over DSI @ eLCDIF with shifted display under weston
-* LVDS shows wrong colors on Tianma display kit (HW issue on display)
+* LVDS shows wrong colors on older Tianma display kit (HW issue on display)
 * USB OTG / DRD
   * USB OTG OC not handled (polarity mismatch)
+  * USB OTG: only host is working
 * QSPI limited to SDR (driver / chip compatibility)
 * Mikrobus Modul RTC5 on ecspi1 don't answer
 
@@ -123,6 +124,7 @@ Artifacs can be found at the usual locations for bitbake:
 
 * \*.dtb: device tree blobs
   * imx8mq-mba8mx.dtb
+  * imx8mq-mba8mx-hdmi.dtb
   * imx8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb
   * imx8mq-mba8mx-dcss-lvds-tm070jvhg33.dtb
   * imx8mq-mba8mx-rpmsg.dtb
@@ -131,6 +133,8 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * imx-boot-${MACHINE}-sd.bin: boot stream for SD / e-MMC
+* hello\_world.bin (Cortex M4 demo, UART4, TCM)
+* rpmsg\_lite\_pingpong\_rtos\_linux\_remote.bin (Cortex M4 demo, UART4, TCM)
 
 ## Boot Dip Switches
 
@@ -185,11 +189,24 @@ _SD Card_
 
 BOOT\_MODE: Internal Boot
 
+*Attention:* Differences from MBa8Mx REV.020x to MBa8Mx REV.030x
+
+MBa8Mx REV.020x:
+
 ```
 	S6			S5			S9
 DIP 	1 2 3 4 5 6 7 8		1 2 3 4 5 6 7 8		1 2 3 4
 ON 	X X   X   X X X		X X X X X X X X 	  X    
 OFF 	    X   X      		               		-   X -
+```
+
+MBa8Mx REV.030x:
+
+```
+	S6			S5			S9
+DIP 	1 2 3 4 5 6 7 8		1 2 3 4 5 6 7 8		1 2 3 4
+ON 	X     X   X X X		X X X X X X X X 	  X    
+OFF 	  X X   X      		               		-   X -
 ```
 
 _e-MMC_
@@ -219,13 +236,17 @@ _S7_
 
 _S8_
 
+*Attention:* Differences from MBa8Mx REV.020x to MBa8Mx REV.030x
+
 * 1: TQMa8M\_SYS\_RST#
   * BSP default: OFF
 * 2: TQMa8M\_ONOFF
   * BSP default: OFF
-* 3: SD\_MUX\_CTRL
+* 3: SD\_MUX\_CTRL (MBa8Mx REV.020x)
   * ON: SD Signals to X8 (Micro SD Slot)
   * OFF: SD Signals to X17
+  * BSP default: ON
+* 3: I2C\_ADDR\_SW (MBa8Mx REV.030x) (I2C Address of GPIO Expander D31)
   * BSP default: ON
 * 4: SPI\_MUX\_CTRL
   * ON: SPI1 Signals to X20 (MikroBus)
@@ -270,6 +291,9 @@ provide the blob via TFTP and update via `run update_fdt`
 Linux kernel: set env var `image` to name of your kernel image,
 provide the file via TFTP and update via `run update_kernel`
 
+Cortex M4 image: set env var `cm_image` to name of your Cortex M4 image,
+provide the file via TFTP and update via `run update_cm_mmc`
+
 ## e-MMC Boot
 
 ### Bootable e-MMC
@@ -313,6 +337,9 @@ provide the blob via TFTP and update via `run update_fdt`
 Linux kernel: set env var `image` to name of your kernel image,
 provide the file via TFTP and update via `run update_kernel`
 
+Cortex M4 image: set env var `cm_image` to name of your Cortex M4 image,
+provide the file via TFTP and update via `run update_cm_mmc`
+
 ## Howto
 
 ### Sleep Modes
@@ -350,16 +377,10 @@ To test audio output using alsa:
 speaker-test -D hw:<n> -l 1 -c 2 -f 500 -t sine
 ```
 
-To test audio using gstreamer / pulse audio:
+To test audio using gstreamer / alsa:
 
 ```
-pactl list sinks
-
-pacmd set-default-sink 0
-gst-launch-1.0 audiotestsrc ! pulsesink
-
-pacmd set-default-sink 1
-gst-launch-1.0 audiotestsrc ! pulsesink
+gst-launch-1.0 audiotestsrc ! alsasink
 ```
 
 ### Audio Line In (codec)
@@ -372,7 +393,24 @@ speaker-test -D hw:0 -l 1 -c 2 -f 500 -t sine
 ### VPU support
 
 ```
-pacmd set-default-sink 1
 gst-play-1.0 /mnt/sd/tears_of_steel_1080p.webm
 ```
 
+### Cortex M4
+
+Demos are compiled to use UART4 (MBa8Mx X17:56,58 + X17:54 for GND) with
+115200 8N1.
+
+To start a demo stored on SD / e-MMC from U-Boot:
+
+```
+setenv fdt_file imx8mq-mba8mx-rpmsg.dtb
+setenv cm_image <demo>
+run boot_cm_mmc
+```
+
+To connect from running linux to rpmsg ping pong demo:
+
+```
+modprobe imx_rpmsg_pingpong
+```
