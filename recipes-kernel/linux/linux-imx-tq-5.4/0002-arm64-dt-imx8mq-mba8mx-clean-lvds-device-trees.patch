@@ -1,0 +1,78 @@
+From 191389428fca3d7444d6c3c6320304be259142a5 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Tue, 13 Oct 2020 14:23:34 +0200
+Subject: [PATCH 2/2] arm64: dt: imx8mq-mba8mx: clean lvds device trees
+
+With lf-5.4.y display subsystem is restructured. LCDIF / DCSS are disabled
+by default in CPU tree. The display-subsystem container is not used anymore
+for i.MX8MQ. So we can simplify our trees ported from 4.14.98_2.2.0
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ .../imx8mq-mba8mx-dcss-lvds-tm070jvhg33.dts   | 12 ------------
+ .../imx8mq-mba8mx-lcdif-lvds-tm070jvhg33.dts  | 19 -------------------
+ 2 files changed, 31 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/imx8mq-mba8mx-dcss-lvds-tm070jvhg33.dts b/arch/arm64/boot/dts/freescale/imx8mq-mba8mx-dcss-lvds-tm070jvhg33.dts
+index db7b6a51d268..9555acda1921 100644
+--- a/arch/arm64/boot/dts/freescale/imx8mq-mba8mx-dcss-lvds-tm070jvhg33.dts
++++ b/arch/arm64/boot/dts/freescale/imx8mq-mba8mx-dcss-lvds-tm070jvhg33.dts
+@@ -6,14 +6,6 @@
+ #include "imx8mq-mba8mx.dts"
+ #include "imx8mq-mba8mx-lvds-tm070jvhg33.dtsi"
+ 
+-/delete-node/ &hdmi;
+-
+-/ {
+-	display-subsystem {
+-		status = "okay";
+-	};
+-};
+-
+ &dcss {
+ 	status = "okay";
+ 
+@@ -48,10 +40,6 @@
+ 	status = "okay";
+ };
+ 
+-&lcdif {
+-	status = "disabled";
+-};
+-
+ &mipi_dsi {
+ 	ports {
+ 		port@0 {
+diff --git a/arch/arm64/boot/dts/freescale/imx8mq-mba8mx-lcdif-lvds-tm070jvhg33.dts b/arch/arm64/boot/dts/freescale/imx8mq-mba8mx-lcdif-lvds-tm070jvhg33.dts
+index 0f1ab839d950..189811656cb7 100644
+--- a/arch/arm64/boot/dts/freescale/imx8mq-mba8mx-lcdif-lvds-tm070jvhg33.dts
++++ b/arch/arm64/boot/dts/freescale/imx8mq-mba8mx-lcdif-lvds-tm070jvhg33.dts
+@@ -6,25 +6,6 @@
+ #include "imx8mq-mba8mx.dts"
+ #include "imx8mq-mba8mx-lvds-tm070jvhg33.dtsi"
+ 
+-/ {
+-	display-subsystem {
+-		status = "disabled";
+-	};
+-};
+-
+-&hdmi {
+-	status = "disabled";
+-};
+-
+-&dcss {
+-	status = "disabled";
+-};
+-
+-&dcss {
+-	status = "disabled";
+-};
+-
+-
+ &irqsteer {
+ 	status = "disabled";
+ };
+-- 
+2.17.1
+

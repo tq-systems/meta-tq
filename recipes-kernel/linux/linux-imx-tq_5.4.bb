@@ -28,6 +28,11 @@ SRC_URI_mx8 = "\
   file://tqma8x-nonimx-drm-removal.cfg \
 "
 
+SRC_URI_append = "\
+    file://0001-arm64-dt-imx8mq-mba8mx-add-GPIO-for-SD-card-supply.patch \
+    file://0002-arm64-dt-imx8mq-mba8mx-clean-lvds-device-trees.patch \
+"
+
 ################
 #           file://optimize-filesystem-selection.cfg \
 #           file://usb-serial-port.cfg \
