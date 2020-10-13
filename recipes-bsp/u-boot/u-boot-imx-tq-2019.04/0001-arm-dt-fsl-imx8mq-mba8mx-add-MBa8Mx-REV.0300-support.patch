@@ -1,0 +1,61 @@
+From 8809c46ad392bb7abfa36dbca4730ae46e91bbd8 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 12 Oct 2020 12:16:37 +0200
+Subject: [PATCH] arm: dt: fsl-imx8mq-mba8mx: add MBa8Mx REV.0300 support
+
+Signal SD2_RESET was not used on MBa8Mx REV.020x. For REV.030x it is connected
+and allows switching the SD card supply voltage. Therefore the pin should be
+muxed, to label it as not usable for other purpose.
+
+Due to the fact that the power supply of the SD card interface pins of the CPU
+cannot be switched at runtime, we have to disable voltage switch for U-Boot
+and keep the regulator device for SD card slot always on.
+
+SD card reset is done at boot time with correct boot config settings
+to guarantee board boot from SD.
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ arch/arm/dts/fsl-imx8mq-mba8mx.dts | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm/dts/fsl-imx8mq-mba8mx.dts b/arch/arm/dts/fsl-imx8mq-mba8mx.dts
+index b5d1e22a1f..74523305b5 100644
+--- a/arch/arm/dts/fsl-imx8mq-mba8mx.dts
++++ b/arch/arm/dts/fsl-imx8mq-mba8mx.dts
+@@ -22,6 +22,10 @@
+ 		regulator-name = "VSD_3V3";
+ 		regulator-min-microvolt = <3300000>;
+ 		regulator-max-microvolt = <3300000>;
++		gpio = <&gpio2 19 GPIO_ACTIVE_HIGH>;
++		enable-active-high;
++		/* can be removed, if only MBa8Mx REV.0300 shall be supported */
++		regulator-always-on;
+ 	};
+ };
+ 
+@@ -129,7 +133,8 @@
+ 
+ 	pinctrl_usdhc2_gpio: usdhc2grpgpio {
+ 		fsl,pins = <
+-			MX8MQ_IOMUXC_SD2_CD_B_GPIO2_IO12	0x41
++			MX8MQ_IOMUXC_SD2_CD_B_GPIO2_IO12		0x41
++			MX8MQ_IOMUXC_SD2_RESET_B_GPIO2_IO19		0xc1
+ 		>;
+ 	};
+ 
+@@ -225,7 +230,10 @@
+ 	bus-width = <4>;
+ 	cd-gpios = <&gpio2 12 GPIO_ACTIVE_LOW>;
+ 	disable-wp;
+-	/* we have VSELECT but no working reset, so disable UHS */
++	/*
++	 * can be removed, if only MBa8Mx REV.0300 shall be supported
++	 * REV.020x has VSELECT but no working reset, so disable UHS in U-Boot
++	 */
+ 	no-1-8-v;
+ 	vmmc-supply = <&reg_usdhc2_vmmc>;
+ 	status = "okay";
+-- 
+2.17.1
+
