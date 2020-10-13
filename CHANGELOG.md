@@ -7,6 +7,7 @@ Releases are named with the following scheme:
 
 ### Added
 
+* linux: TQMa8Mx: add dt examle for HDMI
 * machines: TQMa8Mx / TQMa8Mx\[M,N\]L: include RPMSG examle device tree
 * machines: add configuration for TQMa8Mx with 4 GiB RAM
 * machines: TQMa8MxNL: build FlexSPI bootstream by default
@@ -20,6 +21,8 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* u-boot: TQMa8Mx: restrict SPL size. Use only configured DDR timing to prevent
+  SRAM overflow
 * machines: TQMa8Mx: rename an include (mba8mx.inc -> tqma8mx-mba8mx.inc)
 * linux: TQMa8Xx[S]: fix compatible names in devicetree
 * u-boot: TQMa8Mx: use devicetree to configure MMC env settings
@@ -33,6 +36,9 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* linux: fix imx-spi for GPIO chip select (deferred probe failures on TQMa8Mx)
+* u-boot: TQMa8Mx: fix USB Support. DM_USB and DWC3 for i.MX8M are not 100%
+  compatible when using with non Type-C dual role setup
 * linux: TQMa8Xx: fix dt bindings
 * linux: TQMa8Mx\[M,N\]L: remove USER\_LED\_3 (not usable for these SOM)
 * linux: i.MX8MQ: backport device tree fixes from NXP upstream
