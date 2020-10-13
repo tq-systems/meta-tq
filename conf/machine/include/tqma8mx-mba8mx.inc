@@ -35,3 +35,12 @@ IMAGE_BOOT_FILES ?= "\
 	${KERNEL_IMAGETYPE} \
 	${BOARD_DEVICETREE_FILES} \
 	"
+
+IMAGE_BOOT_FILES += " \
+    hello_world.bin \
+    rpmsg_lite_pingpong_rtos_linux_remote.bin \
+"
+
+WKS_FILE_DEPENDS_append = "\
+	cortexm-demos \
+	"

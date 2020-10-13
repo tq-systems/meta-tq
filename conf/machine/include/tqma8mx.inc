@@ -26,9 +26,6 @@ SPL_BINARY = "spl/u-boot-spl.bin"
 # Set DDR FIRMWARE
 DDR_FIRMWARE_NAME = "lpddr4_pmu_train_1d_imem.bin lpddr4_pmu_train_1d_dmem.bin lpddr4_pmu_train_2d_imem.bin lpddr4_pmu_train_2d_dmem.bin"
 
-IMAGE_BOOTFILES_DEPENDS += "imx-m4-demos:do_deploy"
-IMAGE_BOOTFILES += "imx8mq_m4_TCM_hello_world.bin imx8mq_m4_TCM_rpmsg_lite_pingpong_rtos_linux_remote.bin imx8mq_m4_TCM_rpmsg_lite_str_echo_rtos.bin"
-
 # Set imx-mkimage boot target
 IMXBOOT_TARGETS ?= "flash_evk flash_evk_no_hdmi"
 
