@@ -7,10 +7,6 @@ require recipes-bsp/u-boot/u-boot.inc
 
 inherit pythonnative
 
-SRC_URI_append = " \
-    file://0001-arm-dt-fsl-imx8mq-mba8mx-add-MBa8Mx-REV.0300-support.patch \
-"
-
 PROVIDES += "u-boot"
 DEPENDS_append = " python dtc-native bc-native"
 
