@@ -52,6 +52,8 @@ _MBa8x HW Rev.020x/30x only_
 
 ### Linux:
 
+_MBa8x HW Rev.020x/30x only_
+
 * RAM configs 1 GiB / 2 GiB / 4 GiB
 * CPU variants i.MX8MQ / i.MX8MQL
 * speed grade / temperature grade detection
@@ -93,6 +95,7 @@ _MBa8x HW Rev.020x/30x only_
   * PP / Erase with 1-1-1
 * GPU
 * VPU
+* HDMI
 
 ## TODO:
 
@@ -104,7 +107,6 @@ _MBa8x HW Rev.020x/30x only_
 * Audio
   * HDMI audio not tested
   * Audio codec mic in not tested
-* HDMI
 * DSI
   * DSI to DP bridge
 
@@ -112,8 +114,9 @@ _MBa8x HW Rev.020x/30x only_
 
 * LVDS shows wrong colors on older Tianma display kit (HW issue on display)
 * USB OTG / DRD
-  * USB OTG OC not handled (polarity mismatch)
-  * USB OTG: only host is working
+  * USB OTG OC not handled for host role
+  * USB OTG: only host is working in U-Boot
+  * USB OTG: some USB 3 memory sticks not working in U-Boot
 * QSPI limited to SDR (driver / chip compatibility)
 * Mikrobus Modul RTC5 on ecspi1 don't answer
 
