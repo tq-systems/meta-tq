@@ -9,7 +9,7 @@ SRC_URI = "\
 "
 
 SRCBRANCH = "TQMaxx-lf-5.4.y-1.0.0"
-SRCREV = "6429209392cbfe14b61638e7018f9afd8697b9d9"
+SRCREV = "191389428fca3d7444d6c3c6320304be259142a5"
 
 KERNEL_TREE_DEFCONFIG_mx8 = "imx_v8_defconfig"
 
@@ -26,11 +26,6 @@ SRC_URI_mx8 = "\
   file://tqma8x-adc-hwmon-support.cfg \
   file://tqma8x-rtc.cfg \
   file://tqma8x-nonimx-drm-removal.cfg \
-"
-
-SRC_URI_append = "\
-    file://0001-arm64-dt-imx8mq-mba8mx-add-GPIO-for-SD-card-supply.patch \
-    file://0002-arm64-dt-imx8mq-mba8mx-clean-lvds-device-trees.patch \
 "
 
 ################
