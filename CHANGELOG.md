@@ -5,8 +5,14 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa8.BSP.SW.0030
+
 ### Added
 
+* linux: TQMa8Mx: compatibility to MBa8Mx REV.0300
+* u-boot: TQMa8Mx: compatibility to MBa8Mx REV.0300
+* machines: integrate CortexM examples for TQMa8Mx / TQMa8Mx\[M,N\]L
+* recipes-bsp: first version of CortexM examples for TQMa8Mx / TQMa8Mx\[M,N\]L
 * linux: TQMa8Mx: add dt examle for HDMI
 * machines: TQMa8Mx / TQMa8Mx\[M,N\]L: include RPMSG examle device tree
 * machines: add configuration for TQMa8Mx with 4 GiB RAM
