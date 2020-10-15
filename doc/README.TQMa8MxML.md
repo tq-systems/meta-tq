@@ -340,3 +340,21 @@ prepared. These can be used to update the items using a network connection.
 Bootstream: set env var `uboot` to name of your bootstream image, provide the
 bootstream via TFTP and update via `run update_uboot_spi`
 
+### Cortex M4
+
+Demos are compiled to use UART4 (MBa8Mx X17:56,58 + X17:54 for GND) with
+115200 8N1.
+
+To start a demo stored on SD / e-MMC from U-Boot:
+
+```
+setenv fdt_file imx8mqml-mba8mx-rpmsg.dtb
+setenv cm_image <demo>
+run boot_cm_mmc
+```
+
+To connect from running linux to rpmsg ping pong demo:
+
+```
+modprobe imx_rpmsg_pingpong
+```
