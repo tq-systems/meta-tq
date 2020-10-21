@@ -23,9 +23,11 @@ KERNEL_IMAGETYPE = "Image"
 
 PREFERRED_PROVIDER_u-boot_mx8 ?= "u-boot-imx-tq"
 PREFERRED_PROVIDER_virtual/bootloader_mx8 ?= "u-boot-imx-tq"
+PREFERRED_PROVIDER_u-boot-mfgtool = "u-boot-imx-tq-mfgtool"
 
-UBOOT_MAKE_TARGET = "u-boot.bin"
-UBOOT_SUFFIX = "bin"
+UBOOT_MAKE_TARGET ?= "all"
+SPL_BINARY ?= "spl/u-boot-spl.bin"
+UBOOT_SUFFIX ?= "bin"
 
 # for sdcard image rule
 BOOT_SPACE = "65536"
@@ -37,7 +39,7 @@ IMX_BOOT_SEEK = "32"
 #
 EXTRA_IMAGEDEPENDS += "u-boot imx-boot imx-sc-firmware"
 IMAGE_FSTYPES_append = " tar.gz ext4 wic"
-IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2"
+IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2 sdcard wic.bz2"
 
 # need to have the kernel modules in rootfs
 IMAGE_INSTALL_append = " kernel-modules"
