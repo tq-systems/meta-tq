@@ -115,8 +115,8 @@ Support for the following machines is contained in this version:
 [y]	i.MX8MQ			TQMa8MQ			MBa8Mx		tqma8mx-4gb-mba8mx (TQMa8MQL with 4 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x / 030x)
 [y]	i.MX8MMQ		TQMa8MMQL		MBa8Mx		tqma8mxml-1gb-mba8mx (TQMa8MQML with 1 GiB RAM, HW REV.010x, MBa8Mx HW REV.020x)
 [y]	i.MX8MNQ		TQMa8MNQL		MBa8Mx		tqma8mxnl-1gb-mba8mx (TQMa8MNQL with 1 GiB RAM, HW REV.010x, MBa8Mx HW REV.020x)
-[-]	i.MX8QM			TQMa8QM			MBa8x		tqma8qm-4gb-mba8x (TQMa8QM with 4 GiB RAM, HW REV.010x)
-[-]	i.MX8QM			TQMa8QM			MBa8x		tqma8qm-8gb-mba8x (TQMa8QM with 8 GiB RAM, HW REV.010x)
+[y]	i.MX8QM			TQMa8QM			MBa8x		tqma8qm-4gb-mba8x (TQMa8QM with 4 GiB RAM, HW REV.010x / 020x, MBa8x HW REV.020x)
+[y]	i.MX8QM			TQMa8QM			MBa8x		tqma8qm-8gb-mba8x (TQMa8QM with 8 GiB RAM, HW REV.010x / 020x, MBa8x HW REV.020x)
 [y]	i.MX8QXP		TQMa8XQP		MBa8Xx		tqma8xqp-mba8xx (TQMa8XQP with 1 GiB RAM, HW REV.020x)
 [y]	i.MX8QXP		TQMa8XQP4		MBa8Xx		tqma8xqp4-mba8xx (TQMa8XQP with 2 GiB LPDDR4 RAM, HW REV.010x)
 [y]	i.MX8QXP		TQMa8XQPS		MB-SMARC-2	tqma8xqps-mb-smarc-2 (TQMa8XQPS with 2 GiB RAM, HW REV.020x)
@@ -180,9 +180,11 @@ is
 
 Under the given links SOM specific information can be found:
 
-[TQMA8Mx](doc/README.TQMa8Mx.md)  
-[TQMA8MxML](doc/README.TQMa8MxML.md)  
-[TQMA8MxNL](doc/README.TQMa8MxNL.md)  
-[TQMA8XQP](doc/README.TQMa8Xx.md)  
-[TQMA8XQP4](doc/README.TQMa8Xx.md)  
-[TQMA8XQPS](doc/README.TQMa8XxS.md)  
+[TQMa8Mx](doc/README.TQMa8Mx.md)  
+[TQMa8MxML](doc/README.TQMa8MxML.md)  
+[TQMa8MxNL](doc/README.TQMa8MxNL.md)  
+[TQMa8XQP](doc/README.TQMa8Xx.md)  
+[TQMa8XQP4](doc/README.TQMa8Xx.md)  
+[TQMa8XQPS](doc/README.TQMa8XxS.md)  
+[TQMa8XQPS](doc/README.TQMa8XxS.md)  
+[TQMa8QM](doc/README.TQMa8x.md)  

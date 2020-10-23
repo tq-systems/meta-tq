@@ -8,3 +8,8 @@ require recipes-bsp/u-boot/u-boot-mfgtool.inc
 
 SPL_IMAGE = "${SPL_BINARYNAME}-${MACHINE}-mfgtool-${PV}-${PR}"
 SPL_SYMLINK = "${SPL_BINARYNAME}-mfgtool-${MACHINE}"
+
+COMPATIBLE_MACHINE_append = "tqma8mx"
+COMPATIBLE_MACHINE_append = "|tqma8mxml"
+COMPATIBLE_MACHINE_append = "|tqma8mxnl"
+
