@@ -5,6 +5,12 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+### Added
+
+* linux: TQMa8x: initial support for new kernel with SOM REV.010x / MBa8x REV.020x
+* u-boot: TQMa8x: initial support for new kernel with SOM REV.010x / MBa8x REV.020x
+* meta-tq: add TQMa8 on MBa8x with 4GB / 8 GB
+
 ## zeus.TQMa8.BSP.SW.0030
 
 ### Added
