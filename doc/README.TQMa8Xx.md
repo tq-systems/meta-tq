@@ -38,21 +38,24 @@ See top level README.md for configurations usable as MACHINE.
   * Write
   * Boot
 * I2C
-* e-MMC / SD
+* e-MMC / SD-Card
   * Read
   * Write
   * Boot
-* USB Hub
-* USB OTG
+* USB
+  * USB 2.0 Dual Role
+  * USB 3.0 (Hub on MBa8Xx)
 * ENET (GigE via Phy on MBa8Xx)
   * ENET 1
   * ENET 2
 * Bootstreams
-  * FlexSPI + SD / e-MMC
+  * FlexSPI
+  * SD / e-MMC
   * UUU / mfgtool
 
 **TODO or not tested / supported**
 
+* Cortex M4
 * CPU variants i.MX8DX
 * speed grade / temperature grade detection (current SCU limitation)
 
@@ -70,17 +73,19 @@ See top level README.md for configurations usable as MACHINE.
 * SPI
   * spi user space device on all CS
 * GPU
-* LED
 * GPIO
-* ENET (GigE via Phy)
+  * LED
+* ENET (GigE via Phy on MBa8Xx)
   * ENET 1
   * ENET 2
 * QSPI NOR
 * UART
   * console
   * LPUART3 via unused SAI pins
+* USB
+  * USB 2.0 Dual Role
+  * USB 3.0 (Hub on MBa8Mx)
 * LVDS
-* GPU
 * PCIe (mini-PCIe)
 * Audio
 * CAN
