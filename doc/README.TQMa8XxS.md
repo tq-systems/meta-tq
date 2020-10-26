@@ -88,11 +88,11 @@ See top level README.md for configurations usable as MACHINE.
   * Suspend / Wakeup via GPIO button
 * DVFS
   * speed grade
-* SPI
-  * spi user space device on all CS
 
 ## Known Issues
 
+* LPDDR4
+  * LPDDR4 calibration may fail with low temperatures, results in system stalls
 * CAN
   * CAN FD is not automatically configured (systemd limitation)
 * USB

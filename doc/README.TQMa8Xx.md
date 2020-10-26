@@ -106,10 +106,10 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Known Issues
 
+* LPDDR4
+  * LPDDR4 calibration may fail with low temperatures, results in system stalls
 * CAN
   * CAN FD is not automatically configured (systemd limitation)
-* SPI
-  * some spidev are configured with to high max frequency
 * Audio
   * aplay sometimes stalls for unknown reason
 
