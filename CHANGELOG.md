@@ -5,11 +5,19 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa8.BSP.SW.0031
+
 ### Added
 
-* linux: TQMa8x: initial support for new kernel with SOM REV.010x / MBa8x REV.020x
-* u-boot: TQMa8x: initial support for new kernel with SOM REV.010x / MBa8x REV.020x
+* linux: TQMa8x: initial support for current kernel with MBa8x REV.020x
+* u-boot: TQMa8x: initial support for current kernel with MBa8x REV.020x
 * meta-tq: add TQMa8 on MBa8x with 4GB / 8 GB
+* doc: document an LPDDR4 issue for TQMa8Xx4 / TQMa8XxS
+
+### Fixed
+
+* doc: fixes for TQMa8Mx\[ML,NL\] / MBa8Mx REV.030x
+* doc: cleanup wrong entries for TQMa8Xx feature list
 
 ## zeus.TQMa8.BSP.SW.0030
 
