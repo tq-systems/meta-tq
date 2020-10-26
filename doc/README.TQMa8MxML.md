@@ -213,7 +213,7 @@ _S7_
   * OFF: UART3/UART_SYSC -> Pin head (X17)
   * BSP default: ON
 * 4: UART1\_MUX\_CTRL
-  * ON: UART1/UART2 -> USB (X16)
+  * ON: UART1/UART2 -> USB (X15)
   * OFF: UART1/UART2 -> Pin head (X17)
   * BSP default: OFF
 
