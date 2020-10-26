@@ -223,10 +223,12 @@ _S8_
   * BSP default: OFF
 * 2: TQMa8M\_ONOFF
   * BSP default: OFF
-* 3: SD\_MUX\_CTRL
+* 3: SD\_MUX\_CTRL (MBa8Mx REV.020x)
   * ON: SD Signals to X8 (Micro SD Slot)
   * OFF: SD Signals to X17
   * BSP default: ON
+* 3: I2C\_ADDR\_SW (MBa8Mx REV.030x) (I2C Address of GPIO Expander D31)
+  * BSP default: OFF
 * 4: SPI\_MUX\_CTRL
   * ON: SPI1 Signals to X20 (MikroBus)
   * OFF: SPI1 Signals to X34
