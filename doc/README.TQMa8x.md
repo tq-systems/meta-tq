@@ -45,8 +45,8 @@ See top level README.md for configurations usable as MACHINE.
   * USB 2.0 Dual Role
   * USB 3.0 (Hub on MBa8x)
 * ENET (GigE via Phy on MBa8x)
+  * ENET 0
   * ENET 1
-  * ENET 2
 * Bootstreams
   * FlexSPI
   * SD / e-MMC
@@ -70,15 +70,14 @@ See top level README.md for configurations usable as MACHINE.
   * EEPROMS
 * SPI
   * spi user space device on all CS
-* GPU
 * GPIO
   * LED
   * Button
   * wakeup from GPIO button
   * GPIO on pin heads
 * ENET (GigE via Phy on MBa8x)
+  * ENET 0
   * ENET 1
-  * ENET 2
 * QSPI NOR
 * UART
   * console
@@ -86,16 +85,20 @@ See top level README.md for configurations usable as MACHINE.
 * USB
   * USB 2.0 Dual Role
   * USB 3.0 (Hub on MBa8Mx)
-* LVDS0/LVDS1
+* Graphic
+  * GPU
+  * LVDS0/LVDS1
+  * Display Port
 * CAN
   * can0/1 as network interface
 * PWM
   * PWM in LVDS IP
+* SATA
+* PCI
 
 **TODO or not tested with new BSP**
 
-* SATA
-* Audio
+* Audio (including Display Port)
 * VPU
 * Mikrobus (Module RTC5)
 * ADC
@@ -105,7 +108,6 @@ See top level README.md for configurations usable as MACHINE.
 * Cortex M4
 * DVFS
   * speed grade
-* Display Port (including audio)
 * PWM
   * generic PWM IP
 
@@ -121,24 +123,60 @@ See top level README.md for configurations usable as MACHINE.
 * VPU codecs not avaiable [TQMAACHTX-103]
 * PWM only works after the second enable command (echo 1 > /pwmX/enable)
 
+## Artifacts
+
+Artifacs can be found at the usual locations for bitbake:
+`${TMPDIR}/deploy/images/${MACHINE}`
+
+* \*.dtb: device tree blobs
+* Image: linux kernel image
+* \*.wic: SD / e-MMC system image
+* \*.rootfs.ext4: RootFS image
+* \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
+* imx-boot-${MACHINE}-sd-flash\_spl.bin: boot stream for SD / e-MMC
+* imx-boot-mfgtool-${MACHINE}-mfgtool.bin-flash\_spl: boot stream for UUU
+
+## Boot Dip Switches
+
+_Note:_
+
+* S1 is for Boot Mode.
+* X means position of DIP, - means don't care
+
+_SD Card_
+
+```
+BootMode	5 4 3 2 1 0
+
+OFF 		X X     X X
+ON 		    X X
+```
+
+_e-MMC_
+
+```
+BootMode	5 4 3 2 1 0
+
+OFF 		X X   X X X
+ON 		    X
+```
+
+_FLEXSPI_
+
+```
+BootMode	5 4 3 2 1 0
+
+OFF 		X         X
+ON 		  X X X X
+```
+
 ## SD-Card Boot
 
-### Dip Switches
-
-```
-      543210  
-SW1 : 001100  
-```
-
-### Bootable SD-Card
-
-Complete system image:
+To create a bootable SD-Card with complete system image:
 
 write *.wic Image to SD (offset 0)
 
-Write bootstream only:
-
-Bootstreams built using yocto are named `imx-boot-<module>-<baseboard>-sd.bin`
+To create a bootable SD-Card with boot stream only (file name see above):
 
 write bootstream at offset 32 kiB (0x8000) to SD-Card
 
@@ -146,42 +184,15 @@ Example for Linux:
 
 `sudo dd if=imx-boot-<module>-<baseboard>-sd.bin of=/dev/sd<x> bs=1k seek=32 conv=fsync`
 
-### Update components via U-Boot
-
-Bootstream: set env var `uboot` to name of your bootstream image, provide the
-bootstream via TFTP and update via `run update_uboot`
-
-Device tree blob: set env var `fdt_file` to name of your device tree blob,
-provide the blob via TFTP and update via `run update_fdt`
-
-Linux kernel: set env var `image` to name of your kernel image,
-provide the file via TFTP and update via `run update_kernel`
-
 ## e-MMC Boot
 
-### Dip Switches
+To create a bootable e-MMC with complete system image:
 
-```
-      543210  
-SW1 : 001000  
-```
+write *.wic image to e-MMC (offset 0)
 
-### Bootable e-MMC
+To create a bootable e-MMC with boot stream only (file name see above)
 
-Write *.wic image to e-MMC (offset 0)
-
-Example for Linux:
-
-Boot from SD-Card, copy wic file to USB stick and write *.wic image at offset 0
-to e-MMC.
-
-`sudo dd if=<*.wic> of=/dev/mmcblk0 bs=4M conv=fsync`
-
-Write bootstream only:
-
-Bootstreams built using yocto are named `imx-boot-<module>-<baseboard>-sd.bin`
-
-Boot from SD-Card and write bootstream at offset 32 kiB (0x8000) to e-MMC
+write bootstream at offset 32 kiB (0x8000) to e-MMC
 
 Example for Linux:
 
@@ -197,61 +208,61 @@ setexpr bsz $filesize + 1ff
 setexpr bsz $bsz / 200
 printenv bsz
 mmc dev 0
-mmc write ${loadaddr} 40 $bsz
+mmc write ${loadaddr} 40 ${bsz}
 ```
-
-### Update components via U-Boot
-
-To update components on boot media following u-boot environment scripts are
-prepared. These can be used to update the items using a network connection.
-
-Bootstream: set env var `uboot` to name of your bootstream image, provide the
-bootstream via TFTP and update via `run update_uboot`
-
-Device tree blob: set env var `fdt_file` to name of your device tree blob,
-provide the blob via TFTP and update via `run update_fdt`
-
-Linux kernel: set env var `image` to name of your kernel image,
-provide the file via TFTP and update via `run update_kernel`
 
 ## QSPI Boot
-
-### Dip Switches
-
-```
-      543210  
-SW1 : 011110  
-```
-
-### Build with Yocto
-
-*Note:* QSPI boot stream currently not built by default. Following manual
-changes needed:
-
-set `UBOOT_CONFIG ??= "fspi"` in `conf/machine/tqma8qm-4[8]gb-mba8x.conf`
-set `IMXBOOT_TARGETS_tqma8x = "flash_flexspi"` in `dynamic-layers/fsl-bsp-release/recipes-bsp/imx-mkimage/imx-boot_0.2.bbappend`
-
-Find the resulting QSPI bootstream image in the deploy folder named as
-`xxx.bin-flash_flexspi`.
 
 ### Write bootstream to QSPI
 
 To install QSPI bootstream from U-Boot running on SD, copy the QSPI bootstream from
-deploy folder onto SD-Card partition 1 (firmware partition) or load via tftp
+deploy folder onto SD-Card partition 1 (firmware partition) or load via tftp.
+File name see above.
 
 ```
-setenv uboot xxx.bin-flash_flexspi
+setenv uboot xxx.bin-flash_spl_flexspi
 # load from firmware partition
 load mmc 1:1 ${loadaddr} ${uboot}
 # load via tftp
 tftp ${uboot}
 sf probe
-sf erase 0x0 100000
-sf write ${loadaddr} 0x00 ${filesize}
+sf update ${loadaddr} 0x00 ${filesize}
 # optional verfify
 sf read 0x80300000 0x00 ${filesize}
 cmp.b 0x80300000 ${loadaddr} ${filesize}
 ```
+
+## Update components via U-Boot
+
+For ease of development a set of variables and scripts are in default env.
+
+_U-Boot environment variables_
+
+* `uboot`: name of bootstream image (aka flash.bin)
+* `mmcdev`: 0 for e-MMC, 1 for SD-Card
+* `fdt_file`: device tree blob,
+* `image`: kernel image,
+
+_SD / e-MMC_
+
+Download bootstream from TFTP and update:
+
+`run update_uboot_mmc`
+
+Download device tree blob from TFTP and update:
+
+`run update_fdt_mmc`
+
+Download kernel image from TFTP and update:
+
+`run update_kernel_mmc`
+
+_FLEXSPI_
+
+Download bootstream from TFTP and update:
+
+`run update_uboot_spi`
+
 
 ## Test sleepmode and wakeup
 
@@ -268,12 +279,12 @@ Send linux to sleep mode and press one of the gpio buttons SWITCH\_A or SWITCH\_
 echo mem > /sys/power/state
 ```
 
-## LVDS
+## Display Support
 
-Each LVDS output could be activated independend by using the corresponding devicetree.
-The actual configuration works with the Tianma Display (tm070jvhg33).
+Each Display output could be activated independend by using the corresponding device tree.
 
-|       |                                                |
-|-------|------------------------------------------------|
-| LVDS0 | fsl-imx8qm-tqma8qm-mba8x-lvds0-tm070jvhg33.dtb |
-| LVDS1 | fsl-imx8qm-tqma8qm-mba8x-lvds0-tm070jvhg33.dtb |
+| Interface | Device tree                        | Type           |
+|-----------|------------------------------------|----------------|
+| LVDS0     | imx8qm-mba8x-lvds0-tm070jvhg33.dtb | Tianma Display |
+| LVDS1     | imx8qm-mba8x-lvds1-tm070jvhg33.dtb | Tianma Display |
+| DP        | imx8qm-mba8x-dp.dtb                | Displayport    |
