@@ -26,7 +26,7 @@ require conf/machine/include/tqma8-common.inc
 # achieve this in your BSP layer adding them via
 # IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
 #
-IMAGE_BOOT_FILES ?= "\
+IMAGE_BOOT_FILES = "\
 	${KERNEL_IMAGETYPE} \
 	${BOARD_DEVICETREE_FILES} \
 	${BOARD_FIRMWARE_FILES} \
