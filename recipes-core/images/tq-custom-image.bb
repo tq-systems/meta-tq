@@ -27,6 +27,7 @@ IMAGE_INSTALL_append = " can-utils \
                          iproute2 \
                          e2fsprogs \
                          parted \
+                         init-ifupdown \
                         "
 inherit core-image
 
