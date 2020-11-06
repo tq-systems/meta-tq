@@ -26,7 +26,7 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
 
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 
-SRCREV = "18d1d46a7143e8e04e84f6e50304fae030d49869"
+SRCREV = "40e6ecf58fd231d4d4cdf33d95875086e229cfab"
 SRCBRANCH = "TQMa65xx-u-boot-v2020.01"
 
 PV_append = "+git${SRCPV}"
