@@ -5,6 +5,18 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMLS1028A.BSP.SW.0103
+
+### Added
+
+* packagegroup-testutils: add various additional utilities from
+  meta-openembedded
+
+### Changed
+
+* gstreamer1.0-plugins-bad: build without OpenCV by default to reduce
+  build time
+
 ## zeus.TQ.Yocto.BSP.SW.0001
 
 This is a joint release for multiple TQMaxx and TQMLSxx module families. It can
