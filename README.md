@@ -157,6 +157,7 @@ Support for the following machines is contained in this version:
 [y]	i.MX7[S,D]		TQMa7[S,D]		MBa7x		tqma7x-1gb-mba7 (TQMa7[S,D] HW REV.010x ... 0x020x with 1 GiB RAM / MBa7x HW REV.020x)
 [y]	i.MX7[S,D]		TQMa7[S,D]		MBa7x		tqma7x-2gb-mba7 (TQMa7[S,D] HW REV.010x ... 0x020x with 2 GiB RAM / MBa7x HW REV.020x)
 [y]	LS1012A			TQMLS1012AL		MBLS1012AL	tqmls1012al-mbls1012al
+[y]	LS1017A			TQMLS1017A		MBLS1028A	tqmls1028a-mbls1028a
 [y]	LS1028A			TQMLS1028A		MBLS1028A	tqmls1028a-mbls1028a
 [b]	LS1028A			TQMLS1028A		MBLS1028A-IND	tqmls1028a-mbls1028a-ind
 [b]	LS1043A			TQMLS1043A		MBLS10xxA	tqmls1043a-mbls10xxa (TQMLS1043a / MBLS10xxa)
@@ -165,7 +166,7 @@ Support for the following machines is contained in this version:
 [b]	LS1046A			TQMLS1046A		MBLS10xxA	tqmls1046a_8g-mbls10xxa (TQMLS1046a with 8 GiB RAM / MBLS10xxa)
 [b]	LS1088A			TQMLS1088A		MBLS10xxA	tqmls1088a-mbls10xxa (TQMLS1088a / MBLS10xxa)
 [y]	LS102[0,1]A		TQMLS102[0,1]A		MBLS102xA	tqmls102xa-mbls102xa (TQMLS102[0,1]A HW REV.020x / MBLS102xA HW REV.020x)
-[y]	LX2160A			TQMLX2160A		MBLX2160A	tqmlx2160a-mblx2160a
+[p]	LX2160A			TQMLX2160A		MBLX2160A	tqmlx2160a-mblx2160a
 [y]	AM57[1,2,4]8		TQMa57[1,2,4]8		MBa57xx		tqma57xx-mba57xx (TQMa57[1,2,4]8 / MBa57xx)
 [y]	AM5748			TQMa5748 ECC		MBa57xx		tqma57xx-ecc-mba57xx (TQMa5748 with ECC / MBa57xx)
 [p]	T1022			TQMT1022		STK104x		tqmt1022-64bit-stkt104x
@@ -183,6 +184,7 @@ See also the machine-specific README file:
 - [TQMA6\[Q,D\]](doc/README.TQMa6x.md)
 - [TQMA7\[S,D\]](doc/README.TQMa7x.md)
 - [TQMLS102\[0,1\]A](doc/README.TQMLS102xa.md)
+- [TQMLS1017A/TQMLS1028A](doc/README.TQMLS1028A.md)
 
 **Note:** for TQMa6UL1 and baseboards using this module variant with i.MX6ULG1
           a dedicated device tree is supplied

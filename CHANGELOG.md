@@ -5,9 +5,26 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
-### Added
+## zeus.TQMLS1028A.BSP.SW.0103
 
+### Added
 * tqmlx2160a: initial support for tqmlx2160a
+
+### Changed
+* tqmls1028a: switch from TMU to external sensor IC for core-cluster
+  thermal zone
+
+### Fixed
+* tqmls1012al: fix size check for update\_pbl script in U-Boot default
+  environment
+* tqmls1028a: fix update\_pbl\_spi and update\_pbl\_mmc scripts in U-Boot
+  default environment. Before this fix, update\_pbl\_mmc was unusable.
+* tqmls1028a: fix CPU node FDT fixups in U-Boot not to break the
+  thermal-zones (making the thermal driver unusable). This adds
+  support for the TQMLS1017A to the tqmls1028a images. Both U-Boot and the
+  Linux kernel must be updated for proper operation on TQMLS1017A.
+* tqma6: fix polarity setting of LEDs on MBa6x
+
 
 ## zeus.TQ.Yocto.BSP.SW.0001
 
