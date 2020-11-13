@@ -21,6 +21,7 @@ KERNEL_IMAGETYPE = "Image"
 
 PREFERRED_PROVIDER_u-boot_tqma8mxnl ?= "u-boot-imx-tq"
 PREFERRED_PROVIDER_virtual/bootloader_tqma8mxnl ?= "u-boot-imx-tq"
+PREFERRED_PROVIDER_u-boot-mfgtool = "u-boot-imx-tq-mfgtool"
 SPL_BINARY = "spl/u-boot-spl.bin"
 
 # Set DDR FIRMWARE
