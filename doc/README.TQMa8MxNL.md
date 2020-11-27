@@ -18,7 +18,7 @@ This README contains some useful information for TQMa8MxNL on MBa8Mx
 
 ### U-Boot:
 
-_MBa8x HW Rev.020x only_
+_MBa8x HW Rev.020x/30x only_
 
 * RAM configs: 1 GiB
 * CPU variants i.MX8MNQ
@@ -32,6 +32,7 @@ _MBa8x HW Rev.020x only_
   * MUX CFG
 * I2C
   * GPIO expander
+  * system EEPROM parsing
 * e-MMC / SD
   * Read
   * Write
@@ -97,7 +98,7 @@ _MBa8x HW Rev.020x only_
 ## TODO:
 
 * Audio
-  * Audio codec mic in
+  * Audio codec mic in not tested
 * DSI
   * DSI to DP bridge
 * MIPI CSI
@@ -109,6 +110,7 @@ _MBa8x HW Rev.020x only_
 * Mikrobus Modul RTC5 on ecspi1 don't answer
 * UART4: needs ATF modification, to make it usable for linux. Primary used as
   debug UART for Cortex M7
+* MBa8Mx REV.020x needs modification for correct I2C address of port expander
 
 ## Build Artifacts
 
@@ -124,6 +126,8 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * imx-boot-${MACHINE}-sd.bin: boot stream for SD / e-MMC
+* hello\_world.bin (Cortex M7 demo, UART4, TCM)
+* rpmsg\_lite\_pingpong\_rtos\_linux\_remote.bin (Cortex M7 demo, UART4, TCM)
 
 ## Boot Dip Switches
 
@@ -282,6 +286,9 @@ provide the blob via TFTP and update via `run update_fdt_mmc`
 
 Linux kernel: set env var `image` to name of your kernel image,
 provide the file via TFTP and update via `run update_kernel_mmc`
+
+Cortex M4 image: set env var `cm_image` to name of your Cortex M4 image,
+provide the file via TFTP and update via `run update_cm_mmc`
 
 ## e-MMC Boot
 
