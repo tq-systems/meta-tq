@@ -18,7 +18,7 @@ This README contains some useful information for TQMa8MxML on MBa8Mx
 
 ### U-Boot:
 
-_MBa8x HW Rev.020x only_
+_MBa8x HW Rev.020x/30x only_
 
 * RAM configs: 1 GiB
 * CPU variants i.MX8MMQ
@@ -32,6 +32,7 @@ _MBa8x HW Rev.020x only_
   * MUX CFG
 * I2C
   * GPIO expander
+  * system EEPROM parsing
 * e-MMC / SD
   * Read
   * Write
@@ -56,6 +57,8 @@ _MBa8x HW Rev.020x only_
 * CPU variants i.MX8MMD/S and Lite
 
 ### Linux:
+
+_MBa8x HW Rev.020x/30x only_
 
 * RAM configs: 1 GiB
 * CPU variants i.MX8MMQ
@@ -98,7 +101,7 @@ _MBa8x HW Rev.020x only_
 ## TODO:
 
 * Audio
-  * Audio codec mic in
+  * Audio codec mic in not tested
 * DSI
   * DSI to DP bridge
 * MIPI CSI
@@ -108,6 +111,7 @@ _MBa8x HW Rev.020x only_
 
 ## Known Issues
 
+* LVDS shows wrong colors on older Tianma display kit (HW issue on display)
 * Mikrobus Modul RTC5 on ecspi1 don't answer
 * UART4: needs ATF modification, to make it usable for linux. Primary used as
   debug UART for Cortex M4
@@ -115,6 +119,7 @@ _MBa8x HW Rev.020x only_
   linker settings for SD / e-MMC and FlexSPI. Current recipes for boot stream generation
   can only use a single U-Boot config. Set `UBOOT_CONFIG` to `fspi` to build FlexSPI
   boot stream
+* MBa8Mx REV.020x needs modification for correct I2C address of port expander
 
 ## Build Artifacts
 
@@ -320,6 +325,9 @@ provide the blob via TFTP and update via `run update_fdt_mmc`
 
 Linux kernel: set env var `image` to name of your kernel image,
 provide the file via TFTP and update via `run update_kernel_mmc`
+
+Cortex M4 image: set env var `cm_image` to name of your Cortex M4 image,
+provide the file via TFTP and update via `run update_cm_mmc`
 
 ## e-MMC Boot
 
