@@ -143,7 +143,8 @@ Artifacs can be found at the usual locations for bitbake:
 
 _Note:_
 
-* S5 / S6: Boot Config (inverted)
+* S5: Boot Config\[0 .. 7\] (inverted)
+* S6: Boot Config\[8 .. 15\] (inverted)
 * S9:2: BOOT\_MODE0 (inverted)
 * S9:3: BOOT\_MODE1 (inverted)
 * S9:1 and S9:4: not needed for booting
@@ -153,39 +154,38 @@ _Note:_
 _Board config_
 
 ```
-	S10
-DIP 	1 2 3 4
-ON 	       
-OFF 	X X X X
+DIP S10	1 2 3 4
+ON	       
+OFF	X X X X
 ```
 
 _BOOT\_MODE_
 
-* Boot from Fuses (needs boot fuses to be set)
+* Boot from Fuses (needs boot fuses to be set) - 00b
 
 ```
-	S9
-DIP 	1 2 3 4
-ON 	       
-OFF 	- X X -
+BOOT\_MODE	  0 1  
+DIP S9		1 2 3 4
+ON		  X X  
+OFF		-     -
 ```
 
-* Serial Downloader
+* Serial Downloader - 01b
 
 ```
-	S9
-DIP 	1 2 3 4
-ON 	    X  
-OFF 	- X   -
+BOOT\_MODE	  0 1  
+DIP S9		1 2 3 4
+ON		    X  
+OFF		- X   -
 ```
 
-* Internal Boot (no boot fuses set, use boot config pins)
+* Internal Boot (no boot fuses set, use boot config pins) - 10b
 
 ```
-	S9
-DIP 	1 2 3 4
-ON 	  X    
-OFF 	-   X -
+BOOT\_MODE	  0 1  
+DIP S9		1 2 3 4
+ON		  X    
+OFF		-   X -
 ```
 
 _SD Card_
@@ -198,19 +198,39 @@ MBa8Mx REV.020x:
 
 ```
 	S6			S5			S9
-DIP 	1 2 3 4 5 6 7 8		1 2 3 4 5 6 7 8		1 2 3 4
-ON 	X X   X   X X X		X X X X X X X X 	  X    
-OFF 	    X   X      		               		-   X -
+DIP	1 2 3 4 5 6 7 8		1 2 3 4 5 6 7 8		1 2 3 4
+ON	X X   X   X X X		X   X X   X X X		  X    
+OFF	    X   X      		  X     X      		-   X -
 ```
+
+* BOOT_CFG\[0\] - 0 - reserved
+* BOOT_CFG\[3:1\] - 001 - SD speed mode (SDR25)
+* BOOT_CFG\[4\] - 1 - Bus width 4 Bit
+* BOOT_CFG\[6:5\] - 00 - reserved
+* BOOT_CFG\[7\] - 0 - Fast Boot
+* BOOT_CFG\[8\] - 0 - USDHC loopback clock source
+* BOOT_CFG\[9\] - 0 - Power cycle enable
+* BOOT_CFG\[\11:10\] - 01 - USDHC2
+* BOOT_CFG\[\15:12\] - 0001 - SD Card
 
 MBa8Mx REV.030x:
 
 ```
 	S6			S5			S9
-DIP 	1 2 3 4 5 6 7 8		1 2 3 4 5 6 7 8		1 2 3 4
-ON 	X     X   X X X		X X X X X X X X 	  X    
-OFF 	  X X   X      		               		-   X -
+DIP	1 2 3 4 5 6 7 8		1 2 3 4 5 6 7 8		1 2 3 4
+ON	X     X   X X X		X   X X   X X X		  X    
+OFF	  X X   X      		  X     X      		-   X -
 ```
+
+* BOOT_CFG\[0\] - 0 - reserved
+* BOOT_CFG\[3:1\] - 001 - SD speed mode (SDR25)
+* BOOT_CFG\[4\] - 1 - Bus width 4 Bit
+* BOOT_CFG\[6:5\] - 00 - reserved
+* BOOT_CFG\[7\] - 0 - Fast Boot
+* BOOT_CFG\[8\] - 0 - USDHC loopback clock source
+* BOOT_CFG\[9\] - 1 - Power cycle enable
+* BOOT_CFG\[\11:10\] - 01 - USDHC2
+* BOOT_CFG\[\15:12\] - 0001 - SD Card
 
 _e-MMC_
 
@@ -218,10 +238,20 @@ BOOT\_MODE: Internal Boot
 
 ```
 	S6			S5			S9
-DIP 	1 2 3 4 5 6 7 8		1 2 3 4 5 6 7 8		1 2 3 4
-ON 	X X X X X   X X		X X X X X X X X 	  X    
-OFF 	          X    		               		-   X -
+DIP	1 2 3 4 5 6 7 8		1 2 3 4 5 6 7 8		1 2 3 4
+ON	X X X X X   X X		X   X X X   X X		  X    
+OFF	          X    		  X       X    		-   X -
 ```
+
+* BOOT_CFG\[0\] - 0 - USDHC2 IO VOLTAGE: 3.3 V
+* BOOT_CFG\[1\] - 1 - USDHC1 IO VOLTAGE: 1.8 V
+* BOOT_CFG\[3:2\] - 00 - MMC Speed Mode
+* BOOT_CFG\[\6:4\] - 010 - Bus width 8 Bit
+* BOOT_CFG\[7\] - 0 - Fast boot support
+* BOOT_CFG\[8\] - 0 - USDHC loopback clock through SD pad
+* BOOT_CFG\[9\] - 0 - eMMC reset enable
+* BOOT_CFG\[\11:10\] - 00 - USDHC1
+* BOOT_CFG\[\15:12\] - 0010 - MMC / e-MMC
 
 ## Functional DIP Switches
 
