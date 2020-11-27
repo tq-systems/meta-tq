@@ -210,7 +210,7 @@ Releases are named with the following scheme:
 * linux-imx-tq_5.4: port simple-panel display timings
 * linux-imx-tq_5.4: backport LVDS bugfixes from 5.4.3\_2.0.0 beta
 * linux-imx-tq_5.4: port LVDS DSI bridge
-* linux-imx-tq_5.4: port audio fixes for TQ Systems starter kits
+* linux-imx-tq_5.4: port audio fixes for TQ-Systems starter kits
 * mesa: restrict bbappend to mx8
 * tqma8: disable *.bz2 image types
 * update to zeus

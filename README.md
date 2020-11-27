@@ -1,7 +1,7 @@
-# OpenEmbedded/Yocto hardware support layer for TQ Systems ARM SOM
+# OpenEmbedded/Yocto hardware support layer for TQ-Systems ARM SOM
 
 This README file contains information on the contents of the meta-tq layer.
-This layer provides support for TQ Systems CPU modules and Starterkits with
+This layer provides support for TQ-Systems CPU modules and Starterkits with
 ARM CPU.
 
 Please see the corresponding sections below for details.
