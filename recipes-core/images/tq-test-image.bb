@@ -14,7 +14,6 @@ IMAGE_INSTALL_append = " i2c-tools \
                          wpa-supplicant \
                          dhcp-client \
                          xrandr \
-                         alsa-utils \
                          phoronix-test-suite \
                          libdrm \
                          kmscube \
@@ -27,8 +26,5 @@ IMAGE_INSTALL_append = " i2c-tools \
                          sharutils \
                          ethtool \
                          ifupdown \
-                         ntpdate \
                          ntp \
-                         xz \
-                         dosfstools \
                         "                

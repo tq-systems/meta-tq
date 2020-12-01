@@ -25,9 +25,17 @@ IMAGE_INSTALL_append = " can-utils \
                          networkmanager \
                          apt \
                          iproute2 \
+                         util-linux \
                          e2fsprogs \
                          parted \
                          init-ifupdown \
+                         bc \
+                         alsa-utils \
+                         libfftw \
+                         coreutils \
+                         ntpdate \
+                         xz \
+                         dosfstools \
                         "
 inherit core-image
 
