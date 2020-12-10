@@ -4,7 +4,7 @@ IMAGE_LINGUAS_append = " en-us "
 
 inherit distro_features_check
 
-# normal tq systems packages
+# normal TQ-Systems packages
 IMAGE_INSTALL += "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' packagegroup-systemd', '', d)} \
     packagegroup-hwutils \

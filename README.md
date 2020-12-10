@@ -1,11 +1,11 @@
-# OpenEmbedded / Yocto Project evaluation BSP layer for TQ Systems ARM SOM
+# OpenEmbedded / Yocto Project evaluation BSP layer for TQ-Systems ARM SOM
 
 This README file contains information on the content of the meta-dumpling layer.
 
 This layer provides recipes to generate images to help evaluation of
-TQ Systems CPU modules and Starterkits. This layer additionally contains
+TQ-Systems CPU modules and Starterkits. This layer additionally contains
 optional fixes and extensions for other layers as far as needed / useful
-for TQ Systems SOM.
+for TQ-Systems SOM.
 
 Please see the corresponding sections below for details.
 
@@ -24,7 +24,7 @@ branch: zeus
 layers: meta-tq  
 
 This layer additionally contains optional fixes and extensions for other layers
-as far as needed for TQ Systems SOM. Most of these bbappends are implemented
+as far as needed for TQ-Systems SOM. Most of these bbappends are implemented
 under dynamic-layers and are only visible, if the original layer is in your
 bblayer.conf. For details look for `BBFILES_DYNAMIC` in Yocto Project
 documentation.
@@ -66,7 +66,7 @@ BSPDIR := "${@os.path.abspath(os.path.dirname(d.getVar('FILE', True)) + '/../..'
 ### 2. Misc
 
 The meta-dumpling layer defines images recipes for test / evaluation of
-TQ Systems SOM:
+TQ-Systems SOM:
 
 * tq-image-generic (based on poky core-image-minimal)
 * tq-image-qt5 (based on fsl-image-qt5)
