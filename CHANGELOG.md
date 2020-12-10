@@ -5,6 +5,21 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMLS1012AL.BSP.SW.0008
+
+### Added
+* tqmls1012al: added support for variants with mt25qu01g SPI-NOR flash
+
+### Changed
+* tqma7: disable broken PCIe on MBa7 with linux-tq and linux-rt-tq kernels
+  * PCIe is working on the default linux-imx-tq kernel
+
+### Fixed
+* tqma6: fix polarity setting of LEDs on MBa6x with linux-tq and linux-rt-tq
+  kernels
+  * Already fixed for the default linux-imx-tq kernel with the previous release
+
+
 ## zeus.TQMLS1028A.BSP.SW.0103
 
 ### Added
