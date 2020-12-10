@@ -6,12 +6,17 @@ This README contains some useful information for TQMa8Xx and TQMa8Xx4 on MBa8Xx
 
 ### SCFW:
 
-* version: tq-TQMa8.NXP-v1.3.1.B4124.0029
+* version: tq-TQMa8.NXP-v1.6.0.B4894.0030
 
 ### U-Boot:
 
 * based on uboot-imx (https://source.codeaurora.org/external/imx/uboot-imx)
-* branched from lf-5.4.y-1.0.0
+* branched from imx-5.4.47-2.2.0
+
+### ATF:
+
+* imx-atf (https://source.codeaurora.org/external/imx/imx-atf)
+* v2.2 / imx-5.4.47_2.2.0
 
 ### Linux:
 
@@ -56,8 +61,9 @@ See top level README.md for configurations usable as MACHINE.
 **TODO or not tested / supported**
 
 * Cortex M4
-* CPU variants i.MX8DX
-* speed grade / temperature grade detection (current SCU limitation)
+* CPU variants i.MX8DX not detected (limitation of cpu driver))
+* USB
+  * U-Boot: USB 3.0 port does not initialize USB 2.0 subsystem after USB reset
 
 ### Linux:
 
@@ -106,8 +112,6 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Known Issues
 
-* LPDDR4
-  * LPDDR4 calibration may fail with low temperatures, results in system stalls
 * CAN
   * CAN FD is not automatically configured (systemd limitation)
 * Audio
