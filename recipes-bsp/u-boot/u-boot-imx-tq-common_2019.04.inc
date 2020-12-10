@@ -14,8 +14,8 @@ DEPENDS_append = " bison-native"
 
 S = "${WORKDIR}/git"
 
-COMPATIBLE_MACHINE = "tqma8xx"
-COMPATIBLE_MACHINE_append = "|tqma8xxs"
+# COMPATIBLE_MACHINE = "tqma8xx"
+COMPATIBLE_MACHINE = "|tqma8xxs"
 COMPATIBLE_MACHINE_append = "|tqma8mq"
 COMPATIBLE_MACHINE_append = "|tqma8mxml"
 COMPATIBLE_MACHINE_append = "|tqma8mxnl"
