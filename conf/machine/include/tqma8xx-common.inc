@@ -1,6 +1,6 @@
 # Common definitions for all TQ-Group TQMa8Xx / TQMa8XxS modules
 
-MACHINEOVERRIDES =. "mx8:mx8qxp:"
+MACHINEOVERRIDES =. "mx8:mx8qxp:mx8qxpc0:"
 
 # Don't include kernels in standard images
 RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
