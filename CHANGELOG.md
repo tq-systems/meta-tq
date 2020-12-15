@@ -5,6 +5,14 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMLS1028A.BSP.SW.0104
+
+### Added
+* tqmls1028a: new kernel linux-rt-lsdk-tq-5.4 with PREEMPT_RT support
+  * See the [TQMLS1017A/TQMLS1028A README](doc/README.TQMLS1028A.md)
+    for more information
+
+
 ## zeus.TQMLS1012AL.BSP.SW.0008
 
 ### Added
