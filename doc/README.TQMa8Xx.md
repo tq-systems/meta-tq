@@ -127,7 +127,8 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* imx-boot-${MACHINE}-sd-flash\_spl.bin: boot stream for SD / e-MMC
+* imx-boot-${MACHINE}-sd.bin-flash\_spl: boot stream for SD / e-MMC
+* imx-boot-${MACHINE}-sd.bin-flash\_spl_flexspi: boot stream for QSPI
 * imx-boot-mfgtool-${MACHINE}-mfgtool.bin-flash\_spl: boot stream for UUU
 
 ## Boot Dip Switches
@@ -194,7 +195,7 @@ write bootstream at offset 32 kiB (0x8000) to SD-Card
 
 Example for Linux:
 
-`sudo dd if=imx-boot-<module>-<baseboard>-sd.bin of=/dev/sd<x> bs=1k seek=32 conv=fsync`
+`sudo dd if=imx-boot-<module>-<baseboard>-sd.bin-flash_spl of=/dev/sd<x> bs=1k seek=32 conv=fsync`
 
 ## e-MMC Boot
 
@@ -210,7 +211,7 @@ Boot from SD-Card and write bootstream at offset 32 kiB (0x8000) to e-MMC
 
 Example for Linux:
 
-`sudo dd if=imx-boot-<module>-<baseboard>-sd.bin of=/dev/mmcblk0 bs=1k seek=32 conv=fsync`
+`sudo dd if=imx-boot-<module>-<baseboard>-sd.bin-flash_spl of=/dev/mmcblk0 bs=1k seek=32 conv=fsync`
 
 Example for U-Boot:
 
@@ -252,7 +253,7 @@ For ease of development a set of variables and scripts are in default env.
 
 _U-Boot environment variables_
 
-* `uboot`: name of bootstream image (aka flash.bin)
+* `uboot`: name of bootstream image (default =  bootstream.bin)
 * `mmcdev`: 0 for e-MMC, 1 for SD-Card
 * `fdt_file`: device tree blob,
 * `image`: kernel image,
