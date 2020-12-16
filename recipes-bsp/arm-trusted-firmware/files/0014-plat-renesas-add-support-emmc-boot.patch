@@ -1,0 +1,16 @@
+diff --git a/plat/renesas/rcar/include/emmc_registers.h b/plat/renesas/rcar/include/emmc_registers.h
+index 8f148c8..34c36a9 100644
+--- a/plat/renesas/rcar/include/emmc_registers.h
++++ b/plat/renesas/rcar/include/emmc_registers.h
+@@ -24,7 +24,11 @@
+ #if RCAR_LSI == RCAR_E3
+ #define USE_MMC_CH	(MMC_CH1)	/* R-Car E3 */
+ #else  /* RCAR_LSI == RCAR_E3 */
++#if (RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M)
++#define USE_MMC_CH	(MMC_CH1)
++#else	/* RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M */
+ #define USE_MMC_CH	(MMC_CH0)	/* R-Car H3/M3/M3N */
++#endif	/* RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M */
+ #endif /* RCAR_LSI == RCAR_E3 */
+ 
+ 

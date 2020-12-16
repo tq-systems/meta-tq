@@ -1,0 +1,117 @@
+From e1eac94d4fe6cc6240d8a322b9997e1756d41455 Mon Sep 17 00:00:00 2001
+From: Binh Nguyen <binh.nguyen.uw@renesas.com>
+Date: Mon, 16 Sep 2019 13:42:37 +0700
+Subject: [PATCH] plat: renesas: bl2_fusa: Add ECC support for HIHOPE-RZG2N
+
+Add option build for supporting HIHOPE-RZG2N ECC
+
+Signed-off-by: Binh Nguyen <binh.nguyen.uw@renesas.com>
+---
+ plat/renesas/rcar/bl2_fusa.c       | 48 ++++++++++++++++++++++++++++++++++++++
+ plat/renesas/rcar/bl2_rcar_setup.c |  6 +++++
+ plat/renesas/rcar/platform.mk      |  6 +++++
+ 3 files changed, 60 insertions(+)
+
+diff --git a/plat/renesas/rcar/bl2_fusa.c b/plat/renesas/rcar/bl2_fusa.c
+index e8628ac..f8549ef 100644
+--- a/plat/renesas/rcar/bl2_fusa.c
++++ b/plat/renesas/rcar/bl2_fusa.c
+@@ -59,6 +59,34 @@ static const struct rzg2_ecc_conf {
+ 	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+ };
+ 
++static const struct rzg2_ecc_conf rzg2_hihope_rzg2n_conf[] = {
++#if (RZG_DRAM_ECC_FULL == 1)
++        { FUSAAREACR(1, 7, 0x408000000),    ECCAREACR(0, 0x488000000)   }, /* 128+128 MB */
++        { FUSAAREACR(1, 8, 0x410000000),    ECCAREACR(0, 0x490000000)   }, /* 256+256 MB */
++        { FUSAAREACR(1, 9, 0x420000000),    ECCAREACR(0, 0x4A0000000)   }, /* 512+512 MB */
++        { FUSAAREACR(1, 9, 0x440000000),    ECCAREACR(0, 0x4C0000000)   }, /* 512+512 MB */
++        { FUSAAREACR(1, 9, 0x460000000),    ECCAREACR(0, 0x4E0000000)   }, /* 512+512 MB */
++        { FUSAAREACR(1, 6, 0x480000000),    ECCAREACR(0, 0x484000000)   }, /* 64+64 MB */
++#else //(RZG_DRAM_ECC_FULL == 1)
++        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++#endif //(RZG_DRAM_ECC_FULL == 1)
++        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++};
++
+ /* Setup DRAM ECC configuration registers */
+ void bl2_enable_ecc_ek874(void)
+ {
+@@ -81,6 +109,26 @@ void bl2_enable_ecc_ek874(void)
+ 
+ }
+ 
++void bl2_enable_ecc_hihope_rzg2n(void)
++{
++	const struct rzg2_ecc_conf *conf;
++	int n;
++	int nb_of_conf;
++
++	conf = rzg2_hihope_rzg2n_conf;
++	nb_of_conf = ARRAY_SIZE(rzg2_hihope_rzg2n_conf);
++
++	for (n = 0; n < nb_of_conf; n++, conf++) {
++		mmio_write_32((uintptr_t)((uint32_t *)DFUSAAREACR + n), conf->fusaareacr);
++		mmio_write_32((uintptr_t)((uint32_t *)DECCAREACR + n), conf->eccareacr);
++		if(conf->fusaareacr & (1 << 31))
++			NOTICE("BL2: DRAM ECC area=%d, FuSa=0x%x ECC=0x%x, size=%d MB\n",
++					n, conf->fusaareacr, conf->eccareacr,
++					1 << ((conf->fusaareacr >> 24) & 0xf));
++	}
++
++}
++
+ void bl2_enable_ecc_hihope_rzg2m(void)
+ {
+ 	mmio_write_32((uintptr_t)((uint32_t *)FUSACR), EFUSASEL(0)
+diff --git a/plat/renesas/rcar/bl2_rcar_setup.c b/plat/renesas/rcar/bl2_rcar_setup.c
+index 22f7567..f7f2bb2 100644
+--- a/plat/renesas/rcar/bl2_rcar_setup.c
++++ b/plat/renesas/rcar/bl2_rcar_setup.c
+@@ -711,6 +711,12 @@ static void rcar_bl2_early_platform_setup(const meminfo_t *mem_layout)
+         }
+ #endif
+ 
++#if (RZG_DRAM_HIHOPE_RZG2N_ECC == 1)
++        {
++                extern void bl2_enable_ecc_hihope_rzg2n(void);
++                bl2_enable_ecc_hihope_rzg2n();
++        }
++#endif
+ 	if ((modemr_boot_dev == MODEMR_BOOT_DEV_EMMC_25X1) ||
+ 	    (modemr_boot_dev == MODEMR_BOOT_DEV_EMMC_50X8)) {
+ 		/* Initialize eMMC */
+diff --git a/plat/renesas/rcar/platform.mk b/plat/renesas/rcar/platform.mk
+index d7dfd68..e97ac0c 100644
+--- a/plat/renesas/rcar/platform.mk
++++ b/plat/renesas/rcar/platform.mk
+@@ -379,6 +379,12 @@ RZG_DRAM_HIHOPE_RZG2M_ECC :=0
+ endif
+ $(eval $(call add_define,RZG_DRAM_HIHOPE_RZG2M_ECC))
+ 
++# Process RZG_DRAM_HIHOPE_RZG2N_ECC flag
++ifndef RZG_DRAM_HIHOPE_RZG2N_ECC
++RZG_DRAM_HIHOPE_RZG2N_ECC :=0
++endif
++$(eval $(call add_define,RZG_DRAM_HIHOPE_RZG2N_ECC))
++
+ # Process RZG_DRAM_ECC_FULL flag
+ ifndef RZG_DRAM_ECC_FULL
+ RZG_DRAM_ECC_FULL :=0
+-- 
+2.7.4
+

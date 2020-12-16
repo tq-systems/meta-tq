@@ -1,0 +1,98 @@
+From e87c71bd2d4121f08df18a6cfd51bbbe767c8deb Mon Sep 17 00:00:00 2001
+From: Binh Nguyen <binh.nguyen.uw@renesas.com>
+Date: Thu, 21 Nov 2019 13:28:06 +0700
+Subject: [PATCH 1/4] plat: renesas: bl2_fusa: hihope-rzg2m: do not enable ECC
+ for first 128MB
+
+First 128 MB have access protection which will lead to deadlock if ECC
+enabled. This commit disable ECC for first 128MB by changing setting of
+ADSPLCRn and FUSACR registers.
+
+Other minor changes:
+- declare set of variables used for ADSPLCRn and FUSACR registers
+  setting for easier to switch FULL and Partial mode
+- print value of all registers instead of value of DFUSASEL
+
+Signed-off-by: Binh Nguyen <binh.nguyen.uw@renesas.com>
+---
+ plat/renesas/rcar/bl2_fusa.c | 45 ++++++++++++++++++++++++++++++++++----------
+ 1 file changed, 35 insertions(+), 10 deletions(-)
+
+diff --git a/plat/renesas/rcar/bl2_fusa.c b/plat/renesas/rcar/bl2_fusa.c
+index f8549ef..bfed74a 100644
+--- a/plat/renesas/rcar/bl2_fusa.c
++++ b/plat/renesas/rcar/bl2_fusa.c
+@@ -15,6 +15,11 @@
+ #define	NUM_DAREA		16
+ #define	FUSACR			0xE6784020	/* FuSa Ctrl */
+ 
++#define	ADSPLCR0		0xE6784008	/* Address Split Control 0 */
++#define	ADSPLCR1		0xE678400C	/* Address Split Control 1 */
++#define	ADSPLCR2		0xE6784010	/* Address Split Control 2 */
++#define	ADSPLCR3		0xE6784014	/* Address Split Control 3 */
++
+ /* As the saddr, specify high-memory address (> 4 GB) */
+ #define	FUSAAREACR(en, size, saddr)	\
+ 	(((uint32_t)en << 31) | ((uint32_t)size << 24) | (uint32_t)(((uintptr_t)saddr) >> 12))
+@@ -24,6 +29,10 @@
+ #define	EFUSASEL(x)	((uint32_t)x & 0xff) << 24	/*Setting for Extra Split mode*/
+ #define	DFUSASEL(x)	((uint32_t)x & 0xff) << 16	/*Setting for DRAM*/
+ #define	SFUSASEL(x)	((uint32_t)x & 0x3f)		/*Setting for SRAM*/
++#define	SPLITSEL(x)	((uint32_t)x & 0xff) << 16	/*Setting for Split mode*/
++#define	AREA(x)		((uint32_t)x & 0x1f) << 8	/*address bit devides DBSC into 8 areas*/
++#define	SWP(x)		((uint32_t)x & 0x1f)		/*address bit to interleave DBSCs in split mode*/
++#define	ADRMODE(x)	((uint32_t)x & 0x1) << 31	/*Select address mapping mode*/
+ 
+ #ifndef ARRAY_SIZE
+ #define	ARRAY_SIZE(a)		(sizeof(a) / sizeof(a[0]))
+@@ -87,6 +96,20 @@ static const struct rzg2_ecc_conf rzg2_hihope_rzg2n_conf[] = {
+         { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+ };
+ 
++#if (RZG_DRAM_ECC_FULL == 1)
++static const uint32_t fusacr = EFUSASEL(0xF0) | DFUSASEL(0xFE)| SFUSASEL(0);
++static const uint32_t adsplcr0 = ADRMODE(0) | SPLITSEL(1) | AREA(0x1C) | SWP(0);
++static const uint32_t adsplcr1 = SPLITSEL(1) | AREA(0x1C) | SWP(0);
++static const uint32_t adsplcr2 = 0;
++static const uint32_t adsplcr3 = SPLITSEL(0) | AREA(0x19) | SWP(0);
++#else //(RZG_DRAM_ECC_FULL == 1)
++static const uint32_t fusacr = 0;
++static const uint32_t adsplcr0 = 0;
++static const uint32_t adsplcr1 = 0;
++static const uint32_t adsplcr2 = 0;
++static const uint32_t adsplcr3 = 0;
++#endif //(RZG_DRAM_ECC_FULL == 1)
++
+ /* Setup DRAM ECC configuration registers */
+ void bl2_enable_ecc_ek874(void)
+ {
+@@ -131,14 +154,16 @@ void bl2_enable_ecc_hihope_rzg2n(void)
+ 
+ void bl2_enable_ecc_hihope_rzg2m(void)
+ {
+-	mmio_write_32((uintptr_t)((uint32_t *)FUSACR), EFUSASEL(0)
+-#if (RZG_DRAM_ECC_FULL == 1)
+-						     | DFUSASEL(0xff)
+-#else //(RZG_DRAM_ECC_FULL == 1)
+-						     | DFUSASEL(0x00)
+-#endif //(RZG_DRAM_ECC_FULL == 1)
+-						     | SFUSASEL(0));
+-#if (RZG_DRAM_ECC_FULL == 1)
+-	NOTICE("BL2: DRAM FULL ECC Configured (DFUSASEL=0x%x)\n",DFUSASEL(0xff));
+-#endif //(RZG_DRAM_ECC_FULL == 1)
++	mmio_write_32((uintptr_t)((uint32_t *)ADSPLCR0), adsplcr0);
++	mmio_write_32((uintptr_t)((uint32_t *)ADSPLCR1), adsplcr1);
++	mmio_write_32((uintptr_t)((uint32_t *)ADSPLCR2), adsplcr2);
++	mmio_write_32((uintptr_t)((uint32_t *)ADSPLCR3), adsplcr3);
++	mmio_write_32((uintptr_t)((uint32_t *)FUSACR),fusacr);
++
++	NOTICE("BL2: DRAM ECC Configured:\n");
++	NOTICE("     ADSPLCR0=0x%x\n",adsplcr0);
++	NOTICE("     ADSPLCR1=0x%x\n",adsplcr1);
++	NOTICE("     ADSPLCR2=0x%x\n",adsplcr2);
++	NOTICE("     ADSPLCR3=0x%x\n",adsplcr3);
++	NOTICE("     FUSACR=0x%x\n",fusacr);
+ }
+-- 
+2.7.4
+
