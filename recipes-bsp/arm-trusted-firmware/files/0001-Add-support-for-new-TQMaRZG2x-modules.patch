@@ -1,0 +1,1128 @@
+From deabf27ba8d48ef85e9e40438d580b6b2f80ad77 Mon Sep 17 00:00:00 2001
+From: Andreas Dumberger <andreas.dumberger@tq-group.com>
+Date: Mon, 28 Sep 2020 13:22:51 +0000
+Subject: [PATCH] Add support for new TQMaRZG2x modules
+
+Memory initialization should now work for all modules.
+Start and end of each memory block have been tested for writability using U-Boot.
+
+For each module (N/M/H) there is currently one variant implemented.
+These are:
+- TQMaRZG2N-B (2GiB)
+- TQMaRZG2M-E (8GiB)
+- TQMaRZG2H_C (4GiB)
+
+Signed-off-by: Andreas Dumberger <andreas.dumberger@tq-group.com>
+---
+ plat/renesas/rcar/bl2_rcar_setup.c                 |   9 +-
+ plat/renesas/rcar/bl2_secure_setting.c             |  12 +-
+ .../renesas/rcar/ddr/ddr_b/boot_init_dram_config.c | 199 ++++++++++++++++++++-
+ plat/renesas/rcar/drivers/board/board.c            |  49 +++--
+ plat/renesas/rcar/drivers/board/board.h            |   6 +-
+ plat/renesas/rcar/include/emmc_registers.h         |   6 +-
+ plat/renesas/rcar/pfc/H3/pfc_init_h3_v2.c          |  54 +++---
+ plat/renesas/rcar/pfc/M3/pfc_init_m3.c             |  52 +++---
+ plat/renesas/rcar/pfc/M3N/pfc_init_m3n.c           |  54 +++---
+ plat/renesas/rcar/platform.mk                      |  18 ++
+ tools/dummy_create/makefile                        |  18 ++
+ tools/dummy_create/sa6.c                           |   6 +-
+ 12 files changed, 367 insertions(+), 116 deletions(-)
+
+diff --git a/plat/renesas/rcar/bl2_rcar_setup.c b/plat/renesas/rcar/bl2_rcar_setup.c
+index a18dcf2..4f8ae22 100644
+--- a/plat/renesas/rcar/bl2_rcar_setup.c
++++ b/plat/renesas/rcar/bl2_rcar_setup.c
+@@ -561,15 +561,15 @@ static void rcar_bl2_early_platform_setup(const meminfo_t *mem_layout)
+ #endif // RZG_HIHOPE_RZG2M
+ 		}
+ 	} else {
+-#if (RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H) //RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H
++#if (RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H | RZG_TQMARZG2N_B | RZG_TQMARZG2M_E | RZG_TQMARZG2H_C) //RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H | RZG_TQMARZG2N_B | RZG_TQMARZG2M_E | RZG_TQMARZG2H_C
+ 		(void)sprintf(msg, "BL2: PRR is RZG %s Ver.%d.%d\n", str,
+ 			((prr_val & RCAR_MAJOR_MASK) >> RCAR_MAJOR_SHIFT)
+ 			 + RCAR_MAJOR_OFFSET, (prr_val & RCAR_MINOR_MASK));
+-#else //RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H
++#else //RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H | RZG_TQMARZG2N_B | RZG_TQMARZG2M_E | RZG_TQMARZG2H_C
+ 		(void)sprintf(msg, "BL2: PRR is R-Car %s Ver.%d.%d\n", str,
+ 			((prr_val & RCAR_MAJOR_MASK) >> RCAR_MAJOR_SHIFT)
+ 			 + RCAR_MAJOR_OFFSET, (prr_val & RCAR_MINOR_MASK));
+-#endif //RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H
++#endif //RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H | RZG_TQMARZG2N_B | RZG_TQMARZG2M_E | RZG_TQMARZG2H_C
+ 	}
+ 	NOTICE("%s", msg);
+ 
+@@ -601,6 +601,9 @@ static void rcar_bl2_early_platform_setup(const meminfo_t *mem_layout)
+ 	case BOARD_HIHOPE_RZG2N:
+ 	case BOARD_HIHOPE_RZG2M:
+ 	case BOARD_HIHOPE_RZG2H:
++	case BOARD_TQMARZG2N_B:
++	case BOARD_TQMARZG2M_E:
++	case BOARD_TQMARZG2H_C:
+ 		/* Do nothing. */
+ 		break;
+ 	default:
+diff --git a/plat/renesas/rcar/bl2_secure_setting.c b/plat/renesas/rcar/bl2_secure_setting.c
+index 6eb63d5..67e2fb0 100644
+--- a/plat/renesas/rcar/bl2_secure_setting.c
++++ b/plat/renesas/rcar/bl2_secure_setting.c
+@@ -91,12 +91,12 @@ static const struct {
+ 	/** Security attribute setting for slave ports 13 */
+ 	/* Bit22: RPC slave ports. */
+ 	/*        0: registers can be accessed from secure resource only. */
+-#if (RZG_EK874) | (RZG_HIHOPE_RZG2N) | (RZG_HIHOPE_RZG2M) | (RZG_HIHOPE_RZG2H)
++#if (RZG_EK874) | (RZG_HIHOPE_RZG2N) | (RZG_HIHOPE_RZG2M) | (RZG_HIHOPE_RZG2H | RZG_TQMARZG2N_B | RZG_TQMARZG2M_E | RZG_TQMARZG2H_C)
+ 	/* Permit RPC access from non-secure resource */
+ 	{SEC_SEL13,		0xFFFFFFFFU},
+-#else	// RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H
++#else	// RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H | RZG_TQMARZG2N_B | RZG_TQMARZG2M_E | RZG_TQMARZG2H_C
+ 	{SEC_SEL13,		0xFFBFFFFFU},
+-#endif	// RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H
++#endif	// RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H | RZG_TQMARZG2N_B | RZG_TQMARZG2M_E | RZG_TQMARZG2H_C
+ 
+ 	/** Security attribute setting for slave ports 14 */
+ 	/* Bit27: System Timer (SCMT) slave ports. */
+@@ -227,14 +227,14 @@ static const struct {
+ 	/** Security group 1 attribute setting for slave ports 13 */
+ 	/* Bit22: RPC slave ports. */
+ 	/*        SecurityGroup3 */
+-#if (RZG_EK874) | (RZG_HIHOPE_RZG2N) | (RZG_HIHOPE_RZG2M) | (RZG_HIHOPE_RZG2H)
++#if (RZG_EK874) | (RZG_HIHOPE_RZG2N) | (RZG_HIHOPE_RZG2M) | (RZG_HIHOPE_RZG2H | RZG_TQMARZG2N_B | RZG_TQMARZG2M_E | RZG_TQMARZG2H_C)
+ 	/* Permit RPC access from non-secure resource */
+ 	{SEC_GRP0COND13,	0x00000000U},
+ 	{SEC_GRP1COND13,	0x00000000U},
+-#else	// RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H
++#else	// RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H | RZG_TQMARZG2N_B | RZG_TQMARZG2M_E | RZG_TQMARZG2H_C
+ 	{SEC_GRP0COND13,	0x00400000U},
+ 	{SEC_GRP1COND13,	0x00400000U},
+-#endif	// RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H
++#endif	// RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H | RZG_TQMARZG2N_B | RZG_TQMARZG2M_E | RZG_TQMARZG2H_C
+ 
+ 	/** Security group 0 attribute setting for slave ports 14 */
+ 	/** Security group 1 attribute setting for slave ports 14 */
+diff --git a/plat/renesas/rcar/ddr/ddr_b/boot_init_dram_config.c b/plat/renesas/rcar/ddr/ddr_b/boot_init_dram_config.c
+index 7f9018a..c98b3bc 100644
+--- a/plat/renesas/rcar/ddr/ddr_b/boot_init_dram_config.c
++++ b/plat/renesas/rcar/ddr/ddr_b/boot_init_dram_config.c
+@@ -11,11 +11,24 @@
+  *	NUMBER OF BOARD CONFIGRATION
+  *	PLEASE DEFINE
+  ******************************************************************************/
+-#define BOARDNUM 27
++#define BOARDNUM 30
+ /*******************************************************************************
+  *	PLEASE SET board number or board judge function
+  ******************************************************************************/
+-#if (RZG_HIHOPE_RZG2M) // RZG_HIHOPE_RZG2M
++
++#if (RZG_TQMARZG2N_B)
++static uint32_t boardcnf_get_brd_type(void){
++	return (27);
++}
++#elif (RZG_TQMARZG2M_E)
++static uint32_t boardcnf_get_brd_type(void){
++	return (28);
++}
++#elif (RZG_TQMARZG2H_C)
++static uint32_t boardcnf_get_brd_type(void){
++	return (29);
++}
++#elif (RZG_HIHOPE_RZG2M) // RZG_HIHOPE_RZG2M
+ #define	GPIO_INDT5	0xE605500C
+ #define	LPDDR4_2RANK	(0x01 << 25)
+ 
+@@ -1979,6 +1992,188 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+ 		}
+ 	}
+ },
++/*
++ * boardcnf[27] TQMaRZG2N 8Gbit/1Rank/2ch --> 16 Gbit total per Chip --> 16 Gbit total on module = 2 GB
++ */
++{
++	0x01,		/* phyvalid */
++	0x01,		/* dbi_en */
++	0x0300,		/* cacs_dly */
++	0,		/* cacs_dly_adj */
++	0x0300,		/* dqdm_dly_w */
++	0x00a0,		/* dqdm_dly_r */
++	{
++/*ch[0]*/	{
++/*ddr_density[]*/	{ 0x04, 0xff },
++/*ca_swap*/		0x00543210,
++/*dqs_swap*/		0x3210,
++/*dq_swap[]*/		{ 0x17602534, 0x23546701, 0x43257160, 0x10765243 },
++/*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
++/*wdqlvl_patt[]*/	WDQLVL_PAT,
++/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0 },
++/*dm_adj_w*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 },
++/*dm_adj_r*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 }
++		},
++	}
++},
++
++/*
++ * boardcnf[28] TQMaRZG2M 16Gbit/2Rank/2ch --> 32 Gbit total per Chip --> 64 Gbit total on module = 8 GB
++ */
++{
++	0x03,		/* phyvalid */
++	0x01,		/* dbi_en */
++	0x2c0,		/* cacs_dly */
++	0,		/* cacs_dly_adj */
++	0x0300,		/* dqdm_dly_w */
++	0x00a0,		/* dqdm_dly_r */
++	{
++/*ch[0]*/	{
++/*ddr_density[]*/	{ 0x04, 0x04 },
++/*ca_swap*/		0x00543210,
++/*dqs_swap*/		0x3210,
++/*dq_swap[]*/		{ 0x17602534, 0x23546701, 0x43257160, 0x10765243 },
++/*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
++/*wdqlvl_patt[]*/	WDQLVL_PAT,
++/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0 },
++/*dm_adj_w*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 },
++/*dm_adj_r*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 }
++		},
++/*ch[1]*/	{
++/*ddr_density[]*/	{ 0x04, 0x04 },
++/*ca_swap*/		0x00543210,
++/*dqs_swap*/		0x3210,
++/*dq_swap[]*/		{ 0x17502643, 0x54236170, 0x34521607, 0x07615243 },
++/*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
++/*wdqlvl_patt[]*/	WDQLVL_PAT,
++/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0 },
++/*dm_adj_w*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 },
++/*dm_adj_r*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 }
++		}
++	}
++},
++
++/*
++ * boardcnf[29] TQMaRZG2H 8Gbit/1Rank/2ch --> 16 Gbit total per Chip --> 32 Gbit total on module = 4 GB
++ */
++{
++	0x05,		/* phyvalid */
++	0x01,		/* dbi_en */
++	0x0300,		/* cacs_dly */
++	0,		/* cacs_dly_adj */
++	0x0300,		/* dqdm_dly_w */
++	0x00a0,		/* dqdm_dly_r */
++	{
++/*ch[0]*/	{
++/*ddr_density[]*/	{ 0x04, 0xff },
++/*ca_swap*/		0x00543210,
++/*dqs_swap*/		0x3210,
++/*dq_swap[]*/		{ 0x17602534, 0x23541067, 0x43257160, 0x10765243 },
++/*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
++/*wdqlvl_patt[]*/	WDQLVL_PAT,
++/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0 },
++/*dm_adj_w*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 },
++/*dm_adj_r*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 }
++		},
++/*ch[1]*/	{
++/*ddr_density[]*/	{ 0x04, 0xff },
++/*ca_swap*/		0x00543210,
++/*dqs_swap*/		0x3210,
++/*dq_swap[]*/		{ 0x17502643, 0x54236170, 0x34521607, 0x07615243 },
++/*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
++/*wdqlvl_patt[]*/	WDQLVL_PAT,
++/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0 },
++/*dm_adj_w*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 },
++/*dm_adj_r*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 }
++		},
++/*ch[2]*/	{
++/*ddr_density[]*/	{ 0x04, 0xff },
++/*ca_swap*/		0x00543210,
++/*dqs_swap*/		0x3210,
++/*dq_swap[]*/		{ 0x17502643, 0x54236170, 0x34521607, 0x07615243 },
++/*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
++/*wdqlvl_patt[]*/	WDQLVL_PAT,
++/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0 },
++/*dm_adj_w*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 },
++/*dm_adj_r*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 }
++		},
++/*ch[3]*/	{ // Dummy
++/*ddr_density[]*/	{ 0xff, 0xff },
++/*ca_swap*/		0,
++/*dqs_swap*/		0,
++/*dq_swap[]*/		{ 0, 0, 0, 0 },
++/*dm_swap[]*/		{ 0, 0, 0, 0 },
++/*wdqlvl_patt[]*/	WDQLVL_PAT,
++/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0 },
++/*dm_adj_w*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 },
++/*dm_adj_r*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 }
++		}
++
++	}
++}
+ };
+ 
+ /*******************************************************************************
+diff --git a/plat/renesas/rcar/drivers/board/board.c b/plat/renesas/rcar/drivers/board/board.c
+index 37b9b63..33e6653 100644
+--- a/plat/renesas/rcar/drivers/board/board.c
++++ b/plat/renesas/rcar/drivers/board/board.c
+@@ -15,23 +15,29 @@
+  * Defines
+  ************************************************************************/
+ #ifndef BOARD_DEFAULT
+-#if (RCAR_LSI == RCAR_E3)
+-#if RZG_EK874
+-#define BOARD_DEFAULT		(BOARD_EK874 << BOARD_CODE_SHIFT)
+-#else
+-#define BOARD_DEFAULT		(BOARD_EBISU << BOARD_CODE_SHIFT)
+-#endif
+-#else  /* (RCAR_LSI == RCAR_E3) */
+-#if (RZG_HIHOPE_RZG2M) // RZG_HIHOPE_RZG2M
+-#define BOARD_DEFAULT		(BOARD_HIHOPE_RZG2M << BOARD_CODE_SHIFT)
+-#elif (RZG_HIHOPE_RZG2N) // RZG_HIHOPE_RZG2N
+-#define BOARD_DEFAULT		(BOARD_HIHOPE_RZG2N << BOARD_CODE_SHIFT)
+-#elif (RZG_HIHOPE_RZG2H) // RZG_HIHOPE_RZG2H
+-#define BOARD_DEFAULT		(BOARD_HIHOPE_RZG2H << BOARD_CODE_SHIFT)
+-#else
+-#define BOARD_DEFAULT		(BOARD_SALVATOR_X << BOARD_CODE_SHIFT)
+-#endif
+-#endif /* (RCAR_LSI == RCAR_E3) */
++	#if (RCAR_LSI == RCAR_E3)
++		#if RZG_EK874
++			#define BOARD_DEFAULT		(BOARD_EK874 << BOARD_CODE_SHIFT)
++		#else
++			#define BOARD_DEFAULT		(BOARD_EBISU << BOARD_CODE_SHIFT)
++		#endif
++	#else  /* (RCAR_LSI == RCAR_E3) */
++		#if (RZG_HIHOPE_RZG2M) // RZG_HIHOPE_RZG2M
++			#define BOARD_DEFAULT		(BOARD_HIHOPE_RZG2M << BOARD_CODE_SHIFT)
++		#elif (RZG_HIHOPE_RZG2N) // RZG_HIHOPE_RZG2N
++			#define BOARD_DEFAULT		(BOARD_HIHOPE_RZG2N << BOARD_CODE_SHIFT)
++		#elif (RZG_HIHOPE_RZG2H) // RZG_HIHOPE_RZG2H
++			#define BOARD_DEFAULT		(BOARD_HIHOPE_RZG2H << BOARD_CODE_SHIFT)
++		#elif (RZG_TQMARZG2N_B) // RZG_TQMARZG2N_B
++			#define BOARD_DEFAULT		(BOARD_TQMARZG2N_B << BOARD_CODE_SHIFT)
++		#elif (RZG_TQMARZG2M_E) // RZG_TQMARZG2M_E
++			#define BOARD_DEFAULT		(BOARD_TQMARZG2M_E << BOARD_CODE_SHIFT)
++		#elif (RZG_TQMARZG2H_C) // RZG_TQMARZG2H_C
++			#define BOARD_DEFAULT		(BOARD_TQMARZG2H_C << BOARD_CODE_SHIFT)
++		#else
++			#define BOARD_DEFAULT		(BOARD_SALVATOR_X << BOARD_CODE_SHIFT)
++		#endif
++	#endif /* (RCAR_LSI == RCAR_E3) */
+ #endif
+ 
+ #define SLAVE_ADDR_EEPROM	(0x50U)
+@@ -63,6 +69,9 @@ const char *g_board_tbl[] = {
+ 	[BOARD_HIHOPE_RZG2M]	= "HiHope RZ/G2M",
+ 	[BOARD_HIHOPE_RZG2N]	= "HiHope RZ/G2N",
+ 	[BOARD_HIHOPE_RZG2H]	= "HiHope RZ/G2H",
++	[BOARD_TQMARZG2N_B]	= "TQMaRZG2N (2GB)",
++	[BOARD_TQMARZG2M_E]	= "TQMaRZG2M (8GB)",
++	[BOARD_TQMARZG2H_C]	= "TQMaRZG2H (4GB)",
+ 	[BOARD_UNKNOWN]		= "unknown"
+ };
+ 
+@@ -104,6 +113,12 @@ int32_t get_board_type(uint32_t *type, uint32_t *rev)
+ 					   0xFFU, 0xFFU, 0xFFU, 0xFFU},
+ 		[BOARD_HIHOPE_RZG2H]	= {0x10U, 0xFFU, 0xFFU, 0xFFU,
+ 					   0xFFU, 0xFFU, 0xFFU, 0xFFU},
++		[BOARD_TQMARZG2N_B]	= {0x10U, 0xFFU, 0xFFU, 0xFFU,
++					   0xFFU, 0xFFU, 0xFFU, 0xFFU},
++		[BOARD_TQMARZG2M_E]	= {0x10U, 0xFFU, 0xFFU, 0xFFU,
++					   0xFFU, 0xFFU, 0xFFU, 0xFFU},
++		[BOARD_TQMARZG2H_C]	= {0x10U, 0xFFU, 0xFFU, 0xFFU,
++					   0xFFU, 0xFFU, 0xFFU, 0xFFU},
+ 	};
+ 
+ 	if (BOARD_ID_UNKNOWN == g_board_id) {
+diff --git a/plat/renesas/rcar/drivers/board/board.h b/plat/renesas/rcar/drivers/board/board.h
+index 00bcdd2..a669f18 100644
+--- a/plat/renesas/rcar/drivers/board/board.h
++++ b/plat/renesas/rcar/drivers/board/board.h
+@@ -22,8 +22,10 @@
+ #define BOARD_HIHOPE_RZG2M		(0x0FU)
+ #define BOARD_HIHOPE_RZG2N		(0x10U)
+ #define BOARD_HIHOPE_RZG2H		(0x11U)
+-
+-#define BOARD_UNKNOWN			(BOARD_HIHOPE_RZG2H+1U)
++#define BOARD_TQMARZG2N_B		(0x12U)
++#define BOARD_TQMARZG2M_E		(0x13U)
++#define BOARD_TQMARZG2H_C		(0x14U)
++#define BOARD_UNKNOWN			(BOARD_TQMARZG2H_C+1U)
+ 
+ #define BOARD_REV_UNKNOWN		(0xFFU)
+ 
+diff --git a/plat/renesas/rcar/include/emmc_registers.h b/plat/renesas/rcar/include/emmc_registers.h
+index c0e8230..c8be6c8 100644
+--- a/plat/renesas/rcar/include/emmc_registers.h
++++ b/plat/renesas/rcar/include/emmc_registers.h
+@@ -24,11 +24,11 @@
+ #if RCAR_LSI == RCAR_E3
+ #define USE_MMC_CH	(MMC_CH1)	/* R-Car E3 */
+ #else  /* RCAR_LSI == RCAR_E3 */
+-#if (RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H)
++#if (RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H | RZG_TQMARZG2N_B | RZG_TQMARZG2M_E | RZG_TQMARZG2H_C)
+ #define USE_MMC_CH	(MMC_CH1)
+-#else	/* RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H  */
++#else	/* RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H | RZG_TQMARZG2N_B | RZG_TQMARZG2M_E | RZG_TQMARZG2H_C */
+ #define USE_MMC_CH	(MMC_CH0)	/* R-Car H3/M3/M3N */
+-#endif	/* RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H */
++#endif	/* RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H | RZG_TQMARZG2N_B | RZG_TQMARZG2M_E | RZG_TQMARZG2H_C */
+ #endif /* RCAR_LSI == RCAR_E3 */
+ 
+ 
+diff --git a/plat/renesas/rcar/pfc/H3/pfc_init_h3_v2.c b/plat/renesas/rcar/pfc/H3/pfc_init_h3_v2.c
+index 91137de..bd24f9a 100644
+--- a/plat/renesas/rcar/pfc/H3/pfc_init_h3_v2.c
++++ b/plat/renesas/rcar/pfc/H3/pfc_init_h3_v2.c
+@@ -813,7 +813,7 @@ void pfc_init_h3_v2(void)
+ 	uint32_t reg;
+ 
+ 	/* initialize module select */
+-#if RZG_HIHOPE_RZG2H
++#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
+ 	pfc_reg_write(PFC_MOD_SEL0, MOD_SEL0_MSIOF3_A
+ 				  | MOD_SEL0_MSIOF2_A
+ 				  | MOD_SEL0_MSIOF1_A
+@@ -868,7 +868,7 @@ void pfc_init_h3_v2(void)
+ 				  | MOD_SEL2_ADG_B_A
+ 				  | MOD_SEL2_ADG_C_A
+ 				  | MOD_SEL2_VIN4_A);
+-#else  // RZG_HIHOPE_RZG2H
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ 	pfc_reg_write(PFC_MOD_SEL0, MOD_SEL0_MSIOF3_A
+ 				  | MOD_SEL0_MSIOF2_A
+ 				  | MOD_SEL0_MSIOF1_A
+@@ -923,10 +923,10 @@ void pfc_init_h3_v2(void)
+ 				  | MOD_SEL2_ADG_B_A
+ 				  | MOD_SEL2_ADG_C_A
+ 				  | MOD_SEL2_VIN4_A);
+-#endif // RZG_HIHOPE_RZG2H
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ 
+ 	/* initialize peripheral function select */
+-#if RZG_HIHOPE_RZG2H
++#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
+ 	pfc_reg_write(PFC_IPSR0, IPSR_28_FUNC(0)
+ 			       | IPSR_24_FUNC(0)
+ 			       | IPSR_20_FUNC(0)
+@@ -1073,7 +1073,7 @@ void pfc_init_h3_v2(void)
+ 				| IPSR_0_FUNC(0));
+ 	pfc_reg_write(PFC_IPSR18, IPSR_4_FUNC(0)
+ 				| IPSR_0_FUNC(0));
+-#else  // RZG_HIHOPE_RZG2H
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ 	pfc_reg_write(PFC_IPSR0, IPSR_28_FUNC(0)
+ 			       | IPSR_24_FUNC(0)
+ 			       | IPSR_20_FUNC(0)
+@@ -1219,10 +1219,10 @@ void pfc_init_h3_v2(void)
+ 				| IPSR_0_FUNC(0));
+ 	pfc_reg_write(PFC_IPSR18, IPSR_4_FUNC(0)
+ 				| IPSR_0_FUNC(0));
+-#endif // RZG_HIHOPE_RZG2H
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ 
+ 	/* initialize GPIO/perihperal function select */
+-#if RZG_HIHOPE_RZG2H
++#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
+ 	pfc_reg_write(PFC_GPSR0, GPSR0_D15
+ 			       | GPSR0_D14
+ 			       | GPSR0_D13
+@@ -1325,7 +1325,7 @@ void pfc_init_h3_v2(void)
+ 			       | GPSR6_SSI_SCK0129);
+ 	pfc_reg_write(PFC_GPSR7, GPSR7_AVS2
+ 			       | GPSR7_AVS1);
+-#else  // RZG_HIHOPE_RZG2H
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ 	pfc_reg_write(PFC_GPSR0, GPSR0_D15
+ 			       | GPSR0_D14
+ 			       | GPSR0_D13
+@@ -1432,17 +1432,17 @@ void pfc_init_h3_v2(void)
+ 			       | GPSR6_SSI_SCK0129);
+ 	pfc_reg_write(PFC_GPSR7, GPSR7_AVS2
+ 			       | GPSR7_AVS1);
+-#endif // RZG_HIHOPE_RZG2H
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ 
+ 	/* initialize POC control register */
+-#if RZG_HIHOPE_RZG2H
++#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
+ 	pfc_reg_write(PFC_POCCTRL0, POC_SD0_DAT3_33V
+ 				  | POC_SD0_DAT2_33V
+ 				  | POC_SD0_DAT1_33V
+ 				  | POC_SD0_DAT0_33V
+ 				  | POC_SD0_CMD_33V
+ 				  | POC_SD0_CLK_33V);
+-#else  // RZG_HIHOPE_RZG2H
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ 	pfc_reg_write(PFC_POCCTRL0, POC_SD3_DS_33V
+ 				  | POC_SD3_DAT7_33V
+ 				  | POC_SD3_DAT6_33V
+@@ -1460,10 +1460,10 @@ void pfc_init_h3_v2(void)
+ 				  | POC_SD0_DAT0_33V
+ 				  | POC_SD0_CMD_33V
+ 				  | POC_SD0_CLK_33V);
+-#endif // RZG_HIHOPE_RZG2H
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ 
+ 	/* initialize DRV control register */
+-#if RZG_HIHOPE_RZG2H
++#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
+ 	reg = mmio_read_32(PFC_DRVCTRL0);
+ 	reg = ((reg & DRVCTRL0_MASK) | DRVCTRL0_QSPI0_SPCLK(3)
+ 				     | DRVCTRL0_QSPI0_MOSI_IO0(3)
+@@ -1709,7 +1709,7 @@ void pfc_init_h3_v2(void)
+ 				      | DRVCTRL24_USB31_PWEN(7)
+ 				      | DRVCTRL24_USB31_OVC(7));
+ 	pfc_reg_write(PFC_DRVCTRL24, reg);
+-#else  // RZG_HIHOPE_RZG2H
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ 	reg = mmio_read_32(PFC_DRVCTRL0);
+ 	reg = ((reg & DRVCTRL0_MASK) | DRVCTRL0_QSPI0_SPCLK(3)
+ 				     | DRVCTRL0_QSPI0_MOSI_IO0(3)
+@@ -1955,10 +1955,10 @@ void pfc_init_h3_v2(void)
+ 				      | DRVCTRL24_USB31_PWEN(7)
+ 				      | DRVCTRL24_USB31_OVC(7));
+ 	pfc_reg_write(PFC_DRVCTRL24, reg);
+-#endif // RZG_HIHOPE_RZG2H
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ 
+ 	/* initialize LSI pin pull-up/down control */
+-#if RZG_HIHOPE_RZG2H
++#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
+ 	pfc_reg_write(PFC_PUD0,0x00005FBFU);
+ 	pfc_reg_write(PFC_PUD1,0x00300EFEU);
+ 	pfc_reg_write(PFC_PUD2,0x330001E6U);
+@@ -1966,7 +1966,7 @@ void pfc_init_h3_v2(void)
+ 	pfc_reg_write(PFC_PUD4,0xFFFFFF00U);
+ 	pfc_reg_write(PFC_PUD5,0x7F5FFF87U);
+ 	pfc_reg_write(PFC_PUD6,0x00000055U);
+-#else  // RZG_HIHOPE_RZG2H
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ 	pfc_reg_write(PFC_PUD0, 0x00005FBFU);
+ 	pfc_reg_write(PFC_PUD1, 0x00300FFEU);
+ 	pfc_reg_write(PFC_PUD2, 0x330001E6U);
+@@ -1974,10 +1974,10 @@ void pfc_init_h3_v2(void)
+ 	pfc_reg_write(PFC_PUD4, 0xFFFFFF00U);
+ 	pfc_reg_write(PFC_PUD5, 0x7F5FFF87U);
+ 	pfc_reg_write(PFC_PUD6, 0x00000055U);
+-#endif // RZG_HIHOPE_RZG2H
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ 
+ 	/* initialize LSI pin pull-enable register */
+-#if RZG_HIHOPE_RZG2H
++#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
+ 	pfc_reg_write(PFC_PUEN0,0x00000FFFU);
+ 	pfc_reg_write(PFC_PUEN1,0x00100234U);
+ 	pfc_reg_write(PFC_PUEN2,0x000004C4U);
+@@ -1985,7 +1985,7 @@ void pfc_init_h3_v2(void)
+ 	pfc_reg_write(PFC_PUEN4,0x3E000000U);
+ 	pfc_reg_write(PFC_PUEN5,0x1F000805U);
+ 	pfc_reg_write(PFC_PUEN6,0x00000006U);
+-#else  // RZG_HIHOPE_RZG2H
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ 	pfc_reg_write(PFC_PUEN0, 0x00000FFFU);
+ 	pfc_reg_write(PFC_PUEN1, 0x00100234U);
+ 	pfc_reg_write(PFC_PUEN2, 0x000004C4U);
+@@ -1993,7 +1993,7 @@ void pfc_init_h3_v2(void)
+ 	pfc_reg_write(PFC_PUEN4, 0x3E000000U);
+ 	pfc_reg_write(PFC_PUEN5, 0x1F000805U);
+ 	pfc_reg_write(PFC_PUEN6, 0x00000006U);
+-#endif // RZG_HIHOPE_RZG2H
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ 
+ 	/* initialize positive/negative logic select */
+ 	mmio_write_32(GPIO_POSNEG0, 0x00000000U);
+@@ -2016,7 +2016,7 @@ void pfc_init_h3_v2(void)
+ 	mmio_write_32(GPIO_IOINTSEL7, 0x00000000U);
+ 
+ 	/* initialize general output register */
+-#if RZG_HIHOPE_RZG2H
++#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
+ 	mmio_write_32(GPIO_OUTDT0, 0x00000001U);
+ 	mmio_write_32(GPIO_OUTDT1, 0x00000000U);
+ 	mmio_write_32(GPIO_OUTDT2, 0x00000400U);
+@@ -2025,16 +2025,16 @@ void pfc_init_h3_v2(void)
+ 	mmio_write_32(GPIO_OUTDT5, 0x00000000U);
+ 	mmio_write_32(GPIO_OUTDT6, 0x00003800U);
+ 	mmio_write_32(GPIO_OUTDT7, 0x00000003U);
+-#else  // RZG_HIHOPE_RZG2H
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ 	mmio_write_32(GPIO_OUTDT1, 0x00000000U);
+ 	mmio_write_32(GPIO_OUTDT2, 0x00000400U);
+ 	mmio_write_32(GPIO_OUTDT3, 0x0000C000U);
+ 	mmio_write_32(GPIO_OUTDT5, 0x00000006U);
+ 	mmio_write_32(GPIO_OUTDT6, 0x00003880U);
+-#endif // RZG_HIHOPE_RZG2H
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ 
+ 	/* initialize general input/output switching */
+-#if RZG_HIHOPE_RZG2H
++#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
+ 	mmio_write_32(GPIO_INOUTSEL0, 0x00000001U);
+ 	mmio_write_32(GPIO_INOUTSEL1, 0x00100B00U);
+ 	mmio_write_32(GPIO_INOUTSEL2, 0x00000418U);
+@@ -2043,7 +2043,7 @@ void pfc_init_h3_v2(void)
+ 	mmio_write_32(GPIO_INOUTSEL5, 0x00000208U);
+ 	mmio_write_32(GPIO_INOUTSEL6, 0x00013F00U);
+ 	mmio_write_32(GPIO_INOUTSEL7, 0x00000003U);
+-#else  // RZG_HIHOPE_RZG2H
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ 	mmio_write_32(GPIO_INOUTSEL0, 0x00000000U);
+ 	mmio_write_32(GPIO_INOUTSEL1, 0x01000A00U);
+ 	mmio_write_32(GPIO_INOUTSEL2, 0x00000400U);
+@@ -2052,5 +2052,5 @@ void pfc_init_h3_v2(void)
+ 	mmio_write_32(GPIO_INOUTSEL5, 0x0000020EU);
+ 	mmio_write_32(GPIO_INOUTSEL6, 0x00013880U);
+ 	mmio_write_32(GPIO_INOUTSEL7, 0x00000000U);
+-#endif // RZG_HIHOPE_RZG2H
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
+ }
+diff --git a/plat/renesas/rcar/pfc/M3/pfc_init_m3.c b/plat/renesas/rcar/pfc/M3/pfc_init_m3.c
+index 3b47fc8..13bb616 100644
+--- a/plat/renesas/rcar/pfc/M3/pfc_init_m3.c
++++ b/plat/renesas/rcar/pfc/M3/pfc_init_m3.c
+@@ -894,7 +894,7 @@ void pfc_init_m3(void)
+ 	start_rtdma0_descriptor();
+ 
+ 	/* initialize module select */
+-#if RZG_HIHOPE_RZG2M
++#if (RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E)
+ 	pfc_reg_write(PFC_MOD_SEL0, MOD_SEL0_MSIOF3_A
+ 				  | MOD_SEL0_MSIOF2_A
+ 				  | MOD_SEL0_MSIOF1_A
+@@ -949,7 +949,7 @@ void pfc_init_m3(void)
+ 				  | MOD_SEL2_ADG_B_A
+ 				  | MOD_SEL2_ADG_C_A
+ 				  | MOD_SEL2_VIN4_A);
+-#else  // RZG_HIHOPE_RZG2M
++#else  // RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E
+ 	pfc_reg_write(PFC_MOD_SEL0, MOD_SEL0_MSIOF3_A
+ 				  | MOD_SEL0_MSIOF2_A
+ 				  | MOD_SEL0_MSIOF1_A
+@@ -1004,10 +1004,10 @@ void pfc_init_m3(void)
+ 				  | MOD_SEL2_ADG_B_A
+ 				  | MOD_SEL2_ADG_C_A
+ 				  | MOD_SEL2_VIN4_A);
+-#endif // RZG_HIHOPE_RZG2M
++#endif // RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E
+ 
+ 	/* initialize peripheral function select */
+-#if RZG_HIHOPE_RZG2M
++#if (RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E)
+ 	pfc_reg_write(PFC_IPSR0, IPSR_28_FUNC(0)
+ 			       | IPSR_24_FUNC(0)
+ 			       | IPSR_20_FUNC(0)
+@@ -1154,7 +1154,7 @@ void pfc_init_m3(void)
+ 				| IPSR_0_FUNC(0));
+ 	pfc_reg_write(PFC_IPSR18, IPSR_4_FUNC(0)
+ 				| IPSR_0_FUNC(0));
+-#else  // RZG_HIHOPE_RZG2M
++#else  // RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E
+ 	pfc_reg_write(PFC_IPSR0, IPSR_28_FUNC(0)
+ 			       | IPSR_24_FUNC(0)
+ 			       | IPSR_20_FUNC(0)
+@@ -1303,7 +1303,7 @@ void pfc_init_m3(void)
+ #endif // RZG_HIHOPE_RZG2M
+ 
+ 	/* initialize GPIO/perihperal function select */
+-#if RZG_HIHOPE_RZG2M
++#if (RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E)
+ 	pfc_reg_write(PFC_GPSR0, GPSR0_D15
+ 			       | GPSR0_D14
+ 			       | GPSR0_D13
+@@ -1406,7 +1406,7 @@ void pfc_init_m3(void)
+ 			       | GPSR6_SSI_SCK0129);
+ 	pfc_reg_write(PFC_GPSR7, GPSR7_AVS2
+ 			       | GPSR7_AVS1);
+-#else  // RZG_HIHOPE_RZG2M
++#else  // RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E
+ 	pfc_reg_write(PFC_GPSR0, GPSR0_D15
+ 			       | GPSR0_D14
+ 			       | GPSR0_D13
+@@ -1513,17 +1513,17 @@ void pfc_init_m3(void)
+ 			       | GPSR6_SSI_SCK0129);
+ 	pfc_reg_write(PFC_GPSR7, GPSR7_AVS2
+ 			       | GPSR7_AVS1);
+-#endif // RZG_HIHOPE_RZG2M
++#endif // RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E
+ 
+ 	/* initialize POC control register */
+-#if RZG_HIHOPE_RZG2M
++#if (RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E)
+ 	pfc_reg_write(PFC_POCCTRL0, POC_SD0_DAT3_33V
+ 				  | POC_SD0_DAT2_33V
+ 				  | POC_SD0_DAT1_33V
+ 				  | POC_SD0_DAT0_33V
+ 				  | POC_SD0_CMD_33V
+ 				  | POC_SD0_CLK_33V);
+-#else  // RZG_HIHOPE_RZG2M
++#else  // RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E
+ 	pfc_reg_write(PFC_POCCTRL0, POC_SD3_DS_33V
+ 				  | POC_SD3_DAT7_33V
+ 				  | POC_SD3_DAT6_33V
+@@ -1541,10 +1541,10 @@ void pfc_init_m3(void)
+ 				  | POC_SD0_DAT0_33V
+ 				  | POC_SD0_CMD_33V
+ 				  | POC_SD0_CLK_33V);
+-#endif // RZG_HIHOPE_RZG2M
++#endif // RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E
+ 
+ 	/* initialize DRV control register */
+-#if RZG_HIHOPE_RZG2M
++#if (RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E)
+ 	reg = mmio_read_32(PFC_DRVCTRL0);
+ 	reg = ((reg & DRVCTRL0_MASK) | DRVCTRL0_QSPI0_SPCLK(3)
+ 				     | DRVCTRL0_QSPI0_MOSI_IO0(3)
+@@ -1790,7 +1790,7 @@ void pfc_init_m3(void)
+ 				      | DRVCTRL24_USB31_PWEN(7)
+ 				      | DRVCTRL24_USB31_OVC(7));
+ 	pfc_reg_write(PFC_DRVCTRL24, reg);
+-#else  // RZG_HIHOPE_RZG2M
++#else  // RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E
+ 	reg = mmio_read_32(PFC_DRVCTRL0);
+ 	reg = ((reg & DRVCTRL0_MASK) | DRVCTRL0_QSPI0_SPCLK(3)
+ 				     | DRVCTRL0_QSPI0_MOSI_IO0(3)
+@@ -2036,10 +2036,10 @@ void pfc_init_m3(void)
+ 				      | DRVCTRL24_USB31_PWEN(7)
+ 				      | DRVCTRL24_USB31_OVC(7));
+ 	pfc_reg_write(PFC_DRVCTRL24, reg);
+-#endif // RZG_HIHOPE_RZG2M
++#endif // RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E
+ 
+ 	/* initialize LSI pin pull-up/down control */
+-#if RZG_HIHOPE_RZG2M
++#if (RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E)
+ 	pfc_reg_write(PFC_PUD0,0x00005FBFU);
+ 	pfc_reg_write(PFC_PUD1,0x00300EFEU);
+ 	pfc_reg_write(PFC_PUD2,0x330001E6U);
+@@ -2047,7 +2047,7 @@ void pfc_init_m3(void)
+ 	pfc_reg_write(PFC_PUD4,0xFFFFFF00U);
+ 	pfc_reg_write(PFC_PUD5,0x7F5FFF87U);
+ 	pfc_reg_write(PFC_PUD6,0x00000055U);
+-#else  // RZG_HIHOPE_RZG2M
++#else  // RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E
+ 	pfc_reg_write(PFC_PUD0, 0x00005FBFU);
+ 	pfc_reg_write(PFC_PUD1, 0x00300FFEU);
+ 	pfc_reg_write(PFC_PUD2, 0x330001E6U);
+@@ -2055,10 +2055,10 @@ void pfc_init_m3(void)
+ 	pfc_reg_write(PFC_PUD4, 0xFFFFFF00U);
+ 	pfc_reg_write(PFC_PUD5, 0x7F5FFF87U);
+ 	pfc_reg_write(PFC_PUD6, 0x00000055U);
+-#endif // RZG_HIHOPE_RZG2M
++#endif // RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E
+ 
+ 	/* initialize LSI pin pull-enable register */
+-#if RZG_HIHOPE_RZG2M
++#if (RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E)
+ 	pfc_reg_write(PFC_PUEN0,0x00000FFFU);
+ 	pfc_reg_write(PFC_PUEN1,0x00100234U);
+ 	pfc_reg_write(PFC_PUEN2,0x000004C4U);
+@@ -2066,7 +2066,7 @@ void pfc_init_m3(void)
+ 	pfc_reg_write(PFC_PUEN4,0x3E000000U);
+ 	pfc_reg_write(PFC_PUEN5,0x1F000805U);
+ 	pfc_reg_write(PFC_PUEN6,0x00000006U);
+-#else  // RZG_HIHOPE_RZG2M
++#else  // RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E
+ 	pfc_reg_write(PFC_PUEN0, 0x00000FFFU);
+ 	pfc_reg_write(PFC_PUEN1, 0x00100234U);
+ 	pfc_reg_write(PFC_PUEN2, 0x000004C4U);
+@@ -2074,7 +2074,7 @@ void pfc_init_m3(void)
+ 	pfc_reg_write(PFC_PUEN4, 0x3E000000U);
+ 	pfc_reg_write(PFC_PUEN5, 0x1F000805U);
+ 	pfc_reg_write(PFC_PUEN6, 0x00000006U);
+-#endif // RZG_HIHOPE_RZG2M
++#endif // RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E
+ 
+ 	/* initialize positive/negative logic select */
+ 	mmio_write_32(GPIO_POSNEG0, 0x00000000U);
+@@ -2097,7 +2097,7 @@ void pfc_init_m3(void)
+ 	mmio_write_32(GPIO_IOINTSEL7, 0x00000000U);
+ 
+ 	/* initialize general output register */
+-#if RZG_HIHOPE_RZG2M
++#if (RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E)
+ 	mmio_write_32(GPIO_OUTDT0, 0x00000001U);
+ 	mmio_write_32(GPIO_OUTDT1, 0x00000000U);
+ 	mmio_write_32(GPIO_OUTDT2, 0x00000400U);
+@@ -2106,16 +2106,16 @@ void pfc_init_m3(void)
+ 	mmio_write_32(GPIO_OUTDT5, 0x00000000U);
+ 	mmio_write_32(GPIO_OUTDT6, 0x00003800U);
+ 	mmio_write_32(GPIO_OUTDT7, 0x00000003U);
+-#else  // RZG_HIHOPE_RZG2M
++#else  // RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E
+ 	mmio_write_32(GPIO_OUTDT1, 0x00000000U);
+ 	mmio_write_32(GPIO_OUTDT2, 0x00000400U);
+ 	mmio_write_32(GPIO_OUTDT3, 0x0000C000U);
+ 	mmio_write_32(GPIO_OUTDT5, 0x00000006U);
+ 	mmio_write_32(GPIO_OUTDT6, 0x00003880U);
+-#endif // RZG_HIHOPE_RZG2M
++#endif // RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E
+ 
+ 	/* initialize general input/output switching */
+-#if RZG_HIHOPE_RZG2M
++#if (RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E)
+ 	mmio_write_32(GPIO_INOUTSEL0, 0x00000001U);
+ 	mmio_write_32(GPIO_INOUTSEL1, 0x00100B00U);
+ 	mmio_write_32(GPIO_INOUTSEL2, 0x00000418U);
+@@ -2124,7 +2124,7 @@ void pfc_init_m3(void)
+ 	mmio_write_32(GPIO_INOUTSEL5, 0x00000208U);
+ 	mmio_write_32(GPIO_INOUTSEL6, 0x00013F00U);
+ 	mmio_write_32(GPIO_INOUTSEL7, 0x00000003U);
+-#else  // RZG_HIHOPE_RZG2M
++#else  // RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E
+ 	mmio_write_32(GPIO_INOUTSEL0, 0x00000000U);
+ 	mmio_write_32(GPIO_INOUTSEL1, 0x01000A00U);
+ 	mmio_write_32(GPIO_INOUTSEL2, 0x00000400U);
+@@ -2133,5 +2133,5 @@ void pfc_init_m3(void)
+ 	mmio_write_32(GPIO_INOUTSEL5, 0x0000020EU);
+ 	mmio_write_32(GPIO_INOUTSEL6, 0x00013880U);
+ 	mmio_write_32(GPIO_INOUTSEL7, 0x00000000U);
+-#endif // RZG_HIHOPE_RZG2M
++#endif // RZG_HIHOPE_RZG2M | RZG_TQMARZG2M_E
+ }
+diff --git a/plat/renesas/rcar/pfc/M3N/pfc_init_m3n.c b/plat/renesas/rcar/pfc/M3N/pfc_init_m3n.c
+index fc1cdb2..9edf0d9 100644
+--- a/plat/renesas/rcar/pfc/M3N/pfc_init_m3n.c
++++ b/plat/renesas/rcar/pfc/M3N/pfc_init_m3n.c
+@@ -801,7 +801,7 @@ void pfc_init_m3n(void)
+ 	uint32_t reg;
+ 
+ 	/* initialize module select */
+-#if RZG_HIHOPE_RZG2N
++#if (RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B)
+ 	pfc_reg_write(PFC_MOD_SEL0, MOD_SEL0_MSIOF3_A
+ 				  | MOD_SEL0_MSIOF2_A
+ 				  | MOD_SEL0_MSIOF1_A
+@@ -856,7 +856,7 @@ void pfc_init_m3n(void)
+ 				  | MOD_SEL2_ADG_B_A
+ 				  | MOD_SEL2_ADG_C_A
+ 				  | MOD_SEL2_VIN4_A);
+-#else  // RZG_HIHOPE_RZG2N
++#else  // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ 	pfc_reg_write(PFC_MOD_SEL0, MOD_SEL0_MSIOF3_A
+ 				  | MOD_SEL0_MSIOF2_A
+ 				  | MOD_SEL0_MSIOF1_A
+@@ -911,10 +911,10 @@ void pfc_init_m3n(void)
+ 				  | MOD_SEL2_ADG_B_A
+ 				  | MOD_SEL2_ADG_C_A
+ 				  | MOD_SEL2_VIN4_A);
+-#endif // RZG_HIHOPE_RZG2N
++#endif // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ 
+ 	/* initialize peripheral function select */
+-#if RZG_HIHOPE_RZG2N
++#if (RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B)
+ 	pfc_reg_write(PFC_IPSR0, IPSR_28_FUNC(0)
+ 			       | IPSR_24_FUNC(0)
+ 			       | IPSR_20_FUNC(0)
+@@ -1061,7 +1061,7 @@ void pfc_init_m3n(void)
+ 				| IPSR_0_FUNC(0));
+ 	pfc_reg_write(PFC_IPSR18, IPSR_4_FUNC(0)
+ 				| IPSR_0_FUNC(0));
+-#else  // RZG_HIHOPE_RZG2N
++#else  // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ 	pfc_reg_write(PFC_IPSR0, IPSR_28_FUNC(0)
+ 			       | IPSR_24_FUNC(0)
+ 			       | IPSR_20_FUNC(0)
+@@ -1207,10 +1207,10 @@ void pfc_init_m3n(void)
+ 				| IPSR_0_FUNC(0));
+ 	pfc_reg_write(PFC_IPSR18, IPSR_4_FUNC(0)
+ 				| IPSR_0_FUNC(0));
+-#endif // RZG_HIHOPE_RZG2N
++#endif // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ 
+ 	/* initialize GPIO/perihperal function select */
+-#if RZG_HIHOPE_RZG2N
++#if (RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B)
+ 	pfc_reg_write(PFC_GPSR0, GPSR0_D15
+ 			       | GPSR0_D14
+ 			       | GPSR0_D13
+@@ -1313,7 +1313,7 @@ void pfc_init_m3n(void)
+ 			       | GPSR6_SSI_SCK0129);
+ 	pfc_reg_write(PFC_GPSR7, GPSR7_AVS2
+ 			       | GPSR7_AVS1);
+-#else  // RZG_HIHOPE_RZG2N
++#else  // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ 	pfc_reg_write(PFC_GPSR0, GPSR0_D15
+ 			       | GPSR0_D14
+ 			       | GPSR0_D13
+@@ -1420,17 +1420,17 @@ void pfc_init_m3n(void)
+ 			       | GPSR6_SSI_SCK0129);
+ 	pfc_reg_write(PFC_GPSR7, GPSR7_AVS2
+ 			       | GPSR7_AVS1);
+-#endif // RZG_HIHOPE_RZG2N
++#endif // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ 
+ 	/* initialize POC control register */
+-#if RZG_HIHOPE_RZG2N
++#if (RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B)
+ 	pfc_reg_write(PFC_POCCTRL0, POC_SD0_DAT3_33V
+ 				  | POC_SD0_DAT2_33V
+ 				  | POC_SD0_DAT1_33V
+ 				  | POC_SD0_DAT0_33V
+ 				  | POC_SD0_CMD_33V
+ 				  | POC_SD0_CLK_33V);
+-#else  // RZG_HIHOPE_RZG2N
++#else  // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ 	pfc_reg_write(PFC_POCCTRL0, POC_SD3_DS_33V
+ 				  | POC_SD3_DAT7_33V
+ 				  | POC_SD3_DAT6_33V
+@@ -1448,10 +1448,10 @@ void pfc_init_m3n(void)
+ 				  | POC_SD0_DAT0_33V
+ 				  | POC_SD0_CMD_33V
+ 				  | POC_SD0_CLK_33V);
+-#endif // RZG_HIHOPE_RZG2N
++#endif // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ 
+ 	/* initialize DRV control register */
+-#if RZG_HIHOPE_RZG2N
++#if (RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B)
+ 	reg = mmio_read_32(PFC_DRVCTRL0);
+ 	reg = ((reg & DRVCTRL0_MASK) | DRVCTRL0_QSPI0_SPCLK(3)
+ 				     | DRVCTRL0_QSPI0_MOSI_IO0(3)
+@@ -1697,7 +1697,7 @@ void pfc_init_m3n(void)
+ 				      | DRVCTRL24_USB31_PWEN(7)
+ 				      | DRVCTRL24_USB31_OVC(7));
+ 	pfc_reg_write(PFC_DRVCTRL24, reg);
+-#else  // RZG_HIHOPE_RZG2N
++#else  // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ 	reg = mmio_read_32(PFC_DRVCTRL0);
+ 	reg = ((reg & DRVCTRL0_MASK) | DRVCTRL0_QSPI0_SPCLK(3)
+ 				     | DRVCTRL0_QSPI0_MOSI_IO0(3)
+@@ -1943,10 +1943,10 @@ void pfc_init_m3n(void)
+ 				      | DRVCTRL24_USB31_PWEN(7)
+ 				      | DRVCTRL24_USB31_OVC(7));
+ 	pfc_reg_write(PFC_DRVCTRL24, reg);
+-#endif // RZG_HIHOPE_RZG2N
++#endif // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ 
+ 	/* initialize LSI pin pull-up/down control */
+-#if RZG_HIHOPE_RZG2N
++#if (RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B)
+ 	pfc_reg_write(PFC_PUD0,0x00005FBFU);
+ 	pfc_reg_write(PFC_PUD1,0x00300EFEU);
+ 	pfc_reg_write(PFC_PUD2,0x330001E6U);
+@@ -1954,7 +1954,7 @@ void pfc_init_m3n(void)
+ 	pfc_reg_write(PFC_PUD4,0xFFFFFF00U);
+ 	pfc_reg_write(PFC_PUD5,0x7F5FFF87U);
+ 	pfc_reg_write(PFC_PUD6,0x00000055U);
+-#else  // RZG_HIHOPE_RZG2N
++#else  // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ 	pfc_reg_write(PFC_PUD0, 0x00005FBFU);
+ 	pfc_reg_write(PFC_PUD1, 0x00300FFEU);
+ 	pfc_reg_write(PFC_PUD2, 0x330001E6U);
+@@ -1962,10 +1962,10 @@ void pfc_init_m3n(void)
+ 	pfc_reg_write(PFC_PUD4, 0xFFFFFF00U);
+ 	pfc_reg_write(PFC_PUD5, 0x7F5FFF87U);
+ 	pfc_reg_write(PFC_PUD6, 0x00000055U);
+-#endif // RZG_HIHOPE_RZG2N
++#endif // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ 
+ 	/* initialize LSI pin pull-enable register */
+-#if RZG_HIHOPE_RZG2N
++#if (RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B)
+ 	pfc_reg_write(PFC_PUEN0,0x00000FFFU);
+ 	pfc_reg_write(PFC_PUEN1,0x00100234U);
+ 	pfc_reg_write(PFC_PUEN2,0x000004C4U);
+@@ -1973,7 +1973,7 @@ void pfc_init_m3n(void)
+ 	pfc_reg_write(PFC_PUEN4,0x3E000000U);
+ 	pfc_reg_write(PFC_PUEN5,0x1F000805U);
+ 	pfc_reg_write(PFC_PUEN6,0x00000006U);
+-#else  // RZG_HIHOPE_RZG2N
++#else  // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ 	pfc_reg_write(PFC_PUEN0, 0x00000FFFU);
+ 	pfc_reg_write(PFC_PUEN1, 0x00100234U);
+ 	pfc_reg_write(PFC_PUEN2, 0x000004C4U);
+@@ -1981,7 +1981,7 @@ void pfc_init_m3n(void)
+ 	pfc_reg_write(PFC_PUEN4, 0x3E000000U);
+ 	pfc_reg_write(PFC_PUEN5, 0x1F000805U);
+ 	pfc_reg_write(PFC_PUEN6, 0x00000006U);
+-#endif // RZG_HIHOPE_RZG2N
++#endif // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ 
+ 	/* initialize positive/negative logic select */
+ 	mmio_write_32(GPIO_POSNEG0, 0x00000000U);
+@@ -2004,7 +2004,7 @@ void pfc_init_m3n(void)
+ 	mmio_write_32(GPIO_IOINTSEL7, 0x00000000U);
+ 
+ 	/* initialize general output register */
+-#if RZG_HIHOPE_RZG2N
++#if (RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B)
+ 	mmio_write_32(GPIO_OUTDT0, 0x00000001U);
+ 	mmio_write_32(GPIO_OUTDT1, 0x00000000U);
+ 	mmio_write_32(GPIO_OUTDT2, 0x00000400U);
+@@ -2013,16 +2013,16 @@ void pfc_init_m3n(void)
+ 	mmio_write_32(GPIO_OUTDT5, 0x00000000U);
+ 	mmio_write_32(GPIO_OUTDT6, 0x00003800U);
+ 	mmio_write_32(GPIO_OUTDT7, 0x00000003U);
+-#else  // RZG_HIHOPE_RZG2N
++#else  // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ 	mmio_write_32(GPIO_OUTDT1, 0x00000000U);
+ 	mmio_write_32(GPIO_OUTDT2, 0x00000400U);
+ 	mmio_write_32(GPIO_OUTDT3, 0x0000C000U);
+ 	mmio_write_32(GPIO_OUTDT5, 0x00000006U);
+ 	mmio_write_32(GPIO_OUTDT6, 0x00003880U);
+-#endif // RZG_HIHOPE_RZG2N
++#endif // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ 
+ 	/* initialize general input/output switching */
+-#if RZG_HIHOPE_RZG2N
++#if (RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B)
+ 	mmio_write_32(GPIO_INOUTSEL0, 0x00000001U);
+ 	mmio_write_32(GPIO_INOUTSEL1, 0x00100B00U);
+ 	mmio_write_32(GPIO_INOUTSEL2, 0x00000418U);
+@@ -2031,7 +2031,7 @@ void pfc_init_m3n(void)
+ 	mmio_write_32(GPIO_INOUTSEL5, 0x00000208U);
+ 	mmio_write_32(GPIO_INOUTSEL6, 0x00013F00U);
+ 	mmio_write_32(GPIO_INOUTSEL7, 0x00000003U);
+-#else  // RZG_HIHOPE_RZG2N
++#else  // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ 	mmio_write_32(GPIO_INOUTSEL0, 0x00000000U);
+ 	mmio_write_32(GPIO_INOUTSEL1, 0x01000A00U);
+ 	mmio_write_32(GPIO_INOUTSEL2, 0x00000400U);
+@@ -2040,5 +2040,5 @@ void pfc_init_m3n(void)
+ 	mmio_write_32(GPIO_INOUTSEL5, 0x0000020EU);
+ 	mmio_write_32(GPIO_INOUTSEL6, 0x00013880U);
+ 	mmio_write_32(GPIO_INOUTSEL7, 0x00000000U);
+-#endif // RZG_HIHOPE_RZG2N
++#endif // RZG_HIHOPE_RZG2N | RZG_TQMARZG2N_B
+ }
+diff --git a/plat/renesas/rcar/platform.mk b/plat/renesas/rcar/platform.mk
+index 86bb5ad..b1ef142 100644
+--- a/plat/renesas/rcar/platform.mk
++++ b/plat/renesas/rcar/platform.mk
+@@ -479,6 +479,24 @@ RZG_HIHOPE_RZG2H := 0
+ endif
+ $(eval $(call add_define,RZG_HIHOPE_RZG2H))
+ 
++#Process RZG_TQMARZG2N_B flag
++ifndef RZG_TQMARZG2N_B
++RZG_TQMARZG2N_B := 0
++endif
++$(eval $(call add_define,RZG_TQMARZG2N_B))
++
++#Process RZG_TQMARZG2M_E flag
++ifndef RZG_TQMARZG2M_E
++RZG_TQMARZG2M_E := 0
++endif
++$(eval $(call add_define,RZG_TQMARZG2M_E))
++
++#Process RZG_TQMARZG2H_C flag
++ifndef RZG_TQMARZG2H_C
++RZG_TQMARZG2H_C := 0
++endif
++$(eval $(call add_define,RZG_TQMARZG2H_C))
++
+ # RCAR_SYSTEM_RESET_KEEPON_DDR requires power control of PMIC etc.
+ # When executing SYSTEM_SUSPEND other than Salvator-X, Salvator-XS and Ebisu,
+ # processing equivalent to that implemented in PMIC_ROHM_BD9571 is necessary.
+diff --git a/tools/dummy_create/makefile b/tools/dummy_create/makefile
+index a4d4ed7..d90dc5e 100644
+--- a/tools/dummy_create/makefile
++++ b/tools/dummy_create/makefile
+@@ -78,6 +78,24 @@ ifndef RZG_HIHOPE_RZG2H
+ RZG_HIHOPE_RZG2H := 0
+ endif
+ $(eval $(call add_define,RZG_HIHOPE_RZG2H))
++
++#Process RZG_TQMARZG2N_B flag
++ifndef RZG_TQMARZG2N_B
++RZG_TQMARZG2N_B := 0
++endif
++$(eval $(call add_define,RZG_TQMARZG2N_B))
++
++#Process RZG_TQMARZG2M_E flag
++ifndef RZG_TQMARZG2M_E
++RZG_TQMARZG2M_E := 0
++endif
++$(eval $(call add_define,RZG_TQMARZG2M_E))
++
++#Process TQMARZG2H_C flag
++ifndef RZG_TQMARZG2H_C
++RZG_TQMARZG2H_C := 0
++endif
++$(eval $(call add_define,RZG_TQMARZG2H_C))
+ ###################################################
+ 
+ #c compiler
+diff --git a/tools/dummy_create/sa6.c b/tools/dummy_create/sa6.c
+index 29be0f3..bcc3fd3 100644
+--- a/tools/dummy_create/sa6.c
++++ b/tools/dummy_create/sa6.c
+@@ -22,11 +22,11 @@
+ /* Reserved */
+ #define RCAR_BL32_PARTITION		(0x00000000U)
+ /* Source address on flash for BL33 */
+-#if (RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H)
++#if (RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H | RZG_TQMARZG2N_B | RZG_TQMARZG2M_E | RZG_TQMARZG2H_C)
+ #define RCAR_BL33SRC_ADDRESS		(0x00300000U)
+-#else	// RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H
++#else	// RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H | RZG_TQMARZG2N_B | RZG_TQMARZG2M_E | RZG_TQMARZG2H_C
+ #define RCAR_BL33SRC_ADDRESS		(0x00640000U)
+-#endif	// RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H
++#endif	// RZG_EK874 | RZG_HIHOPE_RZG2N | RZG_HIHOPE_RZG2M | RZG_HIHOPE_RZG2H | RZG_TQMARZG2N_B | RZG_TQMARZG2M_E | RZG_TQMARZG2H_C
+ /* Reserved */
+ #define RCAR_BL33_PARTITION		(0x00000000U)
+ #define RCAR_BL332SRC_ADDRESS		(0x00000000U)
+-- 
+2.7.4
+
