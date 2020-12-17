@@ -5,6 +5,27 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa8.BSP.SW.0032
+
+This is the initial production release for TQMa8XQP / TQMa8XQP4.
+
+### Changed
+
+* doc: updates for TQMa8Xx
+
+### Added
+
+* imx-atf: TQMa8Xx: backport recipe for 2.2, verified for production release
+* firmware-imx: TQMa8Xx: add version based on porting kit 1.6.0,
+  verified for production release
+* imx-seco: TQMa8Xx: backport recipe for 3.7.1, for production release
+* u-boot: TQMa8Xx: add recipe for v2020.04, verified for production release
+
+### Fixed
+
+* treewide: spelling of TQ-Systems
+* doc: DIP switch doku for TQMa8Mx / TQMa8MxML / TQMa8MxNL
+
 ## zeus.TQMa8.BSP.SW.0031
 
 ### Added
