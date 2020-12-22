@@ -15,3 +15,23 @@ OVERRIDES_prepend_tqmlx2160a = "tqmls-atf-common:"
 PLATFORM_tqmlx2160a = "tqmlx2160a"
 
 export STATIC_PBL
+
+do_compile_append_tqmlx2160a () {
+    for rcw_file in $(ls -1 ${DEPLOY_DIR_IMAGE}/rcw/${PLATFORM}/${MACHINE}); do
+	for d in ${btype}; do
+		oe_runmake distclean
+		oe_runmake V=1 -C ${S} pbl PLAT=${PLATFORM} BOOT_MODE=${d} \
+			RCW=${DEPLOY_DIR_IMAGE}/rcw/${PLATFORM}/${MACHINE}/${rcw_file} \
+			BL33=${bl33} ${bl32opt} ${spdopt} ${secureopt} ${fuseopt} ${otaopt}
+
+		cp -r ${S}/build/${PLATFORM}/release/bl2_${d}*.pbl ${S}/bl2_${d}_$(basename ${rcw_file} .bin).pbl
+         done
+    done
+}
+
+do_deploy_append_tqmlx2160a () {
+    install -d ${DEPLOYDIR}/atf/variants
+    for pbl_file in $(ls ${S}/bl2_*_rcw*.pbl); do
+        cp -r ${pbl_file} ${DEPLOYDIR}/atf/variants/
+    done
+}
