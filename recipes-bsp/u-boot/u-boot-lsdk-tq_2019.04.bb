@@ -10,8 +10,8 @@ DEPENDS_append = " bison-native"
 
 PROVIDES += "u-boot"
 
-SRCREV = "4f410379f0089733099266737d0b69b7233d5c5a"
-SRCBRANCH = "TQMLX2160A-bringup-v2019.04-lx2160a-early-access-bsp0.7"
+SRCREV = "74382e0e5b140d3808ae3b5bc23fc497d02998f5"
+SRCBRANCH = "TQMLX2160A-v2019.04-lx2160a-early-access-bsp0.7"
 
 S = "${WORKDIR}/git"
 
