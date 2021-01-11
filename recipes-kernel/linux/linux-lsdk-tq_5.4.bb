@@ -1,4 +1,4 @@
-SUMMARY = "Linux for TQ-Group Freescale LS1088A module based on LSDK 20.12"
+SUMMARY = "Linux for TQ-Group Freescale LS1088A/LX2160A module based on LSDK 20.12"
 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
@@ -11,13 +11,14 @@ DEPENDS += " lzop-native bc-native openssl-native"
 #
 PROVIDES += "linux-tq"
 
-SRCBRANCH = "TQMLxxx-linux-lsdk-v5.4.y"
+SRCBRANCH = "TQMLSXxx-linux-v5.4-LSDK-20.04"
 SRC_URI = "\
   ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
   file://defconfig \
 "
-SRCREV = "6bf4b562abb861cd21b0c92041de73cca8b4dad3"
+SRCREV = "d04b2ec9d778e2d8883848d3726cdc881a1ad93c"
 
 COMPATIBLE_MACHINE = "tqmls1088a"
+COMPATIBLE_MACHINE_append = "|tqmlx2160a"
 
 S = "${WORKDIR}/git"
