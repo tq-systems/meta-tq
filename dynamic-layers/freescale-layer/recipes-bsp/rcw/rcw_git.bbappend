@@ -1,6 +1,6 @@
 SRC_URI_tqmls-rcw-common = "${TQ_GIT_BASEURL}/rcw.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 SRCBRANCH_tqmls-rcw-common = "TQMLS-Integration"
-SRCREV_tqmls-rcw-common = "66a086ae2f7d116500133c85e18a51097aca70c9"
+SRCREV_tqmls-rcw-common = "1a1c7b0f9d6efd9bc5c4866e2851132243b0ba19"
 LIC_FILES_CHKSUM_tqmls-rcw-common = "file://LICENSE;md5=44a0d0fad189770cc022af4ac6262cbe"
 
 SRC_URI_tqmls10xxa = "${SRC_URI_tqmls-rcw-common}"
