@@ -53,7 +53,7 @@ UBI_VOLNAME = "root"
 
 WICVARS_append = " BL2_IMAGE"
 
-BL2_IMAGE ?= "bl2_emmc.pbl"
+BL2_IMAGE ?= "bl2_sd.pbl"
 
 WKS_FILE = "tqmlx2160a.wks"
 
