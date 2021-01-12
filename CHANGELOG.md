@@ -5,6 +5,31 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+### Changed
+
+* linux: TQMa8Xx: lower drive strength for some pins
+* linux: TQMa8QM: lower drive strength for some pins
+* linux: TQMa8Xx: QSPI NOR DSR
+
+### Fixed
+
+* linux: TQMa8MNxL: fix spi gpio CS
+* linux: TQMa8Xx: fix PMIC / CPU thermal sensor support
+* linux: TQMa8QM: fix DP audio support
+* linux: TQMa8QM: make PCIe voltage alway on, fixes USB port usablity at PCIe slot
+
+### Added
+
+* linux: TQMa8QXPS: enable VPU support
+* linux: TQMa8QXP[4]: enable VPU support
+* lm-sensors: TQMa8QM: add ADC support
+* lm-sensors: allow machine specific configs
+* linux: TQMa8QM: enable ADC support
+* linux: spi-nor: add DSR support for Macronix flash
+* linux: TQMa8QM: enable VPU support
+* linux: TQMa8QM: DT example for MicroBus (clock module RTC5)
+* linux: TQMa8Xx: QSPIA_SS1 is usable as GPIO
+
 ## zeus.TQMa8.BSP.SW.0032
 
 This is the initial production release for TQMa8XQP / TQMa8XQP4.
