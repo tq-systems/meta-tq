@@ -2,6 +2,11 @@
 
 This README contains some useful information for TQMa8Xx and TQMa8Xx4 on MBa8Xx
 
+## Variants
+
+* TQMa8XQP REV.020x / 010x
+* TQMa8XQP4 REV.010x
+
 ## Versions
 
 ### SCFW:
@@ -32,10 +37,10 @@ See top level README.md for configurations usable as MACHINE.
 ### U-Boot:
 
 * RAM configs:
-  * 1GB / TQMa8XQP
-  * 2GB / TQMa8XQP4
+  * 1GB DDR3L ECC / TQMa8XQP
+  * 2GB LPDDR4 / TQMa8XQP4
 * CPU variants:
-  * i.MX8QXP
+  * i.MX8QXP C0
 * Fuses
 * GPIO
 * QSPI
@@ -71,7 +76,7 @@ See top level README.md for configurations usable as MACHINE.
   * 1GB / TQMa8XQP
   * 2GB / TQMa8XQP4
 * CPU variants:
-  * i.MX8QXP
+  * i.MX8QXP C0
 * I2C
   * Temperature Sensors (without cpu-temp)
   * RTC
@@ -92,10 +97,15 @@ See top level README.md for configurations usable as MACHINE.
   * USB 2.0 Dual Role
   * USB 3.0 (Hub on MBa8Mx)
 * LVDS
+* GPU
+* VPU
 * PCIe (mini-PCIe)
 * Audio
 * CAN
   * can0/1 as network interface
+* SCU Thermal Sensor
+  * on die sensor
+  * PMIC sensor
 
 **TODO or not tested with new BSP**
 
@@ -108,7 +118,6 @@ See top level README.md for configurations usable as MACHINE.
   * Suspend / Wakeup via GPIO button
 * DVFS
   * speed grade
-* SCU Thermal Sensor
 
 ## Known Issues
 
