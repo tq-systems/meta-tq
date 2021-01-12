@@ -29,7 +29,7 @@ See top level README.md for configurations usable as MACHINE.
 * RAM configs:
   * 2GB / TQMa8XQPS
 * CPU variants:
-  * i.MX8QXP
+  * i.MX8QXP C0
 * Fuses
 * GPIO
 * QSPI
@@ -65,7 +65,6 @@ See top level README.md for configurations usable as MACHINE.
   * Temperature Sensors (without cpu-temp)
   * RTC
   * EEPROMS
-* GPU
 * ENET (GigE via Phy on TQMa8XxS)
   * ENET 1
   * ENET 2
@@ -74,6 +73,7 @@ See top level README.md for configurations usable as MACHINE.
   * console
 * LVDS
 * GPU
+* VPU
 * PCIe (mini-PCIe)
 * CAN
   * can0/1 as network interface
@@ -218,7 +218,7 @@ For ease of development a set of variables and scripts are in default env.
 
 _U-Boot environment variables_
 
-* `uboot`: name of bootstream image (aka flash.bin)
+* `uboot`: name of bootstream image (default =  bootstream.bin)
 * `mmcdev`: 0 for e-MMC, 1 for SD-Card
 * `fdt_file`: device tree blob,
 * `image`: kernel image,
@@ -251,4 +251,13 @@ In case of problems first check the bus termination:
 
 * CAN0: (X29): DIP `TERM CAN0`
 * CAN1: (X30): DIP `TERM CAN1`
+
+### Enable CAN-FD
+
+To enable CAN-FD the following command can be used:
+
+```
+CANIF="can[0,1]"
+ip link set "${CANIF}" up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on‍‍‍‍‍‍‍`
+```
 
