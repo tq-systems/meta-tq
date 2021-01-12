@@ -2,16 +2,26 @@
 
 This README contains some useful information for TQMa8XxS on MB-SMARC-2
 
+## Variants
+
+* TQMa8XQPS REV.020x
+* TQMa8XQPS REV.030x
+
 ## Versions
 
 ### SCFW:
 
-* version: tq-TQMa8.NXP-v1.3.1.B4124.0029
+* version: tq-TQMa8.NXP-v1.6.0.B4894.0030
 
 ### U-Boot:
 
 * based on uboot-imx (https://source.codeaurora.org/external/imx/uboot-imx)
-* branched from lf-5.4.y-1.0.0
+* branched from imx-5.4.47-2.2.0
+
+### ATF:
+
+* imx-atf (https://source.codeaurora.org/external/imx/imx-atf)
+* v2.2 / imx-5.4.47_2.2.0
 
 ### Linux:
 
@@ -37,30 +47,34 @@ See top level README.md for configurations usable as MACHINE.
   * Write
   * Boot
 * I2C
-* e-MMC / SD
+* e-MMC / SD-Card
   * Read
   * Write
   * Boot
-* USB Hub
-* USB OTG
+* USB
+  * USB Hub
+  * USB OTG
 * ENET (GigE via Phy on MBa8Xx)
   * ENET 1
   * ENET 2
 * Bootstreams
-  * FlexSPI + SD / e-MMC
+  * FlexSPI
+  * SD / e-MMC
   * UUU / mfgtool
 
 **TODO or not tested / supported**
 
-* CPU variants i.MX8DX
-* speed grade / temperature grade detection (current SCU limitation)
+* Cortex M4
+* CPU variants i.MX8DX not detected (limitation of cpu driver))
+* USB
+  * U-Boot: USB 3.0 port does not initialize USB 2.0 subsystem after USB reset
 
 ### Linux:
 
 * RAM configs:
   * 2GB / TQMa8XQPS
 * CPU variants:
-  * i.MX8QXP
+  * i.MX8QXP C0
 * I2C
   * Temperature Sensors (without cpu-temp)
   * RTC
@@ -91,13 +105,10 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Known Issues
 
-* LPDDR4
-  * LPDDR4 calibration may fail with low temperatures, results in system stalls
 * CAN
   * CAN FD is not automatically configured (systemd limitation)
 * USB
   * Port USB3 (X3 on MB-SMARC-2) is host only. Do not plugin an USB 3.0 Micro B plug.
-  * USB host ports support only USB 2.0 (HW limitation)
 
 ## Artifacts
 
@@ -109,7 +120,8 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* imx-boot-${MACHINE}-sd-flash\_spl.bin: boot stream for SD / e-MMC
+* imx-boot-${MACHINE}-sd.bin-flash\_spl: boot stream for SD / e-MMC
+* imx-boot-${MACHINE}-sd.bin-flash\_spl_flexspi: boot stream for QSPI
 * imx-boot-mfgtool-${MACHINE}-mfgtool.bin-flash\_spl: boot stream for UUU
 
 ## Boot Dip Switches
@@ -160,7 +172,7 @@ write bootstream at offset 32 kiB (0x8000) to SD-Card
 
 Example for Linux:
 
-`sudo dd if=imx-boot-<module>-<baseboard>-sd.bin of=/dev/sd<x> bs=1k seek=32 conv=fsync`
+`sudo dd if=imx-boot-<module>-<baseboard>-sd.bin-flash_spl of=/dev/sd<x> bs=1k seek=32 conv=fsync`
 
 ## e-MMC Boot
 
@@ -170,13 +182,11 @@ write *.wic image to e-MMC (offset 0)
 
 To create a bootable e-MMC with boot stream only (file name see above)
 
-write bootstream at offset 32 kiB (0x8000) to e-MMC
-
 Boot from SD-Card and write bootstream at offset 32 kiB (0x8000) to e-MMC
 
 Example for Linux:
 
-`sudo dd if=imx-boot-<module>-<baseboard>-sd.bin of=/dev/mmcblk0 bs=1k seek=32 conv=fsync`
+`sudo dd if=imx-boot-<module>-<baseboard>-sd.bin-flash_spl of=/dev/mmcblk0 bs=1k seek=32 conv=fsync`
 
 Example for U-Boot:
 
