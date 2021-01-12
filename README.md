@@ -119,7 +119,8 @@ Support for the following machines is contained in this version:
 [y]	i.MX8QM			TQMa8QM			MBa8x		tqma8qm-8gb-mba8x (TQMa8QM with 8 GiB RAM, HW REV.010x / 020x, MBa8x HW REV.020x)
 [y]	i.MX8QXP		TQMa8XQP		MBa8Xx		tqma8xqp-mba8xx (TQMa8XQP with 1 GiB RAM, HW REV.020x)
 [y]	i.MX8QXP		TQMa8XQP4		MBa8Xx		tqma8xqp4-mba8xx (TQMa8XQP with 2 GiB LPDDR4 RAM, HW REV.010x)
-[y]	i.MX8QXP		TQMa8XQPS		MB-SMARC-2	tqma8xqps-mb-smarc-2 (TQMa8XQPS with 2 GiB RAM, HW REV.020x)
+[y]	i.MX8QXP		TQMa8XQPS		MB-SMARC-2	tqma8xqps-mb-smarc-2 (TQMa8XQPS with 2 GiB RAM, HW REV.030x)
+[y]	i.MX8QXP		TQMa8XQPS		MB-SMARC-2	tqma8xqps-mb-smarc-2-r0200 (TQMa8XQPS REV.020x with 2 GiB RAM, HW REV.020x)
 
 [-]	i.MX6[QP,DP]		TQMa6QP/TQMa6DP		MBa6x		tqma6qp-mba6x (TQMa6[QP,DP] HW REV.040x / MBa6x HW REV.020x)
 [-]	i.MX6[Q,D]		TQMa6D/TQMa6Q		MBa6x		tqma6q-mba6x (TQMa6[D,Q] HW REV.010x ... 040x / MBa6x HW REV.020x)
