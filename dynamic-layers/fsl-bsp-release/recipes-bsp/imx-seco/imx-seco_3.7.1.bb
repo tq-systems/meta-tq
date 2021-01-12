@@ -25,4 +25,4 @@ do_deploy () {
 }
 
 # COMPATIBLE_MACHINE = "(mx8)"
-COMPATIBLE_MACHINE = "tqma8xx"
+COMPATIBLE_MACHINE = "(mx8qxp)"

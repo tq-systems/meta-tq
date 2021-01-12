@@ -60,4 +60,4 @@ addtask deploy after do_compile
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 # COMPATIBLE_MACHINE = "(mx8)"
-COMPATIBLE_MACHINE = "tqma8xx"
+COMPATIBLE_MACHINE = "(mx8qxp)"
