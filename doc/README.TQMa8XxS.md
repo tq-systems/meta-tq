@@ -253,6 +253,23 @@ Download bootstream from TFTP and update:
 
 `run update_uboot_spi`
 
+## Support for REV.020x Modules
+
+To support older REV.020x modules, use the respective machine config. This automatically
+
+- builds the correct bootloader
+- build devicetrees correct device trees (containing `r0200` in its name)
+
+## Display Support
+
+Each Display can be used on its own by using the corresponding device tree.
+To allow reusage, the support for each display is separated in a dtsi fragment.
+
+| Interface       | Device tree                             | Type        ----   |
+|-----------------|-----------------------------------------|--------------------|
+| LVDS0           | imx8qxp-mb-smarc-2-lvds-tm070jvhg33.dtb | Tianma TM070JVHG33 |
+| LVDS0, dual     | imx8qxp-mb-smarc-2-lvds-g133han01.dtb   | AUO G133HAN.01     |
+
 ## CAN
 
 ### Troubleshooting
