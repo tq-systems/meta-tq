@@ -7,12 +7,19 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* doc: TQMa8Xx / TQMa8XxS / TQMa8x: update fatures + issues
+* doc: TQMa8XxS / TQMa8x: updates for new bootstream versions
+* linux: TQMa8XQP / TQMa8XQPS: cleanup LVDS support device trees
+* u-boot: TQMa8x: use v2020.04 together with improve drive strenth settings
+* u-boot: TQMa8XxS: use v2020.04 together with improve drive strenth settings
 * linux: TQMa8Xx: lower drive strength for some pins
 * linux: TQMa8QM: lower drive strength for some pins
 * linux: TQMa8Xx: QSPI NOR DSR
 
 ### Fixed
 
+* linux: sn65dsi83: add fix from Maxim Paymushkin for probe panel errors
+* linux: TQMa8XQPS: fix earlycon bootarg
 * linux: TQMa8MNxL: fix spi gpio CS
 * linux: TQMa8Xx: fix PMIC / CPU thermal sensor support
 * linux: TQMa8QM: fix DP audio support
@@ -20,6 +27,11 @@ Releases are named with the following scheme:
 
 ### Added
 
+* linux: TQMa8XQPS: add support for LVDS AUO G133HAN.01 full HD panel
+* linux: allow DSR for Macronix SPI NOR on all supported TQ-Systems SOM
+* u-boot: allow DSR for Macronix SPI NOR on all supported TQ-Systems SOM
+* TQMa8QXPS: prepare REV.0300 Support, support for REV.0200 moved to separate
+  config (tqma8xqps-mb-smarc-2-r0200)
 * linux: TQMa8QXPS: enable VPU support
 * linux: TQMa8QXP[4]: enable VPU support
 * lm-sensors: TQMa8QM: add ADC support
@@ -29,6 +41,11 @@ Releases are named with the following scheme:
 * linux: TQMa8QM: enable VPU support
 * linux: TQMa8QM: DT example for MicroBus (clock module RTC5)
 * linux: TQMa8Xx: QSPIA_SS1 is usable as GPIO
+
+### Removed
+
+* imx-sc-firmware: drop support for v1.3.1
+* imx-seco: drop support for v2.5.6
 
 ## zeus.TQMa8.BSP.SW.0032
 
