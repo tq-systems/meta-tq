@@ -2,16 +2,26 @@
 
 This README contains some useful information for TQMa8x on MBa8x
 
+## Variants
+
+* TQMa8QM 4 GB RAM REV.020x / 010x
+* TQMa8QM 8 GB RAM REV.020x / 010x
+
 ## Versions
 
 ### SCFW:
 
-* version: tq-TQMa8.NXP-v1.3.1.B4124.0029
+* version: tq-TQMa8.NXP-v1.6.0.B4894.0030
 
 ### U-Boot:
 
 * based on uboot-imx (https://source.codeaurora.org/external/imx/uboot-imx)
-* branched from lf-5.4.y-1.0.0
+* branched from imx-5.4.47-2.2.0
+
+### ATF:
+
+* imx-atf (https://source.codeaurora.org/external/imx/imx-atf)
+* v2.2 / imx-5.4.47_2.2.0
 
 ### Linux:
 
@@ -29,7 +39,7 @@ See top level README.md for configurations usable as MACHINE.
 * RAM configs:
   * 4GB / TQMa8QM
   * 8GB / TQMa8QM
-* CPU variants i.MX8QM
+* CPU variants i.MX8QM B0
 * Fuses
 * GPIO
 * QSPI
@@ -63,7 +73,7 @@ See top level README.md for configurations usable as MACHINE.
 * RAM configs:
   * 4GB / TQMa8QM
   * 8GB / TQMa8QM
-* CPU variants i.MX8QM
+* CPU variants i.MX8QM B0
 * I2C
   * Temperature Sensors (without cpu-temp)
   * RTC
@@ -118,14 +128,12 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Known Issues
 
-* sometimes hangs in linux during first start with a fresh image
-* random hangs starting boot loader when cold boot (only SCU comes up)
 * counting of i2c devices bus starts at i2c-2 (because i2c-0 and i2c-1
   are reserved for i2c_rpmsgbus)
 * CAN
   * CAN FD is not automatically configured (systemd limitation)
-* environment from QSPI fails sometimes
-* PWM only works after the second enable command (echo 1 > /pwmX/enable)
+* PWM only works after the second enable command
+  (`echo 1 > /sys/class/pwm<X>/enable`)
 
 ## Artifacts
 
@@ -137,7 +145,8 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* imx-boot-${MACHINE}-sd-flash\_spl.bin: boot stream for SD / e-MMC
+* imx-boot-${MACHINE}-sd.bin-flash\_spl: boot stream for SD / e-MMC
+* imx-boot-${MACHINE}-sd.bin-flash\_spl_flexspi: boot stream for QSPI
 * imx-boot-mfgtool-${MACHINE}-mfgtool.bin-flash\_spl: boot stream for UUU
 
 ## Boot Dip Switches
@@ -186,7 +195,7 @@ write bootstream at offset 32 kiB (0x8000) to SD-Card
 
 Example for Linux:
 
-`sudo dd if=imx-boot-<module>-<baseboard>-sd.bin of=/dev/sd<x> bs=1k seek=32 conv=fsync`
+`sudo dd if=imx-boot-<module>-<baseboard>-sd.bin-flash_spl of=/dev/sd<x> bs=1k seek=32 conv=fsync`
 
 ## e-MMC Boot
 
@@ -196,11 +205,11 @@ write *.wic image to e-MMC (offset 0)
 
 To create a bootable e-MMC with boot stream only (file name see above)
 
-write bootstream at offset 32 kiB (0x8000) to e-MMC
+Boot from SD-Card and write bootstream at offset 32 kiB (0x8000) to e-MMC
 
 Example for Linux:
 
-`sudo dd if=imx-boot-<module>-<baseboard>-sd.bin of=/dev/mmcblk0 bs=1k seek=32 conv=fsync`
+`sudo dd if=imx-boot-<module>-<baseboard>-sd.bin-flash_spl of=/dev/mmcblk0 bs=1k seek=32 conv=fsync`
 
 Example for U-Boot:
 
@@ -242,7 +251,7 @@ For ease of development a set of variables and scripts are in default env.
 
 _U-Boot environment variables_
 
-* `uboot`: name of bootstream image (aka flash.bin)
+* `uboot`: name of bootstream image (default =  bootstream.bin)
 * `mmcdev`: 0 for e-MMC, 1 for SD-Card
 * `fdt_file`: device tree blob,
 * `image`: kernel image,
