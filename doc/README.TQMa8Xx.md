@@ -214,8 +214,6 @@ write *.wic image to e-MMC (offset 0)
 
 To create a bootable e-MMC with boot stream only (file name see above)
 
-write bootstream at offset 32 kiB (0x8000) to e-MMC
-
 Boot from SD-Card and write bootstream at offset 32 kiB (0x8000) to e-MMC
 
 Example for Linux:
