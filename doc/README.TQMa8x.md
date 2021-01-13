@@ -70,6 +70,7 @@ See top level README.md for configurations usable as MACHINE.
   * EEPROMS
 * SPI
   * spi user space device on all CS
+  * Mikrobus (Module RTC5)
 * GPIO
   * LED
   * Button
@@ -87,6 +88,7 @@ See top level README.md for configurations usable as MACHINE.
   * USB 3.0 (Hub on MBa8Mx)
 * Graphic
   * GPU
+  * VPU
   * LVDS0/LVDS1
   * Display Port
 * CAN
@@ -95,13 +97,16 @@ See top level README.md for configurations usable as MACHINE.
   * PWM in LVDS IP
 * SATA
 * PCI
+* ADC
+* Audio
+  * DisplayPort
 
 **TODO or not tested with new BSP**
 
-* Audio (including Display Port)
-* VPU
-* Mikrobus (Module RTC5)
-* ADC
+* Audio
+  * Line In
+  * Line Out
+  * Microphone
 * FTM (PWM)
 * temperature grade detection
 * HDMI in
@@ -117,10 +122,9 @@ See top level README.md for configurations usable as MACHINE.
 * random hangs starting boot loader when cold boot (only SCU comes up)
 * counting of i2c devices bus starts at i2c-2 (because i2c-0 and i2c-1
   are reserved for i2c_rpmsgbus)
-* can bitrate limited to 125000 (in can0/can1.service), no CAN FD
-  due to hardware limitations on mainboard Rev01xx
+* CAN
+  * CAN FD is not automatically configured (systemd limitation)
 * environment from QSPI fails sometimes
-* VPU codecs not avaiable [TQMAACHTX-103]
 * PWM only works after the second enable command (echo 1 > /pwmX/enable)
 
 ## Artifacts
@@ -288,3 +292,21 @@ Each Display output could be activated independend by using the corresponding de
 | LVDS0     | imx8qm-mba8x-lvds0-tm070jvhg33.dtb | Tianma Display |
 | LVDS1     | imx8qm-mba8x-lvds1-tm070jvhg33.dtb | Tianma Display |
 | DP        | imx8qm-mba8x-dp.dtb                | Displayport    |
+
+## CAN
+
+### Troubleshooting
+
+In case of problems first check the bus termination:
+
+* CAN0: (S10)
+* CAN1: (S11)
+
+### Enable CAN-FD
+
+To enable CAN-FD the following command can be used:
+
+```
+CANIF="can[0,1]"
+ip link set "${CANIF}" up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on‍‍‍‍‍‍‍`
+```
