@@ -144,6 +144,7 @@ Support for the following machines is contained in this version:
 	SOC			SOM			Base board	MACHINE
 [b]	i.MX6[QP,DP]		TQMa6QP/TQMa6DP		MBa6x		tqma6qp-mba6x (TQMa6[QP,DP] HW REV.040x / MBa6x HW REV.020x)
 [y]	i.MX6[Q,D]		TQMa6D/TQMa6Q		MBa6x		tqma6q-mba6x (TQMa6[D,Q] HW REV.010x ... 040x / MBa6x HW REV.020x)
+[y]	i.MX6[Q,D]		TQMa6D/TQMa6Q   	MBa6x		tqma6q-2gb-mba6x (TQMa6[D,Q] with 2 GiB RAM HW REV.040x / MBa6x HW REV.020x)
 [b]	i.MX6DL			TQMa6DL			MBa6x		tqma6dl-mba6x (TQMa6DL HW REV.010x ... 040x / MBa6x HW REV.020x)
 [b]	i.MX6S			TQMa6S			MBa6x		tqma6s-mba6x (TQMa6S HW REV.010x ... 040x / MBa6x HW REV.020x)
 [y]	i.MX6UL			TQMa6ULx		MBaULx		tqma6ulx-mba6ulx (TQMa6UL HW REV.030x / MBa6ULx HW REV.020x)
