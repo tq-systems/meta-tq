@@ -7,6 +7,8 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux: TQMa8QM: enable SD regulator on MBa8x REV.0200 and SD UHS modes
+* u-boot: TQMa8QM: enable SD regulator on MBa8x REV.0200 and SD UHS modes
 * doc: TQMa8Xx / TQMa8XxS / TQMa8x: update fatures + issues
 * doc: TQMa8XxS / TQMa8x: updates for new bootstream versions
 * linux: TQMa8XQP / TQMa8XQPS: cleanup LVDS support device trees
