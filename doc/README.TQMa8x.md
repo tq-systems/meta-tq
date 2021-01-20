@@ -4,8 +4,8 @@ This README contains some useful information for TQMa8x on MBa8x
 
 ## Variants
 
-* TQMa8QM 4 GB RAM REV.020x / 010x
-* TQMa8QM 8 GB RAM REV.020x / 010x
+* TQMa8QM 4 GB RAM REV.020x / 0102 and newer
+* TQMa8QM 8 GB RAM REV.020x / 0102 and newer
 
 ## Versions
 
