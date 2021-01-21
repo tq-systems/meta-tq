@@ -1,8 +1,8 @@
 # Common definitions for TQ-Group TQMLS1088A modules
 
-require conf/machine/include/tqmls10xxa.inc
-
 MACHINEOVERRIDES =. "fsl-lsch3:ls1088a:tqmls10xxa:"
+
+require conf/machine/include/tqmls10xxa.inc
 
 # TQ u-boot and kernel
 #
