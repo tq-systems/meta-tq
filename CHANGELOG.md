@@ -5,6 +5,15 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+### Added
+* tqma6: added machine for TQMa6[Q,D] 2GB variant
+
+### Changed
+* tqma6: U-Boot: update to support 2GB variant
+
+### Fixed
+* tqma6ul: do not enable QPSI boot for mmc configs
+
 ## zeus.TQMLS1028A.BSP.SW.0104
 
 ### Added
