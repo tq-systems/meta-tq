@@ -21,6 +21,7 @@ require conf/machine/include/tqmxx.inc
 
 PREFERRED_PROVIDER_virtual/kernel_tqma65xx ?= "linux-ti-tq"
 KERNEL_IMAGETYPE ?= "Image"
+KERNEL_IMAGETYPES = "Image vmlinux"
 
 PREFERRED_PROVIDER_u-boot_tqma65xx ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/bootloader_tqma65xx ?= "u-boot-tq"

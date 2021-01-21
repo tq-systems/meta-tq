@@ -18,13 +18,11 @@ IMAGE_INSTALL_append = " i2c-tools \
                          libdrm \
                          kmscube \
                          lshw \
-                         usbutils \
                          evtest \
                          ntp-utils \
                          xev \
                          ltp \
                          sharutils \
-                         ethtool \
                          ifupdown \
                          ntp \
                         "                

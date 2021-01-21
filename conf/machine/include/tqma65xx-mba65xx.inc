@@ -19,6 +19,7 @@ KERNEL_DEVICETREE ?= " \
 IMAGE_BOOT_FILES_append = "\
 	${KERNEL_IMAGETYPE};linuximage \
 	${KERNEL_DEVICETREE} \
+	${KERNEL_IMAGETYPE}-initramfs-${MACHINE}.bin \
 "
 
 SERIAL_CONSOLES ?= "115200;ttyS2"
