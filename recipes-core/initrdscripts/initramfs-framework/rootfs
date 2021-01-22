@@ -60,7 +60,7 @@ rootfs_run() {
 				if [ -n "$bootparam_rootfstype" ]; then
 					flags="$flags -t$bootparam_rootfstype"
 				fi
-				/sbin/e2fsck -fyp $bootparam_root
+				/sbin/e2fsck -fp $bootparam_root
 				mount $flags $bootparam_root $ROOTFS_DIR
 				if [ -d $ROOTFS_DIR/dev ]; then
 					break
