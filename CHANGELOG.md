@@ -5,6 +5,8 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMLS1028A.BSP.SW.0105
+
 ### Added
 * tqma6: added machine for TQMa6[Q,D] 2GB variant
 
@@ -12,6 +14,7 @@ Releases are named with the following scheme:
 * tqma6: U-Boot: update to support 2GB variant
 
 ### Fixed
+* tqmls1028a: use correct manufacturer EEPROM address
 * tqma6ul: do not enable QPSI boot for mmc configs
 
 ## zeus.TQMLS1028A.BSP.SW.0104
