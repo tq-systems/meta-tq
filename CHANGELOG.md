@@ -5,6 +5,12 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMLS1028A.BSP.SW.0105
+
+### Fixed
+
+* Correct the spelling of TQ-Systems
+
 ## zeus.TQMLS1028A.BSP.SW.0103
 
 ### Added
