@@ -42,12 +42,3 @@ IMAGE_INSTALL_append = " can-utils \
                          vim \
                         "
 inherit core-image
-
-initramfs_postprocess() {
-  rm ${IMAGE_ROOTFS}/boot/Image-*
-  rm ${IMAGE_ROOTFS}/boot/vmlinux-*
-  cp ${DEPLOY_DIR_IMAGE}/Image-initramfs--* ${IMAGE_ROOTFS}/boot/Image
-  cp ${DEPLOY_DIR_IMAGE}/vmlinux-initramfs--* ${IMAGE_ROOTFS}/boot/vmlinux
-}
-
-ROOTFS_POSTPROCESS_COMMAND += "initramfs_postprocess; "
