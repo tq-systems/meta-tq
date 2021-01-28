@@ -5,6 +5,14 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMLS10xxA.BSP.SW.0103
+
+### Changed
+* tqmls1043a/tqmls1046a: linux-tq: update to v5.4.87
+* tqmls1088a: linux-lsdk-tq: update to v5.4.47
+* tqmls10xxa: u-boot-tq: add XFI Retimer and serdes initialization
+* tqmls10xxa: u-boot-tq: add mmc subcommand to query max enhanced partition size
+
 ## zeus.TQMLS1028A.BSP.SW.0105
 
 ### Added
