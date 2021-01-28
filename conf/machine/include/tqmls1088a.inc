@@ -1,12 +1,14 @@
 # Common definitions for TQ-Group TQMLS1088A modules
 
-MACHINEOVERRIDES =. "fsl-lsch3:ls1088a:tqmls10xxa:"
+MACHINEOVERRIDES =. "fsl-lsch3:ls1088a:tqmls10xxa:tqmls1088a:"
 
 require conf/machine/include/tqmls10xxa.inc
 
 # TQ u-boot and kernel
 #
 require conf/machine/include/tqmxx.inc
+
+PREFERRED_PROVIDER_virtual/kernel_tqmls1088a ?= "linux-lsdk-tq"
 
 UBOOT_ENTRYPOINT_ls1088a = "0x80008000"
 
