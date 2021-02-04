@@ -110,21 +110,22 @@ See top level README.md for configurations usable as MACHINE.
 * ADC
 * Audio
   * DisplayPort
+  * Line In
+  * Line Out
 
 **TODO or not tested with new BSP**
 
 * Audio
-  * Line In
-  * Line Out
   * Microphone
-* FTM (PWM)
+* FTM
+  * PWM (missing in CPU DT)
 * temperature grade detection
 * HDMI in
 * Cortex M4
 * DVFS
   * speed grade
 * PWM
-  * generic PWM IP
+  * generic PWM IP (missing in CPU DT)
 
 ## Known Issues
 
