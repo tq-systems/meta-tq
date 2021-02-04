@@ -5,8 +5,13 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa8.BSP.SW.0033-rc
+
+This is the initial production release for TQMa8XQPS.
+
 ### Changed
 
+* linux: ASoc: backport improvements for TI TLV320AIC32x4 codec
 * linux: TQMa8QM: enable SD regulator on MBa8x REV.0200 and SD UHS modes
 * u-boot: TQMa8QM: enable SD regulator on MBa8x REV.0200 and SD UHS modes
 * doc: TQMa8Xx / TQMa8XxS / TQMa8x: update fatures + issues
@@ -20,6 +25,9 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* linux: TQMa8Xx: reenable audio in DT (deadlock fixed for I2C host)
+* linux: i2c-imx-lpi2c: fix deadlock (TQMa8Xx/TQMa8x)
+* linux: i2c-imx: fix deadlock (TQMa8Mx, TQMa8MxML, TQMa8MxNL)
 * linux: sn65dsi83: add fix from Maxim Paymushkin for probe panel errors
 * linux: TQMa8XQPS: fix earlycon bootarg
 * linux: TQMa8MNxL: fix spi gpio CS
@@ -29,6 +37,8 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa8x: board specific asound.state
+* linux: TQMa8x: enable audio
 * linux: TQMa8XQPS: add support for LVDS AUO G133HAN.01 full HD panel
 * linux: allow DSR for Macronix SPI NOR on all supported TQ-Systems SOM
 * u-boot: allow DSR for Macronix SPI NOR on all supported TQ-Systems SOM
