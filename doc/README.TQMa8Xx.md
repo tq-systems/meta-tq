@@ -101,6 +101,8 @@ See top level README.md for configurations usable as MACHINE.
 * VPU
 * PCIe (mini-PCIe)
 * Audio
+  * Line In
+  * Line Out
 * CAN
   * can0/1 as network interface
 * SCU Thermal Sensor
@@ -112,7 +114,6 @@ See top level README.md for configurations usable as MACHINE.
 * temperature grade
 * Audio
   * Mic In untested
-  * Line In untested
 * DSI - DP bridge
 * GPIO
   * Suspend / Wakeup via GPIO button
@@ -123,8 +124,6 @@ See top level README.md for configurations usable as MACHINE.
 
 * CAN
   * CAN FD is not automatically configured (systemd limitation)
-* Audio
-  * aplay sometimes stalls for unknown reason
 
 ## Artifacts
 
