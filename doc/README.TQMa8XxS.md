@@ -253,6 +253,29 @@ Download bootstream from TFTP and update:
 
 `run update_uboot_spi`
 
+## Use UUU Tool
+
+To build bootstream adapt yocto configuration, modify _local.conf_ or machine
+config file:
+
+```
+UBOOT_CONFIG_tqma8xxs = "mfgtool"
+IMXBOOT_TARGETS_tqma8xxs = "flash_spl"
+```
+
+Rebuild boot stream:
+
+```
+bitbake imx-boot
+```
+
+Use new compiled bootstream containing U-Boot capable of handling SDP together
+with UUU tool:
+
+```
+sudo uuu -b spl imx-boot-<machine>-mfgtool.bin
+```
+
 ## Support for REV.020x Modules
 
 To support older REV.020x modules, use the respective machine config. This automatically
