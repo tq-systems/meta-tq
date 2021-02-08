@@ -25,6 +25,9 @@ This is the initial production release for TQMa8XQPS.
 
 ### Fixed
 
+* u-boot: TQMa8XxS: disable SD3 modes for HW REV.0200, enable for newer REV
+* u-boot: TQMa8x / TQMa8Xx / TQMa8XxS: fix not working update scripts when
+  exchanging an SD card just before start updating
 * linux: TQMa8Xx: reenable audio in DT (deadlock fixed for I2C host)
 * linux: i2c-imx-lpi2c: fix deadlock (TQMa8Xx/TQMa8x)
 * linux: i2c-imx: fix deadlock (TQMa8Mx, TQMa8MxML, TQMa8MxNL)
@@ -37,6 +40,7 @@ This is the initial production release for TQMa8XQPS.
 
 ### Added
 
+* u-boot: prepare TQMa8XDP / TQMa8XDPS support
 * TQMa8x: board specific asound.state
 * linux: TQMa8x: enable audio
 * linux: TQMa8XQPS: add support for LVDS AUO G133HAN.01 full HD panel
