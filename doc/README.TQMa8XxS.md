@@ -65,7 +65,10 @@ See top level README.md for configurations usable as MACHINE.
 **TODO or not tested / supported**
 
 * Cortex M4
-* CPU variants i.MX8DX not detected (limitation of cpu driver))
+* temperature grade
+  * SCU limitation
+* CPU variants i.MX8DX/i.MX8DXP cannot be detected automatically
+  (limitation of cpu driver / SCU firmware)
 * USB
   * U-Boot: USB 3.0 port does not initialize USB 2.0 subsystem after USB reset
 
@@ -91,24 +94,31 @@ See top level README.md for configurations usable as MACHINE.
 * PCIe (mini-PCIe)
 * CAN
   * can0/1 as network interface
+* CPU / PMIC Thermal sensors
+  * via thermal-zone
+* Audio
+  * Line In
+  * Line Out
+* DVFS
 
 **TODO or not tested with new BSP**
 
 * temperature grade
-* Audio
+  * SCU limitation
 * DSI - DP bridge
-* LED
 * GPIO
   * Suspend / Wakeup via GPIO button
-* DVFS
-  * speed grade
 
 ## Known Issues
 
 * CAN
-  * CAN FD is not automatically configured (systemd limitation)
+  * CAN FD can not be automatically configured (systemd limitation)
+  * CAN FD supported on MB-SMARC-2 (system limitation)
 * USB
-  * Port USB3 (X3 on MB-SMARC-2) is host only. Do not plugin an USB 3.0 Micro B plug.
+  * Port USB3 (X3 on MB-SMARC-2) is host only. Do only use a matching adapter
+    on MB-SMARC-2
+* FlexSPI
+  * erase of ranges >= 16 MB fails under linux
 
 ## Artifacts
 
@@ -302,12 +312,21 @@ In case of problems first check the bus termination:
 * CAN0: (X29): DIP `TERM CAN0`
 * CAN1: (X30): DIP `TERM CAN1`
 
+### Enable without CAN-FD
+
+CAN1/2 should be enabled and configured by default when using with MB-SMARC-2
+and meta-tq / systemd
+
+```
+CANIF="can[0,1]"
+ip link set ${CANIF} up type can bitrate 500000 fd off
+```
+
 ### Enable CAN-FD
 
 To enable CAN-FD the following command can be used:
 
 ```
 CANIF="can[0,1]"
-ip link set "${CANIF}" up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on‍‍‍‍‍‍‍`
+ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on
 ```
-
