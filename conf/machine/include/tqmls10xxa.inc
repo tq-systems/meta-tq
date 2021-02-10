@@ -24,7 +24,7 @@ EXTRA_IMAGEDEPENDS_append_fsl-lsch3 += "rcw mc-utils management-complex"
 
 # needed for Rootfs on QSPI
 IMAGE_INSTALL_append = " mtd-utils-jffs2 mtd-utils-ubifs mtd-utils-misc"
-IMAGE_INSTALL_append = " kernel-modules"
+MACHINE_EXTRA_RRECOMMENDS_append = " kernel-modules"
 
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"

@@ -40,7 +40,7 @@ IMX_BOOT_SEEK = "32"
 EXTRA_IMAGEDEPENDS += "u-boot imx-boot imx-sc-firmware"
 
 # need to have the kernel modules in rootfs
-IMAGE_INSTALL_append = " kernel-modules"
+MACHINE_EXTRA_RRECOMMENDS_append = " kernel-modules"
 
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"

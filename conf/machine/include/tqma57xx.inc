@@ -39,8 +39,8 @@ KERNEL_EXTRA_ARGS_prepend = "LOADADDR=${UBOOT_ENTRYPOINT} "
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 
-IMAGE_INSTALL_append = " kernel kernel-modules"
-IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
+MACHINE_EXTRA_RRECOMMENDS_append = " kernel kernel-modules"
+MACHINE_EXTRA_RRECOMMENDS_append = " kernel-devicetree kernel-image-zimage"
 
 IMAGE_BOOT_FILES ?= "\
 	MLO \
