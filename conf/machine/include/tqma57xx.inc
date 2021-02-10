@@ -48,8 +48,6 @@ IMAGE_BOOT_FILES = "\
 	${KERNEL_IMAGETYPE} \
 "
 
-IMAGE_FSTYPES ?= "tar.gz ext4 wic"
-
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
