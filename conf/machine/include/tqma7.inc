@@ -33,7 +33,6 @@ UBOOT_MAKE_TARGET ?= "u-boot.imx"
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 # we do not generate QSPI configuration header yet, so complete QSPI boot flow not available with yocto yet
 
-# DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
 
 # needed for Rootfs on QSPI
 IMAGE_INSTALL_append = " mtd-utils-jffs2 mtd-utils-ubifs mtd-utils-misc"

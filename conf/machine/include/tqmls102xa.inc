@@ -32,7 +32,6 @@ MACHINE_FEATURES_append = " alsa ext2 pci rtc serial usbhost vfat can"
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 
-DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
 
 # needed for Rootfs on QSPI
 IMAGE_INSTALL_append = " mtd-utils-jffs2 mtd-utils-ubifs mtd-utils-misc"
