@@ -39,8 +39,6 @@ PREFERRED_VERSION_weston_mx6_imx ?= "5.0.0.imx"
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 
-IMAGE_FSTYPES_append = " tar.gz ext4 wic"
-IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2 wic.gz"
 
 # need to have the kernel modules in rootfs
 IMAGE_INSTALL_append = " kernel-modules"

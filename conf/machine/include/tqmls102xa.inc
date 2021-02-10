@@ -31,8 +31,6 @@ MACHINE_FEATURES_append = " alsa ext2 pci rtc serial usbhost vfat can"
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-IMAGE_FSTYPES_append = " tar.gz ext4 wic"
-IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2"
 
 DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
 

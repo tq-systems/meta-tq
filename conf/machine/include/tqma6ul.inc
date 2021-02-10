@@ -37,12 +37,8 @@ UBOOT_CONFIG = "sd qspi"
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 # we do not generate QSPI configuration header yet, so complete QSPI boot flow not available with yocto yet
-IMAGE_FSTYPES_append = " tar.gz ext4 wic ubi"
-IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2 wic.gz"
 
 # DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
-IMAGE_FSTYPES_remove += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'ubi', '', d)}"
-IMAGE_FSTYPES_remove += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'ubi', '', d)}"
 
 # needed for Rootfs on QSPI
 IMAGE_INSTALL_append = " mtd-utils-jffs2 mtd-utils-ubifs mtd-utils-misc"
