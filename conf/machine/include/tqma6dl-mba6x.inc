@@ -23,7 +23,7 @@ KERNEL_DEVICETREE = " \
 #	imx6dl-mba6b-glyn-etm0700g0edh6.dtb \
 ###
 
-IMAGE_BOOT_FILES = " \
+IMAGE_BOOT_FILES ?= " \
 	${KERNEL_IMAGETYPE};linuximage \
 	${KERNEL_DEVICETREE} \
 "

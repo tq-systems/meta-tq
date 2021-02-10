@@ -15,7 +15,7 @@ KERNEL_DEVICETREE = " \
 	imx7s-mba7-glyn-etm0700g0edh6.dtb \
 "
 
-IMAGE_BOOT_FILES = "\
+IMAGE_BOOT_FILES ?= "\
 	${KERNEL_IMAGETYPE};linuximage \
 	${KERNEL_DEVICETREE} \
 "
