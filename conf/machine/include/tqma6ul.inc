@@ -40,7 +40,7 @@ EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 
 
 # needed for Rootfs on QSPI
-IMAGE_INSTALL_append = " mtd-utils-jffs2 mtd-utils-ubifs mtd-utils-misc"
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS_append = " mtd-utils-jffs2 mtd-utils-ubifs mtd-utils-misc"
 # need to have the kernel modules in rootfs
 MACHINE_EXTRA_RRECOMMENDS_append = " kernel-modules"
 
