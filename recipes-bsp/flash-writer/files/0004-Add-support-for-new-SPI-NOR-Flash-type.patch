@@ -1,0 +1,42 @@
+From 263289b0cb321b7c83bc390b2b99140a30f4882d Mon Sep 17 00:00:00 2001
+From: Andreas Dumberger <andreas.dumberger@tq-group.com>
+Date: Mon, 27 Jul 2020 09:25:34 +0200
+Subject: [PATCH 3/4] Add support for new SPI-NOR-Flash type
+
+Signed-off-by: Andreas Dumberger <andreas.dumberger@tq-group.com>
+---
+ dgmodul4.c         | 5 +++++
+ include/dgmodul4.h | 1 +
+ 2 files changed, 6 insertions(+)
+
+diff --git a/dgmodul4.c b/dgmodul4.c
+index d5456e9..81f58f5 100644
+--- a/dgmodul4.c
++++ b/dgmodul4.c
+@@ -410,6 +410,11 @@ uint32_t CheckQspiFlashId(void)
+ 						gQspi_sa_size    = SA_64KB;
+ 						gQspi_end_addess = TOTAL_SIZE_64MB - 0x8000 - 1;
+ 				break;
++				case DEVICE_ID_MX66UM1G45G:
++						PutStr("MX66UM1G45G", 1);
++						gQspi_sa_size    = SA_64KB;
++						gQspi_end_addess = TOTAL_SIZE_128MB - 0x8000 - 1;
++				break;
+ 				default:
+ 					ret = -1;
+ 				break;
+diff --git a/include/dgmodul4.h b/include/dgmodul4.h
+index 328303a..af32b8e 100644
+--- a/include/dgmodul4.h
++++ b/include/dgmodul4.h
+@@ -97,6 +97,7 @@
+ #define	DEVICE_ID_MX25L51245G		0x201A
+ #define	DEVICE_ID_MX66U25635F		0x2539
+ #define	DEVICE_ID_MX66U51235F		0x253A
++#define	DEVICE_ID_MX66UM1G45G		0x803B
+ 
+ #define	DEVICE_ID_MT25QL128		0xBA18
+ #define	DEVICE_ID_MT25QU128		0xBB18
+-- 
+2.7.4
+

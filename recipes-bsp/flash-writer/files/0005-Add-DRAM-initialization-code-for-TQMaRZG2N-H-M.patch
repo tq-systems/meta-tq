@@ -1,0 +1,134 @@
+From 34ea1f3b44a11d622aed1798ae79a65ede3bcd6f Mon Sep 17 00:00:00 2001
+From: Andreas Dumberger <andreas.dumberger@tq-group.com>
+Date: Mon, 27 Jul 2020 10:03:49 +0200
+Subject: [PATCH 4/4] Add DRAM initialization code for TQMaRZG2N/H/M
+
+Signed-off-by: Andreas Dumberger <andreas.dumberger@tq-group.com>
+---
+ ddr/lpddr4/boot_init_dram_config.c | 61 +++++++++++++++++++++++++++++++-------
+ 1 file changed, 50 insertions(+), 11 deletions(-)
+
+diff --git a/ddr/lpddr4/boot_init_dram_config.c b/ddr/lpddr4/boot_init_dram_config.c
+index 8badb8c..b0fe110 100644
+--- a/ddr/lpddr4/boot_init_dram_config.c
++++ b/ddr/lpddr4/boot_init_dram_config.c
+@@ -132,7 +132,7 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+ 	0x00a0,		/* dqdm_dly_r */
+ 	{
+ /*ch[0]*/	{
+-/*ddr_density[]*/	{ 0x02, 0xff },
++/*ddr_density[]*/	{ 0x04, 0xff },
+ /*ca_swap*/		0x00543210,
+ /*dqs_swap*/		0x3210,
+ /*dq_swap[]*/		{ 0x17602534, 0x23546701, 0x43257160, 0x10765243 },
+@@ -158,9 +158,9 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+  * boardcnf[1] TQMaRZG2M 16Gbit/2Rank/2ch --> 32 Gbit total per Chip --> 64 Gbit total on module = 8 GB
+  */
+ {
+-	0x01,		/* phyvalid */
++	0x03,		/* phyvalid */
+ 	0x01,		/* dbi_en */
+-	0x02c0,		/* cacs_dly */
++	0x2c0,		/* cacs_dly */
+ 	0,		/* cacs_dly_adj */
+ 	0x0300,		/* dqdm_dly_w */
+ 	0x00a0,		/* dqdm_dly_r */
+@@ -189,7 +189,7 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+ /*ddr_density[]*/	{ 0x04, 0x04 },
+ /*ca_swap*/		0x00543210,
+ /*dqs_swap*/		0x3210,
+-/*dq_swap[]*/		{ 0x16502643, 0x54236170, 0x34521607, 0x07615243 },
++/*dq_swap[]*/		{ 0x17502643, 0x54236170, 0x34521607, 0x07615243 },
+ /*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
+ /*wdqlvl_patt[]*/	WDQLVL_PAT,
+ /*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+@@ -212,7 +212,7 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+  * boardcnf[2] TQMaRZG2H 8Gbit/1Rank/2ch --> 16 Gbit total per Chip --> 32 Gbit total on module = 4 GB
+  */
+ {
+-	0x01,		/* phyvalid */
++	0x05,		/* phyvalid */
+ 	0x01,		/* dbi_en */
+ 	0x0300,		/* cacs_dly */
+ 	0,		/* cacs_dly_adj */
+@@ -220,10 +220,10 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+ 	0x00a0,		/* dqdm_dly_r */
+ 	{
+ /*ch[0]*/	{
+-/*ddr_density[]*/	{ 0x02, 0xff },
++/*ddr_density[]*/	{ 0x04, 0xff },
+ /*ca_swap*/		0x00543210,
+ /*dqs_swap*/		0x3210,
+-/*dq_swap[]*/		{ 0x17602534, 0x23546701, 0x43257160, 0x10765243 },
++/*dq_swap[]*/		{ 0x17602534, 0x23541067, 0x43257160, 0x10765243 },
+ /*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
+ /*wdqlvl_patt[]*/	WDQLVL_PAT,
+ /*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+@@ -240,10 +240,10 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+ 			  0, 0, 0, 0, 0, 0, 0, 0 }
+ 		},
+ /*ch[1]*/	{
+-/*ddr_density[]*/	{ 0x02, 0xff },
++/*ddr_density[]*/	{ 0x04, 0xff },
+ /*ca_swap*/		0x00543210,
+ /*dqs_swap*/		0x3210,
+-/*dq_swap[]*/		{ 0x16502643, 0x54236170, 0x34521607, 0x07615243 },
++/*dq_swap[]*/		{ 0x17502643, 0x54236170, 0x34521607, 0x07615243 },
+ /*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
+ /*wdqlvl_patt[]*/	WDQLVL_PAT,
+ /*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+@@ -258,10 +258,49 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+ 			  0, 0, 0, 0, 0, 0, 0, 0,
+ 			  0, 0, 0, 0, 0, 0, 0, 0,
+ 			  0, 0, 0, 0, 0, 0, 0, 0 }
++		},
++/*ch[2]*/	{
++/*ddr_density[]*/	{ 0x04, 0xff },
++/*ca_swap*/		0x00543210,
++/*dqs_swap*/		0x3210,
++/*dq_swap[]*/		{ 0x17502643, 0x54236170, 0x34521607, 0x07615243 },
++/*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
++/*wdqlvl_patt[]*/	WDQLVL_PAT,
++/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0 },
++/*dm_adj_w*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 },
++/*dm_adj_r*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 }
++		},
++/*ch[3]*/	{ // Dummy
++/*ddr_density[]*/	{ 0xff, 0xff },
++/*ca_swap*/		0,
++/*dqs_swap*/		0,
++/*dq_swap[]*/		{ 0, 0, 0, 0 },
++/*dm_swap[]*/		{ 0, 0, 0, 0 },
++/*wdqlvl_patt[]*/	WDQLVL_PAT,
++/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0 },
++/*dm_adj_w*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 },
++/*dm_adj_r*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 }
+ 		}
+-	}
+-
+ 
++	}
+ }
+ };
+ 
+-- 
+2.7.4
+
