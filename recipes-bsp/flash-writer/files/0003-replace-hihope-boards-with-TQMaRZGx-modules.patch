@@ -1,0 +1,466 @@
+From c26921e044caa39f5e850163988e16045121a244 Mon Sep 17 00:00:00 2001
+From: Andreas Dumberger <andreas.dumberger@tq-group.com>
+Date: Wed, 22 Jul 2020 16:15:14 +0200
+Subject: [PATCH 2/4] replace hihope boards with TQMaRZGx modules
+
+Now only 3 boards are supported which are distinguished by their CPU type.
+Currently only N- and M-types sort of work, but only with one DRAM controller configured.
+H-Type not working...
+---
+ ddr/lpddr4/boot_init_dram_config.c | 346 +++++--------------------------------
+ 1 file changed, 40 insertions(+), 306 deletions(-)
+
+diff --git a/ddr/lpddr4/boot_init_dram_config.c b/ddr/lpddr4/boot_init_dram_config.c
+index 3502605..8badb8c 100644
+--- a/ddr/lpddr4/boot_init_dram_config.c
++++ b/ddr/lpddr4/boot_init_dram_config.c
+@@ -11,50 +11,32 @@
+  *	NUMBER OF BOARD CONFIGRATION
+  *	PLEASE DEFINE
+  ******************************************************************************/
+-#define BOARDNUM 7
++#define BOARDNUM 3
+ /*******************************************************************************
+  *	PLEASE SET board number or board judge function
+  ******************************************************************************/
+ static uint32_t boardcnf_get_brd_type(void)
+ {
+-#if 0
+-	uint32_t Prr_Product;
+-	uint32_t judge = 0;
+-	uint32_t reg;
+-	uint32_t boardInfo;
++	uint32_t boardNr = 0;
++	uint32_t reg;
+ 
+ 	reg = mmio_read_32(PRR);
+ 	Prr_Product = reg & PRR_PRODUCT_MASK;
+-	if (Prr_Product == PRR_PRODUCT_G2M)
++
++	if (Prr_Product == PRR_PRODUCT_G2N)
+ 	{
+-		if (RZG2M_CUT_11 == (reg & PRR_CUT_MASK))
+-		{
+-			judge = 1;	/* 2rank setting	*/
+-		}
+-		else
+-		{
+-			boardInfo = mmio_read_32(GPIO_INDT5);
+-			if (boardInfo & LPDDR4_2RANK)
+-			{
+-				judge = 1;	/* 2rank setting	*/
+-			}
+-			else
+-			{
+-				judge = 0;	/* 1rank setting	*/
+-			}
+-		}
++		boardNr = 0;
+ 	}
+-	else if (Prr_Product == PRR_PRODUCT_G2N)
++	else if (Prr_Product == PRR_PRODUCT_G2M)
+ 	{
+-		judge = 3;
++		boardNr = 1;
+ 	}
+ 	else if (Prr_Product == PRR_PRODUCT_G2H)
+ 	{
+-		judge = 5;	/* 1rank setting	*/
++		boardNr = 2;
+ 	}
+-	return (judge);
+-#endif
+-	return (6);    /* TQMaRZG2x */
++
++	return (boardNr);
+ }
+ 
+ /*******************************************************************************
+@@ -139,113 +121,7 @@ struct _boardcnf {
+ 
+ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+ /*
+- * boardcnf[0] Jiangsu HopeRun Software Co., Ltd. HiHope RZ/G2M board 16Gbit/1rank/2ch board with G2M/SOC
+- */
+-{
+-	0x03,		/* phyvalid */
+-	0x01,		/* dbi_en */
+-	0x02c0,		/* cacs_dly */
+-	0,		/* cacs_dly_adj */
+-	0x0300,		/* dqdm_dly_w */
+-	0x00a0,		/* dqdm_dly_r */
+-	{
+-/*ch[0]*/	{
+-/*ddr_density[]*/	{ 0x04, 0xff },
+-/*ca_swap*/		0x00345201,
+-/*dqs_swap*/		0x3201,
+-/*dq_swap[]*/		{ 0x01672543, 0x45361207, 0x45632107, 0x60715234 },
+-/*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
+-/*wdqlvl_patt[]*/	WDQLVL_PAT,
+-/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0 },
+-/*dm_adj_w*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 },
+-/*dm_adj_r*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 }
+-		},
+-/*ch[1]*/	{
+-/*ddr_density[]*/	{ 0x04, 0xff },
+-/*ca_swap*/		0x00302154,
+-/*dqs_swap*/		0x2310,
+-/*dq_swap[]*/		{ 0x01672543, 0x45361207, 0x45632107, 0x60715234 },
+-/*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
+-/*wdqlvl_patt[]*/	WDQLVL_PAT,
+-/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0 },
+-/*dm_adj_w*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 },
+-/*dm_adj_r*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 }
+-		}
+-	}
+-},
+-/*
+- * boardcnf[1] Jiangsu HopeRun Software Co., Ltd. HiHope RZ/G2M board 8Gbit/2rank/2ch board with G2M/SOC
+- */
+-{
+-	0x03,		/* phyvalid */
+-	0x01,		/* dbi_en */
+-	0x02c0,		/* cacs_dly */
+-	0,		/* cacs_dly_adj */
+-	0x0300,		/* dqdm_dly_w */
+-	0x00a0,		/* dqdm_dly_r */
+-	{
+-/*ch[0]*/	{
+-/*ddr_density[]*/	{ 0x02, 0x02 },
+-/*ca_swap*/		0x00345201,
+-/*dqs_swap*/		0x3201,
+-/*dq_swap[]*/		{ 0x01672543, 0x45361207, 0x45632107, 0x60715234 },
+-/*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
+-/*wdqlvl_patt[]*/	WDQLVL_PAT,
+-/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0 },
+-/*dm_adj_w*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 },
+-/*dm_adj_r*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 }
+-		},
+-/*ch[1]*/	{
+-/*ddr_density[]*/	{ 0x02, 0x02 },
+-/*ca_swap*/		0x00302154,
+-/*dqs_swap*/		0x2310,
+-/*dq_swap[]*/		{ 0x01672543, 0x45361207, 0x45632107, 0x60715234 },
+-/*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
+-/*wdqlvl_patt[]*/	WDQLVL_PAT,
+-/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0 },
+-/*dm_adj_w*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 },
+-/*dm_adj_r*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 }
+-		}
+-	}
+-},
+-/*
+- * boardcnf[2] Jiangsu HopeRun Software Co., Ltd. HiHope RZ/G2N board 8Gbit/2rank/1ch board with G2N/SOC
++ * boardcnf[0] TQMaRZG2N 8Gbit/1Rank/2ch --> 16 Gbit total per Chip --> 16 Gbit total on module = 2 GB
+  */
+ {
+ 	0x01,		/* phyvalid */
+@@ -256,10 +132,10 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+ 	0x00a0,		/* dqdm_dly_r */
+ 	{
+ /*ch[0]*/	{
+-/*ddr_density[]*/	{ 0x02, 0x02 },
+-/*ca_swap*/		0x00345201,
+-/*dqs_swap*/		0x3201,
+-/*dq_swap[]*/		{ 0x01672543, 0x45361207, 0x45632107, 0x60715234 },
++/*ddr_density[]*/	{ 0x02, 0xff },
++/*ca_swap*/		0x00543210,
++/*dqs_swap*/		0x3210,
++/*dq_swap[]*/		{ 0x17602534, 0x23546701, 0x43257160, 0x10765243 },
+ /*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
+ /*wdqlvl_patt[]*/	WDQLVL_PAT,
+ /*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+@@ -274,78 +150,26 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+ 			  0, 0, 0, 0, 0, 0, 0, 0,
+ 			  0, 0, 0, 0, 0, 0, 0, 0,
+ 			  0, 0, 0, 0, 0, 0, 0, 0 }
+-		}
++		},
+ 	}
+ },
++
+ /*
+- * boardcnf[3] Jiangsu HopeRun Software Co., Ltd. HiHope RZ/G2N board 16Gbit/2rank/1ch board with G2N/SOC
++ * boardcnf[1] TQMaRZG2M 16Gbit/2Rank/2ch --> 32 Gbit total per Chip --> 64 Gbit total on module = 8 GB
+  */
+ {
+ 	0x01,		/* phyvalid */
+ 	0x01,		/* dbi_en */
+-	0x0300,		/* cacs_dly */
++	0x02c0,		/* cacs_dly */
+ 	0,		/* cacs_dly_adj */
+ 	0x0300,		/* dqdm_dly_w */
+ 	0x00a0,		/* dqdm_dly_r */
+ 	{
+ /*ch[0]*/	{
+ /*ddr_density[]*/	{ 0x04, 0x04 },
+-/*ca_swap*/		0x00345201,
+-/*dqs_swap*/		0x3201,
+-/*dq_swap[]*/		{ 0x01672543, 0x45361207, 0x45632107, 0x60715234 },
+-/*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
+-/*wdqlvl_patt[]*/	WDQLVL_PAT,
+-/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0 },
+-/*dm_adj_w*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 },
+-/*dm_adj_r*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 }
+-		}
+-	}
+-},
+-/*
+- * boardcnf[4] Jiangsu HopeRun Software Co., Ltd. HiHope RZ/G2H board 8Gbit/2rank/2ch board with G2M/SOC
+- */
+-{
+-	0x05,		/* phyvalid */
+-	0x01,		/* dbi_en */
+-	0x0300,		/* cacs_dly */
+-	0,		/* cacs_dly_adj */
+-	0x0300,		/* dqdm_dly_w */
+-	0x00a0,		/* dqdm_dly_r */
+-	{
+-/*ch[0]*/	{
+-/*ddr_density[]*/	{ 0x02, 0x02 },
+-/*ca_swap*/		0x00345201,
+-/*dqs_swap*/		0x3201,
+-/*dq_swap[]*/		{ 0x01672543, 0x45367012, 0x45632107, 0x60715234 },
+-/*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
+-/*wdqlvl_patt[]*/	WDQLVL_PAT,
+-/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0 },
+-/*dm_adj_w*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 },
+-/*dm_adj_r*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 }
+-		},
+-/*ch[1]*/	{	// for DRAM_SPLIT_2CH
+-/*ddr_density[]*/	{ 0x02, 0x02 },
+-/*ca_swap*/		0x00302154,
+-/*dqs_swap*/		0x2310,
+-/*dq_swap[]*/		{ 0x01672543, 0x45361207, 0x45632107, 0x60715234 },
++/*ca_swap*/		0x00543210,
++/*dqs_swap*/		0x3210,
++/*dq_swap[]*/		{ 0x17602534, 0x23546701, 0x43257160, 0x10765243 },
+ /*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
+ /*wdqlvl_patt[]*/	WDQLVL_PAT,
+ /*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+@@ -361,11 +185,11 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+ 			  0, 0, 0, 0, 0, 0, 0, 0,
+ 			  0, 0, 0, 0, 0, 0, 0, 0 }
+ 		},
+-/*ch[2]*/	{	// for DRAM_SPLIT_NON
+-/*ddr_density[]*/	{ 0x02, 0x02 },
+-/*ca_swap*/		0x00302154,
+-/*dqs_swap*/		0x2310,
+-/*dq_swap[]*/		{ 0x01672543, 0x45361207, 0x45632107, 0x60715234 },
++/*ch[1]*/	{
++/*ddr_density[]*/	{ 0x04, 0x04 },
++/*ca_swap*/		0x00543210,
++/*dqs_swap*/		0x3210,
++/*dq_swap[]*/		{ 0x16502643, 0x54236170, 0x34521607, 0x07615243 },
+ /*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
+ /*wdqlvl_patt[]*/	WDQLVL_PAT,
+ /*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+@@ -380,34 +204,15 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+ 			  0, 0, 0, 0, 0, 0, 0, 0,
+ 			  0, 0, 0, 0, 0, 0, 0, 0,
+ 			  0, 0, 0, 0, 0, 0, 0, 0 }
+-		},
+-/*ch[3]*/	{ // Dummy
+-/*ddr_density[]*/	{ 0xff, 0xff },
+-/*ca_swap*/		0,
+-/*dqs_swap*/		0,
+-/*dq_swap[]*/		{ 0, 0, 0, 0 },
+-/*dm_swap[]*/		{ 0, 0, 0, 0 },
+-/*wdqlvl_patt[]*/	WDQLVL_PAT,
+-/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0 },
+-/*dm_adj_w*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 },
+-/*dm_adj_r*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 }
+ 		}
+ 	}
+ },
++
+ /*
+- * boardcnf[5] Jiangsu HopeRun Software Co., Ltd. HiHope RZ/G2H board 16Gbit/1rank/2ch board with G2H/SOC
++ * boardcnf[2] TQMaRZG2H 8Gbit/1Rank/2ch --> 16 Gbit total per Chip --> 32 Gbit total on module = 4 GB
+  */
+ {
+-	0x05,		/* phyvalid */
++	0x01,		/* phyvalid */
+ 	0x01,		/* dbi_en */
+ 	0x0300,		/* cacs_dly */
+ 	0,		/* cacs_dly_adj */
+@@ -415,50 +220,10 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+ 	0x00a0,		/* dqdm_dly_r */
+ 	{
+ /*ch[0]*/	{
+-/*ddr_density[]*/	{ 0x04, 0xff },
+-/*ca_swap*/		0x00345201,
+-/*dqs_swap*/		0x3201,
+-/*dq_swap[]*/		{ 0x01672543, 0x45367012, 0x45632107, 0x60715234 },
+-/*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
+-/*wdqlvl_patt[]*/	WDQLVL_PAT,
+-/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0 },
+-/*dm_adj_w*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 },
+-/*dm_adj_r*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 }
+-		},
+-/*ch[1]*/	{	// for DRAM_SPLIT_2CH
+-/*ddr_density[]*/	{ 0x04, 0xff },
+-/*ca_swap*/		0x00302154,
+-/*dqs_swap*/		0x2310,
+-/*dq_swap[]*/		{ 0x01672543, 0x45361207, 0x45632107, 0x60715234 },
+-/*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
+-/*wdqlvl_patt[]*/	WDQLVL_PAT,
+-/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0 },
+-/*dm_adj_w*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 },
+-/*dm_adj_r*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 }
+-		},
+-/*ch[2]*/	{	// for DRAM_SPLIT_NON
+-/*ddr_density[]*/	{ 0x04, 0xff },
+-/*ca_swap*/		0x00302154,
+-/*dqs_swap*/		0x2310,
+-/*dq_swap[]*/		{ 0x01672543, 0x45361207, 0x45632107, 0x60715234 },
++/*ddr_density[]*/	{ 0x02, 0xff },
++/*ca_swap*/		0x00543210,
++/*dqs_swap*/		0x3210,
++/*dq_swap[]*/		{ 0x17602534, 0x23546701, 0x43257160, 0x10765243 },
+ /*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
+ /*wdqlvl_patt[]*/	WDQLVL_PAT,
+ /*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+@@ -474,44 +239,11 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+ 			  0, 0, 0, 0, 0, 0, 0, 0,
+ 			  0, 0, 0, 0, 0, 0, 0, 0 }
+ 		},
+-/*ch[3]*/	{ // Dummy
+-/*ddr_density[]*/	{ 0xff, 0xff },
+-/*ca_swap*/		0,
+-/*dqs_swap*/		0,
+-/*dq_swap[]*/		{ 0, 0, 0, 0 },
+-/*dm_swap[]*/		{ 0, 0, 0, 0 },
+-/*wdqlvl_patt[]*/	WDQLVL_PAT,
+-/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0 },
+-/*dm_adj_w*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 },
+-/*dm_adj_r*/		{ 0, 0, 0, 0 },
+-/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0,
+-			  0, 0, 0, 0, 0, 0, 0, 0 }
+-		}
+-	}
+-},
+-/*
+- * boardcnf[6] TQMaRZG2N 8Gbit/1Rank/2ch --> 16 Gbit total per Chip --> 16 Gbit total on module = 2 GB
+- */
+-{
+-	0x01,		/* phyvalid */
+-	0x01,		/* dbi_en */
+-	0x0300,		/* cacs_dly */
+-	0,		/* cacs_dly_adj */
+-	0x0300,		/* dqdm_dly_w */
+-	0x00a0,		/* dqdm_dly_r */
+-	{
+-/*ch[0]*/	{
++/*ch[1]*/	{
+ /*ddr_density[]*/	{ 0x02, 0xff },
+ /*ca_swap*/		0x00543210,
+ /*dqs_swap*/		0x3210,
+-/*dq_swap[]*/		{ 0x17602534, 0x23546701, 0x43257160, 0x10765243 },
++/*dq_swap[]*/		{ 0x16502643, 0x54236170, 0x34521607, 0x07615243 },
+ /*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
+ /*wdqlvl_patt[]*/	WDQLVL_PAT,
+ /*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
+@@ -526,8 +258,10 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+ 			  0, 0, 0, 0, 0, 0, 0, 0,
+ 			  0, 0, 0, 0, 0, 0, 0, 0,
+ 			  0, 0, 0, 0, 0, 0, 0, 0 }
+-		},
++		}
+ 	}
++
++
+ }
+ };
+ 
+-- 
+2.7.4
+

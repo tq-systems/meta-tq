@@ -1,0 +1,882 @@
+From cee4d8a2ee99b1ec26b3578d7175a8a94d9bea5b Mon Sep 17 00:00:00 2001
+From: hienhuynh <hien.huynh.px@renesas.com>
+Date: Thu, 13 Aug 2020 11:36:50 +0700
+Subject: [PATCH] Add Secure Boot Injection.
+
+This commit support Secure Boot Injection with 2 new commands:
+- xls2s: Write temporarily encrypted data to SPI flash memory
+- xsis: Write security module and keyring
+
+Signed-off-by: hienhuynh <hien.huynh.px@renesas.com>
+---
+ dgtable.c            |   3 +
+ include/dgtable.h    |   2 +-
+ include/sec_module.h |  81 +++++++
+ include/sec_rzg2.h   |  34 +++
+ main.c               |   3 +
+ makefile             |   4 +-
+ sec_data.c           |  43 ++++
+ sec_rzg2.c           | 589 +++++++++++++++++++++++++++++++++++++++++++++++++++
+ 8 files changed, 757 insertions(+), 2 deletions(-)
+ create mode 100644 include/sec_module.h
+ create mode 100644 include/sec_rzg2.h
+ create mode 100644 sec_data.c
+ create mode 100644 sec_rzg2.c
+
+diff --git a/dgtable.c b/dgtable.c
+index 55dea72..32a05f9 100644
+--- a/dgtable.c
++++ b/dgtable.c
+@@ -35,6 +35,7 @@
+ #include "ddrcheck.h"
+ #if SERIAL_FLASH == 1
+ #include "dgmodul4.h"
++#include "sec_rzg2.h"
+ #endif /* SERIAL_FLASH == 1 */
+ #if EMMC == 1
+ #include "dgemmc.h"
+@@ -50,11 +51,13 @@ const com_menu MonCom[COMMAND_UNIT] = {
+ 	"XCS"		, dgClearSpiflash0		,  0	,
+ 	"XLS"		, dgG2LoadSpiflash0		,  0	,
+ 	"XLS2"		, dgG2LoadSpiflash0_2		,  0	,
++	"XLS2S"		, dgG2LoadSpiflash0_2s		,  0	,
+ 	"XLS3"		, dgG2LoadSpiflash0_3		,  0	,
+ 	"XINFO_SA0"	, dgG2InfoSpiflash0_SA0		,  0	,
+ 	"XINFO_SA0_S"	, dgG2InfoSetSpiflash0_SA0	,  0	,
+ 	"XINFO"		, dgG2InfoSpiflash0		,  0	,
+ 	"XINFO_S"	, dgG2InfoSetSpiflash0		,  0	,
++	"XSIS"		, dgG2SecInstSpiflash0		,  0	,
+ #endif /* SERIAL_FLASH == 1 */
+ #if EMMC == 1
+ 	"EM_DCID"	, &dg_emmc_disp_cid		,  0	,
+diff --git a/include/dgtable.h b/include/dgtable.h
+index 2d8f277..b92bd01 100644
+--- a/include/dgtable.h
++++ b/include/dgtable.h
+@@ -32,7 +32,7 @@
+ /**********************
+ * COMMAND_UNITE       *
+ ***********************/
+-#define		COMMAND_UNIT		20
++#define		COMMAND_UNIT		22
+ #define		NORMAL_END		0
+ #define		ERROR_END		1
+ 
+diff --git a/include/sec_module.h b/include/sec_module.h
+new file mode 100644
+index 0000000..fcae317
+--- /dev/null
++++ b/include/sec_module.h
+@@ -0,0 +1,81 @@
++/*
++ * Copyright (c) 2020, Renesas Electronics Corporation. All rights reserved.
++ *
++ * SPDX-License-Identifier: BSD-3-Clause
++ */
++
++#ifndef SEC_MODULE_H
++#define SEC_MODULE_H
++
++/******************************************************************************
++Macro definitions
++******************************************************************************/
++
++/* Return Value */
++#define SEC_MODULE_RET_OK (0)
++#define SEC_MODULE_RET_NG (-1)
++
++#define SEC_MODULE_SHARED_SIZE (0x200)
++
++#define SEC_MODULE_ENTRY (SEC_MODULE_BASE + SEC_MODULE_SHARED_SIZE)
++
++#ifndef __ASSEMBLER__
++
++/******************************************************************************
++Typedef definitions
++******************************************************************************/
++
++typedef int (* fp_sec_module_api_t) (void);
++
++typedef enum {
++	CMD_RESET_INIT = 0,
++	CMD_INJECT_KEY,
++	CMD_RE_ENC_DATA,
++	CMD_VERIFY_KEY,
++	CMD_VERIFY_DATA,
++	CMD_MAX,
++} e_cmd_type_t;
++
++typedef struct {
++	uint64_t inst_area;
++} st_reset_init_t;
++
++typedef struct {
++	uint64_t key_ring;
++	uint64_t prov_key;
++} st_inject_key_t;
++
++typedef struct {
++	int num;
++	struct {
++		uint64_t src;
++		uint64_t len;
++		uint64_t dst;
++	} list[16];
++} st_re_enc_data_t;
++
++typedef struct {
++	uint64_t src;
++	uint64_t len;
++	uint64_t dst;
++	uint64_t heap;
++} st_verify_data_t;
++
++typedef struct {
++	uint64_t cmd;
++	uint64_t len;
++	union {
++		st_reset_init_t reset_init;
++		st_inject_key_t inject_key;
++		st_re_enc_data_t re_enc_data;
++		st_verify_data_t verify_data;
++	} prm;
++} st_sec_module_arg_t;
++
++/******************************************************************************
++Exported global functions (to be accessed by other files)
++******************************************************************************/
++
++#endif /* __ASSEMBLER__ */
++
++#endif /* SEC_MODULE_H */
+diff --git a/include/sec_rzg2.h b/include/sec_rzg2.h
+new file mode 100644
+index 0000000..3562031
+--- /dev/null
++++ b/include/sec_rzg2.h
+@@ -0,0 +1,34 @@
++/*
++ * Copyright (c) 2020, Renesas Electronics Corporation
++ * All rights reserved.
++ *
++ * Redistribution and use in source and binary forms, with or without
++ * modification, are permitted provided that the following conditions are met:
++ *
++ *   - Redistributions of source code must retain the above copyright notice,
++ *     this list of conditions and the following disclaimer.
++ *
++ *   - Redistributions in binary form must reproduce the above copyright
++ *     notice, this list of conditions and the following disclaimer in the
++ *     documentation and/or other materials provided with the distribution.
++ *
++ *   - Neither the name of Renesas nor the names of its contributors may be
++ *     used to endorse or promote products derived from this software without
++ *     specific prior written permission.
++ *
++ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
++ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
++ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
++ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
++ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
++ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
++ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
++ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
++ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
++ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
++ * POSSIBILITY OF SUCH DAMAGE.
++ */
++
++extern void InitSec(void);
++extern void dgG2LoadSpiflash0_2s(void);
++extern void dgG2SecInstSpiflash0(void);
+diff --git a/main.c b/main.c
+index 798fbd6..1bde38b 100644
+--- a/main.c
++++ b/main.c
+@@ -41,7 +41,9 @@
+ #include "devdrv.h"
+ #include "boardid.h"
+ #include "reg_rzg2.h"
++#include "sec_rzg2.h"
+ #if USB_ENABLE == 1
++#include "sec_rzg2.h"
+ #include "usb_lib.h"
+ #endif /* USB_ENABLE == 1 */
+ 
+@@ -62,6 +64,7 @@ void Main(void)
+ {
+ 	CheckBoard();
+ 	InitMain();
++	InitSec();
+ 	StartMess();
+ 	DecCom();
+ }
+diff --git a/makefile b/makefile
+index 0a590e0..be834f4 100644
+--- a/makefile
++++ b/makefile
+@@ -113,7 +113,7 @@ ifeq ("$(USB)", "DISABLE")
+ endif
+ 
+ ifeq ("$(SERIAL_FLASH)", "ENABLE")
+-	CFLAGS += -DSERIAL_FLASH=1
++	CFLAGS += -DSERIAL_FLASH=1 -DENC_PROVISIONING_KEY='"${ENC_PROVISIONING_KEY}"'
+ else
+ 	CFLAGS += -DSERIAL_FLASH=0
+ endif
+@@ -166,6 +166,8 @@ ifeq ("$(SERIAL_FLASH)", "ENABLE")
+ SRC_FILE +=					\
+ 	dgmodul4.c				\
+ 	rpcqspidrv.c				\
++	sec_rzg2.c				\
++	sec_data.c				\
+ 	spiflash1drv.c
+ endif
+ 
+diff --git a/sec_data.c b/sec_data.c
+new file mode 100644
+index 0000000..3735dd4
+--- /dev/null
++++ b/sec_data.c
+@@ -0,0 +1,43 @@
++/*
++ * Copyright (c) 2020, Renesas Electronics Corporation
++ * All rights reserved.
++ *
++ * Redistribution and use in source and binary forms, with or without
++ * modification, are permitted provided that the following conditions are met:
++ *
++ *   - Redistributions of source code must retain the above copyright notice,
++ *     this list of conditions and the following disclaimer.
++ *
++ *   - Redistributions in binary form must reproduce the above copyright
++ *     notice, this list of conditions and the following disclaimer in the
++ *     documentation and/or other materials provided with the distribution.
++ *
++ *   - Neither the name of Renesas nor the names of its contributors may be
++ *     used to endorse or promote products derived from this software without
++ *     specific prior written permission.
++ *
++ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
++ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
++ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
++ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
++ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
++ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
++ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
++ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
++ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
++ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
++ * POSSIBILITY OF SUCH DAMAGE.
++ */
++
++#define	INCLUDE_BINARY(section, binary, symbol) __asm__( \
++	".section " #section "\n" \
++	".balign 8\n" \
++	".global " #symbol "\n" \
++	#symbol ":\n" \
++	".incbin \""binary"\" \n" \
++	".global _sizeof_" #symbol "\n" \
++	".set _sizeof_" #symbol ", . - " #symbol "\n" \
++	".balign 4\n")
++
++INCLUDE_BINARY(".rodata", ENC_PROVISIONING_KEY, EncProvisioningKey);
++
+diff --git a/sec_rzg2.c b/sec_rzg2.c
+new file mode 100644
+index 0000000..b18aafd
+--- /dev/null
++++ b/sec_rzg2.c
+@@ -0,0 +1,589 @@
++/*
++ * Copyright (c) 2020, Renesas Electronics Corporation
++ * All rights reserved.
++ *
++ * Redistribution and use in source and binary forms, with or without
++ * modification, are permitted provided that the following conditions are met:
++ *
++ *   - Redistributions of source code must retain the above copyright notice,
++ *     this list of conditions and the following disclaimer.
++ *
++ *   - Redistributions in binary form must reproduce the above copyright
++ *     notice, this list of conditions and the following disclaimer in the
++ *     documentation and/or other materials provided with the distribution.
++ *
++ *   - Neither the name of Renesas nor the names of its contributors may be
++ *     used to endorse or promote products derived from this software without
++ *     specific prior written permission.
++ *
++ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
++ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
++ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
++ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
++ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
++ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
++ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
++ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
++ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
++ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
++ * POSSIBILITY OF SUCH DAMAGE.
++ */
++
++#include "reg_rzg2.h"
++#include "common.h"
++#include "dgtable.h"
++#include "spiflash1drv.h"
++#include "devdrv.h"
++#include "dgmodul4.h"
++#include "ramckmdl.h"
++#include "mmio.h"
++#include "sec_module.h"
++#include "sec_rzg2.h"
++
++extern uint32_t gSpiFlashSvArea;
++extern uint32_t gUserPrgStartAdd;
++extern uint32_t gUserPrgSize;
++
++extern uint32_t gManufacturerId;
++extern uint32_t gDeviceId;
++extern uint32_t gQspi_sa_size;
++extern uint32_t gQspi_end_addess;
++
++extern uint8_t EncProvisioningKey[];
++
++extern void *memset(void *dst, int val, unsigned long count);
++extern void *memcpy(void *dst, const void *src, unsigned long len);
++
++static void XLoadSpiflash0_2s(uint32_t mode);
++static int32_t Load_SecModule(void);
++static int32_t Load_InjectKey(void);
++static int32_t Load_ReEncData(void);
++
++static int32_t Load_PreSubFunc(uint32_t *ramAdd, uint32_t *spiAdd);
++static int32_t Load_PostSubFunc(uint32_t ramAdd_Max, uint32_t ramAdd_Min, uint32_t spiAdd);
++
++static uint8_t s_inst_data[1296];
++
++static st_sec_module_arg_t* secure_boot_arg;
++static fp_sec_module_api_t  secure_boot_api;
++
++struct {
++	uint32_t Num;
++
++	struct
++	{
++		uint8_t* Exec;
++		uint8_t* Spif;
++		uint32_t Size;
++	} List[16];
++} gSecInstInfo;
++
++void InitSec(void)
++{
++	memset(&gSecInstInfo, 0, sizeof(gSecInstInfo));
++}
++
++/************************************************************************
++    MODULE          : dgG2LoadSpiflash0_2s          *
++    FUNCTION        : load Program to Spiflash memory   *
++    COMMAND         : XLS2S                 *
++    INPUT PARAMETER : XLS2S                 *
++*************************************************************************/
++void dgG2LoadSpiflash0_2s(void)
++{
++	if(16 <= gSecInstInfo.Num)
++	{
++		PutStr("The number of re-encrypted data is over", 1);
++		return;
++	}
++
++	XLoadSpiflash0_2s(0);
++}
++
++static void XLoadSpiflash0_2s(uint32_t mode)
++{
++	char str[64];
++	uint32_t readManuId,readDevId;
++
++	uintptr_t Load_workStartAdd,Load_workEndAdd;
++	uint32_t workAdd_Min,workAdd_Max;
++
++	uint32_t Read_workStartAdd;
++	uint32_t ClrSpiStartSecTopAdd,ClrSpiSecEndAdd;
++	uint32_t clearSize;
++
++	uint32_t MaskSectorSize;
++	uint32_t WriteDataStatAdd;
++	uint32_t PrgSpiStatAdd,PrgSpiEndAdd;
++	uint32_t saveSize;
++
++	uint32_t WrittenSize;
++	uint32_t RemainingSize;
++
++	PutStr("===== Qspi writing of RZ/G2 Board Command =============",1);
++	PutStr("Load Program to Spiflash",1);
++	PutStr("Writes to any of SPI address.",1);
++	InitRPC_Mode();
++
++	if(CheckQspiFlashId())
++	{
++		/* Error abort */
++		return;
++	}
++	gUserPrgStartAdd = 0x0;
++	PutStr((mode == 0U ? "Program Top Address & Qspi Save Address " : "Program size & Qspi Save Address "),1);
++
++	gSpiFlashSvArea = 3;
++	Load_workStartAdd = LS_WORK_DRAM_SADD;
++	Load_workEndAdd = LS_WORK_DRAM_EADD_64M;
++
++	PrgSpiStatAdd = 0x0;
++	gUserPrgStartAdd = 0x0;
++
++	if (0U == mode)
++	{
++		PutStr("===== Please Input Program Top Address ============",1);
++		SetAddInputKey(&gUserPrgStartAdd);
++	} else
++	{
++		PutStr("===== Please Input Program size ============",1);
++		SetSizeInputKey(&gUserPrgSize);
++	}
++
++	PutStr(" ",1);
++	PutStr("===== Please Input Qspi Save Address ===",1);
++	SetAddInputKey(&PrgSpiStatAdd);
++
++	if (gQspi_end_addess < PrgSpiStatAdd)
++	{
++		PutStr("Address Input Error", 1);
++		PutStr("Range of H'000_0000 ~ H'0FF_7FFF", 1);
++		return;
++	}
++
++	/* WorkMemory Clear (Write H'FF) */
++	PutStr("Work RAM(H'50000000-H'53FFFFFF) Clear....",1);
++	FillData32Bit((uint32_t *)Load_workStartAdd,(uint32_t *)Load_workEndAdd,0xFFFFFFFF);
++
++	if (0U == mode)
++	{
++		if (dgLS_Load_Offset2(&workAdd_Max, &workAdd_Min))
++		{
++			return;
++		}
++	} else {
++		char bin_data;
++		uint32_t image_offset = 0U;
++		PutStr("please send ! (binary)",1);
++		while (image_offset < gUserPrgSize)
++		{
++			GetChar(&bin_data);
++			*(uint8_t *)(Load_workStartAdd + image_offset) = bin_data;
++			image_offset++;
++		}
++		workAdd_Min = Load_workStartAdd;
++		workAdd_Max = Load_workStartAdd + gUserPrgSize - 1;
++	}
++	PrgSpiStatAdd = PrgSpiStatAdd + (workAdd_Min - Load_workStartAdd);
++	PrgSpiEndAdd  = PrgSpiStatAdd + (workAdd_Max - workAdd_Min);
++	saveSize      = (PrgSpiEndAdd-PrgSpiStatAdd) + 1;
++	if (PrgSpiEndAdd > gQspi_end_addess)
++	{
++		PutStr("Program over size Error", 1);
++		PutStr(" SpiFlashMemory Stat Address : H'", 0);
++		Data2HexAscii(PrgSpiStatAdd, str, 4);
++		PutStr(str ,1);
++		PutStr(" SpiFlashMemory End Address  : H'", 0);
++		Data2HexAscii(PrgSpiEndAdd,str, 4);
++		PutStr(str, 1);
++		return;
++	}
++	MaskSectorSize = (~gQspi_sa_size) + 1;
++
++	WriteDataStatAdd = workAdd_Min;
++	ClrSpiStartSecTopAdd = PrgSpiStatAdd & MaskSectorSize;
++	ClrSpiSecEndAdd = PrgSpiEndAdd | ~(MaskSectorSize);
++
++	clearSize = (ClrSpiSecEndAdd-ClrSpiStartSecTopAdd)+1;
++
++	Read_workStartAdd = WORK_SPI_LOAD_AREA;
++
++	if (CkQspiFlash1ClearSectorSize(Read_workStartAdd, ClrSpiStartSecTopAdd, clearSize,1))
++	{
++		return;
++	}
++	/* SAVE QSPI-FLASH */
++	PutStr("SAVE SPI-FLASH.......",0);
++	/* Manual Mode Single WriteBuffer */
++	SaveDataWithBuffeQspiFlash(WriteDataStatAdd, PrgSpiStatAdd, saveSize);
++	PutStr("",1);
++	PutStr("======= Qspi  Save Information  =================",1);
++	PutStr(" SpiFlashMemory Stat Address : H'",0);
++	Data2HexAscii(PrgSpiStatAdd,str,4);
++	PutStr(str,1);
++	PutStr(" SpiFlashMemory End Address  : H'",0);
++	Data2HexAscii(PrgSpiEndAdd,str,4);
++	PutStr(str,1);
++	PutStr("===========================================================",1);
++	PutStr("",1);
++
++	gSecInstInfo.List[gSecInstInfo.Num].Exec = (uint8_t *)(uintptr_t)gUserPrgStartAdd;
++	gSecInstInfo.List[gSecInstInfo.Num].Spif = (uint8_t *)(uintptr_t)PrgSpiStatAdd;
++	gSecInstInfo.List[gSecInstInfo.Num].Size = saveSize;
++	gSecInstInfo.Num++;
++}
++
++/****************************************************************
++    MODULE          : dgG2SecInstSpiflash0      *
++    FUNCTION        :   *
++    COMMAND         : XSIS          *
++    INPUT PARAMETER : XSIS          *
++*****************************************************************/
++void dgG2SecInstSpiflash0(void)
++{
++	if (Load_SecModule())
++	{
++		return;
++	}
++
++	if (Load_InjectKey())
++	{
++		return;
++	}
++
++	if (0 < gSecInstInfo.Num)
++	{
++		Load_ReEncData();
++
++		gSecInstInfo.Num = 0;
++	}
++}
++
++static int32_t Load_SecModule(void)
++{
++	uintptr_t LoadAdd;
++	uintptr_t ExecAdd;
++
++	uint32_t spiAdd;
++	uint32_t workAdd_Min, workAdd_Max;
++	uint32_t loadSize;
++
++	PutStr(" ",1);
++	PutStr("===== Security Module loading of RZ/G2 Board Command =============",1);
++
++	if (Load_PreSubFunc(&gUserPrgStartAdd, &spiAdd))
++	{
++		return ERROR_END;
++	}
++
++	PutStr(" ",1);
++	PutStr("-- Load Security Module to WorkRAM ---------------",1);
++
++	if (dgLS_Load_Offset2(&workAdd_Max, &workAdd_Min))
++	{
++		return ERROR_END;
++	}
++
++	if (Load_PostSubFunc(workAdd_Max, workAdd_Min, spiAdd))
++	{
++		return ERROR_END;
++	}
++
++	LoadAdd = (uintptr_t)spiAdd;
++	ExecAdd = (uintptr_t)gUserPrgStartAdd;
++	loadSize = workAdd_Max - workAdd_Min + 1;
++
++	Fast4RdQspiFlash(LoadAdd, ExecAdd, loadSize);
++
++	secure_boot_arg = (st_sec_module_arg_t *) ExecAdd;
++	secure_boot_api = (fp_sec_module_api_t)((uint64_t)ExecAdd + SEC_MODULE_SHARED_SIZE);
++
++	mmio_write_32(CPG_CPGWPR,  0x5A5AFFFF);
++	mmio_write_32(CPG_CPGWPCR, 0xA5A50000);
++
++	return NORMAL_END;
++}
++
++
++static int32_t Load_InjectKey(void)
++{
++	uint32_t spiAdd;
++	uint32_t workAdd_Min, workAdd_Max;
++	uint32_t loadSize;
++
++	uintptr_t src,dst;
++
++	st_reset_init_t * reset_init;
++	st_inject_key_t * inject_key;
++
++	PutStr(" ",1);
++	PutStr("===== Key Injection of RZ/G2 Board Command =============",1);
++
++	if (Load_PreSubFunc(&gUserPrgStartAdd, &spiAdd))
++	{
++		return ERROR_END;
++	}
++
++	PutStr(" ",1);
++	PutStr("-- Load Encrypted User Keyring ---------------",1);
++
++	if (dgLS_Load_Offset2(&workAdd_Max, &workAdd_Min))
++	{
++		return ERROR_END;
++	}
++
++	reset_init = &(secure_boot_arg->prm).reset_init;
++	secure_boot_arg->cmd = CMD_RESET_INIT;
++	secure_boot_arg->len = sizeof(st_reset_init_t);
++	reset_init->inst_area = (uint64_t) s_inst_data;
++
++	PutStr(" ",1);
++	PutStr("Security Module Command: CMD_RESET_INIT", 1);
++	if (SEC_MODULE_RET_OK != secure_boot_api())
++	{
++		PutStr(" ",1);
++		PutStr("Security Module CMD_RESET_INIT Command Error", 1);
++		return ERROR_END;
++	}
++
++	inject_key = &(secure_boot_arg->prm).inject_key;
++	secure_boot_arg->cmd = CMD_INJECT_KEY;
++	secure_boot_arg->len = sizeof(st_inject_key_t);
++	inject_key->key_ring = (uint64_t) workAdd_Min;
++	inject_key->prov_key = (uint64_t) EncProvisioningKey;
++
++	PutStr(" ",1);
++	PutStr("Security Module Command: CMD_INJECT_KEY", 1);
++	if (SEC_MODULE_RET_OK != secure_boot_api())
++	{
++		PutStr(" ",1);
++		PutStr("Security Module CMD_INJECT_KEY Command Error", 1);
++		return ERROR_END;
++	}
++
++	src = (uintptr_t)s_inst_data;
++	dst = (uintptr_t)workAdd_Min;
++	memcpy((void *)dst, (void *)src, sizeof(s_inst_data));
++	workAdd_Max = workAdd_Min + sizeof(s_inst_data) - 1;
++
++	if (Load_PostSubFunc(workAdd_Max, workAdd_Min, spiAdd))
++	{
++		return ERROR_END;
++	}
++
++	return NORMAL_END;
++}
++
++static int32_t Load_ReEncData(void)
++{
++	char str[64];
++
++	uintptr_t Load_workStartAdd;
++	uintptr_t Load_workEndAdd;
++
++	uintptr_t reenc_Src;
++	uintptr_t reenc_Dst;
++
++	st_sec_module_arg_t boot_Hdr;
++
++	st_reset_init_t * reset_init;
++	st_re_enc_data_t * re_enc_data;
++
++	Load_workStartAdd = LS_WORK_DRAM_SADD;
++	Load_workEndAdd = LS_WORK_DRAM_EADD_64M;
++
++	reenc_Src = (uintptr_t)Load_workEndAdd + 1;
++	reenc_Dst = (uintptr_t)Load_workStartAdd + SEC_MODULE_SHARED_SIZE;
++
++	PutStr(" ",1);
++	PutStr("Work RAM(H'50000000-H'53FFFFFF) Clear....",1);
++	FillData32Bit((uint32_t *)Load_workStartAdd,(uint32_t *)Load_workEndAdd,0xFFFFFFFF);
++
++	reset_init = &(secure_boot_arg->prm).reset_init;
++	secure_boot_arg->cmd = CMD_RESET_INIT;
++	secure_boot_arg->len = sizeof(st_reset_init_t);
++	reset_init->inst_area = (uint64_t) s_inst_data;
++
++	PutStr(" ",1);
++	PutStr("Security Module Command: CMD_RESET_INIT", 1);
++	if (SEC_MODULE_RET_OK != secure_boot_api())
++	{
++		PutStr(" ",1);
++		PutStr("Security Module CMD_RESET_INIT Command Error", 1);
++		return ERROR_END;
++	}
++
++	re_enc_data = &(secure_boot_arg->prm).re_enc_data;
++	secure_boot_arg->cmd = CMD_RE_ENC_DATA;
++	secure_boot_arg->len = sizeof(st_re_enc_data_t);
++    
++	for(int i = 0; i < gSecInstInfo.Num; i++)
++	{
++		reenc_Src = (reenc_Src - gSecInstInfo.List[i].Size) & (~0xFF);
++
++		re_enc_data->list[i].src = (uint64_t)reenc_Src;
++		re_enc_data->list[i].len = (uint64_t)gSecInstInfo.List[i].Size;
++		re_enc_data->list[i].dst = (uint64_t)reenc_Dst;
++
++		/* Calculate the output address of the next re-encrypted data */
++		reenc_Dst = (((reenc_Dst + gSecInstInfo.List[i].Size) + 0xFF) & (~0xFF)) + SEC_MODULE_SHARED_SIZE;
++
++		if (reenc_Dst >= reenc_Src)
++		{
++			PutStr("Re-Encrypted Data over size Error", 1);
++			return ERROR_END;
++		} else {
++			uintptr_t src = (uintptr_t)gSecInstInfo.List[i].Spif;
++			uintptr_t dst = reenc_Src;
++
++			Fast4RdQspiFlash(src, dst, gSecInstInfo.List[i].Size);
++		}
++	}
++
++	re_enc_data->num = gSecInstInfo.Num;
++
++	PutStr(" ",1);
++	PutStr("Security Module Command: CMD_RE_ENC_DATA", 1);
++	if (SEC_MODULE_RET_OK != secure_boot_api())
++	{
++		PutStr(" ",1);
++		PutStr("Security Module CMD_RE_ENC_DATA Command Error", 1);
++		return ERROR_END;
++	}
++
++	for(int i = 0; i < re_enc_data->num; i++)
++	{
++		uintptr_t spiAdd;
++		uintptr_t workAdd_Min, workAdd_Max;
++
++		boot_Hdr.cmd = CMD_VERIFY_DATA;
++		boot_Hdr.len = sizeof(st_verify_data_t);
++        
++		if (0 == i)
++		{
++			boot_Hdr.prm.verify_data.len = re_enc_data->list[i].len + 64;
++		} else {
++			boot_Hdr.prm.verify_data.len = re_enc_data->list[i].len + 16;
++		}
++		boot_Hdr.prm.verify_data.src = (uint64_t)gSecInstInfo.List[i].Exec + SEC_MODULE_SHARED_SIZE;
++		boot_Hdr.prm.verify_data.dst = (uint64_t)gSecInstInfo.List[i].Exec;
++		boot_Hdr.prm.verify_data.heap = 0; /* Must be set when booting. */
++
++		spiAdd = (uintptr_t)gSecInstInfo.List[i].Spif;
++		workAdd_Min = (uintptr_t)re_enc_data->list[i].dst - SEC_MODULE_SHARED_SIZE;
++		workAdd_Max = (uintptr_t)re_enc_data->list[i].dst + boot_Hdr.prm.verify_data.len - 1;
++        
++		memcpy((void *)workAdd_Min, (void *)&boot_Hdr, sizeof(st_sec_module_arg_t));
++
++		if (Load_PostSubFunc(workAdd_Max, workAdd_Min, spiAdd))
++		{
++			return ERROR_END;
++		}
++	}
++
++	return NORMAL_END;
++}
++
++static int32_t Load_PreSubFunc(uint32_t *ramAdd, uint32_t *spiAdd)
++{
++	uintptr_t Load_workStartAdd;
++	uintptr_t Load_workEndAdd;
++
++	InitRPC_Mode();
++
++	if(CheckQspiFlashId())
++	{
++		/* Error Abort */
++		return ERROR_END;
++	}
++
++	gUserPrgStartAdd = 0x0;
++	PutStr("Program Top Address & Qspi Save Address ",1);
++
++	gSpiFlashSvArea = 3;
++	gUserPrgStartAdd = 0x0;
++
++	Load_workStartAdd = LS_WORK_DRAM_SADD;
++	Load_workEndAdd = LS_WORK_DRAM_EADD_64M;
++
++	*ramAdd	= 0x0;
++	*spiAdd	= 0x0;
++
++	PutStr("===== Please Input Program Top Address ============",1);
++	SetAddInputKey(ramAdd);
++
++	PutStr(" ",1);
++	PutStr("===== Please Input Qspi Save Address ===",1);
++	SetAddInputKey(spiAdd);
++
++	if (gQspi_end_addess < *spiAdd)
++	{
++		PutStr("Address Input Error", 1);
++		PutStr("Range of H'000_0000 ~ H'0FF_7FFF", 1);
++		return ERROR_END;
++	}
++
++	/* WorkMemory Clear (Write H'FF) */
++	PutStr(" ",1);
++	PutStr("Work RAM(H'50000000-H'53FFFFFF) Clear....",1);
++	FillData32Bit((uint32_t *)Load_workStartAdd,(uint32_t *)Load_workEndAdd,0xFFFFFFFF);
++
++	return NORMAL_END;
++}
++
++static int32_t Load_PostSubFunc(uint32_t workAdd_Max, uint32_t workAdd_Min, uint32_t spiAdd)
++{
++	char str[64];
++
++	uint32_t ClrSpiStartSecTopAdd, ClrSpiSecEndAdd;
++	uint32_t clearSize;
++
++	uint32_t MaskSectorSize;
++	uint32_t WriteDataStatAdd;
++	uint32_t PrgSpiStatAdd, PrgSpiEndAdd;
++	uint32_t saveSize;
++
++	PrgSpiStatAdd = spiAdd;
++	PrgSpiEndAdd = spiAdd + (workAdd_Max - workAdd_Min);
++	saveSize = (PrgSpiEndAdd - PrgSpiStatAdd) + 1;
++
++	if (PrgSpiEndAdd > gQspi_end_addess)
++	{
++		PutStr("Program over size Error", 1);
++		PutStr(" SpiFlashMemory Stat Address : H'", 0);
++		Data2HexAscii(PrgSpiStatAdd, str, 4);
++		PutStr(str ,1);
++		PutStr(" SpiFlashMemory End Address  : H'", 0);
++		Data2HexAscii(PrgSpiEndAdd,str, 4);
++		PutStr(str, 1);
++		return ERROR_END;
++	}
++	MaskSectorSize = (~gQspi_sa_size) + 1;
++
++	WriteDataStatAdd = workAdd_Min;
++	ClrSpiStartSecTopAdd = PrgSpiStatAdd & MaskSectorSize;
++	ClrSpiSecEndAdd = PrgSpiEndAdd | ~(MaskSectorSize);
++
++	clearSize = (ClrSpiSecEndAdd-ClrSpiStartSecTopAdd) + 1;
++
++	if (CkQspiFlash1ClearSectorSize(WORK_SPI_LOAD_AREA, ClrSpiStartSecTopAdd, clearSize,1))
++	{
++		return ERROR_END;
++	}
++	/* SAVE QSPI-FLASH */
++	PutStr(" ",1);
++	PutStr("SAVE SPI-FLASH.......",0);
++	SaveDataWithBuffeQspiFlash(WriteDataStatAdd, PrgSpiStatAdd, saveSize);  //Manual Mode Single WriteBuffe
++	PutStr("",1);
++	PutStr("======= Qspi  Save Information  =================",1);
++	PutStr(" SpiFlashMemory Stat Address : H'",0);
++	Data2HexAscii(PrgSpiStatAdd,str,4);
++	PutStr(str,1);
++	PutStr(" SpiFlashMemory End Address  : H'",0);
++	Data2HexAscii(PrgSpiEndAdd,str,4);
++	PutStr(str,1);
++	PutStr("===========================================================",1);
++	PutStr("",1);
++
++	return NORMAL_END;
++}
+-- 
+2.7.4
+

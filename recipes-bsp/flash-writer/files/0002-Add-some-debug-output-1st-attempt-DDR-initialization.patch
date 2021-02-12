@@ -1,0 +1,245 @@
+From 5746ac91b736f5ebef05ff030e032353bd3e67b9 Mon Sep 17 00:00:00 2001
+From: Andreas Dumberger <andreas.dumberger@tq-group.com>
+Date: Wed, 22 Jul 2020 14:00:21 +0200
+Subject: [PATCH 1/4] Add some debug output + 1st attempt DDR initialization
+
+---
+ AArch64_boot/boot_mon.s            |  9 +++++----
+ common.c                           | 23 ++++++++++++++++++++++-
+ ddr/lpddr4/boot_init_dram.c        | 21 ++++++++++++++-------
+ ddr/lpddr4/boot_init_dram_config.c | 38 +++++++++++++++++++++++++++++++++++++-
+ ddr/lpddr4/boot_init_dram_regdef.h |  2 +-
+ include/common.h                   |  1 +
+ 6 files changed, 80 insertions(+), 14 deletions(-)
+
+diff --git a/AArch64_boot/boot_mon.s b/AArch64_boot/boot_mon.s
+index c78a08b..0f0f95c 100644
+--- a/AArch64_boot/boot_mon.s
++++ b/AArch64_boot/boot_mon.s
+@@ -160,10 +160,8 @@ data_end:
+ 	bl	PutStr
+ 
+ 	mov	x0, x19	/* return value of InitDram */
+-	ldr	x1, =str_buf
+-	ldr	x2, =cnt
+-	bl	Hex2Ascii
+-	mov	x0, x1
++	bl	PutHex
++	ldr	x0, =end_str
+ 	mov	x1, #1
+ 	bl	PutStr
+ 1:
+@@ -178,6 +176,9 @@ data_end:
+ dram_err_msg:
+ 	.asciz "InitDram error=0x"
+ 
++end_str:
++        .asciz "\n"
++
+ 	.section .bss
+ 	.align	4
+ cnt:
+diff --git a/common.c b/common.c
+index 91302ae..4526bcf 100644
+--- a/common.c
++++ b/common.c
+@@ -189,6 +189,27 @@ int32_t GetStr(char *str,char *chCnt)
+ }
+ 
+ /************************************************************************/
++/*NAME		: PutHex						*/
++/************************************************************************/
++void PutHex(const uint32_t hexdata)
++{
++	long    i;
++	char    ch;
++
++	for( i = 7; i >= 0; i-- )
++	{
++		ch = (char)(hexdata >> (i*4));
++		ch &= 0x0f;
++		if ( ch > 9 )
++		{
++			ch += 7;
++		}
++		ch += 0x30;
++		PutChar(ch);
++	}
++}
++
++/************************************************************************/
+ /*NAME		: Hex2Ascii						*/
+ /************************************************************************/
+ uint32_t Hex2Ascii(int32_t hexdata,char *str,int32_t *chcnt)
+diff --git a/ddr/lpddr4/boot_init_dram.c b/ddr/lpddr4/boot_init_dram.c
+index 44bef6d..e597cea 100644
+--- a/ddr/lpddr4/boot_init_dram.c
++++ b/ddr/lpddr4/boot_init_dram.c
+@@ -966,18 +966,18 @@ struct _jedec_spec2 {
+ const struct _jedec_spec2 jedec_spec2[2][JS2_TBLCNT] = {
+ 	{
+ /*tSR   */	{  15000,  3 },
+-/*tXP   */	{   7500,  3 },
++/*tXP   */	{   7500,  5 },
+ /*tRTP  */	{   7500,  8 },
+ /*tRCD  */	{  18000,  4 },
+-/*tRPpb */	{  18000,  3 },
+-/*tRPab */	{  21000,  3 },
++/*tRPpb */	{  18000,  4 },
++/*tRPab */	{  21000,  4 },
+ /*tRAS  */	{  42000,  3 },
+-/*tWR   */	{  18000,  4 },
++/*tWR   */	{  18000,  6 },
+ /*tWTR  */	{  10000,  8 },
+ /*tRRD  */	{  10000,  4 },
+ /*tPPD  */	{      0,  0 },
+ /*tFAW  */	{  40000,  0 },
+-/*tDQSCK*/	{   3500,  0 },
++/*tDQSCK*/	{   3600,  0 },
+ /*tCKEHCMD*/	{   7500,  3 },
+ /*tCKELCMD*/	{   7500,  3 },
+ /*tCKELPD*/	{   7500,  3 },
+@@ -985,12 +985,12 @@ const struct _jedec_spec2 jedec_spec2[2][JS2_TBLCNT] = {
+ /*tMRW*/	{  10000, 10 },
+ /*tMRD*/	{  14000, 10 },
+ /*tZQCALns*/	{1000*10,  0 },
+-/*tZQLAT*/	{  30000, 10 },
++/*tZQLAT*/	{  30000,  8 },
+ /*tIEdly*/	{  12500,  0 },
+ /*tODTon_min*/	{   1500,  0 }
+ 	}, {
+ /*tSR   */	{  15000,  3 },
+-/*tXP   */	{   7500,  3 },
++/*tXP   */	{   7500,  5 },
+ /*tRTP  */	{   7500,  8 },
+ /*tRCD  */	{  19875,  4 },
+ /*tRPpb */	{  19875,  3 },
+@@ -4085,18 +4085,22 @@ int32_t InitDram(void)
+ 
+ 	if (Prr_Product == PRR_PRODUCT_G2H)
+ 	{
++                PutStr("CPU type: RZG2H\r\n");
+ 		pDDR_REGDEF_TBL = (const uint32_t *)&DDR_REGDEF_TBL[2][0];
+ 	}
+ 	else if (Prr_Product == PRR_PRODUCT_G2M)
+ 	{
++                PutStr("CPU type: RZG2M\r\n");
+ 		pDDR_REGDEF_TBL = (const uint32_t *)&DDR_REGDEF_TBL[1][0];
+ 	}
+ 	else if (Prr_Product == PRR_PRODUCT_G2N)
+ 	{
++                PutStr("CPU type: RZG2N\r\n");
+ 		pDDR_REGDEF_TBL = (const uint32_t *)&DDR_REGDEF_TBL[3][0];
+ 	}
+ 	else
+ 	{
++                PutStr("CPU type: unknown!\r\n");
+ 		FATAL_MSG("BL2: DDR:Unknown Product\n");
+ 		return 0xff;
+ 	}
+@@ -4104,6 +4108,9 @@ int32_t InitDram(void)
+ 	if ((Prr_Product == PRR_PRODUCT_G2M) && (Prr_Cut < PRR_PRODUCT_30))
+ 	{
+ 		/* non */
++                PutStr("Old M-Type! (PRR=0x");
++                PutHex(mmio_read_32(PRR));
++                PutStr(")\r\n");
+ 	}
+ 	else
+ 	{
+diff --git a/ddr/lpddr4/boot_init_dram_config.c b/ddr/lpddr4/boot_init_dram_config.c
+index 8247ddd..3502605 100644
+--- a/ddr/lpddr4/boot_init_dram_config.c
++++ b/ddr/lpddr4/boot_init_dram_config.c
+@@ -11,12 +11,13 @@
+  *	NUMBER OF BOARD CONFIGRATION
+  *	PLEASE DEFINE
+  ******************************************************************************/
+-#define BOARDNUM 6
++#define BOARDNUM 7
+ /*******************************************************************************
+  *	PLEASE SET board number or board judge function
+  ******************************************************************************/
+ static uint32_t boardcnf_get_brd_type(void)
+ {
++#if 0
+ 	uint32_t Prr_Product;
+ 	uint32_t judge = 0;
+ 	uint32_t reg;
+@@ -52,6 +53,8 @@ static uint32_t boardcnf_get_brd_type(void)
+ 		judge = 5;	/* 1rank setting	*/
+ 	}
+ 	return (judge);
++#endif
++	return (6);    /* TQMaRZG2x */
+ }
+ 
+ /*******************************************************************************
+@@ -492,6 +495,39 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+ 			  0, 0, 0, 0, 0, 0, 0, 0 }
+ 		}
+ 	}
++},
++/*
++ * boardcnf[6] TQMaRZG2N 8Gbit/1Rank/2ch --> 16 Gbit total per Chip --> 16 Gbit total on module = 2 GB
++ */
++{
++	0x01,		/* phyvalid */
++	0x01,		/* dbi_en */
++	0x0300,		/* cacs_dly */
++	0,		/* cacs_dly_adj */
++	0x0300,		/* dqdm_dly_w */
++	0x00a0,		/* dqdm_dly_r */
++	{
++/*ch[0]*/	{
++/*ddr_density[]*/	{ 0x02, 0xff },
++/*ca_swap*/		0x00543210,
++/*dqs_swap*/		0x3210,
++/*dq_swap[]*/		{ 0x17602534, 0x23546701, 0x43257160, 0x10765243 },
++/*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
++/*wdqlvl_patt[]*/	WDQLVL_PAT,
++/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0 },
++/*dm_adj_w*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 },
++/*dm_adj_r*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 }
++		},
++	}
+ }
+ };
+ 
+diff --git a/ddr/lpddr4/boot_init_dram_regdef.h b/ddr/lpddr4/boot_init_dram_regdef.h
+index f05869a..ee55362 100644
+--- a/ddr/lpddr4/boot_init_dram_regdef.h
++++ b/ddr/lpddr4/boot_init_dram_regdef.h
+@@ -23,7 +23,7 @@
+ #define DBMEMCONF_VAL(ch, cs) (DBMEMCONF_REGD(DBMEMCONF_DENS(ch, cs)))
+ 
+ /* refresh mode */
+-#define DBSC_REFINTS		0x0		/* 0: Average interval is REFINT. / 1: Average interval is 1/2 REFINT. */
++#define DBSC_REFINTS		0x1		/* 0: Average interval is REFINT. / 1: Average interval is 1/2 REFINT. */
+ 
+ /* system registers */
+ #define CPG_BASE		(0xE6150000U)
+diff --git a/include/common.h b/include/common.h
+index 4ac22b0..0b1bda7 100644
+--- a/include/common.h
++++ b/include/common.h
+@@ -79,6 +79,7 @@ extern uint32_t	gTerminal;
+ *********************************/
+ int32_t PutMess(const char *const mess[]);
+ int32_t	PutStr(const char *str,char rtn);
++void PutHex(const uint32_t hexdata);
+ #if USB_ENABLE == 1
+ int32_t PutMessUSB(const char *const mess[]);
+ int32_t	PutStrUSB(const char *str,char rtn);
+-- 
+2.7.4
+
