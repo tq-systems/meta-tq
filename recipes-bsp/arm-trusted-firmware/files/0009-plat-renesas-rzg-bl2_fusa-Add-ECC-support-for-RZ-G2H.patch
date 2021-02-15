@@ -1,22 +1,22 @@
-From 137901a2e4a4e9a81de10c14f00308adcaeb315d Mon Sep 17 00:00:00 2001
-From: Huynh Thanh Hung <hung.huynh.wz@renesas.com>
-Date: Mon, 11 May 2020 11:34:32 +0700
-Subject: [PATCH 2/2] plat:renesas:rcar: bl2_fusa: Add ECC support for RZ/G2H
+From 2b167e6dd5e53bb2c2be688440d3fa811028ee39 Mon Sep 17 00:00:00 2001
+From: hienhuynh <hien.huynh.px@renesas.com>
+Date: Thu, 2 Jul 2020 19:20:12 +0700
+Subject: [PATCH 10/10] plat: renesas: rzg: bl2_fusa: Add ECC support for
+ RZ/G2H
 
 This patch will add ecc support for RZ/G2H for both single mode and dual
 mode
 
 Signed-off-by: Huynh Thanh Hung <hung.huynh.wz@renesas.com>
+Signed-off-by: hienhuynh <hien.huynh.px@renesas.com>
 ---
- plat/renesas/rcar/bl2_fusa.c       | 106 ++++++++++++++++++++++++++++-
- plat/renesas/rcar/bl2_rcar_setup.c |   7 ++
- plat/renesas/rcar/platform.mk      |   6 ++
- 3 files changed, 117 insertions(+), 2 deletions(-)
+ plat/renesas/rzg/bl2_fusa.c | 111 +++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 109 insertions(+), 2 deletions(-)
 
-diff --git a/plat/renesas/rcar/bl2_fusa.c b/plat/renesas/rcar/bl2_fusa.c
-index 3139b737..0c1d4062 100644
---- a/plat/renesas/rcar/bl2_fusa.c
-+++ b/plat/renesas/rcar/bl2_fusa.c
+diff --git a/plat/renesas/rzg/bl2_fusa.c b/plat/renesas/rzg/bl2_fusa.c
+index d898b44..8547c68 100644
+--- a/plat/renesas/rzg/bl2_fusa.c
++++ b/plat/renesas/rzg/bl2_fusa.c
 @@ -53,6 +53,23 @@
  #define	HHOPE_G2M_ECCAREA		0x608000000
  #define	HHOPE_G2M_ECCAREA_TOTAL		((1920)*1024*1024)
@@ -38,15 +38,17 @@ index 3139b737..0c1d4062 100644
 +#define	HHOPE_G2H_ECCAREA2_TOTAL	((1024)*1024*1024)
 +#endif
 +
- static const struct rzg2_ecc_conf {
+ struct rzg2_ecc_conf {
  	uint32_t fusaareacr;
  	uint32_t eccareacr;
-@@ -111,6 +128,34 @@ static const struct rzg2_ecc_conf rzg2_hihope_rzg2n_conf[] = {
-         { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+@@ -117,7 +134,37 @@ static const struct rzg2_ecc_conf rzg2_hihope_rzg2n_conf[] = {
  };
+ #endif
  
+-#if (RZG_HIHOPE_RZG2M == 1)
++#if (RZG_DRAM_ECC == 1 && RZG_HIHOPE_RZG2H == 1)
 +static const struct rzg2_ecc_conf rzg2_hihope_rzg2h_conf[] = {
-+#if (RZG_DRAM_ECC_FULL == 2)	// ECC Full mode single channel
++#if (RZG_DRAM_ECC_FULL == 2)   // ECC Full mode single channel
 +	{ FUSAAREACR(1, 6, 0x408000000), ECCAREACR(0, 0x444000000) }, /* 64+64 MB */
 +	{ FUSAAREACR(1, 7, 0x40C000000), ECCAREACR(0, 0x448000000) }, /* 128+128 MB */
 +	{ FUSAAREACR(1, 8, 0x414000000), ECCAREACR(0, 0x450000000) }, /* 256+256 MB */
@@ -72,33 +74,26 @@ index 3139b737..0c1d4062 100644
 +	{ FUSAAREACR(0, 0, 0), ECCAREACR(0, 0) },
 +	{ FUSAAREACR(0, 0, 0), ECCAREACR(0, 0) },
 +};
++#endif
 +
- #if (RZG_DRAM_ECC_FULL == 1)	// ECC Full mode dual channel
++#if ((RZG_HIHOPE_RZG2M == 1 || RZG_HIHOPE_RZG2H == 1) && RZG_DRAM_ECC == 1)
+ #if (RZG_DRAM_ECC_FULL == 1) // ECC Full mode dual channel
  static const uint32_t fusacr = EFUSASEL(0xF0) | DFUSASEL(0xFE)| SFUSASEL(0);
  static const uint32_t adsplcr0 = ADRMODE(0) | SPLITSEL(1) | AREA(0x1C) | SWP(0);
-@@ -125,7 +170,7 @@ static const uint32_t adsplcr2 = 0;
+@@ -131,7 +178,7 @@ static const uint32_t adsplcr1 = 0;
+ static const uint32_t adsplcr2 = 0;
  static const uint32_t adsplcr3 = 0;
  #endif //(RZG_DRAM_ECC_FULL == 1)
+-#endif //(RZG_HIHOPE_RZG2M == 1)
++#endif //((RZG_HIHOPE_RZG2M == 1 || RZG_HIHOPE_RZG2H == 1) && RZG_DRAM_ECC == 1)
  
--#if ((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL == 1))
-+#if ((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL !=0))
+ #if ((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL != 0))
  /* Write zero-valued octa-byte words */
- static void bzero64(uintptr_t start, uint64_t size)
- {
-@@ -136,7 +181,7 @@ static void bzero64(uintptr_t start, uint64_t size)
- 	while (ptr < end)
- 		*ptr++ = 0;
+@@ -247,6 +294,64 @@ static void bl2_enable_ecc_hihope_rzg2m(void)
  }
--#endif //((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL == 1))
-+#endif //((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL != 0))
+ #endif
  
- /* Setup DRAM ECC configuration registers */
- void bl2_enable_ecc_ek874(void)
-@@ -225,3 +270,60 @@ void bl2_enable_ecc_hihope_rzg2m(void)
- 	bzero64(HHOPE_G2M_FUSAAREA, (uint64_t)HHOPE_G2M_FUSAAREA_TOTAL);
- #endif //((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL == 1))
- }
-+
++#if (RZG_DRAM_ECC == 1 && RZG_HIHOPE_RZG2H == 1)
 +void bl2_enable_ecc_hihope_rzg2h(void)
 +{
 +	const struct rzg2_ecc_conf *conf;
@@ -133,15 +128,15 @@ index 3139b737..0c1d4062 100644
 +	NOTICE("     FUSACR=0x%x\n",fusacr);
 +	for (n = 0; n < nb_of_conf; n++, conf++) {
 +		mmio_write_32((uintptr_t)((uint32_t *)DFUSAAREACR + n),
-+			      conf->fusaareacr);
++				conf->fusaareacr);
 +		mmio_write_32((uintptr_t)((uint32_t *)DECCAREACR + n),
-+			      conf->eccareacr);
-+		if(conf->fusaareacr & (1 << 31))
++				conf->eccareacr);
++		if(conf->fusaareacr & ((uint32_t)1 << 31))
 +			NOTICE("BL2: DRAM ECC area=%d, FuSa=0x%x ECC=0x%x,\
 +				size=%d MB\n",
 +				n, conf->fusaareacr, conf->eccareacr,
 +				1 << ((conf->fusaareacr >> 24) & 0xf));
-+	}
++       }
 +#if (FUSA_DRAM_CLEAR == 1)
 +	/* Clear DRAM data area to initialize ECC area */
 +#if (RZG_DRAM_ECC_FULL != 0)
@@ -151,45 +146,23 @@ index 3139b737..0c1d4062 100644
 +#if (RZG_DRAM_ECC_FULL == 2)
 +	NOTICE("BL2: Clearing DATA area from %lx\n", HHOPE_G2H_FUSAAREA2);
 +	bzero64(HHOPE_G2H_FUSAAREA2, (uint64_t)HHOPE_G2H_FUSAAREA2_TOTAL);
-+
 +#endif //(RZG_DRAM_ECC_FULL == 2)
 +#endif //(FUSA_DRAM_CLEAR == 1)
 +}
-diff --git a/plat/renesas/rcar/bl2_rcar_setup.c b/plat/renesas/rcar/bl2_rcar_setup.c
-index 6c2db55a..a18dcf20 100644
---- a/plat/renesas/rcar/bl2_rcar_setup.c
-+++ b/plat/renesas/rcar/bl2_rcar_setup.c
-@@ -767,6 +767,13 @@ static void rcar_bl2_early_platform_setup(const meminfo_t *mem_layout)
-                 bl2_enable_ecc_hihope_rzg2n();
-         }
- #endif
-+
-+#if (RZG_DRAM_HIHOPE_RZG2H_ECC == 1)
-+        {
-+                extern void bl2_enable_ecc_hihope_rzg2h(void);
-+                bl2_enable_ecc_hihope_rzg2h();
-+        }
 +#endif
- 	if ((modemr_boot_dev == MODEMR_BOOT_DEV_EMMC_25X1) ||
- 	    (modemr_boot_dev == MODEMR_BOOT_DEV_EMMC_50X8)) {
- 		/* Initialize eMMC */
-diff --git a/plat/renesas/rcar/platform.mk b/plat/renesas/rcar/platform.mk
-index e7b2c849..86bb5ad2 100644
---- a/plat/renesas/rcar/platform.mk
-+++ b/plat/renesas/rcar/platform.mk
-@@ -417,6 +417,12 @@ RZG_DRAM_HIHOPE_RZG2N_ECC :=0
- endif
- $(eval $(call add_define,RZG_DRAM_HIHOPE_RZG2N_ECC))
- 
-+# Process RZG_DRAM_HIHOPE_RZG2H_ECC flag
-+ifndef RZG_DRAM_HIHOPE_RZG2H_ECC
-+RZG_DRAM_HIHOPE_RZG2H_ECC :=0
-+endif
-+$(eval $(call add_define,RZG_DRAM_HIHOPE_RZG2H_ECC))
 +
- # Process RZG_DRAM_ECC_FULL flag
- # 0 : ECC Full mode will not be applied
- # 1 : ECC Full mode dual channel will be applied
+ void bl2_ecc_init(void)
+ {
+ #if (RZG_DRAM_ECC == 1)
+@@ -257,6 +362,8 @@ void bl2_ecc_init(void)
+ 	bl2_enable_ecc_hihope_rzg2m();
+ #elif (RZG_HIHOPE_RZG2N == 1)
+ 	bl2_enable_ecc_hihope_rzg2n();
++#elif (RZG_HIHOPE_RZG2H == 1)
++	bl2_enable_ecc_hihope_rzg2h();
+ 	return;
+ #else
+ #error "Don't have ECC initialize routine(unknown)."
 -- 
-2.17.1
+2.7.4
 

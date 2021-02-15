@@ -1,29 +1,59 @@
-From 02f41985468a3409ad10b266d343aaa40ae3c793 Mon Sep 17 00:00:00 2001
-From: Huynh Thanh Hung <hung.huynh.wz@renesas.com>
-Date: Mon, 11 May 2020 13:55:14 +0700
-Subject: [PATCH 1/2] plat:renesas:rcar: Change value condition of
+From 7466981e053ee984f35d8e9dc6d656dfe9780796 Mon Sep 17 00:00:00 2001
+From: hienhuynh <hien.huynh.px@renesas.com>
+Date: Thu, 2 Jul 2020 19:05:20 +0700
+Subject: [PATCH 09/10] plat: renesas: rzg: Change value condition of
  RZG_DRAM_ECC_FULL
 
-Since we can support two ECC FULL modes in 1 SoC(ex: RZ/G2H), we should split them into 2
-conditions of RZG_DRAM_ECC_FULL for mode selection.
+Since we can support two ECC FULL modes in 1 SoC(ex: RZ/G2H),
+we should split them into 2 conditions of RZG_DRAM_ECC_FULL
+for mode selection.
 
 Signed-off-by: Huynh Thanh Hung <hung.huynh.wz@renesas.com>
+Signed-off-by: hienhuynh <hien.huynh.px@renesas.com>
 ---
- plat/renesas/rcar/bl2_fusa.c               | 30 +++++++++++-----------
- plat/renesas/rcar/drivers/timer/bl2_swdt.c |  6 ++---
- plat/renesas/rcar/platform.mk              |  3 +++
- 3 files changed, 21 insertions(+), 18 deletions(-)
+ drivers/renesas/rcar/watchdog/swdt.c |  6 +++---
+ plat/renesas/rzg/bl2_fusa.c          | 29 ++++++++++++++---------------
+ plat/renesas/rzg/platform.mk         |  3 +++
+ 3 files changed, 20 insertions(+), 18 deletions(-)
 
-diff --git a/plat/renesas/rcar/bl2_fusa.c b/plat/renesas/rcar/bl2_fusa.c
-index 16038fd8..3139b737 100644
---- a/plat/renesas/rcar/bl2_fusa.c
-+++ b/plat/renesas/rcar/bl2_fusa.c
-@@ -57,19 +57,19 @@ static const struct rzg2_ecc_conf {
- 	uint32_t fusaareacr;
- 	uint32_t eccareacr;
- } rzg2_ek874_conf[] = {
+diff --git a/drivers/renesas/rcar/watchdog/swdt.c b/drivers/renesas/rcar/watchdog/swdt.c
+index 7b94d3d..69cab16 100644
+--- a/drivers/renesas/rcar/watchdog/swdt.c
++++ b/drivers/renesas/rcar/watchdog/swdt.c
+@@ -49,12 +49,12 @@ extern void gicd_set_icenabler(uintptr_t base, unsigned int id);
+ #define WTCSRA_INIT_DATA		(WTCSRA_UPPER_BYTE + 0x0FU)
+ #define WTCSRB_INIT_DATA		(WTCSRB_UPPER_BYTE + 0x21U)
+ 
 -#if (RZG_DRAM_ECC_FULL == 1)
-+#if (RZG_DRAM_ECC_FULL == 2)	// ECC Full mode single channle
++#if (RZG_DRAM_ECC_FULL != 0)
+ #define WTCNT_COUNT_8p13k		(0U)
+ #define WTCNT_COUNT_8p13k_H3VER10	(0U)
+ #define WTCNT_COUNT_8p22k		(0U)
+ #define WTCNT_COUNT_7p81k		(0U)
+-#else //(RZG_DRAM_ECC_FULL == 1)
++#else //(RZG_DRAM_ECC_FULL != 0)
+ #if RCAR_LSI == RCAR_D3
+ #define WTCNT_COUNT_8p13k		(0x10000U - 40760U)
+ #else
+@@ -63,7 +63,7 @@ extern void gicd_set_icenabler(uintptr_t base, unsigned int id);
+ #define WTCNT_COUNT_8p13k_H3VER10	(0x10000U - 20343U)
+ #define WTCNT_COUNT_8p22k		(0x10000U - 41115U)
+ #define WTCNT_COUNT_7p81k		(0x10000U - 39062U)
+-#endif //(RZG_DRAM_ECC_FULL == 1)
++#endif //(RZG_DRAM_ECC_FULL != 0)
+ #define WTCSRA_CKS_DIV16		(0x00000002U)
+ 
+ static void swdt_disable(void)
+diff --git a/plat/renesas/rzg/bl2_fusa.c b/plat/renesas/rzg/bl2_fusa.c
+index 0c79460..d898b44 100644
+--- a/plat/renesas/rzg/bl2_fusa.c
++++ b/plat/renesas/rzg/bl2_fusa.c
+@@ -60,19 +60,19 @@ struct rzg2_ecc_conf {
+ 
+ #if (RZG_DRAM_ECC == 1 && RZG_EK874 == 1)
+ static const struct rzg2_ecc_conf rzg2_ek874_conf[] = {
+-#if (RZG_DRAM_ECC_FULL == 1)
++#if (RZG_DRAM_ECC_FULL == 2) // ECC Full mode single channel
  	{ FUSAAREACR(1, 7, 0x408000000),    ECCAREACR(0, 0x448000000)   }, /* 128+128 MB */
  	{ FUSAAREACR(1, 8, 0x410000000),    ECCAREACR(0, 0x450000000)   }, /* 256+256 MB */
  	{ FUSAAREACR(1, 8, 0x420000000),    ECCAREACR(0, 0x460000000)   }, /* 256+256 MB */
@@ -41,12 +71,12 @@ index 16038fd8..3139b737 100644
  	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
  	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
  	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
-@@ -84,21 +84,21 @@ static const struct rzg2_ecc_conf {
- };
+@@ -89,21 +89,21 @@ static const struct rzg2_ecc_conf rzg2_ek874_conf[] = {
  
+ #if (RZG_DRAM_ECC == 1 && RZG_HIHOPE_RZG2N == 1)
  static const struct rzg2_ecc_conf rzg2_hihope_rzg2n_conf[] = {
 -#if (RZG_DRAM_ECC_FULL == 1)
-+#if (RZG_DRAM_ECC_FULL == 2)	// ECC Full mode single channel
++#if (RZG_DRAM_ECC_FULL == 2) // ECC Full mode single channel
          { FUSAAREACR(1, 7, 0x408000000),    ECCAREACR(0, 0x488000000)   }, /* 128+128 MB */
          { FUSAAREACR(1, 8, 0x410000000),    ECCAREACR(0, 0x490000000)   }, /* 256+256 MB */
          { FUSAAREACR(1, 9, 0x420000000),    ECCAREACR(0, 0x4A0000000)   }, /* 512+512 MB */
@@ -66,16 +96,34 @@ index 16038fd8..3139b737 100644
          { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
          { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
          { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
-@@ -111,7 +111,7 @@ static const struct rzg2_ecc_conf rzg2_hihope_rzg2n_conf[] = {
-         { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
- };
+@@ -118,7 +118,7 @@ static const struct rzg2_ecc_conf rzg2_hihope_rzg2n_conf[] = {
+ #endif
  
+ #if (RZG_HIHOPE_RZG2M == 1)
 -#if (RZG_DRAM_ECC_FULL == 1)
-+#if (RZG_DRAM_ECC_FULL == 1)	// ECC Full mode dual channel
++#if (RZG_DRAM_ECC_FULL == 1) // ECC Full mode dual channel
  static const uint32_t fusacr = EFUSASEL(0xF0) | DFUSASEL(0xFE)| SFUSASEL(0);
  static const uint32_t adsplcr0 = ADRMODE(0) | SPLITSEL(1) | AREA(0x1C) | SWP(0);
  static const uint32_t adsplcr1 = SPLITSEL(1) | AREA(0x1C) | SWP(0);
-@@ -148,11 +148,11 @@ void bl2_enable_ecc_ek874(void)
+@@ -133,7 +133,7 @@ static const uint32_t adsplcr3 = 0;
+ #endif //(RZG_DRAM_ECC_FULL == 1)
+ #endif //(RZG_HIHOPE_RZG2M == 1)
+ 
+-#if ((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL == 1))
++#if ((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL != 0))
+ /* Write zero-valued octa-byte words */
+ static void bzero64(uintptr_t start, uint64_t size)
+ {
+@@ -144,7 +144,7 @@ static void bzero64(uintptr_t start, uint64_t size)
+ 	while (ptr < end)
+ 		*ptr++ = 0;
+ }
+-#endif //((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL == 1))
++#endif //((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL != 0))
+ 
+ /* Setup DRAM ECC configuration registers */
+ #if (RZG_DRAM_ECC == 1 && RZG_EK874 == 1)
+@@ -157,7 +157,7 @@ static void bl2_enable_ecc_ek874(void)
  	conf = rzg2_ek874_conf;
  	nb_of_conf = ARRAY_SIZE(rzg2_ek874_conf);
  
@@ -84,26 +132,16 @@ index 16038fd8..3139b737 100644
  	/* Clear DRAM ECC Area (for check) */
  	NOTICE("BL2: Clearing ECC area from %lx\n", EK874_ECCAREA);
  	bzero64(EK874_ECCAREA, (uint64_t)EK874_ECCAREA_TOTAL);
--#endif //((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL == 1))
-+#endif //((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL == 2))
- 	for (n = 0; n < nb_of_conf; n++, conf++) {
- 		mmio_write_32((uintptr_t)((uint32_t *)DFUSAAREACR + n), conf->fusaareacr);
- 		mmio_write_32((uintptr_t)((uint32_t *)DECCAREACR + n), conf->eccareacr);
-@@ -162,11 +162,11 @@ void bl2_enable_ecc_ek874(void)
- 					1 << ((conf->fusaareacr >> 24) & 0xf));
+@@ -173,7 +173,7 @@ static void bl2_enable_ecc_ek874(void)
  
  	}
+ 
 -#if ((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL == 1))
 +#if ((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL == 2))
  	/* Clear DRAM data area to initialize ECC area */
  	NOTICE("BL2: Clearing DATA area from %lx\n", EK874_FUSAAREA);
  	bzero64(EK874_FUSAAREA, (uint64_t)EK874_FUSAAREA_TOTAL);
--#endif //((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL == 1))
-+#endif //((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL == 2))
- 
- }
- 
-@@ -179,11 +179,11 @@ void bl2_enable_ecc_hihope_rzg2n(void)
+@@ -192,7 +192,7 @@ static void bl2_enable_ecc_hihope_rzg2n(void)
  	conf = rzg2_hihope_rzg2n_conf;
  	nb_of_conf = ARRAY_SIZE(rzg2_hihope_rzg2n_conf);
  
@@ -112,12 +150,7 @@ index 16038fd8..3139b737 100644
  	/* Clear DRAM ECC Area (for check) */
  	NOTICE("BL2: Clearing ECC area from %lx\n", HHOPE_G2N_ECCAREA);
  	bzero64(HHOPE_G2N_ECCAREA, (uint64_t)HHOPE_G2N_ECCAREA_TOTAL);
--#endif //((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL == 1))
-+#endif //((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL == 2))
- 	for (n = 0; n < nb_of_conf; n++, conf++) {
- 		mmio_write_32((uintptr_t)((uint32_t *)DFUSAAREACR + n), conf->fusaareacr);
- 		mmio_write_32((uintptr_t)((uint32_t *)DECCAREACR + n), conf->eccareacr);
-@@ -193,11 +193,11 @@ void bl2_enable_ecc_hihope_rzg2n(void)
+@@ -207,11 +207,11 @@ static void bl2_enable_ecc_hihope_rzg2n(void)
  					1 << ((conf->fusaareacr >> 24) & 0xf));
  	}
  
@@ -128,40 +161,20 @@ index 16038fd8..3139b737 100644
  	bzero64(HHOPE_G2N_FUSAAREA, (uint64_t)HHOPE_G2N_FUSAAREA_TOTAL);
 -#endif //((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL == 1))
 +#endif //((FUSA_DRAM_CLEAR == 1) && (RZG_DRAM_ECC_FULL == 2))
+ 
  }
+ #endif
+@@ -264,4 +264,3 @@ void bl2_ecc_init(void)
  
- void bl2_enable_ecc_hihope_rzg2m(void)
-diff --git a/plat/renesas/rcar/drivers/timer/bl2_swdt.c b/plat/renesas/rcar/drivers/timer/bl2_swdt.c
-index f845041d..56bdcdef 100644
---- a/plat/renesas/rcar/drivers/timer/bl2_swdt.c
-+++ b/plat/renesas/rcar/drivers/timer/bl2_swdt.c
-@@ -47,17 +47,17 @@
- #define WTCSRA_INIT_DATA	(WTCSRA_UPPER_BYTE + 0x0FU)
- #define WTCSRB_INIT_DATA	(WTCSRB_UPPER_BYTE + 0x21U)
- 
--#if (RZG_DRAM_ECC_FULL == 1)
-+#if (RZG_DRAM_ECC_FULL != 0)
- #define WTCNT_COUNT_8p13k		(0U)
- #define WTCNT_COUNT_8p13k_H3VER10	(0U)
- #define WTCNT_COUNT_8p22k		(0U)
- #define WTCNT_COUNT_7p81k		(0U)
--#else //(RZG_DRAM_ECC_FULL == 1)
-+#else //(RZG_DRAM_ECC_FULL != 0)
- #define WTCNT_COUNT_8p13k		(0x10000U - 40687U)
- #define WTCNT_COUNT_8p13k_H3VER10	(0x10000U - 20343U)
- #define WTCNT_COUNT_8p22k		(0x10000U - 41115U)
- #define WTCNT_COUNT_7p81k		(0x10000U - 39062U)
--#endif //(RZG_DRAM_ECC_FULL == 1)
-+#endif //(RZG_DRAM_ECC_FULL != 0)
- #define WTCSRA_CKS_DIV16		(0x00000002U)
- 
- static void bl2_swdt_disable(void);
-diff --git a/plat/renesas/rcar/platform.mk b/plat/renesas/rcar/platform.mk
-index 13cafa47..e7b2c849 100644
---- a/plat/renesas/rcar/platform.mk
-+++ b/plat/renesas/rcar/platform.mk
-@@ -418,6 +418,9 @@ endif
- $(eval $(call add_define,RZG_DRAM_HIHOPE_RZG2N_ECC))
+ #endif /* RZG_DRAM_ECC == 1 */
+ }
+-
+diff --git a/plat/renesas/rzg/platform.mk b/plat/renesas/rzg/platform.mk
+index a8afa00..9764f48 100644
+--- a/plat/renesas/rzg/platform.mk
++++ b/plat/renesas/rzg/platform.mk
+@@ -252,6 +252,9 @@ endif
+ $(eval $(call add_define,RZG_DRAM_ECC))
  
  # Process RZG_DRAM_ECC_FULL flag
 +# 0 : ECC Full mode will not be applied
@@ -171,5 +184,5 @@ index 13cafa47..e7b2c849 100644
  RZG_DRAM_ECC_FULL :=0
  endif
 -- 
-2.17.1
+2.7.4
 

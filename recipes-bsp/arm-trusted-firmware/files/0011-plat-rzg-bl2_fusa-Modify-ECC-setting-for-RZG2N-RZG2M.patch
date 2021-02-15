@@ -1,0 +1,108 @@
+From 64a2ed23eb3c0d9cf3d657efd3ce748ada232a16 Mon Sep 17 00:00:00 2001
+From: Huynh Thanh Hung <hung.huynh.wz@renesas.com>
+Date: Tue, 4 Aug 2020 10:30:05 +0700
+Subject: [PATCH] plat: rzg: bl2_fusa: Modify ECC Full setting for RZG2N, RZG2M and RZG2H
+
+We won't support ECC for area 0x4_10000000-0x4_2FFFFFFF in ECC mode
+full anymore in RZG2N, RZG2M and RZG2H.
+
+Signed-off-by: Huynh Thanh Hung <hung.huynh.wz@renesas.com>
+---
+ plat/renesas/rzg/bl2_fusa.c | 54 ++++++++++++++++++-------------------
+ 1 file changed, 26 insertions(+), 28 deletions(-)
+
+diff --git a/plat/renesas/rzg/bl2_fusa.c b/plat/renesas/rzg/bl2_fusa.c
+index ea6181c3c..f5e769d92 100644
+--- a/plat/renesas/rzg/bl2_fusa.c
++++ b/plat/renesas/rzg/bl2_fusa.c
+@@ -107,40 +107,38 @@ static const struct rzg2_ecc_conf rzg2_ek874_conf[] = {
+ #if (RZG_DRAM_ECC == 1 && RZG_HIHOPE_RZG2N == 1)
+ static const struct rzg2_ecc_conf rzg2_hihope_rzg2n_conf[] = {
+ #if (RZG_DRAM_ECC_FULL == 2) // ECC Full mode single channel
+-        { FUSAAREACR(1, 7, 0x408000000),    ECCAREACR(0, 0x488000000)   }, /* 128+128 MB */
+-        { FUSAAREACR(1, 8, 0x410000000),    ECCAREACR(0, 0x490000000)   }, /* 256+256 MB */
+-        { FUSAAREACR(1, 9, 0x420000000),    ECCAREACR(0, 0x4A0000000)   }, /* 512+512 MB */
+-        { FUSAAREACR(1, 9, 0x440000000),    ECCAREACR(0, 0x4C0000000)   }, /* 512+512 MB */
+-        { FUSAAREACR(1, 9, 0x460000000),    ECCAREACR(0, 0x4E0000000)   }, /* 512+512 MB */
+-        { FUSAAREACR(1, 6, 0x480000000),    ECCAREACR(0, 0x484000000)   }, /* 64+64 MB */
++	{ FUSAAREACR(1, 7, 0x408000000),    ECCAREACR(0, 0x498000000)   }, /* 128+128 MB */
++	{ FUSAAREACR(1, 9, 0x430000000),    ECCAREACR(0, 0x4A0000000)   }, /* 512+512 MB */
++	{ FUSAAREACR(1, 9, 0x450000000),    ECCAREACR(0, 0x4C0000000)   }, /* 512+512 MB */
++	{ FUSAAREACR(1, 9, 0x470000000),    ECCAREACR(0, 0x4E0000000)   }, /* 512+512 MB */
++	{ FUSAAREACR(1, 6, 0x490000000),    ECCAREACR(0, 0x494000000)   }, /* 64+64 MB */
+ #else //(RZG_DRAM_ECC_FULL == 2)
+-        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+-        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+-        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+-        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+-        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+-        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+ #endif //(RZG_DRAM_ECC_FULL == 2)
+-        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+-        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+-        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+-        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+-        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+-        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+-        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+-        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+-        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+-        { FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
++	{ FUSAAREACR(0, 0, 0),    ECCAREACR(0, 0)   },
+ };
+ #endif
+ 
+ #if (RZG_DRAM_ECC == 1 && RZG_HIHOPE_RZG2H == 1)
+ static const struct rzg2_ecc_conf rzg2_hihope_rzg2h_conf[] = {
+ #if (RZG_DRAM_ECC_FULL == 2)   // ECC Full mode single channel
+-	{ FUSAAREACR(1, 6, 0x408000000), ECCAREACR(0, 0x444000000) }, /* 64+64 MB */
+-	{ FUSAAREACR(1, 7, 0x40C000000), ECCAREACR(0, 0x448000000) }, /* 128+128 MB */
+-	{ FUSAAREACR(1, 8, 0x414000000), ECCAREACR(0, 0x450000000) }, /* 256+256 MB */
+-	{ FUSAAREACR(1, 9, 0x424000000), ECCAREACR(0, 0x460000000) }, /* 512+512 MB */
++	{ FUSAAREACR(1, 6, 0x450000000), ECCAREACR(0, 0x454000000) }, /* 64+64 MB */
++	{ FUSAAREACR(1, 7, 0x408000000), ECCAREACR(0, 0x458000000) }, /* 128+128 MB */
++	{ FUSAAREACR(1, 9, 0x430000000), ECCAREACR(0, 0x460000000) }, /* 512+512 MB */
+ 	{ FUSAAREACR(1, 9, 0x600000000), ECCAREACR(0, 0x640000000) }, /* 512+512 MB */
+ 	{ FUSAAREACR(1, 9, 0x620000000), ECCAREACR(0, 0x660000000) }, /* 512+512 MB */
+ #else
+@@ -149,7 +147,6 @@ static const struct rzg2_ecc_conf rzg2_hihope_rzg2h_conf[] = {
+ 	{ FUSAAREACR(0, 0, 0), ECCAREACR(0, 0) },
+ 	{ FUSAAREACR(0, 0, 0), ECCAREACR(0, 0) },
+ 	{ FUSAAREACR(0, 0, 0), ECCAREACR(0, 0) },
+-	{ FUSAAREACR(0, 0, 0), ECCAREACR(0, 0) },
+ #endif //(RZG_DRAM_ECC_FULL == 2)
+ 	{ FUSAAREACR(0, 0, 0), ECCAREACR(0, 0) },
+ 	{ FUSAAREACR(0, 0, 0), ECCAREACR(0, 0) },
+@@ -161,12 +158,13 @@ static const struct rzg2_ecc_conf rzg2_hihope_rzg2h_conf[] = {
+ 	{ FUSAAREACR(0, 0, 0), ECCAREACR(0, 0) },
+ 	{ FUSAAREACR(0, 0, 0), ECCAREACR(0, 0) },
+ 	{ FUSAAREACR(0, 0, 0), ECCAREACR(0, 0) },
++	{ FUSAAREACR(0, 0, 0), ECCAREACR(0, 0) },
+ };
+ #endif
+ 
+ #if ((RZG_HIHOPE_RZG2M == 1 || RZG_HIHOPE_RZG2H == 1) && RZG_DRAM_ECC == 1)
+ #if (RZG_DRAM_ECC_FULL == 1) // ECC Full mode dual channel
+-static const uint32_t fusacr = EFUSASEL(0xF0) | DFUSASEL(0xFE)| SFUSASEL(0);
++static const uint32_t fusacr = EFUSASEL(0xF0) | DFUSASEL(0xF8)| SFUSASEL(0);
+ static const uint32_t adsplcr0 = ADRMODE(0) | SPLITSEL(1) | AREA(0x1C) | SWP(0);
+ static const uint32_t adsplcr1 = SPLITSEL(1) | AREA(0x1C) | SWP(0);
+ static const uint32_t adsplcr2 = 0;
+-- 
+2.17.1
+

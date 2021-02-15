@@ -14,10 +14,7 @@ def check_ecc_mode(d):
       bb.fatal("\nSelect wrong ECC Full Mode for ECC_MODE.\
                 \nSoC %s not support 'Full Dual'" % soc);
     if mode == 'Full Single':
-      if soc == 'r8a774c0' or soc == 'r8a774b1' or soc == 'r8a774e1':
         return '2'
-      bb.fatal("\nSelect wrong ECC Full Mode for ECC_MODE.\
-                \nSoC %s not support 'Full Single'" % soc);
   return '0'
 
 ECC="${@'1' if 'ecc' in '${MACHINE_FEATURES}' else '0'}"
