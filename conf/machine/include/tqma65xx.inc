@@ -47,6 +47,8 @@ IMAGE_INSTALL_append = " kernel kernel-modules"
 IMAGE_INSTALL_append = " kernel-devicetree kernel-image-image"
 
 IMAGE_BOOT_FILES = "\
+	sysfw.itb \
+	tiboot3.bin \
 	tispl.bin \
 	u-boot.img \
 "
