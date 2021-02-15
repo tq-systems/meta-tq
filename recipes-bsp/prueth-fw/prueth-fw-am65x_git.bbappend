@@ -1,1 +1,0 @@
-COMPATIBLE_MACHINE = "tqma65xx"
