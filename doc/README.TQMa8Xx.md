@@ -4,7 +4,7 @@ This README contains some useful information for TQMa8Xx and TQMa8Xx4 on MBa8Xx
 
 ## Variants
 
-* TQMa8XQP REV.020x / 010x
+* TQMa8XQP REV.020x / 0x030x
 * TQMa8XQP4 REV.010x
 
 ## Versions
@@ -66,9 +66,10 @@ See top level README.md for configurations usable as MACHINE.
 **TODO or not tested / supported**
 
 * Cortex M4
-* CPU variants i.MX8DX not detected (limitation of cpu driver))
-* USB
-  * U-Boot: USB 3.0 port does not initialize USB 2.0 subsystem after USB reset
+* temperature grade
+  * SCU limitation
+* CPU variants i.MX8DX/i.MX8DXP cannot be detected automatically
+  (limitation of cpu driver / SCU firmware)
 
 ### Linux:
 
@@ -83,7 +84,6 @@ See top level README.md for configurations usable as MACHINE.
   * EEPROMS
 * SPI
   * spi user space device on all CS
-* GPU
 * GPIO
   * LED
 * ENET (GigE via Phy on MBa8Xx)
@@ -100,30 +100,33 @@ See top level README.md for configurations usable as MACHINE.
 * GPU
 * VPU
 * PCIe (mini-PCIe)
+* CAN
+  * can0/1 as network interface
+* CPU / PMIC Thermal sensors
+  * via thermal-zone
 * Audio
   * Line In
   * Line Out
-* CAN
-  * can0/1 as network interface
-* SCU Thermal Sensor
-  * on die sensor
-  * PMIC sensor
+* DVFS
+* Suspend
+  * mem / freeze
 
 **TODO or not tested with new BSP**
 
 * temperature grade
+  * SCU limitation
 * Audio
   * Mic In untested
 * DSI - DP bridge
 * GPIO
   * Suspend / Wakeup via GPIO button
-* DVFS
-  * speed grade
 
 ## Known Issues
 
 * CAN
-  * CAN FD is not automatically configured (systemd limitation)
+  * CAN FD can not be automatically configured (systemd limitation)
+* USB
+  * U-Boot: USB 3.0 port does not initialize USB 2.0 subsystem after USB reset
 
 ## Artifacts
 
@@ -257,10 +260,16 @@ cmp.b 0x80300000 ${loadaddr} ${filesize}
 
 For ease of development a set of variables and scripts are in default env.
 
+_Note_: Update and start scripts expect a partitioned / initialized SD-Card or
+e-MMC.
+
 _U-Boot environment variables_
 
-* `uboot`: name of bootstream image (default =  bootstream.bin)
-* `mmcdev`: 0 for e-MMC, 1 for SD-Card
+* `uboot`: name of bootstream image (default = bootstream.bin)
+* `mmcdev`: 0 for e-MMC, 1 for SD-Card (automatically generated,
+  can be overwritten)
+  `mmcpart`: partition number for kernel and devicetree (default = 1)
+  `mmcpath`: path to kernel and device tree (default = /)
 * `fdt_file`: device tree blob,
 * `image`: kernel image,
 
@@ -316,12 +325,21 @@ In case of problems first check the bus termination:
 * CAN0: SW1
 * CAN1: SW2
 
+### Enable without CAN-FD
+
+CAN1/2 should be enabled and configured by default when using with MBa8Xx
+and meta-tq / systemd
+
+```
+CANIF="can[0,1]"
+ip link set ${CANIF} up type can bitrate 500000 fd off
+```
+
 ### Enable CAN-FD
 
 To enable CAN-FD the following command can be used:
 
 ```
 CANIF="can[0,1]"
-ip link set "${CANIF}" up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on‍‍‍‍‍‍‍`
+ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on‍‍‍‍‍‍‍
 ```
-
