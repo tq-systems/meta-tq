@@ -18,9 +18,11 @@ KERNEL_DEVICETREE ?= " \
 # achieve this in your BSP layer adding them via
 # IMAGE_INSTALL_append = " kernel-devicetree kernel-image-image"
 #
+INITRAMFS_IMAGE = "core-tq-image-initramfs"
+INITRAMFS_IMAGE_BUNDLE = "1"
 IMAGE_BOOT_FILES_append = "\
 	${KERNEL_IMAGETYPE};linuximage \
-	${KERNEL_IMAGETYPE}-initramfs-${MACHINE}.bin \
+	${KERNEL_IMAGETYPE}-${INITRAMFS_LINK_NAME}.bin \
 	am654-mba65xx-p1.dtb \
 	am654-mba65xx-p2.dtb \
 	am654-mba65xx-eth-prg0.dtbo \
