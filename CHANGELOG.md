@@ -25,6 +25,8 @@ This is the initial production release for TQMa8XQPS.
 
 ### Fixed
 
+* linux: TQMa8XxS: add missing I2C GPIO recovery
+* linux: TQMa8QM / TQMa8Xx\[S,4\]: adjust thermal trip points
 * u-boot: TQMa8XxS: disable SD3 modes for HW REV.0200, enable for newer REV
 * u-boot: TQMa8x / TQMa8Xx / TQMa8XxS: fix not working update scripts when
   exchanging an SD card just before start updating
@@ -40,6 +42,11 @@ This is the initial production release for TQMa8XQPS.
 
 ### Added
 
+* linux: TQMa8XxS:
+  * SMARC-2 GPIO
+  * SMARC-2 DSI0 I2C
+  * SMARC-2 LVDS1 with example
+  * support for second UART
 * u-boot: prepare TQMa8XDP / TQMa8XDPS support
 * TQMa8x: board specific asound.state
 * linux: TQMa8x: enable audio
