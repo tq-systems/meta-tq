@@ -52,9 +52,9 @@ See top level README.md for configurations usable as MACHINE.
   * Write
   * Boot
 * USB
-  * USB Hub
-  * USB OTG
-* ENET (GigE via Phy on MBa8Xx)
+  * USB 2.0 Dual Role
+  * USB 3.0 (Hub on TQMa8XxS)
+* ENET (GigE via Phy on TQMa8XxS)
   * ENET 1
   * ENET 2
 * Bootstreams
@@ -69,8 +69,6 @@ See top level README.md for configurations usable as MACHINE.
   * SCU limitation
 * CPU variants i.MX8DX/i.MX8DXP cannot be detected automatically
   (limitation of cpu driver / SCU firmware)
-* USB
-  * U-Boot: USB 3.0 port does not initialize USB 2.0 subsystem after USB reset
 
 ### Linux:
 
@@ -82,12 +80,20 @@ See top level README.md for configurations usable as MACHINE.
   * Temperature Sensors (without cpu-temp)
   * RTC
   * EEPROMS
+* SPI
+  * spi user space device on all CS
+* GPIO
+  * SMARC GPIO pins
 * ENET (GigE via Phy on TQMa8XxS)
   * ENET 1
   * ENET 2
 * QSPI NOR
 * UART
   * console
+  * LPUART3 via unused SCU GPIO pins
+* USB
+  * USB 2.0 Dual Role
+  * USB 3.0 (Hub on MBa8Mx)
 * LVDS
 * GPU
 * VPU
@@ -100,14 +106,18 @@ See top level README.md for configurations usable as MACHINE.
   * Line In
   * Line Out
 * DVFS
+* Suspend
+  * mem / freeze
 
 **TODO or not tested with new BSP**
 
 * temperature grade
   * SCU limitation
+* Audio
+  * Mic In untested
 * DSI - DP bridge
 * GPIO
-  * Suspend / Wakeup via GPIO button
+  * Suspend / Wakeup GPIO
 
 ## Known Issues
 
@@ -117,8 +127,13 @@ See top level README.md for configurations usable as MACHINE.
 * USB
   * Port USB3 (X3 on MB-SMARC-2) is host only. Do only use a matching adapter
     on MB-SMARC-2
+  * U-Boot: USB 3.0 port does not initialize USB 2.0 subsystem after USB reset
+  * Linux: overcurrent with some USB Sticks on MB-SMARC-2
 * FlexSPI
   * erase of ranges >= 16 MB fails under linux
+* UUU compatible bootstream is not built by default (yocto recipe limitation)
+* Suspend / Wakeup
+  * RTC Alarm IRQ via GPIO leads to system stall during resume
 
 ## Artifacts
 
@@ -236,10 +251,16 @@ cmp.b 0x80300000 ${loadaddr} ${filesize}
 
 For ease of development a set of variables and scripts are in default env.
 
+_Note_: Update and start scripts expect a partitioned / initialized SD-Card or
+e-MMC.
+
 _U-Boot environment variables_
 
-* `uboot`: name of bootstream image (default =  bootstream.bin)
-* `mmcdev`: 0 for e-MMC, 1 for SD-Card
+* `uboot`: name of bootstream image (default = bootstream.bin)
+* `mmcdev`: 0 for e-MMC, 1 for SD-Card (automatically generated,
+  can be overwritten)
+  `mmcpart`: partition number for kernel and devicetree (default = 1)
+  `mmcpath`: path to kernel and device tree (default = /)
 * `fdt_file`: device tree blob,
 * `image`: kernel image,
 
@@ -293,6 +314,18 @@ To support older REV.020x modules, use the respective machine config. This autom
 - builds the correct bootloader
 - build devicetrees correct device trees (containing `r0200` in its name)
 
+## Test sleepmode and wakeup
+
+Use rtc1 (RTC in CPU SNVS domain) to wakeup after 20 seconds:
+
+```
+RTC=rtc1
+echo enabled > /sys/class/rtc/${RTC}/device/power/wakeup
+echo 0 > /sys/class/rtc/${RTC}/wakealarm
+echo +20 > /sys/class/rtc//${RTC}/wakealarm
+echo mem > /sys/power/state
+```
+
 ## Display Support
 
 Each Display can be used on its own by using the corresponding device tree.
@@ -302,6 +335,9 @@ To allow reusage, the support for each display is separated in a dtsi fragment.
 |-----------------|-----------------------------------------|--------------------|
 | LVDS0           | imx8qxp-mb-smarc-2-lvds-tm070jvhg33.dtb | Tianma TM070JVHG33 |
 | LVDS0, dual     | imx8qxp-mb-smarc-2-lvds-g133han01.dtb   | AUO G133HAN.01     |
+
+Please note manual for backlight power supply. For MB-SMARC-2 you can bridge
+X14 pin 1 and 2 to provide 12V.
 
 ## CAN
 
@@ -324,7 +360,8 @@ ip link set ${CANIF} up type can bitrate 500000 fd off
 
 ### Enable CAN-FD
 
-To enable CAN-FD the following command can be used:
+To enable CAN-FD the following command can be used, if using a carrier board with
+FD capable transceiver:
 
 ```
 CANIF="can[0,1]"
