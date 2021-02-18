@@ -5,7 +5,7 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
-## zeus.TQMa8.BSP.SW.0033-rc
+## zeus.TQMa8.BSP.SW.0033
 
 This is the initial production release for TQMa8XQPS.
 
