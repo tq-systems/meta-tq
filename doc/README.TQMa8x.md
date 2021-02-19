@@ -66,7 +66,8 @@ See top level README.md for configurations usable as MACHINE.
 
 * Cortex M4
 * more CPU variants
-* speed grade / temperature grade detection (current SCU limitation)
+* temperature grade
+  * SCU limitation
 
 ### Linux:
 
@@ -106,35 +107,42 @@ See top level README.md for configurations usable as MACHINE.
 * PWM
   * PWM in LVDS IP
 * SATA
-* PCI
+* PCIe
 * ADC
 * Audio
   * DisplayPort
   * Line In
   * Line Out
+* DVFS
+* Suspend
+  * mem / freeze
 
 **TODO or not tested with new BSP**
 
+* temperature grade
+  * SCU limitation
 * Audio
   * Microphone
 * FTM
   * PWM (missing in CPU DT)
-* temperature grade detection
 * HDMI in
 * Cortex M4
-* DVFS
-  * speed grade
 * PWM
   * generic PWM IP (missing in CPU DT)
+* CPU / PMIC Thermal sensors
+  * via thermal-zone
 
 ## Known Issues
 
 * counting of i2c devices bus starts at i2c-2 (because i2c-0 and i2c-1
   are reserved for i2c_rpmsgbus)
 * CAN
-  * CAN FD is not automatically configured (systemd limitation)
+  * CAN FD can not automatically configured (systemd limitation)
 * PWM only works after the second enable command
   (`echo 1 > /sys/class/pwm<X>/enable`)
+* UUU compatible bootstream is not built by default (yocto recipe limitation)
+* USB
+  * U-Boot: `EHCI timed out on TD - token` with some USB sticks on USB 2.0 OTG
 
 ## Artifacts
 
@@ -250,10 +258,16 @@ cmp.b 0x80300000 ${loadaddr} ${filesize}
 
 For ease of development a set of variables and scripts are in default env.
 
+_Note_: Update and start scripts expect a partitioned / initialized SD-Card or
+e-MMC.
+
 _U-Boot environment variables_
 
-* `uboot`: name of bootstream image (default =  bootstream.bin)
-* `mmcdev`: 0 for e-MMC, 1 for SD-Card
+* `uboot`: name of bootstream image (default = bootstream.bin)
+* `mmcdev`: 0 for e-MMC, 1 for SD-Card (automatically generated,
+  can be overwritten)
+  `mmcpart`: partition number for kernel and devicetree (default = 1)
+  `mmcpath`: path to kernel and device tree (default = /)
 * `fdt_file`: device tree blob,
 * `image`: kernel image,
 
@@ -302,14 +316,18 @@ sudo uuu -b spl imx-boot-<machine>-mfgtool.bin
 
 ## Test sleepmode and wakeup
 
-Use rtc1 (on module) to wakeup after 20 seconds:
+Use rtc1 (RTC in CPU SNVS domain) to wakeup after 20 seconds:
+
 ```
-echo enabled > /sys/class/rtc/rtc1/device/power/wakeup
-echo 0 > /sys/class/rtc/rtc1/wakealarm
-echo +20 > /sys/class/rtc/rtc1/wakealarm
+RTC=rtc1
+echo enabled > /sys/class/rtc/${RTC}/device/power/wakeup
+echo 0 > /sys/class/rtc/${RTC}/wakealarm
+echo +20 > /sys/class/rtc//${RTC}/wakealarm
 echo mem > /sys/power/state
 ```
-Send linux to sleep mode and press one of the gpio buttons SWITCH\_A or SWITCH\_B afterwards
+
+Send linux to sleep mode and press one of the gpio buttons SWITCH\_A or SWITCH\_B
+afterwards
 
 ```
 echo mem > /sys/power/state
@@ -334,11 +352,22 @@ In case of problems first check the bus termination:
 * CAN0: (S10)
 * CAN1: (S11)
 
-### Enable CAN-FD
+### Enable without CAN-FD
 
-To enable CAN-FD the following command can be used:
+CAN1/2 should be enabled and configured by default when using with MB-SMARC-2
+and meta-tq / systemd
 
 ```
 CANIF="can[0,1]"
-ip link set "${CANIF}" up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on‍‍‍‍‍‍‍`
+ip link set ${CANIF} up type can bitrate 500000 fd off
+```
+
+### Enable CAN-FD
+
+To enable CAN-FD the following command can be used, if using a carrier board with
+FD capable transceiver:
+
+```
+CANIF="can[0,1]"
+ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on‍‍‍‍‍‍‍`
 ```
