@@ -36,6 +36,10 @@ SRC_URI_mx8 = "\
 #           file://enable-led-features.cfg \
 ####################
 
+SRC_URI_append = "\
+  file://0001-MLK-23627-thermal-imx_sc_thermal-Fix-incorrect-data-.patch \
+"
+
 COMPATIBLE_MACHINE_append = "tqma8xx"
 COMPATIBLE_MACHINE_append = "|tqma8xxs"
 COMPATIBLE_MACHINE_append = "|tqma8mq"
