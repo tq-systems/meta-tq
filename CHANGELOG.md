@@ -5,6 +5,21 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+### Changed
+
+### Fixed
+
+* linux: TQMa8x / TQMa8Xx / TQMa8XxS: backport patch for SCU thermal sensor to
+  prevent shutdown on negative sensor values
+* linux: TQma8x: fix device trees to enable support without SCU PMIC thermal
+  sensor. Whith this patch thermal sensors are working again
+
+### Added
+
+* linux: TQma8Xx / TQMa8XxS: device tree examples for LVDS displays on
+  ldb2 / LVDS1
+* linux: TQma8x: add support for SCU PMIC thermal sensor
+
 ## zeus.TQMa8.BSP.SW.0033
 
 This is the initial production release for TQMa8XQPS.
