@@ -9,7 +9,7 @@ SRC_URI = "\
 "
 
 SRCBRANCH = "TQMaxx-lf-5.4.y-1.0.0"
-SRCREV = "f7c5cf6bc72ed40973a68c51acdfe98ef81d8fd2"
+SRCREV = "4f0108b34a1de0f264a0458ed221109ff1eae465"
 
 KERNEL_TREE_DEFCONFIG_mx8 = "imx_v8_defconfig"
 
@@ -35,10 +35,6 @@ SRC_URI_mx8 = "\
 #           file://tqma8qx-regulator-support.cfg \
 #           file://enable-led-features.cfg \
 ####################
-
-SRC_URI_append = "\
-  file://0001-MLK-23627-thermal-imx_sc_thermal-Fix-incorrect-data-.patch \
-"
 
 COMPATIBLE_MACHINE_append = "tqma8xx"
 COMPATIBLE_MACHINE_append = "|tqma8xxs"
