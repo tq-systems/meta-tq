@@ -1,6 +1,10 @@
 # TQMa8MxNL
 
-This README contains some useful information for TQMa8MxNL on MBa8Mx
+This README contains some useful information for TQMa8MxNL on MBa8Mx REV.0300
+
+## Variants
+
+* TQMa8MQNL REV.020x
 
 ## Versions
 
@@ -8,6 +12,11 @@ This README contains some useful information for TQMa8MxNL on MBa8Mx
 
 * based on uboot-imx (https://source.codeaurora.org/external/imx/uboot-imx)
 * branched from lf-5.4.y-1.0.0
+
+### ATF:
+
+* imx-atf (https://source.codeaurora.org/external/imx/imx-atf)
+* v2.0 / lf-5.4.y
 
 ### Linux:
 
@@ -18,7 +27,7 @@ This README contains some useful information for TQMa8MxNL on MBa8Mx
 
 ### U-Boot:
 
-_MBa8x HW Rev.020x/30x only_
+_MBa8x HW Rev.030x only_
 
 * RAM configs: 1 GiB
 * CPU variants i.MX8MNQ
@@ -53,7 +62,6 @@ _MBa8x HW Rev.020x/30x only_
 **TODO or not tested / supported**
 
 * RAM 2 GB
-* e-MMC Boot (needs fusing to support USDHC1)
 * CPU variants i.MX8MND/S and Lite
 
 ### Linux:
@@ -145,8 +153,8 @@ _Board config_
 ```
 	S10
 DIP 	1 2 3 4
-ON 	X X    
-OFF 	    X X
+ON 	X X X X
+OFF 	       
 ```
 
 _BOOT\_MODE_
@@ -154,9 +162,9 @@ _BOOT\_MODE_
 BOOT Mode \[3:0\] is mapped to the following DIP Switches:
 
 * 3: DIP Switch BOOT\_MODE 3 (TQMa8MxML ADAP)
-* 2: DIP Switch BOOT\_MODE 2 (TQMa8MxML ADAP)
-* 1: DIP Switch S9:2 (MBa8Mx)
-* 0: DIP Switch S9:1 (MBa8Mx)
+* 2: DIP Switch BOOT\_MODE 2 (TQMa8MxML ADAP, inverted)
+* 1: DIP Switch S9:3 (MBa8Mx, inverted)
+* 0: DIP Switch S9:2 (MBa8Mx, inverted)
 
 Boot from Fuses (needs boot fuses to be set)
 
@@ -166,8 +174,8 @@ BOOT\_MODE: 0000
 	BOOT MODE (ADAP)	MBa8Mx
 				S9
 DIP 	3 2			4 3 2 1
-ON 				       
-OFF 	X X			- X X -
+ON 	  X			  X X  
+OFF 	X 			-     -
 ```
 
 Serial Downloader
@@ -178,8 +186,8 @@ BOOT\_MODE: 0001
 	BOOT MODE (ADAP)	MBa8Mx
 				S9
 DIP 	3 2			4 3 2 1
-ON 				    X  
-OFF 	X X			- X   -
+ON 	  X			  X    
+OFF 	X  			-   X -
 ```
 
 e-MMC (needs fuses to be set to use USDHC1)
@@ -190,8 +198,8 @@ BOOT\_MODE: 0010
 	BOOT MODE (ADAP)	MBa8Mx
 				S9
 DIP 	3 2			4 3 2 1
-ON 				  X    
-OFF 	X X			-   X -
+ON 	  X			    X  
+OFF 	X  			- X  -
 ```
 
 SD Card (USDHC2)
@@ -202,8 +210,8 @@ BOOT\_MODE: 0011
 	BOOT MODE (ADAP)	MBa8Mx
 				S9
 DIP 	3 2			4 3 2 1
-ON 				  X X  
-OFF 	X X			-     -
+ON 	  X			       
+OFF 	X  			- X X -
 ```
 
 FlexSPI / 3B Read
@@ -214,8 +222,8 @@ BOOT\_MODE: 0110
 	BOOT MODE (ADAP)	MBa8Mx
 				S9
 DIP 	3 2			4 3 2 1
-ON 	  X			  X    
-OFF 	X  			-   X -
+ON 	   			    X  
+OFF 	X X			- X   -
 ```
 
 ## Functional DIP Switches
@@ -368,7 +376,7 @@ Demos are compiled to use UART4 (MBa8Mx X17:56,58 + X17:54 for GND) with
 To start a demo stored on SD / e-MMC from U-Boot:
 
 ```
-setenv fdt_file imx8mqnl-mba8mx-rpmsg.dtb
+setenv fdt_file imx8mn-mba8mx-rpmsg.dtb
 setenv cm_image <demo>
 run boot_cm_mmc
 ```
