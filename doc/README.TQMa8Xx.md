@@ -4,7 +4,9 @@ This README contains some useful information for TQMa8Xx and TQMa8Xx4 on MBa8Xx
 
 ## Variants
 
+* TQMa8XDP REV.020x / 0x030x
 * TQMa8XQP REV.020x / 0x030x
+* TQMa8XDP4 REV.010x
 * TQMa8XQP4 REV.010x
 
 ## Versions
@@ -37,10 +39,11 @@ See top level README.md for configurations usable as MACHINE.
 ### U-Boot:
 
 * RAM configs:
-  * 1GB DDR3L ECC / TQMa8XQP
-  * 2GB LPDDR4 / TQMa8XQP4
+  * 1GB DDR3L ECC / TQMa8X\[D,Q\]P
+  * 2GB LPDDR4 / TQMa8X\[D,Q\]P4
 * CPU variants:
   * i.MX8QXP C0
+  * i.MX8DXP C0
 * Fuses
 * GPIO
 * QSPI
@@ -68,8 +71,8 @@ See top level README.md for configurations usable as MACHINE.
 * Cortex M4
 * temperature grade
   * SCU limitation
-* CPU variants i.MX8DX/i.MX8DXP cannot be detected automatically
-  (limitation of cpu driver / SCU firmware)
+* CPU variants i.MX8DX/i.MX8DXP cannot be detected automatically from hardware
+  (limitation of cpu driver / SCU firmware, currently fixed with U-Boot Kconfig)
 
 ### Linux:
 
@@ -323,10 +326,10 @@ To allow reusage, the support for each display is separated in a dtsi fragment.
 
 *Note:* With MBa8Xx only one control interface for backlight is available (X22).
 
-| Interface       | Device tree                          | Type        ----   |
-|-----------------|--------------------------------------|--------------------|
-| LVDS0           | imx8qxp-mba8xx-lvds0-tm070jvhg33.dtb | Tianma TM070JVHG33 |
-| LVDS1           | imx8qxp-mba8xx-lvds1-tm070jvhg33.dtb | Tianma TM070JVHG33 |
+| Interface       | Device tree                                | Type        ----   |
+|-----------------|--------------------------------------------|--------------------|
+| LVDS0           | imx8\[d,q\]xp-mba8xx-lvds0-tm070jvhg33.dtb | Tianma TM070JVHG33 |
+| LVDS1           | imx8\[d,q\]xp-mba8xx-lvds1-tm070jvhg33.dtb | Tianma TM070JVHG33 |
 
 ## CAN
 
