@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* u-boot: TQMa8Mx\[M,N\]L: remove muxing and usage of USER\_LED\_3 signal as
+  already done in kernel dtb
 * linux: TQMa8x / TQMa8Xx / TQMa8XxS: backport patch for SCU thermal sensor to
   prevent shutdown on negative sensor values
 * linux: TQma8x: fix device trees to enable support without SCU PMIC thermal
@@ -16,6 +18,7 @@ Releases are named with the following scheme:
 
 ### Added
 
+* linux: TQMa8Mx\[M,N\]L: add recovery GPIO for I2C1
 * linux: TQma8Xx / TQMa8XxS: device tree examples for LVDS displays on
   ldb2 / LVDS1
 * linux: TQma8x: add support for SCU PMIC thermal sensor
