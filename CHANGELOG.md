@@ -5,7 +5,19 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa8.BSP.SW.0034
+
 ### Changed
+
+* u-boot: update v2019.04 to support HW REV.0200 of TQMa8Mx\[M,N\]L
+  * updated RAM-Timing for TQMa8MxML with 2GB
+  * e-MMC is now on USDHC3
+  * some GPIO signals changed
+* conf/machines: rename tqma8mxml-1gb-mba8mx -> tqma8mxml-2gb-mba8mx since
+  HW REV.0200 has per default 2 GB RAM
+* linux: TQMa8Mx\[M,N\]L: fix device trees for TQMa8Mx\[M,N\]L TQMa8Mx\[M,N\]L
+  * e-MMC is now on USDHC3
+  * some GPIO signals changed
 
 ### Fixed
 
@@ -22,6 +34,10 @@ Releases are named with the following scheme:
 * linux: TQma8Xx / TQMa8XxS: device tree examples for LVDS displays on
   ldb2 / LVDS1
 * linux: TQma8x: add support for SCU PMIC thermal sensor
+
+### Removed
+
+* machines: TQMa8Mx\[M,N\]L: support for HW REV.0100
 
 ## zeus.TQMa8.BSP.SW.0033
 
