@@ -13,8 +13,10 @@ SRC_URI_append = " \
 # clear vars to prevent default assignments
 SC_FIRMWARE_NAME = "invalid"
 
+SC_FIRMWARE_NAME_tqma8xdp-mba8xx = "mx8qx-tqma8xqp-mba8xx-scfw-tcm.bin"
 SC_FIRMWARE_NAME_tqma8xqp-mba8xx = "mx8qx-tqma8xqp-mba8xx-scfw-tcm.bin"
 SC_FIRMWARE_NAME_tqma8xd-mba8xx = "mx8qx-tqma8xd-mba8xx-scfw-tcm.bin"
+SC_FIRMWARE_NAME_tqma8xdp4-mba8xx = "mx8qx-tqma8xqp4-mba8xx-scfw-tcm.bin"
 SC_FIRMWARE_NAME_tqma8xqp4-mba8xx = "mx8qx-tqma8xqp4-mba8xx-scfw-tcm.bin"
 
 # TODO: need own firmware later ...
