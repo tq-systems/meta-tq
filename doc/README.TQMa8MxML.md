@@ -1,6 +1,10 @@
 # TQMa8MxML
 
-This README contains some useful information for TQMa8MxML on MBa8Mx
+This README contains some useful information for TQMa8MxML on on MBa8Mx REV.0300
+
+## Variants
+
+* TQMa8MQML REV.020x
 
 ## Versions
 
@@ -8,6 +12,11 @@ This README contains some useful information for TQMa8MxML on MBa8Mx
 
 * based on uboot-imx (https://source.codeaurora.org/external/imx/uboot-imx)
 * branched from lf-5.4.y-1.0.0
+
+### ATF:
+
+* imx-atf (https://source.codeaurora.org/external/imx/imx-atf)
+* v2.0 / lf-5.4.y
 
 ### Linux:
 
@@ -18,9 +27,9 @@ This README contains some useful information for TQMa8MxML on MBa8Mx
 
 ### U-Boot:
 
-_MBa8x HW Rev.020x/30x only_
+_MBa8x HW Rev.030x only_
 
-* RAM configs: 1 GiB
+* RAM configs: 2 GiB
 * CPU variants i.MX8MMQ
 * Fuses
 * speed grade / temperature grade detection
@@ -53,14 +62,11 @@ _MBa8x HW Rev.020x/30x only_
 
 **TODO or not tested / supported**
 
-* RAM 2 GiB
 * CPU variants i.MX8MMD/S and Lite
 
 ### Linux:
 
-_MBa8x HW Rev.020x/30x only_
-
-* RAM configs: 1 GiB
+* RAM configs: 2 GiB
 * CPU variants i.MX8MMQ
 * speed grade / temperature grade detection
 * I2C
@@ -194,13 +200,14 @@ BOOT\_MODE: Internal Boot
 
 *Attention:* Differences from MBa8Mx REV.020x to MBa8Mx REV.030x
 
-MBa8Mx REV.020x:
+_MBa8Mx REV.020x_:
 
 ```
-	S6			S5			S9
-DIP	1 2 3 4 5 6 7 8		1 2 3 4 5 6 7 8		1 2 3 4
-ON	X X   X   X X X		X   X X   X X X		  X    
-OFF	    X   X      		  X     X      		-   X -
+	S6				S5			S9
+BOOTCFG	8  9 10 11 12 13 14 15		0 1 2 3 4 5 6 7
+DIP	1  2  3  4  5  6  7  8		1 2 3 4 5 6 7 8		1 2 3 4
+ON	X  X     X     X  X  X		X   X X   X X X		  X    
+OFF	      X     X         		  X     X      		-   X -
 ```
 
 * BOOT_CFG\[0\] - 0 - reserved
@@ -213,22 +220,23 @@ OFF	    X   X      		  X     X      		-   X -
 * BOOT_CFG\[\11:10\] - 01 - USDHC2
 * BOOT_CFG\[\15:12\] - 0001 - SD Card
 
-MBa8Mx REV.030x:
+_MBa8Mx REV.030x_:
 
 ```
 	S6			S5			S9
-DIP	1 2 3 4 5 6 7 8		1 2 3 4 5 6 7 8		1 2 3 4
-ON	X     X   X X X		X   X X   X X X		  X    
-OFF	  X X   X      		  X     X      		-   X -
+BOOTCFG	8  9 10 11 12 13 14 15		0 1 2 3 4 5 6 7
+DIP	1  2  3  4  5  6  7  8		1 2 3 4 5 6 7 8		1 2 3 4
+ON	X        X     X  X  X		X   X X   X X X		  X    
+OFF	   X  X     X         		  X     X      		-   X -
 ```
 
-* BOOT_CFG\[0\] - 0 - reserved
-* BOOT_CFG\[3:1\] - 001 - SD speed mode (SDR25)
-* BOOT_CFG\[4\] - 1 - Bus width 4 Bit
-* BOOT_CFG\[6:5\] - 00 - reserved
-* BOOT_CFG\[7\] - 0 - Fast Boot
-* BOOT_CFG\[8\] - 0 - USDHC loopback clock source
-* BOOT_CFG\[9\] - 1 - Power cycle enable
+* BOOT_CFG\[0\]      - 0 - reserved
+* BOOT_CFG\[3:1\]    - 001 - SD speed mode (SDR25)
+* BOOT_CFG\[4\]      - 1 - Bus width 4 Bit
+* BOOT_CFG\[6:5\]    - 00 - reserved
+* BOOT_CFG\[7\]      - 0 - Fast Boot
+* BOOT_CFG\[8\]      - 0 - USDHC loopback clock source
+* BOOT_CFG\[9\]      - 1 - Power cycle enable
 * BOOT_CFG\[\11:10\] - 01 - USDHC2
 * BOOT_CFG\[\15:12\] - 0001 - SD Card
 
@@ -236,21 +244,46 @@ _e-MMC_
 
 BOOT\_MODE: Internal Boot
 
+*Attention:* Differences from TQMa8MxML REV.010x to TQMa8MxML REV.020x
+
+_TQMa8MxML REV.010x_
+
 ```
-	S6			S5			S9
-DIP	1 2 3 4 5 6 7 8		1 2 3 4 5 6 7 8		1 2 3 4
-ON	X X X X X   X X		X   X X X   X X		  X    
-OFF	          X    		  X       X    		-   X -
+	S6				S5			S9
+BOOTCFG	8  9 10 11 12 13 14 15		0 1 2 3 4 5 6 7
+DIP	1  2  3  4  5  6  7  8		1 2 3 4 5 6 7 8		1 2 3 4
+ON	X  X  X  X  X     X  X		X   X X X   X X		  X    
+OFF	               X      		  X       X    		-   X -
 ```
 
-* BOOT_CFG\[0\] - 0 - USDHC2 IO VOLTAGE: 3.3 V
-* BOOT_CFG\[1\] - 1 - USDHC1 IO VOLTAGE: 1.8 V
-* BOOT_CFG\[3:2\] - 00 - MMC Speed Mode
-* BOOT_CFG\[\6:4\] - 010 - Bus width 8 Bit
-* BOOT_CFG\[7\] - 0 - Fast boot support
-* BOOT_CFG\[8\] - 0 - USDHC loopback clock through SD pad
-* BOOT_CFG\[9\] - 0 - eMMC reset enable
+* BOOT_CFG\[0\]      - 0 - USDHC2 IO VOLTAGE: 3.3 V
+* BOOT_CFG\[1\]      - 1 - USDHC1 IO VOLTAGE: 1.8 V
+* BOOT_CFG\[3:2\]    - 00 - MMC Speed Mode
+* BOOT_CFG\[\6:4\]   - 010 - Bus width 8 Bit
+* BOOT_CFG\[7\]      - 0 - Fast boot support
+* BOOT_CFG\[8\]      - 0 - USDHC loopback clock through SD pad
+* BOOT_CFG\[9\]      - 0 - eMMC reset enable
 * BOOT_CFG\[\11:10\] - 00 - USDHC1
+* BOOT_CFG\[\15:12\] - 0010 - MMC / e-MMC
+
+_TQMa8MxML REV.020x_
+
+```
+	S6				S5			S9
+BOOTCFG	8  9 10 11 12 13 14 15		0 1 2 3 4 5 6 7
+DIP	1  2  3  4  5  6  7  8		1 2 3 4 5 6 7 8		1 2 3 4
+ON	X  X  X     X     X  X		X   X X X   X X		  X    
+OFF	         X     X      		  X       X    		-   X -
+```
+
+* BOOT_CFG\[0\]      - 0 - USDHC2 IO VOLTAGE: 3.3 V
+* BOOT_CFG\[1\]      - 1 - USDHC1 IO VOLTAGE: 1.8 V
+* BOOT_CFG\[3:2\]    - 00 - MMC Speed Mode
+* BOOT_CFG\[\6:4\]   - 010 - Bus width 8 Bit
+* BOOT_CFG\[7\]      - 0 - Fast boot support
+* BOOT_CFG\[8\]      - 0 - USDHC loopback clock through SD pad
+* BOOT_CFG\[9\]      - 0 - eMMC reset enable
+* BOOT_CFG\[\11:10\] - 10 - USDHC3
 * BOOT_CFG\[\15:12\] - 0010 - MMC / e-MMC
 
 _FlexSPI_ (TODO)
@@ -407,7 +440,7 @@ Demos are compiled to use UART4 (MBa8Mx X17:56,58 + X17:54 for GND) with
 To start a demo stored on SD / e-MMC from U-Boot:
 
 ```
-setenv fdt_file imx8mqml-mba8mx-rpmsg.dtb
+setenv fdt_file imx8mm-mba8mx-rpmsg.dtb
 setenv cm_image <demo>
 run boot_cm_mmc
 ```
