@@ -190,7 +190,13 @@ ON 	  X			  X
 OFF 	X  			-   X -
 ```
 
-e-MMC (needs fuses to be set to use USDHC1)
+e-MMC
+
+_Attention:_
+
+* REV.0100 needs fuses to be set to use USDHC1
+* REV.0200 uses USDHC3 (CPU default), fusing only needed for non starter kit
+  usage.
 
 BOOT\_MODE: 0010
 
