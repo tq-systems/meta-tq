@@ -5,6 +5,19 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa8.BSP.SW.0035
+
+### Added
+
+* machines: support for tqma8xdp\[4\]-mba8xx
+* linux:  support for tqma8xdp\[4\]-mba8xx
+
+### Fixed
+
+* u-boot: 2019.04 / TQMa8Mx\[M,N\]L: fixes for REV.0200
+* u-boot: 2020.04 / TQMa8QM: fix env script loadhdp
+* u-boot: 2020.04 / TQMa8Xx: fix board name for TQMa8XDP\[4\]
+
 ## zeus.TQMa8.BSP.SW.0034
 
 ### Changed
