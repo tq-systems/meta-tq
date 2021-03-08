@@ -26,11 +26,6 @@ require conf/machine/include/tqma8-common.inc
 # Set Serial console
 SERIAL_CONSOLES = "115200;ttymxc2"
 
-# Files are needed in IMAGE_BOOT_FILES because /boot is on an extra partition.
-# If those files should be installed under /boot inside the rootfs, you can
-# achieve this in your BSP layer adding them via
-# IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
-#
 IMAGE_BOOT_FILES ?= "\
 	${KERNEL_IMAGETYPE} \
 	${BOARD_DEVICETREE_FILES} \

@@ -65,6 +65,3 @@ WKS_FILE_DEPENDS = "\
 	virtual/kernel \
 	virtual/bootloader \
 	"
-
-# TODO:
-#IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
