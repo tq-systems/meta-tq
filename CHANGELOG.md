@@ -5,6 +5,17 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa8.BSP.SW.0036
+
+* u-boot: v2020.04 fix FEC Ethernet PHY init
+  - fix phy_config using devicetree
+  - forward error from phy_config
+* config/machines: sanitize variable assignments to improve reusability
+  - replace `IMAGE_INSTALL_append` with more approbiate
+    `MACHINE_EXTRA_RRECOMMENDS_append`
+  - remove all dirty magic for `DISTRO_FEATURES_remove`
+  - replace hard assignments to `IMAGE_BOOT_FILES` with `?=`
+
 ## zeus.TQMa8.BSP.SW.0035
 
 ### Added
