@@ -13,7 +13,7 @@ Please see the corresponding sections below for details.
 This layer in the checked out branch depends on:
 
 URI: https://git.yoctoproject.org/poky  
-branch: zeus  
+branch: hardknott  
 revision: HEAD  
 layers: meta, meta-poky  
 
@@ -23,12 +23,12 @@ meta-freeescale-distro if using i.MX6, i.MX6UL, i.MX7 based machines
 or Layerscape/QorIQ.
 
 URI: https://git.yoctoproject.org/git/meta-freescale  
-branch: zeus  
+branch: hardknott  
 revision: HEAD  
 layers: meta-freeescale  
 
 URI: https://github.com/Freescale/meta-freescale-distro.git  
-branch: zeus  
+branch: hardknott  
 revision: HEAD  
 layers: meta-freeescale-distro  
 
@@ -51,9 +51,13 @@ with machines in meta-tq:
 Optionally the layer can make use of features from meta-ti if using AM57xx
 based machines (tqma57[1,2,4]x-mba57xx etc.)
 
+In meta-ti no hardknott branch exist, so we have to use the master branch.
+The last commit before the master branch supports
+hardknott is commit f56051c9a8cf09f54c43b81301073eed71bbda97.
+
 URI: https://git.yoctoproject.org/git/meta-ti  
-branch: zeus  
-revision: HEAD  
+branch: master  
+revision: f56051c9a8cf09f54c43b81301073eed71bbda97  
 layers: meta-ti  
 
 **Attention:** meta-ti depends on meta-arm and meta-arm-toolchain. The correct
