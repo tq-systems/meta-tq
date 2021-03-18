@@ -39,3 +39,6 @@ IMAGE_BOOT_FILES += " \
 WKS_FILE_DEPENDS_append = "\
 	cortexm-demos \
 	"
+
+MACHINE_FEATURES_append = " wifi"
+MACHINE_EXTRA_RRECOMMENDS_append = " linux-firmware-ath10k"

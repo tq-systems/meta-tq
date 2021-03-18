@@ -26,3 +26,7 @@ IMAGE_BOOT_FILES ?= "\
 	${BOARD_DEVICETREE_FILES} \
 	${BOARD_FIRMWARE_FILES} \
 	"
+
+MACHINE_FEATURES_append = " wifi"
+MACHINE_EXTRA_RRECOMMENDS_append = " linux-firmware-ath10k"
+
