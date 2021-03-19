@@ -108,6 +108,8 @@ See top level README.md for configurations usable as MACHINE.
   * PWM in LVDS IP
 * SATA
 * PCIe
+  * mini-PCIe on MBa8x
+  * wifi with Network Card (Silex Technology SX-PCEAC2-HMC-SP)
 * ADC
 * Audio
   * DisplayPort

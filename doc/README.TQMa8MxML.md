@@ -114,6 +114,8 @@ _MBa8x HW Rev.030x only_
 * MIKRO Bus
 * SIM
 * VPU (test with h264 and vp8)
+* PCIe
+  * wifi not tested, adapter to mini PCIe needed
 
 ## Known Issues
 

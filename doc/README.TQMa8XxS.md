@@ -97,7 +97,9 @@ See top level README.md for configurations usable as MACHINE.
 * LVDS
 * GPU
 * VPU
-* PCIe (mini-PCIe)
+* PCIe
+  * mini-PCIe on MB-SMARC-2
+  * wifi with Network Card (Silex Technology SX-PCEAC2-HMC-SP)
 * CAN
   * can0/1 as network interface
 * CPU / PMIC Thermal sensors

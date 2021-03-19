@@ -83,7 +83,7 @@ _MBa8x HW Rev.020x/30x only_
   * LVDS on eLCDIF
 * PCIe
   * mini-PCIe on MBa8Mx
-  * PCIe (Slot)
+  * wifi with Network Card (Silex Technology SX-PCEAC2-HMC-SP)
 * Audio
   * Codec Line In (X14)
   * Codec Line Out (X13)
