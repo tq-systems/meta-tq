@@ -5,6 +5,13 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## next release
+
+### Added
+
+* linux:  TQMA8:  enable wifi support in kernelconfig
+* machines: enable wifi for all TQMA8 mainboards
+
 ## zeus.TQMa8.BSP.SW.0036
 
 * u-boot: v2020.04 fix FEC Ethernet PHY init
