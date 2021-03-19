@@ -13,8 +13,8 @@ SRC_URI = " \
   file://defconfig \
 "
 
-SRCBRANCH = "TQMa65xx-linux-v5.4.40-ti-5.4.y"
-SRCREV = "083395400847fcc5b1cd0dddba15dfd2701f3200"
+SRCBRANCH = "TQMa65xx-linux-v5.4.93-ti-5.4.y"
+SRCREV = "e6e484bab73f185376950f6c47ce9ec53ab616d2"
 
 COMPATIBLE_MACHINE = "tqma65xx"
 
