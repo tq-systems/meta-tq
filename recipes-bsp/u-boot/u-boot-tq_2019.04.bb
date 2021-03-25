@@ -10,7 +10,7 @@ DEPENDS_append = " bison-native"
 
 PROVIDES += "u-boot"
 
-SRCREV = "ac9930b4e2544d5daf51b044591b5a39debd0ddd"
+SRCREV = "fa805e72855f769365c7530d6262d5eeb6ec5c85"
 SRCBRANCH = "TQMa57xx-u-boot-v2019.04"
 
 S = "${WORKDIR}/git"
