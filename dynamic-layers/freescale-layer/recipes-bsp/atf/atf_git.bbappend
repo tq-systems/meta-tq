@@ -1,6 +1,6 @@
 SRC_URI_tqmls-atf-common = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 SRCBRANCH_tqmls-atf-common = "TQMLS-Integration"
-SRCREV_tqmls-atf-common = "2d6f7c3a75285cb86454affc69345903aa28c24b"
+SRCREV_tqmls-atf-common = "3928092e12f98b958b53ab1330c2283ebd9e78d7"
 
 STATIC_PBL = "no"
 
