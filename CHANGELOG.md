@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
+## zeus.TQMLX2160A.BSP.SW.0009
+
+### Changed
+
+* tqmlx2160a: linux-lsdk-tq: update to v5.4.47 and use same recipe as tqmls1088a
+* tqmlx2160a: atf: change ddr4 parameter to allow reliable 2800MT/s
+* tqmlx2160a: wic: generate sd-card image on default
+* tqmlx2160a: change default rcw to 14_11_2
+
+### Fixed
+* tqmlx2160a: u-boot-lsdk-tq: bugfixes in pcie, sdcard
+* tqmlx2160a: mc-utils: fixed dpl-files
 
 ## zeus.TQMa57xx.BSP.SW.0014
 
