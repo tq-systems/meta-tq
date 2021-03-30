@@ -183,6 +183,7 @@ Support for the following machines is contained in this version:
 See also the machine-specific README file:
 
 - [TQMA6\[Q,D\]](doc/README.TQMa6x.md)
+- [TQMA6UL\[L\]](doc/README.TQMa6ULx.md)
 - [TQMA7\[S,D\]](doc/README.TQMa7x.md)
 - [TQMLS102\[0,1\]A](doc/README.TQMLS102xa.md)
 - [TQMLS1017A/TQMLS1028A](doc/README.TQMLS1028A.md)
