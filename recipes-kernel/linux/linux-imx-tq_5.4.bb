@@ -39,6 +39,7 @@ SRC_URI_mx8 = "\
 
 COMPATIBLE_MACHINE_append = "tqma8xx"
 COMPATIBLE_MACHINE_append = "|tqma8xxs"
+COMPATIBLE_MACHINE_append = "|tqma8mpxl"
 COMPATIBLE_MACHINE_append = "|tqma8mq"
 COMPATIBLE_MACHINE_append = "|tqma8mxml"
 COMPATIBLE_MACHINE_append = "|tqma8mxnl"
