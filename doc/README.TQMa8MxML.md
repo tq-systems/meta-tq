@@ -223,7 +223,7 @@ OFF	      X     X         		  X     X      		-   X -
 _MBa8Mx REV.030x_:
 
 ```
-	S6			S5			S9
+	S6				S5			S9
 BOOTCFG	8  9 10 11 12 13 14 15		0 1 2 3 4 5 6 7
 DIP	1  2  3  4  5  6  7  8		1 2 3 4 5 6 7 8		1 2 3 4
 ON	X        X     X  X  X		X   X X   X X X		  X    
@@ -287,6 +287,21 @@ OFF	         X     X      		  X       X    		-   X -
 * BOOT_CFG\[\15:12\] - 0010 - MMC / e-MMC
 
 _FlexSPI_ (TODO)
+
+```
+	S6				S5			S9
+BOOTCFG	8  9 10 11 12 13 14 15		0 1 2 3 4 5 6 7
+DIP	1  2  3  4  5  6  7  8		1 2 3 4 5 6 7 8		1 2 3 4
+ON	X  X  X  X  X  X     X		X X X X X X X X		  X    
+OFF	                  X   		               		-   X -
+```
+
+* BOOT_CFG\[3:0\]    - 0000 - SPI FLASH Dummy Cycle (auto probed)
+* BOOT_CFG\[5:4\]    - 00   - QuadSPI NOR
+* BOOT_CFG\[7:6\]    - 00   - Hold time before read from device (500us)
+* BOOT_CFG\[\10:8\]  - 000  - Flash Type (Device supports 3B read by default)
+* BOOT_CFG\[11\]     - 0    - SPI FLASH Auto Probe (disable)
+* BOOT_CFG\[14:12\]  - 100  - Boot device selection (Serial NOR)
 
 ## Functional DIP Switches
 
