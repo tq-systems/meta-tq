@@ -24,5 +24,4 @@ do_deploy () {
     install -m 0644 ${S}/firmware/seco/${SECO_FIRMWARE_NAME} ${DEPLOYDIR}
 }
 
-# COMPATIBLE_MACHINE = "(mx8)"
-COMPATIBLE_MACHINE = "(mx8qxp|mx8qm)"
+COMPATIBLE_MACHINE = "(mx8qm|mx8qxp|mx8phantomdxl|mx8dxl)"
