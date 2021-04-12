@@ -186,6 +186,7 @@ Under the given links SOM specific information can be found:
 [TQMa8Mx](doc/README.TQMa8Mx.md)  
 [TQMa8MxML](doc/README.TQMa8MxML.md)  
 [TQMa8MxNL](doc/README.TQMa8MxNL.md)  
+[TQMa8MPxL](doc/README.TQMa8MPxL.md)  
 [TQMa8XDP](doc/README.TQMa8Xx.md)  
 [TQMa8XDP4](doc/README.TQMa8Xx.md)  
 [TQMa8XQP](doc/README.TQMa8Xx.md)  
