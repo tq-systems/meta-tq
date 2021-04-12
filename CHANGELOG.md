@@ -9,8 +9,41 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa8MPxL: add support for new machine
+* u-boot: TQMa8Mx\[M,N\]L: support SD UHS modes
+* u-boot: I2C recovery gpio for
+  * TQMa8Mx\[M,N\]L
+  * TQMa8Xx
+  * TQMa8XxS
+* all: support for NXP BSP rel\_imx\_5.4.70\_2.3.1
+  * u-boot: migrate all imx8 machines with U-Boot v2020.04 support to NXP BSP version
+  * linux: migrate all machines to NXP BSP version
+  * imx-atf: add fork based on NXP BSP version
 * linux:  TQMA8:  enable wifi support in kernelconfig
 * machines: enable wifi for all TQMA8 mainboards
+
+### Changed
+
+* TQMa8Mx\[M,N\]L: port to U-Boot version from used NXP BSP
+* all: support for NXP BSP rel\_imx\_5.4.70\_2.3.1
+  * imx-boot: use meta-freescale upstream as template for own recipe version 1.0
+  * machines: adapt to NXP BSP
+  * recipes:  adapt to NXP BSP
+
+### Fixed
+
+* linux: TQMa8MPxL: fix USB phy driver
+  * port power handling for dual role without Type-C using regulator
+  * add optional over current low active signal handling
+* linux: TQMa8MPxL: MDIO ad phy reset handling for dwmac / stmac driver
+* u-boot: TQMa8MPxL: fix phy init for dwc\_eth\_qos mdio bus
+* u-boot: TQMa8Mx\[M,N\]L: use mmc rescan in env scripts to prevent errors when
+  exchanging SD Card
+* u-boot: TQMa8Mx\[M,N\]L: prevent nasty valtage switch error warning for e-MMC
+
+## Removed
+
+* firmware-imx: remove local recipe
 
 ## zeus.TQMa8.BSP.SW.0036
 
