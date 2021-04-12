@@ -1,5 +1,3 @@
-# DCD_NAME is optional - provide RAM DCD name if RAM bringup not implemented in SCFW
-
 DEPENDS += " \
     virtual/bootloader \
 "

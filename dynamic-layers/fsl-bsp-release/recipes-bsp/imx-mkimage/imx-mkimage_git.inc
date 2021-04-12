@@ -1,11 +1,12 @@
-# Copyright 2017-2019 NXP
-
+# Copyright 2017-2020 NXP
+ 
 DEPENDS = "zlib-native openssl-native"
 
-SRCBRANCH = "imx_5.4.3_2.0.0"
+SRCBRANCH = "imx_5.4.70_2.3.0"
 IMX_MKIMAGE_SRC ?= "git://source.codeaurora.org/external/imx/imx-mkimage.git;protocol=https"
 SRC_URI = "${IMX_MKIMAGE_SRC};branch=${SRCBRANCH}"
-SRCREV = "0fcc82965c695f4754b87ae09b1ec79c0ce6c3b2"
+SRCREV = "8947fea369ab3932259630232cfb9f87b8f9dda1"
+S = "${WORKDIR}/git"
 
 BOOT_TOOLS = "imx-boot-tools"
 SYSROOT_DIRS += "/boot"
