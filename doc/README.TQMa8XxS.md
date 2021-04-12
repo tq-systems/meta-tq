@@ -16,17 +16,17 @@ This README contains some useful information for TQMa8XxS on MB-SMARC-2
 ### U-Boot:
 
 * based on uboot-imx (https://source.codeaurora.org/external/imx/uboot-imx)
-* branched from imx-5.4.47-2.2.0
+* branched from imx-5.4.70-2.3.0
 
 ### ATF:
 
-* imx-atf (https://source.codeaurora.org/external/imx/imx-atf)
-* v2.2 / imx-5.4.47_2.2.0
+* based on imx-atf (https://source.codeaurora.org/external/imx/imx-atf)
+* v2.2 / imx-5.4.70_2.3.0
 
 ### Linux:
 
 * based on linux-imx (https://source.codeaurora.org/external/imx/linux-imx)
-* branched from lf-5.4.y-1.0.0
+* branched from imx-5.4.70-2.3.0
 
 ## Supported machine configurations:
 
