@@ -3,8 +3,8 @@ SECTION = "bootloaders"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
 
-SRCREV = "05b27219b3062526270a629684bd59fc0cfeda34"
-SRCBRANCH = "TQMa8-v2020.04_imx_5.4.47_2.2.0"
+SRCREV = "27d2c0b75ce1680e6af7c6c7a2230a33360a23fd"
+SRCBRANCH = "TQMa8-v2020.04_imx_5.4.70_2.3.0"
 
 SRC_URI = " \
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
