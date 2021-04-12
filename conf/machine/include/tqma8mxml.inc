@@ -25,7 +25,6 @@ SPL_BINARY = "spl/u-boot-spl.bin"
 PREFERRED_PROVIDER_u-boot-mfgtool = "u-boot-imx-tq-mfgtool"
 
 PREFERRED_VERSION_u-boot-imx-tq_${MACHINE} = "2019.04"
-PREFERRED_VERSION_imx-atf_${MACHINE} = "2.0"
 
 # Set DDR FIRMWARE
 DDR_FIRMWARE_NAME = "lpddr4_pmu_train_1d_imem.bin lpddr4_pmu_train_1d_dmem.bin lpddr4_pmu_train_2d_imem.bin lpddr4_pmu_train_2d_dmem.bin"
