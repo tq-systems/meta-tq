@@ -8,8 +8,8 @@ SRC_URI = "\
   file://defconfig \
 "
 
-SRCBRANCH = "TQMaxx-lf-5.4.y-1.0.0"
-SRCREV = "8365a273f1bc5069c64f01c14f01492f8d5f1b69"
+SRCBRANCH = "TQMa8-rel_imx_5.4.70_2.3.0"
+SRCREV = "f9ce3ae6940361b032982bb0110f6902779f6c9b"
 
 KERNEL_TREE_DEFCONFIG_mx8 = "imx_v8_defconfig"
 
