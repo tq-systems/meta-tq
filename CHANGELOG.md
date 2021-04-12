@@ -5,6 +5,10 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa65xx.BSP.SW.0005
+* preliminary addition of module TQMa65xx
+* meta-tq: add new module TQMa65xx / MBa65xx
+
 ## zeus.TQMa57xx.BSP.SW.0012
 
 * tqma57xx: U-Boot: renamed extraversion
