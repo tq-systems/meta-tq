@@ -5,6 +5,12 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa57xx.BSP.SW.0014
+
+### Changed
+* u-boot-tq_2019.04: fix crc offset for variant detection on TQMa57xx
+* u-boot-tq_2019.04: fix written file names for update_uboot script on TQMa57xx
+
 ## zeus.TQMLS10xxA.BSP.SW.0103
 
 ### Changed
