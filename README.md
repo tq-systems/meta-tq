@@ -180,15 +180,6 @@ Support for the following machines is contained in this version:
 \[p\]: prerelease  
 \[\*\]: not buildable in this version  
 
-See also the machine-specific README file:
-
-- [TQMA6\[Q,D\]](doc/README.TQMa6x.md)
-- [TQMA6UL\[L\]](doc/README.TQMa6ULx.md)
-- [TQMA7\[S,D\]](doc/README.TQMa7x.md)
-- [TQMLS102\[0,1\]A](doc/README.TQMLS102xa.md)
-- [TQMLS1017A/TQMLS1028A](doc/README.TQMLS1028A.md)
-- [TQMLX2160A](doc/README.tqmlx2160a-mblx2160a.md)
-
 **Note:** for TQMa6UL1 and baseboards using this module variant with i.MX6ULG1
           a dedicated device tree is supplied
 
@@ -215,3 +206,9 @@ is
 
 Under the given links SOM specific information can be found:
 
+- [TQMA6\[Q,D\]](doc/README.TQMa6x.md)
+- [TQMA6UL\[L\]](doc/README.TQMa6ULx.md)
+- [TQMA7\[S,D\]](doc/README.TQMa7x.md)
+- [TQMLS102\[0,1\]A](doc/README.TQMLS102xa.md)
+- [TQMLS1017A/TQMLS1028A](doc/README.TQMLS1028A.md)
+- [TQMLX2160A](doc/README.tqmlx2160a-mblx2160a.md)
