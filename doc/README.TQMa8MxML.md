@@ -132,8 +132,7 @@ _MBa8x HW Rev.030x only_
 * Mikrobus Modul RTC5 on ecspi1 don't answer
 * Bootstream for QSPI on FlexSPI: not buildable out of the box. U-Boot SPL needs different
   linker settings for SD / e-MMC and FlexSPI. Current recipes for boot stream generation
-  can only use a single U-Boot config. Set `UBOOT_CONFIG` to `fspi` to build FlexSPI
-  boot stream
+  can only use a single U-Boot config. See further notes under Bootable QSPI NOR
 * MBa8Mx REV.020x needs modification for correct I2C address of port expander
 
 ## Build Artifacts
@@ -150,7 +149,7 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / e-MMC
-
+* imx-boot-${MACHINE}-fspi.bin-flash\_evk\_flexspi: boot stream for FlexSPI
 * imx-boot-${MACHINE}-mfgtool.bin-flash\_spl\_uboot:  boot stream for UUU
 * hello\_world.bin (Cortex M4 demo, UART4, TCM)
 * rpmsg\_lite\_pingpong\_rtos\_linux\_remote.bin (Cortex M4 demo, UART4, TCM)
@@ -355,7 +354,7 @@ _S9_
   * ON: DSI to eDP bridge
   * OFF: DSI to LVDS bridge
 
-## SD-Card Boot
+## Boot device initialisation
 
 ### Bootable SD-Card
 
@@ -370,8 +369,6 @@ write bootstream at offset 33 kiB (0x8400) to SD-Card
 Example for Linux:
 
 `sudo dd if=<bootstream> of=/dev/sd<x> bs=1k seek=33 conv=fsync`
-
-## e-MMC Boot
 
 ### Bootable e-MMC
 
@@ -402,7 +399,21 @@ mmc write ${loadaddr} 42 ${bsz}
 
 ### Bootable QSPI NOR
 
-To create a bootable e-MMC with boot stream only (file name see above)
+To build bootstream adapt yocto configuration, modify _local.conf_ or machine
+config file:
+
+```
+UBOOT_CONFIG_tqma8mxml = "fspi"
+IMXBOOT_TARGETS_tqma8mxml = "flash_evk_flexspi"
+```
+
+Rebuild boot stream:
+
+```
+bitbake imx-boot
+```
+
+To create a bootable QSPI NOR with boot stream only (file name see above)
 
 Example for U-Boot, booting from SD-Card:
 
