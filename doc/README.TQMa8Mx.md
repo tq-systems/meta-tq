@@ -135,7 +135,8 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* imx-boot-${MACHINE}-sd.bin: boot stream for SD / e-MMC
+* imx-boot-${MACHINE}-sd.bin-flash\_hdmi\_spl\_uboot:  boot stream for SD / e-MMC
+* imx-boot-${MACHINE}-mfgtool.bin-flash\_spl\_uboot:  boot stream for UUU
 * hello\_world.bin (Cortex M4 demo, UART4, TCM)
 * rpmsg\_lite\_pingpong\_rtos\_linux\_remote.bin (Cortex M4 demo, UART4, TCM)
 
@@ -295,53 +296,35 @@ _S9_
   * ON: DSI to eDP bridge
   * OFF: DSI to LVDS bridge
 
-## SD-Card Boot
+## Boot device initialisation
 
 ### Bootable SD-Card
 
-Complete system image:
+To create a bootable SD-Card with complete system image:
 
 write *.wic Image to SD (offset 0)
 
-Write bootstream only:
-
-Bootstreams built using yocto are named `imx-boot-${MACHINE}-sd.bin`
+To create a bootable SD-Card with boot stream only (file name see above):
 
 write bootstream at offset 33 kiB (0x8400) to SD-Card
 
 Example for Linux:
 
-`sudo dd if=imx-boot-${MACHINE}-sd.bin of=/dev/sd<x> bs=1k seek=33 conv=fsync`
-
-### Update components via U-Boot
-
-Bootstream: set env var `uboot` to name of your bootstream image, provide the
-bootstream via TFTP and update via `run update_uboot`
-
-Device tree blob: set env var `fdt_file` to name of your device tree blob,
-provide the blob via TFTP and update via `run update_fdt`
-
-Linux kernel: set env var `image` to name of your kernel image,
-provide the file via TFTP and update via `run update_kernel`
-
-Cortex M4 image: set env var `cm_image` to name of your Cortex M4 image,
-provide the file via TFTP and update via `run update_cm_mmc`
-
-## e-MMC Boot
+`sudo dd if=<bootstream> of=/dev/sd<x> bs=1k seek=33 conv=fsync`
 
 ### Bootable e-MMC
 
+To create a bootable e-MMC with complete system image:
+
 write *.wic image to e-MMC (offset 0)
 
-Write bootstream only:
-
-Bootstreams built using yocto are named `imx-boot-<module>-<baseboard>-sd.bin`
+To create a bootable e-MMC with boot stream only (file name see above)
 
 Boot from SD-Card and write bootstream at offset 33 kiB (0x8400) to e-MMC
 
 Example for Linux:
 
-`sudo dd if=imx-boot-${MACHINE}-sd.bin of=/dev/mmcblk0 bs=1k seek=33 conv=fsync`
+`sudo dd if=<bootstream> of=/dev/mmcblk0 bs=1k seek=33 conv=fsync`
 
 Example for U-Boot:
 
@@ -356,22 +339,59 @@ mmc dev 0
 mmc write ${loadaddr} 42 ${bsz}
 ```
 
-### Update components via U-Boot
+## Update components via U-Boot
 
-To update components on boot media following u-boot environment scripts are
-prepared. These can be used to update the items using a network connection.
+For ease of development a set of variables and scripts are in default env.
 
-Bootstream: set env var `uboot` to name of your bootstream image, provide the
-bootstream via TFTP and update via `run update_uboot`
+_Note_: Update and start scripts expect a partitioned / initialized SD-Card or
+e-MMC.
 
-Device tree blob: set env var `fdt_file` to name of your device tree blob,
-provide the blob via TFTP and update via `run update_fdt`
+_U-Boot environment variables_
 
-Linux kernel: set env var `image` to name of your kernel image,
-provide the file via TFTP and update via `run update_kernel`
+* `uboot`: name of bootstream image (default = bootstream.bin)
+* `mmcdev`: 0 for e-MMC, 1 for SD-Card (automatically generated,
+  can be overwritten)
+  `mmcpart`: partition number for kernel and devicetree (default = 1)
+  `mmcpath`: path to kernel and device tree (default = /)
+* `fdt_file`: device tree blob,
+* `image`: kernel image,
 
-Cortex M4 image: set env var `cm_image` to name of your Cortex M4 image,
-provide the file via TFTP and update via `run update_cm_mmc`
+_SD / e-MMC_
+
+Download bootstream from TFTP and update:
+
+`run update_uboot`
+
+Download device tree blob from TFTP and update:
+
+`run update_fdt`
+
+Download kernel image from TFTP and update:
+
+`run update_kernel`
+
+## Use UUU Tool
+
+To build bootstream adapt yocto configuration, modify _local.conf_ or machine
+config file:
+
+```
+UBOOT_CONFIG_tqma8mq = "mfgtool"
+IMXBOOT_TARGETS_tqma8mq = "flash_spl_uboot"
+```
+
+Rebuild boot stream:
+
+```
+bitbake imx-boot
+```
+
+Use new compiled bootstream containing U-Boot capable of handling SDP together
+with UUU tool:
+
+```
+sudo uuu -b spl <bootstream>
+```
 
 ## Howto
 
