@@ -3,7 +3,7 @@ SECTION = "bootloaders"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
 
-SRCREV = "6f30a596df0aa169c42cec17f8c74e6d6fcab01e"
+SRCREV = "faab759ed6c0dfa6148861d4d48e0e8dc466ce2d"
 SRCBRANCH = "TQMa8-v2020.04_imx_5.4.70_2.3.0"
 
 SRC_URI = " \
@@ -18,6 +18,6 @@ COMPATIBLE_MACHINE = "tqma8xx"
 COMPATIBLE_MACHINE_append = "|tqma8xxs"
 COMPATIBLE_MACHINE_append = "|tqma8qm"
 COMPATIBLE_MACHINE_append = "|tqma8mpxl"
-#COMPATIBLE_MACHINE_append = "|tqma8mq"
+COMPATIBLE_MACHINE_append = "|tqma8mq"
 COMPATIBLE_MACHINE_append = "|tqma8mxml"
 COMPATIBLE_MACHINE_append = "|tqma8mxnl"
