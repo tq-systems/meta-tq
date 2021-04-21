@@ -11,7 +11,13 @@ Releases are named with the following scheme:
 
 * TQMa8MPxL: add support for new machine
 * u-boot: TQMa8Mx\[M,N\]L: support SD UHS modes
+* Linux: I2C recovery gpio for
+  * TQMa8Mx
+  * TQMa8Mx\[M,N\]L
+  * TQMa8Xx
+  * TQMa8XxS
 * u-boot: I2C recovery gpio for
+  * TQMa8Mx
   * TQMa8Mx\[M,N\]L
   * TQMa8Xx
   * TQMa8XxS
@@ -24,6 +30,9 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* u-boot: TQMa8Mx: backport QSPI driver changes to support mor flash types out
+  of the box
+* TQMa8Mx: port to U-Boot version from used NXP BSP
 * TQMa8Mx\[M,N\]L: port to U-Boot version from used NXP BSP
 * all: support for NXP BSP rel\_imx\_5.4.70\_2.3.1
   * imx-boot: use meta-freescale upstream as template for own recipe version 1.0
@@ -32,6 +41,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* linux: ASoc: port fixes for Codec on STK to prevent race condition that could
+  cause driver load failure
 * linux: TQMa8MPxL: fix USB phy driver
   * port power handling for dual role without Type-C using regulator
   * add optional over current low active signal handling
