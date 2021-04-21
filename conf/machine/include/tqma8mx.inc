@@ -32,7 +32,7 @@ DDR_FIRMWARE_NAME = "\
 "
 
 # Set imx-mkimage boot target
-IMXBOOT_TARGETS ?= "flash_evk flash_evk_no_hdmi"
+IMXBOOT_TARGETS ??= "flash_spl_uboot"
 
 LOADADDR = ""
 UBOOT_SUFFIX = "bin"
@@ -40,7 +40,7 @@ UBOOT_MAKE_TARGET = ""
 
 # for sdcard image rule
 BOOT_SPACE = "65536"
-IMAGE_BOOTLOADER = "imx-boot"
+IMAGE_BOOTLOADER ?= "imx-boot"
 
 # for sdcard + wic image rule
 IMX_BOOT_SEEK = "33"
