@@ -95,7 +95,7 @@ On MBLX2160A.0200 the SD-Card interface works properly.
 
 * atf/
 	* fip_uboot.bin: U-Boot
-	* bl2_[emmc|flexspi_nor|sd].pbl: Boot-media dependend Primary Boot Loadwer with RCW
+	* bl2_[emmc|flexspi_nor|sd].pbl: Boot-media dependend Primary Boot Loader with RCW
 	* variants: contains RCW-PBL for all supported RCW serdes-configurations and all supported boot sources.
 * ddr-phy/
 	* fip_ddr.bin: Firmware for DDR-Controller Phy
@@ -106,6 +106,23 @@ On MBLX2160A.0200 the SD-Card interface works properly.
 * fsl-lx2160a-tqmlx2160a-mblx2160a.dtb: Device Tree Blob.
 * u-boot-tfa-2019.04-r0.bin: U-Boot Binary
 * tq-image-generic-tqmlx2160a-mblx2160a.wic: Complete eMMC / SD-Card Image
+* tq-image-generic-tqmlx2160a-mblx2160a.ubi: RootFS UBI-Image
+
+Note: As U-Boot use the fip_uboot.bin from the atf directory.
+
+
+### Update Scripts
+
+In U-Boot update scripts are provided to easily update components.
+
+There are scripts to update the PBL, U-Boot, Kernel and Devicetree.
+
+These scripts are named `update_[pbl|uboot|fdt|kernel]_[spi|mmc|sd]`.
+
+### Flash UBI to SPI-NOR
+
+`ubiformat /dev/mtd9 -f tq-image-generic-tqmlx2160a-mblx2160a.ubi`
+`ubiattach /dev/ubi_ctrl -m 9`
 
 ## Memory Layout
 ### SPI-NOR
@@ -127,6 +144,7 @@ On MBLX2160A.0200 the SD-Card interface works properly.
 * 0x1000000 : "Boot Partition"
 * 0x3000000 : "RootFS ext4"
 
+Note: eMMC and SD-Card Image differ only in RCW-PBL. So a SD-Card Image can be used for eMMC when pbl is replaced.
 
 ## Build-Time Configuration
 * rcw: Used RCW-Binary to build ATF
@@ -176,17 +194,17 @@ Some useful restool commands are:
 The following table shows which MAC is connected to which port depending on the interface.
 |  MAC  | RGMII | SGMII | XFI | CAUI4 |
 | ----- | ----- | ----- | --- | ----- |
-| MAC.1 |   -   |   -   |  -  |  X29  |
-| MAC.9 |   -   | X13.A |  -  |   -   |
-| MAC.10|   -   | X13.B |  -  |   -   |
-| MAC.12|   -   | X10.A |  -  |   -   |
-| MAC.13|   -   | X12.A |  X8 |   -   |
-| MAC.14|   -   | X12.B |  X9 |   -   |
-| MAC.16|   -   | X11.B |  -  |   -   |
-| MAC.17| X14.A | X10.B |  -  |   -   |
-| MAC.18| X14.B | X11.A |  -  |   -   |
+| MAC1  |   -   |   -   |  -  |  X29  |
+| MAC9  |   -   | X13.A |  -  |   -   |
+| MAC10 |   -   | X13.B |  -  |   -   |
+| MAC12 |   -   | X10.A |  -  |   -   |
+| MAC13 |   -   | X12.A |  X8 |   -   |
+| MAC14 |   -   | X12.B |  X9 |   -   |
+| MAC16 |   -   | X11.B |  -  |   -   |
+| MAC17 | X14.A | X10.B |  -  |   -   |
+| MAC18 | X14.B | X11.A |  -  |   -   |
 
-Interfaces in U-Boot are named like this: DPMAC.xx@interface (e.g. DPMAC.17@rgmii).
+Interfaces in U-Boot are named like this: DPMACxx@interface (e.g. DPMAC17@rgmii-id).
 Note: When MAC.17 or MAC.18 is configured as SGMII device the RGMII ports won't work.
 
 ## Serdes Configuration
@@ -219,14 +237,14 @@ Pay attention to the following DIP-Switches:
 
 | DIP-Switch | Serdes Lane | On  | Off |
 | ---------- | ----------- | --- | ---- |
-| S3-1       | SD1 Lane 6 & 7 | PCIe | SGMII |
-| S3-2       | SD2 Lane 2 | SGMII | SATA |
-| S3-3       | SD2 Lane 3 | SGMII | SATA |
-| S3-4       | SD2 Lane 4 | PCIe | SATA |
-| S4-1       | SD2 Lane 6 | XFI | SGMII |
-| S4-2       | SD2 Lane 7 | XFI | SGMII |
-| S4-3       | SD3 Lane 4 -7 | PCIe x8 | PCIe x4 |
-| S5-1       | EC2| ETH.1588 | RGMII |
+| S3-1       | SD1 Lane 6 & 7 | PCIe.2 | SGMII.9 & 10 |
+| S3-2       | SD2 Lane 2 | SGMII.17 | SATA.1 |
+| S3-3       | SD2 Lane 3 | SGMII.18 | SATA.2 |
+| S3-4       | SD2 Lane 4 | PCIe.4 | SATA.3 |
+| S4-1       | SD2 Lane 6 | XFI.13 | SGMII.13 |
+| S4-2       | SD2 Lane 7 | XFI.14 | SGMII.14 |
+| S4-3       | SD3 Lane 4 -7 | PCIe.5 x8 | PCIe.6 x4 |
+| S5-1       | EC2| ETH.1588 | RGMII.18 |
 
 ## PCIe Configuration
 
