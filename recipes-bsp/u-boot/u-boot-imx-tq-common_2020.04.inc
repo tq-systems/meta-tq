@@ -3,7 +3,7 @@ SECTION = "bootloaders"
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
 
-SRCREV = "faab759ed6c0dfa6148861d4d48e0e8dc466ce2d"
+SRCREV = "fbe3c6d9c74a0f73de768a1b4e965fac64a01820"
 SRCBRANCH = "TQMa8-v2020.04_imx_5.4.70_2.3.0"
 
 SRC_URI = " \
