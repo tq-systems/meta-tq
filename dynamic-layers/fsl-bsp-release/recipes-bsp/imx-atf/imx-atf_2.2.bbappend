@@ -4,7 +4,7 @@ SRC_URI = " \
     ${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
 "
 
-SRCREV = "8d9e7aabed30d3b24225bf37c3ab45eb9d0811f6"
+SRCREV = "cfccd003a1c08655e25bc8d8fdfa1938b0dbda36"
 
 PLATFORM        ?= "INVALID"
 
