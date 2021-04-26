@@ -5,12 +5,13 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
-## next release
+## zeus.TQMa8.BSP.SW.0037
 
 ### Added
 
 * TQMa8MPxL: add support for new machine
-* u-boot: TQMa8Mx\[M,N\]L: support SD UHS modes
+* u-boot: TQMa8Mx\[M,N\]L: support SD UHS modes and optimized pad config
+* linux: TQMa8Mx\[M,N\]L: support SD UHS modes and optimized pad config
 * Linux: I2C recovery gpio for
   * TQMa8Mx
   * TQMa8Mx\[M,N\]L
@@ -34,15 +35,18 @@ Releases are named with the following scheme:
   of the box
 * TQMa8Mx: port to U-Boot version from used NXP BSP
 * TQMa8Mx\[M,N\]L: port to U-Boot version from used NXP BSP
-* all: support for NXP BSP rel\_imx\_5.4.70\_2.3.1
+* all: support for NXP BSP rel\_imx\_5.4.70\_2.3.2
   * imx-boot: use meta-freescale upstream as template for own recipe version 1.0
   * machines: adapt to NXP BSP
-  * recipes:  adapt to NXP BSP
+  * recipes:  adapt to NXP BSP, merge branches for imx-atf, uboot-imx and linux-imx
 
 ### Fixed
 
 * linux: ASoc: port fixes for Codec on STK to prevent race condition that could
   cause driver load failure
+* linux: fix DT for mPCIe USB cards
+  * TQMa8X\[D,Q\]P\[4\] on MBa8Xx
+  * TQMa8Mx\[M,N\]L on MBa8Mx
 * linux: TQMa8MPxL: fix USB phy driver
   * port power handling for dual role without Type-C using regulator
   * add optional over current low active signal handling
@@ -50,10 +54,11 @@ Releases are named with the following scheme:
 * u-boot: TQMa8MPxL: fix phy init for dwc\_eth\_qos mdio bus
 * u-boot: TQMa8Mx\[M,N\]L: use mmc rescan in env scripts to prevent errors when
   exchanging SD Card
-* u-boot: TQMa8Mx\[M,N\]L: prevent nasty valtage switch error warning for e-MMC
+* u-boot: TQMa8Mx\[M,N\]L: prevent nasty voltage switch error warning for e-MMC
 
 ## Removed
 
+* u-boot: drop support for v2019.04, since no user left
 * firmware-imx: remove local recipe
 
 ## zeus.TQMa8.BSP.SW.0036
