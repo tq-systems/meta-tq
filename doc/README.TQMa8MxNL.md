@@ -5,6 +5,7 @@ This README contains some useful information for TQMa8MxNL on MBa8Mx REV.0300
 ## Variants
 
 * TQMa8MQNL REV.020x
+* TQMa8MDLNL REV.020x
 
 ## Versions
 
@@ -34,7 +35,9 @@ See top level README.md for configurations usable as MACHINE.
 _MBa8x HW Rev.030x only_
 
 * RAM configs: 1 GiB
-* CPU variants i.MX8MNQ
+* CPU variants:
+  * i.MX8MNQ
+  * i.MX8MNDL
 * Fuses
 * speed grade / temperature grade detection
 * UART (console on UART3)
@@ -66,12 +69,14 @@ _MBa8x HW Rev.030x only_
 **TODO or not tested / supported**
 
 * RAM 2 GB
-* CPU variants i.MX8MND/S and Lite
+* CPU variants i.MX8MNS
 
 ### Linux:
 
 * RAM configs 1 GiB
-* CPU variants i.MX8MNQ
+* CPU variants:
+  * i.MX8MNQ
+  * i.MX8MNDL
 * speed grade / temperature grade detection
 * I2C
   * Temperature Sensors
