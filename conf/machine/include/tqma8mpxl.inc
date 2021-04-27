@@ -1,6 +1,6 @@
 # Common definitions for TQ-Group TQMa8MPxL modules
 
-MACHINEOVERRIDES =. "imx:mx8:mx8m:mx8mp:tqma8mxnl:"
+MACHINEOVERRIDES =. "imx:mx8:mx8m:mx8mp:tqma8mpxl:"
 
 # Don't include kernels in standard images
 RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
@@ -19,8 +19,8 @@ require conf/machine/include/tqmxx.inc
 PREFERRED_PROVIDER_virtual/kernel_tqma8mpxl ?= "linux-imx-tq"
 KERNEL_IMAGETYPE = "Image"
 
-PREFERRED_PROVIDER_u-boot_tqma8mxnl ?= "u-boot-imx-tq"
-PREFERRED_PROVIDER_virtual/bootloader_tqma8mxnl ?= "u-boot-imx-tq"
+PREFERRED_PROVIDER_u-boot_tqma8mpxl ?= "u-boot-imx-tq"
+PREFERRED_PROVIDER_virtual/bootloader_tqma8mpxl ?= "u-boot-imx-tq"
 PREFERRED_PROVIDER_u-boot-mfgtool = "u-boot-imx-tq-mfgtool"
 SPL_BINARY = "spl/u-boot-spl.bin"
 
@@ -56,7 +56,7 @@ IMAGE_INSTALL_remove = " packagegroup-fsl-optee-imx"
 
 # Image Options
 #
-EXTRA_IMAGEDEPENDS += "u-boot imx-boot cortexm-demos"
+EXTRA_IMAGEDEPENDS += "u-boot imx-boot"
 
 # need to have the kernel modules in rootfs
 MACHINE_EXTRA_RRECOMMENDS_append = " kernel-modules"
