@@ -5,6 +5,7 @@ UBOOT_DTB_NAME = "imx8mp-mba8mpxl.dtb"
 
 BOARD_DEVICETREE_FILES = "\
     imx8mp-mba8mpxl.dtb \
+    imx8mp-mba8mpxl-lvds-tm070jvhg33.dtb \
 "
 
 KERNEL_DEVICETREE = ""
@@ -19,9 +20,8 @@ IMAGE_BOOT_FILES ?= "\
 	${BOARD_DEVICETREE_FILES} \
 	"
 
-# TODO:
-# IMXBOOT_TARGETS ?= "flash_spl_uboot flash_evk_flexspi"
-IMXBOOT_TARGETS ?= "flash_spl_uboot"
+# SD boot image and FlexSPI boot image can be built using same U-Boot config
+IMXBOOT_TARGETS ?= "flash_spl_uboot flash_evk_flexspi"
 
 # TODO:
 #IMAGE_BOOT_FILES += " \
