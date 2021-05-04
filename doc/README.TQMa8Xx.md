@@ -186,7 +186,9 @@ ON
 OFF 		X X X X
 ```
 
-## SD-Card Boot
+## Boot device initialisation
+
+### Bootable SD-Card
 
 To create a bootable SD-Card with complete system image:
 
@@ -198,9 +200,9 @@ write bootstream at offset 32 kiB (0x8000) to SD-Card
 
 Example for Linux:
 
-`sudo dd if=imx-boot-<module>-<baseboard>-sd.bin-flash_spl of=/dev/sd<x> bs=1k seek=32 conv=fsync`
+`sudo dd if=<bootstream> of=/dev/sd<x> bs=1k seek=32 conv=fsync`
 
-## e-MMC Boot
+### Bootable e-MMC
 
 To create a bootable e-MMC with complete system image:
 
@@ -212,7 +214,7 @@ Boot from SD-Card and write bootstream at offset 32 kiB (0x8000) to e-MMC
 
 Example for Linux:
 
-`sudo dd if=imx-boot-<module>-<baseboard>-sd.bin-flash_spl of=/dev/mmcblk0 bs=1k seek=32 conv=fsync`
+`sudo dd if=<bootstream> of=/dev/mmcblk0 bs=1k seek=32 conv=fsync`
 
 Example for U-Boot:
 
@@ -220,32 +222,23 @@ Example for U-Boot:
 # 32k -> 64 blocks -> 0x40
 
 tftp <bootstream>
-setexpr bsz $filesize + 1ff
-setexpr bsz $bsz / 200
+setexpr bsz ${filesize} + 1ff
+setexpr bsz ${bsz} / 200
 printenv bsz
 mmc dev 0
 mmc write ${loadaddr} 40 ${bsz}
 ```
 
-## QSPI Boot
+### Bootable QSPI NOR
 
-### Write bootstream to QSPI
+To create a bootable QSPI NOR with boot stream only (file name see above)
 
-To install QSPI bootstream from U-Boot running on SD, copy the QSPI bootstream from
-deploy folder onto SD-Card partition 1 (firmware partition) or load via tftp.
-File name see above.
+Example for U-Boot, booting from SD-Card:
 
 ```
-setenv uboot xxx.bin-flash_spl_flexspi
-# load from firmware partition
-load mmc 1:1 ${loadaddr} ${uboot}
-# load via tftp
-tftp ${uboot}
+tftp <bootstream>
 sf probe
-sf update ${loadaddr} 0x00 ${filesize}
-# optional verfify
-sf read 0x80300000 0x00 ${filesize}
-cmp.b 0x80300000 ${loadaddr} ${filesize}
+sf update ${loadaddr} 0 ${filesize}
 ```
 
 ## Update components via U-Boot
