@@ -331,8 +331,10 @@ Each Display output could be activated independend by using the corresponding de
 
 In case of problems first check the bus termination:
 
-* CAN0: (S10)
-* CAN1: (S11)
+| Interface | Connector | DIP |
+| --------- | --------- | --- |
+| CAN0      |           | S10 |
+| CAN1      |           | S11 |
 
 ### Enable without CAN-FD
 

@@ -319,8 +319,10 @@ To allow reusage, the support for each display is separated in a dtsi fragment.
 
 In case of problems first check the bus termination:
 
-* CAN0: SW1
-* CAN1: SW2
+| Interface | Connector | DIP |
+| --------- | --------- | --- |
+| CAN0      |           | SW1 |
+| CAN1      |           | SW2 |
 
 ### Enable without CAN-FD
 
@@ -334,7 +336,8 @@ ip link set ${CANIF} up type can bitrate 500000 fd off
 
 ### Enable CAN-FD
 
-To enable CAN-FD the following command can be used:
+To enable CAN-FD the following command can be used, if using a carrier board with
+FD capable transceiver:
 
 ```
 CANIF="can[0,1]"

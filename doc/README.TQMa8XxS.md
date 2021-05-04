@@ -328,8 +328,10 @@ X14 pin 1 and 2 to provide 12V.
 
 In case of problems first check the bus termination:
 
-* CAN0: (X29): DIP `TERM CAN0`
-* CAN1: (X30): DIP `TERM CAN1`
+| Interface | Connector | DIP         |
+| --------- | --------- | ----------- |
+| CAN0      | X29       | `TERM CAN0` |
+| CAN1      | X30       | `TERM CAN1` |
 
 ### Enable without CAN-FD
 
