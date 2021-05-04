@@ -5,6 +5,7 @@ UBOOT_DTB_NAME = "imx8mp-mba8mpxl.dtb"
 
 BOARD_DEVICETREE_FILES = "\
     imx8mp-mba8mpxl.dtb \
+    imx8mp-mba8mpxl-hdmi.dtb \
     imx8mp-mba8mpxl-lvds-tm070jvhg33.dtb \
 "
 
