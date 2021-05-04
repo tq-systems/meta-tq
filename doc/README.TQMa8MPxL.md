@@ -72,22 +72,27 @@ See top level README.md for configurations usable as MACHINE.
   * USB 3.0 Host / Hub
   * USB DRD (USB 3.0 Cable Detect, VBUS)
 * GPU
+* VPU
 * Display
   * LVDS
+  * HDMI
+* Audio
+  * HDMI
 
 ## TODO:
 
 * Audio
-* DSI
+  * Codec
 * MIPI CSI
 * Display
-  * HDMI
   * DSI
-* VPU
 * CortexM
 * PCIe
 
 ## Known Issues
+
+* CAN
+  * CAN FD can not be automatically configured (systemd limitation)
 
 ## Build Artifacts
 
@@ -97,6 +102,7 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.dtb: device tree blobs
   * imx8mp-mba8mpxl.dtb
   * imx8mp-mba8mpxl-lvds-tm070jvhg33.dtb
+  * imx8mp-mba8mpxl-hdmi.dtb
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
@@ -177,7 +183,7 @@ Example for Linux:
 Example for U-Boot:
 
 ```
-# 32k -> 64 Blocks -> 0x40
+# 32k -> 64 blocks -> 0x40
 
 tftp <bootstream>
 setexpr bsz ${filesize} + 1ff
@@ -230,7 +236,6 @@ Download kernel image from TFTP and update:
 
 `run update_kernel_mmc`
 
-
 _FLEXSPI_
 
 Download bootstream from TFTP and update:
@@ -239,3 +244,44 @@ Download bootstream from TFTP and update:
 
 ```
 
+## Display Support
+
+Each Display can be used on its own by using the corresponding device tree.
+To allow reusage, the support for each display is separated in a dtsi fragment.
+
+| Interface       | Device tree                           | Type        ----   |
+|-----------------|---------------------------------------|--------------------|
+| LVDS            | imx8mp-mbba8mpxl-lvds-tm070jvhg33.dtb | Tianma TM070JVHG33 |
+| HDMI            | imx8mp-mbba8mpxl-hdmi.dtb             | Tianma TM070JVHG33 |
+
+
+## CAN
+
+### Troubleshooting
+
+In case of problems first check the bus termination:
+
+| Interface | Connector | DIP |
+| --------- | --------- | --- |
+| CAN0      | X18       | S12 |
+| CAN1      | X19       | S11 |
+
+### Enable without CAN-FD
+
+CAN1/2 should be enabled and configured by default when using with MBa8MPxL
+and meta-tq / systemd
+
+```
+CANIF="can[0,1]"
+ip link set ${CANIF} up type can bitrate 500000 fd off
+```
+
+### Enable CAN-FD
+
+To enable CAN-FD the following command can be used, if using a carrier board with
+FD capable transceiver:
+
+```
+CANIF="can[0,1]"
+ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on
+```
