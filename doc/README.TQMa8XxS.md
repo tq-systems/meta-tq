@@ -7,26 +7,13 @@ This README contains some useful information for TQMa8XxS on MB-SMARC-2
 * TQMa8XQPS REV.020x
 * TQMa8XQPS REV.030x
 
-## Versions
+## Version information for software components
+
+See [here](doc/README.SoftwareVersions.md) for the software base versions.
 
 ### SCFW:
 
 * version: tq-TQMa8.NXP-v1.6.0.B4894.0030
-
-### U-Boot:
-
-* based on uboot-imx (https://source.codeaurora.org/external/imx/uboot-imx)
-* branched from imx-5.4.70-2.3.0
-
-### ATF:
-
-* based on imx-atf (https://source.codeaurora.org/external/imx/imx-atf)
-* v2.2 / imx-5.4.70_2.3.0
-
-### Linux:
-
-* based on linux-imx (https://source.codeaurora.org/external/imx/linux-imx)
-* branched from imx-5.4.70-2.3.0
 
 ## Supported machine configurations:
 
