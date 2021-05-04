@@ -8,22 +8,9 @@ This README contains some useful information for TQMa8Mx on MBa8Mx
 * TQMa8MQ / TQMa8MD / TQMa8MQL REV.020x 2GiB LPDDR4
 * TQMa8MQ / TQMa8MD / TQMa8MQL REV.020x 4GiB LPDDR4
 
-## Versions
+## Version information for software components
 
-### U-Boot:
-
-* based on uboot-imx (https://source.codeaurora.org/external/imx/uboot-imx)
-* branched from imx-5.4.70-2.3.0
-
-### ATF:
-
-* based on imx-atf (https://source.codeaurora.org/external/imx/imx-atf)
-* v2.2 / imx-5.4.70_2.3.0
-
-### Linux:
-
-* based on linux-imx (https://source.codeaurora.org/external/imx/linux-imx)
-* branched from imx-5.4.70-2.3.1
+See [here](doc/README.SoftwareVersions.md) for the software base versions.
 
 ## Supported machine configurations:
 
