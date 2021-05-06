@@ -5,7 +5,10 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
-## [Unreleased]
+## zeus.TQMa35xx.BSP.SW.0120
+
+### Added
+* tqma335x: Support for TQMa335x[L] 256MB and 512MB
 
 ### Changed
 
