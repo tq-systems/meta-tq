@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
+
+## [Unreleased]
+
+### Changed
+
+* linux-rt-tq-5.4: tqma\[6,6ul,6ull,7\]: sync with PTXdist defconfig
+* linux-rt-tq-5.4: update defconfigs
+* linux-tq-5.4: tqma\[6,6ul,6ull,7\]: sync with PTXdist defconfig
+* linux-tq-5.4: update defconfigs
+* linux-rt-tq-5.4: update to 5.4.87-rt48
+* linux-tq: update to v5.4.87
+
 ## zeus.TQMLX2160A.BSP.SW.0009
 
 ### Changed
