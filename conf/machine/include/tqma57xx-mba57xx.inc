@@ -27,4 +27,4 @@ IMAGE_BOOT_FILES_append = "\
 
 SERIAL_CONSOLES ?= "115200;ttyS2"
 
-WKS_FILE ?= "tqma57xx-sdimg.wks"
+WKS_FILE ?= "tqma57xx_tqma335x-sdimg.wks"
