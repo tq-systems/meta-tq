@@ -10,7 +10,7 @@ DEPENDS_append = " bison-native"
 
 PROVIDES += "u-boot"
 
-SRCREV = "fa805e72855f769365c7530d6262d5eeb6ec5c85"
+SRCREV = "a6daf58ed1e4d0308189073dde07c6830d6bcc11"
 SRCBRANCH = "TQMa57xx-u-boot-v2019.04"
 
 S = "${WORKDIR}/git"
@@ -18,5 +18,6 @@ S = "${WORKDIR}/git"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 COMPATIBLE_MACHINE = "tqma57xx"
+COMPATIBLE_MACHINE_append = "|tqma335x"
 
 SPL_BINARY = "MLO"
