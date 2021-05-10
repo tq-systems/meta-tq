@@ -121,6 +121,7 @@ Support for the following machines is contained in this version:
 [y]	i.MX8DXP		TQMa8XDP4		MBa8Xx		tqma8xdp4-mba8xx (TQMa8XDP with 2 GiB LPDDR4 RAM, HW REV.010x)
 [y]	i.MX8QXP		TQMa8XQP		MBa8Xx		tqma8xqp-mba8xx (TQMa8XQP with 1 GiB RAM, HW REV.020x / 0x30x)
 [y]	i.MX8QXP		TQMa8XQP4		MBa8Xx		tqma8xqp4-mba8xx (TQMa8XQP with 2 GiB LPDDR4 RAM, HW REV.010x)
+[y]	i.MX8DXP		TQMa8XDPS		MB-SMARC-2	tqma8xdps-mb-smarc-2 (TQMa8XDPS with 2 GiB RAM, HW REV.030x)
 [y]	i.MX8QXP		TQMa8XQPS		MB-SMARC-2	tqma8xqps-mb-smarc-2 (TQMa8XQPS with 2 GiB RAM, HW REV.030x)
 [y]	i.MX8QXP		TQMa8XQPS		MB-SMARC-2	tqma8xqps-mb-smarc-2-r0200 (TQMa8XQPS REV.020x with 2 GiB RAM, HW REV.020x)
 
@@ -190,6 +191,6 @@ Under the given links SOM specific information can be found:
 [TQMa8XDP4](doc/README.TQMa8Xx.md)  
 [TQMa8XQP](doc/README.TQMa8Xx.md)  
 [TQMa8XQP4](doc/README.TQMa8Xx.md)  
-[TQMa8XQPS](doc/README.TQMa8XxS.md)  
+[TQMa8XDPS](doc/README.TQMa8XxS.md)  
 [TQMa8XQPS](doc/README.TQMa8XxS.md)  
 [TQMa8QM](doc/README.TQMa8x.md)  
