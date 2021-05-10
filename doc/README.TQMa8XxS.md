@@ -6,6 +6,7 @@ This README contains some useful information for TQMa8XxS on MB-SMARC-2
 
 * TQMa8XQPS REV.020x
 * TQMa8XQPS REV.030x
+* TQMa8XDPS REV.030x
 
 ## Version information for software components
 
@@ -24,9 +25,10 @@ See top level README.md for configurations usable as MACHINE.
 ### U-Boot:
 
 * RAM configs:
-  * 2GB / TQMa8XQPS
+  * 2GB / TQMa8X\[D,Q\]PS
 * CPU variants:
   * i.MX8QXP C0
+  * i.MX8DXP C0
 * Fuses
 * GPIO
 * QSPI
@@ -60,8 +62,9 @@ See top level README.md for configurations usable as MACHINE.
 ### Linux:
 
 * RAM configs:
-  * 2GB / TQMa8XQPS
+  * 2GB / TQMa8X\[D,Q\]PS
 * CPU variants:
+  * i.MX8QXP C0
   * i.MX8QXP C0
 * I2C
   * Temperature Sensors (without cpu-temp)
