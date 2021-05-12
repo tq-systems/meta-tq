@@ -5,7 +5,31 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa8.BSP.SW.0037
+
+### Added
+
+* TQMa8XDPS: add support for new machine
+* linux: add support for TQMa8XDPS
+* linux: I2C recovery gpio for
+  * TQMa8x
+  * TQMa8Xx
+  * TQMa8XxS
+* u-boot: I2C recovery gpio for
+  * TQMa8x
+  * TQMa8Xx
+  * TQMa8XxS
+
+### Fixed
+
+* imx-sc-firmware: fix IOCTL output for TQMa8QM 8GB RAM info
+* u-boot: tqma8xxs: fix `tqma8xxs_get_boardname` for TQMa8DXPS
+* linux: ASoc: port fixes for Codec on STK to prevent race condition that could
+  cause driver load failure
+
 ## zeus.TQMa8.BSP.SW.0036
+
+### Fixed
 
 * u-boot: v2020.04 fix FEC Ethernet PHY init
   - fix phy_config using devicetree
