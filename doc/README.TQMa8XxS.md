@@ -14,7 +14,7 @@ See [here](doc/README.SoftwareVersions.md) for the software base versions.
 
 ### SCFW:
 
-* version: tq-TQMa8.NXP-v1.6.0.B4894.0030
+* version: tq-TQMa8.NXP-v1.6.0.B4894.0031
 
 ## Supported machine configurations:
 
