@@ -11,7 +11,7 @@ This README contains some useful information for TQMa8x on MBa8x
 
 ### SCFW:
 
-* version: tq-TQMa8.NXP-v1.6.0.B4894.0030
+* version: tq-TQMa8.NXP-v1.6.0.B4894.0031
 
 ### U-Boot:
 
