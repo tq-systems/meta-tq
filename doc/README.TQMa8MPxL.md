@@ -78,21 +78,26 @@ See top level README.md for configurations usable as MACHINE.
   * HDMI
 * Audio
   * HDMI
+  * Codec (Line IN / Line OUT)
+* PCIe
+  * network card at M.2
+* SPI
+  * spidev at all CS
 
 ## TODO:
 
 * Audio
-  * Codec
+  * Codec Microphone in
 * MIPI CSI
 * Display
-  * DSI
+  * DSI / DSI DP bridge
 * CortexM
-* PCIe
+* ADC
 
 ## Known Issues
 
 * CAN
-  * CAN FD can not be automatically configured (systemd limitation)
+  * CAN FD can not be automatically configured (systemd limitation in this version)
 
 ## Build Artifacts
 
@@ -252,7 +257,7 @@ To allow reusage, the support for each display is separated in a dtsi fragment.
 | Interface       | Device tree                           | Type        ----   |
 |-----------------|---------------------------------------|--------------------|
 | LVDS            | imx8mp-mbba8mpxl-lvds-tm070jvhg33.dtb | Tianma TM070JVHG33 |
-| HDMI            | imx8mp-mbba8mpxl-hdmi.dtb             | Tianma TM070JVHG33 |
+| HDMI            | imx8mp-mbba8mpxl-hdmi.dtb             | compatible monitor |
 
 
 ## CAN
