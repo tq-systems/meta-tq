@@ -9,3 +9,5 @@ PREFERRED_PROVIDER_ptpd_qoriq = "${@bb.utils.contains('BBFILE_COLLECTIONS', 'fre
 PREFERRED_PROVIDER_ptpd ?= "ptpd"
 
 IMAGE_FSTYPES ?= "tar.gz"
+
+MACHINE_FEATURES_remove_imx = " nxp8987"
