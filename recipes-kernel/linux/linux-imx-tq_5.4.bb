@@ -29,6 +29,10 @@ SRC_URI_mx8 = "\
   file://tqma8x-wifi-support.cfg \
 "
 
+SRC_URI_append_tqma8mpxl = "\
+  file://0001-arm64-dt-imx8mp-mba8mpxl-fix-pin-mux-conflict.patch \
+"
+
 ################
 #           file://optimize-filesystem-selection.cfg \
 #           file://usb-serial-port.cfg \
