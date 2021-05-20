@@ -28,6 +28,7 @@ SRC_URI_mx8 = "\
   file://tqma8x-rtc.cfg \
   file://tqma8x-nonimx-drm-removal.cfg \
   file://tqma8x-wifi-support.cfg \
+  file://tqma8x-v4l2.cfg \
 "
 
 ################
