@@ -9,7 +9,9 @@ Releases are named with the following scheme:
 
 ### Added
 
-* TQMa8MPxL: add support for new machine
+* linux: DSR support for Micron SPI NOR
+* TQMa8MPxL: add more machine features (can, rtc, serial, ...)
+* TQMa8MPxL: add support for new machine (see doc for initial supported features)
 * u-boot: TQMa8Mx\[M,N\]L: support SD UHS modes and optimized pad config
 * linux: TQMa8Mx\[M,N\]L: support SD UHS modes and optimized pad config
 * Linux: I2C recovery gpio for
@@ -31,7 +33,7 @@ Releases are named with the following scheme:
 
 ### Changed
 
-* u-boot: TQMa8Mx: backport QSPI driver changes to support mor flash types out
+* u-boot: TQMa8Mx: backport QSPI driver changes to support more flash types out
   of the box
 * TQMa8Mx: port to U-Boot version from used NXP BSP
 * TQMa8Mx\[M,N\]L: port to U-Boot version from used NXP BSP
@@ -42,6 +44,7 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* linux: TQMa8MPxL: use DTE for UART 1-3
 * linux: ASoc: port fixes for Codec on STK to prevent race condition that could
   cause driver load failure
 * linux: fix DT for mPCIe USB cards
