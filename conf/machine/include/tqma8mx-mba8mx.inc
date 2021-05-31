@@ -3,7 +3,7 @@
 # Set u-boot DTB
 UBOOT_DTB_NAME = "imx8mq-mba8mx.dtb"
 
-IMXBOOT_TARGETS ?= "flash_spl_uboot flash_hdmi_spl_uboot"
+IMXBOOT_TARGETS ?= "flash_hdmi_spl_uboot flash_spl_uboot "
 
 BOARD_DEVICETREE_FILES = "\
     imx8mq-mba8mx.dtb \
