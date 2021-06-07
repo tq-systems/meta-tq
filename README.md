@@ -208,6 +208,7 @@ is
 
 Under the given links SOM specific information can be found:
 
+- [TQMA335x\[L\]](doc/README.TQMa335x.md)
 - [TQMA6\[Q,D\]](doc/README.TQMa6x.md)
 - [TQMA6UL\[L\]](doc/README.TQMa6ULx.md)
 - [TQMA7\[S,D\]](doc/README.TQMa7x.md)
