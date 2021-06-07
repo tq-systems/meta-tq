@@ -76,6 +76,7 @@ Additionally you can use github's collaboration features.
 3. Support for wic
 4. Support custom mainboards
 5. SOM specific documentation
+6. Known Issues
 
 ### 1. Adding the meta-tq layer to your build
 
@@ -215,3 +216,8 @@ Under the given links SOM specific information can be found:
 - [TQMLS102\[0,1\]A](doc/README.TQMLS102xa.md)
 - [TQMLS1017A/TQMLS1028A](doc/README.TQMLS1028A.md)
 - [TQMLX2160A](doc/README.tqmlx2160a-mblx2160a.md)
+
+### 6. Known Issues
+
+- `u-boot-fw-utils` is not buildable currently because it uses the U-Boot Mainline
+repository. To make it buildable a bbappend which changes SRC_URI would be necessary.
