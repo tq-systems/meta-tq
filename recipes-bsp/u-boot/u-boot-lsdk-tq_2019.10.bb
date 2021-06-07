@@ -6,4 +6,4 @@ PROVIDES += "u-boot-tq"
 SRCREV = "63dea9ef34fbde075905e72a4c409469a145fdb2"
 SRCBRANCH = "TQMLSxx-LSDK-20.04-update-290520"
 
-COMPATIBLE_MACHINE = "tqmls1012al-mbls1012al|tqmls1028a-mbls1028a"
+COMPATIBLE_MACHINE = "tqmls1012al-mbls1012al|tqmls1012al-1gb-mbls1012al|tqmls1028a-mbls1028a"
