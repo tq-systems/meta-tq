@@ -5,6 +5,14 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## [Unreleased]
+
+### Added
+
+* tqmls1012al: add README
+* atf: add support for tqmls1012al with 1 GB RAM
+* tqmls1012al: add module variant with 1 GB RAM
+
 ## zeus.TQMa35xx.BSP.SW.0120
 
 ### Added
