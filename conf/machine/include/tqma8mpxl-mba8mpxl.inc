@@ -13,6 +13,8 @@ KERNEL_DEVICETREE = ""
 
 require conf/machine/include/tqma8-common.inc
 
+MACHINE_FEATURES_append = " wifi"
+
 # Set Serial console
 SERIAL_CONSOLES = "115200;ttymxc3"
 
