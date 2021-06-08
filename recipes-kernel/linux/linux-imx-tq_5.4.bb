@@ -9,7 +9,7 @@ SRC_URI = "\
 "
 
 SRCBRANCH = "TQMa8-rel_imx_5.4.70_2.3.0"
-SRCREV = "c40900b8c808bf722640f7b7341f5629b9147c5a"
+SRCREV = "5731645ebfab2652fb02ae52febca0a4ebefd213"
 
 KERNEL_TREE_DEFCONFIG_mx8 = "imx_v8_defconfig"
 
@@ -27,10 +27,6 @@ SRC_URI_mx8 = "\
   file://tqma8x-rtc.cfg \
   file://tqma8x-nonimx-drm-removal.cfg \
   file://tqma8x-wifi-support.cfg \
-"
-
-SRC_URI_append_tqma8mpxl = "\
-  file://0001-arm64-dt-imx8mp-mba8mpxl-fix-pin-mux-conflict.patch \
 "
 
 ################
