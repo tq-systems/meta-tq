@@ -1,6 +1,6 @@
 # TQMa8MxNL
 
-This README contains some useful information for TQMa8MxNL on MBa8Mx REV.0300
+This README contains some useful information for TQMa8MxNL on MBa8Mx REV.030x
 
 ## Variants
 
@@ -42,6 +42,7 @@ _MBa8x HW Rev.030x only_
 * ENET (GigE via Phy on MBa8Mx)
 * Bootdevices:
   * SD-Card on USDHC2
+  * e-MMC on USDHC3
   * QSPI-NOR on FlexSPI
 * USB
   * USB 2.0 Host / Hub
@@ -113,12 +114,13 @@ _MBa8x HW Rev.030x only_
 
 * UART4: needs ATF modification, to make it usable for linux. Primary used as
   debug UART for Cortex M7. Modification is available with current ATF version.
+* MBa8Mx before REV.0300 is not supported.
 
 ## Known Issues
 
 * LVDS shows wrong colors on older Tianma display kit (HW issue on display)
 * Mikrobus Modul RTC5 on ecspi1 don't answer
-* MBa8Mx REV.020x needs modification for correct I2C address of port expander
+* Audio does not work after suspend / resume (clocking problem)
 
 ## Build Artifacts
 
@@ -152,12 +154,10 @@ _Note:_
 
 _Board config_
 
-```
-	S10
-DIP 	1 2 3 4
-ON 	X X X X
-OFF 	       
-```
+| DIP S10  | 1 | 2 | 3 | 4 |
+| -------- | - | - | - | - |
+| ON       | x | x | x | x |
+| OFF      |   |   |   |   |
 
 _BOOT\_MODE_
 
@@ -192,13 +192,7 @@ ON 	  X			  X
 OFF 	X  			-   X -
 ```
 
-e-MMC
-
-_Attention:_
-
-* REV.0100 needs fuses to be set to use USDHC1
-* REV.0200 uses USDHC3 (CPU default), fusing only needed for non starter kit
-  usage.
+e-MMC (USDHC3)
 
 BOOT\_MODE: 0010
 
@@ -254,11 +248,7 @@ _S8_
   * BSP default: OFF
 * 2: TQMa8M\_ONOFF
   * BSP default: OFF
-* 3: SD\_MUX\_CTRL (MBa8Mx REV.020x)
-  * ON: SD Signals to X8 (Micro SD Slot)
-  * OFF: SD Signals to X17
-  * BSP default: ON
-* 3: I2C\_ADDR\_SW (MBa8Mx REV.030x) (I2C Address of GPIO Expander D31)
+* 3: I2C\_ADDR\_SW (I2C Address of GPIO Expander D31)
   * BSP default: OFF
 * 4: SPI\_MUX\_CTRL
   * ON: SPI1 Signals to X20 (MikroBus)
@@ -360,7 +350,7 @@ Download kernel image from TFTP and update:
 
 `run update_kernel_mmc`
 
-Cortex M4 image: set env var `cm_image` to name of your Cortex M7 image,
+Cortex M7 image: set env var `cm_image` to name of your Cortex M7 image,
 provide the file via TFTP and update via `run update_cm_mmc`
 
 _FLEXSPI_
