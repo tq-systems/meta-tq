@@ -17,7 +17,7 @@ IMAGE_BOOT_FILES_append = "\
 	${KERNEL_DEVICETREE} \
 "
 
-MACHINE_EXTRA_RDEPENDS += "ti-sgx-ddk-km"
+MACHINE_EXTRA_RRECOMMENDS += "${@bb.utils.contains('BBFILE_COLLECTIONS', 'meta-ti', 'ti-sgx-ddk-km', '', d)}"
 
 IMAGE_FSTYPES_append = " tar.gz ext4 wic"
 
