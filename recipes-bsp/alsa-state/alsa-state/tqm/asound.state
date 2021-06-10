@@ -2,8 +2,8 @@ state.tqmtlv320aic32 {
 	control.1 {
 		iface MIXER
 		name 'PCM Playback Volume'
-		value.0 80
-		value.1 80
+		value.0 127
+		value.1 127
 		comment {
 			access 'read write'
 			type INTEGER
@@ -11,8 +11,8 @@ state.tqmtlv320aic32 {
 			range '0 - 175'
 			dbmin -6350
 			dbmax 2400
-			dbvalue.0 -2350
-			dbvalue.1 -2350
+			dbvalue.0 0
+			dbvalue.1 0
 		}
 	}
 	control.2 {
@@ -60,8 +60,8 @@ state.tqmtlv320aic32 {
 	control.5 {
 		iface MIXER
 		name 'LO Driver Gain Volume'
-		value.0 30
-		value.1 30
+		value.0 6
+		value.1 6
 		comment {
 			access 'read write'
 			type INTEGER
@@ -69,8 +69,8 @@ state.tqmtlv320aic32 {
 			range '0 - 35'
 			dbmin -600
 			dbmax 2900
-			dbvalue.0 2400
-			dbvalue.1 2400
+			dbvalue.0 0
+			dbvalue.1 0
 		}
 	}
 	control.6 {
