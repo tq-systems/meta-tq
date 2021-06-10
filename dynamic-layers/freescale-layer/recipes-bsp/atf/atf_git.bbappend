@@ -6,6 +6,7 @@ STATIC_PBL = "no"
 
 OVERRIDES_prepend_tqmls1012al = "tqmls-atf-common:"
 PLATFORM_tqmls1012al = "tqmls1012al"
+PLATFORM_tqmls1012al_tqmls1012al-1gb = "tqmls1012al_1gb"
 
 OVERRIDES_prepend_tqmls1028a = "tqmls-atf-common:"
 PLATFORM_tqmls1028a = "tqmls1028a"
