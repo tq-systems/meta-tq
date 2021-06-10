@@ -6,8 +6,16 @@ EXTRA_IMAGE_FEATURES_append = " package-management"
 
 IMAGE_INSTALL = "\
     packagegroup-core-boot \
-    ${CORE_IMAGE_EXTRA_INSTALL} \
-    "
+    packagegroup-base \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' packagegroup-systemd', '', d)} \
+    packagegroup-hwutils \
+    packagegroup-fsutils \
+    packagegroup-netutils \
+    packagegroup-sysutils \
+    packagegroup-testutils \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'can', ' packagegroup-can', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'alsa', ' packagegroup-audio', '', d)} \
+"
     
 IMAGE_INSTALL_append = " can-utils \
                          mtd-utils \
