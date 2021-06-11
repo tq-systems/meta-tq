@@ -1,6 +1,6 @@
 # TQMa8MxML
 
-This README contains some useful information for TQMa8MxML on on MBa8Mx REV.0300
+This README contains some useful information for TQMa8MxML on MBa8Mx REV.030x
 
 ## Variants
 
@@ -21,7 +21,8 @@ See top level README.md for configurations usable as MACHINE.
 _MBa8x HW Rev.030x only_
 
 * RAM configs: 2 GiB
-* CPU variants i.MX8MMQ
+* CPU
+  * variants i.MX8MMQ
 * Fuses
 * speed grade / temperature grade detection
 * UART (console on UART3)
@@ -39,7 +40,7 @@ _MBa8x HW Rev.030x only_
 * ENET (GigE via Phy on MBa8Mx)
 * Bootdevices:
   * SD-Card on USDHC2
-  * e-MMC on USDHC1
+  * e-MMC on USDHC3
   * QSPI-NOR on FlexSPI
 * USB
   * USB 2.0 Host / Hub
@@ -58,7 +59,8 @@ _MBa8x HW Rev.030x only_
 ### Linux:
 
 * RAM configs: 2 GiB
-* CPU variants i.MX8MMQ
+* CPU
+  * variants i.MX8MMQ
 * speed grade / temperature grade detection
 * I2C
   * Temperature Sensors
@@ -112,6 +114,7 @@ _MBa8x HW Rev.030x only_
 
 * UART4: needs ATF modification, to make it usable for linux. Primary used as
   debug UART for Cortex M7. Modification is available with current ATF version.
+* MBa8Mx before REV.0300 is not supported.
 
 ## Known Issues
 
@@ -120,7 +123,7 @@ _MBa8x HW Rev.030x only_
 * Bootstream for QSPI on FlexSPI: not buildable out of the box. U-Boot SPL needs different
   linker settings for SD / e-MMC and FlexSPI. Current recipes for boot stream generation
   can only use a single U-Boot config. See further notes under Bootable QSPI NOR
-* MBa8Mx REV.020x needs modification for correct I2C address of port expander
+* Audio does not work after suspend / resume (clocking problem)
 
 ## Build Artifacts
 
@@ -155,68 +158,40 @@ _Note:_
 
 _Board config_
 
-```
-DIP S10	1 2 3 4
-ON 	X X    
-OFF 	    X X
-```
+| DIP S10  | 1 | 2 | 3 | 4 |
+| -------- | - | - | - | - |
+| ON       | x | x |   |   |
+| OFF      |   |   | x | x |
 
 _BOOT\_MODE_
 
 * Boot from Fuses (needs boot fuses to be set) - 00b
 
-```
-BOOT\_MODE	  0 1  
-DIP S9		1 2 3 4
-ON		  X X  
-OFF		-     -
-```
+| BOOT\_MODE |   | 0 | 1 |   |
+| ---------- | - | - | - | - |
+| DIP S9     | 1 | 2 | 3 | 4 |
+| ON         |   | X | X |   |
+| OFF        | - |   |   | - |
 
 * Serial Downloader - 01b
 
-```
-BOOT\_MODE	  0 1  
-DIP S9		1 2 3 4
-ON		    X  
-OFF		- X   -
-```
+| BOOT\_MODE |   | 0 | 1 |   |
+| ---------- | - | - | - | - |
+| DIP S9     | 1 | 2 | 3 | 4 |
+| ON         |   |   | X |   |
+| OFF        | - | X |   | - |
 
 * Internal Boot (no boot fuses set, use boot config pins) - 10b
 
-```
-BOOT\_MODE	  0 1  
-DIP S9		1 2 3 4
-ON		  X    
-OFF		-   X -
-```
+| BOOT\_MODE |   | 0 | 1 |   |
+| ---------- | - | - | - | - |
+| DIP S9     | 1 | 2 | 3 | 4 |
+| ON         |   | X |   |   |
+| OFF        | - |   | X | - |
 
-_SD Card_
+_SD Card_ (USDHC2)
 
 BOOT\_MODE: Internal Boot
-
-*Attention:* Differences from MBa8Mx REV.020x to MBa8Mx REV.030x
-
-_MBa8Mx REV.020x_:
-
-```
-	S6				S5			S9
-BOOTCFG	8  9 10 11 12 13 14 15		0 1 2 3 4 5 6 7
-DIP	1  2  3  4  5  6  7  8		1 2 3 4 5 6 7 8		1 2 3 4
-ON	X  X     X     X  X  X		X   X X   X X X		  X    
-OFF	      X     X         		  X     X      		-   X -
-```
-
-* BOOT_CFG\[0\] - 0 - reserved
-* BOOT_CFG\[3:1\] - 001 - SD speed mode (SDR25)
-* BOOT_CFG\[4\] - 1 - Bus width 4 Bit
-* BOOT_CFG\[6:5\] - 00 - reserved
-* BOOT_CFG\[7\] - 0 - Fast Boot
-* BOOT_CFG\[8\] - 0 - USDHC loopback clock source
-* BOOT_CFG\[9\] - 0 - Power cycle enable
-* BOOT_CFG\[\11:10\] - 01 - USDHC2
-* BOOT_CFG\[\15:12\] - 0001 - SD Card
-
-_MBa8Mx REV.030x_:
 
 ```
 	S6				S5			S9
@@ -236,33 +211,7 @@ OFF	   X  X     X         		  X     X      		-   X -
 * BOOT_CFG\[\11:10\] - 01 - USDHC2
 * BOOT_CFG\[\15:12\] - 0001 - SD Card
 
-_e-MMC_
-
-BOOT\_MODE: Internal Boot
-
-*Attention:* Differences from TQMa8MxML REV.010x to TQMa8MxML REV.020x
-
-_TQMa8MxML REV.010x_
-
-```
-	S6				S5			S9
-BOOTCFG	8  9 10 11 12 13 14 15		0 1 2 3 4 5 6 7
-DIP	1  2  3  4  5  6  7  8		1 2 3 4 5 6 7 8		1 2 3 4
-ON	X  X  X  X  X     X  X		X   X X X   X X		  X    
-OFF	               X      		  X       X    		-   X -
-```
-
-* BOOT_CFG\[0\]      - 0 - USDHC2 IO VOLTAGE: 3.3 V
-* BOOT_CFG\[1\]      - 1 - USDHC1 IO VOLTAGE: 1.8 V
-* BOOT_CFG\[3:2\]    - 00 - MMC Speed Mode
-* BOOT_CFG\[\6:4\]   - 010 - Bus width 8 Bit
-* BOOT_CFG\[7\]      - 0 - Fast boot support
-* BOOT_CFG\[8\]      - 0 - USDHC loopback clock through SD pad
-* BOOT_CFG\[9\]      - 0 - eMMC reset enable
-* BOOT_CFG\[\11:10\] - 00 - USDHC1
-* BOOT_CFG\[\15:12\] - 0010 - MMC / e-MMC
-
-_TQMa8MxML REV.020x_
+_e-MMC_ (USDHC3)
 
 ```
 	S6				S5			S9
@@ -315,17 +264,11 @@ _S7_
 
 _S8_
 
-*Attention:* Differences from MBa8Mx REV.020x to MBa8Mx REV.030x
-
 * 1: TQMa8M\_SYS\_RST#
   * BSP default: OFF
 * 2: TQMa8M\_ONOFF
   * BSP default: OFF
-* 3: SD\_MUX\_CTRL (MBa8Mx REV.020x)
-  * ON: SD Signals to X8 (Micro SD Slot)
-  * OFF: SD Signals to X17
-  * BSP default: ON
-* 3: I2C\_ADDR\_SW (MBa8Mx REV.030x) (I2C Address of GPIO Expander D31)
+* 3: I2C\_ADDR\_SW (I2C Address of GPIO Expander D31)
   * BSP default: OFF
 * 4: SPI\_MUX\_CTRL
   * ON: SPI1 Signals to X20 (MikroBus)
@@ -468,6 +411,7 @@ bitbake imx-boot
 
 Use new compiled bootstream containing U-Boot capable of handling SDP together
 with UUU tool:
+
 ```
 sudo uuu -b spl <bootstream>
 ```
