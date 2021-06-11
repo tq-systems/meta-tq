@@ -5,12 +5,38 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+### Added
+
+* linux: TQMa8MPxL: device tree for CortexM7 demos
+* u-boot: TQMa8MPxL: env settings for CortexM7
+* u-boot: DSR support for Micron SPI NOR
+* linux: DSR support for Micron SPI NOR
+* TQMa8MPxL: add more machine features (can, rtc, serial, ...)
+
+### Changed
+
+* linux: TQMa8MPxL / TQMa8MxML / TQMa8MxNL: label sys EEPROM as read only
+* linux: TQMa8MPxL: use verified pad config for e-MMC
+* linux: TQMa8MxML / TQMa8MxNL: use verified pad config
+* u-boot: TQMa8MPxL: use verified pad config for e-MMC
+* u-boot: TQMa8MxML / TQMa8MxNL: use verified pad config
+* u-boot: TQMa8MxML / TQMa8MxNL: optimize RAM-config
+* u-boot: TQMa8MPxL fix RAM-config to support 2000 mHz / 4000 MZ
+
+### Fixed
+
+* linux: TQMa8MxNL: fix SAI interface sychronous play / record
+* u-boot: backport lmb fixes from upstream, needed for newer DTB with lots of
+  reserved mem regions
+* u-boot: fsl_fspi: fix flow for EVCR access
+* alsa-state: optimize codec preconfig. PCM input and LineOut amp factors were
+  configured suboptimal.
+* linux: TQMa8MPxL: use DTE for UART 1-3
+
 ## zeus.TQMa8.BSP.SW.0050
 
 ### Added
 
-* linux: DSR support for Micron SPI NOR
-* TQMa8MPxL: add more machine features (can, rtc, serial, ...)
 * TQMa8MPxL: add support for new machine (see doc for initial supported features)
 * u-boot: TQMa8Mx\[M,N\]L: support SD UHS modes and optimized pad config
 * linux: TQMa8Mx\[M,N\]L: support SD UHS modes and optimized pad config
@@ -44,7 +70,6 @@ Releases are named with the following scheme:
 
 ### Fixed
 
-* linux: TQMa8MPxL: use DTE for UART 1-3
 * linux: ASoc: port fixes for Codec on STK to prevent race condition that could
   cause driver load failure
 * linux: fix DT for mPCIe USB cards
@@ -61,6 +86,7 @@ Releases are named with the following scheme:
 
 ## Removed
 
+* doc: TQMa8MxML / TQMa8MxNL: remove remaining docs for incompatible MBa8Mx REV.020x
 * u-boot: drop support for v2019.04, since no user left
 * firmware-imx: remove local recipe
 
