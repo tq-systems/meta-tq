@@ -45,6 +45,9 @@ See top level README.md for configurations usable as MACHINE.
 * QSPI NOR
   * Read with 1-1-1 SDR
   * PP / Erase with 1-1-1 SDR
+* Cortex M7
+  * env settings for starting from TCM
+  * examples with UART3 as debug console
 
 **TODO or not tested / supported**
 
@@ -83,6 +86,9 @@ See top level README.md for configurations usable as MACHINE.
   * network card at M.2
 * SPI
   * spidev at all CS
+* Cortex M7
+  * examples running from TCM
+  * use UART3 as debug console
 
 ## TODO:
 
@@ -91,13 +97,16 @@ See top level README.md for configurations usable as MACHINE.
 * MIPI CSI
 * Display
   * DSI / DSI DP bridge
-* CortexM
 * ADC
 
 ## Known Issues
 
 * CAN
   * CAN FD can not be automatically configured (systemd limitation in this version)
+* UART 1,2,3
+  * UART are in DTE mode, not DCE
+  * to use UART with FTDI RS232 / USB some hardware modification are needed for REV.010x, see
+    manual
 
 ## Build Artifacts
 
@@ -114,6 +123,8 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / e-MMC
 * imx-boot-${MACHINE}-sd.bin-flash\_evk\_flexspi: boot stream for FlexSPI
+* hello\_world.bin (Cortex M7 demo, UART3, TCM)
+* rpmsg\_lite\_pingpong\_rtos\_linux\_remote.bin (Cortex M7 demo, UART3, TCM)
 
 ## Boot Dip Switches
 
@@ -249,6 +260,30 @@ Download bootstream from TFTP and update:
 
 ```
 
+## Use UUU Tool
+
+To build bootstream adapt yocto configuration, modify _local.conf_ or machine
+config file:
+
+```
+UBOOT_CONFIG_tqma8mpxl = "mfgtool"
+IMXBOOT_TARGETS_tqma8mpxl = "flash_spl_uboot"
+```
+
+Rebuild boot stream:
+
+```
+bitbake imx-boot
+```
+
+Use new compiled bootstream containing U-Boot capable of handling SDP together
+with UUU tool:
+
+```
+sudo uuu -b spl <bootstream>
+```
+
+
 ## Display Support
 
 Each Display can be used on its own by using the corresponding device tree.
@@ -289,4 +324,22 @@ FD capable transceiver:
 ```
 CANIF="can[0,1]"
 ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on
+```
+
+### Cortex M7
+
+Demos are compiled to use UART3 with 115200 8N1.
+
+To start a demo stored on SD / e-MMC from U-Boot:
+
+```
+setenv fdt_file imx8mp-mba8mpxl-rpmsg.dtb
+setenv cm_image <demo>
+run boot_cm_mmc
+```
+
+To connect from running linux to rpmsg ping pong demo:
+
+```
+modprobe imx_rpmsg_pingpong
 ```
