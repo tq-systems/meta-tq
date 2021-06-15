@@ -312,7 +312,7 @@ Boot from SD-Card and write bootstream at offset 33 kiB (0x8400) to e-MMC
 
 Example for Linux:
 
-`sudo dd if=imx-boot-${MACHINE}-sd.bin of=/dev/mmcblk0 bs=1k seek=33 conv=fsync`
+`sudo dd if=<bootstream> of=/dev/mmcblk0 bs=1k seek=33 conv=fsync`
 
 Example for U-Boot:
 
