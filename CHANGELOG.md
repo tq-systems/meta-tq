@@ -5,7 +5,7 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
-## [Unreleased]
+## zeus.TQMLS1012AL.BSP.SW.0009
 
 ### Added
 
