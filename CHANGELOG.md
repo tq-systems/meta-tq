@@ -7,6 +7,7 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa8MPxL: enable CortexM demo package
 * linux: TQMa8MPxL: device tree for CortexM7 demos
 * u-boot: TQMa8MPxL: env settings for CortexM7
 * u-boot: DSR support for Micron SPI NOR
@@ -15,6 +16,23 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* machines / layer.conf: disable packages only relevant for NXP STK
+  * nxp8987 WiFi
+  * imx-m\[4,7\]-demos
+* machines: TQMa8Mx / TQMa8MxML / TQMa8MxNL: update to new CortexM demo package
+* recipes-bsp: rewrite recipe for CortexM demos
+  * based on NXP SDK v2.9.0
+  * rename and sanitize recipe
+  * use versioned archive name
+* linux: TQMa8MPxL: fix drive strength for SAI3
+* linux: backport upstream PMIC driver for PCA9450
+  * adjust device trees for TQMa8MPxL / TQMa8MxML / TQMa8MxNL
+  * limit voltage rails for TQMa8MxML / TQMa8MxNL
+* u-boot: TQMa8MxNL / TQMa8MxML: optimize PMIC config in SPL
+  * lower voltage for LDO2 / V\_SNVS\_0V8
+  * improved configs for BUCK1/3 (recommendations from hardware development guide
+    and app note for using same board for i.MX8MN / i.MX8MM)
+* u-boot: TQMa8MPxL: make SPL more silent, do not print PMIC registers
 * linux: TQMa8MPxL / TQMa8MxML / TQMa8MxNL: label sys EEPROM as read only
 * linux: TQMa8MPxL: use verified pad config for e-MMC
 * linux: TQMa8MxML / TQMa8MxNL: use verified pad config
