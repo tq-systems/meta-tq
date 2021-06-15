@@ -31,7 +31,7 @@ IMAGE_BOOT_FILES += " \
 "
 
 WKS_FILE_DEPENDS_append = "\
-	cortexm-demos \
+	tqma8-cortexm-demos \
 	"
 
 MACHINE_FEATURES_append = " wifi"

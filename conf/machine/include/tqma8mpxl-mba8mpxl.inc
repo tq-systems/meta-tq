@@ -26,12 +26,11 @@ IMAGE_BOOT_FILES ?= "\
 # SD boot image and FlexSPI boot image can be built using same U-Boot config
 IMXBOOT_TARGETS ?= "flash_spl_uboot flash_evk_flexspi"
 
-# TODO:
-#IMAGE_BOOT_FILES += " \
-#    hello_world.bin \
-#    rpmsg_lite_pingpong_rtos_linux_remote.bin \
-#"
-#
-#WKS_FILE_DEPENDS_append = "\
-#	cortexm-demos \
-#	"
+IMAGE_BOOT_FILES += " \
+    hello_world.bin \
+    rpmsg_lite_pingpong_rtos_linux_remote.bin \
+"
+
+WKS_FILE_DEPENDS_append = "\
+	tqma8-cortexm-demos \
+	"

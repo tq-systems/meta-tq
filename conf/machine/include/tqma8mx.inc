@@ -55,7 +55,7 @@ IMAGE_INSTALL_remove = " packagegroup-fsl-optee-imx"
 
 # Image Options
 #
-EXTRA_IMAGEDEPENDS += "u-boot imx-boot cortexm-demos"
+EXTRA_IMAGEDEPENDS += "u-boot imx-boot"
 
 # need to have the kernel modules in rootfs
 MACHINE_EXTRA_RRECOMMENDS_append = " kernel-modules"
