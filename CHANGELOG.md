@@ -5,6 +5,10 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa8.BSP.SW.0038
+
+* u-boot: tqma8xxs: fix `tqma8xxs_get_boardname` for TQMa8DXPS again
+
 ## zeus.TQMa8.BSP.SW.0037
 
 ### Added
