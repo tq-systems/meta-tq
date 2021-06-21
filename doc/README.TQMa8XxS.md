@@ -78,7 +78,7 @@ See top level README.md for configurations usable as MACHINE.
   * 2GB / TQMa8X\[D,Q\]PS
 * CPU variants:
   * i.MX8QXP C0
-  * i.MX8QXP C0
+  * i.MX8DXP C0
 * I2C
   * Temperature Sensors (without cpu-temp)
   * RTC
@@ -143,7 +143,8 @@ See top level README.md for configurations usable as MACHINE.
 Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
 
-* \*.dtb: device tree blobs
+* imx8qxp\*.dtb: device tree blobs for TQMa8XQPS
+* imx8dxp\*.dtb: device tree blobs for TQMa8XDPS
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
