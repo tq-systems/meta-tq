@@ -5,6 +5,13 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa8.BSP.SW.0052
+
+### Fixed
+
+* u-boot: TQMa8MxML: RAM Timing
+* u-boot: TQMa8XDPS: board name handling
+
 ## zeus.TQMa8.BSP.SW.0051
 
 ### Added
