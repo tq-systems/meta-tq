@@ -5,6 +5,23 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+### Added
+
+* linux: add device trees for TQMa8XDPS on MB-SMARC-2
+* machines: add TQMa8XDPS on MB-SMARC-2
+
+### Changed
+
+* u-boot: TQMa8MxML: DDR Timing improvement (REV.0153)
+* u-boot: TQMa8MxML / TQMa8MxNL: use default prompt
+
+### Fixed
+
+* u-boot: TQMa8MPxL: pad config fixes and optimization in DT
+* doc: README.md: board table
+* imx-sc-firmware: update to version TQMa8.NXP-v1.6.0.B4894.0031
+  from zeus.TQMa8.BSP.SW.0037 (RAM size IOCTL for TQMa8QM 8GB)
+
 ## zeus.TQMa8.BSP.SW.0052
 
 ### Fixed
