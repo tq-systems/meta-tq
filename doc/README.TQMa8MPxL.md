@@ -258,8 +258,6 @@ Download bootstream from TFTP and update:
 
 `run update_uboot_spi`
 
-```
-
 ## Use UUU Tool
 
 To build bootstream adapt yocto configuration, modify _local.conf_ or machine
