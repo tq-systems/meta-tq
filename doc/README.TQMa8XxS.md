@@ -142,41 +142,35 @@ Artifacs can be found at the usual locations for bitbake:
 * imx-boot-${MACHINE}-sd.bin-flash\_spl_flexspi: boot stream for QSPI
 * imx-boot-mfgtool-${MACHINE}-mfgtool.bin-flash\_spl: boot stream for UUU
 
-## Boot Dip Switches
+## Boot DIP Switches
 
 _Note:_
 
-* S3 is for Boot Mode.
-* X means position of DIP, - means don't care
+* DIP S3 is for Boot Mode.
 
 _SD Card_
 
-```
-            1 2 3 4
-DIP (S3)    0 1 1 0
-
-```
+| DIP (S3) | 1 | 2 | 3 | 4 |
+| -------- | - | - | - | - |
+| Position | 0 | 1 | 1 | 0 |
 
 _e-MMC_
 
-```
-            1 2 3 4
-DIP (S3)    1 0 0 0
-```
+| DIP (S3) | 1 | 2 | 3 | 4 |
+| -------- | - | - | - | - |
+| Position | 1 | 0 | 0 | 0 |
 
 _QSPI_
 
-```
-            1 2 3 4
-DIP (S3)    1 1 0 0
-```
+| DIP (S3) | 1 | 2 | 3 | 4 |
+| -------- | - | - | - | - |
+| Position | 1 | 1 | 0 | 0 |
 
 _Serial Downloader_
 
-```
-            1 2 3 4
-DIP (S3)    0 0 0 1
-```
+| DIP (S3) | 1 | 2 | 3 | 4 |
+| -------- | - | - | - | - |
+| Position | 0 | 0 | 0 | 1 |
 
 ## Boot device initialisation
 
