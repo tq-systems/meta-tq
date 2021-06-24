@@ -35,6 +35,16 @@ For 1 GB RAM start mtest with parameters
 
 `mtest 0x80000000 0xB7000000`
 
-================================================================================
+### RCW
+
+RCW is for SerDes Protocol 0x3508  
+3G configuration with 1 SGMII + 1 RGMII + 1 PCIe + 1 SATA
+
+The default core frequency is 1 GHz.
+
+To use RCW with a core frequency of 800 MHz, set in local.conf:
+`RCWQSPI = "default/rcw_800_sd"`
+
+_____
 
 See [TQ Embedded Wiki for TQMLS1012AL](https://support.tq-group.com/en/layerscape/tqmls1012al)
