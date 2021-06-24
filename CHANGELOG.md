@@ -5,6 +5,16 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMLS1012AL.BSP.SW.0010
+
+### Added
+
+* tqmls1012al: add RCW with 1 GHz core frequency
+
+### Changed
+
+* tqmls1012al: use 1 GHz core frequency as default
+
 ## zeus.TQMLS1012AL.BSP.SW.0009
 
 ### Added
