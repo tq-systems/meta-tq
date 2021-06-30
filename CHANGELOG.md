@@ -5,7 +5,26 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa65xx.BSP.SW.0007
+
+### Fixed
+
+* u-boot / linux: fix switchable base URL
+
+## zeus.TQMa65xx.BSP.SW.0006
+
+### Changes
+
+* improvements for TQMa65xx u-boot / linux
+
+## Fixed
+
+* add missing packages to default image for TQMa65xx
+
 ## zeus.TQMa65xx.BSP.SW.0005
+
+### Added
+
 * preliminary addition of module TQMa65xx
 * meta-tq: add new module TQMa65xx / MBa65xx
 
