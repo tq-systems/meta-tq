@@ -11,6 +11,8 @@ BOARD_DEVICETREE_FILES = "\
     imx8mq-mba8mx-dcss-lvds-tm070jvhg33.dtb \
     imx8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb \
     imx8mq-mba8mx-rpmsg.dtb \
+    imx8mq-mba8mx-hdmi-ov9281.dtb \
+    imx8mq-mba8mx-hdmi-imx327.dtb \
 "
 
 KERNEL_DEVICETREE = ""
@@ -34,5 +36,4 @@ WKS_FILE_DEPENDS_append = "\
 	tqma8-cortexm-demos \
 	"
 
-MACHINE_FEATURES_append = " wifi"
-MACHINE_EXTRA_RRECOMMENDS_append = " linux-firmware-ath10k"
+MACHINE_FEATURES_append = " wifi camera"
