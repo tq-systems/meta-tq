@@ -7,11 +7,21 @@ Releases are named with the following scheme:
 
 ### Added
 
+* linux: drivers for Vision Components GmbH MIPI CSI cameras with Sony IMX327
+  and Omnivision OV9281
 * linux: add device trees for TQMa8XDPS on MB-SMARC-2
 * machines: add TQMa8XDPS on MB-SMARC-2
 
 ### Changed
 
+* TQMa8Mx: prepare support for Vision Components GmbH MIPI CSI cameras
+  - add device trees
+  - add 'camera' MACHINE_FEATURE
+* TQMa8\[Mx,MxML,MxNL,MPxL,Xx,XxS,x\]: improve kernel config
+  - remove ACPI
+  - remove unused audio stuff
+  - remove unused net devices
+  - enable Vision Components GmbH MIPI CSI cameras
 * u-boot: TQMa8MxML: DDR Timing improvement (REV.0153)
 * u-boot: TQMa8MxML / TQMa8MxNL: use default prompt
 
