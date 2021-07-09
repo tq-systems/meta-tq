@@ -96,6 +96,11 @@ _MBa8x HW Rev.030x only_
 * Cortex M4
   * examples running from TCM
   * use UART4 as debug console
+* MIPI CSI
+  * Gray with Vision Components GmbH camera (Sensor OV9281)
+  * Raw Bayer with Vision Components GmbH camera (Sensor IMX327)
+* PCIe
+  * tested with several network cards
 
 ## TODO:
 
@@ -103,7 +108,6 @@ _MBa8x HW Rev.030x only_
   * Audio codec mic in not tested
 * DSI
   * DSI to DP bridge
-* MIPI CSI
 * MIKRO Bus
 * SIM
 * VPU (test with h264 and vp8)
@@ -118,7 +122,8 @@ _MBa8x HW Rev.030x only_
 
 ## Known Issues
 
-* LVDS shows wrong colors on older Tianma display kit (HW issue on display)
+* LVDS shows wrong colors on older Tianma display kit (HW issue on older
+  display kit revisions)
 * Mikrobus Modul RTC5 on ecspi1 don't answer
 * Bootstream for QSPI on FlexSPI: not buildable out of the box. U-Boot SPL needs different
   linker settings for SD / e-MMC and FlexSPI. Current recipes for boot stream generation
@@ -133,6 +138,8 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.dtb: device tree blobs
   * imx8mm-mba8mx.dtb
   * imx8mm-mba8mx-lcdif-lvds-tm070jvhg33.dtb
+  * imx8mm-mba8mx-lcdif-lvds-tm070jvhg33-imx327.dtb
+  * imx8mm-mba8mx-lcdif-lvds-tm070jvhg33-ov9281.dtb
   * imx8mm-mba8mx-rpmsg.dtb
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
@@ -417,6 +424,33 @@ sudo uuu -b spl <bootstream>
 ```
 
 ## Howto
+
+### MIPI-CSI
+
+#### Vision Components GmbH cameras
+
+__Gray with Omnivision OV9281__
+
+* Devicetree: `imx8mm-mba8mx-lcdif-lvds-tm070jvhg33-ov9281.dtb`
+* gstreamer example:
+
+```
+gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! \
+	autovideosink -v sync=false
+```
+
+__Raw Bayer with Sony IMX327__
+
+* Devicetree: `imx8mm-mba8mx-lcdif-lvds-tm070jvhg33-imx327.dtb`
+* gstreamer example:
+
+```
+gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false '!' \
+	video/x-bayer,format=rggb,bpp=12,width=1280,height=720,framerate=25/1 '!' \
+	bayer2rgbneon show-fps=t reduce-bpp=t '!' autovideoconvert '!' \
+	autovideosink sync=false
+```
+
 
 ### Cortex M4
 
