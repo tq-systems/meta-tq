@@ -14,6 +14,12 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* TQMa8MxML: prepare support for Vision Components GmbH MIPI CSI cameras
+  - add device trees
+  - add 'camera' MACHINE_FEATURE
+* linux: TQMa8Mx: apply NXP fix for PCIe Phy VPH @ 3.3V
+* linux: TQMa8Mx / TQMa8MxML: disable PCIe L1SS
+* linux: enable more RAW/Bayer formats for `mxc_mipi_csi` and `mxc-mipi-csi2_yav`
 * TQMa8Mx: prepare support for Vision Components GmbH MIPI CSI cameras
   - add device trees
   - add 'camera' MACHINE_FEATURE
@@ -27,6 +33,10 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* u-boot: TQMa8Mx: allow chip REV. 2.2
+* u-boot: TQMa8Mx: apply fix for PCIe PHY VPH
+  * disable VREG_BYPASS early to ensure using the CPU internal regulator for
+    PCIe Phy when supplying with 3.3 V
 * u-boot: TQMa8MPxL: pad config fixes and optimization in DT
 * doc: README.md: board table
 * imx-sc-firmware: update to version TQMa8.NXP-v1.6.0.B4894.0031
