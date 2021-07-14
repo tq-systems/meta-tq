@@ -5,6 +5,8 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa8.BSP.SW.0053
+
 ### Added
 
 * linux: drivers for Vision Components GmbH MIPI CSI cameras with Sony IMX327
