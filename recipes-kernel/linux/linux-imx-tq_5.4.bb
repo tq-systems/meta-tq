@@ -9,7 +9,7 @@ SRC_URI = "\
 "
 
 SRCBRANCH = "TQMa8-rel_imx_5.4.70_2.3.0"
-SRCREV = "407522ad97c29e8fbb4e8af2b7933ef18d4a1f58"
+SRCREV = "f1d060129c7a22271d0e9ee526cdb64fe41e461d"
 
 KERNEL_TREE_DEFCONFIG_mx8 = "imx_v8_defconfig"
 
