@@ -5,6 +5,37 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+### Added
+
+* u-boot: TQMa8MPxL: mfgtool defconfig for MBa8MPxL
+
+### Changed
+
+* linux: TQMa8Mx / TQMa8QM / TQMa8Xx / TQMa8XxS: label sys EEPROM as read only
+* linux: TQMa8MPxL: optimize pad settings for GPIO
+* linux: TQMa8MPxL: use verified pad settings for SD / ENET and QSPI
+* u-boot: TQMa8MPxL: use verified pad settings for ENET and QSPI
+* u-boot: TQMa8MPxL: use pad setting from kernel for GPIO / I2C / QSPI
+
+### Fixed
+
+* linux: TQMa8\[xyz\]:  add GPIO\_OPEN\_DRAIN to I2C GPIO to prevent warnings
+* linux: TQMa8Xx: make backlight for LVDS work again. When using PWM from
+         different power domain, this domain needs to be enabled
+* u-boot: TQMa8Xx / TQMa8XxS / TQMa8QM: prevent voltage switch error message
+          for e-MMC. This is not a real error but ugly behaviour which was fixed
+          for other SOM before
+* u-boot: TQMa8MxML: improve pad settings for QSPI, needed for stable function
+          at higher temperature
+* u-boot: TQMa8\[xyz\]: add GPIO\_OPEN\_DRAIN to I2C GPIO to prevent warnings
+          (sync with kernel)
+* TQMa8QM: fix typo in machine file preventing mfgtool bootstream builds
+
+### Removed
+
+* Recipes for never used automatic build of mfgtool bootstreams. While removing
+  the recipes remove also PREFFERRED_PROVIDER vars for these recipes
+
 ## zeus.TQMa8.BSP.SW.0053
 
 ### Added
