@@ -451,7 +451,6 @@ gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false '!' \
 	autovideosink sync=false
 ```
 
-
 ### Cortex M4
 
 Demos are compiled to use UART4 (MBa8Mx X17:56,58 + X17:54 for GND) with
