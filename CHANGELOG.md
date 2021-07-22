@@ -7,10 +7,17 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa8MPxL: prepare support for Vision Components GmbH MIPI CSI cameras
+  - add device trees
+  - add 'camera' MACHINE\_FEATURE
+* linux: add RAW/Bayer formats for `imx8_mipi_csi2` and `mx8-isi-cap`
+
 * u-boot: TQMa8MPxL: mfgtool defconfig for MBa8MPxL
 
 ### Changed
 
+* linux: kernelconfig: build camera and support drivers into kernel instead as
+         module
 * linux: TQMa8Mx / TQMa8QM / TQMa8Xx / TQMa8XxS: label sys EEPROM as read only
 * linux: TQMa8MPxL: optimize pad settings for GPIO
 * linux: TQMa8MPxL: use verified pad settings for SD / ENET and QSPI
@@ -19,6 +26,7 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* linux: port and implement fixes for `imx8_mipi_csi2` and `mx8-isi-cap`
 * linux: TQMa8\[xyz\]:  add GPIO\_OPEN\_DRAIN to I2C GPIO to prevent warnings
 * linux: TQMa8Xx: make backlight for LVDS work again. When using PWM from
          different power domain, this domain needs to be enabled
@@ -34,7 +42,7 @@ Releases are named with the following scheme:
 ### Removed
 
 * Recipes for never used automatic build of mfgtool bootstreams. While removing
-  the recipes remove also PREFFERRED_PROVIDER vars for these recipes
+  the recipes remove also PREFFERRED\_PROVIDER vars for these recipes
 
 ## zeus.TQMa8.BSP.SW.0053
 
@@ -49,7 +57,7 @@ Releases are named with the following scheme:
 
 * TQMa8MxML: prepare support for Vision Components GmbH MIPI CSI cameras
   - add device trees
-  - add 'camera' MACHINE_FEATURE
+  - add 'camera' MACHINE\_FEATURE
 * linux: TQMa8Mx: apply NXP fix for PCIe Phy VPH @ 3.3V
 * linux: TQMa8Mx / TQMa8MxML: disable PCIe L1SS
 * linux: enable more RAW/Bayer formats for `mxc_mipi_csi` and `mxc-mipi-csi2_yav`
