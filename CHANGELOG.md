@@ -5,11 +5,18 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa8.BSP.SW.0054
+
 ### Added
 
+* TQMa8MxNL: prepare support for Vision Components GmbH MIPI CSI cameras
+  - add device trees
+  - add 'camera' MACHINE\_FEATURE
 * TQMa8MPxL: prepare support for Vision Components GmbH MIPI CSI cameras
   - add device trees
   - add 'camera' MACHINE\_FEATURE
+* linux: TQMa8MxNL / TQMa8MPxL: add devicetrees for Vision Components GmbH
+         MIPI CSI cameras
 * linux: add RAW/Bayer formats for `imx8_mipi_csi2` and `mx8-isi-cap`
 
 * u-boot: TQMa8MPxL: mfgtool defconfig for MBa8MPxL
