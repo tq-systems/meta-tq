@@ -18,7 +18,6 @@ See top level README.md for configurations usable as MACHINE.
 
 ### U-Boot:
 
-
 * RAM configs: 2 GiB
 * CPU variants i.MX8MPQ
 * Fuses
@@ -67,7 +66,7 @@ See top level README.md for configurations usable as MACHINE.
   * Button
 * UART
   * console on UART4
-  * 2 x UART via pin head
+  * 3 x UART via pin head / FTDI 4 port USB / UART converter (see issues)
 * ENET
   * GigE / FEC via Phy on MBa8MPxL
   * GigE / Eqos via Phy on MBa8MPxL
@@ -88,13 +87,15 @@ See top level README.md for configurations usable as MACHINE.
   * spidev at all CS
 * Cortex M7
   * examples running from TCM
-  * use UART3 as debug console
+  * use UART3 as debug console (see issues)
+* MIPI CSI (see issues)
+  * Gray with Vision Components GmbH camera (Sensor OV9281)
+  * Raw Bayer with Vision Components GmbH camera (Sensor IMX327)
 
 ## TODO:
 
 * Audio
   * Codec Microphone in
-* MIPI CSI
 * Display
   * DSI / DSI DP bridge
 * ADC
@@ -107,6 +108,13 @@ See top level README.md for configurations usable as MACHINE.
   * UART are in DTE mode, not DCE
   * to use UART with FTDI RS232 / USB some hardware modification are needed for REV.010x, see
     manual
+  * to use UART for M7, patch for UART DTE mode is needed
+* MIPI CSI
+  * IMX327: bayer support with 12 Bit does not work at the moment, only 10 Bit with
+    1280x720 is tested with gstreamer
+  * IMX327: when configuring to SRGGB12 reboot may be needed to get a working
+    capture again
+  * capture sometimes not starting
 
 ## Build Artifacts
 
@@ -117,6 +125,8 @@ Artifacs can be found at the usual locations for bitbake:
   * imx8mp-mba8mpxl.dtb
   * imx8mp-mba8mpxl-lvds-tm070jvhg33.dtb
   * imx8mp-mba8mpxl-hdmi.dtb
+  * imx8mp-mba8mpxl-hdmi-imx290.dtb
+  * imx8mp-mba8mpxl-hdmi-ov9281.dtb
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
@@ -170,7 +180,7 @@ BOOT\_MODE: 0110
 
 ### Bootable SD-Card
 
-To create a bootable SD-Card with complete system image:
+Complete system image:
 
 write *.wic Image to SD (offset 0)
 
@@ -252,6 +262,9 @@ Download kernel image from TFTP and update:
 
 `run update_kernel_mmc`
 
+Cortex M7 image: set env var `cm_image` to name of your Cortex M7 image,
+provide the file via TFTP and update via `run update_cm_mmc`
+
 _FLEXSPI_
 
 Download bootstream from TFTP and update:
@@ -281,6 +294,42 @@ with UUU tool:
 sudo uuu -b spl <bootstream>
 ```
 
+## Howto
+
+### MIPI-CSI
+
+#### Vision Components GmbH cameras
+
+__Gray with Omnivision OV9281__
+
+* Devicetree: `imx8mp-mba8mpxl-hdmi-ov9281.dtb`
+* gstreamer example:
+
+```
+# configure
+yavta -f Y8 -s 1280x800 /dev/video0
+# grab to file
+gst-launch-1.0 v4l2src device=/dev/video0 ! videorate ! video/x-raw,format=GRAY8,framerate=1/1 ! \
+	jpegenc ! multifilesink location=test%d.jpg
+# show live video
+gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! \
+	autovideosink -v sync=false
+```
+
+__Raw Bayer with Sony IMX327__
+
+* Devicetree: `imx8mp-mba8mpxl-hdmi-imx327.dtb`
+* gstreamer example:
+
+```
+# configure
+yavta -f SRGGB10 -s 1280x720  /dev/video0
+# show live video
+gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false '!' \
+	video/x-bayer,format=rggb,bpp=10,width=1280,height=720,framerate=25/1 '!' \
+	bayer2rgbneon show-fps=t reduce-bpp=t '!' autovideoconvert '!' \
+	autovideosink sync=false
+```
 
 ## Display Support
 
@@ -291,7 +340,6 @@ To allow reusage, the support for each display is separated in a dtsi fragment.
 |-----------------|---------------------------------------|--------------------|
 | LVDS            | imx8mp-mbba8mpxl-lvds-tm070jvhg33.dtb | Tianma TM070JVHG33 |
 | HDMI            | imx8mp-mbba8mpxl-hdmi.dtb             | compatible monitor |
-
 
 ## CAN
 
