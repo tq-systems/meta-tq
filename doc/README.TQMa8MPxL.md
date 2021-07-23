@@ -88,7 +88,7 @@ See top level README.md for configurations usable as MACHINE.
 * Cortex M7
   * examples running from TCM
   * use UART3 as debug console (see issues)
-* MIPI CSI (see issues)
+* MIPI CSI (see Issues section)
   * Gray with Vision Components GmbH camera (Sensor OV9281)
   * Raw Bayer with Vision Components GmbH camera (Sensor IMX327)
 
@@ -114,7 +114,8 @@ See top level README.md for configurations usable as MACHINE.
     1280x720 is tested with gstreamer
   * IMX327: when configuring to SRGGB12 reboot may be needed to get a working
     capture again
-  * capture sometimes not starting
+  * gstreamer: capture sometimes not starting, when using `yavta -c20 /dev/video0` to
+    capture some frames, `gstreamer` starts afterwards
 
 ## Build Artifacts
 
