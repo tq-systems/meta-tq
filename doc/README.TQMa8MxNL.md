@@ -99,6 +99,9 @@ _MBa8x HW Rev.030x only_
 * Cortex M7
   * examples running from TCM
   * use UART4 as debug console
+* MIPI CSI (see Issues section)
+  * Gray with Vision Components GmbH camera (Sensor OV9281)
+  * Raw Bayer with Vision Components GmbH camera (Sensor IMX327)
 
 ## TODO:
 
@@ -106,21 +109,31 @@ _MBa8x HW Rev.030x only_
   * Audio codec mic in not tested
 * DSI
   * DSI to DP bridge
-* MIPI CSI
 * MIKRO Bus
 * SIM
 
 ## Important Notes
 
 * UART4: needs ATF modification, to make it usable for linux. Primary used as
-  debug UART for Cortex M7. Modification is available with current ATF version.
+  debug UART for Cortex M7. Modification needed in file
+  `plat/imx/imx8m/imx8mn/imx8mn_bl31_setup.c`. Disable assignment of UART4 -
+  delete statement `	RDC_PDAPn(RDC_PDAP_UART4, D1R | D1W),` in rdc configuration
+  table.
 * MBa8Mx before REV.0300 is not supported.
 
 ## Known Issues
 
-* LVDS shows wrong colors on older Tianma display kit (HW issue on display)
+* LVDS shows wrong colors on older Tianma display kit (HW issue on older
+  display kit revisions)
 * Mikrobus Modul RTC5 on ecspi1 don't answer
 * Audio does not work after suspend / resume (clocking problem)
+* MIPI CSI
+  * IMX327: bayer support with 12 Bit does not work at the moment, only 10 Bit with
+    1280x720 is tested with gstreamer
+  * IMX327: when configuring to SRGGB12 reboot may be needed to get a working
+    capture again
+  * gstreamer: capture sometimes not starting, when using `yavta -c20 /dev/video0` to
+    capture some frames, `gstreamer` starts afterwards
 
 ## Build Artifacts
 
@@ -130,6 +143,8 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.dtb: device tree blobs
   * imx8mn-mba8mx.dtb
   * imx8mn-mba8mx-lcdif-lvds-tm070jvhg33.dtb
+  * imx8mn-mba8mx-lcdif-lvds-tm070jvhg33-imx327.dtb
+  * imx8mn-mba8mx-lcdif-lvds-tm070jvhg33-ov9281.dtb
   * imx8mn-mba8mx-rpmsg.dtb
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
@@ -297,7 +312,7 @@ Example for Linux:
 Example for U-Boot:
 
 ```
-# 32k -> 64 Blocks -> 0x40
+# 32k -> 64 blocks -> 0x40
 
 tftp <bootstream>
 setexpr bsz ${filesize} + 1ff
@@ -383,6 +398,41 @@ sudo uuu -b spl <bootstream>
 ```
 
 ## Howto
+
+### MIPI-CSI
+
+#### Vision Components GmbH cameras
+
+__Gray with Omnivision OV9281__
+
+* Devicetree: `imx8mn-mba8mx-lcdif-lvds-tm070jvhg33-ov9281.dtb`
+* gstreamer example:
+
+```
+# configure
+yavta -f Y8 -s 1280x800 /dev/video0
+# grab to file
+gst-launch-1.0 v4l2src device=/dev/video0 ! videorate ! video/x-raw,format=GRAY8,framerate=1/1 ! \
+	jpegenc ! multifilesink location=test%d.jpg
+# show live video
+gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! \
+	autovideosink -v sync=false
+```
+
+__Raw Bayer with Sony IMX327__
+
+* Devicetree: `imx8mn-mba8mx-lcdif-lvds-tm070jvhg33-imx327.dtb`
+* gstreamer example:
+
+```
+# configure
+yavta -f SRGGB10 -s 1280x720  /dev/video0
+# show live video
+gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false '!' \
+	video/x-bayer,format=rggb,bpp=10,width=1280,height=720,framerate=25/1 '!' \
+	bayer2rgbneon show-fps=t reduce-bpp=t '!' autovideoconvert '!' \
+	autovideosink sync=false
+```
 
 ### Cortex M7
 
