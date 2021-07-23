@@ -10,7 +10,7 @@ This README contains some useful information for TQMa8XxS on MB-SMARC-2
 
 ## Version information for software components
 
-See [here](doc/README.SoftwareVersions.md) for the software base versions.
+See [here](./README.SoftwareVersions.md) for the software base versions.
 
 ### SCFW:
 

@@ -9,7 +9,7 @@ This README contains some useful information for TQMa8MxNL on MBa8Mx REV.030x
 
 ## Version information for software components
 
-See [here](doc/README.SoftwareVersions.md) for the software base versions.
+See [here](./README.SoftwareVersions.md) for the software base versions.
 
 ## Supported machine configurations:
 

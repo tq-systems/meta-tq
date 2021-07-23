@@ -15,7 +15,7 @@ This README contains some useful information for TQMa8Xx and TQMa8Xx4 on MBa8Xx
 
 * version: tq-TQMa8.NXP-v1.6.0.B4894.0031
 
-See [here](doc/README.SoftwareVersions.md) for the software base versions.
+See [here](./README.SoftwareVersions.md) for the software base versions.
 
 ## Supported machine configurations:
 
