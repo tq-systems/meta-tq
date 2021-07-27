@@ -99,7 +99,6 @@ _MBa8x HW Rev.020x/30x only_
 * VPU
 * HDMI
 * MIPI CSI
-  * Gray with Vision Components GmbH camera (Sensor OV9281)
   * Raw Bayer with Vision Components GmbH camera (Sensor IMX327)
 
 ## TODO:
@@ -133,7 +132,6 @@ Artifacs can be found at the usual locations for bitbake:
   * imx8mq-mba8mx.dtb
   * imx8mq-mba8mx-hdmi.dtb
   * imx8mq-mba8mx-hdmi-imx327.dtb
-  * imx8mq-mba8mx-hdmi-ov9281.dtb
   * imx8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb
   * imx8mq-mba8mx-dcss-lvds-tm070jvhg33.dtb
   * imx8mq-mba8mx-rpmsg.dtb
@@ -454,16 +452,6 @@ gst-play-1.0 /mnt/sd/tears_of_steel_1080p.webm
 ### MIPI-CSI
 
 #### Vision Components GmbH cameras
-
-__Gray with Omnivision OV9281__
-
-* Devicetree: `imx8mq-mba8mx-hdmi-ov9281.dtb`
-* gstreamer example:
-
-```
-gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! \
-	autovideosink -v sync=false
-```
 
 __Raw Bayer with Sony IMX327__
 

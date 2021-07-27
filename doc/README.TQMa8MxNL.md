@@ -100,7 +100,6 @@ _MBa8x HW Rev.030x only_
   * examples running from TCM
   * use UART4 as debug console
 * MIPI CSI (see Issues section)
-  * Gray with Vision Components GmbH camera (Sensor OV9281)
   * Raw Bayer with Vision Components GmbH camera (Sensor IMX327)
 
 ## TODO:
@@ -144,7 +143,6 @@ Artifacs can be found at the usual locations for bitbake:
   * imx8mn-mba8mx.dtb
   * imx8mn-mba8mx-lcdif-lvds-tm070jvhg33.dtb
   * imx8mn-mba8mx-lcdif-lvds-tm070jvhg33-imx327.dtb
-  * imx8mn-mba8mx-lcdif-lvds-tm070jvhg33-ov9281.dtb
   * imx8mn-mba8mx-rpmsg.dtb
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
@@ -402,22 +400,6 @@ sudo uuu -b spl <bootstream>
 ### MIPI-CSI
 
 #### Vision Components GmbH cameras
-
-__Gray with Omnivision OV9281__
-
-* Devicetree: `imx8mn-mba8mx-lcdif-lvds-tm070jvhg33-ov9281.dtb`
-* gstreamer example:
-
-```
-# configure
-yavta -f Y8 -s 1280x800 /dev/video0
-# grab to file
-gst-launch-1.0 v4l2src device=/dev/video0 ! videorate ! video/x-raw,format=GRAY8,framerate=1/1 ! \
-	jpegenc ! multifilesink location=test%d.jpg
-# show live video
-gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! \
-	autovideosink -v sync=false
-```
 
 __Raw Bayer with Sony IMX327__
 
