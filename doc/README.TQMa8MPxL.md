@@ -354,21 +354,3 @@ FD capable transceiver:
 CANIF="can[0,1]"
 ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on
 ```
-
-### Cortex M7
-
-Demos are compiled to use UART3 with 115200 8N1.
-
-To start a demo stored on SD / e-MMC from U-Boot:
-
-```
-setenv fdt_file imx8mp-mba8mpxl-rpmsg.dtb
-setenv cm_image <demo>
-run boot_cm_mmc
-```
-
-To connect from running linux to rpmsg ping pong demo:
-
-```
-modprobe imx_rpmsg_pingpong
-```
