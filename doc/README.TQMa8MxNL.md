@@ -409,10 +409,11 @@ __Raw Bayer with Sony IMX327__
 ```
 # configure
 yavta -f SRGGB10 -s 1280x720  /dev/video0
+
 # show live video
-gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false '!' \
-	video/x-bayer,format=rggb,bpp=10,width=1280,height=720,framerate=25/1 '!' \
-	bayer2rgbneon show-fps=t reduce-bpp=t '!' autovideoconvert '!' \
+gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false ! \
+	video/x-bayer,format=rggb,bpp=10,width=1280,height=720,framerate=25/1 ! \
+	bayer2rgbneon show-fps=t reduce-bpp=t ! autovideoconvert ! \
 	autovideosink sync=false
 ```
 

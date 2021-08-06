@@ -459,9 +459,9 @@ __Raw Bayer with Sony IMX327__
 * gstreamer example:
 
 ```
-gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false '!' \
-	video/x-bayer,format=rggb,bpp=12,width=1280,height=720,framerate=25/1 '!' \
-	bayer2rgbneon show-fps=t reduce-bpp=t '!' autovideoconvert '!' \
+gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false ! \
+	video/x-bayer,format=rggb,bpp=12,width=1280,height=720,framerate=25/1 ! \
+	bayer2rgbneon show-fps=t reduce-bpp=t ! autovideoconvert ! \
 	autovideosink sync=false
 ```
 
