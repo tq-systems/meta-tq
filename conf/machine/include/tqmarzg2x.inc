@@ -1,11 +1,9 @@
-SOC_FAMILY = "rzg2:r8a774e1"
-MACHINEOVERRIDES =. "tqmarzg2h_c:r8a774e1:"
+# Common definitions for TQ-Group TQMa6 modules
+
+MACHINEOVERRIDES =. "tqmarzg2x:"
 
 DEFAULTTUNE ?= "cortexa57-cortexa53"
 require conf/machine/include/arm/arch-armv8a.inc
-
-PREFERRED_PROVIDER_u-boot_tqmarzg2h_c ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader_tqmarzg2h_c ?= "u-boot-tq"
 
 TUNEVALID[cortexa57-cortexa53] = "Enable big.LITTLE Cortex-A57.Cortex-A53 specific processor optimizations"
 TUNECONFLICTS[aarch64] = "armv4 armv5 armv6 armv7 armv7a"
@@ -29,6 +27,30 @@ USE_32BIT_PKGS ?= "0"
 USE_32BIT_WAYLAND ?= "0"
 USE_32BIT_MMP ?= "0"
 
+# Machine specific options
+# 
+MACHINE_FEATURES = "ext2 pci rtc serial usb3 usbhost vfat can"
+
+# TQ u-boot and kernel
+#
+require conf/machine/include/tqmxx.inc
+
+# Configuration for kernel
+PREFERRED_PROVIDER_virtual/kernel = "linux-renesas"
+KERNEL_IMAGETYPE = "Image"
+
+# u-boot
+PREFERRED_VERSION_u-boot = "2018.09%"
+PREFERRED_PROVIDER_u-boot_tqmarzg2x ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader_tqmarzg2x ?= "u-boot-tq"
+
+# Image Options
+#
+EXTRA_IMAGEDEPENDS += "virtual/bootloader"
+
+IMAGE_FSTYPES_append = " tar.bz2 ext4 wic"
+IMAGE_FSTYPES_remove = " wic.gz"
+
 # Configuration for ARM Trusted Firmware
 EXTRA_IMAGEDEPENDS += " arm-trusted-firmware"
 
@@ -41,8 +63,8 @@ BUILDCFG_VARS_append = " SOC_FAMILY"
 # Command using to build kernel-module-gles
 HOSTTOOLS += "sync"
 
-IMAGE_FSTYPES_append = " wic"
-IMAGE_FSTYPES_remove = " wic.gz"
+# flash writer
+EXTRA_IMAGEDEPENDS += " flash-writer"
 
 # need to have the kernel modules in rootfs
 IMAGE_INSTALL_append = " kernel-modules"
@@ -50,23 +72,10 @@ IMAGE_INSTALL_append = " kernel-modules"
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
-WKS_FILE ?= "tqmarzg2x-sdimg.wks"
-
 WKS_FILE_DEPENDS = "\
-        mtools-native \
-        dosfstools-native \
-        parted-native \
-        virtual/kernel \
-        virtual/bootloader \
-        "
-
-# Files are needed in IMAGE_BOOT_FILES because /boot is on an extra partition.
-# If those files should be installed under /boot inside the rootfs, you can
-# achieve this in your BSP layer adding them via
-# IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
-#
-IMAGE_BOOT_FILES ?= "\
-        ${KERNEL_IMAGETYPE} \
-        r8a774a1-tqmarzg2m_e-mbarzg2x.dtb \
-        r8a774a1-tqmarzg2m_e-mbarzg2x-lvds-tm070jvhg33.dtb \
-        "
+	mtools-native \
+	dosfstools-native \
+	parted-native \
+	virtual/kernel \
+	virtual/bootloader \
+"
