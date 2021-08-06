@@ -1,4 +1,4 @@
-From deabf27ba8d48ef85e9e40438d580b6b2f80ad77 Mon Sep 17 00:00:00 2001
+From 79a199054cc2e8ccf4868103238e029f7a80e421 Mon Sep 17 00:00:00 2001
 From: Andreas Dumberger <andreas.dumberger@tq-group.com>
 Date: Mon, 28 Sep 2020 13:22:51 +0000
 Subject: [PATCH] Add support for new TQMaRZG2x modules
@@ -14,18 +14,18 @@ These are:
 
 Signed-off-by: Andreas Dumberger <andreas.dumberger@tq-group.com>
 ---
- plat/renesas/rcar/bl2_rcar_setup.c                 |   9 +-
- plat/renesas/rcar/bl2_secure_setting.c             |  12 +-
- .../renesas/rcar/ddr/ddr_b/boot_init_dram_config.c | 199 ++++++++++++++++++++-
- plat/renesas/rcar/drivers/board/board.c            |  49 +++--
- plat/renesas/rcar/drivers/board/board.h            |   6 +-
- plat/renesas/rcar/include/emmc_registers.h         |   6 +-
- plat/renesas/rcar/pfc/H3/pfc_init_h3_v2.c          |  54 +++---
- plat/renesas/rcar/pfc/M3/pfc_init_m3.c             |  52 +++---
- plat/renesas/rcar/pfc/M3N/pfc_init_m3n.c           |  54 +++---
- plat/renesas/rcar/platform.mk                      |  18 ++
- tools/dummy_create/makefile                        |  18 ++
- tools/dummy_create/sa6.c                           |   6 +-
+ plat/renesas/rcar/bl2_rcar_setup.c            |   9 +-
+ plat/renesas/rcar/bl2_secure_setting.c        |  12 +-
+ .../rcar/ddr/ddr_b/boot_init_dram_config.c    | 199 +++++++++++++++++-
+ plat/renesas/rcar/drivers/board/board.c       |  49 +++--
+ plat/renesas/rcar/drivers/board/board.h       |   6 +-
+ plat/renesas/rcar/include/emmc_registers.h    |   6 +-
+ plat/renesas/rcar/pfc/H3/pfc_init_h3_v2.c     |  54 ++---
+ plat/renesas/rcar/pfc/M3/pfc_init_m3.c        |  52 ++---
+ plat/renesas/rcar/pfc/M3N/pfc_init_m3n.c      |  54 ++---
+ plat/renesas/rcar/platform.mk                 |  18 ++
+ tools/dummy_create/makefile                   |  18 ++
+ tools/dummy_create/sa6.c                      |   6 +-
  12 files changed, 367 insertions(+), 116 deletions(-)
 
 diff --git a/plat/renesas/rcar/bl2_rcar_setup.c b/plat/renesas/rcar/bl2_rcar_setup.c
@@ -430,7 +430,7 @@ index c0e8230..c8be6c8 100644
  
  
 diff --git a/plat/renesas/rcar/pfc/H3/pfc_init_h3_v2.c b/plat/renesas/rcar/pfc/H3/pfc_init_h3_v2.c
-index 91137de..bd24f9a 100644
+index 91137de..cb07f30 100644
 --- a/plat/renesas/rcar/pfc/H3/pfc_init_h3_v2.c
 +++ b/plat/renesas/rcar/pfc/H3/pfc_init_h3_v2.c
 @@ -813,7 +813,7 @@ void pfc_init_h3_v2(void)
@@ -438,7 +438,7 @@ index 91137de..bd24f9a 100644
  
  	/* initialize module select */
 -#if RZG_HIHOPE_RZG2H
-+#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
++#if (RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C)
  	pfc_reg_write(PFC_MOD_SEL0, MOD_SEL0_MSIOF3_A
  				  | MOD_SEL0_MSIOF2_A
  				  | MOD_SEL0_MSIOF1_A
@@ -447,7 +447,7 @@ index 91137de..bd24f9a 100644
  				  | MOD_SEL2_ADG_C_A
  				  | MOD_SEL2_VIN4_A);
 -#else  // RZG_HIHOPE_RZG2H
-+#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  	pfc_reg_write(PFC_MOD_SEL0, MOD_SEL0_MSIOF3_A
  				  | MOD_SEL0_MSIOF2_A
  				  | MOD_SEL0_MSIOF1_A
@@ -456,11 +456,11 @@ index 91137de..bd24f9a 100644
  				  | MOD_SEL2_ADG_C_A
  				  | MOD_SEL2_VIN4_A);
 -#endif // RZG_HIHOPE_RZG2H
-+#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  
  	/* initialize peripheral function select */
 -#if RZG_HIHOPE_RZG2H
-+#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
++#if (RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C)
  	pfc_reg_write(PFC_IPSR0, IPSR_28_FUNC(0)
  			       | IPSR_24_FUNC(0)
  			       | IPSR_20_FUNC(0)
@@ -469,7 +469,7 @@ index 91137de..bd24f9a 100644
  	pfc_reg_write(PFC_IPSR18, IPSR_4_FUNC(0)
  				| IPSR_0_FUNC(0));
 -#else  // RZG_HIHOPE_RZG2H
-+#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  	pfc_reg_write(PFC_IPSR0, IPSR_28_FUNC(0)
  			       | IPSR_24_FUNC(0)
  			       | IPSR_20_FUNC(0)
@@ -478,11 +478,11 @@ index 91137de..bd24f9a 100644
  	pfc_reg_write(PFC_IPSR18, IPSR_4_FUNC(0)
  				| IPSR_0_FUNC(0));
 -#endif // RZG_HIHOPE_RZG2H
-+#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  
  	/* initialize GPIO/perihperal function select */
 -#if RZG_HIHOPE_RZG2H
-+#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
++#if (RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C)
  	pfc_reg_write(PFC_GPSR0, GPSR0_D15
  			       | GPSR0_D14
  			       | GPSR0_D13
@@ -491,7 +491,7 @@ index 91137de..bd24f9a 100644
  	pfc_reg_write(PFC_GPSR7, GPSR7_AVS2
  			       | GPSR7_AVS1);
 -#else  // RZG_HIHOPE_RZG2H
-+#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  	pfc_reg_write(PFC_GPSR0, GPSR0_D15
  			       | GPSR0_D14
  			       | GPSR0_D13
@@ -500,11 +500,11 @@ index 91137de..bd24f9a 100644
  	pfc_reg_write(PFC_GPSR7, GPSR7_AVS2
  			       | GPSR7_AVS1);
 -#endif // RZG_HIHOPE_RZG2H
-+#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  
  	/* initialize POC control register */
 -#if RZG_HIHOPE_RZG2H
-+#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
++#if (RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C)
  	pfc_reg_write(PFC_POCCTRL0, POC_SD0_DAT3_33V
  				  | POC_SD0_DAT2_33V
  				  | POC_SD0_DAT1_33V
@@ -512,7 +512,7 @@ index 91137de..bd24f9a 100644
  				  | POC_SD0_CMD_33V
  				  | POC_SD0_CLK_33V);
 -#else  // RZG_HIHOPE_RZG2H
-+#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  	pfc_reg_write(PFC_POCCTRL0, POC_SD3_DS_33V
  				  | POC_SD3_DAT7_33V
  				  | POC_SD3_DAT6_33V
@@ -521,11 +521,11 @@ index 91137de..bd24f9a 100644
  				  | POC_SD0_CMD_33V
  				  | POC_SD0_CLK_33V);
 -#endif // RZG_HIHOPE_RZG2H
-+#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  
  	/* initialize DRV control register */
 -#if RZG_HIHOPE_RZG2H
-+#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
++#if (RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C)
  	reg = mmio_read_32(PFC_DRVCTRL0);
  	reg = ((reg & DRVCTRL0_MASK) | DRVCTRL0_QSPI0_SPCLK(3)
  				     | DRVCTRL0_QSPI0_MOSI_IO0(3)
@@ -534,7 +534,7 @@ index 91137de..bd24f9a 100644
  				      | DRVCTRL24_USB31_OVC(7));
  	pfc_reg_write(PFC_DRVCTRL24, reg);
 -#else  // RZG_HIHOPE_RZG2H
-+#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  	reg = mmio_read_32(PFC_DRVCTRL0);
  	reg = ((reg & DRVCTRL0_MASK) | DRVCTRL0_QSPI0_SPCLK(3)
  				     | DRVCTRL0_QSPI0_MOSI_IO0(3)
@@ -543,11 +543,11 @@ index 91137de..bd24f9a 100644
  				      | DRVCTRL24_USB31_OVC(7));
  	pfc_reg_write(PFC_DRVCTRL24, reg);
 -#endif // RZG_HIHOPE_RZG2H
-+#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  
  	/* initialize LSI pin pull-up/down control */
 -#if RZG_HIHOPE_RZG2H
-+#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
++#if (RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C)
  	pfc_reg_write(PFC_PUD0,0x00005FBFU);
  	pfc_reg_write(PFC_PUD1,0x00300EFEU);
  	pfc_reg_write(PFC_PUD2,0x330001E6U);
@@ -556,7 +556,7 @@ index 91137de..bd24f9a 100644
  	pfc_reg_write(PFC_PUD5,0x7F5FFF87U);
  	pfc_reg_write(PFC_PUD6,0x00000055U);
 -#else  // RZG_HIHOPE_RZG2H
-+#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  	pfc_reg_write(PFC_PUD0, 0x00005FBFU);
  	pfc_reg_write(PFC_PUD1, 0x00300FFEU);
  	pfc_reg_write(PFC_PUD2, 0x330001E6U);
@@ -565,11 +565,11 @@ index 91137de..bd24f9a 100644
  	pfc_reg_write(PFC_PUD5, 0x7F5FFF87U);
  	pfc_reg_write(PFC_PUD6, 0x00000055U);
 -#endif // RZG_HIHOPE_RZG2H
-+#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  
  	/* initialize LSI pin pull-enable register */
 -#if RZG_HIHOPE_RZG2H
-+#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
++#if (RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C)
  	pfc_reg_write(PFC_PUEN0,0x00000FFFU);
  	pfc_reg_write(PFC_PUEN1,0x00100234U);
  	pfc_reg_write(PFC_PUEN2,0x000004C4U);
@@ -578,7 +578,7 @@ index 91137de..bd24f9a 100644
  	pfc_reg_write(PFC_PUEN5,0x1F000805U);
  	pfc_reg_write(PFC_PUEN6,0x00000006U);
 -#else  // RZG_HIHOPE_RZG2H
-+#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  	pfc_reg_write(PFC_PUEN0, 0x00000FFFU);
  	pfc_reg_write(PFC_PUEN1, 0x00100234U);
  	pfc_reg_write(PFC_PUEN2, 0x000004C4U);
@@ -587,7 +587,7 @@ index 91137de..bd24f9a 100644
  	pfc_reg_write(PFC_PUEN5, 0x1F000805U);
  	pfc_reg_write(PFC_PUEN6, 0x00000006U);
 -#endif // RZG_HIHOPE_RZG2H
-+#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  
  	/* initialize positive/negative logic select */
  	mmio_write_32(GPIO_POSNEG0, 0x00000000U);
@@ -596,7 +596,7 @@ index 91137de..bd24f9a 100644
  
  	/* initialize general output register */
 -#if RZG_HIHOPE_RZG2H
-+#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
++#if (RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C)
  	mmio_write_32(GPIO_OUTDT0, 0x00000001U);
  	mmio_write_32(GPIO_OUTDT1, 0x00000000U);
  	mmio_write_32(GPIO_OUTDT2, 0x00000400U);
@@ -605,18 +605,18 @@ index 91137de..bd24f9a 100644
  	mmio_write_32(GPIO_OUTDT6, 0x00003800U);
  	mmio_write_32(GPIO_OUTDT7, 0x00000003U);
 -#else  // RZG_HIHOPE_RZG2H
-+#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  	mmio_write_32(GPIO_OUTDT1, 0x00000000U);
  	mmio_write_32(GPIO_OUTDT2, 0x00000400U);
  	mmio_write_32(GPIO_OUTDT3, 0x0000C000U);
  	mmio_write_32(GPIO_OUTDT5, 0x00000006U);
  	mmio_write_32(GPIO_OUTDT6, 0x00003880U);
 -#endif // RZG_HIHOPE_RZG2H
-+#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  
  	/* initialize general input/output switching */
 -#if RZG_HIHOPE_RZG2H
-+#if (RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C)
++#if (RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C)
  	mmio_write_32(GPIO_INOUTSEL0, 0x00000001U);
  	mmio_write_32(GPIO_INOUTSEL1, 0x00100B00U);
  	mmio_write_32(GPIO_INOUTSEL2, 0x00000418U);
@@ -625,7 +625,7 @@ index 91137de..bd24f9a 100644
  	mmio_write_32(GPIO_INOUTSEL6, 0x00013F00U);
  	mmio_write_32(GPIO_INOUTSEL7, 0x00000003U);
 -#else  // RZG_HIHOPE_RZG2H
-+#else  // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#else  // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  	mmio_write_32(GPIO_INOUTSEL0, 0x00000000U);
  	mmio_write_32(GPIO_INOUTSEL1, 0x01000A00U);
  	mmio_write_32(GPIO_INOUTSEL2, 0x00000400U);
@@ -634,7 +634,7 @@ index 91137de..bd24f9a 100644
  	mmio_write_32(GPIO_INOUTSEL6, 0x00013880U);
  	mmio_write_32(GPIO_INOUTSEL7, 0x00000000U);
 -#endif // RZG_HIHOPE_RZG2H
-+#endif // RZG_HIHOPE_RZG2H | RZG_TQMRZG2H_C
++#endif // RZG_HIHOPE_RZG2H | RZG_TQMARZG2H_C
  }
 diff --git a/plat/renesas/rcar/pfc/M3/pfc_init_m3.c b/plat/renesas/rcar/pfc/M3/pfc_init_m3.c
 index 3b47fc8..13bb616 100644
@@ -1124,5 +1124,5 @@ index 29be0f3..bcc3fd3 100644
  #define RCAR_BL33_PARTITION		(0x00000000U)
  #define RCAR_BL332SRC_ADDRESS		(0x00000000U)
 -- 
-2.7.4
+2.25.1
 
