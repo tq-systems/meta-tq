@@ -10,7 +10,7 @@ DEPENDS_append = " bison-native"
 
 PROVIDES += "u-boot"
 
-SRCREV = "ddac62210be7e70fea43d6a49fb3a01df6ef7d82"
+SRCREV = "ad97a694c7a485038f9adcab29ae5470b8b8145a"
 SRCBRANCH = "TQMaRZG2x-u-boot-v2018.09-VLP_1.0.6"
 
 S = "${WORKDIR}/git"
@@ -65,4 +65,4 @@ do_deploy_append() {
     fi
 }
 
-COMPATIBLE_MACHINE = "tqmarzg2m_e"
+COMPATIBLE_MACHINE = "tqmarzg2m_e|tqmarzg2h_c"
