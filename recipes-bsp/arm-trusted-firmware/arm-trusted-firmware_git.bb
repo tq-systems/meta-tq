@@ -14,35 +14,17 @@ require include/ecc-control.inc
 
 S = "${WORKDIR}/git"
 
-BRANCH = "master"
+BRANCH = "TQMaRZG2x-VLP_1.0.6_2.3.0"
 BRANCH_mbedtls = "mbedtls-2.16"
 
 SRC_URI = " \
-	git://git.trustedfirmware.org/TF-A/trusted-firmware-a.git;branch=${BRANCH};protocol=https \
+	${TQ_GIT_BASEURL}/atf.git;branch=${BRANCH};protocol=${TQ_GIT_PROTOCOL} \
 	git://github.com/ARMmbed/mbedtls.git;branch=${BRANCH_mbedtls};name=mbedtls;destsuffix=mbedtls \
 "
 
-#Tag v2.3
-SRCREV = "8ff55a9e14a23d7c7f89f52465bcc6307850aa33"
+SRCREV = "729625214f316135ce10fa8291fcc37440e4ea5a"
 SRCREV_mbedtls = "04a049bda1ceca48060b57bc4bcf5203ce591421"
 
-SRC_URI += " \
-	file://0001-Add-support-RZ-G2-platform.patch \
-	file://0002-plat-rcar-timer-bl2_swdt-increase-WDT-count-when-ECC.patch \
-	file://0003-renesas-rzg-add-support-for-Hihope-RZG2H-board.patch \
-	file://0004-renesas-rzg-add-support-HiHope-Rev3-and-4-Board.patch \
-	file://0005-renesas-rzg-add-support-Silinux-EK874-rev3-board.patch \
-	file://0006-plat-renesas-bl2_fusa-hihope-rzg2m-do-not-enable-ECC.patch \
-	file://0007-plat-renesas-bl2_fusa-Add-mem-initialization-b-f-and.patch \
-	file://0008-plat-renesas-rzg-Change-value-condition-of-RZG_DRAM_.patch \
-	file://0009-plat-renesas-rzg-bl2_fusa-Add-ECC-support-for-RZ-G2H.patch \
-	file://0010-Fix-ld-error-unrecognized-option-with-old-binutils.patch \
-	file://0011-plat-rzg-bl2_fusa-Modify-ECC-setting-for-RZG2N-RZG2M.patch \
-	file://0012-plat-renesas-rzg-bl2_fusa-Optimize-source-code.patch \
-	file://0013-plat-renesas-rzg-Add-support-ECC-Full-Single-setting.patch \
-	file://0014-rzg-ddr-Update-lpddr4-to-rev-0.40.patch \
-	file://0015-rzg-plat-Zero-terminate-the-string-in-unsigned_num_p.patch \
-"
 
 PV = "v2.3+renesas+git"
 
