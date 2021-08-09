@@ -2,14 +2,6 @@ require include/provisioning.inc
 
 SEC_MODULE_LIBDIR = "${HOME}/private/secure/lib/"
 
-SRC_URI_append += " \
-	${@oe.utils.conditional("SECURE_BOOT", "1", "file://0001-rzg-add-support-SECURE-BOOT-for-RZ-G2-Platform.patch", "",d)} \
-	file://0100-add-TQMaRZG2x-modules.patch \
-	file://0101-tqmarzg2h-add-fix-from-Renesas-for-booting-from-emmc.patch \
-	file://0102-tqmarzg2x-add-fix-from-Renesas-for-accessing-SPI-NOR.patch \
-	file://0103-tqmarzg2x-set-all-GPIOs-to-input-without-PU-PD.patch \
-"
-
 ATFW_OPT_r8a774b1 = "LSI=G2N RCAR_AVS_SETTING_ENABLE=0 RZG_TQMARZG2N_B=1 PMIC_ROHM_BD9571=0 RCAR_SYSTEM_SUSPEND=0 SPD="none""
 ATFW_OPT_r8a774a1 = "LSI=G2M RCAR_DRAM_SPLIT=2 RCAR_AVS_SETTING_ENABLE=0 RZG_TQMARZG2M_E=1 PMIC_ROHM_BD9571=0 RCAR_SYSTEM_SUSPEND=0 RCAR_SECURE_BOOT=0 SPD="none""
 ATFW_OPT_r8a774e1 = "LSI=G2H RCAR_DRAM_SPLIT=2 RCAR_DRAM_LPDDR4_MEMCONF=1 RCAR_DRAM_CHANNEL=5 RCAR_AVS_SETTING_ENABLE=0 RZG_TQMARZG2H_C=1 PMIC_ROHM_BD9571=0 RCAR_SYSTEM_SUSPEND=0 SPD="none""
