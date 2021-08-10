@@ -131,12 +131,14 @@ Artifacs can be found at the usual locations for bitbake:
   * imx8mp-mba8mpxl-hdmi.dtb
   * imx8mp-mba8mpxl-hdmi-imx290.dtb
   * imx8mp-mba8mpxl-hdmi-ov9281.dtb
+  * imx8mp-mba8mpxl-rpmsg.dtb
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / e-MMC
 * imx-boot-${MACHINE}-sd.bin-flash\_evk\_flexspi: boot stream for FlexSPI
+* imx-boot-${MACHINE}-mfgtool.bin-flash\_evk\_uboot:  boot stream for UUU
 * hello\_world.bin (Cortex M7 demo, UART3, TCM)
 * rpmsg\_lite\_pingpong\_rtos\_linux\_remote.bin (Cortex M7 demo, UART3, TCM)
 
