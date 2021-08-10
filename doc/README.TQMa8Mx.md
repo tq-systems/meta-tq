@@ -98,7 +98,8 @@ _MBa8x HW Rev.020x/30x only_
 * GPU
 * VPU
 * HDMI
-* MIPI CSI
+* MIPI CSI (see Issues section)
+  * Gray with Vision Components GmbH camera (Sensor OV9281)
   * Raw Bayer with Vision Components GmbH camera (Sensor IMX327)
 
 ## TODO:
@@ -122,6 +123,12 @@ _MBa8x HW Rev.020x/30x only_
   * USB OTG: some USB 3 memory sticks not working in U-Boot
 * QSPI limited to SDR (driver / chip compatibility)
 * Mikrobus Modul RTC5 on ecspi1 don't answer
+* MIPI CSI
+  * driver stack is not completely v4l2-compliance test proof. The IOCTLS for format / resolution
+    enumeration and query can return invalid / wrong values depending of the internal state
+    of the driver stack. Please follow given examples for a working setup.
+  * IMX327: bayer support with 12 Bit does not work at the moment, only 10 Bit with
+    1280x720 is tested with gstreamer
 
 ## Build Artifacts
 
@@ -132,6 +139,7 @@ Artifacs can be found at the usual locations for bitbake:
   * imx8mq-mba8mx.dtb
   * imx8mq-mba8mx-hdmi.dtb
   * imx8mq-mba8mx-hdmi-imx327.dtb
+  * imx8mq-mba8mx-hdmi-ov9281.dtb
   * imx8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb
   * imx8mq-mba8mx-dcss-lvds-tm070jvhg33.dtb
   * imx8mq-mba8mx-rpmsg.dtb
@@ -451,7 +459,19 @@ gst-play-1.0 /mnt/sd/tears_of_steel_1080p.webm
 
 ### MIPI-CSI
 
+*Note*: see known issue section above.
+
 #### Vision Components GmbH cameras
+
+__Gray with Omnivision OV9281__
+
+* Devicetree: `imx8mq-mba8mx-hdmi-ov9281.dtb`
+* gstreamer example:
+
+```
+gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! \
+	autovideosink -v sync=false
+```
 
 __Raw Bayer with Sony IMX327__
 

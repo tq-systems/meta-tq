@@ -129,6 +129,12 @@ _MBa8x HW Rev.030x only_
   linker settings for SD / e-MMC and FlexSPI. Current recipes for boot stream generation
   can only use a single U-Boot config. See further notes under Bootable QSPI NOR
 * Audio does not work after suspend / resume (clocking problem)
+* MIPI CSI
+  * driver stack is not completely v4l2-compliance test proof. The IOCTLS for format / resolution
+    enumeration and query can return invalid / wrong values depending of the internal state
+    of the driver stack. Please follow given examples for a working setup.
+  * IMX327: bayer support with 12 Bit does not work at the moment, only 10 Bit with
+    1280x720 is tested with gstreamer
 
 ## Build Artifacts
 
@@ -429,14 +435,20 @@ sudo uuu -b spl <bootstream>
 
 #### Vision Components GmbH cameras
 
+*Note*: see known issue section above.
+
 __Gray with Omnivision OV9281__
 
 * Devicetree: `imx8mm-mba8mx-lcdif-lvds-tm070jvhg33-ov9281.dtb`
 * gstreamer example:
 
 ```
-gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! \
-	autovideosink -v sync=false
+# grab to file
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! \
+	videorate ! video/x-raw,format=GRAY8,framerate=1/1 ! jpegenc ! multifilesink location=test%d.jpg
+# show live video
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! \
+	videoconvert ! autovideosink -v sync=false
 ```
 
 __Raw Bayer with Sony IMX327__

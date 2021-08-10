@@ -89,6 +89,7 @@ See top level README.md for configurations usable as MACHINE.
   * examples running from TCM
   * use UART3 as debug console (see issues)
 * MIPI CSI (see Issues section)
+  * Gray with Vision Components GmbH camera (Sensor OV9281)
   * Raw Bayer with Vision Components GmbH camera (Sensor IMX327)
 
 ## TODO:
@@ -109,11 +110,14 @@ See top level README.md for configurations usable as MACHINE.
     manual
   * to use UART for M7, patch for UART DTE mode is needed
 * MIPI CSI
+  * driver stack is not completely v4l2-compliance test proof. The IOCTLS for format / resolution
+    enumeration and query can return invalid / wrong values depending of the internal state
+    of the driver stack. Please follow given examples for a working setup.
   * IMX327: bayer support with 12 Bit does not work at the moment, only 10 Bit with
     1280x720 is tested with gstreamer
   * IMX327: when configuring to SRGGB12 reboot may be needed to get a working
     capture again
-  * gstreamer: capture sometimes not starting, when using `yavta -c20 /dev/video0` to
+  * OV9281: gstreamer: capture not starting out of the box, need to use  `yavta` to
     capture some frames, `gstreamer` starts afterwards
 
 ## Build Artifacts
@@ -126,6 +130,7 @@ Artifacs can be found at the usual locations for bitbake:
   * imx8mp-mba8mpxl-lvds-tm070jvhg33.dtb
   * imx8mp-mba8mpxl-hdmi.dtb
   * imx8mp-mba8mpxl-hdmi-imx290.dtb
+  * imx8mp-mba8mpxl-hdmi-ov9281.dtb
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
@@ -298,6 +303,24 @@ sudo uuu -b spl <bootstream>
 ### MIPI-CSI
 
 #### Vision Components GmbH cameras
+
+*Note*: see known issue section above.
+
+__Gray with Omnivision OV9281__
+
+* Devicetree: `imx8mp-mba8mpxl-hdmi-ov9281.dtb`
+* gstreamer example:
+
+```
+# configure
+yavta -f Y8 -s 1280x800 -c20 /dev/video0
+# grab to file
+gst-launch-1.0 v4l2src device=/dev/video0 ! videorate ! video/x-raw,format=GRAY8,framerate=1/1 ! \
+	jpegenc ! multifilesink location=test%d.jpg
+# show live video
+gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! \
+	autovideosink -v sync=false
+```
 
 __Raw Bayer with Sony IMX327__
 
