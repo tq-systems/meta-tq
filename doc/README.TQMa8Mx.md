@@ -137,18 +137,20 @@ Artifacs can be found at the usual locations for bitbake:
 
 * \*.dtb: device tree blobs
   * imx8mq-mba8mx.dtb
-  * imx8mq-mba8mx-hdmi.dtb
-  * imx8mq-mba8mx-hdmi-imx327.dtb
-  * imx8mq-mba8mx-hdmi-ov9281.dtb
-  * imx8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb
-  * imx8mq-mba8mx-dcss-lvds-tm070jvhg33.dtb
-  * imx8mq-mba8mx-rpmsg.dtb
+  * imx8mq-mba8mx-hdmi.dtb (HDMI support)
+  * imx8mq-mba8mx-hdmi-imx327.dtb (HDMI support plus Vision Components CSI camera
+    with Sony IMX327)
+  * imx8mq-mba8mx-hdmi-ov9281.dtb (HDMI support plus Vision Components CSI camera
+    with OmniVision OV9281)
+  * imx8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb (LVDS support over LCDIF with TIANMA TM070JVHG33)
+  * imx8mq-mba8mx-dcss-lvds-tm070jvhg33.dtb (LVDS support over DCSS with TIANMA TM070JVHG33)
+  * imx8mq-mba8mx-rpmsg.dtb (CortexM / RPMSG Support)
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* imx-boot-${MACHINE}-sd.bin-flash\_hdmi\_spl\_uboot:  boot stream for SD / e-MMC
-* imx-boot-${MACHINE}-mfgtool.bin-flash\_spl\_uboot:  boot stream for UUU
+* imx-boot-${MACHINE}-sd.bin-flash\_hdmi\_spl\_uboot: boot stream for SD / e-MMC
+* imx-boot-${MACHINE}-mfgtool.bin-flash\_spl\_uboot: boot stream for UUU
 * hello\_world.bin (Cortex M4 demo, UART4, TCM)
 * rpmsg\_lite\_pingpong\_rtos\_linux\_remote.bin (Cortex M4 demo, UART4, TCM)
 
