@@ -387,17 +387,6 @@ ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 40000
 ### Cortex M7
 
 Demos are compiled to use UART3 with 115200 8N1.
+For demos available in the BSP and the device tree to be used see [artifacts section](#build-artifacts).
 
-To start a demo stored on SD / e-MMC from U-Boot:
-
-```
-setenv fdt_file imx8mp-mba8mpxl-rpmsg.dtb
-setenv cm_image <demo>
-run boot_cm_mmc
-```
-
-To connect from running linux to rpmsg ping pong demo:
-
-```
-modprobe imx_rpmsg_pingpong
-```
+Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8M.md).

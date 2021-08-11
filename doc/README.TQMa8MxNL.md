@@ -444,19 +444,7 @@ gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false ! \
 
 ### Cortex M7
 
-Demos are compiled to use UART4 (MBa8Mx X17:56,58 + X17:54 for GND) with
-115200 8N1.
+Demos are compiled to use UART4 (MBa8Mx X17:56,58 + X17:54 for GND) with 115200 8N1.
+For demos available in the BSP and the device tree to be used see [artifacts section](#build-artifacts).
 
-To start a demo stored on SD / e-MMC from U-Boot:
-
-```
-setenv fdt_file imx8mn-mba8mx-rpmsg.dtb
-setenv cm_image <demo>
-run boot_cm_mmc
-```
-
-To connect from running linux to rpmsg ping pong demo:
-
-```
-modprobe imx_rpmsg_pingpong
-```
+Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8M.md).
