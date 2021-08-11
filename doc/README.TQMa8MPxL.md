@@ -127,11 +127,13 @@ Artifacs can be found at the usual locations for bitbake:
 
 * \*.dtb: device tree blobs
   * imx8mp-mba8mpxl.dtb
-  * imx8mp-mba8mpxl-lvds-tm070jvhg33.dtb
-  * imx8mp-mba8mpxl-hdmi.dtb
-  * imx8mp-mba8mpxl-hdmi-imx290.dtb
-  * imx8mp-mba8mpxl-hdmi-ov9281.dtb
-  * imx8mp-mba8mpxl-rpmsg.dtb
+  * imx8mp-mba8mpxl-lvds-tm070jvhg33.dtb (LVDS support with TIANMA TM070JVHG33)
+  * imx8mp-mba8mpxl-hdmi.dtb (HDMI support)
+  * imx8mp-mba8mpxl-hdmi-imx327.dtb (HDMI support plus Vision Components CSI camera
+    with Sony IMX327)
+  * imx8mp-mba8mpxl-hdmi-ov9281.dtb (HDMI support plus Vision Components CSI camera
+    with OmniVision OV9281)
+  * imx8mp-mba8mpxl-rpmsg.dtb (CortexM / RPMSG Support)
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
