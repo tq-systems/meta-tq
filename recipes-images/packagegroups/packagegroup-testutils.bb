@@ -14,7 +14,6 @@ inherit packagegroup
 # and that's not what we want
 
 RDEPENDS_${PN} = " \
-    perf \
     strace \
     gdbserver \
     mc \
