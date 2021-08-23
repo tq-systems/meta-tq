@@ -27,4 +27,4 @@ UBI_VOLNAME = "root"
 # wks-files for image creation:
 # tqmls1088a-sdimg.wks.in -> to boot from SD-Card
 # tqmls1088a-emmcimg.wks.in -> to boot from eMMC
-WKS_FILE ?= "tqmls1088a-sdimg.wks.in"
+WKS_FILE_${MACHINE} ?= "tqmls1088a-sdimg.wks.in"

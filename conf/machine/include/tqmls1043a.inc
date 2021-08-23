@@ -17,4 +17,4 @@ UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
 # needs to be set to have it consistent for kernel command line
 UBI_VOLNAME = "root"
 
-WKS_FILE ?= "tqmls1043a-sdimg.wks"
+WKS_FILE_${MACHINE} ?= "tqmls1043a-sdimg.wks"
