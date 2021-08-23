@@ -13,7 +13,7 @@ require conf/machine/include/tqmxx.inc
 PREFERRED_PROVIDER_u-boot_tqmlx2160a ?= "u-boot-lsdk-tq"
 PREFERRED_PROVIDER_virtual/bootloader_tqmlx2160a ?= "u-boot-lsdk-tq"
 PREFERRED_PROVIDER_virtual/kernel_tqmlx2160a ?= "linux-lsdk-tq"
-
+PREFERRED_VERSION_qoriq-atf = "1.5%"
 # Define the default image type
 KERNEL_IMAGETYPE ?= "Image"
 
@@ -27,7 +27,7 @@ MACHINE_FEATURES_append = "  ext2 pci rtc serial usbhost vfat can"
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-EXTRA_IMAGEDEPENDS += "rcw atf management-complex mc-utils"
+EXTRA_IMAGEDEPENDS += "rcw qoriq-atf management-complex mc-utils"
 
 # DPAA2 manament utility
 IMAGE_INSTALL_append = " restool"

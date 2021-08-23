@@ -32,7 +32,7 @@ MACHINE_FEATURES_append = " alsa ext2 pci rtc serial usbhost vfat can"
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-EXTRA_IMAGEDEPENDS += "rcw atf dp-firmware-cadence"
+EXTRA_IMAGEDEPENDS += "rcw qoriq-atf dp-firmware-cadence"
 
 IMAGE_FSTYPES_append = " tar.gz ext4 wic"
 IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2 ext2.gz.u-boot ext2.gz"

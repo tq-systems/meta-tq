@@ -32,7 +32,7 @@ MACHINE_FEATURES_append = " ext2 pci rtc serial usbhost vfat"
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-EXTRA_IMAGEDEPENDS += "rcw atf ppfe-firmware"
+EXTRA_IMAGEDEPENDS += "rcw qoriq-atf ppfe-firmware"
 IMAGE_FSTYPES_append = " tar.gz ext4 wic"
 IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2 ext2.gz.u-boot ext2.gz"
 

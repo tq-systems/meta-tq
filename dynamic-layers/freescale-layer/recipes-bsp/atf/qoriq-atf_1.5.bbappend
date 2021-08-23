@@ -7,13 +7,18 @@ STATIC_PBL = "no"
 OVERRIDES_prepend_tqmls1012al = "tqmls-atf-common:"
 PLATFORM_tqmls1012al = "tqmls1012al"
 PLATFORM_tqmls1012al_tqmls1012al-1gb = "tqmls1012al_1gb"
+RCW_FOLDER_tqmls1012al = "${PLATFORM_tqmls1012al}"
+# fix override by qoriq-atf_1.5 from freescale layer
+rcw_ls1012a = ""
 
 OVERRIDES_prepend_tqmls1028a = "tqmls-atf-common:"
 PLATFORM_tqmls1028a = "tqmls1028a"
+RCW_FOLDER_tqmls1028a = "${PLATFORM_tqmls1028a}"
 STATIC_PBL_tqmls1028a = "yes"
 
 OVERRIDES_prepend_tqmlx2160a = "tqmls-atf-common:"
 PLATFORM_tqmlx2160a = "tqmlx2160a"
+RCW_FOLDER_tqmlx2160a = "${PLATFORM_tqmlx2160a}"
 
 export STATIC_PBL
 
