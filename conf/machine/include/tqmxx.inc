@@ -4,6 +4,9 @@
 TQ_GIT_BASEURL ?= "git://github.com/tq-systems"
 TQ_GIT_PROTOCOL ?= "https"
 
+# target not supported in older U-Boot
+UBOOT_INITIAL_ENV ?= ""
+
 PREFERRED_PROVIDER_ptpd_imx = "ptpd"
 PREFERRED_PROVIDER_ptpd_qoriq = "${@bb.utils.contains('BBFILE_COLLECTIONS', 'freescale-layer', 'ptpd-qoriq', 'ptpd', d)}"
 PREFERRED_PROVIDER_ptpd ?= "ptpd"
