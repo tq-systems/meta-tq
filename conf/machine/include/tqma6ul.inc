@@ -25,8 +25,8 @@ PREFERRED_PROVIDER_virtual/kernel_tqma6ulx ?= "linux-imx-tq"
 PREFERRED_PROVIDER_virtual/kernel_tqma6ulx_use-mainline-bsp ?= "linux-tq"
 KERNEL_IMAGETYPE = "zImage"
 
-PREFERRED_PROVIDER_u-boot_tqma6ulx ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader_tqma6ulx ?= "u-boot-tq"
+PREFERRED_PROVIDER_u-boot_tqma6ulx ?= "u-boot-imx-tq"
+PREFERRED_PROVIDER_virtual/bootloader_tqma6ulx ?= "u-boot-imx-tq"
 
 UBOOT_SUFFIX ?= "imx"
 UBOOT_MAKE_TARGET ?= "u-boot.imx"
