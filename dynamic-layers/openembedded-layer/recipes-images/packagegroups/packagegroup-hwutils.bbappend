@@ -1,4 +1,4 @@
-RDEPENDS_${PN}_append = " \
+RDEPENDS_${PN}_append = "\
     spitools \
     lmsensors-sensors \
     libgpiod \

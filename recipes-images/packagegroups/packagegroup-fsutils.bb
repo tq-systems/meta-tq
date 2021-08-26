@@ -18,8 +18,8 @@ IMAGE_INSTALL_append = "\
     ${@bb.utils.contains('MACHINE_FEATURES', 'ubi', ' ${MTD_UTILS_PACKAGES}', '', d)} \
 "
 
-RDEPENDS_${PN} = " \
+RDEPENDS_${PN} = "\
     parted \
     e2fsprogs \
     ${@bb.utils.contains('BBFILE_COLLECTIONS', 'filesystems-layer', ' f2fs-tools', '', d)} \
-    "
+"

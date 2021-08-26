@@ -5,11 +5,11 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 inherit packagegroup
 
-RDEPENDS_${PN} = " \
+RDEPENDS_${PN} = "\
     usbutils \
     mmc-utils \
     i2c-tools \
     ${@bb.utils.contains('MACHINE_FEATURES', 'pci', ' pciutils', '', d)} \
     minicom \
     screen \
-    "
+"

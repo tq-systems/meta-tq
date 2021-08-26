@@ -3,8 +3,8 @@ LICENSE = "MIT"
 
 inherit packagegroup
 
-RDEPENDS_${PN} = " \
+RDEPENDS_${PN} = "\
     systemd \
     systemd-machine-units \
     systemd-serialgetty \
-    "
+"

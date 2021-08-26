@@ -3,6 +3,6 @@ LICENSE = "MIT"
 
 inherit packagegroup
 
-RDEPENDS_${PN} = " \
+RDEPENDS_${PN} = "\
     rng-tools \
-    "
+"
