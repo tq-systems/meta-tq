@@ -27,16 +27,16 @@ inherit deploy seco-firmware-name
 # Add CFLAGS with native INCDIR & LIBDIR for imx-mkimage build
 CFLAGS = "-O2 -Wall -std=c99 -I ${STAGING_INCDIR_NATIVE} -L ${STAGING_LIBDIR_NATIVE}"
 
-IMX_M4_DEMOS        = ""
-IMX_M4_DEMOS_mx8qm  = "imx-m4-demos:do_deploy"
-IMX_M4_DEMOS_mx8x   = "imx-m4-demos:do_deploy"
-IMX_M4_DEMOS_mx8dxl = "imx-m4-demos:do_deploy"
+IMX_M4_DEMOS        ?= ""
+IMX_M4_DEMOS_mx8qm  ?= "imx-m4-demos:do_deploy"
+IMX_M4_DEMOS_mx8x   ?= "imx-m4-demos:do_deploy"
+IMX_M4_DEMOS_mx8dxl ?= "imx-m4-demos:do_deploy"
 
 M4_DEFAULT_IMAGE ?= "m4_image.bin"
-M4_DEFAULT_IMAGE_mx8qxp = "imx8qx_m4_TCM_power_mode_switch.bin"
-M4_DEFAULT_IMAGE_mx8phantomdxl = "imx8dxl-phantom_m4_TCM_srtm_demo.bin"
-M4_DEFAULT_IMAGE_mx8dxl = "imx8dxl_m4_TCM_power_mode_switch.bin"
-M4_DEFAULT_IMAGE_mx8dx = "imx8qx_m4_TCM_power_mode_switch.bin"
+M4_DEFAULT_IMAGE_mx8qxp ?= "imx8qx_m4_TCM_power_mode_switch.bin"
+M4_DEFAULT_IMAGE_mx8phantomdxl ?= "imx8dxl-phantom_m4_TCM_srtm_demo.bin"
+M4_DEFAULT_IMAGE_mx8dxl ?= "imx8dxl_m4_TCM_power_mode_switch.bin"
+M4_DEFAULT_IMAGE_mx8dx ?= "imx8qx_m4_TCM_power_mode_switch.bin"
 
 # This package aggregates output deployed by other packages,
 # so set the appropriate dependencies
@@ -137,6 +137,9 @@ compile_mx8() {
 
 compile_mx8x() {
     bbnote 8QX boot binary build
+    if [ "$1" = "flash_linux_m4" ]; then
+        cp ${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}           ${BOOT_STAGING}/m4_image.bin
+    fi
     cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}             ${BOOT_STAGING}
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${SC_FIRMWARE_NAME} ${BOOT_STAGING}/scfw_tcm.bin
     cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${BOOT_STAGING}/bl31.bin
@@ -154,7 +157,7 @@ do_compile() {
         cp ${DEPLOY_DIR_IMAGE}/tee.bin ${BOOT_STAGING}
     fi
     for target in ${IMXBOOT_TARGETS}; do
-        compile_${SOC_FAMILY}
+        compile_${SOC_FAMILY} "$target"
         if [ "$target" = "flash_linux_m4_no_v2x" ]; then
            # Special target build for i.MX 8DXL with V2X off
            bbnote "building ${SOC_TARGET} - ${REV_OPTION} V2X=NO ${target}"
