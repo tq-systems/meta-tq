@@ -54,10 +54,14 @@ This README contains some useful information for TQMaRZG2x on MBaRZG2x
 * Sound
 * RGB-Display-Interface
 * Mikro-Modul
+* NFS boot
+* Wakeup
 
 ## Known Issues
+* U-Boot update script 'update_uboot_mmc' does not write to boot partition, but data partition instead.
 * After a hardware reset (S9), PCIe does not work any more on all module variants. 
 * After a hardware reset (S9), USB3 does not work any more on the TQMaRZG2N variant. 
+* U-Boot command 'gpio status' works, but generates an error messsage: 'Error reading output register' 
 
 ## Notes
 * SDHC:
