@@ -30,6 +30,7 @@ See top level README.md for configurations usable as MACHINE.
 
 * RAM configs:
   * 1GB DDR3L ECC / TQMa8X\[D,Q\]P
+  * 2GB DDR3L ECC / TQMa8X\[D,Q\]P
   * 2GB LPDDR4 / TQMa8X\[D,Q\]P4
 * CPU variants:
   * i.MX8QXP C0
@@ -58,7 +59,6 @@ See top level README.md for configurations usable as MACHINE.
 
 **TODO or not tested / supported**
 
-* Cortex M4
 * temperature grade
   * SCU limitation
 * CPU variants i.MX8DX/i.MX8DXP cannot be detected automatically from hardware
@@ -67,10 +67,12 @@ See top level README.md for configurations usable as MACHINE.
 ### Linux:
 
 * RAM configs:
-  * 1GB / TQMa8XQP
-  * 2GB / TQMa8XQP4
+  * 1GB DDR3L ECC / TQMa8X\[D,Q\]P
+  * 2GB DDR3L ECC / TQMa8X\[D,Q\]P
+  * 2GB LPDDR4 / TQMa8X\[D,Q\]P4
 * CPU variants:
   * i.MX8QXP C0
+  * i.MX8DXP C0
 * I2C
   * Temperature Sensors (without cpu-temp)
   * RTC
@@ -128,14 +130,18 @@ See top level README.md for configurations usable as MACHINE.
 Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
 
-* \*.dtb: device tree blobs
+* imx8qxp\*.dtb: device tree blobs for TQMa8XQP\[4\]
+* imx8dxp\*.dtb: device tree blobs for TQMa8XDP\[4\]
 * Image: linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * imx-boot-${MACHINE}-sd.bin-flash\_spl: boot stream for SD / e-MMC
+* imx-boot-${MACHINE}-sd.bin-flash\_linux\_m4: boot stream for SD / e-MMC + M4 Demo
 * imx-boot-${MACHINE}-sd.bin-flash\_spl_flexspi: boot stream for QSPI
 * imx-boot-mfgtool-${MACHINE}-mfgtool.bin-flash\_spl: boot stream for UUU
+* hello\_world.bin (Cortex M4 demo, CM4 UART, TCM)
+* rpmsg\_lite\_pingpong\_rtos\_linux\_remote.bin (Cortex M4 demo, CM4 UART, TCM)
 
 ## Boot Dip Switches
 
@@ -346,3 +352,10 @@ FD capable transceiver:
 CANIF="can[0,1]"
 ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on‍‍‍‍‍‍‍
 ```
+
+### Cortex M4
+
+Demos are compiled to use Cortex M4 UART with 115200 8N1 on Pins SCU\_GPIO\_00 and SCU\_GPIO\_01
+For demos available in the BSP and the device tree to be used see [artifacts section](#build-artifacts).
+
+Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8X.md).
