@@ -15,8 +15,8 @@ SRC_URI_append = " \
 # clear vars to prevent default assignments
 SC_FIRMWARE_NAME = "invalid"
 
-SC_FIRMWARE_NAME_tqma8xdp-mba8xx = "mx8qx-tqma8xqp-1gb-mba8xx-scfw-tcm.bin"
-SC_FIRMWARE_NAME_tqma8xqp-mba8xx = "mx8qx-tqma8xqp-1gb-mba8xx-scfw-tcm.bin"
+SC_FIRMWARE_NAME_tqma8xdp-1gb-mba8xx = "mx8qx-tqma8xqp-1gb-mba8xx-scfw-tcm.bin"
+SC_FIRMWARE_NAME_tqma8xqp-1gb-mba8xx = "mx8qx-tqma8xqp-1gb-mba8xx-scfw-tcm.bin"
 SC_FIRMWARE_NAME_tqma8xqp-2gb-mba8xx = "mx8qx-tqma8xqp-2gb-mba8xx-scfw-tcm.bin"
 SC_FIRMWARE_NAME_tqma8xdp4-mba8xx = "mx8qx-tqma8xqp4-mba8xx-scfw-tcm.bin"
 SC_FIRMWARE_NAME_tqma8xqp4-mba8xx = "mx8qx-tqma8xqp4-mba8xx-scfw-tcm.bin"
