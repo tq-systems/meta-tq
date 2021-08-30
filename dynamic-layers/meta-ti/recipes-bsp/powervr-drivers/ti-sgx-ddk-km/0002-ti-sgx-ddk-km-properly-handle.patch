@@ -1,30 +1,26 @@
-From 693a70d58eedd3e1d61746774052472c32978c4d Mon Sep 17 00:00:00 2001
-From: Gregor Herburger <gregor.herburger@tq-group.com>
-Date: Tue, 27 Apr 2021 12:24:27 +0200
-Subject: [PATCH] ti-sgx-ddk-km: properly handle arm-poky-linux-gnueabi
- compiler prefix
+ti-sgx-ddk-km: properly handle tq-linux-gnueabi compiler prefix
+
+From: Martin Schmiedel <Martin.Schmiedel@tq-group.com>
 
 The additional patch for ti-sgx-ddk-km remaps the arm-oe-linux-gnueabi prefix
 to the arm-linux-gnueabihf preferred target. Same should be done for the
-arm-poky-linux-gnueabi prefix.
+arm-tq-linux-gnueabi prefix.
 
-Patch from meta-ti.
-
-Signed-off-by: Gregor Herburger <gregor.herburger@tq-group.com>
+Signed-off-by: Martin Schmiedel <Martin.Schmiedel@tq-group.com>
 ---
- eurasia_km/eurasiacon/build/linux2/config/compiler.mk | 2 +-
+ .../eurasiacon/build/linux2/config/compiler.mk     |    2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/eurasia_km/eurasiacon/build/linux2/config/compiler.mk b/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
-index 2ba3e5e..97b90e2 100644
+index 97b90e2..50088af 100644
 --- a/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
 +++ b/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
 @@ -68,7 +68,7 @@ define calculate-compiler-preferred-target
    ifneq ($$(filter aarch64-%,$$($(1)_compiler_preferred_target)),)
     $(1)_compiler_preferred_target := aarch64-linux-gnu
    endif
--  ifneq ($$(filter arm-%-gnueabihf arm-oe-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
-+  ifneq ($$(filter arm-%-gnueabihf arm-oe-linux-gnueabi arm-poky-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
+-  ifneq ($$(filter arm-%-gnueabihf arm-oe-linux-gnueabi arm-poky-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
++  ifneq ($$(filter arm-%-gnueabihf arm-oe-linux-gnueabi arm-poky-linux-gnueabi arm-tq-linux-musleabi arm-tq-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
     $(1)_compiler_preferred_target := arm-linux-gnueabihf
    endif
    ifneq ($$(filter arm-%-gnueabi armv7a-cros-linux-gnueabi armv7hl-redhat-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
