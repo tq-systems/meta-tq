@@ -42,6 +42,7 @@ Additionally you can use github's collaboration features.
 
 1. Adding the meta-dumpling layer to your build
 2. Misc
+3. Distros
 
 ### 1. Adding the meta-dumpling layer to your build
 
@@ -68,10 +69,21 @@ BSPDIR := "${@os.path.abspath(os.path.dirname(d.getVar('FILE', True)) + '/../..'
 The meta-dumpling layer defines images recipes for test / evaluation of
 TQ-Systems SOM:
 
+* tq-image-small (based on poky core-image-minimal)
 * tq-image-generic (based on poky core-image-minimal)
-* tq-image-qt5 (based on fsl-image-qt5)
+* tq-image-weston (based on poky core-image-weston)
 
 **Attention:** These recipes can be used as a starting point for own customization.
 Because of the intended usage, a lot for debug and test tools are included.
 These packages should not go into a production image. Depending on the actual
 project, security must be taken in account.
+
+It is recommended to use the [Format_Guidelines](https://www.openembedded.org/wiki/Styleguide#Format_Guidelines) from openembedded.
+
+### 3. Distros
+
+The meta-dumpling layer defines distros as starting point for own customization.
+
+* spaetzle (small image for nand flash)
+* dumpling
+* dumpling-wayland (graphics support)
