@@ -10,11 +10,14 @@ This README contains some useful information for TQMa8XxS on MB-SMARC-2
 
 ## Version information for software components
 
-See [here](./README.SoftwareVersions.md) for the software base versions.
-
 ### SCFW:
 
-* version: tq-TQMa8.NXP-v1.6.0.B4894.0031
+* version: tq-TQMa8.NXP-v1.6.0.B4894.0032
+
+### Other components
+
+See [here](./README.SoftwareVersions.md) for the software base versions of atf,
+bootloader and linux kernel.
 
 ## Supported machine configurations:
 
