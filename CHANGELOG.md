@@ -5,6 +5,31 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa8.BSP.SW.0055
+
+### Added
+
+* TQMa8Xx\[S\]: support for Cortex M4 enabled bootstream
+* add new variant tqma8xqp-2gb-mba8xx
+* linux: TQMa8Xx\[S\]: device trees for Cortex M4 demos
+* U-Boot: TQMa8Xx\[S\]: add reserved memory nodes in DT to prevent U-Boot
+  accessing M4 reserved memory
+
+### Changed
+
+* rename machines tqma8x\[d,q\]p-mba8xx to tqma8x\[d,q\]p-1gb-mba8xx to allow
+  new variants
+* imx-boot: allow building bootstream with Cortex M4 demo for TQ Systems SOM
+* Update SCFW version: basic CortexM4 support for TQMa8Xx\[S\] and new
+  2GB DDR3L / ECC variant of TQMa8Xx
+* Update tqma8-cortexm-demos version: basic CortexM4 support for TQMa8Xx\[S\]
+
+### Fixed
+
+* linux: TQMa8Xx: set CAN PDRV to low
+* linux: upstream fixes from linux-imx
+* U-Boot: TQMa8\[X\]x\[S\]: fix location U-Boot config node in DT
+
 ## zeus.TQMa8.BSP.SW.0054
 
 ### Added
