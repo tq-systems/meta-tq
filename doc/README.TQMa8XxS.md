@@ -56,11 +56,10 @@ See top level README.md for configurations usable as MACHINE.
 
 **TODO or not tested / supported**
 
-* Cortex M4
 * temperature grade
   * SCU limitation
-* CPU variants i.MX8DX/i.MX8DXP cannot be detected automatically
-  (limitation of cpu driver / SCU firmware)
+* CPU variants i.MX8DX/i.MX8DXP cannot be detected automatically from hardware
+  (limitation of cpu driver / SCU firmware, currently fixed with U-Boot Kconfig)
 
 ### Linux:
 
@@ -118,7 +117,7 @@ See top level README.md for configurations usable as MACHINE.
 
 * CAN
   * CAN FD can not be automatically configured (systemd limitation)
-  * CAN FD supported on MB-SMARC-2 (system limitation)
+  * CAN FD not supported on MB-SMARC-2 (system limitation)
 * USB
   * Port USB3 (X3 on MB-SMARC-2) is host only. Do only use a matching adapter
     on MB-SMARC-2
@@ -142,8 +141,11 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * imx-boot-${MACHINE}-sd.bin-flash\_spl: boot stream for SD / e-MMC
+* imx-boot-${MACHINE}-sd.bin-flash\_linux\_m4: boot stream for SD / e-MMC + M4 Demo
 * imx-boot-${MACHINE}-sd.bin-flash\_spl_flexspi: boot stream for QSPI
 * imx-boot-mfgtool-${MACHINE}-mfgtool.bin-flash\_spl: boot stream for UUU
+* hello\_world.bin (Cortex M4 demo, CM4 UART, TCM)
+* rpmsg\_lite\_pingpong\_rtos\_linux\_remote.bin (Cortex M4 demo, CM4 UART, TCM)
 
 ## Boot DIP Switches
 
@@ -353,3 +355,12 @@ FD capable transceiver:
 CANIF="can[0,1]"
 ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on
 ```
+
+### Cortex M4
+
+Demos are compiled to use Cortex M4 UART with 115200 8N1 on Pins SCU\_GPIO\_00 and SCU\_GPIO\_01
+For demos available in the BSP and the device tree to be used see [artifacts section](#build-artifacts).
+
+*Note:* UART3 uses the same pins as Cortex M4 UART and has to be disabled when using Cortex M4.
+
+Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8X.md).
