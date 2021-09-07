@@ -32,17 +32,6 @@ UBOOT_MAKE_TARGET_${MACHINE} ?= "u-boot.imx"
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-IMAGE_FSTYPES_append = " tar.gz ext4 wic ubi"
-IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2 wic.gz"
-
-# DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
-IMAGE_FSTYPES_remove += "${@bb.utils.contains('DISTRO_FEATURES', 'wayland', 'ubi', '', d)}"
-IMAGE_FSTYPES_remove += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'ubi', '', d)}"
-
-# needed for Rootfs on QSPI
-IMAGE_INSTALL_append = " mtd-utils-jffs2 mtd-utils-ubifs mtd-utils-misc"
-# need to have the kernel modules in rootfs
-IMAGE_INSTALL_append = " kernel-modules"
 
 # from PTXdist BSP:
 # PTXCONF_IMAGE_ROOT_UBIFS_PEB_SIZE="65536"

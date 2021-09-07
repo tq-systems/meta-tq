@@ -33,15 +33,6 @@ MACHINE_FEATURES_append = " ext2 pci rtc serial usbhost vfat"
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 EXTRA_IMAGEDEPENDS += "rcw qoriq-atf ppfe-firmware"
-IMAGE_FSTYPES_append = " tar.gz ext4 wic"
-IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2 ext2.gz.u-boot ext2.gz"
-
-DISTRO_FEATURES_remove += "${@bb.utils.contains('IMAGE_FSTYPES', 'ubi', 'wayland weston x11', '', d)}"
-
-# needed for Rootfs on QSPI
-IMAGE_INSTALL_append = " mtd-utils-jffs2 mtd-utils-ubifs mtd-utils-misc"
-IMAGE_INSTALL_append = " ppfe-firmware"
-IMAGE_INSTALL_append = " kernel-modules"
 
 # Image Options
 #
