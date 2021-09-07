@@ -27,7 +27,7 @@ MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree udev-extraconf"
 
 # provide info about machine's capabilities
 # OP-TEE is currently untested, so we don't enable the feature for now
-MACHINE_FEATURES_append = " ext2 pci rtc serial usbhost vfat"
+MACHINE_FEATURES_append = " ext2 pci rtc serial usbhost vfat ubi"
 
 # Image Options
 #

@@ -22,7 +22,7 @@ KERNEL_IMAGETYPE ?= "Image"
 MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree udev-extraconf"
 
 # provide info about machine's capabilities
-MACHINE_FEATURES_append = "  ext2 pci rtc serial usbhost vfat can"
+MACHINE_FEATURES_append = "  ext2 pci rtc serial usbhost vfat can ubi"
 
 # Image Options
 #
