@@ -31,7 +31,7 @@ PREFERRED_PROVIDER_virtual/bootloader_tqma6ullx ?= "u-boot-imx-tq"
 UBOOT_SUFFIX_${MACHINE} ?= "imx"
 UBOOT_MAKE_TARGET_${MACHINE} ?= "u-boot.imx"
 
-UBOOT_CONFIG = "sd qspi"
+UBOOT_CONFIG ?= "sd qspi"
 
 # Image Options
 #
