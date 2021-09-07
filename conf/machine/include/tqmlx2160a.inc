@@ -32,8 +32,6 @@ EXTRA_IMAGEDEPENDS += "rcw qoriq-atf management-complex mc-utils"
 # DPAA2 manament utility
 IMAGE_INSTALL_append = " restool"
 
-PREFERRED_VERSION_management-complex = "10.21.0"
-
 IMAGE_FSTYPES_append = " tar.gz ext4 wic ubi"
 IMAGE_FSTYPES_remove = " tar.bz2 sdcard.bz2"
 
