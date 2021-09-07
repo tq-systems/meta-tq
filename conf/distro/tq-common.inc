@@ -47,9 +47,6 @@ VIRTUAL-RUNTIME_login_manager = "busybox"
 VIRTUAL-RUNTIME_syslog = ""
 VIRTUAL-RUNTIME_initscripts = ""
 
-# add some locales per default
-IMAGE_LINGUAS_append = " de-de en-us"
-
 # home for root is '/root' and nothing else
 ROOT_HOME ?= "/root"
 
