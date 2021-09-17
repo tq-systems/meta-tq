@@ -17,11 +17,23 @@ MACHINE_GSTREAMER_1_0_PLUGIN ??= ""
 
 IMAGE_FEATURES_remove = " package-management"
 
-IMAGE_INSTALL_append               = " gstreamer1.0-plugins-base-meta"
-IMAGE_INSTALL_append               = " gstreamer1.0-plugins-good-meta"
-IMAGE_INSTALL_append               = " gstreamer1.0-plugins-bad-meta"
-IMAGE_INSTALL_append               = " ${MACHINE_GSTREAMER_1_0_PLUGIN}"
+###
+# this is a little bit overkill
+###
+THISIMAGE_GSTREAMER_PLUGINS ?= "\
+    gstreamer1.0-plugins-base-meta \
+    gstreamer1.0-plugins-good-meta \
+    gstreamer1.0-plugins-bad-meta \
+"
 
-IMAGE_INSTALL_append               = " weston-examples"
-IMAGE_INSTALL_append_imxgpu3d      = " glmark2"
-IMAGE_INSTALL_append_imxdrm        = " kmscube"
+THISIMAGE_GSTREAMER_PLUGINS_use-nxp-bsp ?= "\
+    ${MACHINE_GSTREAMER_1_0_PLUGIN} \
+"
+
+CORE_IMAGE_EXTRA_INSTALL += " \
+    weston-examples \
+    ${THISIMAGE_GSTREAMER_PLUGINS} \
+"
+
+CORE_IMAGE_EXTRA_INSTALL_append_imxgpu3d = " glmark2"
+CORE_IMAGE_EXTRA_INSTALL_append_imxdrm   = " kmscube"
