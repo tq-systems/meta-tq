@@ -9,10 +9,6 @@ MACHINE_USES_VIVANTE_KERNEL_DRIVER_MODULE = "0"
 MACHINEOVERRIDES =. "tqma6x:"
 MACHINEOVERRIDES =. "mx6:"
 
-PREFERRED_VERSION_weston_mx6_imx ?= "8.0.0.imx"
-PREFERRED_VERSION_wayland-protocols_mx6 ?= "1.18.imx"
-PREFERRED_VERSION_libdrm_mx6 ?= "2.4.99.imx"
-
 include conf/machine/include/imx-base.inc
 
 DEFAULTTUNE ?= "cortexa9thf-neon"
