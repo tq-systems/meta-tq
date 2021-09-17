@@ -51,3 +51,5 @@ VIRTUAL-RUNTIME_initscripts = ""
 ROOT_HOME ?= "/root"
 
 IMAGE_FSTYPES ?= " tar.gz"
+
+IMX_DEFAULT_BSP = "${@bb.utils.contains('BBFILE_COLLECTIONS', 'freescale_layer', '', 'nxp', d)}"
