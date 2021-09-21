@@ -1,0 +1,33 @@
+# shared definitions for MBa8x mainboard
+
+# We have to disable SERIAL_CONSOLE due to auto-serial-console
+SERIAL_CONSOLES = "115200;ttyLP0"
+
+# we do not want to have getty running on tty0 as we run
+# auto-serial-console there
+USE_VT = "0"
+
+BOARD_DEVICETREE_FILES = "\
+	imx8qm-mba8x.dtb \
+	imx8qm-mba8x-lvds0-tm070jvhg33.dtb \
+	imx8qm-mba8x-lvds1-tm070jvhg33.dtb \
+	imx8qm-mba8x-dp.dtb \
+	imx8qm-mba8x-rpmsg.dtb \
+"
+
+BOARD_FIRMWARE_FILES = "\
+	dpfw.bin \
+	hdmirxfw.bin \
+"
+
+require conf/machine/include/tqma8-common.inc
+
+IMAGE_BOOT_FILES ?= "\
+	${KERNEL_IMAGETYPE} \
+	${BOARD_DEVICETREE_FILES} \
+	${BOARD_FIRMWARE_FILES} \
+	"
+
+MACHINE_FEATURES_append = " wifi"
+MACHINE_EXTRA_RRECOMMENDS_append = " linux-firmware-ath10k"
+
