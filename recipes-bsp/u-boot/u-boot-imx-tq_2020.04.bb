@@ -24,9 +24,9 @@ do_deploy_append_mx8m () {
                 then
                     install -d ${DEPLOYDIR}/${BOOT_TOOLS}
                     for dtb in ${UBOOT_DTB_NAME}; do
-                        install -m 0777 ${B}/${config}/arch/arm/dts/${dtb}  ${DEPLOYDIR}/${BOOT_TOOLS}
+                        install -m 0777 ${B}/${config}/arch/arm/dts/${dtb}  ${DEPLOYDIR}/${BOOT_TOOLS}/${dtb}-${MACHINE}-${type}
                     done
-                    install -m 0777 ${B}/${config}/u-boot-nodtb.bin  ${DEPLOYDIR}/${BOOT_TOOLS}/u-boot-nodtb.bin-${MACHINE}-${UBOOT_CONFIG}
+                    install -m 0777 ${B}/${config}/u-boot-nodtb.bin  ${DEPLOYDIR}/${BOOT_TOOLS}/u-boot-nodtb.bin-${MACHINE}-${type}
                 fi
             done
             unset  j
