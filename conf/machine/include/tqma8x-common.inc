@@ -12,6 +12,7 @@ LOADADDR = ""
 MACHINE_FEATURES_append = " can pci alsa rtc serial ext2 ext3 vfat usbhost"
 
 PREFERRED_PROVIDER_virtual/imx-cortexm-demos = "tqma8-cortexm-demos"
+PREFERRED_PROVIDER_imx-sc-firmware ?= "imx-sc-firmware-tq"
 
 UBOOT_MAKE_TARGET ?= "all"
 UBOOT_SUFFIX ?= "bin"

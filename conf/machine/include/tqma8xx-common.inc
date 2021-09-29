@@ -13,7 +13,7 @@ MACHINE_FEATURES_append = " can pci alsa rtc serial ext2 ext3 vfat usbhost"
 
 # TQ u-boot and kernel
 #
-
+PREFERRED_PROVIDER_imx-sc-firmware ?= "imx-sc-firmware-tq"
 PREFERRED_PROVIDER_virtual/imx-cortexm-demos ?= "tqma8-cortexm-demos"
 
 UBOOT_MAKE_TARGET ?= "all"
