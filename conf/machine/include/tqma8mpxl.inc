@@ -32,9 +32,6 @@ DDR_FIRMWARE_NAME = " \
   lpddr4_pmu_train_2d_imem_202006.bin \
 "
 
-# Set imx-mkimage boot target
-IMXBOOT_TARGETS ??= "flash_spl_uboot"
-
 LOADADDR = ""
 UBOOT_SUFFIX = "bin"
 UBOOT_MAKE_TARGET = ""

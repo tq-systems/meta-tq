@@ -32,7 +32,7 @@ DDR_FIRMWARE_NAME = "\
 "
 
 # Set imx-mkimage boot target
-IMXBOOT_TARGETS ??= "flash_spl_uboot"
+IMXBOOT_TARGETS ?= "flash_spl_uboot"
 
 LOADADDR = ""
 UBOOT_SUFFIX = "bin"

@@ -27,7 +27,7 @@ SPL_BINARY = "spl/u-boot-spl.bin"
 DDR_FIRMWARE_NAME = "lpddr4_pmu_train_1d_imem.bin lpddr4_pmu_train_1d_dmem.bin lpddr4_pmu_train_2d_imem.bin lpddr4_pmu_train_2d_dmem.bin"
 
 # Set imx-mkimage boot target
-IMXBOOT_TARGETS ??= "flash_spl_uboot"
+IMXBOOT_TARGETS ?= "flash_spl_uboot"
 IMX_BOOT_SOC_TARGET = "iMX8MN"
 
 ATF_PLATFORM = "imx8mn"
