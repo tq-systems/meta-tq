@@ -3,8 +3,6 @@
 # Set u-boot DTB
 UBOOT_DTB_NAME = "imx8mq-mba8mx.dtb"
 
-IMXBOOT_TARGETS ?= "flash_hdmi_spl_uboot flash_spl_uboot "
-
 BOARD_DEVICETREE_FILES = "\
     imx8mq-mba8mx.dtb \
     imx8mq-mba8mx-hdmi.dtb \
@@ -31,6 +29,8 @@ IMAGE_BOOT_FILES += " \
     hello_world.bin \
     rpmsg_lite_pingpong_rtos_linux_remote.bin \
 "
+
+IMXBOOT_TARGETS ?= "flash_hdmi_spl_uboot flash_spl_uboot"
 
 WKS_FILE_DEPENDS_append = "\
 	tqma8-cortexm-demos \
