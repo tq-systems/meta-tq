@@ -7,6 +7,8 @@ MACHINE_EXTRA_RRECOMMENDS += " kernel-modules kernel-devicetree"
 
 PREFERRED_PROVIDER_u-boot-fw-utils_mx8 ?= "u-boot-fw-utils-imx-tq"
 
+PREFERRED_PROVIDER_imx-boot ?= "imx-boot-tq"
+
 PREFERRED_PROVIDER_virtual/kernel_mx8 ?= "linux-imx-tq"
 KERNEL_IMAGETYPE = "Image"
 
