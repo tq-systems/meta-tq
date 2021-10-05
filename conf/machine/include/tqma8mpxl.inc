@@ -12,11 +12,11 @@ LOADADDR = ""
 MACHINE_FEATURES_append = " pci alsa usbhost can rtc serial ext2 ext3 vfat"
 
 # Set DDR FIRMWARE
-DDR_FIRMWARE_NAME = " \
-  lpddr4_pmu_train_1d_dmem_202006.bin \
-  lpddr4_pmu_train_1d_imem_202006.bin \
-  lpddr4_pmu_train_2d_dmem_202006.bin \
-  lpddr4_pmu_train_2d_imem_202006.bin \
+DDR_FIRMWARE_NAME = "\
+    lpddr4_pmu_train_1d_dmem_202006.bin \
+    lpddr4_pmu_train_1d_imem_202006.bin \
+    lpddr4_pmu_train_2d_dmem_202006.bin \
+    lpddr4_pmu_train_2d_imem_202006.bin \
 "
 
 LOADADDR = ""
@@ -46,13 +46,13 @@ IMAGE_INSTALL_remove = " packagegroup-fsl-optee-imx"
 EXTRA_IMAGEDEPENDS += "u-boot imx-boot"
 
 WKS_FILE_DEPENDS = "\
-	mtools-native \
-	dosfstools-native \
-	parted-native \
-	virtual/kernel \
-	virtual/bootloader \
-	imx-boot \
-	"
+    mtools-native \
+    dosfstools-native \
+    parted-native \
+    virtual/kernel \
+    virtual/bootloader \
+    imx-boot \
+"
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale
