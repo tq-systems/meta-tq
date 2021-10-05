@@ -9,7 +9,7 @@ LOADADDR = ""
 
 # Machine specific options
 #
-MACHINE_FEATURES_append = " can pci alsa rtc serial ext2 ext3 vfat usbhost"
+MACHINE_FEATURES_append = " can pci"
 
 # TQ u-boot and kernel
 #

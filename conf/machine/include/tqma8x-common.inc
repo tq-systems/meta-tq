@@ -9,7 +9,7 @@ LOADADDR = ""
 
 # Machine specific options
 #
-MACHINE_FEATURES_append = " can pci alsa rtc serial ext2 ext3 vfat usbhost"
+MACHINE_FEATURES_append = " can pci"
 
 PREFERRED_PROVIDER_virtual/imx-cortexm-demos = "tqma8-cortexm-demos"
 PREFERRED_PROVIDER_imx-sc-firmware ?= "imx-sc-firmware-tq"

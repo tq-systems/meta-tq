@@ -9,7 +9,7 @@ LOADADDR = ""
 
 # Machine specific options
 #
-MACHINE_FEATURES_append = " pci alsa"
+MACHINE_FEATURES_append = " pci"
 
 # Set DDR FIRMWARE
 DDR_FIRMWARE_NAME = "\

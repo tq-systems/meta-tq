@@ -9,7 +9,7 @@ LOADADDR = ""
 
 # Machine specific options
 #
-MACHINE_FEATURES_append = " pci alsa usbhost can rtc serial ext2 ext3 vfat"
+MACHINE_FEATURES_append = " pci can"
 
 # Set DDR FIRMWARE
 DDR_FIRMWARE_NAME = "\
