@@ -1,4 +1,4 @@
-DESCRIPTION = "tools needed to support differnt types if file systems and storege"
+DESCRIPTION = "tools needed to support different types of file systems and storage"
 LICENSE = "MIT"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
@@ -6,7 +6,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 
-# needed for Rootfs on QSPI
+# needed for Rootfs on [Q]SPI
 MTD_UTILS_PACKAGES = "\
     mtd-utils \
     mtd-utils-misc \
@@ -14,12 +14,9 @@ MTD_UTILS_PACKAGES = "\
     mtd-utils-ubifs \
 "
 
-IMAGE_INSTALL_append = "\
-    ${@bb.utils.contains('MACHINE_FEATURES', 'ubi', ' ${MTD_UTILS_PACKAGES}', '', d)} \
-"
-
 RDEPENDS_${PN} = "\
     parted \
     e2fsprogs \
     ${@bb.utils.contains('BBFILE_COLLECTIONS', 'filesystems-layer', ' f2fs-tools', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'ubi', ' ${MTD_UTILS_PACKAGES}', '', d)} \
 "
