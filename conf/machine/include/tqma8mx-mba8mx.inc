@@ -37,3 +37,4 @@ WKS_FILE_DEPENDS_append = "\
 "
 
 MACHINE_FEATURES_append = " wifi camera"
+MACHINE_EXTRA_RRECOMMENDS_append = " linux-firmware-ath10k"
