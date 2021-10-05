@@ -17,6 +17,8 @@ SPL_BINARY = "spl/u-boot-spl.bin"
 PREFERRED_PROVIDER_u-boot_mx8 ?= "u-boot-imx-tq"
 PREFERRED_PROVIDER_virtual/bootloader_mx8 ?= "u-boot-imx-tq"
 
+PREFERRED_PROVIDER_virtual/imx-cortexm-demos ?= "tqma8-cortexm-demos"
+
 # provide dt name handling to prevent a lot of copy and paste
 # in kernel prefix where to find dtb
 
