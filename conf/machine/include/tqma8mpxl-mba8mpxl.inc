@@ -38,5 +38,5 @@ IMAGE_BOOT_FILES += "\
 "
 
 WKS_FILE_DEPENDS_append = "\
-    tqma8-cortexm-demos \
+    virtual/imx-cortexm-demos \
 "
