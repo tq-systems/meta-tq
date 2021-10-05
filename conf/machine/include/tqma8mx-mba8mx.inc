@@ -33,7 +33,7 @@ IMAGE_BOOT_FILES += "\
 IMXBOOT_TARGETS ?= "flash_hdmi_spl_uboot flash_spl_uboot"
 
 WKS_FILE_DEPENDS_append = "\
-    tqma8-cortexm-demos \
+    virtual/imx-cortexm-demos \
 "
 
 MACHINE_FEATURES_append = " wifi camera"
