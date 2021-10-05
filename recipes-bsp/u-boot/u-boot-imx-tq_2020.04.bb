@@ -8,7 +8,7 @@ require recipes-bsp/u-boot/u-boot.inc
 inherit pythonnative
 
 PROVIDES += "u-boot"
-DEPENDS_append = " python dtc-native bc-native"
+DEPENDS_append = " dtc-native bc-native"
 
 BOOT_TOOLS = "imx-boot-tools"
 
