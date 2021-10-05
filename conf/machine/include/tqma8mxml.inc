@@ -19,8 +19,6 @@ DDR_FIRMWARE_NAME = "\
     lpddr4_pmu_train_2d_dmem.bin \
 "
 
-IMX_BOOT_SOC_TARGET = "iMX8MM"
-
 ATF_PLATFORM = "imx8mm"
 
 LOADADDR = ""
@@ -33,6 +31,7 @@ IMAGE_BOOTLOADER = "imx-boot"
 
 # for sdcard + wic image rule
 IMX_BOOT_SEEK = "33"
+IMX_BOOT_SOC_TARGET = "iMX8MM"
 
 # TODO:
 # optee rule filters for matching machine names and expects at least imx for MX8
@@ -47,13 +46,13 @@ IMAGE_INSTALL_remove = " packagegroup-fsl-optee-imx"
 EXTRA_IMAGEDEPENDS += "u-boot imx-boot"
 
 WKS_FILE_DEPENDS = "\
-	mtools-native \
-	dosfstools-native \
-	parted-native \
-	virtual/kernel \
-	virtual/bootloader \
-	imx-boot \
-	"
+    mtools-native \
+    dosfstools-native \
+    parted-native \
+    virtual/kernel \
+    virtual/bootloader \
+    imx-boot \
+"
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale
