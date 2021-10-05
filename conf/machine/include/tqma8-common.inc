@@ -1,7 +1,19 @@
-# Common definitions for all TQ-Group TQMa8x / TQMa8xx / TQMa8Mx /
-# TQMa8MxML / TQMa8MxNL modules
+# Common definitions for all TQ-Group TQMa8x / TQMa8Xx / TQMa8Mx /
+# TQMa8MxML / TQMa8MxNL / TQMa8MPxL modules
+
+require conf/machine/include/tqmxx.inc
+
+MACHINE_EXTRA_RRECOMMENDS += " kernel-modules kernel-devicetree"
 
 PREFERRED_PROVIDER_u-boot-fw-utils_mx8 ?= "u-boot-fw-utils-imx-tq"
+
+PREFERRED_PROVIDER_virtual/kernel_mx8 ?= "linux-imx-tq"
+KERNEL_IMAGETYPE = "Image"
+
+SPL_BINARY = "spl/u-boot-spl.bin"
+
+PREFERRED_PROVIDER_u-boot_mx8 ?= "u-boot-imx-tq"
+PREFERRED_PROVIDER_virtual/bootloader_mx8 ?= "u-boot-imx-tq"
 
 # provide dt name handling to prevent a lot of copy and paste
 # in kernel prefix where to find dtb
@@ -15,3 +27,8 @@ python () {
     dt_list =  [dt_prefix % i for i in dt_list]
     d.setVar("KERNEL_DEVICETREE", ' '.join(dt_list))
 }
+
+# Do not update fstab file when using wic images
+WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
+
+WKS_FILE ?= "tqma8-sdimg.wks.in"

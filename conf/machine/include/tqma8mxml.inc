@@ -9,19 +9,7 @@ LOADADDR = ""
 
 # Machine specific options
 #
-MACHINE_EXTRA_RRECOMMENDS += " kernel-modules kernel-devicetree"
 MACHINE_FEATURES_append = " pci alsa"
-
-# TQ u-boot and kernel
-#
-require conf/machine/include/tqmxx.inc
-
-PREFERRED_PROVIDER_virtual/kernel_tqma8mxml ?= "linux-imx-tq"
-KERNEL_IMAGETYPE = "Image"
-
-PREFERRED_PROVIDER_u-boot_tqma8mxml ?= "u-boot-imx-tq"
-PREFERRED_PROVIDER_virtual/bootloader_tqma8mxml ?= "u-boot-imx-tq"
-SPL_BINARY = "spl/u-boot-spl.bin"
 
 # Set DDR FIRMWARE
 DDR_FIRMWARE_NAME = "\
@@ -59,14 +47,6 @@ IMAGE_INSTALL_remove = " packagegroup-fsl-optee-imx"
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "u-boot imx-boot"
-
-# need to have the kernel modules in rootfs
-MACHINE_EXTRA_RRECOMMENDS_append = " kernel-modules"
-
-# Do not update fstab file when using wic images
-WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
-
-WKS_FILE ?= "tqma8-sdimg.wks.in"
 
 WKS_FILE_DEPENDS = "\
 	mtools-native \
