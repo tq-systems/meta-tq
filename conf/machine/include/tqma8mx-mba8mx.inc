@@ -21,11 +21,11 @@ require conf/machine/include/tqma8-common.inc
 SERIAL_CONSOLES = "115200;ttymxc2"
 
 IMAGE_BOOT_FILES ?= "\
-	${KERNEL_IMAGETYPE} \
-	${BOARD_DEVICETREE_FILES} \
-	"
+    ${KERNEL_IMAGETYPE} \
+    ${BOARD_DEVICETREE_FILES} \
+"
 
-IMAGE_BOOT_FILES += " \
+IMAGE_BOOT_FILES += "\
     hello_world.bin \
     rpmsg_lite_pingpong_rtos_linux_remote.bin \
 "
@@ -33,7 +33,7 @@ IMAGE_BOOT_FILES += " \
 IMXBOOT_TARGETS ?= "flash_hdmi_spl_uboot flash_spl_uboot"
 
 WKS_FILE_DEPENDS_append = "\
-	tqma8-cortexm-demos \
-	"
+    tqma8-cortexm-demos \
+"
 
 MACHINE_FEATURES_append = " wifi camera"
