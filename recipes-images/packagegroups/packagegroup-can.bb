@@ -1,4 +1,4 @@
-DESCRIPTION = "tools needed for network support / testing"
+DESCRIPTION = "tools needed for CAN support / testing"
 LICENSE = "MIT"
 
 inherit packagegroup
