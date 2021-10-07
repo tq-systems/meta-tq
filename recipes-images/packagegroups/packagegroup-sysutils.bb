@@ -4,5 +4,6 @@ LICENSE = "MIT"
 inherit packagegroup
 
 RDEPENDS_${PN} = "\
+    u-boot-fw-utils \
     rng-tools \
 "
