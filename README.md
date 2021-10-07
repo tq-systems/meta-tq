@@ -5,7 +5,7 @@ This README file contains information on the content of the meta-dumpling layer.
 This layer provides recipes to generate images to help evaluation of
 TQ-Systems CPU modules and Starterkits. This layer additionally contains
 optional fixes and extensions for other layers as far as needed / useful
-for TQ-Systems SOM.
+for TQ-Systems SOM and some initial example distro support.
 
 Please see the corresponding sections below for details.
 
@@ -56,7 +56,7 @@ other layers needed. e.g.:
 ```
 BSPDIR := "${@os.path.abspath(os.path.dirname(d.getVar('FILE', True)) + '/../..')}"
 
-  BBLAYERS ?= " \
+  BBLAYERS ?= "\
 ...
     ${BSPDIR}/sources/meta-tq \
     ${BSPDIR}/sources/poky/meta \
@@ -72,9 +72,10 @@ TQ-Systems SOM:
 * tq-image-small (based on poky core-image-minimal)
 * tq-image-generic (based on poky core-image-minimal)
 * tq-image-weston (based on poky core-image-weston)
+* tq-image-qt5 (based on tq-image-weston)
 
 **Attention:** These recipes can be used as a starting point for own customization.
-Because of the intended usage, a lot for debug and test tools are included.
+Because of the intended usage, a lot debug and test tools are included.
 These packages should not go into a production image. Depending on the actual
 project, security must be taken in account.
 
@@ -83,7 +84,22 @@ It is recommended to use the [Format_Guidelines](https://www.openembedded.org/wi
 ### 3. Distros
 
 The meta-dumpling layer defines distros as starting point for own customization.
+These distros are also available for usage together with vendor based kernel /
+vendor hardware support layer.
 
-* spaetzle (small image for nand flash)
-* dumpling
-* dumpling-wayland (graphics support)
+| distro name          | purpose                                                              |
+| -------------------- | -------------------------------------------------------------------- |
+| spaetzle             | small size for usage with \[Q\]SPI-NOR flash                         |
+| spaetzle-nxp         | small size for usage with \[Q\]SPI-NOR flash with NXP / FSLC kernel  |
+| spaetzle-ti          | small size for usage with \[Q\]SPI-NOR flash with TI kernel          |
+| dumpling             | systemd, features depends on machine settings                        |
+| dumpling-nxp         | systemd, features depends on machine settings with NXP / FSLC kernel |
+| dumpling-ti          | systemd, features depends on machine settings with TI kernel         |
+| dumpling-wayland     | like dumpling, additional wayland / weston                           |
+| dumpling-wayland-nxp | like dumpling-nxp, additional wayland / weston                       |
+| dumpling-wayland-ti  | like dumpling-ti, additional wayland / weston                       |
+
+**Attention:** These distro configs can be used as a starting point for own
+customization. Because of the intended usage, they are focused on demonstration.
+These configs should not go into a production usage without thorough review.
+Depending on the actual project, security must be taken in account.
