@@ -5,6 +5,29 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+### Added
+
+* port from zeus-tqma8
+  * camera package group
+  * camera support recipes
+  * wifi package group
+  * psplash branding and systemd support
+  * add recipe for small sized image capable for UBI
+  * add recipe for qt5 demo image
+* add distro support
+  * small / normal and wayland based
+  * support for building with vendor layers
+
+### Fixed
+
+* allow kmscube to run in background
+* packagegroup-fsutils: fix ubi support
+* build fixes for musl and UTF8 / unicode
+
+### Changed
+
+* switch to hardknott
+
 ## zeus.TQMLS1028A.BSP.SW.0105
 
 ### Fixed
