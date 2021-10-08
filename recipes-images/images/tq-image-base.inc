@@ -2,7 +2,7 @@ LICENSE = "MIT"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-IMAGE_INSTALL += "\
+IMAGE_INSTALL_append = "\
     packagegroup-base \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' packagegroup-systemd', '', d)} \
     packagegroup-hwutils \

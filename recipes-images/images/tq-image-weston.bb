@@ -26,14 +26,10 @@ THISIMAGE_GSTREAMER_PLUGINS ?= "\
     gstreamer1.0-plugins-bad-meta \
 "
 
-THISIMAGE_GSTREAMER_PLUGINS_use-nxp-bsp ?= "\
-    ${MACHINE_GSTREAMER_1_0_PLUGIN} \
-"
-
-CORE_IMAGE_EXTRA_INSTALL += " \
+IMAGE_INSTALL_append = " \
     weston-examples \
     ${THISIMAGE_GSTREAMER_PLUGINS} \
 "
 
-CORE_IMAGE_EXTRA_INSTALL_append_imxgpu3d = " glmark2"
-CORE_IMAGE_EXTRA_INSTALL_append_imxdrm   = " kmscube"
+IMAGE_INSTALL_append_imxgpu3d = " glmark2"
+IMAGE_INSTALL_append_imxdrm   = " kmscube"
