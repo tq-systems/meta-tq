@@ -2,6 +2,8 @@
 
 This README contains some useful information for TQMa8XxS on MB-SMARC-2
 
+[[_TOC_]]
+
 ## Variants
 
 * TQMa8XQPS REV.020x
@@ -25,7 +27,7 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Supported Features
 
-### U-Boot:
+### U-Boot
 
 * RAM configs:
   * 2GB / TQMa8X\[D,Q\]PS
@@ -61,7 +63,7 @@ See top level README.md for configurations usable as MACHINE.
 * CPU variants i.MX8DX/i.MX8DXP cannot be detected automatically from hardware
   (limitation of cpu driver / SCU firmware, currently fixed with U-Boot Kconfig)
 
-### Linux:
+### Linux
 
 * RAM configs:
   * 2GB / TQMa8X\[D,Q\]PS
@@ -153,29 +155,33 @@ _Note:_
 
 * DIP S3 is for Boot Mode.
 
-_SD Card_
+### SD Card
 
-| DIP (S3) | 1 | 2 | 3 | 4 |
-| -------- | - | - | - | - |
-| Position | 0 | 1 | 1 | 0 |
+| DIP S3  | 1 | 2 | 3 | 4 |
+| ------- | - | - | - | - |
+| ON      |   | x | x |   |
+| OFF     | x |   |   | x |
 
-_e-MMC_
+### e-MMC
 
-| DIP (S3) | 1 | 2 | 3 | 4 |
-| -------- | - | - | - | - |
-| Position | 1 | 0 | 0 | 0 |
+| DIP S3  | 1 | 2 | 3 | 4 |
+| ------- | - | - | - | - |
+| ON      | x |   |   |   |
+| OFF     |   | x | x | x |
 
-_QSPI_
+### QSPI
 
-| DIP (S3) | 1 | 2 | 3 | 4 |
-| -------- | - | - | - | - |
-| Position | 1 | 1 | 0 | 0 |
+| DIP S3  | 1 | 2 | 3 | 4 |
+| ------- | - | - | - | - |
+| ON      | x | x |   |   |
+| OFF     |   |   | x | x |
 
-_Serial Downloader_
+### Serial Downloader
 
-| DIP (S3) | 1 | 2 | 3 | 4 |
-| -------- | - | - | - | - |
-| Position | 0 | 0 | 0 | 1 |
+| DIP S3  | 1 | 2 | 3 | 4 |
+| ------- | - | - | - | - |
+| ON      |   |   |   | x |
+| OFF     | x | x | x |   |
 
 ## Boot device initialisation
 
@@ -299,7 +305,9 @@ To support older REV.020x modules, use the respective machine config. This autom
 - builds the correct bootloader
 - build devicetrees correct device trees (containing `r0200` in its name)
 
-## Test sleepmode and wakeup
+## Howto
+
+### Test sleepmode and wakeup
 
 Use rtc1 (RTC in CPU SNVS domain) to wakeup after 20 seconds:
 
@@ -311,7 +319,7 @@ echo +20 > /sys/class/rtc//${RTC}/wakealarm
 echo mem > /sys/power/state
 ```
 
-## Display Support
+### Display Support
 
 Each Display can be used on its own by using the corresponding device tree.
 To allow reusage, the support for each display is separated in a dtsi fragment.
@@ -325,9 +333,9 @@ To allow reusage, the support for each display is separated in a dtsi fragment.
 Please note manual for backlight power supply. For MB-SMARC-2 you can bridge
 X14 pin 1 and 2 to provide 12V.
 
-## CAN
+### CAN
 
-### Troubleshooting
+#### Troubleshooting
 
 In case of problems first check the bus termination:
 
@@ -336,7 +344,7 @@ In case of problems first check the bus termination:
 | CAN0      | X29       | `TERM CAN0` |
 | CAN1      | X30       | `TERM CAN1` |
 
-### Enable without CAN-FD
+#### Enable without CAN-FD
 
 CAN1/2 should be enabled and configured by default when using with MB-SMARC-2
 and meta-tq / systemd
@@ -346,7 +354,7 @@ CANIF="can[0,1]"
 ip link set ${CANIF} up type can bitrate 500000 fd off
 ```
 
-### Enable CAN-FD
+#### Enable CAN-FD
 
 To enable CAN-FD the following command can be used, if using a carrier board with
 FD capable transceiver:

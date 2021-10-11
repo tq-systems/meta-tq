@@ -2,6 +2,8 @@
 
 This README contains some useful information for TQMa8Mx on MBa8Mx
 
+[[_TOC_]]
+
 ## Variants
 
 * TQMa8MQ / TQMa8MD / TQMa8MQL REV.020x 1GiB LPDDR4
@@ -18,7 +20,7 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Supported Features
 
-### U-Boot:
+### U-Boot
 
 _MBa8x HW Rev.020x/30x only / TQMa8Mx HW Rev.020x only_
 
@@ -52,7 +54,7 @@ _MBa8x HW Rev.020x/30x only / TQMa8Mx HW Rev.020x only_
   * env settings for starting from TCM
   * examples with UART4 as debug console
 
-### Linux:
+### Linux
 
 _MBa8x HW Rev.020x/30x only_
 
@@ -102,7 +104,7 @@ _MBa8x HW Rev.020x/30x only_
   * Gray with Vision Components GmbH camera (Sensor OV9281)
   * Raw Bayer with Vision Components GmbH camera (Sensor IMX327)
 
-## TODO:
+## TODO
 
 * MIKRO Bus
 * SIM
@@ -166,16 +168,18 @@ _Note:_
 * S10: Board config
 * X means position of DIP, - means don't care
 
-_Board config_
+### Board config
 
 | DIP S10 | 1 | 2 | 3 | 4 |
 | ------- | - | - | - | - |
 | ON      |   |   |   |   |
 | OFF     | X | X | X | X |
 
-_BOOT\_MODE_
+### BOOT\_MODE
 
-* Boot from Fuses (needs boot fuses to be set) - 00b
+#### Boot from Fuses (needs boot fuses to be set)
+
+BOOT\_MODE: 00b
 
 | BOOT\_MODE |   | 0 | 1 |   |
 | ---------- | - | - | - | - |
@@ -183,7 +187,9 @@ _BOOT\_MODE_
 | ON         |   | X | X |   |
 | OFF        | - |   |   | - |
 
-* Serial Downloader - 01b
+#### Serial Downloader
+
+BOOT\_MODE: 01b
 
 | BOOT\_MODE |   | 0 | 1 |   |
 | ---------- | - | - | - | - |
@@ -191,7 +197,9 @@ _BOOT\_MODE_
 | ON         |   |   | X |   |
 | OFF        | - | X |   | - |
 
-* Internal Boot (no boot fuses set, use boot config pins) - 10b
+#### Internal Boot (no boot fuses set, use boot config pins)
+
+BOOT\_MODE: 10b
 
 | BOOT\_MODE |   | 0 | 1 |   |
 | ---------- | - | - | - | - |
@@ -199,20 +207,20 @@ _BOOT\_MODE_
 | ON         |   | X |   |   |
 | OFF        | - |   | X | - |
 
-_SD Card_
+##### SD Card
 
 BOOT\_MODE: Internal Boot
 
 *Attention:* Differences from MBa8Mx REV.020x to MBa8Mx REV.030x
 
-MBa8Mx REV.020x:
+###### MBa8Mx REV.020x:
 
-```
-	S6			S5			S9
-DIP	1 2 3 4 5 6 7 8		1 2 3 4 5 6 7 8		1 2 3 4
-ON	X X   X   X X X		X   X X   X X X		  X    
-OFF	    X   X      		  X     X      		-   X -
-```
+|         |  S6  |     |      |      |      |      |      |      | S5 |     |     |     |     |     |     |     |     | S9 |     |     |     |     |
+| ------- | :--: | :-: | :--: | :--: | :--: | :--: | :--: | :--: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: |
+| BOOTCFG |  8   |  9  |  10  |  11  |  12  |  13  |  14  |  15  |    |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |    |     |     |     |     |
+| DIP     |  1   |  2  |  3   |  4   |  5   |  6   |  7   |  8   |    |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |  3  |  4  |
+| ON      |  x   |  x  |      |  x   |      |  x   |  x   |  x   |    |  x  |     |  x  |  x  |     |  x  |  x  |  x  |    |     |  x  |     |     |
+| OFF     |      |     |  x   |      |  x   |      |      |      |    |     |  x  |     |     |  x  |     |     |     |    |  -  |     |  x  |  -  |
 
 * BOOT_CFG\[0\] - 0 - reserved
 * BOOT_CFG\[3:1\] - 001 - SD speed mode (SDR25)
@@ -224,14 +232,14 @@ OFF	    X   X      		  X     X      		-   X -
 * BOOT_CFG\[\11:10\] - 01 - USDHC2
 * BOOT_CFG\[\15:12\] - 0001 - SD Card
 
-MBa8Mx REV.030x:
+###### MBa8Mx REV.030x:
 
-```
-	S6			S5			S9
-DIP	1 2 3 4 5 6 7 8		1 2 3 4 5 6 7 8		1 2 3 4
-ON	X     X   X X X		X   X X   X X X		  X    
-OFF	  X X   X      		  X     X      		-   X -
-```
+|         |  S6  |     |      |      |      |      |      |      | S5 |     |     |     |     |     |     |     |     | S9 |     |     |     |     |
+| ------- | :--: | :-: | :--: | :--: | :--: | :--: | :--: | :--: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: |
+| BOOTCFG |  8   |  9  |  10  |  11  |  12  |  13  |  14  |  15  |    |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |    |     |     |     |     |
+| DIP     |  1   |  2  |  3   |  4   |  5   |  6   |  7   |  8   |    |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |  3  |  4  |
+| ON      |  x   |     |      |  x   |      |  x   |  x   |  x   |    |  x  |     |  x  |  x  |     |  x  |  x  |  x  |    |     |  x  |     |     |
+| OFF     |      |  x  |  x   |      |  x   |      |      |      |    |     |  x  |     |     |  x  |     |     |     |    |  -  |     |  x  |  -  |
 
 * BOOT_CFG\[0\] - 0 - reserved
 * BOOT_CFG\[3:1\] - 001 - SD speed mode (SDR25)
@@ -243,16 +251,16 @@ OFF	  X X   X      		  X     X      		-   X -
 * BOOT_CFG\[\11:10\] - 01 - USDHC2
 * BOOT_CFG\[\15:12\] - 0001 - SD Card
 
-_e-MMC_
+##### e-MMC
 
 BOOT\_MODE: Internal Boot
 
-```
-	S6			S5			S9
-DIP	1 2 3 4 5 6 7 8		1 2 3 4 5 6 7 8		1 2 3 4
-ON	X X X X X   X X		X   X X X   X X		  X    
-OFF	          X    		  X       X    		-   X -
-```
+|         |  S6  |     |      |      |      |      |      |      | S5 |     |     |     |     |     |     |     |     | S9 |     |     |     |     |
+| ------- | :--: | :-: | :--: | :--: | :--: | :--: | :--: | :--: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: |
+| BOOTCFG |  8   |  9  |  10  |  11  |  12  |  13  |  14  |  15  |    |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |    |     |     |     |     |
+| DIP     |  1   |  2  |  3   |  4   |  5   |  6   |  7   |  8   |    |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |  3  |  4  |
+| ON      |  x   |  x  |  x   |  x   |  x   |      |  x   |  x   |    |  x  |     |  x  |  x  |  x  |     |  x  |  x  |    |     |  x  |     |     |
+| OFF     |      |     |      |      |      |  x   |      |      |    |     |  x  |     |     |     |  x  |     |     |    |  -  |     |  x  |  -  |
 
 * BOOT_CFG\[0\] - 0 - USDHC2 IO VOLTAGE: 3.3 V
 * BOOT_CFG\[1\] - 1 - USDHC1 IO VOLTAGE: 1.8 V

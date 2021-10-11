@@ -2,6 +2,8 @@
 
 This README contains some useful information for TQMa8x on MBa8x
 
+[[_TOC_]]
+
 ## Variants
 
 * TQMa8QM 4 GB RAM REV.020x / 0102 and newer
@@ -24,7 +26,7 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Supported Features
 
-### U-Boot:
+### U-Boot
 
 * RAM configs:
   * 4GB / TQMa8QM
@@ -59,7 +61,7 @@ See top level README.md for configurations usable as MACHINE.
 * temperature grade
   * SCU limitation
 
-### Linux:
+### Linux
 
 * RAM configs:
   * 4GB / TQMa8QM
@@ -157,32 +159,26 @@ _Note:_
 * S1 is for Boot Mode.
 * X means position of DIP, - means don't care
 
-_SD Card_
+### SD Card
 
-```
-BootMode	5 4 3 2 1 0
+| DIP S1  | 5 | 4 | 3 | 2 | 1 | 0 |
+| ------- | - | - | - | - | - | - |
+| ON      |   |   | x | x |   |   |
+| OFF     | x | x |   |   | x | x |
 
-OFF 		X X     X X
-ON 		    X X
-```
+### e-MMC
 
-_e-MMC_
+| DIP S1  | 5 | 4 | 3 | 2 | 1 | 0 |
+| ------- | - | - | - | - | - | - |
+| ON      |   |   | x |   |   |   |
+| OFF     | x | x |   | x | x | x |
 
-```
-BootMode	5 4 3 2 1 0
+### FLEXSPI
 
-OFF 		X X   X X X
-ON 		    X
-```
-
-_FLEXSPI_
-
-```
-BootMode	5 4 3 2 1 0
-
-OFF 		X         X
-ON 		  X X X X
-```
+| DIP S1  | 5 | 4 | 3 | 2 | 1 | 0 |
+| ------- | - | - | - | - | - | - |
+| ON      |   | x | x | x | x |   |
+| OFF     | x |   |   |   |   | x |
 
 ## Boot device initialisation
 
@@ -298,8 +294,9 @@ with UUU tool:
 ```
 sudo uuu -b spl imx-boot-<machine>-mfgtool.bin
 ```
+## Howto
 
-## Test sleepmode and wakeup
+### Test sleepmode and wakeup
 
 Use rtc1 (RTC in CPU SNVS domain) to wakeup after 20 seconds:
 
@@ -318,7 +315,7 @@ afterwards
 echo mem > /sys/power/state
 ```
 
-## Display Support
+### Display Support
 
 Each Display output could be activated independend by using the corresponding device tree.
 
@@ -328,9 +325,9 @@ Each Display output could be activated independend by using the corresponding de
 | LVDS1     | imx8qm-mba8x-lvds1-tm070jvhg33.dtb | Tianma Display |
 | DP        | imx8qm-mba8x-dp.dtb                | Displayport    |
 
-## CAN
+### CAN
 
-### Troubleshooting
+#### Troubleshooting
 
 In case of problems first check the bus termination:
 
@@ -339,7 +336,7 @@ In case of problems first check the bus termination:
 | CAN0      |           | S10 |
 | CAN1      |           | S11 |
 
-### Enable without CAN-FD
+#### Enable without CAN-FD
 
 CAN1/2 should be enabled and configured by default when using with MB-SMARC-2
 and meta-tq / systemd
@@ -349,7 +346,7 @@ CANIF="can[0,1]"
 ip link set ${CANIF} up type can bitrate 500000 fd off
 ```
 
-### Enable CAN-FD
+#### Enable CAN-FD
 
 To enable CAN-FD the following command can be used, if using a carrier board with
 FD capable transceiver:

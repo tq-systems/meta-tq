@@ -2,6 +2,8 @@
 
 This README contains some useful information for TQMa8MxNL on MBa8Mx REV.030x
 
+[[_TOC_]]
+
 ## Variants
 
 * TQMa8MQNL REV.020x
@@ -17,7 +19,7 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Supported Features
 
-### U-Boot:
+### U-Boot
 
 _MBa8x HW Rev.030x only_
 
@@ -59,7 +61,7 @@ _MBa8x HW Rev.030x only_
 * RAM 2 GB
 * CPU variants i.MX8MNS
 
-### Linux:
+### Linux
 
 * RAM configs 1 GiB
 * CPU variants:
@@ -103,7 +105,7 @@ _MBa8x HW Rev.030x only_
   * Gray with Vision Components GmbH camera (Sensor OV9281)
   * Raw Bayer with Vision Components GmbH camera (Sensor IMX327)
 
-## TODO:
+## TODO
 
 * Audio
   * Audio codec mic in not tested
@@ -172,14 +174,14 @@ _Note:_
 * S10: Board config
 * X means position of DIP, - means don't care
 
-_Board config_
+### Board config
 
 | DIP S10  | 1 | 2 | 3 | 4 |
 | -------- | - | - | - | - |
 | ON       | x | x | x | x |
 | OFF      |   |   |   |   |
 
-_BOOT\_MODE_
+### BOOT\_MODE
 
 BOOT Mode \[3:0\] is mapped to the following DIP Switches:
 
@@ -188,65 +190,50 @@ BOOT Mode \[3:0\] is mapped to the following DIP Switches:
 * 1: DIP Switch S9:3 (MBa8Mx, inverted)
 * 0: DIP Switch S9:2 (MBa8Mx, inverted)
 
-Boot from Fuses (needs boot fuses to be set)
+#### Boot from Fuses (needs boot fuses to be set)
 
 BOOT\_MODE: 0000
 
-```
-	BOOT MODE (ADAP)	MBa8Mx
-				S9
-DIP 	3 2			4 3 2 1
-ON 	  X			  X X  
-OFF 	X 			-     -
-```
+| BOOT MODE<br>(ADAP) | 4 | 3 | 2 | 1 | MBa8Mx<br>S9 | 4 | 3 | 2 | 1 |
+| ------------------- | - | - | - | - | ------------ | - | - | - | - |
+| ON                  |   |   | x |   |              |   | x | x |   |
+| OFF                 | - | x |   | - |              | - |   |   | - |
 
-Serial Downloader
+#### Serial Downloader
 
 BOOT\_MODE: 0001
 
-```
-	BOOT MODE (ADAP)	MBa8Mx
-				S9
-DIP 	3 2			4 3 2 1
-ON 	  X			  X    
-OFF 	X  			-   X -
-```
+| BOOT MODE<br>(ADAP) | 4 | 3 | 2 | 1 | MBa8Mx<br>S9 | 4 | 3 | 2 | 1 |
+| ------------------- | - | - | - | - | ------------ | - | - | - | - |
+| ON                  |   |   | x |   |              |   | x |   |   |
+| OFF                 | - | x |   | - |              | - |   | x | - |
 
-e-MMC (USDHC3)
+#### e-MMC (USDHC3)
 
 BOOT\_MODE: 0010
 
-```
-	BOOT MODE (ADAP)	MBa8Mx
-				S9
-DIP 	3 2			4 3 2 1
-ON 	  X			    X  
-OFF 	X  			- X  -
-```
+| BOOT MODE<br>(ADAP) | 4 | 3 | 2 | 1 | MBa8Mx<br>S9 | 4 | 3 | 2 | 1 |
+| ------------------- | - | - | - | - | ------------ | - | - | - | - |
+| ON                  |   |   | x |   |              |   |   | x |   |
+| OFF                 | - | x |   | - |              | - | x |   | - |
 
-SD Card (USDHC2)
+#### SD Card (USDHC2)
 
 BOOT\_MODE: 0011
 
-```
-	BOOT MODE (ADAP)	MBa8Mx
-				S9
-DIP 	3 2			4 3 2 1
-ON 	  X			       
-OFF 	X  			- X X -
-```
+| BOOT MODE<br>(ADAP) | 4 | 3 | 2 | 1 | MBa8Mx<br>S9 | 4 | 3 | 2 | 1 |
+| ------------------- | - | - | - | - | ------------ | - | - | - | - |
+| ON                  |   |   | x |   |              |   |   |   |   |
+| OFF                 | - | x |   | - |              | - | x | x | - |
 
-FlexSPI / 3B Read
+#### FlexSPI / 3B Read
 
 BOOT\_MODE: 0110
 
-```
-	BOOT MODE (ADAP)	MBa8Mx
-				S9
-DIP 	3 2			4 3 2 1
-ON 	   			    X  
-OFF 	X X			- X   -
-```
+| BOOT MODE<br>(ADAP) | 4 | 3 | 2 | 1 | MBa8Mx<br>S9 | 4 | 3 | 2 | 1 |
+| ------------------- | - | - | - | - | ------------ | - | - | - | - |
+| ON                  |   |   |   |   |              |   |   | x |   |
+| OFF                 | - | x | x | - |              | - | x |   | - |
 
 ## Functional DIP Switches
 

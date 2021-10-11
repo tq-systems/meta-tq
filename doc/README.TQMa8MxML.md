@@ -2,6 +2,8 @@
 
 This README contains some useful information for TQMa8MxML on MBa8Mx REV.030x
 
+[[_TOC_]]
+
 ## Variants
 
 * TQMa8MQML REV.020x
@@ -16,7 +18,7 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Supported Features
 
-### U-Boot:
+### U-Boot
 
 _MBa8x HW Rev.030x only_
 
@@ -56,7 +58,7 @@ _MBa8x HW Rev.030x only_
 
 * CPU variants i.MX8MMD/S and Lite
 
-### Linux:
+### Linux
 
 * RAM configs: 2 GiB
 * CPU
@@ -102,7 +104,7 @@ _MBa8x HW Rev.030x only_
 * PCIe
   * tested with several network cards
 
-## TODO:
+## TODO
 
 * Audio
   * Audio codec mic in not tested
@@ -171,16 +173,18 @@ _Note:_
 * S10: Board config
 * X means position of DIP, - means don't care
 
-_Board config_
+### Board config
 
 | DIP S10  | 1 | 2 | 3 | 4 |
 | -------- | - | - | - | - |
 | ON       | x | x |   |   |
 | OFF      |   |   | x | x |
 
-_BOOT\_MODE_
+### BOOT\_MODE
 
-* Boot from Fuses (needs boot fuses to be set) - 00b
+#### Boot from Fuses (needs boot fuses to be set)
+
+BOOT\_MODE: 00b
 
 | BOOT\_MODE |   | 0 | 1 |   |
 | ---------- | - | - | - | - |
@@ -188,7 +192,9 @@ _BOOT\_MODE_
 | ON         |   | X | X |   |
 | OFF        | - |   |   | - |
 
-* Serial Downloader - 01b
+#### Serial Downloader
+
+BOOT\_MODE: 01b
 
 | BOOT\_MODE |   | 0 | 1 |   |
 | ---------- | - | - | - | - |
@@ -196,7 +202,9 @@ _BOOT\_MODE_
 | ON         |   |   | X |   |
 | OFF        | - | X |   | - |
 
-* Internal Boot (no boot fuses set, use boot config pins) - 10b
+#### Internal Boot (no boot fuses set, use boot config pins)
+
+BOOT\_MODE: 10b
 
 | BOOT\_MODE |   | 0 | 1 |   |
 | ---------- | - | - | - | - |
@@ -204,17 +212,16 @@ _BOOT\_MODE_
 | ON         |   | X |   |   |
 | OFF        | - |   | X | - |
 
-_SD Card_ (USDHC2)
+##### SD Card (USDHC2)
 
 BOOT\_MODE: Internal Boot
 
-```
-	S6				S5			S9
-BOOTCFG	8  9 10 11 12 13 14 15		0 1 2 3 4 5 6 7
-DIP	1  2  3  4  5  6  7  8		1 2 3 4 5 6 7 8		1 2 3 4
-ON	X        X     X  X  X		X   X X   X X X		  X    
-OFF	   X  X     X         		  X     X      		-   X -
-```
+|         |  S6  |     |      |      |      |      |      |      | S5 |     |     |     |     |     |     |     |     | S9 |     |     |     |     |
+| ------- | :--: | :-: | :--: | :--: | :--: | :--: | :--: | :--: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: |
+| BOOTCFG |  8   |  9  |  10  |  11  |  12  |  13  |  14  |  15  |    |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |    |     |     |     |     |
+| DIP     |  1   |  2  |  3   |  4   |  5   |  6   |  7   |  8   |    |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |  3  |  4  |
+| ON      |  x   |     |      |  x   |      |  x   |  x   |  x   |    |  x  |     |  x  |  x  |     |  x  |  x  |  x  |    |     |  x  |     |     |
+| OFF     |      |  x  |  x   |      |  x   |      |      |      |    |     |  x  |     |     |  x  |     |     |     |    |  -  |     |  x  |  -  |
 
 * BOOT_CFG\[0\]      - 0 - reserved
 * BOOT_CFG\[3:1\]    - 001 - SD speed mode (SDR25)
@@ -226,15 +233,14 @@ OFF	   X  X     X         		  X     X      		-   X -
 * BOOT_CFG\[\11:10\] - 01 - USDHC2
 * BOOT_CFG\[\15:12\] - 0001 - SD Card
 
-_e-MMC_ (USDHC3)
+##### e-MMC (USDHC3)
 
-```
-	S6				S5			S9
-BOOTCFG	8  9 10 11 12 13 14 15		0 1 2 3 4 5 6 7
-DIP	1  2  3  4  5  6  7  8		1 2 3 4 5 6 7 8		1 2 3 4
-ON	X  X  X     X     X  X		X   X X X   X X		  X    
-OFF	         X     X      		  X       X    		-   X -
-```
+|         |  S6  |     |      |      |      |      |      |      | S5 |     |     |     |     |     |     |     |     | S9 |     |     |     |     |
+| ------- | :--: | :-: | :--: | :--: | :--: | :--: | :--: | :--: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: |
+| BOOTCFG |  8   |  9  |  10  |  11  |  12  |  13  |  14  |  15  |    |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |    |     |     |     |     |
+| DIP     |  1   |  2  |  3   |  4   |  5   |  6   |  7   |  8   |    |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |  3  |  4  |
+| ON      |  x   |  x  |  x   |      |  x   |      |  x   |  x   |    |  x  |     |  x  |  x  |  x  |     |  x  |  x  |    |     |  x  |     |     |
+| OFF     |      |     |      |  x   |      |  x   |      |      |    |     |  x  |     |     |     |  x  |     |     |    |  -  |     |  x  |  -  |
 
 * BOOT_CFG\[0\]      - 0 - USDHC2 IO VOLTAGE: 3.3 V
 * BOOT_CFG\[1\]      - 1 - USDHC1 IO VOLTAGE: 1.8 V
@@ -246,15 +252,14 @@ OFF	         X     X      		  X       X    		-   X -
 * BOOT_CFG\[\11:10\] - 10 - USDHC3
 * BOOT_CFG\[\15:12\] - 0010 - MMC / e-MMC
 
-_FlexSPI_
+##### FlexSPI
 
-```
-	S6				S5			S9
-BOOTCFG	8  9 10 11 12 13 14 15		0 1 2 3 4 5 6 7
-DIP	1  2  3  4  5  6  7  8		1 2 3 4 5 6 7 8		1 2 3 4
-ON	X  X  X  X  X  X     X		X X X X X X X X		  X    
-OFF	                  X   		               		-   X -
-```
+|         |  S6  |     |      |      |      |      |      |      | S5 |     |     |     |     |     |     |     |     | S9 |     |     |     |     |
+| ------- | :--: | :-: | :--: | :--: | :--: | :--: | :--: | :--: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: |
+| BOOTCFG |  8   |  9  |  10  |  11  |  12  |  13  |  14  |  15  |    |  0  |  1  |  2  |  3  |  4  |  5  |  6  |  7  |    |     |     |     |     |
+| DIP     |  1   |  2  |  3   |  4   |  5   |  6   |  7   |  8   |    |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |  3  |  4  |
+| ON      |  x   |  x  |  x   |  x   |  x   |  x   |      |  x   |    |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |    |     |  x  |     |     |
+| OFF     |      |     |      |      |      |      |  x   |      |    |     |     |     |     |     |     |     |     |    |  -  |     |  x  |  -  |
 
 * BOOT_CFG\[3:0\]    - 0000 - SPI FLASH Dummy Cycle (auto probed)
 * BOOT_CFG\[5:4\]    - 00   - QuadSPI NOR

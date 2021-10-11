@@ -2,6 +2,8 @@
 
 This README contains some useful information for TQMa8Xx and TQMa8Xx4 on MBa8Xx
 
+[[_TOC_]]
+
 ## Variants
 
 * TQMa8XDP REV.020x / 0x030x
@@ -26,7 +28,7 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Supported Features
 
-### U-Boot:
+### U-Boot
 
 * RAM configs:
   * 1GB DDR3L ECC / TQMa8X\[D,Q\]P
@@ -64,7 +66,7 @@ See top level README.md for configurations usable as MACHINE.
 * CPU variants i.MX8DX/i.MX8DXP cannot be detected automatically from hardware
   (limitation of cpu driver / SCU firmware, currently fixed with U-Boot Kconfig)
 
-### Linux:
+### Linux
 
 * RAM configs:
   * 1GB DDR3L ECC / TQMa8X\[D,Q\]P
@@ -150,50 +152,45 @@ _Note:_
 * S1 is for Boot Mode.
 * X means position of DIP, - means don't care
 
-_SD Card_
+### SD Card
 
-```
-DIP (S1)	1 2 3 4
-BootMode	3 2 1 0
-ON 		    X X
-OFF 		X X    
-```
+| DIP S1   | 1 | 2 | 3 | 4 |
+| -------- | - | - | - | - |
+| BOOTMode | 3 | 2 | 1 | 0 |
+| ON       |   |   | x | x |
+| OFF      | x | x |   |   |
 
-_e-MMC_
+### e-MMC
 
-```
-DIP (S1)	1 2 3 4
-BootMode	3 2 1 0
-ON 		    X  
-OFF 		X X   X
-```
+| DIP S1   | 1 | 2 | 3 | 4 |
+| -------- | - | - | - | - |
+| BOOTMode | 3 | 2 | 1 | 0 |
+| ON       |   |   | x |   |
+| OFF      | x | x |   | x |
 
-_FLEXSPI_
+### FLEXSPI
 
-```
-DIP (S1)	1 2 3 4
-BootMode	3 2 1 0
-ON 		  X X  
-OFF 		X     X
-```
+| DIP S1   | 1 | 2 | 3 | 4 |
+| -------- | - | - | - | - |
+| BOOTMode | 3 | 2 | 1 | 0 |
+| ON       |   | x | x |   |
+| OFF      | x |   |   | x |
 
-_Serial Downloader_
+### Serial Downloader
 
-```
-DIP (S1)	1 2 3 4
-BootMode	3 2 1 0
-ON 		      X
-OFF 		X X X  
-```
+| DIP S1   | 1 | 2 | 3 | 4 |
+| -------- | - | - | - | - |
+| BOOTMode | 3 | 2 | 1 | 0 |
+| ON       |   |   |   | x |
+| OFF      | x | x | x |   |
 
-_Boot from Fuses_
+### Boot from Fuses
 
-```
-DIP (S1)	1 2 3 4
-BootMode	3 2 1 0
-ON 		       
-OFF 		X X X X
-```
+| DIP S1   | 1 | 2 | 3 | 4 |
+| -------- | - | - | - | - |
+| BOOTMode | 3 | 2 | 1 | 0 |
+| ON       |   |   |   |   |
+| OFF      | x | x | x | x |
 
 ## Boot device initialisation
 
@@ -310,7 +307,9 @@ with UUU tool:
 sudo uuu -b spl imx-boot-<machine>-mfgtool.bin
 ```
 
-## Display Support
+## Howto
+
+### Display Support
 
 Each Display can be used on its own by using the corresponding device tree.
 To allow reusage, the support for each display is separated in a dtsi fragment.
@@ -322,9 +321,9 @@ To allow reusage, the support for each display is separated in a dtsi fragment.
 | LVDS0           | imx8\[d,q\]xp-mba8xx-lvds0-tm070jvhg33.dtb | Tianma TM070JVHG33 |
 | LVDS1           | imx8\[d,q\]xp-mba8xx-lvds1-tm070jvhg33.dtb | Tianma TM070JVHG33 |
 
-## CAN
+### CAN
 
-### Troubleshooting
+#### Troubleshooting
 
 In case of problems first check the bus termination:
 
@@ -333,7 +332,7 @@ In case of problems first check the bus termination:
 | CAN0      |           | SW1 |
 | CAN1      |           | SW2 |
 
-### Enable without CAN-FD
+#### Enable without CAN-FD
 
 CAN1/2 should be enabled and configured by default when using with MBa8Xx
 and meta-tq / systemd
@@ -343,7 +342,7 @@ CANIF="can[0,1]"
 ip link set ${CANIF} up type can bitrate 500000 fd off
 ```
 
-### Enable CAN-FD
+#### Enable CAN-FD
 
 To enable CAN-FD the following command can be used, if using a carrier board with
 FD capable transceiver:

@@ -2,6 +2,8 @@
 
 This README contains some useful information for TQMa8MPxL on MBa8MPxL
 
+[[_TOC_]]
+
 ## Variants
 
 * TQMa8MPQL REV.010x
@@ -16,7 +18,7 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Supported Features
 
-### U-Boot:
+### U-Boot
 
 * RAM configs: 2 GiB
 * CPU variants i.MX8MPQ
@@ -52,7 +54,7 @@ See top level README.md for configurations usable as MACHINE.
 
 * CPU variants i.MX8MPD/S and Lite
 
-### Linux:
+### Linux
 
 * RAM configs: 2 GiB
 * CPU variants i.MX8MPQ
@@ -343,7 +345,7 @@ gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false ! \
 	autovideosink sync=false
 ```
 
-## Display Support
+### Display Support
 
 Each Display can be used on its own by using the corresponding device tree.
 To allow reusage, the support for each display is separated in a dtsi fragment.
@@ -353,9 +355,9 @@ To allow reusage, the support for each display is separated in a dtsi fragment.
 | LVDS            | imx8mp-mbba8mpxl-lvds-tm070jvhg33.dtb | Tianma TM070JVHG33 |
 | HDMI            | imx8mp-mbba8mpxl-hdmi.dtb             | compatible monitor |
 
-## CAN
+### CAN
 
-### Troubleshooting
+#### Troubleshooting
 
 In case of problems first check the bus termination:
 
@@ -364,7 +366,7 @@ In case of problems first check the bus termination:
 | CAN0      | X18       | S12 |
 | CAN1      | X19       | S11 |
 
-### Enable without CAN-FD
+#### Enable without CAN-FD
 
 CAN1/2 should be enabled and configured by default when using with MBa8MPxL
 and meta-tq / systemd
@@ -374,7 +376,7 @@ CANIF="can[0,1]"
 ip link set ${CANIF} up type can bitrate 500000 fd off
 ```
 
-### Enable CAN-FD
+#### Enable CAN-FD
 
 To enable CAN-FD the following command can be used, if using a carrier board with
 FD capable transceiver:
