@@ -56,7 +56,6 @@ See top level README.md for configurations usable as MACHINE.
 
 **TODO or not tested / supported**
 
-* Cortex M4
 * more CPU variants
 * temperature grade
   * SCU limitation
@@ -66,7 +65,8 @@ See top level README.md for configurations usable as MACHINE.
 * RAM configs:
   * 4GB / TQMa8QM
   * 8GB / TQMa8QM
-* CPU variants i.MX8QM B0
+* CPU variants
+  * i.MX8QM B0
 * I2C
   * Temperature Sensors (without cpu-temp)
   * RTC
@@ -98,6 +98,8 @@ See top level README.md for configurations usable as MACHINE.
   * can0/1 as network interface
 * PWM
   * PWM in LVDS IP
+* CPU / PMIC Thermal sensors
+  * via thermal-zone
 * SATA
 * PCIe
   * mini-PCIe on MBa8x
@@ -120,11 +122,8 @@ See top level README.md for configurations usable as MACHINE.
 * FTM
   * PWM (missing in CPU DT)
 * HDMI in
-* Cortex M4
 * PWM
   * generic PWM IP (missing in CPU DT)
-* CPU / PMIC Thermal sensors
-  * via thermal-zone
 
 ## Known Issues
 
@@ -149,8 +148,11 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * imx-boot-${MACHINE}-sd.bin-flash\_spl: boot stream for SD / e-MMC
+* imx-boot-${MACHINE}-sd.bin-flash\_linux\_m4: boot stream for SD / e-MMC + M4 Demo
 * imx-boot-${MACHINE}-sd.bin-flash\_spl_flexspi: boot stream for QSPI
 * imx-boot-mfgtool-${MACHINE}-mfgtool.bin-flash\_spl: boot stream for UUU
+* rpmsg\_lite\_pingpong\_rtos\_linux\_remote\_m40.bin: CortexM4 demo for device 0
+* rpmsg\_lite\_pingpong\_rtos\_linux\_remote\_m41.bin: CortexM4 demo for device 1
 
 ## Boot Dip Switches
 
@@ -355,3 +357,10 @@ FD capable transceiver:
 CANIF="can[0,1]"
 ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on‍‍‍‍‍‍‍`
 ```
+
+### Cortex M4
+
+Demos are compiled to use Cortex M4 0/1 UARTS with 115200 8N1.
+For demos available in the BSP and the device tree to be used see [artifacts section](#build-artifacts).
+
+Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8X.md).
