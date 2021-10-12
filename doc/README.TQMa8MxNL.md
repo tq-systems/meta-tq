@@ -321,6 +321,8 @@ To create a bootable QSPI NOR with boot stream only (file name see above)
 Example for U-Boot, booting from SD-Card:
 
 ```
+# SPI-NOR @ FlexSPI, offset 0
+
 tftp <bootstream>
 sf probe
 sf update ${loadaddr} 0 ${filesize}
