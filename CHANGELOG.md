@@ -1,12 +1,18 @@
 # Changelog
 
+[[_TOC_]]
+
 All notable changes to this project will be documented in this file.
 Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## Next Release
+
 ### Changed
 
+* tqma8mx/tqma8mxml/tqma8mxnl: move phy reset gpio in dt from fec node to phy node
+  to improve resume flow.
 * tqma8xx\[s\]: enable building multiple u-boot configs
 * tqma8x: enable building multiple u-boot configs
 * tqma8mx: enable building multiple u-boot configs
@@ -25,6 +31,7 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* linux: backport FEC phy resume fixes
 * u-boot-imx-tq: mx8m: deploy dtb and u-boot-nodtb for multiple configs. At the
   moment multiple configs would be built but all variants would be deployed with
   the same name resulting in the fact that only the last will be available for
@@ -251,7 +258,7 @@ Releases are named with the following scheme:
   exchanging SD Card
 * u-boot: TQMa8Mx\[M,N\]L: prevent nasty voltage switch error warning for e-MMC
 
-## Removed
+### Removed
 
 * doc: TQMa8MxML / TQMa8MxNL: remove remaining docs for incompatible MBa8Mx REV.020x
 * u-boot: drop support for v2019.04, since no user left
