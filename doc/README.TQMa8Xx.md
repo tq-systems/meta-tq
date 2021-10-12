@@ -93,16 +93,19 @@ See top level README.md for configurations usable as MACHINE.
 * USB
   * USB 2.0 Dual Role
   * USB 3.0 (Hub on MBa8Mx)
-* LVDS
-* GPU
-* VPU
-* PCIe
-  * mini-PCIe on MBa8xx
-  * wifi with Network Card (Silex Technology SX-PCEAC2-HMC-SP)
+* Graphic
+  * GPU
+  * VPU
+  * LVDS
 * CAN
   * can0/1 as network interface
+* PWM
+  * PWM in LVDS IP
 * CPU / PMIC Thermal sensors
   * via thermal-zone
+* PCIe
+  * mini-PCIe on MBa8Xx
+  * wifi with Network Card (Silex Technology SX-PCEAC2-HMC-SP)
 * Audio
   * Line In
   * Line Out
