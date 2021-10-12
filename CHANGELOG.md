@@ -5,6 +5,36 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+### Changed
+
+* tqma8xx\[s\]: enable building multiple u-boot configs
+* tqma8x: enable building multiple u-boot configs
+* tqma8mx: enable building multiple u-boot configs
+* tqma8mx\[m,n\]l: enable building multiple u-boot configs
+* tqma8mpxl: enable building multiple u-boot configs
+
+### Added
+
+* imx-boot: support multiple u-boot configs. Build all bootstream variants for
+  all enabled u-boot configs
+* tqma8qm: add bootstreams with cortexM4 demos
+* imx-boot: prepare CortexM4 Support for TQMa8x
+* tqma8-cortexm-demos: add demos for tqma8qm
+* update SCFW version: basic CortexM4 support for tqma8qm
+* linux: tqma8qm: add rpmsg enable dtb
+
+### Fixed
+
+* u-boot-imx-tq: mx8m: deploy dtb and u-boot-nodtb for multiple configs. At the
+  moment multiple configs would be built but all variants would be deployed with
+  the same name resulting in the fact that only the last will be available for
+  imx-boot.
+* linux: tqma8mq: sanititze dtb nodes / remove trailing 0 in address part of
+  node names
+* linux: imx8qm: fix cpu dtb for CortexM4 subsystems
+  - disable M4 remotes by default
+  - include CM40 subsystem
+
 ## zeus.TQMa8.BSP.SW.0055
 
 ### Added
