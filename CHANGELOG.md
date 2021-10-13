@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## zeus.TQMa8.BSP.SW.0056
+
 ### Changed
 
 * tqma8mx/tqma8mxml/tqma8mxnl: move phy reset gpio in dt from fec node to phy node
@@ -31,6 +33,7 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* doc: fix CortexM4 documentation for TQMa8x / TQMa8Xx / TQMa8XxS
 * linux: backport FEC phy resume fixes
 * u-boot-imx-tq: mx8m: deploy dtb and u-boot-nodtb for multiple configs. At the
   moment multiple configs would be built but all variants would be deployed with
