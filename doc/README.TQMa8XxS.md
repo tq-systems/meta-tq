@@ -14,7 +14,7 @@ This README contains some useful information for TQMa8XxS on MB-SMARC-2
 
 ### SCFW:
 
-* version: tq-TQMa8.NXP-v1.6.0.B4894.0032
+Version: tq-TQMa8.NXP-v1.6.0.B4894.0033
 
 ### Other components
 
