@@ -132,7 +132,7 @@ See top level README.md for configurations usable as MACHINE.
 * Suspend / Wakeup
   * RTC Alarm IRQ via GPIO leads to system stall during resume
 
-## Artifacts
+## Build artifacts
 
 Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`

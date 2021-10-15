@@ -130,7 +130,7 @@ See top level README.md for configurations usable as MACHINE.
 * USB
   * U-Boot: USB 3.0 port does not initialize USB 2.0 subsystem after USB reset
 
-## Artifacts
+## Build artifacts
 
 Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`

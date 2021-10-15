@@ -137,7 +137,7 @@ See top level README.md for configurations usable as MACHINE.
 * USB
   * U-Boot: `EHCI timed out on TD - token` with some USB sticks on USB 2.0 OTG
 
-## Artifacts
+## Build artifacts
 
 Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
