@@ -3,6 +3,7 @@ RDEPENDS_${PN}_append = "\
     lmsensors-libsensors \
     lmsensors-sensors \
     libgpiod \
+    libgpiod-tools \
     uhubctl \
     usb-modeswitch \
 "
