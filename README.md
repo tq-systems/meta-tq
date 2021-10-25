@@ -54,7 +54,7 @@ Optionally the layer can make use of features from meta-ti if using AM57xx
 based machines (tqma57\[1,2,4\]x-mba57xx etc.)
 
 In meta-ti no hardknott branch exists, so we have to use the master branch.
-The last commit before the master branch supports
+The last commit in the master branch that supports
 hardknott is commit f56051c9a8cf09f54c43b81301073eed71bbda97.
 
 URI: https://git.yoctoproject.org/git/meta-ti  
@@ -62,9 +62,10 @@ branch: master
 revision: f56051c9a8cf09f54c43b81301073eed71bbda97  
 layers: meta-ti  
 
-**Attention:** meta-ti depends on meta-arm and meta-arm-toolchain. The correct
-branch of meta-arm to be used depends on revision. Yocto zeus support started
-in branch master and is currently maintained in branch dunfell
+meta-ti and meta-arm are mandatory for the following machines:
+
+- tqma65xx-2gb-mba65xx
+- tqma65xx-4gb-mba65xx
 
 ### Coding style
 
@@ -145,7 +146,6 @@ BBLAYERS = "\
 
 Support for the following machines is contained in this version:
 
-
 | Status | SOC / CPU        | SOM                      | Base board     | yocto / OpenEmbedded machine | hardware revision                                                     |
 | ------ | ---------------- | -------------------------| ---------------| ---------------------------- | --------------------------------------------------------------------- |
 | [y]    | i.MX6\[QP,DP\]   | TQMa6\[QP,DP\]           | MBa6x          | tqma6qp-mba6x                | TQMa6\[QP,DP\] HW REV.040x / MBa6x HW REV.020x                        |
@@ -196,6 +196,8 @@ Support for the following machines is contained in this version:
 | [b]    | AM355x           | TQMa335x                 | MBa335x        | tqma355x_512mb-mba335x       | TQMa335x HW REV.020x with 512 MiB RAM / MBa335x HW REV.020x |
 | [b]    | AM57\[1,2,4\]8   | TQMa57\[1,2,4\]8         | MBa57xx        | tqma57xx-mba57xx             | TQMa57[1,2,4]8 / MBa57xx |
 | [b]    | AM5748           | TQMa5748 ECC             | MBa57xx        | tqma57xx-ecc-mba57xx         | TQMa5748 with ECC / MBa57xx |
+| [y]    | AM6548           | TQMa654x                 | MBa65xx        | tqma65xx-2gb-mba65xx         | TQMa6548 HW REV.010x with 2GiB RAM |
+| [y]    | AM6548           | TQMa654x                 | MBa65xx        | tqma65xx-4gb-mba65xx         | TQMa6548 HW REV.010x with 4GiB RAM |
 
 
 \[y\]: fully supported  
@@ -246,6 +248,7 @@ Under the given links SOM specific information can be found:
 [TQMa8XQPS](doc/README.TQMa8XxS.md)  
 [TQMa8QM](doc/README.TQMa8x.md)  
 [TQMA335x\[L\]](doc/README.TQMa335x.md)  
+[TQMA65xx](doc/README.TQMa65xx.md)  
 [TQMLS1012AL](doc/README.TQMLS1012AL.md)  
 [TQMLS102\[0,1\]A](doc/README.TQMLS102xa.md)  
 [TQMLS1017A/TQMLS1028A](doc/README.TQMLS1028A.md)  
