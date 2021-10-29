@@ -21,6 +21,7 @@ SRC_URI_mx8 = "\
   file://tqma8x-network-support.cfg \
   file://tqma8x-i2c-devices.cfg \
   file://acpi-removal.cfg \
+  file://sdma.cfg \
   file://tqma8x-input-devices.cfg \
   file://tqma8x-bpf-support.cfg \
   file://tqma8x-audio-support.cfg \
