@@ -99,6 +99,7 @@ _MBa8x HW Rev.020x/30x only_
   * PP / Erase with 1-1-1
 * GPU
 * VPU
+  * Note: GPU temperature observation uses CPU thermal-zone! Playing 4K Videos on 4K Display will raise the thermal-zone (CPU) temperature >80°C, reducing VPU clock. Apparently there is no dedicated VPU sensor
 * HDMI
 * MIPI CSI (see Issues section)
   * Gray with Vision Components GmbH camera (Sensor OV9281)
