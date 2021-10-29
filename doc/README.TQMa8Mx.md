@@ -88,9 +88,9 @@ _MBa8x HW Rev.020x/30x only_
 * PCIe
   * mini-PCIe on MBa8Mx
   * wifi with Network Card (Silex Technology SX-PCEAC2-HMC-SP)
-* ~~Audio~~
-  * ~~Codec Line In (X14)~~
-  * ~~Codec Line Out (X13)~~
+* Audio
+  * Codec Line In (X14)
+  * Codec Line Out (X13)
 * Cortex M4
   * examples running from TCM
   * use UART4 as debug console
@@ -117,7 +117,6 @@ _MBa8x HW Rev.020x/30x only_
 
 ## Known Issues
 
-* Audio playback freezes complete system
 * LVDS shows wrong colors on older Tianma display kit (HW issue on older
   display kit revisions)
 * USB OTG / DRD

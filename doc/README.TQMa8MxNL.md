@@ -83,9 +83,9 @@ _MBa8x HW Rev.030x only_
 * SPI
   * 2 x via spidev in userland
 * ENET (GigE via Phy on MBa8Mx)
-* ~~Audio~~
-  * ~~Codec Line In (X14)~~
-  * ~~Codec Line Out (X13)~~
+* Audio
+  * Codec Line In (X14)
+  * Codec Line Out (X13)
 * USB
   * USB 2.0 Host / Hub
   * USB DRD (USB 2.0 OTG, Cable Detect, VBUS)
@@ -125,7 +125,6 @@ _MBa8x HW Rev.030x only_
 
 ## Known Issues
 
-* Audio playback freezes complete system
 * LVDS shows wrong colors on older Tianma display kit (HW issue on older
   display kit revisions)
 * Mikrobus Modul RTC5 on ecspi1 don't answer
