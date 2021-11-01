@@ -454,7 +454,7 @@ speaker-test -D hw:<n> -l 1 -c 2 -f 500 -t sine
 To test audio using gstreamer / alsa:
 
 ```
-gst-launch-1.0 audiotestsrc ! alsasink
+WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 audiotestsrc ! alsasink
 ```
 
 ### Audio Line In (codec)
@@ -467,7 +467,7 @@ speaker-test -D hw:0 -l 1 -c 2 -f 500 -t sine
 ### VPU support
 
 ```
-gst-play-1.0 /mnt/sd/tears_of_steel_1080p.webm
+WAYLAND_DISPLAY=/run/wayland-0 gst-play-1.0 /mnt/sd/tears_of_steel_1080p.webm
 ```
 
 ### MIPI-CSI
@@ -482,7 +482,7 @@ __Gray with Omnivision OV9281__
 * gstreamer example:
 
 ```
-gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! \
+WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! \
 	autovideosink -v sync=false
 ```
 
@@ -492,7 +492,7 @@ __Raw Bayer with Sony IMX327__
 * gstreamer example:
 
 ```
-gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false ! \
+WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false ! \
 	video/x-bayer,format=rggb,bpp=12,width=1280,height=720,framerate=25/1 ! \
 	bayer2rgbneon show-fps=t reduce-bpp=t ! autovideoconvert ! \
 	autovideosink sync=false

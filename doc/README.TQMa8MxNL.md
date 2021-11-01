@@ -408,10 +408,10 @@ __Gray with Omnivision OV9281__
 # configure
 yavta -f Y8 -s 1280x800 -c20 /dev/video0
 # grab to file
-gst-launch-1.0 v4l2src device=/dev/video0 ! videorate ! video/x-raw,format=GRAY8,framerate=1/1 ! \
+WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! videorate ! video/x-raw,format=GRAY8,framerate=1/1 ! \
 	jpegenc ! multifilesink location=test%d.jpg
 # show live video
-gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! \
+WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! \
 	autovideosink -v sync=false
 ```
 
@@ -425,7 +425,7 @@ __Raw Bayer with Sony IMX327__
 yavta -f SRGGB10 -s 1280x720  /dev/video0
 
 # show live video
-gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false ! \
+WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false ! \
 	video/x-bayer,format=rggb,bpp=10,width=1280,height=720,framerate=25/1 ! \
 	bayer2rgbneon show-fps=t reduce-bpp=t ! autovideoconvert ! \
 	autovideosink sync=false
