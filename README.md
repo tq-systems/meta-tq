@@ -158,6 +158,10 @@ Support for the following machines is contained in this version:
 [y]	i.MX7[S,D]		TQMa7[S,D]		MBa7x		tqma7x-512mb-mba7 (TQMa7[S,D] HW REV.010x ... 0x020x with 512 MiB RAM / MBa7x HW REV.020x)
 [y]	i.MX7[S,D]		TQMa7[S,D]		MBa7x		tqma7x-1gb-mba7 (TQMa7[S,D] HW REV.010x ... 0x020x with 1 GiB RAM / MBa7x HW REV.020x)
 [y]	i.MX7[S,D]		TQMa7[S,D]		MBa7x		tqma7x-2gb-mba7 (TQMa7[S,D] HW REV.010x ... 0x020x with 2 GiB RAM / MBa7x HW REV.020x)
+[y]	RZG/2H			TQMaRZG2H		MBaRZG2x	tqmarzg2h_c-mbarzg2x (TQMaRZG2H-PROTO1 HW REV.01xx with 4 GiB RAM)
+[y]	RZG/2M			TQMaRZG2M		MBaRZG2x	tqmarzg2m_e-mbarzg2x (TQMaRZG2M-PROTO1 HW REV.01xx with 8 GiB RAM)
+[y]	RZG/2M			TQMaRZG2M		MBaRZG2x	tqmarzg2m_aa-mbarzg2x (TQMaRZG2M-AA HW REV.01xx with 2GiB RAM)
+[y]	RZG/2N			TQMaRZG2N		MBaRZG2x	tqmarzg2n_b-mbarzg2x (TQMaRZG2N-PROTO1 HW REV.01xx with 2GiB RAM)
 [y]	LS1012A			TQMLS1012AL		MBLS1012AL	tqmls1012al-mbls1012al (TQMLS1012AL HW REV.010x ... 020x with 512 MiB RAM / MBLS1012AL HW REV.020x)
 [y]	LS1012A			TQMLS1012AL		MBLS1012AL	tqmls1012al-1gb-mbls1012al (TQMLS1012AL HW REV.020x with 1 GiB RAM / MBLS1012AL HW REV.020x)
 [y]	LS1017A			TQMLS1017A		MBLS1028A	tqmls1028a-mbls1028a
@@ -214,6 +218,7 @@ Under the given links SOM specific information can be found:
 - [TQMA6\[Q,D\]](doc/README.TQMa6x.md)
 - [TQMA6UL\[L\]](doc/README.TQMa6ULx.md)
 - [TQMA7\[S,D\]](doc/README.TQMa7x.md)
+- [TQMARZG2\[H,M,N\]](doc/README.TQMaRZG2x.md)
 - [TQMLS1012AL](doc/README.TQMLS1012AL.md)
 - [TQMLS102\[0,1\]A](doc/README.TQMLS102xa.md)
 - [TQMLS1017A/TQMLS1028A](doc/README.TQMLS1028A.md)

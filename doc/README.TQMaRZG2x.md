@@ -4,6 +4,7 @@ This README contains some useful information for TQMaRZG2x on MBaRZG2x
 
 ## Variants
 * TQMaRZG2M (r8a774a1) 8GiB RAM Rev.01xx
+* TQMaRZG2M (r8a774a1) 2GiB RAM Rev.01xx
 * TQMaRZG2N (r8a774b1) 2GiB RAM Rev.01xx
 * TQMaRZG2H (r8a774e1) 4GiB RAM Rev.01xx
 
@@ -20,6 +21,7 @@ This README contains some useful information for TQMaRZG2x on MBaRZG2x
 
 ## Supported machine configurations:
 * tqmarzg2m_e-mbarzg2x
+* tqmarzg2m_aa-mbarzg2x
 * tqmarzg2n_b-mbarzg2x
 * tqmarzg2h_c-mbarzg2x
 
@@ -37,7 +39,7 @@ This README contains some useful information for TQMaRZG2x on MBaRZG2x
 * GPIOs
 * eMMC
 * SDHC
-* SPI Nor - Flash
+* SPI Nor - Flash (except tqmarzg2m_aa-mbarzg2x)
 * I2C
 * Ethernet
 * CAN
@@ -67,21 +69,26 @@ This README contains some useful information for TQMaRZG2x on MBaRZG2x
 * SDHC:
 TQMaRZG2x on a MBaRZG2x cannot boot from SD-Card.
 The only bootable SD/eMMC-Interface of the CPU is connected to eMMC.
+* SPI Nor - Flash:
+TQMaRZG2M_AA does not have a SPI NOR-Flash.
 
 ## Build Artifacts
-* bl2-${MACHINE}.srec: Primary Boot Loader for TQMaRZG2[H|M|N]. Needed by Flash-Writer.
-* bl31-${MACHINE}.srec: Socondary Boot Loader for TQMaRZG2[H|M|N]. Needed by Flash-Writer.
+* AArch64_Flash_writer_SCIF_DUMMY_CERT_E6300400_TQMARZG2[H_C|M_E|M_AA|N_B].mot
+* bl2-${MACHINE}.srec: Primary Boot Loader for TQMaRZG2[H_C|M_E|M_AA|N_B]. Needed by Flash-Writer.
+* bl31-${MACHINE}.srec: Socondary Boot Loader for TQMaRZG2[H_C|M_E|M_AA|N_B]. Needed by Flash-Writer.
 * bootparam_sa0.srec: ATF Boot parameters. Needed by Flash-Writer.
 * cert\_header_sa6\_spi-nor.srec: Cerificate header for SPI NOR boot. Needed by Flash-Writer.
 * Image: Kernel
-* r8a774a1-tqmarzg2m_e-mbarzg2x.dtb: Device Tree Blob for TQMaRZG2M without display support.
-* r8a774a1-tqmarzg2m_e-mbarzg2x-lvds-tm070jvhg33.dtb: Device Tree Blob for TQMaRZG2M with LVDS display support.
-* r8a774b1-tqmarzg2n_b-mbarzg2x.dtb: Device Tree Blob for TQMaRZG2N without display support.
-* r8a774b1-tqmarzg2n_b-mbarzg2x-lvds-tm070jvhg33.dtb: Device Tree Blob for TQMaRZG2N with LVDS display support.
-* r8a774e1-tqmarzg2h_c-mbarzg2x.dtb: Device Tree Blob for TQMaRZG2H without display support.
-* r8a774e1-tqmarzg2h_c-mbarzg2x-lvds-tm070jvhg33.dtb: Device Tree Blob for TQMaRZG2H with LVDS display support.
-* u-boot-elf-${MACHINE}.srec: U-Boot Binary for TQMaRZG2[H|M|N]. Needed by Flash-Writer.
-* u-boot-${MACHINE}.bin: U-Boot Binary for TQMaRZG2[H|M|N]. Needed by emmc update scripts.
+* r8a774a1-tqmarzg2m_e-mbarzg2x.dtb: Device Tree Blob for TQMaRZG2M_E without display support.
+* r8a774a1-tqmarzg2m_e-mbarzg2x-lvds-tm070jvhg33.dtb: Device Tree Blob for TQMaRZG2M_E with LVDS display support.
+* r8a774a1-tqmarzg2m_aa-mbarzg2x.dtb: Device Tree Blob for TQMaRZG2M_AA without display support. 
+* r8a774a1-tqmarzg2m_aa-mbarzg2x-lvds-tm070jvhg33.dtb: Device Tree Blob for TQMaRZG2M_AA with LVDS display support.
+* r8a774b1-tqmarzg2n_b-mbarzg2x.dtb: Device Tree Blob for TQMaRZG2N_B without display support.
+* r8a774b1-tqmarzg2n_b-mbarzg2x-lvds-tm070jvhg33.dtb: Device Tree Blob for TQMaRZG2N_B with LVDS display support.
+* r8a774e1-tqmarzg2h_c-mbarzg2x.dtb: Device Tree Blob for TQMaRZG2H_C without display support.
+* r8a774e1-tqmarzg2h_c-mbarzg2x-lvds-tm070jvhg33.dtb: Device Tree Blob for TQMaRZG2H_C with LVDS display support.
+* u-boot-elf-${MACHINE}.srec: U-Boot Binary for TQMaRZG2[H_C|M_E|M_AA|N_B]. Needed by Flash-Writer.
+* u-boot-${MACHINE}.bin: U-Boot Binary for TQMaRZG2[H_C|M_E|M_AA|N_B]. Needed by emmc update scripts.
 * tq-image-weston-${MACHINE}.wic: Complete eMMC / SD-Card Image
 
 
