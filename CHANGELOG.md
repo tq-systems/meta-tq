@@ -5,6 +5,16 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMa335x.BSP.SW.0121
+
+### Added
+
+* tqma335x: u-boot-tq: mmc hwpartition allows size '-' for whole e-mmc
+
+### Changed
+
+* tqma335x: u-boot-tq: e-mmc pins slewrate set to slow
+
 ## zeus.TQMaRZG2x.BSP.SW.0002
 
 ### Added
