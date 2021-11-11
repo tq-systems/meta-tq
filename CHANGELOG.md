@@ -5,6 +5,12 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMaRZG2x.BSP.SW.0003
+
+### Added
+
+* tqmarzg2m: add support for module variant with 2GB RAM
+
 ## zeus.TQMa335x.BSP.SW.0121
 
 ### Added
