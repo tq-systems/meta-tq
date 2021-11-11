@@ -114,6 +114,10 @@ LS10[46]a	TQMLS102[46]a>		MBLS10xxa	tqmls1046a-mbls1046a (TQMLS1046a HW REV.020x
 AM571[6,8]	TQMa5718/TQMa5716	MBa57xx		tqma571x-mba57xx
 AM572[6,8]	TQMa5728/TQMa5726	MBa57xx		tqma572x-mba57xx
 AM574[6,8]	TQMa5748/TQMa5746	MBa57xx		tqma574x-mba57xx
+RZG/2H			TQMaRZG2H		MBaRZG2x	tqmarzg2h_c-mbarzg2x (TQMaRZG2H-PROTO1 HW REV.01xx with 4 GiB RAM)
+RZG/2M			TQMaRZG2M		MBaRZG2x	tqmarzg2m_e-mbarzg2x (TQMaRZG2M-PROTO1 HW REV.01xx with 8 GiB RAM)
+RZG/2M			TQMaRZG2M		MBaRZG2x	tqmarzg2m_aa-mbarzg2x (TQMaRZG2M-AA HW REV.01xx with 2GiB RAM)
+RZG/2N			TQMaRZG2N		MBaRZG2x	tqmarzg2n_b-mbarzg2x (TQMaRZG2N-PROTO1 HW REV.01xx with 2GiB RAM)
 
 Note: for TQMa6UL1 and baseboard using this module variant with i.MX6ULG1
       a dedicated device tree is supplied
