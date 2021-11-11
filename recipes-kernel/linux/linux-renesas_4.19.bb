@@ -3,11 +3,11 @@ DESCRIPTION = "Linux kernel for the RZG2 based board"
 require recipes-kernel/linux/linux-yocto.inc
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}/:"
-COMPATIBLE_MACHINE = "(tqmarzg2n_b-mbarzg2x|tqmarzg2m_e-mbarzg2x|tqmarzg2h_c-mbarzg2x)"
+COMPATIBLE_MACHINE = "(tqmarzg2n_b-mbarzg2x|tqmarzg2m_e-mbarzg2x|tqmarzg2m_aa-mbarzg2x|tqmarzg2h_c-mbarzg2x)"
 
 SRC_URI = "${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 SRCBRANCH = "TQMaRZG2x-linux-v4.19.140-VLP_1.0.6"
-SRCREV = "8e6bd492a32a0c9e18dfd7ba98cdc0a54a7b9426"
+SRCREV = "663fd93cd9e4b62d4efc054ed1943409fd18d34c"
 
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
