@@ -1,0 +1,395 @@
+From 3cf86b1c1fd94b790900410b72b9e9d17c70832b Mon Sep 17 00:00:00 2001
+From: Andreas Dumberger <andreas.dumberger@tq-group.com>
+Date: Thu, 11 Nov 2021 15:19:30 +0100
+Subject: [PATCH] TQMaRZG2x: build module-specific binaries
+
+The original flash-writer used CPU IDs and GPIOs to select the
+required DRAM configuration.
+On the TQMaRZG2x modules we can have different memory configurations
+in identical environments (same CPU, same board).
+So we must build each flash-writer to support exactly one module.
+
+Signed-off-by: Andreas Dumberger <andreas.dumberger@tq-group.com>
+---
+ boot_init_lbsc.c                   |  4 +--
+ boot_init_port.c                   | 20 ++++++-------
+ cpudrv.c                           |  8 +++---
+ ddr/lpddr4/boot_init_dram.c        | 12 ++++++++
+ ddr/lpddr4/boot_init_dram_config.c | 46 ++++++++++++++++++++++++++++--
+ dgmodul1.c                         |  8 +++---
+ include/scifdrv.h                  |  4 +--
+ init_scif.c                        |  4 +--
+ makefile                           | 16 +++++++++++
+ rpcqspidrv.c                       |  4 +--
+ scifdrv.c                          |  4 +--
+ 11 files changed, 99 insertions(+), 31 deletions(-)
+
+diff --git a/boot_init_lbsc.c b/boot_init_lbsc.c
+index 24e5614..900b5e9 100644
+--- a/boot_init_lbsc.c
++++ b/boot_init_lbsc.c
+@@ -49,10 +49,10 @@ void InitCSCTRL(void)
+ 
+ void InitCSWCR(void)
+ {
+-#ifdef RZG2_HIHOPE
++#if defined RZG2_HIHOPE || defined TQMARZG2X
+ 	*((volatile uint32_t*)LBSC_CSWCR0)=0x2A103320;
+ 	*((volatile uint32_t*)LBSC_CSWCR1)=0x2A103320;
+-#endif /* RZG2_HIHOPE */
++#endif /* RZG2_HIHOPE | TQMARZG2X */
+ }
+ 
+ void InitCSPWCR(void)
+diff --git a/boot_init_port.c b/boot_init_port.c
+index 3ec2623..7525242 100644
+--- a/boot_init_port.c
++++ b/boot_init_port.c
+@@ -71,7 +71,7 @@
+ #define RDMCHCRB_SLM_256		(0x00000080U)	/* once in 256 clock cycle */
+ #define RDMDPBASE_SEL_EXT		(0x00000001U)	/* External memory use */
+ 
+-#ifdef RZG2_HIHOPE
++#if defined RZG2_HIHOPE || defined TQMARZG2X
+ static void InitMODSEL(void);
+ static void InitIPSR_G2M(void);
+ static void InitGPSR_G2M(void);
+@@ -79,7 +79,7 @@ static void InitPOCCTRL(void);
+ static void InitDRVCTRL(void);
+ static void InitPUD(void);
+ static void InitPUEN(void);
+-#endif /* RZG2_HIHOPE */
++#endif /* RZG2_HIHOPE || TQMARZG2X */
+ 
+ #ifdef RZG2_EK874
+ static void InitMODSEL_G2E(void);
+@@ -90,9 +90,9 @@ static void InitPUD_G2E(void);
+ static void InitPUEN_G2E(void);
+ #endif /* RZG2_EK874 */
+ 
+-#ifdef RZG2_HIHOPE
++#if defined RZG2_HIHOPE || defined TQMARZG2X
+ static void StartRtDma0_Descriptor(void);
+-#endif /* RZG2_HIHOPE */
++#endif /* RZG2_HIHOPE || TQMARZG2X */
+ 
+ void InitPORT(void)
+ {
+@@ -104,7 +104,7 @@ void InitPORT(void)
+ 
+ 	switch (product)
+ 	{
+-#ifdef RZG2_HIHOPE
++#if defined RZG2_HIHOPE || defined TQMARZG2X
+ 		case PRR_PRODUCT_G2M:
+ 			StartRtDma0_Descriptor();
+ 			/* no break */
+@@ -118,7 +118,7 @@ void InitPORT(void)
+ 			InitPUD();
+ 			InitPUEN();
+ 		break;
+-#endif /* RZG2_HIHOPE */
++#endif /* RZG2_HIHOPE || TQMARZG2X */
+ #ifdef RZG2_EK874
+ 		case PRR_PRODUCT_G2E:
+ 			InitMODSEL_G2E();
+@@ -134,7 +134,7 @@ void InitPORT(void)
+ 	}
+ }
+ 
+-#ifdef RZG2_HIHOPE
++#if defined RZG2_HIHOPE || defined TQMARZG2X
+ static void InitMODSEL(void)
+ {
+ 	PFC_WR(PFC_MOD_SEL0,0x00000000);
+@@ -175,7 +175,7 @@ static void InitPUD(void)
+ static void InitPUEN(void)
+ {
+ }
+-#endif /* RZG2_HIHOPE */
++#endif /* RZG2_HIHOPE || TQMARZG2X */
+ 
+ #ifdef RZG2_EK874
+ static void InitMODSEL_G2E(void)
+@@ -210,7 +210,7 @@ static void InitPUEN_G2E(void)
+ }
+ #endif /* RZG2_EK874*/
+ 
+-#ifdef RZG2_HIHOPE
++#if defined RZG2_HIHOPE || defined TQMARZG2X
+ static void StartRtDma0_Descriptor(void)
+ {
+ 	uint32_t reg;
+@@ -256,4 +256,4 @@ static void StartRtDma0_Descriptor(void)
+ 											);
+ 	}
+ }
+-#endif /* RZG2_HIHOPE */
++#endif /* RZG2_HIHOPE || TQMARZG2X */
+diff --git a/cpudrv.c b/cpudrv.c
+index 6bb3624..9a81790 100644
+--- a/cpudrv.c
++++ b/cpudrv.c
+@@ -46,10 +46,10 @@ void StartTMU0(uint32_t tenmSec)
+ 
+ 	*((volatile uint16_t*)TMU_TCR0)  = 0x0000U;	/* TCNT_count_clock=(Input-Clock)/4 */
+ 
+-#ifdef RZG2_HIHOPE
++#if defined  RZG2_HIHOPE || defined TQMARZG2X
+ 	*((volatile uint32_t*)TMU_TCNT0) = 20833U;	/* [G2M/G2N](8.3333MHz/4)*20833=9.999880ms (-0.000012s/100s)	*/
+ 	*((volatile uint32_t*)TMU_TCOR0) = 20833U;	/* Input-Clock=CP-Clock=16.6666/2=8.3333MHz			*/
+-#endif /* RZG2_HIHOPE */
++#endif /* RZG2_HIHOPE || TQMARZG2X */
+ #ifdef RZG2_EK874
+ 	*((volatile uint32_t*)TMU_TCNT0) = 60000U;	/* [G2E](24.0000MHz/4)*60000=10.00ms				*/
+ 	*((volatile uint32_t*)TMU_TCOR0) = 60000U;	/* Input-Clock=CP-Clock=48.0000/2=24.0000MHz			*/
+@@ -81,10 +81,10 @@ void StartTMU0usec(uint32_t tenuSec)
+ 
+ 	*((volatile uint16_t*)TMU_TCR0)  = 0x0000U;	/* TCNT_count_clock=(Input-Clock)/4 */
+ 
+-#ifdef RZG2_HIHOPE
++#if defined  RZG2_HIHOPE || defined TQMARZG2X
+ 	*((volatile uint32_t*)TMU_TCNT0) = 21U;		/* [G2M/G2N](8.3333MHz/4)*21=10.08004us (+0.8004s/100s)	*/
+ 	*((volatile uint32_t*)TMU_TCOR0) = 21U;		/* Input-Clock=CP-Clock=16.6666/2=8.3333MHz		*/
+-#endif /* RZG2_HIHOPE */
++#endif /* RZG2_HIHOPE || TQMARZG2X */
+ #ifdef RZG2_EK874
+ 	*((volatile uint32_t*)TMU_TCNT0) = 60U;		/* [G2E](24.0000MHz/4)*60=10.00us		*/
+ 	*((volatile uint32_t*)TMU_TCOR0) = 60U;		/* Input-Clock=CP-Clock=48.0000/2=24.0000MHz	*/
+diff --git a/ddr/lpddr4/boot_init_dram.c b/ddr/lpddr4/boot_init_dram.c
+index 973e64d..63633ba 100644
+--- a/ddr/lpddr4/boot_init_dram.c
++++ b/ddr/lpddr4/boot_init_dram.c
+@@ -4080,6 +4080,18 @@ int32_t InitDram(void)
+ 	/***********************************************************************
+ 	 * Judge product and cut
+ 	 ***********************************************************************/
++#if defined TQMARZG2H_C
++	PutStr("Flash-Writer for TQMaRZG2H-PROTO1\r\n");
++#elif defined TQMARZG2M_E
++	PutStr("Flash-Writer for TQMaRZG2M-PROTO1\r\n");
++#elif defined TQMARZG2M_AA
++	PutStr("Flash-Writer for TQMaRZG2M-AA\r\n");
++#elif defined TQMARZG2N_B
++	PutStr("Flash-Writer for TQMaRZG2N-PROTO1\r\n");
++#else
++	PutStr("Flash-Writer not configured for TQMaRZG2 modules\r\n");
++#endif
++
+ 	Prr_Product = mmio_read_32(PRR) & PRR_PRODUCT_MASK;
+ 	Prr_Cut = mmio_read_32(PRR) & PRR_CUT_MASK;
+ 
+diff --git a/ddr/lpddr4/boot_init_dram_config.c b/ddr/lpddr4/boot_init_dram_config.c
+index ee5116b..e9ce186 100644
+--- a/ddr/lpddr4/boot_init_dram_config.c
++++ b/ddr/lpddr4/boot_init_dram_config.c
+@@ -11,7 +11,7 @@
+  *	NUMBER OF BOARD CONFIGRATION
+  *	PLEASE DEFINE
+  ******************************************************************************/
+-#define BOARDNUM 3
++#define BOARDNUM 4
+ /*******************************************************************************
+  *	PLEASE SET board number or board judge function
+  ******************************************************************************/
+@@ -29,11 +29,17 @@ static uint32_t boardcnf_get_brd_type(void)
+ 	}
+ 	else if (Prr_Product == PRR_PRODUCT_G2M)
+ 	{
++#if defined TQMARZG2M_E
+ 		boardNr = 1;
++#elif defined TQMARZG2M_AA
++		boardNr = 2;
++#else
++	#warning "unknown board"
++#endif
+ 	}
+ 	else if (Prr_Product == PRR_PRODUCT_G2H)
+ 	{
+-		boardNr = 2;
++		boardNr = 3;
+ 	}
+ 
+ 	return (boardNr);
+@@ -209,7 +215,41 @@ static const struct _boardcnf boardcnfs[BOARDNUM] = {
+ },
+ 
+ /*
+- * boardcnf[2] TQMaRZG2H 8Gbit/1Rank/2ch --> 16 Gbit total per Chip --> 32 Gbit total on module = 4 GB
++ * boardcnf[2] TQMaRZG2M-AA 8Gbit/1Rank/2ch --> 16 Gbit total per Chip --> 16 Gbit total on module = 2 GB
++ */
++{
++	0x01,		/* phyvalid */
++	0x01,		/* dbi_en */
++	0x0300,		/* cacs_dly */
++	0,		/* cacs_dly_adj */
++	0x0300,		/* dqdm_dly_w */
++	0x00a0,		/* dqdm_dly_r */
++	{
++/*ch[0]*/	{
++/*ddr_density[]*/	{ 0x04, 0xff },
++/*ca_swap*/		0x00543210,
++/*dqs_swap*/		0x3210,
++/*dq_swap[]*/		{ 0x17602534, 0x23546701, 0x43257160, 0x10765243 },
++/*dm_swap[]*/		{ 0x08, 0x08, 0x08, 0x08 },
++/*wdqlvl_patt[]*/	WDQLVL_PAT,
++/*cacs_adj*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0 },
++/*dm_adj_w*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_w*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 },
++/*dm_adj_r*/		{ 0, 0, 0, 0 },
++/*dqdm_adj_r*/		{ 0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0,
++			  0, 0, 0, 0, 0, 0, 0, 0 }
++		},
++	}
++},
++
++/*
++ * boardcnf[3] TQMaRZG2H 8Gbit/1Rank/2ch --> 16 Gbit total per Chip --> 32 Gbit total on module = 4 GB
+  */
+ {
+ 	0x05,		/* phyvalid */
+diff --git a/dgmodul1.c b/dgmodul1.c
+index e7a64d8..5d729af 100644
+--- a/dgmodul1.c
++++ b/dgmodul1.c
+@@ -105,9 +105,9 @@ void	dgScifSpeedUp(void)
+ void	dgScifSpeedUp_921600(void)
+ {
+ 	uint16_t setData;
+-#ifdef RZG2_HIHOPE
++#if defined RZG2_HIHOPE || defined TQMARZG2X
+ 	uint32_t product;
+-#endif /* RZG2_HIHOPE */
++#endif /* RZG2_HIHOPE || TQMARZG2X */
+ #ifdef RZG2_EK874
+ 	uint32_t sscg;
+ 	uint32_t md;
+@@ -120,10 +120,10 @@ void	dgScifSpeedUp_921600(void)
+ 	PutStr("Please change to 921.6Kbps baud rate setting of the terminal.",1);
+ 	WaitPutCharSendEnd();
+ 
+-#ifdef RZG2_HIHOPE
++#if defined RZG2_HIHOPE || defined TQMARZG2X
+ 	product = *((volatile uint32_t*)PRR) & (PRR_PRODUCT_MASK | PRR_CUT_MASK);
+ 	setData =0x12;		/* 266.66MHz / (921600*16) = 18.08  @S3D1 */
+-#endif /* RZG2_HIHOPE */
++#endif /* RZG2_HIHOPE || TQMARZG2X */
+ #ifdef RZG2_EK874
+ 	if (sscg == 0x0)
+ 	{			/* MD12=0 (SSCG off) ÅF S3D1C=266.6MHz */
+diff --git a/include/scifdrv.h b/include/scifdrv.h
+index 9679861..2c86e8a 100644
+--- a/include/scifdrv.h
++++ b/include/scifdrv.h
+@@ -33,9 +33,9 @@ int32_t PutCharSCIF2(char outChar);
+ int32_t GetCharSCIF2(char *inChar);
+ void PowerOnScif2(void);
+ void WaitPutScif2SendEnd(void);
+-#ifdef RZG2_HIHOPE
++#if defined RZG2_HIHOPE || defined TQMARZG2X
+ void InitScif2_SCIFCLK(void);
+-#endif /* RZG2_HIHOPE */
++#endif /* RZG2_HIHOPE || TQMARZG2X */
+ #ifdef RZG2_EK874
+ void InitScif2_SCIFCLK_G2E(void);
+ #endif /* RZG2_EK874 */
+diff --git a/init_scif.c b/init_scif.c
+index 9f72003..6abbb57 100644
+--- a/init_scif.c
++++ b/init_scif.c
+@@ -42,13 +42,13 @@ void InitScif(void)
+ 	product = *((volatile uint32_t*)PRR) & PRR_PRODUCT_MASK;
+ 	switch(product)
+ 	{
+-#ifdef RZG2_HIHOPE
++#if defined RZG2_HIHOPE || defined TQMARZG2X
+ 		case PRR_PRODUCT_G2H:
+ 		case PRR_PRODUCT_G2M:
+ 		case PRR_PRODUCT_G2N:
+ 			InitScif2_SCIFCLK();
+ 		break;
+-#endif /* RZG2_HIHOPE */
++#endif /* RZG2_HIHOPE || TQMARZG2X */
+ #ifdef RZG2_EK874
+ 		case PRR_PRODUCT_G2E:
+ 			InitScif2_SCIFCLK_G2E();
+diff --git a/makefile b/makefile
+index 0a590e0..8b384cf 100644
+--- a/makefile
++++ b/makefile
+@@ -78,6 +78,22 @@ ifeq ("$(BOARD)", "EK874")
+ 	BOARD_NAME   =  EK874
+ 	FILENAME_ADD = _ek874
+ 	CFLAGS += -DRZG2_EK874=1
++else ifeq ("$(BOARD)", "TQMARZG2H_C")
++	BOARD_NAME   =  TQMARZG2H_C
++	FILENAME_ADD = _TQMARZG2H_C
++	CFLAGS += -DTQMARZG2X=1 -DTQMARZG2H_C=1
++else ifeq ("$(BOARD)", "TQMARZG2M_AA")
++	BOARD_NAME   =  TQMARZG2M_AA
++	FILENAME_ADD = _TQMARZG2M_AA
++	CFLAGS += -DTQMARZG2X=1 -DTQMARZG2M_AA=1
++else ifeq ("$(BOARD)", "TQMARZG2M_E")
++	BOARD_NAME   =  TQMARZG2M_E
++	FILENAME_ADD = _TQMARZG2M_E
++	CFLAGS += -DTQMARZG2X=1 -DTQMARZG2M_E=1
++else ifeq ("$(BOARD)", "TQMARZG2N_B")
++	BOARD_NAME   =  TQMARZG2N_B
++	FILENAME_ADD = _TQMARZG2N_B
++	CFLAGS += -DTQMARZG2X=1 -DTQMARZG2N_B=1
+ else
+ 	BOARD_NAME   =  HIHOPE
+ 	FILENAME_ADD = _hihope
+diff --git a/rpcqspidrv.c b/rpcqspidrv.c
+index 0b67e16..21c98c5 100644
+--- a/rpcqspidrv.c
++++ b/rpcqspidrv.c
+@@ -1053,7 +1053,7 @@ void SetRPC_ClockMode(uint32_t mode)
+ {
+ 	uint32_t dataL=0;
+ 
+-#ifdef RZG2_HIHOPE
++#if defined RZG2_HIHOPE || defined TQMARZG2X
+ 	if (mode == RPC_CLK_160M)
+ 	{
+ 		dataL = 0x00000011;	/* RPC clock 160MHz */
+@@ -1066,7 +1066,7 @@ void SetRPC_ClockMode(uint32_t mode)
+ 	{
+ 		dataL = 0x00000017;	/* RPC clock 40MHz */
+ 	}
+-#endif /* RZG2_HIHOPE */
++#endif /* RZG2_HIHOPE || TQMARZG2X */
+ #ifdef RZG2_EK874
+ 	if (mode == RPC_CLK_160M)
+ 	{
+diff --git a/scifdrv.c b/scifdrv.c
+index b49bd5c..c3977d2 100644
+--- a/scifdrv.c
++++ b/scifdrv.c
+@@ -99,7 +99,7 @@ void WaitPutScif2SendEnd(void)
+ 	}
+ }
+ 
+-#ifdef RZG2_HIHOPE
++#if defined RZG2_HIHOPE || defined TQMARZG2X
+ void InitScif2_SCIFCLK(void)
+ {
+ 	volatile uint16_t dataW;
+@@ -128,7 +128,7 @@ void InitScif2_SCIFCLK(void)
+ 
+ 	SoftDelay(100);
+ }
+-#endif /* RZG2_HIHOPE */
++#endif /* RZG2_HIHOPE || TQMARZG2X */
+ 
+ #ifdef RZG2_EK874
+ void InitScif2_SCIFCLK_G2E(void)
+-- 
+2.25.1
+

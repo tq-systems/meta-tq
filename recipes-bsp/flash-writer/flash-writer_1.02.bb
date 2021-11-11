@@ -24,6 +24,14 @@ do_compile() {
                 BOARD="HIHOPE";
         elif [ "${MACHINE}" = "ek874" ]; then
                 BOARD="EK874";
+        elif [ "${MACHINE}" = "tqmarzg2h_c-mbarzg2x" ]; then
+                BOARD="TQMARZG2H_C";
+        elif [ "${MACHINE}" = "tqmarzg2m_aa-mbarzg2x" ]; then
+                BOARD="TQMARZG2M_AA";
+        elif [ "${MACHINE}" = "tqmarzg2m_e-mbarzg2x" ]; then
+                BOARD="TQMARZG2M_E";
+        elif [ "${MACHINE}" = "tqmarzg2n_b-mbarzg2x" ]; then
+                BOARD="TQMARZG2N_B";
         fi
         cd ${S}
 
