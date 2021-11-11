@@ -9,12 +9,22 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* tqma335x: linux-ti-tq: enable RTC TPS65910 in kernelconfig
+* tqma335x: u-boot-tq: e-mmc pins slewrate set to slow
+
 ### Added
 
+* TQMa8Xx/TQMa8Xx4/TQMa8XxS: linux 5.10 support based on
+  linux-fslc 5.10 + imx
+* tqma335x: u-boot-tq: mmc hwpartition allows size '-' for whole e-mmc
 * machines: add machine config for TQMa8MxML with 1GiB RAM on MBa8Mx
 * u-boot: tqma8mxml: add support for SOM variant with 1GiB RAM
 
-## Next release
+### Fixed
+
+* tqma335x: linux-ti-tq: fixes for RTC TPS65910 in dtb
 
 ## hardknott.TQMa8.BSP.SW.0081
 
@@ -37,7 +47,8 @@ Releases are named with the following scheme:
 
 ## Added
 
-* TQMa8Mx/TQMa8MxML/TQMa8MxNL/TQMa8x/TQMa8MPxL/TQMa8Xx/TQMa8XxS: linux 5.10 support based on linux-fslc 5.10 + imx
+* TQMa8Mx/TQMa8MxML/TQMa8MxNL/TQMa8x/TQMa8MPxL: linux 5.10 support based on
+  linux-fslc 5.10 + imx
   * experimental usb support for ath10k
   * adjusted kernel config settings
 * port TQMa8 boards from branch zeus-tqma8 (equal to release
