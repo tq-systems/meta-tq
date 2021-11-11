@@ -1,118 +1,52 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-# all our boards have at least one native network port
 SRC_URI = " \
     file://10-eth0.network \
+    file://10-eth1.network \
+    file://20-can0.network \
+    file://20-can1.network \
     file://90-dhcp-default.network \
 "
 
-# TQMa6x has two native interfaces and two CAN interfaces
-SRC_URI_append_tqma6x = " \
-    file://10-eth1.network \
-    file://can0.service \
-    file://can1.service \
-"
+# most boards have a second ethernet port and 2 can interfaces
+HAS_ETH1 ??= "true"
+HAS_CAN0 ??= "true"
+HAS_CAN1 ??= "true"
 
-# TQMa6ULx has two native interfaces and two CAN interfaces
-SRC_URI_append_tqma6ulx = " \
-    file://10-eth1.network \
-    file://can0.service \
-    file://can1.service \
-"
+# adjust available interfaces for some boards
+HAS_ETH1_tqma8mq ?= "false"
+HAS_CAN0_tqma8mq ?= "false"
+HAS_CAN1_tqma8mq ?= "false"
 
-# TQMa6ULLx has two native interfaces and two CAN interfaces
-SRC_URI_append_tqma6ullx = " \
-    file://10-eth1.network \
-    file://can0.service \
-    file://can1.service \
-"
+HAS_ETH1_tqma8mxml ?= "false"
+HAS_CAN0_tqma8mxml ?= "false"
+HAS_CAN1_tqma8mxml ?= "false"
 
-# TQMa7x has two native interfaces and two CAN interfaces
-SRC_URI_append_tqma7x = " \
-    file://10-eth1.network \
-    file://can0.service \
-    file://can1.service \
-"
+HAS_ETH1_tqma8mxnl ?= "false"
+HAS_CAN0_tqma8mxnl ?= "false"
+HAS_CAN1_tqma8mxnl ?= "false"
 
-# TQMLS102xa has two native interfaces and two CAN interfaces
-SRC_URI_append_tqmls102xa = " \
-    file://10-eth1.network \
-    file://can0.service \
-    file://can1.service \
-"
-
-# TQMLS1028a has two CAN interfaces
-SRC_URI_append_tqmls1028a = " \
-    file://can0.service \
-    file://can1.service \
-"
-
-SYSTEMD_SERVICE_${PN}_tqma6x = "can0.service can1.service"
-SYSTEMD_SERVICE_${PN}_tqma6ulx = "can0.service can1.service"
-SYSTEMD_SERVICE_${PN}_tqma6ullx = "can0.service can1.service"
-SYSTEMD_SERVICE_${PN}_tqma7x = "can0.service can1.service"
-SYSTEMD_SERVICE_${PN}_tqmls102xa = "can0.service can1.service"
-SYSTEMD_SERVICE_${PN}_tqmls1028a = "can0.service can1.service"
+HAS_ETH1_tqmls1028a ?= "false"
 
 do_install_append() {
+    # all our boards have at least one native network port
     install -d ${D}${systemd_unitdir}/network/
     install -m 0644 "${WORKDIR}/10-eth0.network" ${D}${systemd_unitdir}/network/
     install -m 0644 "${WORKDIR}/90-dhcp-default.network" ${D}${systemd_unitdir}/network/
 
-    case ${MACHINE} in
-        # place complete machine names first to make sure special settings
-        # are prioritized
-        tqma6dl* |\
-        tqma6q* |\
-        tqma6qp* |\
-        tqma6s* )
-            install -m 0644 "${WORKDIR}/10-eth1.network" ${D}${systemd_unitdir}/network/
-            install -d ${D}${systemd_system_unitdir}/
-            install -m 0644 "${WORKDIR}/can0.service" ${D}${systemd_system_unitdir}/
-            install -m 0644 "${WORKDIR}/can1.service" ${D}${systemd_system_unitdir}/
-            break
-            ;;
-        tqma6ulx* )
-            install -m 0644 "${WORKDIR}/10-eth1.network" ${D}${systemd_unitdir}/network/
-            install -d ${D}${systemd_system_unitdir}/
-            install -m 0644 "${WORKDIR}/can0.service" ${D}${systemd_system_unitdir}/
-            install -m 0644 "${WORKDIR}/can1.service" ${D}${systemd_system_unitdir}/
-            break
-            ;;
-        tqma6ullx* )
-            install -m 0644 "${WORKDIR}/10-eth1.network" ${D}${systemd_unitdir}/network/
-            install -d ${D}${systemd_system_unitdir}/
-            install -m 0644 "${WORKDIR}/can0.service" ${D}${systemd_system_unitdir}/
-            install -m 0644 "${WORKDIR}/can1.service" ${D}${systemd_system_unitdir}/
-            break
-            ;;
-        tqma7x*)
-            install -m 0644 "${WORKDIR}/10-eth1.network" ${D}${systemd_unitdir}/network/
-            install -d ${D}${systemd_system_unitdir}/
-            install -m 0644 "${WORKDIR}/can0.service" ${D}${systemd_system_unitdir}/
-            install -m 0644 "${WORKDIR}/can1.service" ${D}${systemd_system_unitdir}/
-            break
-            ;;
-        tqmls102xa*)
-            install -m 0644 "${WORKDIR}/10-eth1.network" ${D}${systemd_unitdir}/network/
-            install -d ${D}${systemd_system_unitdir}/
-            install -m 0644 "${WORKDIR}/can0.service" ${D}${systemd_system_unitdir}/
-            install -m 0644 "${WORKDIR}/can1.service" ${D}${systemd_system_unitdir}/
-            break
-            ;;
-        tqmls1028a*)
-            install -d ${D}${systemd_system_unitdir}/
-            install -m 0644 "${WORKDIR}/can0.service" ${D}${systemd_system_unitdir}/
-            install -m 0644 "${WORKDIR}/can1.service" ${D}${systemd_system_unitdir}/
-            break
-            ;;
-        *)
-            break
-            ;;
-    esac
+    if [ "${HAS_ETH1}" = "true" ]; then
+        install -m 0644 "${WORKDIR}/10-eth1.network" ${D}${systemd_unitdir}/network/
+    fi
+
+    if [ "${HAS_CAN0}" = "true" ]; then
+        install -m 0644 "${WORKDIR}/20-can0.network" ${D}${systemd_unitdir}/network/
+    fi
+
+    if [ "${HAS_CAN1}" = "true" ]; then
+        install -m 0644 "${WORKDIR}/20-can1.network" ${D}${systemd_unitdir}/network/
+    fi
 }
 
 FILES_${PN} = "\
-    ${systemd_system_unitdir} \
     ${systemd_unitdir}/network/ \
 "
