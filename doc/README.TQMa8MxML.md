@@ -124,6 +124,7 @@ _MBa8x HW Rev.030x only_
 
 ## Known Issues
 
+* Default setting for `fdt_file` in u-boot does not match new naming scheme. See [Build Artifacts](#Build-Artifacts) for complete list of supported Device Tree files
 * USB hub disconnects after suspend
 * LVDS shows wrong colors on older Tianma display kit (HW issue on older
   display kit revisions)
