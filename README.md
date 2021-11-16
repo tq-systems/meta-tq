@@ -21,7 +21,7 @@ layers: meta, meta-poky
 
 Optionally the layer can make use of features from meta-freescale /
 meta-freeescale-distro if using i.MX6, i.MX6UL, i.MX7 based machines
-(tqma6[s,dl,q,qp]-mba6x, tqma6ul[l]x-mba6ulx, tqma6ul[l]x-lga-mba6ulx etc.)
+(tqma6\[s,dl,q,qp\]-mba6x, tqma6ul\[l\]x-mba6ulx, tqma6ul\[l\]x-lga-mba6ulx etc.)
 or Layerscape/QorIQ.
 
 URI: https://git.yoctoproject.org/git/meta-freescale  
@@ -51,9 +51,9 @@ with machines in meta-tq:
 - fsl-xwayland
 
 Optionally the layer can make use of features from meta-ti if using AM57xx
-based machines (tqma57[1,2,4]x-mba57xx etc.)
+based machines (tqma57\[1,2,4\]x-mba57xx etc.)
 
-In meta-ti no hardknott branch exist, so we have to use the master branch.
+In meta-ti no hardknott branch exists, so we have to use the master branch.
 The last commit before the master branch supports
 hardknott is commit f56051c9a8cf09f54c43b81301073eed71bbda97.
 
