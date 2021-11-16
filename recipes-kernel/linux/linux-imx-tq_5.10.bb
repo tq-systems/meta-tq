@@ -10,7 +10,7 @@ SRC_URI = "\
 "
 
 SRCBRANCH = "TQMa8-fslc-5.10-2.1.x-imx"
-SRCREV = "4defdc745f06555e138b0b8b3c397ecd859fc009"
+SRCREV = "28c7edbf8ca084917c22d1ae49f6cbe409becb18"
 
 KERNEL_TREE_DEFCONFIG_mx8 = "imx_v8_defconfig"
 
@@ -40,14 +40,13 @@ COMPATIBLE_MACHINE = "^("
 # COMPATIBLE_MACHINE .= "|tqma6ullx"
 # COMPATIBLE_MACHINE .= "|tqmls1012al"
 # COMPATIBLE_MACHINE .= "|tqmls1028a"
-# COMPATIBLE_MACHINE .= "|tqma8x"
+COMPATIBLE_MACHINE .= "|tqma8x"
 # COMPATIBLE_MACHINE .= "|tqma8xx"
 # COMPATIBLE_MACHINE .= "|tqma8xxs"
 # COMPATIBLE_MACHINE .= "|tqma8mpxl"
 COMPATIBLE_MACHINE .= "|tqma8mq"
 COMPATIBLE_MACHINE .= "|tqma8mxml"
 COMPATIBLE_MACHINE .= "|tqma8mxnl"
-# COMPATIBLE_MACHINE .= "|tqma8qm"
 COMPATIBLE_MACHINE .= ")$"
 
 EXTRA_OEMAKE_append_mx8 = " ARCH=arm64"

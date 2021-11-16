@@ -8,11 +8,11 @@ SERIAL_CONSOLES = "115200;ttyLP0"
 USE_VT = "0"
 
 BOARD_DEVICETREE_FILES = "\
-	imx8qm-mba8x.dtb \
-	imx8qm-mba8x-lvds0-tm070jvhg33.dtb \
-	imx8qm-mba8x-lvds1-tm070jvhg33.dtb \
-	imx8qm-mba8x-dp.dtb \
-	imx8qm-mba8x-rpmsg.dtb \
+	imx8qm-tqma8qm-mba8x.dtb \
+	imx8qm-tqma8qm-mba8x-dp.dtb \
+	imx8qm-tqma8qm-mba8x-lvds0-tm070jvhg33.dtb \
+	imx8qm-tqma8qm-mba8x-lvds1-tm070jvhg33.dtb \
+	imx8qm-tqma8qm-mba8x-rpmsg.dtb \
 "
 
 BOARD_FIRMWARE_FILES = "\
