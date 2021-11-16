@@ -12,11 +12,11 @@ This README contains some useful information for TQMa8Mx on MBa8Mx
 
 ## Version information for software components
 
-See [here](./README.SoftwareVersions.md) for the software base versions.
+See [here](./README.TQMa8.SoftwareVersions.md) for the software base versions.
 
 ## Supported machine configurations:
 
-See top level README.md for configurations usable as MACHINE.
+See top level [README](../README.md) for configurations usable as MACHINE.
 
 ## Supported Features
 
