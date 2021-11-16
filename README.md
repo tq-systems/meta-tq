@@ -158,6 +158,22 @@ Support for the following machines is contained in this version:
 | [p]    | i.MX7\[S,D\]     | TQMa7\[S,D\]             | MBa7x          | tqma7x-512mb-mba7            | TQMa7\[S,D\] HW REV.010x ... 0x020x / 512 MiB RAM / MBa7x HW REV.020x |
 | [p]    | i.MX7\[S,D\]     | TQMa7\[S,D\]             | MBa7x          | tqma7x-1gb-mba7              | TQMa7\[S,D\] HW REV.010x ... 0x020x / 1 GiB RAM / MBa7x HW REV.020x |
 | [p]    | i.MX7\[S,D\]     | TQMa7\[S,D\]             | MBa7x          | tqma7x-2gb-mba7              | TQMa7\[S,D\] HW REV.010x ... 0x020x / 2 GiB RAM / MBa7x HW REV.020x |
+| [b]    | i.MX8MP          | TQMa8MPxL                | MBa8MPxL       | tqma8mpxl-2gb-mba8mpxl       | TQMa8MPQL with 2 GiB RAM, HW REV.010x, MBa8Mx HW REV.010x |
+| [y]    | i.MX8M\[D,Q\]    | TQMa8M\[D,Q\]            | MBa8Mx         | tqma8mx-1gb-mba8mx           | TQMa8M\[D,Q\] with 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x / 030x |
+| [y]    | i.MX8MQL         | TQMa8MQL                 | MBa8Mx         | tqma8mx-2gb-mba8mx           | TQMa8MQL / 2 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x / 030x |
+| [y]    | i.MX8MQ          | TQMa8MQ	               | MBa8Mx         | tqma8mx-4gb-mba8mx           | TQMa8MQ / 4 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x / 030x |
+| [y]    | i.MX8MMQ         | TQMa8MQML                | MBa8Mx         | tqma8mxml-2gb-mba8mx         | TQMa8MQML / 2 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x |
+| [y]    | i.MX8MNQ         | TQMa8MQNL                | MBa8Mx         | tqma8mxnl-1gb-mba8mx         | TQMa8MQNL / 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x |
+| [y]    | i.MX8MNDL        | TQMa8MDLNL               | MBa8Mx         | tqma8mxnl-1gb-mba8mx         | TQMa8MDLNL / 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x |
+| [p]    | i.MX8QM          | TQMa8QM	               | MBa8x          | tqma8qm-4gb-mba8x            | TQMa8QM / 4 GiB RAM, HW REV.0102 and newer / 020x, MBa8x HW REV.020x |
+| [p]    | i.MX8QM          | TQMa8QM	               | MBa8x          | tqma8qm-8gb-mba8x            | TQMa8QM / 8 GiB RAM, HW REV.0102 and newer / 020x, MBa8x HW REV.020x |
+| [p]    | i.MX8DXP         | TQMa8XDP                 | MBa8Xx         | tqma8xdp-1gb-mba8xx          | TQMa8XDP / 1 GiB RAM ECC, HW REV.020x / 0x30x |
+| [p]    | i.MX8DXP         | TQMa8XDP4                | MBa8Xx         | tqma8xdp4-mba8xx             | TQMa8XDP / 2 GiB LPDDR4 RAM, HW REV.010x |
+| [p]    | i.MX8QXP         | TQMa8XQP                 | MBa8Xx         | tqma8xqp-1gb-mba8xx          | TQMa8XQP / 1 GiB RAM ECC, HW REV.020x / 0x30x |
+| [p]    | i.MX8QXP         | TQMa8XQP                 | MBa8Xx         | tqma8xqp-2gb-mba8xx          | TQMa8XQP / 2 GiB RAM ECC, HW REV.020x / 0x30x |
+| [p]    | i.MX8QXP         | TQMa8XQP4                | MBa8Xx         | tqma8xqp4-mba8xx             | TQMa8XQP / 2 GiB LPDDR4 RAM, HW REV.010x |
+| [p]    | i.MX8DXP         | TQMa8XDPS                | MB-SMARC-2     | tqma8xdps-mb-smarc-2         | TQMa8XDPS / 2 GiB RAM, HW REV.030x |
+| [p]    | i.MX8QXP         | TQMa8XQPS                | MB-SMARC-2     | tqma8xqps-mb-smarc-2         | TQMa8XQPS / 2 GiB RAM, HW REV.030x |
 | [b]    | LS1012A          | TQMLS1012AL              | MBLS1012AL     | tqmls1012al-mbls1012al       | TQMLS1012AL HW REV.010x ... 020x / 512 MiB RAM / MBLS1012AL HW REV.020x |
 | [b]    | LS1012A          | TQMLS1012AL              | MBLS1012AL     | tqmls1012al-1gb-mbls1012al   | TQMLS1012AL HW REV.020x / 1 GiB RAM / MBLS1012AL HW REV.020x |
 | [b]    | LS1017A          | TQMLS1017A               | MBLS1028A      | tqmls1028a-mbls1028a         | |
@@ -209,14 +225,25 @@ is
 
 Under the given links SOM specific information can be found:
 
-- [TQMA335x\[L\]](doc/README.TQMa335x.md)
-- [TQMA6\[Q,D\]](doc/README.TQMa6x.md)
-- [TQMA6UL\[L\]](doc/README.TQMa6ULx.md)
-- [TQMA7\[S,D\]](doc/README.TQMa7x.md)
-- [TQMLS1012AL](doc/README.TQMLS1012AL.md)
-- [TQMLS102\[0,1\]A](doc/README.TQMLS102xa.md)
-- [TQMLS1017A/TQMLS1028A](doc/README.TQMLS1028A.md)
-- [TQMLX2160A](doc/README.tqmlx2160a-mblx2160a.md)
+[TQMA6\[Q,D\]](doc/README.TQMa6x.md)  
+[TQMA6UL\[L\]](doc/README.TQMa6ULx.md)  
+[TQMA7\[S,D\]](doc/README.TQMa7x.md)  
+[TQMa8Mx](doc/README.TQMa8Mx.md)  
+[TQMa8MxML](doc/README.TQMa8MxML.md)  
+[TQMa8MxNL](doc/README.TQMa8MxNL.md)  
+[TQMa8MPxL](doc/README.TQMa8MPxL.md)  
+[TQMa8XDP](doc/README.TQMa8Xx.md)  
+[TQMa8XDP4](doc/README.TQMa8Xx.md)  
+[TQMa8XQP](doc/README.TQMa8Xx.md)  
+[TQMa8XQP4](doc/README.TQMa8Xx.md)  
+[TQMa8XDPS](doc/README.TQMa8XxS.md)  
+[TQMa8XQPS](doc/README.TQMa8XxS.md)  
+[TQMa8QM](doc/README.TQMa8x.md)  
+[TQMA335x\[L\]](doc/README.TQMa335x.md)  
+[TQMLS1012AL](doc/README.TQMLS1012AL.md)  
+[TQMLS102\[0,1\]A](doc/README.TQMLS102xa.md)  
+[TQMLS1017A/TQMLS1028A](doc/README.TQMLS1028A.md)  
+[TQMLX2160A](doc/README.tqmlx2160a-mblx2160a.md)  
 
 ### Known Issues
 
