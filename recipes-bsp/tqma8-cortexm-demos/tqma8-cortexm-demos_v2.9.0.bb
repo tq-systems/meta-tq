@@ -13,6 +13,7 @@ inherit deploy
 
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
+do_install[noexec] = "1"
 
 SOC		?= "INVALID"
 SOC_tqma8mxnl	= "tqma8mxnl"
@@ -32,17 +33,13 @@ SRC_URI = "file://tqma8-cortexm-demos-${SDK_BASE_REV}-${SDK_TQ_REV}.tar.gz"
 
 S = "${WORKDIR}/${BPN}-${SDK_BASE_REV}-${SDK_TQ_REV}"
 
-do_compile[noexec] = "1"
-
-do_install[noexec] = "1"
-
 do_deploy () {
     install -m 0644 ${S}/${SOC}/*.bin ${DEPLOYDIR}
 }
 
 addtask deploy after do_install
 
-FILES_${PN} = " \
+FILES_${PN} = "\
    /*.bin \
 "
 
