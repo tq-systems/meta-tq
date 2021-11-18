@@ -6,6 +6,8 @@ ARM CPU.
 
 Please see the corresponding sections below for details.
 
+[[_TOC_]]
+
 ## Overview
 
 ### Dependencies
@@ -73,21 +75,14 @@ Maintainer: Markus Niebel <Markus.Niebel@tq-group.com>
 
 Additionally you can use github's collaboration features.
 
-## Table of Contents
+## Usage
 
-1. Adding the meta-tq layer to your build
-2. Supported machines
-3. Support for wic
-4. Support custom mainboards
-5. SOM specific documentation
-6. Known Issues
-
-### 1. Adding the meta-tq layer to your build
+### Adding the meta-tq layer to your build
 
 In order to use this layer, you need to make the build system aware of
 it.
 
-Assuming the all layers exist in a subdir sources at the top-level of your
+Assuming that all layers exist in a subdir `sources` at the top-level of your
 yocto build tree, you can add it to the build system by adding the
 location of the tq layer to bblayers.conf, along with any
 other layers needed. e.g.:
@@ -141,7 +136,7 @@ BBLAYERS = " \
 "
 ```
 
-### 2. Supported machines
+### Supported machines
 
 Support for the following machines is contained in this version:
 
@@ -188,12 +183,12 @@ Support for the following machines is contained in this version:
 **Note:** for TQMa6UL1 and baseboards using this module variant with i.MX6ULG1
           a dedicated device tree is supplied
 
-### 3. Support for wic
+### Support for wic
 
 To generate bootable images for SD / e-MMC wic is supported. Config files are
 located in wic directory. Machine files are preconfigured to generate wic images.
 
-### 4. Support custom mainboards
+### Support custom mainboards
 
 To allow reusing of defines and settings all machine configuration files are
 splitted in SOM and mainboard specific parts. Most of the settings can easily
@@ -207,7 +202,9 @@ is
   the SOM)
 * include SOM specific settings from meta-tq (`conf/machine/include`)
 
-### 5. SOM specific documentation
+## Additional information
+
+### SOM specific documentation
 
 Under the given links SOM specific information can be found:
 
@@ -220,7 +217,7 @@ Under the given links SOM specific information can be found:
 - [TQMLS1017A/TQMLS1028A](doc/README.TQMLS1028A.md)
 - [TQMLX2160A](doc/README.tqmlx2160a-mblx2160a.md)
 
-### 6. Known Issues
+### Known Issues
 
 - `u-boot-fw-utils` is not buildable currently because it uses the U-Boot Mainline
 repository. To make it buildable a bbappend which changes SRC_URI would be necessary.
