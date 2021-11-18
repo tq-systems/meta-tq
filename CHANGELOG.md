@@ -5,6 +5,38 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+[[_TOC_]]
+
+## Next release
+
+## Changed
+
+* rework systemd-machine-units bbappend (add simplification from branch
+  zeus-tqma8, adapt to newer systemd version with CAN FD support)
+* adjust layerscape machine files to meta-freescale / hardknott
+* adapt layerscape specific recipes / bbappend to meta-freescale / hardknott
+* adapt TI specific recipes / bbappend to used meta-ti
+* rename atf recipe for LS based boards to qoriq-atf (follows changes in meta-freescale)
+* update sub modules to support hardknott
+
+## Added
+
+* TQMa8Mx/TQMa8MxML/TQMa8MxNL: linux 5.10 support based on linux-fslc 5.10 + imx
+  * experimental usb support for ath10k
+  * adjusted kernel config settings
+* port TQMa8 boards from branch zeus-tqma8 (equal to last release of mentioned branch)
+* ubi as MACHINE_FEATURE if \[Q\]SPI NOR is supported by machine
+* gitpkgv-nonexact.bbclass
+
+## Fixed
+
+* weak assignments in machine files wherever possible to allow overwriting for
+  custom mainboards or project specific tailoring
+
+## Removed
+
+* preview support for PowerPC machines
+
 ## zeus.TQMLS1012AL.BSP.SW.0010
 
 ### Added
@@ -26,7 +58,7 @@ Releases are named with the following scheme:
 ## zeus.TQMa35xx.BSP.SW.0120
 
 ### Added
-* tqma335x: Support for TQMa335x[L] 256MB and 512MB
+* tqma335x: Support for TQMa335x\[L\] 256MB and 512MB
 
 ### Changed
 
@@ -67,7 +99,7 @@ Releases are named with the following scheme:
 ## zeus.TQMLS1028A.BSP.SW.0105
 
 ### Added
-* tqma6: added machine for TQMa6[Q,D] 2GB variant
+* tqma6: added machine for TQMa6\[Q,D\] 2GB variant
 
 ### Changed
 * tqma6: U-Boot: update to support 2GB variant
