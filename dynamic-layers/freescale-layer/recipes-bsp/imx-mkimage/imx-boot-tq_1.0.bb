@@ -12,9 +12,10 @@ inherit use-imx-security-controller-firmware
 
 BOOT_TOOLS = "imx-boot-tools"
 
-IMX_EXTRA_FIRMWARE      = "firmware-imx-8 imx-sc-firmware imx-seco"
-IMX_EXTRA_FIRMWARE_mx8m = "firmware-imx-8m"
-IMX_EXTRA_FIRMWARE_mx8x = "imx-sc-firmware imx-seco"
+IMX_EXTRA_FIRMWARE        = "firmware-imx-8 imx-sc-firmware imx-seco"
+IMX_EXTRA_FIRMWARE_append = " ${@bb.utils.contains('IMXBOOT_TARGETS', 'flash_linux_m4', 'virtual/imx-cortexm-demos', '', d)}"
+IMX_EXTRA_FIRMWARE_mx8m   = "firmware-imx-8m"
+IMX_EXTRA_FIRMWARE_mx8x   = "imx-sc-firmware imx-seco"
 
 DEPENDS += "\
     u-boot \
@@ -32,11 +33,6 @@ DEPENDS_append = "\
 DEPENDS_append_mx8m = "\
     u-boot-mkimage-native \
     dtc-native \
-"
-
-# imx8qx / imx8x need CortexM image(s) for bootstream with M4 support
-DEPENDS_append = "\
-    ${@bb.utils.contains('IMXBOOT_TARGETS', 'flash_linux_m4', 'virtual/imx-cortexm-demos', '', d)} \
 "
 
 BOOT_NAME = "imx-boot"
@@ -57,18 +53,6 @@ do_compile[depends] += "\
     ${@' '.join('%s:do_deploy' % r for r in '${IMX_EXTRA_FIRMWARE}'.split() )} \
     imx-atf:do_deploy \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os:do_deploy', '', d)} \
-"
-
-do_compile_mx8[depends] += "\
-    imx-sc-firmware:do_deploy \
-"
-
-do_compile_mx8x[depends] += "\
-    imx-sc-firmware:do_deploy \
-"
-
-do_compile_mx8x[depends] += "\
-    ${@bb.utils.contains('IMXBOOT_TARGETS', 'flash_linux_m4', 'virtual/imx-cortexm-demos:do_deploy', '', d)} \
 "
 
 SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
