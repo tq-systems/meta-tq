@@ -5,6 +5,13 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## zeus.TQMLS1028A.BSP.SW.0106
+
+### Added
+
+* tqmls1028a: new kernel linux-rt-lsdk-tq-5.10
+* perf: backport from Yocto Dunfell to fix build issues with newer kernels
+
 ## zeus.TQMaRZG2x.BSP.SW.0003
 
 ### Added
