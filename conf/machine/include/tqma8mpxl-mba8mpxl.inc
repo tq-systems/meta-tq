@@ -4,12 +4,12 @@
 UBOOT_DTB_NAME = "imx8mp-mba8mpxl.dtb"
 
 BOARD_DEVICETREE_FILES = "\
-    imx8mp-mba8mpxl.dtb \
-    imx8mp-mba8mpxl-hdmi.dtb \
-    imx8mp-mba8mpxl-hdmi-imx327.dtb \
-    imx8mp-mba8mpxl-hdmi-ov9281.dtb \
-    imx8mp-mba8mpxl-rpmsg.dtb \
-    imx8mp-mba8mpxl-lvds-tm070jvhg33.dtb \
+    imx8mp-tqma8mpql-mba8mpxl.dtb \
+    imx8mp-tqma8mpql-mba8mpxl-hdmi.dtb \
+    imx8mp-tqma8mpql-mba8mpxl-hdmi-imx327.dtb \
+    imx8mp-tqma8mpql-mba8mpxl-hdmi-ov9281.dtb \
+    imx8mp-tqma8mpql-mba8mpxl-lvds-tm070jvhg33.dtb \
+    imx8mp-tqma8mpql-mba8mpxl-rpmsg.dtb \
 "
 
 KERNEL_DEVICETREE = ""

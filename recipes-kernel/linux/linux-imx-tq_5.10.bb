@@ -10,7 +10,7 @@ SRC_URI = "\
 "
 
 SRCBRANCH = "TQMa8-fslc-5.10-2.1.x-imx"
-SRCREV = "28c7edbf8ca084917c22d1ae49f6cbe409becb18"
+SRCREV = "edbaba3667f6e9b4d89bb50adae728efb4a84108"
 
 KERNEL_TREE_DEFCONFIG_mx8 = "imx_v8_defconfig"
 
@@ -43,7 +43,7 @@ COMPATIBLE_MACHINE = "^("
 COMPATIBLE_MACHINE .= "|tqma8x"
 # COMPATIBLE_MACHINE .= "|tqma8xx"
 # COMPATIBLE_MACHINE .= "|tqma8xxs"
-# COMPATIBLE_MACHINE .= "|tqma8mpxl"
+COMPATIBLE_MACHINE .= "|tqma8mpxl"
 COMPATIBLE_MACHINE .= "|tqma8mq"
 COMPATIBLE_MACHINE .= "|tqma8mxml"
 COMPATIBLE_MACHINE .= "|tqma8mxnl"
