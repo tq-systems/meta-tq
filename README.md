@@ -114,6 +114,7 @@ Support for the following machines is contained in this version:
 [y]	i.MX8M[D,Q]		TQMa8M[D,Q]		MBa8Mx		tqma8mx-1gb-mba8mx (TQMa8M[D,Q] with 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x / 030x)
 [y]	i.MX8MQL		TQMa8MQL		MBa8Mx		tqma8mx-2gb-mba8mx (TQMa8MQL with 2 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x / 030x)
 [y]	i.MX8MQ			TQMa8MQ			MBa8Mx		tqma8mx-4gb-mba8mx (TQMa8MQ with 4 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x / 030x)
+[y]	i.MX8MMQ		TQMa8MQML		MBa8Mx		tqma8mxml-1gb-mba8mx (TQMa8MQML with 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x)
 [y]	i.MX8MMQ		TQMa8MQML		MBa8Mx		tqma8mxml-2gb-mba8mx (TQMa8MQML with 2 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x)
 [y]	i.MX8MNQ		TQMA8MQNL		MBa8Mx		tqma8mxnl-1gb-mba8mx (TQMA8MQNL with 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x)
 [y]	i.MX8MNDL		TQMa8MDLNL		MBa8Mx		tqma8mxnl-1gb-mba8mx (TQMa8MDLNL with 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x)
