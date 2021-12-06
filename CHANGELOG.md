@@ -7,6 +7,13 @@ Releases are named with the following scheme:
 
 [[_TOC_]]
 
+## Next Release
+
+### Added
+
+* machines: add machine config for TQMa8MxML with 1GiB RAM on MBa8Mx
+* u-boot: tqma8mxml: add support for SOM variant with 1GiB RAM
+
 ## Next release
 
 ## hardknott.TQMa8.BSP.SW.0081
