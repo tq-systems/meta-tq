@@ -9,12 +9,17 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* machines: add machine config for TQMa8MxML with 1GiB RAM on MBa8Mx
+* u-boot: tqma8mxml: add support for SOM variant with 1GiB RAM
+
 ## zeus.TQMa8.BSP.SW.0056
 
 ### Changed
 
-* tqma8mx/tqma8mxml/tqma8mxnl: move phy reset gpio in dt from fec node to phy node
-  to improve resume flow.
+* linux: tqma8mx/tqma8mxml/tqma8mxnl: move phy reset gpio in dt from fec node
+  to phy node to improve resume flow.
 * tqma8xx\[s\]: enable building multiple u-boot configs
 * tqma8x: enable building multiple u-boot configs
 * tqma8mx: enable building multiple u-boot configs
