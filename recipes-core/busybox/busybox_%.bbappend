@@ -10,6 +10,7 @@ SRC_URI_append = "\
     file://enable-TFTP_FULL_FEATURES.cfg \
     file://disable-TELNET.cfg \
     file://disable-FTP.cfg \
+    file://tq-busybox-options.cfg \
 "
 
 # necessary to prevent above change being reverted during "do_compile"
