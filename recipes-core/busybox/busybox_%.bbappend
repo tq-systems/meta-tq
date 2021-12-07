@@ -2,14 +2,14 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 SRC_URI_append = "\
-	file://enable-BEEP.cfg \
-	file://enable-CHAT.cfg \
-	file://enable-DEVMEM.cfg \
-	file://enable-VERBOSE_USAGE.cfg \
-	file://enable-DD_ALL_FEATURES.cfg \
-	file://enable-TFTP_FULL_FEATURES.cfg \
-	file://disable-TELNET.cfg \
-	file://disable-FTP.cfg \
+    file://enable-BEEP.cfg \
+    file://enable-CHAT.cfg \
+    file://enable-DEVMEM.cfg \
+    file://enable-VERBOSE_USAGE.cfg \
+    file://enable-DD_ALL_FEATURES.cfg \
+    file://enable-TFTP_FULL_FEATURES.cfg \
+    file://disable-TELNET.cfg \
+    file://disable-FTP.cfg \
 "
 
 # necessary to prevent above change being reverted during "do_compile"
