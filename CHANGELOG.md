@@ -5,8 +5,12 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+## Next Release
+
 ### Added
 
+* busybox: defconfig: enable extendend features / parameters for enabled applets
+* packagegroup-wifi: add hostapd
 * port from zeus-tqma8
   * camera package group
   * camera support recipes
@@ -20,6 +24,10 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* distros: fix spelling of TQ-Systems
+* packagegroup-hwutils: enable libgpiod-tools - it is splitted package in newer
+  versions
+* busybox: defconfig: restore extendend parameters for `dd`
 * allow kmscube to run in background
 * packagegroup-fsutils: fix ubi support
 * build fixes for musl and UTF8 / unicode
