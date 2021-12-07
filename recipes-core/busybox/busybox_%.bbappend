@@ -6,7 +6,7 @@ SRC_URI_append = "\
 	file://enable-CHAT.cfg \
 	file://enable-DEVMEM.cfg \
 	file://enable-VERBOSE_USAGE.cfg \
-	file://enable-DD_STATUS_LINE.cfg \
+	file://enable-DD_ALL_FEATURES.cfg \
 	file://enable-TFTP_FULL_FEATURES.cfg \
 	file://disable-TELNET.cfg \
 	file://disable-FTP.cfg \
