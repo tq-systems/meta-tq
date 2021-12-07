@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## zeus.TQMa8.BSP.SW.0057
+
 ### Added
 
 * machines: add machine config for TQMa8MxML with 1GiB RAM on MBa8Mx
