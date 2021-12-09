@@ -120,7 +120,8 @@ See top level README.md for configurations usable as MACHINE.
   * OV9281: gstreamer: capture not starting out of the box, need to use  `yavta` to
     capture some frames, `gstreamer` starts afterwards
 * Possible communication error to PHY attached to FEC, reboot required to fix
-* Upon reset (S7) booting from SD card might not work, power cycle required
+* A reset using button S7 will not reset the SD card properly. Especially if the SD
+  card is operating on 1.8V it will be non-functional after reset. Use button S8 instead.
 
 ## Build Artifacts
 
