@@ -9,4 +9,4 @@ IMAGE_INSTALL_append = "\
 
 # force openssh to prevent conflict with dropbear
 IMAGE_FEATURES_append = " ssh-server-openssh"
-IMAGE_FEATURES_remove = " ssh-server-dropbear"
+IMAGE_FEATURES_remove = "ssh-server-dropbear"

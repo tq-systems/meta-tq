@@ -10,4 +10,4 @@ require tq-image-base.inc
 
 # force dropbear
 IMAGE_FEATURES_append = " ssh-server-dropbear"
-IMAGE_FEATURES_remove = " ssh-server-openssh"
+IMAGE_FEATURES_remove = "ssh-server-openssh"
