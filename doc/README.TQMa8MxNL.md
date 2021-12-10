@@ -438,3 +438,13 @@ Demos are compiled to use UART4 (MBa8Mx X17:56,58 + X17:54 for GND) with 115200 
 For demos available in the BSP and the device tree to be used see [artifacts section](#build-artifacts).
 
 Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8M.md).
+
+### U-Boot: switch between using of USB OTG (X19) and USB HUB (X6)
+
+|               | SEL_USB_HUB_B (GPIO2_1) |
+| ------------- | ----------------------- |
+| USB OTG (X19) | 0 (default)             |
+| USB HUB (X6)  | 1                       |
+
+Change by switching from GPIO2_1 (SEL_USB_HUB_B)
+`gpio toggle GPIO2_1` followed by `usb reset `
