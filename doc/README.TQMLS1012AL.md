@@ -45,6 +45,6 @@ The default core frequency is 1 GHz.
 To use RCW with a core frequency of 800 MHz, set in local.conf:
 `RCWQSPI = "default/rcw_800_sd"`
 
-_____
+================================================================================
 
 See [TQ Embedded Wiki for TQMLS1012AL](https://support.tq-group.com/en/layerscape/tqmls1012al)
