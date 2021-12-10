@@ -365,3 +365,7 @@ Demos are compiled to use Cortex M4 0/1 UARTS with 115200 8N1.
 For demos available in the BSP and the device tree to be used see [artifacts section](#build-artifacts).
 
 Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8X.md).
+
+================================================================================
+
+See [TQ Embedded Wiki for TQMa8x](https://support.tq-group.com/en/arm/tqma8x)
