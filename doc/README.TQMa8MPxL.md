@@ -403,3 +403,7 @@ Demos are compiled to use UART3 with 115200 8N1.
 For demos available in the BSP and the device tree to be used see [artifacts section](#build-artifacts).
 
 Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8M.md).
+
+================================================================================
+
+See [TQ Embedded Wiki for TQMa8MPxL](https://support.tq-group.com/en/arm/tqma8mpxl)
