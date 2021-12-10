@@ -134,7 +134,10 @@ _MBa8x HW Rev.020x/30x only_
   * IMX327: bayer support with 12 Bit does not work at the moment, only 10 Bit with
     1280x720 is tested with gstreamer
   * MIPI CSI does not work reliably. It may work, it may fail or even lockup the system
-* When using HDMI the default Audio device changes to HDMI output. For osing DAI codec `aplay` requires the parameter `-Dsysdefault:CARD=tqmtlv320aic32`
+* When using HDMI the default Audio device changes to HDMI output.
+  For using DAI codec `aplay` requires the parameter `-Dsysdefault:CARD=tqmtlv320aic32`
+* HDMI: When using large displays, module variants with> = 2 GiB RAM are recommended.
+  It is known that some use cases will not work with less memory. Like Weston on a 4K monitor 
 
 ## Build Artifacts
 
