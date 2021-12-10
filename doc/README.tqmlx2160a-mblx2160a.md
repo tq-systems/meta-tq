@@ -253,3 +253,7 @@ Pay attention to the following DIP-Switches:
 * X37 -> SD3 Lane 0-3 and additional Lane 4-7 when x8 (Pay attention to DIP switch)
 * X16 -> SD2 Lane 0
 * X17 -> SD2 Lane 4
+
+================================================================================
+
+See [TQ Embedded Wiki for TQMLX2160A](https://support.tq-group.com/en/layerscape/tqmlx2160a)
