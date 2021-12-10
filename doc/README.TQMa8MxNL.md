@@ -448,3 +448,7 @@ Detailed documentation for CortexM support can be found [here](./README.CortexM-
 
 Change by switching from GPIO2_1 (SEL_USB_HUB_B)
 `gpio toggle GPIO2_1` followed by `usb reset `
+
+================================================================================
+
+See [TQ Embedded Wiki for TQMa8MxNL](https://support.tq-group.com/en/arm/tqma8mxnl)
