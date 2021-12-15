@@ -88,7 +88,7 @@ OFF 	- - - -       X		X
 ```
 
 
-===============================================================================
+## Support Wiki
 
 See [TQ Embedded Wiki for TQMa6ULx and TQMa6ULx](https://support.tq-group.com/en/arm/tqma6ulx)  
 See [TQ Embedded Wiki for TQMa6ULx and TQMa6ULxL](https://support.tq-group.com/en/arm/tqma6ulxl)

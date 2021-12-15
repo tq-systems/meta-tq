@@ -54,6 +54,6 @@ ON 	               		            X  		       		X
 OFF 	X X X X X X X X		X X X X X X   X		X X X X		  X
 ```
 
-================================================================================
+## Support Wiki
 
 See [TQ Embedded Wiki for TQMa7x](https://support.tq-group.com/en/arm/tqma7x)

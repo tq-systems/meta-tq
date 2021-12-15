@@ -481,6 +481,6 @@ For demos available in the BSP and the device tree to be used see [artifacts sec
 
 Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8M.md).
 
-================================================================================
+## Support Wiki
 
 See [TQ Embedded Wiki for TQMa8MxML](https://support.tq-group.com/en/arm/tqma8mxml)

@@ -23,6 +23,6 @@ higher precision.
 The sensor is used for automatic core clock reduction and shutdown in the
 case of overheating.
 
-================================================================================
+## Support Wiki
 
 See [TQ Embedded Wiki for TQMLS1028A](https://support.tq-group.com/en/layerscape/tqmls1028a)

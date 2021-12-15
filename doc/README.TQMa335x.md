@@ -21,6 +21,6 @@ _Kernel:_
 
 - none
 
-===============================================================================
+## Support Wiki
 
 See [TQ Embedded Wiki for TQMa335x](https://support.tq-group.com/en/arm/tqma335x)

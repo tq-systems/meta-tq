@@ -20,6 +20,6 @@
 
 [DIP Switch settings for TQMLS102xA](https://support.tq-group.com/en/layerscape/tqmls102xa/mbls102xa/dip_switches)
 
-================================================================================
+## Support Wiki
 
 See [TQ Embedded Wiki for TQMLS102xA](https://support.tq-group.com/en/layerscape/tqmls102xa)
