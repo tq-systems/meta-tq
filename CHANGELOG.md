@@ -30,7 +30,7 @@ Releases are named with the following scheme:
 
 ## Added
 
-* TQMa8Mx/TQMa8MxML/TQMa8MxNL: linux 5.10 support based on linux-fslc 5.10 + imx
+* TQMa8Mx/TQMa8MxML/TQMa8MxNL/TQMa8x/TQMa8MPxL/TQMa8Xx/TQMa8XxS: linux 5.10 support based on linux-fslc 5.10 + imx
   * experimental usb support for ath10k
   * adjusted kernel config settings
 * port TQMa8 boards from branch zeus-tqma8 (equal to release
@@ -42,6 +42,7 @@ Releases are named with the following scheme:
 
 * weak assignments in machine files wherever possible to allow overwriting for
   custom mainboards or project specific tailoring
+* package dependencies for board specific firmware files in imx-boot-tq
 
 ## Removed
 
