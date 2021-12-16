@@ -7,6 +7,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## hardknott.TQMa8.BSP.SW.0080
+
 ### Added
 
 * busybox: defconfig: enable extendend features / parameters for enabled applets
