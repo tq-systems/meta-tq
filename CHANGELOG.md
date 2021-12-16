@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next release
 
+## hardknott.TQMa8.BSP.SW.0080
+
 ## Changed
 
 * rework systemd-machine-units bbappend (add simplification from branch
@@ -24,7 +26,8 @@ Releases are named with the following scheme:
 * TQMa8Mx/TQMa8MxML/TQMa8MxNL: linux 5.10 support based on linux-fslc 5.10 + imx
   * experimental usb support for ath10k
   * adjusted kernel config settings
-* port TQMa8 boards from branch zeus-tqma8 (equal to last release of mentioned branch)
+* port TQMa8 boards from branch zeus-tqma8 (equal to release
+  zeus.TQMa8.BSP.SW.0056 of mentioned branch)
 * ubi as MACHINE_FEATURE if \[Q\]SPI NOR is supported by machine
 * gitpkgv-nonexact.bbclass
 
