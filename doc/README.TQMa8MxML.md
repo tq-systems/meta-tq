@@ -22,8 +22,11 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 _MBa8x HW Rev.030x only_
 
-* RAM configs: 2 GiB
+* RAM configs:
+  * 1 GiB
+  * 2 GiB
 * CPU
+  * variants i.MX8MMD
   * variants i.MX8MMQ
 * Fuses
 * speed grade / temperature grade detection
@@ -56,12 +59,15 @@ _MBa8x HW Rev.030x only_
 
 **TODO or not tested / supported**
 
-* CPU variants i.MX8MMD/S and Lite
+* CPU variants i.MX8MMS and Lite
 
 ### Linux
 
-* RAM configs: 2 GiB
+* RAM configs:
+  * 1 GiB
+  * 2 GiB
 * CPU
+  * variants i.MX8MMD
   * variants i.MX8MMQ
 * speed grade / temperature grade detection
 * I2C
