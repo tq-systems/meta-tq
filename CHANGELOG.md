@@ -9,6 +9,13 @@ Releases are named with the following scheme:
 
 ## Next release
 
+## hardknott.TQMa8.BSP.SW.0081
+
+## Changed
+
+* doc: add missing links to TQ-Embedded Wiki
+* doc: updates for TQMa8Mx / TQMa8MPxL / TQMa8MxNL
+
 ## hardknott.TQMa8.BSP.SW.0080
 
 ## Changed
