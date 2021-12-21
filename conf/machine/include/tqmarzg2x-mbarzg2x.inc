@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMaRZG2x modules on MBaRZG2x
+# Common definitions for TQ-Systems GmbH TQMaRZG2x modules on MBaRZG2x
 
 SERIAL_CONSOLE = "115200 ttySC0"
 
