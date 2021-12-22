@@ -19,5 +19,7 @@
 
 ### Kernel based on 5.4
 
+* superseeded with above mentioned kernel 5.10 and will be removed in future
+  releases
 * based on linux-imx (https://source.codeaurora.org/external/imx/linux-imx)
 * branched from imx-5.4.70-2.3.0 + changes from imx-5.4.70-2.3.2
