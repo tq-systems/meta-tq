@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Fixed
+
+* linux: tqma8mxml: remove rtc alarm IRQ from SOM dtb. There is no direct
+  connection on the SOM.
+
 ## zeus.TQMa8.BSP.SW.0057
 
 ### Added
