@@ -1,0 +1,31 @@
+From a3f661d7e8f4d90c735fb44cd295679c5d180844 Mon Sep 17 00:00:00 2001
+From: Paul Gerber <Paul.Gerber@tq-group.com>
+Date: Mon, 3 Jan 2022 12:31:03 +0100
+Subject: [PATCH] [HACK]: rcar_gen3: explicit path variable instead of PWD
+
+VSPMIF_MODULE_PATH needs to be defined in the environment of the calling
+process.
+
+Signed-off-by: Paul Gerber <Paul.Gerber@tq-group.com>
+---
+ vspm_if-module/files/vspm_if/drv/Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/vspm_if-module/files/vspm_if/drv/Makefile b/vspm_if-module/files/vspm_if/drv/Makefile
+index bf082d7..e7eb529 100644
+--- a/vspm_if-module/files/vspm_if/drv/Makefile
++++ b/vspm_if-module/files/vspm_if/drv/Makefile
+@@ -3,8 +3,8 @@ CFILES = vspm_if_main.c vspm_if_sub.c
+ obj-m += vspm_if.o
+ vspm_if-objs := $(CFILES:.c=.o)
+ 
+-U_INCLUDE := -I$(PWD)
+-U_INCLUDE += -I$(PWD)/../include
++U_INCLUDE := -I$(VSPMIF_MODULE_PATH)
++U_INCLUDE += -I$(VSPMIF_MODULE_PATH)/../include
+ U_INCLUDE += -I$(KERNELSRC)/include
+ EXTRA_CFLAGS += $(U_INCLUDE)
+ 
+-- 
+2.25.1
+
