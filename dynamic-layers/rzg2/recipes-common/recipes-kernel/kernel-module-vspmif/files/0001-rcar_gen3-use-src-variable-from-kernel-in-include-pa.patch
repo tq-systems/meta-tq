@@ -1,0 +1,28 @@
+From 8da4d6addeed1d8a3fea4b151d52afea57badb44 Mon Sep 17 00:00:00 2001
+From: Paul Gerber <Paul.Gerber@tq-group.com>
+Date: Wed, 5 Jul 2023 08:25:04 +0200
+Subject: [PATCH] rcar_gen3: use `src` variable from kernel in include paths
+
+Signed-off-by: Paul Gerber <Paul.Gerber@tq-group.com>
+---
+ vspm_if-module/files/vspm_if/drv/Makefile | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/vspm_if-module/files/vspm_if/drv/Makefile b/vspm_if-module/files/vspm_if/drv/Makefile
+index bf082d7..3466ff0 100644
+--- a/vspm_if-module/files/vspm_if/drv/Makefile
++++ b/vspm_if-module/files/vspm_if/drv/Makefile
+@@ -3,8 +3,8 @@ CFILES = vspm_if_main.c vspm_if_sub.c
+ obj-m += vspm_if.o
+ vspm_if-objs := $(CFILES:.c=.o)
+ 
+-U_INCLUDE := -I$(PWD)
+-U_INCLUDE += -I$(PWD)/../include
++U_INCLUDE := -I$(src)
++U_INCLUDE += -I$(src)/../include
+ U_INCLUDE += -I$(KERNELSRC)/include
+ EXTRA_CFLAGS += $(U_INCLUDE)
+ 
+-- 
+2.39.1
+
