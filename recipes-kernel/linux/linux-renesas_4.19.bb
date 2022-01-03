@@ -34,6 +34,8 @@ SRC_URI_append = " \
     file://qspi.cfg \
     file://tqmarzg2.cfg \
     file://mbarzg2.cfg \
+    file://wlcore-sdio.cfg \
+    file://lvds-pwm.cfg \
 "
 
 do_download_firmware () {
