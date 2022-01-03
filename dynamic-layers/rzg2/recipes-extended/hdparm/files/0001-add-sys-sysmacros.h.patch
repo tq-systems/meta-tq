@@ -1,0 +1,41 @@
+From 3d75b08dc151e7aac3c92cb9641a2d954641dc03 Mon Sep 17 00:00:00 2001
+From: Paul Gerber <Paul.Gerber@tq-group.com>
+Date: Mon, 3 Jan 2022 15:22:23 +0100
+Subject: [PATCH] add sys/sysmacros.h
+
+The macros major, minor and makedev are defined in sys/sysmacros.h in
+newer versions of glibc.
+
+Signed-off-by: Paul Gerber <Paul.Gerber@tq-group.com>
+---
+ geom.c  | 1 +
+ sysfs.c | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/geom.c b/geom.c
+index 982ec55..e180cce 100644
+--- a/geom.c
++++ b/geom.c
+@@ -15,6 +15,7 @@
+ #include <errno.h>
+ #include <dirent.h>
+ #include <sys/stat.h>
++#include <sys/sysmacros.h>
+ #include <sys/ioctl.h>
+ #include <linux/types.h>
+ #include <linux/fs.h>
+diff --git a/sysfs.c b/sysfs.c
+index a81b148..44d602d 100644
+--- a/sysfs.c
++++ b/sysfs.c
+@@ -15,6 +15,7 @@
+ #include <dirent.h>
+ #include <limits.h>
+ #include <sys/stat.h>
++#include <sys/sysmacros.h>
+ #include <linux/types.h>
+ 
+ #include "hdparm.h"
+-- 
+2.25.1
+
