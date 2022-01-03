@@ -1,0 +1,1 @@
+MMNGR_CFG_tqmarzg2x = "MMNGR_SALVATORX"
