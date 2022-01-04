@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMa335x modules
+# Common definitions for TQ-Systems GmbH TQMa335x modules
 # optional from meta-ti
 # will handle SOC_FAMILY_append ?= ":ti33x" needed for TI recipes
 include conf/machine/include/ti33x.inc

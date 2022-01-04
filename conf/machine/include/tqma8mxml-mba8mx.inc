@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMa8MxML modules on MBa8Mx starter kit
+# Common definitions for TQ-Systems GmbH TQMa8MxML modules on MBa8Mx starter kit
 
 require conf/machine/include/tqma8mxml.inc
 

@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMa6ULL modules
+# Common definitions for TQ-Systems GmbH TQMa6ULL modules
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale

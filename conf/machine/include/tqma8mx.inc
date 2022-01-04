@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMa8MX modules
+# Common definitions for TQ-Systems GmbH TQMa8MX modules
 
 MACHINEOVERRIDES =. "imx:mx8:mx8m:mx8mq:tqma8mq:"
 

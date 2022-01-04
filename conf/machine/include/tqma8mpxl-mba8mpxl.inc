@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group MBa8MPxL baseboard for TQMa8MPxL modules
+# Common definitions for TQ-Systems GmbH MBa8MPxL baseboard for TQMa8MPxL modules
 
 # Set u-boot DTB
 UBOOT_DTB_NAME = "imx8mp-mba8mpxl.dtb"

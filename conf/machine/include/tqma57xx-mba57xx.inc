@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMa57xx modules on MBa57xx
+# Common definitions for TQ-Systems GmbH TQMa57xx modules on MBa57xx
 
 KERNEL_DEVICETREE ?= " \
 	am571x-mba57xx.dtb \

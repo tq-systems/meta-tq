@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMa57xx modules
+# Common definitions for TQ-Systems GmbH TQMa57xx modules
 # optional from meta-ti
 # will handle SOC_FAMILY_append ?= ":dra7xx" needed for TI recipes
 include conf/machine/include/dra7xx.inc

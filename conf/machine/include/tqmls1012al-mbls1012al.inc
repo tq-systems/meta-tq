@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMLS1012AL modules on MBLS1012AL
+# Common definitions for TQ-Systems GmbH TQMLS1012AL modules on MBLS1012AL
 
 SERIAL_CONSOLES = "115200;ttyS0"
 SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"

@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group ARM modules
+# Common definitions for TQ-Systems GmbH ARM modules
 
 # these are used for linux-tq and u-boot-tq
 TQ_GIT_BASEURL ?= "git://github.com/tq-systems"

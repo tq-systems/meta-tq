@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMa335x modules on MBA335x board
+# Common definitions for TQ-Systems GmbH TQMa335x modules on MBA335x board
 
 KERNEL_DEVICETREE = " \
 	am335x-mba335x.dtb \

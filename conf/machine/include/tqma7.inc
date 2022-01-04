@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMa7x modules
+# Common definitions for TQ-Systems GmbH TQMa7x modules
 
 MACHINEOVERRIDES =. "mx7:mx7d:tqma7x:"
 

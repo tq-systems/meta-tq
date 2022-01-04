@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMLS10xxA modules
+# Common definitions for TQ-Systems GmbH TQMLS10xxA modules
 
 require conf/machine/include/arm/arch-arm64.inc
 

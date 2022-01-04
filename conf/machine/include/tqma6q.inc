@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMa6[Q,D,QP,DP] modules
+# Common definitions for TQ-Systems GmbH TQMa6[Q,D,QP,DP] modules
 
 MACHINEOVERRIDES =. "mx6:mx6q:"
 

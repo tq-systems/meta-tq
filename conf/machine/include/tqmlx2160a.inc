@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMLX2160A modules
+# Common definitions for TQ-Systems GmbH TQMLX2160A modules
 
 require conf/machine/include/soc-family.inc
 

@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMLS1012AL modules
+# Common definitions for TQ-Systems GmbH TQMLS1012AL modules
 
 require conf/machine/include/soc-family.inc
 

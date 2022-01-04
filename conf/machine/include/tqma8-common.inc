@@ -1,4 +1,4 @@
-# Common definitions for all TQ-Group TQMa8x / TQMa8Xx / TQMa8Mx /
+# Common definitions for all TQ-Systems GmbH TQMa8x / TQMa8Xx / TQMa8Mx /
 # TQMa8MxML / TQMa8MxNL / TQMa8MPxL modules
 
 require conf/machine/include/tqmxx.inc

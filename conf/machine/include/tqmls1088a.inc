@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMLS1088A modules
+# Common definitions for TQ-Systems GmbH TQMLS1088A modules
 
 MACHINEOVERRIDES =. "fsl-lsch3:ls1088a:tqmls10xxa:tqmls1088a:"
 

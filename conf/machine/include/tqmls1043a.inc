@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMLS1043A modules
+# Common definitions for TQ-Systems GmbH TQMLS1043A modules
 
 MACHINEOVERRIDES =. "fsl-lsch2:ls1043a:tqmls10xxa:"
 

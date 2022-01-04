@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMa8XxS b0 modules
+# Common definitions for TQ-Systems GmbH TQMa8XxS b0 modules
 
 MACHINEOVERRIDES =. "tqma8xxs:"
 

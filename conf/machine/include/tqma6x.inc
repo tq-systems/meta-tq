@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMa6 modules
+# Common definitions for TQ-Systems GmbH TQMa6 modules
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale

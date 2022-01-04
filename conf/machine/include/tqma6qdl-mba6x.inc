@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMa6 modules on MBa6
+# Common definitions for TQ-Systems GmbH TQMa6 modules on MBa6
 
 SERIAL_CONSOLES = "115200;ttymxc1"
 

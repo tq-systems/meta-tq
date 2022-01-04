@@ -1,4 +1,4 @@
-# Common definitions for TQ-Group TQMLS102xa modules
+# Common definitions for TQ-Systems GmbH TQMLS102xa modules
 
 require conf/machine/include/soc-family.inc
 
