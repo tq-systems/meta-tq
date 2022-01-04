@@ -1,4 +1,4 @@
-SUMMARY = "Linux kernel based on linux-imx for TQ-Group i.MX / LS based modules"
+SUMMARY = "Linux kernel based on linux-imx for TQ-Systems GmbH i.MX / LS based modules"
 
 require linux-imx-tq-common.inc
 

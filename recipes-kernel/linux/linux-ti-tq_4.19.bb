@@ -1,4 +1,4 @@
-SUMMARY = "Linux kernel for TQ-Group TI AM57 based modules"
+SUMMARY = "Linux kernel for TQ-Systems GmbH TI AM57 based modules"
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 

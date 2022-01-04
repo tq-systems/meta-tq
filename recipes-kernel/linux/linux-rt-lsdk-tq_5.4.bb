@@ -1,4 +1,4 @@
-SUMMARY = "Linux kernel with PREEMPT_RT support for TQ-Group Layerscape based modules"
+SUMMARY = "Linux kernel with PREEMPT_RT support for TQ-Systems GmbH Layerscape based modules"
 
 inherit kernel
 

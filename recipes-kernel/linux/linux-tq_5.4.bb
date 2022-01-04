@@ -1,4 +1,4 @@
-SUMMARY = "Linux for TQ-Group Freescale / NXP i.MX6/6UL/7 and LS102xA/LS104xA based modules"
+SUMMARY = "Linux for TQ-Systems GmbH Freescale / NXP i.MX6/6UL/7 and LS102xA/LS104xA based modules"
 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
