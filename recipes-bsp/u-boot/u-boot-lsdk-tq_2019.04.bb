@@ -1,6 +1,6 @@
 require u-boot-tq.inc
 
-DESCRIPTION = "u-boot for TQ-Group LX2160A based modules"
+DESCRIPTION = "u-boot for TQ-Systems GmbH LX2160A based modules"
 
 PROVIDES += "u-boot"
 

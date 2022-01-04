@@ -1,6 +1,6 @@
 require u-boot-tq.inc
 
-DESCRIPTION = "U-Boot for TQ-Group Freescale LS1012A/LS1028A based modules"
+DESCRIPTION = "U-Boot for TQ-Systems GmbH Freescale LS1012A/LS1028A based modules"
 
 PROVIDES += "u-boot"
 

@@ -1,6 +1,6 @@
 require u-boot-tq.inc
 
-DESCRIPTION = "Mainline U-Boot for TQ-Group modules"
+DESCRIPTION = "Mainline U-Boot for TQ-Systems GmbH modules"
 
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
