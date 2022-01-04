@@ -21,7 +21,7 @@ BOOT_TOOLS = "imx-boot-tools"
 
 ATF_PLATFORM ??= "INVALID"
 
-EXTRA_OEMAKE += " \
+EXTRA_OEMAKE += "\
     CROSS_COMPILE="${TARGET_PREFIX}" \
     PLAT=${ATF_PLATFORM} \
 "

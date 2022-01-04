@@ -38,7 +38,7 @@ BBCLASSEXTEND = "cross"
 # Append path for tq layer to include fw_env.conf
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}/${MACHINE}:${THISDIR}/${PN}:"
 
-SRC_URI_append = " \
+SRC_URI_append = "\
 	file://fw_env.config \
 "
 

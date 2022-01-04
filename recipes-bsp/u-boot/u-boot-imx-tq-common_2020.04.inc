@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
 SRCREV = "3d06bd8543826a7e73236fc68ad6da7a5d02ac71"
 SRCBRANCH = "TQMa8-v2020.04_imx_5.4.70_2.3.0"
 
-SRC_URI = " \
+SRC_URI = "\
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
 "
 

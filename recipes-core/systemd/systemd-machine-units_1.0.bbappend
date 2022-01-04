@@ -1,6 +1,6 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
-SRC_URI = " \
+SRC_URI = "\
     file://10-eth0.network \
     file://10-eth1.network \
     file://20-can0.network \

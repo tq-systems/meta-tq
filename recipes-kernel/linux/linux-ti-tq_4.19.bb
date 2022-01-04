@@ -10,7 +10,7 @@ DEPENDS += "lzop-native bc-native"
 #
 PROVIDES += "linux-tq"
 
-SRC_URI = " \
+SRC_URI = "\
     ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
     file://defconfig \
 "

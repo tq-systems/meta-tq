@@ -1,6 +1,6 @@
 # Common definitions for TQ-Systems GmbH TQMa6[S,DL] modules on MBa6
 
-KERNEL_DEVICETREE = " \
+KERNEL_DEVICETREE = "\
 	imx6dl-mba6a.dtb \
 	imx6dl-mba6a-hdmi.dtb \
 	imx6dl-mba6b.dtb \
@@ -28,7 +28,7 @@ KERNEL_DEVICETREE = " \
 # achieve this in your BSP layer adding them via
 # IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
 #
-IMAGE_BOOT_FILES = " \
+IMAGE_BOOT_FILES = "\
 	${KERNEL_IMAGETYPE};linuximage \
 	${KERNEL_DEVICETREE} \
 "

@@ -1,6 +1,6 @@
 SERIAL_CONSOLES = "115200;ttymxc0"
 
-KERNEL_DEVICETREE = " \
+KERNEL_DEVICETREE = "\
 	imx6ul-mba6ulx.dtb \
 	imx6ul-mba6ulx-g1.dtb \
 	imx6ul-mba6ulx-lvds.dtb \

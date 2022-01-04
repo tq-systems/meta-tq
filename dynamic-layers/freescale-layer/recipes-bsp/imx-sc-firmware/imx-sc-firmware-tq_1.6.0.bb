@@ -18,7 +18,7 @@ SC_FIRMWARE_VERSION_TQ ?= "TQMa8.NXP-v1.6.0.B4894.0033"
 SC_FIRMWARE_DBG ??= "0"
 SC_FIRMWARE_NAME_TQ ?= "${SC_FIRMWARE_VERSION_TQ}${@'_dbg' if d.getVar('SC_FIRMWARE_DBG') == '1' else ''}"
 
-SRC_URI = " \
+SRC_URI = "\
     file://${BPN}-${SC_FIRMWARE_NAME_TQ}.tar.gz \
 "
 

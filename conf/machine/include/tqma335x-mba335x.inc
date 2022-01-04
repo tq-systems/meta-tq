@@ -1,6 +1,6 @@
 # Common definitions for TQ-Systems GmbH TQMa335x modules on MBA335x board
 
-KERNEL_DEVICETREE = " \
+KERNEL_DEVICETREE = "\
 	am335x-mba335x.dtb \
 	am335x-mba335x-lvds-g104x1.dtb \
 	am335x-mba335x-glyn-etm0700.dtb \

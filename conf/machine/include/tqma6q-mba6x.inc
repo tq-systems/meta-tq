@@ -1,6 +1,6 @@
 # Common definitions for TQ-Systems GmbH TQMa6[Q,D] modules on MBa6
 
-KERNEL_DEVICETREE = " \
+KERNEL_DEVICETREE = "\
 	imx6q-mba6a.dtb \
 	imx6q-mba6a-duallvds-tm070jvhg33.dtb \
 	imx6q-mba6a-lvds-tm070jvhg33.dtb \
@@ -14,7 +14,7 @@ KERNEL_DEVICETREE = " \
 	imx6q-mba6b-usb-peripheral.dtb \
 "
 
-KERNEL_DEVICETREE_append_use-mainline-bsp = " \
+KERNEL_DEVICETREE_append_use-mainline-bsp = "\
 	imx6q-mba6a-dmb-ct21.dtb \
 	imx6q-mba6a-dmb-ct44.dtb \
 	imx6q-mba6a-glyn-etm0700g0edh6.dtb \

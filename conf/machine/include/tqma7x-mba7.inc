@@ -2,7 +2,7 @@ include conf/machine/include/tqma7.inc
 
 SERIAL_CONSOLES = "115200;ttymxc5"
 
-KERNEL_DEVICETREE = " \
+KERNEL_DEVICETREE = "\
 	imx7d-mba7.dtb \
 	imx7d-mba7-lvds.dtb \
 	imx7d-mba7-dmb-ct21.dtb \

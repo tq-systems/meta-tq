@@ -1,6 +1,6 @@
 
 SRCBRANCH = "TQMa8-imx_5.4.70_2.3.0"
-SRC_URI = " \
+SRC_URI = "\
     ${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
 "
 
@@ -22,16 +22,16 @@ ATF_IMX_DEBUG_UART_tqma8xxs ?= "0"
 # enable / disable debug console
 ATF_DEBUG_CONSOLE ?= "0"
 
-EXTRA_OEMAKE_append_mx8m = " \
+EXTRA_OEMAKE_append_mx8m = "\
     IMX_BOOT_UART_BASE=${ATF_UART_BASE} \
 "
 
-EXTRA_OEMAKE_append_mx8qm += " \
+EXTRA_OEMAKE_append_mx8qm += "\
 	IMX_DEBUG_UART=${ATF_IMX_DEBUG_UART} \
 	DEBUG_CONSOLE=${ATF_DEBUG_CONSOLE} \
 "
 
-EXTRA_OEMAKE_append_mx8x += " \
+EXTRA_OEMAKE_append_mx8x += "\
 	IMX_DEBUG_UART=${ATF_IMX_DEBUG_UART} \
 	DEBUG_CONSOLE=${ATF_DEBUG_CONSOLE} \
 "
