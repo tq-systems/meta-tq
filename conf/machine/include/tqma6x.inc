@@ -42,9 +42,9 @@ EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
 WKS_FILE_DEPENDS = "\
-	mtools-native \
-	dosfstools-native \
-	parted-native \
-	virtual/kernel \
-	virtual/bootloader \
-	"
+    mtools-native \
+    dosfstools-native \
+    parted-native \
+    virtual/kernel \
+    virtual/bootloader \
+    "

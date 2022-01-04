@@ -51,12 +51,12 @@ RCWXSPI ?= "default/rcw_1300_spi_nor"
 WKS_FILE ?= "tqmls1028a-sdimg.wks.in"
 
 WKS_FILE_DEPENDS = "\
-	mtools-native \
-	dosfstools-native \
-	parted-native \
-	virtual/kernel \
-	virtual/bootloader \
-	"
+    mtools-native \
+    dosfstools-native \
+    parted-native \
+    virtual/kernel \
+    virtual/bootloader \
+    "
 
 # source the machine specific features for RCW, multimedia etc. from
 # meta-freescale

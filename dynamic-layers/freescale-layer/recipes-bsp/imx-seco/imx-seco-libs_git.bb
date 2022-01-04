@@ -20,7 +20,7 @@ S = "${WORKDIR}/git"
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 do_install () {
-	oe_runmake DESTDIR=${D} install
+    oe_runmake DESTDIR=${D} install
 }
 
 COMPATIBLE_MACHINE = "(mx8)"

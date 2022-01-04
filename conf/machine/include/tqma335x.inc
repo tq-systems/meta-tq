@@ -38,20 +38,20 @@ KERNEL_EXTRA_ARGS_prepend = "LOADADDR=${UBOOT_ENTRYPOINT} "
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 
 IMAGE_BOOT_FILES = "\
-	MLO \
-	u-boot-dtb.img;u-boot.img \
+    MLO \
+    u-boot-dtb.img;u-boot.img \
 "
 
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
 WKS_FILE_DEPENDS = "\
-	mtools-native \
-	dosfstools-native \
-	parted-native \
-	virtual/kernel \
-	virtual/bootloader \
-	"
+    mtools-native \
+    dosfstools-native \
+    parted-native \
+    virtual/kernel \
+    virtual/bootloader \
+    "
 
 # Use the expected value of the ubifs filesystem's volume name in the kernel
 # and u-boot.

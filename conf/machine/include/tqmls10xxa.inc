@@ -36,12 +36,12 @@ RCWIMG ?= "tqmls1088a-mbls10xxa/${@d.getVar('RCW' + d.getVar('BOOTMODE').upper()
 WICVARS_append = " RCWIMG MC_DPL MC_DPC"
 
 WKS_FILE_DEPENDS = "\
-	mtools-native \
-	dosfstools-native \
-	parted-native \
-	virtual/kernel \
-	virtual/bootloader \
-	"
+    mtools-native \
+    dosfstools-native \
+    parted-native \
+    virtual/kernel \
+    virtual/bootloader \
+    "
 
 # source the machine specific features for RCW, MC, multimedia etc. from
 # meta-freescale

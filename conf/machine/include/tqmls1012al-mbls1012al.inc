@@ -15,8 +15,8 @@ KERNEL_DEVICETREE ?= " \
 # IMAGE_INSTALL_append = " kernel-devicetree kernel-image"
 #
 IMAGE_BOOT_FILES ?= "\
-	${KERNEL_IMAGETYPE} \
-	fsl-ls1012a-mbls1012al.dtb \
+    ${KERNEL_IMAGETYPE} \
+    fsl-ls1012a-mbls1012al.dtb \
 "
 
 UBOOT_CONFIG ?= "tfa"

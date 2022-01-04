@@ -25,8 +25,8 @@ MACHINE_FEATURES_append = "\
 SERIAL_CONSOLES = "115200;ttymxc3"
 
 IMAGE_BOOT_FILES ?= "\
-	${KERNEL_IMAGETYPE} \
-	${BOARD_DEVICETREE_FILES} \
+    ${KERNEL_IMAGETYPE} \
+    ${BOARD_DEVICETREE_FILES} \
 "
 
 # SD boot image and FlexSPI boot image can be built using same U-Boot config

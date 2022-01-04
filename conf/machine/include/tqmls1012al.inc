@@ -51,11 +51,11 @@ RCWQSPI ?= "default/rcw_1000_sd"
 WKS_FILE ?= "tqmls1012al-sdimg.wks"
 
 WKS_FILE_DEPENDS = "\
-	mtools-native \
-	dosfstools-native \
-	parted-native \
-	virtual/kernel \
-	"
+    mtools-native \
+    dosfstools-native \
+    parted-native \
+    virtual/kernel \
+    "
 
 # source the machine specific features for RCW, multimedia etc. from
 # meta-freescale

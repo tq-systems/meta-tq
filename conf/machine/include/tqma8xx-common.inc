@@ -44,14 +44,14 @@ UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
 UBI_VOLNAME = "root"
 
 WKS_FILE_DEPENDS = "\
-	mtools-native \
-	dosfstools-native \
-	parted-native \
-	virtual/kernel \
-	virtual/bootloader \
-	imx-boot \
-	imx-sc-firmware \
-	"
+    mtools-native \
+    dosfstools-native \
+    parted-native \
+    virtual/kernel \
+    virtual/bootloader \
+    imx-boot \
+    imx-sc-firmware \
+    "
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale

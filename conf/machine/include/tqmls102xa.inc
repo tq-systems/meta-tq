@@ -50,12 +50,12 @@ WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 WKS_FILE ?= "tqmls102xa-sdimg.wks"
 
 WKS_FILE_DEPENDS = "\
-	mtools-native \
-	dosfstools-native \
-	parted-native \
-	virtual/kernel \
-	virtual/bootloader \
-	"
+    mtools-native \
+    dosfstools-native \
+    parted-native \
+    virtual/kernel \
+    virtual/bootloader \
+    "
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale

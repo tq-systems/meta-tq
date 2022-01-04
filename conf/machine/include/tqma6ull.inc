@@ -53,12 +53,12 @@ UBI_VOLNAME = "root"
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
 WKS_FILE_DEPENDS = "\
-	mtools-native \
-	dosfstools-native \
-	parted-native \
-	virtual/kernel \
-	virtual/bootloader \
-	"
+    mtools-native \
+    dosfstools-native \
+    parted-native \
+    virtual/kernel \
+    virtual/bootloader \
+    "
 
 # TODO:
 #IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
