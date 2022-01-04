@@ -101,7 +101,7 @@ if boards with i.MX CPU are used. Therefore the `MACHINEOVERRIDE` variable is
 prepared inside the <modulename>.conf files. See following example:
 
 ```
-BBLAYERS = " \
+BBLAYERS = "\
   ${BSPDIR}/sources/poky/meta \
   ${BSPDIR}/sources/poky/meta-poky \
   \
@@ -120,7 +120,7 @@ boards are used. Therefore the `MACHINEOVERRIDE` variable is prepared inside the
 <modulename>.conf files. See following example:
 
 ```
-BBLAYERS = " \
+BBLAYERS = "\
   ${BSPDIR}/sources/poky/meta \
   ${BSPDIR}/sources/poky/meta-poky \
   \
