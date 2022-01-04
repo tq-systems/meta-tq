@@ -55,7 +55,7 @@ WKS_FILE_DEPENDS = "\
     parted-native \
     virtual/kernel \
     virtual/bootloader \
-    "
+"
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale

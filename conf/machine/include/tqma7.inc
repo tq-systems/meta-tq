@@ -54,4 +54,4 @@ WKS_FILE_DEPENDS = "\
     parted-native \
     virtual/kernel \
     virtual/bootloader \
-    "
+"

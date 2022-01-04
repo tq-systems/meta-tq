@@ -26,7 +26,7 @@ IMAGE_BOOT_FILES ?= "\
     ${KERNEL_IMAGETYPE} \
     ${BOARD_DEVICETREE_FILES} \
     ${BOARD_FIRMWARE_FILES} \
-    "
+"
 
 # TODO: handle optee as soon as supported
 IMXBOOT_TARGETS ?= "flash_spl flash_spl_flexspi flash_linux_m4"

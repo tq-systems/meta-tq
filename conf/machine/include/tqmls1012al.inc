@@ -55,7 +55,7 @@ WKS_FILE_DEPENDS = "\
     dosfstools-native \
     parted-native \
     virtual/kernel \
-    "
+"
 
 # source the machine specific features for RCW, multimedia etc. from
 # meta-freescale

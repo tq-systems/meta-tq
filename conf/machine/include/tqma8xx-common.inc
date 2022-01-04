@@ -51,7 +51,7 @@ WKS_FILE_DEPENDS = "\
     virtual/bootloader \
     imx-boot \
     imx-sc-firmware \
-    "
+"
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale
