@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## hardknott.TQMa8.BSP.SW.0082
+
 ### Changed
 
 * tqma335x: linux-ti-tq: enable RTC TPS65910 in kernelconfig
@@ -24,6 +26,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* linux-rt-tq_4.19: fix missing defaults for SRCREV and SRCBRANCH
+* ti-sgx-ddk-km: spurious build problems due to bbappend. Not tested with rootfs
 * tqma335x: linux-ti-tq: fixes for RTC TPS65910 in dtb
 
 ## hardknott.TQMa8.BSP.SW.0081
