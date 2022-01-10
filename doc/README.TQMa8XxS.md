@@ -118,6 +118,8 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Known Issues
 
+* Default setting for `fdt_file` in u-boot does not match new naming scheme.
+  See [Build Artifacts](#Build-Artifacts) for complete list of supported Device Tree files
 * CAN
   * CAN FD is only supported on MB-SMARC-2 up to 1MBit/s (system limitation)
 * USB
@@ -127,7 +129,6 @@ See top level README.md for configurations usable as MACHINE.
   * Linux: overcurrent with some USB Sticks on MB-SMARC-2
 * FlexSPI
   * erase of ranges >= 16 MB fails under linux
-* UUU compatible bootstream is not built by default (yocto recipe limitation)
 * Suspend / Wakeup
   * RTC Alarm IRQ via GPIO leads to system stall during resume
 
@@ -297,6 +298,7 @@ with UUU tool:
 ```
 sudo uuu -b spl imx-boot-<machine>-mfgtool.bin
 ```
+
 ## Howto
 
 ### Test sleepmode and wakeup
