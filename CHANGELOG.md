@@ -7,6 +7,23 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Fixed
+
+* distro spaetzle* / image tq-image-small: fix to use initscripts from within
+  busybox. Otherwise no start / stop scripts are installed at all
+
+### Changed
+
+* tq-image-small:
+  * install kernel and dtbs into image for using the rootfs in UBI
+    images on MTD devices like QSPI NOR
+  * install packagroup-netutils for basic network support
+
+### Removed
+
+* perf: scripting scripting doesn't need to be disabled anymore, remove bbappend
+  file
+
 ## hardknott.TQMa8.BSP.SW.0080
 
 ### Added
@@ -27,8 +44,8 @@ Releases are named with the following scheme:
 ### Fixed
 
 * distros: fix spelling of TQ-Systems
-* packagegroup-hwutils: enable libgpiod-tools - it is splitted package in newer
-  versions
+* packagegroup-hwutils: enable libgpiod-tools - libgpiod has been split into
+  subpackages in newer versions
 * busybox: defconfig: restore extendend parameters for `dd`
 * allow kmscube to run in background
 * packagegroup-fsutils: fix ubi support
