@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
 DEPENDS += "xxd-native"
 
-SRCREV = "ed3d4eca182a4fd4e335317cc5fbc8ea986abf61"
+SRCREV = "c8256abcff63f095645d6d5b7dd69bc24794b45c"
 SRCBRANCH = "TQMaxx2-v2016.03-rel_imx_4.1.15_2.0.0_ga"
 
 SRC_URI = "\
