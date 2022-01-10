@@ -124,6 +124,8 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Known Issues
 
+* Default setting for `fdt_file` in u-boot does not match new naming scheme.
+  See [Build Artifacts](#Build-Artifacts) for complete list of supported Device Tree files
 * USB
   * U-Boot: USB 3.0 port does not initialize USB 2.0 subsystem after USB reset
 * Upon resume ethernet PHY will not establish a new link again
@@ -146,7 +148,7 @@ Artifacs can be found at the usual locations for bitbake:
 * hello\_world.bin (Cortex M4 demo, CM4 UART, TCM)
 * rpmsg\_lite\_pingpong\_rtos\_linux\_remote.bin (Cortex M4 demo, CM4 UART, TCM)
 
-## Boot Dip Switches
+## Boot DIP Switches
 
 _Note:_
 
