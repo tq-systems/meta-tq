@@ -11,7 +11,7 @@
 
 ### Known issues
 
-- none
+- PCIe requires a power cycle to work reliably. Asserting a POR using S9 or S10 is not sufficient.
 
 ## HowTo:
 
