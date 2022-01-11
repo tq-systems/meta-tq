@@ -47,7 +47,9 @@ _Note:_
 | ON      |      |     |  x   |  x   |      |      |      |      |    |     |     |     |     |     |     |     |     |    |     |     |     |  x  |  x  |     |     |     |    |  x  |     |
 | OFF     |  x   |  x  |      |      |  x   |  x   |  x   |  x   |    |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |    |  x  |  x  |  x  |     |     |  x  |  x  |  x  |    |     |  x  |
 
+### Dual LVDS usage
 
+The 2nd framebuffer / display is blanked by default. In order to use the display on `LVDS1` it need to be unblanked: `echo 0 > /sys/devices/platform/fb@3/graphics/fb2/blank`
 
 ## Support Wiki
 
