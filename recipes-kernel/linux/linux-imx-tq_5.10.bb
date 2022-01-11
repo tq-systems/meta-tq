@@ -10,9 +10,38 @@ SRC_URI = "\
 "
 
 SRCBRANCH = "TQMa8-fslc-5.10-2.1.x-imx"
-SRCREV = "915dd663fdf996ebd05a253782915db108f2010a"
+SRCREV = "a988e804a17dcc33ae7cbfb6a03a217d81bfa908"
 
+KERNEL_TREE_DEFCONFIG_mx6 = "imx_v7_defconfig"
 KERNEL_TREE_DEFCONFIG_mx8 = "imx_v8_defconfig"
+
+SRC_URI_mx6 = "\
+  ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+  file://disable-highpte.cfg \
+  file://dynamic-debug.cfg \
+  file://enable-led-features.cfg \
+  file://general-optimizations.cfg \
+  file://gpio-enablement.cfg \
+  file://kallsyms.cfg \
+  file://local-version.cfg \
+  file://neon.cfg \
+  file://optimize-filesystem-selection.cfg \
+  file://pcie.cfg \
+  file://sdma.cfg \
+  file://tqma6-audio-support.cfg \
+  file://tqma6-bpf-support.cfg \
+  file://tqma6-disable-unused-devices.cfg \
+  file://tqma6-i2c-devices.cfg \
+  file://tqma6-input-devices.cfg \
+  file://tqma6-network-support.cfg \
+  file://tqma6-nonimx-drm-removal.cfg \
+  file://tqma6-regulator-support.cfg \
+  file://tqma6-rtc.cfg \
+  file://tqma6-spi.cfg \
+  file://tqma6-wifi-support.cfg \
+  file://tqma6x-display-support.cfg \
+  file://usb-serial-port.cfg \
+"
 
 SRC_URI_mx8 = "\
   ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
@@ -35,7 +64,7 @@ SRC_URI_mx8 = "\
 
 COMPATIBLE_MACHINE = "^("
 # COMPATIBLE_MACHINE .= "tqma7x"
-# COMPATIBLE_MACHINE .= "|tqma6x"
+COMPATIBLE_MACHINE .= "|tqma6x"
 # COMPATIBLE_MACHINE .= "|tqma6ulx"
 # COMPATIBLE_MACHINE .= "|tqma6ullx"
 # COMPATIBLE_MACHINE .= "|tqmls1012al"

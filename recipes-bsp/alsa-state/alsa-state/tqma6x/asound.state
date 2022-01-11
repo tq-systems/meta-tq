@@ -1,4 +1,4 @@
-state.imx6tqma6xtlv32 {
+state.imxaudiotlv320a {
 	control.1 {
 		iface MIXER
 		name 'PCM Playback Volume'
@@ -17,6 +17,32 @@ state.imx6tqma6xtlv32 {
 	}
 	control.2 {
 		iface MIXER
+		name 'DAC Left Playback PowerTune Switch'
+		value P3
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 P3
+			item.1 P2
+			item.2 P1
+		}
+	}
+	control.3 {
+		iface MIXER
+		name 'DAC Right Playback PowerTune Switch'
+		value P3
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 P3
+			item.1 P2
+			item.2 P1
+		}
+	}
+	control.4 {
+		iface MIXER
 		name 'HP Driver Gain Volume'
 		value.0 6
 		value.1 6
@@ -31,7 +57,7 @@ state.imx6tqma6xtlv32 {
 			dbvalue.1 0
 		}
 	}
-	control.3 {
+	control.5 {
 		iface MIXER
 		name 'LO Driver Gain Volume'
 		value.0 6
@@ -47,7 +73,7 @@ state.imx6tqma6xtlv32 {
 			dbvalue.1 0
 		}
 	}
-	control.4 {
+	control.6 {
 		iface MIXER
 		name 'HP DAC Playback Switch'
 		value.0 false
@@ -58,7 +84,7 @@ state.imx6tqma6xtlv32 {
 			count 2
 		}
 	}
-	control.5 {
+	control.7 {
 		iface MIXER
 		name 'LO DAC Playback Switch'
 		value.0 true
@@ -69,7 +95,19 @@ state.imx6tqma6xtlv32 {
 			count 2
 		}
 	}
-	control.6 {
+	control.8 {
+		iface MIXER
+		name 'LO Playback Common Mode Switch'
+		value 'Full Chip'
+		comment {
+			access 'read write'
+			type ENUMERATED
+			count 1
+			item.0 'Full Chip'
+			item.1 '1.65V'
+		}
+	}
+	control.9 {
 		iface MIXER
 		name 'Mic PGA Switch'
 		value.0 false
@@ -80,7 +118,7 @@ state.imx6tqma6xtlv32 {
 			count 2
 		}
 	}
-	control.7 {
+	control.10 {
 		iface MIXER
 		name 'ADCFGA Left Mute Switch'
 		value false
@@ -90,7 +128,7 @@ state.imx6tqma6xtlv32 {
 			count 1
 		}
 	}
-	control.8 {
+	control.11 {
 		iface MIXER
 		name 'ADCFGA Right Mute Switch'
 		value false
@@ -100,7 +138,7 @@ state.imx6tqma6xtlv32 {
 			count 1
 		}
 	}
-	control.9 {
+	control.12 {
 		iface MIXER
 		name 'ADC Level Volume'
 		value.0 24
@@ -116,7 +154,7 @@ state.imx6tqma6xtlv32 {
 			dbvalue.1 0
 		}
 	}
-	control.10 {
+	control.13 {
 		iface MIXER
 		name 'PGA Level Volume'
 		value.0 0
@@ -132,7 +170,7 @@ state.imx6tqma6xtlv32 {
 			dbvalue.1 0
 		}
 	}
-	control.11 {
+	control.14 {
 		iface MIXER
 		name 'Auto-mute Switch'
 		value 0
@@ -143,7 +181,7 @@ state.imx6tqma6xtlv32 {
 			range '0 - 7'
 		}
 	}
-	control.12 {
+	control.15 {
 		iface MIXER
 		name 'AGC Left Switch'
 		value false
@@ -153,7 +191,7 @@ state.imx6tqma6xtlv32 {
 			count 1
 		}
 	}
-	control.13 {
+	control.16 {
 		iface MIXER
 		name 'AGC Right Switch'
 		value false
@@ -163,7 +201,7 @@ state.imx6tqma6xtlv32 {
 			count 1
 		}
 	}
-	control.14 {
+	control.17 {
 		iface MIXER
 		name 'AGC Target Level'
 		value.0 0
@@ -175,7 +213,7 @@ state.imx6tqma6xtlv32 {
 			range '0 - 7'
 		}
 	}
-	control.15 {
+	control.18 {
 		iface MIXER
 		name 'AGC Gain Hysteresis'
 		value.0 0
@@ -187,7 +225,7 @@ state.imx6tqma6xtlv32 {
 			range '0 - 3'
 		}
 	}
-	control.16 {
+	control.19 {
 		iface MIXER
 		name 'AGC Hysteresis'
 		value.0 0
@@ -199,7 +237,7 @@ state.imx6tqma6xtlv32 {
 			range '0 - 3'
 		}
 	}
-	control.17 {
+	control.20 {
 		iface MIXER
 		name 'AGC Noise Threshold'
 		value.0 0
@@ -211,7 +249,7 @@ state.imx6tqma6xtlv32 {
 			range '0 - 31'
 		}
 	}
-	control.18 {
+	control.21 {
 		iface MIXER
 		name 'AGC Max PGA'
 		value.0 127
@@ -223,7 +261,7 @@ state.imx6tqma6xtlv32 {
 			range '0 - 127'
 		}
 	}
-	control.19 {
+	control.22 {
 		iface MIXER
 		name 'AGC Attack Time'
 		value.0 0
@@ -235,7 +273,7 @@ state.imx6tqma6xtlv32 {
 			range '0 - 31'
 		}
 	}
-	control.20 {
+	control.23 {
 		iface MIXER
 		name 'AGC Decay Time'
 		value.0 0
@@ -247,7 +285,7 @@ state.imx6tqma6xtlv32 {
 			range '0 - 31'
 		}
 	}
-	control.21 {
+	control.24 {
 		iface MIXER
 		name 'AGC Noise Debounce'
 		value.0 0
@@ -259,7 +297,7 @@ state.imx6tqma6xtlv32 {
 			range '0 - 31'
 		}
 	}
-	control.22 {
+	control.25 {
 		iface MIXER
 		name 'AGC Signal Debounce'
 		value.0 0
@@ -271,7 +309,7 @@ state.imx6tqma6xtlv32 {
 			range '0 - 15'
 		}
 	}
-	control.23 {
+	control.26 {
 		iface MIXER
 		name 'HPL Output Mixer L_DAC Switch'
 		value false
@@ -281,7 +319,7 @@ state.imx6tqma6xtlv32 {
 			count 1
 		}
 	}
-	control.24 {
+	control.27 {
 		iface MIXER
 		name 'HPL Output Mixer IN1_L Switch'
 		value false
@@ -291,7 +329,7 @@ state.imx6tqma6xtlv32 {
 			count 1
 		}
 	}
-	control.25 {
+	control.28 {
 		iface MIXER
 		name 'LOL Output Mixer L_DAC Switch'
 		value true
@@ -301,7 +339,7 @@ state.imx6tqma6xtlv32 {
 			count 1
 		}
 	}
-	control.26 {
+	control.29 {
 		iface MIXER
 		name 'HPR Output Mixer R_DAC Switch'
 		value false
@@ -311,7 +349,7 @@ state.imx6tqma6xtlv32 {
 			count 1
 		}
 	}
-	control.27 {
+	control.30 {
 		iface MIXER
 		name 'HPR Output Mixer IN1_R Switch'
 		value false
@@ -321,7 +359,7 @@ state.imx6tqma6xtlv32 {
 			count 1
 		}
 	}
-	control.28 {
+	control.31 {
 		iface MIXER
 		name 'LOR Output Mixer R_DAC Switch'
 		value true
@@ -331,7 +369,7 @@ state.imx6tqma6xtlv32 {
 			count 1
 		}
 	}
-	control.29 {
+	control.32 {
 		iface MIXER
 		name 'IN1_R to Right Mixer Positive Resistor'
 		value '10 kOhm'
@@ -345,7 +383,7 @@ state.imx6tqma6xtlv32 {
 			item.3 '40 kOhm'
 		}
 	}
-	control.30 {
+	control.33 {
 		iface MIXER
 		name 'IN2_R to Right Mixer Positive Resistor'
 		value Off
@@ -359,7 +397,7 @@ state.imx6tqma6xtlv32 {
 			item.3 '40 kOhm'
 		}
 	}
-	control.31 {
+	control.34 {
 		iface MIXER
 		name 'IN3_R to Right Mixer Positive Resistor'
 		value Off
@@ -373,7 +411,7 @@ state.imx6tqma6xtlv32 {
 			item.3 '40 kOhm'
 		}
 	}
-	control.32 {
+	control.35 {
 		iface MIXER
 		name 'IN2_L to Right Mixer Positive Resistor'
 		value Off
@@ -387,7 +425,7 @@ state.imx6tqma6xtlv32 {
 			item.3 '40 kOhm'
 		}
 	}
-	control.33 {
+	control.36 {
 		iface MIXER
 		name 'CM_R to Right Mixer Negative Resistor'
 		value '10 kOhm'
@@ -401,7 +439,7 @@ state.imx6tqma6xtlv32 {
 			item.3 '40 kOhm'
 		}
 	}
-	control.34 {
+	control.37 {
 		iface MIXER
 		name 'IN1_L to Right Mixer Negative Resistor'
 		value '10 kOhm'
@@ -415,7 +453,7 @@ state.imx6tqma6xtlv32 {
 			item.3 '40 kOhm'
 		}
 	}
-	control.35 {
+	control.38 {
 		iface MIXER
 		name 'IN3_L to Right Mixer Negative Resistor'
 		value Off
@@ -429,7 +467,7 @@ state.imx6tqma6xtlv32 {
 			item.3 '40 kOhm'
 		}
 	}
-	control.36 {
+	control.39 {
 		iface MIXER
 		name 'IN1_L to Left Mixer Positive Resistor'
 		value '10 kOhm'
@@ -443,7 +481,7 @@ state.imx6tqma6xtlv32 {
 			item.3 '40 kOhm'
 		}
 	}
-	control.37 {
+	control.40 {
 		iface MIXER
 		name 'IN2_L to Left Mixer Positive Resistor'
 		value Off
@@ -457,7 +495,7 @@ state.imx6tqma6xtlv32 {
 			item.3 '40 kOhm'
 		}
 	}
-	control.38 {
+	control.41 {
 		iface MIXER
 		name 'IN3_L to Left Mixer Positive Resistor'
 		value Off
@@ -471,7 +509,7 @@ state.imx6tqma6xtlv32 {
 			item.3 '40 kOhm'
 		}
 	}
-	control.39 {
+	control.42 {
 		iface MIXER
 		name 'IN1_R to Left Mixer Positive Resistor'
 		value '10 kOhm'
@@ -485,7 +523,7 @@ state.imx6tqma6xtlv32 {
 			item.3 '40 kOhm'
 		}
 	}
-	control.40 {
+	control.43 {
 		iface MIXER
 		name 'CM_L to Left Mixer Negative Resistor'
 		value '10 kOhm'
@@ -499,7 +537,7 @@ state.imx6tqma6xtlv32 {
 			item.3 '40 kOhm'
 		}
 	}
-	control.41 {
+	control.44 {
 		iface MIXER
 		name 'IN2_R to Left Mixer Negative Resistor'
 		value Off
@@ -513,7 +551,7 @@ state.imx6tqma6xtlv32 {
 			item.3 '40 kOhm'
 		}
 	}
-	control.42 {
+	control.45 {
 		iface MIXER
 		name 'IN3_R to Left Mixer Negative Resistor'
 		value Off
