@@ -1,5 +1,7 @@
 # TQMa6\[QP,DP,Q,D,DL,SL\] up to Rev.040x on MBa6x REV.020x carrier board
 
+[[_TOC_]]
+
 ## Overview
 
 ### Supported Hardware:
