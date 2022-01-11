@@ -1,0 +1,22 @@
+From 96080de518339c87be70081b158e424191e51856 Mon Sep 17 00:00:00 2001
+From: Paul Gerber <Paul.Gerber@tq-group.com>
+Date: Thu, 9 Mar 2023 10:44:50 +0100
+Subject: [PATCH] compilers: add aarch64-tq-linux as lint to aarch64-linux-gnu
+
+Signed-off-by: Paul Gerber <Paul.Gerber@tq-group.com>
+---
+ build/linux/config/compilers/aarch64-tq-linux.mk | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 120000 build/linux/config/compilers/aarch64-tq-linux.mk
+
+diff --git a/build/linux/config/compilers/aarch64-tq-linux.mk b/build/linux/config/compilers/aarch64-tq-linux.mk
+new file mode 120000
+index 0000000..e162da5
+--- /dev/null
++++ b/build/linux/config/compilers/aarch64-tq-linux.mk
+@@ -0,0 +1 @@
++aarch64-linux-gnu.mk
+\ No newline at end of file
+-- 
+2.39.1
+
