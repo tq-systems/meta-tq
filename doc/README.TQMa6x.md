@@ -9,6 +9,39 @@
 * TQMa6x: module revisions REV.010x ... REV.040x
 * MBa6x:  board revisions REV.020x
 
+### Supported Features
+
+|                              | linux-imx-tq-5.10 |
+| ---------------------------- | :---------------: |
+| Fuses                        |       x           |
+| UART (console on UART3, X15) |       x           |
+| GPIO                         |       x           |
+| Button (S6, S7, S8)          |       x           |
+| I2C                          |       x           |
+| GPIO expander                |       x           |
+| EEPROM                       |       x           |
+| RTC                          |       x           |
+| SPI NOR                      |       x           |
+| Buzzer                       |       x           |
+| GPU                          |       x           |
+| VPU H.264                    |       x           |
+| VPU VP8                      |       x           |
+| USB Host (X6/X7)             |       x           |
+| USB Dual Role (X8)           |       x           |
+| eMMC/SD (on-board/X9)        |       x           |
+| Ethernet GigE (X11/X12)      |       x           |
+| CAN (X13/X14)                |       x           |
+| RS-485 (X16)                 |       x           |
+| HDMI (X17)                   |       x           |
+| LVDS (X18, X19)              |       x           |
+| Audio Line In (X20)          |       x           |
+| Audio Line Out (x22)         |       x           |
+| PCIe (X23)                   |       x           |
+
+### ToDo
+* SIM card
+* Mic In (X21)
+
 ### Known issues
 
 - PCIe requires a power cycle to work reliably. Asserting a POR using S9 or S10 is not sufficient.
