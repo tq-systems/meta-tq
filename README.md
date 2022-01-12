@@ -66,6 +66,11 @@ layers: meta-ti
 branch of meta-arm to be used depends on revision. Yocto zeus support started
 in branch master and is currently maintained in branch dunfell
 
+### Coding style
+
+It is recommended to use the [Format_Guidelines](https://www.openembedded.org/wiki/Styleguide#Format_Guidelines)
+from openembedded.
+
 ### Patches
 
 Please submit patches against the meta-tq layer to the
