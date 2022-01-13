@@ -5,10 +5,13 @@ DEPENDS += "lzop-native bc-native openssl-native"
 #
 # append linux-mainline if we provide mainline kernel versions
 #
-PROVIDES += "linux-imx linux-tq-imx"
+PROVIDES += "linux-imx linux-imx-tq"
 
 inherit kernel
 
+#
+# optional stuff from meta-freescale
+#
 require ${@bb.utils.contains("BBFILE_COLLECTIONS", "freescale-layer", 'linux-imx-tq-conditional.inc', '', d)}
 
 # name the intree defconfig file
