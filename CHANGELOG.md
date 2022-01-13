@@ -9,6 +9,25 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* TQMa6x: linux 5.10 support based on linux-fslc 5.10 + imx
+
+### Changed
+
+* u-boot: use local version as implemented in branch zeus-tqma8. This will make
+  the U-boot version string consistent with newer and upcomming kernel version
+  string and consists of `<upstream version>-tq+g<git short hash>`
+
+### Fixed
+
+* u-boot-imx-tq\_2020.04: tqma8\[all variants\] adjust `DEFAULT_FDT_FILE` to
+  kernel 5.10 used in this BSP. This is also the naming scheme that will be
+  found in linux-mainline.
+* u-boot-imx-tq\_2016.03: tqma\[6,7,6ul,6ull\] adjust board specific dt_fixup
+  to work also with newer kernel versions. In newer kernel node naming was
+  changed according to device tree specification.
+
 ## hardknott.TQMa8.BSP.SW.0082
 
 ### Changed
