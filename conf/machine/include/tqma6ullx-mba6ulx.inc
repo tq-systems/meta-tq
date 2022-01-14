@@ -1,5 +1,9 @@
+# Common definitions for TQ-Systems GmbH MBa6ULx baseboard for TQMa6ULLx[L] modules
 
 SERIAL_CONSOLES = "115200;ttymxc0"
+
+# disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
+USE_VT = "0"
 
 KERNEL_DEVICETREE = "\
     imx6ull-mba6ulx.dtb \

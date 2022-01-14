@@ -2,7 +2,7 @@
 
 SERIAL_CONSOLES = "115200;ttyS0"
 SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
-# no virtual terminal needed
+# disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
 USE_VT = "0"
 
 KERNEL_DEVICETREE ?= " \

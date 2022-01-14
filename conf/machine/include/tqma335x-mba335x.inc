@@ -21,4 +21,7 @@ MACHINE_EXTRA_RRECOMMENDS += "${@bb.utils.contains('BBFILE_COLLECTIONS', 'meta-t
 
 SERIAL_CONSOLES ?= "115200;ttyS4"
 
+# disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
+USE_VT = "0"
+
 WKS_FILE = "tqma57xx_tqma335x-sdimg.wks"

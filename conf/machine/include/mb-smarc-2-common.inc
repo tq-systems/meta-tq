@@ -3,8 +3,7 @@
 # We have to disable SERIAL_CONSOLE due to auto-serial-console
 SERIAL_CONSOLES = "115200;ttyLP0"
 
-# we do not want to have getty running on tty1 as we run
-# auto-serial-console there
+# disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
 USE_VT = "0"
 
 # TODO: handle optee as soon as supported

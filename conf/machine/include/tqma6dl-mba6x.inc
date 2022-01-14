@@ -1,4 +1,4 @@
-# Common definitions for TQ-Systems GmbH TQMa6[S,DL] modules on MBa6
+# Common definitions for TQ-Systems GmbH TQMa6[S,DL] modules on MBa6x
 
 KERNEL_DEVICETREE = "\
     imx6dl-mba6a.dtb \

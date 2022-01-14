@@ -1,6 +1,11 @@
+# Common definitions for TQ-Systems GmbH MBa7x baseboard for TQMa7x modules
+
 include conf/machine/include/tqma7.inc
 
 SERIAL_CONSOLES = "115200;ttymxc5"
+
+# disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
+USE_VT = "0"
 
 KERNEL_DEVICETREE = "\
     imx7d-mba7.dtb \

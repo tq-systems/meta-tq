@@ -24,6 +24,9 @@ MACHINE_FEATURES_append = "\
 # Set Serial console
 SERIAL_CONSOLES = "115200;ttymxc3"
 
+# disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
+USE_VT = "0"
+
 IMAGE_BOOT_FILES ?= "\
     ${KERNEL_IMAGETYPE} \
     ${BOARD_DEVICETREE_FILES} \
