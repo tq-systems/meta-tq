@@ -1,13 +1,11 @@
-LICENSE = "GPLv2"
+require linux-tq.inc
+
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
-DEPENDS += "lzop-native bc-native openssl-native"
 #
 # append linux-mainline if we provide mainline kernel versions
 #
 PROVIDES += "linux-imx linux-imx-tq"
-
-inherit kernel
 
 #
 # optional stuff from meta-freescale
@@ -74,26 +72,3 @@ do_configure_prepend() {
         (cd "${WORKDIR}" && ${S}/scripts/kconfig/merge_config.sh -m -O "${B}" "$config" $fragments)
     fi
 }
-
-####
-# kernel.bbclass unconditionally creates an empty .scmversion file that prevents
-# using CONFIG_LOCALVERSION_AUTO - we fix this in provifing an append step
-# regenerating the file if is set in final .config
-####
-do_configure_append() {
-    config="${B}/.config"
-
-    bbnote "configure_append"
-
-    # match complete line:
-    grep -Fx "CONFIG_LOCALVERSION_AUTO=y" ${config} > /dev/null
-    if [ "$?" -eq "0" ]; then
-        # Add GIT revision to the local version
-        head=$(git --git-dir=${S}/.git rev-parse --verify --short HEAD 2> /dev/null)
-        printf "%s%s" +g $head > ${B}/.scmversion
-        printf "%s%s" +g $head > ${S}/.scmversion
-        bbnote "fix .scmversion"
-    fi
-}
-
-S = "${WORKDIR}/git"
