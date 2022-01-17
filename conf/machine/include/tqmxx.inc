@@ -10,3 +10,9 @@ UBOOT_INITIAL_ENV ?= ""
 PREFERRED_PROVIDER_ptpd_imx = "ptpd"
 PREFERRED_PROVIDER_ptpd_qoriq = "${@bb.utils.contains('BBFILE_COLLECTIONS', 'freescale-layer', 'ptpd-qoriq', 'ptpd', d)}"
 PREFERRED_PROVIDER_ptpd ?= "ptpd"
+
+# Return a list of device tree files depending on the virtual/kernel
+# provider. The (optional) list is named KERNEL_DEVICETREE_<provider>
+def kernel_provider_dtbs(d):
+    kernel_provider = d.getVar('PREFERRED_PROVIDER_virtual/kernel')
+    return d.getVar('KERNEL_DEVICETREE_' + kernel_provider)
