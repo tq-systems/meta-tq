@@ -4,13 +4,13 @@
 KERNEL_DEVICETREE = "\
     imx6q-mba6a.dtb \
     imx6q-mba6a-duallvds-tm070jvhg33.dtb \
-    imx6q-mba6a-lvds-tm070jvhg33.dtb \
     imx6q-mba6a-hdmi.dtb \
+    imx6q-mba6a-lvds-tm070jvhg33.dtb \
     \
     imx6q-mba6b.dtb \
     imx6q-mba6b-duallvds-tm070jvhg33.dtb \
-    imx6q-mba6b-lvds-tm070jvhg33.dtb \
     imx6q-mba6b-hdmi.dtb \
+    imx6q-mba6b-lvds-tm070jvhg33.dtb \
 "
 
 KERNEL_DEVICETREE_linux-imx-tq = "\
