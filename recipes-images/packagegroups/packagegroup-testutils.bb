@@ -13,14 +13,16 @@ inherit packagegroup
 # maybe perl comes also in as a dependency for mtrace
 # and that's not what we want
 
-GL_TEST_TOOLS = "\
-    ${@oe.utils.ifelse(d.getVar('PREFERRED_PROVIDER_virtual/libgbm') != "", 'kmscube', '')} \
-"
-
 RDEPENDS_${PN} = "\
     strace \
     gdbserver \
     mc \
     ${@bb.utils.contains('MACHINE_FEATURES', 'alsa', ' alsa-utils-speakertest', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', ' ${GL_TEST_TOOLS}', '', d)} \
+"
+
+# note: kmscube is only available if we have opengl and if virtual/libgbm
+# is built. Since this is at least not the case for TQMa6x with vendor graphic
+# stack we need this ugly construct
+RRECOMMENDS_${PN} = "\
+    ${@oe.utils.ifelse(d.getVar('PREFERRED_PROVIDER_virtual/libgbm') != "", 'kmscube', '')} \
 "
