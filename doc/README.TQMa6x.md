@@ -11,36 +11,43 @@
 
 ### Supported Features
 
-|                              | linux-imx-tq-5.10 |
-| ---------------------------- | :---------------: |
-| Fuses                        |       x           |
-| UART (console on UART3, X15) |       x           |
-| GPIO                         |       x           |
-| Button (S6, S7, S8)          |       x           |
-| I2C                          |       x           |
-| GPIO expander                |       x           |
-| EEPROM                       |       x           |
-| RTC                          |       x           |
-| SPI NOR                      |       x           |
-| Buzzer                       |       x           |
-| GPU                          |       x           |
-| VPU H.264                    |       x           |
-| VPU VP8                      |       x           |
-| USB Host (X6/X7)             |       x           |
-| USB Dual Role (X8)           |       x           |
-| eMMC/SD (on-board/X9)        |       x           |
-| Ethernet GigE (X11/X12)      |       x           |
-| CAN (X13/X14)                |       x           |
-| RS-485 (X16)                 |       x           |
-| HDMI (X17)                   |       x           |
-| LVDS (X18, X19)              |       x           |
-| Audio Line In (X20)          |       x           |
-| Audio Line Out (x22)         |       x           |
-| PCIe (X23)                   |       x           |
+|                              | linux-imx-tq-5.10 | linux-tq-5.15 |
+| ---------------------------- | :---------------: | :-----------: |
+| Fuses                        |       x           |      x        |
+| UART (console on UART3, X15) |       x           |      x        |
+| GPIO                         |       x           |      x        |
+| Button (S6, S7, S8)          |       x           |      x        |
+| I2C                          |       x           |      x        |
+| GPIO expander                |       x           |      x        |
+| EEPROM                       |       x           |      x        |
+| RTC                          |       x           |      x        |
+| SPI NOR                      |       x           |      x        |
+| Buzzer                       |       x           |      x        |
+| GPU                          |       x           |      x        |
+| VPU H.264                    |       x           |      x        |
+| VPU VP8                      |       x           |               |
+| USB Host (X6/X7)             |       x           |      x        |
+| USB Dual Role (X8)           |       x           |      x        |
+| eMMC/SD (on-board/X9)        |       x           |      x        |
+| Ethernet GigE (X11/X12)      |       x           |      x        |
+| CAN (X13/X14)                |       x           |      x        |
+| RS-485 (X16)                 |       x           |      x        |
+| HDMI (X17)                   |       x           |      x        |
+| LVDS (X18, X19)              |       x           |      x        |
+| HDMI + LVDS (X17, X18)       |                   |      x        |
+| Audio Line In (X20)          |       x           |      x        |
+| Audio Line Out (x22)         |       x           |      x        |
+| PCIe (X23)                   |       x           |      x        |
+| Parallel LCD (X27)           |                   |      x        |
+| Touch (X27)                  |                   |      x        |
+| Multi-Display                |                   |      x        |
 
-### ToDo
-* SIM card
+### ToDo / Untested
 * Mic In (X21)
+* SIM card (X24)
+* MIPI-CSI (X28)
+* MIPI-DSI (X28)
+* MLB (X28)
 
 ### Known issues
 
@@ -82,6 +89,8 @@ _Note:_
 | OFF     |  x   |  x  |      |      |  x   |  x   |  x   |  x   |    |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |    |  x  |  x  |  x  |     |     |  x  |  x  |  x  |    |     |  x  |
 
 ### Dual LVDS usage
+
+_Note:_ Only valid for `linux-imx-tq-5.10`
 
 The 2nd framebuffer / display is blanked by default. In order to use the display on `LVDS1` it need to be unblanked: `echo 0 > /sys/devices/platform/fb@3/graphics/fb2/blank`
 
