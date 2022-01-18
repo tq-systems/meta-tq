@@ -53,6 +53,8 @@
 
 - PCIe requires a power cycle to work reliably. Asserting a POR using S9 or S10 is not sufficient.
 - eth1 (X12) uses a random MAC address. The one stored in MBa6 EEPROM is currently not used.
+- Backlight on parallel displays are enabled upon Power-On which might lead to random output.
+  Display will be disabled during bootup and can be used normally afterwards.
 
 ## HowTo:
 
