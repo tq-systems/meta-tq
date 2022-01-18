@@ -5,7 +5,9 @@ require conf/machine/include/tqmxx.inc
 
 MACHINE_EXTRA_RRECOMMENDS += " kernel-modules kernel-devicetree"
 
-MACHINE_FEATURES_append = " alsa usbhost rtc serial ext2 ext3 vfat ubi"
+MACHINE_FEATURES += "alsa usbhost rtc serial ext2 ext3 vfat ubi"
+MACHINE_FEATURES += "vpu"
+MACHINE_FEATURES_remove_mx8mn = "vpu"
 
 PREFERRED_PROVIDER_u-boot-fw-utils_mx8 ?= "u-boot-fw-utils-imx-tq"
 
