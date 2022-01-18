@@ -9,11 +9,18 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* recipes-image: fix installing kmscube and glmark2 for different setups
 * distro spaetzle* / image tq-image-small: fix to use initscripts from within
   busybox. Otherwise no start / stop scripts are installed at all
 
 ### Changed
 
+* rename packagegroup-camera to packagegroup-v4l2 and install also, if
+  `MACHINE_FEATURES` contains `vpu`
+* glmark2: enable install multiple flavours
+* distro:
+  * enable mesa libs as virtual providers for mainline based distros
+  * refactor include hierarchy
 * tq-image-small:
   * install kernel and dtbs into image for using the rootfs in UBI
     images on MTD devices like QSPI NOR
