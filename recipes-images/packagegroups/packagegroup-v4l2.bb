@@ -1,7 +1,9 @@
-DESCRIPTION = "camera testing tools"
+DESCRIPTION = "camera and video codec testing tools"
 LICENSE = "MIT"
 
 inherit packagegroup
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 GST_PKGS = "\
     gstreamer1.0 \
