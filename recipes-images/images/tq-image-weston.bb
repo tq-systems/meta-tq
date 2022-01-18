@@ -27,6 +27,3 @@ IMAGE_INSTALL_append = "\
     weston-examples \
     ${THISIMAGE_GSTREAMER_PLUGINS} \
 "
-
-IMAGE_INSTALL_append_imxgpu3d = " glmark2"
-IMAGE_INSTALL_append_imxdrm   = " kmscube"

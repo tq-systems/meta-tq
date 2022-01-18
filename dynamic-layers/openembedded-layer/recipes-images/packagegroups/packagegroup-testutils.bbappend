@@ -9,4 +9,5 @@ RDEPENDS_${PN}_append = "\
     nano \
     fb-test \
     stressapptest \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', ' glmark2', '', d)} \
 "
