@@ -11,22 +11,34 @@ Releases are named with the following scheme:
 
 ### Added
 
+* mesa: add bbappend to support TQMa6x / TQMa7x / TQMa6U\[L\]x\[L\] with mainline
+  kernel
+* TQMa8 / TQMa6x: add new MACHINE_FEATURE `vpu` for all but TQMa8MxNL
 * TQMa6x: linux 5.10 support based on linux-fslc 5.10 + imx
 
 ### Changed
 
+* TQMa8 / TQMa6x: force build vivante gpu driver for linux-tq-imx as out of tree module
+  to ensure versions between module and userland match. Overrides default assignments
+  from meta-freescale.
+* linux-imx-tq: switch to use linux-yocto for kernel fragment handling
 * u-boot: use local version as implemented in branch zeus-tqma8. This will make
   the U-boot version string consistent with newer and upcomming kernel version
   string and consists of `<upstream version>-tq+g<git short hash>`
 
 ### Fixed
 
+* machines: add `USE_VT = "0"` where missing to disable virtual console support.
 * u-boot-imx-tq\_2020.04: tqma8\[all variants\] adjust `DEFAULT_FDT_FILE` to
   kernel 5.10 used in this BSP. This is also the naming scheme that will be
   found in linux-mainline.
 * u-boot-imx-tq\_2016.03: tqma\[6,7,6ul,6ull\] adjust board specific dt_fixup
   to work also with newer kernel versions. In newer kernel node naming was
   changed according to device tree specification.
+
+## Removed
+
+* linux-imx-tq_5.4: remove support for i.MX8 based machines
 
 ## hardknott.TQMa8.BSP.SW.0082
 
