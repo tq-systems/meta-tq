@@ -45,9 +45,9 @@ do_download_firmware () {
 addtask do_download_firmware after do_configure before do_compile
 
 # Fix race condition, which can causes configs in defconfig file be ignored
-#do_kernel_configme[depends] += "virtual/${TARGET_PREFIX}binutils:do_populate_sysroot"
-#do_kernel_configme[depends] += "virtual/${TARGET_PREFIX}gcc:do_populate_sysroot"
-#do_kernel_configme[depends] += "bc-native:do_populate_sysroot bison-native:do_populate_sysroot"
+do_kernel_configme[depends] += "virtual/${TARGET_PREFIX}binutils:do_populate_sysroot"
+do_kernel_configme[depends] += "virtual/${TARGET_PREFIX}gcc:do_populate_sysroot"
+do_kernel_configme[depends] += "bc-native:do_populate_sysroot bison-native:do_populate_sysroot"
 
 # Fix error: openssl/bio.h: No such file or directory
 DEPENDS += "openssl-native"
