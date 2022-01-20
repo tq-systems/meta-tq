@@ -3,9 +3,6 @@
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale
 
-MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT = "1"
-MACHINE_USES_VIVANTE_KERNEL_DRIVER_MODULE = "0"
-
 MACHINEOVERRIDES =. "tqma6x:"
 MACHINEOVERRIDES =. "mx6:"
 
