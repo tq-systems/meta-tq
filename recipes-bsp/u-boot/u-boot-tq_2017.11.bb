@@ -9,7 +9,7 @@ DEPENDS += "bc-native bison-native"
 DEPENDS += "swap-file-endianess-native tcl-native"
 #DEPENDS += "dtc-native bc-native"
 
-SRCREV = "b9bb44db2039d6c2f8c46215b4b647796128cf7a"
+SRCREV = "f6e872244f807f68b2c984936b6fdd77cb91c31b"
 SRCBRANCH = "TQMaxx-u-boot-v2017.11"
 
 SRC_URI = "\
