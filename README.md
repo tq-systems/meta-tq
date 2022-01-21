@@ -37,6 +37,11 @@ under dynamic-layers and are only visible, if the original layer is in your
 bblayer.conf. For details look for `BBFILES_DYNAMIC` in Yocto Project
 documentation.
 
+### Coding style
+
+It is recommended to use the [Format_Guidelines](https://www.openembedded.org/wiki/Styleguide#Format_Guidelines)
+from openembedded.
+
 ### Patches
 
 Please submit patches against the meta-dumpling layer to the
@@ -86,13 +91,33 @@ TQ-Systems SOM:
 | tq-image-qt5           | based on tq-image-weston, added qt5 support                   |
 | tq-image-qt5-debug     | based on tq-image-qt5, added debug features and packages      |
 
-**Attention:** These recipes can be used as a starting point for own customization.
-Because of the intended usage, a lot debug and test tools are included.
-These packages should not go into a production image. Depending on the actual
-project, security must be taken in account.
+**Attention:** These image recipes can be used as a starting point for own customization.
+Every recipe comes in two flavours. The images suffixed with `debug` add `debug-tweaks` to
+the `IMAGE_FEATURES` to have an open root login for console and ssh for ease of development
+and testing. The non suffixed images simply define a base feature set for the use case
+and contain a lot of test utils, to evaluate and test TQ-Systems starterkits.
+Because of the intended use case, these image recipes are intended as a starting point
+for development but should not be used directly for production images.
+Depending on the actual project, security must be taken in account.
 
-It is recommended to use the [Format_Guidelines](https://www.openembedded.org/wiki/Styleguide#Format_Guidelines)
-from openembedded.
+**Note:** Out of the box (without `debug-tweaks` in `IMAGE_FEATURES`) the images
+without `-debug` suffix do not allow user login. This should be default for the vast
+majority of embedded systems. If one need an user that can login, see poky documentation
+for `extrausers.bbclass` and following example:
+
+```
+# add user <username> with password <passwd> and force password change at first login
+IMAGE_CLASSES += "extrausers"
+USERADDEXTENSION = "useradd-staticids"
+USERADD_UID_TABLES = "files/passwd"
+USERADD_GID_TABLES = "files/group"
+
+EXTRA_USERS_PARAMS = "\
+    useradd <username> ; \
+    usermod -P <passwd> <username>; \
+    passwd-expire <username>; \
+"
+```
 
 ### Example distros
 
