@@ -6,7 +6,6 @@ IMAGE_INSTALL_append = "\
     coreutils \
     ${@bb.utils.contains('MACHINE_FEATURES', 'camera', ' packagegroup-v4l2', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vpu', ' packagegroup-v4l2', '', d)} \
-    packagegroup-testutils \
 "
 
 # force openssh to prevent conflict with dropbear
