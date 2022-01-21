@@ -18,6 +18,10 @@ SRC_URI = "\
     file://defconfig \
 "
 
+SRC_URI_append_tqmls102xa = "\
+    file://tqmls102x-enable-edac.cfg \
+"
+
 COMPATIBLE_MACHINE = "tqmls102xa"
 COMPATIBLE_MACHINE_append = "|tqma7x"
 COMPATIBLE_MACHINE_append = "|tqma6x"
