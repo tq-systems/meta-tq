@@ -14,7 +14,7 @@ KERNEL_DEVICETREE ?= " \
 # achieve this in your BSP layer adding them via
 # IMAGE_INSTALL_append = " kernel-devicetree kernel-image"
 #
-IMAGE_BOOT_FILES ?= "\
+IMAGE_BOOT_FILES = "\
     ${KERNEL_IMAGETYPE} \
     fsl-ls1012a-mbls1012al.dtb \
 "
