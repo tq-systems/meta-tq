@@ -190,7 +190,7 @@ Support for the following machines is contained in this version:
 | [b]    | LS1046A          | TQMLS1046A               | MBLS10xxA      | tqmls1046a-mbls10xxa         | TQMLS1046a with 2 GiB RAM / MBLS10xxa |
 | [b]    | LS1046A          | TQMLS1046A               | MBLS10xxA      | tqmls1046a_8g-mbls10xxa      | TQMLS1046a with 8 GiB RAM / MBLS10xxa |
 | [b]    | LS1088A          | TQMLS1088A               | MBLS10xxA      | tqmls1088a-mbls10xxa         | TQMLS1088a / MBLS10xxa |
-| [b]    | LS102\[0,1\]A    | TQMLS102\[0,1\]A         | MBLS102xA      | tqmls102xa-mbls102xa         | TQMLS102\[0,1\]A HW REV.020x / MBLS102xA HW REV.020x |
+| [y]    | LS102\[0,1\]A    | TQMLS102\[0,1\]A         | MBLS102xA      | tqmls102xa-mbls102xa         | TQMLS102\[0,1\]A HW REV.020x / MBLS102xA HW REV.020x |
 | [b]    | LX2160A          | TQMLX2160A               | MBLX2160A      | tqmlx2160a-mblx2160a         | TQMLX2160A HW REV.010x / MBLX2160A HW REV.010x and REV.020x |
 | [b]    | AM355x           | TQMa335x\[L\]            | MBa335x        | tqma355x-mba335x             | TQMa335x[L] HW REV.020x with 256 MiB RAM / MBa335x HW REV.020x |
 | [b]    | AM355x           | TQMa335x                 | MBa335x        | tqma355x_512mb-mba335x       | TQMa335x HW REV.020x with 512 MiB RAM / MBa335x HW REV.020x |
