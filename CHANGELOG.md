@@ -11,6 +11,7 @@ Releases are named with the following scheme:
 
 ### Added
 
+* linux-tq_5.4 / TQMLS102xA: support EDAC for ECC RAM
 * mesa: add bbappend to support TQMa6x / TQMa7x / TQMa6U\[L\]x\[L\] with mainline
   kernel
 * TQMa8 / TQMa6x: add new MACHINE_FEATURE `vpu` for all but TQMa8MxNL
@@ -18,6 +19,7 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-tq_5.4: rewrite to use linux-yocto class
 * TQMa8 / TQMa6x: force build vivante gpu driver for linux-tq-imx as out of tree module
   to ensure versions between module and userland match. Overrides default assignments
   from meta-freescale.
@@ -28,6 +30,10 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* treewide: fix assignment of `IMAGE_BOOT_FILES` in machine configs. Do not use `?=`
+  to prevent unwanted defaults from vendor layers.
+* u-boot-tq_2017.11 / TQMLS102xA: ensure backward compatibility to older SOM variants
+  using module EEPROM on different I2C address
 * machines: add `USE_VT = "0"` where missing to disable virtual console support.
 * u-boot-imx-tq\_2020.04: tqma8\[all variants\] adjust `DEFAULT_FDT_FILE` to
   kernel 5.10 used in this BSP. This is also the naming scheme that will be
