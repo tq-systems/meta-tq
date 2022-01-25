@@ -16,6 +16,8 @@ Releases are named with the following scheme:
   kernel
 * TQMa8 / TQMa6x: add new MACHINE_FEATURE `vpu` for all but TQMa8MxNL
 * TQMa6x: linux 5.10 support based on linux-fslc 5.10 + imx
+* TQMa6x: linux 5.15 support based on linux-stable 5.15.y
+* TQMxx: support different list of device tree files, depending on the `virtual/kernel` provider
 
 ### Changed
 
