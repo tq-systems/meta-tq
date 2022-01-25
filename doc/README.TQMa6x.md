@@ -55,6 +55,7 @@
 - eth1 (X12) uses a random MAC address. The one stored in MBa6 EEPROM is currently not used.
 - Backlight on parallel displays are enabled upon Power-On which might lead to random output.
   Display will be disabled during bootup and can be used normally afterwards.
+- GPIO wake-up not supported on `linux-imx-tq-5.10`
 
 ## HowTo:
 
