@@ -11,3 +11,6 @@ PRU_VERSION_tqma574x-mba57xx = "REV2"
 FW_PREFIX_tqma571x-mba57xx = "am57xx"
 FW_PREFIX_tqma572x-mba57xx = "am57xx"
 FW_PREFIX_tqma574x-mba57xx = "am57xx"
+
+ICSS_EMAC_LLD_GIT_URI = "git://git.ti.com/cgit/keystone-rtos/icss-emac"
+ICSS_EMAC_LLD_GIT_PROTOCOL = "https"
