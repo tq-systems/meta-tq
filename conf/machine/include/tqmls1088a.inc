@@ -8,7 +8,7 @@ require conf/machine/include/tqmls10xxa.inc
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_virtual/kernel_tqmls1088a ?= "linux-lsdk-tq"
+PREFERRED_PROVIDER_virtual/kernel ?= "linux-lsdk-tq"
 
 UBOOT_ENTRYPOINT_ls1088a = "0x80008000"
 

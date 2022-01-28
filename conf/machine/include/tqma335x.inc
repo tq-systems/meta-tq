@@ -18,7 +18,7 @@ MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree"
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_virtual/kernel_tqma335x ?= "linux-ti-tq"
+PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-tq"
 KERNEL_IMAGETYPE ?= "zImage"
 
 PREFERRED_PROVIDER_u-boot_tqma335x ?= "u-boot-tq"
