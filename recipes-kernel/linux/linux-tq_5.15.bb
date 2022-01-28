@@ -2,7 +2,7 @@ SUMMARY = "Linux kernel based on linux mainline 5.15.y for TQ-Systems GmbH i.MX 
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
-require linux-imx-tq-common.inc
+require linux-tq-common.inc
 
 KBRANCH = "TQMaxx-linux-v5.15.y"
 SRCREV = "96f0c9d0bfdd03aaa4887ecfe96a76812bb9ac42"
