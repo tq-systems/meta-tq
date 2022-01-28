@@ -5,13 +5,22 @@ SERIAL_CONSOLES = "115200;ttymxc0"
 # disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
 USE_VT = "0"
 
-KERNEL_DEVICETREE = "\
+KERNEL_DEVICETREE_linux-imx-tq = "\
     imx6ull-mba6ulx.dtb \
     imx6ull-mba6ulx-lvds.dtb \
     imx6ull-mba6ulx-dmb-ct21.dtb \
     imx6ull-mba6ulx-dmb-ct44.dtb \
     imx6ull-mba6ulx-glyn-etm0700g0edh6.dtb \
 "
+
+KERNEL_DEVICETREE_linux-tq = "\
+    imx6ull-tqma6ull2-mba6ulx.dtb \
+    imx6ull-tqma6ull2-mba6ulx-lvds.dtb \
+    imx6ull-tqma6ull2-mba6ulx-cdtech-dc44.dtb \
+    imx6ull-tqma6ull2-mba6ulx-cdtech-fc21.dtb \
+"
+
+KERNEL_DEVICETREE_append = " ${@kernel_provider_dtbs(d)} "
 
 # Files are needed in IMAGE_BOOT_FILES because /boot is on an extra partition.
 # If those files should be installed under /boot inside the rootfs, you can
