@@ -10,9 +10,43 @@
 * TQMa6ULLxL REV.020x on MBa6ULx REV.020x carrier board (aka STKa6ULLxL)
 * TQMa6ULxL REV.020x on MBa6ULxL REV.020x carrier board
 
-### Known issues
+### Supported Features
 
-- The CPU frequency cannot be output.
+|                              | linux-tq-5.15 |
+| ---------------------------- | :-----------: |
+| Fuses                        |      x        |
+| UART1 (console, X15)         |      x        |
+| UART3 (X5)                   |      x        |
+| GPIO                         |      x        |
+| Button (S6, S7, S8)          |      x        |
+| I2C                          |      x        |
+| GPIO expander                |      x        |
+| EEPROM                       |      x        |
+| RTC                          |      x        |
+| QSPI NOR                     |      x        |
+| Buzzer                       |      x        |
+| USB Host (X7/X8/X22)         |      x        |
+| USB Dual Role (X10)          |      x        |
+| eMMC/SD (on-board/X9)        |      x        |
+| Ethernet GigE (X1400)        |      x        |
+| Ethernet GigE (X1500) not G1 |      x        |
+| CAN (X13)                    |      x        |
+| CAN (X14) not G1             |      x        |
+| RS-485 (X16)                 |      x        |
+| LVDS (X17, X18)              |      x        |
+| Parallel LCD (X4)            |      x        |
+| Audio Line In (X20)          |      x        |
+| Audio Line Out (x21)         |      x        |
+
+_Note:_ Mini PCIe connector only supports USB.
+
+### ToDo / Untested
+* Mic In (X19)
+* SIM card (X23)
+* Resistive Touch (X4)
+* Pixel Pipeline PXP
+
+### Known issues
 
 ## HowTo
 
