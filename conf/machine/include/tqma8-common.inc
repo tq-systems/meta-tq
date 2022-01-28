@@ -13,7 +13,7 @@ PREFERRED_PROVIDER_u-boot-fw-utils_mx8 ?= "u-boot-fw-utils-imx-tq"
 
 PREFERRED_PROVIDER_imx-boot ?= "imx-boot-tq"
 
-PREFERRED_PROVIDER_virtual/kernel ?= "linux-imx-tq"
+PREFERRED_PROVIDER_virtual/kernel ??= "linux-imx-tq"
 KERNEL_IMAGETYPE = "Image"
 
 SPL_BINARY = "spl/u-boot-spl.bin"

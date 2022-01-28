@@ -11,7 +11,7 @@ KERNEL_IMAGETYPE ?= "Image"
 
 PREFERRED_PROVIDER_u-boot_tqmls10xxa ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/bootloader_tqmls10xxa ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/kernel ?= "linux-tq"
+PREFERRED_PROVIDER_virtual/kernel ??= "linux-tq"
 
 # Machine specific options
 #

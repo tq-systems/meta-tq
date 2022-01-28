@@ -16,7 +16,7 @@ require conf/machine/include/tqmxx.inc
 
 PREFERRED_PROVIDER_u-boot_tqmlx2160a ?= "u-boot-lsdk-tq"
 PREFERRED_PROVIDER_virtual/bootloader_tqmlx2160a ?= "u-boot-lsdk-tq"
-PREFERRED_PROVIDER_virtual/kernel ?= "linux-lsdk-tq"
+PREFERRED_PROVIDER_virtual/kernel ??= "linux-lsdk-tq"
 PREFERRED_VERSION_qoriq-atf = "1.5%"
 # Define the default image type
 KERNEL_IMAGETYPE ?= "Image"
