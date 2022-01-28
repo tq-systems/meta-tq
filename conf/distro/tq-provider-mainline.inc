@@ -3,10 +3,7 @@
 IMX_DEFAULT_BSP = "mainline"
 DISTRO_FEATURES += "tq-mainline"
 
-PREFERRED_PROVIDER_virtual/kernel_tqma6x = "linux-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqma6ulx = "linux-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqma6ullx = "linux-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqma7x = "linux-tq"
+PREFERRED_PROVIDER_virtual/kernel ?= "linux-tq"
 
 PREFERRED_PROVIDER_virtual/egl = "mesa"
 PREFERRED_PROVIDER_virtual/libgl = "mesa"
