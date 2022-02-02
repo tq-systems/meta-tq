@@ -15,6 +15,8 @@ require conf/machine/include/tune-cortexa9.inc
 #
 MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree"
 MACHINE_EXTRA_RRECOMMENDS += "linux-firmware-imx-sdma-imx6q"
+MACHINE_EXTRA_RRECOMMENDS += "firmware-imx-vpu-imx6d firmware-imx-vpu-imx6q"
+
 MACHINE_FEATURES += "alsa ext2 pci rtc serial usbhost vfat can vpu"
 
 # TQ u-boot and kernel
