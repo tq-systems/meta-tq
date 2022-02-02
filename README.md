@@ -138,6 +138,10 @@ BBLAYERS = " \
 "
 ```
 
+**Attention:**  Docker is currently not supported on TQMaRZG2x machines, but
+meta-rzg2 has a bbappend for lxc from meta-virtualization. Without
+meta-virtualization the build will not be successful.
+
 ### Supported machines
 
 Support for the following machines is contained in this version:

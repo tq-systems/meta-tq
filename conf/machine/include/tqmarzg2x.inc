@@ -89,6 +89,7 @@ MACHINE_FEATURES_append = " multimedia"
 MACHINE_FEATURES_append = " usb3"
 
 # Configuration for Docker
+# ATTENTION: This is currently not supported on TQMaRZG2x machines
 #MACHINE_FEATURES_append = " docker"
 
 # Configuration for ECC
