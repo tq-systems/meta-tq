@@ -10,11 +10,11 @@
 #  - ---------- ------- ------------- --------- ------------- -------------
 # ^ ^          ^       ^             ^         ^             ^
 # | |          |       |             |         |             |
-# 0 4kiB     3MiB    9MiB          16MiB     48MiB        304MiB
+# 0 4kiB     3MiB    9MiB          16MiB     48MiB        variable
 #
 part u-boot --source rawcopy --sourceparams="file=u-boot.bin-esdhc" --no-table --align 4
 part fman-ucode --source rawcopy --sourceparams="file=fsl_fman_ucode_ls1043_r1.1_106_4_18.bin" --no-table --align 9216
 part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 16384 --fixed-size 32M
-part / --source rootfs --fstype=ext4 --label root --align 4096 --fixed-size 512M
+part / --source rootfs --fstype=ext4 --label root --align 4096
 
 bootloader --ptable msdos

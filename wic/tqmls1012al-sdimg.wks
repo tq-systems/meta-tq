@@ -9,9 +9,9 @@
 #  -- -------- ------------- ---
 # ^  ^        ^             ^
 # |  |        |             |
-# 0 4MiB    36MiB        548MiB
+# 0 4MiB    36MiB        variable
 #
 part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 4096 --fixed-size 32M
-part / --source rootfs --fstype=ext4 --label root --align 4096 --fixed-size 512M
+part / --source rootfs --fstype=ext4 --label root --align 4096
 
 bootloader --ptable msdos

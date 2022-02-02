@@ -10,7 +10,7 @@
 #  - --------- -------- ------- -------- -------- -------- ------- -------- ---
 # ^ ^         ^        ^       ^        ^        ^        ^       ^        ^
 # | |         |        |       |        |        |        |       |        |
-# 0 4kiB    1MiB     3MiB   10MiB    13MiB    14MiB    16MiB   48MiB   304MiB
+# 0 4kiB    1MiB     3MiB   10MiB    13MiB    14MiB    16MiB   48MiB    variable
 #
 
 part rcw_pbi --source rawcopy --sourceparams="file=rcw/${RCWIMG}" --no-table --align 4
@@ -19,6 +19,6 @@ part mc_app --source rawcopy --sourceparams="file=mc_app/mc.itb" --no-table --al
 part mc_dpl --source rawcopy --sourceparams="file=mc-utils/${MC_DPL}" --no-table --align 13312
 part mc_dpc --source rawcopy --sourceparams="file=mc-utils/${MC_DPC}" --no-table --align 14336
 part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 16384 --fixed-size 32M
-part / --source rootfs --fstype=ext4 --label root --align 4096 --fixed-size 512M
+part / --source rootfs --fstype=ext4 --label root --align 4096
 
 bootloader --ptable msdos
