@@ -7,6 +7,5 @@ RDEPENDS_${PN} = "\
     wpa-supplicant \
     iw \
     wireless-regdb-static \
-    hostapd \
 "
 
