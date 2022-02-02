@@ -9,6 +9,10 @@
 * TQMa6x: module revisions REV.010x ... REV.040x
 * MBa6x:  board revisions REV.020x
 
+## Version information for software components
+
+See [here](./README.SoftwareVersions.md) for the software base versions.
+
 ### Supported Features
 
 |                              | linux-imx-tq-5.10 | linux-tq-5.15 |

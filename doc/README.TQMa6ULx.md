@@ -10,6 +10,10 @@
 * TQMa6ULLxL REV.020x on MBa6ULx REV.020x carrier board (aka STKa6ULLxL)
 * TQMa6ULxL REV.020x on MBa6ULxL REV.020x carrier board
 
+## Version information for software components
+
+See [here](./README.SoftwareVersions.md) for the software base versions.
+
 ### Supported Features
 
 |                              | linux-tq-5.15 |
