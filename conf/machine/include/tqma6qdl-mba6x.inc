@@ -10,3 +10,4 @@ UBOOT_CONFIG ??= "sd spinor"
 WKS_FILE = "tqmaxx-sdimg.wks"
 
 MACHINE_FEATURES_append = " wifi"
+MACHINE_EXTRA_RRECOMMENDS += "linux-firmware-ath10k"
