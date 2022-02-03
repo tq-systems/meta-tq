@@ -11,6 +11,9 @@ Releases are named with the following scheme:
 
 ### Added
 
+* u-boot-imx-tq_2020.04: TQMa8Xx/TQMa8XxS/TQMa8x: support booting UBI rootfs
+  from SPI NOR
+* TQMa6UL\[L\]x/[L\] : linux 5.15 support based on linux-stable 5.15.y
 * linux-tq_5.4 / TQMLS102xA: support EDAC for ECC RAM
 * mesa: add bbappend to support TQMa6x / TQMa7x / TQMa6U\[L\]x\[L\] with mainline
   kernel
@@ -21,6 +24,8 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* TQMa6UL\[L\]x/[L\] / TQMa6x: add firmware ath10k as `MACHINE_EXTRA_RRECOMEND`
+* TQMLS\[all machines\]: remove rootfs size restrictions for wic images
 * linux-tq_5.4: rewrite to use linux-yocto class
 * TQMa8 / TQMa6x: force build vivante gpu driver for linux-tq-imx as out of tree module
   to ensure versions between module and userland match. Overrides default assignments
@@ -32,6 +37,13 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* u-boot-imx-tq_2020.04: support for large micron SPI NOR on TQMa8Xx / TQMa8x
+  flash was discovered but progam / erase silently fails. Backport upstream
+  driver changes for FlexSPI IP and use this driver instead of the older one.
+* TQMa6x: VPU firmware was not installed if building against linux mainline kernel
+  without meta-freescale
+* linux-tq_5.15: TQMa6x: kernel defconfig
+  remove debug options to improve performance and cleanup
 * treewide: fix assignment of `IMAGE_BOOT_FILES` in machine configs. Do not use `?=`
   to prevent unwanted defaults from vendor layers.
 * u-boot-tq_2017.11 / TQMLS102xA: ensure backward compatibility to older SOM variants
