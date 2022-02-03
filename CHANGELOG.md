@@ -21,6 +21,9 @@ Releases are named with the following scheme:
 * TQMa6x: linux 5.10 support based on linux-fslc 5.10 + imx
 * TQMa6x: linux 5.15 support based on linux-stable 5.15.y
 * TQMxx: support different list of device tree files, depending on the `virtual/kernel` provider
+* TQMa65xx: Add new module family
+  - New kernel recipe linux-ti-tq-5.4.109
+  - New U-Boot recipe u-boot-ti-tq-2020.01
 
 ### Changed
 
