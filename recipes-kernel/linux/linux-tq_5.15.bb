@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 require linux-tq-common.inc
 
 KBRANCH = "TQMaxx-linux-v5.15.y"
-SRCREV = "96f0c9d0bfdd03aaa4887ecfe96a76812bb9ac42"
+SRCREV = "594dcdc6052df599a4ddbbd1db17233be0ef272a"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "5.15"
-LINUX_VERSION = "${LINUX_RELEASE}.14"
+LINUX_VERSION = "${LINUX_RELEASE}.18"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
