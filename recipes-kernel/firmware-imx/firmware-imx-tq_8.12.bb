@@ -5,7 +5,6 @@ SECTION = "base"
 inherit nxp-bin-unpack
 
 # Year and version are from file COPYING in binary archive
-LICENSE_FLAGS = "NXP-EULA-v24"
 LICENSE = "Proprietary & NXP-EULA-v24"
 LIC_FILES_CHKSUM = " \
     file://COPYING;md5=417b82f17fc02b88125331ed312f6f1b \
