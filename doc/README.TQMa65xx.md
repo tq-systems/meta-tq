@@ -24,6 +24,9 @@ _Kernel:_
     detected. Use a USB2 OTG cable.
   - In device mode (gadget driver), USB2 is used even when both sides and the
     cable should support USB3.
+* The 6 PRU Ethernet ports only work in PHY master mode. This makes it
+  impossible to connect these ports to other devices that enforce master mode
+  (like the PRU ports of other MBa65xx boards).
 * SPI Linux boot from UBIFS is currently unsupported.
 * The linux-ti-tq-5.4.109 recipe is not based on linux-yocto, so the kernel
   defconfig cannot be extended using config fragments.
