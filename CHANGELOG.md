@@ -9,6 +9,9 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* packagegroup-wifi: bbappend for hostapd in dynamic-layers to prevent build
+  failure without meta-openembedded
+* kmscube: missing dependency (already fixed upstream)
 * recipes-image: fix installing kmscube and glmark2 for different setups
 * distro spaetzle* / image tq-image-small: fix to use initscripts from within
   busybox. Otherwise no start / stop scripts are installed at all
