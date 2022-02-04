@@ -28,23 +28,29 @@ See top level README.md for configurations usable as MACHINE.
 ## Supported Features
 
 ### U-Boot:
-* GPIOs
+* GPIO Status
 * eMMC
+  * Boot
+  * Read
+  * Write
 * SDHC
+  * Read
+  * Write
 * I2C
+  * Board EEPROM Read
+  * Board EEPROM Read/Write
+  * Bus probing
 * Ethernet
 * USB
 
 ### Linux:
 * GPIOs
+  * LEDs
 * eMMC
 * SDHC
-* SPI Nor - Flash (except tqmarzg2m_aa-mbarzg2x)
 * I2C
 * Ethernet
 * CAN
-* PCIe
-* SATA (RZG2H and RZG2N only)
 * USB
 * USB - OTG
 * HDMI
@@ -54,18 +60,32 @@ See top level README.md for configurations usable as MACHINE.
 
 **TODO or not tested / supported**
 * ECC
-* SIM-Card
-* Sound
-* RGB-Display-Interface
-* Mikro-Modul
 * NFS boot
-* Wakeup
+* U-Boot
+  * LEDs (not configured in device tree)
+* Linux
+  * SIM-Card
+  * Audio
+  * RGB-Display-Interface
+  * Mikro-Modul
+  * Wakeup 
+  * MIPI-CSI
+  * PCIe
+  * SATA (RZG2H and RZG2N only)
+  * SPI Nor - Flash (except tqmarzg2m_aa-mbarzg2x)
 
 ## Known Issues
 * U-Boot update script 'update_uboot_mmc' does not write to boot partition, but data partition instead.
 * After a hardware reset (S9), PCIe does not work any more on all module variants.
 * After a hardware reset (S9), USB3 does not work any more on the TQMaRZG2N variant.
 * U-Boot command 'gpio status' works, but generates an error messsage: 'Error reading output register'
+* Audio codec and driver are not configured
+* ID parsing in module eeprom causes 'unknown hardware variant' due to wrong
+string comparison in U-Boot
+* 4K resolution is laggy
+* Powersave (Sleeping works but no wakeup support through RTC or button)
+* USER_BUTTONs are not configured in device tree
+* Devices on I2C Bus 4 cannot be detected with 'i2cdetect -l'
 
 ## Notes
 * SDHC:
