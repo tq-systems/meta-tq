@@ -25,6 +25,5 @@ SRC_URI_append_tqmls102xa = "\
 COMPATIBLE_MACHINE = "tqmls102xa"
 COMPATIBLE_MACHINE_append = "|tqma7x"
 COMPATIBLE_MACHINE_append = "|tqma6x"
-COMPATIBLE_MACHINE_append = "|tqma6ulx"
-COMPATIBLE_MACHINE_append = "|tqma6ullx"
+COMPATIBLE_MACHINE_append = "|tqma6ulx-lga-mba6ulxl"
 COMPATIBLE_MACHINE_append = "|tqmls10xxa"
