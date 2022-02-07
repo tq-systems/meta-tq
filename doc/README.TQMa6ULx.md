@@ -52,6 +52,10 @@ _Note:_ Mini PCIe connector only supports USB.
 
 ### Known issues
 
+* U-Boot: default device tree names for all machines using the starter kit
+  mainboard (aka MBa6ULx) do not match device tree names in current supported
+  mainline kernel version.
+
 ## HowTo
 
 ### MBa6ULx DIP Switch settings for Boot
