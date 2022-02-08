@@ -7,6 +7,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## hardknott.TQMa8.BSP.SW.0083
+
 ### Fixed
 
 * packagegroup-wifi: bbappend for hostapd in dynamic-layers to prevent build
