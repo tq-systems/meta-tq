@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## hardknott.TQMa8.BSP.SW.0083
+
 ### Added
 
 * u-boot-imx-tq_2020.04: TQMa8Xx/TQMa8XxS/TQMa8x: support booting UBI rootfs
