@@ -3,8 +3,7 @@
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale
 
-MACHINEOVERRIDES =. "tqma6ulx:"
-MACHINEOVERRIDES =. "mx6:mx6ul:"
+MACHINEOVERRIDES =. "imx:mx6:mx6ul:tqma6ulx:"
 
 include conf/machine/include/imx-base.inc
 

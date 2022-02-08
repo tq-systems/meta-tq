@@ -1,6 +1,6 @@
 # Common definitions for TQ-Systems GmbH TQMa7x modules
 
-MACHINEOVERRIDES =. "mx7:mx7d:tqma7x:"
+MACHINEOVERRIDES =. "imx:mx7:mx7d:tqma7x:"
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale
