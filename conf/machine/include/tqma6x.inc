@@ -22,8 +22,6 @@ MACHINE_FEATURES += "alsa ext2 pci rtc serial usbhost vfat can vpu"
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_virtual/kernel ??= "linux-imx-tq"
-PREFERRED_PROVIDER_virtual/kernel_use-mainline-bsp ??= "linux-tq"
 KERNEL_IMAGETYPE = "zImage"
 
 PREFERRED_PROVIDER_u-boot_tqma6x ?= "u-boot-imx-tq"
