@@ -82,6 +82,8 @@ e-MMC.
 * `ubirootfspart`: name of ubi partition for rootfs  (default = ubi)
 * `ubirootfsvol`: name of ubi volume for rootfs (default = rootfs)
 * `ubimtdidx`: number of ubi partition for rootfs (default = 3)
+* `ubirootfs`: name of ubifs image to be used for the update command
+  (default = rootfs.ubifs)
 
 _Attention_ UBI related variables have to be in sync with `mtdparts` and
 `mtdids` variables.
@@ -119,3 +121,16 @@ Download UBIFS image from TFTP and update:
 
 `run update_rootfs_spi`
 
+## Booting linux OS
+
+To boot a linux OS from a running U-Boot following scripts are implemented in
+environment:
+
+* `mmboot`: load kernel and dtb from SD/e-MMC instance given with variable `mmcdev`
+  * Boot device is SD / e-MMC: `mcdev` is set to device index of the boot device if
+    `mmcautodetect` is `yes` (default)
+  * Boot device is not SD / e-MMC: `mmcdev` has to be set before using `mmcboo`
+* `ubiboot`: load kernel and dtb from UBIFS in default UBI volume and boots into
+  ubifs rootfs in this volume
+* `netboot`: load kernel and dtb using tftpboot and boots into rootfs on a NFS
+  mount.
