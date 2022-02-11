@@ -154,7 +154,7 @@ Artifacs can be found at the usual locations for bitbake:
   * imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb (LVDS support over LCDIF with TIANMA TM070JVHG33)
   * imx8mq-tqma8mq-mba8mx-dcss-lvds-tm070jvhg33.dtb (LVDS support over DCSS with TIANMA TM070JVHG33)
   * imx8mq-tqma8mq-mba8mx-rpmsg.dtb (CortexM / RPMSG Support)
-* Image: linux kernel image
+* Image: Linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
@@ -440,7 +440,7 @@ echo +20 > /sys/class/rtc/${RTC}/wakealarm
 echo mem > /sys/power/state
 ```
 
-Send linux to sleep mode and press one of the gpio buttons S\[1,2,3\] afterwards:
+Send Linux to sleep mode and press one of the gpio buttons S\[1,2,3\] afterwards:
 
 ```
 echo mem > /sys/power/state

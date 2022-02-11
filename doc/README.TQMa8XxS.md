@@ -18,7 +18,7 @@ Version: tq-TQMa8.NXP-v1.6.0.B4894.0033
 ### Other components
 
 See [here](./README.SoftwareVersions.md) for the software base versions of atf,
-bootloader and linux kernel.
+bootloader and Linux kernel.
 
 ## Supported machine configurations:
 
@@ -139,7 +139,7 @@ Artifacs can be found at the usual locations for bitbake:
 
 * imx8qxp\*.dtb: device tree blobs for TQMa8XQPS
 * imx8dxp\*.dtb: device tree blobs for TQMa8XDPS
-* Image: linux kernel image
+* Image: Linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)

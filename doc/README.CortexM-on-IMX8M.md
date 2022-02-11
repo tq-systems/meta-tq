@@ -9,7 +9,7 @@ run boot_cm_mmc
 ```
 
 To demonstrate `rpmsg` and `freertos` a simple demo is included. When the demo
-is started you can connect from running linux to the rpmsg ping pong demo:
+is started you can connect from running Linux to the rpmsg ping pong demo:
 
 ```
 modprobe imx_rpmsg_pingpong

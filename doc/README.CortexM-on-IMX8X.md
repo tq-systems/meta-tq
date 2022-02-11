@@ -64,7 +64,7 @@ firmware. Bootstreams with M4 firmware follow the naming convention
 how to change the bootstream on SD / e-MMC. To boot with new bootstream a
 power cycle of the board is needed after updating the bootstream.
 
-Before running linux the devicetree in U-Boot environment has to be changed to
+Before running Linux the devicetree in U-Boot environment has to be changed to
 the CortexM aware tree. See SOM specific documentation for available device tree
 and how to change them.
 
@@ -75,7 +75,7 @@ firmware uses the CortexM UART(s) connecte to the FTDI USB / UART converter on
 the starter kits. The M4 firmware is started by the bootstream. You should see
 a banner message on the UART for the M4 when the demo is started.
 
-When using the ping pong demo you can connect from running linux using:
+When using the ping pong demo you can connect from running Linux using:
 
 ```
 modprobe imx_rpmsg_pingpong

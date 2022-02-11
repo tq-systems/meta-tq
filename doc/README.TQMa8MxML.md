@@ -159,7 +159,7 @@ Artifacs can be found at the usual locations for bitbake:
   * imx8mm-tqma8mqml-mba8mx-lcdif-lvds-tm070jvhg33-ov9281.dtb (LVDS support with TIANMA TM070JVHG33
     plus Vision Components CSI camera with OmniVision OV9281)
   * imx8mm-tqma8mqml-mba8mx-rpmsg.dtb (CortexM / RPMSG Support)
-* Image: linux kernel image
+* Image: Linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)

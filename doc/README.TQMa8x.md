@@ -18,7 +18,7 @@ Version: tq-TQMa8.NXP-v1.6.0.B4894.0033
 ### Other components
 
 See [here](./README.SoftwareVersions.md) for the software base versions of atf,
-bootloader and linux kernel.
+bootloader and Linux kernel.
 
 ## Supported machine configurations:
 
@@ -144,7 +144,7 @@ Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
 
 * \*.dtb: device tree blobs
-* Image: linux kernel image
+* Image: Linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
@@ -226,7 +226,7 @@ echo +20 > /sys/class/rtc//${RTC}/wakealarm
 echo mem > /sys/power/state
 ```
 
-Send linux to sleep mode and press one of the gpio buttons SWITCH\_A or SWITCH\_B
+Send Linux to sleep mode and press one of the gpio buttons SWITCH\_A or SWITCH\_B
 afterwards
 
 ```

@@ -121,9 +121,9 @@ Download UBIFS image from TFTP and update:
 
 `run update_rootfs_spi`
 
-## Booting linux OS
+## Booting Linux OS
 
-To boot a linux OS from a running U-Boot following scripts are implemented in
+To boot a Linux OS from a running U-Boot following scripts are implemented in
 environment:
 
 * `mmboot`: load kernel and dtb from SD/e-MMC instance given with variable `mmcdev`
