@@ -61,6 +61,19 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
   Display will be disabled during bootup and can be used normally afterwards.
 - GPIO wake-up not supported on `linux-imx-tq-5.10`
 
+## Artifacts
+
+Artifacs can be found at the usual locations for bitbake:
+`${TMPDIR}/deploy/images/${MACHINE}`
+
+* \*.dtb: device tree blobs
+* zImage: linux kernel image
+* \*.wic: SD / e-MMC system image
+* \*.rootfs.ext4: RootFS image
+* \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
+* u-boot-${MACHINE}.imx-sd: boot stream for SD / e-MMC
+* u-boot-${MACHINE}.imx-spinor: boot stream for SD / e-MMC
+
 ## HowTo:
 
 ### MBa6x DIP Switch settings for Boot
