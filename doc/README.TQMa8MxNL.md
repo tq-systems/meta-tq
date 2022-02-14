@@ -371,26 +371,7 @@ Download bootstream from TFTP and update:
 
 ## Use UUU Tool
 
-To build bootstream adapt yocto configuration, modify _local.conf_ or machine
-config file:
-
-```
-UBOOT_CONFIG_tqma8mxnl = "mfgtool"
-IMXBOOT_TARGETS_tqma8mxnl = "flash_spl_uboot"
-```
-
-Rebuild boot stream:
-
-```
-bitbake imx-boot
-```
-
-Use new compiled bootstream containing U-Boot capable of handling SDP together
-with UUU tool:
-
-```
-sudo uuu -b spl <bootstream>
-```
+See [here] for details about using Serial Download mode and UUU.
 
 ## Howto
 
