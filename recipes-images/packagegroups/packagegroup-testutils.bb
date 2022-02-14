@@ -14,7 +14,7 @@ inherit packagegroup
 # and that's not what we want
 
 RDEPENDS_${PN} = "\
-    ${@bb.utils.contains('MACHINE_FEATURES', 'alsa', ' alsa-utils-speakertest', '', d)} \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'alsa', ' alsa-utils-speakertest', '', d)} \
     atop \
     dstat \
     evtest \
