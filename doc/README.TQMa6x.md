@@ -108,6 +108,67 @@ _Note:_
 | ON      |      |     |  x   |  x   |      |      |      |      |    |     |     |     |     |     |     |     |     |    |     |     |     |  x  |  x  |     |     |     |    |  x  |     |
 | OFF     |  x   |  x  |      |      |  x   |  x   |  x   |  x   |    |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |    |  x  |  x  |  x  |     |     |  x  |  x  |  x  |    |     |  x  |
 
+### Boot device initialisation
+
+#### QSPI NOR
+
+To initialize QSPI NOR with bootloader, write the [bootloader image](#artifacts)
+to QSPI NOR at offset 0x00:
+
+```
+setenv uboot <U-Boot QSPI boot image>
+tftp ${loadaddr} ${uboot}
+sf probe
+sf update ${loadaddr} 0 ${filesize}
+```
+
+#### SD / e-MMC
+
+To initialize SD / e-MMC with bootloader, write the [bootloader image](#artifacts)
+for SD / e-MMC to SD / e-MMC at offset 0x400 / block #2
+
+```
+setenv uboot <U-Boot SD/e-MMC boot image>
+tftp ${loadaddr} ${uboot}
+mmc dev [0,1]
+mmc rescan
+setenv blkc ${filesize} + 1ff
+setenv blkc ${blkc} / 200
+mmc write ${loadaddr} 2 ${blkc}
+setenv blkc
+```
+
+### Program system image
+
+#### SPI NOR
+
+Not supported. Only kernel and DTB can be stored at the moment.
+
+#### SD / e-MMC
+
+To program complete system image to SD / e-MMC, write [WIC image](#artifacts)
+to SD / e-MMC at offset 0x00 / block #0
+
+### Update parts of system
+
+To update parts of system using U-Boot / TFTP following shortcuts exist, to
+update the part on the active boot device.
+
+```
+setenv zimage <name of linux zimage>
+run update_kernel
+```
+
+```
+setenv fdt_file <name of fdt image>
+run update_fdt
+```
+
+```
+setenv uboot <name of u-boot image>
+run update_uboot
+```
+
 ### Dual LVDS usage
 
 _Note:_ Only valid for `linux-imx-tq-5.10`
