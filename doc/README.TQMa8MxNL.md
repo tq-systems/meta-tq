@@ -164,7 +164,7 @@ Artifacs can be found at the usual locations for bitbake:
 * hello\_world.bin (Cortex M7 demo, UART4, TCM)
 * rpmsg\_lite\_pingpong\_rtos\_linux\_remote.bin (Cortex M7 demo, UART4, TCM)
 
-## Boot Dip Switches
+## Boot DIP Switches
 
 _Note:_
 
