@@ -9,6 +9,13 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Fixed
+
+* TQMa6Q/DL: Fix accidentally changed sound card name in DTS
+* TQMa65xx:
+  - Better support for modules without SPI-NOR flash
+  - Set correct EEPROM page size for faster writes
+
 ## hardknott.TQMa8.BSP.SW.0083
 
 ### Added
