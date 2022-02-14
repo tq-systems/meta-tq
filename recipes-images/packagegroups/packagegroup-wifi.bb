@@ -5,6 +5,7 @@ inherit packagegroup
 
 RDEPENDS_${PN} = "\
     wpa-supplicant \
+    hostapd \
     iw \
     wireless-regdb-static \
 "

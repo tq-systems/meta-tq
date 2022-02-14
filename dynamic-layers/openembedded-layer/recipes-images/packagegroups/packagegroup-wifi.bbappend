@@ -1,3 +1,0 @@
-RDEPENDS_${PN} += "\
-    hostapd \
-"

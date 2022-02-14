@@ -5,5 +5,7 @@ inherit packagegroup
 
 RDEPENDS_${PN} = "\
     ethtool \
+    iperf2 \
+    iperf3 \
     iproute2 \
 "

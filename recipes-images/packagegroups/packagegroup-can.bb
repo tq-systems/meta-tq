@@ -4,5 +4,6 @@ LICENSE = "MIT"
 inherit packagegroup
 
 RDEPENDS_${PN} = "\
+    can-utils \
     iproute2 \
 "

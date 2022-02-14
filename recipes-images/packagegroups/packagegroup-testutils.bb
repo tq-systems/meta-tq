@@ -14,10 +14,21 @@ inherit packagegroup
 # and that's not what we want
 
 RDEPENDS_${PN} = "\
-    strace \
-    gdbserver \
-    mc \
     ${@bb.utils.contains('MACHINE_FEATURES', 'alsa', ' alsa-utils-speakertest', '', d)} \
+    atop \
+    dstat \
+    evtest \
+    fb-test \
+    gdbserver \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', ' glmark2', '', d)} \
+    htop \
+    iotop \
+    mc \
+    memtester \
+    nano \
+    strace \
+    stressapptest \
+    stress-ng \
 "
 
 # note: kmscube is only available if we have opengl and if virtual/libgbm
@@ -26,3 +37,4 @@ RDEPENDS_${PN} = "\
 RRECOMMENDS_${PN} = "\
     ${@oe.utils.ifelse(d.getVar('PREFERRED_PROVIDER_virtual/libgbm') != "", 'kmscube', '')} \
 "
+
