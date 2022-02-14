@@ -14,7 +14,7 @@ SRC_URI = " \
 "
 
 SRCBRANCH = "TQMa65xx-ti-rt-linux-5.4.y"
-SRCREV = "25bdc2677d524d9f7023b281376638d882b970c2"
+SRCREV = "9bbdb0df80b3508bc2dacccb92aaa63f6ec25f61"
 
 COMPATIBLE_MACHINE = "tqma65xx"
 
