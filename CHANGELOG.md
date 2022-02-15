@@ -7,6 +7,15 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## hardknott.TQMa65xx.BSP.SW.0008
+
+### Changed
+
+* packagegroup-can: install also subpackage can-utils-cantest
+* alsa packages: use COMBINED_FEATURES for optional install
+* dependencies: meta-openembedded/meta-oe is now a dependency, remove from
+  dynamic-layers and fold bbappends in normal directories and recipes.
+
 ## hardknott.TQMa8.BSP.SW.0083
 
 ### Fixed
