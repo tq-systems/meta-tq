@@ -19,10 +19,25 @@ branch: hardknott
 revision: HEAD  
 layers: meta, meta-poky  
 
+#### Notes for machines with i.MX CPU
+
 Optionally the layer can make use of features from meta-freescale /
-meta-freeescale-distro if using i.MX6, i.MX6UL, i.MX7 based machines
-(tqma6\[s,dl,q,qp\]-mba6x, tqma6ul\[l\]x-mba6ulx, tqma6ul\[l\]x-lga-mba6ulx etc.)
-or Layerscape/QorIQ.
+meta-freeescale-distro if using CPU from following NXP families - see
+[table](#supported-machines)
+
+* i.MX6
+* i.MX6UL / i.MX6ULL
+* i.MX7
+
+For machines based on following CPU families from NXP the use of meta-freescale
+is _mandatory_ - see [table](#supported-machines).
+
+* i.MX8
+* i.MX8X
+* i.MX8MQ
+* i.MX8MM
+* i.MX8MN
+* i.MX8MP
 
 URI: https://git.yoctoproject.org/git/meta-freescale  
 branch: hardknott  
@@ -34,38 +49,49 @@ branch: hardknott
 revision: HEAD  
 layers: meta-freeescale-distro  
 
-**Attention:** meta-freescale is mandatory for the following machines:
-
-- tqmls1012al-mbls1012al
-- tqmls1028a-mbls1028a
-- tqmls1028a-mbls1028a-ind
-- tqmls1088a-mbls10xxa
-- tqmlx2160a-mblx2160a
-
-**Attention:** The following distros defined in meta-freescale-distro are not comatible
-with machines in meta-tq:
+**Attention:** The following distros defined in meta-freescale-distro are not
+tested with machines in meta-tq:
 
 - fsl-framebuffer
 - fsl-wayland
 - fsl-x11
 - fsl-xwayland
 
-Optionally the layer can make use of features from meta-ti if using AM57xx
-based machines (tqma57\[1,2,4\]x-mba57xx etc.)
+#### Notes for machines with Layerscape CPU
+
+For machines based on following CPU families from NXP usage of meta-freescale
+is _mandatory_ - see [table](#supported-machines).
+
+* LS1012A
+* LS1028A / LS1017A
+* LS1043A / LS1046A
+* LX2160A
+
+#### Notes for machines with TI CPU
+
+Optionally the layer can make use of features from meta-ti if using machines
+with the following CPU families from TI  - see [table](#supported-machines).
+
+* AM355x
+* AM57xx
+
+For machines based on following CPU families from TI usage of meta-ti
+is _mandatory_ - see [table](#supported-machines)
+
+* AM65xx
+
+**Attention**:
 
 In meta-ti no hardknott branch exists, so we have to use the master branch.
-The last commit in the master branch that supports
-hardknott is commit f56051c9a8cf09f54c43b81301073eed71bbda97.
+The last commit in the master branch that supports hardknott
+is commit f56051c9a8cf09f54c43b81301073eed71bbda97.
 
 URI: https://git.yoctoproject.org/git/meta-ti  
 branch: master  
 revision: f56051c9a8cf09f54c43b81301073eed71bbda97  
 layers: meta-ti  
 
-meta-ti and meta-arm are mandatory for the following machines:
-
-- tqma65xx-2gb-mba65xx
-- tqma65xx-4gb-mba65xx
+If using meta-ti, meta-arm is also needed due to dependencies of meta-ti.
 
 ### Coding style
 
