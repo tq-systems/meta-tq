@@ -9,8 +9,14 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## hardknott.TQMa65xx.BSP.SW.0008
+
 ### Fixed
 
+* documentation:
+  * Updates and fixes for global README.md
+  * Add missing infos for TQMa6x / TQMa6UL\[L\]x\[L\]
+  * Update Issues for TQMa65xx
 * TQMa6Q/DL: Fix accidentally changed sound card name in DTS
 * TQMa65xx:
   - Better support for modules without SPI-NOR flash
