@@ -128,9 +128,10 @@ other layers needed. e.g.:
   "
 ```
 
-The layer can be used together with the Freescale / NXP layers if needed and
-if boards with i.MX CPU are used. Therefore the `MACHINEOVERRIDE` variable is
-prepared inside the <modulename>.conf files. See following example:
+If the layer has to be used together with the Freescale / NXP layers for
+machines with i.MX CPU, `MACHINEOVERRIDES` and other configuration
+settings are prepared inside the <machine>.conf and their include files.
+See following example:
 
 ```
 BBLAYERS = "\
@@ -138,18 +139,19 @@ BBLAYERS = "\
   ${BSPDIR}/sources/poky/meta-poky \
   \
   ${BSPDIR}/sources/meta-openembedded/meta-oe \
+  ${BSPDIR}/sources/meta-openembedded/meta-python \
   ${BSPDIR}/sources/meta-openembedded/meta-multimedia \
   \
   ${BSPDIR}/sources/meta-freescale \
-  ${BSPDIR}/sources/meta-freescale-distro \
   \
   ${BSPDIR}/sources/meta-tq \
 "
 ```
 
-The layer can be used together with the meta-ti layer if needed and am57xx based
-boards are used. Therefore the `MACHINEOVERRIDE` variable is prepared inside the
-<modulename>.conf files. See following example:
+If the layer has to be used together with the meta-ti layer for machines with
+TI CPU, `MACHINEOVERRIDES` and other configuration settings are prepared inside
+the <machine>.conf and their include files.
+See following example:
 
 ```
 BBLAYERS = "\
@@ -157,10 +159,10 @@ BBLAYERS = "\
   ${BSPDIR}/sources/poky/meta-poky \
   \
   ${BSPDIR}/sources/meta-openembedded/meta-oe \
-  ${BSPDIR}/sources/meta-openembedded/meta-multimedia \
+  ${BSPDIR}/sources/meta-openembedded/meta-python \
   \
-  ${BSPDIR}/sources/meta-arm \
-  ${BSPDIR}/sources/meta-arm-toolchain \
+  ${BSPDIR}/sources/meta-arm/meta-arm \
+  ${BSPDIR}/sources/meta-arm/meta-arm-toolchain \
   \
   ${BSPDIR}/sources/meta-ti \
   \
