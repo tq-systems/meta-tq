@@ -39,3 +39,76 @@ _Kernel:_
 ## Support Wiki
 
 See [TQ Support Wiki for TQMa65xx](https://support.tq-group.com/en/arm/tqma65xx)
+
+## Artifacts
+
+Artifacts can be found at the usual locations for Bitbake:
+`${TMPDIR}/deploy/images/${MACHINE}`
+
+* \*.dtb: Device Tree blobs
+* Image: Linux kernel image
+* \*.wic: SD / e-MMC system image
+* \*.rootfs.ext4: RootFS image
+* \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
+* sysfw.itb: system controller firmware
+* tiboot3.bin: first-stage bootloader (R5 core)
+* tispl.bin: second-stage bootloader (A53 core, includes ATF and OPTEE)
+* u-boot.img: last-stage bootloader
+
+## HowTo
+
+### MBa65xx DIP switch settings for boot
+
+#### SD Card
+
+|         |  S8 |     |     |     |     |     |     |     |    |  S9 |     |     |     |     |     |     |     |
+| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| DIP     |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |
+| ON      |     |  x  |  x  |     |     |     |     |     |    |     |     |     |     |  x  |     |     |     |
+| OFF     |  x  |     |     |  x  |     |     |     |  x  |    |  x  |  x  |  x  |  x  |     |  x  |     |     |
+
+#### eMMC
+
+|         |  S8 |     |     |     |     |     |     |     |    |  S9 |     |     |     |     |     |     |     |
+| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| DIP     |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |
+| ON      |     |  x  |  x  |     |     |     |     |     |    |     |     |     |     |     |  x  |     |     |
+| OFF     |  x  |     |     |  x  |     |     |     |  x  |    |  x  |  x  |  x  |  x  |  x  |     |     |     |
+
+#### SPI-NOR
+
+|         |  S8 |     |     |     |     |     |     |     |    |  S9 |     |     |     |     |     |     |     |
+| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| DIP     |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |
+| ON      |  x  |     |     |     |     |     |     |     |    |     |     |  x  |     |     |     |  x  |     |
+| OFF     |     |  x  |  x  |  x  |     |     |     |  x  |    |  x  |  x  |     |  x  |  x  |  x  |     |  x  |
+
+### OS boot
+
+By default, U-Boot will boot the OS from the same medium that it was started
+from (eMMC, SD card or SPI-NOR). The default `bootcmd` allows changing the OS
+boot source by modifying the following environment variables:
+
+- `boot`: Set to `mmc`, `ubi` or `net`
+- `mmcdev`: Set to `0` (eMMC) or `1` (SD card)
+
+Network boot does not use TFTP. Instead, kernel and Device Trees are loaded from
+the `/boot` directory of the root filesystem via NFS.
+
+### Updates
+
+When booting from e-MMC / SD card, the bootloader and system firmware are loaded
+from a FAT partition (the first partition of the boot medium by default). They
+can be updated by replacing the files on this partition.
+
+For convenience, the following commands can be used in U-Boot to update these
+files via TFTP:
+```
+run update_firmware_mmc
+run update_uboot_mmc
+```
+The environment variables `sysfw`, `tiboot3`, `tispl` and `u-boot` can be
+modified to control the filenames requested via TFTP.
+
+Kernel and Device Trees are part of the root filesystem. They can not be updated
+separately from U-Boot.
