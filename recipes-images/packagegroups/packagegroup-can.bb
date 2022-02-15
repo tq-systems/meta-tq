@@ -5,5 +5,6 @@ inherit packagegroup
 
 RDEPENDS_${PN} = "\
     can-utils \
+    can-utils-cantest \
     iproute2 \
 "
