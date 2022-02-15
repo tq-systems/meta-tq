@@ -21,7 +21,11 @@ This layer in the checked out branch depends on:
 
 URI: https://git.yoctoproject.org/poky  
 branch: hardknott  
-layers: meta  
+layers: meta, meta-poky  
+
+URI: https://github.com/openembedded/meta-openembedded.git
+branch: hardknott  
+layers: meta-oe  
 
 URI: https://github.com/tq-systems/meta-tq.git  
 branch: hardknott  
@@ -58,8 +62,10 @@ BSPDIR := "${@os.path.abspath(os.path.dirname(d.getVar('FILE', True)) + '/../..'
 
 BBLAYERS ?= "\
 ...
-    ${BSPDIR}/sources/meta-tq \
     ${BSPDIR}/sources/poky/meta \
+    ${BSPDIR}/sources/poky/meta-poky \
+    ${BSPDIR}/sources/poky/meta-openembedded/meta-oe \
+    ${BSPDIR}/sources/meta-tq \
     ...
 "
 ```
