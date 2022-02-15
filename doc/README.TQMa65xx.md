@@ -24,6 +24,9 @@ _Kernel:_
     detected. Use a USB2 OTG cable.
   - In device mode (gadget driver), USB2 is used even when both sides and the
     cable should support USB3.
+* The USB OTG port does not work in host mode in U-Boot
+  - Use one of the hub ports to connect USB media in U-Boot. The OTG port works
+    in host mode after booting Linux.
 * The 6 PRU Ethernet ports only work in PHY master mode. This makes it
   impossible to connect these ports to other devices that enforce master mode
   (like the PRU ports of other MBa65xx boards).
