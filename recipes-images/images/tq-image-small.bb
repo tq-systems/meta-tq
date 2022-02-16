@@ -13,7 +13,6 @@ IMAGE_FEATURES_append = " ssh-server-dropbear"
 IMAGE_FEATURES_remove = "ssh-server-openssh"
 
 IMAGE_INSTALL_append = "\
-    packagegroup-netutils \
     kernel-devicetree \
     kernel-image \
 "
