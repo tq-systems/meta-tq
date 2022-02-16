@@ -7,6 +7,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* make sure hwclock from util-linux gets installed
+* add coreutils to images not built for spaetzle
+
 ## hardknott.TQMa65xx.BSP.SW.0008
 
 ### Changed
