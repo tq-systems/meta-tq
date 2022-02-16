@@ -7,6 +7,9 @@ DISTRO_FEATURES = "${DISTRO_FEATURES_DEFAULT} opengl systemd"
 # add some locales per default
 IMAGE_LINGUAS_append = " de-de en-us"
 
+# point some runtime providers to full fledged packages
+VIRTUAL-RUNTIME_base-utils-hwclock ?= "util-linux-hwclock"
+
 # strip some unused stuff to lower dependencies, work in progress:
 
 # we do not have firewire support
