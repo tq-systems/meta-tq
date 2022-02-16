@@ -55,6 +55,9 @@ _Note:_ Mini PCIe connector only supports USB.
 * U-Boot: default device tree names for all machines using the starter kit
   mainboard (aka MBa6ULx) do not match device tree names in current supported
   mainline kernel version.
+* edt-ft5406 touch controller on some Glyn displays might cause CRC errors
+  after restart using `reboot` command. At startup as well as during runtime. The device
+  is still functioning though.
 
 ## Artifacts
 
