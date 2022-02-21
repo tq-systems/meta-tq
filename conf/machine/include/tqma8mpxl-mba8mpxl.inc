@@ -1,7 +1,7 @@
 # Common definitions for TQ-Systems GmbH MBa8MPxL baseboard for TQMa8MPxL modules
 
 # Set u-boot DTB
-UBOOT_DTB_NAME = "imx8mp-mba8mpxl.dtb"
+UBOOT_DTB_NAME = "imx8mp-tqma8mpql-mba8mpxl.dtb"
 
 BOARD_DEVICETREE_FILES = "\
     imx8mp-tqma8mpql-mba8mpxl.dtb \
