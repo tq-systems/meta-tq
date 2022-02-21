@@ -34,9 +34,9 @@ _Note:_ Not recommended for usage
 
 #### Kernel based on 5.4  (linux-stable)
 
-_Note:_ Not recommended for usage for machines with MBa6ULx mainboard (starter kit)
+_Note:_ Not recommended for usage for machines with TQMa6UL[L]/TQMa6UL[L]xL
 
-* not selected by default (except for tqma6ulx-lga-mba6ulxl)
+* not selected by default
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
 * branched from 5.4.y / tag commit is merged into (see LINUX_VERSION in linux-tq-5.4.bb for exact release)
 
