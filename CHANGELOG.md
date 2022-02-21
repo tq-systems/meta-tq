@@ -9,11 +9,25 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## hardknott.TQMa65xx.BSP.SW.0008
+
+### Added
+
+* tqma6ulx-lga-mba6ulxl machine: linux 5.15 support based on linux-stable 5.15.y
+
+### Changed
+
+* linux-tq-5.4 is deprecated for all TQMa6UL[L]x modules (LGA variants as well)
+* Workaround for unset MAC address using linux-imx-tq-5.10 on TQMa6x
+
 ### Fixed
 * TQMa65xx:
   - Fix unintended difference to TI AM65x-EVM memory layout in U-Boot SPL
+* TQMa6x/TQMa6UL:
+  - GPIO wakeup
+  - Load USB ethernet MAC address from EEPROM on MBa6x as fallback
+  - Audio configuration on TQMa6UL[L]x
 
-## hardknott.TQMa65xx.BSP.SW.0008
 ## hardknott.TQMa8.BSP.SW.0084
 
 ### Added
