@@ -10,10 +10,26 @@ Releases are named with the following scheme:
 ## Next Release
 
 ## hardknott.TQMa65xx.BSP.SW.0008
+## hardknott.TQMa8.BSP.SW.0084
+
+### Added
+
+* TQMa8MPxL: support REV.020x
+  * u-boot-imx-tq: add new configs and adjust DT to the one supplied by kernel
+  * u-boot-imx-tq: support booting rootfs from UBI (use same settings as for TQMa8Xx)
+  * linux-imx-tq: add new devicetrees
+
+### Changed
+
+* TQMa8MPxL: REV.0100 machine was renamed to tqma8mpxl-2gb-mba8mpxl-r0100
+* linux-imx-tq 5.10: integrate upstream fixes from linux-fslc (5.10.98)
+* TQMa8MPxL: rework EEPROM acces code in u-boot
+* u-boot-imx-tq 2020.04: backport upstream logic for mmc SPL conversion
 
 ### Fixed
 
 * documentation:
+  * wrong link for UUU section for TQMa8Mx/TQMa8MPxL/TQMa8MxML/TQMa8MxNL
   * Updates and fixes for global README.md
   * Improve description of UBI/UBIFS images
   * Add missing infos for TQMa6x / TQMa6UL\[L\]x\[L\]
