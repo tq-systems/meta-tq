@@ -40,9 +40,19 @@ IMAGE_BOOT_FILES = "\
     u-boot.img \
 "
 
+# Verified values to generate UBI image:
+# UBIFS_PEB_SIZE="65536"
+# UBIFS_MINIMUM_IO_UNIT_SIZE="1"
+# UBIFS_SUB_PAGE_SIZE="1"
+# UBIFS_VID_HEADER_OFFSET="64"
+# UBIFS_LEB_SIZE="65408"
+
+MKUBIFS_ARGS = " -m 1 -e 65408 -c 896 "
+UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
+# needs to be set to have it consistent for kernel command line
 # Use the expected value of the ubifs filesystem's volume name in the kernel
 # and u-boot.
 UBI_VOLNAME = "rootfs"
 
 # List common SoC features
-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx mmip dsp pci"
+MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx mmip dsp pci ubi"
