@@ -15,12 +15,17 @@ Releases are named with the following scheme:
 
 * documentation:
   * Updates and fixes for global README.md
+  * Improve description of UBI/UBIFS images
   * Add missing infos for TQMa6x / TQMa6UL\[L\]x\[L\]
   * Update Issues for TQMa65xx
 * TQMa6Q/DL: Fix accidentally changed sound card name in DTS
 * TQMa65xx:
   - Better support for modules without SPI-NOR flash
   - Set correct EEPROM page size for faster writes
+  - Add MTD and CAN utils to TQ images (meta-dumpling)
+  - Build UBI images for SPI-NOR boot
+  - Fix access to QSPI-NOR flash from Linux
+  - Fix GPIO access from U-Boot command line
 
 ## hardknott.TQMa8.BSP.SW.0083
 
