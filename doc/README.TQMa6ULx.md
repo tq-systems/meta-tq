@@ -66,6 +66,8 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
+* \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
+* \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 * u-boot-${MACHINE}.imx-sd: boot stream for SD / e-MMC
 * u-boot-${MACHINE}.imx-qspi: boot stream for SD / e-MMC
 
@@ -174,7 +176,7 @@ setenv blkc
 
 __Attention__: This section is subject to change.
 
-To program the rootfs as UBI, write <rootfs.ubifs> image to `/dev/mtd5` (under Linux)
+To program the rootfs as UBI, write <rootfs.ubi> image to `/dev/mtd5` (under Linux)
 Copy the image on a USB stick and mount it to `/mnt`
 
 ```
@@ -185,7 +187,7 @@ To check check usability of the programmed rootfs one can use
 
 ```
 ubiattach /dev/ubi_ctrl -m 5
-mount -t ubifs ubi0 /mnt
+mount -t ubifs ubi0:rootfs /mnt
 ```
 
 #### SD / e-MMC

@@ -148,7 +148,8 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* \*.rootfs.ubifs: UBIFS image for SPI NOR (rootfs incl. kernel and device trees)
+* \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
+* \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 * imx-boot-${MACHINE}-sd.bin-flash\_spl: boot stream for SD / e-MMC
 * imx-boot-${MACHINE}-sd.bin-flash\_linux\_m4: boot stream for SD / e-MMC + M4 Demo
 * imx-boot-${MACHINE}-sd.bin-flash\_spl_flexspi: boot stream for QSPI
