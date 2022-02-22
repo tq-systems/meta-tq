@@ -30,7 +30,6 @@ _Kernel:_
 * The 6 PRU Ethernet ports only work in PHY master mode. This makes it
   impossible to connect these ports to other devices that enforce master mode
   (like the PRU ports of other MBa65xx boards).
-* SPI Linux boot from UBIFS is currently unsupported.
 * The linux-ti-tq-5.4.109 recipe is not based on linux-yocto, so the kernel
   defconfig cannot be extended using config fragments.
 * Macronix Octal SPI-NOR flash is currently unsupported. TQMa65xx variants with
@@ -50,6 +49,8 @@ Artifacts can be found at the usual locations for Bitbake:
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
+* \*.rootfs.ubifs: UBIFS rootfs
+* \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 * sysfw.itb: system controller firmware
 * tiboot3.bin: first-stage bootloader (R5 core)
 * tispl.bin: second-stage bootloader (A53 core, includes ATF and OPTEE)
@@ -94,6 +95,48 @@ boot source by modifying the following environment variables:
 
 Network boot does not use TFTP. Instead, kernel and Device Trees are loaded from
 the `/boot` directory of the root filesystem via NFS.
+
+### Display support
+
+To enable display support, a Device Tree overlay must be loaded from U-Boot
+by setting the variable `name_overlay_extra`:
+```
+setenv name_overlay_extra overlay.dtbo
+```
+The `saveenv` command is used to persist this setting.
+
+The following overlays are currently available:
+
+| Device Tree overlay                        | Interface     | Type                          |
+|--------------------------------------------|---------------|-------------------------------|
+| k3-am65-tqma65xx-mba65xx-dmb-fc21.dtbo     | RGB           | DMB / CDTech S070PWS19HP-FC21 |
+| k3-am65-tqma65xx-mba65xx-dmb-dc44.dtbo     | RGB           | DMB / CDTech S070SWV29HG-DC44 |
+| k3-am65-tqma65xx-mba65xx-lvds-display.dtbo | LVDS          | Tianma TM070JVHG33            |
+
+### Program system image
+
+#### SD card / e-MMC
+
+To program a complete system image, write the [WIC image](#artifacts) to
+SD card / e-MMC at offset 0.
+
+#### SPI-NOR
+
+__Attention__: This section is subject to change.
+
+To program the root filesystem, format `/dev/mtd6` as a UBI volume and write
+the UBI image to it. If the image is stored at `/mnt/rootfs.ubi` (for example
+on a USB drive), use the following command:
+```
+ubiformat /dev/mtd6 -f /mnt/rootfs.ubi
+```
+
+To check check usability of the programmed root filesystem, the following
+commands can be used:
+```
+ubiattach -p /dev/mtd6
+mount -t ubifs ubi0:rootfs /mnt
+```
 
 ### Updates
 
