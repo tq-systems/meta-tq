@@ -57,9 +57,13 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 
 - PCIe requires a power cycle to work reliably. Asserting a POR using S9 or S10 is not sufficient.
 - eth1 (X12) uses a random MAC address. The one stored in MBa6 EEPROM is currently not used.
+  (`linux-imx-tq` only)
+  Workaround: Run `setenv eth1addr ${usbethaddr}; saveenv` once in u-boot console
 - Backlight on parallel displays are enabled upon Power-On which might lead to random output.
   Display will be disabled during bootup and can be used normally afterwards.
-- GPIO wake-up not supported on `linux-imx-tq-5.10`
+- Powersave modes `mem` and `freeze` might not work reliably.
+  It has been observed that USB errors were preventing entering powersave mode.
+- `asound.state` is not compatible with `linux-5.4` (`linux-imx-tq` as well as `linux-tq`)
 
 ## Artifacts
 
