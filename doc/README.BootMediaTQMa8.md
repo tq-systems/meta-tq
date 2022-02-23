@@ -7,6 +7,17 @@ how default U-Boot env supports update for development purpose.
 
 ## Boot device initialisation
 
+### Bootstream location on SD and e-MMC
+
+| CPU family | 32 kiB (0x8000) | 33k (0x8400) |
+| ---------- | --------------- | ------------ |
+| iMX8MQ     |                 |     x        |
+| iMX8MM     |                 |     x        |
+| iMX8MN     |       x         |              |
+| iMX8MP     |       x         |              |
+| iMX8X      |       x         |              |
+| iMX8       |       x         |              |
+
 ### Bootable SD-Card
 
 To create a bootable SD-Card with complete system image:
@@ -16,7 +27,7 @@ write *.wic Image to SD (offset 0)
 To create a bootable SD-Card with boot stream only (for exact file name see
 SOM specific documentation):
 
-write bootstream at offset 32 kiB (0x8000) to SD-Card
+Write bootstream with correct [offset](#bootstream-location-on-sd-and-e-mmc) to SD-Card
 
 Example for Linux:
 
@@ -31,7 +42,8 @@ write *.wic image to e-MMC (offset 0)
 To create a bootable e-MMC with boot stream only (for exact file name see
 SOM specific documentation)
 
-Boot from SD-Card and write bootstream at offset 32 kiB (0x8000) to e-MMC
+Boot from SD-Card and write bootstream with correct [offset](#bootstream-location-on-sd-and-e-mmc)
+to e-MMC
 
 Example for Linux:
 
