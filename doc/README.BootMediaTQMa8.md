@@ -146,3 +146,17 @@ environment:
   ubifs rootfs in this volume
 * `netboot`: load kernel and dtb using tftpboot and boots into rootfs on a NFS
   mount.
+
+## Cortex M4/M7 support
+
+This section only applies to  following CPU families:
+
+| CPU family | Cortex M4 | Cortex M7  |
+| ---------- | ----------| ---------- |
+| iMX8MQ     |     x     |            |
+| iMX8MMini  |     x     |            |
+| iMX8MNano  |           |      x     |
+| iMX8MPlus  |           |      x     |
+
+Cortex M image: set env var `cm_image` to the name of your Cortex M image,
+provide the file via TFTP and update on SD / e-MMC via `run update_cm_mmc`
