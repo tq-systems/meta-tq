@@ -397,7 +397,7 @@ Download kernel image from TFTP and update:
 
 ## Use UUU Tool
 
-See [here] for details about using Serial Download mode and UUU.
+See [here](./README.TQMa8.UUU.md) for details about using Serial Download mode and UUU.
 
 ## Howto
 
