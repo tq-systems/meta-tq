@@ -6,7 +6,8 @@ This README contains some useful information for TQMa8MPxL on MBa8MPxL
 
 ## Variants
 
-* TQMa8MPQL REV.010x
+* TQMa8MPQL REV.010x on MBa8MPxL REV.010x
+* TQMa8MPQL REV.020x on MBa8MPxL REV.020x
 
 ## Version information for software components
 
@@ -20,79 +21,94 @@ See top level README.md for configurations usable as MACHINE.
 
 ### U-Boot
 
-* RAM configs: 2 GiB
-* CPU variants i.MX8MPQ
-* Fuses
-* speed grade / temperature grade detection
-* UART (console on UART4)
-* GPIO
-  * LED
-  * Button
-* I2C
-  * system EEPROM parsing
-* e-MMC / SD
-  * Read
-  * Write
-* ENET
-  * GigE / FEC via Phy on MBa8MPxL
-  * GigE / Eqos via Phy on MBa8MPxL
-* Bootdevices:
-  * SD-Card on USDHC2
-  * e-MMC on USDHC3
-  * QSPI-NOR on FlexSPI
-* USB
-  * USB 3.0 Host / Hub
-  * USB DRD (USB 3.0 Cable Detect, VBUS)
-* QSPI NOR
-  * Read with 1-1-1 SDR
-  * PP / Erase with 1-1-1 SDR
-* Cortex M7
-  * env settings for starting from TCM
-  * examples with UART3 as debug console
+| Feature                                          |    REV.010x |     REV.020x |
+| ------------------------------------------------ | ----------- | ------------ |
+| RAM configs                                      |       2 GiB |        2 GiB |
+| CPU variants                                     |    i.MX8MPQ |     i.MX8MPQ |
+| Fuses / OCRAM                                    |       x     |       x      |
+| speed grade / temperature grade detection        |       x     |       x      |
+| UART (console on UART4)                          |       x     |       x      |
+| **GPIO**                                         |             |              |
+| LED                                              |       x     |       x      |
+| Button                                           |       x     |       x      |
+| 24V IO                                           |             |       x      |
+| **I2C**                                          |             |              |
+| system EEPROM parsing                            |       x     |       x      |
+| PMIC                                             |       x     |       x      |
+| **e-MMC / SD**                                   |             |              |
+| Read                                             |       x     |       x      |
+| Write                                            |       x     |       x      |
+| **ENET**                                         |             |              |
+| GigE / FEC via Phy on MBa8MPxL                   |       x     |       x      |
+| GigE / EQOS via Phy on MBa8MPxL                  |       x     |       x      |
+| **Bootdevices:**                                 |             |              |
+| SD-Card on USDHC2                                |       x     |       x      |
+| e-MMC on USDHC3                                  |       x     |       x      |
+| QSPI-NOR on FlexSPI                              |       x     |       x      |
+| Serial Downloader                                |       x     |       x      |
+| **USB**                                          |             |              |
+| USB 3.0 Host / Hub                               |       x     |       x      |
+| USB DRD (USB 3.0 Cable Detect, VBUS)             |       x     |              |
+| **QSPI NOR**                                     |             |              |
+| Read with 1-1-1 SDR                              |       x     |       x      |
+| PP / Erase with 1-1-1 SDR                        |       x     |       x      |
+| **Cortex M7**                                    |             |              |
+| env settings for starting from TCM               |       x     |              |
+| examples with UART3 as debug console             |       x     |              |
 
 **TODO or not tested / supported**
 
 * CPU variants i.MX8MPD/S and Lite
+* Cortex M7 with REV.020x
 
 ### Linux
 
-* RAM configs: 2 GiB
-* CPU variants i.MX8MPQ
-* speed grade / temperature grade detection
-* I2C
-  * Temperature Sensors
-  * RTC
-  * EEPROMS
-* GPIO
-  * LED
-  * Button
-* UART
-  * console on UART4
-  * 3 x UART via pin head / FTDI 4 port USB / UART converter (see issues)
-* ENET
-  * GigE / FEC via Phy on MBa8MPxL
-  * GigE / Eqos via Phy on MBa8MPxL
-* USB
-  * USB 3.0 Host / Hub
-  * USB DRD (USB 3.0 Cable Detect, VBUS)
-* GPU
-* VPU
-* Display
-  * LVDS
-  * HDMI
-* Audio
-  * HDMI
-  * Codec (Line IN / Line OUT)
-* PCIe
-  * network card at M.2
-* SPI
-  * spidev at all CS
-* Cortex M7
-  * examples running from TCM
-  * use UART3 as debug console (see issues)
-* MIPI CSI (see Issues section)
-  * Gray with Vision Components GmbH camera (Sensor OV9281)
-  * Raw Bayer with Vision Components GmbH camera (Sensor IMX327)
+| Feature                                          |    REV.010x |     REV.020x |
+| ------------------------------------------------ | ----------- | ------------ |
+| RAM configs                                      |       2 GiB |        2 GiB |
+| CPU variants                                     |    i.MX8MPQ |     i.MX8MPQ |
+| Fuses / OCRAM                                    |       x     |       x      |
+| speed grade / temperature grade detection        |       x     |       x      |
+| **UART**                                         |             |              |
+| console on UART4 (via USB / UART converter       |       x     |       x      |
+| 3 x UART via pin head / USB UART converter       |       x     |              |
+| **GPIO**                                         |             |              |
+| LED                                              |       x     |       x      |
+| Button                                           |       x     |       x      |
+| 24V IO                                           |             |       x      |
+| **I2C**                                          |             |              |
+| EEPROMs                                          |       x     |       x      |
+| PMIC                                             |       x     |       x      |
+| RTC                                              |       x     |       x      |
+| Temperature Sensors                              |       x     |       x      |
+| **ENET**                                         |             |              |
+| GigE / FEC via Phy on MBa8MPxL                   |       x     |       x      |
+| GigE / EQOS via Phy on MBa8MPxL                  |       x     |       x      |
+| **USB**                                          |             |              |
+| USB 3.0 Host / Hub                               |       x     |       x      |
+| USB DRD (USB 3.0 Cable Detect, VBUS)             |       x     |              |
+| **QSPI NOR**                                     |             |              |
+| Read with 1-1-4 SDR                              |       x     |       x      |
+| PP / Erase with 1-1-1 SDR                        |       x     |       x      |
+| GPU                                              |       x     |       x      |
+| VPU                                              |       x     |       x      |
+| **Display**                                      |             |              |
+| LVDS                                             |       x     |       x      |
+| HDMI                                             |       x     |       x      |
+| **Audio**                                        |             |              |
+| HDMI                                             |       x     |              |
+| Codec (Line IN / Line OUT)                       |       x     |       x      |
+| **PCIe**                                         |             |              |
+| network card at M.2                              |       x     |              |
+| **SPI**                                          |       x     |       x      |
+| spidev at all CS                                 |       x     |       x      |
+| ADC                                              |       x     |       x      |
+| **Cortex M7**                                    |             |              |
+| examples running from TCM                        |       x     |              |
+| use UART3 as debug console (see issues)          |       x     |              |
+| **MIPI CSI (see Issues section)**                |             |              |
+| Gray with Vision Components GmbH camera (Sensor OV9281) |       x     |     |
+| Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |   x    |     |
 
 ## TODO:
 
@@ -100,11 +116,15 @@ See top level README.md for configurations usable as MACHINE.
   * Codec Microphone in
 * Display
   * DSI / DSI DP bridge
-* ADC
+* PCIe (REV.020x)
+  * not tested
+* UART1-3
+  * not tested on REV.0200
+* Cortex M7 (REV.020x)
 
 ## Known Issues
 
-* UART 1,2,3
+* UART 1,2,3 (REV.010x)
   * UART are in DTE mode, not DCE
   * to use UART with FTDI RS232 / USB some hardware modification are needed for REV.010x, see
     manual
@@ -141,6 +161,8 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
+* \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
+* \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 * imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / e-MMC
 * imx-boot-${MACHINE}-sd.bin-flash\_evk\_flexspi: boot stream for FlexSPI
 * imx-boot-${MACHINE}-mfgtool.bin-flash\_evk\_uboot:  boot stream for UUU
