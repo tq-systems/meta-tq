@@ -17,11 +17,20 @@ Releases are named with the following scheme:
 
 ### Added
 
-* packagegroup-testutils: add alsabat if alsa is enabled
+* image recipes:
+  * recipes are split, so that every image has a conjugated
+    -debug enabled recipe. This enables to distinguish debug and release builds
+    easily
+  * add a postprocess command for -debug images that adds a hint regarding
+    security to etc/issue\[.net\]
+* packagegroup-testutils:
+  * add alsabat if alsa is enabled
+  * RRECOMMEND openssh-sftp-server (useful for QtCreator, eclipse etc.)
 * alsa-utils: add bbappend to allow compilation of alsabat
 * base-files: customize /etc/issue[.net] to have some branding
 
 ## hardknott.TQMa65xx.BSP.SW.0008
+## hardknott.TQMa8.BSP.SW.0084
 
 ### Changed
 
