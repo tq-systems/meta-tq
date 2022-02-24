@@ -9,6 +9,10 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Fixed
+* TQMa65xx:
+  - Fix unintended difference to TI AM65x-EVM memory layout in U-Boot SPL
+
 ## hardknott.TQMa65xx.BSP.SW.0008
 ## hardknott.TQMa8.BSP.SW.0084
 
