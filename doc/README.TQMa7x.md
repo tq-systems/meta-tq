@@ -48,6 +48,19 @@
   PCIe can not be used on MBa7x
 - `asound.state` is not compatible with `linux-5.4` (`linux-imx-tq` as well as `linux-tq`)
 
+## Artifacts
+
+Artifacs can be found at the usual locations for bitbake:
+`${TMPDIR}/deploy/images/${MACHINE}`
+
+* \*.dtb: device tree blobs
+* zImage: Linux kernel image
+* \*.wic: SD / e-MMC system image
+* \*.rootfs.ext4: RootFS image
+* \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
+* u-boot-${MACHINE}.imx-sd: boot stream for SD / e-MMC
+* u-boot-${MACHINE}.imx-qspi: boot stream for QSPI
+
 ## HowTo:
 
 ### MBa7x DIP Switch settings for Boot
