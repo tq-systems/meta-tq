@@ -1,5 +1,7 @@
 # Version information for software components
 
+[[_TOC_]]
+
 ## U-Boot:
 
 * based on uboot-imx (https://source.codeaurora.org/external/imx/uboot-imx)

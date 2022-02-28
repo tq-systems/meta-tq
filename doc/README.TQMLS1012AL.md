@@ -1,5 +1,7 @@
 # TQMLS1012AL on MBLS1012AL carrier board
 
+[[_TOC_]]
+
 ## Overview
 
 ### Supported Hardware:

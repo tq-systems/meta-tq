@@ -1,5 +1,7 @@
 # Version information for software components
 
+[[_TOC_]]
+
 ## TQMa6x / TQMa6UL[L]x[L] / TQMa7x
 
 ### U-Boot:

@@ -1,5 +1,7 @@
 # TQMLS1017A / TQMLS1028A
 
+[[_TOC_]]
+
 ## Kernel variants
 
 By default, the kernel recipe linux-imx-tq (based on FSLC kernel

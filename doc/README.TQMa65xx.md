@@ -1,5 +1,7 @@
 # TQMa65xx on MBa65xx carrier board
 
+[[_TOC_]]
+
 ## Overview
 
 ### Supported Hardware:

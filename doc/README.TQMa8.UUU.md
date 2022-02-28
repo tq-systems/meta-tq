@@ -1,5 +1,7 @@
 # Using the Universal Update Utility (UUU)
 
+[[_TOC_]]
+
 ## Bootstream
 
 To build a bootstream usable with UUU tool the following settings needs to be in your

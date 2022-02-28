@@ -1,5 +1,7 @@
 # TQMLX2160A-MBLX2160A
 
+[[_TOC_]]
+
 ## Overview
 
 ### Supported Hardware:

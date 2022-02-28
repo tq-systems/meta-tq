@@ -1,5 +1,7 @@
 # TQMa335x on MBa335x carrier board
 
+[[_TOC_]]
+
 ## Overview
 
 ### Supported Hardware:

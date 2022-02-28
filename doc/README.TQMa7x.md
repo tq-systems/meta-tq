@@ -1,5 +1,7 @@
 # TQMa7x on MBa7x carrier board (aka STKa7x)
 
+[[_TOC_]]
+
 ## Overview
 
 ### Supported Hardware:
