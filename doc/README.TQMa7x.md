@@ -7,16 +7,45 @@
 * TQMa7x: module revisions REV.020x
 * MBa7x:  board revisions REV.020x
 
+### Supported Features
+
+|                              | linux-tq-5.15 |
+| ---------------------------- | :-----------: |
+| Fuses                        |      x        |
+| UART (console, X13 or X14)   |      x        |
+| GPIO                         |      x        |
+| Button (S11, S12, S13)       |      x        |
+| I2C                          |      x        |
+| GPIO expander                |      x        |
+| EEPROM                       |      x        |
+| RTC                          |      x        |
+| SPI NOR                      |      x        |
+| Buzzer                       |      x        |
+| LEDs                         |      x        |
+| SPI                          |      x        |
+| USB Host (X4)                |      x        |
+| USB Dual Role (X5)           |      x        |
+| USB on Mini PCIe (X17)       |      x        |
+| eMMC/SD (on-board/X7)        |      x        |
+| Ethernet GigE (X8/X9)        |      x        |
+| CAN (X10/X11)                |      x        |
+| RS-485 (X12)                 |      x        |
+| LVDS (X15, X16)              |      x        |
+| PCIe (X17)                   |               |
+| Audio Line In (X20)          |      x        |
+| Audio Line Out (x21)         |      x        |
+| Parallel LCD (X23)           |      x        |
+| Touch (X23)                  |      x        |
+
+### ToDo / Untested
+* Smart card (X6)
+* SIM card (X18)
+* Mic In (X19)
+
 ### Known issues
 
-- With kernel linux-imx-tq 5.4 (and possibly other variants based on 5.4),
-power management for the HSIC USB hub of the MBa7x is too aggressive and
-will power off the hub completely when no device is connected. A
-software access to the hub (for example by running `lsusb -v`) is
-necessary to wake up the hub, so a newly connected device is detected.
-- PCI on MBa7x is not supported by the Linux mainline kernel
-- Loading the imx-cpufreq-dt fails with the TQMa7s (Solo). This means
-that the CPU frequency cannot be output. TQMa7s use only a single frequency.
+- Using internal PCIe PHY clock is currently not supported by the Linux mainline kernel
+  PCIe can not be used on MBa7x
 
 ## HowTo:
 
