@@ -1,4 +1,4 @@
-SUMMARY = "Linux for TQ-Systems GmbH Freescale / NXP i.MX7 and LS102xA/LS104xA based modules"
+SUMMARY = "Linux for TQ-Systems GmbH Freescale / LS102xA/LS104xA based modules"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
@@ -23,5 +23,4 @@ SRC_URI_append_tqmls102xa = "\
 "
 
 COMPATIBLE_MACHINE = "tqmls102xa"
-COMPATIBLE_MACHINE_append = "|tqma7x"
 COMPATIBLE_MACHINE_append = "|tqmls10xxa"
