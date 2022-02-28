@@ -46,6 +46,7 @@
 
 - Using internal PCIe PHY clock is currently not supported by the Linux mainline kernel
   PCIe can not be used on MBa7x
+- `asound.state` is not compatible with `linux-5.4` (`linux-imx-tq` as well as `linux-tq`)
 
 ## HowTo:
 
