@@ -74,7 +74,7 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 * u-boot-${MACHINE}.imx-sd: boot stream for SD / e-MMC
-* u-boot-${MACHINE}.imx-qspi: boot stream for SD / e-MMC
+* u-boot-${MACHINE}.imx-qspi: boot stream for QSPI
 
 ## HowTo
 
