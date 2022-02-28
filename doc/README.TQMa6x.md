@@ -76,7 +76,7 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * u-boot-${MACHINE}.imx-sd: boot stream for SD / e-MMC
-* u-boot-${MACHINE}.imx-spinor: boot stream for SD / e-MMC
+* u-boot-${MACHINE}.imx-spinor: boot stream for SPI NOR
 
 ## HowTo:
 
