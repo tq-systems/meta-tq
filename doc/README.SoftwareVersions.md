@@ -26,7 +26,11 @@ _Note:_ Not supported for:
 
 #### Kernel based on 5.4  (linux-imx-fslc)
 
-_Note:_ Not recommended for usage
+_Note:_ Not recommended for usage with
+
+- TQMa6x: use [5.10](#kernel-based-on-510-linux-imx-fslc)
+- TQMa6ULx / TQMa6ULxL: use [5.15](#kernel-based-on-515-linux-stable)
+- TQMa6ULLx / TQMa6ULLxL: use [5.15](#kernel-based-on-515-linux-stable)
 
 * not selected by default
 * based on linux-imx-fslc (https://github.com/Freescale/linux-fslc.git)
@@ -34,7 +38,11 @@ _Note:_ Not recommended for usage
 
 #### Kernel based on 5.4  (linux-stable)
 
-_Note:_ Not recommended for usage for machines with TQMa6UL[L]/TQMa6UL[L]xL
+_Note:_ Not supported for:
+
+- TQMa6x: use [5.15](#kernel-based-on-515-linux-stable)
+- TQMa6ULx / TQMa6ULxL: use [5.15](#kernel-based-on-515-linux-stable)
+- TQMa6ULLx / TQMa6ULLxL: use [5.15](#kernel-based-on-515-linux-stable)
 
 * not selected by default
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
