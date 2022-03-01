@@ -1,3 +1,4 @@
+require recipes-bsp/u-boot/u-boot.inc
 require u-boot-tq.inc
 
 DESCRIPTION = "u-boot for TQ-Systems GmbH Freescale LS10xxA based modules"

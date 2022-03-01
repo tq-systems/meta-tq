@@ -1,4 +1,3 @@
-require recipes-bsp/u-boot/u-boot.inc
 inherit gitpkgv-nonexact
 
 PROVIDES += "u-boot"
