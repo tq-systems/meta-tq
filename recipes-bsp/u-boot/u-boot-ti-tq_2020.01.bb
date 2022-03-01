@@ -1,3 +1,4 @@
+require recipes-bsp/u-boot/u-boot.inc
 require u-boot-tq.inc
 
 DESCRIPTION = "U-boot for TQ-Systems TI AM65 based modules"

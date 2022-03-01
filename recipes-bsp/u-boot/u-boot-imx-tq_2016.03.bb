@@ -1,3 +1,4 @@
+require recipes-bsp/u-boot/u-boot.inc
 require u-boot-tq.inc
 
 DESCRIPTION = "U-Boot for TQ-Systems GmbH IMX based modules"
