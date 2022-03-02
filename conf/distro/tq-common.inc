@@ -1,6 +1,9 @@
-DISTRO_VERSION ??= "tq-generic"
-VENDOR = "tq"
-TARGET_VENDOR = "-${VENDOR}"
+VENDOR_SHORT_NAME = "tq"
+VENDOR_LONG_NAME = "TQ-Systems"
+TARGET_VENDOR = "-${VENDOR_SHORT_NAME}"
+# should be set to a useful name as soon as we want to go away from
+# poky/meta-poky/conf/distro/poky.conf
+DISTRO_VERSION ??= "${VENDOR_SHORT_NAME}.0.1"
 
 # The bundle version interacts with the downgrade barrier.
 # "r0" as version, disables the downgrade barrier. If a
@@ -9,7 +12,7 @@ TARGET_VENDOR = "-${VENDOR}"
 # vulnerabilities cannot be exploited.
 RAUC_BUNDLE_VERSION ?= "r0"
 
-SDK_VENDOR = "-${VENDOR}sdk"
+SDK_VENDOR = "-${VENDOR_SHORT_NAME}sdk"
 SDK_VERSION := "${DISTRO_VERSION}"
 SDK_NAME = "${VENDOR}-${DISTRO}-${TCLIBC}-${SDK_ARCH}-${IMAGE_BASENAME}-${TUNE_PKGARCH}"
 SDKPATH = "/opt/${VENDOR}-${DISTRO}/${SDK_VERSION}"
