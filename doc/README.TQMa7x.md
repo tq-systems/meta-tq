@@ -49,6 +49,10 @@
 - Using internal PCIe PHY clock is currently not supported by the Linux mainline kernel
   PCIe can not be used on MBa7x
 - `asound.state` is not compatible with `linux-5.4` (`linux-imx-tq` as well as `linux-tq`)
+- USB Dual Role gadget: Causing a device disconnect is not possible. D+ is
+  erroneously supplying VBUS as well preventing a device disconnect per software.
+  Occurs when gadget is disabled again. USB host might fail to detect a new USB
+  descriptor once gadget is restarted.
 
 ## Artifacts
 
