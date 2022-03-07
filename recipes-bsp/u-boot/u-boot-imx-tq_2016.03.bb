@@ -12,6 +12,10 @@ SRCBRANCH = "TQMaxx2-v2016.03-rel_imx_4.1.15_2.0.0_ga"
 
 SRC_URI = "\
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+    file://0001-tqma6ul-fix-OTG2-fuse-check-on-MBa6ULx.patch \
+    file://0002-tqma6ul-configure-OTG1_PWR-pin-early-in-mba6ul_setup.patch \
+    file://0003-tqma6ul-check-fuse-state-for-ENET1-2-on-MBa6ULxL.patch \
+    file://0004-tqma6ul-add-fuse-check-for-USB-IP.patch \
 "
 
 COMPATIBLE_MACHINE = "tqma7x"

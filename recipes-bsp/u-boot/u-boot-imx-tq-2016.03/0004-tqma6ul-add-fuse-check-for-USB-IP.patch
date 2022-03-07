@@ -1,0 +1,40 @@
+From 86a65bceb893edf33f996948a11e461979ace69b Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Fri, 6 Mar 2020 11:20:21 +0100
+Subject: [PATCH 4/4] tqma6ul: add fuse check for USB IP
+
+IP can be fused on some CPU variants. Let's play safe and check before access
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ board/tqc/tqma6ul/tqma6ul_mba6ulxl.c | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/board/tqc/tqma6ul/tqma6ul_mba6ulxl.c b/board/tqc/tqma6ul/tqma6ul_mba6ulxl.c
+index 02c71293e54..49322bd93e5 100644
+--- a/board/tqc/tqma6ul/tqma6ul_mba6ulxl.c
++++ b/board/tqc/tqma6ul/tqma6ul_mba6ulxl.c
+@@ -397,12 +397,20 @@ int board_ehci_hcd_init(int port)
+ 
+ 	switch (port) {
+ 		case 0:
++			if (check_module_fused(MX6_MODULE_USB_OTG1)) {
++				puts("OTG1: fused\n");
++				return -ENODEV;
++			}
+ 			/* Set Power polarity */
+ 			setbits_le32(usbnc_usb_ctrl, UCTRL_PWR_POL);
+ 			/* Set Overcurrent polarity */
+ 			setbits_le32(usbnc_usb_ctrl, UCTRL_OC_POL);
+ 			break;
+ 		case 1:
++			if (check_module_fused(MX6_MODULE_USB_OTG2)) {
++				puts("OTG2: fused\n");
++				return -ENODEV;
++			}
+ 			/* Disable Overcurrent detection */
+ 			/* managed by 2517i 7port usb hub */
+ 			setbits_le32(usbnc_usb_ctrl, UCTRL_OC_DISABLE);
+-- 
+2.17.1
+
