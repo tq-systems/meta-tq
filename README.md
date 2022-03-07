@@ -184,10 +184,12 @@ Support for the following machines is contained in this version:
 | [y]    | i.MX6UL          | TQMa6ULx                 | MBaULx         | tqma6ulx-mba6ulx             | TQMa6UL HW REV.030x / MBa6ULx HW REV.020x                             |
 | [y]    | i.MX6UL          | TQMa6ULx                 | MBaULx         | tqma6ulx-512mb-mba6ulx       | TQMa6ULx HW REV.030x 512 MiB RAM / MBa6ULx HW REV.020x                |
 | [y]    | i.MX6UL          | TQMa6ULxL                | MBaULx         | tqma6ulx-lga-mba6ulx         | TQMa6ULxL HW REV.020x / MBa6ULx HW REV.020x                           |
-| [p]    | i.MX6UL          | TQMa6ULxL                | MBaULxL        | tqma6ulx-lga-mba6ulxl        | TQMa6ULxL HW REV.020x / MBa6ULxL HW REV.020x |
+| [y]    | i.MX6UL          | TQMa6ULxL                | MBaULx         | tqma6ulx-512mb-lga-mba6ulx   | TQMa6ULxL HW REV.020x / MBa6ULx HW REV.020x                           |
+| [y]    | i.MX6UL          | TQMa6ULxL                | MBaULxL        | tqma6ulx-lga-mba6ulxl        | TQMa6ULxL HW REV.020x / MBa6ULxL HW REV.020x |
 | [y]    | i.MX6ULL         | TQMa6ULLx                | MBaULx         | tqma6ullx-mba6ulx            | TQMa6ULLx HW REV.030x / MBa6ULx HW REV.020x |
 | [y]    | i.MX6ULL         | TQMa6ULLx                | MBaULx         | tqma6ullx-512mb-mba6ulx      | TQMa6ULLx HW REV.030x 512 MiB RAM / MBa6ULx HW REV.020x |
 | [y]    | i.MX6ULL         | TQMa6ULLxL               | MBaULx         | tqma6ullx-lga-mba6ulx        | TQMa6ULLxL HW REV.020x / MBa6ULx HW REV.020x |
+| [y]    | i.MX6ULL         | TQMa6ULLxL               | MBaULx         | tqma6ullx-512mb-lga-mba6ulx  | TQMa6ULLxL HW REV.020x 512 MiB RAM/ MBa6ULx HW REV.020x               |
 | [y]    | i.MX7\[S,D\]     | TQMa7\[S,D\]             | MBa7x          | tqma7x-512mb-mba7            | TQMa7\[S,D\] HW REV.010x ... 0x020x / 512 MiB RAM / MBa7x HW REV.020x |
 | [y]    | i.MX7\[S,D\]     | TQMa7\[S,D\]             | MBa7x          | tqma7x-1gb-mba7              | TQMa7\[S,D\] HW REV.010x ... 0x020x / 1 GiB RAM / MBa7x HW REV.020x |
 | [y]    | i.MX7\[S,D\]     | TQMa7\[S,D\]             | MBa7x          | tqma7x-2gb-mba7              | TQMa7\[S,D\] HW REV.010x ... 0x020x / 2 GiB RAM / MBa7x HW REV.020x |
