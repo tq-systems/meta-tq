@@ -1,4 +1,4 @@
-# Common definitions for TQ-Systems GmbH MBa6ULx baseboard for TQMa6ULLxL modules
+# Common definitions for TQ-Systems GmbH MBa6ULx baseboard for TQMa6ULLxL SOM
 
 SERIAL_CONSOLES = "115200;ttymxc0"
 
