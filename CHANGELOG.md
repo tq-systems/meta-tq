@@ -7,12 +7,26 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Fixed
+
+* rng.tools: remove outdated recipe that was needed for zeus and older to include
+  libjitterentropy support. Switch to use current upstream from poky.
+* lmsensors: default packageconfig installs sensord with complex dependencies.
+  Fix it to prevent massive rootfs size increase and installment of otherwise
+  not needed packages
+
+### Added
+
+* packagegroup-testutils: add alsabat if alsa is enabled
+* alsa-utils: add bbappend to allow compilation of alsabat
+* base-files: customize /etc/issue[.net] to have some branding
+
+## hardknott.TQMa65xx.BSP.SW.0008
+
 ### Changed
 
 * make sure hwclock from util-linux gets installed
 * add coreutils to images not built for spaetzle
-
-## hardknott.TQMa65xx.BSP.SW.0008
 
 ### Changed
 
