@@ -13,8 +13,13 @@ inherit packagegroup
 # maybe perl comes also in as a dependency for mtrace
 # and that's not what we want
 
+ALSA_RDEPENDS = "\
+    alsa-utils-alsabat \
+    alsa-utils-speakertest \
+"
+
 RDEPENDS_${PN} = "\
-    ${@bb.utils.contains('COMBINED_FEATURES', 'alsa', ' alsa-utils-speakertest', '', d)} \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'alsa', ' ${ALSA_RDEPENDS}', '', d)} \
     atop \
     dstat \
     evtest \
