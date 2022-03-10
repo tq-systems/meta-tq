@@ -36,10 +36,18 @@ RDEPENDS_${PN} = "\
     stress-ng \
 "
 
+#
+# although we should use openssh, prepare to use the packagegroup with dropbear
+# sftp is needed for IDE like QtCreator
+#
+RRECOMMENDS_${PN} = "\
+    openssh-sftp-server \
+"
+
 # note: kmscube is only available if we have opengl and if virtual/libgbm
 # is built. Since this is at least not the case for TQMa6x with vendor graphic
 # stack we need this ugly construct
-RRECOMMENDS_${PN} = "\
+RRECOMMENDS_${PN} += "\
     ${@oe.utils.ifelse(d.getVar('PREFERRED_PROVIDER_virtual/libgbm') != "", 'kmscube', '')} \
 "
 
