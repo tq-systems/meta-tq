@@ -61,8 +61,6 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
   Workaround: Run `setenv eth1addr ${usbethaddr}; saveenv` once in u-boot console
 - Backlight on parallel displays are enabled upon Power-On which might lead to random output.
   Display will be disabled during bootup and can be used normally afterwards.
-- Powersave modes `mem` and `freeze` might not work reliably.
-  It has been observed that USB errors were preventing entering powersave mode.
 - `asound.state` is not compatible with `linux-5.4` (`linux-imx-tq` as well as `linux-tq`)
 
 ## Artifacts
