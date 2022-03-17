@@ -53,20 +53,20 @@ SRC_URI_mx6 = "\
 SRC_URI_mx8 = "\
     ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
     file://local-version.cfg \
-    file://tqma8x-display-support.cfg \
-    file://tqma8x-network-support.cfg \
-    file://tqma8x-i2c-devices.cfg \
+    file://tqma8-display-support.cfg \
+    file://tqma8-network-support.cfg \
+    file://tqma8-i2c-devices.cfg \
     file://acpi-removal.cfg \
     file://sdma.cfg \
-    file://tqma8x-input-devices.cfg \
-    file://tqma8x-bpf-support.cfg \
-    file://tqma8x-audio-support.cfg \
-    file://tqma8x-usb-special-drivers.cfg \
-    file://tqma8x-adc-hwmon-support.cfg \
-    file://tqma8x-rtc.cfg \
-    file://tqma8x-nonimx-drm-removal.cfg \
-    file://tqma8x-wifi-support.cfg \
-    file://tqma8x-v4l2.cfg \
+    file://tqma8-input-devices.cfg \
+    file://bpf-support.cfg \
+    file://tqma8-audio-support.cfg \
+    file://tqma8-usb-special-drivers.cfg \
+    file://tqma8-adc-hwmon-support.cfg \
+    file://tqma8-rtc.cfg \
+    file://tqma8-nonimx-drm-removal.cfg \
+    file://tqma8-wifi-support.cfg \
+    file://tqma8-v4l2.cfg \
 "
 
 COMPATIBLE_MACHINE = "^("
