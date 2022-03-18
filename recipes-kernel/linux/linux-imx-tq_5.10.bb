@@ -55,7 +55,7 @@ SRC_URI_mx8 = "\
     file://local-version.cfg \
     file://tqma8-display-support.cfg \
     file://tqma8-network-support.cfg \
-    file://tqma8-i2c-devices.cfg \
+    file://tq-generic-devices.cfg \
     file://acpi-removal.cfg \
     file://sdma.cfg \
     file://tqma8-input-devices.cfg \
