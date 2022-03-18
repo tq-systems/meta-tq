@@ -67,6 +67,7 @@ SRC_URI_mx8 = "\
     file://tqma8-nonimx-drm-removal.cfg \
     file://tqma8-wifi-support.cfg \
     file://tqma8-v4l2.cfg \
+    file://usb-gadget-support.cfg \
 "
 
 COMPATIBLE_MACHINE = "^("
