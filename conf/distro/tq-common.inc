@@ -24,13 +24,6 @@ INHERIT += "sanity"
 INHERIT += "insane"
 QA_LOG = "1"
 
-# Log information on images and packages
-INHERIT += "buildhistory"
-
-# Uncomment to disable commits
-# BUILDHISTORY_COMMIT = "0"
-INHERIT += "buildstats"
-
 # do images prelink
 INHERIT += "image-prelink"
 
