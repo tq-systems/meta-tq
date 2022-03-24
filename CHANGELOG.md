@@ -9,6 +9,35 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## hardknott.TQMa6UL.BSP.SW.0116
+
+### Added
+
+* tqma7x-<nn>-mba7x machines: linux 5.15 support based on linux-stable 5.15.y
+* tqma6ulxl / tqma6ullxl: add 512 MB variants
+* u-boot-lsdk-tq-2019.10: backport e-MMC full size pSLC conversion
+
+### Changed
+
+* linux-imx-tq_5.10: rename and optimize kernel config fragments:
+  * remove `tqma8x` prefix for generic fragments
+  * use `tqma8` instead of `tqma8x` for others
+
+### Fixed
+
+* TQMa57xx: wks file generates non booting wic images with dosfstools 4.2, mkfs.vfat
+  change /boot partition config to use --ofset and --fixed-size and increase size
+* linux-imx-tq_5.10:
+  * TQMa8: optimize kernel config for USB gadget:
+    gadgets should be modules to not block loading the UDC driver if gadget cannot
+    be loaded. Tested with TQMa8MPxL
+  * TQMa6x: fix for smsc95xx suspend / resume
+  * TQMa8MPxL: enable missing ADC driver
+* linux-imx-tq_5.10: merge all mainline stable fixes up to v5.10.103
+  (CVE-2022-0847 "Dirty Pipe Vulnerability")
+* linux-tq_5.15: merge all mainline stable fixes up to v5.15.27
+  (CVE-2022-0847 "Dirty Pipe Vulnerability")
+
 ## hardknott.TQMa65xx.BSP.SW.0008
 
 ### Added
