@@ -10,7 +10,7 @@
 # -----------------------------------------------------------
 # ^      ^       ^        ^       ^
 # |      |       |        |       |
-# 0      1280kiB 1344kiB  4MiB    20MiB
+# 0      1280kiB 1344kiB  4MiB    36MiB
 #
-part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 4096 --size 16M --extra-space 0
+part /boot --source bootimg-partition --fstype=vfat --label boot --active --offset 4M --fixed-size 32M
 part / --source rootfs --fstype=ext4 --label root --align 4096
