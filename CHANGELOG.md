@@ -5,7 +5,20 @@ Releases are named with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
+[[_TOC_]]
+
 ## Next Release
+
+## hardknott.TQMa6UL.BSP.SW.0116
+
+### Changed
+
+* distro: unbundle dumpling / spatzle distros from using buildhistory and
+  buildstats. This should be done in buildspace local.conf or auto.conf rather
+  then in distro config.
+* rng.tools: do not start rngd if HW RNG is available. Modern kernels already use
+  the entropy from a HW RNG itself. Also starting rngd using libjitterentropy
+  introduces a huge but useless CPU usage upon startup.
 
 ### Fixed
 
