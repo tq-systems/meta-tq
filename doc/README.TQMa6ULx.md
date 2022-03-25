@@ -60,6 +60,15 @@ _Note:_ Mini PCIe connector only supports USB.
 * edt-ft5406 touch controller on some Glyn displays might cause CRC errors
   after restart using `reboot` command. At startup as well as during runtime. The device
   is still functioning though.
+* Linux: Booting with rootfs over NFS does not work reliable with systemd when
+  booting CPU with two ethernet interfaces. Needs modification of kernel command
+  line and networkd unit file. Reason for this is the fact that ENET2 is detected
+  before ENET1 and both share the same MDIO bus. Network device numbering in U-Boot
+  is inverse to Linux.
+* Linux / DTB: when booting kernel versions from this BSP the disabling of fused IP in
+  device tree before loding the OS may fail with U-Boot from older BSP versions.
+  Device tree path names were changed in CPU device tree fragment to conform the
+  device tree specification.
 
 ## Artifacts
 
