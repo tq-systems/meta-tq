@@ -258,6 +258,39 @@ WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 force-a
 	autovideosink sync=false
 ```
 
+#### Basler camera
+
+__daA3840-30mc__
+
+##### Build
+
+In order to avoid any unforseen side effects for different cameras, basler support has to be enabled explicitely by adding the following lines to `local.conf`
+```
+# Basler camera support
+ACCEPT_BASLER_EULA = "1"
+IMAGE_INSTALL_append = " packagegroup-fsl-isp packagegroup-dart-bcon-mipi"
+DISTRO_FEATURES_append = " x11"
+MACHINE_FEATURES_append = " basler"
+```
+
+This enabled additional patches required for this camera as well as a dedicated DT and additional pacages.
+
+Also several meta layers have to be added in bblayers.conf (if not already done):
+```
+  ${BSPDIR}/sources/meta-basler-imx8 \
+  ${BSPDIR}/sources/meta-basler-tools \
+  ${BSPDIR}/sources/meta-freescale \
+  ${BSPDIR}/sources/meta-qt5 \
+```
+
+##### Usage
+* Devicetree: `imx8mp-tqma8mpql-mba8mpxl-lvds-basler.dtb`
+* gstreamer example:
+
+```
+WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 -v v4l2src device=/dev/video0 ! waylandsink
+```
+
 ### Display Support
 
 Each Display can be used on its own by using the corresponding device tree.
