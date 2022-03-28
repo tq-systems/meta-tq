@@ -1,0 +1,68 @@
+From 35b885a4202258c6e0fdcf83ea014a944cfed335 Mon Sep 17 00:00:00 2001
+From: Marvin Schmidt <Marvin.Schmidt@baslerweb.com>
+Date: Tue, 17 Dec 2019 18:10:27 +0100
+Subject: [PATCH 10/24] media: mxc: Enable dual pixel mode for YUV422
+
+On the imx8mm the MIPI CSI-2 receiver can be configured to transfer two
+pixel components of YUV422 per clock cycle by setting the PIXEL_MODE
+bits in the MIPI_CSI_ISP_CONFIGn register to "Dual pixel mode".
+
+The CSI bridge has to be configured accordingly by settings the
+MIPI_DOUBLE_CMPNT bit in the CSI_CSICR18.
+
+NOTE: We expected that setting the MIPI_DOUBLE_CMPNT bit would break
+YUV422 for the imx8mq since it's using the same CSI bridge but a
+different MIPI CSI-2 receiver. The CSI receiver on the imx8mq can't be
+configured with regards to the way the data is transfered. For the
+YUV422 8-bit format the datasheet says:
+
+  13.8.3.6.15 YUV422 8 bit (Data Type = 0x1E)
+  With YUV422 8 bit is received as UYVY sequence. With the Rx controller
+  configured for single pixel mode, data_out[7:0] contains the U1
+  component, bits [15:8] Y1. On the next data valid cycle bits [7:0] V1,
+  bits [15:8] Y2.
+
+So it should *always* send 16-bit data to the bridge, which should only
+be processed correctly with the MIPI_DOUBLE_CMPNT set. But somehow it
+doesn't seem to make a difference on the imx8mq whether this bit is set
+or not
+
+Applied from https://github.com/basler/meta-basler-imx8/tree/b1b6d6653931303bffbad727d767fe5a8d4844fc/recipes-kernel/linux/linux-imx
+
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+---
+ drivers/media/platform/mxc/capture/mx6s_capture.c | 1 +
+ drivers/media/platform/mxc/capture/mxc_mipi_csi.c | 5 +++++
+ 2 files changed, 6 insertions(+)
+
+diff --git a/drivers/media/platform/mxc/capture/mx6s_capture.c b/drivers/media/platform/mxc/capture/mx6s_capture.c
+index 042afecfde0d..435ce07a7239 100644
+--- a/drivers/media/platform/mxc/capture/mx6s_capture.c
++++ b/drivers/media/platform/mxc/capture/mx6s_capture.c
+@@ -970,6 +970,7 @@ static int mx6s_configure_csi(struct mx6s_csi_dev *csi_dev)
+ 		case V4L2_PIX_FMT_YUYV:
+ 			csi_dev->csi_two_8bit_sensor_mode = true;
+ 			cr18 |= BIT_MIPI_DATA_FORMAT_YUV422_8B;
++			cr18 |= BIT_MIPI_DOUBLE_CMPNT;
+ 			break;
+ 		case V4L2_PIX_FMT_SBGGR8:
+ 		case V4L2_PIX_FMT_SGRBG8:
+diff --git a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
+index 55d5550ab8cf..929ab3d75702 100644
+--- a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
++++ b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
+@@ -514,6 +514,11 @@ static void __mipi_csis_set_format(struct csi_state *state)
+ 	/* Color format */
+ 	val = mipi_csis_read(state, MIPI_CSIS_ISPCONFIG_CH0);
+ 	val = (val & ~MIPI_CSIS_ISPCFG_FMT_MASK) | state->csis_fmt->fmt_reg;
++
++	/* Enable dual pixel mode for YUV422 */
++	if (mf->code == MEDIA_BUS_FMT_UYVY8_2X8)
++		val |= MIPI_CSIS_ISPCFG_DOUBLE_CMPNT;
++
+ 	mipi_csis_write(state, MIPI_CSIS_ISPCONFIG_CH0, val);
+ 
+ 	/* Pixel resolution */
+-- 
+2.25.1
+

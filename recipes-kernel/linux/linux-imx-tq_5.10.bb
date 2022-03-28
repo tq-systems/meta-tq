@@ -70,6 +70,12 @@ SRC_URI_mx8 = "\
     file://usb-gadget-support.cfg \
 "
 
+# Optional Basler camera support wich uses a specific patch set
+SRC_URI_append_mx8mp = " \
+    file://basler-camera;type=kmeta;destsuffix=basler-camera \
+"
+KERNEL_FEATURES_append_mx8mp = "${@bb.utils.contains('MACHINE_FEATURES', 'basler', ' basler-camera.scc', '', d)}"
+
 COMPATIBLE_MACHINE = "^("
 # COMPATIBLE_MACHINE .= "tqma7x"
 COMPATIBLE_MACHINE .= "|tqma6x"

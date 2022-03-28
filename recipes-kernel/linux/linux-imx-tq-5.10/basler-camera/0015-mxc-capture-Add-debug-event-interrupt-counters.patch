@@ -1,0 +1,196 @@
+From c97288780e144c1f6b6eaf5e30bc22e0ea1f02ac Mon Sep 17 00:00:00 2001
+From: Thies Moeller <thies.moeller@baslerweb.com>
+Date: Fri, 25 Jun 2021 16:29:22 +0200
+Subject: [PATCH 15/24] mxc: capture: Add debug event/interrupt counters
+
+Applied from https://github.com/basler/meta-basler-imx8/tree/b1b6d6653931303bffbad727d767fe5a8d4844fc/recipes-kernel/linux/linux-imx
+Adopted to local changes.
+
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+---
+ .../media/platform/mxc/capture/mx6s_capture.c | 82 ++++++++++++++++++-
+ .../media/platform/mxc/capture/mxc_mipi_csi.c |  6 ++
+ 2 files changed, 87 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/media/platform/mxc/capture/mx6s_capture.c b/drivers/media/platform/mxc/capture/mx6s_capture.c
+index 435ce07a7239..e1d057eab611 100644
+--- a/drivers/media/platform/mxc/capture/mx6s_capture.c
++++ b/drivers/media/platform/mxc/capture/mx6s_capture.c
+@@ -173,6 +173,34 @@
+ #define NUM_FORMATS ARRAY_SIZE(formats)
+ #define MX6SX_MAX_SENSORS    1
+ 
++struct mipi_csis_event {
++	u32 mask;
++	const char * const name;
++	unsigned int counter;
++};
++
++static const struct mipi_csis_event mipi_csis_events[] = {
++	{ BIT_ADDR_CH_ERR_INT, "Base address switching occur before DMA complete" },
++	{ BIT_FIELD0_INT, "DMA field 0 is complete" },
++	{ BIT_FIELD1_INT, "DMA field 1 is complete" },
++	{ BIT_SFF_OR_INT, "STATFIFO has overflowed" },
++	{ BIT_RFF_OR_INT, "RXFIFO has overflowed" },
++	{ BIT_DMA_TSF_DONE_SFF, "DMA Transfer Done from StatFIFO" },
++	{ BIT_STATFF_INT, "STATFIFO Full Interrupt Status" },
++	{ BIT_DMA_TSF_DONE_FB2, "DMA Transfer Done in Frame Buffer2" },
++	{ BIT_DMA_TSF_DONE_FB1, "DMA Transfer Done in Frame Buffer1" },
++	{ BIT_RXFF_INT, "RXFIFO Full Interrupt Status" },
++	{ BIT_EOF_INT, "EOF is detected" },
++	{ BIT_SOF_INT, "SOF is detected" },
++	{ BIT_F2_INT, "Field 2 of video is about to start" },
++	{ BIT_F1_INT, "Field 1 of video is about to start" },
++	{ BIT_COF_INT, "Change of video field is detected" },
++	{ BIT_HRESP_ERR_INT, "Hresponse error is detected" },
++	{ BIT_ECC_INT, "Error is detected in CCIR coding" },
++	{ BIT_DRDY, "At least 1 datum (word) is ready in RXFIFO" },
++};
++#define MIPI_CSIS_NUM_EVENTS ARRAY_SIZE(mipi_csis_events)
++
+ struct csi_signal_cfg_t {
+ 	unsigned data_width:3;
+ 	unsigned clk_mode:2;
+@@ -427,6 +455,9 @@ struct mx6s_csi_dev {
+ 	bool csi_two_8bit_sensor_mode;
+ 	const struct mx6s_csi_soc *soc;
+ 	struct mx6s_csi_mux csi_mux;
++
++	struct mipi_csis_event events[MIPI_CSIS_NUM_EVENTS];
++	unsigned long BaslerIrq;
+ };
+ 
+ static const struct of_device_id mx6s_csi_dt_ids[];
+@@ -538,6 +569,35 @@ static void csisw_reset(struct mx6s_csi_dev *csi_dev)
+ 	csi_write(csi_dev, cr18, CSI_CSICR18);
+ }
+ 
++static void mx6s_clear_counters(struct mx6s_csi_dev *state)
++{
++	unsigned long flags;
++	int i;
++
++	spin_lock_irqsave(&state->slock, flags);
++	for (i = 0; i < MIPI_CSIS_NUM_EVENTS; i++)
++		state->events[i].counter = 0;
++	state->BaslerIrq = 0;
++	spin_unlock_irqrestore(&state->slock, flags);
++}
++
++static void mx6s_log_counters(struct mx6s_csi_dev *state, bool non_errors)
++{
++	int i = MIPI_CSIS_NUM_EVENTS;
++	unsigned long flags;
++
++	spin_lock_irqsave(&state->slock, flags);
++
++	dev_dbg(state->dev, "--> Total %ld IRQ events\n", state->BaslerIrq);
++
++	for (i--; i >= 0; i--) {
++		dev_dbg(state->dev, "%s events: %d\n", state->events[i].name,
++				state->events[i].counter);
++	}
++
++	spin_unlock_irqrestore(&state->slock, flags);
++}
++
+ /*!
+  * csi_init_interface
+  *    Init csi interface
+@@ -1265,9 +1325,12 @@ static irqreturn_t mx6s_csi_irq_handler(int irq, void *data)
+ 	struct mx6s_csi_dev *csi_dev =  data;
+ 	unsigned long status;
+ 	u32 cr3, cr18;
++	unsigned int i = 0;
+ 
+ 	spin_lock(&csi_dev->slock);
+ 
++	csi_dev->BaslerIrq++;
++
+ 	status = csi_read(csi_dev, CSI_CSISR);
+ 	csi_write(csi_dev, status, CSI_CSISR);
+ 
+@@ -1340,6 +1403,13 @@ static irqreturn_t mx6s_csi_irq_handler(int irq, void *data)
+ 			pr_warn("skip frame 1\n");
+ 	}
+ 
++	/* Update the event/error counters */
++	for (i = 0; i < MIPI_CSIS_NUM_EVENTS; i++) {
++		if (!(status & csi_dev->events[i].mask))
++			continue;
++		csi_dev->events[i].counter++;
++	}
++
+ 	spin_unlock(&csi_dev->slock);
+ 
+ 	return IRQ_HANDLED;
+@@ -1692,9 +1762,12 @@ static int mx6s_vidioc_streamoff(struct file *file, void *priv,
+ 				enum v4l2_buf_type i)
+ {
+ 	struct mx6s_csi_dev *csi_dev = video_drvdata(file);
++	int ret;
+ 
+ 	WARN_ON(priv != file->private_data);
+ 
++	mx6s_clear_counters(csi_dev);
++
+ 	if (i != V4L2_BUF_TYPE_VIDEO_CAPTURE)
+ 		return -EINVAL;
+ 
+@@ -1702,7 +1775,11 @@ static int mx6s_vidioc_streamoff(struct file *file, void *priv,
+ 	 * This calls buf_release from host driver's videobuf_queue_ops for all
+ 	 * remaining buffers. When the last buffer is freed, stop capture
+ 	 */
+-	return vb2_streamoff(&csi_dev->vb2_vidq, i);
++	ret = vb2_streamoff(&csi_dev->vb2_vidq, i);
++
++	mx6s_log_counters(csi_dev, 1);
++
++	return ret;
+ }
+ 
+ static int mx6s_vidioc_g_pixelaspect(struct file *file, void *fh,
+@@ -2174,6 +2251,9 @@ static int mx6s_csi_probe(struct platform_device *pdev)
+ 		return -EINVAL;
+ 	csi_dev->soc = of_id->data;
+ 
++	/* Initialize event counters */
++	memcpy(csi_dev->events, mipi_csis_events, sizeof(csi_dev->events));
++
+ 	snprintf(csi_dev->v4l2_dev.name,
+ 		 sizeof(csi_dev->v4l2_dev.name), "CSI");
+ 
+diff --git a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
+index 929ab3d75702..f146144d5b2f 100644
+--- a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
++++ b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
+@@ -289,6 +289,8 @@ struct csi_state {
+ 	struct csis_pktbuf pkt_buf;
+ 	struct mipi_csis_event events[MIPI_CSIS_NUM_EVENTS];
+ 
++	unsigned long BaslerIrq;
++
+ 	struct v4l2_async_subdev    asd;
+ 	struct v4l2_async_notifier  subdev_notifier;
+ 	struct v4l2_async_subdev    *async_subdevs[2];
+@@ -698,6 +700,8 @@ static void mipi_csis_log_counters(struct csi_state *state, bool non_errors)
+ 
+ 	spin_lock_irqsave(&state->slock, flags);
+ 
++	v4l2_info(&state->mipi_sd, "--> Total %ld IRQ events\n", state->BaslerIrq);
++
+ 	for (i--; i >= 0; i--) {
+ 		if (state->events[i].counter > 0 || debug)
+ 			v4l2_info(&state->mipi_sd, "%s events: %d\n",
+@@ -1023,6 +1027,8 @@ static irqreturn_t mipi_csis_irq_handler(int irq, void *dev_id)
+ 
+ 	spin_lock_irqsave(&state->slock, flags);
+ 
++	state->BaslerIrq++;
++
+ 	if ((status & MIPI_CSIS_INTSRC_NON_IMAGE_DATA) && pktbuf->data) {
+ 		u32 offset;
+ 
+-- 
+2.25.1
+

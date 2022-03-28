@@ -1,0 +1,63 @@
+From 3a328605b09ca11de336b4fd8f4ce37bc5cade13 Mon Sep 17 00:00:00 2001
+From: "Koeller, Thomas" <Thomas.Koeller@baslerweb.com>
+Date: Wed, 18 Nov 2020 15:21:08 +0100
+Subject: [PATCH 18/24] Merged PR 9649: Enable imx8mq-evk camera trigger
+
+Enable imx8mq-evk camera trigger
+
+Configure the pin multiplexer for camera trigger line support.
+
+Applied from https://github.com/basler/meta-basler-imx8/tree/b1b6d6653931303bffbad727d767fe5a8d4844fc/recipes-kernel/linux/linux-imx
+
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+---
+ .../dts/freescale/imx8mq-evk-basler-camera-csi.dtsi | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi.dtsi b/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi.dtsi
+index b7684fe752f2..e997caa4300b 100644
+--- a/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi.dtsi
++++ b/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi.dtsi
+@@ -59,6 +59,7 @@ mipi2_sensor_ep: endpoint@0 {
+ 
+ /delete-node/ &ov5640_mipi;
+ /delete-node/ &ov5640_mipi2;
++/delete-node/ &pinctrl_csi_rst;
+ 
+ &i2c1 {
+ 	basler_camera_mipi2: basler_camera_mipi@36 {
+@@ -75,12 +76,13 @@ basler_camera_mipi2_ep: endpoint {
+ 				data-lanes = <1 2 3 4>;
+ 				clock-lanes = <0>;
+ 				link-frequencies = /bits/ 64 <248000000>;
++				pinctrl-0 = <&pinctrl_camera_trigger>;
+ 			};
+ 		};
+ 	};
+ };
+ 
+-&i2c2{
++&i2c2 {
+ 	clock-frequency = <400000>;
+ 
+ 	basler_camera_mipi1: basler_camera_mipi@36 {
+@@ -97,7 +99,16 @@ basler_camera_mipi1_ep: endpoint {
+ 				data-lanes = <1 2 3 4>;
+ 				clock-lanes = <0>;
+ 				link-frequencies = /bits/ 64 <248000000>;
++				pinctrl-0 = <&pinctrl_camera_trigger>;
+ 			};
+ 		};
+ 	};
+ };
++
++&iomuxc {
++	pinctrl_camera_trigger: cameratriggergrp {
++		fsl,pins = <
++			MX8MQ_IOMUXC_GPIO1_IO15_GPIO1_IO15	0x01
++		>;
++	};
++};
+-- 
+2.25.1
+

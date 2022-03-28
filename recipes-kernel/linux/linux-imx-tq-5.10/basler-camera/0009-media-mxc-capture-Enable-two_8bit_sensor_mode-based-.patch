@@ -1,0 +1,97 @@
+From 9bea1cb7789e96bdbd8500c81ae372e3806e9c99 Mon Sep 17 00:00:00 2001
+From: Stefan Klug <klug.stefan@gmx.de>
+Date: Sun, 2 Feb 2020 19:14:24 +0000
+Subject: [PATCH 09/24] media: mxc: capture: Enable two_8bit_sensor_mode based
+ on video format
+
+This code is hacky and only works on the imx8mq.
+On the imx8mm Raw8 can also be transferred using 16bit per pixel clock
+
+Applied from https://github.com/basler/meta-basler-imx8/tree/b1b6d6653931303bffbad727d767fe5a8d4844fc/recipes-kernel/linux/linux-imx
+Adopted to local changes.
+
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+---
+ .../media/platform/mxc/capture/mx6s_capture.c | 23 +++++++------------
+ 1 file changed, 8 insertions(+), 15 deletions(-)
+
+diff --git a/drivers/media/platform/mxc/capture/mx6s_capture.c b/drivers/media/platform/mxc/capture/mx6s_capture.c
+index ee717a5dbdf3..042afecfde0d 100644
+--- a/drivers/media/platform/mxc/capture/mx6s_capture.c
++++ b/drivers/media/platform/mxc/capture/mx6s_capture.c
+@@ -665,8 +665,11 @@ static void csi_dmareq_rff_enable(struct mx6s_csi_dev *csi_dev)
+ 	cr3 |= BIT_HRESP_ERR_EN;
+ 	cr3 &= ~BIT_RXFF_LEVEL;
+ 	cr3 |= 0x2 << 4;
+-	if (csi_dev->csi_two_8bit_sensor_mode)
++	if (csi_dev->csi_two_8bit_sensor_mode) {
+ 		cr3 |= BIT_TWO_8BIT_SENSOR;
++	} else {
++		cr3 &= ~BIT_TWO_8BIT_SENSOR;
++	}
+ 
+ 	__raw_writel(cr3, csi_dev->regbase + CSI_CSICR3);
+ 	__raw_writel(cr2, csi_dev->regbase + CSI_CSICR2);
+@@ -965,6 +968,7 @@ static int mx6s_configure_csi(struct mx6s_csi_dev *csi_dev)
+ 		switch (csi_dev->fmt->pixelformat) {
+ 		case V4L2_PIX_FMT_UYVY:
+ 		case V4L2_PIX_FMT_YUYV:
++			csi_dev->csi_two_8bit_sensor_mode = true;
+ 			cr18 |= BIT_MIPI_DATA_FORMAT_YUV422_8B;
+ 			break;
+ 		case V4L2_PIX_FMT_SBGGR8:
+@@ -972,6 +976,7 @@ static int mx6s_configure_csi(struct mx6s_csi_dev *csi_dev)
+ 		case V4L2_PIX_FMT_SGBRG8:
+ 		case V4L2_PIX_FMT_SRGGB8:
+ 		case V4L2_PIX_FMT_GREY:
++			csi_dev->csi_two_8bit_sensor_mode = false;
+ 			cr18 |= BIT_MIPI_DATA_FORMAT_RAW8;
+ 			break;
+ 		case V4L2_PIX_FMT_SBGGR10:
+@@ -979,6 +984,7 @@ static int mx6s_configure_csi(struct mx6s_csi_dev *csi_dev)
+ 		case V4L2_PIX_FMT_SGBRG10:
+ 		case V4L2_PIX_FMT_SRGGB10:
+ 		case V4L2_PIX_FMT_Y10:
++			csi_dev->csi_two_8bit_sensor_mode = true;
+ 			cr18 |= BIT_MIPI_DATA_FORMAT_RAW10;
+ 			cr1  |= BIT_PIXEL_BIT;
+ 			break;
+@@ -987,6 +993,7 @@ static int mx6s_configure_csi(struct mx6s_csi_dev *csi_dev)
+ 		case V4L2_PIX_FMT_SGBRG12:
+ 		case V4L2_PIX_FMT_SRGGB12:
+ 		case V4L2_PIX_FMT_Y12:
++			csi_dev->csi_two_8bit_sensor_mode = true;
+ 			cr18 |= BIT_MIPI_DATA_FORMAT_RAW12;
+ 			cr1  |= BIT_PIXEL_BIT;
+ 			break;
+@@ -2052,19 +2059,6 @@ static const struct v4l2_async_notifier_operations mx6s_capture_async_ops = {
+ 	.unbind = subdev_notifier_unbind,
+ };
+ 
+-static int mx6s_csi_two_8bit_sensor_mode_sel(struct mx6s_csi_dev *csi_dev)
+-{
+-	struct device_node *np = csi_dev->dev->of_node;
+-
+-	if (of_get_property(np, "fsl,two-8bit-sensor-mode", NULL))
+-		csi_dev->csi_two_8bit_sensor_mode = true;
+-	else {
+-		csi_dev->csi_two_8bit_sensor_mode = false;
+-	}
+-
+-	return 0;
+-}
+-
+ static int mx6sx_register_subdevs(struct mx6s_csi_dev *csi_dev)
+ {
+ 	struct device_node *parent = csi_dev->dev->of_node;
+@@ -2173,7 +2167,6 @@ static int mx6s_csi_probe(struct platform_device *pdev)
+ 	csi_dev->dev = dev;
+ 
+ 	mx6s_csi_mode_sel(csi_dev);
+-	mx6s_csi_two_8bit_sensor_mode_sel(csi_dev);
+ 
+ 	of_id = of_match_node(mx6s_csi_dt_ids, csi_dev->dev->of_node);
+ 	if (!of_id)
+-- 
+2.25.1
+

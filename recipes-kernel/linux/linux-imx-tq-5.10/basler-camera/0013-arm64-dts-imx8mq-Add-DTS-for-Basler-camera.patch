@@ -1,0 +1,217 @@
+From 5350ba2979a33a6a344e4382217946fb93b6b05f Mon Sep 17 00:00:00 2001
+From: Marvin Schmidt <Marvin.Schmidt@baslerweb.com>
+Date: Wed, 29 Jan 2020 13:52:21 +0100
+Subject: [PATCH 13/24] arm64: dts: imx8mq: Add DTS for Basler camera
+
+Applied from https://github.com/basler/meta-basler-imx8/tree/b1b6d6653931303bffbad727d767fe5a8d4844fc/recipes-kernel/linux/linux-imx
+
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/Makefile        |   4 +
+ .../imx8mq-evk-basler-camera-csi.dtsi         | 103 ++++++++++++++++++
+ .../imx8mq-evk-basler-camera-csi1.dts         |  14 +++
+ .../imx8mq-evk-basler-camera-csi2.dts         |  14 +++
+ .../freescale/imx8mq-evk-basler-camera.dts    |  26 +++++
+ 5 files changed, 161 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi.dtsi
+ create mode 100644 arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi1.dts
+ create mode 100644 arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi2.dts
+ create mode 100644 arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera.dts
+
+diff --git a/arch/arm64/boot/dts/freescale/Makefile b/arch/arm64/boot/dts/freescale/Makefile
+index 97848b062567..29d0e00ae968 100644
+--- a/arch/arm64/boot/dts/freescale/Makefile
++++ b/arch/arm64/boot/dts/freescale/Makefile
+@@ -265,4 +265,8 @@ dtb-$(CONFIG_ARCH_S32) += s32v234-evb.dtb \
+ dtb-$(CONFIG_ARCH_MXC) += \
+ 	imx8mm-evk-basler-camera.dtb \
+ 	imx8mm-ddr4-evk-basler-camera.dtb
++dtb-$(CONFIG_ARCH_MXC) += \
++	imx8mq-evk-basler-camera.dtb \
++	imx8mq-evk-basler-camera-csi1.dtb \
++	imx8mq-evk-basler-camera-csi2.dtb
+ 
+diff --git a/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi.dtsi b/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi.dtsi
+new file mode 100644
+index 000000000000..b7684fe752f2
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi.dtsi
+@@ -0,0 +1,103 @@
++
++&csi1_bridge {
++	dma-coherent;
++	bsl,dma-invalidate;
++	status = "disabled";
++};
++
++&csi2_bridge {
++	dma-coherent;
++	bsl,dma-invalidate;
++	status = "disabled";
++};
++
++&mipi_csi_1 {
++	#address-cells = <1>;
++	#size-cells = <0>;
++	rxhs-settle = <0x07>;
++	status = "disabled";
++
++	/* When the second clock is changed, the link-frequencies entry in
++	 * the basler_camera_mipi1_ep node also needs to be updated. */
++	assigned-clock-rates = <266000000>, <125000000>, <66000000>;
++
++	port {
++		mipi1_sensor_ep: endpoint@0 {
++			remote-endpoint = <&basler_camera_mipi1_ep>;
++
++			/* If the following entries are changed, then
++			 * the entries in the basler_camera_mipi1_ep node
++			 * need to updated too. */
++			clock-lanes = <0>;
++			data-lanes = <1 2 3 4>;
++		};
++	};
++};
++
++&mipi_csi_2 {
++	#address-cells = <1>;
++	#size-cells = <0>;
++	rxhs-settle = <0x07>;
++	status = "disabled";
++
++	/* When the second clock is changed, the link-frequencies entry in
++	 * the basler_camera_mipi2_ep node also needs to be updated. */
++	assigned-clock-rates = <266000000>, <125000000>, <66000000>;
++
++	port {
++		mipi2_sensor_ep: endpoint@0 {
++			remote-endpoint = <&basler_camera_mipi2_ep>;
++
++			/* If the following entries are changed, then
++			 * the entries in the basler_camera_mipi2_ep node
++			 * need to updated too. */
++			clock-lanes = <0>;
++			data-lanes = <1 2 3 4>;
++		};
++	};
++};
++
++/delete-node/ &ov5640_mipi;
++/delete-node/ &ov5640_mipi2;
++
++&i2c1 {
++	basler_camera_mipi2: basler_camera_mipi@36 {
++		compatible = "basler,basler-camera";
++		reg = <0x36>;
++		status = "disabled";
++
++		port {
++			basler_camera_mipi2_ep: endpoint {
++				remote-endpoint = <&mipi2_sensor_ep>;
++
++				/* IMPORTANT: The following three entries needs to be held
++				 * in sync with the information stored in the mipi2_sensor_ep node. */
++				data-lanes = <1 2 3 4>;
++				clock-lanes = <0>;
++				link-frequencies = /bits/ 64 <248000000>;
++			};
++		};
++	};
++};
++
++&i2c2{
++	clock-frequency = <400000>;
++
++	basler_camera_mipi1: basler_camera_mipi@36 {
++		compatible = "basler,basler-camera";
++		reg = <0x36>;
++		status = "disabled";
++
++		port {
++			basler_camera_mipi1_ep: endpoint {
++				remote-endpoint = <&mipi1_sensor_ep>;
++
++				/* IMPORTANT: The following three entries needs to be held
++				 * in sync with the information stored in the mipi1_sensor_ep node. */
++				data-lanes = <1 2 3 4>;
++				clock-lanes = <0>;
++				link-frequencies = /bits/ 64 <248000000>;
++			};
++		};
++	};
++};
+diff --git a/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi1.dts b/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi1.dts
+new file mode 100644
+index 000000000000..eb55df2bec1d
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi1.dts
+@@ -0,0 +1,14 @@
++#include "imx8mq-evk.dts"
++#include "imx8mq-evk-basler-camera-csi.dtsi"
++
++&csi1_bridge {
++	status = "okay";
++};
++
++&mipi_csi_1 {
++	status = "okay";
++};
++
++&basler_camera_mipi1 {
++	status = "okay";
++};
+diff --git a/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi2.dts b/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi2.dts
+new file mode 100644
+index 000000000000..1be9fdfbc76b
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi2.dts
+@@ -0,0 +1,14 @@
++#include "imx8mq-evk.dts"
++#include "imx8mq-evk-basler-camera-csi.dtsi"
++
++&csi2_bridge {
++	status = "okay";
++};
++
++&mipi_csi_2 {
++	status = "okay";
++};
++
++&basler_camera_mipi2 {
++	status = "okay";
++};
+diff --git a/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera.dts b/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera.dts
+new file mode 100644
+index 000000000000..fada965a120f
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera.dts
+@@ -0,0 +1,26 @@
++#include "imx8mq-evk.dts"
++#include "imx8mq-evk-basler-camera-csi.dtsi"
++
++&csi1_bridge {
++	status = "okay";
++};
++
++&csi2_bridge {
++	status = "okay";
++};
++
++&mipi_csi_1 {
++	status = "okay";
++};
++
++&mipi_csi_2 {
++	status = "okay";
++};
++
++&basler_camera_mipi2 {
++	status = "okay";
++};
++
++&basler_camera_mipi1 {
++	status = "okay";
++};
+-- 
+2.25.1
+

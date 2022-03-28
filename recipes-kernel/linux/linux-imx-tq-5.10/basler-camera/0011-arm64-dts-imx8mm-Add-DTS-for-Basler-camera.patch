@@ -1,0 +1,100 @@
+From d3695b827f99548d118fe0e900b3c8c0ababc455 Mon Sep 17 00:00:00 2001
+From: Marvin Schmidt <Marvin.Schmidt@baslerweb.com>
+Date: Wed, 29 Jan 2020 13:52:03 +0100
+Subject: [PATCH 11/24] arm64: dts: imx8mm: Add DTS for Basler camera
+
+Applied from https://github.com/basler/meta-basler-imx8/tree/b1b6d6653931303bffbad727d767fe5a8d4844fc/recipes-kernel/linux/linux-imx
+
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/Makefile        |  5 ++
+ .../freescale/imx8mm-evk-basler-camera.dts    | 64 +++++++++++++++++++
+ 2 files changed, 69 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/freescale/imx8mm-evk-basler-camera.dts
+
+diff --git a/arch/arm64/boot/dts/freescale/Makefile b/arch/arm64/boot/dts/freescale/Makefile
+index 74bebf44cf9b..019dd559c3f7 100644
+--- a/arch/arm64/boot/dts/freescale/Makefile
++++ b/arch/arm64/boot/dts/freescale/Makefile
+@@ -260,3 +260,8 @@ dtb-$(CONFIG_ARCH_MXC) += imx8ulp-evk.dtb imx8ulp-evk-rk055hdmipi4m.dtb \
+ 
+ dtb-$(CONFIG_ARCH_S32) += s32v234-evb.dtb \
+ 			  s32v234-sbc.dtb
++
++
++dtb-$(CONFIG_ARCH_MXC) += \
++	imx8mm-evk-basler-camera.dtb
++
+diff --git a/arch/arm64/boot/dts/freescale/imx8mm-evk-basler-camera.dts b/arch/arm64/boot/dts/freescale/imx8mm-evk-basler-camera.dts
+new file mode 100644
+index 000000000000..b9a419983e53
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/imx8mm-evk-basler-camera.dts
+@@ -0,0 +1,64 @@
++/*
++ *  Devicetree for a Basler camera on a iMX8M Mini
++ *
++ *  Created by Hauke Wulff on 23.07.19.
++ *  Copyright (c) 2019 Basler AG. All rights reserved.
++ *
++ */
++
++#include "imx8mm-evk.dts"
++
++&mipi_csi_1 {
++	#address-cells = <1>;
++	#size-cells = <0>;
++	status = "okay";
++
++	port {
++		mipi1_sensor_ep: endpoint@1 {
++			remote-endpoint = <&basler_camera_mipi1_ep>;
++
++			/* If the following entries are changed, then
++			 * the entries in the basler_camera_mipi1_ep node
++			 * need to updated too. */
++			/* On the i.mx8mmini NXP uses data-lanes
++			 * other than expected by the kernel.
++			 * On the imx8mmini the entry data-lanes
++			 * must contain the number of data lanes. */
++			data-lanes = <4>;
++			clock-lanes = <0>;
++			link-frequencies = /bits/ 64 <496000000>;
++
++			csis-hs-settle = <13>;
++			csis-clk-settle = <2>;
++			csis-wclk;
++		};
++	};
++};
++
++&csi1_bridge {
++	dma-coherent;
++	bsl,dma-invalidate;
++	status = "okay";
++};
++
++/delete-node/ &ov5640_mipi;
++
++&i2c3 {
++	basler_camera_mipi1: basler_camera_mipi@36 {
++		compatible = "basler,basler-camera";
++		reg = <0x36>;
++		status = "okay";
++
++		port {
++			basler_camera_mipi1_ep: endpoint {
++				remote-endpoint = <&mipi1_sensor_ep>;
++
++				/* IMPORTANT: The following three entries needs to be held
++				 * in sync with the information stored in the mipi1_sensor_ep node. */
++				data-lanes = <1 2 3 4>;
++				clock-lanes = <0>;
++				link-frequencies = /bits/ 64 <496000000>;
++			};
++		};
++	};
++};
+-- 
+2.25.1
+

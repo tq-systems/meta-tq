@@ -1,0 +1,151 @@
+From deae7e2411e9b1be9f845447cde57270d3181950 Mon Sep 17 00:00:00 2001
+From: Stefan Klug <stefan.klug@baslerweb.com>
+Date: Wed, 22 Dec 2021 14:59:30 +0100
+Subject: [PATCH 22/24] Add basler camera on CSI1 via ISI1.
+
+# Conflicts:
+#	arch/arm64/boot/dts/freescale/Makefile
+
+Applied from https://github.com/basler/meta-basler-imx8/tree/b1b6d6653931303bffbad727d767fe5a8d4844fc/recipes-kernel/linux/linux-imx
+
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/Makefile        |   1 +
+ .../imx8mp-evk-basler-mixed-isp-isi.dts       | 113 ++++++++++++++++++
+ 2 files changed, 114 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/freescale/imx8mp-evk-basler-mixed-isp-isi.dts
+
+diff --git a/arch/arm64/boot/dts/freescale/Makefile b/arch/arm64/boot/dts/freescale/Makefile
+index 2fcab221d52b..ca519c1dbd9f 100644
+--- a/arch/arm64/boot/dts/freescale/Makefile
++++ b/arch/arm64/boot/dts/freescale/Makefile
+@@ -109,6 +109,7 @@ dtb-$(CONFIG_ARCH_MXC) += imx8mp-evk.dtb imx8mp-evk-rm67191.dtb imx8mp-evk-it626
+ 			  imx8mp-evk-root.dtb imx8mp-evk-inmate.dtb imx8mp-evk-ov2775.dtb \
+ 			  imx8mp-evk-ov2775-ov5640.dtb imx8mp-evk-basler-ov5640.dtb imx8mp-evk-basler.dtb \
+ 			  imx8mp-evk-basler-ov2775.dtb imx8mp-evk-dual-basler.dtb \
++			  imx8mp-evk-basler-mixed-isp-isi.dtb \
+ 			  imx8mp-evk-dual-ov2775.dtb imx8mp-evk-spdif-lb.dtb \
+ 			  imx8mp-evk-sof-wm8960.dtb \
+ 			  imx8mp-evk-iqaudio-dacplus.dtb imx8mp-evk-iqaudio-dacpro.dtb imx8mp-evk-hifiberry-dacplus.dtb \
+diff --git a/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-mixed-isp-isi.dts b/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-mixed-isp-isi.dts
+new file mode 100644
+index 000000000000..4628a57a4ff9
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-mixed-isp-isi.dts
+@@ -0,0 +1,113 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (C) 2020 Basler AG
++ * Copyright 2020 NXP
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++
++#include "imx8mp-evk.dts"
++
++&i2c2 {
++	/delete-node/ov5640_mipi@3c;
++
++	basler_camera_vvcam@36 {
++		compatible = "basler,basler-camera-vvcam", "basler-camera-vvcam";
++		reg = <0x36>;
++		csi_id = <0x00>;
++		status = "okay";
++
++		port {
++			basler_ep_0: endpoint {
++				data-lanes = <1 2 3 4>;
++				clock-lanes = <0>;
++				link-frequencies = /bits/ 64 <750000000>;
++				max-lane-frequency = /bits/ 64 <750000000>;
++				max-pixel-frequency = /bits/ 64 <500000000>;
++				max-data-rate = /bits/ 64 <0>;
++				remote-endpoint = <&mipi_csi0_ep>;
++			};
++		};
++	};
++};
++
++&mipi_csi_0 {
++	status = "okay";
++
++	port@0 {
++		mipi_csi0_ep: endpoint {
++			remote-endpoint = <&basler_ep_0>;
++			data-lanes = <4>;
++			csis-hs-settle = <16>;
++		};
++	};
++};
++
++&i2c3 {
++	status = "okay";
++	/delete-node/ov5640_mipi@3c;
++
++	basler_camera@36 {
++		compatible = "basler,basler-camera", "basler-camera";
++		reg = <0x36>;
++		csi_id = <0x01>;
++		status = "okay";
++
++		port {
++			basler_ep_1: endpoint {
++				data-lanes = <1 2 3 4>;
++				clock-lanes = <0>;
++				link-frequencies = /bits/ 64 <532000000>;
++				remote-endpoint = <&mipi_csi1_ep>;
++			};
++		};
++	};
++};
++
++&mipi_csi_1 {
++	status = "okay";
++};
++&mipi_csi1_ep {
++	remote-endpoint = <&basler_ep_1>;
++	data-lanes = <4>;
++	csis-hs-settle = <16>;
++};
++
++
++&cameradev {
++	status = "okay";
++};
++
++&isi_0 {
++	status = "disabled";
++	dma-coherent;
++	bsl,dma-invalidate;
++	fsl,chain_buf;
++};
++
++&isi_1 {
++	status = "okay";
++	dma-coherent;
++	bsl,dma-invalidate;
++	fsl,chain_buf;
++};
++
++&isp_0 {
++	status = "okay";
++};
++
++&isp_1 {
++	status = "disabled";
++};
++
++&dewarp {
++	status = "okay";
++};
+-- 
+2.25.1
+

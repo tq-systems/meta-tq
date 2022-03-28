@@ -1,0 +1,85 @@
+From ee463563de040ce35e44367685777b48615373d4 Mon Sep 17 00:00:00 2001
+From: Thies Moeller <thies.moeller@baslerweb.com>
+Date: Fri, 25 Jun 2021 16:14:17 +0200
+Subject: [PATCH 06/24] implement cache invalidation for MMAP
+
+When the property "bsl,dma-invalidate;" is added to the device tree, the data cache area of frame buffers
+will get invalidated after each DMA transfer. The property takes an optional 64 bit integer parameter.
+If this parameter is given, then the invalidation is only done for buffers that are smaller than this value.
+
+Example with parameter:
+  bsl,dma-invalidate = <0 2097152>; // invalidate buffers smaller than 2MB
+
+Applied from https://github.com/basler/meta-basler-imx8/tree/b1b6d6653931303bffbad727d767fe5a8d4844fc/recipes-kernel/linux/linux-imx
+
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+---
+ .../common/videobuf2/videobuf2-dma-contig.c   | 23 ++++++++++++++++---
+ 1 file changed, 20 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/media/common/videobuf2/videobuf2-dma-contig.c b/drivers/media/common/videobuf2/videobuf2-dma-contig.c
+index fe626109ef4d..1dbf993c047c 100644
+--- a/drivers/media/common/videobuf2/videobuf2-dma-contig.c
++++ b/drivers/media/common/videobuf2/videobuf2-dma-contig.c
+@@ -17,6 +17,8 @@
+ #include <linux/sched.h>
+ #include <linux/slab.h>
+ #include <linux/dma-mapping.h>
++#include <linux/of.h>
++#include <asm/cacheflush.h>
+ 
+ #include <media/videobuf2-v4l2.h>
+ #include <media/videobuf2-dma-contig.h>
+@@ -37,6 +39,7 @@ struct vb2_dc_buf {
+ 	struct vb2_vmarea_handler	handler;
+ 	refcount_t			refcount;
+ 	struct sg_table			*sgt_base;
++	bool				inval_cache;
+ 
+ 	/* DMABUF related */
+ 	struct dma_buf_attachment	*db_attach;
+@@ -106,10 +109,14 @@ static void vb2_dc_finish(void *buf_priv)
+ 	struct vb2_dc_buf *buf = buf_priv;
+ 	struct sg_table *sgt = buf->dma_sgt;
+ 
+-	if (!sgt)
+-		return;
++	if (buf->db_attach)
++ 		return;
++
++	if (sgt)
++		dma_sync_sgtable_for_cpu(buf->dev, sgt, buf->dma_dir);
++	else if (buf->inval_cache)
++		__inval_dcache_area(buf->vaddr, buf->size);
+ 
+-	dma_sync_sgtable_for_cpu(buf->dev, sgt, buf->dma_dir);
+ }
+ 
+ /*********************************************/
+@@ -138,6 +145,8 @@ static void *vb2_dc_alloc(struct device *dev, unsigned long attrs,
+ 			  gfp_t gfp_flags)
+ {
+ 	struct vb2_dc_buf *buf;
++	u64 prop_value;
++	int err;
+ 
+ 	if (WARN_ON(!dev))
+ 		return ERR_PTR(-EINVAL);
+@@ -163,6 +172,14 @@ static void *vb2_dc_alloc(struct device *dev, unsigned long attrs,
+ 	buf->size = size;
+ 	buf->dma_dir = dma_dir;
+ 
++	err = of_property_read_u64(buf->dev->of_node, "bsl,dma-invalidate",
++				   &prop_value);
++	/* invalidate cache if buffer is too small */
++	buf->inval_cache = !err && (size < prop_value);
++	/* always invalidate cache if property doesn't provide a size limit */
++	buf->inval_cache |= err && err != -EINVAL;
++	dev_printk(KERN_DEBUG, dev, "Post DMA cache invalidation %s\n", buf->inval_cache ? "enabled" : "disabled");
++
+ 	buf->handler.refcount = &buf->refcount;
+ 	buf->handler.put = vb2_dc_put;
+ 	buf->handler.arg = buf;
+-- 
+2.25.1
+

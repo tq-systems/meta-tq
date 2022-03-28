@@ -1,0 +1,195 @@
+From 9f3069c5a8fbfbef8a8497a25e2a2c07df75eaf2 Mon Sep 17 00:00:00 2001
+From: Thies Moeller <thies.moeller@baslerweb.com>
+Date: Mon, 14 Jun 2021 13:27:00 +0200
+Subject: [PATCH 24/24] imx8mp-isi: add dual isi dtb. fix max link frequencies
+
+isi0 max frequency limited by basler camera module 1.2Gbps
+isi1 max frequency limited by i.MX8MPlus pixel link 266MPix/s
+     represented as max linkspeed in 16bit YUV format
+
+Applied from https://github.com/basler/meta-basler-imx8/tree/b1b6d6653931303bffbad727d767fe5a8d4844fc/recipes-kernel/linux/linux-imx
+
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/Makefile        |   2 +-
+ .../freescale/imx8mp-evk-basler-isi0-isi1.dts | 111 ++++++++++++++++++
+ .../dts/freescale/imx8mp-evk-basler-isi0.dts  |   2 +-
+ .../imx8mp-evk-basler-mixed-isp-isi.dts       |  15 ++-
+ 4 files changed, 122 insertions(+), 8 deletions(-)
+ create mode 100644 arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0-isi1.dts
+
+diff --git a/arch/arm64/boot/dts/freescale/Makefile b/arch/arm64/boot/dts/freescale/Makefile
+index a223b7c08911..5d1ecb728828 100644
+--- a/arch/arm64/boot/dts/freescale/Makefile
++++ b/arch/arm64/boot/dts/freescale/Makefile
+@@ -107,7 +107,7 @@ dtb-$(CONFIG_ARCH_MXC) += imx8mp-evk.dtb imx8mp-evk-rm67191.dtb imx8mp-evk-it626
+ 			  imx8mp-evk-pcie-ep.dtb  imx8mp-evk-rpmsg.dtb imx8mp-evk-ecspi-slave.dtb \
+ 			  imx8mp-evk-jdi-wuxga-lvds-panel.dtb imx8mp-evk-flexcan2.dtb \
+ 			  imx8mp-evk-root.dtb imx8mp-evk-inmate.dtb imx8mp-evk-ov2775.dtb \
+-			  imx8mp-evk-basler-mixed-isp-isi.dtb imx8mp-evk-basler-isi0.dtb \
++			  imx8mp-evk-basler-isi0.dtb imx8mp-evk-basler-isi0-isi1.dtb \
+ 			  imx8mp-evk-ov2775-ov5640.dtb imx8mp-evk-basler-ov5640.dtb imx8mp-evk-basler.dtb \
+ 			  imx8mp-evk-basler-ov2775.dtb imx8mp-evk-dual-basler.dtb \
+ 			  imx8mp-evk-basler-mixed-isp-isi.dtb \
+diff --git a/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0-isi1.dts b/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0-isi1.dts
+new file mode 100644
+index 000000000000..0c85dca11175
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0-isi1.dts
+@@ -0,0 +1,111 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (C) 2020 Basler AG
++ * Copyright 2020 NXP
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++
++#include "imx8mp-evk.dts"
++
++&i2c2 {
++	/delete-node/ov5640_mipi@3c;
++
++	basler_camera@36 {
++		compatible = "basler,basler-camera", "basler-camera";
++		reg = <0x36>;
++		csi_id = <0x00>;
++		status = "okay";
++
++		port {
++			basler_ep_0: endpoint {
++				data-lanes = <1 2 3 4>;
++				clock-lanes = <0>;
++				link-frequencies = /bits/ 64 <600000000>;
++				remote-endpoint = <&mipi_csi0_ep>;
++			};
++		};
++	};
++};
++
++
++&mipi_csi_0 {
++	status = "okay";
++
++	port@0 {
++		mipi_csi0_ep: endpoint {
++			remote-endpoint = <&basler_ep_0>;
++			data-lanes = <4>;
++			csis-hs-settle = <16>;
++		};
++	};
++};
++
++&i2c3 {
++	/delete-node/ov5640_mipi@3c;
++
++	basler_camera@36 {
++		compatible = "basler,basler-camera", "basler-camera";
++		reg = <0x36>;
++		csi_id = <0x01>;
++		status = "okay";
++
++		port {
++			basler_ep_1: endpoint {
++				data-lanes = <1 2 3 4>;
++				clock-lanes = <0>;
++				link-frequencies = /bits/ 64 <532000000>;
++				remote-endpoint = <&mipi_csi1_ep>;
++			};
++		};
++	};
++};
++
++
++&mipi_csi_1 {
++	status = "okay";
++
++	port@1 {
++		mipi_csi1_ep: endpoint {
++			remote-endpoint = <&basler_ep_1>;
++			data-lanes = <4>;
++			csis-hs-settle = <16>;
++		};
++	};
++};
++
++
++&cameradev {
++	status = "okay";
++};
++
++&isi_0 {
++	status = "okay";
++	fsl,chain_buf;
++};
++
++&isi_1 {
++	status = "okay";
++	fsl,chain_buf;
++};
++
++&isp_0 {
++	status = "disabled";
++};
++
++&isp_1 {
++	status = "disabled";
++};
++
++&dewarp {
++	status = "disabled";
++};
++
+diff --git a/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0.dts b/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0.dts
+index 8727ac56ef3d..4e893594cfa3 100644
+--- a/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0.dts
++++ b/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0.dts
+@@ -29,7 +29,7 @@ port {
+ 			basler_ep_0: endpoint {
+ 				data-lanes = <1 2 3 4>;
+ 				clock-lanes = <0>;
+-				link-frequencies = /bits/ 64 <500000000>;
++				link-frequencies = /bits/ 64 <600000000>;
+ 				remote-endpoint = <&mipi_csi0_ep>;
+ 			};
+ 		};
+diff --git a/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-mixed-isp-isi.dts b/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-mixed-isp-isi.dts
+index 4628a57a4ff9..923083ef1011 100644
+--- a/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-mixed-isp-isi.dts
++++ b/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-mixed-isp-isi.dts
+@@ -72,15 +72,18 @@ basler_ep_1: endpoint {
+ 	};
+ };
+ 
++
+ &mipi_csi_1 {
+ 	status = "okay";
+-};
+-&mipi_csi1_ep {
+-	remote-endpoint = <&basler_ep_1>;
+-	data-lanes = <4>;
+-	csis-hs-settle = <16>;
+-};
+ 
++	port@1 {
++		mipi_csi1_ep: endpoint {
++			remote-endpoint = <&basler_ep_1>;
++			data-lanes = <4>;
++			csis-hs-settle = <16>;
++		};
++	};
++};
+ 
+ &cameradev {
+ 	status = "okay";
+-- 
+2.25.1
+

@@ -1,0 +1,29 @@
+From 1f23b7b5b2deb73c3e0de933f26449e1ee52c0f5 Mon Sep 17 00:00:00 2001
+From: Steven Scholz <steven.scholz@baslerweb.com>
+Date: Tue, 15 Sep 2020 13:52:35 +0200
+Subject: [PATCH 16/24] mxc: Fix MASK_OPTION in CSICR18 to avoid loosing first
+ frame
+
+Applied from https://github.com/basler/meta-basler-imx8/tree/b1b6d6653931303bffbad727d767fe5a8d4844fc/recipes-kernel/linux/linux-imx
+
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+---
+ drivers/media/platform/mxc/capture/mx6s_capture.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/media/platform/mxc/capture/mx6s_capture.c b/drivers/media/platform/mxc/capture/mx6s_capture.c
+index e1d057eab611..f26b1515ebf5 100644
+--- a/drivers/media/platform/mxc/capture/mx6s_capture.c
++++ b/drivers/media/platform/mxc/capture/mx6s_capture.c
+@@ -2380,7 +2380,7 @@ static const struct mx6s_csi_soc mx6sl_soc = {
+ };
+ static const struct mx6s_csi_soc mx8mq_soc = {
+ 	.rx_fifo_rst = true,
+-	.baseaddr_switch = 0x80030,
++	.baseaddr_switch = 0x00030,		// MASK_OPTION = 00 | BASEADDR_SWITCH_SEL | BASEADDR_SWITCH_EN
+ };
+ 
+ static const struct of_device_id mx6s_csi_dt_ids[] = {
+-- 
+2.25.1
+

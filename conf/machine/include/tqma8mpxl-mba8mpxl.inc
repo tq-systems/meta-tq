@@ -11,6 +11,7 @@ BOARD_DEVICETREE_FILES = "\
     imx8mp-tqma8mpql-mba8mpxl-lvds-tm070jvhg33.dtb \
     imx8mp-tqma8mpql-mba8mpxl-rpmsg.dtb \
 "
+BOARD_DEVICETREE_FILES_append_mx8mp = "${@bb.utils.contains('MACHINE_FEATURES', 'basler', ' imx8mp-tqma8mpql-mba8mpxl-lvds-basler.dtb', '', d)}"
 
 KERNEL_DEVICETREE = ""
 

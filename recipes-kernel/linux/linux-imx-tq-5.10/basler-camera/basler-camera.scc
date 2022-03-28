@@ -1,0 +1,28 @@
+define KFEATURE_DESCRIPTION "Enable Basler camera support"
+
+patch 0001-arm64-dt-imx8mp-tqma8mpql-mba8mpxl-Add-DT-for-basler.patch
+patch 0002-staging-media-imx8-mipi-csi2-sam-Fix-error-message.patch
+patch 0003-make-sensor-controls-available-in-mx6s_capture.patch
+patch 0004-rxhs-settle-and-send-level-value-is-now-optinal-conf.patch
+patch 0005-increase-max-video-memory-from-64-to-128MB.patch
+patch 0006-implement-cache-invalidation-for-MMAP.patch
+patch 0007-handle-subdev-unbind.patch
+patch 0008-media-mxc-mipi_csi-Add-UYVY8_2X8.patch
+patch 0009-media-mxc-capture-Enable-two_8bit_sensor_mode-based-.patch
+patch 0010-media-mxc-Enable-dual-pixel-mode-for-YUV422.patch
+patch 0011-arm64-dts-imx8mm-Add-DTS-for-Basler-camera.patch
+patch 0012-arm64-dts-imx8mm-ddr4-Add-DTS-for-Basler-camera.patch
+patch 0013-arm64-dts-imx8mq-Add-DTS-for-Basler-camera.patch
+patch 0014-arm64-dts-imx8mm-Add-DT-variants-using-one-CSI-lane.patch
+patch 0015-mxc-capture-Add-debug-event-interrupt-counters.patch
+patch 0016-mxc-Fix-MASK_OPTION-in-CSICR18-to-avoid-loosing-firs.patch
+patch 0017-Reformatted-Makefile.patch
+patch 0018-Merged-PR-9649-Enable-imx8mq-evk-camera-trigger.patch
+patch 0019-Merged-PR-9974-Added-highspeed-device-tree-for-imx8m.patch
+patch 0020-media-mxc-change-mx6s_fmt.bpp-to-bits-per-pixel.patch
+patch 0021-media-mxc-add-support-for-YUV420-NV12.patch
+patch 0022-Add-basler-camera-on-CSI1-via-ISI1.patch
+patch 0023-Add-basler-camera-on-CSI0-via-ISI0-chained.patch
+patch 0024-imx8mp-isi-add-dual-isi-dtb.-fix-max-link-frequencie.patch
+
+kconf hardware basler-camera.cfg

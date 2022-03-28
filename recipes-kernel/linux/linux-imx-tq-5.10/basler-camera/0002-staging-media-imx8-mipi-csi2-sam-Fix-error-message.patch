@@ -1,0 +1,29 @@
+From 65dd682eb4ac1f4c523c0ebd11e13398d690b88e Mon Sep 17 00:00:00 2001
+From: Alexander Stein <alexander.stein@ew.tq-group.com>
+Date: Tue, 15 Feb 2022 10:58:14 +0100
+Subject: [PATCH 02/24] staging: media: imx8-mipi-csi2-sam: Fix error message
+
+Print the ioctl number only, in hexadecimal format. So it can easily
+be matched against VVCSIOC_RESET & friends.
+
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+---
+ drivers/staging/media/imx/imx8-mipi-csi2-sam.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/staging/media/imx/imx8-mipi-csi2-sam.c b/drivers/staging/media/imx/imx8-mipi-csi2-sam.c
+index 8f2cffcc62c6..7fb62bc05257 100644
+--- a/drivers/staging/media/imx/imx8-mipi-csi2-sam.c
++++ b/drivers/staging/media/imx/imx8-mipi-csi2-sam.c
+@@ -1531,7 +1531,7 @@ static long csis_priv_ioctl(struct v4l2_subdev *sd, unsigned int cmd, void *arg_
+ 		ret = csis_ioc_qcap(sd, arg);
+ 		break;
+ 	default:
+-		v4l2_err(&state->sd, "unsupported csi-sam command %d.", cmd);
++		v4l2_err(&state->sd, "unsupported csi-sam command %#x.", _IOC_NR(cmd));
+ 		ret = -EINVAL;
+ 		break;
+ 	}
+-- 
+2.25.1
+

@@ -1,0 +1,114 @@
+From f214133d86a9fb7a1e4ddbdc6cf6e1ca5c98e477 Mon Sep 17 00:00:00 2001
+From: Thies Moeller <thies.moeller@baslerweb.com>
+Date: Mon, 11 Jan 2021 17:03:28 +0100
+Subject: [PATCH 23/24] Add basler camera on CSI0 via ISI0(chained)
+
+Applied from https://github.com/basler/meta-basler-imx8/tree/b1b6d6653931303bffbad727d767fe5a8d4844fc/recipes-kernel/linux/linux-imx
+
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+---
+ arch/arm64/boot/dts/freescale/Makefile        |  1 +
+ .../dts/freescale/imx8mp-evk-basler-isi0.dts  | 79 +++++++++++++++++++
+ 2 files changed, 80 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0.dts
+
+diff --git a/arch/arm64/boot/dts/freescale/Makefile b/arch/arm64/boot/dts/freescale/Makefile
+index ca519c1dbd9f..a223b7c08911 100644
+--- a/arch/arm64/boot/dts/freescale/Makefile
++++ b/arch/arm64/boot/dts/freescale/Makefile
+@@ -107,6 +107,7 @@ dtb-$(CONFIG_ARCH_MXC) += imx8mp-evk.dtb imx8mp-evk-rm67191.dtb imx8mp-evk-it626
+ 			  imx8mp-evk-pcie-ep.dtb  imx8mp-evk-rpmsg.dtb imx8mp-evk-ecspi-slave.dtb \
+ 			  imx8mp-evk-jdi-wuxga-lvds-panel.dtb imx8mp-evk-flexcan2.dtb \
+ 			  imx8mp-evk-root.dtb imx8mp-evk-inmate.dtb imx8mp-evk-ov2775.dtb \
++			  imx8mp-evk-basler-mixed-isp-isi.dtb imx8mp-evk-basler-isi0.dtb \
+ 			  imx8mp-evk-ov2775-ov5640.dtb imx8mp-evk-basler-ov5640.dtb imx8mp-evk-basler.dtb \
+ 			  imx8mp-evk-basler-ov2775.dtb imx8mp-evk-dual-basler.dtb \
+ 			  imx8mp-evk-basler-mixed-isp-isi.dtb \
+diff --git a/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0.dts b/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0.dts
+new file mode 100644
+index 000000000000..8727ac56ef3d
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0.dts
+@@ -0,0 +1,79 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (C) 2020 Basler AG
++ * Copyright 2020 NXP
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++
++#include "imx8mp-evk.dts"
++
++&i2c2 {
++	/delete-node/ov5640_mipi@3c;
++
++	basler_camera@36 {
++		compatible = "basler,basler-camera", "basler-camera";
++		reg = <0x36>;
++		csi_id = <0x00>;
++		status = "okay";
++
++		port {
++			basler_ep_0: endpoint {
++				data-lanes = <1 2 3 4>;
++				clock-lanes = <0>;
++				link-frequencies = /bits/ 64 <500000000>;
++				remote-endpoint = <&mipi_csi0_ep>;
++			};
++		};
++	};
++};
++
++
++&mipi_csi_0 {
++	status = "okay";
++
++	port@0 {
++		mipi_csi0_ep: endpoint {
++			remote-endpoint = <&basler_ep_0>;
++			data-lanes = <4>;
++			csis-hs-settle = <16>;
++		};
++	};
++};
++
++&cameradev {
++	status = "okay";
++};
++
++&isi_0 {
++	status = "okay";
++        dma-coherent;
++        bsl,dma-invalidate;
++	fsl,chain_buf;
++};
++
++&isi_1 {
++	status = "disabled";
++	fsl,chain_buf;
++};
++
++&isp_0 {
++	status = "disabled";
++};
++
++&isp_1 {
++	status = "disabled";
++};
++
++&dewarp {
++	status = "disabled";
++};
++
+-- 
+2.25.1
+

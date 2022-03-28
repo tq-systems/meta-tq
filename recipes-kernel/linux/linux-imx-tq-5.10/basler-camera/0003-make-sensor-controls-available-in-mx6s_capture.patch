@@ -1,0 +1,287 @@
+From cebdefe90f188a8627b542d4de0dc890c2660204 Mon Sep 17 00:00:00 2001
+From: Michael Singer <michael.singer@baslerweb.com>
+Date: Thu, 14 Nov 2019 18:59:13 +0100
+Subject: [PATCH 03/24] make sensor controls available in mx6s_capture
+
+Our sensor driver provides V4L Extended Controls that need to be made available
+through the /dev/videoX file.
+
+v1 -> v2 (Marvin Schmidt):
+
+Port to 5.4.3 and adjust to the following API changes:
+  * v4l2_ctrl_add_handler
+  * v4l2_{try,g,s}_ext_ctrls
+
+Applied from https://github.com/basler/meta-basler-imx8/tree/b1b6d6653931303bffbad727d767fe5a8d4844fc/recipes-kernel/linux/linux-imx
+
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+---
+ .../media/platform/imx8/mxc-mipi-csi2_yav.c   |  17 ++-
+ .../media/platform/mxc/capture/mx6s_capture.c | 106 +++++++++++++++++-
+ .../media/platform/mxc/capture/mxc_mipi_csi.c |  19 +++-
+ 3 files changed, 139 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/media/platform/imx8/mxc-mipi-csi2_yav.c b/drivers/media/platform/imx8/mxc-mipi-csi2_yav.c
+index a990cede79ff..3dd45ba7a1f0 100644
+--- a/drivers/media/platform/imx8/mxc-mipi-csi2_yav.c
++++ b/drivers/media/platform/imx8/mxc-mipi-csi2_yav.c
+@@ -27,6 +27,7 @@
+ #include <media/v4l2-fwnode.h>
+ #include <media/v4l2-subdev.h>
+ #include <media/v4l2-device.h>
++#include <media/v4l2-ctrls.h>
+ 
+ #include "mxc-mipi-csi2.h"
+ static int debug;
+@@ -577,6 +578,9 @@ static int subdev_notifier_bound(struct v4l2_async_notifier *notifier,
+ 		goto out;
+ 	}
+ 
++	v4l2_ctrl_add_handler(csi2dev->sd.ctrl_handler, subdev->ctrl_handler,
++		  NULL, true);
++
+ 	v4l2_info(&csi2dev->v4l2_dev, "Registered sensor subdevice: %s\n",
+ 		  subdev->name);
+ 
+@@ -801,11 +805,18 @@ static int mipi_csi2_probe(struct platform_device *pdev)
+ 	/* .. and a pointer to the subdev. */
+ 	platform_set_drvdata(pdev, csi2dev);
+ 
++	/* Add the control handler */
++	v4l2_ctrl_handler_init(&csi2dev->ctrl_handler, 10);
++	if (csi2dev->ctrl_handler.error)
++		return csi2dev->ctrl_handler.error;
++	csi2dev->sd.ctrl_handler = &csi2dev->ctrl_handler;
++
+ 	/* First register a v4l2 device */
+ 	ret = v4l2_device_register(dev, &csi2dev->v4l2_dev);
+ 	if (ret) {
+ 		dev_err(&pdev->dev, "Unable to register v4l2 device.\n");
+-		return -EINVAL;
++		ret = -EINVAL;
++		goto e_handler;
+ 	}
+ 	ret = v4l2_async_register_subdev(&csi2dev->sd);
+ 	if (ret < 0) {
+@@ -880,6 +891,8 @@ static int mipi_csi2_probe(struct platform_device *pdev)
+ 	v4l2_async_unregister_subdev(&csi2dev->sd);
+ e_v4l_dev:
+ 	v4l2_device_unregister(&csi2dev->v4l2_dev);
++e_handler:
++	v4l2_ctrl_handler_free(&csi2dev->ctrl_handler);
+ 	return ret;
+ }
+ 
+@@ -890,6 +903,8 @@ static int mipi_csi2_remove(struct platform_device *pdev)
+ 
+ 	mipi_csi2_clk_disable(csi2dev);
+ 	pm_runtime_disable(&pdev->dev);
++	v4l2_ctrl_handler_free(sd->ctrl_handler);
++	sd->ctrl_handler = NULL;
+ 
+ 	return 0;
+ }
+diff --git a/drivers/media/platform/mxc/capture/mx6s_capture.c b/drivers/media/platform/mxc/capture/mx6s_capture.c
+index 7aa8a4bc9587..f008a1de0e42 100644
+--- a/drivers/media/platform/mxc/capture/mx6s_capture.c
++++ b/drivers/media/platform/mxc/capture/mx6s_capture.c
+@@ -1835,6 +1835,102 @@ static int mx6s_vidioc_enum_frameintervals(struct file *file, void *priv,
+ 	return 0;
+ }
+ 
++static int mx6s_vidioc_queryctrl(struct file *file, void *priv,
++				 struct v4l2_queryctrl *a)
++{
++	struct mx6s_csi_dev *csi_dev = video_drvdata(file);
++	struct v4l2_subdev *sd = csi_dev->sd;
++
++	if (!sd || !sd->ctrl_handler)
++		return -ENOTTY;
++
++	return v4l2_queryctrl(sd->ctrl_handler, a);
++}
++
++static int mx6s_vidioc_query_ext_ctrl(struct file *file, void *priv,
++				      struct v4l2_query_ext_ctrl *a)
++{
++	struct mx6s_csi_dev *csi_dev = video_drvdata(file);
++	struct v4l2_subdev *sd = csi_dev->sd;
++
++	if (!sd || !sd->ctrl_handler)
++		return -ENOTTY;
++
++	return v4l2_query_ext_ctrl(sd->ctrl_handler, a);
++}
++
++static int mx6s_vidioc_g_ctrl(struct file *file, void *priv,
++			      struct v4l2_control *a)
++{
++	struct mx6s_csi_dev *csi_dev = video_drvdata(file);
++	struct v4l2_subdev *sd = csi_dev->sd;
++
++	if (!sd || !sd->ctrl_handler)
++		return -ENOTTY;
++
++	return v4l2_g_ctrl(sd->ctrl_handler, a);
++}
++
++static int mx6s_vidioc_s_ctrl(struct file *file, void *priv,
++			      struct v4l2_control *a)
++{
++	struct mx6s_csi_dev *csi_dev = video_drvdata(file);
++	struct v4l2_subdev *sd = csi_dev->sd;
++
++	if (!sd || !sd->ctrl_handler)
++		return -ENOTTY;
++
++	return v4l2_s_ctrl(NULL, sd->ctrl_handler, a);
++}
++
++static int mx6s_vidioc_g_ext_ctrls(struct file *file, void *priv,
++				   struct v4l2_ext_controls *a)
++{
++	struct mx6s_csi_dev *csi_dev = video_drvdata(file);
++	struct v4l2_subdev *sd = csi_dev->sd;
++
++	if (!sd || !sd->ctrl_handler)
++		return -ENOTTY;
++
++	return v4l2_g_ext_ctrls(sd->ctrl_handler, csi_dev->vdev, NULL, a);
++}
++
++static int mx6s_vidioc_s_ext_ctrls(struct file *file, void *priv,
++				   struct v4l2_ext_controls *a)
++{
++	struct mx6s_csi_dev *csi_dev = video_drvdata(file);
++	struct v4l2_subdev *sd = csi_dev->sd;
++
++	if (!sd || !sd->ctrl_handler)
++		return -ENOTTY;
++
++	return v4l2_s_ext_ctrls(NULL, sd->ctrl_handler, csi_dev->vdev, NULL, a);
++}
++
++static int mx6s_vidioc_try_ext_ctrls(struct file *file, void *priv,
++				     struct v4l2_ext_controls *a)
++{
++	struct mx6s_csi_dev *csi_dev = video_drvdata(file);
++	struct v4l2_subdev *sd = csi_dev->sd;
++
++	if (!sd || !sd->ctrl_handler)
++		return -ENOTTY;
++
++	return v4l2_try_ext_ctrls(sd->ctrl_handler, csi_dev->vdev, NULL, a);
++}
++
++static int mx6s_vidioc_querymenu(struct file *file, void *priv,
++				 struct v4l2_querymenu *a)
++{
++	struct mx6s_csi_dev *csi_dev = video_drvdata(file);
++	struct v4l2_subdev *sd = csi_dev->sd;
++
++	if (!sd || !sd->ctrl_handler)
++		return -ENOTTY;
++
++	return v4l2_querymenu(sd->ctrl_handler, a);
++}
++
+ static const struct v4l2_ioctl_ops mx6s_csi_ioctl_ops = {
+ 	.vidioc_querycap          = mx6s_vidioc_querycap,
+ 	.vidioc_enum_fmt_vid_cap  = mx6s_vidioc_enum_fmt_vid_cap,
+@@ -1862,6 +1958,14 @@ static const struct v4l2_ioctl_ops mx6s_csi_ioctl_ops = {
+ 	.vidioc_s_parm        = mx6s_vidioc_s_parm,
+ 	.vidioc_enum_framesizes = mx6s_vidioc_enum_framesizes,
+ 	.vidioc_enum_frameintervals = mx6s_vidioc_enum_frameintervals,
++	.vidioc_queryctrl      = mx6s_vidioc_queryctrl,
++	.vidioc_query_ext_ctrl = mx6s_vidioc_query_ext_ctrl,
++	.vidioc_g_ctrl         = mx6s_vidioc_g_ctrl,
++	.vidioc_s_ctrl         = mx6s_vidioc_s_ctrl,
++	.vidioc_g_ext_ctrls    = mx6s_vidioc_g_ext_ctrls,
++	.vidioc_s_ext_ctrls    = mx6s_vidioc_s_ext_ctrls,
++	.vidioc_try_ext_ctrls  = mx6s_vidioc_try_ext_ctrls,
++	.vidioc_querymenu      = mx6s_vidioc_querymenu,
+ };
+ 
+ static int subdev_notifier_bound(struct v4l2_async_notifier *notifier,
+@@ -1989,7 +2093,7 @@ static int mx6sx_register_subdevs(struct mx6s_csi_dev *csi_dev)
+ 					&csi_dev->subdev_notifier);
+ 	if (ret)
+ 		dev_err(csi_dev->dev,
+-					"Error register async notifier regoster\n");
++					"Error registering async notifier\n");
+ 
+ 	return ret;
+ }
+diff --git a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
+index 777eacaa724f..f2f7591ae4d1 100644
+--- a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
++++ b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
+@@ -38,6 +38,7 @@
+ #include <linux/videodev2.h>
+ #include <media/v4l2-subdev.h>
+ #include <media/v4l2-device.h>
++#include <media/v4l2-ctrls.h>
+ 
+ static int debug;
+ module_param(debug, int, 0644);
+@@ -294,6 +295,8 @@ struct csi_state {
+ 
+ 	struct csis_hw_reset hw_reset;
+ 	struct regulator     *mipi_phy_regulator;
++
++	struct v4l2_ctrl_handler ctrl_handler;
+ };
+ 
+ /**
+@@ -1067,6 +1070,9 @@ static int subdev_notifier_bound(struct v4l2_async_notifier *notifier,
+ 		goto out;
+ 	}
+ 
++	v4l2_ctrl_add_handler(state->mipi_sd.ctrl_handler, subdev->ctrl_handler,
++		  NULL, true);
++
+ 	v4l2_info(&state->v4l2_dev, "Registered sensor subdevice: %s\n",
+ 		  subdev->name);
+ 
+@@ -1305,12 +1311,20 @@ static int mipi_csis_probe(struct platform_device *pdev)
+ 		goto e_clkdis;
+ 	}
+ 
++	/* Add the control handler */
++	v4l2_ctrl_handler_init(&state->ctrl_handler, 10);
++	if (state->ctrl_handler.error) {
++		ret = state->ctrl_handler.error;
++		goto e_clkdis;
++	}
++	state->mipi_sd.ctrl_handler = &state->ctrl_handler;
++
+ 	/* First register a v4l2 device */
+ 	ret = v4l2_device_register(dev, &state->v4l2_dev);
+ 	if (ret) {
+ 		v4l2_err(dev->driver,
+ 			"Unable to register v4l2 device.\n");
+-		goto e_clkdis;
++		goto e_handler;
+ 	}
+ 	v4l2_info(&state->v4l2_dev, "mipi csi v4l2 device registered\n");
+ 
+@@ -1347,6 +1361,8 @@ static int mipi_csis_probe(struct platform_device *pdev)
+ 	v4l2_device_unregister(&state->v4l2_dev);
+ e_sd_mipi:
+ 	v4l2_async_unregister_subdev(&state->mipi_sd);
++e_handler:
++	v4l2_ctrl_handler_free(&state->ctrl_handler);
+ e_clkdis:
+ 	mipi_csis_clk_disable(state);
+ 	return ret;
+@@ -1447,6 +1463,7 @@ static int mipi_csis_remove(struct platform_device *pdev)
+ 	v4l2_async_unregister_subdev(&state->mipi_sd);
+ 	v4l2_async_notifier_unregister(&state->subdev_notifier);
+ 	v4l2_device_unregister(&state->v4l2_dev);
++	v4l2_ctrl_handler_free(&state->ctrl_handler);
+ 
+ 	pm_runtime_disable(&pdev->dev);
+ 	mipi_csis_pm_suspend(&pdev->dev, true);
+-- 
+2.25.1
+

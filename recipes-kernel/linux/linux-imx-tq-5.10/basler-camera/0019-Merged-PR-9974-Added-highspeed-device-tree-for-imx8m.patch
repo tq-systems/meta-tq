@@ -1,0 +1,63 @@
+From ae75c566f6f48856d0a63fb2e1947041a59845a0 Mon Sep 17 00:00:00 2001
+From: "Koeller, Thomas" <Thomas.Koeller@baslerweb.com>
+Date: Fri, 11 Dec 2020 15:19:36 +0100
+Subject: [PATCH 19/24] Merged PR 9974: Added highspeed device tree for imx8mq
+
+Added highspeed device tree for imx8mq
+
+This device tree allows for full-speed CSI operation at 333MHz clock
+frequency.
+
+Applied from https://github.com/basler/meta-basler-imx8/tree/b1b6d6653931303bffbad727d767fe5a8d4844fc/recipes-kernel/linux/linux-imx
+
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+---
+ ...imx8mq-evk-basler-camera-csi-fullspeed.dts | 36 +++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi-fullspeed.dts
+
+diff --git a/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi-fullspeed.dts b/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi-fullspeed.dts
+new file mode 100644
+index 000000000000..388a90630cb9
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi-fullspeed.dts
+@@ -0,0 +1,36 @@
++#include "imx8mq-evk.dts"
++#include "imx8mq-evk-basler-camera-csi.dtsi"
++
++&csi1_bridge {
++	status = "okay";
++};
++
++&csi2_bridge {
++	status = "okay";
++};
++
++&mipi_csi_1 {
++	status = "okay";
++	assigned-clock-rates = <266000000>, <333000000>, <66000000>;
++};
++
++&mipi_csi_2 {
++	status = "okay";
++	assigned-clock-rates = <266000000>, <333000000>, <66000000>;
++};
++
++&basler_camera_mipi2 {
++	status = "okay";
++};
++
++&basler_camera_mipi1 {
++	status = "okay";
++};
++
++&i2c1 {
++	link-frequencies = /bits/ 64 <600000000>;
++};
++
++&i2c2 {
++	link-frequencies = /bits/ 64 <600000000>;
++};
+-- 
+2.25.1
+
