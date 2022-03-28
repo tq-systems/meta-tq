@@ -16,6 +16,7 @@ Releases are named with the following scheme:
 * tqma7x-<nn>-mba7x machines: linux 5.15 support based on linux-stable 5.15.y
 * tqma6ulxl / tqma6ullxl: add 512 MB variants
 * u-boot-lsdk-tq-2019.10: backport e-MMC full size pSLC conversion
+* Experimental support for Basler daA3840-30mc on TQMa8MPxL + MBa8MPxL
 
 ### Changed
 
