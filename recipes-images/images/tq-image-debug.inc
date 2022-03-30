@@ -8,9 +8,10 @@ IMAGE_INSTALL_append = "\
 
 # enable root login w/o password and passwordless ssh login
 IMAGE_FEATURES_append = " debug-tweaks"
-# poky defined collection of debug/test tools
+# poky defined collection of debug tools
+# tools-testapps is not appended here since it increases images size
+# without having a global benefit due to ltp and complex dependencies
 IMAGE_FEATURES_append = " tools-debug"
-IMAGE_FEATURES_append = " tools-testapps"
 
 #
 # Add a postprocess command to add a note and a message in the issue banner files
