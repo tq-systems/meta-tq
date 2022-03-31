@@ -35,9 +35,34 @@ do_compile_append_tqmlx2160a () {
     done
 }
 
+do_compile_append_tqmls1028a () {
+    for rcw_file in ${ATF_RCW_VARIANTS}; do
+        case $rcw_file in
+            *sd*)
+            bootmode="sd";
+            ;;
+            *nor*)
+            bootmode="flexspi_nor"
+            ;;
+        esac
+
+        oe_runmake distclean
+        oe_runmake V=1 -C ${S} pbl PLAT=${PLATFORM} BOOT_MODE=${bootmode} RCW=${DEPLOY_DIR_IMAGE}/rcw/${PLATFORM}/${rcw_file} ${bl32opt} ${spdopt} ${secureopt} ${fuseopt} ${otaopt}
+	install -d ${S}/atf-variants
+        cp ${S}/build/${PLATFORM}/release/bl2_${bootmode}.pbl ${S}/atf-variants/bl2_$(basename ${rcw_file} .bin).pbl
+    done
+}
+
 do_deploy_append_tqmlx2160a () {
     install -d ${DEPLOYDIR}/atf/variants
     for pbl_file in $(ls ${S}/bl2_*_rcw*.pbl); do
         cp -r ${pbl_file} ${DEPLOYDIR}/atf/variants/
+    done
+}
+
+do_deploy_append_tqmls1028a () {
+    install -d ${DEPLOYDIR}/atf/variants
+    for pbl_file in ${ATF_RCW_VARIANTS}; do
+        cp ${S}/atf-variants/bl2_$(basename ${pbl_file} .bin).pbl ${DEPLOYDIR}/atf/variants/
     done
 }
