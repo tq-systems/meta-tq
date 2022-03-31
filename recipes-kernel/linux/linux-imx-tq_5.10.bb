@@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 require linux-imx-tq-common.inc
 
 KBRANCH = "TQMa8-fslc-5.10-2.1.x-imx"
-SRCREV = "c70763eaf23c6d97fc0ceab3d908f81fe3c89b46"
+SRCREV = "1a23965fcc79bfa5ac9188912f7690dcbb2c8751"
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "5.10"
-LINUX_VERSION = "${LINUX_RELEASE}.103"
+LINUX_VERSION = "${LINUX_RELEASE}.109"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
