@@ -9,14 +9,36 @@ Releases are named with the following scheme:
 
 ## Next Release
 
-## hardknott.TQMa6UL.BSP.SW.0116
+### Changed
+
+* u-boot-imx-tq\_2020.04: TQMa8MPxL: use nxp\_fspi instead of old fsl\_fspi driver
+* linux-imx-tq\_5.10: merge all mainline stable fixes up to v5.10.109. Contains 
+  further fixing for spectre related problems and fixes for CVE-2022-1016
+* linux-tq\_5.15: merge all mainline stable fixes up to v5.15.32. Contains fixes
+  for CVE-2022-1015 and CVE-2022-1016
+* u-boot-lsdk-tq-2019.10: backport e-MMC pSLC conversion from upstream. This
+  enables converting the complete user area without further parameters
+
+### Fixed
+
+* u-boot-imx-tq\_2020.04: TQMa8Xx: workaround for a SD-Card boot issue. When the
+  OTG port on MBa8Xx is enabled in U-Boot this can lead to a non detected SD card
+  in linux. This can cause system stall when rootfs is on SD-Card.
+* linux-imx-tq\_5.10: backport deadlock workaround from NXP linux-imx lf-5.15 branch.
+  i.MX8MP clock system and power domain exposes an potential A-B/B-A deadlock during
+  driver loading.
 
 ### Added
+
+* Experimental support for Basler daA3840-30mc on TQMa8MPxL + MBa8MPxL
+
+## hardknott.TQMa6UL.BSP.SW.0116
+## hardknott.TQMa6x.BSP.SW.0120
+## hardknott.TQMa7x.BSP.SW.0114
 
 * tqma7x-<nn>-mba7x machines: linux 5.15 support based on linux-stable 5.15.y
 * tqma6ulxl / tqma6ullxl: add 512 MB variants
 * u-boot-lsdk-tq-2019.10: backport e-MMC full size pSLC conversion
-* Experimental support for Basler daA3840-30mc on TQMa8MPxL + MBa8MPxL
 
 ### Changed
 
