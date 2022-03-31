@@ -2,6 +2,10 @@
 
 require conf/machine/include/soc-family.inc
 
+# optionally source the machine specific features for multimedia etc. from
+# meta-freescale
+include conf/machine/include/qoriq-arm.inc
+
 MACHINEOVERRIDES =. "ls102xa:tqmls102xa:"
 
 DEFAULTTUNE ?= "cortexa7thf-neon"
@@ -56,7 +60,3 @@ WKS_FILE_DEPENDS = "\
     virtual/kernel \
     virtual/bootloader \
 "
-
-# optionally source the machine specific features for multimedia etc. from
-# meta-freescale
-include conf/machine/include/qoriq-arm.inc

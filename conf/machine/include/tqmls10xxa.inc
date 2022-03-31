@@ -2,6 +2,10 @@
 
 require conf/machine/include/arm/arch-arm64.inc
 
+# source the machine specific features for RCW, MC, multimedia etc. from
+# meta-freescale
+require conf/machine/include/qoriq-arm64.inc
+
 # Define the default image type
 KERNEL_IMAGETYPE ?= "Image"
 
@@ -42,7 +46,3 @@ WKS_FILE_DEPENDS = "\
     virtual/kernel \
     virtual/bootloader \
 "
-
-# source the machine specific features for RCW, MC, multimedia etc. from
-# meta-freescale
-require conf/machine/include/qoriq-arm64.inc

@@ -2,6 +2,10 @@
 
 require conf/machine/include/soc-family.inc
 
+# source the machine specific features for RCW, multimedia etc. from
+# meta-freescale
+require conf/machine/include/qoriq-arm64.inc
+
 MACHINEOVERRIDES =. "tqmlx2160a:lx2160a:fsl-lsch3:"
 
 require conf/machine/include/tune-cortexa72.inc
@@ -48,7 +52,3 @@ WKS_FILE_${MACHINE} ?=  "tqmlx2160a.wks"
 
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
-
-# source the machine specific features for RCW, multimedia etc. from
-# meta-freescale
-require conf/machine/include/qoriq-arm64.inc

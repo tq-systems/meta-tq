@@ -2,6 +2,10 @@
 
 require conf/machine/include/soc-family.inc
 
+# source the machine specific features for RCW, multimedia etc. from
+# meta-freescale
+require conf/machine/include/qoriq-arm64.inc
+
 MACHINEOVERRIDES =. "tqmls1028a:ls1028a:fsl-lsch3:"
 
 
@@ -57,7 +61,3 @@ WKS_FILE_DEPENDS = "\
     virtual/kernel \
     virtual/bootloader \
 "
-
-# source the machine specific features for RCW, multimedia etc. from
-# meta-freescale
-require conf/machine/include/qoriq-arm64.inc
