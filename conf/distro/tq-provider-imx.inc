@@ -1,17 +1,14 @@
+# This file is used for all distro configs based on imx / fslc-imx kernel and
+# vendor software stacks. To make it usable also with distros based on
+# poky-tiny we need to add a specific PREFERRED_PROVIDER for virtual/kernel
+# since poky-tiny has a hard assignment for linux-yocto-tiny
+
+# variable from meta-freescale
+# TODO: QORIQ_DEFAULT_BSP
 IMX_DEFAULT_BSP = "nxp"
+IMX_DEFAULT_KERNEL = "linux-imx-tq"
 
-PREFERRED_PROVIDER_virtual/kernel_tqma6x = "linux-imx-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqma6ulx = "linux-imx-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqma6ullx = "linux-imx-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqma7x = "linux-imx-tq"
-
-PREFERRED_PROVIDER_virtual/kernel_tqma8x = "linux-imx-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqma8xx = "linux-imx-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqma8xxs = "linux-imx-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqma8mq = "linux-imx-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqma8mxml = "linux-imx-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqma8mxnl = "linux-imx-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqma8mpxl = "linux-imx-tq"
+PREFERRED_PROVIDER_virtual/kernel ?= "linux-imx-tq"
 
 PREFERRED_PROVIDER_virtual/bootloader = "u-boot-imx-tq"
 
