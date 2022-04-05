@@ -1,4 +1,16 @@
+###############################################################################
+# Attention: poky-tiny has a hard assignment:
+# PREFERRED_PROVIDER_virtual/kernel = "linux-yocto-tiny"
+# this will break our boards, preventing to use own kernel recipes, branches
+# etc. To workaround this, store the value before inclusion, unset after
+# inclusion and weak assign after inclusion. This allows all sort of reassignment
+# from distro or environment and leaves the default.
+###############################################################################
+SPAETZLE_DEFAULT_KERNEL := "${PREFERRED_PROVIDER_virtual/kernel}"
 require conf/distro/poky-tiny.conf
+unset PREFERRED_PROVIDER_virtual/kernel
+PREFERRED_PROVIDER_virtual/kernel ??= "${SPAETZLE_DEFAULT_KERNEL}"
+
 require tq-common.inc
 
 DISTRO_FEATURES += "tiny"
