@@ -6,7 +6,7 @@ require conf/machine/include/soc-family.inc
 # meta-freescale
 require conf/machine/include/qoriq-arm64.inc
 
-MACHINEOVERRIDES =. "tqmls1012al:ls1012a:fsl-lsch2:"
+MACHINEOVERRIDES =. "fsl-lsch2:ls1012a:tqmls1012al:"
 
 
 require conf/machine/include/tune-cortexa53.inc
