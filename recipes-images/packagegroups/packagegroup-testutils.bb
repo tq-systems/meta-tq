@@ -48,6 +48,10 @@ RRECOMMENDS_${PN} = "\
 # is built. Since this is at least not the case for TQMa6x with vendor graphic
 # stack we need this ugly construct
 RRECOMMENDS_${PN} += "\
-    ${@oe.utils.ifelse(d.getVar('PREFERRED_PROVIDER_virtual/libgbm') != "", 'kmscube', '')} \
+    ${@oe.utils.ifelse( \
+        bb.utils.contains('DISTRO_FEATURES', 'opengl', True, False, d) and \
+	    d.getVar('PREFERRED_PROVIDER_virtual/libgbm') != "", \
+        'kmscube', '', \
+    )} \
 "
 

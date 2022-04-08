@@ -9,6 +9,10 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Fixes
+
+* packagegroup-testutils: fix build for DISTRO_FEATURES without "opengl"
+
 ## hardknott.TQMa6UL.BSP.SW.0116
 
 ### Changed
