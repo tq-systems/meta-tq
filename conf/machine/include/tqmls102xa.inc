@@ -19,8 +19,9 @@ PREFERRED_PROVIDER_u-boot_tqmls102xa ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/bootloader_tqmls102xa ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/kernel ??= "linux-tq"
 
-# Define the default image type
-KERNEL_IMAGETYPE ?= "zImage"
+# Define the default image type, we cannot use default assignment due to the
+# default assignment in qoriq-arm.inc (meta-freescale).
+KERNEL_IMAGETYPE = "zImage"
 
 UBOOT_ENTRYPOINT_ls102xa = "0x80008000"
 
