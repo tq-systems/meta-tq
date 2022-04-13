@@ -9,8 +9,16 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## hardknott.TQMLS1028A.BSP.SW.0107
+
 ### Changed
 
+* qoriq-atf\_1.5: tqmls1028a build bl2 for all rcw variants
+* machines:
+  * imx: optimize MACHINEOVERRIDES and other variable assignments in
+  * simplify machine configs for starterkits using MBLS10xxA
+  * adjustments for latest meta-freescale for Layerscape based SOM
+  preparation of better linux PREEMPT RT support
 * u-boot-imx-tq\_2020.04: TQMa8MPxL: use nxp\_fspi instead of old fsl\_fspi driver
 * linux-imx-tq\_5.10: merge all mainline stable fixes up to v5.10.109. Contains 
   further fixing for spectre related problems and fixes for CVE-2022-1016
@@ -30,6 +38,7 @@ Releases are named with the following scheme:
 
 ### Added
 
+* rcw: tqmls1028a: Added 800MHz variants for sd boot and spi boot
 * Experimental support for Basler daA3840-30mc on TQMa8MPxL + MBa8MPxL
 
 ## hardknott.TQMa6UL.BSP.SW.0116
