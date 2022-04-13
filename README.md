@@ -213,8 +213,8 @@ Support for the following machines is contained in this version:
 | [y]    | i.MX8QXP         | TQMa8XQPS                | MB-SMARC-2     | tqma8xqps-mb-smarc-2         | TQMa8XQPS / 2 GiB RAM, HW REV.030x |
 | [b]    | LS1012A          | TQMLS1012AL              | MBLS1012AL     | tqmls1012al-mbls1012al       | TQMLS1012AL HW REV.010x ... 020x / 512 MiB RAM / MBLS1012AL HW REV.020x |
 | [b]    | LS1012A          | TQMLS1012AL              | MBLS1012AL     | tqmls1012al-1gb-mbls1012al   | TQMLS1012AL HW REV.020x / 1 GiB RAM / MBLS1012AL HW REV.020x |
-| [b]    | LS1017A          | TQMLS1017A               | MBLS1028A      | tqmls1028a-mbls1028a         | |
-| [b]    | LS1028A          | TQMLS1028A               | MBLS1028A      | tqmls1028a-mbls1028a         | |
+| [y]    | LS1017A          | TQMLS1017A               | MBLS1028A      | tqmls1028a-mbls1028a         | |
+| [y]    | LS1028A          | TQMLS1028A               | MBLS1028A      | tqmls1028a-mbls1028a         | |
 | [b]    | LS1028A          | TQMLS1028A               | MBLS1028A-IND  | tqmls1028a-mbls1028a-ind     | |
 | [b]    | LS1043A          | TQMLS1043A               | MBLS10xxA      | tqmls1043a-mbls10xxa         | TQMLS1043a / MBLS10xxa |
 | [b]    | LS1043A          | TQMLS1043A               | MBLS10xxA      | tqmls1043a_2g-mbls10xxa      | TQMLS1043a with 2 GiB RAM / MBLS10xxa |
