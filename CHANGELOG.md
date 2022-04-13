@@ -9,10 +9,27 @@ Releases are named with the following scheme:
 
 ## Next Release
 
-### Fixes
+## hardknott.TQMLS1028A.BSP.SW.0107
 
+### Changed
+
+* images: reduce size of debug images. `IMAGE_FEATURES` with tools-testapps
+  have complex dependencies causing large image sizes.
+
+### Added
+
+* image: recipe for PREEMPT RT use case
+
+### Fixed
+
+* base-files: issue.net handling
+  * output only for interactive sessions
+  * prevent escape codes in issue.net
 * packagegroup-testutils: fix build for DISTRO_FEATURES without "opengl"
+* distros: enable kernel provider override for PREEMPT RT use case
 
+## hardknott.TQMa7x.BSP.SW.0114
+## hardknott.TQMa6x.BSP.SW.0120
 ## hardknott.TQMa6UL.BSP.SW.0116
 
 ### Changed
