@@ -19,8 +19,8 @@ PREFERRED_PROVIDER_u-boot_tqmls1028a ?= "u-boot-lsdk-tq"
 PREFERRED_PROVIDER_virtual/bootloader_tqmls1028a ?= "u-boot-lsdk-tq"
 PREFERRED_PROVIDER_virtual/kernel ??= "linux-imx-tq"
 
-# Define the default image type
-KERNEL_IMAGETYPE ?= "Image.gz"
+# Define the default image type, overwrite default from qoriq-arm64.inc
+KERNEL_IMAGETYPE = "Image.gz"
 
 UBOOT_ENTRYPOINT_ls1028a = "0x80008000"
 
