@@ -20,5 +20,15 @@ IMAGE_BOOT_FILES = "\
     fsl-ls1012a-mbls1012al.dtb \
 "
 
+# direct assignment to override empty default from meta-freescale
+WKS_FILE = "tqmls1012al-sdimg.wks"
+
+WKS_FILE_DEPENDS = "\
+    mtools-native \
+    dosfstools-native \
+    parted-native \
+    virtual/kernel \
+"
+
 UBOOT_CONFIG ?= "tfa"
 UBOOT_CONFIG[tfa] = "tqmls1012al_mbls1012al_tfa_defconfig"

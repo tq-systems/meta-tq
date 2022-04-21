@@ -51,12 +51,3 @@ WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
 # default RCW with 1 GHz core frequency
 RCWQSPI ?= "default/rcw_1000_sd"
-
-WKS_FILE ?= "tqmls1012al-sdimg.wks"
-
-WKS_FILE_DEPENDS = "\
-    mtools-native \
-    dosfstools-native \
-    parted-native \
-    virtual/kernel \
-"
