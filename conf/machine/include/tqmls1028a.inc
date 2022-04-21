@@ -57,13 +57,3 @@ ATF_RCW_VARIANTS ?= " \
 "
 RCWSD ?= "default/rcw_1300_sd"
 RCWXSPI ?= "default/rcw_1300_spi_nor"
-
-WKS_FILE ?= "tqmls1028a-sdimg.wks.in"
-
-WKS_FILE_DEPENDS = "\
-    mtools-native \
-    dosfstools-native \
-    parted-native \
-    virtual/kernel \
-    virtual/bootloader \
-"
