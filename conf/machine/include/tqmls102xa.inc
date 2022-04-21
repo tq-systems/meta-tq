@@ -61,13 +61,3 @@ UBI_VOLNAME = "root"
 
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
-
-WKS_FILE ?= "tqmls102xa-sdimg.wks"
-
-WKS_FILE_DEPENDS = "\
-    mtools-native \
-    dosfstools-native \
-    parted-native \
-    virtual/kernel \
-    virtual/bootloader \
-"
