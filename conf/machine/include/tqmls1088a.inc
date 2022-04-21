@@ -22,9 +22,3 @@ MACHINE_EXTRA_RRECOMMENDS += "restool"
 
 # needs to be set to have it consistent for kernel command line
 UBI_VOLNAME = "root"
-
-# different RCW files for booting CPU from SD card and eMMC require two
-# wks-files for image creation:
-# tqmls1088a-sdimg.wks.in -> to boot from SD-Card
-# tqmls1088a-emmcimg.wks.in -> to boot from eMMC
-WKS_FILE_${MACHINE} ?= "tqmls1088a-sdimg.wks.in"

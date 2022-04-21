@@ -35,14 +35,3 @@ WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 # sd -> to boot from SD-Card
 # emmc -> to boot from eMMC
 BOOTMODE ?= "sd"
-RCWIMG ?= "tqmls1088a-mbls10xxa/${@d.getVar('RCW' + d.getVar('BOOTMODE').upper())}"
-
-WICVARS_append = " RCWIMG MC_DPL MC_DPC"
-
-WKS_FILE_DEPENDS = "\
-    mtools-native \
-    dosfstools-native \
-    parted-native \
-    virtual/kernel \
-    virtual/bootloader \
-"
