@@ -47,8 +47,3 @@ UBI_VOLNAME = "root"
 WICVARS_append = " BL2_IMAGE"
 
 BL2_IMAGE ?= "bl2_sd.pbl"
-
-WKS_FILE_${MACHINE} ?=  "tqmlx2160a.wks"
-
-# Do not update fstab file when using wic images
-WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
