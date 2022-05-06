@@ -6,10 +6,10 @@ SUMMARY = "Linux kernel with PREEMPT_RT support based on linux mainline v5.15-rt
 KBRANCH = "TQMaxx-linux-v5.15.y-rt"
 SRCREV = "8bbe98b675ce3bcb4ec524f54617d5f3d2789f6d"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN_BASE}-${LINUX_RELEASE}:"
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN_BASE}-${LINUX_RELEASE}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
-SRC_URI_append = "\
+SRC_URI:append = "\
     file://rt.cfg \
 "
 

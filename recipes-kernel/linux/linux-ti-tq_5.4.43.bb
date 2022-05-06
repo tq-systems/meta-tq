@@ -1,12 +1,18 @@
-SUMMARY = "Linux kernel for TQ-Systems GmbH TQ AM57xx modules"
+SUMMARY = "Linux kernel for TQ-Systems GmbH TQ AM57xx and AM335 modules"
 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 inherit kernel
 
-DEPENDS += " lzop-native bc-native openssl-native"
+DEPENDS += "\
+    bc-native \
+    lzop-native \
+    openssl-native \
+"
+
 PROVIDES += "linux-tq"
+PROVIDES += "linux-ti-staging"
 
 SRC_URI = "\
   ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
@@ -18,6 +24,6 @@ SRCREV = "acb70d0b69f7099d0cafc4ebca38698c19eef7a4"
 
 
 COMPATIBLE_MACHINE = "tqma57xx"
-COMPATIBLE_MACHINE_append = "|tqma335x"
+COMPATIBLE_MACHINE:append = "|tqma335x"
 
 S = "${WORKDIR}/git"

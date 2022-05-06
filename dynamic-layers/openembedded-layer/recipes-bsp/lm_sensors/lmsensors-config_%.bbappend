@@ -1,7 +1,7 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/lmsensors-config:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/lmsensors-config:"
 SRC_URI += "file://mba8x.conf"
 
-do_install_append() {
+do_install:append() {
     case ${MACHINE} in
         tqma8qm-*-mba8x) install -m 0644 ${WORKDIR}/mba8x.conf ${D}${sysconfdir}/sensors.d
                          ;;
@@ -11,4 +11,4 @@ do_install_append() {
 }
 
 # libsensors configuration file
-FILES_${PN}-libsensors += "${sysconfdir}/sensors.d/*"
+FILES:${PN}-libsensors += "${sysconfdir}/sensors.d/*"

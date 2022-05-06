@@ -13,7 +13,7 @@ KERNEL_DEVICETREE ?= " \
 # Files are needed in IMAGE_BOOT_FILES because /boot is on an extra partition.
 # If those files should be installed under /boot inside the rootfs, you can
 # achieve this in your BSP layer adding them via
-# IMAGE_INSTALL_append = " kernel-devicetree kernel-image"
+# IMAGE_INSTALL:append = " kernel-devicetree kernel-image"
 #
 IMAGE_BOOT_FILES = "\
     ${KERNEL_IMAGETYPE} \

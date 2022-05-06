@@ -18,9 +18,9 @@ SRCBRANCH = "TQMaxx-linux-v5.4.y-rt"
 SRCREV = "16c18bed076c4c7d583f7f18d72b2fa4f2a1e9db"
 
 COMPATIBLE_MACHINE = "tqmls102xa"
-COMPATIBLE_MACHINE_append = "|tqma7x"
-COMPATIBLE_MACHINE_append = "|tqma6x"
-COMPATIBLE_MACHINE_append = "|tqma6ulx"
-COMPATIBLE_MACHINE_append = "|tqma6ullx"
+COMPATIBLE_MACHINE:append = "|tqma7x"
+COMPATIBLE_MACHINE:append = "|tqma6x"
+COMPATIBLE_MACHINE:append = "|tqma6ulx"
+COMPATIBLE_MACHINE:append = "|tqma6ullx"
 
 S = "${WORKDIR}/git"

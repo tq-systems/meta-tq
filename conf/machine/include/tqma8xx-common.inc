@@ -3,13 +3,13 @@
 MACHINEOVERRIDES =. "imx:mx8:mx8x:mx8qxp:mx8qxpc0:"
 
 # Don't include kernels in standard images
-RDEPENDS_${KERNEL_PACKAGE_NAME}-base = ""
+RDEPENDS:${KERNEL_PACKAGE_NAME}-base = ""
 
 LOADADDR = ""
 
 # Machine specific options
 #
-MACHINE_FEATURES_append = " can pci"
+MACHINE_FEATURES:append = " can pci"
 
 # TQ u-boot and kernel
 #
@@ -57,7 +57,7 @@ WKS_FILE_DEPENDS = "\
 # meta-freescale
 
 include conf/machine/include/imx-base.inc
-require conf/machine/include/tune-cortexa35.inc
+require conf/machine/include/arm/armv8a/tune-cortexa35.inc
 
 # need to do after imx-base, not included in firmware-imx-8.3
-MACHINE_FIRMWARE_remove = "firmware-imx-brcm"
+MACHINE_FIRMWARE:remove = "firmware-imx-brcm"

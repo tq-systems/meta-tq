@@ -2,20 +2,20 @@
 
 require conf/machine/include/soc-family.inc
 
+MACHINEOVERRIDES =. "fsl-lsch3:lx2160a:tqmlx2160a:"
+
 # source the machine specific features for RCW, multimedia etc. from
 # meta-freescale
 require conf/machine/include/qoriq-arm64.inc
 
-MACHINEOVERRIDES =. "fsl-lsch3:lx2160a:tqmlx2160a:"
-
-require conf/machine/include/tune-cortexa72.inc
+require conf/machine/include/arm/armv8a/tune-cortexa72.inc
 
 # TQ u-boot and kernel
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_u-boot_tqmlx2160a ?= "u-boot-lsdk-tq"
-PREFERRED_PROVIDER_virtual/bootloader_tqmlx2160a ?= "u-boot-lsdk-tq"
+PREFERRED_PROVIDER_u-boot:tqmlx2160a ?= "u-boot-lsdk-tq"
+PREFERRED_PROVIDER_virtual/bootloader:tqmlx2160a ?= "u-boot-lsdk-tq"
 PREFERRED_PROVIDER_virtual/kernel ??= "linux-lsdk-tq"
 PREFERRED_VERSION_qoriq-atf = "1.5%"
 # Define the default image type
@@ -26,7 +26,7 @@ KERNEL_IMAGETYPE ?= "Image"
 MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree udev-extraconf"
 
 # provide info about machine's capabilities
-MACHINE_FEATURES_append = "  ext2 pci rtc serial usbhost vfat can ubi"
+MACHINE_FEATURES:append = "  ext2 pci rtc serial usbhost vfat can ubi"
 
 # Image Options
 #
@@ -34,7 +34,7 @@ EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 EXTRA_IMAGEDEPENDS += "rcw qoriq-atf management-complex mc-utils"
 
 # DPAA2 manament utility
-IMAGE_INSTALL_append = " restool"
+IMAGE_INSTALL:append = " restool"
 
 # Image Options
 #
@@ -44,6 +44,6 @@ UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
 # needs to be set to have it consistent for kernel command line
 UBI_VOLNAME = "root"
 
-WICVARS_append = " BL2_IMAGE"
+WICVARS:append = " BL2_IMAGE"
 
 BL2_IMAGE ?= "bl2_sd.pbl"

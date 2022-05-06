@@ -9,8 +9,8 @@ require conf/machine/include/qoriq-arm64.inc
 # Define the default image type
 KERNEL_IMAGETYPE ?= "Image"
 
-PREFERRED_PROVIDER_u-boot_tqmls10xxa ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader_tqmls10xxa ?= "u-boot-tq"
+PREFERRED_PROVIDER_u-boot:tqmls10xxa ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader:tqmls10xxa ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/kernel ??= "linux-tq"
 
 # Machine specific options
@@ -18,13 +18,13 @@ PREFERRED_PROVIDER_virtual/kernel ??= "linux-tq"
 MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree udev-extraconf"
 
 # provide info about machine's capabilities
-MACHINE_FEATURES_append = " ext2 pci rtc serial usbhost vfat ubi"
+MACHINE_FEATURES:append = " ext2 pci rtc serial usbhost vfat ubi"
 
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-EXTRA_IMAGEDEPENDS_append_fsl-lsch2 += "fm-ucode"
-EXTRA_IMAGEDEPENDS_append_fsl-lsch3 += "rcw mc-utils management-complex"
+EXTRA_IMAGEDEPENDS:append:fsl-lsch2 += "fm-ucode"
+EXTRA_IMAGEDEPENDS:append:fsl-lsch3 += "rcw mc-utils management-complex"
 
 
 # Do not update fstab file when using wic images

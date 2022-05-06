@@ -3,7 +3,7 @@
 
 DEPENDS = "zlib-native openssl-native"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRCBRANCH = "lf-5.10.y_2.0.0"
 SRC_URI = "git://source.codeaurora.org/external/imx/imx-mkimage.git;protocol=https;branch=${SRCBRANCH} \

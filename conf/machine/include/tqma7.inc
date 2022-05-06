@@ -6,14 +6,14 @@ MACHINEOVERRIDES =. "imx:mx7:mx7d:tqma7x:"
 # meta-freescale
 include conf/machine/include/imx-base.inc
 
-DEFAULTTUNE ?= "cortexa7thf-neon"
-require conf/machine/include/tune-cortexa7.inc
+DEFAULTTUNE:imx7 ?= "cortexa7thf-neon"
+require conf/machine/include/arm/armv7a/tune-cortexa7.inc
 
 # Machine specific options
 #
 MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree"
 MACHINE_EXTRA_RRECOMMENDS += " linux-firmware-imx-sdma-imx7d"
-MACHINE_FEATURES_append = " alsa ext2 pci rtc serial usbhost vfat can ubi"
+MACHINE_FEATURES:append = " alsa ext2 pci rtc serial usbhost vfat can ubi"
 
 # TQ u-boot and kernel
 #
@@ -21,11 +21,11 @@ require conf/machine/include/tqmxx.inc
 
 KERNEL_IMAGETYPE = "zImage"
 
-PREFERRED_PROVIDER_u-boot_tqma7x ?= "u-boot-imx-tq"
-PREFERRED_PROVIDER_virtual/bootloader_tqma7x ?= "u-boot-imx-tq"
+PREFERRED_PROVIDER_u-boot:tqma7x ?= "u-boot-imx-tq"
+PREFERRED_PROVIDER_virtual/bootloader:tqma7x ?= "u-boot-imx-tq"
 
-UBOOT_SUFFIX_${MACHINE} ?= "imx"
-UBOOT_MAKE_TARGET_${MACHINE} ?= "u-boot.imx"
+UBOOT_SUFFIX:${MACHINE} ?= "imx"
+UBOOT_MAKE_TARGET:${MACHINE} ?= "u-boot.imx"
 
 # Image Options
 #

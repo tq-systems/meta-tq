@@ -16,7 +16,7 @@ SRC_URI = "\
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
 "
 
-do_compile_append_tqmls102xa () {
+do_compile:append:tqmls102xa () {
  unset i j
     if [ "${UBOOT_CONFIG}" ]; then
         for config in ${UBOOT_MACHINE}; do
@@ -43,6 +43,6 @@ COMPATIBLE_MACHINE = "tqmls102xa"
 
 ####
 #PACKAGES += "${PN}-images"
-#FILES_${PN}-images += "/boot"
+#FILES:${PN}-images += "/boot"
 
 

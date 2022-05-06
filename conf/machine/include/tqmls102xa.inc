@@ -9,29 +9,29 @@ include conf/machine/include/qoriq-arm.inc
 MACHINEOVERRIDES =. "ls102xa:tqmls102xa:"
 
 DEFAULTTUNE ?= "cortexa7thf-neon"
-require conf/machine/include/tune-cortexa7.inc
+require conf/machine/include/arm/armv7a/tune-cortexa7.inc
 
 # TQ u-boot and kernel
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_u-boot_tqmls102xa ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader_tqmls102xa ?= "u-boot-tq"
+PREFERRED_PROVIDER_u-boot:tqmls102xa ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader:tqmls102xa ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/kernel ??= "linux-tq"
 
 # Define the default image type, we cannot use default assignment due to the
 # default assignment in qoriq-arm.inc (meta-freescale).
 KERNEL_IMAGETYPE = "zImage"
 
-UBOOT_ENTRYPOINT_ls102xa = "0x80008000"
+UBOOT_ENTRYPOINT:ls102xa = "0x80008000"
 
 # Machine specific options
 #
 
-MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree udev-extraconf"
+MACHINE_EXTRA_RRECOMMENDS += "kernel-devicetree kernel-modules udev-extraconf"
 
 # provide info about machine's capabilities
-MACHINE_FEATURES_append = "\
+MACHINE_FEATURES:append = "\
     alsa \
     can \
     ext2 \

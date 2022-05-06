@@ -19,6 +19,6 @@ SRC_URI = "\
 SRCREV = "d04b2ec9d778e2d8883848d3726cdc881a1ad93c"
 
 COMPATIBLE_MACHINE = "tqmls1088a"
-COMPATIBLE_MACHINE_append = "|tqmlx2160a"
+COMPATIBLE_MACHINE:append = "|tqmlx2160a"
 
 S = "${WORKDIR}/git"

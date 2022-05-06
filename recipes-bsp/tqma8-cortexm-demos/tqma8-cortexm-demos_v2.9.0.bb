@@ -16,18 +16,18 @@ do_compile[noexec] = "1"
 do_install[noexec] = "1"
 
 SOC		?= "INVALID"
-SOC_tqma8mxnl	= "tqma8mxnl"
-SOC_tqma8mxml	= "tqma8mxml"
-SOC_tqma8mq	= "tqma8mx"
-SOC_tqma8mpxl	= "tqma8mpxl"
-SOC_tqma8x	= "tqma8qm"
-SOC_tqma8xx	= "tqma8xx"
-SOC_tqma8xxs	= "tqma8xxs"
+SOC:tqma8mxnl	= "tqma8mxnl"
+SOC:tqma8mxml	= "tqma8mxml"
+SOC:tqma8mq	= "tqma8mx"
+SOC:tqma8mpxl	= "tqma8mpxl"
+SOC:tqma8x	= "tqma8qm"
+SOC:tqma8xx	= "tqma8xx"
+SOC:tqma8xxs	= "tqma8xxs"
 
 SDK_BASE_REV = "v2.9.0"
 SDK_TQ_REV = "g4eb071e74f9d"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI = "file://tqma8-cortexm-demos-${SDK_BASE_REV}-${SDK_TQ_REV}.tar.gz"
 
@@ -39,7 +39,7 @@ do_deploy () {
 
 addtask deploy after do_install
 
-FILES_${PN} = "\
+FILES:${PN} = "\
    /*.bin \
 "
 

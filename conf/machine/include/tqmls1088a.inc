@@ -10,7 +10,7 @@ require conf/machine/include/tqmxx.inc
 
 PREFERRED_PROVIDER_virtual/kernel ??= "linux-lsdk-tq"
 
-UBOOT_ENTRYPOINT_ls1088a = "0x80008000"
+UBOOT_ENTRYPOINT:ls1088a = "0x80008000"
 
 # Image Options
 #

@@ -25,7 +25,7 @@ SCMVERSION ?= "y"
 # TODO: we should verify, if we can use a localversion-tq file later on to minimize
 # interdependencies to oe / poky and meta-freescale
 ###
-do_compile_prepend() {
+do_compile:prepend() {
     head=""
     suffix=""
 

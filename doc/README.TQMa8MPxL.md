@@ -268,9 +268,9 @@ In order to avoid any unforseen side effects for different cameras, basler suppo
 ```
 # Basler camera support
 ACCEPT_BASLER_EULA = "1"
-IMAGE_INSTALL_append = " packagegroup-fsl-isp packagegroup-dart-bcon-mipi"
-DISTRO_FEATURES_append = " x11"
-MACHINE_FEATURES_append = " basler"
+IMAGE_INSTALL:append = " packagegroup-fsl-isp packagegroup-dart-bcon-mipi"
+DISTRO_FEATURES:append = " x11"
+MACHINE_FEATURES:append = " basler"
 ```
 
 This enabled additional patches required for this camera as well as a dedicated DT and additional pacages.

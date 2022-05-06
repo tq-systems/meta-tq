@@ -20,12 +20,12 @@ KERNEL_DEVICETREE_linux-tq = "\
     imx6ull-tqma6ull2l-mba6ulx-cdtech-fc21.dtb \
 "
 
-KERNEL_DEVICETREE_append = " ${@kernel_provider_dtbs(d)} "
+KERNEL_DEVICETREE:append = " ${@kernel_provider_dtbs(d)} "
 
 # Files are needed in IMAGE_BOOT_FILES because /boot is on an extra partition.
 # If those files should be installed under /boot inside the rootfs, you can
 # achieve this in your BSP layer adding them via
-# IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
+# IMAGE_INSTALL:append = " kernel-devicetree kernel-image-zimage"
 #
 IMAGE_BOOT_FILES = "\
     ${KERNEL_IMAGETYPE};linuximage \
@@ -34,5 +34,5 @@ IMAGE_BOOT_FILES = "\
 
 WKS_FILE = "tqmaxx-sdimg.wks"
 
-MACHINE_FEATURES_append = " wifi"
+MACHINE_FEATURES:append = " wifi"
 MACHINE_EXTRA_RRECOMMENDS += "linux-firmware-ath10k"

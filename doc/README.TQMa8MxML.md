@@ -361,8 +361,8 @@ To build bootstream adapt yocto configuration, modify _local.conf_ or machine
 config file:
 
 ```
-UBOOT_CONFIG_tqma8mxml = "fspi"
-IMXBOOT_TARGETS_tqma8mxml = "flash_evk_flexspi"
+UBOOT_CONFIG:tqma8mxml = "fspi"
+IMXBOOT_TARGETS:tqma8mxml = "flash_evk_flexspi"
 ```
 
 Rebuild boot stream:

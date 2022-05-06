@@ -8,7 +8,7 @@
 # userland
 # The imxgpu override comes from imx-base.inc in meta-freescale and should be
 # included in the machine config file
-MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT_imxgpu = "1"
-MACHINE_USES_VIVANTE_KERNEL_DRIVER_MODULE_imxgpu = "1"
+MACHINE_HAS_VIVANTE_KERNEL_DRIVER_SUPPORT:imxgpu = "1"
+MACHINE_USES_VIVANTE_KERNEL_DRIVER_MODULE:imxgpu = "1"
 
 inherit fsl-vivante-kernel-driver-handler

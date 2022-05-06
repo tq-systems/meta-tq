@@ -14,11 +14,13 @@ MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree"
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_virtual/kernel_tqma65xx ?= "linux-ti-tq"
+# This is hacky, but we have to be more specific than meta-ti to get our kernel
+# fork in
+PREFERRED_PROVIDER_virtual/kernel:tqma65xx ?= "linux-ti-tq"
 KERNEL_IMAGETYPES = "Image"
 
-PREFERRED_PROVIDER_u-boot_tqma65xx ?= "u-boot-ti-tq"
-PREFERRED_PROVIDER_virtual/bootloader_tqma65xx ?= "u-boot-ti-tq"
+PREFERRED_PROVIDER_u-boot:tqma65xx ?= "u-boot-ti-tq"
+PREFERRED_PROVIDER_virtual/bootloader:tqma65xx ?= "u-boot-ti-tq"
 
 UBOOT_ARCH = "arm"
 UBOOT_ENTRYPOINT = "0x80008000"
@@ -27,7 +29,7 @@ UBOOT_SUFFIX = "img"
 
 # we still need this, since meta-ti sets KERNEL_IMAGETYPES to contain uImage
 # and forces building this ancient image which forces us to provide this var
-KERNEL_EXTRA_ARGS_prepend = "LOADADDR=${UBOOT_ENTRYPOINT} "
+KERNEL_EXTRA_ARGS:prepend = "LOADADDR=${UBOOT_ENTRYPOINT} "
 
 # Image Options
 #

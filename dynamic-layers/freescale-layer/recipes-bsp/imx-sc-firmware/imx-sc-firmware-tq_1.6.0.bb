@@ -1,6 +1,6 @@
 # Copyright (C) 2016 Freescale Semiconductor
 # Copyright 2017-2019 NXP
-# Copyright 2019-2021 TQ-Systems GmbH
+# Copyright 2019-2022 TQ-Systems GmbH
 
 DESCRIPTION = "i.MX System Controller Firmware"
 LICENSE = "Proprietary"
@@ -9,7 +9,7 @@ SECTION = "BSP"
 
 PROVIDES = "imx-sc-firmware"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${PV}:${THISDIR}/${PN}:"
 
 # Need tq_imx-scfw-v1.2.7-b3357 or newer for build
 # (use SC_FIRMWARE_VERSION_TQ in package name)
@@ -27,18 +27,19 @@ S = "${WORKDIR}/${BPN}-${SC_FIRMWARE_NAME_TQ}"
 # clear vars to prevent default assignments
 SC_FIRMWARE_NAME = "invalid"
 
-SC_FIRMWARE_NAME_tqma8xdp-1gb-mba8xx = "mx8qx-tqma8xqp-1gb-mba8xx-scfw-tcm.bin"
-SC_FIRMWARE_NAME_tqma8xqp-1gb-mba8xx = "mx8qx-tqma8xqp-1gb-mba8xx-scfw-tcm.bin"
-SC_FIRMWARE_NAME_tqma8xqp-2gb-mba8xx = "mx8qx-tqma8xqp-2gb-mba8xx-scfw-tcm.bin"
-SC_FIRMWARE_NAME_tqma8xdp4-mba8xx = "mx8qx-tqma8xqp4-mba8xx-scfw-tcm.bin"
-SC_FIRMWARE_NAME_tqma8xqp4-mba8xx = "mx8qx-tqma8xqp4-mba8xx-scfw-tcm.bin"
+# TODO: move firmware name to machine config.
+SC_FIRMWARE_NAME:tqma8xdp-1gb-mba8xx = "mx8qx-tqma8xqp-1gb-mba8xx-scfw-tcm.bin"
+SC_FIRMWARE_NAME:tqma8xqp-1gb-mba8xx = "mx8qx-tqma8xqp-1gb-mba8xx-scfw-tcm.bin"
+SC_FIRMWARE_NAME:tqma8xqp-2gb-mba8xx = "mx8qx-tqma8xqp-2gb-mba8xx-scfw-tcm.bin"
+SC_FIRMWARE_NAME:tqma8xdp4-mba8xx = "mx8qx-tqma8xqp4-mba8xx-scfw-tcm.bin"
+SC_FIRMWARE_NAME:tqma8xqp4-mba8xx = "mx8qx-tqma8xqp4-mba8xx-scfw-tcm.bin"
 
-SC_FIRMWARE_NAME_tqma8xqps-mb-smarc-2 = "mx8qx-tqma8xqps-mb-smarc-2-scfw-tcm.bin"
-SC_FIRMWARE_NAME_tqma8xdps-mb-smarc-2 = "mx8qx-tqma8xqps-mb-smarc-2-scfw-tcm.bin"
-SC_FIRMWARE_NAME_tqma8xqps-mb-smarc-2-r0200 = "mx8qx-tqma8xqps-mb-smarc-2-scfw-tcm.bin"
+SC_FIRMWARE_NAME:tqma8xqps-mb-smarc-2 = "mx8qx-tqma8xqps-mb-smarc-2-scfw-tcm.bin"
+SC_FIRMWARE_NAME:tqma8xdps-mb-smarc-2 = "mx8qx-tqma8xqps-mb-smarc-2-scfw-tcm.bin"
+SC_FIRMWARE_NAME:tqma8xqps-mb-smarc-2-r0200 = "mx8qx-tqma8xqps-mb-smarc-2-scfw-tcm.bin"
 
-SC_FIRMWARE_NAME_tqma8qm-4gb-mba8x = "mx8qm-tqma8qm-4gb-scfw-tcm.bin"
-SC_FIRMWARE_NAME_tqma8qm-8gb-mba8x = "mx8qm-tqma8qm-8gb-scfw-tcm.bin"
+SC_FIRMWARE_NAME:tqma8qm-4gb-mba8x = "mx8qm-tqma8qm-4gb-scfw-tcm.bin"
+SC_FIRMWARE_NAME:tqma8qm-8gb-mba8x = "mx8qm-tqma8qm-8gb-scfw-tcm.bin"
 
 inherit deploy
 

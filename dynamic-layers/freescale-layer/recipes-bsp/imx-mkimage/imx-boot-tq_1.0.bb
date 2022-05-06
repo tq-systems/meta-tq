@@ -13,9 +13,9 @@ inherit use-imx-security-controller-firmware
 BOOT_TOOLS = "imx-boot-tools"
 
 IMX_EXTRA_FIRMWARE        = "firmware-imx-8 imx-sc-firmware imx-seco"
-IMX_EXTRA_FIRMWARE_append = " ${@bb.utils.contains('IMXBOOT_TARGETS', 'flash_linux_m4', 'virtual/imx-cortexm-demos', '', d)}"
-IMX_EXTRA_FIRMWARE_mx8m   = "firmware-imx-8m"
-IMX_EXTRA_FIRMWARE_mx8x   = "imx-sc-firmware imx-seco"
+IMX_EXTRA_FIRMWARE:append = " ${@bb.utils.contains('IMXBOOT_TARGETS', 'flash_linux_m4', 'virtual/imx-cortexm-demos', '', d)}"
+IMX_EXTRA_FIRMWARE:mx8m   = "firmware-imx-8m"
+IMX_EXTRA_FIRMWARE:mx8x   = "imx-sc-firmware imx-seco"
 
 DEPENDS += "\
     u-boot \
@@ -25,12 +25,12 @@ DEPENDS += "\
 "
 
 # xxd is a dependency of fspi_packer.sh
-DEPENDS_append = "\
+DEPENDS:append = "\
     xxd-native \
 "
 
 # imx8m needs mkimage and dtc for ITB images
-DEPENDS_append_mx8m = "\
+DEPENDS:append:mx8m = "\
     u-boot-mkimage-native \
     dtc-native \
 "
@@ -58,7 +58,7 @@ do_compile[depends] += "\
 SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
 
 ATF_MACHINE_NAME ?= "bl31-${ATF_PLATFORM}.bin"
-ATF_MACHINE_NAME_append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-optee', '', d)}"
+ATF_MACHINE_NAME:append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-optee', '', d)}"
 
 UBOOT_NAME = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
 UBOOT_SPL_NAME = "${@os.path.basename(d.getVar("SPL_BINARY"))}-${MACHINE}-${UBOOT_CONFIG}"
@@ -72,27 +72,27 @@ DEPLOY_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false
 IMXBOOT_TARGETS ??= "unknown"
 
 BOOT_STAGING       = "${S}/${IMX_BOOT_SOC_TARGET}"
-BOOT_STAGING_mx8m  = "${S}/iMX8M"
-BOOT_STAGING_mx8dx = "${S}/iMX8QX"
+BOOT_STAGING:mx8m  = "${S}/iMX8M"
+BOOT_STAGING:mx8dx = "${S}/iMX8QX"
 
 SOC_FAMILY      = "INVALID"
-SOC_FAMILY_mx8  = "mx8"
-SOC_FAMILY_mx8m = "mx8m"
-SOC_FAMILY_mx8x = "mx8x"
+SOC_FAMILY:mx8  = "mx8"
+SOC_FAMILY:mx8m = "mx8m"
+SOC_FAMILY:mx8x = "mx8x"
 
 REV_OPTION ?= ""
-REV_OPTION_mx8qxp = \
+REV_OPTION:mx8qxp = \
     "${@bb.utils.contains('MACHINE_FEATURES', 'soc-revb0', '', \
                                                            'REV=C0', d)}"
 
 ##
 # do assignment for TQMa8Xx[S] / TQMa8x SOM to enable bootstream with M4 demo
 ##
-M4_DEFAULT_IMAGE_tqma8xx ?= "rpmsg_lite_pingpong_rtos_linux_remote.bin"
-M4_DEFAULT_IMAGE_tqma8xxs ?= "rpmsg_lite_pingpong_rtos_linux_remote.bin"
+M4_DEFAULT_IMAGE:tqma8xx ?= "rpmsg_lite_pingpong_rtos_linux_remote.bin"
+M4_DEFAULT_IMAGE:tqma8xxs ?= "rpmsg_lite_pingpong_rtos_linux_remote.bin"
 
-M4_DEFAULT_IMAGE_tqma8x ?= "rpmsg_lite_pingpong_rtos_linux_remote_m40.bin"
-M4_1_DEFAULT_IMAGE_tqma8x ?= "rpmsg_lite_pingpong_rtos_linux_remote_m41.bin"
+M4_DEFAULT_IMAGE:tqma8x ?= "rpmsg_lite_pingpong_rtos_linux_remote_m40.bin"
+M4_1_DEFAULT_IMAGE:tqma8x ?= "rpmsg_lite_pingpong_rtos_linux_remote_m41.bin"
 
 compile_mx8m() {
     bbnote 8MQ/8MM/8MN/8MP boot binary build
@@ -280,6 +280,6 @@ do_deploy() {
 addtask deploy before do_build after do_compile
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-FILES_${PN} = "/boot"
+FILES:${PN} = "/boot"
 
 COMPATIBLE_MACHINE = "(mx8)"

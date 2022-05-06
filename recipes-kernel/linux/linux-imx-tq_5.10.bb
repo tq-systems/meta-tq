@@ -10,7 +10,7 @@ SRCREV = "1a23965fcc79bfa5ac9188912f7690dcbb2c8751"
 LINUX_RELEASE = "5.10"
 LINUX_VERSION = "${LINUX_RELEASE}.109"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
 SRC_URI = "\
     ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
@@ -19,10 +19,10 @@ SRC_URI = "\
 
 DEFAULT_PREFERENCE = "1"
 
-KBUILD_DEFCONFIG_mx6 = "imx_v7_defconfig"
-KBUILD_DEFCONFIG_mx8 = "imx_v8_defconfig"
+KBUILD_DEFCONFIG:mx6 = "imx_v7_defconfig"
+KBUILD_DEFCONFIG:mx8 = "imx_v8_defconfig"
 
-SRC_URI_mx6 = "\
+SRC_URI:mx6 = "\
     ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
     file://disable-highpte.cfg \
     file://dynamic-debug.cfg \
@@ -50,7 +50,7 @@ SRC_URI_mx6 = "\
     file://usb-serial-port.cfg \
 "
 
-SRC_URI_mx8 = "\
+SRC_URI:mx8 = "\
     ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
     file://local-version.cfg \
     file://tqma8-display-support.cfg \
@@ -71,10 +71,10 @@ SRC_URI_mx8 = "\
 "
 
 # Optional Basler camera support wich uses a specific patch set
-SRC_URI_append_mx8mp = " \
+SRC_URI:append:mx8mp = " \
     file://basler-camera;type=kmeta;destsuffix=basler-camera \
 "
-KERNEL_FEATURES_append_mx8mp = "${@bb.utils.contains('MACHINE_FEATURES', 'basler', ' basler-camera.scc', '', d)}"
+KERNEL_FEATURES:append:mx8mp = "${@bb.utils.contains('MACHINE_FEATURES', 'basler', ' basler-camera.scc', '', d)}"
 
 COMPATIBLE_MACHINE = "^("
 # COMPATIBLE_MACHINE .= "tqma7x"
@@ -92,4 +92,4 @@ COMPATIBLE_MACHINE .= "|tqma8mxml"
 COMPATIBLE_MACHINE .= "|tqma8mxnl"
 COMPATIBLE_MACHINE .= ")$"
 
-EXTRA_OEMAKE_append_mx8 = " ARCH=arm64"
+EXTRA_OEMAKE:append:mx8 = " ARCH=arm64"

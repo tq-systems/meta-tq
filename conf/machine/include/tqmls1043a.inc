@@ -8,7 +8,7 @@ require conf/machine/include/tqmls10xxa.inc
 #
 require conf/machine/include/tqmxx.inc
 
-UBOOT_ENTRYPOINT_ls1043a = "0x80008000"
+UBOOT_ENTRYPOINT:ls1043a = "0x80008000"
 
 # Image Options
 #

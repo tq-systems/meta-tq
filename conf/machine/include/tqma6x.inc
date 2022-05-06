@@ -8,7 +8,7 @@ MACHINEOVERRIDES =. "imx:mx6:tqma6x:"
 include conf/machine/include/imx-base.inc
 
 DEFAULTTUNE ?= "cortexa9thf-neon"
-require conf/machine/include/tune-cortexa9.inc
+require conf/machine/include/arm/armv7a/tune-cortexa9.inc
 
 # Machine specific options
 #
@@ -24,11 +24,11 @@ require conf/machine/include/tqmxx.inc
 
 KERNEL_IMAGETYPE = "zImage"
 
-PREFERRED_PROVIDER_u-boot_tqma6x ?= "u-boot-imx-tq"
-PREFERRED_PROVIDER_virtual/bootloader_tqma6x ?= "u-boot-imx-tq"
+PREFERRED_PROVIDER_u-boot:tqma6x ?= "u-boot-imx-tq"
+PREFERRED_PROVIDER_virtual/bootloader:tqma6x ?= "u-boot-imx-tq"
 
-UBOOT_SUFFIX_${MACHINE} ?= "imx"
-UBOOT_MAKE_TARGET_${MACHINE} ?= "u-boot.imx"
+UBOOT_SUFFIX:tqma6x ?= "imx"
+UBOOT_MAKE_TARGET:tqma6x ?= "u-boot.imx"
 
 # Image Options
 #

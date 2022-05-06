@@ -7,14 +7,14 @@ MACHINEOVERRIDES =. "imx:mx6:mx6ull:tqma6ullx:"
 
 include conf/machine/include/imx-base.inc
 
-DEFAULTTUNE_mx6ull ?= "cortexa7thf-neon"
-require conf/machine/include/tune-cortexa7.inc
+DEFAULTTUNE:mx6ull ?= "cortexa7thf-neon"
+require conf/machine/include/arm/armv7a/tune-cortexa7.inc
 
 # Machine specific options
 #
 MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree"
 MACHINE_EXTRA_RRECOMMENDS += " linux-firmware-imx-sdma-imx6q"
-MACHINE_FEATURES_append = " alsa ext2 rtc serial usbhost vfat can ubi"
+MACHINE_FEATURES:append = " alsa ext2 rtc serial usbhost vfat can ubi"
 
 # TQ u-boot and kernel
 #
@@ -22,11 +22,11 @@ require conf/machine/include/tqmxx.inc
 
 KERNEL_IMAGETYPE = "zImage"
 
-PREFERRED_PROVIDER_u-boot_tqma6ullx ?= "u-boot-imx-tq"
-PREFERRED_PROVIDER_virtual/bootloader_tqma6ullx ?= "u-boot-imx-tq"
+PREFERRED_PROVIDER_u-boot:tqma6ullx ?= "u-boot-imx-tq"
+PREFERRED_PROVIDER_virtual/bootloader:tqma6ullx ?= "u-boot-imx-tq"
 
-UBOOT_SUFFIX_${MACHINE} ?= "imx"
-UBOOT_MAKE_TARGET_${MACHINE} ?= "u-boot.imx"
+UBOOT_SUFFIX:${MACHINE} ?= "imx"
+UBOOT_MAKE_TARGET:${MACHINE} ?= "u-boot.imx"
 
 UBOOT_CONFIG ?= "sd qspi"
 
@@ -58,4 +58,4 @@ WKS_FILE_DEPENDS = "\
 "
 
 # TODO:
-#IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
+#IMAGE_INSTALL:append = " kernel-devicetree kernel-image-zimage"

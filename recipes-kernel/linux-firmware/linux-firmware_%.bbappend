@@ -1,8 +1,8 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI += " file://HY103880XB_SX-USBAC_210323.bin"
 
-do_install_append() {
+do_install:append() {
   install -d ${D}${base_libdir}/firmware/ath10k/QCA9377/hw1.1/
   # SDIO firmware is also used for USB device, even on hw1.1
   install -m 0644 ${B}/ath10k/QCA9377/hw1.0/firmware-sdio-5.bin ${D}${base_libdir}/firmware/ath10k/QCA9377/hw1.1/firmware-usb-5.bin

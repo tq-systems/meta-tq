@@ -6,11 +6,11 @@ require u-boot-tq.inc
 
 # inherit pythonnative
 
-DEPENDS_append = " dtc-native bc-native python3-native"
+DEPENDS:append = " dtc-native bc-native python3-native"
 
 BOOT_TOOLS = "imx-boot-tools"
 
-do_deploy_append_mx8m () {
+do_deploy:append:mx8m () {
     # Deploy the u-boot-nodtb.bin and ${UBOOT_DTB_NAME} for mkimage to generate boot binary
     if [ -n "${UBOOT_CONFIG}" ]
     then
@@ -33,4 +33,4 @@ do_deploy_append_mx8m () {
     fi
 }
 
-UBOOT_NAME_mx8 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
+UBOOT_NAME:mx8 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"

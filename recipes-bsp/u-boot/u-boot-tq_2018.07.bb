@@ -12,7 +12,7 @@ SRCBRANCH = "TQMLS10xxA-u-boot-v2018.07"
 
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 
-do_configure_prepend() {
+do_configure:prepend() {
     if [ "${UBOOT_RCW_CONFIG}" ]; then
         unset i j
         if [ "${UBOOT_CONFIG}" ]; then
@@ -32,9 +32,9 @@ do_configure_prepend() {
 }
 
 UBOOT_WITHPBL = ""
-UBOOT_WITHPBL_fsl-lsch2 = "true"
+UBOOT_WITHPBL:fsl-lsch2 = "true"
 
-do_compile_append () {
+do_compile:append () {
  unset i j
     if [ "${UBOOT_CONFIG}" ]; then
         for config in ${UBOOT_MACHINE}; do
@@ -73,6 +73,6 @@ COMPATIBLE_MACHINE = "tqmls10xxa"
 
 ####
 #PACKAGES += "${PN}-images"
-#FILES_${PN}-images += "/boot"
+#FILES:${PN}-images += "/boot"
 
 

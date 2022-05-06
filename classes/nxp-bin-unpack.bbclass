@@ -29,11 +29,11 @@ NXP_EULA_FILE_MD5SUM ?= \
 
 LIC_FILES_CHKSUM_LAYER ?= "file://${NXP_EULA_FILE};md5=${NXP_EULA_FILE_MD5SUM}"
 LIC_FILES_CHKSUM_LAYER[vardepsexclude] += "NXP_EULA_FILE"
-LIC_FILES_CHKSUM_append = " ${LIC_FILES_CHKSUM_LAYER}"
+LIC_FILES_CHKSUM:append = " ${LIC_FILES_CHKSUM_LAYER}"
 
 LIC_FILES_CHKSUM[vardepsexclude] += "NXP_EULA_FILE"
 
-do_fetch_prepend() {
+do_fetch:prepend() {
     if "Proprietary" not in d.getVar("LICENSE"):
         bb.fatal("The recipe LICENSE should include Proprietary but is " + d.getVar("LICENSE") + ".")
 }

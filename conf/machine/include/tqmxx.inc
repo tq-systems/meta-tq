@@ -7,12 +7,12 @@ TQ_GIT_PROTOCOL ?= "https"
 # target not supported in older U-Boot
 UBOOT_INITIAL_ENV ?= ""
 
-PREFERRED_PROVIDER_ptpd_imx = "ptpd"
-PREFERRED_PROVIDER_ptpd_qoriq = "${@bb.utils.contains('BBFILE_COLLECTIONS', 'freescale-layer', 'ptpd-qoriq', 'ptpd', d)}"
+PREFERRED_PROVIDER_ptpd:imx = "ptpd"
+PREFERRED_PROVIDER_ptpd:qoriq = "${@bb.utils.contains('BBFILE_COLLECTIONS', 'freescale-layer', 'ptpd-qoriq', 'ptpd', d)}"
 PREFERRED_PROVIDER_ptpd ?= "ptpd"
 
-DEFAULT_KERNEL_imx ??= "linux-imx-tq"
-DEFAULT_KERNEL_imx_use-mainline-bsp ??= "linux-tq"
+DEFAULT_KERNEL:imx ??= "linux-imx-tq"
+DEFAULT_KERNEL:imx:use-mainline-bsp ??= "linux-tq"
 PREFERRED_PROVIDER_virtual/kernel ??= "${DEFAULT_KERNEL}"
 
 # Return a list of device tree files depending on the virtual/kernel

@@ -5,10 +5,16 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 inherit kernel
 
-DEPENDS += " lzop-native bc-native openssl-native"
-PROVIDES += "linux-tq"
+DEPENDS += "\
+    bc-native \
+    lzop-native \
+    openssl-native \
+"
 
-SRC_URI = " \
+PROVIDES += "linux-tq"
+PROVIDES += "linux-ti-staging"
+
+SRC_URI = "\
   ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
   file://defconfig \
 "

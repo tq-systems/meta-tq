@@ -38,19 +38,19 @@ do_install () {
 }
 
 # Use same license scheme as in recipe linux-firmware
-FILES_${PN}-nxp-license = "${nonarch_base_libdir}/firmware/LICENCE.NXP-EULA-v24"
+FILES:${PN}-nxp-license = "${nonarch_base_libdir}/firmware/LICENCE.NXP-EULA-v24"
 
 
-LICENSE_${PN}-vpu-imx6q = "NXP-EULA-v24"
-FILES_${PN}-vpu-imx6q = "${nonarch_base_libdir}/firmware/vpu/vpu_fw_imx6q.bin"
-RDEPENDS_${PN}-vpu-imx6q += "${PN}-nxp-license"
-RPROVIDES_${PN}-vpu-imx6q = "firmware-imx-vpu-imx6q"
-RREPLACES_${PN}-vpu-imx6q = "firmware-imx-vpu-imx6q"
-RCONFLICTS_${PN}-vpu-imx6q = "firmware-imx-vpu-imx6q"
+LICENSE:${PN}-vpu-imx6q = "NXP-EULA-v24"
+FILES:${PN}-vpu-imx6q = "${nonarch_base_libdir}/firmware/vpu/vpu_fw_imx6q.bin"
+RDEPENDS:${PN}-vpu-imx6q += "${PN}-nxp-license"
+RPROVIDES:${PN}-vpu-imx6q = "firmware-imx-vpu-imx6q"
+RREPLACES:${PN}-vpu-imx6q = "firmware-imx-vpu-imx6q"
+RCONFLICTS:${PN}-vpu-imx6q = "firmware-imx-vpu-imx6q"
 
-LICENSE_${PN}-vpu-imx6d = "NXP-EULA-v24"
-FILES_${PN}-vpu-imx6d = "${nonarch_base_libdir}/firmware/vpu/vpu_fw_imx6d.bin"
-RDEPENDS_${PN}-vpu-imx6d += "${PN}-nxp-license"
-RPROVIDES_${PN}-vpu-imx6d = "firmware-imx-vpu-imx6d"
-RREPLACES_${PN}-vpu-imx6d = "firmware-imx-vpu-imx6d"
-RCONFLICTS_${PN}-vpu-imx6d = "firmware-imx-vpu-imx6d"
+LICENSE:${PN}-vpu-imx6d = "NXP-EULA-v24"
+FILES:${PN}-vpu-imx6d = "${nonarch_base_libdir}/firmware/vpu/vpu_fw_imx6d.bin"
+RDEPENDS:${PN}-vpu-imx6d += "${PN}-nxp-license"
+RPROVIDES:${PN}-vpu-imx6d = "firmware-imx-vpu-imx6d"
+RREPLACES:${PN}-vpu-imx6d = "firmware-imx-vpu-imx6d"
+RCONFLICTS:${PN}-vpu-imx6d = "firmware-imx-vpu-imx6d"

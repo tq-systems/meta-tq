@@ -11,16 +11,16 @@ SRCREV = "5f33bc464d83b11e15fcdf7f507ee83578257bc9"
 LINUX_RELEASE = "5.4"
 LINUX_VERSION = "${LINUX_RELEASE}.87"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
 SRC_URI = "\
     ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
     file://defconfig \
 "
 
-SRC_URI_append_tqmls102xa = "\
+SRC_URI:append:tqmls102xa = "\
     file://tqmls102x-enable-edac.cfg \
 "
 
 COMPATIBLE_MACHINE = "tqmls102xa"
-COMPATIBLE_MACHINE_append = "|tqmls10xxa"
+COMPATIBLE_MACHINE:append = "|tqmls10xxa"

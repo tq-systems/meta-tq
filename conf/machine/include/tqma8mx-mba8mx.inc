@@ -35,9 +35,9 @@ IMAGE_BOOT_FILES += "\
 
 IMXBOOT_TARGETS ?= "flash_hdmi_spl_uboot flash_spl_uboot"
 
-WKS_FILE_DEPENDS_append = "\
+WKS_FILE_DEPENDS:append = "\
     virtual/imx-cortexm-demos \
 "
 
-MACHINE_FEATURES_append = " wifi camera"
-MACHINE_EXTRA_RRECOMMENDS_append = " linux-firmware-ath10k"
+MACHINE_FEATURES:append = " wifi camera"
+MACHINE_EXTRA_RRECOMMENDS:append = " linux-firmware-ath10k"

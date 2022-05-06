@@ -34,7 +34,7 @@ KCONFIG_MODE="--alldefconfig"
 # instead fiddling with .scmversion file we fix this using a localversion file
 # in build directory
 ####
-do_configure_append() {
+do_configure:append() {
     head=$(git --git-dir=${S}/.git rev-parse --short HEAD 2> /dev/null)
     printf "%s%s%s" "${KERNEL_LOCALVERSION}" +g ${head} > ${B}/localversion-tq
 }

@@ -15,9 +15,9 @@ SRCREV = "8672a5f5abcd3a354dcab07e03f2a8a69b2e962d"
 S = "${WORKDIR}/git"
 
 MC_CFG ?= ""
-MC_CFG_ls1088a = "ls1088a"
+MC_CFG:ls1088a = "ls1088a"
 MC_CFG_ls2088a = "ls2088a"
-MC_CFG_lx2160a = "lx2160a"
+MC_CFG:lx2160a = "lx2160a"
 
 MC_FLAVOUR ?= "RDB"
 
@@ -45,5 +45,5 @@ do_deploy () {
 addtask deploy after do_install
 
 PACKAGES += "${PN}-image"
-FILES_${PN}-image += "/boot"
+FILES:${PN}-image += "/boot"
 COMPATIBLE_MACHINE = "(qoriq-arm64)"

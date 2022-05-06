@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI = "\
     file://10-eth0.network \
@@ -14,21 +14,21 @@ HAS_CAN0 ??= "true"
 HAS_CAN1 ??= "true"
 
 # adjust available interfaces for some boards
-HAS_ETH1_tqma8mq ?= "false"
-HAS_CAN0_tqma8mq ?= "false"
-HAS_CAN1_tqma8mq ?= "false"
+HAS_ETH1:tqma8mq ?= "false"
+HAS_CAN0:tqma8mq ?= "false"
+HAS_CAN1:tqma8mq ?= "false"
 
-HAS_ETH1_tqma8mxml ?= "false"
-HAS_CAN0_tqma8mxml ?= "false"
-HAS_CAN1_tqma8mxml ?= "false"
+HAS_ETH1:tqma8mxml ?= "false"
+HAS_CAN0:tqma8mxml ?= "false"
+HAS_CAN1:tqma8mxml ?= "false"
 
-HAS_ETH1_tqma8mxnl ?= "false"
-HAS_CAN0_tqma8mxnl ?= "false"
-HAS_CAN1_tqma8mxnl ?= "false"
+HAS_ETH1:tqma8mxnl ?= "false"
+HAS_CAN0:tqma8mxnl ?= "false"
+HAS_CAN1:tqma8mxnl ?= "false"
 
-HAS_ETH1_tqmls1028a ?= "false"
+HAS_ETH1:tqmls1028a ?= "false"
 
-do_install_append() {
+do_install:append() {
     # all our boards have at least one native network port
     install -d ${D}${systemd_unitdir}/network/
     install -m 0644 "${WORKDIR}/10-eth0.network" ${D}${systemd_unitdir}/network/
@@ -47,6 +47,6 @@ do_install_append() {
     fi
 }
 
-FILES_${PN} = "\
+FILES:${PN} = "\
     ${systemd_unitdir}/network/ \
 "

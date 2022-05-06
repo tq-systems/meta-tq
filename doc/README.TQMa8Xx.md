@@ -208,8 +208,8 @@ To build bootstream for UUU tool the following settings needs to be in your
 configuration. (This is already the case for starterkit machine configurations):
 
 ```
-UBOOT_CONFIG_tqma8xx = "mfgtool"
-IMXBOOT_TARGETS_tqma8xx = "flash_spl"
+UBOOT_CONFIG:tqma8xx = "mfgtool"
+IMXBOOT_TARGETS:tqma8xx = "flash_spl"
 ```
 
 Rebuild boot stream:

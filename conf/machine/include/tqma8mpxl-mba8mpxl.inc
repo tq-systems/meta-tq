@@ -11,13 +11,13 @@ BOARD_DEVICETREE_FILES = "\
     imx8mp-tqma8mpql-mba8mpxl-lvds-tm070jvhg33.dtb \
     imx8mp-tqma8mpql-mba8mpxl-rpmsg.dtb \
 "
-BOARD_DEVICETREE_FILES_append_mx8mp = "${@bb.utils.contains('MACHINE_FEATURES', 'basler', ' imx8mp-tqma8mpql-mba8mpxl-lvds-basler.dtb', '', d)}"
+BOARD_DEVICETREE_FILES:append:mx8mp = "${@bb.utils.contains('MACHINE_FEATURES', 'basler', ' imx8mp-tqma8mpql-mba8mpxl-lvds-basler.dtb', '', d)}"
 
 KERNEL_DEVICETREE = ""
 
 require conf/machine/include/tqma8-common.inc
 
-MACHINE_FEATURES_append = "\
+MACHINE_FEATURES:append = "\
   wifi \
   camera \
 "
@@ -41,6 +41,6 @@ IMAGE_BOOT_FILES += "\
     rpmsg_lite_pingpong_rtos_linux_remote.bin \
 "
 
-WKS_FILE_DEPENDS_append = "\
+WKS_FILE_DEPENDS:append = "\
     virtual/imx-cortexm-demos \
 "

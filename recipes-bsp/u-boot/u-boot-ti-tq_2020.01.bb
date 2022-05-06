@@ -19,5 +19,5 @@ SPL_BINARY ?= "tispl.bin"
 
 PACKAGECONFIG[atf] = "ATF=${STAGING_DIR_HOST}/firmware/bl31.bin,,trusted-firmware-a"
 PACKAGECONFIG[optee] = "TEE=${STAGING_DIR_HOST}${nonarch_base_libdir}/firmware/bl32.bin,,optee-os"
-PACKAGECONFIG_append_aarch64 = " atf optee"
+PACKAGECONFIG:append:aarch64 = " atf optee"
 EXTRA_OEMAKE += "${PACKAGECONFIG_CONFARGS}"

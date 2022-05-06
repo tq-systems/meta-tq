@@ -2,27 +2,26 @@
 
 require conf/machine/include/soc-family.inc
 
+MACHINEOVERRIDES =. "fsl-lsch3:ls1028a:tqmls1028a:"
+
 # source the machine specific features for RCW, multimedia etc. from
 # meta-freescale
 require conf/machine/include/qoriq-arm64.inc
 
-MACHINEOVERRIDES =. "fsl-lsch3:ls1028a:tqmls1028a:"
-
-
-require conf/machine/include/tune-cortexa72.inc
+require conf/machine/include/arm/armv8a/tune-cortexa72.inc
 
 # TQ u-boot and kernel
 #
 require conf/machine/include/tqmxx.inc
 
-PREFERRED_PROVIDER_u-boot_tqmls1028a ?= "u-boot-lsdk-tq"
-PREFERRED_PROVIDER_virtual/bootloader_tqmls1028a ?= "u-boot-lsdk-tq"
+PREFERRED_PROVIDER_u-boot:tqmls1028a ?= "u-boot-lsdk-tq"
+PREFERRED_PROVIDER_virtual/bootloader:tqmls1028a ?= "u-boot-lsdk-tq"
 PREFERRED_PROVIDER_virtual/kernel ??= "linux-imx-tq"
 
 # Define the default image type, overwrite default from qoriq-arm64.inc
 KERNEL_IMAGETYPE = "Image.gz"
 
-UBOOT_ENTRYPOINT_ls1028a = "0x80008000"
+UBOOT_ENTRYPOINT:ls1028a = "0x80008000"
 
 # Machine specific options
 #
@@ -31,7 +30,7 @@ MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree udev-extraconf"
 
 # provide info about machine's capabilities
 # OP-TEE is currently untested, so we don't enable the feature for now
-MACHINE_FEATURES_append = " alsa ext2 pci rtc serial usbhost vfat can ubi"
+MACHINE_FEATURES:append = " alsa ext2 pci rtc serial usbhost vfat can ubi"
 
 # Image Options
 #
