@@ -1,0 +1,48 @@
+From 23ea4aa5d5b5140036ead05808963b2e549cfd65 Mon Sep 17 00:00:00 2001
+From: Martin Schmiedel <Martin.Schmiedel@tq-group.com>
+Date: Fri, 6 May 2022 13:25:25 +0200
+Subject: [PATCH] ti-sgx-ddk-km: properly handle more OE/YP compiler prefix
+
+The additional patch for ti-sgx-ddk-km remaps the arm-oe-linux-gnueabi prefix
+to the arm-linux-gnueabihf preferred target. Same should be done for the
+arm-tq-linux-gnueabi and arm-tq-linux-musleabi prefix.
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+
+%% original patch: 0001-ti-sgx-ddk-km-properly-handle-more-OE-YP-compiler-pr.patch
+
+work in progress
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+
+cleanup
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ eurasia_km/eurasiacon/build/linux2/config/compiler.mk | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/eurasia_km/eurasiacon/build/linux2/config/compiler.mk b/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
+index dead2f9..86bd448 100644
+--- a/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
++++ b/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
+@@ -68,12 +68,13 @@ define calculate-compiler-preferred-target
+   ifneq ($$(filter aarch64-%,$$($(1)_compiler_preferred_target)),)
+    $(1)_compiler_preferred_target := aarch64-linux-gnu
+   endif
++  # this check needs to be before generic arm-%-gnueabi check. Otherwise we fall back to gnueabi / armel
++  ifneq ($$(filter arm-%-gnueabihf arm-oe-linux-gnueabi arm-poky-linux-gnueabi arm-tq-linux-musleabi arm-tq-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
++   $(1)_compiler_preferred_target := arm-linux-gnueabihf
++  endif
+   ifneq ($$(filter arm-%-gnueabi armv7a-cros-linux-gnueabi armv7hl-redhat-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
+    $(1)_compiler_preferred_target := arm-linux-gnueabi
+   endif
+-  ifneq ($$(filter arm-%-gnueabihf,$$($(1)_compiler_preferred_target)),)
+-   $(1)_compiler_preferred_target := arm-linux-gnueabihf
+-  endif
+  endif
+ endef
+ 
+-- 
+2.17.1
+
