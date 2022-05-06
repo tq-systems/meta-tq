@@ -59,4 +59,19 @@ UBI_VOLNAME = "rootfs"
 
 # List common SoC features
 
-MACHINE_FEATURES_append = " kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx gpu mmip dsp can"
+MACHINE_FEATURES_append = "\
+    alsa \
+    apm \
+    can \
+    dsp \
+    ethernet \
+    ext2 \
+    gpu \
+    kernel26 \
+    mmip \
+    screen \
+    sgx \
+    usbgadget \
+    usbhost \
+    vfat \
+"
