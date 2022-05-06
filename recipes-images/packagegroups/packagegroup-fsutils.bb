@@ -14,7 +14,7 @@ MTD_UTILS_PACKAGES = "\
     mtd-utils-ubifs \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     parted \
     e2fsprogs \
     ${@bb.utils.contains('BBFILE_COLLECTIONS', 'filesystems-layer', ' f2fs-tools', '', d)} \

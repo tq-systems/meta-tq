@@ -18,7 +18,7 @@ ALSA_RDEPENDS = "\
     alsa-utils-speakertest \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${@bb.utils.contains('COMBINED_FEATURES', 'alsa', ' ${ALSA_RDEPENDS}', '', d)} \
     atop \
     dstat \
@@ -40,14 +40,14 @@ RDEPENDS_${PN} = "\
 # although we should use openssh, prepare to use the packagegroup with dropbear
 # sftp is needed for IDE like QtCreator
 #
-RRECOMMENDS_${PN} = "\
+RRECOMMENDS:${PN} = "\
     openssh-sftp-server \
 "
 
 # note: kmscube is only available if we have opengl and if virtual/libgbm
 # is built. Since this is at least not the case for TQMa6x with vendor graphic
 # stack we need this ugly construct
-RRECOMMENDS_${PN} += "\
+RRECOMMENDS:${PN} += "\
     ${@oe.utils.ifelse( \
         bb.utils.contains('DISTRO_FEATURES', 'opengl', True, False, d) and \
 	    d.getVar('PREFERRED_PROVIDER_virtual/libgbm') != "", \

@@ -31,7 +31,7 @@ INHERIT += "image-prelink"
 INHERIT += "image-mklibs"
 
 # include the version package
-IMAGE_INSTALL_append = " os-release"
+IMAGE_INSTALL:append = " os-release"
 
 # listed checks from ERROR_QA to WARN_QA (from insane.bbclass)
 ERROR_TO_WARN_QA = "version-going-backwards"

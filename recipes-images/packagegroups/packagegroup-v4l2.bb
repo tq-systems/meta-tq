@@ -29,7 +29,7 @@ GST_PKGS = "\
     gstreamer1.0-plugin-bayer2rgb-neon \
 "
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     ${GST_PKGS} \
     bayer2rgb-neon-bin \
     v4l-utils \

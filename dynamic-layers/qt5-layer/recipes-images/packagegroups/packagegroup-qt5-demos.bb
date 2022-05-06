@@ -5,7 +5,7 @@ LICENSE = "MIT"
 
 inherit packagegroup
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     qtbase \
     qtserialport \
     qtdeclarative \
@@ -13,7 +13,7 @@ RDEPENDS_${PN} = "\
     qwt-qt5 \
 "
 
-RDEPENDS_${PN}_append = "\
+RDEPENDS:${PN}:append = "\
     qwt-qt5-examples \
 "
 
@@ -22,6 +22,6 @@ QT5_OPENGL_DEMOS ="\
     qt5everywheredemo \
 "
 
-RDEPENDS_${PN}_append = "\
+RDEPENDS:${PN}:append = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', "${QT5_OPENGL_DEMOS}", '', d)} \
 "

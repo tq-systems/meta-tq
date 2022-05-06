@@ -19,7 +19,7 @@ DISTRO_SHORT_NAME = "spaetzle"
 # Make sure we have sysvinit in the list. Needed to get tasks injected by
 # update-rc.d.bbclass. This will bring in the initscripts from different
 # packages
-DISTRO_FEATURES_append = " sysvinit"
+DISTRO_FEATURES:append = " sysvinit"
 
 # We have some images that can't be built with spaetzle
 PNBLACKLIST[tq-image-weston] = "not buildable with spaetzle: use tq-image-small"
@@ -41,6 +41,6 @@ VIRTUAL-RUNTIME_keymaps = "keymaps"
 # force removal of systemd from DISTRO_FEATURES
 # take care when updating yocto, at the moment sysvinit must not be removed,
 # see above
-DISTRO_FEATURES_BACKFILL_CONSIDERED_append = " systemd"
+DISTRO_FEATURES_BACKFILL_CONSIDERED:append = " systemd"
 
-IMAGE_FSTYPES_append = "${@bb.utils.contains('MACHINE_FEATURES', 'ubi', ' ubi', '', d)}"
+IMAGE_FSTYPES:append = "${@bb.utils.contains('MACHINE_FEATURES', 'ubi', ' ubi', '', d)}"

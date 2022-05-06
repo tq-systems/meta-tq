@@ -1,1 +1,1 @@
-PACKAGECONFIG_append = " bat "
+PACKAGECONFIG:append = " bat "

@@ -8,4 +8,4 @@ This creates a small image, that must not be used for production - \
 especially from the aspect of security."
 
 # enable root login w/o password and passwordless ssh login
-IMAGE_FEATURES_append = " debug-tweaks"
+IMAGE_FEATURES:append = " debug-tweaks"

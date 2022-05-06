@@ -16,14 +16,14 @@ PV = "0.6.1+git${SRCPV}"
 inherit autotools ptest pkgconfig lib_package
 
 REQUIRED_TUNE_FEATURES = "neon"
-REQUIRED_TUNE_FEATURES_aarch64 = ""
+REQUIRED_TUNE_FEATURES:aarch64 = ""
 
 DEPENDS += "gengetopt-native"
 
 PACKAGES =+ "${PN}-tests"
 
-FILES_${PN}-dbg += "${PTEST_PATH}/.debug"
+FILES:${PN}-dbg += "${PTEST_PATH}/.debug"
 
 PTEST_PATH = "${libdir}/bayer2rgb/testsuite"
-FILES_${PN}-tests += "${libdir}/bayer2rgb/testsuite"
-RDEPENDS_${PN}-tests += "bash"
+FILES:${PN}-tests += "${libdir}/bayer2rgb/testsuite"
+RDEPENDS:${PN}-tests += "bash"

@@ -5,7 +5,7 @@
 PACKAGECONFIG ?= ""
 
 # remove these, since thy depend on perl
-RDEPENDS_${PN}_remove = "${PN}-sensorsdetect"
-RDEPENDS_${PN}_remove = "${PN}-sensorsconfconvert"
+RDEPENDS:${PN}:remove = "${PN}-sensorsdetect"
+RDEPENDS:${PN}:remove = "${PN}-sensorsconfconvert"
 
 SYSTEMD_AUTO_ENABLE = "enable"

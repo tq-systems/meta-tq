@@ -18,8 +18,8 @@ PREFERRED_PROVIDER_virtual/libgbm = "mesa"
 # Support building some machines without having neither mainline kernel support
 # nor linux-yocto-tiny
 # TODO: remove as soon we have a linux-tq recipe for the machine
-PREFERRED_PROVIDER_virtual/kernel_tqma57xx ?= "linux-ti-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqmls1012al ?= "linux-imx-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqmls1028a ?= "linux-imx-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqmls1088a ?= "linux-lsdk-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqmlx2160a ?= "linux-lsdk-tq"
+PREFERRED_PROVIDER_virtual/kernel:tqma57xx ?= "linux-ti-tq"
+PREFERRED_PROVIDER_virtual/kernel:tqmls1012al ?= "linux-imx-tq"
+PREFERRED_PROVIDER_virtual/kernel:tqmls1028a ?= "linux-imx-tq"
+PREFERRED_PROVIDER_virtual/kernel:tqmls1088a ?= "linux-lsdk-tq"
+PREFERRED_PROVIDER_virtual/kernel:tqmlx2160a ?= "linux-lsdk-tq"

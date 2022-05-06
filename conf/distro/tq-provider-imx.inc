@@ -12,7 +12,7 @@ PREFERRED_PROVIDER_virtual/kernel ?= "linux-imx-tq"
 
 PREFERRED_PROVIDER_virtual/bootloader = "u-boot-imx-tq"
 
-PREFERRED_PROVIDER_virtual/libgbm_tqma6x = ""
-PREFERRED_PROVIDER_virtual/libgbm_tqma7x = ""
-PREFERRED_PROVIDER_virtual/libgbm_tqma6ulx = ""
-PREFERRED_PROVIDER_virtual/libgbm_tqma6ullx = ""
+PREFERRED_PROVIDER_virtual/libgbm:tqma6x = ""
+PREFERRED_PROVIDER_virtual/libgbm:tqma7x = ""
+PREFERRED_PROVIDER_virtual/libgbm:tqma6ulx = ""
+PREFERRED_PROVIDER_virtual/libgbm:tqma6ullx = ""

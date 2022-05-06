@@ -4,13 +4,13 @@
 #
 DEPENDS += "figlet-native"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
-SRC_URI_append = "\
+SRC_URI:append = "\
     file://handle_issue.sh \
 "
 
-dirs755_append = "\
+dirs755:append = "\
     ${sysconfdir}/profile.d \
 "
 
@@ -18,11 +18,11 @@ dirs755_append = "\
 VENDOR_LONG_NAME ??= "TQ-Systems"
 DISTRO_SHORT_NAME ??= "dumpling"
 
-do_install_append() {
+do_install:append() {
     install -m 0755 ${WORKDIR}/handle_issue.sh ${D}${sysconfdir}/profile.d/handle_issue.sh
 }
 
-do_install_basefilesissue_append() {
+do_install_basefilesissue:append() {
     # rewrite issue.net to prevent telnetd escape codes in the banner
     if [ -n "${DISTRO_NAME}" ]; then
         printf "%s" "${DISTRO_NAME}" > ${D}${sysconfdir}/issue.net

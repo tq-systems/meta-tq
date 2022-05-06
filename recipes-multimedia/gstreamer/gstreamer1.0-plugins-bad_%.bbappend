@@ -1,1 +1,1 @@
-PACKAGECONFIG_append = " kms"
+PACKAGECONFIG:append = " kms"

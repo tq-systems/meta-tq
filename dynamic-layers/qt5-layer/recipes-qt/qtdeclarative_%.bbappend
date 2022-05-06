@@ -1,1 +1,1 @@
-PACKAGECONFIG_append_class-target = " examples"
+PACKAGECONFIG:append:class-target = " examples"

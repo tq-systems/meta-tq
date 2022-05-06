@@ -12,8 +12,8 @@ directly suitable for production - also from the aspect of security."
 
 LICENSE = "MIT"
 
-IMAGE_FEATURES_remove = "package-management"
-IMAGE_FEATURES_append = " splash"
+IMAGE_FEATURES:remove = "package-management"
+IMAGE_FEATURES:append = " splash"
 
 ###
 # this may be a little bit overkill
@@ -24,7 +24,7 @@ THISIMAGE_GSTREAMER_PLUGINS = "\
     gstreamer1.0-plugins-bad-meta \
 "
 
-IMAGE_INSTALL_append = "\
+IMAGE_INSTALL:append = "\
     weston-examples \
     ${THISIMAGE_GSTREAMER_PLUGINS} \
 "
