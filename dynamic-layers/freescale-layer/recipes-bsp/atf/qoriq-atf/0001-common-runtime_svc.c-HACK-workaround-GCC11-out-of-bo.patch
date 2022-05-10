@@ -1,0 +1,31 @@
+From 5c0374ad019bc63e1ad45af0f50358821c154f21 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Tue, 10 May 2022 10:15:38 +0200
+Subject: [PATCH] common/runtime_svc.c [HACK] workaround GCC11 out of bounds
+ warning
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ common/runtime_svc.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/common/runtime_svc.c b/common/runtime_svc.c
+index 0ea4cd093..8e6e83061 100644
+--- a/common/runtime_svc.c
++++ b/common/runtime_svc.c
+@@ -47,13 +47,14 @@ uintptr_t handle_runtime_svc(uint32_t smc_fid,
+ 	index = rt_svc_descs_indices[idx];
+ 	if (index < 0 || index >= (int)RT_SVC_DECS_NUM)
+ 		SMC_RET1(handle, SMC_UNK);
+-
++#pragma GCC diagnostic ignored "-Warray-bounds"
+ 	rt_svc_descs = (rt_svc_desc_t *) RT_SVC_DESCS_START;
+ 
+ 	get_smc_params_from_ctx(handle, x1, x2, x3, x4);
+ 
+ 	return rt_svc_descs[index].handle(smc_fid, x1, x2, x3, x4, cookie,
+ 						handle, flags);
++#pragma GCC diagnostic pop
+ }
+ 
+ /*******************************************************************************
