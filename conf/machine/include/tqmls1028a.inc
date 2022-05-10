@@ -26,11 +26,25 @@ UBOOT_ENTRYPOINT:ls1028a = "0x80008000"
 # Machine specific options
 #
 
-MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree udev-extraconf"
+MACHINE_EXTRA_RRECOMMENDS += "\
+    kernel-devicetree \
+    kernel-modules \
+    udev-extraconf \
+"
 
 # provide info about machine's capabilities
 # OP-TEE is currently untested, so we don't enable the feature for now
-MACHINE_FEATURES:append = " alsa ext2 pci rtc serial usbhost vfat can ubi"
+MACHINE_FEATURES:append = "\
+    alsa \
+    can \
+    ext2 \
+    pci \
+    rtc \
+    serial \
+    ubi \
+    usbhost \
+    vfat \
+"
 
 # Image Options
 #
@@ -48,11 +62,11 @@ UBI_VOLNAME = "root"
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
-ATF_RCW_VARIANTS ?= " \
-    default/rcw_1300_sd.bin \
-    default/rcw_1300_spi_nor.bin \
+ATF_RCW_VARIANTS ?= "\
     default/rcw_800_sd.bin \
     default/rcw_800_spi_nor.bin\
+    default/rcw_1300_sd.bin \
+    default/rcw_1300_spi_nor.bin \
 "
 RCWSD ?= "default/rcw_1300_sd"
 RCWXSPI ?= "default/rcw_1300_spi_nor"
