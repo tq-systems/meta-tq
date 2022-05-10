@@ -15,17 +15,32 @@ PREFERRED_PROVIDER_virtual/kernel ??= "linux-tq"
 
 # Machine specific options
 #
-MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree udev-extraconf"
+MACHINE_EXTRA_RRECOMMENDS += "\
+    kernel-devicetree \
+    kernel-modules \
+    udev-extraconf \
+"
 
 # provide info about machine's capabilities
-MACHINE_FEATURES:append = " ext2 pci rtc serial usbhost vfat ubi"
+MACHINE_FEATURES:append = "\
+    ext2 \
+    pci \
+    rtc \
+    serial \
+    ubi \
+    usbhost \
+    vfat \
+"
 
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-EXTRA_IMAGEDEPENDS:append:fsl-lsch2 += "fm-ucode"
-EXTRA_IMAGEDEPENDS:append:fsl-lsch3 += "rcw mc-utils management-complex"
-
+EXTRA_IMAGEDEPENDS:append:fsl-lsch2 = " fm-ucode"
+EXTRA_IMAGEDEPENDS:append:fsl-lsch3 = "\
+    management-complex \
+    mc-utils \
+    rcw \
+"
 
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
