@@ -1,12 +1,15 @@
 # Common definitions for TQ-Systems GmbH TQMLS1043A modules
 
-MACHINEOVERRIDES =. "fsl-lsch2:ls1043a:tqmls10xxa:"
+MACHINEOVERRIDES =. "fsl-lsch2:ls1043a:tqmls10xxa:tqmls104xa"
+
+# TQ-Systems U-Boot and kernel has to be set before qoriq-arm64.inc
+# to allow weak settings
+#
+PREFERRED_PROVIDER_u-boot ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/kernel ?= "linux-tq"
 
 require conf/machine/include/tqmls10xxa.inc
-
-# TQ u-boot and kernel
-#
-require conf/machine/include/tqmxx.inc
 
 UBOOT_ENTRYPOINT:ls1043a = "0x80008000"
 

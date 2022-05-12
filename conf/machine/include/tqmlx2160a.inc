@@ -4,20 +4,22 @@ require conf/machine/include/soc-family.inc
 
 MACHINEOVERRIDES =. "fsl-lsch3:lx2160a:tqmlx2160a:"
 
+# TQ-Systems U-Boot and kernel has to be set before qoriq-arm64.inc
+# to allow weak settings
+#
+require conf/machine/include/tqmxx.inc
+
+PREFERRED_PROVIDER_u-boot ?= "u-boot-lsdk-tq"
+PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-lsdk-tq"
+PREFERRED_PROVIDER_virtual/kernel ?= "linux-lsdk-tq"
+PREFERRED_VERSION_qoriq-atf = "1.5%"
+
 # source the machine specific features for RCW, multimedia etc. from
 # meta-freescale
 require conf/machine/include/qoriq-arm64.inc
 
 require conf/machine/include/arm/armv8a/tune-cortexa72.inc
 
-# TQ u-boot and kernel
-#
-require conf/machine/include/tqmxx.inc
-
-PREFERRED_PROVIDER_u-boot:tqmlx2160a ?= "u-boot-lsdk-tq"
-PREFERRED_PROVIDER_virtual/bootloader:tqmlx2160a ?= "u-boot-lsdk-tq"
-PREFERRED_PROVIDER_virtual/kernel ??= "linux-lsdk-tq"
-PREFERRED_VERSION_qoriq-atf = "1.5%"
 # Define the default image type
 KERNEL_IMAGETYPE ?= "Image"
 

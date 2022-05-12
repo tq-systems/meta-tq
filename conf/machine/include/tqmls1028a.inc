@@ -4,19 +4,18 @@ require conf/machine/include/soc-family.inc
 
 MACHINEOVERRIDES =. "fsl-lsch3:ls1028a:tqmls1028a:"
 
-# source the machine specific features for RCW, multimedia etc. from
-# meta-freescale
-require conf/machine/include/qoriq-arm64.inc
-
-require conf/machine/include/arm/armv8a/tune-cortexa72.inc
-
-# TQ u-boot and kernel
+# TQ-Systems U-Boot and kernel has to be set before qoriq-arm64.inc
+# to allow weak settings
 #
 require conf/machine/include/tqmxx.inc
 
 PREFERRED_PROVIDER_u-boot:tqmls1028a ?= "u-boot-lsdk-tq"
 PREFERRED_PROVIDER_virtual/bootloader:tqmls1028a ?= "u-boot-lsdk-tq"
 PREFERRED_PROVIDER_virtual/kernel ??= "linux-imx-tq"
+
+require conf/machine/include/qoriq-arm64.inc
+
+require conf/machine/include/arm/armv8a/tune-cortexa72.inc
 
 # Define the default image type, overwrite default from qoriq-arm64.inc
 KERNEL_IMAGETYPE = "Image.gz"

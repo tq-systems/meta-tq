@@ -2,6 +2,16 @@
 
 require conf/machine/include/soc-family.inc
 
+# TQ-Systems U-Boot and kernel has to be set before qoriq-arm.inc
+# to allow weak settings
+#
+require conf/machine/include/tqmxx.inc
+
+PREFERRED_PROVIDER_u-boot ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/kernel ?= "linux-tq"
+
+
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale
 include conf/machine/include/qoriq-arm.inc
@@ -10,14 +20,6 @@ MACHINEOVERRIDES =. "ls102xa:tqmls102xa:"
 
 DEFAULTTUNE ?= "cortexa7thf-neon"
 require conf/machine/include/arm/armv7a/tune-cortexa7.inc
-
-# TQ u-boot and kernel
-#
-require conf/machine/include/tqmxx.inc
-
-PREFERRED_PROVIDER_u-boot:tqmls102xa ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader:tqmls102xa ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/kernel ??= "linux-tq"
 
 # Define the default image type, we cannot use default assignment due to the
 # default assignment in qoriq-arm.inc (meta-freescale).

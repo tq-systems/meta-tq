@@ -7,17 +7,19 @@ require conf/machine/include/soc-family.inc
 
 MACHINEOVERRIDES =. "fsl-lsch2:ls1012a:tqmls1012al:"
 
-require conf/machine/include/qoriq-arm64.inc
-
-require conf/machine/include/arm/armv8a/tune-cortexa53.inc
-
-# TQ u-boot and kernel
+# TQ-Systems U-Boot and kernel has to be set before qoriq-arm64.inc
+# to allow weak settings
 #
+
 require conf/machine/include/tqmxx.inc
 
 PREFERRED_PROVIDER_u-boot:tqmls1012al ?= "u-boot-lsdk-tq"
 PREFERRED_PROVIDER_virtual/bootloader:tqmls1012al ?= "u-boot-lsdk-tq"
 PREFERRED_PROVIDER_virtual/kernel ??= "linux-imx-tq"
+
+require conf/machine/include/qoriq-arm64.inc
+
+require conf/machine/include/arm/armv8a/tune-cortexa53.inc
 
 # Define the default image type, overwrite default from qoriq-arm64.inc
 KERNEL_IMAGETYPE = "Image.gz"
