@@ -44,14 +44,24 @@ RRECOMMENDS:${PN} = "\
     openssh-sftp-server \
 "
 
-# note: kmscube is only available if we have opengl and if virtual/libgbm
+# Note: kmscube is only available if we have opengl and if virtual/libgbm
 # is built. Since this is at least not the case for TQMa6x with vendor graphic
 # stack we need this ugly construct
-RRECOMMENDS:${PN} += "\
-    ${@oe.utils.ifelse( \
-        bb.utils.contains('DISTRO_FEATURES', 'opengl', True, False, d) and \
-	    d.getVar('PREFERRED_PROVIDER_virtual/libgbm') != "", \
-        'kmscube', '', \
-    )} \
-"
+# Currently only kmscube needs to be handled
+python () {
+    opengl_rrecommends = ''
 
+    if bb.utils.contains('DISTRO_FEATURES', 'opengl', True, False, d):
+        provider_libgbm = d.getVar('PREFERRED_PROVIDER_virtual/libgbm') or None
+        if provider_libgbm:
+             bb.note("opengl and libgbm provided: adding kmscube")
+             opengl_rrecommends += 'kmscube'
+        else:
+             bb.note("opengl but no libgbm provider")
+    else:
+        bb.note("no opengl and no libgbm")
+
+    d.setVar('OPENGL_RRECOMMENDS', opengl_rrecommends)
+}
+
+RRECOMMENDS:${PN} += "${OPENGL_RRECOMMENDS}"
