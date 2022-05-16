@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 require linux-imx-tq-common.inc
 
 KBRANCH = "TQM-lf-5.15"
-SRCREV = "ec9191b274220cf20fbfb226e7417ab278faf6b2"
+SRCREV = "e27a78db286db0e09cf6b2981ad931de087ab54d"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "5.15"
@@ -22,4 +22,5 @@ DEFAULT_PREFERENCE = "0"
 
 COMPATIBLE_MACHINE = "^("
 COMPATIBLE_MACHINE .= "|tqmls1012al"
+COMPATIBLE_MACHINE .= "|tqmls1028a"
 COMPATIBLE_MACHINE .= ")$"
