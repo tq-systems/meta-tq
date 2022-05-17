@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* treewide: syntax conversion for honister
+* treewide: recipe changes for building with honister
+
 ## hardknott.TQMLS1028A.BSP.SW.0107
 
 ### Changed
