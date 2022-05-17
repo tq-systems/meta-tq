@@ -11,7 +11,7 @@ SRC_URI += "git://github.com/ARMmbed/mbedtls;nobranch=1;destsuffix=git/mbedtls;n
 SRCREV_mbedtls = "0795874acdf887290b2571b193cafd3c4041a708"
 SRCREV_FORMAT = "atf"
 
-COMPATIBLE_MACHINE = "(qoriq)"
+COMPATIBLE_MACHINE = "(tqmls1012al)"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
