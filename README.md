@@ -20,15 +20,15 @@ for TQ-Systems SOM and some initial example distro support.
 This layer in the checked out branch depends on:
 
 URI: https://git.yoctoproject.org/poky  
-branch: hardknott  
+branch: honister  
 layers: meta, meta-poky  
 
 URI: https://github.com/openembedded/meta-openembedded.git
-branch: hardknott  
+branch: honister  
 layers: meta-oe  
 
 URI: https://github.com/tq-systems/meta-tq.git  
-branch: hardknott  
+branch: honister  
 layers: meta-tq  
 
 This layer additionally contains optional fixes and extensions for other layers
@@ -146,7 +146,7 @@ Depending on the actual project, security must be taken in account.
 
 ### Known issues
 
-* tq-image-small:
+* tq-image-small\[-debug\]:
   * DHCP is not working
   * restricted support for hardware
   * some warnings from init scripts
