@@ -11,10 +11,38 @@ Releases are named with the following scheme:
 
 ### Changed
 
-* meta-tq: tqmls1012al: hardknott release using updated versions:
+* linux-ti-tq_5.4.43: TQMa335x
+  - change compression to speed up booting
+  - disable debug options to speed up booting
+  - rewrite recipe to support config fragments
+  - port some config fragments from TQMa6
+  - use same e-MMC pad configs in DT as in U-Boot
+* TQMa335x: merge machines to a single config
+* systemd-machine-units: TQMa8MPxL: enable CAN-FD support
+* u-boot-tq_2019.04: rework for TQMa335x
+  - update RAM-Timings to be compliant with more RAM types
+  - Restore delay during RAM calibration to make Winbond RAM usable
+  - Use a single config for both RAM variants
+  - Improve CPU frequency specific initialisation
+  - enable more SPI NOR vendors
+  - backport some fixes from upstream to lower unaligned access warnings
+  - remove unused stuff from defconfig
+  - handle optional SPI-NOR if not assembled
+  - improve module EEPROM and MAC handling
+* tqmls\[xyz\]: fix WKS file handling (compatibility to upstream meta-freescale
+  hardknott)
+* tqmls104\[3,6\]a: merge WKS files (use wks.in and variables, no defference in
+  layout for the two boards)
+* tqmls1012al: add wifi to MACHINE_FEATURES and rrecommend firmware-ath10k
+* tqmls1012al: hardknott release using updated versions:
   * `qoriq-atf_2.4`
   * `u-boot-lsdk-tq-2021.04`
   * `linux-imx-tq_5.15`
+
+### Fixed
+
+linux-tq_5.15: TQMa6x: non working DDC for HDMI
+u-boot-tq_2019.04: RAM timings for TQMa335x
 
 ### Removed
 
