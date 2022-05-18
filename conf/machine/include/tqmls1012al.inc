@@ -32,6 +32,7 @@ UBOOT_ENTRYPOINT:ls1012a = "0x80008000"
 MACHINE_EXTRA_RRECOMMENDS += "\
     kernel-devicetree \
     kernel-modules \
+    ppfe-firmware \
     udev-extraconf \
 "
 
