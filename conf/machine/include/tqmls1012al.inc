@@ -27,7 +27,12 @@ UBOOT_ENTRYPOINT_ls1012a = "0x80008000"
 # Machine specific options
 #
 
-MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree udev-extraconf"
+MACHINE_EXTRA_RRECOMMENDS += "\
+    kernel-modules \
+    kernel-devicetree \
+    ppfe-firmware \
+    udev-extraconf \
+"
 
 # provide info about machine's capabilities
 # OP-TEE is currently untested, so we don't enable the feature for now
