@@ -5,7 +5,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 IMAGE_INSTALL:append = "\
     packagegroup-base \
     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' packagegroup-systemd', '', d)} \
-    packagegroup-hwutils \
+    packagegroup-hwutils-base \
     packagegroup-fsutils \
     packagegroup-netutils \
     packagegroup-sysutils \
