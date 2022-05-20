@@ -9,6 +9,13 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* meta-tq: tqmls1012al: hardknott release using updated versions:
+  * `qoriq-atf_2.4`
+  * `u-boot-lsdk-tq-2021.04`
+  * `linux-imx-tq_5.15`
+
 ## hardknott.TQMLS1028A.BSP.SW.0107
 
 ### Changed
