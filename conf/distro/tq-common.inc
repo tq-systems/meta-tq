@@ -27,9 +27,6 @@ QA_LOG = "1"
 # do images prelink
 INHERIT += "image-prelink"
 
-# optimize lib sizes with mklibs
-INHERIT += "image-mklibs"
-
 # include the version package
 IMAGE_INSTALL:append = " os-release"
 
