@@ -23,7 +23,6 @@ RDEPENDS:${PN} = "\
     atop \
     dstat \
     evtest \
-    fb-test \
     gdbserver \
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', ' glmark2', '', d)} \
     htop \
@@ -44,6 +43,15 @@ RDEPENDS:${PN} = "\
 RRECOMMENDS:${PN} = "\
     openssh-sftp-server \
     ${VIRTUAL-RUNTIME_base-utils-lscpu} \
+"
+
+DISPLAY_RRECOMMENDS = "\
+    fb-test \
+    libdrm-tests \
+"
+
+RRECOMMENDS:${PN} += "\
+    ${@bb.utils.contains('MACHINE_FEATURES', 'display', '${DISPLAY_RRECOMMENDS}', '', d)} \
 "
 
 # Note: kmscube is only available if we have opengl and if virtual/libgbm
