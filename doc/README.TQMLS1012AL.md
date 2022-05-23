@@ -13,6 +13,23 @@
 
 - none
 
+## Version information for software components
+
+## U-Boot:
+
+* based on uboot-imx (https://source.codeaurora.org/external/qoriq/qoriq-components/u-boot/)
+* branched from lf-5.15.5-1.0.0
+
+## ATF:
+
+* based on imx-atf (https://source.codeaurora.org/external/qoriq/qoriq-components/atf/)
+* branched from lf-5.15.5-1.0.0
+
+## Linux:
+
+* based on linux-imx-fslc (https://source.codeaurora.org/external/qoriq/qoriq-components/linux/)
+* branched from lf-5.15.5-1.0.0
+
 ## HowTo:
 
 ### MBLS1012AL DIP Switch settings for Boot
