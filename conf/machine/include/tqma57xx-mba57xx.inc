@@ -1,6 +1,6 @@
 # Common definitions for TQ-Systems GmbH TQMa57xx modules on MBa57xx
 
-KERNEL_DEVICETREE ?= " \
+KERNEL_DEVICETREE ?= "\
     am571x-mba57xx.dtb \
     am571x-mba57xx-cdtech-dc44.dtb \
     am571x-mba57xx-edt-etm0700g0edh6.dtb \
@@ -15,11 +15,14 @@ KERNEL_DEVICETREE ?= " \
     am574x-mba57xx-tianma-tm070jvhg33.dtb \
 "
 
-# Files are needed in IMAGE_BOOT_FILES because /boot is on an extra partition.
-# If those files should be installed under /boot inside the rootfs, you can
-# achieve this in your BSP layer adding them via
-# IMAGE_INSTALL:append = " kernel-devicetree kernel-image-zimage"
-#
+# install also under /boot inside the rootfs, needed for UBIFS use case
+# and because kernel / DTB in extra FAT boot partition on SD / e-MMC shall be
+# removed in future
+IMAGE_INSTALL:append = "\
+    kernel-devicetree \
+    kernel-image-zimage \
+"
+
 IMAGE_BOOT_FILES:append = "\
     ${KERNEL_IMAGETYPE};linuximage \
     ${KERNEL_DEVICETREE} \

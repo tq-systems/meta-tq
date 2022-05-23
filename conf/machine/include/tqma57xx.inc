@@ -12,7 +12,10 @@ require ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-ti", '', 'conf/machine/
 
 # Machine specific options
 #
-MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree"
+MACHINE_EXTRA_RRECOMMENDS += "\
+    kernel-devicetree \
+    kernel-modules \
+"
 
 # TQ u-boot and kernel
 #
@@ -60,4 +63,19 @@ WKS_FILE_DEPENDS = "\
 UBI_VOLNAME = "rootfs"
 
 # List common SoC features
-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx mmip dsp pci can"
+MACHINE_FEATURES = "\
+    alsa \
+    apm \
+    can \
+    dsp \
+    ext2 \
+    ethernet \
+    kernel26 \
+    mmip \
+    pci \
+    screen \
+    sgx \
+    usbgadget \
+    usbhost \
+    vfat \
+"
