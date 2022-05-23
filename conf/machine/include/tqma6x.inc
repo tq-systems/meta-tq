@@ -7,16 +7,30 @@ MACHINEOVERRIDES =. "imx:mx6:tqma6x:"
 
 include conf/machine/include/imx-base.inc
 
-DEFAULTTUNE ?= "cortexa9thf-neon"
+DEFAULTTUNE:imx6 ?= "cortexa9thf-neon"
 require conf/machine/include/arm/armv7a/tune-cortexa9.inc
 
 # Machine specific options
 #
-MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree"
-MACHINE_EXTRA_RRECOMMENDS += "linux-firmware-imx-sdma-imx6q"
-MACHINE_EXTRA_RRECOMMENDS += "firmware-imx-vpu-imx6d firmware-imx-vpu-imx6q"
+MACHINE_EXTRA_RRECOMMENDS += "\
+    firmware-imx-vpu-imx6d \
+    firmware-imx-vpu-imx6q \
+    kernel-devicetree \
+    kernel-modules \
+    linux-firmware-imx-sdma-imx6q \
+"
 
-MACHINE_FEATURES += "alsa ext2 pci rtc serial usbhost vfat can vpu"
+MACHINE_FEATURES += "\
+    alsa \
+    can \
+    ext2 \
+    pci \
+    rtc \
+    serial \
+    usbhost \
+    vfat \
+    vpu \
+"
 
 # TQ u-boot and kernel
 #

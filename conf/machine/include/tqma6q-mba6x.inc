@@ -1,4 +1,4 @@
-# Common definitions for TQ-Systems GmbH TQMa6[Q,D] modules on MBa6
+# Common definitions for TQ-Systems GmbH TQMa6[Q,D] modules on MBa6x
 
 # Common device trees used in linux-imx-qt and linux-tq
 KERNEL_DEVICETREE = "\
@@ -30,11 +30,14 @@ KERNEL_DEVICETREE_linux-tq = "\
 
 KERNEL_DEVICETREE:append = " ${@kernel_provider_dtbs(d)} "
 
-# Files are needed in IMAGE_BOOT_FILES because /boot is on an extra partition.
-# If those files should be installed under /boot inside the rootfs, you can
-# achieve this in your BSP layer adding them via
-# IMAGE_INSTALL:append = " kernel-devicetree kernel-image-zimage"
-#
+# install also under /boot inside the rootfs, needed for UBIFS use case
+# and because extra FAT boot partition on SD / e-MMC shall be removed
+IMAGE_INSTALL:append = "\
+    kernel-devicetree \
+    kernel-image \
+"
+
+# Files also in IMAGE_BOOT_FILES for backward compatibility
 IMAGE_BOOT_FILES = "\
     ${KERNEL_IMAGETYPE};linuximage \
     ${KERNEL_DEVICETREE} \
