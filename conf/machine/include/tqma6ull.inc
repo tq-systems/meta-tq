@@ -12,9 +12,22 @@ require conf/machine/include/arm/armv7a/tune-cortexa7.inc
 
 # Machine specific options
 #
-MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree"
-MACHINE_EXTRA_RRECOMMENDS += " linux-firmware-imx-sdma-imx6q"
-MACHINE_FEATURES:append = " alsa ext2 rtc serial usbhost vfat can ubi"
+MACHINE_EXTRA_RRECOMMENDS += "\
+    kernel-devicetree \
+    kernel-modules \
+    linux-firmware-imx-sdma-imx6q \
+"
+
+MACHINE_FEATURES:append = "\
+    alsa \
+    can \
+    ext2 \
+    rtc \
+    serial \
+    usbhost \
+    vfat \
+    ubi \
+"
 
 # TQ u-boot and kernel
 #
@@ -27,8 +40,6 @@ PREFERRED_PROVIDER_virtual/bootloader:tqma6ullx ?= "u-boot-imx-tq"
 
 UBOOT_SUFFIX:${MACHINE} ?= "imx"
 UBOOT_MAKE_TARGET:${MACHINE} ?= "u-boot.imx"
-
-UBOOT_CONFIG ?= "sd qspi"
 
 # Image Options
 #
@@ -57,5 +68,9 @@ WKS_FILE_DEPENDS = "\
     virtual/bootloader \
 "
 
-# TODO:
-#IMAGE_INSTALL:append = " kernel-devicetree kernel-image-zimage"
+# install also under /boot inside the rootfs, needed for UBIFS use case
+# and because extra FAT boot partition on SD / e-MMC shall be removed
+IMAGE_INSTALL:append = "\
+    kernel-devicetree \
+    kernel-image \
+"
