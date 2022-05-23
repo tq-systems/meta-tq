@@ -3,9 +3,22 @@
 
 require conf/machine/include/tqmxx.inc
 
-MACHINE_EXTRA_RRECOMMENDS += " kernel-modules kernel-devicetree"
+MACHINE_EXTRA_RRECOMMENDS += "\
+    kernel-devicetree \
+    kernel-modules \
+"
 
-MACHINE_FEATURES += "alsa usbhost rtc serial ext2 ext3 vfat ubi"
+MACHINE_FEATURES += "\
+    alsa \
+    ext2 \
+    ext3 \
+    rtc \
+    serial \
+    ubi \
+    usbhost \
+    vfat \
+"
+
 MACHINE_FEATURES += "vpu"
 MACHINE_FEATURES:remove:mx8mn = "vpu"
 
