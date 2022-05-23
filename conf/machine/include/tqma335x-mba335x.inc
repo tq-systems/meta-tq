@@ -2,16 +2,19 @@
 
 KERNEL_DEVICETREE = "\
     am335x-mba335x.dtb \
-    am335x-mba335x-lvds-g104x1.dtb \
-    am335x-mba335x-glyn-etm0700.dtb \
     am335x-mba335x-dmb-ct44.dtb \
+    am335x-mba335x-glyn-etm0700.dtb \
+    am335x-mba335x-lvds-g104x1.dtb \
 "
 
-# Files are needed in IMAGE_BOOT_FILES because /boot is on an extra partition.
-# If those files should be installed under /boot inside the rootfs, you can
-# achieve this in your BSP layer adding them via
-# IMAGE_INSTALL:append = " kernel-devicetree kernel-image-zimage"
-#
+# install also under /boot inside the rootfs, needed for UBIFS use case
+# and because kernel / DTB in extra FAT boot partition on SD / e-MMC shall be
+# removed in future
+IMAGE_INSTALL:append = "\
+    kernel-devicetree \
+    kernel-image \
+"
+
 IMAGE_BOOT_FILES:append = "\
     ${KERNEL_IMAGETYPE};linuximage \
     ${KERNEL_DEVICETREE} \

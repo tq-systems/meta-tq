@@ -12,7 +12,10 @@ require ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-ti", '', 'conf/machine/
 
 # Machine specific options
 #
-MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree"
+MACHINE_EXTRA_RRECOMMENDS += "\
+    kernel-devicetree \
+    kernel-modules \
+"
 
 # TQ u-boot and kernel
 #
