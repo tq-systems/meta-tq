@@ -8,7 +8,10 @@ MACHINEOVERRIDES =. "tqma65xx:"
 
 # Machine specific options
 #
-MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree"
+MACHINE_EXTRA_RRECOMMENDS += "\
+    kernel-devicetree \
+    kernel-modules \
+"
 
 # TQ u-boot and kernel
 #
@@ -57,4 +60,20 @@ UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
 UBI_VOLNAME = "rootfs"
 
 # List common SoC features
-MACHINE_FEATURES = "kernel26 apm usbgadget usbhost vfat ext2 screen alsa ethernet sgx mmip dsp pci ubi can"
+MACHINE_FEATURES = "\
+    apm \
+    alsa \
+    can \
+    dsp \
+    ethernet \
+    ext2 \
+    kernel26 \
+    mmip \
+    pci \
+    screen \
+    sgx \
+    ubi \
+    usbgadget \
+    usbhost \
+    vfat \
+"
