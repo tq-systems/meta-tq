@@ -29,16 +29,32 @@ UBOOT_ENTRYPOINT:ls1012a = "0x80008000"
 # Machine specific options
 #
 
-MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree udev-extraconf"
+MACHINE_EXTRA_RRECOMMENDS += "\
+    kernel-devicetree \
+    kernel-modules \
+    udev-extraconf \
+"
 
 # provide info about machine's capabilities
 # OP-TEE is currently untested, so we don't enable the feature for now
-MACHINE_FEATURES:append = " ext2 pci rtc serial usbhost vfat ubi"
+MACHINE_FEATURES:append = "\
+    ext2 \
+    pci \
+    rtc \
+    serial \
+    ubi \
+    usbhost \
+    vfat \
+"
 
 # Image Options
 #
-EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-EXTRA_IMAGEDEPENDS += "rcw qoriq-atf ppfe-firmware"
+EXTRA_IMAGEDEPENDS += "\
+    ppfe-firmware \
+    qoriq-atf \
+    rcw \
+    virtual/bootloader \
+"
 
 # Image Options
 #
