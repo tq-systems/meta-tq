@@ -67,10 +67,3 @@ WKS_FILE_DEPENDS = "\
     virtual/kernel \
     virtual/bootloader \
 "
-
-# install also under /boot inside the rootfs, needed for UBIFS use case
-# and because extra FAT boot partition on SD / e-MMC shall be removed
-IMAGE_INSTALL:append = "\
-    kernel-devicetree \
-    kernel-image \
-"
