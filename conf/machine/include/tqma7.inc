@@ -11,9 +11,23 @@ require conf/machine/include/arm/armv7a/tune-cortexa7.inc
 
 # Machine specific options
 #
-MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree"
-MACHINE_EXTRA_RRECOMMENDS += " linux-firmware-imx-sdma-imx7d"
-MACHINE_FEATURES:append = " alsa ext2 pci rtc serial usbhost vfat can ubi"
+MACHINE_EXTRA_RRECOMMENDS += "\
+    kernel-devicetree \
+    kernel-modules \
+    linux-firmware-imx-sdma-imx7d \
+"
+
+MACHINE_FEATURES:append = "\
+    alsa \
+    can \
+    ext2 \
+    pci \
+    rtc \
+    serial \
+    ubi \
+    usbhost \
+    vfat \
+"
 
 # TQ u-boot and kernel
 #
