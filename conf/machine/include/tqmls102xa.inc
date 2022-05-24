@@ -28,7 +28,11 @@ UBOOT_ENTRYPOINT:ls102xa = "0x80008000"
 # Machine specific options
 #
 
-MACHINE_EXTRA_RRECOMMENDS += "kernel-devicetree kernel-modules udev-extraconf"
+MACHINE_EXTRA_RRECOMMENDS += "\
+    kernel-devicetree \
+    kernel-modules \
+    udev-extraconf \
+"
 
 # provide info about machine's capabilities
 MACHINE_FEATURES:append = "\
