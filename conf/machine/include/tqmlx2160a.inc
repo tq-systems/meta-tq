@@ -25,15 +25,33 @@ KERNEL_IMAGETYPE ?= "Image"
 
 # Machine specific options
 
-MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree udev-extraconf"
+MACHINE_EXTRA_RRECOMMENDS += "\
+    kernel-devicetree \
+    kernel-modules \
+    udev-extraconf \
+"
 
 # provide info about machine's capabilities
-MACHINE_FEATURES:append = "  ext2 pci rtc serial usbhost vfat can ubi"
+MACHINE_FEATURES:append = "\
+    can \
+    ext2 \
+    pci \
+    rtc \
+    serial \
+    ubi \
+    usbhost \
+    vfat \
+"
 
 # Image Options
 #
-EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-EXTRA_IMAGEDEPENDS += "rcw qoriq-atf management-complex mc-utils"
+EXTRA_IMAGEDEPENDS += "\
+    management-complex \
+    mc-utils \
+    qoriq-atf \
+    rcw \
+    virtual/bootloader \
+"
 
 # DPAA2 manament utility
 IMAGE_INSTALL:append = " restool"
