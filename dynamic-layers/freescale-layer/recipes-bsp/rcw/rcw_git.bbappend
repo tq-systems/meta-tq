@@ -4,10 +4,5 @@ SRCREV = "4a036b8a36322ddc687dc515a80227dc04bd0c06"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=44a0d0fad189770cc022af4ac6262cbe"
 
 M:tqmls1012al = "tqmls1012al"
-
-do_install:append:tqmls1012al-1gb () {
-    mv -T ${D}/boot/rcw/tqmls1012al ${D}/boot/rcw/tqmls1012al_1gb
-}
-
 M:tqmls1028a = "tqmls1028a"
 M:tqmlx2160a = "tqmlx2160a"
