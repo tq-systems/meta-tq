@@ -30,7 +30,7 @@ S = "${WORKDIR}/git"
 SRC_URI = "git://source.codeaurora.org/external/qoriq/qoriq-components/atf;nobranch=1"
 SRCREV = "5ae5233c064e94a8bd1b4a1652a03b87b0be63f6"
 
-COMPATIBLE_MACHINE = "(qoriq)"
+COMPATIBLE_MACHINE = "(tqmlx2160a|tqmls1028a)"
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 

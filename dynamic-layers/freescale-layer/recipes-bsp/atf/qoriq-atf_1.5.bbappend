@@ -6,11 +6,6 @@ SRCREV = "0bed034f4ed9ed9bc572e739ff5913b216df54d5"
 
 STATIC_PBL = "no"
 
-PLATFORM:tqmls1012al = "tqmls1012al"
-PLATFORM:tqmls1012al-1gb = "tqmls1012al_1gb"
-RCW_FOLDER:tqmls1012al-1gb = "tqmls1012al_1gb"
-RCW_FOLDER:tqmls1012al = "${PLATFORM:tqmls1012al}"
-
 # fix override by qoriq-atf_1.5 from freescale layer
 rcw_ls1012a = ""
 
