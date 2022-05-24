@@ -30,6 +30,26 @@
 * based on linux-imx-fslc (https://source.codeaurora.org/external/qoriq/qoriq-components/linux/)
 * branched from lf-5.15.5-1.0.0
 
+## Build Artifacts
+
+Artifacs can be found at the usual locations for bitbake:
+`${TMPDIR}/deploy/images/${MACHINE}`
+* `atf/`
+  * 512MiB
+    * `bl2_qspi.pbl` Primary Boot Loader with RCW
+    * `fip_uboot.bin` U-Boot
+  * 1GiB
+    * `bl2_qspi_tqmls1012al_1gb.pbl` Primary Boot Loader with RCW
+    * `fip_uboot_tqmls1012al_1gb.bin` U-Boot
+* `engine-pfe-bin/pfe_fw_sbl.itb` PFE engine firmware file
+* `rcw/`: different rcw configurations to use with atf-recipe
+* `fsl-ls1012a-mbls1012al-tqmls1012al-mbls1012al.dtb`: device tree blob
+* `Image.gz`: Linux kernel image
+* `u-boot-tfa-2021.04-r0.bin` U-Boot binary
+* \*.wic: SD / e-MMC system image
+* \*.rootfs.ext4: RootFS image
+* \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
+
 ## HowTo:
 
 ### MBLS1012AL DIP Switch settings for Boot
