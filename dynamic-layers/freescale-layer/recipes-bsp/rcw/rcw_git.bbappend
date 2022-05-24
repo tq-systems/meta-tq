@@ -6,10 +6,6 @@ LIC_FILES_CHKSUM_tqmls-rcw-common = "file://LICENSE;md5=44a0d0fad189770cc022af4a
 OVERRIDES_prepend_tqmls1012al = "tqmls-rcw-common:"
 M_tqmls1012al = "tqmls1012al"
 
-do_install_append_tqmls1012al-1gb () {
-    mv -T ${D}/boot/rcw/tqmls1012al ${D}/boot/rcw/tqmls1012al_1gb
-}
-
 OVERRIDES_prepend_tqmls1028a = "tqmls-rcw-common:"
 M_tqmls1028a = "tqmls1028a"
 
