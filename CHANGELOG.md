@@ -16,6 +16,11 @@ Releases are named with the following scheme:
   * `u-boot-lsdk-tq-2021.04`
   * `linux-imx-tq_5.15`
 
+### Removed
+
+* Dedicated machine `tqmls1012al-1gb-mbls1012al` was removed.
+  Use specific ATF files for 1GiB module (see [TQMLS1012AL README](doc/README.TQMLS1012AL.md)) as replacement
+
 ## hardknott.TQMLS1028A.BSP.SW.0107
 
 ### Changed
