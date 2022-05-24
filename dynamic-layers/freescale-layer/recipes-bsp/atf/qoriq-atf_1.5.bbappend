@@ -4,10 +4,6 @@ SRCREV_tqmls-atf-common = "0bed034f4ed9ed9bc572e739ff5913b216df54d5"
 
 STATIC_PBL = "no"
 
-OVERRIDES_prepend_tqmls1012al = "tqmls-atf-common:"
-PLATFORM_tqmls1012al = "tqmls1012al"
-PLATFORM_tqmls1012al_tqmls1012al-1gb = "tqmls1012al_1gb"
-RCW_FOLDER_tqmls1012al = "${PLATFORM_tqmls1012al}"
 # fix override by qoriq-atf_1.5 from freescale layer
 rcw_ls1012a = ""
 
