@@ -43,7 +43,10 @@ IMAGE_INSTALL:remove = "packagegroup-fsl-optee-imx"
 
 # Image Options
 #
-EXTRA_IMAGEDEPENDS += "u-boot imx-boot"
+EXTRA_IMAGEDEPENDS += "\
+    imx-boot \
+    u-boot \
+"
 
 # Verified values to generate UBI image:
 # UBIFS_PEB_SIZE="65536"

@@ -1,5 +1,8 @@
 # Common definitions for TQ-Systems GmbH MBa8Mx baseboard for TQMa8Mx modules
 
+require conf/machine/include/tqma8mx.inc
+require conf/machine/include/mba8mx-common.inc
+
 # Set u-boot DTB
 UBOOT_DTB_NAME = "imx8mq-mba8mx.dtb"
 
@@ -17,27 +20,7 @@ KERNEL_DEVICETREE = ""
 
 require conf/machine/include/tqma8-common.inc
 
-# Set Serial console
-SERIAL_CONSOLES = "115200;ttymxc2"
-
-# disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
-USE_VT = "0"
-
-IMAGE_BOOT_FILES = "\
-    ${KERNEL_IMAGETYPE} \
-    ${BOARD_DEVICETREE_FILES} \
+IMXBOOT_TARGETS ?= "\
+    flash_hdmi_spl_uboot \
+    flash_spl_uboot \
 "
-
-IMAGE_BOOT_FILES += "\
-    hello_world.bin \
-    rpmsg_lite_pingpong_rtos_linux_remote.bin \
-"
-
-IMXBOOT_TARGETS ?= "flash_hdmi_spl_uboot flash_spl_uboot"
-
-WKS_FILE_DEPENDS:append = "\
-    virtual/imx-cortexm-demos \
-"
-
-MACHINE_FEATURES:append = " wifi camera"
-MACHINE_EXTRA_RRECOMMENDS:append = " linux-firmware-ath10k"
