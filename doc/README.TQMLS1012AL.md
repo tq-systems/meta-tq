@@ -1,36 +1,50 @@
 # TQMLS1012AL on MBLS1012AL carrier board
 
+This README contains some useful information for TQMLS1012AL on MBLS1012AL carrier board
+
 [[_TOC_]]
 
-## Overview
+## Variants
 
-### Supported Hardware:
+* TQMLS1012AL SOM REV.020x 512 MiB / 1024 MiB RAM 
+* MBLS1012AL carrier Board
 
-* TQMLS1012AL: module
-* MBLS1012AL:  board
-
-### Known issues
-
-- none
 
 ## Version information for software components
 
-## U-Boot:
+### U-Boot
 
 * based on uboot-imx (https://source.codeaurora.org/external/qoriq/qoriq-components/u-boot/)
 * branched from lf-5.15.5-1.0.0
 
-## ATF:
+### ATF
 
 * based on imx-atf (https://source.codeaurora.org/external/qoriq/qoriq-components/atf/)
 * branched from lf-5.15.5-1.0.0
 
-## Linux:
+### Linux
 
 * based on linux-imx-fslc (https://source.codeaurora.org/external/qoriq/qoriq-components/linux/)
 * branched from lf-5.15.5-1.0.0
 
-## Build Artifacts
+## Supported machine configurations
+
+See top level README.md for configurations usable as MACHINE.
+
+## Important notes
+
+*Attention*: CPU supports only booting from QSPI NOR. When deleting bootloader
+recovery via JTAG is needed.
+
+## Known Issues
+
+* U-Boot: USB HUB(X3): sometimes lock after second 'usb reset` when using USB stick
+  * seems to be hardware dependend
+  * only with multiple connected USB mass storage devices
+* Linux: currently no out of the box support for RootFS on SPI
+* Linux: Wake Up support not working (RTC / GPIO button)
+
+## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
@@ -46,13 +60,11 @@ Artifacs can be found at the usual locations for bitbake:
 * `fsl-ls1012a-mbls1012al-tqmls1012al-mbls1012al.dtb`: device tree blob
 * `Image.gz`: Linux kernel image
 * `u-boot-tfa-2021.04-r0.bin` U-Boot binary
-* \*.wic: SD / e-MMC system image
+* \*.wic: SD / e-MMC system image (without boot loader)
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 
-## HowTo:
-
-### MBLS1012AL DIP Switch settings for Boot
+## Boot DIP Switches
 
 ```
 DIP S1  ON                              OFF
@@ -61,6 +73,37 @@ DIP S1  ON                              OFF
 3       Debug-UART on USB / pin header  Debug-UART on OpenSDA
 4       CPU-JTAG disabled               CPU-JTAG enabled
 ```
+
+## Boot device initialisation and update
+
+Make sure the power supply is on during update, see [important notes](#important-notes)
+for recovery.
+
+U-Boot envinronment provides scripts to help updating components needed to boot
+the board. For filenames see [artifacts section](#artifacts).
+
+### Update with static IP
+
+```
+setenv ipaddr <ipaddr>
+setenv serverip <serverip>
+setenv pbl_spi_file <filename>		# RCW/PBL/BL2 file name
+run update_pbl				# update PCW/PBL/BL2
+setenv uboot_spi_file <filename>	# U-boot file name
+run update_uboot			# update U-boot
+```
+
+### Update with dynamic IP
+
+```
+setenv ipmode dynamic			# obtain IP configuration via DHCP
+setenv pbl_spi_file <filename>		# RCW/PBL/BL2 file name
+run update_pbl				# update PCW/PBL/BL2
+setenv uboot_spi_file <filename>	# U-boot file name
+run update_uboot			# update U-boot
+```
+
+## Howto
 
 ### U-Boot mtest
 
