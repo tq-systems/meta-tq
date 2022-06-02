@@ -39,5 +39,10 @@ WKS_FILE_DEPENDS_append = "\
     virtual/imx-cortexm-demos \
 "
 
-MACHINE_FEATURES_append = " wifi camera"
+MACHINE_FEATURES_append = "\
+    camera \
+    display \
+    wifi \
+"
+
 MACHINE_EXTRA_RRECOMMENDS_append = " linux-firmware-ath10k"

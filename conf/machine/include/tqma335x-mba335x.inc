@@ -17,6 +17,10 @@ IMAGE_BOOT_FILES_append = "\
     ${KERNEL_DEVICETREE} \
 "
 
+MACHINE_FEATURES_append = "\
+    display \
+"
+
 MACHINE_EXTRA_RRECOMMENDS += "${@bb.utils.contains('BBFILE_COLLECTIONS', 'meta-ti', 'ti-sgx-ddk-km', '', d)}"
 
 SERIAL_CONSOLES ?= "115200;ttyS4"

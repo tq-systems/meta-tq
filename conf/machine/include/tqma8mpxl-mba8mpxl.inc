@@ -18,8 +18,9 @@ KERNEL_DEVICETREE = ""
 require conf/machine/include/tqma8-common.inc
 
 MACHINE_FEATURES_append = "\
-  wifi \
-  camera \
+    camera \
+    display \
+    wifi \
 "
 
 # Set Serial console
