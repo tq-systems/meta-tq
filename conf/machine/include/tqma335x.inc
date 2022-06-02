@@ -71,6 +71,7 @@ MACHINE_FEATURES_append = "\
     mmip \
     screen \
     sgx \
+    ubi \
     usbgadget \
     usbhost \
     vfat \
