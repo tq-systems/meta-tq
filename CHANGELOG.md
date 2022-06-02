@@ -14,6 +14,8 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* TQMa6x / TQMa335x: add ubi to `MACHINE_FEATURES`
+* u-boot-imx-tq_2020.04: TQMa8MPxL: update RAM Timings
 * linux-ti-tq_5.4.43: TQMa335x
   - change compression to speed up booting
   - disable debug options to speed up booting
@@ -44,8 +46,15 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* u-boot-imx-tq_2020.04:
+  * TQMa8MPxL: fix mmc env offset for redundant env
+  * TQMa8QM/ TQMa8Xx[S]: fix argument check for scu_rm command
 linux-tq_5.15: TQMa6x: non working DDC for HDMI
 u-boot-tq_2019.04: RAM timings for TQMa335x
+
+### Added
+
+* machines: add `display` to `MACHINE_FEATURES`. This enables rootfs customization.
 
 ### Removed
 
