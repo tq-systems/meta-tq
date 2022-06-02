@@ -28,6 +28,10 @@ IMAGE_BOOT_FILES:append = "\
     ${KERNEL_DEVICETREE} \
 "
 
+MACHINE_FEATURES:append = "\
+    display \
+"
+
 SERIAL_CONSOLES ?= "115200;ttyS2"
 
 # disable virtual console support for this board and limit getty to SERIAL_CONSOLES only

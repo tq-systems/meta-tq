@@ -8,6 +8,7 @@ IMAGE_BOOT_FILES = "\
 
 MACHINE_FEATURES:append = "\
     camera \
+    display \
     wifi \
 "
 

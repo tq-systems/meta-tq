@@ -13,5 +13,9 @@ IMXBOOT_TARGETS ?= "\
     flash_spl_flexspi \
 "
 
-MACHINE_FEATURES:append = " wifi"
 MACHINE_EXTRA_RRECOMMENDS:append = " linux-firmware-ath10k"
+
+MACHINE_FEATURES:append = "\
+    display \
+    wifi \
+"
