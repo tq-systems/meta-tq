@@ -27,6 +27,7 @@ MACHINE_FEATURES += "\
     pci \
     rtc \
     serial \
+    ubi \
     usbhost \
     vfat \
     vpu \
