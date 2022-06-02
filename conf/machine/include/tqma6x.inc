@@ -16,7 +16,17 @@ MACHINE_EXTRA_RRECOMMENDS += "kernel-modules kernel-devicetree"
 MACHINE_EXTRA_RRECOMMENDS += "linux-firmware-imx-sdma-imx6q"
 MACHINE_EXTRA_RRECOMMENDS += "firmware-imx-vpu-imx6d firmware-imx-vpu-imx6q"
 
-MACHINE_FEATURES += "alsa ext2 pci rtc serial usbhost vfat can vpu"
+MACHINE_FEATURES += "\
+    alsa \
+    can \
+    ext2 \
+    pci \
+    rtc \
+    serial \
+    usbhost \
+    vfat \
+    vpu \
+"
 
 # TQ u-boot and kernel
 #
