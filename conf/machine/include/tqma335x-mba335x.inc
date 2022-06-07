@@ -7,16 +7,6 @@ KERNEL_DEVICETREE = "\
     am335x-mba335x-dmb-ct44.dtb \
 "
 
-# Files are needed in IMAGE_BOOT_FILES because /boot is on an extra partition.
-# If those files should be installed under /boot inside the rootfs, you can
-# achieve this in your BSP layer adding them via
-# IMAGE_INSTALL_append = " kernel-devicetree kernel-image-zimage"
-#
-IMAGE_BOOT_FILES_append = "\
-    ${KERNEL_IMAGETYPE};linuximage \
-    ${KERNEL_DEVICETREE} \
-"
-
 MACHINE_FEATURES_append = "\
     display \
 "
