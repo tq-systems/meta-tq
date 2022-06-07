@@ -15,11 +15,6 @@ IMAGE_INSTALL:append = "\
     kernel-image \
 "
 
-IMAGE_BOOT_FILES:append = "\
-    ${KERNEL_IMAGETYPE};linuximage \
-    ${KERNEL_DEVICETREE} \
-"
-
 MACHINE_FEATURES:append = "\
     display \
 "
