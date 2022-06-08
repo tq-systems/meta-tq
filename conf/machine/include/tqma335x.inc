@@ -37,6 +37,18 @@ KERNEL_EXTRA_ARGS_prepend = "LOADADDR=${UBOOT_ENTRYPOINT} "
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 
+# note: These settings are only usable with larger SPI NOR
+# ubinize PEB_SIZE="65536"
+# ubinize MINIMUM_IO_UNIT_SIZE="1"
+# ubinize SUB_PAGE_SIZE="1"
+# mkubifs VID_HEADER_OFFSET="64"
+# mkubifs LEB_SIZE="65408"
+
+MKUBIFS_ARGS = " -m 1 -e 65408 -c 896 "
+UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
+# needs to be set to have it consistent for kernel command line
+UBI_VOLNAME = "root"
+
 IMAGE_BOOT_FILES = "\
     MLO \
     u-boot-dtb.img;u-boot.img \
@@ -52,10 +64,6 @@ WKS_FILE_DEPENDS = "\
     virtual/kernel \
     virtual/bootloader \
 "
-
-# Use the expected value of the ubifs filesystem's volume name in the kernel
-# and u-boot.
-UBI_VOLNAME = "rootfs"
 
 # List common SoC features
 
