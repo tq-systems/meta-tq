@@ -10,13 +10,6 @@ MACHINEOVERRIDES =. "tqma57xx:"
 DEFAULTTUNE ?= "${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-ti", "", "armv7athf-neon", d)}"
 require ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-ti", '', 'conf/machine/include/arm/armv7a/tune-cortexa15.inc', d)}
 
-# Machine specific options
-#
-MACHINE_EXTRA_RRECOMMENDS += "\
-    kernel-devicetree \
-    kernel-modules \
-"
-
 # TQ u-boot and kernel
 #
 require conf/machine/include/tqmxx.inc
@@ -45,17 +38,6 @@ EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 IMAGE_BOOT_FILES = "\
     MLO \
     u-boot.img \
-"
-
-# Do not update fstab file when using wic images
-WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
-
-WKS_FILE_DEPENDS = "\
-    mtools-native \
-    dosfstools-native \
-    parted-native \
-    virtual/kernel \
-    virtual/bootloader \
 "
 
 # Use the expected value of the ubifs filesystem's volume name in the kernel

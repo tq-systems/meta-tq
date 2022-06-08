@@ -15,17 +15,9 @@ KERNEL_DEVICETREE ?= "\
     am574x-mba57xx-tianma-tm070jvhg33.dtb \
 "
 
-# install also under /boot inside the rootfs, needed for UBIFS use case
-# and because kernel / DTB in extra FAT boot partition on SD / e-MMC shall be
-# removed in future
-IMAGE_INSTALL:append = "\
+MACHINE_EXTRA_RRECOMMENDS += "\
     kernel-devicetree \
-    kernel-image-zimage \
-"
-
-IMAGE_BOOT_FILES:append = "\
-    ${KERNEL_IMAGETYPE};linuximage \
-    ${KERNEL_DEVICETREE} \
+    kernel-modules \
 "
 
 MACHINE_FEATURES:append = "\
@@ -37,4 +29,14 @@ SERIAL_CONSOLES ?= "115200;ttyS2"
 # disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
 USE_VT = "0"
 
-WKS_FILE ?= "tqmaxx-ti-sdimg.wks"
+# Do not update fstab file when using wic images
+WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
+
+WKS_FILE_DEPENDS = "\
+    mtools-native \
+    dosfstools-native \
+    parted-native \
+    virtual/bootloader \
+"
+
+WKS_FILE = "tqmaxx-ti-sdimg.wks"
