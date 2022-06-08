@@ -12,5 +12,5 @@
 # |      |       |        |       |
 # 0      1280kiB 1344kiB  4MiB    36MiB
 #
-part /boot --source bootimg-partition --fstype=vfat --label boot --active --offset 4M --fixed-size 32M
+part /boot --source bootimg-partition --fstype=vfat --label boot --active --offset 4M --fixed-size ${WIC_BOOTPART_SIZE}
 part / --source rootfs --fstype=ext4 --label root --align 4096
