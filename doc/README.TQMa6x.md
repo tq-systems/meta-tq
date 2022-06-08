@@ -62,6 +62,10 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 - Backlight on parallel displays are enabled upon Power-On which might lead to random output.
   Display will be disabled during bootup and can be used normally afterwards.
 - `asound.state` is not compatible with `linux-5.4` (`linux-imx-tq` as well as `linux-tq`)
+- The generated UBIFS does not fit into the default SPI-NOR (16 MiB). If
+  rootfs on SPI NOR is required, following solutions:
+  * tailor image recipe and kernel configuration to get real tiny
+  * use SoM variant with larger SPI-NOR
 
 ## Artifacts
 
