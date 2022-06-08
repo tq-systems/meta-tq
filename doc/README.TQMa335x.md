@@ -26,7 +26,13 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Known Issues
 
-* TQMa335xL in MBa335x: sometimes after booting the ethernet phy shows up wrong addresses
+* TQMa335xL in MBa335x: sometimes after booting the ethernet phy shows
+  up wrong addresses
+* The generated UBIFS does not fit into the default SPI-NOR (16 MiB). If
+  rootfs on SPI NOR is required, following solutions:
+  * tailor image recipe and kernel configuration to get real tiny
+  * use SoM variant with larger SPI-NOR
+
 
 ## Artifacts
 
