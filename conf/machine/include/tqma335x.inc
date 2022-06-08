@@ -51,19 +51,11 @@ UBI_VOLNAME = "root"
 
 IMAGE_BOOT_FILES = "\
     MLO \
-    u-boot-dtb.img;u-boot.img \
+    u-boot.img \
 "
 
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
-
-WKS_FILE_DEPENDS = "\
-    mtools-native \
-    dosfstools-native \
-    parted-native \
-    virtual/kernel \
-    virtual/bootloader \
-"
 
 # List common SoC features
 
