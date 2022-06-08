@@ -28,4 +28,6 @@ WKS_FILE_DEPENDS = "\
     virtual/bootloader \
 "
 
-WKS_FILE = "tqmaxx-ti-sdimg.wks"
+WKS_FILE = "tqmaxx-ti-sdimg.wks.in"
+
+WIC_BOOTPART_SIZE = "4M"
