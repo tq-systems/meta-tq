@@ -9,7 +9,7 @@ Releases are named with the following scheme:
 
 ## Next Release
 
-## hardknott.TQMLS1012AL.BSP.SW.0011
+## hardknott.TQMLS1028A.BSP.SW.0108
 
 ### Changed
 
@@ -22,6 +22,24 @@ Releases are named with the following scheme:
   since we have an optionally assembled SPI-NOR, `ubi` should be added to have
   the ability to install MTD utils in rootfs based on `MACHINE_FEATURES`
 * u-boot-imx-tq_2020.04: TQMa8MPxL: update RAM Timings
+
+### Added
+
+* rcw: tqmls1028a:
+  - Added 1000MHz variants for eMMC/SD and SPI-NOR boot
+  - Removed 800MHz variants for SPI-NOR boot due to erratum A050958
+* machines: add `display` to `MACHINE_FEATURES`. This enables rootfs customization.
+
+### Fixed
+
+* u-boot-imx-tq_2020.04:
+  * TQMa8MPxL: fix mmc env offset for redundant env
+  * TQMa8QM/ TQMa8Xx[S]: fix argument check for scu_rm command
+
+## hardknott.TQMLS1012AL.BSP.SW.0011
+
+### Changed
+
 * linux-ti-tq_5.4.43: TQMa335x
   - change compression to speed up booting
   - disable debug options to speed up booting
@@ -52,15 +70,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
-* u-boot-imx-tq_2020.04:
-  * TQMa8MPxL: fix mmc env offset for redundant env
-  * TQMa8QM/ TQMa8Xx[S]: fix argument check for scu_rm command
 linux-tq_5.15: TQMa6x: non working DDC for HDMI
 u-boot-tq_2019.04: RAM timings for TQMa335x
-
-### Added
-
-* machines: add `display` to `MACHINE_FEATURES`. This enables rootfs customization.
 
 ### Removed
 
