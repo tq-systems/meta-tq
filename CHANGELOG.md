@@ -9,6 +9,21 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* rcw: tqmls1028a:
+  - Added 1000MHz variants for eMMC/SD and SPI-NOR boot
+  - Removed 800MHz variants for SPI-NOR boot due to erratum A050958
+* machines: add `display` to `MACHINE_FEATURES`. This enables rootfs customization.
+
+### Fixed
+
+* u-boot-imx-tq_2020.04:
+  * TQMa8MPxL: fix mmc env offset for redundant env
+  * TQMa8QM/ TQMa8Xx[S]: fix argument check for scu_rm command
+* linux-tq_5.15: TQMa6x: non working DDC for HDMI
+* u-boot-tq_2019.04: RAM timings for TQMa335x
+
 ### Changed
 
 * TQMa335x/TQMa57xx/TQMa65xx: allow configuration of boot VFAT size. This enables
@@ -48,22 +63,13 @@ Releases are named with the following scheme:
   * `u-boot-lsdk-tq-2021.04`
   * `linux-imx-tq_5.15`
 
-### Fixed
-
-* u-boot-imx-tq_2020.04:
-  * TQMa8MPxL: fix mmc env offset for redundant env
-  * TQMa8QM/ TQMa8Xx[S]: fix argument check for scu_rm command
-linux-tq_5.15: TQMa6x: non working DDC for HDMI
-u-boot-tq_2019.04: RAM timings for TQMa335x
-
-### Added
-
-* machines: add `display` to `MACHINE_FEATURES`. This enables rootfs customization.
-
 ### Removed
 
 * Dedicated machine `tqmls1012al-1gb-mbls1012al` was removed.
   Use specific ATF files for 1GiB module (see [TQMLS1012AL README](doc/README.TQMLS1012AL.md)) as replacement
+
+__Start of porting to honister__
+------------------------------------------------------------------------
 
 ## hardknott.TQMLS1028A.BSP.SW.0107
 
