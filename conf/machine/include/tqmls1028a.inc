@@ -50,10 +50,11 @@ UBI_VOLNAME = "root"
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
 ATF_RCW_VARIANTS ?= " \
+    default/rcw_1000_sd.bin \
+    default/rcw_1000_spi_nor.bin \
     default/rcw_1300_sd.bin \
     default/rcw_1300_spi_nor.bin \
     default/rcw_800_sd.bin \
-    default/rcw_800_spi_nor.bin\
 "
 RCWSD ?= "default/rcw_1300_sd"
 RCWXSPI ?= "default/rcw_1300_spi_nor"
