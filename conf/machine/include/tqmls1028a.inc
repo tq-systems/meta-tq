@@ -61,9 +61,10 @@ UBI_VOLNAME = "root"
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
-ATF_RCW_VARIANTS ?= "\
+ATF_RCW_VARIANTS ?= " \
     default/rcw_800_sd.bin \
-    default/rcw_800_spi_nor.bin\
+    default/rcw_1000_sd.bin \
+    default/rcw_1000_spi_nor.bin \
     default/rcw_1300_sd.bin \
     default/rcw_1300_spi_nor.bin \
 "
