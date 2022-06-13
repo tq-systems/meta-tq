@@ -11,7 +11,14 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* TQMa335x/TQMa57xx/TQMa65xx: allow configuration of boot VFAT size. This enables
+  smaller sizes if the kernel image will be installed into /boot which is the
+  default now.
+* TQMa335x: do not install kernel and dtb into boot VFAT image. The images are
+  already found and used from /boot
 * TQMa6x / TQMa335x: add ubi to `MACHINE_FEATURES`
+  since we have an optionally assembled SPI-NOR, `ubi` should be added to have
+  the ability to install MTD utils in rootfs based on `MACHINE_FEATURES`
 * u-boot-imx-tq_2020.04: TQMa8MPxL: update RAM Timings
 * linux-ti-tq_5.4.43: TQMa335x
   - change compression to speed up booting
