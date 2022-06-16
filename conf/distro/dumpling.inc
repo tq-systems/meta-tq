@@ -9,7 +9,10 @@ DISTRO_FEATURES = "${DISTRO_FEATURES_DEFAULT} opengl systemd"
 IMAGE_LINGUAS:append = " de-de en-us"
 
 # point some runtime providers to full fledged packages
-VIRTUAL-RUNTIME_base-utils-hwclock ?= "util-linux-hwclock"
+PREFERRED_PROVIDER_virtual/base-utils = "packagegroup-core-base-utils"
+VIRTUAL-RUNTIME_base-utils = "packagegroup-core-base-utils"
+VIRTUAL-RUNTIME_base-utils-hwclock = "util-linux-hwclock"
+VIRTUAL-RUNTIME_base-utils-lscpu = "util-linux-lscpu"
 
 # strip some unused stuff to lower dependencies, work in progress:
 
