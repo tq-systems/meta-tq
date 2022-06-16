@@ -39,9 +39,11 @@ RDEPENDS:${PN} = "\
 #
 # although we should use openssh, prepare to use the packagegroup with dropbear
 # sftp is needed for IDE like QtCreator
+# lscpu is also good to have for testing
 #
 RRECOMMENDS:${PN} = "\
     openssh-sftp-server \
+    ${VIRTUAL-RUNTIME_base-utils-lscpu} \
 "
 
 # Note: kmscube is only available if we have opengl and if virtual/libgbm
