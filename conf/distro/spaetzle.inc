@@ -38,6 +38,11 @@ VIRTUAL-RUNTIME_init_manager = "busybox"
 VIRTUAL-RUNTIME_initscripts = "initscripts"
 VIRTUAL-RUNTIME_keymaps = "keymaps"
 
+# point some runtime providers to busybox
+PREFERRED_PROVIDER_virtual/base-utils = "busybox"
+VIRTUAL-RUNTIME_base-utils = "busybox"
+VIRTUAL-RUNTIME_base-utils-hwclock = "busybox-hwclock"
+
 # force removal of systemd from DISTRO_FEATURES
 # take care when updating yocto, at the moment sysvinit must not be removed,
 # see above
