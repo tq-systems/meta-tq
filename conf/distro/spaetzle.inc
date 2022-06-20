@@ -22,8 +22,8 @@ DISTRO_SHORT_NAME = "spaetzle"
 DISTRO_FEATURES:append = " sysvinit"
 
 # We have some images that can't be built with spaetzle
-PNBLACKLIST[tq-image-weston] = "not buildable with spaetzle: use tq-image-small"
-PNBLACKLIST[tq-image-qt5] = "not buildable with spaetzle: use tq-image-small"
+SKIP_RECIPE[tq-image-weston] = "not buildable with spaetzle: use tq-image-small"
+SKIP_RECIPE[tq-image-qt5] = "not buildable with spaetzle: use tq-image-small"
 
 # tinification of tq-common.inc (mostly similar to init-manager-mdev-busybox.inc).
 # Although it is used as default assigned value from poky-tiny.conf documentation

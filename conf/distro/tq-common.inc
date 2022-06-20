@@ -24,9 +24,6 @@ INHERIT += "sanity"
 INHERIT += "insane"
 QA_LOG = "1"
 
-# do images prelink
-INHERIT += "image-prelink"
-
 # include the version package
 IMAGE_INSTALL:append = " os-release"
 
