@@ -6,8 +6,11 @@ This README contains some useful information for TQMa8MPxL on MBa8MPxL
 
 ## Variants
 
-* TQMa8MPQL REV.010x on MBa8MPxL REV.010x
 * TQMa8MPQL REV.020x on MBa8MPxL REV.020x
+* TQMa8MPQL REV.020x on MBa8MPxL REV.020x SoM prototypes (2 GiB RAM)
+  without variant data in EEPROM ((see [issue section](#known-issues))
+* TQMa8MPQL REV.010x on MBa8MPxL REV.010x (scheduled for removal with upgrade to
+  next yocto version)
 
 ## Version information for software components
 
@@ -15,7 +18,7 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 
 ## Supported machine configurations:
 
-See top level README.md for configurations usable as MACHINE.
+See [top level README.md](./../README.md) for configurations usable as MACHINE.
 
 ## Supported Features
 
@@ -124,7 +127,13 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Known Issues
 
-* UART 1,2,3 (REV.010x)
+* REV.020x SoM without variant data in EEPROM (prototypes)
+  * With default U-Boot configuration boot is interrupted in SPL and waits for
+    input of assembled RAM size (1, 2, 8).
+  * Use fixed 2GB U-Boot configuration. This is built by default `UBOOT_CONFIG`
+    entries `sd-2gb` and `mfgtool-2gb` (note that the generated wic-File uses
+    the multi RAM config)
+* UART 1,2,3 (REV.010x only)
   * UART are in DTE mode, not DCE
   * to use UART with FTDI RS232 / USB some hardware modification are needed for REV.010x, see
     manual
