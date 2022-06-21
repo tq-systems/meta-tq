@@ -9,10 +9,13 @@ Releases are named with the following scheme:
 
 ## Next Release
 
-## hardknott.TQMLS1028A.BSP.SW.0108
+## hardknott.TQMa8.BSP.SW.0085
 
 ### Changed
 
+* u-boot-imx-tq_2020.04: TQMa8Mx/TQMa8MxML/TQMa8MxNL/TQMa8MP
+  * backport MMU table fixxes from upstream
+  * backport U-Boot relocation and RAM size fixes from upstream
 * TQMa335x/TQMa57xx/TQMa65xx: allow configuration of boot VFAT size. This enables
   smaller sizes if the kernel image will be installed into /boot which is the
   default now.
@@ -25,10 +28,22 @@ Releases are named with the following scheme:
 
 ### Added
 
+* classes: add `image_type_bootonly` to support generation of minimal bootable
+  images
+* TQMa8MP: new machine config variant (single image for multiple RAM sizes)
+  with support for 2GB RAM fallback variant
+* u-boot-imx-tq_2020.04: TQMa8MP
+  * variant and revision data support
+  * single image for multiple RAM size variants
 * rcw: tqmls1028a:
   - Added 1000MHz variants for eMMC/SD and SPI-NOR boot
   - Removed 800MHz variants for SPI-NOR boot due to erratum A050958
 * machines: add `display` to `MACHINE_FEATURES`. This enables rootfs customization.
+
+### Removed
+
+* TQMa8MP: 2GB machine config variant, support for 2GB fallback bootstream is
+  included in new tqma8mpx-mba8mpxl machine configuration
 
 ### Fixed
 
