@@ -2,7 +2,7 @@ require u-boot-tq.inc
 
 DESCRIPTION = "u-boot for TQ-Systems GmbH Freescale / NXP LS102xA based modules"
 
-LICENSE = "GPLv2+"
+LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
 DEPENDS += "bc-native bison-native"
