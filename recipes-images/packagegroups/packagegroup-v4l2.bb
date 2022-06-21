@@ -1,9 +1,10 @@
 DESCRIPTION = "camera and video codec testing tools"
 LICENSE = "MIT"
 
-inherit packagegroup
+# prevent warning related to dynamic package renaming
+PACKAGE_ARCH = "${TUNE_PKGARCH}"
 
-PACKAGE_ARCH = "${MACHINE_ARCH}"
+inherit packagegroup
 
 GST_PKGS = "\
     gstreamer1.0 \
