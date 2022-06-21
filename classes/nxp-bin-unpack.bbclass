@@ -106,13 +106,12 @@ python do_unpack() {
     else:
         bb.note("NXP EULA has been accepted for '%s'" % pkg)
 
-    # The binary unpack needs to be done first so 'S' is valid
-    bb.build.exec_func('nxp_bin_do_unpack', d)
-
     try:
         bb.build.exec_func('base_do_unpack', d)
     except:
         raise
+
+    bb.build.exec_func('nxp_bin_do_unpack', d)
 }
 
 do_unpack[vardepsexclude] += "NXP_EULA_FILE"
