@@ -2,7 +2,7 @@ SUMMARY = "Linux kernel with PREEMPT_RT support for TQ-Systems GmbH Layerscape b
 
 inherit kernel
 
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 DEPENDS += "lzop-native bc-native openssl-native"

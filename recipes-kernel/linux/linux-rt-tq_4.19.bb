@@ -1,6 +1,6 @@
 SUMMARY = "Linux kernel for TQ-Systems GmbH TQMa57xx modules based on Linux 4.19-rt"
 
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
 inherit kernel

@@ -1,4 +1,4 @@
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 
 DEPENDS += "lzop-native bc-native openssl-native"
 
