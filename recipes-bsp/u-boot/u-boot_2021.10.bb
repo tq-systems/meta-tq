@@ -9,6 +9,6 @@ DEPENDS += "xxd-native bison-native"
 
 SRCREV = "69d9eda4da13ecabb8002fce0dded4bba3bff9f9"
 
-SRC_URI = "git://git.denx.de/u-boot.git;protocol=git"
+SRC_URI = "git://git.denx.de/u-boot.git;branch=master;protocol=git"
 
 COMPATIBLE_MACHINE = "tqma6s|tqma6q"
