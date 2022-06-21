@@ -21,7 +21,7 @@ ALSA_RDEPENDS = "\
 RDEPENDS:${PN} = "\
     ${@bb.utils.contains('COMBINED_FEATURES', 'alsa', ' ${ALSA_RDEPENDS}', '', d)} \
     atop \
-    dstat \
+    dool \
     evtest \
     gdbserver \
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', ' glmark2', '', d)} \
