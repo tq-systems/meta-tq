@@ -26,12 +26,12 @@ EXTRA_OEMAKE:append:mx8m = "\
     IMX_BOOT_UART_BASE=${ATF_UART_BASE} \
 "
 
-EXTRA_OEMAKE:append:mx8qm += "\
+EXTRA_OEMAKE:append:mx8qm = "\
     IMX_DEBUG_UART=${ATF_IMX_DEBUG_UART} \
     DEBUG_CONSOLE=${ATF_DEBUG_CONSOLE} \
 "
 
-EXTRA_OEMAKE:append:mx8x += "\
+EXTRA_OEMAKE:append:mx8x = "\
     IMX_DEBUG_UART=${ATF_IMX_DEBUG_UART} \
     DEBUG_CONSOLE=${ATF_DEBUG_CONSOLE} \
 "
