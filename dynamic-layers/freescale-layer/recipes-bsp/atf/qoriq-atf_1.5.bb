@@ -1,6 +1,6 @@
 DESCRIPTION = "ARM Trusted Firmware"
 
-LICENSE = "BSD"
+LICENSE = "BSD-3-Clause"
 LIC_FILES_CHKSUM = "file://license.rst;md5=e927e02bca647e14efd87e9e914b2443"
 
 PV = "1.5+git${SRCPV}"
