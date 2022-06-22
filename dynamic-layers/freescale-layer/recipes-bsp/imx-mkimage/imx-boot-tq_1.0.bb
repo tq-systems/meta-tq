@@ -1,5 +1,5 @@
 # Copyright (C) 2017-2020 NXP
-# Copyright (C) 2020-2021 TQ-Systems GmbH
+# Copyright (C) 2020-2022 TQ-Systems GmbH
 
 require imx-mkimage-tq_git.inc
 
@@ -14,8 +14,8 @@ BOOT_TOOLS = "imx-boot-tools"
 
 IMX_EXTRA_FIRMWARE        = "firmware-imx-8 imx-sc-firmware imx-seco"
 IMX_EXTRA_FIRMWARE:append = " ${@bb.utils.contains('IMXBOOT_TARGETS', 'flash_linux_m4', 'virtual/imx-cortexm-demos', '', d)}"
-IMX_EXTRA_FIRMWARE:mx8m   = "firmware-imx-8m"
-IMX_EXTRA_FIRMWARE:mx8x   = "imx-sc-firmware imx-seco"
+IMX_EXTRA_FIRMWARE:mx8m-generic-bsp   = "firmware-imx-8m"
+IMX_EXTRA_FIRMWARE:mx8x-generic-bsp   = "imx-sc-firmware imx-seco"
 
 DEPENDS += "\
     u-boot \
@@ -30,7 +30,7 @@ DEPENDS:append = "\
 "
 
 # imx8m needs mkimage and dtc for ITB images
-DEPENDS:append:mx8m = "\
+DEPENDS:append:mx8m-generic-bsp = "\
     u-boot-mkimage-native \
     dtc-native \
 "
@@ -72,16 +72,16 @@ DEPLOY_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false
 IMXBOOT_TARGETS ??= "unknown"
 
 BOOT_STAGING       = "${S}/${IMX_BOOT_SOC_TARGET}"
-BOOT_STAGING:mx8m  = "${S}/iMX8M"
-BOOT_STAGING:mx8dx = "${S}/iMX8QX"
+BOOT_STAGING:mx8m-generic-bsp  = "${S}/iMX8M"
+BOOT_STAGING:mx8dx-generic-bsp = "${S}/iMX8QX"
 
 SOC_FAMILY      = "INVALID"
-SOC_FAMILY:mx8  = "mx8"
-SOC_FAMILY:mx8m = "mx8m"
-SOC_FAMILY:mx8x = "mx8x"
+SOC_FAMILY:mx8-generic-bsp  = "mx8"
+SOC_FAMILY:mx8m-generic-bsp = "mx8m"
+SOC_FAMILY:mx8x-generic-bsp = "mx8x"
 
 REV_OPTION ?= ""
-REV_OPTION:mx8qxp = \
+REV_OPTION:mx8qxp-generic-bsp = \
     "${@bb.utils.contains('MACHINE_FEATURES', 'soc-revb0', '', \
                                                            'REV=C0', d)}"
 
@@ -282,4 +282,4 @@ addtask deploy before do_build after do_compile
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 FILES:${PN} = "/boot"
 
-COMPATIBLE_MACHINE = "(mx8)"
+COMPATIBLE_MACHINE = "(mx8-generic-bsp)"

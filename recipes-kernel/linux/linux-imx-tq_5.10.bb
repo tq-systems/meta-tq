@@ -19,10 +19,10 @@ SRC_URI = "\
 
 DEFAULT_PREFERENCE = "1"
 
-KBUILD_DEFCONFIG:mx6 = "imx_v7_defconfig"
-KBUILD_DEFCONFIG:mx8 = "imx_v8_defconfig"
+KBUILD_DEFCONFIG:mx6-generic-bsp = "imx_v7_defconfig"
+KBUILD_DEFCONFIG:mx8-generic-bsp = "imx_v8_defconfig"
 
-SRC_URI:mx6 = "\
+SRC_URI:mx6-generic-bsp = "\
     ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
     file://disable-highpte.cfg \
     file://dynamic-debug.cfg \
@@ -50,7 +50,7 @@ SRC_URI:mx6 = "\
     file://usb-serial-port.cfg \
 "
 
-SRC_URI:mx8 = "\
+SRC_URI:mx8-nxp-bsp = "\
     ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
     file://local-version.cfg \
     file://tqma8-display-support.cfg \
@@ -71,10 +71,13 @@ SRC_URI:mx8 = "\
 "
 
 # Optional Basler camera support wich uses a specific patch set
-SRC_URI:append:mx8mp = " \
+SRC_URI:append:mx8mp-nxp-bsp = "\
     file://basler-camera;type=kmeta;destsuffix=basler-camera \
 "
-KERNEL_FEATURES:append:mx8mp = "${@bb.utils.contains('MACHINE_FEATURES', 'basler', ' basler-camera.scc', '', d)}"
+
+KERNEL_FEATURES:append:mx8mp-nxp-bsp = "\
+    ${@bb.utils.contains('MACHINE_FEATURES', 'basler', ' basler-camera.scc', '', d)} \
+"
 
 COMPATIBLE_MACHINE = "^("
 # COMPATIBLE_MACHINE .= "tqma7x"
@@ -92,4 +95,4 @@ COMPATIBLE_MACHINE .= "|tqma8mxml"
 COMPATIBLE_MACHINE .= "|tqma8mxnl"
 COMPATIBLE_MACHINE .= ")$"
 
-EXTRA_OEMAKE:append:mx8 = " ARCH=arm64"
+EXTRA_OEMAKE:append:mx8-generic-bsp = " ARCH=arm64"
