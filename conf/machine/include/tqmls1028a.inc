@@ -46,6 +46,11 @@ UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
 # needs to be set to have it consistent for kernel command line
 UBI_VOLNAME = "root"
 
+# For the 4GB variant set BL2_IMAGE to 'bl2_sd_tqmls1028a_4gb.pbl'
+# and BL3_IMAGE to 'fip_uboot_tqmls1028a_4gb.bin'
+BL2_IMAGE ?= "bl2_sd.pbl"
+BL3_IMAGE ?= "fip_uboot.bin"
+
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
