@@ -14,4 +14,4 @@ PREFERRED_PROVIDER_virtual/bootloader = "u-boot-imx-tq"
 
 # machine without drm/kms in fslc BSP have no libgbm
 PREFERRED_PROVIDER_virtual/libgbm = ""
-PREFERRED_PROVIDER_virtual/libgbm:mx8 = "imx-gpu-viv"
+PREFERRED_PROVIDER_virtual/libgbm:mx8-nxp-bsp = "imx-gpu-viv"
