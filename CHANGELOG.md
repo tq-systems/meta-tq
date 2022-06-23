@@ -9,6 +9,21 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* distros: build small SD / e-MMC boot image for SOM with TI CPU
+* treewide: syntax conversion for honister
+* treewide: recipe changes for building with honister
+
+### Added
+
+* distros: dumpling: enable bluetooth as DISTRO_FEATURE by default
+* doc: paragraph for SDK usage
+
+### Fixed
+
+* distros: fix broken SDK build (due to a wrong named variable)
+
 __Start of porting to kirkstone__
 ------------------------------------------------------------------------
 
