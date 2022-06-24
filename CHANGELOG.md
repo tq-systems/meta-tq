@@ -88,6 +88,10 @@ Releases are named with the following scheme:
 linux-tq_5.15: TQMa6x: non working DDC for HDMI
 u-boot-tq_2019.04: RAM timings for TQMa335x
 
+### Added
+
+* tqmls1012al: Support for Winbond RAM
+
 ### Removed
 
 * Dedicated machine `tqmls1012al-1gb-mbls1012al` was removed.
