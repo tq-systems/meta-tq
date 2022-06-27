@@ -1,14 +1,21 @@
 # Common definitions for TQ-Systems GmbH TQMa335x modules
-# optional from meta-ti
-# will handle SOC_FAMILY:append ?= ":ti33x" needed for TI recipes
-include conf/machine/include/ti33x.inc
 
 # needed for easier compatible / preferred_provider
 MACHINEOVERRIDES =. "tqma335x:"
 
-# prevent inclusion if meta-ti is present - otherwise we get nasty double inclusion warnings
-DEFAULTTUNE ?= "${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-ti", "", "armv7athf-neon", d)}"
-require ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-ti", '', 'conf/machine/include/arm/armv7a/tune-cortexa8.inc', d)}
+# Default providers, may need to override for specific machines
+# needs to be set before inclusion of ti33x.inc
+PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-tq"
+PREFERRED_PROVIDER_u-boot ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-tq"
+
+# from meta-ti-bsp: will handle SOC_FAMILY:append ?= ":ti33x" needed for TI recipes
+include conf/machine/include/ti33x.inc
+
+# prevent inclusion of tune settings if meta-ti is present -
+# otherwise we get nasty double inclusion warnings
+DEFAULTTUNE ?= "${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-ti-bsp", "", "armv7athf-neon", d)}"
+require ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-ti-bsp", '', 'conf/machine/include/arm/armv7a/tune-cortexa8.inc', d)}
 
 # Machine specific options
 #
@@ -21,18 +28,13 @@ MACHINE_EXTRA_RRECOMMENDS += "\
 #
 require conf/machine/include/tqmxx.inc
 
-# This is hacky, but we have to be more specific than meta-ti to get our kernel
-# fork in
-PREFERRED_PROVIDER_virtual/kernel:tqma335x ?= "linux-ti-tq"
 KERNEL_IMAGETYPE ?= "zImage"
-
-PREFERRED_PROVIDER_u-boot:tqma335x ?= "u-boot-tq"
-PREFERRED_PROVIDER_virtual/bootloader:tqma335x ?= "u-boot-tq"
 
 UBOOT_ARCH = "arm"
 UBOOT_ENTRYPOINT = "0x80008000"
 UBOOT_LOADADDRESS = "0x80008000"
-UBOOT_SUFFIX ?= "img"
+SPL_BINARY = "MLO"
+UBOOT_SUFFIX = "img"
 
 # we still need this, since meta-ti sets KERNEL_IMAGETYPES to contain uImage
 # and forces building this ancient image which forces us to provide this var
@@ -52,6 +54,8 @@ EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 MKUBIFS_ARGS = " -m 1 -e 65408 -c 896 "
 UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
 # needs to be set to have it consistent for kernel command line
+# Use the expected value of the ubifs filesystem's volume name in the kernel
+# and u-boot.
 UBI_VOLNAME = "root"
 
 IMAGE_BOOT_FILES = "\
@@ -63,8 +67,7 @@ IMAGE_BOOT_FILES = "\
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
 # List common SoC features
-
-MACHINE_FEATURES:append = "\
+MACHINE_FEATURES += "\
     alsa \
     apm \
     can \
