@@ -15,3 +15,52 @@ COMPATIBLE_MACHINE = "tqma57xx"
 COMPATIBLE_MACHINE_append = "|tqma335x"
 
 SPL_BINARY = "MLO"
+
+do_install_append_tqma335x () {
+    if [ -n "${SPL_BINARY}" ]; then
+        if [ -n "${UBOOT_CONFIG}" ]; then
+            for config in ${UBOOT_MACHINE}; do
+                i=$(expr $i + 1);
+                for type in ${UBOOT_CONFIG}; do
+                    j=$(expr $j + 1);
+                    if [ $j -eq $i ]; then
+                         install -m 644 ${B}/${config}/${SPL_BINARY}.byteswap ${D}/boot/${SPL_IMAGE}.byteswap-${type}-${PV}-${PR}
+                         ln -sf ${SPL_IMAGE}.byteswap-${type}-${PV}-${PR} ${D}/boot/${SPL_BINARYNAME}.byteswap-${type}
+                         ln -sf ${SPL_IMAGE}.byteswap-${type}-${PV}-${PR} ${D}/boot/${SPL_BINARYNAME}.byteswap
+                    fi
+                done
+                unset j
+            done
+        else
+            install -m 644 ${B}/${SPL_BINARY}.byteswap ${D}/boot/${SPL_IMAGE}.byteswap
+            ln -sf ${SPL_IMAGE}.byteswap ${D}/boot/${SPL_BINARYNAME}.byteswap
+        fi
+    fi
+}
+
+do_deploy_append_tqma335x () {
+     if [ -n "${SPL_BINARY}" ]; then
+        if [ -n "${UBOOT_CONFIG}" ]; then
+            for config in ${UBOOT_MACHINE}; do
+                i=$(expr $i + 1);
+                for type in ${UBOOT_CONFIG}; do
+                    j=$(expr $j + 1);
+                    if [ $j -eq $i ]; then
+                        install -m 644 ${B}/${config}/${SPL_BINARY}.byteswap ${DEPLOYDIR}/${SPL_IMAGE}.byteswap-${type}-${PV}-${PR}
+                        rm -f ${DEPLOYDIR}/${SPL_BINARYNAME}.byteswap ${DEPLOYDIR}/${SPL_SYMLINK}.byteswap-${type}
+                        ln -sf ${SPL_IMAGE}.byteswap-${type}-${PV}-${PR} ${DEPLOYDIR}/${SPL_BINARYNAME}.byteswap-${type}
+                        ln -sf ${SPL_IMAGE}.byteswap-${type}-${PV}-${PR} ${DEPLOYDIR}/${SPL_BINARYNAME}.byteswap
+                        ln -sf ${SPL_IMAGE}.byteswap-${type}-${PV}-${PR} ${DEPLOYDIR}/${SPL_SYMLINK}.byteswap-${type}
+                        ln -sf ${SPL_IMAGE}.byteswap-${type}-${PV}-${PR} ${DEPLOYDIR}/${SPL_SYMLINK}.byteswap
+                    fi
+                done
+                unset j
+            done
+        else
+            install -m 644 ${B}/${SPL_BINARY}.byteswap ${DEPLOYDIR}/${SPL_IMAGE}.byteswap
+            rm -f ${DEPLOYDIR}/${SPL_BINARYNAME}.byteswap ${DEPLOYDIR}/${SPL_SYMLINK}.byteswap
+            ln -sf ${SPL_IMAGE}.byteswap ${DEPLOYDIR}/${SPL_BINARYNAME}.byteswap
+            ln -sf ${SPL_IMAGE}.byteswap ${DEPLOYDIR}/${SPL_SYMLINK}.byteswap
+        fi
+    fi
+}
