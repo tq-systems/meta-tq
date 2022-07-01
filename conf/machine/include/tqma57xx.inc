@@ -28,6 +28,7 @@ UBOOT_ARCH = "arm"
 UBOOT_ENTRYPOINT = "0x80008000"
 UBOOT_LOADADDRESS = "0x80008000"
 UBOOT_SUFFIX ?= "img"
+SPL_BINARY = "MLO"
 
 # we still need this, since meta-ti sets KERNEL_IMAGETYPES to contain uImage
 # and forces building this ancient image which forces us to provide this var
