@@ -11,8 +11,10 @@ SRCBRANCH = "TQMa57xx-u-boot-v2019.04"
 
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 
-COMPATIBLE_MACHINE = "tqma57xx"
-COMPATIBLE_MACHINE_append = "|tqma335x"
+COMPATIBLE_MACHINE = "^("
+COMPATIBLE_MACHINE .= "|tqma335x"
+COMPATIBLE_MACHINE .= "|tqma57xx"
+COMPATIBLE_MACHINE .= ")$"
 
 do_install_append_tqma335x () {
     if [ -n "${SPL_BINARY}" ]; then
