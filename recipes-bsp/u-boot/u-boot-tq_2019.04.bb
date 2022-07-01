@@ -14,8 +14,6 @@ SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branc
 COMPATIBLE_MACHINE = "tqma57xx"
 COMPATIBLE_MACHINE:append = "|tqma335x"
 
-SPL_BINARY = "MLO"
-
 do_install:append:tqma335x () {
     if [ -n "${SPL_BINARY}" ]; then
         if [ -n "${UBOOT_CONFIG}" ]; then
