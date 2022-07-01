@@ -144,6 +144,50 @@ customization. Because of the intended usage, they are focused on demonstration.
 These configs should not go into a production usage without thorough review.
 Depending on the actual project, security must be taken in account.
 
+### SDK usage
+
+For each of the distros an SDK can be built. The SDK contains everything
+needed for cross application development for the target hardware. To build
+the SDK along with the image, run
+
+```
+bitbake <image> -c populate_sdk
+```
+
+After building the SDK, an installation script can be found in
+`${TMPDIR}/deploy/sdk`. Simply run the script to install the SDK on your
+development host. The script will provide you with a default install path,
+but it can be customized when needed. Depending on your installation path
+you will possibly need root access to install the SDK.
+
+#### Developing in SDK environment
+
+Source the bash script located inside your chosen installation path, starting
+with `environment-setup` followed by some architecture specifications. For
+example:
+
+```
+source <path/to/sdk/installation>/environment-setup-cortexa53-crypto-tq-linux
+```
+
+Inside the SDK environment you can now develop your application using the
+cross compiler tools. To verify the environment run `env` or display the
+value of `CC`:
+
+```
+echo ${CC}
+```
+
+#### Direct usage of SDK cross toolchain
+
+You can also invoke the cross compile tools directly. They are
+located in the SDK installation path in the `sysroots` folder. In this
+folder you will find two more folders. One sysroot for your target
+hardware, containing cross compiled libraries and headers among others
+and one sysroot for your development host architecture (typically
+x86_64). This second sysroot contains the cross compile tools in
+`<path/to/sdk/installation>/sysroots/<host_architecture>/usr/bin/<target_architecture>`.
+
 ### Known issues
 
 * tq-image-small\[-debug\]:
