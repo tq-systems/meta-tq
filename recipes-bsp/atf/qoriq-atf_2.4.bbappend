@@ -21,3 +21,29 @@ PLATFORM_ADDITIONAL_TARGET_tqmls1028a = "tqmls1028a_4gb"
 STATIC_PBL_tqmls1028a = "yes"
 
 export STATIC_PBL
+
+do_compile_append_tqmls1028a () {
+    for plat in ${PLATFORM} ${PLATFORM_ADDITIONAL_TARGET}; do
+        for rcw_file in ${ATF_RCW_VARIANTS}; do
+                case $rcw_file in
+                    *sd*)
+                    bootmode="sd";
+                    ;;
+                    *nor*)
+                    bootmode="flexspi_nor"
+                    ;;
+                esac
+                oe_runmake distclean
+                oe_runmake -C ${S} pbl PLAT=${plat} BOOT_MODE=${bootmode} RCW=${DEPLOY_DIR_IMAGE}/rcw/${RCW_FOLDER}/${rcw_file} ${bl32opt} ${spdopt} ${secureopt} ${fuseopt} ${otaopt}
+                install -d ${S}/atf-variants
+                cp ${S}/build/${plat}/release/bl2_${bootmode}.pbl ${S}/atf-variants/bl2_${plat}_$(basename ${rcw_file} .bin).pbl
+        done
+    done
+}
+
+do_deploy_append () {
+    if [ -e ${S}/atf-variants/ ]; then
+        install -d ${DEPLOYDIR}/atf/variants
+        install ${S}/atf-variants/*.pbl ${DEPLOYDIR}/atf/variants/
+    fi
+}
