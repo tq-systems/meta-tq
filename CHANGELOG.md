@@ -16,12 +16,17 @@ Releases are named with the following scheme:
   * add infos for boot sources and update
 * u-boot-tq_2019.04:
   * TQMa335x[L]: cleanup update scripts and variables
+* u-boot-lsdk-tq_2019.10: tqmls1028a: add support for second DRAM bank
+* qoriq-atf_v2.4:
+  * add support for tqmls1028a
+  * add support for tqmls1028a 4GiB variant
 
 ### Added
 
 * u-boot-tq_2019.04:
   * TQMa335x[L]: installation of MLO for SPI NOR Flash in yocto recipe
   * TQMa335x[L]: SPI NOR boot support
+* tqmls1028a: use BL2_IMAGE, BL3_IMAGE variable for wic file creation
 
 ### Fixed
 
@@ -29,6 +34,8 @@ Releases are named with the following scheme:
   * SPDX license header for TQMa335x[L] sources and DT
   * backport fixes for environment for multiple environment
     location support
+* tqmls1028a: add qoriq-atf to WKS_FILE_DEPENDS
+* tqmlx2160a: add qoriq-atf to WKS_FILE_DEPENDS
 
 ## hardknott.TQMa8.BSP.SW.0085
 
