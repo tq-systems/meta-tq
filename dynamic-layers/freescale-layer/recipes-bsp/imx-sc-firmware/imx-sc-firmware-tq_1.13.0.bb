@@ -4,7 +4,7 @@
 
 DESCRIPTION = "i.MX System Controller Firmware"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=983e4c77621568488dd902b27e0c2143"
+LIC_FILES_CHKSUM = "file://COPYING;md5=d3c315c6eaa43e07d8c130dc3a04a011"
 SECTION = "BSP"
 
 PROVIDES = "imx-sc-firmware"
@@ -14,7 +14,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}-${PV}:${THISDIR}/${PN}:"
 # Need tq_imx-scfw-v1.2.7-b3357 or newer for build
 # (use SC_FIRMWARE_VERSION_TQ in package name)
 
-SC_FIRMWARE_VERSION_TQ ?= "TQMa8.NXP-v1.6.0.B4894.0033"
+SC_FIRMWARE_VERSION_TQ ?= "TQMa8.NXP-v1.13.0.B5561.0034"
 SC_FIRMWARE_DBG ??= "0"
 SC_FIRMWARE_NAME_TQ ?= "${SC_FIRMWARE_VERSION_TQ}${@'_dbg' if d.getVar('SC_FIRMWARE_DBG') == '1' else ''}"
 
@@ -22,7 +22,7 @@ SRC_URI = "\
     file://${BPN}-${SC_FIRMWARE_NAME_TQ}.tar.gz \
 "
 
-S = "${WORKDIR}/${BPN}-${SC_FIRMWARE_NAME_TQ}"
+S = "${WORKDIR}/${BPN}-${SC_FIRMWARE_VERSION_TQ}"
 
 # clear vars to prevent default assignments
 SC_FIRMWARE_NAME = "invalid"
@@ -60,4 +60,4 @@ INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "(tqma8xx|tqma8xx|tqma8x)"
+COMPATIBLE_MACHINE = "(tqma8xx|tqma8xxs|tqma8x)"
