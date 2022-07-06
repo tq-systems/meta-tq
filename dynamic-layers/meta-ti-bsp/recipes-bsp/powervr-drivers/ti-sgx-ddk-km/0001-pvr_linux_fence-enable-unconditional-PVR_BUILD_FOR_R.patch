@@ -1,0 +1,31 @@
+From be011b3e358c8d85e1a55ef54e949a686080aa7a Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Tue, 5 Jul 2022 18:02:51 +0200
+Subject: [PATCH] pvr_linux_fence: enable unconditional PVR_BUILD_FOR_RT_LINUX
+
+The guarded changes depend on changes from PREMPT_RT patch.
+They do not depend on the activation of PREEMPT_RT.
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ eurasia_km/services4/srvkm/env/linux/pvr_linux_fence.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+diff --git a/eurasia_km/services4/srvkm/env/linux/pvr_linux_fence.c b/eurasia_km/services4/srvkm/env/linux/pvr_linux_fence.c
+index 9ba1ccd..2905d83 100644
+--- a/eurasia_km/services4/srvkm/env/linux/pvr_linux_fence.c
++++ b/eurasia_km/services4/srvkm/env/linux/pvr_linux_fence.c
+@@ -68,9 +68,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ #define	BLOCKED_ON_READ		1
+ #define	BLOCKED_ON_WRITE	2
+ 
+-#if defined(CONFIG_PREEMPT_RT_BASE) || defined(CONFIG_PREEMPT_RT)
+- #define PVR_BUILD_FOR_RT_LINUX
+-#endif
++#define PVR_BUILD_FOR_RT_LINUX
+ 
+ struct pvr_fence_context
+ {
+-- 
+2.17.1
+

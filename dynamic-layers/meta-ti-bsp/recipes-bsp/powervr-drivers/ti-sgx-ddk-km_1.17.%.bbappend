@@ -2,6 +2,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI += "\
     file://0001-ti-sgx-ddk-km-properly-handle-more-OE-YP-compiler-pr.patch \
+    file://0001-pvr_linux_fence-enable-unconditional-PVR_BUILD_FOR_R.patch \
 "
 
 MACHINE_KERNEL_PR:append = "v"
