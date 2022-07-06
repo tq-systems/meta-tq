@@ -9,6 +9,27 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* TQMa335x[L]: documentation
+  * add Issues
+  * add infos for boot sources and update
+* u-boot-tq_2019.04:
+  * TQMa335x[L]: cleanup update scripts and variables
+
+### Added
+
+* u-boot-tq_2019.04:
+  * TQMa335x[L]: installation of MLO for SPI NOR Flash in yocto recipe
+  * TQMa335x[L]: SPI NOR boot support
+
+### Fixed
+
+* u-boot-tq_2019.04:
+  * SPDX license header for TQMa335x[L] sources and DT
+  * backport fixes for environment for multiple environment
+    location support
+
 ## hardknott.TQMa8.BSP.SW.0085
 
 ### Changed
