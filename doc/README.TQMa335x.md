@@ -46,7 +46,8 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* MLO-${MACHINE}: U-Boot MLO (SPL image)
+* MLO-${MACHINE}: U-Boot MLO (SPL image for SD / e-MMC)
+* MLO-${MACHINE}.byteswap: U-Boot MLO (SPL image for SPI NOR flash)
 * u-boot-${MACHINE}.img: U-Boot image to be booted by MLO
 
 ## HowTo
@@ -95,12 +96,13 @@ Boot sequence: SPI0 (NOR) → MMC0 (SD) → USB0 (N/A) → UART0 (N/A)
 
 #### Bootable SD-Card
 
-To create a bootable SD-Card with complete system image:
+To create a bootable SD-Card with complete system image use the generated
+[wic image](#artifacts):
 
 write *.wic Image to SD (offset 0)
 
-To create a bootable SD-Card with minimum boot image (for exact file name see
-SOM specific documentation):
+To create a bootable SD-Card with minimum boot image use the generated
+[minimal wic image](#artifacts):
 
 write *.wic.bootonly to SD (offset 0)
 
@@ -110,12 +112,13 @@ Example for Linux:
 
 #### Bootable e-MMC
 
-To create a bootable e-MMC with complete system image:
+To create a bootable e-MMC with complete system image use the generated
+[wic image](#artifacts):
 
 write *.wic image to e-MMC (offset 0)
 
-To create a bootable SD-Card with minimum boot image (for exact file name see
-SOM specific documentation):
+To create a bootable e-MMC with minimum boot image use the generated
+[minimal wic image](#artifacts):
 
 write *.wic.bootonly to e-MMC (offset 0)
 
@@ -136,9 +139,8 @@ mmc write ${loadaddr} 0 ${bsz}
 
 #### Bootable SPI NOR
 
-To create a bootable SPI NOR with boot loader only
-
-Example for U-Boot, booting from SD-Card:
+To create a bootable SPI NOR with boot loader only use the generated
+[bootloader images](#artifacts). Example for U-Boot, booting from SD-Card:
 
 ```
 sf probe
@@ -150,12 +152,14 @@ sf update ${loadaddr} 0x20000 ${filesize}
 
 ### Update components via U-Boot
 
+#### U-Boot environment variables
+
 For ease of development a set of variables and scripts are in default env.
+Depending on your configuration some variable values needs to bet changend
+to the right values. For files to use see the [artifacts](#artifacts) section.
 
 _Note_: Update and start scripts expect a partitioned / initialized SD-Card or
 e-MMC.
-
-#### U-Boot environment variables
 
 * `uboot`: name of U-Boot payload image for SD / e-MMC (default = u-boot.img)
 * `mlo`: name of U-Boot SPL image for SD / e-MMC (default = MLO)
