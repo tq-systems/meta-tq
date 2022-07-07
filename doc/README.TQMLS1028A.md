@@ -2,6 +2,27 @@
 
 [[_TOC_]]
 
+## Variants
+* TQMLS1028A / TQMLS1017A SOM REV.020x/030x with 1GiB / 4GiB RAM
+* MBLS1028A / MBLS1028A-IND carrier board
+
+## Version information for software components
+
+### U-Boot
+
+* based on qoriq-u-boot (https://source.codeaurora.org/external/qoriq/qoriq-components/u-boot/)
+* branched from LSDK-20.04-update-290520
+
+### ATF
+
+* based on qoriq-atf (https://source.codeaurora.org/external/qoriq/qoriq-components/atf/)
+* branched from lf-5.15.5-1.0.0
+
+### Linux
+
+* based on linux-imx-fslc (https://github.com/Freescale/linux-fslc.git)
+* branched from 5.4-1.0.0-imx
+
 ## Kernel variants
 
 By default, the kernel recipe linux-imx-tq (based on FSLC kernel
