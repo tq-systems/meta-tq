@@ -18,9 +18,15 @@ KERNEL_DEVICETREE = ""
 require conf/machine/include/tqma8-common.inc
 
 MACHINE_FEATURES_append = "\
+    bluetooth \
     camera \
     display \
     wifi \
+"
+
+MACHINE_EXTRA_RRECOMMENDS += "\
+    linux-firmware-ath10k \
+    linux-firmware-qca \
 "
 
 # Set Serial console
