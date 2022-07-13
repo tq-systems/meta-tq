@@ -9,6 +9,14 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* linux-imx-tq_5.15: Add support for tqmls1028a as default kernel
+
+### Removed
+
+* linux-imx-tq_5.4: Drop support for tqmls1028a
+
 ## hardknott.TQMLS1028A.BSP.SW.0108
 
 ### Changed
