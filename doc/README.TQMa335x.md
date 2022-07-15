@@ -26,9 +26,12 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Known Issues
 
-* TQMa335x[L] in MBa335x: sometimes after booting the ethernet phy shows
+* TQMa335x[L] on MBa335x: sometimes after booting the ethernet phy shows
   up wrong addresses or can not be found. This needs a hardware fix on MBa335x.
   Please contact TQ-Systems support
+* TQMa335x[L] on MBa335x: U-Boot: only the first port of the CPSW is working.
+  This is a driver limitation in the used U-Boot version, under Linux both ports
+  are working.
 * TQMa335xL: warnings for non exisiting chips when booting Linux. Disable
   RTC / EEPROM / temperature sensor in DT.
 * The generated UBIFS does not fit into the default SPI-NOR (16 MiB). If
