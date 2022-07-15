@@ -11,6 +11,8 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa8MPxL: add `bluetooth` to `MACHINE_FEATURES` of MBa8MPxL and add missing
+  firmware to `MACHINE_EXTRA_RRECOMMENDS`
 * linux-imx-tq_5.15: Add support for tqmls1028a as default kernel
 
 ### Removed
