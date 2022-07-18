@@ -20,13 +20,13 @@
 
 ### Linux
 
-* based on linux-imx-fslc (https://github.com/Freescale/linux-fslc.git)
-* branched from 5.4-1.0.0-imx
+* based on linux-qoriq (https://source.codeaurora.org/external/qoriq/qoriq-components/linux/)
+* branched from lf-5.15.5-1.0.0
 
 ## Kernel variants
 
-By default, the kernel recipe linux-imx-tq (based on FSLC kernel
-5.4-1.0.0-imx) is built. An alternative kernel based on LSDK-20.12-V5.4-RT
+By default, the kernel recipe linux-imx-tq (based on qoriq kernel
+5.15.5) is built. An alternative kernel based on LSDK-20.12-V5.4-RT
 can be selected for PREEMPT_RT support by adding the following to
 local.conf or a custom DISTRO config:
 
