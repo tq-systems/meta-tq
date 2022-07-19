@@ -64,7 +64,7 @@ is _mandatory_ - see [table](#supported-machines).
 
 * LS1012A
 * LS1028A / LS1017A
-* LS1043A / LS1046A
+* LS1043A / LS1046A / LS1088A
 * LX2160A
 
 #### Notes for machines with TI CPU
@@ -212,9 +212,8 @@ Support for the following machines is contained in this version:
 | [y]    | i.MX8DXP         | TQMa8XDPS                | MB-SMARC-2     | tqma8xdps-mb-smarc-2         | TQMa8XDPS / 2 GiB RAM, HW REV.030x |
 | [y]    | i.MX8QXP         | TQMa8XQPS                | MB-SMARC-2     | tqma8xqps-mb-smarc-2         | TQMa8XQPS / 2 GiB RAM, HW REV.030x |
 | [y]    | LS1012A          | TQMLS1012AL              | MBLS1012AL     | tqmls1012al-mbls1012al       | TQMLS1012AL HW REV.010x ... 020x / 512 MiB RAM / MBLS1012AL HW REV.020x |
-| [y]    | LS1017A          | TQMLS1017A               | MBLS1028A      | tqmls1028a-mbls1028a         | |
-| [y]    | LS1028A          | TQMLS1028A               | MBLS1028A      | tqmls1028a-mbls1028a         | |
-| [b]    | LS1028A          | TQMLS1028A               | MBLS1028A-IND  | tqmls1028a-mbls1028a-ind     | |
+| [y]    | LS10\[17,28\]A   | TQMLS10\[17,28\]A        | MBLS1028A      | tqmls1028a-mbls1028a         | TQMLS1017A / TQMLS1028A HW REV.010x ... 030x, 1 GiB / 4 GiB RAM, MBLS1028A HW REV.010x |
+| [y]    | LS10\[17,28\]A   | TQMLS10\[17,28\]A        | MBLS1028A-IND  | tqmls1028a-mbls1028a-ind     | TQMLS1017A / TQMLS1028A HW REV.010x ... 030x, 1 GiB / 4 GiB RAM, MBLS1028A-IND HW REV.010x |
 | [b]    | LS1043A          | TQMLS1043A               | MBLS10xxA      | tqmls1043a-mbls10xxa         | TQMLS1043a / MBLS10xxa |
 | [b]    | LS1043A          | TQMLS1043A               | MBLS10xxA      | tqmls1043a_2g-mbls10xxa      | TQMLS1043a with 2 GiB RAM / MBLS10xxa |
 | [b]    | LS1046A          | TQMLS1046A               | MBLS10xxA      | tqmls1046a-mbls10xxa         | TQMLS1046a with 2 GiB RAM / MBLS10xxa |
