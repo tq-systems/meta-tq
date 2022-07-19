@@ -12,7 +12,6 @@ require conf/machine/include/tqmxx.inc
 PREFERRED_PROVIDER_u-boot ?= "u-boot-lsdk-tq"
 PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-lsdk-tq"
 PREFERRED_PROVIDER_virtual/kernel ?= "linux-lsdk-tq"
-PREFERRED_VERSION_qoriq-atf = "1.5%"
 
 # source the machine specific features for RCW, multimedia etc. from
 # meta-freescale
