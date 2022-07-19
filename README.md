@@ -78,6 +78,7 @@ with the following CPU families from TI  - see [table](#supported-machines).
 For machines based on following CPU families from TI usage of meta-ti
 is _mandatory_ - see [table](#supported-machines)
 
+* AM64xx
 * AM65xx
 
 **Attention**:
@@ -223,6 +224,7 @@ Support for the following machines is contained in this version:
 | [y]    | AM355x           | TQMa335x\[L\]            | MBa335x        | tqma355x-mba335x             | TQMa335x[L] HW REV.020x with 256/512 MiB RAM / MBa335x HW REV.020x |
 | [b]    | AM57\[1,2,4\]8   | TQMa57\[1,2,4\]8         | MBa57xx        | tqma57xx-mba57xx             | TQMa57[1,2,4]8 / MBa57xx |
 | [b]    | AM5748           | TQMa5748 ECC             | MBa57xx        | tqma57xx-ecc-mba57xx         | TQMa5748 with ECC / MBa57xx |
+| [p]    | AM6442           | TQMa6442L                | MBaX4XxL       | tqma64xxl-mbax4xxl           | TQMa6442L / MBaX4XxL HW REV.010x |
 | [y]    | AM6548           | TQMa654x                 | MBa65xx        | tqma65xx-2gb-mba65xx         | TQMa6548 HW REV.010x with 2GiB RAM |
 | [y]    | AM6548           | TQMa654x                 | MBa65xx        | tqma65xx-4gb-mba65xx         | TQMa6548 HW REV.010x with 4GiB RAM |
 
@@ -275,6 +277,7 @@ Under the given links SOM specific information can be found:
 [TQMa8XQPS](doc/README.TQMa8XxS.md)  
 [TQMa8QM](doc/README.TQMa8x.md)  
 [TQMA335x\[L\]](doc/README.TQMa335x.md)  
+[TQMA64xxL](doc/README.TQMa64xxL.md)  
 [TQMA65xx](doc/README.TQMa65xx.md)  
 [TQMLS1012AL](doc/README.TQMLS1012AL.md)  
 [TQMLS102\[0,1\]A](doc/README.TQMLS102xa.md)  
