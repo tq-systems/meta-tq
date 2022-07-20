@@ -45,6 +45,10 @@ OFF 	X   X X
 
 ## Versions
 
+### ATF
+* based on qoriq-atf (https://source.codeaurora.org/external/qoriq/qoriq-components/atf/)
+* branched from lf-5.15.5-1.0.0
+
 ### U-Boot
 * U-Boot 2019.04 based on https://source.codeaurora.org/external/qoriq/qoriq-components/u-boot
 * Based on Tag lx2160a-early-access-bsp0.7
@@ -52,7 +56,6 @@ OFF 	X   X X
 ### Linux
 * Linux 5.4.33 based on https://source.codeaurora.org/external/qoriq/qoriq-components/linux
 * Based on Tag LSDK-20.04-V5.4-update-290520
-
 
 ## Supported Interfaces:
 
@@ -83,10 +86,8 @@ OFF 	X   X X
 * USB
 * USB - OTG
 
-
 ## Not Supported
 * SIM-Card
-
 
 ## Notes:
 * SDHC:
@@ -111,7 +112,6 @@ On MBLX2160A.0200 the SD-Card interface works properly.
 * tq-image-generic-tqmlx2160a-mblx2160a.ubi: RootFS UBI-Image
 
 Note: As U-Boot use the fip_uboot.bin from the atf directory.
-
 
 ### Update Scripts
 
@@ -149,10 +149,13 @@ These scripts are named `update_[pbl|uboot|fdt|kernel]_[spi|mmc|sd]`.
 Note: eMMC and SD-Card Image differ only in RCW-PBL. So a SD-Card Image can be used for eMMC when pbl is replaced.
 
 ## Build-Time Configuration
-* rcw: Used RCW-Binary to build ATF
+* RCWXSPI: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SPI-NOR Boot
+* RCWSD: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SD
+* RCWEMMC: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for e-MMC Boot
+* ATF_RCW_VARIANTS: List of RCW binaries used to build variants of the Primary Boot Loader
 * MC_DPC: DPAA2 Configuration File
 * MC_DPL: DPAA2 Data Path Layout file.
-* BL2_IMAGE: ATF bl2 file used for wic Image generation.
+* BL2_IMAGE: ATF pbl file used for wic Image generation.
 
 ## Ethernet and DPAA2
 ### RCW - SerDes Configuration
