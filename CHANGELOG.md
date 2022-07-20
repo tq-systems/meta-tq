@@ -9,6 +9,14 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* qoriq-atf_v2.4: add support for tqmlx2160a
+
+### Removed
+
+* qoriq-atf_1.5: Removed recipe
+
 ## hardknott.TQMa64xxL.BSP.SW.0001
 
 ### Changed
