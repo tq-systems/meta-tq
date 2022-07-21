@@ -2,13 +2,9 @@ COMPATIBLE_MACHINE = "(tqmls1012al|tqmls1028a|tqmlx2160a)"
 
 STATIC_PBL = "no"
 
-OVERRIDES_prepend_tqmls1028a = "tqmls-atf-common:"
-OVERRIDES_prepend_tqmls1012al = "tqmls-atf-common:"
-OVERRIDES_prepend_tqmlx2160a = "tqmls-atf-common:"
-
-SRC_URI_tqmls-atf-common = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
-SRCBRANCH_tqmls-atf-common = "TQM-v2.4"
-SRCREV_tqmls-atf-common = "594d01dd92ac599c73e14d64e16737bd26a3ef93"
+SRC_URI_tqmlsx = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
+SRCBRANCH_tqmlsx = "TQM-v2.4"
+SRCREV_tqmlsx = "594d01dd92ac599c73e14d64e16737bd26a3ef93"
 
 RCW_FOLDER_tqmls1012al = "tqmls1012al"
 RCW_SUFFIX_tqmls1012al = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
