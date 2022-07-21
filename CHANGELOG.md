@@ -22,6 +22,11 @@ Releases are named with the following scheme:
 
 * linux-imx-tq_5.4: Drop support for tqmls1028a
 
+### Fixed
+
+* u-boot-tq_2019.04:
+  * TQMa335x[L]: fixed incorrect MAC addresses in environment
+
 ## hardknott.TQMLS1028A.BSP.SW.0108
 
 ### Changed
