@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## hardknott.TQMa335x.BSP.SW.0123
+
 ### Added
 
 * TQMa8MPxL: add `bluetooth` to `MACHINE_FEATURES` of MBa8MPxL and add missing
