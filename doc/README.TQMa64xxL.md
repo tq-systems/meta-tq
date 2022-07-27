@@ -25,6 +25,14 @@ _Kernel:_
   - The OTG port works in host mode after booting Linux.
 * The linux-ti-tq-5.10 recipe is not based on linux-yocto, so the kernel
   defconfig cannot be extended using config fragments.
+* Detecting the SPI-NOR flash in U-Boot using `sf probe` is unreliable. In some
+  cases, a flash with size 0 is detected instead of the correct size.
+* Most GPIOs can't be read or set from U-Boot, as they are disabled in the
+  default pinmuxing. This also affects LED and button GPIOs. LEDs and buttons
+  are working as expected on Linux.
+
+**Note:** TQMa64xxL support currently has prerelease status. The Linux BSP has
+not been tested fully yet.
 
 ## Support Wiki
 
