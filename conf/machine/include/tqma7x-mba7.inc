@@ -43,3 +43,13 @@ IMAGE_BOOT_FILES = "\
 "
 
 WKS_FILE = "tqmaxx-sdimg.wks"
+
+MACHINE_FEATURES_append = "\
+    bluetooth \
+    wifi \
+"
+
+MACHINE_EXTRA_RRECOMMENDS_append = "\
+    linux-firmware-ath10k \
+    linux-firmware-qca \
+"
