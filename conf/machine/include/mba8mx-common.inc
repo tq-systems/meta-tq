@@ -6,13 +6,17 @@ IMAGE_BOOT_FILES = "\
     ${BOARD_DEVICETREE_FILES} \
 "
 
-MACHINE_FEATURES:append = "\
+MACHINE_FEATURES += "\
+    bluetooth \
     camera \
     display \
     wifi \
 "
 
-MACHINE_EXTRA_RRECOMMENDS:append = " linux-firmware-ath10k"
+MACHINE_EXTRA_RRECOMMENDS += "\
+    linux-firmware-ath10k \
+    linux-firmware-qca \
+"
 
 IMAGE_BOOT_FILES += "\
     hello_world.bin \
