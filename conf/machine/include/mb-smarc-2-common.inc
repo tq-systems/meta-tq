@@ -10,8 +10,12 @@ USE_VT = "0"
 IMXBOOT_TARGETS ?= "flash_spl flash_spl_flexspi flash_linux_m4"
 
 MACHINE_FEATURES_append = "\
+    bluetooth \
     display \
     wifi \
 "
 
-MACHINE_EXTRA_RRECOMMENDS_append = " linux-firmware-ath10k"
+MACHINE_EXTRA_RRECOMMENDS_append = "\
+    linux-firmware-ath10k \
+    linux-firmware-qca \
+"
