@@ -6,11 +6,15 @@ SERIAL_CONSOLES = "115200;ttyLP1"
 # disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
 USE_VT = "0"
 
-MACHINE_EXTRA_RRECOMMENDS:append = " linux-firmware-ath10k"
-
-MACHINE_FEATURES:append = "\
+MACHINE_FEATURES += "\
+    bluetooth \
     display \
     wifi \
+"
+
+MACHINE_EXTRA_RRECOMMENDS += "\
+    linux-firmware-ath10k \
+    linux-firmware-qca \
 "
 
 # TODO: handle optee as soon as supported
