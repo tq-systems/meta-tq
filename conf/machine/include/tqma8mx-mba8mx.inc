@@ -40,9 +40,13 @@ WKS_FILE_DEPENDS_append = "\
 "
 
 MACHINE_FEATURES_append = "\
+    bluetooth \
     camera \
     display \
     wifi \
 "
 
-MACHINE_EXTRA_RRECOMMENDS_append = " linux-firmware-ath10k"
+MACHINE_EXTRA_RRECOMMENDS_append = "\
+    linux-firmware-ath10k \
+    linux-firmware-qca \
+"
