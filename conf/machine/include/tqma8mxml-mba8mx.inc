@@ -29,12 +29,16 @@ IMAGE_BOOT_FILES = "\
 "
 
 MACHINE_FEATURES_append = "\
+    bluetooth \
     camera \
     display \
     wifi \
 "
 
-MACHINE_EXTRA_RRECOMMENDS_append = " linux-firmware-ath10k"
+MACHINE_EXTRA_RRECOMMENDS_append = "\
+    linux-firmware-ath10k \
+    linux-firmware-qca \
+"
 
 IMAGE_BOOT_FILES += "\
     hello_world.bin \
