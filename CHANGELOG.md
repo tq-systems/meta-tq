@@ -18,6 +18,15 @@ Releases are named with the following scheme:
 
 ### Added
 
+* MBa7: add wifi, bluetooth and firmware
+* MBa6ULxL: add wifi, bluetooth and firmware
+* MBa6ULx: add bluetooth and firmware
+* MBa6: add bluetooth and firmware
+* linux-tq-5.15: add optional bluetooth config support
+* linux-tq_5.15: add ath10k usb support for QCA9377
+* MBa8: add bluetooth and firmware
+* MB-SMARC-2: add bluetooth and firmware
+* linux-imx-tq-5.10: add optional bluetooth config support
 * qoriq-atf_v2.4: add support for tqmlx2160a
 
 ### Removed
