@@ -215,13 +215,13 @@ Support for the following machines is contained in this version:
 | [y]    | LS1012A          | TQMLS1012AL              | MBLS1012AL     | tqmls1012al-mbls1012al       | TQMLS1012AL HW REV.010x ... 020x / 512 MiB RAM / MBLS1012AL HW REV.020x |
 | [y]    | LS10\[17,28\]A   | TQMLS10\[17,28\]A        | MBLS1028A      | tqmls1028a-mbls1028a         | TQMLS1017A / TQMLS1028A HW REV.010x ... 030x, 1 GiB / 4 GiB RAM, MBLS1028A HW REV.010x |
 | [y]    | LS10\[17,28\]A   | TQMLS10\[17,28\]A        | MBLS1028A-IND  | tqmls1028a-mbls1028a-ind     | TQMLS1017A / TQMLS1028A HW REV.010x ... 030x, 1 GiB / 4 GiB RAM, MBLS1028A-IND HW REV.010x |
-| [b]    | LS1043A          | TQMLS1043A               | MBLS10xxA      | tqmls1043a-mbls10xxa         | TQMLS1043a / MBLS10xxa |
-| [b]    | LS1043A          | TQMLS1043A               | MBLS10xxA      | tqmls1043a_2g-mbls10xxa      | TQMLS1043a with 2 GiB RAM / MBLS10xxa |
-| [b]    | LS1046A          | TQMLS1046A               | MBLS10xxA      | tqmls1046a-mbls10xxa         | TQMLS1046a with 2 GiB RAM / MBLS10xxa |
-| [b]    | LS1046A          | TQMLS1046A               | MBLS10xxA      | tqmls1046a_8g-mbls10xxa      | TQMLS1046a with 8 GiB RAM / MBLS10xxa |
-| [b]    | LS1088A          | TQMLS1088A               | MBLS10xxA      | tqmls1088a-mbls10xxa         | TQMLS1088a / MBLS10xxa |
+| [y]    | LS1043A          | TQMLS1043A               | MBLS10xxA      | tqmls1043a-mbls10xxa         | TQMLS1043a / 1 GiB RAM, HW REV.020x / MBLS10xxa, HW REV.020x |
+| [y]    | LS1043A          | TQMLS1043A               | MBLS10xxA      | tqmls1043a_2g-mbls10xxa      | TQMLS1043a / 2 GiB RAM, HW REV.020x / MBLS10xxa, HW REV.020x |
+| [y]    | LS1046A          | TQMLS1046A               | MBLS10xxA      | tqmls1046a-mbls10xxa         | TQMLS1046a / 2 GiB RAM, HW REV.020x / MBLS10xxa, HW REV.020x |
+| [y]    | LS1046A          | TQMLS1046A               | MBLS10xxA      | tqmls1046a_8g-mbls10xxa      | TQMLS1046a / 8 GiB RAM, HW REV.020x / MBLS10xxa, HW REV.020x |
+| [y]    | LS1088A          | TQMLS1088A               | MBLS10xxA      | tqmls1088a-mbls10xxa         | TQMLS1088a / MBLS10xxa |
 | [y]    | LS102\[0,1\]A    | TQMLS102\[0,1\]A         | MBLS102xA      | tqmls102xa-mbls102xa         | TQMLS102\[0,1\]A HW REV.020x / MBLS102xA HW REV.020x |
-| [b]    | LX2160A          | TQMLX2160A               | MBLX2160A      | tqmlx2160a-mblx2160a         | TQMLX2160A HW REV.010x / MBLX2160A HW REV.010x and REV.020x |
+| [y]    | LX2160A          | TQMLX2160A               | MBLX2160A      | tqmlx2160a-mblx2160a         | TQMLX2160A HW REV.010x / MBLX2160A HW REV.010x and REV.020x |
 | [y]    | AM355x           | TQMa335x\[L\]            | MBa335x        | tqma355x-mba335x             | TQMa335x[L] HW REV.020x with 256/512 MiB RAM / MBa335x HW REV.020x |
 | [b]    | AM57\[1,2,4\]8   | TQMa57\[1,2,4\]8         | MBa57xx        | tqma57xx-mba57xx             | TQMa57[1,2,4]8 / MBa57xx |
 | [b]    | AM5748           | TQMa5748 ECC             | MBa57xx        | tqma57xx-ecc-mba57xx         | TQMa5748 with ECC / MBa57xx |
