@@ -2,7 +2,7 @@
 
 require conf/machine/include/soc-family.inc
 
-MACHINEOVERRIDES =. "fsl-lsch3:lx2160a:tqmlx2160a:"
+MACHINEOVERRIDES =. "fsl-lsch3:lx2160a:tqmlsx:tqmlx2160a:"
 
 # TQ-Systems U-Boot and kernel has to be set before qoriq-arm64.inc
 # to allow weak settings

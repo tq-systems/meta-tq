@@ -5,7 +5,7 @@ require conf/machine/include/soc-family.inc
 # source the machine specific features for RCW, multimedia etc. from
 # meta-freescale
 
-MACHINEOVERRIDES =. "fsl-lsch2:ls1012a:tqmls1012al:"
+MACHINEOVERRIDES =. "fsl-lsch2:ls1012a:tqmlsx:tqmls1012al:"
 
 # TQ-Systems U-Boot and kernel has to be set before qoriq-arm64.inc
 # to allow weak settings

@@ -1,13 +1,8 @@
 STATIC_PBL = "no"
 
-OVERRIDES:prepend:tqmls1028a = "tqmls-atf-common:"
-OVERRIDES:prepend:tqmls1012al = "tqmls-atf-common:"
-OVERRIDES:prepend:tqmlx2160a = "tqmls-atf-common:"
-
-SRC_URI:tqmls-atf-common = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
-SRCBRANCH:tqmls-atf-common = "TQM-v2.4"
-SRCREV:tqmls-atf-common = "ea967df114f4458389133e3b5b0f331c6c35dd13"
-
+SRC_URI:tqmlsx = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
+SRCBRANCH:tqmlsx = "TQM-v2.4"
+SRCREV:tqmlsx = "594d01dd92ac599c73e14d64e16737bd26a3ef93"
 
 RCW_FOLDER:tqmls1012al = "tqmls1012al"
 RCW_SUFFIX:tqmls1012al = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"

@@ -1,6 +1,6 @@
 # Common definitions for TQ-Systems GmbH TQMLS1046A modules
 
-MACHINEOVERRIDES =. "fsl-lsch2:ls1046a:tqmls10xxa:tqmls104xa"
+MACHINEOVERRIDES =. "fsl-lsch2:ls1046a::tqmlsx:tqmls10xxa:tqmls104xa"
 
 # TQ-Systems U-Boot and kernel has to be set before qoriq-arm64.inc
 # to allow weak settings
