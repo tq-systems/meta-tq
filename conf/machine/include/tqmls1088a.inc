@@ -1,6 +1,6 @@
 # Common definitions for TQ-Systems GmbH TQMLS1088A modules
 
-MACHINEOVERRIDES =. "fsl-lsch3:ls1088a:tqmls10xxa:tqmls1088a:"
+MACHINEOVERRIDES =. "fsl-lsch3:ls1088a:tqmlsx:tqmls10xxa:tqmls1088a:"
 
 require conf/machine/include/tqmls10xxa.inc
 

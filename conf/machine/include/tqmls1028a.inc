@@ -6,8 +6,7 @@ require conf/machine/include/soc-family.inc
 # meta-freescale
 require conf/machine/include/qoriq-arm64.inc
 
-MACHINEOVERRIDES =. "fsl-lsch3:ls1028a:tqmls1028a:"
-
+MACHINEOVERRIDES =. "fsl-lsch3:ls1028a:tqmlsx:tqmls1028a:"
 
 require conf/machine/include/tune-cortexa72.inc
 
