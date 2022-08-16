@@ -9,8 +9,93 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Removed
+
+* qoriq-atf_1.5: Removed recipe
+* linux-imx-tq_5.4: Drop support for tqmls1028a
+* TQMa8MP: 2GB machine config variant, support for 2GB fallback bootstream is
+  included in new tqma8mpx-mba8mpxl machine configuration
+
+### Fixed
+
+* u-boot-tq_2019.04:
+  * TQMa335x[L]: fixed incorrect MAC addresses in environment
+  * SPDX license header for TQMa335x[L] sources and DT
+  * backport fixes for environment for multiple environment
+    location support
+* tqmls1028a: add qoriq-atf to WKS_FILE_DEPENDS
+* tqmlx2160a: add qoriq-atf to WKS_FILE_DEPENDS
+
+### Changed
+
+* TQMa8QM/TQMa8Xx[S]:
+  * update imx-seco
+  * update imx seco-libs
+  * update imx-sc-firmware
+* TQMa64xxL: doc: update Known Issues
+* TQMLS1028A: update documentation
+* TQMa335x[L]: documentation
+  * add Issues
+  * add infos for boot sources and update
+* u-boot-tq_2019.04:
+  * TQMa335x[L]: cleanup update scripts and variables
+* u-boot-lsdk-tq_2019.10: tqmls1028a: add support for second DRAM bank
+* qoriq-atf_v2.4:
+  * add support for tqmls1028a
+  * add support for tqmls1028a 4GiB variant
+* u-boot-imx-tq_2020.04: TQMa8Mx/TQMa8MxML/TQMa8MxNL/TQMa8MP
+  * backport MMU table fixxes from upstream
+  * backport U-Boot relocation and RAM size fixes from upstream
+* TQMa335x/TQMa57xx/TQMa65xx: allow configuration of boot VFAT size. This enables
+  smaller sizes if the kernel image will be installed into /boot which is the
+  default now.
+* TQMa335x: do not install kernel and dtb into boot VFAT image. The images are
+  already found and used from /boot
+* TQMa6x / TQMa335x: add ubi to `MACHINE_FEATURES`
+  since we have an optionally assembled SPI-NOR, `ubi` should be added to have
+  the ability to install MTD utils in rootfs based on `MACHINE_FEATURES`
+* u-boot-imx-tq_2020.04: TQMa8MPxL: update RAM Timings
+
 ### Added
 
+* MBa7: add wifi, bluetooth and firmware
+* MBa6ULxL: add wifi, bluetooth and firmware
+* MBa6ULx: add bluetooth and firmware
+* MBa6: add bluetooth and firmware
+* linux-tq-5.15: add optional bluetooth config support
+* linux-tq_5.15: add ath10k usb support for QCA9377
+* MBa8: add bluetooth and firmware
+* MB-SMARC-2: add bluetooth and firmware
+* linux-imx-tq-5.10: add optional bluetooth config support
+* qoriq-atf_v2.4: add support for tqmlx2160a
+* TQMa8MPxL: add `bluetooth` to `MACHINE_FEATURES` of MBa8MPxL and add missing
+  firmware to `MACHINE_EXTRA_RRECOMMENDS`
+* linux-imx-tq_5.15: Add support for tqmls1028a as default kernel
+* Add preliminary TQMa64xxl/MBaX4XxL support (tqma64xxl-mbax4xxl)
+  * New kernel linux-ti-tq-5.10
+  * New U-Boot u-boot-ti-tq-2021.01
+* u-boot-tq_2019.04:
+  * TQMa335x[L]: installation of MLO for SPI NOR Flash in yocto recipe
+  * TQMa335x[L]: SPI NOR boot support
+* tqmls1028a: use BL2_IMAGE, BL3_IMAGE variable for wic file creation
+* classes: add `image_type_bootonly` to support generation of minimal bootable
+  images
+* TQMa8MP: new machine config variant (single image for multiple RAM sizes)
+  with support for 2GB RAM fallback variant
+* u-boot-imx-tq_2020.04: TQMa8MP
+  * variant and revision data support
+  * single image for multiple RAM size variants
+* rcw: tqmls1028a:
+  - Added 1000MHz variants for eMMC/SD and SPI-NOR boot
+  - Removed 800MHz variants for SPI-NOR boot due to erratum A050958
+* machines: add `display` to `MACHINE_FEATURES`. This enables rootfs customization.
+
+__Start of porting to kirkstone__
+------------------------------------------------------------------------
+
+### Added
+
+* tqmls1012al: Support for Winbond RAM
 * rcw: tqmls1028a:
   - Added 1000MHz variants for eMMC/SD and SPI-NOR boot
   - Removed 800MHz variants for SPI-NOR boot due to erratum A050958
