@@ -2,7 +2,7 @@ SUMMARY = "bayer2rgb color conversion with ARM neon support"
 SECTION = "libs"
 HOMEPAGE = "https://gitlab-ext.sigma-chemnitz.de/ensc/bayer2rgb.git"
 
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-only"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 BRANCH = "master"

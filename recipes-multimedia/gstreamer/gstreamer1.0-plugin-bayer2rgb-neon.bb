@@ -2,7 +2,7 @@ SUMMARY = "bayer2rgb gstreamer plugin with neon support"
 SECTION = "multimedia"
 HOMEPAGE = "https://gitlab-ext.sigma-chemnitz.de/ensc/gst-bayer2rgb-neon.git"
 
-LICENSE = "GPLv3"
+LICENSE = "GPL-3.0-or-later"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 
 BRANCH = "master"
