@@ -1,5 +1,5 @@
-PREFERRED_PROVIDER_virtual/kernel_tqma335x = "linux-ti-tq"
-PREFERRED_PROVIDER_virtual/kernel_tqma57xx = "linux-ti-tq"
+PREFERRED_PROVIDER_virtual/kernel:tqma335x = "linux-ti-tq"
+PREFERRED_PROVIDER_virtual/kernel:tqma57xx = "linux-ti-tq"
 
 # Add MLO SD/e-MMC image generation for SOM based on TI SOC
 # This image is a stripped down version of the normal .wic, consisting
