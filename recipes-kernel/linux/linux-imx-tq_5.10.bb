@@ -79,6 +79,10 @@ KERNEL_FEATURES:append:mx8mp-nxp-bsp = "\
     ${@bb.utils.contains('MACHINE_FEATURES', 'basler', ' basler-camera.scc', '', d)} \
 "
 
+SRC_URI:append = " \
+    ${@bb.utils.contains('COMBINED_FEATURES', 'bluetooth', 'file://features/bluetooth-support.cfg', '', d)} \
+"
+
 COMPATIBLE_MACHINE = "^("
 # COMPATIBLE_MACHINE .= "tqma7x"
 COMPATIBLE_MACHINE .= "|tqma6x"
