@@ -9,10 +9,25 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+__Start of porting to kirkstone__
+------------------------------------------------------------------------
+
 ### Changed
 
+* distros
+  * spaetzle: force using busybox utils
+  * dumpling: prefer full featured util-linux utils
+* packagegroup-testutils:
+  * improve package handling for opengl related stuff
+  * optimize utils selection if `MACHINE_FEATURES` contains `display`
+* packagegroup-hwutils: improve handling of usb related packages. usb-modeswitch
+  is now provided as new subpackage. This is not used by default because it is
+  rarely needed but depends on tcl
 * treewide: syntax conversion for honister
 * treewide: recipe changes for building with honister
+
+__Start of porting to honister__
+------------------------------------------------------------------------
 
 ## hardknott.TQMLS1028A.BSP.SW.0107
 
