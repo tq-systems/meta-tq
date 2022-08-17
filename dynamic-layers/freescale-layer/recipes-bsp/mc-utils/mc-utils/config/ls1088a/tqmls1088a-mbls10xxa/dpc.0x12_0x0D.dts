@@ -1,5 +1,11 @@
+/* SPDX-License-Identifier: BSD-3-Clause */
 /*
- * Copyright 2019 TQ-Systems GmbH
+ * Copyright 2019-2022 TQ-Systems GmbH <oss@ew.tq-group.com>
+ * author: Matthias Schiffer
+ */
+
+/*
+ * This DPC showcases one basic Linux configuration for SerDes 0x12_0x0D.
  */
 
 /dts-v1/;
@@ -13,19 +19,25 @@
 		};
 	};
 	mc_general {
+		/* Configure the DDR log */
 		log {
 			mode = "LOG_MODE_ON";
 			level = "LOG_LEVEL_WARNING";
 		};
+		/* Configure the UART log */
+		/* If CONSOLE_MODE_ON all commands take longer time to execute! */
 		console {
 			mode = "CONSOLE_MODE_ON";
 			uart_id = <3>;
 		};
 	};
 	aiop {
+		/* Configure the DDR log */
 		log {
 			mode = "LOG_MODE_ON";
 		};
+		/* Configure the UART log */
+		/* If CONSOLE_MODE_ON all commands take longer time to execute! */
 		console {
 			mode = "CONSOLE_MODE_ON";
 			uart_id = <4>;

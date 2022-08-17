@@ -1,5 +1,7 @@
+/* SPDX-License-Identifier: BSD-3-Clause */
 /*
- * Copyright 2019 TQ-Systems GmbH
+ * Copyright 2019-2022 TQ-Systems GmbH <oss@ew.tq-group.com>
+ * author: Matthias Schiffer
  */
 
 /*
