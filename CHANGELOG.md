@@ -9,6 +9,13 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* TQMa8QM/TQMa8Xx[S]: 
+  * update imx-seco
+  * update imx seco-libs
+  * update imx-sc-firmware
+
 ### Added
 
 * qoriq-atf_v2.4: add support for tqmlx2160a
