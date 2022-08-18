@@ -42,6 +42,18 @@ SRC_URI:append:tqma335x = "\
     file://remove-debug.cfg \
 "
 
+SRC_URI:append:tqma57xx = "\
+    file://config-only-armv7.cfg \
+    file://disable-highpte.cfg \
+    file://dynamic-debug.cfg \
+    file://general-optimizations.cfg \
+    file://kallsyms.cfg \
+    file://local-version.cfg \
+    file://neon.cfg \
+    file://pack-lzo.cfg \
+    file://remove-debug.cfg \
+"
+
 DEFAULT_PREFERENCE = "1"
 
 COMPATIBLE_MACHINE = "^("
