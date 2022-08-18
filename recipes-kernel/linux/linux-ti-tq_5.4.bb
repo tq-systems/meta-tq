@@ -40,6 +40,7 @@ SRC_URI:append:tqma335x = "\
     file://neon.cfg \
     file://pack-lzo.cfg \
     file://remove-debug.cfg \
+    file://bpf-support.cfg \
 "
 
 SRC_URI:append:tqma57xx = "\
@@ -52,6 +53,7 @@ SRC_URI:append:tqma57xx = "\
     file://neon.cfg \
     file://pack-lzo.cfg \
     file://remove-debug.cfg \
+    file://bpf-support.cfg \
 "
 
 DEFAULT_PREFERENCE = "1"
