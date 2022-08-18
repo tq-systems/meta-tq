@@ -1,4 +1,5 @@
 require linux-tq.inc
+require ti-kernel.inc
 
 #
 # append linux-mainline if we provide mainline kernel versions
