@@ -54,6 +54,7 @@ SRC_URI:append:tqma57xx = "\
     file://pack-lzo.cfg \
     file://remove-debug.cfg \
     file://bpf-support.cfg \
+    file://enable-legacy-drm.cfg \
 "
 
 DEFAULT_PREFERENCE = "1"
