@@ -20,15 +20,15 @@ for TQ-Systems SOM and some initial example distro support.
 This layer in the checked out branch depends on:
 
 URI: https://git.yoctoproject.org/poky  
-branch: honister  
+branch: kirkstone  
 layers: meta, meta-poky  
 
 URI: https://github.com/openembedded/meta-openembedded.git
-branch: honister  
+branch: kirkstone  
 layers: meta-oe  
 
 URI: https://github.com/tq-systems/meta-tq.git  
-branch: honister  
+branch: kirkstone  
 layers: meta-tq  
 
 This layer additionally contains optional fixes and extensions for other layers
