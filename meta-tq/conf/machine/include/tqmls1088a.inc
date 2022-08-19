@@ -15,11 +15,6 @@ UBOOT_ENTRYPOINT:ls1088a = "0x80008000"
 
 # Image Options
 #
-MKUBIFS_ARGS = " -m 1 -e 65408 -c 640 "
-UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
 
 # DPAA2 manament utility
 MACHINE_EXTRA_RRECOMMENDS += "restool"
-
-# needs to be set to have it consistent for kernel command line
-UBI_VOLNAME = "root"

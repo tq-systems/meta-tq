@@ -45,16 +45,34 @@ IMAGE_INSTALL:remove = "packagegroup-fsl-optee-imx"
 #
 EXTRA_IMAGEDEPENDS += "u-boot imx-boot"
 
-# Verified values:
-# UBIFS_PEB_SIZE="65536"
-# UBIFS_MINIMUM_IO_UNIT_SIZE="1"
-# UBIFS_SUB_PAGE_SIZE="1"
-# UBIFS_VID_HEADER_OFFSET="64"
-# UBIFS_LEB_SIZE="65408"
+# Verified values to generate UBI image:
+# physical erase block size
+UBI_PEB_SIZE = "65536"
+UBI_MINIMUM_IO_UNIT_SIZE = "1"
+UBI_SUB_PAGE_SIZE = "1"
+# UBI_VID_HEADER_OFFSET="64"
+# logical erase block size
+UBI_LEB_SIZE = "65408"
 
-MKUBIFS_ARGS = " -m 1 -e 65408 -c 896 "
-UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
+# we have 64 MB flash, 8 MB for bootloader and env should be enough
+# so use 1024 - 128 LEB
+UBI_MAX_LEB_COUNT = "896"
+
+MKUBIFS_ARGS = "\
+    --min-io-size=${UBI_MINIMUM_IO_UNIT_SIZE} \
+    --leb-size=${UBI_LEB_SIZE} \
+    --max-leb-cnt=${UBI_MAX_LEB_COUNT} \
+"
+
+UBINIZE_ARGS = "\
+    --peb-size=${UBI_PEB_SIZE} \
+    --min-io-size=${UBI_MINIMUM_IO_UNIT_SIZE} \
+    --sub-page-size=${UBI_SUB_PAGE_SIZE} \
+"
+
 # needs to be set to have it consistent for kernel command line
+# Use the expected value of the ubifs filesystem's volume name in the kernel
+# and u-boot.
 UBI_VOLNAME = "root"
 
 WKS_FILE_DEPENDS = "\
