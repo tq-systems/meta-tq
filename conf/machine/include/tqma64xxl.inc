@@ -23,10 +23,21 @@ MACHINE_EXTRA_RRECOMMENDS += "\
 #
 require conf/machine/include/tqmxx.inc
 KERNEL_IMAGETYPE = "Image"
+# TI enforces also fitimage and vmlinux.gz
+# this will enlarge our rootfs
+KERNEL_IMAGETYPES = "Image"
 
 # Image Options
 #
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
+
+#
+# dropped in dunfell branch of meta-ti after the kirkstone fork
+# see https://git.yoctoproject.org/meta-ti
+# commit 1eb6e71f "wic: revert grub-efi patch"
+#
+MACHINE_FEATURES:remove = "efi"
+EFI_PROVIDER = ""
 
 # Verified values to generate UBI image:
 # UBIFS_PEB_SIZE="65536"
