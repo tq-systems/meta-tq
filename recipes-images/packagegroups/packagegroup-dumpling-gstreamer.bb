@@ -1,7 +1,7 @@
 DESCRIPTION = "Package group to provide audio, video, networking and debug \
 GStreamer plugins with the required hardware acceleration (if supported by the SoC)."
 
-SUMMARY = "set of commonly used GStreamer 1.0 plugins for imx CPU"
+SUMMARY = "set of commonly used GStreamer 1.0 plugins"
 
 LICENSE = "MIT"
 
@@ -18,8 +18,6 @@ PACKAGES += "\
     ${PN}-network-base \
     ${PN}-network \
 "
-
-MACHINE_GSTREAMER_1_0_PLUGIN ?= ""
 
 RDEPENDS:${PN} = "\
     ${PN}-audio \
@@ -52,9 +50,6 @@ RDEPENDS:${PN}-base = "\
     gstreamer1.0-plugins-base-videoscale \
     gstreamer1.0-plugins-base-volume \
     gstreamer1.0-plugins-good-autodetect \
-    ${MACHINE_GSTREAMER_1_0_PLUGIN} \
-    ${@bb.utils.contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-gst1.0-plugin-gplay", "", d)} \
-    ${@bb.utils.contains("MACHINE_GSTREAMER_1_0_PLUGIN", "imx-gst1.0-plugin", "imx-gst1.0-plugin-grecorder", "", d)} \
 "
 
 RRECOMMENDS:${PN}-base = "\
