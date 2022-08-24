@@ -22,6 +22,11 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* gstreamer1.0-plugins-good: fix patch fuzz warning
+* images: tq-image-weston-debug: bbappend for image did not work after
+  splitting image recipes. IMX gstreamer packages were missing when using
+  meta-freescale together with `use-nxp-bsp`
+
 * distros: fix broken SDK build (due to a wrong named variable)
 
 __Start of porting to kirkstone__
