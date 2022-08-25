@@ -1,4 +1,4 @@
-From 214e1f6b970786cf78c2278d69977735b09b3b52 Mon Sep 17 00:00:00 2001
+From 0e0d947e774f50fc989630f7b3fd61f6b8966f0f Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 7 Oct 2021 19:00:16 +0200
 Subject: [PATCH] sys/v4l2/gstv4l2object.c: add 10,12,14,16 Bit Raw Bayer FMT
@@ -9,12 +9,12 @@ Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
  1 file changed, 157 insertions(+), 8 deletions(-)
 
 diff --git a/sys/v4l2/gstv4l2object.c b/sys/v4l2/gstv4l2object.c
-index 3923d1254..632276eb3 100755
+index cf32bd6..f3ed437 100644
 --- a/sys/v4l2/gstv4l2object.c
 +++ b/sys/v4l2/gstv4l2object.c
-@@ -47,6 +47,17 @@
- #include <gst/allocators/gstdmabufmeta.h>
- #include <libdrm/drm_fourcc.h>
+@@ -44,6 +44,17 @@
+ #include <gst/video/video.h>
+ #include <gst/allocators/gstdmabuf.h>
  
 +#ifndef V4L2_PIX_FMT_SBGGR14
 +#  define V4L2_PIX_FMT_SBGGR14 v4l2_fourcc('B', 'G', '1', '4')
@@ -30,7 +30,7 @@ index 3923d1254..632276eb3 100755
  GST_DEBUG_CATEGORY_EXTERN (v4l2_debug);
  #define GST_CAT_DEFAULT v4l2_debug
  
-@@ -118,6 +129,7 @@ static const GstV4L2FormatDesc gst_v4l2_formats[] = {
+@@ -114,6 +125,7 @@ static const GstV4L2FormatDesc gst_v4l2_formats[] = {
    {V4L2_PIX_FMT_Y6, TRUE, GST_V4L2_RAW},
    {V4L2_PIX_FMT_Y10, TRUE, GST_V4L2_RAW},
    {V4L2_PIX_FMT_Y12, TRUE, GST_V4L2_RAW},
@@ -38,7 +38,7 @@ index 3923d1254..632276eb3 100755
    {V4L2_PIX_FMT_Y16, TRUE, GST_V4L2_RAW},
    {V4L2_PIX_FMT_Y16_BE, TRUE, GST_V4L2_RAW},
    {V4L2_PIX_FMT_Y10BPACK, TRUE, GST_V4L2_RAW},
-@@ -176,6 +188,26 @@ static const GstV4L2FormatDesc gst_v4l2_formats[] = {
+@@ -167,6 +179,26 @@ static const GstV4L2FormatDesc gst_v4l2_formats[] = {
    {V4L2_PIX_FMT_SGRBG8, TRUE, GST_V4L2_RAW},
    {V4L2_PIX_FMT_SRGGB8, TRUE, GST_V4L2_RAW},
  
@@ -65,7 +65,7 @@ index 3923d1254..632276eb3 100755
    /* compressed formats */
    {V4L2_PIX_FMT_MJPEG, FALSE, GST_V4L2_CODEC},
    {V4L2_PIX_FMT_JPEG, FALSE, GST_V4L2_CODEC},
-@@ -1059,6 +1091,7 @@ gst_v4l2_object_format_get_rank (const struct v4l2_fmtdesc *fmt)
+@@ -1025,6 +1057,7 @@ gst_v4l2_object_format_get_rank (const struct v4l2_fmtdesc *fmt)
      case V4L2_PIX_FMT_Y6:
      case V4L2_PIX_FMT_Y10:
      case V4L2_PIX_FMT_Y12:
@@ -73,7 +73,7 @@ index 3923d1254..632276eb3 100755
      case V4L2_PIX_FMT_Y10BPACK:
      case V4L2_PIX_FMT_YUV555:
      case V4L2_PIX_FMT_YUV565:
-@@ -1155,6 +1188,26 @@ gst_v4l2_object_format_get_rank (const struct v4l2_fmtdesc *fmt)
+@@ -1116,6 +1149,26 @@ gst_v4l2_object_format_get_rank (const struct v4l2_fmtdesc *fmt)
      case V4L2_PIX_FMT_SGBRG8:
      case V4L2_PIX_FMT_SGRBG8:
      case V4L2_PIX_FMT_SRGGB8:
@@ -100,7 +100,7 @@ index 3923d1254..632276eb3 100755
        rank = BAYER_BASE_RANK;
        break;
  
-@@ -1471,6 +1524,22 @@ gst_v4l2_object_v4l2fourcc_is_rgb (guint32 fourcc)
+@@ -1419,6 +1472,22 @@ gst_v4l2_object_v4l2fourcc_is_rgb (guint32 fourcc)
      case V4L2_PIX_FMT_SGBRG8:
      case V4L2_PIX_FMT_SGRBG8:
      case V4L2_PIX_FMT_SRGGB8:
@@ -123,7 +123,7 @@ index 3923d1254..632276eb3 100755
        ret = TRUE;
        break;
      default:
-@@ -1629,11 +1698,71 @@ gst_v4l2_object_v4l2fourcc_to_bare_struct (guint32 fourcc)
+@@ -1548,11 +1617,71 @@ gst_v4l2_object_v4l2fourcc_to_bare_struct (guint32 fourcc)
      case V4L2_PIX_FMT_SGBRG8:
      case V4L2_PIX_FMT_SGRBG8:
      case V4L2_PIX_FMT_SRGGB8:
@@ -199,7 +199,7 @@ index 3923d1254..632276eb3 100755
        break;
      case V4L2_PIX_FMT_SN9C10X:
        structure = gst_structure_new_empty ("video/x-sonix");
-@@ -1655,6 +1784,7 @@ gst_v4l2_object_v4l2fourcc_to_bare_struct (guint32 fourcc)
+@@ -1574,6 +1703,7 @@ gst_v4l2_object_v4l2fourcc_to_bare_struct (guint32 fourcc)
      case V4L2_PIX_FMT_Y6:
      case V4L2_PIX_FMT_Y10:
      case V4L2_PIX_FMT_Y12:
@@ -207,7 +207,7 @@ index 3923d1254..632276eb3 100755
      case V4L2_PIX_FMT_Y10BPACK:
      case V4L2_PIX_FMT_YUV444:
      case V4L2_PIX_FMT_YUV555:
-@@ -2028,15 +2158,34 @@ gst_v4l2_object_get_caps_info (GstV4l2Object * v4l2object, GstCaps * caps,
+@@ -1908,15 +2038,34 @@ gst_v4l2_object_get_caps_info (GstV4l2Object * v4l2object, GstCaps * caps,
        fourcc = V4L2_PIX_FMT_VP9;
      } else if (g_str_equal (mimetype, "video/x-bayer")) {
        const gchar *format = gst_structure_get_string (structure, "format");
@@ -246,3 +246,6 @@ index 3923d1254..632276eb3 100755
        }
      } else if (g_str_equal (mimetype, "video/x-sonix")) {
        fourcc = V4L2_PIX_FMT_SN9C10X;
+-- 
+2.25.1
+
