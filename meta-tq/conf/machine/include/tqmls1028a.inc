@@ -47,8 +47,13 @@ MACHINE_FEATURES:append = "\
 
 # Image Options
 
-EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-EXTRA_IMAGEDEPENDS += "rcw qoriq-atf dp-firmware-cadence"
+EXTRA_IMAGEDEPENDS += "\
+    dp-firmware-cadence \
+    qoriq-atf \
+    rcw \
+    virtual/bootloader \
+    virtual/kernel \
+"
 
 # Verified values to generate UBI image:
 # physical erase block size

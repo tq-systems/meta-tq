@@ -32,7 +32,18 @@ MACHINE_FEATURES:append = "\
 
 # Image Options
 #
-EXTRA_IMAGEDEPENDS += "virtual/bootloader"
+
+EXTRA_IMAGEDEPENDS += "\
+    virtual/bootloader \
+    virtual/kernel \
+"
+
+EXTRA_IMAGEDEPENDS:append:fsl-lsch2 = " fm-ucode"
+EXTRA_IMAGEDEPENDS:append:fsl-lsch3 = "\
+    management-complex \
+    mc-utils \
+    rcw \
+"
 
 # Verified values to generate UBI image:
 # physical erase block size
@@ -61,13 +72,6 @@ UBINIZE_ARGS = "\
 # Use the expected value of the ubifs filesystem's volume name in the kernel
 # and u-boot.
 UBI_VOLNAME = "root"
-
-EXTRA_IMAGEDEPENDS:append:fsl-lsch2 = " fm-ucode"
-EXTRA_IMAGEDEPENDS:append:fsl-lsch3 = "\
-    management-complex \
-    mc-utils \
-    rcw \
-"
 
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"

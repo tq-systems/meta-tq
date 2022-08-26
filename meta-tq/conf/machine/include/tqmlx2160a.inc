@@ -30,6 +30,9 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     udev-extraconf \
 "
 
+# DPAA2 manament utility
+MACHINE_EXTRA_RRECOMMENDS += "restool"
+
 # provide info about machine's capabilities
 MACHINE_FEATURES:append = "\
     can \
@@ -50,10 +53,8 @@ EXTRA_IMAGEDEPENDS += "\
     qoriq-atf \
     rcw \
     virtual/bootloader \
+    virtual/kernel \
 "
-
-# DPAA2 manament utility
-IMAGE_INSTALL:append = " restool"
 
 # Verified values to generate UBI image:
 # physical erase block size

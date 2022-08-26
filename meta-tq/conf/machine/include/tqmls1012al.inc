@@ -55,6 +55,7 @@ EXTRA_IMAGEDEPENDS += "\
     qoriq-atf \
     rcw \
     virtual/bootloader \
+    virtual/kernel \
 "
 
 # Verified values to generate UBI image:

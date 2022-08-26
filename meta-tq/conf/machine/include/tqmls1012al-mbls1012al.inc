@@ -30,7 +30,6 @@ WKS_FILE_DEPENDS = "\
     mtools-native \
     dosfstools-native \
     parted-native \
-    virtual/kernel \
 "
 
 UBOOT_CONFIG ?= "tfa"
