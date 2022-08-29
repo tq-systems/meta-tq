@@ -25,7 +25,7 @@ SOC_tqma8xx	= "tqma8xx"
 SOC_tqma8xxs	= "tqma8xxs"
 
 SDK_BASE_REV = "v2.9.0"
-SDK_TQ_REV = "g4eb071e74f9d"
+SDK_TQ_REV = "g592f9c6e15fa"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 
