@@ -11,6 +11,12 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-tq-5.15: update to 5.15.55
+* linux-rt-tq_5.15: update to 5.15.55-rt48
+* linux-rt-tq_5.15: integrate changes form linux-tq_5.15
+* tqma8-demos: TQMa8MPxL adapted for HW Rev.020x
+  (CortexM debug UART is configured for DCE)
+
 * TQMa8QM/TQMa8Xx[S]: 
   * update imx-seco
   * update imx seco-libs
