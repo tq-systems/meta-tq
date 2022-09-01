@@ -1,0 +1,47 @@
+From 7cf6f4dd49ce7cf35ddc60b2b1e16022fac1f519 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Tue, 6 Sep 2022 11:36:54 +0200
+Subject: [PATCH 1/2] gst-plugins-good: v4l2: add missing Y14 support
+
+V4L2_PIX_FMT_Y14 is defined since commit
+742d4355 ("v4l2: Sync headers with kernel 5.9")
+
+Add needed logic in gstv4l2object to handle
+this format.
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ sys/v4l2/gstv4l2object.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/sys/v4l2/gstv4l2object.c b/sys/v4l2/gstv4l2object.c
+index 64704a578d..5a71867a71 100644
+--- a/sys/v4l2/gstv4l2object.c
++++ b/sys/v4l2/gstv4l2object.c
+@@ -114,6 +114,7 @@ static const GstV4L2FormatDesc gst_v4l2_formats[] = {
+   {V4L2_PIX_FMT_Y6, TRUE, GST_V4L2_RAW},
+   {V4L2_PIX_FMT_Y10, TRUE, GST_V4L2_RAW},
+   {V4L2_PIX_FMT_Y12, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_Y14, TRUE, GST_V4L2_RAW},
+   {V4L2_PIX_FMT_Y16, TRUE, GST_V4L2_RAW},
+   {V4L2_PIX_FMT_Y16_BE, TRUE, GST_V4L2_RAW},
+   {V4L2_PIX_FMT_Y10BPACK, TRUE, GST_V4L2_RAW},
+@@ -1025,6 +1026,7 @@ gst_v4l2_object_format_get_rank (const struct v4l2_fmtdesc *fmt)
+     case V4L2_PIX_FMT_Y6:
+     case V4L2_PIX_FMT_Y10:
+     case V4L2_PIX_FMT_Y12:
++    case V4L2_PIX_FMT_Y14:
+     case V4L2_PIX_FMT_Y10BPACK:
+     case V4L2_PIX_FMT_YUV555:
+     case V4L2_PIX_FMT_YUV565:
+@@ -1576,6 +1578,7 @@ gst_v4l2_object_v4l2fourcc_to_bare_struct (guint32 fourcc)
+     case V4L2_PIX_FMT_Y6:
+     case V4L2_PIX_FMT_Y10:
+     case V4L2_PIX_FMT_Y12:
++    case V4L2_PIX_FMT_Y14:
+     case V4L2_PIX_FMT_Y10BPACK:
+     case V4L2_PIX_FMT_YUV444:
+     case V4L2_PIX_FMT_YUV555:
+-- 
+2.25.1
+
