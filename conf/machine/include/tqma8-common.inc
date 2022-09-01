@@ -22,9 +22,7 @@ MACHINE_FEATURES += "\
 MACHINE_FEATURES += "vpu"
 MACHINE_FEATURES:remove:mx8mn-generic-bsp = "vpu"
 
-PREFERRED_PROVIDER_u-boot-fw-utils:mx8-generic-bsp ?= "\
-    u-boot-fw-utils-imx-tq \
-"
+PREFERRED_PROVIDER_u-boot-fw-utils:mx8-generic-bsp ?= "u-boot-fw-utils-imx-tq"
 
 PREFERRED_PROVIDER_imx-boot ?= "imx-boot-tq"
 
