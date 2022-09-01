@@ -1,15 +1,17 @@
-From 0e0d947e774f50fc989630f7b3fd61f6b8966f0f Mon Sep 17 00:00:00 2001
+From db5ffba96c04c1180ad36b197240e1323ca38913 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@tq-group.com>
 Date: Thu, 7 Oct 2021 19:00:16 +0200
 Subject: [PATCH] sys/v4l2/gstv4l2object.c: add 10,12,14,16 Bit Raw Bayer FMT
 
 Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+
+%% original patch: gstreamer1.0-plugins-good_bayer.patch
 ---
  sys/v4l2/gstv4l2object.c | 165 +++++++++++++++++++++++++++++++++++++--
  1 file changed, 157 insertions(+), 8 deletions(-)
 
 diff --git a/sys/v4l2/gstv4l2object.c b/sys/v4l2/gstv4l2object.c
-index cf32bd6..f3ed437 100644
+index 76f2282..b437b22 100644
 --- a/sys/v4l2/gstv4l2object.c
 +++ b/sys/v4l2/gstv4l2object.c
 @@ -44,6 +44,17 @@
@@ -73,7 +75,7 @@ index cf32bd6..f3ed437 100644
      case V4L2_PIX_FMT_Y10BPACK:
      case V4L2_PIX_FMT_YUV555:
      case V4L2_PIX_FMT_YUV565:
-@@ -1116,6 +1149,26 @@ gst_v4l2_object_format_get_rank (const struct v4l2_fmtdesc *fmt)
+@@ -1118,6 +1151,26 @@ gst_v4l2_object_format_get_rank (const struct v4l2_fmtdesc *fmt)
      case V4L2_PIX_FMT_SGBRG8:
      case V4L2_PIX_FMT_SGRBG8:
      case V4L2_PIX_FMT_SRGGB8:
@@ -100,7 +102,7 @@ index cf32bd6..f3ed437 100644
        rank = BAYER_BASE_RANK;
        break;
  
-@@ -1419,6 +1472,22 @@ gst_v4l2_object_v4l2fourcc_is_rgb (guint32 fourcc)
+@@ -1421,6 +1474,22 @@ gst_v4l2_object_v4l2fourcc_is_rgb (guint32 fourcc)
      case V4L2_PIX_FMT_SGBRG8:
      case V4L2_PIX_FMT_SGRBG8:
      case V4L2_PIX_FMT_SRGGB8:
@@ -123,7 +125,7 @@ index cf32bd6..f3ed437 100644
        ret = TRUE;
        break;
      default:
-@@ -1548,11 +1617,71 @@ gst_v4l2_object_v4l2fourcc_to_bare_struct (guint32 fourcc)
+@@ -1550,11 +1619,71 @@ gst_v4l2_object_v4l2fourcc_to_bare_struct (guint32 fourcc)
      case V4L2_PIX_FMT_SGBRG8:
      case V4L2_PIX_FMT_SGRBG8:
      case V4L2_PIX_FMT_SRGGB8:
@@ -199,7 +201,7 @@ index cf32bd6..f3ed437 100644
        break;
      case V4L2_PIX_FMT_SN9C10X:
        structure = gst_structure_new_empty ("video/x-sonix");
-@@ -1574,6 +1703,7 @@ gst_v4l2_object_v4l2fourcc_to_bare_struct (guint32 fourcc)
+@@ -1576,6 +1705,7 @@ gst_v4l2_object_v4l2fourcc_to_bare_struct (guint32 fourcc)
      case V4L2_PIX_FMT_Y6:
      case V4L2_PIX_FMT_Y10:
      case V4L2_PIX_FMT_Y12:
@@ -207,7 +209,7 @@ index cf32bd6..f3ed437 100644
      case V4L2_PIX_FMT_Y10BPACK:
      case V4L2_PIX_FMT_YUV444:
      case V4L2_PIX_FMT_YUV555:
-@@ -1908,15 +2038,34 @@ gst_v4l2_object_get_caps_info (GstV4l2Object * v4l2object, GstCaps * caps,
+@@ -1910,15 +2040,34 @@ gst_v4l2_object_get_caps_info (GstV4l2Object * v4l2object, GstCaps * caps,
        fourcc = V4L2_PIX_FMT_VP9;
      } else if (g_str_equal (mimetype, "video/x-bayer")) {
        const gchar *format = gst_structure_get_string (structure, "format");
