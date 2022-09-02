@@ -22,6 +22,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* Fix missing `WAYLAND_DISPLAY` environment variable. Allows access for
+  members of `wayland` group
 * gstreamer1.0-plugins-good: fix patch fuzz warning
 * images: tq-image-weston-debug: bbappend for image did not work after
   splitting image recipes. IMX gstreamer packages were missing when using
