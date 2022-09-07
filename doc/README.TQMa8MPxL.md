@@ -7,8 +7,6 @@ This README contains some useful information for TQMa8MPxL on MBa8MPxL
 ## Variants
 
 * TQMa8MPQL REV.020x on MBa8MPxL REV.020x
-* TQMa8MPQL REV.020x on MBa8MPxL REV.020x SoM prototypes (2 GiB RAM)
-  without variant data in EEPROM ((see [issue section](#known-issues))
 
 ## Version information for software components
 
@@ -22,8 +20,8 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 
 ### U-Boot
 
-| Feature                                          |     REV.020x |
-| ------------------------------------------------ | ------------ |
+| Feature                                          |   REV.020x   |
+| :----------------------------------------------- | :----------: |
 | RAM configs                                      |    1,2,8 GiB |
 | CPU variants                                     |     i.MX8MPQ |
 | Fuses / OCRAM                                    |       x      |
@@ -39,10 +37,10 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 | **e-MMC / SD**                                   |              |
 | Read                                             |       x      |
 | Write                                            |       x      |
-| **ENET**                                         |              |
+| **Ethernet**                                     |              |
 | GigE / FEC via Phy on MBa8MPxL                   |       x      |
 | GigE / EQOS via Phy on MBa8MPxL                  |       x      |
-| **Bootdevices:**                                 |              |
+| **Bootdevices**                                  |              |
 | SD-Card on USDHC2                                |       x      |
 | e-MMC on USDHC3                                  |       x      |
 | QSPI-NOR on FlexSPI                              |       x      |
@@ -54,25 +52,25 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 | Read with 1-1-1 SDR                              |       x      |
 | PP / Erase with 1-1-1 SDR                        |       x      |
 | **Cortex M7**                                    |              |
-| env settings for starting from TCM               |              |
-| examples with UART3 as debug console             |              |
+| env settings for starting from TCM               |       x      |
+| examples with UART3 as debug console             |       x      |
 
 **TODO or not tested / supported**
 
 * CPU variants i.MX8MPD/S and Lite
-* Cortex M7 with REV.020x
 
 ### Linux
 
-| Feature                                          |     REV.020x |
-| ------------------------------------------------ | ------------ |
+| Feature                                          |    REV.020x  |
+| :----------------------------------------------- | :----------: |
 | RAM configs                                      |    1,2,8 GiB |
 | CPU variants                                     |     i.MX8MPQ |
 | Fuses / OCRAM                                    |       x      |
 | speed grade / temperature grade detection        |       x      |
 | **UART**                                         |              |
 | console on UART4 (via USB / UART converter       |       x      |
-| 3 x UART via pin head / USB UART converter       |              |
+| UART3 via USB UART converter                     |       x      |
+| UART1 / UART2 via pin header                     |              |
 | **GPIO**                                         |              |
 | LED                                              |       x      |
 | Button                                           |       x      |
@@ -87,7 +85,7 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 | GigE / EQOS via Phy on MBa8MPxL                  |       x      |
 | **USB**                                          |              |
 | USB 3.0 Host / Hub                               |       x      |
-| USB DRD (USB 3.0 Cable Detect, VBUS)             |              |
+| USB DRD (USB 3.0 Cable Detect, VBUS)             |       x      |
 | **QSPI NOR**                                     |              |
 | Read with 1-1-4 SDR                              |       x      |
 | PP / Erase with 1-1-1 SDR                        |       x      |
@@ -100,16 +98,18 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 | HDMI                                             |              |
 | Codec (Line IN / Line OUT)                       |       x      |
 | **PCIe**                                         |              |
-| network card at M.2                              |              |
-| **SPI**                                          |       x      |
-| spidev at all CS                                 |       x      |
+| wireless card at M.2                             |       x      |
+| **CAN-FD**                                       |              |
+| CAN-FD                                           |       x      |
+| **SPI**                                          |              |
+| spidev at all CS                                 |              |
 | ADC                                              |       x      |
 | **Cortex M7**                                    |              |
-| examples running from TCM                        |              |
-| use UART3 as debug console (see issues)          |              |
+| examples running from TCM                        |       x      |
+| use UART3 as debug console (see issues)          |       x      |
 | **MIPI CSI (see Issues section)**                |              |
-| Gray with Vision Components GmbH camera (Sensor OV9281) |       x     |
-| Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |   x    |
+| Gray with Vision Components GmbH camera (Sensor OV9281) |   x    |
+| Raw Bayer with Vision Components GmbH camera (Sensor IMX327) | x |
 
 ## TODO:
 
@@ -117,11 +117,9 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
   * Codec Microphone in
 * Display
   * DSI / DSI DP bridge
-* PCIe (REV.020x)
-  * not tested
-* UART1-3
-  * not tested on REV.0200
-* Cortex M7 (REV.020x)
+* UART1/UART2 via pin header
+* SPI via pin header
+* I²C interface of PCIe Clock generator not tested
 
 ## Known Issues
 
@@ -139,11 +137,35 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
     1280x720 is tested with gstreamer
   * IMX327: when configuring to SRGGB12 reboot may be needed to get a working
     capture again
-  * OV9281: gstreamer: capture not starting out of the box, need to use  `yavta` to
-    capture some frames, `gstreamer` starts afterwards
+  * OV9281: gstreamer does not support Y10 format
 * Possible communication error to PHY attached to FEC, reboot required to fix
 * A reset using button S7 will not reset the SD card properly. Especially if the SD
   card is operating on 1.8V it will be non-functional after reset. Use button S8 instead.
+* PCIe
+  * Some WiFi modules might not be supported
+  * Suspend to RAM not supported. Disable PCIe RC node in device tree
+  ```
+  &pcie {
+    status = "disabled";
+  };
+  ```
+* Audio
+  * Suspend to RAM does not work reliably. Disable `sound` node in device tree
+  ```
+  sound {
+    compatible = "fsl,imx-audio-tlv320aic32x4";
+    [...]
+    status = "disabled";
+  };
+  ```
+* USB Host
+  * USB Superspeed U3 powersave mode is broken
+* USB Bluetooth:
+  * Some adapters cause the following error during bootup
+
+    `Bluetooth: hci0: unexpected event for opcode 0xfc2f`
+
+    According to https://lkml.org/lkml/2019/6/6/868 this can be ignored
 
 ## Build Artifacts
 
@@ -228,23 +250,34 @@ See [here](./README.TQMa8.UUU.md) for details about using Serial Download mode a
 
 *Note*: see known issue section above.
 
-__Gray with Omnivision OV9281__
+##### Gray with Omnivision OV9281
 
 * Devicetree: `imx8mp-tqma8mpql-mba8mpxl-hdmi-ov9281.dtb`
-* gstreamer example:
+
+gstreamer examples:
 
 ```
 # configure
 yavta -f Y8 -s 1280x800 -c20 /dev/video0
 # grab to file
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! videorate ! video/x-raw,format=GRAY8,framerate=1/1 ! \
-	jpegenc ! multifilesink location=test%d.jpg
+WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! videorate ! \
+ video/x-raw,format=GRAY8,width=1280,height=800,framerate=1/1 ! jpegenc ! multifilesink location=test%d.jpg
+
 # show live video
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! \
-	autovideosink -v sync=false
+WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! videoconvert ! autovideosink -v sync=false
 ```
 
-__Raw Bayer with Sony IMX327__
+* OpenGL accelerated pipeline:
+```
+WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! glupload ! glcolorconvert ! glcolorscale ! glcolorconvert ! gldownload ! autovideosink -v sync=false
+```
+* Show FPS on screen
+```
+WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! glupload ! glcolorconvert ! glcolorscale ! glcolorconvert ! gldownload ! fpsdisplaysink video-sink="waylandsink" sync=false -v
+```
+Add `text-overlay=false` to fpsdisplaysink for console output only
+
+##### Raw Bayer with Sony IMX327
 
 * Devicetree: `imx8mp-tqma8mpql-mba8mpxl-hdmi-imx327.dtb`
 * gstreamer example:
@@ -254,10 +287,9 @@ __Raw Bayer with Sony IMX327__
 yavta -f SRGGB10 -s 1280x720  /dev/video0
 
 # show live video
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false ! \
-	video/x-bayer,format=rggb,bpp=10,width=1280,height=720,framerate=25/1 ! \
-	bayer2rgbneon show-fps=t reduce-bpp=t ! autovideoconvert ! \
-	autovideosink sync=false
+WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! \
+  video/x-bayer,format=rggb,bpp=10,width=1280,height=720 ! bayer2rgbneon show-fps=t reduce-bpp=t ! \
+  autovideoconvert ! autovideosink sync=false
 ```
 
 #### Basler camera
