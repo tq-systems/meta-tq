@@ -71,3 +71,5 @@ WKS_FILE_DEPENDS = "\
 
 include conf/machine/include/imx-base.inc
 require conf/machine/include/arm/armv8a/tune-cortexa53.inc
+
+PREFERRED_VERSION_linux-imx-tq = "5.15%"
