@@ -58,6 +58,7 @@ Releases are named with the following scheme:
 
 ### Added
 
+* linux-imx-tq_5.15: Support for TQMa8MPxL
 * MBa7: add wifi, bluetooth and firmware
 * MBa6ULxL: add wifi, bluetooth and firmware
 * MBa6ULx: add bluetooth and firmware
