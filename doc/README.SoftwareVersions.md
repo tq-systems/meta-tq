@@ -16,6 +16,17 @@
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
 * branched from `linux-5.15.y` / tag commit is merged into (see `LINUX_VERSION` in `linux-tq-5.15.bb` for exact release)
 
+#### Kernel based on 5.15 (linux-imx-fslc)
+
+_Note:_ Not supported for:
+
+- TQMa6ULx / TQMa6ULxL: use [5.15 linux-stable](#kernel-based-on-515-linux-stable)
+- TQMa6ULLx / TQMa6ULLxL: use [5.15 linux-stable](#kernel-based-on-515-linux-stable)
+- TQMa7x: use [5.15 linux-stable](#kernel-based-on-515-linux-stable)
+
+* based on [5.15-2.0.x-imx](https://github.com/Freescale/linux-fslc/tree/5.15-2.0.x-imx)
+* branched from `TQMa8-fslc-5.15-2.0.x-imx` / contains commits up to d818413e4d7901cb8a00a631a389326e2c93ae41
+
 #### Kernel based on 5.10 (linux-imx-fslc)
 
 _Note:_ Not supported for:
