@@ -24,35 +24,43 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 _MBa8x HW Rev.020x/30x only / TQMa8Mx HW Rev.020x only_
 
-* RAM configs 1 GiB / 2 GiB / 4 GiB
-* CPU variants i.MX8MQ / i.MX8MQL
-* Fuses
-* speed grade / temperature grade detection
-* UART (console on UART3)
-* GPIO
-  * LED
-  * Button
-  * BOOT_CFG
-  * MUX CFG
-* I2C
-  * GPIO expander
-  * system EEPROM parsing
-* e-MMC / SD
-  * Read
-  * Write
-* ENET (GigE via Phy on MBa8Mx)
-* Bootdevices: e-MMC / SD-Card
-* HDMI (fixed resolution)
-* QSPI NOR
-  * 4 byte adressing, SPI mode
-  * see Known Issues
-* USB Host (USB1 via hub 2.0 and 3.0)
-* USB Dual Role (USB0, 2.0 host only - hard coded in driver)
-  * Cable Detect / ID
-  * switchable VBUS
-* Cortex M4
-  * env settings for starting from TCM
-  * examples with UART4 as debug console
+| Feature                                          |                    |
+| :----------------------------------------------- | :----------------: |
+| RAM configs                                      |      1,2,8 GiB     |
+| CPU variants                                     | i.MX8MQ / i.MX8MQL |
+| Fuses / OCRAM                                    |         x          |
+| speed grade / temperature grade detection        |         x          |
+| UART (console on UART3)                          |         x          |
+| **GPIO**                                         |                    |
+| LED                                              |         x          |
+| Button                                           |         x          |
+| BOOT_CFG                                         |         x          |
+| MUX                                              |         x          |
+| **I2C**                                          |                    |
+| GPIO expander                                    |         x          |
+| system EEPROM parsing                            |         x          |
+| **e-MMC / SD**                                   |                    |
+| Read                                             |         x          |
+| Write                                            |         x          |
+| **Ethernet**                                     |                    |
+| GigE via Phy on MBa8Mx                           |         x          |
+| **Bootdevices**                                  |                    |
+| SD-Card on USDHC2                                |         x          |
+| e-MMC on USDHC1                                  |         x          |
+| **Display**                                      |                    |
+| HDMI (fixed resolution)                          |         x          |
+| **USB**                                          |                    |
+| USB Host (USB1 via hub 2.0 and 3.0)              |         x          |
+| USB Dual Role (USB0, 2.0 host only)              |         x          |
+|   Cable Detect / ID                              |         x          |
+|   switchable VBUS                                |         x          |
+| **QSPI NOR**                                     |                    |
+| 4 byte adressing, SPI mode                       |         x          |
+| see Known Issues                                 |                    |
+| **Cortex M4**                                    |                    |
+| env settings for starting from TCM               |         x          |
+| examples with UART4 as debug console             |         x          |
+
 
 ### Linux
 
