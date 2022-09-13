@@ -1,0 +1,195 @@
+From 1a579f881c05a16ee7e7fe78ae0b10cedc39fdfd Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Tue, 6 Sep 2022 11:43:15 +0200
+Subject: [PATCH 2/2] gst-plugins-good: v4l2: add missing raw bayer format
+ support
+
+Raw bayer formats with more than 8 BPP are defined since commit
+742d4355 ("v4l2: Sync headers with kernel 5.9")
+
+Add needed logic in gstv4l2object to handle these formats.
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ sys/v4l2/gstv4l2object.c | 131 ++++++++++++++++--
+ 1 file changed, 123 insertions(+), 8 deletions(-)
+
+diff --git a/subprojects/gst-plugins-good/sys/v4l2/gstv4l2object.c b/subprojects/gst-plugins-good/sys/v4l2/gstv4l2object.c
+index 5a71867a71..e6c9d985f9 100644
+--- a/sys/v4l2/gstv4l2object.c
++++ b/sys/v4l2/gstv4l2object.c
+@@ -167,6 +167,22 @@ static const GstV4L2FormatDesc gst_v4l2_formats[] = {
+   {V4L2_PIX_FMT_SGBRG8, TRUE, GST_V4L2_RAW},
+   {V4L2_PIX_FMT_SGRBG8, TRUE, GST_V4L2_RAW},
+   {V4L2_PIX_FMT_SRGGB8, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SBGGR10, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SGBRG10, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SGRBG10, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SRGGB10, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SBGGR12, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SGBRG12, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SGRBG12, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SRGGB12, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SBGGR14, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SGBRG14, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SGRBG14, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SRGGB14, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SBGGR16, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SGBRG16, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SGRBG16, TRUE, GST_V4L2_RAW},
++  {V4L2_PIX_FMT_SRGGB16, TRUE, GST_V4L2_RAW},
+ 
+   /* compressed formats */
+   {V4L2_PIX_FMT_MJPEG, FALSE, GST_V4L2_CODEC},
+@@ -1120,6 +1136,22 @@ gst_v4l2_object_format_get_rank (const struct v4l2_fmtdesc *fmt)
+     case V4L2_PIX_FMT_SGBRG8:
+     case V4L2_PIX_FMT_SGRBG8:
+     case V4L2_PIX_FMT_SRGGB8:
++    case V4L2_PIX_FMT_SBGGR10:
++    case V4L2_PIX_FMT_SGBRG10:
++    case V4L2_PIX_FMT_SGRBG10:
++    case V4L2_PIX_FMT_SRGGB10:
++    case V4L2_PIX_FMT_SBGGR12:
++    case V4L2_PIX_FMT_SGBRG12:
++    case V4L2_PIX_FMT_SGRBG12:
++    case V4L2_PIX_FMT_SRGGB12:
++    case V4L2_PIX_FMT_SBGGR14:
++    case V4L2_PIX_FMT_SGBRG14:
++    case V4L2_PIX_FMT_SGRBG14:
++    case V4L2_PIX_FMT_SRGGB14:
++    case V4L2_PIX_FMT_SBGGR16:
++    case V4L2_PIX_FMT_SGBRG16:
++    case V4L2_PIX_FMT_SGRBG16:
++    case V4L2_PIX_FMT_SRGGB16:
+       rank = BAYER_BASE_RANK;
+       break;
+ 
+@@ -1423,6 +1455,22 @@ gst_v4l2_object_v4l2fourcc_is_rgb (guint32 fourcc)
+     case V4L2_PIX_FMT_SGBRG8:
+     case V4L2_PIX_FMT_SGRBG8:
+     case V4L2_PIX_FMT_SRGGB8:
++    case V4L2_PIX_FMT_SBGGR10:
++    case V4L2_PIX_FMT_SGBRG10:
++    case V4L2_PIX_FMT_SGRBG10:
++    case V4L2_PIX_FMT_SRGGB10:
++    case V4L2_PIX_FMT_SBGGR12:
++    case V4L2_PIX_FMT_SGBRG12:
++    case V4L2_PIX_FMT_SGRBG12:
++    case V4L2_PIX_FMT_SRGGB12:
++    case V4L2_PIX_FMT_SBGGR14:
++    case V4L2_PIX_FMT_SGBRG14:
++    case V4L2_PIX_FMT_SGRBG14:
++    case V4L2_PIX_FMT_SRGGB14:
++    case V4L2_PIX_FMT_SBGGR16:
++    case V4L2_PIX_FMT_SGBRG16:
++    case V4L2_PIX_FMT_SGRBG16:
++    case V4L2_PIX_FMT_SRGGB16:
+       ret = TRUE;
+       break;
+     default:
+@@ -1552,11 +1600,59 @@ gst_v4l2_object_v4l2fourcc_to_bare_struct (guint32 fourcc)
+     case V4L2_PIX_FMT_SGBRG8:
+     case V4L2_PIX_FMT_SGRBG8:
+     case V4L2_PIX_FMT_SRGGB8:
++    case V4L2_PIX_FMT_SBGGR10:
++    case V4L2_PIX_FMT_SGBRG10:
++    case V4L2_PIX_FMT_SGRBG10:
++    case V4L2_PIX_FMT_SRGGB10:
++    case V4L2_PIX_FMT_SBGGR12:
++    case V4L2_PIX_FMT_SGBRG12:
++    case V4L2_PIX_FMT_SGRBG12:
++    case V4L2_PIX_FMT_SRGGB12:
++    case V4L2_PIX_FMT_SBGGR14:
++    case V4L2_PIX_FMT_SGBRG14:
++    case V4L2_PIX_FMT_SGRBG14:
++    case V4L2_PIX_FMT_SRGGB14:
++    case V4L2_PIX_FMT_SBGGR16:
++    case V4L2_PIX_FMT_SGBRG16:
++    case V4L2_PIX_FMT_SGRBG16:
++    case V4L2_PIX_FMT_SRGGB16:
+       structure = gst_structure_new ("video/x-bayer", "format", G_TYPE_STRING,
+-          fourcc == V4L2_PIX_FMT_SBGGR8 ? "bggr" :
+-          fourcc == V4L2_PIX_FMT_SGBRG8 ? "gbrg" :
+-          fourcc == V4L2_PIX_FMT_SGRBG8 ? "grbg" :
+-          /* fourcc == V4L2_PIX_FMT_SRGGB8 ? */ "rggb", NULL);
++         (fourcc == V4L2_PIX_FMT_SBGGR8  ? "bggr" :
++          fourcc == V4L2_PIX_FMT_SBGGR10 ? "bggr" :
++          fourcc == V4L2_PIX_FMT_SBGGR12 ? "bggr" :
++          fourcc == V4L2_PIX_FMT_SBGGR14 ? "bggr" :
++          fourcc == V4L2_PIX_FMT_SBGGR16 ? "bggr" :
++          fourcc == V4L2_PIX_FMT_SGBRG8  ? "gbrg" :
++          fourcc == V4L2_PIX_FMT_SGBRG10 ? "gbrg" :
++          fourcc == V4L2_PIX_FMT_SGBRG12 ? "gbrg" :
++          fourcc == V4L2_PIX_FMT_SGBRG14 ? "gbrg" :
++          fourcc == V4L2_PIX_FMT_SGBRG16 ? "gbrg" :
++          fourcc == V4L2_PIX_FMT_SGRBG8  ? "grbg" :
++          fourcc == V4L2_PIX_FMT_SGRBG10 ? "grbg" :
++          fourcc == V4L2_PIX_FMT_SGRBG12 ? "grbg" :
++          fourcc == V4L2_PIX_FMT_SGRBG14 ? "grbg" :
++          fourcc == V4L2_PIX_FMT_SGRBG16 ? "grbg" :
++          "rggb"),
++          "bpp", G_TYPE_INT,
++          (fourcc == V4L2_PIX_FMT_SBGGR10  ? 10 :
++           fourcc == V4L2_PIX_FMT_SGBRG10  ? 10 :
++           fourcc == V4L2_PIX_FMT_SGRBG10  ? 10 :
++           fourcc == V4L2_PIX_FMT_SRGGB10  ? 10 :
++           fourcc == V4L2_PIX_FMT_SBGGR12  ? 12 :
++           fourcc == V4L2_PIX_FMT_SGBRG12  ? 12 :
++           fourcc == V4L2_PIX_FMT_SGRBG12  ? 12 :
++           fourcc == V4L2_PIX_FMT_SRGGB12  ? 12 :
++           fourcc == V4L2_PIX_FMT_SBGGR14  ? 14 :
++           fourcc == V4L2_PIX_FMT_SGBRG14  ? 14 :
++           fourcc == V4L2_PIX_FMT_SGRBG14  ? 14 :
++           fourcc == V4L2_PIX_FMT_SRGGB14  ? 14 :
++           fourcc == V4L2_PIX_FMT_SBGGR16  ? 16 :
++           fourcc == V4L2_PIX_FMT_SGBRG16  ? 16 :
++           fourcc == V4L2_PIX_FMT_SGRBG16  ? 16 :
++           fourcc == V4L2_PIX_FMT_SRGGB16  ? 16 :
++           8),
++
++          NULL);
+       break;
+     case V4L2_PIX_FMT_SN9C10X:
+       structure = gst_structure_new_empty ("video/x-sonix");
+@@ -1913,15 +2009,34 @@ gst_v4l2_object_get_caps_info (GstV4l2Object * v4l2object, GstCaps * caps,
+       fourcc = V4L2_PIX_FMT_VP9;
+     } else if (g_str_equal (mimetype, "video/x-bayer")) {
+       const gchar *format = gst_structure_get_string (structure, "format");
++      gint bpp;
++      if (!gst_structure_get_int(structure, "bpp", &bpp))
++        bpp = 8;
+       if (format) {
+         if (!g_ascii_strcasecmp (format, "bggr"))
+-          fourcc = V4L2_PIX_FMT_SBGGR8;
++          fourcc = (bpp == 10 ? V4L2_PIX_FMT_SBGGR10 :
++                    bpp == 12 ? V4L2_PIX_FMT_SBGGR12 :
++                    bpp == 14 ? V4L2_PIX_FMT_SBGGR14 :
++                    bpp == 16 ? V4L2_PIX_FMT_SBGGR16 :
++                    V4L2_PIX_FMT_SBGGR8);
+         else if (!g_ascii_strcasecmp (format, "gbrg"))
+-          fourcc = V4L2_PIX_FMT_SGBRG8;
++          fourcc = (bpp == 10 ? V4L2_PIX_FMT_SGBRG10 :
++                    bpp == 12 ? V4L2_PIX_FMT_SGBRG12 :
++                    bpp == 14 ? V4L2_PIX_FMT_SGBRG14 :
++                    bpp == 16 ? V4L2_PIX_FMT_SGBRG16 :
++                    V4L2_PIX_FMT_SGBRG8);
+         else if (!g_ascii_strcasecmp (format, "grbg"))
+-          fourcc = V4L2_PIX_FMT_SGRBG8;
++          fourcc = (bpp == 10 ? V4L2_PIX_FMT_SGRBG10 :
++                    bpp == 12 ? V4L2_PIX_FMT_SGRBG12 :
++                    bpp == 14 ? V4L2_PIX_FMT_SGRBG14 :
++                    bpp == 16 ? V4L2_PIX_FMT_SGRBG16 :
++                    V4L2_PIX_FMT_SGRBG8);
+         else if (!g_ascii_strcasecmp (format, "rggb"))
+-          fourcc = V4L2_PIX_FMT_SRGGB8;
++          fourcc = (bpp == 10 ? V4L2_PIX_FMT_SRGGB10 :
++                    bpp == 12 ? V4L2_PIX_FMT_SRGGB12 :
++                    bpp == 14 ? V4L2_PIX_FMT_SRGGB14 :
++                    bpp == 16 ? V4L2_PIX_FMT_SRGGB16 :
++                    V4L2_PIX_FMT_SRGGB8);
+       }
+     } else if (g_str_equal (mimetype, "video/x-sonix")) {
+       fourcc = V4L2_PIX_FMT_SN9C10X;
+-- 
+2.25.1
+

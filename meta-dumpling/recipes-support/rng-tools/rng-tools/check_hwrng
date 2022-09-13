@@ -1,0 +1,21 @@
+#!/bin/sh
+# SPDX-License-Identifier: GPL-2.0-only
+# Copyright TQ-Systems GmbH
+
+# This script checks if /dev/hwrng is backed by a HW device driver.
+# This is true if '/sys/class/misc/hw_random/rng_current' does *not*
+# contain 'none'
+# This script returns 0 if no HW backend is available, 1 otherwise.
+# It is intended to be used by 'ExecCondition=' in a systemd .service file
+
+main() {
+    local ENTROPY_SRC
+
+    ENTROPY_SRC=$(cat /sys/class/misc/hw_random/rng_current 2>/dev/null)
+    if [ -z "${ENTROPY_SRC}" ] || [ "none" = "${ENTROPY_SRC}" ]; then
+      exit 0
+    fi
+    exit 1
+}
+
+main "$@"
