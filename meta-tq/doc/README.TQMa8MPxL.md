@@ -68,7 +68,7 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 | Fuses / OCRAM                                    |       x      |
 | speed grade / temperature grade detection        |       x      |
 | **UART**                                         |              |
-| console on UART4 (via USB / UART converter       |       x      |
+| console on UART4 (via USB / UART converter)      |       x      |
 | UART3 via USB UART converter                     |       x      |
 | UART1 / UART2 via pin header                     |              |
 | **GPIO**                                         |              |
