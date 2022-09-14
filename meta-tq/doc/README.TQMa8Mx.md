@@ -66,52 +66,57 @@ _MBa8x HW Rev.020x/30x only / TQMa8Mx HW Rev.020x only_
 
 _MBa8x HW Rev.020x/30x only_
 
-* RAM configs 1 GiB / 2 GiB / 4 GiB
-* CPU variants i.MX8MQ / i.MX8MQL
-* speed grade / temperature grade detection
-* DVFS (CPU overdrive mode)
-* suspend (deep / s2idle)
-* I2C
-  * Temperature Sensors
-  * RTC (with wakealarm)
-  * EEPROMS
-  * GPIO expanders
-* GPIO
-  * LED
-  * Button
-  * HOG
-* UART
-  * console on UART3
-  * 2 x UART via pin head or X15
-  * 1 x UART via mikroBUS
-* SPI
-  * 2 x via spidev in userland
-* ENET (GigE via Phy on MBa8Mx)
-* USB
-  * USB 3.0 Host / Hub
-  * USB DRD (USB 2.0 OTG only, Cable Detect, VBUS)
-* DSI
-  * LVDS on DCSS
-  * LVDS on eLCDIF
-* PCIe
-  * mini-PCIe on MBa8Mx
-  * wifi with Network Card (Silex Technology SX-PCEAC2-HMC-SP)
-* Audio
-  * Codec Line In (X14)
-  * Codec Line Out (X13)
-* Cortex M4
-  * examples running from TCM
-  * use UART4 as debug console
-* QSPI NOR
-  * Read with 1-1-4 SDR
-  * PP / Erase with 1-1-1
-* GPU
-* VPU
-  * Note: GPU temperature observation uses CPU thermal-zone! Playing 4K Videos on 4K Display will raise the thermal-zone (CPU) temperature >80°C, reducing VPU clock. Apparently there is no dedicated VPU sensor
-* HDMI
-* MIPI CSI (see Issues section)
-  * Gray with Vision Components GmbH camera (Sensor OV9281)
-  * Raw Bayer with Vision Components GmbH camera (Sensor IMX327)
+| Feature                                          |                    |
+| :----------------------------------------------- | :----------------: |
+| RAM configs                                      |      1,2,8 GiB     |
+| CPU variants                                     | i.MX8MQ / i.MX8MQL |
+| Fuses / OCRAM                                    |          x         |
+| speed grade / temperature grade detection        |          x         |
+| DVFS (CPU overdrive mode)                        |          x         |
+| suspend (deep / s2idle)                          |          x         |
+| **UART**                                         |                    |
+| console on UART3 (via USB / UART converter)      |          x         |
+| 2 x UART via pin head or X15                     |          x         |
+| 1 x UART via mikroBUS                            |                    |
+| **GPIO**                                         |                    |
+| LED                                              |          x         |
+| Button                                           |          x         |
+| HOG                                              |          x         |
+| **I2C**                                          |                    |
+| EEPROMs                                          |          x         |
+| PMIC                                             |          x         |
+| GPIO expanders                                   |          x         |
+| RTC (with wakealarm)                             |          x         |
+| Temperature Sensors                              |          x         |
+| **ENET**                                         |                    |
+| GigE via Phy on MBa8Mx                           |          x         |
+| **USB**                                          |                    |
+| USB 3.0 Host / Hub                               |          x         |
+| USB DRD (USB 2.0 DR only, Cable Detect, VBUS)    |          x         |
+| **QSPI NOR**                                     |                    |
+| Read with 1-1-4 SDR                              |                    |
+| PP / Erase with 1-1-1 SDR                        |                    |
+| **GRAPHICS**                                     |                    |
+| GPU                                              |          x         |
+| VPU                                              |          x         |
+| **Display**                                      |                    |
+| LVDS on DCSS                                     |          x         |
+| LVDS on eLCDIF                                   |          x         |
+| HDMI                                             |          x         |
+| **Audio**                                        |                    |
+| HDMI                                             |          x         |
+| Codec (Line IN / Line OUT)                       |          x         |
+| **PCIe**                                         |                    |
+| mini-PCIe on MBa8Mx                              |          x         |
+| PCIe slot with Network Card                      |          x         |
+| **SPI**                                          |                    |
+| 2 x via spidev in userland                       |          x         |
+| **Cortex M4**                                    |                    |
+| examples running from TCM                        |          x         |
+| use UART4 as debug console                       |          x         |
+| **MIPI CSI (see Issues section)**                |                    |
+| Gray with Vision Components GmbH camera (Sensor OV9281) |        x    |
+| Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |   x    |
 
 ## TODO
 
@@ -144,8 +149,12 @@ _MBa8x HW Rev.020x/30x only_
   * MIPI CSI does not work reliably. It may work, it may fail or even lockup the system
 * When using HDMI the default Audio device changes to HDMI output.
   For using DAI codec `aplay` requires the parameter `-Dsysdefault:CARD=tqmtlv320aic32`
+* The HDMI audio device has to be selected explicitely by passing `-Dsysdefault:CARD=imxaudiohdmi` to `aplay` & friends
 * HDMI: When using large displays, module variants with> = 2 GiB RAM are recommended.
-  It is known that some use cases will not work with less memory. Like Weston on a 4K monitor 
+  It is known that some use cases will not work with less memory. Like Weston on a 4K monitor
+* HDMI hotplug is sometimes unreliable
+* Note: GPU temperature observation uses CPU thermal-zone! Playing 4K Videos on 4K Display will raise the thermal-zone (CPU) temperature >80°C, reducing VPU clock. Apparently there is no dedicated VPU sensor
+* PCIe driver causes several warnings during suspend
 
 ## Build Artifacts
 
@@ -463,6 +472,8 @@ speaker-test -D hw:0 -l 1 -c 2 -f 500 -t sine
 WAYLAND_DISPLAY=/run/wayland-0 gst-play-1.0 /mnt/sd/tears_of_steel_1080p.webm
 ```
 
+Add `--audiosink='alsasink device=hw:1'` for selecting a specific audio device
+
 ### MIPI-CSI
 
 *Note*: see known issue section above.
@@ -475,9 +486,21 @@ __Gray with Omnivision OV9281__
 * gstreamer example:
 
 ```
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! \
-	autovideosink -v sync=false
+WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! \
+  video/x-raw,format=GRAY8,width=1280,height=800 ! videoconvert ! autovideosink -v sync=false
 ```
+
+* OpenGL accelerated pipeline:
+```
+WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! \
+  video/x-raw,format=GRAY8,width=1280,height=800 ! glupload ! glcolorconvert ! \
+  glcolorscale ! glcolorconvert ! gldownload ! autovideosink -v sync=false
+```
+* Show FPS on screen
+```
+WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! glupload ! glcolorconvert ! glcolorscale ! glcolorconvert ! gldownload ! fpsdisplaysink video-sink="waylandsink" sync=false -v
+```
+Add `text-overlay=false` to fpsdisplaysink for console output only
 
 __Raw Bayer with Sony IMX327__
 
@@ -486,9 +509,9 @@ __Raw Bayer with Sony IMX327__
 
 ```
 WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false ! \
-	video/x-bayer,format=rggb,bpp=12,width=1280,height=720,framerate=25/1 ! \
-	bayer2rgbneon show-fps=t reduce-bpp=t ! autovideoconvert ! \
-	autovideosink sync=false
+  video/x-bayer,format=rggb,bpp=10,width=1280,height=720,framerate=25/1 ! \
+  bayer2rgbneon show-fps=t reduce-bpp=t ! autovideoconvert ! \
+  autovideosink sync=false
 ```
 
 ### Cortex M4
