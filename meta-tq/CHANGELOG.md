@@ -28,6 +28,16 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* all machines with layerscape CPU: improve variables for image and wic
+  generation
+  * WKS_FILE_DEPENDS is used for tools
+  * use EXTRA_IMAGEDEPENDS to allow kernel and firtmware installment in
+    rootfs
+  * use MACHINE_EXTRA_RRECOMMENDS for tools
+* all machines with [Q]SPI-NOR: improve readablility for UBI / UBIFS
+  parameters
+  * use long opts for MKUBIFS_ARGS / UBINIZE_ARGS
+  * Use variables for parameters
 * TQMa8QM/TQMa8Xx[S]:
   * update imx-seco
   * update imx seco-libs
