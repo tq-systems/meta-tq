@@ -6,16 +6,13 @@ require linux-imx-tq-common.inc
 
 KBRANCH = "TQM-lf-5.15"
 SRCREV = "e27a78db286db0e09cf6b2981ad931de087ab54d"
-KBRANCH:tqma8mpxl = "TQMa8-fslc-5.15-2.0.x-imx"
-SRCREV:tqma8mpxl = "e8d5dc6cddeb0d760209a52e5d59f7e22821d2ac"
-KBRANCH:tqma8mq = "TQMa8-fslc-5.15-2.0.x-imx"
-SRCREV:tqma8mq = "e8d5dc6cddeb0d760209a52e5d59f7e22821d2ac"
+KBRANCH:mx8-nxp-bsp = "TQMa8-fslc-5.15-2.0.x-imx"
+SRCREV:mx8-nxp-bsp = "e8d5dc6cddeb0d760209a52e5d59f7e22821d2ac"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "5.15"
 LINUX_VERSION = "${LINUX_RELEASE}.5"
-LINUX_VERSION:tqma8mpxl = "${LINUX_RELEASE}.60"
-LINUX_VERSION:tqma8mq = "${LINUX_RELEASE}.60"
+LINUX_VERSION:mx8-nxp-bsp = "${LINUX_RELEASE}.60"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
