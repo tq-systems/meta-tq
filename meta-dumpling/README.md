@@ -21,7 +21,7 @@ This layer in the checked out branch depends on:
 
 URI: https://git.yoctoproject.org/poky  
 branch: kirkstone  
-layers: meta, meta-poky  
+layers: meta  
 
 URI: https://github.com/openembedded/meta-openembedded.git
 branch: kirkstone  
@@ -31,11 +31,20 @@ URI: https://github.com/tq-systems/meta-tq.git
 branch: kirkstone  
 layers: meta-tq  
 
+When using one of the distros definded in this layer you need
+additionally the `meta-poky` layer from the poky repo that defines
+`poky` and `poky-tiny` which the distros defined in this layer depend on.
+**Note** Recipes and bbappends in this layer do not depend on `meta-poky`
+
+URI: https://git.yoctoproject.org/poky  
+branch: kirkstone  
+layers: meta-poky  
+
 This layer additionally contains optional fixes and extensions for other layers
-as far as needed for TQ-Systems SOM. Most of these bbappends are implemented
-under dynamic-layers and are only visible, if the original layer is in your
-bblayer.conf. For details look for `BBFILES_DYNAMIC` in Yocto Project
-documentation.
+as far as needed or useful for TQ-Systems SOM. Most of these bbappends
+are implemented under dynamic-layers and are only visible, if the original
+layer is in your bblayer.conf. For details look for `BBFILES_DYNAMIC` in
+Yocto Project documentation.
 
 ### Coding style
 
