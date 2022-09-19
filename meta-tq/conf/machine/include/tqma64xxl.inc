@@ -13,14 +13,14 @@ PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-ti-tq"
 require conf/machine/include/am64xx.inc
 
 # Machine specific options
-#
+
 MACHINE_EXTRA_RRECOMMENDS += "\
     kernel-devicetree \
     kernel-modules \
 "
 
 # TQ u-boot and kernel
-#
+
 require conf/machine/include/tqmxx.inc
 KERNEL_IMAGETYPE = "Image"
 # TI enforces also fitimage and vmlinux.gz
@@ -28,7 +28,7 @@ KERNEL_IMAGETYPE = "Image"
 KERNEL_IMAGETYPES = "Image"
 
 # Image Options
-#
+
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 
 #

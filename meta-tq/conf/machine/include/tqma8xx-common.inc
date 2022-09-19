@@ -8,11 +8,11 @@ RDEPENDS:${KERNEL_PACKAGE_NAME}-base = ""
 LOADADDR = ""
 
 # Machine specific options
-#
+
 MACHINE_FEATURES:append = " can pci"
 
 # TQ u-boot and kernel
-#
+
 PREFERRED_PROVIDER_imx-sc-firmware ?= "imx-sc-firmware-tq"
 
 UBOOT_MAKE_TARGET ?= "all"
@@ -28,7 +28,7 @@ IMX_BOOT_SEEK = "32"
 IMX_BOOT_SOC_TARGET = "iMX8QX"
 
 # Image Options
-#
+
 EXTRA_IMAGEDEPENDS += "u-boot imx-boot imx-sc-firmware"
 
 # Verified values to generate UBI image:

@@ -8,7 +8,7 @@ RDEPENDS:${KERNEL_PACKAGE_NAME}-base = ""
 LOADADDR = ""
 
 # Machine specific options
-#
+
 MACHINE_FEATURES:append = " can pci"
 
 PREFERRED_PROVIDER_virtual/imx-cortexm-demos = "tqma8-cortexm-demos"
@@ -28,7 +28,7 @@ IMX_BOOT_SOC_TARGET = "iMX8QM"
 
 
 # Image Options
-#
+
 EXTRA_IMAGEDEPENDS += "u-boot imx-boot imx-sc-firmware"
 
 # Verified values to generate UBI image:

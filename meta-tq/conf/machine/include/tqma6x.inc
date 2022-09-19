@@ -11,7 +11,7 @@ DEFAULTTUNE:imx6 ?= "cortexa9thf-neon"
 require conf/machine/include/arm/armv7a/tune-cortexa9.inc
 
 # Machine specific options
-#
+
 MACHINE_EXTRA_RRECOMMENDS += "\
     firmware-imx-vpu-imx6d \
     firmware-imx-vpu-imx6q \
@@ -34,7 +34,7 @@ MACHINE_FEATURES += "\
 "
 
 # TQ u-boot and kernel
-#
+
 require conf/machine/include/tqmxx.inc
 
 KERNEL_IMAGETYPE = "zImage"
@@ -46,7 +46,7 @@ UBOOT_SUFFIX:tqma6x ?= "imx"
 UBOOT_MAKE_TARGET:tqma6x ?= "u-boot.imx"
 
 # Image Options
-#
+
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 
 # note: These settings are only usable with larger SPI NOR

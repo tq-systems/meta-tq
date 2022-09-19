@@ -8,7 +8,6 @@ RDEPENDS:${KERNEL_PACKAGE_NAME}-base = ""
 LOADADDR = ""
 
 # Machine specific options
-#
 
 # Set DDR FIRMWARE
 DDR_FIRMWARE_NAME = "\
@@ -42,7 +41,7 @@ MACHINE_FEATURES:remove = "optee"
 IMAGE_INSTALL:remove = "packagegroup-fsl-optee-imx"
 
 # Image Options
-#
+
 EXTRA_IMAGEDEPENDS += "u-boot imx-boot"
 
 # Verified values to generate UBI image:

@@ -8,7 +8,7 @@ RDEPENDS:${KERNEL_PACKAGE_NAME}-base = ""
 LOADADDR = ""
 
 # Machine specific options
-#
+
 MACHINE_FEATURES:append = " pci"
 
 # Set DDR FIRMWARE
@@ -42,7 +42,7 @@ MACHINE_FEATURES:remove = "optee"
 IMAGE_INSTALL:remove = "packagegroup-fsl-optee-imx"
 
 # Image Options
-#
+
 EXTRA_IMAGEDEPENDS += "\
     imx-boot \
     u-boot \

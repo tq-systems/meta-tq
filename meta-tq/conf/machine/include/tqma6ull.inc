@@ -11,7 +11,7 @@ DEFAULTTUNE:mx6ull ?= "cortexa7thf-neon"
 require conf/machine/include/arm/armv7a/tune-cortexa7.inc
 
 # Machine specific options
-#
+
 MACHINE_EXTRA_RRECOMMENDS += "\
     kernel-devicetree \
     kernel-modules \
@@ -30,7 +30,7 @@ MACHINE_FEATURES:append = "\
 "
 
 # TQ u-boot and kernel
-#
+
 require conf/machine/include/tqmxx.inc
 
 KERNEL_IMAGETYPE = "zImage"
@@ -42,7 +42,7 @@ UBOOT_SUFFIX:${MACHINE} ?= "imx"
 UBOOT_MAKE_TARGET:${MACHINE} ?= "u-boot.imx"
 
 # Image Options
-#
+
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
 
 # Verified values to generate UBI image:
