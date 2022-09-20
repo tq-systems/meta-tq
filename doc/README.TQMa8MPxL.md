@@ -60,7 +60,6 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 **TODO or not tested / supported**
 
 * CPU variants i.MX8MPD/S and Lite
-* Cortex M7 with REV.020x
 
 ### Linux
 
@@ -100,7 +99,7 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 | HDMI                                             |              |
 | Codec (Line IN / Line OUT)                       |       x      |
 | **PCIe**                                         |              |
-| network card at M.2                              |              |
+| wireless card at M.2                             |       x      |
 | **SPI**                                          |       x      |
 | spidev at all CS                                 |       x      |
 | ADC                                              |       x      |
@@ -116,20 +115,19 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 * Audio
   * Codec Microphone in
 * Display
-  * DSI / DSI DP bridge
-* PCIe (REV.020x)
-  * not tested
-* UART1-3
-  * not tested on REV.0200
+  * DSI / DSI DP bridge (lacking driver support)
+* UART1/UART2 via pin header
+* SPI via pin header
+* I²C interface of PCIe Clock generator not tested
 
 ## Known Issues
 
 * REV.020x SoM without variant data in EEPROM (prototypes)
-  * With default U-Boot configuration boot is interrupted in SPL and waits for
-    input of assembled RAM size (1, 2, 8).
+  * With the default U-Boot configuration the boot flow is interrupted in
+    SPL and waits for input of the assembled RAM size (1, 2, 4, 8).
   * Use fixed 2GB U-Boot configuration. This is built by default `UBOOT_CONFIG`
-    entries `sd-2gb` and `mfgtool-2gb` (note that the generated wic-File uses
-    the multi RAM config)
+    entries `sd-2gb` and `mfgtool-2gb`
+    **Note:** the generated wic-File uses the U-Boot multi RAM config
 * MIPI CSI
   * driver stack is not completely v4l2-compliance test proof. The IOCTLS for format / resolution
     enumeration and query can return invalid / wrong values depending of the internal state
@@ -140,9 +138,17 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
     capture again
   * OV9281: gstreamer: capture not starting out of the box, need to use  `yavta` to
     capture some frames, `gstreamer` starts afterwards
-* Possible communication error to PHY attached to FEC, reboot required to fix
+* Ethernet
+  * Possible communication error to PHY attached to FEC, reboot required to fix
+  * ETH1 looses manual assigned IP after suspend/resume. Default systemd network
+    configuration uses DHCP with fallback. Has to be adjusted if needed.
 * A reset using button S7 will not reset the SD card properly. Especially if the SD
   card is operating on 1.8V it will be non-functional after reset. Use button S8 instead.
+* PCIe
+  * Some WiFi modules might not be supported
+* USB
+  * U-Boot: some USB stick types not working correct in U-Boot and are not
+    enumerated correctly after `usb reset`
 
 ## Build Artifacts
 
@@ -227,10 +233,11 @@ See [here](./README.TQMa8.UUU.md) for details about using Serial Download mode a
 
 *Note*: see known issue section above.
 
-__Gray with Omnivision OV9281__
+##### Gray with Omnivision OV9281
 
 * Devicetree: `imx8mp-tqma8mpql-mba8mpxl-hdmi-ov9281.dtb`
-* gstreamer example:
+
+gstreamer examples:
 
 ```
 # configure
@@ -243,7 +250,7 @@ WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! video
 	autovideosink -v sync=false
 ```
 
-__Raw Bayer with Sony IMX327__
+##### Raw Bayer with Sony IMX327
 
 * Devicetree: `imx8mp-tqma8mpql-mba8mpxl-hdmi-imx327.dtb`
 * gstreamer example:
