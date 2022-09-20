@@ -11,6 +11,7 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-imx-tq-5.10: pwm fan improvements
 * linux-tq-5.15: update to 5.15.55
 * linux-rt-tq_5.15: update to 5.15.55-rt48
 * linux-rt-tq_5.15: integrate changes form linux-tq_5.15
@@ -24,6 +25,9 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa8MPxL: update u-boot-imx-tq
+  * support 4GiB Variant
+  * optional support for LVDS splash (clock, ldb, pwm, lcdif2)
 * MBa7: add wifi, bluetooth and firmware
 * MBa6ULxL: add wifi, bluetooth and firmware
 * MBa6ULx: add bluetooth and firmware
@@ -37,6 +41,7 @@ Releases are named with the following scheme:
 
 ### Removed
 
+* TQMa8MPxL: remove support for REV.010x prototype hardware
 * qoriq-atf_1.5: Removed recipe
 
 ## hardknott.TQMa64xxL.BSP.SW.0001
