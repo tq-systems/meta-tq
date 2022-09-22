@@ -28,6 +28,8 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-rt-tq_5.15: update to 5.15.55-rt48
+* linux-tq-5.15: update to 5.15.55
 * all machines with layerscape CPU: improve variables for image and wic
   generation
   * WKS_FILE_DEPENDS is used for tools
