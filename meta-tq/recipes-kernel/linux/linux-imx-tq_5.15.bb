@@ -7,7 +7,7 @@ require linux-imx-tq-common.inc
 KBRANCH = "TQM-lf-5.15"
 SRCREV = "e27a78db286db0e09cf6b2981ad931de087ab54d"
 KBRANCH:mx8-nxp-bsp = "TQMa8-fslc-5.15-2.0.x-imx"
-SRCREV:mx8-nxp-bsp = "e8d5dc6cddeb0d760209a52e5d59f7e22821d2ac"
+SRCREV:mx8-nxp-bsp = "0a9a84f6fbde844584efc18dde38ebdaf4062190"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "5.15"
@@ -56,6 +56,7 @@ SRC_URI:append = " \
 COMPATIBLE_MACHINE = "^("
 COMPATIBLE_MACHINE .= "|tqma8mpxl"
 COMPATIBLE_MACHINE .= "|tqma8mq"
+COMPATIBLE_MACHINE .= "|tqma8mxml"
 COMPATIBLE_MACHINE .= "|tqmls1012al"
 COMPATIBLE_MACHINE .= "|tqmls1028a"
 COMPATIBLE_MACHINE .= ")$"
