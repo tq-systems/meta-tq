@@ -433,6 +433,45 @@ See [here](./README.TQMa8.UUU.md) for details about using Serial Download mode a
 
 ## Howto
 
+### RTC wakeup alarm
+By default the `RTC_EVENT#` is not connect to any input, but left open on `X4` pin 11 on TQMa8MxML-ADAP. In order to use the RTC IRQ feature this output has to be connected to a GPIO input with IRQ support, e.g. `GPIO01_06` on `X17` pin 9 on MBa8Mx.
+
+#### DT changes
+For the example from above the following DT change has to be applied in order to support RTC IRQ support.
+
+```diff
+diff --git a/arch/arm64/boot/dts/freescale/imx8mm-tqma8mqml-mba8mx.dts b/arch/arm64/boot/dts/freescale/imx8mm-tqma8mqml-mba8mx.dts
+index 65e0b68c13a5..6a9d0b65604d 100644
+--- a/arch/arm64/boot/dts/freescale/imx8mm-tqma8mqml-mba8mx.dts
++++ b/arch/arm64/boot/dts/freescale/imx8mm-tqma8mqml-mba8mx.dts
+@@ -81,6 +81,14 @@ &pcie0 {
+        status = "okay";
+ };
+ 
++&pcf85063 {
++       /* RTC_EVENT# is connected on MBa8Mx GPIO01_IO06 */
++       pinctrl-names = "default";
++       pinctrl-0 = <&pinctrl_rtc>;
++       interrupt-parent = <&gpio1>;
++       interrupts = <6 IRQ_TYPE_EDGE_FALLING>;
++};
++
+ &sai3 {
+        assigned-clocks = <&clk IMX8MM_CLK_SAI3>;
+        assigned-clock-parents = <&clk IMX8MM_AUDIO_PLL1_OUT>;
+@@ -201,6 +209,10 @@ pinctrl_pwm4: pwm4grp {
+                fsl,pins = <MX8MM_IOMUXC_GPIO1_IO15_PWM4_OUT            0x14>;
+        };
+ 
++       pinctrl_rtc: rtcgrp {
++               fsl,pins = <MX8MM_IOMUXC_GPIO1_IO06_GPIO1_IO6           0x1c0>;
++       };
++
+        pinctrl_sai3: sai3grp {
+                fsl,pins = <MX8MM_IOMUXC_SAI3_MCLK_SAI3_MCLK            0x94>,
+                           <MX8MM_IOMUXC_SAI3_RXC_SAI3_RX_BCLK          0x94>,
+```
+
 ### MIPI-CSI
 
 #### Vision Components GmbH cameras
