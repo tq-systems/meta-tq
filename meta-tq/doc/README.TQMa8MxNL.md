@@ -66,56 +66,61 @@ _MBa8x HW Rev.030x only_
 
 ### Linux
 
-* RAM configs 1 GiB
-* CPU variants:
-  * i.MX8MNQ
-  * i.MX8MNDL
-* speed grade / temperature grade detection
-* I2C
-  * Temperature Sensors
-  * RTC
-  * EEPROMS
-  * GPIO expanders
-* GPIO
-  * LED
-  * Button
-  * HOG
-* UART
-  * console on UART3
-  * 2 x UART via pin head or X15
-* SPI
-  * 2 x via spidev in userland
-* ENET (GigE via Phy on MBa8Mx)
-* Audio
-  * Codec Line In (X14)
-  * Codec Line Out (X13)
-* USB
-  * USB 2.0 Host / Hub
-  * USB DRD (USB 2.0 OTG, Cable Detect, VBUS)
-* PWM
-  * Buzzer
-  * Backlight for LVDS
-* DSI
-  * DSI to LVDS bridge
-* GPU
-* QSPI NOR
-  * Read with 1-1-4 SDR
-  * PP / Erase with 1-1-1 SDR
-* Cortex M7
-  * examples running from TCM
-  * use UART4 as debug console
-* MIPI CSI (see Issues section)
-  * Gray with Vision Components GmbH camera (Sensor OV9281)
-  * Raw Bayer with Vision Components GmbH camera (Sensor IMX327)
+| Feature                                          |                      |
+| :----------------------------------------------- | :------------------: |
+| RAM configs                                      |        1 GiB         |
+| CPU variants                                     | i.MX8MNQ / i.MX8MNDL |
+| Fuses / OCRAM                                    |          x           |
+| speed grade / temperature grade detection        |          x           |
+| DVFS (CPU overdrive mode)                        |          x           |
+| suspend (deep / s2idle)                          |          x           |
+| **UART**                                         |                      |
+| console on UART3 (via USB / UART converter)      |          x           |
+| 2 x UART via pin head or X15                     |          x           |
+| **GPIO**                                         |                      |
+| LED                                              |          x           |
+| Button                                           |          x           |
+| HOG                                              |          x           |
+| **I2C**                                          |                      |
+| EEPROMs                                          |          x           |
+| PMIC                                             |          x           |
+| GPIO expanders                                   |          x           |
+| RTC (for wakealarm see HowTo below)              |          x           |
+| Temperature Sensors                              |          x           |
+| **ENET**                                         |                      |
+| GigE via Phy on MBa8Mx                           |          x           |
+| **USB**                                          |                      |
+| USB 2.0 Host / Hub                               |          x           |
+| USB DRD (USB 2.0 DR only, Cable Detect, VBUS)    |          x           |
+| **PWM**                                          |                      |
+| PWM Buzzer                                       |          x           |
+| LVDS Backlight                                   |          x           |
+| **QSPI NOR**                                     |                      |
+| Read with 1-1-4 SDR                              |          x           |
+| PP / Erase with 1-1-1 SDR                        |          x           |
+| **GRAPHICS**                                     |                      |
+| GPU                                              |          x           |
+| **Display**                                      |                      |
+| DSI to LVDS bridge                               |          x           |
+| **Audio**                                        |                      |
+| Codec (Line IN X14 / Line OUT X13)               |          x           |
+| **SPI**                                          |                      |
+| 2 x via spidev in userland                       |          x           |
+| **Cortex M7**                                    |                      |
+| examples running from TCM                        |          x           |
+| use UART4 as debug console                       |          x           |
+| **MIPI CSI (see Issues section)**                |                      |
+| Gray with Vision Components GmbH camera (Sensor OV9281) |         x     |
+| Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |    x     |
 
 ## TODO
 
+* MIKRO Bus
+* SIM
 * Audio
   * Audio codec mic in not tested
 * DSI
   * DSI to DP bridge
-* MIKRO Bus
-* SIM
 
 ## Important Notes
 
@@ -412,8 +417,7 @@ yavta -f SRGGB10 -s 1280x720  /dev/video0
 # show live video
 WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false ! \
 	video/x-bayer,format=rggb,bpp=10,width=1280,height=720,framerate=25/1 ! \
-	bayer2rgbneon show-fps=t reduce-bpp=t ! autovideoconvert ! \
-	autovideosink sync=false
+	bayer2rgbneon show-fps=t reduce-bpp=t ! autovideosink sync=false
 ```
 
 ### Cortex M7
