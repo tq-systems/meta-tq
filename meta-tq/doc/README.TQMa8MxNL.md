@@ -23,38 +23,41 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 _MBa8x HW Rev.030x only_
 
-* RAM configs: 1 GiB
-* CPU variants:
-  * i.MX8MNQ
-  * i.MX8MNDL
-* Fuses
-* speed grade / temperature grade detection
-* UART (console on UART3)
-* GPIO
-  * LED
-  * Button
-  * BOOT_CFG
-  * MUX CFG
-* I2C
-  * GPIO expander
-  * system EEPROM parsing
-* e-MMC / SD
-  * Read
-  * Write
-* ENET (GigE via Phy on MBa8Mx)
-* Bootdevices:
-  * SD-Card on USDHC2
-  * e-MMC on USDHC3
-  * QSPI-NOR on FlexSPI
-* USB
-  * USB 2.0 Host / Hub
-  * USB DRD (USB 2.0 OTG, Cable Detect, VBUS)
-* QSPI NOR
-  * Read with 1-1-1 SDR
-  * PP / Erase with 1-1-1 SDR
-* Cortex M7
-  * env settings for starting from TCM
-  * examples with UART4 as debug console
+| Feature                                          |                       |
+| :----------------------------------------------- | :-------------------: |
+| RAM configs                                      |        1 GiB          |
+| CPU variants                                     |  i.MX8MNQ / i.MX8MNDL |
+| Fuses / OCRAM                                    |          x            |
+| speed grade / temperature grade detection        |          x            |
+| UART (console on UART3)                          |          x            |
+| **GPIO**                                         |                       |
+| LED                                              |          x            |
+| Button                                           |          x            |
+| BOOT_CFG                                         |          x            |
+| MUX                                              |          x            |
+| **I2C**                                          |                       |
+| GPIO expander                                    |          x            |
+| system EEPROM parsing                            |          x            |
+| **e-MMC / SD**                                   |                       |
+| Read                                             |          x            |
+| Write                                            |          x            |
+| **Ethernet**                                     |                       |
+| GigE via Phy on MBa8Mx                           |          x            |
+| **Bootdevices**                                  |                       |
+| SD-Card on USDHC2                                |          x            |
+| e-MMC on USDHC3                                  |          x            |
+| QSPI-NOR on FlexSPI                              |          x            |
+| **USB**                                          |                       |
+| USB Host (USB1 via hub 2.0)                      |          x            |
+| USB Dual Role (USB0, 2.0)                        |          x            |
+|   Cable Detect / ID                              |          x            |
+|   switchable VBUS                                |          x            |
+| **QSPI NOR**                                     |                       |
+| Read with 1-1-1 SDR                              |          x            |
+| PP / Erase with 1-1-1 SDR                        |          x            |
+| **Cortex M7**                                    |                       |
+| env settings for starting from TCM               |          x            |
+| examples with UART4 as debug console             |          x            |
 
 **TODO or not tested / supported**
 
