@@ -27,6 +27,7 @@ RDEPENDS:${PN} = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', ' glmark2', '', d)} \
     htop \
     iotop \
+    libiio-tests \
     mc \
     memtester \
     nano \
