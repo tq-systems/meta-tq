@@ -9,6 +9,20 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* linux-imx-tq-5.10
+  * TQMa8MPxL: add PWM fan support (not enabled per default)
+
+### Fixed
+
+* linux-imx-tq-5.10
+  * TQMa8MPxL: fix SPI ADC VREF MBa8MPxL
+  * TQMa8Mx[M,N]L: fix non working USB dual role for MBa8Mx
+  * i.MX8M: fix non working pwm inversion
+* lmsensors-config: fix configuration for MBa8MPxL
+* dynamic-layers: fix visibility of meta-openembedded
+
 ## hardknott.TQMa8.BSP.SW.0086
 
 ### Changed
