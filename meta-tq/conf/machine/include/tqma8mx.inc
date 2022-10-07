@@ -23,10 +23,6 @@ LOADADDR = ""
 UBOOT_SUFFIX = "bin"
 UBOOT_MAKE_TARGET = ""
 
-# for sdcard image rule
-BOOT_SPACE = "65536"
-IMAGE_BOOTLOADER ?= "imx-boot"
-
 ATF_PLATFORM = "imx8mq"
 
 # for sdcard + wic image rule

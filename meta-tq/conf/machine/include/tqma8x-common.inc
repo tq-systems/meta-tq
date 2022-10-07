@@ -19,9 +19,6 @@ UBOOT_SUFFIX ?= "bin"
 
 ATF_PLATFORM = "imx8qm"
 
-# for sdcard image rule
-BOOT_SPACE = "65536"
-IMAGE_BOOTLOADER = "imx-boot"
 # for sdcard + wic image rule
 IMX_BOOT_SEEK = "32"
 IMX_BOOT_SOC_TARGET = "iMX8QM"
