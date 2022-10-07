@@ -22,7 +22,7 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 
 | Feature                                          |   REV.020x   |
 | :----------------------------------------------- | :----------: |
-| RAM configs                                      |    1,2,8 GiB |
+| RAM configs                                      |  1,2,4,8 GiB |
 | CPU variants                                     |     i.MX8MPQ |
 | Fuses / OCRAM                                    |       x      |
 | speed grade / temperature grade detection        |       x      |
@@ -63,7 +63,7 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 
 | Feature                                          |    REV.020x  |
 | :----------------------------------------------- | :----------: |
-| RAM configs                                      |    1,2,8 GiB |
+| RAM configs                                      |  1,2,4,8 GiB |
 | CPU variants                                     |     i.MX8MPQ |
 | Fuses / OCRAM                                    |       x      |
 | speed grade / temperature grade detection        |       x      |
@@ -124,11 +124,11 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 ## Known Issues
 
 * REV.020x SoM without variant data in EEPROM (prototypes)
-  * With default U-Boot configuration boot is interrupted in SPL and waits for
-    input of assembled RAM size (1, 2, 8).
+  * With the default U-Boot configuration the boot flow is interrupted in
+    SPL and waits for input of the assembled RAM size (1, 2, 4, 8).
   * Use fixed 2GB U-Boot configuration. This is built by default `UBOOT_CONFIG`
-    entries `sd-2gb` and `mfgtool-2gb` (note that the generated wic-File uses
-    the multi RAM config)
+    entries `sd-2gb` and `mfgtool-2gb`
+    **Note:** the generated wic-File uses the U-Boot multi RAM config
 * MIPI CSI
   * driver stack is not completely v4l2-compliance test proof. The IOCTLS for format / resolution
     enumeration and query can return invalid / wrong values depending of the internal state
@@ -138,7 +138,10 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
   * IMX327: when configuring to SRGGB12 reboot may be needed to get a working
     capture again
   * OV9281: gstreamer does not support Y10 format
-* Possible communication error to PHY attached to FEC, reboot required to fix
+* Ethernet
+  * Possible communication error to PHY attached to FEC, reboot required to fix
+  * ETH1 looses manual assigned IP after suspend/resume. Default systemd network
+    configuration uses DHCP with fallback. Has to be adjusted if needed.
 * A reset using button S7 will not reset the SD card properly. Especially if the SD
   card is operating on 1.8V it will be non-functional after reset. Use button S8 instead.
 * PCIe
@@ -160,6 +163,8 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
   ```
 * USB Host
   * USB Superspeed U3 powersave mode is broken
+  * U-Boot: some USB stick types are not working correctly in U-Boot and
+    fail to enumerate correctly after `usb reset`
 * USB Bluetooth:
   * Some adapters cause the following error during bootup
 
