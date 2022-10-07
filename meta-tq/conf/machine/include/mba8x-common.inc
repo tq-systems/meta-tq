@@ -28,7 +28,16 @@ IMAGE_BOOT_FILES = "\
 "
 
 # TODO: handle optee as soon as supported
-IMXBOOT_TARGETS ?= "flash_spl flash_spl_flexspi flash_linux_m4"
+IMXBOOT_TARGETS ?= "\
+    flash_linux_m4 \
+    flash_spl \
+    flash_spl_flexspi \
+"
+
+#
+# bootstream name, construction see imx-boot recipe, do_deploy
+#
+MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-flash_spl"
 
 MACHINE_FEATURES += "\
     bluetooth \

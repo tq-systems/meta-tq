@@ -41,7 +41,15 @@ IMAGE_BOOT_FILES = "\
 "
 
 # SD boot image and FlexSPI boot image can be built using same U-Boot config
-IMXBOOT_TARGETS ?= "flash_spl_uboot flash_evk_flexspi"
+IMXBOOT_TARGETS ?= "\
+    flash_evk_flexspi \
+    flash_spl_uboot \
+"
+
+#
+# bootstream name, construction see imx-boot recipe, do_deploy
+#
+MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-flash_spl_uboot"
 
 IMAGE_BOOT_FILES += "\
     hello_world.bin \

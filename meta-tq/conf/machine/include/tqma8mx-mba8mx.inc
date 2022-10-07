@@ -24,3 +24,8 @@ IMXBOOT_TARGETS ?= "\
     flash_hdmi_spl_uboot \
     flash_spl_uboot \
 "
+
+#
+# bootstream name, construction see imx-boot recipe, do_deploy
+#
+MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-flash_hdmi_spl_uboot"

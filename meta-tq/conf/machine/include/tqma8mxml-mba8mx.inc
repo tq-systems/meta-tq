@@ -17,3 +17,13 @@ BOARD_DEVICETREE_FILES = "\
 KERNEL_DEVICETREE = ""
 
 require conf/machine/include/tqma8-common.inc
+
+IMXBOOT_TARGETS ?= "\
+    flash_evk_flexspi \
+    flash_spl_uboot \
+"
+
+#
+# bootstream name, construction see imx-boot recipe, do_deploy
+#
+MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-flash_spl_uboot"

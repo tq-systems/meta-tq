@@ -1,8 +1,7 @@
 # short-description: Create SD card image with a boot partition
 # long-description:
 # Create an image that can be written onto a SD card using dd for use
-# with i.MX8QX A0 SoC family
-# It uses u-boot
+# with i.MX8/i.MX8X/i.MX8M SoC families
 #
 # The disk layout used is:
 #  - -------------- ------- --------- ----------- -------------
@@ -13,7 +12,7 @@
 # 0 |             4MiB    8MiB       72MiB
 #   ${IMX_BOOT_SEEK} 32 or 33kiB, see reference manual
 #
-part u-boot --source rawcopy --sourceparams="file=imx-boot" --no-table --align ${IMX_BOOT_SEEK}
+part u-boot --source rawcopy --sourceparams="file=${MACHINE_WKS_BOOTSTREAM}" --no-table --align ${IMX_BOOT_SEEK}
 part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 8192 --size 64M --extra-space 0
 part / --source rootfs --fstype=ext4 --label root --align 8192
 
