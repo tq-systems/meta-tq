@@ -260,18 +260,11 @@ do_deploy() {
 
     # copy makefile (soc.mak) for reference
     install -m 0644 ${BOOT_STAGING}/soc.mak                  ${DEPLOYDIR}/${BOOT_TOOLS}
-    # copy the generated boot image to deploy path
-    if [ -e ${DEPLOYDIR}/${BOOT_NAME} ]; then
-        rm ${DEPLOYDIR}/${BOOT_NAME}
-    fi
+    # copy the generated boot images to deploy path
     for target in ${IMXBOOT_TARGETS}; do
         for type in ${UBOOT_CONFIG}; do
             install -m 0644 ${S}/${BOOT_NAME}-${MACHINE}-${type}.bin-${target} \
                                                              ${DEPLOYDIR}
-            if ! [ -e ${DEPLOYDIR}/${BOOT_NAME} ]; then
-                ln -sf ${BOOT_NAME}-${MACHINE}-${type}.bin-${target} \
-                                                             ${DEPLOYDIR}/${BOOT_NAME}
-            fi
         done
     done
 }
