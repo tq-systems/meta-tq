@@ -40,8 +40,9 @@ IMAGE_INSTALL:remove = "packagegroup-fsl-optee-imx"
 # Image Options
 
 EXTRA_IMAGEDEPENDS += "\
-    imx-boot \
-    u-boot \
+    imx-boot:do_deploy \
+    virtual/bootloader \
+    virtual/kernel \
 "
 
 # Verified values to generate UBI image:
@@ -79,9 +80,6 @@ WKS_FILE_DEPENDS = "\
     mtools-native \
     dosfstools-native \
     parted-native \
-    virtual/kernel \
-    virtual/bootloader \
-    imx-boot \
 "
 
 # optionally source the machine specific features for multimedia etc. from

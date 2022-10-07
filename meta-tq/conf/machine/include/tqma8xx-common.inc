@@ -26,7 +26,12 @@ IMX_BOOT_SOC_TARGET = "iMX8QX"
 
 # Image Options
 
-EXTRA_IMAGEDEPENDS += "u-boot imx-boot imx-sc-firmware"
+EXTRA_IMAGEDEPENDS += "\
+    imx-boot:do_deploy \
+    imx-sc-firmware \
+    virtual/kernel \
+    virtual/bootloader \
+"
 
 # Verified values to generate UBI image:
 # physical erase block size
@@ -62,10 +67,6 @@ WKS_FILE_DEPENDS = "\
     mtools-native \
     dosfstools-native \
     parted-native \
-    virtual/kernel \
-    virtual/bootloader \
-    imx-boot \
-    imx-sc-firmware \
 "
 
 # optionally source the machine specific features for multimedia etc. from

@@ -29,13 +29,23 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     linux-firmware-qca \
 "
 
+EXTRA_IMAGEDEPENDS += "\
+    virtual/imx-cortexm-demos \
+"
+
 # Set Serial console
 SERIAL_CONSOLES = "115200;ttymxc3"
 
 # disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
 USE_VT = "0"
 
+CORTEXM_DEMOS += "\
+    hello_world.bin \
+    rpmsg_lite_pingpong_rtos_linux_remote.bin \
+"
+
 IMAGE_BOOT_FILES = "\
+    ${CORTEXM_DEMOS} \
     ${KERNEL_IMAGETYPE} \
     ${BOARD_DEVICETREE_FILES} \
 "
@@ -51,11 +61,3 @@ IMXBOOT_TARGETS ?= "\
 #
 MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-flash_spl_uboot"
 
-IMAGE_BOOT_FILES += "\
-    hello_world.bin \
-    rpmsg_lite_pingpong_rtos_linux_remote.bin \
-"
-
-WKS_FILE_DEPENDS:append = "\
-    virtual/imx-cortexm-demos \
-"

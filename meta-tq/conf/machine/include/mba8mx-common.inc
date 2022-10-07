@@ -1,7 +1,13 @@
 # Set Serial console
 SERIAL_CONSOLES = "115200;ttymxc2"
 
+CORTEXM_DEMOS = "\
+    hello_world.bin \
+    rpmsg_lite_pingpong_rtos_linux_remote.bin \
+"
+
 IMAGE_BOOT_FILES = "\
+    ${CORTEXM_DEMOS} \
     ${KERNEL_IMAGETYPE} \
     ${BOARD_DEVICETREE_FILES} \
 "
@@ -18,11 +24,6 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     linux-firmware-qca \
 "
 
-IMAGE_BOOT_FILES += "\
-    hello_world.bin \
-    rpmsg_lite_pingpong_rtos_linux_remote.bin \
-"
-
-WKS_FILE_DEPENDS:append = "\
+EXTRA_IMAGEDEPENDS += "\
     virtual/imx-cortexm-demos \
 "
