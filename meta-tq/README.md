@@ -194,7 +194,7 @@ Support for the following machines is contained in this version:
 | [y]    | i.MX7\[S,D\]     | TQMa7\[S,D\]             | MBa7x          | tqma7x-512mb-mba7            | TQMa7\[S,D\] HW REV.010x ... 0x020x / 512 MiB RAM / MBa7x HW REV.020x |
 | [y]    | i.MX7\[S,D\]     | TQMa7\[S,D\]             | MBa7x          | tqma7x-1gb-mba7              | TQMa7\[S,D\] HW REV.010x ... 0x020x / 1 GiB RAM / MBa7x HW REV.020x |
 | [y]    | i.MX7\[S,D\]     | TQMa7\[S,D\]             | MBa7x          | tqma7x-2gb-mba7              | TQMa7\[S,D\] HW REV.010x ... 0x020x / 2 GiB RAM / MBa7x HW REV.020x |
-| [y]    | i.MX8MP          | TQMa8MPxL                | MBa8MPxL       | tqma8mpxl-mba8mpxl           | TQMa8MPQL with 1/2/8 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x |
+| [y]    | i.MX8MP          | TQMa8MPxL                | MBa8MPxL       | tqma8mpxl-mba8mpxl           | TQMa8MPQL with 1/2/4/8 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x |
 | [y]    | i.MX8M\[D,Q\]    | TQMa8M\[D,Q\]            | MBa8Mx         | tqma8mx-1gb-mba8mx           | TQMa8M\[D,Q\] with 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x / 030x |
 | [y]    | i.MX8MQL         | TQMa8MQL                 | MBa8Mx         | tqma8mx-2gb-mba8mx           | TQMa8MQL / 2 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x / 030x |
 | [y]    | i.MX8MQ          | TQMa8MQ                  | MBa8Mx         | tqma8mx-4gb-mba8mx           | TQMa8MQ / 4 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x / 030x |
