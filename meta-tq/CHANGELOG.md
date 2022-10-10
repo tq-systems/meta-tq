@@ -18,24 +18,37 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* machines:
+  * Fix handling of bootstream image to use for wic image generation.
+    Do not use a link that is generated with the hidden dependency that
+    the first bootstream generated is the one that is the correct for
+    SD / eMMC
+  * TQMa8[*]: change assignment for `WKS_FILE` to ensure our wks
+    template is used and not the one from meta-freescale
 * u-boot-tq_2019.04:
   * TQMa335x[L]: fixed incorrect MAC addresses in environment
   * SPDX license header for TQMa335x[L] sources and DT
   * backport fixes for environment for multiple environment
     location support
-* tqmls1028a: add qoriq-atf to WKS_FILE_DEPENDS
-* tqmlx2160a: add qoriq-atf to WKS_FILE_DEPENDS
+* tqmls1028a / tqmlx2160a: add qoriq-atf to EXTRA_IMAGEDEPENDS since it
+  needs to be built although not installed in rootfs
 
 ### Changed
 
 * linux-rt-tq_5.15: update to 5.15.55-rt48
 * linux-tq-5.15: update to 5.15.55
+* all machines with i.MX8[*] CPU: improve variables for image and wic
+  generation
+  * WKS_FILE_DEPENDS is used for host tools only
+  * EXTRA_IMAGEDEPENDS for packages that are needed to generate images
+    although not installed for rootfs
+  * remove unused variables from machine config
 * all machines with layerscape CPU: improve variables for image and wic
   generation
-  * WKS_FILE_DEPENDS is used for tools
-  * use EXTRA_IMAGEDEPENDS to allow kernel and firtmware installment in
-    rootfs
-  * use MACHINE_EXTRA_RRECOMMENDS for tools
+  * WKS_FILE_DEPENDS is used for host tools
+  * use EXTRA_IMAGEDEPENDS to allow kernel and firmware installment also
+    outside of rootfs
+  * use MACHINE_EXTRA_RRECOMMENDS for tools to install into rootfs
 * all machines with [Q]SPI-NOR: improve readablility for UBI / UBIFS
   parameters
   * use long opts for MKUBIFS_ARGS / UBINIZE_ARGS
