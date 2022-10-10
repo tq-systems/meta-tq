@@ -154,7 +154,7 @@ do_compile() {
     if ${DEPLOY_OPTEE}; then
         cp ${DEPLOY_DIR_IMAGE}/tee.bin ${BOOT_STAGING}
     fi
-    cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${ATF_MACHINE_NAME} ${BOOT_STAGING}/bl31.bin
+    cp ${DEPLOY_DIR_IMAGE}/${ATF_MACHINE_NAME} ${BOOT_STAGING}/bl31.bin
     for target in ${IMXBOOT_TARGETS}; do
         for config in ${UBOOT_CONFIG}; do
             compile_${SOC_FAMILY} "$target"
