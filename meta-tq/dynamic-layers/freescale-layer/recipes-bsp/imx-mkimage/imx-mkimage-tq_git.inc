@@ -8,14 +8,18 @@ DEPENDS = "\
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-# TODO: update to lf-5.15.5_1.0.0
-SRCBRANCH = "lf-5.10.y_2.0.0"
+SRCBRANCH = "lf-5.15.52_2.1.0"
+BRANCH_SPEC = "branch=${SRCBRANCH}"
+SRCREV = "37648c8ba5094420faa8206d8cb8e0c6f17d72fc"
+
 SRC_URI = "\
-    git://source.codeaurora.org/external/imx/imx-mkimage.git;protocol=https;branch=${SRCBRANCH} \
-    file://0001-mkimage_fit_atf-fix-fit-generator-node-naming.patch \
-    file://0001-Add-LDFLAGS-to-link-step.patch \
+    git://github.com/nxp-imx/imx-mkimage.git;protocol=https;${BRANCH_SPEC} \
     file://0001-iMX8M-soc.mak-use-native-mkimage-from-sysroot.patch \
+    file://0002-iMX9-remove-unused-targets-from-soc.mak.patch \
+    file://0003-iMX8DXL-remove-unused-targets.patch \
+    file://0004-iMX8QM-remove-unused-target.patch \
+    file://0005-iMX8QX-remove-unused-target.patch \
+    file://0006-iMX8ULP-remove-unused-targets.patch \
 "
 
-SRCREV = "5138add7602a50d1730a54d0b67219f0ce0666b4"
 S = "${WORKDIR}/git"

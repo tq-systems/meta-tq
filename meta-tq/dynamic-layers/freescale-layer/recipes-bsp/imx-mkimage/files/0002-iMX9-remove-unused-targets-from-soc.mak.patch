@@ -1,0 +1,38 @@
+From 32b77b6da365f0bd354a9d17bdcdc2aa86a204ac Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Wed, 12 Oct 2022 11:01:33 +0200
+Subject: [PATCH] iMX9: remove unused targets from soc.mak
+
+u-boot-atf.bin and u-boot-atf.itb are not valid for i.MX9 and depend
+on the presence of mkimage_uboot and mkimage_fit_atf.sh. Remove.
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ iMX9/soc.mak | 11 -----------
+ 1 file changed, 11 deletions(-)
+
+diff --git a/iMX9/soc.mak b/iMX9/soc.mak
+index 23f6f64..43d68e9 100644
+--- a/iMX9/soc.mak
++++ b/iMX9/soc.mak
+@@ -51,17 +51,6 @@ u-boot-hash.bin: u-boot.bin
+ 	./$(MKIMG) -commit > head.hash
+ 	@cat u-boot.bin head.hash > u-boot-hash.bin
+ 
+-u-boot-atf.bin: u-boot-hash.bin bl31.bin
+-	@cp bl31.bin u-boot-atf.bin
+-	@dd if=u-boot-hash.bin of=u-boot-atf.bin bs=1K seek=128
+-
+-u-boot-atf.itb: u-boot-hash.bin bl31.bin
+-	./$(PAD_IMAGE) bl31.bin
+-	./$(PAD_IMAGE) u-boot-hash.bin
+-	TEE_LOAD_ADDR=$(TEE_LOAD_ADDR) ./mkimage_fit_atf.sh > u-boot.its;
+-	./mkimage_uboot -E -p 0x3000 -f u-boot.its u-boot-atf.itb;
+-	@rm -f u-boot.its
+-
+ u-boot-atf-container.img: bl31.bin u-boot-hash.bin
+ 	if [ -f tee.bin ]; then \
+ 		if [ $(shell echo $(ROLLBACK_INDEX_IN_CONTAINER)) ]; then \
+-- 
+2.25.1
+
