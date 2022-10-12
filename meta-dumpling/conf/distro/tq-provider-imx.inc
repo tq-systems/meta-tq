@@ -10,7 +10,7 @@ IMX_DEFAULT_KERNEL = "linux-imx-tq"
 
 PREFERRED_PROVIDER_virtual/kernel ?= "linux-imx-tq"
 
-PREFERRED_PROVIDER_virtual/bootloader = "u-boot-imx-tq"
+PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-imx-tq"
 
 # machine without drm/kms in fslc BSP have no libgbm
 PREFERRED_PROVIDER_virtual/libgbm = ""
