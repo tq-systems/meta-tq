@@ -25,21 +25,7 @@ SRC_URI = "\
 S = "${WORKDIR}/${BPN}-${SC_FIRMWARE_VERSION_TQ}"
 
 # clear vars to prevent default assignments
-SC_FIRMWARE_NAME = "invalid"
-
-# TODO: move firmware name to machine config.
-SC_FIRMWARE_NAME:tqma8xdp-1gb-mba8xx = "mx8qx-tqma8xqp-1gb-mba8xx-scfw-tcm.bin"
-SC_FIRMWARE_NAME:tqma8xqp-1gb-mba8xx = "mx8qx-tqma8xqp-1gb-mba8xx-scfw-tcm.bin"
-SC_FIRMWARE_NAME:tqma8xqp-2gb-mba8xx = "mx8qx-tqma8xqp-2gb-mba8xx-scfw-tcm.bin"
-SC_FIRMWARE_NAME:tqma8xdp4-mba8xx = "mx8qx-tqma8xqp4-mba8xx-scfw-tcm.bin"
-SC_FIRMWARE_NAME:tqma8xqp4-mba8xx = "mx8qx-tqma8xqp4-mba8xx-scfw-tcm.bin"
-
-SC_FIRMWARE_NAME:tqma8xqps-mb-smarc-2 = "mx8qx-tqma8xqps-mb-smarc-2-scfw-tcm.bin"
-SC_FIRMWARE_NAME:tqma8xdps-mb-smarc-2 = "mx8qx-tqma8xqps-mb-smarc-2-scfw-tcm.bin"
-SC_FIRMWARE_NAME:tqma8xqps-mb-smarc-2-r0200 = "mx8qx-tqma8xqps-mb-smarc-2-scfw-tcm.bin"
-
-SC_FIRMWARE_NAME:tqma8qm-4gb-mba8x = "mx8qm-tqma8qm-4gb-scfw-tcm.bin"
-SC_FIRMWARE_NAME:tqma8qm-8gb-mba8x = "mx8qm-tqma8qm-8gb-scfw-tcm.bin"
+SC_FIRMWARE_NAME ??= "invalid"
 
 inherit deploy
 
