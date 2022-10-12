@@ -71,3 +71,5 @@ WKS_FILE_DEPENDS = "\
     virtual/kernel \
     virtual/bootloader \
 "
+
+PREFERRED_VERSION_linux-imx-tq = "5.15%"

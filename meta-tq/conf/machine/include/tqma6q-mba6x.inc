@@ -13,11 +13,6 @@ KERNEL_DEVICETREE = "\
     imx6q-mba6b-lvds-tm070jvhg33.dtb \
 "
 
-KERNEL_DEVICETREE_linux-imx-tq = "\
-    imx6q-mba6a-usb-peripheral.dtb \
-    imx6q-mba6b-usb-peripheral.dtb \
-"
-
 KERNEL_DEVICETREE_linux-tq = "\
     imx6q-mba6a-cdtech-dc44.dtb \
     imx6q-mba6a-cdtech-fc21.dtb \
