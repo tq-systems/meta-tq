@@ -6,12 +6,15 @@ require linux-imx-tq-common.inc
 
 KBRANCH = "TQM-lf-5.15"
 SRCREV = "e27a78db286db0e09cf6b2981ad931de087ab54d"
+KBRANCH:mx6-nxp-bsp = "TQMa8-fslc-5.15-2.0.x-imx"
+SRCREV:mx6-nxp-bsp = "6ec9467507b21dacd3e8a9ea9f09a2147ab0f390"
 KBRANCH:mx8-nxp-bsp = "TQMa8-fslc-5.15-2.0.x-imx"
-SRCREV:mx8-nxp-bsp = "317e975caeb6c53153b349fcf9084aeb50b6020b"
+SRCREV:mx8-nxp-bsp = "6ec9467507b21dacd3e8a9ea9f09a2147ab0f390"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "5.15"
 LINUX_VERSION = "${LINUX_RELEASE}.5"
+LINUX_VERSION:mx6-nxp-bsp = "${LINUX_RELEASE}.60"
 LINUX_VERSION:mx8-nxp-bsp = "${LINUX_RELEASE}.60"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
@@ -23,7 +26,36 @@ SRC_URI = "\
 
 DEFAULT_PREFERENCE = "0"
 
+KBUILD_DEFCONFIG:mx6-generic-bsp = "imx_v7_defconfig"
 KBUILD_DEFCONFIG:mx8-generic-bsp = "imx_v8_defconfig"
+
+SRC_URI:mx6-nxp-bsp = "\
+    ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
+    file://disable-highpte.cfg \
+    file://dynamic-debug.cfg \
+    file://enable-led-features.cfg \
+    file://general-optimizations.cfg \
+    file://gpio-enablement.cfg \
+    file://kallsyms.cfg \
+    file://local-version.cfg \
+    file://neon.cfg \
+    file://optimize-filesystem-selection.cfg \
+    file://pcie.cfg \
+    file://sdma.cfg \
+    file://tqma6-audio-support.cfg \
+    file://tqma6-bpf-support.cfg \
+    file://tqma6-disable-unused-devices.cfg \
+    file://tqma6-i2c-devices.cfg \
+    file://tqma6-input-devices.cfg \
+    file://tqma6-network-support.cfg \
+    file://tqma6-nonimx-drm-removal.cfg \
+    file://tqma6-regulator-support.cfg \
+    file://tqma6-rtc.cfg \
+    file://tqma6-spi.cfg \
+    file://tqma6-wifi-support.cfg \
+    file://tqma6x-display-support.cfg \
+    file://usb-serial-port.cfg \
+"
 
 SRC_URI:mx8-nxp-bsp = "\
     ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
@@ -54,6 +86,7 @@ SRC_URI:append = " \
 "
 
 COMPATIBLE_MACHINE = "^("
+COMPATIBLE_MACHINE .= "|tqma6x"
 COMPATIBLE_MACHINE .= "|tqma8mpxl"
 COMPATIBLE_MACHINE .= "|tqma8mq"
 COMPATIBLE_MACHINE .= "|tqma8mxml"
