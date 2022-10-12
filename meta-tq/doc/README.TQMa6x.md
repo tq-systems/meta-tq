@@ -32,6 +32,7 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 | USB Host (X6/X7)             |       x           |        x          |      x        |
 | USB Dual Role (X8)           |       x           |        x          |      x        |
 | eMMC/SD (on-board/X9)        |       x           |        x          |      x        |
+| SATA (X10)                   |       x           |        x          |      x        |
 | Ethernet 1GiB/s (X11)        |       x           |        x          |      x        |
 | Ethernet 100MBit/s (X12)     |       x           |        x          |      x        |
 | CAN (X13/X14)                |       x           |        x          |      x        |
