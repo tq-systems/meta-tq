@@ -8,29 +8,41 @@ LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
 SECTION = "BSP"
 
+# This is needed to set SECO_FIRMWARE_NAME for imx8 / imx8x
 inherit use-imx-security-controller-firmware
 
-IMX_EXTRA_FIRMWARE        = "firmware-imx-8 imx-sc-firmware imx-seco"
+IMX_EXTRA_FIRMWARE = "\
+    firmware-imx-8 \
+    imx-seco \
+    imx-sc-firmware \
+"
+
+IMX_EXTRA_FIRMWARE:mx8m-generic-bsp = "firmware-imx-8m"
+
+IMX_EXTRA_FIRMWARE:mx8x-generic-bsp = "\
+    imx-seco \
+    imx-sc-firmware \
+"
+
+IMX_EXTRA_FIRMWARE:mx9-generic-bsp = "\
+    firmware-imx-9 \
+    firmware-sentinel \
+"
+
 IMX_EXTRA_FIRMWARE:append = " ${@bb.utils.contains('IMXBOOT_TARGETS', 'flash_linux_m4', 'virtual/imx-cortexm-demos', '', d)}"
-IMX_EXTRA_FIRMWARE:mx8m-generic-bsp   = "firmware-imx-8m"
-IMX_EXTRA_FIRMWARE:mx8x-generic-bsp   = "imx-sc-firmware imx-seco"
 
 DEPENDS += "\
-    u-boot \
     ${IMX_EXTRA_FIRMWARE} \
     imx-atf \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os', '', d)} \
-"
-
-# xxd is a dependency of fspi_packer.sh
-DEPENDS:append = "\
+    u-boot \
     xxd-native \
 "
 
 # imx8m needs mkimage and dtc for ITB images
 DEPENDS:append:mx8m-generic-bsp = "\
-    u-boot-mkimage-native \
     dtc-native \
+    u-boot-mkimage-native \
 "
 
 BOOT_NAME = "imx-boot"
@@ -47,10 +59,10 @@ M4_1_DEFAULT_IMAGE  ??= "INVALID"
 # This package aggregates output deployed by other packages,
 # so set the appropriate dependencies
 do_compile[depends] += "\
-    virtual/bootloader:do_deploy \
-    ${@' '.join('%s:do_deploy' % r for r in '${IMX_EXTRA_FIRMWARE}'.split() )} \
     imx-atf:do_deploy \
+    ${@' '.join('%s:do_deploy' % r for r in '${IMX_EXTRA_FIRMWARE}'.split() )} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os:do_deploy', '', d)} \
+    virtual/bootloader:do_deploy \
 "
 
 SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
@@ -69,19 +81,19 @@ DEPLOY_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false
 
 IMXBOOT_TARGETS ??= "unknown"
 
-BOOT_STAGING       = "${S}/${IMX_BOOT_SOC_TARGET}"
-BOOT_STAGING:mx8m-generic-bsp  = "${S}/iMX8M"
+BOOT_STAGING = "${S}/${IMX_BOOT_SOC_TARGET}"
+BOOT_STAGING:mx8m-generic-bsp = "${S}/iMX8M"
 BOOT_STAGING:mx8dx-generic-bsp = "${S}/iMX8QX"
 
-SOC_FAMILY      = "INVALID"
-SOC_FAMILY:mx8-generic-bsp  = "mx8"
+SOC_FAMILY = "INVALID"
+SOC_FAMILY:mx8-generic-bsp = "mx8"
 SOC_FAMILY:mx8m-generic-bsp = "mx8m"
 SOC_FAMILY:mx8x-generic-bsp = "mx8x"
+SOC_FAMILY:mx9-generic-bsp = "mx9"
 
 REV_OPTION ?= ""
 REV_OPTION:mx8qxp-generic-bsp = \
-    "${@bb.utils.contains('MACHINE_FEATURES', 'soc-revb0', '', \
-                                                           'REV=C0', d)}"
+    "${@bb.utils.contains('MACHINE_FEATURES', 'soc-revb0', '', 'REV=C0', d)}"
 
 ##
 # do assignment for TQMa8Xx[S] / TQMa8x SOM to enable bootstream with M4 demo
@@ -91,6 +103,23 @@ M4_DEFAULT_IMAGE:tqma8xxs ?= "rpmsg_lite_pingpong_rtos_linux_remote.bin"
 
 M4_DEFAULT_IMAGE:tqma8x ?= "rpmsg_lite_pingpong_rtos_linux_remote_m40.bin"
 M4_1_DEFAULT_IMAGE:tqma8x ?= "rpmsg_lite_pingpong_rtos_linux_remote_m41.bin"
+
+compile_mx8() {
+    bbnote 8QM boot binary build
+    cp ${DEPLOY_DIR_IMAGE}/${SC_FIRMWARE_NAME} ${BOOT_STAGING}/scfw_tcm.bin
+    cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}             ${BOOT_STAGING}
+    if [ "$1" = "flash_linux_m4" ]; then
+        cp ${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}           ${BOOT_STAGING}/m4_image.bin
+        cp ${DEPLOY_DIR_IMAGE}/${M4_1_DEFAULT_IMAGE}           ${BOOT_STAGING}/m4_1_image.bin
+    fi
+    for type in ${UBOOT_CONFIG}; do
+        cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type} ${BOOT_STAGING}/u-boot.bin-${type}
+        if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} ] ; then
+            cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} \
+                                                             ${BOOT_STAGING}/u-boot-spl.bin-${type}
+        fi
+    done
+}
 
 compile_mx8m() {
     bbnote 8MQ/8MM/8MN/8MP boot binary build
@@ -113,23 +142,6 @@ compile_mx8m() {
     done
 }
 
-compile_mx8() {
-    bbnote 8QM boot binary build
-    cp ${DEPLOY_DIR_IMAGE}/${SC_FIRMWARE_NAME} ${BOOT_STAGING}/scfw_tcm.bin
-    cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}             ${BOOT_STAGING}
-    if [ "$1" = "flash_linux_m4" ]; then
-        cp ${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}           ${BOOT_STAGING}/m4_image.bin
-        cp ${DEPLOY_DIR_IMAGE}/${M4_1_DEFAULT_IMAGE}           ${BOOT_STAGING}/m4_1_image.bin
-    fi
-    for type in ${UBOOT_CONFIG}; do
-        cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type} ${BOOT_STAGING}/u-boot.bin-${type}
-        if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} ] ; then
-            cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} \
-                                                             ${BOOT_STAGING}/u-boot-spl.bin-${type}
-        fi
-    done
-}
-
 compile_mx8x() {
     bbnote 8QX boot binary build
     if [ "$1" = "flash_linux_m4" ]; then
@@ -143,6 +155,20 @@ compile_mx8x() {
             cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} \
                                                              ${BOOT_STAGING}/u-boot-spl.bin-${type}
         fi
+    done
+}
+
+compile_mx9() {
+    bbnote i.MX9 boot binary build
+    for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
+        bbnote "Copy ddr_firmware: ${ddr_firmware} from ${DEPLOY_DIR_IMAGE} -> ${BOOT_STAGING} "
+        cp ${DEPLOY_DIR_IMAGE}/${ddr_firmware}               ${BOOT_STAGING}
+    done
+    cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}             ${BOOT_STAGING}
+    for type in ${UBOOT_CONFIG}; do
+        cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} \
+                                                             ${BOOT_STAGING}/u-boot-spl.bin-${type}
+        cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type} ${BOOT_STAGING}/u-boot.bin-${type}
     done
 }
 
@@ -218,4 +244,4 @@ addtask deploy before do_build after do_compile
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 FILES:${PN} = "/boot"
 
-COMPATIBLE_MACHINE = "(mx8-generic-bsp)"
+COMPATIBLE_MACHINE = "(mx8-generic-bsp|mx9-generic-bsp)"
