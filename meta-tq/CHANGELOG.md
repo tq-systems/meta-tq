@@ -87,6 +87,7 @@ Releases are named with the following scheme:
   * support 4GiB variant
   * optional support for LVDS splash (clock, ldb, pwm, lcdif2)
 * linux-imx-tq_5.15:
+  * Support for TQMa6x
   * Support for TQMa8Mx
   * Support for TQMa8MxML
   * Support for TQMa8MxNL
