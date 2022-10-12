@@ -2,12 +2,12 @@
 # Copyright 2017-2019 NXP
 # Copyright 2019-2022 TQ-Systems GmbH
 
-DESCRIPTION = "i.MX System Controller Firmware"
+DESCRIPTION = "i.MX System Controller Firmware for TQ-Systems GmbH SOM"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d3c315c6eaa43e07d8c130dc3a04a011"
 SECTION = "BSP"
 
-PROVIDES = "imx-sc-firmware"
+PROVIDES += "imx-sc-firmware"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${PV}:${THISDIR}/${PN}:"
 
@@ -45,15 +45,13 @@ inherit deploy
 
 symlink_name = "scfw_tcm.bin"
 
-BOOT_TOOLS = "imx-boot-tools"
-
 do_compile[noexec] = "1"
 
 do_install[noexec] = "1"
 
 do_deploy() {
-    install -Dm 0644 ${S}/${SC_FIRMWARE_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}/${SC_FIRMWARE_NAME}
-    ln -sf ${SC_FIRMWARE_NAME} ${DEPLOYDIR}/${BOOT_TOOLS}/${symlink_name}
+    install -Dm 0644 ${S}/${SC_FIRMWARE_NAME} ${DEPLOYDIR}/${SC_FIRMWARE_NAME}
+    ln -sf ${SC_FIRMWARE_NAME} ${DEPLOYDIR}/${symlink_name}
 }
 addtask deploy after do_install
 
