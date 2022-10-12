@@ -15,36 +15,36 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 
 ### Supported Features
 
-|                              | linux-imx-tq-5.10 | linux-tq-5.15 |
-| ---------------------------- | :---------------: | :-----------: |
-| Fuses                        |       x           |      x        |
-| UART (console on UART3, X15) |       x           |      x        |
-| GPIO                         |       x           |      x        |
-| Button (S6, S7, S8)          |       x           |      x        |
-| I2C                          |       x           |      x        |
-| GPIO expander                |       x           |      x        |
-| EEPROM                       |       x           |      x        |
-| RTC                          |       x           |      x        |
-| SPI NOR                      |       x           |      x        |
-| Buzzer                       |       x           |      x        |
-| GPU                          |       x           |      x        |
-| VPU H.264                    |       x           |      x        |
-| VPU VP8                      |       x           |               |
-| USB Host (X6/X7)             |       x           |      x        |
-| USB Dual Role (X8)           |       x           |      x        |
-| eMMC/SD (on-board/X9)        |       x           |      x        |
-| Ethernet GigE (X11/X12)      |       x           |      x        |
-| CAN (X13/X14)                |       x           |      x        |
-| RS-485 (X16)                 |       x           |      x        |
-| HDMI (X17)                   |       x           |      x        |
-| LVDS (X18, X19)              |       x           |      x        |
-| HDMI + LVDS (X17, X18)       |                   |      x        |
-| Audio Line In (X20)          |       x           |      x        |
-| Audio Line Out (x22)         |       x           |      x        |
-| PCIe (X23)                   |       x           |      x        |
-| Parallel LCD (X27)           |                   |      x        |
-| Touch (X27)                  |                   |      x        |
-| Multi-Display                |                   |      x        |
+|                              | linux-imx-tq-5.10 | linux-imx-tq-5.15 | linux-tq-5.15 |
+| ---------------------------- | :---------------: | :---------------: | :-----------: |
+| Fuses                        |       x           |        x          |      x        |
+| UART (console on UART3, X15) |       x           |        x          |      x        |
+| GPIO                         |       x           |        x          |      x        |
+| Button (S6, S7, S8)          |       x           |        x          |      x        |
+| I2C                          |       x           |        x          |      x        |
+| EEPROM                       |       x           |        x          |      x        |
+| RTC                          |       x           |        x          |      x        |
+| SPI NOR                      |       x           |        x          |      x        |
+| Buzzer                       |       x           |        x          |      x        |
+| GPU                          |       x           |        x          |      x        |
+| VPU H.264                    |       x           |        x          |      x        |
+| VPU VP8                      |       x           |        x          |               |
+| USB Host (X6/X7)             |       x           |        x          |      x        |
+| USB Dual Role (X8)           |       x           |        x          |      x        |
+| eMMC/SD (on-board/X9)        |       x           |        x          |      x        |
+| Ethernet 1GiB/s (X11)        |       x           |        x          |      x        |
+| Ethernet 100MBit/s (X12)     |       x           |        x          |      x        |
+| CAN (X13/X14)                |       x           |        x          |      x        |
+| RS-485 (X16)                 |       x           |                   |      x        |
+| HDMI (X17)                   |       x           |        x          |      x        |
+| LVDS (X18, X19)              |       x           |        x          |      x        |
+| HDMI + LVDS (X17, X18)       |                   |                   |      x        |
+| Audio Line In (X20)          |       x           |        x          |      x        |
+| Audio Line Out (x22)         |       x           |        x          |      x        |
+| PCIe (X23)                   |       x           |        x          |      x        |
+| Parallel LCD (X27)           |                   |                   |      x        |
+| I2C Touch (X27)              |                   |                   |      x        |
+| Multi-Display                |                   |                   |      x        |
 
 ### ToDo / Untested
 * Mic In (X21)
@@ -52,6 +52,7 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 * MIPI-CSI (X28)
 * MIPI-DSI (X28)
 * MLB (X28)
+* RS-485 (`linux-imx-tq-5.15`)
 
 ### Known issues
 
@@ -66,6 +67,11 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
   rootfs on SPI NOR is required, following solutions:
   * tailor image recipe and kernel configuration to get real tiny
   * use SoM variant with larger SPI-NOR
+- `linux-imx-tq-5.15`
+  * Default CMA size too small for HDMI. e.g. run `setenv cma_size 320M` once in u-boot console
+  * Using dual LVDS the 2nd framebuffer needs to be unblanked first:
+    * `echo 0 > /sys/class/graphics/fb2/blank`
+    * `fb-test -f 2 -p 0`
 
 ## Artifacts
 
