@@ -19,6 +19,8 @@ Releases are named with the following scheme:
 ### Fixed
 
 * machines:
+  * fix handling of provider specific `KERNEL_DEVICETREE` lists. The initial
+    implementation could not handle non assigned lists.
   * Fix handling of bootstream image to use for wic image generation.
     Do not use a link that is generated with the hidden dependency that
     the first bootstream generated is the one that is the correct for
