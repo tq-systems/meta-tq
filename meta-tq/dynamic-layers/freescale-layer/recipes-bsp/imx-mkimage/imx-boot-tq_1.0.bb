@@ -10,8 +10,6 @@ SECTION = "BSP"
 
 inherit use-imx-security-controller-firmware
 
-BOOT_TOOLS = "imx-boot-tools"
-
 IMX_EXTRA_FIRMWARE        = "firmware-imx-8 imx-sc-firmware imx-seco"
 IMX_EXTRA_FIRMWARE:append = " ${@bb.utils.contains('IMXBOOT_TARGETS', 'flash_linux_m4', 'virtual/imx-cortexm-demos', '', d)}"
 IMX_EXTRA_FIRMWARE:mx8m-generic-bsp   = "firmware-imx-8m"
@@ -206,60 +204,7 @@ do_install () {
     done
 }
 
-deploy_mx8m() {
-    install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-    for type in ${UBOOT_CONFIG}; do
-        install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} \
-                                                             ${DEPLOYDIR}/${BOOT_TOOLS}
-    done
-    for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
-        install -m 0644 ${DEPLOY_DIR_IMAGE}/${ddr_firmware}  ${DEPLOYDIR}/${BOOT_TOOLS}
-    done
-    install -m 0644 ${BOOT_STAGING}/signed_dp_imx8m.bin      ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0644 ${BOOT_STAGING}/signed_hdmi_imx8m.bin    ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0755 ${BOOT_STAGING}/${TOOLS_NAME}            ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0755 ${BOOT_STAGING}/mkimage_fit_atf.sh       ${DEPLOYDIR}/${BOOT_TOOLS}
-}
-
-deploy_mx8() {
-    install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0644 ${BOOT_STAGING}/${SECO_FIRMWARE_NAME}    ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0755 ${S}/${TOOLS_NAME}                       ${DEPLOYDIR}/${BOOT_TOOLS}
-    for type in ${UBOOT_CONFIG}; do
-        if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} ] ; then
-            install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} \
-                                                             ${DEPLOYDIR}/${BOOT_TOOLS}
-        fi
-    done
-}
-
-deploy_mx8x() {
-    install -d ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0644 ${BOOT_STAGING}/${SECO_FIRMWARE_NAME}    ${DEPLOYDIR}/${BOOT_TOOLS}
-    install -m 0755 ${S}/${TOOLS_NAME}                       ${DEPLOYDIR}/${BOOT_TOOLS}
-    for type in ${UBOOT_CONFIG}; do
-        if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} ] ; then
-            install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} \
-                                                             ${DEPLOYDIR}/${BOOT_TOOLS}
-        fi
-    done
-}
-
 do_deploy() {
-    deploy_${SOC_FAMILY}
-
-    # copy the tool mkimage to deploy path and sc fw, dcd and uboot
-    for type in ${UBOOT_CONFIG}; do
-        install -m 0644 ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type} \
-                                                             ${DEPLOYDIR}/${BOOT_TOOLS}
-    done
-    # copy tee.bin to deploy path
-    if ${DEPLOY_OPTEE}; then
-       install -m 0644 ${DEPLOY_DIR_IMAGE}/tee.bin ${DEPLOYDIR}/${BOOT_TOOLS}
-    fi
-
-    # copy makefile (soc.mak) for reference
-    install -m 0644 ${BOOT_STAGING}/soc.mak                  ${DEPLOYDIR}/${BOOT_TOOLS}
     # copy the generated boot images to deploy path
     for target in ${IMXBOOT_TARGETS}; do
         for type in ${UBOOT_CONFIG}; do
