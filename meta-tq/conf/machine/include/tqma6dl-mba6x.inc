@@ -23,7 +23,7 @@ KERNEL_DEVICETREE_linux-tq = "\
     imx6dl-mba6b-multi.dtb \
 "
 
-KERNEL_DEVICETREE:append = " ${@kernel_provider_dtbs(d)} "
+KERNEL_DEVICETREE += "${@kernel_provider_dtbs(d)}"
 
 # install also under /boot inside the rootfs, needed for UBIFS use case
 # and because extra FAT boot partition on SD / e-MMC shall be removed

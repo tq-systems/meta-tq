@@ -15,4 +15,4 @@ KERNEL_DEVICETREE_linux-tq = "\
     imx6ull-tqma6ull2l-mba6ulx-cdtech-fc21.dtb \
 "
 
-KERNEL_DEVICETREE:append = " ${@kernel_provider_dtbs(d)} "
+KERNEL_DEVICETREE += "${@kernel_provider_dtbs(d)}"

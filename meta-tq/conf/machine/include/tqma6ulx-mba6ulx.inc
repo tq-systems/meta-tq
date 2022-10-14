@@ -16,4 +16,4 @@ KERNEL_DEVICETREE_linux-tq = "\
     imx6ul-tqma6ul2-mba6ulx-lvds.dtb \
 "
 
-KERNEL_DEVICETREE:append = " ${@kernel_provider_dtbs(d)} "
+KERNEL_DEVICETREE += "${@kernel_provider_dtbs(d)}"
