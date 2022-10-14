@@ -14,9 +14,16 @@ PREFERRED_PROVIDER_virtual/kernel ??= "${DEFAULT_KERNEL}"
 # Return a list of device tree files depending on the virtual/kernel
 # provider. The (optional) list is named KERNEL_DEVICETREE_<provider>
 def kernel_provider_dtbs(d):
-    # They share a common kernel, so they can be copied
-    mainline_list = d.getVar('KERNEL_DEVICETREE_linux-tq')
-    d.setVar('KERNEL_DEVICETREE_linux-rt-tq', mainline_list)
-
     kernel_provider = d.getVar('PREFERRED_PROVIDER_virtual/kernel')
-    return d.getVar('KERNEL_DEVICETREE_' + kernel_provider)
+
+    if kernel_provider == 'linux-rt-tq':
+        # They share a common kernel, so they can be copied
+        mainline_list = d.getVar('KERNEL_DEVICETREE_linux-tq')
+        if mainline_list is not None :
+            d.setVar('KERNEL_DEVICETREE_linux-rt-tq', mainline_list)
+
+    dtbs_for_provider = d.getVar('KERNEL_DEVICETREE_' + kernel_provider)
+    if dtbs_for_provider is not None:
+        return d.getVar('KERNEL_DEVICETREE_' + kernel_provider)
+
+    return ''
