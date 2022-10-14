@@ -104,12 +104,12 @@ compile_mx8m() {
     cp ${DEPLOY_DIR_IMAGE}/signed_hdmi_imx8m.bin             ${BOOT_STAGING}
     for type in ${UBOOT_CONFIG}; do
         for dtb in ${UBOOT_DTB_NAME}; do
-            cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/${dtb}-${MACHINE}-${type} \
+            cp ${DEPLOY_DIR_IMAGE}/u-boot-${dtb}-${MACHINE}-${type} \
                                                              ${BOOT_STAGING}/${dtb}-${type}
         done
         cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} \
                                                              ${BOOT_STAGING}/u-boot-spl.bin-${type}
-        cp ${DEPLOY_DIR_IMAGE}/${BOOT_TOOLS}/u-boot-nodtb.bin-${MACHINE}-${type} \
+        cp ${DEPLOY_DIR_IMAGE}/u-boot-nodtb.bin-${MACHINE}-${type} \
                                                              ${BOOT_STAGING}/u-boot-nodtb.bin-${type}
         cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type} ${BOOT_STAGING}/u-boot.bin-${type}
     done
