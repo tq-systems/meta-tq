@@ -37,6 +37,9 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* imx-boot-tq: Remove ${DEPLOYDIR}/${BOOT_TOOLS} usage. This makes
+  recipes providing artifacts for boot stream generation cleaner and
+  simplify imx-boot-tq deploy itself.
 * linux-rt-tq_5.15: update to 5.15.55-rt48
 * linux-tq-5.15: update to 5.15.55
 * all machines with i.MX8[*] CPU: improve variables for image and wic
