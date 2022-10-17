@@ -85,6 +85,8 @@ Releases are named with the following scheme:
 
 ### Added
 
+* u-boot-imx-tq_2016.03: update
+  * tqma6ul: remove obsolete warning for 512 MB variants
 * TQMa8MPxL: update u-boot-imx-tq
   * support 4GiB variant
   * optional support for LVDS splash (clock, ldb, pwm, lcdif2)
