@@ -11,7 +11,7 @@ DEPENDS += "\
     xxd-native \
 "
 
-SRCREV = "86a65bceb893edf33f996948a11e461979ace69b"
+SRCREV = "e89ae952fcc86139a8c7bc25cda5e7c3fe67a385"
 SRCBRANCH = "TQMaxx2-v2016.03-rel_imx_4.1.15_2.0.0_ga"
 
 SRC_URI = "\
