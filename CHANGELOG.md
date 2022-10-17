@@ -11,6 +11,8 @@ Releases are named with the following scheme:
 
 ### Added
 
+* u-boot-imx-tq_2016.03: update
+  * tqma6ul: remove obsolete warning for 512 MB variants
 * linux-imx-tq-5.10
   * TQMa8MPxL: add PWM fan support (not enabled per default)
 
