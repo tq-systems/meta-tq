@@ -28,31 +28,31 @@ See top level README.md for configurations usable as MACHINE.
 
 ### U-Boot
 
-* RAM configs:
-  * 4GB / TQMa8QM
-  * 8GB / TQMa8QM
-* CPU variants i.MX8QM B0
-* Fuses
-* GPIO
-* QSPI
-  * Read
-  * Write
-  * Boot
-* I2C
-* e-MMC / SD-Card
-  * Read
-  * Write
-  * Boot
-* USB
-  * USB 2.0 Dual Role
-  * USB 3.0 (Hub on MBa8x)
-* ENET (GigE via Phy on MBa8x)
-  * ENET 0
-  * ENET 1
-* Bootstreams
-  * FlexSPI
-  * SD / e-MMC
-  * UUU / mfgtool
+| Feature                                          |                    |
+| :----------------------------------------------- | :----------------: |
+| RAM configs                                      |      4,8 GiB       |
+| CPU variants                                     |     i.MX8QM B0     |
+| Fuses                                            |         x          |
+| GPIO                                             |         x          |
+| I2C                                              |         x          |
+| **QSPI**                                         |                    |
+| Read                                             |         x          |
+| Write                                            |         x          |
+| Boot                                             |         x          |
+| **e-MMC / SD-Card**                              |                    |
+| Read                                             |         x          |
+| Write                                            |         x          |
+| Boot                                             |         x          |
+| **USB**                                          |                    |
+| USB 2.0 Dual Role                                |         x          |
+| USB 3.0 (Hub on MBa8x)                           |         x          |
+| **ENET (GigE via Phy on MBa8x)**                 |                    |
+| ENET 0                                           |         x          |
+| ENET 1                                           |         x          |
+| **Bootstreams**                                  |                    |
+| FlexSPI                                          |         x          |
+| SD / e-MMC                                       |         x          |
+| UUU / mfgtool                                    |         x          |
 
 **TODO or not tested / supported**
 
