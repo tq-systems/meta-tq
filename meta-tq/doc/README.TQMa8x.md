@@ -28,31 +28,31 @@ See top level README.md for configurations usable as MACHINE.
 
 ### U-Boot
 
-| Feature                                          |                    |
-| :----------------------------------------------- | :----------------: |
-| RAM configs                                      |      4,8 GiB       |
-| CPU variants                                     |     i.MX8QM B0     |
-| Fuses                                            |         x          |
-| GPIO                                             |         x          |
-| I2C                                              |         x          |
-| **QSPI**                                         |                    |
-| Read                                             |         x          |
-| Write                                            |         x          |
-| Boot                                             |         x          |
-| **e-MMC / SD-Card**                              |                    |
-| Read                                             |         x          |
-| Write                                            |         x          |
-| Boot                                             |         x          |
-| **USB**                                          |                    |
-| USB 2.0 Dual Role                                |         x          |
-| USB 3.0 (Hub on MBa8x)                           |         x          |
-| **ENET (GigE via Phy on MBa8x)**                 |                    |
-| ENET 0                                           |         x          |
-| ENET 1                                           |         x          |
-| **Bootstreams**                                  |                    |
-| FlexSPI                                          |         x          |
-| SD / e-MMC                                       |         x          |
-| UUU / mfgtool                                    |         x          |
+| Feature                                          |              |
+| :----------------------------------------------- | :----------: |
+| RAM configs                                      |   4,8 GiB    |
+| CPU variants                                     |  i.MX8QM B0  |
+| Fuses                                            |      x       |
+| GPIO                                             |      x       |
+| I2C                                              |      x       |
+| **QSPI**                                         |              |
+| Read                                             |      x       |
+| Write                                            |      x       |
+| Boot                                             |      x       |
+| **e-MMC / SD-Card**                              |              |
+| Read                                             |      x       |
+| Write                                            |      x       |
+| Boot                                             |      x       |
+| **USB**                                          |              |
+| USB 2.0 Dual Role                                |      x       |
+| USB 3.0 (Hub on MBa8x)                           |      x       |
+| **ENET (GigE via Phy on MBa8x)**                 |              |
+| ENET 0                                           |      x       |
+| ENET 1                                           |      x       |
+| **Bootstreams**                                  |              |
+| FlexSPI                                          |      x       |
+| SD / e-MMC                                       |      x       |
+| UUU / mfgtool                                    |      x       |
 
 **TODO or not tested / supported**
 
@@ -62,59 +62,65 @@ See top level README.md for configurations usable as MACHINE.
 
 ### Linux
 
-* RAM configs:
-  * 4GB / TQMa8QM
-  * 8GB / TQMa8QM
-* CPU variants
-  * i.MX8QM B0
-* I2C
-  * Temperature Sensors (without cpu-temp)
-  * RTC
-  * EEPROMS
-* SPI
-  * spi user space device on all CS
-  * Mikrobus (Module RTC5)
-* GPIO
-  * LED
-  * Button
-  * wakeup from GPIO button
-  * GPIO on pin heads
-* ENET (GigE via Phy on MBa8x)
-  * ENET 0
-  * ENET 1
-* QSPI NOR
-* UART
-  * console
-  * additional UARTS on pin heads
-* USB
-  * USB 2.0 Dual Role
-  * USB 3.0 (Hub on MBa8Mx)
-* Graphic
-  * GPU
-  * VPU
-  * LVDS0/LVDS1
-  * Display Port
-* CAN
-  * can0/1 as network interface
-* PWM
-  * PWM in LVDS IP
-* CPU / PMIC Thermal sensors
-  * via thermal-zone
-* SATA
-* PCIe
-  * mini-PCIe on MBa8x
-  * wifi with Network Card (Silex Technology SX-PCEAC2-HMC-SP)
-* ADC
-* Audio
-  * DisplayPort
-  * Line In
-  * Line Out
-* DVFS
-* Suspend
-  * mem / freeze
+| Feature                                          |              |
+| :----------------------------------------------- | :----------: |
+| RAM configs                                      |     4,8 GiB  |
+| CPU variants                                     |  i.MX8QM B0  |
+| Fuses / OCRAM                                    |       x      |
+| speed grade / temperature grade detection        |       x      |
+| **UART**                                         |              |
+| console on LPUART0 (X24)                         |       x      |
+| additional UARTS on pin heads                    |       x      |
+| **GPIO**                                         |              |
+| LED                                              |       x      |
+| Button                                           |       x      |
+| wakeup from GPIO button                          |       x      |
+| GPIO on pin heads                                |       x      |
+| **I2C**                                          |              |
+| Temperature Sensors (without cpu-temp)           |       x      |
+| RTC                                              |       x      |
+| EEPROMS                                          |       x      |
+| **ENET (GigE via Phy on MBa8x)**                 |              |
+| ENET 0                                           |       x      |
+| ENET 1                                           |       x      |
+| **USB**                                          |              |
+| USB 2.0 Dual Role                                |       x      |
+| USB 3.0 (Hub on MBa8x)                           |       x      |
+| **QSPI NOR**                                     |              |
+| Read with 1-1-4 SDR                              |       x      |
+| PP / Erase with 1-1-1 SDR                        |       x      |
+| **Graphic**                                      |              |
+| GPU                                              |       x      |
+| VPU                                              |       x      |
+| **Display**                                      |              |
+| LVDS0/LVDS1                                      |       x      |
+| Display Port                                     |       x      |
+| **Audio**                                        |              |
+| Line IN / Line Out (X16, X17)                    |       x      |
+| Display Port                                     |       x      |
+| **PCIe**                                         |              |
+| mini-PCIe on MBa8x (SX-PCEAC2-HMC-SP)            |       x      |
+| M.2 PCIe with WiFi Card (SX-PCEAC2-M2-SP)        |       x      |
+| **SATA**                                         |              |
+| M.2 SATA                                         |              |
+| **CAN**                                          |              |
+| CAN                                              |       x      |
+| **SPI**                                          |              |
+| SPI user space device on all CS                  |       x      |
+| Mikrobus (Module RTC5)                           |              |
+| **ADC**                                          |              |
+| ADC                                              |       x      |
+| **PWM**                                          |              |
+| PWM in LVDS IP                                   |       x      |
+| **CPU/PMIC thermal sensors**                     |              |
+| via thermal zone                                 |       x      |
+| **Cortex M4**                                    |              |
+| examples running from TCM                        |       x      |
+| use UART as debug console                        |       x      |
 
 **TODO or not tested with new BSP**
 
+* MIKRO Bus
 * temperature grade
   * SCU limitation
 * Audio
@@ -137,6 +143,7 @@ See top level README.md for configurations usable as MACHINE.
   * U-Boot: `EHCI timed out on TD - token` with some USB sticks on USB 2.0 OTG
   * runtime suspend disabled for USB Hub TUSB8041
 * DT file for rpmsg is too big and needs `fdt_high` to be set to `0xffffffffffffffff`
+* `linux-imx-tq_5.15`: SATA is broken due to link issues
 
 ## Artifacts
 
@@ -238,8 +245,8 @@ echo mem > /sys/power/state
 
 Each Display output could be activated independend by using the corresponding device tree.
 
-| Interface | Device tree                        | Type           |
-|-----------|------------------------------------|----------------|
+| Interface | Device tree                               | Type           |
+|-----------|-------------------------------------------|----------------|
 | LVDS0     | imx8qm-tqma8x-mba8x-lvds0-tm070jvhg33.dtb | Tianma Display |
 | LVDS1     | imx8qm-tqma8x-mba8x-lvds1-tm070jvhg33.dtb | Tianma Display |
 | DP        | imx8qm-tqma8x-mba8x-dp.dtb                | Displayport    |
