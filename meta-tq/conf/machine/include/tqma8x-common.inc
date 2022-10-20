@@ -77,3 +77,5 @@ require conf/machine/include/arm/armv8a/tune-cortexa72-cortexa53.inc
 
 # need to do after imx-base, not included in firmware-imx-8.3
 MACHINE_FIRMWARE:remove = "firmware-imx-brcm"
+
+PREFERRED_VERSION_linux-imx-tq = "5.15%"
