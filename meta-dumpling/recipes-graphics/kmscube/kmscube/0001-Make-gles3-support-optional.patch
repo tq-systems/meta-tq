@@ -1,172 +1,42 @@
-From de4fade03c881b044098eaddb6297941823d4256 Mon Sep 17 00:00:00 2001
-From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
-Date: Thu, 18 Aug 2022 13:27:30 +0200
-Subject: [PATCH] Make gles3 support optional
+From 92a523d29d3dcedd8d45b31e9ec04e1c8243aa95 Mon Sep 17 00:00:00 2001
+From: Eric Engestrom <eric@engestrom.ch>
+Date: Fri, 2 Sep 2022 16:15:24 +0100
+Subject: [PATCH 1/1] make GLES3 optional
 
-Some cores don't support gles3, so compile gles3 targets
-conditionally.
+This means that `shadertoy` & `texturator` might not be supported in a given build.
 
-Idea is based on and extends meta-arago commit
-https://github.com/denix0/meta-arago
-56fdeea ("kmscube: enable gles3 targets conditionally")
-
-Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Upstream-Status: Backport [https://gitlab.freedesktop.org/mesa/kmscube/-/commit/92a523d29d3dcedd8d45b31e9ec04e1c8243aa95]
+Signed-off-by: Eric Engestrom <eric@engestrom.ch>
 ---
- common.h    | 12 ++++++++++++
- kmscube.c   | 23 ++++++++++++++++++++++-
- meson.build | 31 +++++++++++++++++++++----------
- 3 files changed, 55 insertions(+), 11 deletions(-)
+ common.h    | 11 +++++++++++
+ meson.build | 29 +++++++++++++++++++----------
+ 2 files changed, 30 insertions(+), 10 deletions(-)
 
 diff --git a/common.h b/common.h
-index 7c41fee..c9e52c1 100644
+index 7c41fee..c5d624a 100644
 --- a/common.h
 +++ b/common.h
-@@ -170,12 +170,16 @@ enum mode {
- 	NV12_2IMG,     /* NV12, handled as two textures and converted to RGB in shader */
- 	NV12_1IMG,     /* NV12, imported as planar YUV eglimg */
- 	VIDEO,         /* video textured cube */
-+#if defined(HAVE_GLES3)
- 	SHADERTOY,     /* display shadertoy shader */
-+#endif
- };
+@@ -175,7 +175,18 @@ enum mode {
  
  const struct egl * init_cube_smooth(const struct gbm *gbm, int samples);
  const struct egl * init_cube_tex(const struct gbm *gbm, enum mode mode, int samples);
-+#if defined(HAVE_GLES3)
++
++#ifdef HAVE_GLES3
  const struct egl * init_cube_shadertoy(const struct gbm *gbm, const char *shadertoy, int samples);
++#else
++static inline const struct egl *
++init_cube_shadertoy(const struct gbm *gbm, const char *shadertoy, int samples)
++{
++	(void)gbm; (void)shadertoy; (void)samples;
++	printf("no GLES3 support!\n");
++	return NULL;
++}
 +#endif
  
  #ifdef HAVE_GST
  
-@@ -196,11 +200,19 @@ init_cube_video(const struct gbm *gbm, const char *video, int samples)
- }
- #endif
- 
-+#if defined(HAVE_GLES3)
- void init_perfcntrs(const struct egl *egl, const char *perfcntrs);
- void start_perfcntrs(void);
- void end_perfcntrs(void);
- void finish_perfcntrs(void);
- void dump_perfcntrs(unsigned nframes, uint64_t elapsed_time_ns);
-+#else
-+static inline void init_perfcntrs(const struct egl *egl, const char *perfcntrs) {}
-+static inline void start_perfcntrs(void) {}
-+static inline void end_perfcntrs(void) {}
-+static inline void finish_perfcntrs(void) {}
-+static inline void dump_perfcntrs(unsigned nframes, uint64_t elapsed_time_ns) {}
-+#endif
- 
- #define NSEC_PER_SEC (INT64_C(1000) * USEC_PER_SEC)
- #define USEC_PER_SEC (INT64_C(1000) * MSEC_PER_SEC)
-diff --git a/kmscube.c b/kmscube.c
-index 8aa81f4..6a51485 100644
---- a/kmscube.c
-+++ b/kmscube.c
-@@ -41,7 +41,11 @@ static const struct egl *egl;
- static const struct gbm *gbm;
- static const struct drm *drm;
- 
-+#if defined(HAVE_GLES3)
- static const char *shortopts = "Ac:D:f:M:m:p:S:s:V:v:xn";
-+#else
-+static const char *shortopts = "Ac:D:f:M:m:s:V:v:xn";
-+#endif
- 
- static const struct option longopts[] = {
- 	{"atomic", no_argument,       0, 'A'},
-@@ -50,7 +54,10 @@ static const struct option longopts[] = {
- 	{"format", required_argument, 0, 'f'},
- 	{"mode",   required_argument, 0, 'M'},
- 	{"modifier", required_argument, 0, 'm'},
-+#if defined(HAVE_GLES3)
- 	{"perfcntr", required_argument, 0, 'p'},
-+	{"shadertoy", required_argument, 0, 'S'},
-+#endif
- 	{"samples",  required_argument, 0, 's'},
- 	{"video",  required_argument, 0, 'V'},
- 	{"vmode",  required_argument, 0, 'v'},
-@@ -61,7 +68,11 @@ static const struct option longopts[] = {
- 
- static void usage(const char *name)
- {
--	printf("Usage: %s [-ADfMmSsVvxn]\n"
-+#if defined(HAVE_GLES3)
-+	printf("Usage: %s [-ADfMmpSsVvxn]\n"
-+#else
-+	printf("Usage: %s [-ADfMmsVvxn]\n"
-+#endif
- 			"\n"
- 			"options:\n"
- 			"    -A, --atomic             use atomic modesetting and fencing\n"
-@@ -74,10 +85,12 @@ static void usage(const char *name)
- 			"        nv12-2img -  yuv textured (color conversion in shader)\n"
- 			"        nv12-1img -  yuv textured (single nv12 texture)\n"
- 			"    -m, --modifier=MODIFIER  hardcode the selected modifier\n"
-+#if defined(HAVE_GLES3)
- 			"    -p, --perfcntr=LIST      sample specified performance counters using\n"
- 			"                             the AMD_performance_monitor extension (comma\n"
- 			"                             separated list, shadertoy mode only)\n"
- 			"    -S, --shadertoy=FILE     use specified shadertoy shader\n"
-+#endif
- 			"    -s, --samples=N          use MSAA\n"
- 			"    -V, --video=FILE         video textured cube (comma separated list)\n"
- 			"    -v, --vmode=VMODE        specify the video mode in the format\n"
-@@ -92,8 +105,10 @@ int main(int argc, char *argv[])
- {
- 	const char *device = NULL;
- 	const char *video = NULL;
-+#if defined(HAVE_GLES3)
- 	const char *shadertoy = NULL;
- 	const char *perfcntr = NULL;
-+#endif
- 	char mode_str[DRM_DISPLAY_MODE_LEN] = "";
- 	char *p;
- 	enum mode mode = SMOOTH;
-@@ -157,6 +172,7 @@ int main(int argc, char *argv[])
- 		case 'm':
- 			modifier = strtoull(optarg, NULL, 0);
- 			break;
-+#if defined(HAVE_GLES3)
- 		case 'p':
- 			perfcntr = optarg;
- 			break;
-@@ -164,6 +180,7 @@ int main(int argc, char *argv[])
- 			mode = SHADERTOY;
- 			shadertoy = optarg;
- 			break;
-+#endif
- 		case 's':
- 			samples = strtoul(optarg, NULL, 0);
- 			break;
-@@ -216,8 +233,10 @@ int main(int argc, char *argv[])
- 		egl = init_cube_smooth(gbm, samples);
- 	else if (mode == VIDEO)
- 		egl = init_cube_video(gbm, video, samples);
-+#if defined(HAVE_GLES3)
- 	else if (mode == SHADERTOY)
- 		egl = init_cube_shadertoy(gbm, shadertoy, samples);
-+#endif
- 	else
- 		egl = init_cube_tex(gbm, mode, samples);
- 
-@@ -226,6 +245,7 @@ int main(int argc, char *argv[])
- 		return -1;
- 	}
- 
-+#if defined(HAVE_GLES3)
- 	if (perfcntr) {
- 		if (mode != SHADERTOY) {
- 			printf("performance counters only supported in shadertoy mode\n");
-@@ -233,6 +253,7 @@ int main(int argc, char *argv[])
- 		}
- 		init_perfcntrs(egl, perfcntr);
- 	}
-+#endif
- 
- 	/* clear the color buffer */
- 	glClearColor(0.5, 0.5, 0.5, 1.0);
 diff --git a/meson.build b/meson.build
-index 4fca2f2..ced6e7f 100644
+index 4fca2f2..518006f 100644
 --- a/meson.build
 +++ b/meson.build
 @@ -35,7 +35,6 @@ endif
@@ -177,33 +47,35 @@ index 4fca2f2..ced6e7f 100644
    'cube-smooth.c',
    'cube-tex.c',
    'drm-atomic.c',
-@@ -45,7 +44,6 @@ sources = files(
-   'frame-512x512-NV12.c',
-   'frame-512x512-RGBA.c',
-   'kmscube.c',
--  'perfcntrs.c',
- )
+@@ -55,13 +54,22 @@ dep_libdrm = dependency('libdrm', version : '>=2.4.71')
+ dep_gbm = dependency('gbm', version : '>=13.0')
+ dep_egl = dependency('egl')
+ dep_gles2 = dependency('glesv2')
++dep_gles3 = dependency('glesv2', version : '>= 3', required : false)
++
++if dep_gles3.found()
++  sources += files('cube-shadertoy.c')
++  add_project_arguments('-DHAVE_GLES3', language : 'c')
++  message('GLES3 supported; shadertoy & texturator are included in this build')
++else
++  message('GLES3 not supported; shadertoy & texturator are NOT included in this build')
++endif
++
+ dep_libpng = dependency('libpng', required : false)
  
- cc = meson.get_compiler('c')
-@@ -93,13 +91,26 @@ else
-   message('Building without gstreamer support')
+ if dep_libpng.found()
+   add_project_arguments('-DHAVE_LIBPNG', language : 'c')
  endif
  
--executable('kmscube', sources, dependencies : dep_common, install : true)
-+# GLES3 check
-+gles3_h = false
-+if dep_gles2.found()
-+  gles3_h = cc.has_header('GLES3/gl3.h', dependencies: dep_gles2)
-+endif
+-
+ dep_common = [dep_m, dep_threads, dep_libdrm, dep_gbm, dep_egl, dep_gles2, dep_libpng]
  
-+if gles3_h
-+  message('Building with GLES3 support')
-+  add_project_arguments('-DHAVE_GLES3', language : 'c')
-+  sources += files(
-+    'cube-shadertoy.c',
-+    'perfcntrs.c',
-+  )
+ dep_gst = []
+@@ -95,11 +103,12 @@ endif
  
+ executable('kmscube', sources, dependencies : dep_common, install : true)
+ 
+-
 -executable('texturator', files(
 -	'common.c',
 -	'drm-legacy.c',
@@ -211,6 +83,7 @@ index 4fca2f2..ced6e7f 100644
 -	'perfcntrs.c',  # not used, but required to link
 -	'texturator.c',
 -), dependencies : dep_common, install : true)
++if dep_gles3.found()
 +  executable('texturator', files(
 +    'common.c',
 +    'drm-legacy.c',
@@ -219,5 +92,6 @@ index 4fca2f2..ced6e7f 100644
 +    'texturator.c',
 +  ), dependencies : dep_common, install : true)
 +endif
-+
-+executable('kmscube', sources, dependencies : dep_common, install : true)
+-- 
+2.25.1
+
