@@ -65,46 +65,52 @@ See top level README.md for configurations usable as MACHINE.
 
 ### Linux
 
-* RAM configs:
-  * 2GB / TQMa8X\[D,Q\]PS
-* CPU variants:
-  * i.MX8QXP C0
-  * i.MX8DXP C0
-* I2C
-  * Temperature Sensors (without cpu-temp)
-  * RTC
-  * EEPROMS
-* SPI
-  * spi user space device on all CS
-* GPIO
-  * SMARC GPIO pins
-* ENET (GigE via Phy on TQMa8XxS)
-  * ENET 1
-  * ENET 2
-* QSPI NOR
-* UART
-  * console
-  * LPUART3 via unused SCU GPIO pins
-* USB
-  * USB 2.0 Dual Role
-  * USB 3.0 (Hub on MBa8Mx)
-* Graphic
-  * GPU
-  * VPU
-  * LVDS
-* CAN
-  * can0/1 as network interface
-* CPU / PMIC Thermal sensors
-  * via thermal-zone
-* PCIe
-  * mini-PCIe on MB-SMARC-2
-  * wifi with Network Card (Silex Technology SX-PCEAC2-HMC-SP)
-* Audio
-  * Line In
-  * Line Out
-* DVFS
-* Suspend
-  * mem / freeze
+| Feature                                          |                             |
+| :----------------------------------------------- | :-------------------------: |
+| **RAM configs**                                  |                             |
+| TQMa8X\[D,Q\]PS                                  |            2 GiB            |
+|                                                  |                             |
+| CPU variants                                     |  i.MX8QXP C0 / i.MX8DXP C0  |
+| Fuses / OCRAM                                    |              x              |
+| speed grade / temperature grade detection        |              x              |
+| **UART**                                         |                             |
+| console on LPUART1 (X39)                         |              x              |
+| LPUART3 via unused SCU pins                      |              x              |
+| **GPIO**                                         |                             |
+| SMARC GPIO pins                                  |              x              |
+| **I2C**                                          |                             |
+| Temperature Sensors (without cpu-temp)           |              x              |
+| RTC                                              |              x              |
+| EEPROMS                                          |              x              |
+| **ENET (GigE via Phy on TQMa8XxS)**              |                             |
+| ENET 0                                           |              x              |
+| ENET 1                                           |              x              |
+| **USB**                                          |                             |
+| USB 2.0 Dual Role                                |              x              |
+| USB 3.0 (Hub on TQMa8XxS)                        |              x              |
+| **QSPI NOR**                                     |                             |
+| Read with 1-1-4 SDR                              |              x              |
+| PP / Erase with 1-1-1 SDR                        |              x              |
+| **Graphic**                                      |                             |
+| GPU                                              |              x              |
+| VPU                                              |              x              |
+| **Display**                                      |                             |
+| LVDS0/LVDS1                                      |              x              |
+| **Audio**                                        |                             |
+| Line IN / Line Out (X17, X18)                    |              x              |
+| **PCIe**                                         |                             |
+| mini-PCIe on MB-SMARC-2 (SX-PCEAC2-HMC-SP)       |              x              |
+| **CAN-FD**                                       |                             |
+| CAN-FD                                           |              x              |
+| **SPI**                                          |                             |
+| SPI user space device on all CS                  |              x              |
+| **PWM**                                          |                             |
+| PWM in LVDS IP                                   |              x              |
+| **CPU/PMIC thermal sensors**                     |                             |
+| via thermal zone                                 |              x              |
+| **Cortex M4**                                    |                             |
+| examples running from TCM                        |              x              |
+| use UART as debug console                        |              x              |
 
 **TODO or not tested with new BSP**
 
@@ -132,6 +138,7 @@ See top level README.md for configurations usable as MACHINE.
   * erase of ranges >= 16 MB fails under linux
 * Suspend / Wakeup
   * RTC Alarm IRQ via GPIO leads to system stall during resume
+* 1080p Video playback on LVDS is broken
 
 ## Artifacts
 
