@@ -101,6 +101,7 @@ Releases are named with the following scheme:
   * Support for TQMa8MPxL
   * Support for TQMa8x
   * Support for TQMa8Xx
+  * Support for TQMa8XxS
 * MBa7: add wifi, bluetooth and firmware
 * MBa6ULxL: add wifi, bluetooth and firmware
 * MBa6ULx: add bluetooth and firmware
