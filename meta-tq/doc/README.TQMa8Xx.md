@@ -138,6 +138,7 @@ See top level README.md for configurations usable as MACHINE.
 * USB
   * U-Boot: USB 3.0 port does not initialize USB 2.0 subsystem after USB reset
 * Upon resume ethernet PHY will not establish a new link again
+* 1080p Video playback on LVDS is broken
 
 ## Artifacts
 
