@@ -68,50 +68,59 @@ See top level README.md for configurations usable as MACHINE.
 
 ### Linux
 
-* RAM configs:
-  * 1GB DDR3L ECC / TQMa8X\[D,Q\]P
-  * 2GB DDR3L ECC / TQMa8X\[D,Q\]P
-  * 2GB LPDDR4 / TQMa8X\[D,Q\]P4
-* CPU variants:
-  * i.MX8QXP C0
-  * i.MX8DXP C0
-* I2C
-  * Temperature Sensors (without cpu-temp)
-  * RTC
-  * EEPROMS
-* SPI
-  * spi user space device on all CS
-* GPIO
-  * LED
-* ENET (GigE via Phy on MBa8Xx)
-  * ENET 1
-  * ENET 2
-* QSPI NOR
-* UART
-  * console
-  * LPUART3 via unused SAI pins
-* USB
-  * USB 2.0 Dual Role
-  * USB 3.0 (Hub on MBa8Mx)
-* Graphic
-  * GPU
-  * VPU
-  * LVDS
-* CAN
-  * can0/1 as network interface
-* PWM
-  * PWM in LVDS IP
-* CPU / PMIC Thermal sensors
-  * via thermal-zone
-* PCIe
-  * mini-PCIe on MBa8Xx
-  * wifi with Network Card (Silex Technology SX-PCEAC2-HMC-SP)
-* Audio
-  * Line In
-  * Line Out
-* DVFS
-* Suspend
-  * mem / freeze
+| Feature                                          |                             |
+| :----------------------------------------------- | :-------------------------: |
+| **RAM configs**                                  |                             |
+| TQMa8X\[D,Q\]P                                   |       1,2 GiB DDR3L ECC     |
+| TQMa8X\[D,Q\]P4                                  |         2 GiB LPDDR4        |
+|                                                  |                             |
+| CPU variants                                     |  i.MX8QXP C0 / i.MX8DXP C0  |
+| Fuses / OCRAM                                    |              x              |
+| speed grade / temperature grade detection        |              x              |
+| **UART**                                         |                             |
+| console on LPUART1 (X13)                         |              x              |
+| LPUART3 via unused SAI pins                      |              x              |
+| **GPIO**                                         |                             |
+| LED                                              |              x              |
+| Button                                           |              x              |
+| wakeup from GPIO button                          |              x              |
+| GPIO on pin heads                                |              x              |
+| **I2C**                                          |                             |
+| Temperature Sensors (without cpu-temp)           |              x              |
+| RTC                                              |              x              |
+| EEPROMS                                          |              x              |
+| **ENET (GigE via Phy on MBa8x)**                 |                             |
+| ENET 0                                           |              x              |
+| ENET 1                                           |              x              |
+| **USB**                                          |                             |
+| USB 2.0 Dual Role                                |              x              |
+| USB 3.0 (Hub on MBa8x)                           |              x              |
+| **QSPI NOR**                                     |                             |
+| Read with 1-1-4 SDR                              |              x              |
+| PP / Erase with 1-1-1 SDR                        |              x              |
+| **Graphic**                                      |                             |
+| GPU                                              |              x              |
+| VPU                                              |                             |
+| **Display**                                      |                             |
+| LVDS0/LVDS1                                      |              x              |
+| **Audio**                                        |                             |
+| Line IN / Line Out (X9, X10)                     |              x              |
+| **PCIe**                                         |                             |
+| mini-PCIe on MBa8xx (SX-PCEAC2-HMC-SP)           |              x              |
+| M.2 PCIe with WiFi Card (SX-PCEAC2-M2-SP)        |              x              |
+| **CAN-FD**                                       |                             |
+| CAN-FD                                           |              x              |
+| **SPI**                                          |                             |
+| SPI user space device on all CS                  |              x              |
+| **ADC**                                          |                             |
+| ADC                                              |              x              |
+| **PWM**                                          |                             |
+| PWM in LVDS IP                                   |              x              |
+| **CPU/PMIC thermal sensors**                     |                             |
+| via thermal zone                                 |              x              |
+| **Cortex M4**                                    |                             |
+| examples running from TCM                        |              x              |
+| use UART as debug console                        |              x              |
 
 **TODO or not tested with new BSP**
 
