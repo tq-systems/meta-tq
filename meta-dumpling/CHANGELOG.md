@@ -22,6 +22,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* recipes-graphics/kmscube: Fix optional GLES3 support
+  backport new upstream fixes and make sure kmscube will be installed
 * Fix missing `WAYLAND_DISPLAY` environment variable. Allows access for
   members of `wayland` group
 * gstreamer1.0-plugins-good: fix patch fuzz warning
