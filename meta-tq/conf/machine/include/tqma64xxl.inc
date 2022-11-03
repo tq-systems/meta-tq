@@ -27,6 +27,10 @@ KERNEL_IMAGETYPE = "Image"
 # this will enlarge our rootfs
 KERNEL_IMAGETYPES = "Image"
 
+SPL_BINARY = "tispl.bin_HS"
+UBOOT_BINARY = "u-boot.img_HS"
+UBOOT_SYMLINK = "u-boot.img"
+
 # Image Options
 
 EXTRA_IMAGEDEPENDS += "virtual/bootloader"
