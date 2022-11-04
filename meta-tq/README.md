@@ -15,7 +15,7 @@ Please see the corresponding sections below for details.
 This layer in the checked out branch depends on:
 
 URI: https://git.yoctoproject.org/poky  
-branch: hardknott  
+branch: kirkstone  
 revision: HEAD  
 layers: meta, meta-poky  
 
@@ -40,14 +40,9 @@ is _mandatory_ - see [table](#supported-machines).
 * i.MX8MP
 
 URI: https://git.yoctoproject.org/git/meta-freescale  
-branch: hardknott  
+branch: kirkstone  
 revision: HEAD  
 layers: meta-freeescale  
-
-URI: https://github.com/Freescale/meta-freescale-distro.git  
-branch: hardknott  
-revision: HEAD  
-layers: meta-freeescale-distro  
 
 **Attention:** The following distros defined in meta-freescale-distro are not
 tested with machines in meta-tq:
@@ -81,16 +76,11 @@ is _mandatory_ - see [table](#supported-machines)
 * AM64xx
 * AM65xx
 
-**Attention**:
-
-In meta-ti no hardknott branch exists, so we have to use the master branch.
-The last commit in the master branch that supports hardknott
-is commit f56051c9a8cf09f54c43b81301073eed71bbda97.
 
 URI: https://git.yoctoproject.org/git/meta-ti  
-branch: master  
-revision: f56051c9a8cf09f54c43b81301073eed71bbda97  
-layers: meta-ti  
+branch: kirkstone  
+revision: HEAD  
+layers: meta-ti-bsp  
 
 If using meta-ti, meta-arm is also needed due to dependencies of meta-ti.
 
