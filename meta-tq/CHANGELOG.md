@@ -37,6 +37,14 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* TQMa64xxL:
+  * Update U-Boot and kernel for hardware revision 0200. The obsolete
+    revision 0100 is not supported anymore.
+* linux-ti-tq-5.10: update to to latest ti-linux-kernel upstream, based
+  on 5.10.152-rt75
+* u-boot-ti-tq-2021.01: update to latest ti-u-boot upstream
+  * The latest kirkstone version of the meta-ti layer is required for
+    compatiblity of U-Boot and the SCI firmware
 * imx-boot-tq: Remove ${DEPLOYDIR}/${BOOT_TOOLS} usage. This makes
   recipes providing artifacts for boot stream generation cleaner and
   simplify imx-boot-tq deploy itself.
