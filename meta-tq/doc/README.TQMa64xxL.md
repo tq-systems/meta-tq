@@ -6,8 +6,8 @@
 
 ### Supported Hardware:
 
-* TQMa6442L: Module revisions REV.010x
-* MBaX4XxL: Board revisions REV.010x
+* TQMa6442L: Module revisions REV.020x
+* MBaX4XxL: Board revisions REV.020x
 
 ### Versions
 
@@ -23,16 +23,10 @@ _Kernel:_
 
 * The USB OTG port does not work in host mode in U-Boot
   - The OTG port works in host mode after booting Linux.
-* The linux-ti-tq-5.10 recipe is not based on linux-yocto, so the kernel
-  defconfig cannot be extended using config fragments.
-* Detecting the SPI-NOR flash in U-Boot using `sf probe` is unreliable. In some
-  cases, a flash with size 0 is detected instead of the correct size.
 * Most GPIOs can't be read or set from U-Boot, as they are disabled in the
   default pinmuxing. This also affects LED and button GPIOs. LEDs and buttons
   are working as expected on Linux.
-
-**Note:** TQMa64xxL support currently has prerelease status. The Linux BSP has
-not been tested fully yet.
+* There is currently no driver support for the Bluetooth module of the MBaX4XxL
 
 ## Support Wiki
 
@@ -86,11 +80,6 @@ Artifacts can be found at the usual locations for Bitbake:
 | DIP     |  1  |  2  |  3  |  4  |    |  1  |  2  |  3  |  4  |
 | ON      |  x  |  x  |     |     |    |     |     |     |     |
 | OFF     |     |     |  x  |  x  |    |     |  x  |     |     |
-
-Note: This configuration uses the MMCSD mode with port 0 to boot a full
-filesystem image from the eMMC user partition, which is not officially supported
-by TI for the AM64x. Refer to the SoC documentation provided by TI for
-information on the use of the eMMC boot partitions.
 
 #### SPI-NOR
 
