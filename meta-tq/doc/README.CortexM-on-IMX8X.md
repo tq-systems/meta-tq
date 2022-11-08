@@ -1,4 +1,4 @@
-# CortexM Support for TQ Systems SOM with i.MX8X / i.MX8
+# CortexM Support for TQ-Systems SOM with i.MX8X / i.MX8
 
 [[_TOC_]]
 

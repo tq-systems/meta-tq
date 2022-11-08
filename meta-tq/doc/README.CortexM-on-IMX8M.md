@@ -1,4 +1,4 @@
-# CortexM Support for TQ Systems SOM with i.MX8M
+# CortexM Support for TQ-Systems SOM with i.MX8M
 
 To start a demo stored on SD / e-MMC from U-Boot:
 
