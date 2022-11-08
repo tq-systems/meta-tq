@@ -21,5 +21,8 @@ PACKAGECONFIG_pn_gstreamer1.0-plugin-good:remove = "dv1394"
 # at the moment gtk is not used
 PACKAGECONFIG_pn_gstreamer1.0-plugin-good:remove = "gtk"
 
+# Conflicts with systemd-networkd
+SYSTEMD_AUTO_ENABLE:dhcpcd = "disable"
+
 # TODO: cairo and gdk-pixbuf are default on - if not gstreamer dependencies
 # can be removed.

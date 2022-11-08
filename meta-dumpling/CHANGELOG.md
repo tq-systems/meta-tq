@@ -11,6 +11,7 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* distros: disable dhcpcd systemd units by default
 * distros: build small SD / e-MMC boot image for SOM with TI CPU
 * treewide: syntax conversion for honister
 * treewide: recipe changes for building with honister
