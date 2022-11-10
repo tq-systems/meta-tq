@@ -137,7 +137,16 @@ _MBa8x HW Rev.020x/30x only_
 * USB OTG / DRD
   * USB OTG OC not handled for host role
   * USB OTG: only host is working in U-Boot
-  * USB OTG: some USB 3 memory sticks not working in U-Boot
+  * U-Boot: some USB stick types are not working correctly in U-Boot.
+    After `usb reset` they may fail to enumerate correctly or causing
+    a system reset during enumeration with errors like:
+    ```
+    WARN halted endpoint, queueing URB anyway.
+    Unexpected XHCI event TRB, skipping... (fbf120f0 00000000 13000000 03008401)
+    BUG at drivers/usb/host/xhci-ring.c:496/abort_td()!
+    BUG!
+    �esetting ...
+    ```
 * QSPI limited to SDR (driver / chip compatibility)
 * Mikrobus Modul RTC5 on ecspi1 don't answer
 * MIPI CSI

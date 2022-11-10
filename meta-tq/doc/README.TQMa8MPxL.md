@@ -163,8 +163,16 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
   ```
 * USB Host
   * USB Superspeed U3 powersave mode is broken
-  * U-Boot: some USB stick types are not working correctly in U-Boot and
-    fail to enumerate correctly after `usb reset`
+  * U-Boot: some USB stick types are not working correctly in U-Boot.
+    After `usb reset` they may fail to enumerate correctly or causing
+    a system reset during enumeration with errors like:
+    ```
+    WARN halted endpoint, queueing URB anyway.
+    Unexpected XHCI event TRB, skipping... (fbf120f0 00000000 13000000 03008401)
+    BUG at drivers/usb/host/xhci-ring.c:496/abort_td()!
+    BUG!
+    �esetting ...
+    ```
 * USB Bluetooth:
   * Some adapters cause the following error during bootup
 
