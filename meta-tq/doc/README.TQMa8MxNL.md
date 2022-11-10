@@ -129,11 +129,11 @@ _MBa8x HW Rev.030x only_
   `plat/imx/imx8m/imx8mn/imx8mn_bl31_setup.c`. Disable assignment of UART4 -
   delete statement `	RDC_PDAPn(RDC_PDAP_UART4, D1R | D1W),` in rdc configuration
   table.
+* USB: see [USB Howto](#usb)
 * MBa8Mx before REV.0300 is not supported.
 
 ## Known Issues
 
-* Default setting for `fdt_file` in u-boot does not match new naming scheme. See [Build Artifacts](#Build-Artifacts) for complete list of supported Device Tree files
 * LVDS shows wrong colors on older Tianma display kit (HW issue on older
   display kit revisions)
 * Mikrobus Modul RTC5 on ecspi1 don't answer
@@ -162,6 +162,7 @@ Artifacs can be found at the usual locations for bitbake:
   * imx8mn-tqma8mqnl-mba8mx-lcdif-lvds-tm070jvhg33-ov9281.dtb (LVDS support with TIANMA TM070JVHG33
     plus Vision Components CSI camera with OmniVision OV9281)
   * imx8mn-tqma8mqnl-mba8mx-rpmsg.dtb (CortexM / RPMSG Support)
+  * imx8mn-tqma8mqnl-mba8mx-usb0otg.dtb (USB dual role support)
 * Image: Linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
@@ -466,7 +467,14 @@ For demos available in the BSP and the device tree to be used see [artifacts sec
 
 Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8M.md).
 
-### U-Boot: switch between using of USB OTG (X19) and USB HUB (X6)
+### USB
+
+Since i.MX8MN only supports one USB controller, one can switch USB between
+USB Hub (MBa8Mx X6) and micro USB Connector (MBa8Mx X19)
+
+#### U-Boot
+
+Switch between using of USB dual role (X19) and USB HUB (X6)
 
 |               | SEL_USB_HUB_B (GPIO2_1) |
 | ------------- | ----------------------- |
@@ -474,7 +482,12 @@ Detailed documentation for CortexM support can be found [here](./README.CortexM-
 | USB HUB (X6)  | 1                       |
 
 Change by switching from GPIO2_1 (SEL_USB_HUB_B)
-`gpio toggle GPIO2_1` followed by `usb reset `
+`gpio toggle GPIO2_1` followed by `usb reset`
+
+#### Linux
+
+Default dtb is configured for USB Host support via USB hub. A special dtb
+is provided for USB dual role support, see see [artifacts section](#build-artifacts).
 
 ## Support Wiki
 
