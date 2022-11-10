@@ -7,7 +7,7 @@ require linux-imx-tq-common.inc
 KBRANCH = "TQM-lf-5.15"
 SRCREV = "e27a78db286db0e09cf6b2981ad931de087ab54d"
 KBRANCH:imx-nxp-bsp = "TQMa8-fslc-5.15-2.0.x-imx"
-SRCREV:imx-nxp-bsp = "484bfc7b8c21106e93a55d85a50dcfdcd0e5b18f"
+SRCREV:imx-nxp-bsp = "89a67700a041f5c2066d0964564626d6d81ad5db"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "5.15"
