@@ -1,4 +1,4 @@
-# TQMa6\[QP,DP,Q,D,DL,SL\] up to Rev.040x on MBa6x REV.020x carrier board
+# TQMa6\[QP,DP,Q,D,DL,S\] up to Rev.040x on MBa6x REV.020x carrier board
 
 [[_TOC_]]
 
@@ -123,16 +123,16 @@ _Note:_
 
 ### Boot device initialisation
 
-#### QSPI NOR
+#### SPI NOR
 
-To initialize QSPI NOR with bootloader, write the [bootloader image](#artifacts)
-to QSPI NOR at offset 0x00:
+To initialize SPI NOR with bootloader, write the [bootloader image](#artifacts)
+to SPI NOR at offset 0x400:
 
 ```
-setenv uboot <U-Boot QSPI boot image>
+setenv uboot <U-Boot SPI boot image>
 tftp ${loadaddr} ${uboot}
 sf probe
-sf update ${loadaddr} 0 ${filesize}
+sf update ${loadaddr} 0x400 ${filesize}
 ```
 
 #### SD / e-MMC
