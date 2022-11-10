@@ -138,7 +138,6 @@ See top level README.md for configurations usable as MACHINE.
   * erase of ranges >= 16 MB fails under linux
 * Suspend / Wakeup
   * RTC Alarm IRQ via GPIO leads to system stall during resume
-* 1080p Video playback on LVDS is broken
 
 ## Artifacts
 

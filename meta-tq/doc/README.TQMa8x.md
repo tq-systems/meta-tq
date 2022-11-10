@@ -144,7 +144,6 @@ See top level README.md for configurations usable as MACHINE.
   * runtime suspend disabled for USB Hub TUSB8041
 * DT file for rpmsg is too big and needs `fdt_high` to be set to `0xffffffffffffffff`
 * `linux-imx-tq_5.15`: SATA is broken due to link issues
-* 1080p Video playback on LVDS is broken
 
 ## Artifacts
 
