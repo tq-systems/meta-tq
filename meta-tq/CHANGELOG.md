@@ -18,6 +18,9 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* linux-tq / linux-rt-tq 5.4: tqmls102xa - fix rtc quartz capacity
+  handling. Even if the correct value is set by bootloader the value
+  falls back to its default if not configured in dtb
 * machines:
   * fix handling of provider specific `KERNEL_DEVICETREE` lists. The initial
     implementation could not handle non assigned lists.
