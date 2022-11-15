@@ -11,6 +11,8 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* distros: use busybox ping instead of inetutils version to
+  have more complete commandline args for some use cases
 * distros: disable dhcpcd systemd units by default
 * distros: build small SD / e-MMC boot image for SOM with TI CPU
 * treewide: syntax conversion for honister
