@@ -41,3 +41,14 @@ VIRTUAL-RUNTIME_initscripts = ""
 ROOT_HOME ?= "/root"
 
 IMAGE_FSTYPES ?= " tar.gz"
+
+#
+# busybox has prio 50 per default, inetutils has 79
+# ping from iputils should have same features as full featured
+# busybox ping and has priority of 100
+# to prevent installing a crippled ping, decrease prio for inetutils
+# implementation, so that we have
+# inetutils.ping < busybox.ping < iputils.ping
+#
+ALTERNATIVE_PRIORITY_inetutils[ping] = "27"
+ALTERNATIVE_PRIORITY_inetutils[ping6] = "27"
