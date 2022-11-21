@@ -51,4 +51,4 @@ python () {
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
-WKS_FILE = "tqma8-sdimg.wks.in"
+WKS_FILE = "tqmaxx-imx-v8-sdimg.wks.in"
