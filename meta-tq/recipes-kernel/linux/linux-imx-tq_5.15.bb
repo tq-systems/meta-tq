@@ -23,8 +23,8 @@ SRC_URI = "\
 
 DEFAULT_PREFERENCE = "0"
 
-KBUILD_DEFCONFIG:mx6-generic-bsp = "imx_v7_defconfig"
-KBUILD_DEFCONFIG:mx8-generic-bsp = "imx_v8_defconfig"
+KBUILD_DEFCONFIG:mx6-nxp-bsp = "imx_v7_defconfig"
+KBUILD_DEFCONFIG:mx8-nxp-bsp = "imx_v8_defconfig"
 
 SRC_URI:mx6-nxp-bsp = "\
     ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
