@@ -50,5 +50,5 @@ IMAGE_FSTYPES ?= " tar.gz"
 # implementation, so that we have
 # inetutils.ping < busybox.ping < iputils.ping
 #
-ALTERNATIVE_PRIORITY_inetutils[ping] = "27"
-ALTERNATIVE_PRIORITY_inetutils[ping6] = "27"
+ALTERNATIVE_PRIORITY_inetutils-ping[ping] = "27"
+ALTERNATIVE_PRIORITY_inetutils-ping6[ping6] = "27"
