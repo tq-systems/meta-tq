@@ -1,0 +1,23 @@
+From 5e843662e010087c336ff31de2be6987190e440f Mon Sep 17 00:00:00 2001
+From: Matthias Schiffer <matthias.schiffer@tq-group.com>
+Date: Wed, 23 Nov 2022 11:15:45 +0100
+Subject: [PATCH] ti-sgx-ddk-km: properly handle more OE/YP compiler prefixes
+
+Signed-off-by: Matthias Schiffer <matthias.schiffer@tq-group.com>
+---
+ eurasia_km/eurasiacon/build/linux2/config/compiler.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/eurasia_km/eurasiacon/build/linux2/config/compiler.mk b/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
+index 1b5f090..50f7bfe 100644
+--- a/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
++++ b/eurasia_km/eurasiacon/build/linux2/config/compiler.mk
+@@ -68,7 +68,7 @@ define calculate-compiler-preferred-target
+   ifneq ($$(filter aarch64-%,$$($(1)_compiler_preferred_target)),)
+    $(1)_compiler_preferred_target := aarch64-linux-gnu
+   endif
+-  ifneq ($$(filter arm-%-gnueabihf arm-oe-linux-gnueabi arm-poky-linux-gnueabi arm-yoe-linux-gnueabi arm-oe-linux-musleabi arm-poky-linux-musleabi arm-yoe-linux-musleabi,$$($(1)_compiler_preferred_target)),)
++  ifneq ($$(filter arm-%-gnueabihf arm-oe-linux-gnueabi arm-poky-linux-gnueabi arm-yoe-linux-gnueabi arm-oe-linux-musleabi arm-poky-linux-musleabi arm-yoe-linux-musleabi arm-tq-linux-gnueabi arm-tq-linux-musleabi,$$($(1)_compiler_preferred_target)),)
+    $(1)_compiler_preferred_target := arm-linux-gnueabihf
+   endif
+   ifneq ($$(filter arm-%-gnueabi armv7a-cros-linux-gnueabi armv7hl-redhat-linux-gnueabi,$$($(1)_compiler_preferred_target)),)
