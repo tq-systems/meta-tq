@@ -267,6 +267,7 @@ Under the given links SOM specific information can be found:
 [TQMa8XQPS](doc/README.TQMa8XxS.md)  
 [TQMa8QM](doc/README.TQMa8x.md)  
 [TQMA335x\[L\]](doc/README.TQMa335x.md)  
+[TQMA57xx](doc/README.TQMa57xx.md)  
 [TQMA64xxL](doc/README.TQMa64xxL.md)  
 [TQMA65xx](doc/README.TQMa65xx.md)  
 [TQMLS1012AL](doc/README.TQMLS1012AL.md)  
