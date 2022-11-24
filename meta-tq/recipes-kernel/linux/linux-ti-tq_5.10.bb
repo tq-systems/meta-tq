@@ -28,6 +28,16 @@ SRC_URI = "\
     file://defconfig \
 "
 
+SRC_URI:append:tqma57xx = "\
+    file://bpf-support.cfg \
+    file://devicetree.cfg \
+    file://dynamic-debug.cfg \
+    file://general-optimizations.cfg \
+    file://kallsyms.cfg \
+    file://local-version.cfg \
+    file://remove-debug.cfg \
+"
+
 SRC_URI:append:tqma64xxl = "\
     file://bpf-support.cfg \
     file://devicetree.cfg \
@@ -38,4 +48,4 @@ SRC_URI:append:tqma64xxl = "\
     file://remove-debug.cfg \
 "
 
-COMPATIBLE_MACHINE = "tqma64xxl"
+COMPATIBLE_MACHINE = "tqma57xx|tqma64xxl"
