@@ -30,14 +30,17 @@ KCONFIG_MODE="--alldefconfig"
 
 ####
 # kernel.bbclass unconditionally creates empty .scmversion files in ${B} and ${S}.
-# This prevents using CONFIG_LOCALVERSION_AUTO without additional provisioning
-# instead fiddling with .scmversion file we fix this using a localversion file
-# in build directory
+# This prevents using CONFIG_LOCALVERSION_AUTO without additional provisioning.
+# Instead of fiddling with the .scmversion file we fix this by using a localversion
+# file in the shared source directory.
+# Multiple before/after tasks are listed, so the order is correct for recipes with
+# and without linux-yocto.
 ####
-do_configure:append() {
-    head=$(git --git-dir=${S}/.git rev-parse --short HEAD 2> /dev/null)
-    printf "%s%s%s" "${KERNEL_LOCALVERSION}" +g ${head} > ${B}/localversion-tq
+do_set_localversion_tq() {
+    head=$(git --git-dir=${STAGING_KERNEL_DIR}/.git rev-parse --short HEAD 2> /dev/null)
+    printf '%s%s%s\n' "${KERNEL_LOCALVERSION}" +g ${head} > ${STAGING_KERNEL_DIR}/localversion-tq
 }
+addtask set_localversion_tq before do_patch do_configure after do_symlink_kernsrc do_kernel_metadata
 
 S = "${WORKDIR}/git"
 
