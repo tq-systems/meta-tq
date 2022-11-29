@@ -2,17 +2,8 @@
 
 KERNEL_DEVICETREE ?= "\
     am571x-mba57xx.dtb \
-    am571x-mba57xx-cdtech-dc44.dtb \
-    am571x-mba57xx-edt-etm0700g0edh6.dtb \
-    am571x-mba57xx-tianma-tm070jvhg33.dtb \
     am572x-mba57xx.dtb \
-    am572x-mba57xx-cdtech-dc44.dtb \
-    am572x-mba57xx-edt-etm0700g0edh6.dtb \
-    am572x-mba57xx-tianma-tm070jvhg33.dtb \
     am574x-mba57xx.dtb \
-    am574x-mba57xx-cdtech-dc44.dtb \
-    am574x-mba57xx-edt-etm0700g0edh6.dtb \
-    am574x-mba57xx-tianma-tm070jvhg33.dtb \
 "
 
 MACHINE_EXTRA_RRECOMMENDS += "\

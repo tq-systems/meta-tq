@@ -57,6 +57,18 @@ SRC_URI:append:tqma57xx = "\
     file://enable-legacy-drm.cfg \
 "
 
+KERNEL_DEVICETREE:append:tqma57xx = "\
+    am571x-mba57xx-cdtech-dc44.dtb \
+    am571x-mba57xx-edt-etm0700g0edh6.dtb \
+    am571x-mba57xx-tianma-tm070jvhg33.dtb \
+    am572x-mba57xx-cdtech-dc44.dtb \
+    am572x-mba57xx-edt-etm0700g0edh6.dtb \
+    am572x-mba57xx-tianma-tm070jvhg33.dtb \
+    am574x-mba57xx-cdtech-dc44.dtb \
+    am574x-mba57xx-edt-etm0700g0edh6.dtb \
+    am574x-mba57xx-tianma-tm070jvhg33.dtb \
+"
+
 DEFAULT_PREFERENCE = "1"
 
 COMPATIBLE_MACHINE = "^("
