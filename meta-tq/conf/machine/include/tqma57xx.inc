@@ -59,7 +59,6 @@ IMAGE_BOOT_FILES = "\
 
 # List common SoC features
 MACHINE_FEATURES += "\
-    alsa \
     apm \
     can \
     dsp \
@@ -75,3 +74,7 @@ MACHINE_FEATURES += "\
     usbhost \
     vfat \
 "
+
+# We have no sound support for now.
+# Remove the alsa feature, which is added by default in meta-ti
+MACHINE_FEATURES:remove = "alsa"
