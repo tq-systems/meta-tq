@@ -11,6 +11,8 @@ Releases are named with the following scheme:
 
 ### Removed
 
+* linux-rt-tq-4.19: Remove recipe
+* linux-ti-tq-4.19: Remove recipe
 * qoriq-atf_1.5: Removed recipe
 * linux-imx-tq_5.4: Drop support for tqmls1028a
 * TQMa8MP: 2GB machine config variant, support for 2GB fallback bootstream is
@@ -18,6 +20,10 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TQMa57xx:
+  * Update U-Boot for Kernel/DTB in rootfs
+  * Fix MBa57xx USB hub initialization
+  * Fix inclusion of PRU Ethernet firmwares
 * linux-tq / linux-rt-tq 5.4: tqmls102xa - fix rtc quartz capacity
   handling. Even if the correct value is set by bootloader the value
   falls back to its default if not configured in dtb
@@ -99,6 +105,9 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa57xx:
+  * Added support for the linux-ti-tq-5.10 kernel. This kernel is the default
+    now. See the TQMa57xx README for more information.
 * u-boot-imx-tq_2016.03: update
   * tqma6ul: remove obsolete warning for 512 MB variants
 * TQMa8MPxL: update u-boot-imx-tq
