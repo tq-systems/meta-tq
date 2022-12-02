@@ -46,13 +46,20 @@
 
 ### Known issues
 
-- Using internal PCIe PHY clock is currently not supported by the Linux mainline kernel
-  PCIe can not be used on MBa7x
-- `asound.state` is not compatible with `linux-5.4` (`linux-imx-tq` as well as `linux-tq`)
+- Using internal PCIe PHY clock is currently not supported by the Linux
+  mainline and newer NXP vendor kernel. PCIe can not be used on MBa7x
+  with these kernel versions.
+- `asound.state` is not compatible with `linux-5.4`
+  (`linux-imx-tq` as well as `linux-tq`). Use newer kernel - default is
+  based on 5.15.y stable
 - USB Dual Role gadget: Causing a device disconnect is not possible. D+ is
   erroneously supplying VBUS as well preventing a device disconnect per software.
   Occurs when gadget is disabled again. USB host might fail to detect a new USB
   descriptor once gadget is restarted.
+- U-Boot v2016.03 needs special environment setting for booting a mainline
+  kernel, see [Mainline Kernel](#mainline_kernel)
+- Writing to FAT filesystems may cause warnings and errors in U-Boot
+  based on v2016.03.
 
 ## Artifacts
 
@@ -160,6 +167,22 @@ run update_fdt
 setenv uboot <name of u-boot image>
 run update_uboot
 ```
+
+### Mainline Kernel
+
+Mainline kernel depends on the presence of running firmware in TrustZone
+that implements the PSCI. Default U-Boot does not leave TrustZone before
+booting linux, resulting in only one CPU core available with mainline kernel.
+
+In order to be able to use both CPU cores of i.MX7 with the TQMa7D, the
+kernel has to be started outside of TrustZone. To achieve this, following
+change has to be made to the U-boot environment:
+
+```
+setenv bootm_boot_mode nonsec
+```
+
+The number of running CPUs can be checked with `nproc` under linux.
 
 ## Support Wiki
 
