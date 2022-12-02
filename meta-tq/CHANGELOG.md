@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQMa6UL.BSP.SW.0117
+
 ### Removed
 
 * linux-rt-tq-4.19: Remove recipe
@@ -20,6 +22,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TQMa64xx:
+  * linux-ti-tq_5.10: make OSPI working
 * TQMa57xx:
   * Update U-Boot for Kernel/DTB in rootfs
   * Fix MBa57xx USB hub initialization
