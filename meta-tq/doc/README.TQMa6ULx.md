@@ -69,6 +69,8 @@ _Note:_ Mini PCIe connector only supports USB.
   device tree before loding the OS may fail with U-Boot from older BSP versions.
   Device tree path names were changed in CPU device tree fragment to conform the
   device tree specification.
+- Writing to FAT filesystems may cause warnings and errors in U-Boot
+  based on v2016.03.
 
 ## Artifacts
 
