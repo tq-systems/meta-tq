@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQMa6UL.BSP.SW.0117
+
 ### Changed
 
 * distros: use busybox ping instead of inetutils version to
