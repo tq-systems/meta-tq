@@ -27,3 +27,30 @@ def kernel_provider_dtbs(d):
         return dtbs_for_provider
 
     return ''
+
+# Return a list of device tree files that does not contain a vendor
+# directory prefix. This list is intended to be used for dtb list
+# assignment of `IMAGE_BOOT_FILES`
+def create_image_boot_dtb_files(d):
+    # Generate IMAGE_BOOT_FILES entries for device tree files listed in
+    # KERNEL_DEVICETREE.
+    # Use only the basename for dtb files:
+    alldtbs = d.getVar('KERNEL_DEVICETREE')
+
+    # DTBs may be built out of kernel with devicetree.bbclass
+    if not alldtbs:
+        return ''
+
+    def transform(dtb):
+        if not (dtb.endswith('dtb') or dtb.endswith('dtbo')):
+            # eg: <whatever>/<dtb file name>.dtb[o] has:
+            #     DEPLOYDIR file: <dtb file name>.dtb[o]
+            #     destination: <dtb file name>.dtb[o]
+            bb.error("KERNEL_DEVICETREE entry %s is not a .dtb or .dtbo file." % (dtb) )
+        return os.path.basename(dtb)
+
+    return ' '.join([transform(dtb) for dtb in alldtbs.split() if dtb])
+
+# this instructs bitbake to take the dependency established with the
+# above function into account when calculating hashes for IMAGE_BOOTFILES
+IMAGE_BOOT_FILES[vardeps] = "KERNEL_DEVICETREE"
