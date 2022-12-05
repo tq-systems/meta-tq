@@ -1,6 +1,6 @@
 # Common definitions for TQ-Systems GmbH TQMa6[Q,D] modules on MBa6x
 
-# Common device trees used in linux-imx-qt and linux-tq
+# Common device trees used in linux-imx-tq and linux-tq
 KERNEL_DEVICETREE = "\
     imx6q-mba6a.dtb \
     imx6q-mba6a-duallvds-tm070jvhg33.dtb \
