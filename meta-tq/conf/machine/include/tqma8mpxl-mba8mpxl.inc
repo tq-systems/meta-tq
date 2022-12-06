@@ -1,21 +1,28 @@
 # Common definitions for TQ-Systems GmbH MBa8MPxL baseboard for TQMa8MPxL modules
 
+require conf/machine/include/tqma8mpxl.inc
+
 # Set u-boot DTB
 UBOOT_DTB_NAME = "imx8mp-tqma8mpql-mba8mpxl.dtb"
 
-BOARD_DEVICETREE_FILES = "\
-    imx8mp-tqma8mpql-mba8mpxl.dtb \
-    imx8mp-tqma8mpql-mba8mpxl-hdmi.dtb \
-    imx8mp-tqma8mpql-mba8mpxl-hdmi-imx327.dtb \
-    imx8mp-tqma8mpql-mba8mpxl-hdmi-ov9281.dtb \
-    imx8mp-tqma8mpql-mba8mpxl-lvds-tm070jvhg33.dtb \
-    imx8mp-tqma8mpql-mba8mpxl-rpmsg.dtb \
+KERNEL_DEVICETREE = "\
+    freescale/imx8mp-tqma8mpql-mba8mpxl.dtb \
 "
-BOARD_DEVICETREE_FILES:append:mx8mp = "${@bb.utils.contains('MACHINE_FEATURES', 'basler', ' imx8mp-tqma8mpql-mba8mpxl-lvds-basler.dtb', '', d)}"
 
-KERNEL_DEVICETREE = ""
+KERNEL_DEVICETREE_linux-imx-tq = "\
+    freescale/imx8mp-tqma8mpql-mba8mpxl-hdmi.dtb \
+    freescale/imx8mp-tqma8mpql-mba8mpxl-hdmi-imx327.dtb \
+    freescale/imx8mp-tqma8mpql-mba8mpxl-hdmi-ov9281.dtb \
+    freescale/imx8mp-tqma8mpql-mba8mpxl-lvds-tm070jvhg33.dtb \
+    freescale/imx8mp-tqma8mpql-mba8mpxl-rpmsg.dtb \
+"
 
-require conf/machine/include/tqma8-common.inc
+KERNEL_DEVICETREE_linux-imx-tq:append:mx8mp-nxp-bsp = "\
+    ${@bb.utils.contains('MACHINE_FEATURES', 'basler', \
+        ' freescale/imx8mp-tqma8mpql-mba8mpxl-lvds-basler.dtb', '', d)} \
+"
+
+KERNEL_DEVICETREE += "${@kernel_provider_dtbs(d)}"
 
 MACHINE_FEATURES:append = "\
     bluetooth \
@@ -45,9 +52,9 @@ CORTEXM_DEMOS += "\
 "
 
 IMAGE_BOOT_FILES = "\
+    ${@create_image_boot_dtb_files(d)} \
     ${CORTEXM_DEMOS} \
     ${KERNEL_IMAGETYPE} \
-    ${BOARD_DEVICETREE_FILES} \
 "
 
 # SD boot image and FlexSPI boot image can be built using same U-Boot config
@@ -60,4 +67,3 @@ IMXBOOT_TARGETS ?= "\
 # bootstream name, construction see imx-boot recipe, do_deploy
 #
 MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-flash_spl_uboot"
-

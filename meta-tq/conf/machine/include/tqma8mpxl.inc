@@ -1,5 +1,7 @@
 # Common definitions for TQ-Systems GmbH TQMa8MPxL modules
 
+require conf/machine/include/tqma8-common.inc
+
 MACHINEOVERRIDES =. "imx:mx8mp:tqma8mpxl:"
 
 # Don't include kernels in standard images
