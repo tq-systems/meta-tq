@@ -135,7 +135,12 @@ _MBa8Mx HW Rev.030x only_
 
 ## Known Issues
 
-* Default setting for `fdt_file` in u-boot does not match new naming scheme. See [Build Artifacts](#Build-Artifacts) for complete list of supported Device Tree files
+* Linux: operating points for DDR controller missing in device tree.
+  running at lower DDR frequencies does not work in this version of BSP.
+* Default setting for `fdt_file` in u-boot from older BSP version does
+  not match kernel naming scheme since linux 5.10. Use U-Boot from this
+  BSP release or see [Build Artifacts](#Build-Artifacts) for complete
+  list of supported Device Tree files.
 * USB hub disconnects after suspend
 * LVDS shows wrong colors on older Tianma display kit (HW issue on older
   display kit revisions)
