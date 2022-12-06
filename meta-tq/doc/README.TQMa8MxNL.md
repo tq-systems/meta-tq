@@ -134,6 +134,8 @@ _MBa8x HW Rev.030x only_
 
 ## Known Issues
 
+* Linux: operating points for DDR controller missing in device tree.
+  running at lower DDR frequencies does not work in this version of BSP.
 * LVDS shows wrong colors on older Tianma display kit (HW issue on older
   display kit revisions)
 * Mikrobus Modul RTC5 on ecspi1 don't answer
