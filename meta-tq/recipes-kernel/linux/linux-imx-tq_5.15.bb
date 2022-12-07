@@ -20,6 +20,7 @@ LINUX_VERSION:imx-nxp-bsp = "${LINUX_RELEASE}.60"
 LINUX_VERSION:mx93-nxp-bsp = "${LINUX_RELEASE}.52"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
+FILESEXTRAPATHS:prepend:aarch64:imx-nxp-bsp := "${THISDIR}/${PN}-${LINUX_RELEASE}/imx-arm64:"
 
 SRC_URI = "\
     ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
@@ -59,7 +60,7 @@ SRC_URI:mx6-nxp-bsp = "\
     file://usb-serial-port.cfg \
 "
 
-SRC_URI:mx8-nxp-bsp = "\
+SRC_URI:aarch64:imx-nxp-bsp = "\
     ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
     file://local-version.cfg \
     file://tqma8-display-support.cfg \
@@ -78,10 +79,6 @@ SRC_URI:mx8-nxp-bsp = "\
     file://tqma8-v4l2.cfg \
     file://features/devicetree.cfg \
     file://usb-gadget-support.cfg \
-"
-
-SRC_URI:mx93-nxp-bsp = "\
-    ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
 "
 
 SRC_URI:append = " \
