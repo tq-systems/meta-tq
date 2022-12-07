@@ -81,6 +81,10 @@ SRC_URI:aarch64:imx-nxp-bsp = "\
     file://usb-gadget-support.cfg \
 "
 
+SRC_URI:append:mx93-nxp-bsp = "\
+    file://0001-drm-bridge-it6161-add-missing-gpio-consumer-header.patch \
+"
+
 SRC_URI:append = " \
     ${@bb.utils.contains('COMBINED_FEATURES', 'bluetooth', 'file://features/bluetooth-support.cfg', '', d)} \
 "

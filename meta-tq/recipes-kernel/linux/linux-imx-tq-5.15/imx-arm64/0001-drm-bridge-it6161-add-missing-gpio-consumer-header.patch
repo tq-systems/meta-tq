@@ -1,0 +1,31 @@
+From a935f3b9e9c2a4444992005397655f8fede90e5f Mon Sep 17 00:00:00 2001
+From: Ricardo Salveti <ricardo@foundries.io>
+Date: Thu, 30 Sep 2021 20:41:06 -0300
+Subject: [PATCH] drm: bridge: it6161: add missing gpio consumer header
+
+Fix it6161.c:2810:24: error: implicit declaration of function
+'devm_gpiod_get_optional'.
+
+Signed-off-by: Ricardo Salveti <ricardo@foundries.io>
+Acked-by: Jason Liu <jason.hui.liu@nxp.com>
+(cherry picked from commit 2255796b66ccb898161607cb721b2ab13e2353dd)
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ drivers/gpu/drm/bridge/it6161.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/drivers/gpu/drm/bridge/it6161.c b/drivers/gpu/drm/bridge/it6161.c
+index a06ec2544a42..b7bf3698db99 100644
+--- a/drivers/gpu/drm/bridge/it6161.c
++++ b/drivers/gpu/drm/bridge/it6161.c
+@@ -8,6 +8,7 @@
+ #include <drm/drm_print.h>
+ #include <drm/drm_probe_helper.h>
+ #include <linux/err.h>
++#include <linux/gpio/consumer.h>
+ #include <linux/i2c.h>
+ #include <linux/interrupt.h>
+ #include <sound/hdmi-codec.h>
+-- 
+2.25.1
+
