@@ -63,20 +63,20 @@ SRC_URI:mx6-nxp-bsp = "\
 SRC_URI:aarch64:imx-nxp-bsp = "\
     ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
     file://local-version.cfg \
-    file://tqma8-display-support.cfg \
-    file://tqma8-network-support.cfg \
+    file://display-support.cfg \
+    file://network-support.cfg \
     file://tq-generic-devices.cfg \
     file://acpi-removal.cfg \
     file://sdma.cfg \
-    file://tqma8-input-devices.cfg \
+    file://input-devices.cfg \
     file://bpf-support.cfg \
-    file://tqma8-audio-support.cfg \
-    file://tqma8-usb-special-drivers.cfg \
-    file://tqma8-adc-hwmon-support.cfg \
-    file://tqma8-rtc.cfg \
-    file://tqma8-nonimx-drm-removal.cfg \
-    file://tqma8-wifi-support.cfg \
-    file://tqma8-v4l2.cfg \
+    file://audio-support.cfg \
+    file://usb-special-drivers.cfg \
+    file://adc-hwmon-support.cfg \
+    file://rtc.cfg \
+    file://nonimx-drm-removal.cfg \
+    file://wifi-support.cfg \
+    file://v4l2.cfg \
     file://features/devicetree.cfg \
     file://usb-gadget-support.cfg \
 "
