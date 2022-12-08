@@ -13,9 +13,11 @@ require conf/machine/include/k3r5.inc
 # a modified configuration. Unfortunately, meta-ti currently lacks a convenient
 # way to do so.
 
-SYSFW_SOC = "am64x"
 SYSFW_CONFIG = "evm"
-SYSFW_SUFFIX = "gp"
+SYSFW_TIBOOT3_SYMLINK = ""
+
+SPL_BINARY = ""
+UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
 
 PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-tq"
 PREFERRED_PROVIDER_u-boot = "u-boot-ti-tq"

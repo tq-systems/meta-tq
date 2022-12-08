@@ -9,8 +9,18 @@ PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-tq"
 PREFERRED_PROVIDER_u-boot ?= "u-boot-ti-tq"
 PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-ti-tq"
 
+# am64x-gp and am64x_sr2-hs variants are added by am64xx.inc
+IMAGE_BOOT_FILES ?= "${SPL_BINARYNAME} u-boot.${UBOOT_SUFFIX} tiboot3-am64x_sr2-hs-fs-evm.bin"
+
 # From meta-ti-bsp: PREFERRED_PROVIDER and tuning
 require conf/machine/include/am64xx.inc
+
+# Available variants: am64x-gp am64x_sr2-hs-fs am64x_sr2-hs
+SYSFW_DEFAULT_VARIANT ?= "am64x-gp"
+
+# All 3 variants are installed to the boot partition
+# The default variant is additionally installed as tiboot3.bin
+IMAGE_BOOT_FILES += "tiboot3-${SYSFW_DEFAULT_VARIANT}-evm.bin;tiboot3.bin"
 
 # Machine specific options
 
@@ -26,10 +36,6 @@ KERNEL_IMAGETYPE = "Image"
 # TI enforces also fitimage and vmlinux.gz
 # this will enlarge our rootfs
 KERNEL_IMAGETYPES = "Image"
-
-SPL_BINARY = "tispl.bin_HS"
-UBOOT_BINARY = "u-boot.img_HS"
-UBOOT_SYMLINK = "u-boot.img"
 
 # Image Options
 
