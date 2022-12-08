@@ -1,17 +1,2 @@
-DEPENDS:append:tqma64xxl-k3r5 = " virtual/bootloader"
-EXTRA_OEMAKE:append:tqma64xxl-k3r5 = " SBL="${STAGING_DIR_HOST}/boot/u-boot-spl.bin""
-
-do_install:tqma64xxl-k3r5() {
-	install -d ${D}/boot
-	install -m 644 ${WORKDIR}/imggen/${UBOOT_BINARY} ${D}/boot/${UBOOT_IMAGE}
-	ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_SYMLINK}
-	ln -sf ${UBOOT_IMAGE} ${D}/boot/${UBOOT_BINARY}
-}
-
-do_deploy:tqma64xxl-k3r5() {
-	install -d ${DEPLOYDIR}
-	install -m 644 ${WORKDIR}/imggen/${UBOOT_BINARY} ${DEPLOYDIR}/${UBOOT_IMAGE}
-	ln -sf ${UBOOT_IMAGE} ${DEPLOYDIR}/${UBOOT_SYMLINK}
-	ln -sf ${UBOOT_IMAGE} ${DEPLOYDIR}/${UBOOT_BINARY}
-	install -m 644 ${SYSFW_TISCI} ${DEPLOYDIR}/
-}
+DEPENDS:remove:tqma65xx-k3r5 = "virtual/bootloader"
+EXTRA_OEMAKE:remove:tqma65xx-k3r5 = "SBL="${STAGING_DIR_HOST}/boot/u-boot-spl.bin""
