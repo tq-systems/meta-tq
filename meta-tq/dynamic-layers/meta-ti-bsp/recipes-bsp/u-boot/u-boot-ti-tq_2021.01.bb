@@ -13,11 +13,4 @@ SRCREV = "11eb6e967d1b299bfdb0a50d74eb07751eb182c3"
 
 DEPENDS += "python3-setuptools-native"
 
-SPL_UART_BINARY:k3r5:tqma64xxl-k3r5 = "u-boot-spl.bin"
-
-do_deploy:append:tqma64xxl-k3r5 () {
-	mv ${DEPLOYDIR}/tiboot3.bin ${DEPLOYDIR}/tiboot3-r5spl.bin || true
-	mv ${DEPLOYDIR}/u-boot-spl.bin ${DEPLOYDIR}/u-boot-spl-r5spl.bin || true
-}
-
 COMPATIBLE_MACHINE = "tqma64xxl"
