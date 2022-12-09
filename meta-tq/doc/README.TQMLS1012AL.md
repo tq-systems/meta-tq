@@ -9,7 +9,6 @@ This README contains some useful information for TQMLS1012AL on MBLS1012AL carri
 * TQMLS1012AL SOM REV.020x 512 MiB / 1024 MiB RAM 
 * MBLS1012AL carrier Board
 
-
 ## Version information for software components
 
 ### U-Boot
@@ -43,8 +42,9 @@ recovery via JTAG is needed.
   * only with multiple connected USB mass storage devices
 * Linux: currently no out of the box support for RootFS on SPI
 * Linux: Wake Up support not working (RTC / GPIO button)
+* Linux: tftp does not work on swp0@eth1 (X13 next to X6)
 
-## Artifacts
+## Build Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
@@ -64,7 +64,7 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 
-## Boot DIP Switches
+## Functional DIP Switches
 
 ```
 DIP S1  ON                              OFF
