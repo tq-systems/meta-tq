@@ -9,6 +9,27 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQMa335x.IBPQ.SW.0123
+## kirkstone.TQMLS1012AL.BSP.SW.0012
+## kirkstone.TQMLS102xA.BSP.SW.0116
+
+### Changed
+
+* recipes-kernel: simplify structure for TQMa8 kernel config fragments
+  and reuse for TQMa93xxLA
+
+### Added
+
+* recipes-bsp: add recipes for i.MX93 support
+  * firmware-sentinel
+  * firmware-imx-9
+  * imx-atf-tq nased on imx-atf 2.6
+  * u-boot-imx-tq based on v2022.04
+* recipes-kernel: prepare i.MX93 support for linux-imx-tq 5.15
+* conf:
+  * prepare optional include for imx-base for i.MX93 `MACHINEOVERRIDES`
+  * Add machine `tqma93xxla-mba9xxxca`
+
 ## kirkstone.TQMa8.BSP.SW.0087
 ## kirkstone.TQMa6x.BSP.SW.0121
 ## kirkstone.TQMa7x.BSP.SW.0115
