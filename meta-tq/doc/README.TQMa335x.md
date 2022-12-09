@@ -1,22 +1,22 @@
-# TQMa335x\[L\] on MBa335x carrier board
+# TQMa335x\[L\]
+
+This README contains some useful information for TQMa335x\[L\] on MBa335x
 
 [[_TOC_]]
 
-## Overview
+## Variants
 
-### Supported Hardware
-
-* TQMa335x: module revisions REV.020x 256/512 DDR3 memory variants
-* TQMa335xL: module revisions REV.020x 256/512 DDR3 memory variants
-* MBa335x: board revisions REV.020x
+* TQMa335x / TQMa335xL REV.020x 256 MiB DDR3
+* TQMa335x / TQMa335xL REV.020x 512 MiB DDR3
+* MBa335x REV.020x
 
 ## Version information for software components
 
-### Bootloader
+### U-Boot
 
 * uboot-tq (Based on Mainline 2019.04)
 
-### Kernel
+### Linux
 
 * TI-linux-5.4.43 (Based on TI linux-5.4.y-07.00.00.005-rt)
 
@@ -39,7 +39,7 @@ See top level README.md for configurations usable as MACHINE.
   * tailor image recipe and kernel configuration to get real tiny
   * use SoM variant with larger SPI-NOR
 
-## Artifacts
+## Build Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
@@ -53,9 +53,8 @@ Artifacs can be found at the usual locations for bitbake:
 * MLO-${MACHINE}.byteswap: U-Boot MLO (SPL image for SPI NOR flash)
 * u-boot-${MACHINE}.img: U-Boot image to be booted by MLO
 
-## HowTo
 
-### MBa335x DIP Switches
+## DIP Switches
 
 | Switch  | Description       |
 | ------- | :---------------: |
@@ -64,7 +63,7 @@ Artifacs can be found at the usual locations for bitbake:
 | S3      | CAN termination   |
 | S4      | RS485 Termination |
 
-### MBa335x DIP Switch settings for Boot
+### Boot sequence
 
 #### SD Card
 
@@ -93,11 +92,9 @@ Boot sequence: SPI0 (NOR) → MMC0 (SD) → USB0 (N/A) → UART0 (N/A)
 | ON      |  x  |  x  |  x  |     |     |     |     |     |
 | OFF     |     |     |     |  x  |  x  |  x  |  x  |  x  |
 
-## Boot device initialisation and update
+## Boot device initialisation
 
-### Boot device initialisation
-
-#### Bootable SD-Card
+### Bootable SD-Card
 
 To create a bootable SD-Card with complete system image use the generated
 [wic image](#artifacts):
@@ -113,7 +110,7 @@ Example for Linux:
 
 `sudo dd if=<image> of=/dev/sd<x> bs=4M conv=fsync`
 
-#### Bootable e-MMC
+### Bootable e-MMC
 
 To create a bootable e-MMC with complete system image use the generated
 [wic image](#artifacts):
@@ -140,7 +137,7 @@ mmc dev 1
 mmc write ${loadaddr} 0 ${bsz}
 ```
 
-#### Bootable SPI NOR
+### Bootable SPI NOR
 
 To create a bootable SPI NOR with boot loader only use the generated
 [bootloader images](#artifacts). Example for U-Boot, booting from SD-Card:
@@ -153,9 +150,9 @@ tftp u-boot.img
 sf update ${loadaddr} 0x20000 ${filesize}
 ```
 
-### Update components via U-Boot
+## Update components via U-Boot
 
-#### U-Boot environment variables
+### U-Boot environment variables
 
 For ease of development a set of variables and scripts are in default env.
 Depending on your configuration some variable values needs to bet changend
@@ -174,7 +171,7 @@ e-MMC.
 * `fdtfile`: device tree blob,
 * `bootfile`: kernel image,
 
-#### SD / e-MMC
+### SD / e-MMC
 
 Download bootloader from TFTP and update (make sure `mmcdev` is correctly set):
 
@@ -182,11 +179,13 @@ Download bootloader from TFTP and update (make sure `mmcdev` is correctly set):
 run update_uboot_mmc
 ```
 
-#### SPI
+### SPI
 
 Download bootloader from TFTP and update:
 
 `run update_uboot_spi`
+
+## HowTo
 
 ### Booting Linux OS
 
