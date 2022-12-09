@@ -9,6 +9,10 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQMa335x.IBPQ.SW.0123
+## kirkstone.TQMLS1012AL.BSP.SW.0012
+## kirkstone.TQMLS102xA.BSP.SW.0116
+
 ## kirkstone.TQMa8.BSP.SW.0087
 ## kirkstone.TQMa6x.BSP.SW.0121
 ## kirkstone.TQMa7x.BSP.SW.0115
