@@ -201,6 +201,7 @@ Support for the following machines is contained in this version:
 | [y]    | i.MX8QXP         | TQMa8XQP4                | MBa8Xx         | tqma8xqp4-mba8xx             | TQMa8XQP / 2 GiB LPDDR4 RAM, HW REV.010x |
 | [y]    | i.MX8DXP         | TQMa8XDPS                | MB-SMARC-2     | tqma8xdps-mb-smarc-2         | TQMa8XDPS / 2 GiB RAM, HW REV.030x |
 | [y]    | i.MX8QXP         | TQMa8XQPS                | MB-SMARC-2     | tqma8xqps-mb-smarc-2         | TQMa8XQPS / 2 GiB RAM, HW REV.030x |
+| [p]    | i.MX93 11x11     | TQMa93\[3,5\]\[1,2\]LA   | MBa9xxxCA      | tqma93xxla-mba9xxxca         | TQMa93\[3,5\]\[1,2\]LA / 1 GiB RAM, HW REV.010x (Prototype) / MBa9xxxCA |
 | [y]    | LS1012A          | TQMLS1012AL              | MBLS1012AL     | tqmls1012al-mbls1012al       | TQMLS1012AL HW REV.010x ... 020x / 512 MiB / 1GiB RAM / MBLS1012AL HW REV.020x |
 | [y]    | LS10\[17,28\]A   | TQMLS10\[17,28\]A        | MBLS1028A      | tqmls1028a-mbls1028a         | TQMLS1017A / TQMLS1028A HW REV.010x ... 030x, 1 GiB / 4 GiB RAM, MBLS1028A HW REV.010x |
 | [y]    | LS10\[17,28\]A   | TQMLS10\[17,28\]A        | MBLS1028A-IND  | tqmls1028a-mbls1028a-ind     | TQMLS1017A / TQMLS1028A HW REV.010x ... 030x, 1 GiB / 4 GiB RAM, MBLS1028A-IND HW REV.010x |
@@ -266,6 +267,7 @@ Under the given links SOM specific information can be found:
 [TQMa8XDPS](doc/README.TQMa8XxS.md)  
 [TQMa8XQPS](doc/README.TQMa8XxS.md)  
 [TQMa8QM](doc/README.TQMa8x.md)  
+[TQMa93\[3,5\]\[1,2\]LA](doc/README.TQMa93xx.md)  
 [TQMA335x\[L\]](doc/README.TQMa335x.md)  
 [TQMA57xx](doc/README.TQMa57xx.md)  
 [TQMA64xxL](doc/README.TQMa64xxL.md)  

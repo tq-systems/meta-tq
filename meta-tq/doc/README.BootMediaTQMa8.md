@@ -17,6 +17,7 @@ how default U-Boot env supports update for development purpose.
 | iMX8MP     |       x         |              |
 | iMX8X      |       x         |              |
 | iMX8       |       x         |              |
+| iMX93      |       x         |              |
 
 ### Bootable SD-Card
 
@@ -31,7 +32,7 @@ Write bootstream with correct [offset](#bootstream-location-on-sd-and-e-mmc) to 
 
 Example for Linux:
 
-`sudo dd if=<bootstream> of=/dev/sd<x> bs=1k seek=32 conv=fsync`
+`sudo dd if=<bootstream> of=/dev/sd<x> bs=1k seek=<kiB offset> conv=fsync`
 
 ### Bootable e-MMC
 
@@ -47,7 +48,7 @@ to e-MMC
 
 Example for Linux:
 
-`sudo dd if=<bootstream> of=/dev/mmcblk0 bs=1k seek=32 conv=fsync`
+`sudo dd if=<bootstream> of=/dev/mmcblk0 bs=1k seek=<kiB offset> conv=fsync`
 
 Example for U-Boot:
 
