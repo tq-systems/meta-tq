@@ -1,5 +1,7 @@
 # Common definitions for R5 bootloader on TQMa65xx
 
+MACHINEOVERRIDES =. "tqma65xx-k3r5:"
+
 require conf/machine/include/k3r5.inc
 
 # See https://git.ti.com/cgit/k3-image-gen/k3-image-gen/tree/README.md
