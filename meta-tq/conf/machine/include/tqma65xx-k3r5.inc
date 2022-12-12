@@ -20,6 +20,12 @@ SYSFW_SYMLINK = ""
 PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-tq"
 PREFERRED_PROVIDER_u-boot = "u-boot-ti-tq"
 
+SPL_BINARY = "spl/u-boot-spl.${UBOOT_SUFFIX}"
+SPL_SYMLINK = "u-boot-r5spl.${UBOOT_SUFFIX}"
+UBOOT_BINARY = "tiboot3.${UBOOT_SUFFIX}"
+UBOOT_IMAGE = "tiboot3-${MAINMACHINE}-${PV}-${PR}.${UBOOT_SUFFIX}"
+UBOOT_SYMLINK = "tiboot3-${MAINMACHINE}.${UBOOT_SUFFIX}"
+
 # R5 sysfw and U-Boot are build using the Bitbake MultiConfig feature. To avoid
 # conflicts and race conditions, in particular when using the "rm_work" class,
 # each of the multiconfigs must use a separate TMPDIR (resulting in directory
