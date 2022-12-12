@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 
 SRCBRANCH = "TQMa65xx-ti-u-boot-v2020.01"
-SRCREV = "0c0990aacae59a469e5f119a4bb61dd00937d6ab"
+SRCREV = "488aa8881775a1e36abe43d2c4d7569417896f08"
 
 DEPENDS += "dtc-native bc-native lzop-native flex-native bison-native"
 
