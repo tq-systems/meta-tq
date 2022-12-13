@@ -10,7 +10,7 @@ KERNEL_DEVICETREE = " \
     ti/k3-am65-tqma65xx-mba65xx-dmb-fc21.dtbo \
 "
 
-SERIAL_CONSOLES ?= "115200;ttyS2"
+SERIAL_CONSOLES = "115200;ttyS2"
 
 # disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
 USE_VT = "0"

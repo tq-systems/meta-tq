@@ -9,6 +9,10 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Fixed
+
+* TQMa65xx: correctly set SERIAL_CONSOLES
+
 ## kirkstone.TQMa335x.BSP.SW.0124
 ## kirkstone.TQMLS1012AL.BSP.SW.0012
 ## kirkstone.TQMLS102xA.BSP.SW.0116
