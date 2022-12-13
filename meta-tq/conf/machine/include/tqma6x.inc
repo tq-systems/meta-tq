@@ -7,7 +7,7 @@ MACHINEOVERRIDES =. "imx:mx6:tqma6x:"
 
 include conf/machine/include/imx-base.inc
 
-DEFAULTTUNE:imx6 ?= "cortexa9thf-neon"
+DEFAULTTUNE ?= "cortexa9thf-neon"
 require conf/machine/include/arm/armv7a/tune-cortexa9.inc
 
 # Machine specific options
