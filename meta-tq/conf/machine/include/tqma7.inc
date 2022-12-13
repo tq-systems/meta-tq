@@ -6,7 +6,7 @@ MACHINEOVERRIDES =. "imx:mx7:mx7d:tqma7x:"
 # meta-freescale
 include conf/machine/include/imx-base.inc
 
-DEFAULTTUNE:imx7 ?= "cortexa7thf-neon"
+DEFAULTTUNE ?= "cortexa7thf-neon"
 require conf/machine/include/arm/armv7a/tune-cortexa7.inc
 
 # Machine specific options
