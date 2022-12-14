@@ -19,6 +19,8 @@ IMAGE_BOOT_FILES = "\
     ${KERNEL_DEVICETREE} \
 "
 
+KERNEL_DEVICETREE += "${@kernel_provider_dtbs(d)}"
+
 WKS_FILE = "tqmaxx-sdimg.wks"
 
 MACHINE_FEATURES += "\
