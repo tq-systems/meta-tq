@@ -14,7 +14,7 @@
 
 ## Linux:
 
-### Kernel based on 5.10
+### Kernel based on 5.15
 
 * based on linux-imx-fslc (https://github.com/Freescale/linux-fslc.git)
-* branched from `5.10-2.1.x-imx` / contains commits up to b0d74a58e223ab3e125a170c48bc1904d5a656ed
+* branched from `5.15-2.0.x-imx` / contains commits up to d818413e4d7901cb8a00a631a389326e2c93ae41
