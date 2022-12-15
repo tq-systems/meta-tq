@@ -12,6 +12,7 @@ do_install:append () {
     # Delete initscript if it is not needed
     if $without_sysvinit || $with_udev; then
         rm -rf ${D}/etc/init.d
+        rmdir --ignore-fail-on-non-empty ${D}/etc
     fi
 
     if $with_udev; then
