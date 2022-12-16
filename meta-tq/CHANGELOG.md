@@ -9,6 +9,14 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* TQMa64xxL/TQMa65xx: updated for compatiblity with latest meta-ti
+  (commit 2a5a0339d5bd)
+* TQMa64xxL: updated build to generate tiboot3.bin for all 3 SYSFW variants
+  (GP, HS-FS, HS-SE). Only boot on GP variants has been actually tested, as no
+  TQMa64xxL with a HS CPU variant exists at this point.
+
 ### Fixed
 
 * TQMa65xx: correctly set SERIAL_CONSOLES
