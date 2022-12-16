@@ -9,8 +9,23 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* recipes-kernel: add support for linux-6.1.y as stable kernel for
+  * TQMa8Mx
+  * TQMa8MxML
+  * TQMa8MxNL
+  * TQMa8MPxL
+* TQMa8: prepare to have different `KERNEL_DEVICETREE` lists for different
+  kernel flavours. Reuse the logic already in use for TQMa6x.
+
 ### Changed
 
+* TQMLX2160A-MBLX2160A: follow yocto migration guide to prevent install
+  kernel image into rootfs
+* TQMa8: allow kernel image to be installed in rootfs per default
+* TQMa8 / TQMa9: rewrite logic for `KERNEL_DEVICETREE` and device trees in
+  `IMAGE_BOOT_FILES`. This removes the intermidiate variable `BOARD_DEVICETREE_FILES`
 * TQMa93xxAL: update imx-tf-tq_2.6 to NXP BSP lf-5.15.71-2.2.0
 * TQMa93xxAL: update security controller firmware to version 0.8 from NXP
 * TQMa64xxL: Update to include latest ti-u-boot-2021.01 changes. This fixes
@@ -28,6 +43,9 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* machines: add missing dependency for `KERNEL_DEVICETREE`
+  when using the python helper `kernel_provider_dtbs` `KERNEL_DEVICETREE`
+  has a hidden dependency on `KERNEL_DEVICETREE_${PREFERRED_PROVIDER_virtual/kernel}`
 * doc: fixes for kernel versions in use for SOM with NXP CPU
 * TQMa6x/TQMa7x/TQMa6UL[L]: fix comatibility of overrides with
   meta-freescale
