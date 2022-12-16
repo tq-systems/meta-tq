@@ -45,9 +45,32 @@ Artifacts can be found at the usual locations for Bitbake:
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * \*.rootfs.ubifs: UBIFS rootfs
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
-* tiboot3.bin: first-stage bootloader (R5 core, includes system controller firmware)
+* tiboot3-*-evm.bin: first-stage bootloader (R5 core)
 * tispl.bin: second-stage bootloader (A53 core, includes ATF and OPTEE)
 * u-boot.img: last-stage bootloader
+
+### First-stage bootloader variants
+
+The first-stage bootloader comes in three variants, each including a different
+version of the system controller firmware:
+
+* tiboot3-am64x-gp-evm.bin (AM64x Silicon Revision 1.0 or 2.0, General Purpose variant)
+* tiboot3-am64x_sr2-hs-fs-evm.bin (AM64x Silicon Revision 2.0, High Security variant, field-securable)
+* tiboot3-am64x_sr2-hs-evm.bin (AM64x Silicon Revision 2.0, High Security variant, security enforced)
+
+Please refer to the Secure Device Processor SDK documention for more information
+on the High Security CPU variants. This documentation must be obtained directly
+from TI.
+
+To select the variant to use, set the `SYSFW_DEFAULT_VARIANT` variable to
+"am64x-gp", "am64x_sr2-hs-fs" or "am64x_sr2-hs" (in `local.conf` or a custom
+machine definition), to match the used AM64x CPU variant and security
+enforcement status. The default value is "am64x-gp".
+
+The selected variant will be installed to the boot partition of the generated
+WIC images as `tiboot3.bin`. It is possible to change an existing image to boot
+on a different CPU variant by mounting the boot partition and renaming one of
+the bootloader binaries to `tiboot3.bin`.
 
 ## HowTo
 
