@@ -39,9 +39,15 @@ PREFERRED_PROVIDER_virtual/imx-cortexm-demos ?= "tqma8-cortexm-demos"
 # in kernel prefix where to find dtb
 
 KERNEL_DEVICETREE_PATH_PREFIX = "freescale/"
+BOARD_DEVICETREE_FILES ??= ""
 
 python () {
-    dt_list = d.getVar("BOARD_DEVICETREE_FILES").split()
+    bdf = d.getVar("BOARD_DEVICETREE_FILES")
+    # 'BOARD_DEVICETREE_FILES' may be empty when setting 'KERNEL_DEVICETREE'
+    # with vendor prefix
+    if not bdf:
+        return
+    dt_list = bdf.split()
     dt_prefix = d.getVar("KERNEL_DEVICETREE_PATH_PREFIX")
     dt_prefix += "% s"
     dt_list =  [dt_prefix % i for i in dt_list]
