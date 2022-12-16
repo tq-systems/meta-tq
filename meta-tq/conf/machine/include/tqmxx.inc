@@ -24,6 +24,6 @@ def kernel_provider_dtbs(d):
 
     dtbs_for_provider = d.getVar('KERNEL_DEVICETREE_' + kernel_provider)
     if dtbs_for_provider is not None:
-        return d.getVar('KERNEL_DEVICETREE_' + kernel_provider)
+        return dtbs_for_provider
 
     return ''
