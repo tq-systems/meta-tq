@@ -11,6 +11,8 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* TQMa64xxL: Update to include latest ti-u-boot-2021.01 changes. This fixes
+  a license issue in U-Boot (inclusion of GPL-incompatible code).
 * TQMa64xxL/TQMa65xx: updated for compatiblity with latest meta-ti
   (commit 2a5a0339d5bd)
 * TQMa64xxL: updated build to generate tiboot3.bin for all 3 SYSFW variants
