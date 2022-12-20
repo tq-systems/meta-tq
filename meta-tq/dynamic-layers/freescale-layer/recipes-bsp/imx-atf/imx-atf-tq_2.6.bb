@@ -11,11 +11,10 @@ PROVIDES += "imx-atf"
 PV .= "+git${SRCPV}"
 
 SRCBRANCH = "TQM-lf_v2.6"
-SRCREV = "264fa91769c8e35bd56e526ed10fda27b764d5c0"
+SRCREV = "b66bf0ccefe755ecb2d6017aedd7786eb14707f6"
 
 SRC_URI = "\
     ${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
-    file://0001-Makefile-Suppress-array-bounds-error.patch \
 "
 
 S = "${WORKDIR}/git"
