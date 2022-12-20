@@ -7,16 +7,6 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     kernel-modules \
 "
 
-MACHINE_FEATURES += "\
-    ext2 \
-    ext3 \
-    rtc \
-    serial \
-    ubi \
-    usbhost \
-    vfat \
-"
-
 PREFERRED_PROVIDER_imx-boot ?= "imx-boot-tq"
 
 KERNEL_IMAGETYPE = "Image"
