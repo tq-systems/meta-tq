@@ -11,6 +11,8 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* TQMa93xxAL: update imx-tf-tq_2.6 to NXP BSP lf-5.15.71-2.2.0
+* TQMa93xxAL: update security controller firmware to version 0.8 from NXP
 * TQMa64xxL: Update to include latest ti-u-boot-2021.01 changes. This fixes
   a license issue in U-Boot (inclusion of GPL-incompatible code).
 * TQMa64xxL/TQMa65xx: updated for compatiblity with latest meta-ti
@@ -21,6 +23,9 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* doc: fixes for kernel versions in use for SOM with NXP CPU
+* TQMa6x/TQMa7x/TQMa6UL[L]: fix comatibility of overrides with
+  meta-freescale
 * TQMa65xx: correctly set SERIAL_CONSOLES
 
 ## kirkstone.TQMa335x.BSP.SW.0124
