@@ -35,6 +35,75 @@ local.conf or a custom DISTRO config:
 Please note that the default linux-imx-tq kernel has received more thorough
 testing and it is therefore recommended for most usecases.
 
+## Supported Features
+
+### U-Boot
+
+| Feature                                          |              |
+| :----------------------------------------------- | :----------: |
+| RAM configs                                      |   1,4 GiB    |
+| CPU variants                                     |LS1017/LS1028A|
+| GPIO                                             |      x       |
+| I2C                                              |      x       |
+| **QSPI**                                         |              |
+| Read                                             |      x       |
+| Write                                            |      x       |
+| Boot                                             |      x       |
+| **e-MMC / SD-Card**                              |              |
+| Read                                             |      x       |
+| Write                                            |      x       |
+| Boot                                             |      x       |
+| **USB**                                          |              |
+| USB 3.0                                          |      x       |
+| **ENET**                                         |              |
+| ENET 0                                           |      x       |
+| ENET 1                                           |      x       |
+| ENET Switch                                      |      x       |
+| **Bootstreams**                                  |              |
+| FlexSPI                                          |      x       |
+| SD / e-MMC                                       |      x       |
+
+### Linux
+
+| Feature                                          |              |
+| :----------------------------------------------- | :----------: |
+| RAM configs                                      |    1,4 GiB   |
+| CPU variants                                     |LS1017/LS1028A|
+| speed grade / temperature grade detection        |       x      |
+| **UART**                                         |              |
+| console on UART1 (X19)                           |       x      |
+| additional UART2 on pin heads (X38)              |       x      |
+| **GPIO**                                         |              |
+| LED                                              |       x      |
+| Button                                           |       x      |
+| **I2C**                                          |              |
+| Temperature Sensors                              |       x      |
+| RTC                                              |       x      |
+| EEPROMS                                          |       x      |
+| **ENET**                                         |              |
+| ENET 0                                           |       x      |
+| ENET 1                                           |       x      |
+| ENET Switch                                      |       x      |
+| **USB**                                          |              |
+| USB 3.0 Hub                                      |       x      |
+| USB 2.0 Dual Role (X5)                           |       x      |
+| **QSPI NOR**                                     |              |
+| Read                                             |       x      |
+| Write                                            |       x      |
+| **Graphic**                                      |              |
+| GPU                                              |       x      |
+| **Display**                                      |              |
+| DisplayPort                                      |       x      |
+| **PCIe**                                         |              |
+| mini-PCIe on MBLs1028a                           |       x      |
+| **SATA**                                         |              |
+| M.2 SATA                                         |       x      |
+| **CAN**                                          |              |
+| CAN 1                                            |       x      |
+| CAN 2                                            |       x      |
+| **SPI**                                          |              |
+| SPI user space device                            |       x      |
+
 ## Notes
 
 Differing from the LS1028A defaults, the TQMLS1028A device trees use an
@@ -45,6 +114,10 @@ higher precision.
 
 The sensor is used for automatic core clock reduction and shutdown in the
 case of overheating.
+
+## Known Issues
+
+DisplayPort only works with some monitors and only in 1920x1080.
 
 ## Artifacts
 
@@ -79,6 +152,37 @@ Artifacs can be found at the usual locations for bitbake:
 
 Set BL2_IMAGE to `bl2_sd_tqmls1028a_4gb.pbl` and BL3_IMAGE to `fip_uboot_tqmls1028a_4gb.bin` to create
 SD/e-MMC image for 4GiB variant.
+
+## Boot DIP Switches
+
+### SD Card
+
+| DIP S9  | 1 | 2 | 3 | 4 |
+| ------- | - | - | - | - |
+| ON      |   |   |   |   |
+| OFF     | x | x | x | x |
+
+### e-MMC
+
+| DIP S9  | 1 | 2 | 3 | 4 |
+| ------- | - | - | - | - |
+| ON      | x |   |   |   |
+| OFF     |   | x | x | x |
+
+### FLEXSPI
+
+| DIP S9  | 1 | 2 | 3 | 4 |
+| ------- | - | - | - | - |
+| ON      |   | x |   |   |
+| OFF     | x |   | x | x |
+
+## Signal Switch Select
+
+DIP S10 allows switching of signals:
+ * S10-1: 0: IIC5 to Mikro-Module 1: IIC5 to Baseboard I2C
+ * S10-2: 0: UART2 to Mikro-Module 1: UART2 to Baseboard X38 Pin 15 and Pin 17
+ * S10-3: 0: SPI3 to Mikro-Module 1: SPI3 to Baseboard X25 Pin 38/40/42/44
+ * S10-4: 0: Fan on X37 active 1: Fan on X37 not active
 
 ## Support Wiki
 
