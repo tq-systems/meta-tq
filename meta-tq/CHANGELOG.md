@@ -20,6 +20,11 @@ Releases are named with the following scheme:
 * TQMa64xxL: updated build to generate tiboot3.bin for all 3 SYSFW variants
   (GP, HS-FS, HS-SE). Only boot on GP variants has been actually tested, as no
   TQMa64xxL with a HS CPU variant exists at this point.
+* TQMLS1028A:
+  * Removed CONFIG_NET_RANDOM_ETHADDR in U-Boot
+  * Renamed U-Boot environment variables for bootscripts
+  * Added Support for GPIO Controllers in U-Boot
+  * Updated README.TQMLS1028A.md
 
 ### Fixed
 
@@ -27,6 +32,10 @@ Releases are named with the following scheme:
 * TQMa6x/TQMa7x/TQMa6UL[L]: fix comatibility of overrides with
   meta-freescale
 * TQMa65xx: correctly set SERIAL_CONSOLES
+* TQMLS1028A:
+  * Fix SD-Card WP pin issue in Linux and U-Boot
+  * Fixed automatic setting of bootcmd
+  * Linux: Fixed wrong dcdc_reset pin
 
 ## kirkstone.TQMa335x.BSP.SW.0124
 ## kirkstone.TQMLS1012AL.BSP.SW.0012
