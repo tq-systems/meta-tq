@@ -36,6 +36,7 @@ Releases are named with the following scheme:
   * Fix SD-Card WP pin issue in Linux and U-Boot
   * Fixed automatic setting of bootcmd
   * Linux: Fixed wrong dcdc_reset pin
+* TQMa335x: Fix RTC alarm IRQ
 
 ## kirkstone.TQMa335x.BSP.SW.0124
 ## kirkstone.TQMLS1012AL.BSP.SW.0012
