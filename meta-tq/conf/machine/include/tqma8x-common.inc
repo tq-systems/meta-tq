@@ -2,9 +2,6 @@
 
 MACHINEOVERRIDES =. "imx:mx8:mx8qm:"
 
-# Don't include kernels in standard images
-RDEPENDS:${KERNEL_PACKAGE_NAME}-base = ""
-
 LOADADDR = ""
 
 # Machine specific options

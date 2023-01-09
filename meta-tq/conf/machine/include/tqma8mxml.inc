@@ -4,9 +4,6 @@ require conf/machine/include/tqma8-common.inc
 
 MACHINEOVERRIDES =. "imx:mx8mm:tqma8mxml:"
 
-# Don't include kernels in standard images
-RDEPENDS:${KERNEL_PACKAGE_NAME}-base = ""
-
 LOADADDR = ""
 
 # Machine specific options
