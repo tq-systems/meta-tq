@@ -28,6 +28,10 @@ def kernel_provider_dtbs(d):
 
     return ''
 
+# this instructs bitbake to take the dependency established with the
+# above function into account when calculating hashes for KERNEL_DEVICETREE
+KERNEL_DEVICETREE[vardeps] = "KERNEL_DEVICETREE_${PREFERRED_PROVIDER_virtual/kernel}"
+
 # Return a list of device tree files that does not contain a vendor
 # directory prefix. This list is intended to be used for dtb list
 # assignment of `IMAGE_BOOT_FILES`
