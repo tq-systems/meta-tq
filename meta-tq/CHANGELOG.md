@@ -11,6 +11,12 @@ Releases are named with the following scheme:
 
 ### Added
 
+* u-boot-imx-tq: TQMa8MPxL: VARD based device tree patching
+  Devices may be assembled optionally on SOM. Use variant and revision data to
+  enable / disable devices in device tree based on VARD. This prevents the OS
+  from probing / accessing not assembled devices
+* u-boot-imx-tq: TQMa8[x,Xx,Mx,MxML,MxNL,MPxL]: add nfs boot script to boot from
+  network without TFTP server
 * recipes-kernel: add support for linux-6.1.y as stable kernel for
   * TQMa8Mx
   * TQMa8MxML
@@ -26,6 +32,7 @@ Releases are named with the following scheme:
 * TQMa8: allow kernel image to be installed in rootfs per default
 * TQMa8 / TQMa9: rewrite logic for `KERNEL_DEVICETREE` and device trees in
   `IMAGE_BOOT_FILES`. This removes the intermidiate variable `BOARD_DEVICETREE_FILES`
+* u-boot-imx-tq: TQMa8[x,Xx,Mx,MxML,MxNL,MPxL]: cleanup default environment
 * TQMa93xxAL: update imx-tf-tq_2.6 to NXP BSP lf-5.15.71-2.2.0
 * TQMa93xxAL: update security controller firmware to version 0.8 from NXP
 * TQMa64xxL: Update to include latest ti-u-boot-2021.01 changes. This fixes
@@ -43,6 +50,10 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* u-boot-imx-tq: TQMa8MPxL:
+  * long delay when accessing network via Eqos / TSN port (dwc_eth_qos)
+  * unregister MDIO bus when probe failed for Eqos / TSN port (dwc_eth_qos)
+    and FEC port (fec-mxc)
 * machines: add missing dependency for `KERNEL_DEVICETREE`
   when using the python helper `kernel_provider_dtbs` `KERNEL_DEVICETREE`
   has a hidden dependency on `KERNEL_DEVICETREE_${PREFERRED_PROVIDER_virtual/kernel}`
