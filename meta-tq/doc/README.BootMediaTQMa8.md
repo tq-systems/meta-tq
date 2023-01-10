@@ -147,6 +147,8 @@ environment:
   ubifs rootfs in this volume
 * `netboot`: load kernel and dtb using tftpboot and boots into rootfs on a NFS
   mount.
+* `nfsboot`: load kernel and dtb from NFS and boots into rootfs on a NFS.
+  Kernel and dtb are expected in the NFS rootfs (`${rootpath}/boot` on NFS server)
 
 ## Cortex M4/M7 support
 
