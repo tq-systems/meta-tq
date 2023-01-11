@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Removed
+
+* gengetopt: remove recipe, we depend on openembedded-layer which provides this
+  recipe
+
 ### Fixed
 
 * Fix ti-sgx-ddk-um initialization on systemd-based distros. This allows
