@@ -12,6 +12,7 @@ Releases are named with the following scheme:
 ### Added
 
 * u-boot-imx-tq: TQMa8MPxL: VARD based device tree patching
+
   Devices may be assembled optionally on SOM. Use variant and revision data to
   enable / disable devices in device tree based on VARD. This prevents the OS
   from probing / accessing not assembled devices
@@ -52,6 +53,10 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TQMa57xx: Fix setup of DSP coprocessors on AM572x/AM574x SoC variants
+* TQMa64xxL: Fix periodic rescan for SD cards with warning message when no SD
+  card is inserted
+* TQMa64xxL: Fix QSPI data corruption in U-Boot when accessing UBIFS volumes
 * u-boot-imx-tq: TQMa8MPxL:
   * long delay when accessing network via Eqos / TSN port (dwc_eth_qos)
   * unregister MDIO bus when probe failed for Eqos / TSN port (dwc_eth_qos)
