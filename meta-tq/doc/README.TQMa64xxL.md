@@ -23,15 +23,12 @@ _Kernel:_
 
 * The USB OTG port does not work in host mode in U-Boot
   - The OTG port works in host mode after booting Linux.
+* There is no PRU Ethernet support in U-Boot. Only the primary Ethernet port
+  is usable in the bootloader.
 * Most GPIOs can't be read or set from U-Boot, as they are disabled in the
   default pinmuxing. This also affects LED and button GPIOs. LEDs and buttons
   are working as expected on Linux.
 * There is currently no driver support for the Bluetooth module of the MBaX4XxL
-
-## Support Wiki
-
-A link to the TQ support Wiki will be added here when a page for the TQMa64xxL
-is available.
 
 ## Artifacts
 
@@ -201,3 +198,7 @@ to control the filenames requested via TFTP.
 
 Kernel and Device Trees are part of the root filesystem. They cannot be updated
 from U-Boot separately from the filesystem.
+
+## Support Wiki
+
+See [TQ Support Wiki for TQMa64xxL](https://support.tq-group.com/en/arm/tqma64xxl)
