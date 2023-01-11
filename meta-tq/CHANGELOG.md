@@ -27,6 +27,8 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-imx-tq: TQMa8[Mx,MxML,MxNL,MPxL]: hog IRQ gpio as input in devicetree to
+  prevent configuration as output
 * TQMLX2160A-MBLX2160A: follow yocto migration guide to prevent install
   kernel image into rootfs
 * TQMa8: allow kernel image to be installed in rootfs per default
