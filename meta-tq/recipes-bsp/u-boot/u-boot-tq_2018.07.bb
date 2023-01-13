@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
 DEPENDS += "bc-native bison-native"
 DEPENDS += "swap-file-endianess-native tcl-native"
 
-SRCREV = "2078dbd7871b6a8ed7bb475f78a486ed2e3bf937"
+SRCREV = "42021947ff51df345f6b1013d25bffe2eafa92e1"
 SRCBRANCH = "TQMLS10xxA-u-boot-v2018.07"
 
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
