@@ -9,6 +9,15 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQ.ARM.BSP.0003
+
+### Module BSP Revisions
+
+* kirkstone.TQMa335x.BSP.SW.0125
+* kirkstone.TQMa64xxL.BSP.SW.0002
+* kirkstone.TQMa65xx.BSP.SW.0009
+* kirkstone.TQMa8.BSP.SW.0088
+
 ### Removed
 
 * gengetopt: remove recipe, we depend on openembedded-layer which provides this
