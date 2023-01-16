@@ -53,6 +53,11 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TQMa65xx: Fix RX hang of PRU Ethernet ports
+
+  The TQMa65xx PRU Ethernet ports frequently got stuck in a state where all
+  received traffic was dropped. Revert the PRU Ethernet firmware to 02.02.09.03
+  (as was used in our Hardknott-based BSPs) to fix this issue.
 * TQMa57xx: Fix setup of DSP coprocessors on AM572x/AM574x SoC variants
 * TQMa64xxL: Fix periodic rescan for SD cards with warning message when no SD
   card is inserted
