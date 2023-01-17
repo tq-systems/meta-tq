@@ -36,6 +36,13 @@ _Kernel:_
   defconfig cannot be extended using config fragments.
 * Macronix Octal SPI-NOR flash is currently unsupported. TQMa65xx variants with
   an OSPI flash run in single SPI mode.
+* When rebooting from Linux with DIP switches set to SPI-NOR boot, the system
+  will boot from eMMC instead if the eMMC contains a bootable image
+* The system will hang while booting from NFS unless the `netdev` variable is
+  set in the U-Boot environment. Use the commands `setenv netdev eth0; saveenv`
+  to set up the environment for NFS boot.
+* LVDS shows wrong colors on older Tianma display kit (HW issue on older
+  display kit revisions)
 
 ## Support Wiki
 
