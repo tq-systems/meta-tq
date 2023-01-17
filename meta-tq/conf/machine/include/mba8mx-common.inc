@@ -1,3 +1,6 @@
+
+require mba8-common.inc
+
 # Set Serial console
 SERIAL_CONSOLES = "115200;ttymxc2"
 

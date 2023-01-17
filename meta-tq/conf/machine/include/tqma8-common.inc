@@ -3,11 +3,6 @@
 
 require conf/machine/include/tqmxx.inc
 
-MACHINE_EXTRA_RRECOMMENDS += "\
-    kernel-devicetree \
-    kernel-modules \
-"
-
 MACHINE_FEATURES += "\
     alsa \
     ext2 \

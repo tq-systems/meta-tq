@@ -1,6 +1,7 @@
 # Common definitions for TQ-Systems GmbH MBa8MPxL baseboard for TQMa8MPxL modules
 
 require conf/machine/include/tqma8mpxl.inc
+require conf/machine/include/mba8-common.inc
 
 # Set u-boot DTB
 UBOOT_DTB_NAME = "imx8mp-tqma8mpql-mba8mpxl.dtb"

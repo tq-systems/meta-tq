@@ -1,4 +1,5 @@
 # shared definitions for MB-SMARC-2 mainboard
+require conf/machine/include/mba8-common.inc
 
 # We have to disable SERIAL_CONSOLE due to auto-serial-console
 SERIAL_CONSOLES = "115200;ttyLP0"
