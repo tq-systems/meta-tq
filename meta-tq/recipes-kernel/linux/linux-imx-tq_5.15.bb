@@ -79,6 +79,7 @@ SRC_URI:aarch64:imx-nxp-bsp = "\
     file://v4l2.cfg \
     file://features/devicetree.cfg \
     file://usb-gadget-support.cfg \
+    file://imx93-platform-support.cfg \
 "
 
 SRC_URI:append:mx93-nxp-bsp = "\
