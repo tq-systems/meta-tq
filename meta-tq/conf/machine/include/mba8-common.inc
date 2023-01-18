@@ -7,3 +7,12 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     kernel-image \
     kernel-modules \
 "
+
+WKS_FILE = "tqmaxx-imx-v8-sdimg.wks.in"
+
+WKS_FILE_DEPENDS += "\
+    dosfstools-native \
+    e2fsprogs-native \
+    mtools-native \
+    parted-native \
+"

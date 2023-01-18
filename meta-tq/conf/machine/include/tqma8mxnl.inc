@@ -73,12 +73,6 @@ UBINIZE_ARGS = "\
 # and u-boot.
 UBI_VOLNAME = "root"
 
-WKS_FILE_DEPENDS = "\
-    mtools-native \
-    dosfstools-native \
-    parted-native \
-"
-
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale
 

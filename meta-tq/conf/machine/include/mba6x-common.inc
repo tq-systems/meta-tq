@@ -21,8 +21,6 @@ IMAGE_BOOT_FILES = "\
 
 KERNEL_DEVICETREE += "${@kernel_provider_dtbs(d)}"
 
-WKS_FILE = "tqmaxx-sdimg.wks"
-
 MACHINE_FEATURES += "\
     bluetooth \
     display \
@@ -32,4 +30,13 @@ MACHINE_FEATURES += "\
 MACHINE_EXTRA_RRECOMMENDS += "\
     linux-firmware-ath10k \
     linux-firmware-qca \
+"
+
+WKS_FILE = "tqmaxx-sdimg.wks"
+
+WKS_FILE_DEPENDS += "\
+    dosfstools-native \
+    e2fsprogs-native \
+    mtools-native \
+    parted-native \
 "

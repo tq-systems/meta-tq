@@ -47,7 +47,10 @@ UBOOT_MAKE_TARGET:tqma6x ?= "u-boot.imx"
 
 # Image Options
 
-EXTRA_IMAGEDEPENDS += "virtual/bootloader"
+EXTRA_IMAGEDEPENDS += "\
+    virtual/bootloader \
+    virtual/kernel \
+"
 
 # note: These settings are only usable with larger SPI NOR
 # ubinize PEB_SIZE="65536"
@@ -63,13 +66,5 @@ UBI_VOLNAME = "root"
 
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
-
-WKS_FILE_DEPENDS = "\
-    mtools-native \
-    dosfstools-native \
-    parted-native \
-    virtual/kernel \
-    virtual/bootloader \
-"
 
 PREFERRED_VERSION_linux-imx-tq = "5.15%"

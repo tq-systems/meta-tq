@@ -43,7 +43,10 @@ UBOOT_MAKE_TARGET:${MACHINE} ?= "u-boot.imx"
 
 # Image Options
 
-EXTRA_IMAGEDEPENDS += "virtual/bootloader"
+EXTRA_IMAGEDEPENDS += "\
+    virtual/bootloader \
+    virtual/kernel \
+"
 
 # Verified values to generate UBI image:
 # physical erase block size
@@ -78,10 +81,3 @@ UBI_VOLNAME = "root"
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
-WKS_FILE_DEPENDS = "\
-    mtools-native \
-    dosfstools-native \
-    parted-native \
-    virtual/kernel \
-    virtual/bootloader \
-"
