@@ -38,10 +38,11 @@ is _mandatory_ - see [table](#supported-machines).
 * i.MX8MM
 * i.MX8MN
 * i.MX8MP
+* i.MX93
 
 URI: https://git.yoctoproject.org/git/meta-freescale  
 branch: kirkstone  
-revision: HEAD  
+revision: tested with HEAD, at least commit 8bd13d69 ("firmware-imx: Upgrade 8.17 -> 8.18")
 layers: meta-freeescale  
 
 **Attention:** The following distros defined in meta-freescale-distro are not
