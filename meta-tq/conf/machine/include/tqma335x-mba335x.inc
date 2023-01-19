@@ -27,10 +27,14 @@ USE_VT = "0"
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
-WKS_FILE_DEPENDS = "\
-    mtools-native \
+WKS_FILE_DEPENDS += "\
     dosfstools-native \
+    e2fsprogs-native \
+    mtools-native \
     parted-native \
+"
+
+EXTRA_IMAGEDEPENDS += "\
     virtual/bootloader \
 "
 

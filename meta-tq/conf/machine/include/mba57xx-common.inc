@@ -23,13 +23,17 @@ USE_VT = "0"
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
-WKS_FILE_DEPENDS = "\
-    mtools-native \
+WKS_FILE_DEPENDS += "\
     dosfstools-native \
+    e2fsprogs-native \
+    mtools-native \
     parted-native \
-    virtual/bootloader \
 "
 
 WKS_FILE = "tqmaxx-ti-sdimg.wks.in"
+
+EXTRA_IMAGEDEPENDS += "\
+    virtual/bootloader \
+"
 
 WIC_BOOTPART_SIZE = "32M"
