@@ -11,6 +11,11 @@ Releases are named with the following scheme:
 
 ## kirkstone.TQ.ARM.BSP.0003
 
+### Changed
+
+* TQMa93xxLA: update firmware-imx-9 to 8.18. Needs at least meta-freescale
+  commit 8bd13d69 ("firmware-imx: Upgrade 8.17 -> 8.18")
+
 ### Module BSP Revisions
 
 * kirkstone.TQMa335x.BSP.SW.0125
