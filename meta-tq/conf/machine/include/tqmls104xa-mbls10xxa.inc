@@ -21,7 +21,8 @@ UBOOT_RCW_CONFIG ??= ""
 WKS_FILE = "tqmls104xa-sdimg.wks.in"
 
 WKS_FILE_DEPENDS = "\
-    mtools-native \
     dosfstools-native \
+    e2fsprogs-native \
+    mtools-native \
     parted-native \
 "

@@ -26,9 +26,10 @@ IMAGE_BOOT_FILES = "\
 # direct assignment to override empty default from meta-freescale
 WKS_FILE = "tqmls1012al-sdimg.wks"
 
-WKS_FILE_DEPENDS = "\
-    mtools-native \
+WKS_FILE_DEPENDS += "\
     dosfstools-native \
+    e2fsprogs-native \
+    mtools-native \
     parted-native \
 "
 
