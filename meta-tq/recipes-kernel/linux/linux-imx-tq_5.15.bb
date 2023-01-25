@@ -81,6 +81,7 @@ SRC_URI:aarch64:imx-nxp-bsp = "\
     file://features/devicetree.cfg \
     file://usb-gadget-support.cfg \
     file://imx93-platform-support.cfg \
+    file://quectel-wwan-support.cfg \
 "
 
 SRC_URI:append = " \
