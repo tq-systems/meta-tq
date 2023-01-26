@@ -9,6 +9,12 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+* TQMa8X[xS]: Known issue regarding hardware controlled chip-select
+
+### Fixed
+* MBa8Xx[S]: Pull-up configured for SPI chip-selects
+
 ## kirkstone.TQ.ARM.BSP.0003
 
 ### Changed
