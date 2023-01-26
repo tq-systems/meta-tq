@@ -10,17 +10,22 @@ Releases are named with the following scheme:
 ## Next Release
 
 ### Added
+* TQMa93xxLA: add wifi and bluetooth to `MACHINE_FEATURES` and enable firmware for
+  WLAN cards with 88W8997 chipset
 * TQMa8X[xS]: Known issue regarding hardware controlled chip-select
 
 ### Fixed
 * MBa8Xx[S]: Pull-up configured for SPI chip-selects
 
-## kirkstone.TQ.ARM.BSP.0003
-
 ### Changed
 
+* linux-imx-tq 5.15:
+  * enable enable marvel / nxp wifi driver in wifi support fragment
+  * enable PWM driver needed for i.MX93
 * TQMa93xxLA: update firmware-imx-9 to 8.18. Needs at least meta-freescale
   commit 8bd13d69 ("firmware-imx: Upgrade 8.17 -> 8.18")
+
+## kirkstone.TQ.ARM.BSP.0003
 
 ### Module BSP Revisions
 
