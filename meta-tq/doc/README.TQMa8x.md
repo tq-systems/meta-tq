@@ -144,6 +144,11 @@ See top level README.md for configurations usable as MACHINE.
   * runtime suspend disabled for USB Hub TUSB8041
 * DT file for rpmsg is too big and needs `fdt_high` to be set to `0xffffffffffffffff`
 * `linux-imx-tq_5.15`: SATA is broken due to link issues
+* SPI: Hardware-controlled chipselects are not driven as expected
+  * Toggle after each Byte when using DMA
+  * Inbetween each `spi_transfer`
+  * Use of GPIO controlled chip-selects instead is recommended
+  * By default all chip-selects are configured as GPIO
 
 ## Artifacts
 
