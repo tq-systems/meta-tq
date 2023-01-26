@@ -138,6 +138,13 @@ See top level README.md for configurations usable as MACHINE.
   * erase of ranges >= 16 MB fails under linux
 * Suspend / Wakeup
   * RTC Alarm IRQ via GPIO leads to system stall during resume
+* SPI: Hardware-controlled chipselects are not driven as expected
+  * Toggle after each Byte when using DMA
+  * Inbetween each `spi_transfer`
+  * Use of GPIO controlled chip-selects instead is recommended
+  * Note for MBa8XxS: The following pins **cannot** be configured as GPIO:
+    * `SPI1_CS0` on pad `SAI0_RXD`
+    * `SPI1_CS1` on pad `SAI1_RXD`
 
 ## Artifacts
 
