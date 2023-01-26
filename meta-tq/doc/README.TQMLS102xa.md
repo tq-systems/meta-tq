@@ -121,6 +121,14 @@ eMMC is a placement option on TQMLS102xA
 | SAI1 / SAI2 | - | - | on  | off |
 | Reserved    | - | - | off | off |
 
+## Howto
+
+### HDMI
+
+When using HDMI output the default CMA size (16MiB) might be too small, `weston` will not be able to start. In this case add the parameter `cma=32M` to the kernel command line.
+
+Using an HDMI monitor might require color space conversion. Without a GPU this causes a high CPU usage.
+
 ## Support Wiki
 
 See [TQ Embedded Wiki for TQMLS102xA](https://support.tq-group.com/en/layerscape/tqmls102xa)
