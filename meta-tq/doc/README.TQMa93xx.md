@@ -1,12 +1,12 @@
 # TQMa93xxLA
 
-This README contains some useful information for TQMa93xxLA on MBa9xxxCA
+This README contains some useful information for TQMa93xxLA on MBa93xxCA
 
 [[_TOC_]]
 
 ## Variants
 
-* TQMa93xxLA REV.010x on MBa9xxxCA REV.010x
+* TQMa93xxLA REV.010x on MBa93xxCA REV.010x
 
 ## Version information for software components
 
@@ -16,7 +16,7 @@ This README contains some useful information for TQMa93xxLA on MBa9xxxCA
 
 ## Supported machine configurations:
 
-* tqma93xxla-mba9xxxca
+* tqma93xxla-mba93xxca
 
 ## Supported Features
 
@@ -39,8 +39,8 @@ This README contains some useful information for TQMa93xxLA on MBa9xxxCA
 | Read                                             |       x      |
 | Write                                            |       x      |
 | **Ethernet**                                     |              |
-| GigE / FEC via Phy on MBa9xxxCA                  |       x      |
-| GigE / EQOS via Phy on MBa9xxxCA                 |       x      |
+| GigE / FEC via Phy on MBa93xxCA                  |       x      |
+| GigE / EQOS via Phy on MBa93xxCA                 |       x      |
 | **Bootdevices**                                  |              |
 | SD-Card on USDHC2                                |       x      |
 | e-MMC on USDHC1                                  |       x      |
@@ -80,8 +80,8 @@ This README contains some useful information for TQMa93xxLA on MBa9xxxCA
 | RTC                                              |       x      |
 | Temperature Sensors                              |       x      |
 | **ENET**                                         |              |
-| GigE / FEC via Phy on MBa9xxxCA                  |       x      |
-| GigE / EQOS via Phy on MBa9xxxCA                 |       x      |
+| GigE / FEC via Phy on MBa93xxCA                  |       x      |
+| GigE / EQOS via Phy on MBa93xxCA                 |       x      |
 | **USB**                                          |              |
 | USB 2.0 Host / Hub                               |              |
 | USB DRD (USB 2.0 Cable Detect, VBUS)             |       x      |
