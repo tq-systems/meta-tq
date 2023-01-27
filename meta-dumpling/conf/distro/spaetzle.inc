@@ -16,6 +16,9 @@ require tq-common.inc
 DISTRO_FEATURES += "tiny"
 DISTRO_SHORT_NAME = "spaetzle"
 
+# For powerpc64 musl images are not working so build with glibc
+TCLIBC:tqmt10xx = "glibc"
+
 # Make sure we have sysvinit in the list. Needed to get tasks injected by
 # update-rc.d.bbclass. This will bring in the initscripts from different
 # packages
