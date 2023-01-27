@@ -23,7 +23,14 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* TQMa93xxLA: rename starter kit mainboard to MBa93xxCA, therefore machine name is
+  now tqma93xxla-mba93xxca
+* linux-imx-tq 2022.04 / TQMa93xxLA
+  * improve VARD support, fixup devictree
+  * improve QSPI NOR support
+  * speed grade / temperature grade handling
 * linux-imx-tq 5.15:
+  * TQMa93xxLA: LVDS support, QSPI support, USB at mPCIe slot,
   * enable enable marvel / nxp wifi driver in wifi support fragment
   * enable PWM driver needed for i.MX93
 * TQMa93xxLA: update firmware-imx-9 to 8.18. Needs at least meta-freescale
