@@ -142,9 +142,7 @@ See top level README.md for configurations usable as MACHINE.
   * Toggle after each Byte when using DMA
   * Inbetween each `spi_transfer`
   * Use of GPIO controlled chip-selects instead is recommended
-  * Note for MBa8XxS: The following pins **cannot** be configured as GPIO:
-    * `SPI1_CS0` on pad `SAI0_RXD`
-    * `SPI1_CS1` on pad `SAI1_RXD`
+  * By default all chip-selects are configured as GPIO
 
 ## Artifacts
 
