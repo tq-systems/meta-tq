@@ -27,7 +27,7 @@ This README contains some useful information for TQMa93xxLA on MBa93xxCA
 | RAM configs                                      |  1 GiB       |
 | CPU variants                                     |     i.MX93   |
 | Fuses / OCRAM                                    |       x      |
-| speed grade / temperature grade detection        |              |
+| speed grade / temperature grade detection        |       x      |
 | UART (console on UART1)                          |       x      |
 | **GPIO**                                         |              |
 | LED                                              |       x      |
@@ -50,8 +50,8 @@ This README contains some useful information for TQMa93xxLA on MBa93xxCA
 | USB 2.0 Host / Hub                               |       x      |
 | USB DRD (USB 2.0 Cable Detect, VBUS)             |       x      |
 | **QSPI NOR**                                     |              |
-| Read with 1-1-1 SDR                              |       x      |
-| PP / Erase with 1-1-1 SDR                        |       x      |
+| Read with 1-1-4 SDR                              |       x      |
+| PP / Erase with 1-1-4 SDR                        |       x      |
 | **Cortex M33**                                   |              |
 | env settings for starting from TCM               |              |
 | examples with UART3 as debug console             |              |
@@ -79,6 +79,8 @@ This README contains some useful information for TQMa93xxLA on MBa93xxCA
 | PMIC                                             |       x      |
 | RTC                                              |       x      |
 | Temperature Sensors                              |       x      |
+| IMU / Gyroscope                                  |       x      |
+| Port expander                                    |       x      |
 | **ENET**                                         |              |
 | GigE / FEC via Phy on MBa93xxCA                  |       x      |
 | GigE / EQOS via Phy on MBa93xxCA                 |       x      |
@@ -86,15 +88,16 @@ This README contains some useful information for TQMa93xxLA on MBa93xxCA
 | USB 2.0 Host / Hub                               |              |
 | USB DRD (USB 2.0 Cable Detect, VBUS)             |       x      |
 | **QSPI NOR**                                     |              |
-| Read with 1-1-1 SDR                              |       x      |
-| PP / Erase with 1-1-1 SDR                        |       x      |
+| Read with 1-1-4 SDR                              |       x      |
+| PP / Erase with 1-1-4 SDR                        |       x      |
 | **Display**                                      |              |
-| LVDS                                             |              |
+| LVDS                                             |       x      |
 | **CAN-FD**                                       |              |
-| CAN-FD                                           |              |
+| CAN-FD                                           |       x      |
 | **SPI**                                          |              |
 | spidev at all CS                                 |              |
-| ADC                                              |              |
+| **internal ADC**                                 |              |
+| ADC                                              |       x      |
 | **Cortex M33**                                   |              |
 | examples running from TCM                        |              |
 | use UART3 as debug console (see issues)          |              |
@@ -105,14 +108,11 @@ This README contains some useful information for TQMa93xxLA on MBa93xxCA
 
 ## TODO:
 
-* CAN
-* USB Host
 * SPI
 * MIPI-DSI
 * MIPI-CSI
-* LVDS
-* RS485
-* WiFi
+* RS485 (technical limitation, will be fixed with MBa93xxCA REV.020x)
+* WiFi (driver and firmware loading OK, needs additional testing)
 * Cortex M33
 * UBI Boot
 * LPB Booot modes
@@ -127,7 +127,8 @@ Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
 
 * \*.dtb: device tree blobs
-    * mx93-tqma93xxla-mba9xxxca.dtb
+  * imx93-tqma93xxla-mba9xxxca.dtb
+  * imx93-tqma93xxla-mba9xxxca-lvds-tm070jvhg33.dtb
 * Image: Linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
@@ -163,9 +164,55 @@ TODO
 
 ### Display Support
 
-TODO
+Each Display can be used on its own by using the corresponding device tree.
+To allow reusage, the support for each display is separated in a dtsi fragment.
+
+| Interface       | Device tree                                    | Type        ----   |
+|-----------------|------------------------------------------------|--------------------|
+| LVDS            | imx93-tqma93xxla-mba9-lvds-tm070jvhg33.dtb     | Tianma TM070JVHG33 |
 
 ### CAN
+
+#### Troubleshooting
+
+In case of problems first check the bus termination:
+
+| Interface | Connector | DIP  |
+| --------- | --------- | ---- |
+| CAN0      | X8        | S5.2 |
+| CAN1      | X9        | S5.1 |
+
+#### Enable without CAN-FD
+
+CAN1/2 should be enabled (with CAN-FD) and configured by default when using with
+MBa93xxCA and meta-tq / systemd.
+
+Configure CAN1/2 per commandline without CAN-FD:
+```
+CANIF="can[0,1]"
+ip link set ${CANIF} up type can bitrate 500000 fd off
+```
+
+To (permanently) configure CAN1/2 in systemd network file, set in files
+* /lib/systemd/network/20-can0.network
+* /lib/systemd/network/20-can1.network
+
+`FDMode=no` to disable CAN-FD.
+
+#### Enable CAN-FD
+
+CAN1/2 should be enabled (with CAN-FD) and configured by default when using with
+MBa93xxCA and meta-tq / systemd.
+
+To enable CAN-FD the following command can be used, if using a carrier board with
+FD capable transceiver:
+
+```
+CANIF="can[0,1]"
+ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on
+```
+
+### RS485
 
 TODO
 
