@@ -9,7 +9,7 @@ require linux-imx-tq-common.inc
 KBRANCH = "TQM-lf-5.15"
 SRCREV = "70ddbf9e156f634743838a564873dfd39bd8bc8a"
 KBRANCH:imx-nxp-bsp = "TQMa8-fslc-5.15-2.0.x-imx"
-SRCREV:imx-nxp-bsp = "e24e5bece63502b3888576dfefa935751cabcc8d"
+SRCREV:imx-nxp-bsp = "c9663aed0e5149129e3b63cba2dc83c59c632d23"
 KBRANCH:mx93-nxp-bsp = "TQMaxx-lf-5.15.y"
 SRCREV:mx93-nxp-bsp = "39a3f2dbf4a0af0c14bc772d8f2681d8cd8114c5"
 
