@@ -10,11 +10,15 @@ Releases are named with the following scheme:
 ## Next Release
 
 ### Added
+
+* TQMLS1046A: add machine config for RAM without ECC
+* TQMLS1046A: add u-boot-tq-2018.07 configs for Modules without ECC
 * TQMa93xxLA: add wifi and bluetooth to `MACHINE_FEATURES` and enable firmware for
   WLAN cards with 88W8997 chipset
 * TQMa8X[xS]: Known issue regarding hardware controlled chip-select
 
 ### Fixed
+
 * MBa8Xx[S]: Pull-up configured for SPI chip-selects
 
 ### Changed
