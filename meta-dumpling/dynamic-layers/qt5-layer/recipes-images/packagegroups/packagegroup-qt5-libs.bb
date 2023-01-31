@@ -26,3 +26,17 @@ RDEPENDS:${PN} = "\
     qtmultimedia \
     qwt-qt5 \
 "
+
+RDEPENDS:${PN} += "\
+    ttf-dejavu-sans \
+    ttf-dejavu-sans-condensed \
+    ttf-dejavu-sans-mono \
+    ttf-dejavu-serif \
+    ttf-dejavu-serif-condensed \
+    ttf-dejavu-mathtexgyre \
+    ttf-dejavu-common \
+"
+
+RDEPENDS:${PN}:append = "\
+    ${@bb.utils.contains('DISTRO_FEATURES', 'wayland', "qtwayland qtwayland-plugins", '', d)} \
+"
