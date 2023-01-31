@@ -4,7 +4,7 @@
 # D-82229 Seefeld, Germany.
 # Author: Markus Niebel
 
-DESCRIPTION = "Package group for Qt5 demos"
+DESCRIPTION = "Package group for Qt5 librararies"
 LICENSE = "MIT"
 
 #
@@ -19,15 +19,10 @@ PACKAGE_ARCH:imx-nxp-bsp = "${TUNE_PKGARCH}"
 inherit packagegroup
 
 RDEPENDS:${PN} = "\
-    packagegroup-qt5-libs \
-    qwt-qt5-examples \
-"
-
-QT5_OPENGL_DEMOS ="\
-    cinematicexperience \
-    qt5everywheredemo \
-"
-
-RDEPENDS:${PN}:append = "\
-    ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', "${QT5_OPENGL_DEMOS}", '', d)} \
+    qtbase \
+    qtbase-plugins \
+    qtserialport \
+    qtdeclarative \
+    qtmultimedia \
+    qwt-qt5 \
 "
