@@ -219,6 +219,10 @@ Support for the following machines is contained in this version:
 | [y]    | AM6442           | TQMa6442L                | MBaX4XxL       | tqma64xxl-mbax4xxl           | TQMa6442L / MBaX4XxL HW REV.020x |
 | [y]    | AM6548           | TQMa654x                 | MBa65xx        | tqma65xx-2gb-mba65xx         | TQMa6548 HW REV.010x with 2GiB RAM |
 | [y]    | AM6548           | TQMa654x                 | MBa65xx        | tqma65xx-4gb-mba65xx         | TQMa6548 HW REV.010x with 4GiB RAM |
+| [y]    | T1040            | TQMT1040                 | STKT104x       | tqmt1040-64bit-stkt104x      | TQMT1040 HW REV.020x with 2GiB RAM |
+| [y]    | T1042            | TQMT1042                 | STKT104x       | tqmt1042-64bit-stkt104x      | TQMT1042 HW REV.020x with 2GiB RAM |
+| [y]    | T1022            | TQMT1022                 | STKT104x       | tqmt1022-64bit-stkt104x      | TQMT1022 HW REV.020x with 2GiB RAM |
+| [y]    | T1024            | TQMT1024                 | STKT104x       | tqmt1024-64bit-stkt104x      | TQMT1024 HW REV.020x with 2GiB RAM |
 
 
 \[y\]: fully supported  
@@ -277,6 +281,7 @@ Under the given links SOM specific information can be found:
 * [TQMLS102\[0,1\]A](doc/README.TQMLS102xa.md)
 * [TQMLS1017A/TQMLS1028A](doc/README.TQMLS1028A.md)
 * [TQMLX2160A](doc/README.tqmlx2160a-mblx2160a.md)
+* [TQMT10xx](doc/README.TQMT10xx.md)
 
 ### Known Issues
 
