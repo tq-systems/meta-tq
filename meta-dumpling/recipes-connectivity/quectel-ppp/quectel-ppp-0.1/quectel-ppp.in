@@ -1,0 +1,11 @@
+@QUECTEL_PPP_TTY@
+115200
+user ""
+password ""
+connect 'chat -s -v -f /etc/ppp/peers/quectel-chat-connect'
+disconnect 'chat -s -v -f /etc/ppp/peers/quectel-chat-disconnect'
+hide-password
+noauth
+debug
+defaultroute
+noipdefault
