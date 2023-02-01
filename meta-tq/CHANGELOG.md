@@ -19,10 +19,14 @@ Releases are named with the following scheme:
 
 ### Fixed
 
-* MBa8Xx[S]: Pull-up configured for SPI chip-selects
+* MBa8Xx[S]: linux-imx-tq 5.15:
+  * Pull-up configured for SPI chip-selects in kernel devicetree
+  * use gpio chip select for SPI where possible to prevent toggling chip select
+    due to SPI IP and DMA limitation
 
 ### Changed
 
+* TQMa93xxLA: port and configure more graphic support from meta-imx
 * TQMa93xxLA: rename starter kit mainboard to MBa93xxCA, therefore machine name is
   now tqma93xxla-mba93xxca
 * linux-imx-tq 2022.04 / TQMa93xxLA
