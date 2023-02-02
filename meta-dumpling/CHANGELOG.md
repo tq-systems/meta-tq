@@ -9,6 +9,10 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* Added initial support for TQMT10xx machines
+
 ### Changed
 
 * dynamic-layers/meta-ti:
@@ -27,6 +31,7 @@ Releases are named with the following scheme:
     of defaults.
   * Add qtwayland and QPA plugin if `wayland` is in `DISTRO_FEATURES`
   * Add `eglfs` QPA plugin if `imxgpu3d` is in `MACHINEOVERRIDES`
+* Use glibc in spaetzle distro for tqmt10xx machines
 
 ### Fixed
 
