@@ -26,6 +26,9 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* all imx based SOM: port changes from meta-imx kirkstone-5.15.71-2.2.0
+  in libdrm, weston, wayland-protocols as bbappend-files under dynamic layers
+  to get the latest changes needed for imx93
 * TQMa93xxLA: port and configure more graphic support from meta-imx
 * TQMa93xxLA: rename starter kit mainboard to MBa93xxCA, therefore machine name is
   now tqma93xxla-mba93xxca
