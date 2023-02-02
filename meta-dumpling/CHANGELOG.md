@@ -9,6 +9,22 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* dynamic-layers/qt5-layer:
+  * Split package groups for Qt5, so that examples etc. can be left out for
+    release images.
+  * Rewrite bbappend for qtbase. Use `PACKAGECONFIG_<abc>` variables provided by
+    qtbase recipe from meta-qt5 to have some structure and provide a better set
+    of defaults.
+  * Add qtwayland and QPA plugin if `wayland` is in `DISTRO_FEATURES`
+  * Add `eglfs` QPA plugin if `imxgpu3d` is in `MACHINEOVERRIDES`
+
+### Fixed
+
+* dynamic-layers/qt5-layer: Move Qt5 bbappends to correct location. This
+  allows bitbake to use them.
+
 ## kirkstone.TQ.ARM.BSP.0003
 
 ### Module BSP Revisions
