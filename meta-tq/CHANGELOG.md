@@ -18,6 +18,11 @@ Releases are named with the following scheme:
 * TQMa93xxLA: add wifi and bluetooth to `MACHINE_FEATURES` and enable firmware for
   WLAN cards with 88W8997 chipset
 * TQMa8X[xS]: Known issue regarding hardware controlled chip-select
+* TQMT10xx: add initial support for TQMT10xx based machines:
+  * tqmt1040-64bit-stkt104x
+  * tqmt1042-64bit-stkt104x
+  * tqmt1022-64bit-stkt104x
+  * tqmt1024-64bit-stkt104x
 
 ### Fixed
 
@@ -35,6 +40,11 @@ Releases are named with the following scheme:
   * Pull-up configured for SPI chip-selects in kernel devicetree
   * use gpio chip select for SPI where possible to prevent toggling chip select
     due to SPI IP and DMA limitation
+* linux-firmware: fix for multilib configurations
+
+## Removed
+
+* fm-ucode recipe removed and append for meta-freescale recipe added instead.
 
 ### Changed
 
