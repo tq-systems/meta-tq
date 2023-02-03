@@ -13,6 +13,8 @@ MACHINE_EXTRA_RRECOMMENDS += "\
 
 MACHINE_FEATURES:append = "\
     display \
+    screen \
+    touchscreen \
 "
 
 SERIAL_CONSOLES ?= "115200;ttyS2"

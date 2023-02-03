@@ -29,6 +29,8 @@ MACHINE_FEATURES:append = "\
     bluetooth \
     camera \
     display \
+    screen \
+    touchscreen \
     wifi \
 "
 

@@ -17,6 +17,8 @@ IMAGE_INSTALL:append = "\
 
 MACHINE_FEATURES:append = "\
     display \
+    screen \
+    touchscreen \
 "
 
 SERIAL_CONSOLES ?= "115200;ttyS4"

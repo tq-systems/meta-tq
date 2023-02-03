@@ -29,6 +29,11 @@ EXTRA_IMAGEDEPENDS += "\
     virtual/bootloader \
 "
 
+MACHINE_FEATURES += "\
+    screen \
+    touchscreen \
+"
+
 WKS_FILE = "tqmaxx-ti-sdimg.wks.in"
 
 WIC_BOOTPART_SIZE = "32M"
