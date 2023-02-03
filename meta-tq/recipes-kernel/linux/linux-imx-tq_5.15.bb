@@ -11,7 +11,7 @@ SRCREV = "70ddbf9e156f634743838a564873dfd39bd8bc8a"
 KBRANCH:imx-nxp-bsp = "TQMa8-fslc-5.15-2.0.x-imx"
 SRCREV:imx-nxp-bsp = "c9663aed0e5149129e3b63cba2dc83c59c632d23"
 KBRANCH:mx93-nxp-bsp = "TQMaxx-lf-5.15.y"
-SRCREV:mx93-nxp-bsp = "79f61ea3ed62db2c9b50f37d01df2c51743967e5"
+SRCREV:mx93-nxp-bsp = "c23d22782b81e8c98e0578149476e856ad64347a"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "5.15"
