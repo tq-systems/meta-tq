@@ -12,6 +12,14 @@ RCW_SUFFIX:tqmls1028a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sbe
 PLATFORM:tqmls1028a = "tqmls1028a_1gb"
 PLATFORM_ADDITIONAL_TARGET:tqmls1028a = "tqmls1028a_4gb"
 
+RCW_FOLDER:tqmls1043a = "tqmls1043a"
+PLATFORM:tqmls1043a = "tqmls1043a"
+PLATFORM_ADDITIONAL_TARGET:tqmls1043a = "tqmls1043a_2gb"
+
+RCW_FOLDER:tqmls1046a = "tqmls1046a"
+PLATFORM:tqmls1046a = "tqmls1046a"
+PLATFORM_ADDITIONAL_TARGET:tqmls1046a = "tqmls1046a_8gb"
+
 RCW_FOLDER:tqmlx2160a = "tqmlx2160a"
 RCW_SUFFIX:tqmlx2160a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
 PLATFORM:tqmlx2160a = "tqmlx2160a"
@@ -26,7 +34,22 @@ do_compile:prepend () {
 do_compile:append () {
     for plat in ${PLATFORM} ${PLATFORM_ADDITIONAL_TARGET}; do
         for rcw_file in ${ATF_RCW_VARIANTS}; do
+            case $rcw_file in
+                *_sd)
+                rcw_bootmode="sd"
+                ;;
+                *_qspi)
+                rcw_bootmode="qspi"
+                ;;
+                *)
+                rcw_bootmode=""
+                ;;
+            esac
+
             for bootmode in ${BOOTTYPE}; do
+                if [ -n "$rcw_bootmode}" ] && [ "${rcw_bootmode}" != "${bootmode}" ]; then
+	            continue
+                fi
                 make V=1 realclean
                 oe_runmake V=1 pbl PLAT=${plat} BOOT_MODE=${bootmode} RCW=${DEPLOY_DIR_IMAGE}/rcw/${RCW_FOLDER}/${rcw_file}${RCW_SUFFIX}
                 install -d ${S}/atf-variants
