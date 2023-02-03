@@ -52,7 +52,7 @@ DISPLAY_RRECOMMENDS = "\
 "
 
 RRECOMMENDS:${PN} += "\
-    ${@bb.utils.contains('MACHINE_FEATURES', 'display', '${DISPLAY_RRECOMMENDS}', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'screen', '${DISPLAY_RRECOMMENDS}', '', d)} \
 "
 
 # Note: kmscube is only available if we have opengl and if virtual/libgbm
