@@ -5,7 +5,7 @@ SECTION = "bootloaders"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
 
-SRCREV = "d7fa6108d0ccaacb576bfd1291576c5d70b64e51"
+SRCREV = "11bd23656c25aa298b76ca7b76e9810ee463ffc2"
 SRCBRANCH = "TQMaxx-lf_v2022.04"
 
 SRC_URI = "\
