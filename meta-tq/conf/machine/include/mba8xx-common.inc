@@ -9,7 +9,6 @@ USE_VT = "0"
 
 MACHINE_FEATURES += "\
     bluetooth \
-    display \
     screen \
     touchscreen \
     wifi \

@@ -16,7 +16,6 @@ IMAGE_INSTALL:append = "\
 "
 
 MACHINE_FEATURES:append = "\
-    display \
     screen \
     touchscreen \
 "

@@ -28,7 +28,6 @@ KERNEL_DEVICETREE += "${@kernel_provider_dtbs(d)}"
 MACHINE_FEATURES:append = "\
     bluetooth \
     camera \
-    display \
     screen \
     touchscreen \
     wifi \

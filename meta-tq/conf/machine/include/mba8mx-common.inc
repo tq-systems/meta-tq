@@ -17,7 +17,6 @@ IMAGE_BOOT_FILES = "\
 MACHINE_FEATURES += "\
     bluetooth \
     camera \
-    display \
     screen \
     touchscreen \
     wifi \
