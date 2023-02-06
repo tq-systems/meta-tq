@@ -11,6 +11,9 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* Check for `screen` instead of `display` in `MACHINE_FEATURES` since `screen`
+  is used in Yocto Project / OpenEmbedded to test for display support of
+  current `MACHINE`
 * dynamic-layers/qt5-layer:
   * Split package groups for Qt5, so that examples etc. can be left out for
     release images.
