@@ -5,13 +5,6 @@ SERIAL_CONSOLES = "115200;ttymxc1"
 # disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
 USE_VT = "0"
 
-# install also under /boot inside the rootfs, needed for UBIFS use case
-# and because extra FAT boot partition on SD / e-MMC shall be removed
-IMAGE_INSTALL:append = "\
-    kernel-devicetree \
-    kernel-image \
-"
-
 # Files are needed in IMAGE_BOOT_FILES because we use an extra partition for
 # backward compatibility.
 IMAGE_BOOT_FILES = "\
@@ -27,7 +20,12 @@ MACHINE_FEATURES += "\
     wifi \
 "
 
+# install kernel and devicetree also under /boot inside the rootfs,
+# needed for UBIFS use case and perpare removal of extra FAT boot partition
+# on SD / e-MMC
 MACHINE_EXTRA_RRECOMMENDS += "\
+    kernel-devicetree \
+    kernel-image \
     linux-firmware-ath10k \
     linux-firmware-qca \
 "
