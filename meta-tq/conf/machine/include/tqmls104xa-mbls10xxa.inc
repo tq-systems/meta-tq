@@ -7,14 +7,6 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
 # SERIAL_CONSOLES only
 USE_VT = "0"
 
-# These things are also still in IMAGE_BOOT_FILES because /boot is on an extra
-# partition. We will use them in future also under /boot inside the rootfs, so
-# we enable this also:
-IMAGE_INSTALL:append = "\
-    kernel-devicetree \
-    kernel-image \
-"
-
 UBOOT_RCW_CONFIG ??= ""
 
 # direct assignment to override empty default from meta-freescale
