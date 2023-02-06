@@ -19,6 +19,13 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* machines: fix display related features in `MACHINE_FEATURES`
+  Use `screen` and `touchscreen` since this is what Yocto Project / OpenEmbedded
+  use. Remove `display` which was in use solely in TQ-Systems layers.
+* machines: clean `WKS_FILE_DEPENDS` and make sure it contains e2fsprogs-native.
+  This prevents ext4 build errors during wix image creation. This kind of error
+  occurs repeatedly when ext4 is not part of `IMAGE_FSTYPES` Additionally move
+  all non host tools dependencies from `WKS_FILE_DEPENDS` to `EXTRA_IMAGEDEPENDS`
 * MBa8Xx[S]: linux-imx-tq 5.15:
   * Pull-up configured for SPI chip-selects in kernel devicetree
   * use gpio chip select for SPI where possible to prevent toggling chip select
@@ -26,6 +33,9 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* machines: improve usage of bitbake variables to express image dependencies
+  Move packages from `IMAGE_INSTALL:append` to `MACHINE_EXTRA_RRECOMMEND` in
+  machine config files.
 * all imx based SOM: port changes from meta-imx kirkstone-5.15.71-2.2.0
   in libdrm, weston, wayland-protocols as bbappend-files under dynamic layers
   to get the latest changes needed for imx93
