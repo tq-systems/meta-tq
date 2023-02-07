@@ -33,6 +33,13 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-tq 6.1 / TQMa8M: update to 6.1.9
+* linux-imx-tq 5.15 / TQMa93xxLA:
+  * cleanup gpio for LVDS on MBa93xxCA, make USB touch working
+  * rename DT and compatible for MBa93xxCA
+* u-boot-imx-tq 2022.04 / TQMa93xxLA
+  * rename board and config names for MBa93xxCA
+  * rename DT for MBa93xxCA
 * tqma57xx: update machine configuration and bbappends for compatibility with
   latest meta-ti kirkstone
   (as of commit 38941472e1e3 "meta-ti-bsp: add BeagleBone AI-64 support")
@@ -45,7 +52,7 @@ Releases are named with the following scheme:
 * TQMa93xxLA: port and configure more graphic support from meta-imx
 * TQMa93xxLA: rename starter kit mainboard to MBa93xxCA, therefore machine name is
   now tqma93xxla-mba93xxca
-* linux-imx-tq 2022.04 / TQMa93xxLA
+* u-boot-imx-tq 2022.04 / TQMa93xxLA
   * improve VARD support, fixup devictree
   * improve QSPI NOR support
   * speed grade / temperature grade handling
