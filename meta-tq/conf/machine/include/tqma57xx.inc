@@ -4,7 +4,7 @@
 MACHINEOVERRIDES =. "tqma57xx:"
 
 # Default providers, may need to override for specific machines
-# needs to be set before inclusion of dra7xx.inc
+# needs to be set before inclusion of am57xx.inc
 PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-tq"
 PREFERRED_VERSION_linux-ti-tq ?= "5.10%"
 TI_SGX_DDK_KM_KERNVER ?= "5.10"
@@ -12,8 +12,8 @@ TI_SGX_DDK_KM_KERNVER ?= "5.10"
 PREFERRED_PROVIDER_u-boot ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-tq"
 
-# from meta-ti-bsp: will handle SOC_FAMILY:append ?= ":dra7xx" needed for TI recipes
-include conf/machine/include/dra7xx.inc
+# from meta-ti-bsp: will handle SOC_FAMILY:append = ":am57xx" needed for TI recipes
+include conf/machine/include/am57xx.inc
 
 # prevent inclusion of tune settings if meta-ti is present -
 # otherwise we get nasty double inclusion warnings

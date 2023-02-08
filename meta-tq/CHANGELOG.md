@@ -33,6 +33,9 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* tqma57xx: update machine configuration and bbappends for compatibility with
+  latest meta-ti kirkstone
+  (as of commit 38941472e1e3 "meta-ti-bsp: add BeagleBone AI-64 support")
 * machines: improve usage of bitbake variables to express image dependencies
   Move packages from `IMAGE_INSTALL:append` to `MACHINE_EXTRA_RRECOMMEND` in
   machine config files.
