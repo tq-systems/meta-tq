@@ -11,6 +11,11 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* dynamic-layers/meta-ti:
+  * Update for compatibility with latest meta-ti kirkstone (as of
+    commit 38941472e1e3 "meta-ti-bsp: add BeagleBone AI-64 support"). Our
+    ti-sgx-ddk-um initialization fix has been upstreamed and is removed from
+    meta-dumpling.
 * Check for `screen` instead of `display` in `MACHINE_FEATURES` since `screen`
   is used in Yocto Project / OpenEmbedded to test for display support of
   current `MACHINE`
