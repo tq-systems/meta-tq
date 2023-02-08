@@ -7,10 +7,9 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
 # SERIAL_CONSOLES only
 USE_VT = "0"
 
-# These things are also still in IMAGE_BOOT_FILES because /boot is on an extra
-# partition. We will use them in future also under /boot inside the rootfs, so
-# we enable this also:
-IMAGE_INSTALL:append = "\
+# Install kernel and devicetree also under /boot inside the rootfs,
+# needed for UBIFS use case to prevent extra partition(s) for kernel and dtb.
+MACHINE_EXTRA_RRECOMMENDS += "\
     kernel-devicetree \
     kernel-image \
 "
