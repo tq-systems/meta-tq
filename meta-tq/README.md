@@ -69,18 +69,17 @@ Optionally the layer can make use of features from meta-ti if using machines
 with the following CPU families from TI  - see [table](#supported-machines).
 
 * AM355x
-* AM57xx
 
 For machines based on following CPU families from TI usage of meta-ti
 is _mandatory_ - see [table](#supported-machines)
 
+* AM57xx
 * AM64xx
 * AM65xx
 
-
 URI: https://git.yoctoproject.org/git/meta-ti  
 branch: kirkstone  
-revision: HEAD  
+revision: at least commit 38941472e1e3 ("meta-ti-bsp: add BeagleBone AI-64 support")  
 layers: meta-ti-bsp  
 
 If using meta-ti, meta-arm is also needed due to dependencies of meta-ti.
