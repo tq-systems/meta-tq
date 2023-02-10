@@ -58,8 +58,38 @@ only bootstream in user area of eMMC.
 
 One can collect `uuu` commands in a cmdlist file for a custom workflow.
 The following example can be used to program a wic image to eMMC without
-writing the boot stream to the eMMC boot partition. Following example is
-for TQMa8MPxL on MBa8MPxL, tested with `uuu` version 1.5.4.
+writing the boot stream to the eMMC boot partition. 
+
+##### TQMa8MxML on MBa8Mx
+
+Following example is tested with `uuu` version 1.5.4.
+
+File `uuu.tqma8mxml`:
+
+```
+uuu_version 1.5.4
+
+SDP: delay 500
+SDP: @ boot -f @BOOTSTREAM@
+
+SDPV: delay 1000
+SDPV: @ write -f @BOOTSTREAM@ -skipspl -scanterm -scanlimited 0x800000
+SDPV: jump -scanlimited 0x800000
+
+FB: ucmd setenv fastboot_dev mmc
+FB: ucmd setenv mmcdev ${emmc_dev}
+FB: ucmd mmc dev ${emmc_dev}
+FB: @ flash -raw2sparse all @WICIMAGE@
+FB: done
+```
+
+The cmdlist file can be used with the following command line:
+
+`uuu -e BOOTSTREAM=<bootstream for uuu> -e WICIMAGE=<wic image for eMMC> uuu.tqma8mxml`
+
+##### TQMa8MPxL on MBa8MPxL
+
+Following example is tested with `uuu` version 1.5.4.
 
 File `uuu.tqma8mpxl`:
 
