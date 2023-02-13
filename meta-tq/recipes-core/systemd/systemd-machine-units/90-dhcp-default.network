@@ -1,6 +1,6 @@
 [Match]
-# Machting eth1, wlan0, enp2s1 and wlp2s1
-Name=eth* enp* wl*
+# Machting eth1, wlan0, mlan0, enp2s1 and wlp2s1
+Name=eth* enp* mlan* wl*
 
 [Network]
 DHCP=yes
