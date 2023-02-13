@@ -135,6 +135,15 @@ _MBa8Mx HW Rev.030x only_
 
 ## Known Issues
 
+* U-Boot: mfgtool config fails to write image to eMMC / SD with error -19.
+  The USB gadget is not enabled in U-Boot spacific device tree part. To make it
+  work it is needed to add the following changes to
+  `arch/arm/dt/imx8mm-mba8mx-u-boot.dtsi`:
+  ```
+  &usbg1 {
+	status = "okay";
+  };
+  ```
 * Linux: operating points for DDR controller missing in device tree.
   running at lower DDR frequencies does not work in this version of BSP.
 * Default setting for `fdt_file` in u-boot from older BSP version does
@@ -145,9 +154,6 @@ _MBa8Mx HW Rev.030x only_
 * LVDS shows wrong colors on older Tianma display kit (HW issue on older
   display kit revisions)
 * Mikrobus Modul RTC5 on ecspi1 don't answer
-* Bootstream for QSPI on FlexSPI: not buildable out of the box. U-Boot SPL needs different
-  linker settings for SD / e-MMC and FlexSPI. Current recipes for boot stream generation
-  can only use a single U-Boot config. See further notes under Bootable QSPI NOR
 * MIPI CSI
   * driver stack is not completely v4l2-compliance test proof. The IOCTLS for format / resolution
     enumeration and query can return invalid / wrong values depending of the internal state
