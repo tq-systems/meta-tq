@@ -11,6 +11,8 @@ Releases are named with the following scheme:
 
 ### Added
 
+* linux-imx-tq 5.15 / imx on arm64:
+  * enable RFKILL support in kernel config
 * TQMLS1046A: add machine config for RAM without ECC
 * TQMLS1046A: add u-boot-tq-2018.07 configs for Modules without ECC
 * TQMa93xxLA: add wifi and bluetooth to `MACHINE_FEATURES` and enable firmware for
@@ -19,6 +21,9 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TQMa8MPxL: fix disabling of devices when no VARD can be used. Rather than dis-
+  abling all optional devices, print a warning and try to boot. Without the warning
+  this restores the behaviour before handling optional devices with VARD.
 * machines: fix display related features in `MACHINE_FEATURES`
   Use `screen` and `touchscreen` since this is what Yocto Project / OpenEmbedded
   use. Remove `display` which was in use solely in TQ-Systems layers.
