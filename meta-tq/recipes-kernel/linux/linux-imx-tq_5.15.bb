@@ -76,6 +76,7 @@ SRC_URI:aarch64:imx-nxp-bsp = "\
     file://rtc.cfg \
     file://nonimx-drm-removal.cfg \
     file://wifi-support.cfg \
+    file://rfkill-support.cfg \
     file://v4l2.cfg \
     file://features/devicetree.cfg \
     file://usb-gadget-support.cfg \
