@@ -11,7 +11,16 @@ Releases are named with the following scheme:
 
 ### Added
 
+* Machines:
+  * MBa93xx[CA,LA] preparation for using with Quectel GSM/LTE modem
+  * Support for TQMa93xxCA on MBa93xxCA was added. This SOM shares U-Boot and
+    devicetree with TQMa93xxLA on adaptor. Machine `tqma93xxla-mba93xxca` was
+    therefore renamed to `tqma93xx-mba93xxca`
+  * Support for TQMa93xxLA on MBa93xxLA was added. The machine config files for
+    TQMa93xxLA on MBa93xxCA were restructured to allow sharing settings for the
+    boards. This prevents copy and paste and allows quickly adding new boards.
 * linux-imx-tq 5.15 / imx on arm64:
+  * enable support of GSM/LTE modules connected via USB. Tested with Quectel EC21.
   * enable RFKILL support in kernel config
 * TQMLS1046A: add machine config for RAM without ECC
 * TQMLS1046A: add u-boot-tq-2018.07 configs for Modules without ECC
