@@ -36,15 +36,19 @@ MACHINE_FEATURES:append = "\
 # Add packages we want to be deployed, even when they are not part of rootfs
 # We need these here to support UBI / NFS boot case
 EXTRA_IMAGEDEPENDS += "\
+    rcw \
     virtual/bootloader \
     virtual/kernel \
 "
 
-EXTRA_IMAGEDEPENDS:append:fsl-lsch2 = " fm-ucode"
+EXTRA_IMAGEDEPENDS:append:fsl-lsch2 = "\
+    fm-ucode \
+    qoriq-atf \
+"
+
 EXTRA_IMAGEDEPENDS:append:fsl-lsch3 = "\
     management-complex \
     mc-utils \
-    rcw \
 "
 
 # Verified values to generate UBI image:
@@ -78,8 +82,17 @@ UBI_VOLNAME = "root"
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
+# Composite Image Layout (in KBytes)
+IMAGE_OFFSET_PBL ?= "4"
+IMAGE_OFFSET_FIP ?= "1024"
+IMAGE_OFFSET_FMAN_UCODE ?= "9216"
+BL2_IMAGE ?= "bl2_sd.pbl"
+BL3_IMAGE ?= "fip_uboot.bin"
+
 # Different RCW files for booting CPU from SD card and eMMC require
 # setting the correct BOOTMODE:
 # sd -> to boot from SD-Card
 # emmc -> to boot from eMMC
 BOOTMODE ?= "sd"
+
+BOOTTYPE = "sd qspi"
