@@ -25,7 +25,7 @@ IMX_EXTRA_FIRMWARE:mx8x-generic-bsp = "\
 "
 
 IMX_EXTRA_FIRMWARE:mx9-generic-bsp = "\
-    firmware-imx-9 \
+    firmware-imx-8 \
     firmware-sentinel \
 "
 
