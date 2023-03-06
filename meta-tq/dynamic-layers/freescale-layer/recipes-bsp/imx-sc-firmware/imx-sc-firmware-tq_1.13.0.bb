@@ -14,7 +14,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${PV}:${THISDIR}/${PN}:"
 # Need tq_imx-scfw-v1.2.7-b3357 or newer for build
 # (use SC_FIRMWARE_VERSION_TQ in package name)
 
-SC_FIRMWARE_VERSION_TQ ?= "TQMa8.NXP-v1.13.0.B5561.0034"
+SC_FIRMWARE_VERSION_TQ ?= "TQMa8.NXP-v1.13.0.B5561.0035"
 SC_FIRMWARE_DBG ??= "0"
 SC_FIRMWARE_NAME_TQ ?= "${SC_FIRMWARE_VERSION_TQ}${@'_dbg' if d.getVar('SC_FIRMWARE_DBG') == '1' else ''}"
 
