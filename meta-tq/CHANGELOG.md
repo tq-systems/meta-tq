@@ -57,6 +57,12 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* imx-sc-firmware-tq_1.13.0 (TQMa8X[D,Q]P[S], TQMa8QM)
+  * update to TQMa8.NXP-v1.13.0.B5561.0035
+  * Improve DRAM memory region protection: only existing DRAM is partitioned
+  * Move recipe out of dynamic-layers/freescale-layer. Since we provide our own
+    binary package without dependencies to other layers the recipe does not need
+    to be hidden.
 * linux-tq 6.1 / TQMa8M: update to 6.1.9
 * linux-imx-tq 5.15 / TQMa93xxLA:
   * cleanup gpio for LVDS on MBa93xxCA, make USB touch working
