@@ -13,7 +13,7 @@ This README contains some useful information for TQMa8x on MBa8x
 
 ### SCFW:
 
-Version: tq-TQMa8.NXP-v1.13.0.B5561.0034
+Version: tq-TQMa8.NXP-v1.13.0.B5561.0035
 
 ### Other components
 
