@@ -146,7 +146,7 @@ Artifacs can be found at the usual locations for bitbake:
 
 BOOT\_MODE can be configured using DIP switch S1.
 
-| Bootmode | Description           | S1-1 | S1-2 | S1-2 | S1-4 |
+| Bootmode | Description           | S1-1 | S1-2 | S1-3 | S1-4 |
 | :------: | :-------------------: | :--: | :--: | :--: | :--: |
 | 0000     | Boot from fuses       | OFF  | OFF  | OFF  | OFF  |
 | 0001     | Serial Downloader     | OFF  | OFF  | OFF  | ON   |
