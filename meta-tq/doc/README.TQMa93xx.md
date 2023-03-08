@@ -144,6 +144,8 @@ Artifacs can be found at the usual locations for bitbake:
 
 ## Boot DIP Switches
 
+### MBa93xxCA
+
 BOOT\_MODE can be configured using DIP switch S1.
 
 | Bootmode | Description           | S1-1 | S1-2 | S1-3 | S1-4 |
@@ -155,6 +157,22 @@ BOOT\_MODE can be configured using DIP switch S1.
 | 0100     | QSPI (FlexSPI NOR     | OFF  | ON   | OFF  | OFF  |
 
 **NOTE:** LPB boot modes not supported yet.
+**NOTE:** The DIP switch order is reversed to MBa93xxLA
+
+### MBa93xxLA
+
+BOOT\_MODE can be configured using DIP switch S1.
+
+| Bootmode | Description           | S1-4 | S1-3 | S1-2 | S1-1 |
+| :------: | :-------------------: | :--: | :--: | :--: | :--: |
+| 0000     | Boot from fuses       | OFF  | OFF  | OFF  | OFF  |
+| 0001     | Serial Downloader     | OFF  | OFF  | OFF  | ON   |
+| 0010     | e-MMC (USDHC1)        | OFF  | OFF  | ON   | OFF  |
+| 0011     | SD Card (USDHC2)      | OFF  | OFF  | ON   | ON   |
+| 0100     | QSPI (FlexSPI NOR     | OFF  | ON   | OFF  | OFF  |
+
+**NOTE:** LPB boot modes not supported yet.
+**NOTE:** The DIP switch order is reversed to MBa93xxCA
 
 ## Boot device initialisation and update
 
