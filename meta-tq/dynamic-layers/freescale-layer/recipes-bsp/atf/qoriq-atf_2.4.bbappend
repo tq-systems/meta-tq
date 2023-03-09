@@ -25,6 +25,9 @@ RCW_SUFFIX:tqmlx2160a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sbe
 PLATFORM:tqmlx2160a = "tqmlx2160a"
 
 ATF_RCW_VARIANTS ??= ""
+DDR_ECC_EN ?= "yes"
+
+EXTRA_OEMAKE += "DDR_ECC_EN=${DDR_ECC_EN}"
 
 do_compile:prepend () {
     rm -f ${S}/*.pbl ${S}/*.bin
