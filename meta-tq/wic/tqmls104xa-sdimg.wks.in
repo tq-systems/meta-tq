@@ -1,19 +1,19 @@
 # short-description: Create SD card image with a boot partition
 # long-description:
 # Create an image that can be written onto a SD card or eMMC using dd for use
-# with TQMLS104[3,6]a modules
-# It uses u-boot as boot loader
+# with TQMLS104[3,6]a modules. It uses qoriq-atf and U-Boot as bootstream.
 #
 # The disk layout used is:
-#  - ---------- ------- ------------- --------- ------------- -------------
-# | |  u-boot  |  env  | fman-ucode  |  /boot  |    rootfs   |
-#  - ---------- ------- ------------- --------- ------------- -------------
-# ^ ^          ^       ^             ^         ^             ^
-# | |          |       |             |         |             |
-# 0 4kiB     3MiB    9MiB          16MiB     48MiB        variable
+#  - ----- --------- -------------- --------- ------------- -------------
+# | | PBL | FIP     |  FMAN-UCODE  |  boot   |    rootfs   |
+#  - ----- --------- -------------- --------- ------------- -------------
+# ^ ^     ^         ^              ^         ^             ^
+# | |     |         |              |         |             |
+# 0 4kiB  1MiB    9MiB           16MiB     48MiB        variable
 #
-part u-boot --source rawcopy --sourceparams="file=u-boot.bin-esdhc" --no-table --align 4
-part fman-ucode --source rawcopy --sourceparams="file=${FMAN_UCODE}" --no-table --align ${IMAGE_OFFSET_FMAN_UCODE}
+part PBL --source rawcopy --sourceparams="file=atf/${BL2_IMAGE}" --no-table --align ${IMAGE_OFFSET_PBL}
+part FIP --source rawcopy --sourceparams="file=atf/${BL3_IMAGE}" --no-table --align ${IMAGE_OFFSET_FIP}
+part FMAN-UCODE --source rawcopy --sourceparams="file=${FMAN_UCODE}" --no-table --align ${IMAGE_OFFSET_FMAN_UCODE}
 part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 16384 --fixed-size 32M
 part / --source rootfs --fstype=ext4 --label root --align 4096
 
