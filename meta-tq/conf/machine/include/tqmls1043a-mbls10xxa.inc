@@ -8,6 +8,6 @@ KERNEL_DEVICETREE ?= " \
 "
 
 IMAGE_BOOT_FILES = "\
-    ${KERNEL_IMAGETYPE};linuximage \
+    ${KERNEL_IMAGETYPE} \
     fsl-tqmls1043a-mbls10xxa.dtb \
 "
