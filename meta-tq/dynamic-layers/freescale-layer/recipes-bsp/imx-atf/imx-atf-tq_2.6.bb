@@ -1,5 +1,5 @@
 # Copyright (C) 2017-2022 NXP
-# Copyright (C) 2022 TQ-Systems GmbH
+# Copyright (C) 2022-2023 TQ-Systems GmbH
 
 DESCRIPTION = "i.MX ARM Trusted Firmware"
 SECTION = "BSP"
@@ -11,7 +11,7 @@ PROVIDES += "imx-atf"
 PV .= "+git${SRCPV}"
 
 SRCBRANCH = "TQM-lf_v2.6"
-SRCREV = "b66bf0ccefe755ecb2d6017aedd7786eb14707f6"
+SRCREV = "547776b9571a7225e97aa6e435a856640082f5a1"
 
 SRC_URI = "\
     ${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
@@ -22,14 +22,41 @@ S = "${WORKDIR}/git"
 inherit deploy
 
 ATF_PLATFORM ??= "INVALID"
+ATF_IMX_BOOT_UART_BASE ??= "" 
+# UART3
+ATF_IMX_BOOT_UART_BASE:tqma8mq ?= "0x30880000"
+ATF_IMX_BOOT_UART_BASE:tqma8mxml ?= "0x30880000"
+ATF_IMX_BOOT_UART_BASE:tqma8mxnl ?= "0x30880000"
+# UART4
+ATF_IMX_BOOT_UART_BASE:tqma8mpxl ?= "0x30a60000"
 
-# FIXME: We should return INVALID here but currently only i.MX8M has support to override the UART
-# base address in source code.
-ATF_BOOT_UART_BASE ?= ""
+# debug uart index (lpuart<n>)
+ATF_IMX_DEBUG_UART ?= ""
+ATF_IMX_DEBUG_UART:tqma8x ?= "0"
+ATF_IMX_DEBUG_UART:tqma8xx ?= "0"
+ATF_IMX_DEBUG_UART:tqma8xxs ?= "0"
+
+# TODO
+# enable / disable debug console
+ATF_DEBUG_CONSOLE ?= "0"
 
 EXTRA_OEMAKE += " \
     CROSS_COMPILE="${TARGET_PREFIX}" \
     PLAT=${ATF_PLATFORM} \
+"
+
+EXTRA_OEMAKE:append:mx8m-generic-bsp = "\
+    IMX_BOOT_UART_BASE=${ATF_IMX_BOOT_UART_BASE} \
+"
+
+EXTRA_OEMAKE:append:mx8qm-generic-bsp = "\
+    IMX_DEBUG_UART=${ATF_IMX_DEBUG_UART} \
+    DEBUG_CONSOLE=${ATF_DEBUG_CONSOLE} \
+"
+
+EXTRA_OEMAKE:append:mx8x-generic-bsp = "\
+    IMX_DEBUG_UART=${ATF_IMX_DEBUG_UART} \
+    DEBUG_CONSOLE=${ATF_DEBUG_CONSOLE} \
 "
 
 # Let the Makefile handle setting up the CFLAGS and LDFLAGS as it is a standalone application
@@ -57,9 +84,6 @@ def remove_options_tail (in_string):
 EXTRA_OEMAKE += 'LD="${@remove_options_tail(d.getVar('LD'))}"'
 EXTRA_OEMAKE += 'CC="${@remove_options_tail(d.getVar('CC'))}"'
 
-# Set the UART to use during the boot.
-EXTRA_OEMAKE += 'IMX_BOOT_UART_BASE=${ATF_BOOT_UART_BASE}'
-
 do_configure[noexec] = "1"
 
 do_compile() {
@@ -80,5 +104,6 @@ do_deploy() {
     fi
 }
 
+# needed, since we add machine specific settings
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(mx93-generic-bsp)"
+COMPATIBLE_MACHINE = "(mx93-generic-bsp|mx8-generic-bsp)"
