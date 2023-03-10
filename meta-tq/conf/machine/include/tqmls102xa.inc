@@ -50,10 +50,6 @@ MACHINE_FEATURES:append = "\
     vfat \
 "
 
-# Image Options
-#
-EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-
 # Verified values to generate UBI image:
 # physical erase block size
 UBI_PEB_SIZE = "65536"

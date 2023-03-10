@@ -33,6 +33,8 @@ MACHINE_FEATURES:append = "\
 # Image Options
 #
 
+# Add packages we want to be deployed, even when they are not part of rootfs
+# We need these here to support UBI / NFS boot case
 EXTRA_IMAGEDEPENDS += "\
     virtual/bootloader \
     virtual/kernel \
