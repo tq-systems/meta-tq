@@ -26,6 +26,7 @@ require conf/machine/include/arm/armv7a/tune-cortexa7.inc
 KERNEL_IMAGETYPE = "zImage"
 
 UBOOT_ENTRYPOINT:ls102xa = "0x80008000"
+UBOOT_SUFFIX = "bin"
 
 # Machine specific options
 #
