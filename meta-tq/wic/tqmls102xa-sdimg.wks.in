@@ -12,7 +12,7 @@
 # | |          |       |        |         |             |
 # 0 4kiB     1MiB    2MiB     4MiB      24MiB        280MiB
 #
-part u-boot --source rawcopy --sourceparams="file=u-boot.bin-sd" --no-table --align 4
+part u-boot --source rawcopy --sourceparams="file=${MACHINE_WKS_BOOTSTREAM}" --no-table --align 4
 part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 4096 --fixed-size 20M
 part / --source rootfs --fstype=ext4 --label root --align 4096
 
