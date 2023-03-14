@@ -42,7 +42,8 @@ is _mandatory_ - see [table](#supported-machines).
 
 URI: https://git.yoctoproject.org/git/meta-freescale  
 branch: kirkstone  
-revision: tested with HEAD, at least commit 8bd13d69 ("firmware-imx: Upgrade 8.17 -> 8.18")
+revision: tested with HEAD, at least commit 642cf7f2 ("Merge pull request #1433
+from Freescale/backport-1432-to-kirkstone")  
 layers: meta-freeescale  
 
 **Attention:** The following distros defined in meta-freescale-distro are not
