@@ -55,6 +55,9 @@ Releases are named with the following scheme:
 
 ## Removed
 
+* Adjust and mostly remove recipes ported from meta-imx for i.MX93 support. These
+  are ported to meta-freescale as of commit 642cf7f2 ("Merge pull request #1433
+  from Freescale/backport-1432-to-kirkstone")
 * fm-ucode recipe removed and append for meta-freescale recipe added instead.
 
 ### Changed
