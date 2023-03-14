@@ -15,19 +15,18 @@ SERIAL_CONSOLES = "115200;ttyS2"
 # disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
 USE_VT = "0"
 
-# Do not update fstab file when using wic images
-WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
-
-WKS_FILE_DEPENDS += "\
-    dosfstools-native \
-    e2fsprogs-native \
-    mtools-native \
-    parted-native \
-"
-
+# Add packages we want to be deployed, even when they are not part of rootfs
+# We need these here to support UBI / NFS boot case
 EXTRA_IMAGEDEPENDS += "\
     virtual/bootloader \
 "
+
+# Do not update fstab file when using wic images
+WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
+
+# EXTRA_IMAGEDEPENDS are applied to do_image_complete only. do_image_wic may run
+# before and needs those packages as well
+WKS_FILE_DEPENDS += "${EXTRA_IMAGEDEPENDS}"
 
 MACHINE_FEATURES += "\
     screen \
