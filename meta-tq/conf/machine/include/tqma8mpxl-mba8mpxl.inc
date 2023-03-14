@@ -38,6 +38,8 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     linux-firmware-qca \
 "
 
+# Add packages we want to be deployed, even when they are not part of rootfs
+# We need these here to support UBI / NFS boot case
 EXTRA_IMAGEDEPENDS += "\
     virtual/imx-cortexm-demos \
 "

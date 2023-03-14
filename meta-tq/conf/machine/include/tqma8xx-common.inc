@@ -25,8 +25,10 @@ IMX_BOOT_SOC_TARGET = "iMX8QX"
 
 # Image Options
 
+# Add packages we want to be deployed, even when they are not part of rootfs
+# We need these here to support UBI / NFS boot case
 EXTRA_IMAGEDEPENDS += "\
-    imx-boot:do_deploy \
+    imx-boot \
     imx-sc-firmware \
     virtual/kernel \
     virtual/bootloader \

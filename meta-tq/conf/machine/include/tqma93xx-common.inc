@@ -25,10 +25,12 @@ SPL_BINARY = "spl/u-boot-spl.bin"
 
 # Image Options
 
+# Add packages we want to be deployed, even when they are not part of rootfs
+# We need these here to support UBI / NFS boot case
 EXTRA_IMAGEDEPENDS += "\
-    imx-boot:do_deploy \
+    imx-boot \
     virtual/bootloader \
-    virtual/kernel:do_deploy \
+    virtual/kernel \
 "
 
 # Verified values to generate UBI image:

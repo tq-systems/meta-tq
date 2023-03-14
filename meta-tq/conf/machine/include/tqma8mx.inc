@@ -39,7 +39,7 @@ IMAGE_INSTALL:remove = "packagegroup-fsl-optee-imx"
 # Image Options
 
 EXTRA_IMAGEDEPENDS += "\
-    imx-boot:do_deploy \
+    imx-boot \
     virtual/bootloader \
     virtual/kernel \
 "
