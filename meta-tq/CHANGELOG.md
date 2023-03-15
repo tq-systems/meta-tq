@@ -35,6 +35,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* all machines: Fix a race condition due to missing dependencies for `WKS_FILE_DEPENDS`.
+  Add `EXTRA_IMAGEDEPENDS` to `WKS_FILE_DEPENDS` for all machines.
 * TQMa8MPxL: fix disabling of devices when no VARD can be used. Rather than dis-
   abling all optional devices, print a warning and try to boot. Without the warning
   this restores the behaviour before handling optional devices with VARD.
@@ -57,6 +59,10 @@ Releases are named with the following scheme:
 
 ### Changed
 
+*  TQMLS102xA
+   * improve settings for U-Boot specific variables
+   * allow easier usage with different RCW
+   * u-boot-tq_2017.11: simplify recipe for TQMLS102xA
 * imx-sc-firmware-tq_1.13.0 (TQMa8X[D,Q]P[S], TQMa8QM)
   * update to TQMa8.NXP-v1.13.0.B5561.0035
   * Improve DRAM memory region protection: only existing DRAM is partitioned
