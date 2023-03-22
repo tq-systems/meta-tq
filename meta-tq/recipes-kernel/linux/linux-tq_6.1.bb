@@ -5,11 +5,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 require linux-tq-common.inc
 
 KBRANCH = "linux-6.1.y"
-SRCREV = "68a95455c153f8adc513e5b688f4b348daa7c1b1"
+SRCREV = "76ba310227d2490018c271f1ecabb6c0a3212eb0"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "6.1"
-LINUX_VERSION = "${LINUX_RELEASE}.9"
+LINUX_VERSION = "${LINUX_RELEASE}.32"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
