@@ -1,10 +1,10 @@
 # Copyright (C) 2016 Freescale Semiconductor
 # Copyright 2017-2019 NXP
-# Copyright 2019-2022 TQ-Systems GmbH
+# Copyright 2019-2023 TQ-Systems GmbH
 
 DESCRIPTION = "i.MX System Controller Firmware for TQ-Systems GmbH SOM"
 LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://COPYING;md5=d3c315c6eaa43e07d8c130dc3a04a011"
+LIC_FILES_CHKSUM = "file://COPYING;md5=5a0bf11f745e68024f37b4724a5364fe"
 SECTION = "BSP"
 
 PROVIDES += "imx-sc-firmware"
@@ -14,7 +14,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${PV}:${THISDIR}/${PN}:"
 # Need tq_imx-scfw-v1.2.7-b3357 or newer for build
 # (use SC_FIRMWARE_VERSION_TQ in package name)
 
-SC_FIRMWARE_VERSION_TQ ?= "TQMa8.NXP-v1.13.0.B5561.0035"
+SC_FIRMWARE_VERSION_TQ ?= "TQMa8.NXP-v1.15.0.B5624.0036"
 SC_FIRMWARE_DBG ??= "0"
 SC_FIRMWARE_NAME_TQ ?= "${SC_FIRMWARE_VERSION_TQ}${@'_dbg' if d.getVar('SC_FIRMWARE_DBG') == '1' else ''}"
 
