@@ -1,0 +1,26 @@
+From e4d1fb1faf1130bfd3431ccab62166237154e803 Mon Sep 17 00:00:00 2001
+From: Paul Gerber <Paul.Gerber@tq-group.com>
+Date: Wed, 5 Jul 2023 08:30:09 +0200
+Subject: [PATCH] rcar_gen3: use `src` variable from kernel in include paths
+
+Signed-off-by: Paul Gerber <Paul.Gerber@tq-group.com>
+---
+ vsp2driver/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/vsp2driver/Makefile b/vsp2driver/Makefile
+index 7603ee8..c39b0cb 100644
+--- a/vsp2driver/Makefile
++++ b/vsp2driver/Makefile
+@@ -13,7 +13,7 @@ CFILES += vsp2_debug.c
+ obj-m += vsp2.o
+ vsp2-objs := $(CFILES:.c=.o)
+ 
+-U_INCLUDE := -I$(PWD)
++U_INCLUDE := -I$(src)
+ U_INCLUDE += -I$(KERNELSRC)/include
+ EXTRA_CFLAGS += $(U_INCLUDE)
+ EXTRA_CFLAGS += -DUSE_BUFFER
+-- 
+2.39.1
+
