@@ -6,8 +6,8 @@
 
 ### Supported Hardware:
 
-* TQMa6442L: Module revisions REV.020x
-* MBaX4XxL: Board revisions REV.020x
+* TQMa6442L: Module revisions REV.010x / 020x
+* MBaX4XxL: Board revisions REV.010x / 020x
 
 ### Versions
 
@@ -29,6 +29,11 @@ _Kernel:_
   default pinmuxing. This also affects LED and button GPIOs. LEDs and buttons
   are working as expected on Linux.
 * There is currently no driver support for the Bluetooth module of the MBaX4XxL
+* On the TQMa64xxL REV.010x, there is an address conflict on I2C addresses
+  0x51 and 0x54. Access to the EEPROMs and the RTC may not work correctly.
+* On the MBaX4XxL REV.010x, the SD card can't be reset by software. This can
+  make the redetection of an SD card unreliable after it has been switched
+  to UHS mode.
 
 ## Artifacts
 
