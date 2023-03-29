@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 require linux-ti-tq-common.inc
 
 KBRANCH = "TQMaxx-ti-rt-linux-5.10.y"
-SRCREV = "74b6c84c730becbc7283735937ce3c09d28d3b47"
+SRCREV = "78aebe7dab3d6b4321e889e94f4b21a4ca63701c"
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "5.10"
 LINUX_VERSION = "${LINUX_RELEASE}.152"
