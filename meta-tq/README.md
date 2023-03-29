@@ -182,9 +182,9 @@ Support for the following machines is contained in this version:
 | [y]    | i.MX6ULL         | TQMa6ULLx                | MBaULx         | tqma6ullx-512mb-mba6ulx      | TQMa6ULLx HW REV.030x 512 MiB RAM / MBa6ULx HW REV.020x |
 | [y]    | i.MX6ULL         | TQMa6ULLxL               | MBaULx         | tqma6ullx-lga-mba6ulx        | TQMa6ULLxL HW REV.020x / MBa6ULx HW REV.020x |
 | [y]    | i.MX6ULL         | TQMa6ULLxL               | MBaULx         | tqma6ullx-512mb-lga-mba6ulx  | TQMa6ULLxL HW REV.020x 512 MiB RAM/ MBa6ULx HW REV.020x               |
-| [y]    | i.MX7\[S,D\]     | TQMa7\[S,D\]             | MBa7x          | tqma7x-512mb-mba7            | TQMa7\[S,D\] HW REV.010x ... 0x020x / 512 MiB RAM / MBa7x HW REV.020x |
-| [y]    | i.MX7\[S,D\]     | TQMa7\[S,D\]             | MBa7x          | tqma7x-1gb-mba7              | TQMa7\[S,D\] HW REV.010x ... 0x020x / 1 GiB RAM / MBa7x HW REV.020x |
-| [y]    | i.MX7\[S,D\]     | TQMa7\[S,D\]             | MBa7x          | tqma7x-2gb-mba7              | TQMa7\[S,D\] HW REV.010x ... 0x020x / 2 GiB RAM / MBa7x HW REV.020x |
+| [y]    | i.MX7\[S,D\]     | TQMa7\[S,D\]             | MBa7x          | tqma7x-512mb-mba7            | TQMa7\[S,D\] HW REV.010x ... 020x / 512 MiB RAM / MBa7x HW REV.020x |
+| [y]    | i.MX7\[S,D\]     | TQMa7\[S,D\]             | MBa7x          | tqma7x-1gb-mba7              | TQMa7\[S,D\] HW REV.010x ... 020x / 1 GiB RAM / MBa7x HW REV.020x |
+| [y]    | i.MX7\[S,D\]     | TQMa7\[S,D\]             | MBa7x          | tqma7x-2gb-mba7              | TQMa7\[S,D\] HW REV.010x ... 020x / 2 GiB RAM / MBa7x HW REV.020x |
 | [y]    | i.MX8MP          | TQMa8MPxL                | MBa8MPxL       | tqma8mpxl-mba8mpxl           | TQMa8MPQL with 1/2/4/8 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x |
 | [y]    | i.MX8M\[D,Q\]    | TQMa8M\[D,Q\]            | MBa8Mx         | tqma8mx-1gb-mba8mx           | TQMa8M\[D,Q\] with 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x / 030x |
 | [y]    | i.MX8MQL         | TQMa8MQL                 | MBa8Mx         | tqma8mx-2gb-mba8mx           | TQMa8MQL / 2 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x / 030x |
@@ -195,10 +195,10 @@ Support for the following machines is contained in this version:
 | [y]    | i.MX8MNDL        | TQMa8MDLNL               | MBa8Mx         | tqma8mxnl-1gb-mba8mx         | TQMa8MDLNL / 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x |
 | [y]    | i.MX8QM          | TQMa8QM                  | MBa8x          | tqma8qm-4gb-mba8x            | TQMa8QM / 4 GiB RAM, HW REV.0102 and newer / 020x, MBa8x HW REV.020x |
 | [y]    | i.MX8QM          | TQMa8QM                  | MBa8x          | tqma8qm-8gb-mba8x            | TQMa8QM / 8 GiB RAM, HW REV.0102 and newer / 020x, MBa8x HW REV.020x |
-| [y]    | i.MX8DXP         | TQMa8XDP                 | MBa8Xx         | tqma8xdp-1gb-mba8xx          | TQMa8XDP / 1 GiB RAM ECC, HW REV.020x / 0x30x |
+| [y]    | i.MX8DXP         | TQMa8XDP                 | MBa8Xx         | tqma8xdp-1gb-mba8xx          | TQMa8XDP / 1 GiB RAM ECC, HW REV.020x / 030x |
 | [y]    | i.MX8DXP         | TQMa8XDP4                | MBa8Xx         | tqma8xdp4-mba8xx             | TQMa8XDP / 2 GiB LPDDR4 RAM, HW REV.010x |
-| [y]    | i.MX8QXP         | TQMa8XQP                 | MBa8Xx         | tqma8xqp-1gb-mba8xx          | TQMa8XQP / 1 GiB RAM ECC, HW REV.020x / 0x30x |
-| [y]    | i.MX8QXP         | TQMa8XQP                 | MBa8Xx         | tqma8xqp-2gb-mba8xx          | TQMa8XQP / 2 GiB RAM ECC, HW REV.020x / 0x30x |
+| [y]    | i.MX8QXP         | TQMa8XQP                 | MBa8Xx         | tqma8xqp-1gb-mba8xx          | TQMa8XQP / 1 GiB RAM ECC, HW REV.020x / 030x |
+| [y]    | i.MX8QXP         | TQMa8XQP                 | MBa8Xx         | tqma8xqp-2gb-mba8xx          | TQMa8XQP / 2 GiB RAM ECC, HW REV.020x / 030x |
 | [y]    | i.MX8QXP         | TQMa8XQP4                | MBa8Xx         | tqma8xqp4-mba8xx             | TQMa8XQP / 2 GiB LPDDR4 RAM, HW REV.010x |
 | [y]    | i.MX8DXP         | TQMa8XDPS                | MB-SMARC-2     | tqma8xdps-mb-smarc-2         | TQMa8XDPS / 2 GiB RAM, HW REV.030x |
 | [y]    | i.MX8QXP         | TQMa8XQPS                | MB-SMARC-2     | tqma8xqps-mb-smarc-2         | TQMa8XQPS / 2 GiB RAM, HW REV.030x |
