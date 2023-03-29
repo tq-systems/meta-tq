@@ -35,6 +35,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TQMa64xxL: enable SDHC controller quirk to fix SD card access on
+  TQMa64xxL REV.010x SoMs.
 * all machines: Fix a race condition due to missing dependencies for `WKS_FILE_DEPENDS`.
   Add `EXTRA_IMAGEDEPENDS` to `WKS_FILE_DEPENDS` for all machines.
 * TQMa8MPxL: fix disabling of devices when no VARD can be used. Rather than dis-
