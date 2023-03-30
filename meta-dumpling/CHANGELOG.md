@@ -9,6 +9,13 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQ.ARM.BSP.0004
+
+### Module BSP Revisions
+
+* kirkstone.TQMa64xxL.BSP.SW.0003
+* kirkstone.TQMa8.BSP.SW.0089
+
 ### Added
 
 * Added initial support for TQMT10xx machines
