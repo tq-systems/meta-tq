@@ -34,6 +34,7 @@ _Kernel:_
 * On the MBaX4XxL REV.010x, the SD card can't be reset by software. This can
   make the redetection of an SD card unreliable after it has been switched
   to UHS mode.
+* The WLAN/bluetooth adapter of the MBaX4XxL REV.010x is unsupported
 
 ## Artifacts
 
