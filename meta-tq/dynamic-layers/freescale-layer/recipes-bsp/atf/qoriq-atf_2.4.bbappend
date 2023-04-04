@@ -28,9 +28,9 @@ do_compile:append:tqmls1028a () {
                     ;;
                 esac
                 oe_runmake distclean
-                oe_runmake -C ${S} pbl PLAT=${plat} BOOT_MODE=${bootmode} RCW=${DEPLOY_DIR_IMAGE}/rcw/${RCW_FOLDER}/${rcw_file} ${bl32opt} ${spdopt} ${secureopt} ${fuseopt} ${otaopt}
+                oe_runmake -C ${S} pbl PLAT=${plat} BOOT_MODE=${bootmode} RCW=${DEPLOY_DIR_IMAGE}/rcw/${RCW_FOLDER}/${rcw_file}${RCW_SUFFIX} ${bl32opt} ${spdopt} ${secureopt} ${fuseopt} ${otaopt}
                 install -d ${S}/atf-variants
-                cp ${S}/build/${plat}/release/bl2_${bootmode}.pbl ${S}/atf-variants/bl2_${plat}_$(basename ${rcw_file} .bin).pbl
+                cp ${S}/build/${plat}/release/bl2_${bootmode}.pbl ${S}/atf-variants/bl2_${plat}_$(basename ${rcw_file}${RCW_SUFFIX} .bin).pbl
         done
     done
 }
@@ -40,8 +40,8 @@ do_compile:append:tqmlx2160a () {
     for rcw_file in ${ATF_RCW_VARIANTS}; do
         for bootmode in ${BOOTTYPE}; do
             oe_runmake distclean
-            oe_runmake -C ${S} pbl PLAT=${PLATFORM} BOOT_MODE=${bootmode} RCW=${DEPLOY_DIR_IMAGE}/rcw/${RCW_FOLDER}/${rcw_file} ${bl32opt} ${spdopt} ${secureopt} ${fuseopt} ${otaopt}
-            cp ${S}/build/${PLATFORM}/release/bl2_${bootmode}.pbl ${S}/atf-variants/bl2_${bootmode}_$(basename ${rcw_file} .bin).pbl
+            oe_runmake -C ${S} pbl PLAT=${PLATFORM} BOOT_MODE=${bootmode} RCW=${DEPLOY_DIR_IMAGE}/rcw/${RCW_FOLDER}/${rcw_file}${RCW_SUFFIX} ${bl32opt} ${spdopt} ${secureopt} ${fuseopt} ${otaopt}
+            cp ${S}/build/${PLATFORM}/release/bl2_${bootmode}.pbl ${S}/atf-variants/bl2_${bootmode}_$(basename ${rcw_file}${RCW_SUFFIX} .bin).pbl
         done
     done
 }
