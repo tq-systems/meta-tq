@@ -1,5 +1,3 @@
-STATIC_PBL = "no"
-
 SRC_URI:tqmlsx = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 SRCBRANCH:tqmlsx = "TQM-v2.4"
 SRCREV:tqmlsx = "e871aeab7cc6f37a406f5662198c355d7305c13e"
@@ -13,13 +11,10 @@ RCW_FOLDER:tqmls1028a = "tqmls1028a"
 RCW_SUFFIX:tqmls1028a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
 PLATFORM:tqmls1028a = "tqmls1028a_1gb"
 PLATFORM_ADDITIONAL_TARGET:tqmls1028a = "tqmls1028a_4gb"
-STATIC_PBL:tqmls1028a = "yes"
 
 RCW_FOLDER:tqmlx2160a = "tqmlx2160a"
 RCW_SUFFIX:tqmlx2160a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
 PLATFORM:tqmlx2160a = "tqmlx2160a"
-
-export STATIC_PBL
 
 do_compile:append:tqmls1028a () {
     for plat in ${PLATFORM} ${PLATFORM_ADDITIONAL_TARGET}; do
