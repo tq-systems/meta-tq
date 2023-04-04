@@ -57,9 +57,3 @@ do_deploy:append () {
         install ${S}/atf-variants/*.pbl ${DEPLOYDIR}/atf/variants/
     fi
 }
-
-COMPATIBLE_MACHINE = "^("
-COMPATIBLE_MACHINE .= "|tqmls1012al"
-COMPATIBLE_MACHINE .= "|tqmls1028a"
-COMPATIBLE_MACHINE .= "|tqmlx2160a"
-COMPATIBLE_MACHINE .= ")$"
