@@ -87,20 +87,21 @@ UBINIZE_ARGS = "\
 # and u-boot.
 UBI_VOLNAME = "root"
 
-# For the 4GB variant set BL2_IMAGE to 'bl2_sd_tqmls1028a_4gb.pbl'
+# For the 4GB variant set BL2_IMAGE to 'bl2_auto_tqmls1028a_4gb.pbl'
 # and BL3_IMAGE to 'fip_uboot_tqmls1028a_4gb.bin'
-BL2_IMAGE ?= "bl2_sd.pbl"
+BL2_IMAGE ?= "bl2_auto.pbl"
 BL3_IMAGE ?= "fip_uboot.bin"
 
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
+# auto boottype can boot from both eMMC and SD card
+BOOTTYPE ?= "auto flexspi_nor"
+
 ATF_RCW_VARIANTS ?= " \
-    default/rcw_800_sd \
-    default/rcw_1000_sd \
-    default/rcw_1000_spi_nor \
-    default/rcw_1300_sd \
-    default/rcw_1300_spi_nor \
+    default/rcw_800 \
+    default/rcw_1000 \
+    default/rcw_1300 \
 "
-RCWSD ?= "default/rcw_1300_sd"
-RCWXSPI ?= "default/rcw_1300_spi_nor"
+RCWAUTO ?= "default/rcw_1300"
+RCWXSPI ?= "default/rcw_1300"
