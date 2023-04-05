@@ -9,6 +9,19 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+* TQMLS1028A/TQMLX2160A:
+  * `ATF_RCW_VARIANTS` does not include the `.bin` filename extension anymore
+* TQMLS1028A:
+  * RCW variants do not distinguish between SD/e-MMC and SPI-NOR boot sources
+    anymore
+  * The boot type "auto" is now used for SD/e-MMC boot. The default RCW for
+    this boot source is now set using the `RCWAUTO` variable instead of `RCWSD`
+  * Secure Boot support has been added to RCW, ATF and U-Boot. For now, this
+    adds only the minimal amount of code required to boot on a the LS1028A
+    with Secure Boot enabled. Only the early boot stages (up to U-Boot) are
+    signed and verified.
+
 ## kirkstone.TQ.ARM.BSP.0004
 
 ### Module BSP Revisions
