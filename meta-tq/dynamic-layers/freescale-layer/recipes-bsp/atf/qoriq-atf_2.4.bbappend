@@ -16,37 +16,23 @@ RCW_FOLDER:tqmlx2160a = "tqmlx2160a"
 RCW_SUFFIX:tqmlx2160a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
 PLATFORM:tqmlx2160a = "tqmlx2160a"
 
+ATF_RCW_VARIANTS ??= ""
+
 do_compile:prepend () {
     rm -f ${S}/*.pbl ${S}/*.bin
     rm -rf ${S}/atf-variants
 }
 
-do_compile:append:tqmls1028a () {
+do_compile:append () {
     for plat in ${PLATFORM} ${PLATFORM_ADDITIONAL_TARGET}; do
         for rcw_file in ${ATF_RCW_VARIANTS}; do
-                case $rcw_file in
-                    *sd*)
-                    bootmode="sd";
-                    ;;
-                    *nor*)
-                    bootmode="flexspi_nor"
-                    ;;
-                esac
-                oe_runmake distclean
-                oe_runmake -C ${S} pbl PLAT=${plat} BOOT_MODE=${bootmode} RCW=${DEPLOY_DIR_IMAGE}/rcw/${RCW_FOLDER}/${rcw_file}${RCW_SUFFIX} ${bl32opt} ${spdopt} ${secureopt} ${fuseopt} ${otaopt}
+            for bootmode in ${BOOTTYPE}; do
+                make V=1 realclean
+                oe_runmake V=1 pbl PLAT=${plat} BOOT_MODE=${bootmode} RCW=${DEPLOY_DIR_IMAGE}/rcw/${RCW_FOLDER}/${rcw_file}${RCW_SUFFIX}
                 install -d ${S}/atf-variants
-                cp ${S}/build/${plat}/release/bl2_${bootmode}.pbl ${S}/atf-variants/bl2_${plat}_$(basename ${rcw_file}${RCW_SUFFIX} .bin).pbl
-        done
-    done
-}
-
-do_compile:append:tqmlx2160a () {
-    install -d ${S}/atf-variants
-    for rcw_file in ${ATF_RCW_VARIANTS}; do
-        for bootmode in ${BOOTTYPE}; do
-            oe_runmake distclean
-            oe_runmake -C ${S} pbl PLAT=${PLATFORM} BOOT_MODE=${bootmode} RCW=${DEPLOY_DIR_IMAGE}/rcw/${RCW_FOLDER}/${rcw_file}${RCW_SUFFIX} ${bl32opt} ${spdopt} ${secureopt} ${fuseopt} ${otaopt}
-            cp ${S}/build/${PLATFORM}/release/bl2_${bootmode}.pbl ${S}/atf-variants/bl2_${bootmode}_$(basename ${rcw_file}${RCW_SUFFIX} .bin).pbl
+                cp build/${plat}/release/bl2_${bootmode}${SECURE_EXTENTION}.pbl \
+                    ${S}/atf-variants/bl2_${bootmode}_${plat}${SECURE_EXTENTION}_$(basename ${rcw_file}).pbl
+            done
         done
     done
 }
@@ -54,6 +40,6 @@ do_compile:append:tqmlx2160a () {
 do_deploy:append () {
     if [ -e ${S}/atf-variants/ ]; then
         install -d ${DEPLOYDIR}/atf/variants
-        install ${S}/atf-variants/*.pbl ${DEPLOYDIR}/atf/variants/
+        cp ${S}/atf-variants/*.pbl ${DEPLOYDIR}/atf/variants/
     fi
 }
