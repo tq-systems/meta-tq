@@ -16,6 +16,11 @@ RCW_FOLDER:tqmlx2160a = "tqmlx2160a"
 RCW_SUFFIX:tqmlx2160a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
 PLATFORM:tqmlx2160a = "tqmlx2160a"
 
+do_compile:prepend () {
+    rm -f ${S}/*.pbl ${S}/*.bin
+    rm -rf ${S}/atf-variants
+}
+
 do_compile:append:tqmls1028a () {
     for plat in ${PLATFORM} ${PLATFORM_ADDITIONAL_TARGET}; do
         for rcw_file in ${ATF_RCW_VARIANTS}; do
