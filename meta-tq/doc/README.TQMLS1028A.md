@@ -126,11 +126,11 @@ Artifacs can be found at the usual locations for bitbake:
 * `atf/`
   * 1GiB
     * `bl2_flexspi_nor.pbl` Primary Boot Loader with RCW
-    * `bl2_sd.pbl` Primary Boot Loader with RCW for SD/e-MMC boot
+    * `bl2_auto.pbl` Primary Boot Loader with RCW for SD/e-MMC boot
     * `fip_uboot.bin` U-Boot
   * 4GiB
     * `bl2_flexspi_nor_tqmls1028a_4gb.pbl` Primary Boot Loader with RCW
-    * `bl2_sd_tqmls1028a_4gb.pbl` Primary Boot Loader with RCW for SD/e-MMC boot
+    * `bl2_auto_tqmls1028a_4gb.pbl` Primary Boot Loader with RCW for SD/e-MMC boot
     * `fip_uboot_tqmls1028a_4gb.bin` U-Boot
 * `atf/variants/`: different Primary Boot Loader variants built with RCW binaries form `rcw/`
 * `rcw/`: different RCW configuration binaries
@@ -144,14 +144,41 @@ Artifacs can be found at the usual locations for bitbake:
 
 ## Build-Time Configuration
 
-* BL2_IMAGE: ATF BL2 file used for WIC Image creation
-* BL3_IMAGE: ATF BL3 file used for WIC Image creation
-* RCWSD: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SD/e-MMC Boot
+* BL2_IMAGE: ATF BL2 file used for WIC image creation
+* BL3_IMAGE: ATF BL3 file used for WIC image creation
+* RCWAUTO: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SD/e-MMC Boot
 * RCWXSPI: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SPI-NOR Flash
 * ATF_RCW_VARIANTS: List of RCW binaries used to build variants of the Primary Boot Loader
 
-Set BL2_IMAGE to `bl2_sd_tqmls1028a_4gb.pbl` and BL3_IMAGE to `fip_uboot_tqmls1028a_4gb.bin` to create
-SD/e-MMC image for 4GiB variant.
+Set BL2_IMAGE to `bl2_auto${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.pbl` and BL3_IMAGE to
+`fip_uboot${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.bin` to create an SD/e-MMC image for the 4GiB variant.
+
+### Secure Boot
+
+Secure Boot is enabled by adding "secure" to `DISTRO_FEATURES`. With this setting, signed variants
+of all ATF components are generated and built into the SD/e-MMC system image.
+
+By default, a newly generated keypair will be used for signing, which may be lost when certain
+packages are rebuilt. To enable the build of secured images with a pregenerated keypair, the
+following settings can be added to a distro configuration or `local.conf`:
+
+```
+DISTRO_FEATURES:append = " secure"
+
+SRK_PATH = "/path/to/my/srk/keypair"
+SRC_URI:append:pn-qoriq-cst-native = " file://${SRK_PATH}/srk.pri file://${SRK_PATH}/srk.pub"
+SECURE_PRI_KEY:pn-qoriq-cst-native = "${SRK_PATH}/srk.pri"
+SECURE_PUB_KEY:pn-qoriq-cst-native = "${SRK_PATH}/srk.pub
+```
+
+To boot a secured image, a LS1028AE CPU (with cryptography support) with programmed OTPMK fuses is
+required. Please refer to the
+[LSDK User Guide](https://www.nxp.com/design/software/embedded-software/linux-software-and-development-tools/layerscape-linux-distribution-poc:LAYERSCAPE-SDK#documentation)
+for more information on the Secure Boot process and the required hardware preparation.
+
+For now, only the early boot stages (up to U-Boot) are signed and verified.
+Additional configuration of U-Boot is required to verify subsequent boot images
+like the Linux kernel.
 
 ## Boot DIP Switches
 
