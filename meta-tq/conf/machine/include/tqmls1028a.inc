@@ -87,10 +87,13 @@ UBINIZE_ARGS = "\
 # and u-boot.
 UBI_VOLNAME = "root"
 
-# For the 4GB variant set BL2_IMAGE to 'bl2_auto_tqmls1028a_4gb.pbl'
-# and BL3_IMAGE to 'fip_uboot_tqmls1028a_4gb.bin'
-BL2_IMAGE ?= "bl2_auto.pbl"
-BL3_IMAGE ?= "fip_uboot.bin"
+ATF_SECURE_SUFFIX ?= "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sec', '', d)}"
+
+# For the 4GB variant set
+# BL2_IMAGE to 'bl2_auto${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.pbl' and
+# BL3_IMAGE to 'fip_uboot${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.bin'
+BL2_IMAGE ?= "bl2_auto${ATF_SECURE_SUFFIX}.pbl"
+BL3_IMAGE ?= "fip_uboot${ATF_SECURE_SUFFIX}.bin"
 
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
