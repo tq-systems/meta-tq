@@ -2,7 +2,7 @@ STATIC_PBL = "no"
 
 SRC_URI:tqmlsx = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 SRCBRANCH:tqmlsx = "TQM-v2.4"
-SRCREV:tqmlsx = "594d01dd92ac599c73e14d64e16737bd26a3ef93"
+SRCREV:tqmlsx = "e871aeab7cc6f37a406f5662198c355d7305c13e"
 
 RCW_FOLDER:tqmls1012al = "tqmls1012al"
 RCW_SUFFIX:tqmls1012al = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
