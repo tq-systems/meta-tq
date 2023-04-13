@@ -21,8 +21,15 @@ _Kernel:_
 
 ### Known issues
 
-* The USB OTG port does not work in host mode in U-Boot
-  - The OTG port works in host mode after booting Linux.
+* USB functions are limited in U-Boot:
+  - USB 3.0 is disabled in U-Boot, only USB 2.0 is available
+  - The OTG ID pin is ignored in U-Boot. The mode of the port is determined
+    by the boot mode:
+    - When booting in USB host mode (from mass storage), the port uses host
+      mode. Access to the connected USB storage device is possible from the
+      U-Boot command line.
+    - For all other boot modes, the port will be in device mode. The "dfu"
+      command can be used to flash the boot media from a connected host.
 * There is no PRU Ethernet support in U-Boot. Only the primary Ethernet port
   is usable in the bootloader.
 * Most GPIOs can't be read or set from U-Boot, as they are disabled in the
@@ -120,6 +127,57 @@ the bootloader binaries to `tiboot3.bin`.
 | DIP     |  1  |  2  |  3  |  4  |    |  1  |  2  |  3  |  4  |
 | ON      |  x  |  x  |     |  x  |    |     |     |     |     |
 | OFF     |     |     |  x  |     |    |  x  |     |     |     |
+
+#### USB host (mass storage)
+
+|         |  S5 |     |     |     |
+| ------- | :-: | :-: | :-: | :-: |
+| DIP     |  1  |  2  |  3  |  4  |
+| ON      |  x  |     |  x  |     |
+| OFF     |     |  x  |     |  x  |
+
+|         |  S4 |     |     |     |    |  S6 |     |     |     |
+| ------- | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: |
+| DIP     |  1  |  2  |  3  |  4  |    |  1  |  2  |  3  |  4  |
+| ON      |  x  |  x  |     |     |    |  x  |     |     |     |
+| OFF     |     |     |  x  |  x  |    |     |  x  |     |     |
+
+Only boot of U-Boot is currently supported from USB mass storage. The U-Boot
+default environment does not provide commands to load kernel and root filesystem
+from USB devices.
+
+#### USB device (dfu-util)
+
+|         |  S5 |     |     |     |
+| ------- | :-: | :-: | :-: | :-: |
+| DIP     |  1  |  2  |  3  |  4  |
+| ON      |  x  |     |  x  |     |
+| OFF     |     |  x  |     |  x  |
+
+|         |  S4 |     |     |     |    |  S6 |     |     |     |
+| ------- | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: |
+| DIP     |  1  |  2  |  3  |  4  |    |  1  |  2  |  3  |  4  |
+| ON      |  x  |  x  |     |     |    |     |     |     |     |
+| OFF     |     |     |  x  |  x  |    |  x  |  x  |     |     |
+
+The `dfu-util` command can be used to load U-Boot from a connected USB host:
+
+```
+# After initial power-on, U-Boot will reset the device as a part of an Errata
+# workaround, so tiboot3.bin needs to be loaded twice. After a warm boot (reset
+# from U-Boot or reboot from Linux), the initial load of tiboot3.bin must be
+# skipped.
+dfu-util -a bootloader -D tiboot3.bin
+
+# Load all U-Boot stages in sequence
+dfu-util -R -a bootloader -D tiboot3.bin
+dfu-util -R -a tispl.bin -D tispl.bin
+dfu-util -R -a u-boot.img -D u-boot.img
+```
+
+Please refer to the
+[AM64x Processor SDK Documentation](https://software-dl.ti.com/processor-sdk-linux/esd/AM64X/08_02_00_23/exports/docs/linux/Foundational_Components/U-Boot/Users-Guide.html)
+for information on the usage of `dfu-util` to flash boot media.
 
 ### OS boot
 
