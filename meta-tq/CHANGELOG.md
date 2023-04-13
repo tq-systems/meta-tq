@@ -10,6 +10,8 @@ Releases are named with the following scheme:
 ## Next Release
 
 ### Changed
+* TQMa64xxL: Added support for booting in USB host mode (from USB mass storage)
+  and device mode (using `dfu-util` on a connected host)
 * TQMLS1028A/TQMLX2160A:
   * `ATF_RCW_VARIANTS` does not include the `.bin` filename extension anymore
 * TQMLS1028A:
