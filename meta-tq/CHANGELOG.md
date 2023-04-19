@@ -9,6 +9,12 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+* TQMLS104xA: Added support for atf bootstream.
+    * rcw: add support for rcw recipe
+    * qoriq-atf: add support
+    * u-boot: update to atf bootstream and to U-Boot version 2022.04
+
 ### Changed
 * TQMa64xxL: Added support for booting in USB host mode (from USB mass storage)
   and device mode (using `dfu-util` on a connected host)
@@ -23,6 +29,12 @@ Releases are named with the following scheme:
     adds only the minimal amount of code required to boot on a the LS1028A
     with Secure Boot enabled. Only the early boot stages (up to U-Boot) are
     signed and verified.
+* TQMLS104xA: Do not rename linux in boot partition.
+
+### Removed
+* tqmls1046a_8g-mbls10xxa and tqmls1046a_2g-mbls10xxa machines are removed.
+  The bl2 pbl files for these memory variants are now built with the qoriq-atf
+  recipe.
 
 ## kirkstone.TQ.ARM.BSP.0004
 
