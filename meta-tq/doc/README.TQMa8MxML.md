@@ -24,7 +24,7 @@ _MBa8Mx HW Rev.030x only_
 
 | Feature                                          |                      |
 | :----------------------------------------------- | :------------------: |
-| RAM configs                                      |        1,2 GiB       |
+| RAM configs                                      |        1,2,4 GiB     |
 | CPU variants                                     |  i.MX8MMD / i.MX8MMQ |
 | Fuses / OCRAM                                    |          x           |
 | speed grade / temperature grade detection        |          x           |
@@ -67,7 +67,7 @@ _MBa8Mx HW Rev.030x only_
 
 | Feature                                          |                     |
 | :----------------------------------------------- | :----------------:  |
-| RAM configs                                      |        1,2 GiB      |
+| RAM configs                                      |        1,2,4 GiB    |
 | CPU variants                                     | i.MX8MMD / i.MX8MMQ |
 | Fuses / OCRAM                                    |          x          |
 | speed grade / temperature grade detection        |          x          |

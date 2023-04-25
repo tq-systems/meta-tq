@@ -191,6 +191,7 @@ Support for the following machines is contained in this version:
 | [y]    | i.MX8MQ          | TQMa8MQ                  | MBa8Mx         | tqma8mx-4gb-mba8mx           | TQMa8MQ / 4 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x / 030x |
 | [y]    | i.MX8MM\[D,Q\]   | TQMa8M\[D,Q\]ML          | MBa8Mx         | tqma8mxml-1gb-mba8mx         | TQMa8M\[D,Q\]ML / 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x |
 | [y]    | i.MX8MMQ         | TQMa8MQML                | MBa8Mx         | tqma8mxml-2gb-mba8mx         | TQMa8MQML / 2 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x |
+| [y]    | i.MX8MMQ         | TQMa8MQML                | MBa8Mx         | tqma8mxml-4gb-mba8mx         | TQMa8MQML / 4 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x |
 | [y]    | i.MX8MNQ         | TQMa8MQNL                | MBa8Mx         | tqma8mxnl-1gb-mba8mx         | TQMa8MQNL / 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x |
 | [y]    | i.MX8MNDL        | TQMa8MDLNL               | MBa8Mx         | tqma8mxnl-1gb-mba8mx         | TQMa8MDLNL / 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x |
 | [y]    | i.MX8QM          | TQMa8QM                  | MBa8x          | tqma8qm-4gb-mba8x            | TQMa8QM / 4 GiB RAM, HW REV.0102 and newer / 020x, MBa8x HW REV.020x |
