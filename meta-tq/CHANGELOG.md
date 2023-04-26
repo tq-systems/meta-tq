@@ -10,12 +10,24 @@ Releases are named with the following scheme:
 ## Next Release
 
 ### Added
+
+* TQMa8MxML: add support for 4 GB RAM variant
 * TQMLS104xA: Added support for atf bootstream.
-    * rcw: add support for rcw recipe
-    * qoriq-atf: add support
-    * u-boot: update to atf bootstream and to U-Boot version 2022.04
+  * rcw: add support for rcw recipe
+  * qoriq-atf: add support
+  * u-boot: update to atf bootstream and to U-Boot version 2022.04
 
 ### Changed
+
+* TQMa8Mx[M,N]L: u-boot-imx-tq v2020.04:
+  * update RAM configuration based on latest RPA
+  * increase number of DRAM banks to prepare usage with
+  * increase number of DRAM banks to prepare usage with OPTEE
+* TQMa8:
+  * u-boot-imx-tq v2020.04: prepare new TQ-Systems serial numeber format
+* TQMa6x / TQMa7x / TQMa6U[L,LL]x[L]:
+  * update linux-tq 5.15 to 5.15.104
+  * update linux-rt-tq 5.15 to 5.15.96-rt61
 * TQMa64xxL: Added support for booting in USB host mode (from USB mass storage)
   and device mode (using `dfu-util` on a connected host)
 * TQMLS1028A/TQMLX2160A:
