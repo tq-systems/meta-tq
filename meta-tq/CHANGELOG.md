@@ -29,6 +29,7 @@ Releases are named with the following scheme:
     adds only the minimal amount of code required to boot on a the LS1028A
     with Secure Boot enabled. Only the early boot stages (up to U-Boot) are
     signed and verified.
+  * u-boot-lsdk-tq_2019.10: use tqmls1028a for COMPATIBLE_MACHINE
 * TQMLS104xA: Do not rename linux in boot partition.
 
 ### Removed
