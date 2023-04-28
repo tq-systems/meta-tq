@@ -176,7 +176,44 @@ compile_prepare:mx9-generic-bsp() {
     done
 }
 
+compile_finish() {
+    # Do nothing by default
+    :
+}
+
+generate_habinfo_mx8m() {
+    local target="$1" print_fit_hab_target
+
+    awk '
+        /^ csf_off\>/ { print "SPL_CSF_OFF=\""$2"\"" }
+        /^ spl hab block:/ { print "SPL_HAB_BLOCK=\""$4" "$5" "$6"\"" }
+        /^ sld_csf_off\>/ { print "SLD_CSF_OFF=\""$2"\"" }
+        /^ sld hab block:/ { print "SLD_HAB_BLOCK=\""$4" "$5" "$6"\"" }
+    ' ${BOOT_STAGING}/mkimage.log
+
+    case "${target}" in
+    *_flexspi)
+        print_fit_hab_target='print_fit_hab_flexspi'
+        ;;
+    *)
+        print_fit_hab_target='print_fit_hab'
+        ;;
+    esac
+
+    echo -n 'FIT_HAB_BLOCK="'
+    oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} dtbs=${UBOOT_DTB_NAME} -s ${print_fit_hab_target}
+    echo '"'
+}
+
+compile_finish:mx8m-generic-bsp() {
+    local target="$1" type="$2"
+
+    generate_habinfo_mx8m "${target}" > ${S}/habinfo-${type}.env-${target}
+}
+
 do_compile() {
+    rm -f ${S}/habinfo-*
+
     # mkimage for i.MX8
     # Copy TEE binary to SoC target folder to mkimage
     if ${DEPLOY_OPTEE}; then
@@ -221,6 +258,7 @@ do_compile() {
 
             if [ -e "${BOOT_STAGING}/flash.bin" ]; then
                 cp ${BOOT_STAGING}/flash.bin ${S}/${BOOT_NAME}-${MACHINE}-${config}.bin-${target}
+                compile_finish "$target" "$config"
             fi
         done
     done
@@ -241,6 +279,9 @@ do_deploy() {
         for type in ${UBOOT_CONFIG}; do
             install -m 0644 ${S}/${BOOT_NAME}-${MACHINE}-${type}.bin-${target} \
                                                              ${DEPLOYDIR}
+            if [ -e ${S}/habinfo-${type}.env-${target} ]; then
+                install -m 0644 ${S}/habinfo-${type}.env-${target} ${DEPLOYDIR}/
+            fi
         done
     done
 }
