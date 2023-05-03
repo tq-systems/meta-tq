@@ -6,7 +6,7 @@
 
 ### Supported Hardware:
 
-* TQMLX2160A: module revisions REV.010x
+* TQMLX2080A/TQMLX2160A: module revisions REV.010x
 * MBLX2160A:  board revisions REV.010x .. REV.020x
 
 ## HowTo
@@ -155,7 +155,11 @@ Note: eMMC and SD-Card Image differ only in RCW-PBL. So a SD-Card Image can be u
 * ATF_RCW_VARIANTS: List of RCW binaries used to build variants of the Primary Boot Loader
 * MC_DPC: DPAA2 Configuration File
 * MC_DPL: DPAA2 Data Path Layout file.
-* BL2_IMAGE: ATF pbl file used for wic Image generation.
+* BL2_IMAGE: ATF BL2 (PBL) file used for WIC image generation.
+* BL3_IMAGE: ATF BL3 (U-Boot) file used for WIC image generation.
+
+Set BL2_IMAGE to `bl2_tqmlx2160a_16gb.pbl` and BL3_IMAGE to `fip_uboot_tqmlx2160a_16gb.bin`
+to create an SD/e-MMC image for the 16GiB variant.
 
 ## Ethernet and DPAA2
 ### RCW - SerDes Configuration
@@ -210,7 +214,7 @@ The following table shows which MAC is connected to which port depending on the 
 | MAC18 | X14.B | X11.A |  -  |   -   |
 
 Interfaces in U-Boot are named like this: DPMACxx@interface (e.g. DPMAC17@rgmii-id).
-Note: When MAC.17 or MAC.18 is configured as SGMII device the RGMII ports won't work.
+Note: On MAC.17 and MAC.18 RGMII configuration takes precedence over SGMII.
 
 ## Serdes Configuration
 
