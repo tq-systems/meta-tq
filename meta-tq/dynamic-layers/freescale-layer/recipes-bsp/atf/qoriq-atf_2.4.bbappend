@@ -1,6 +1,6 @@
 SRC_URI:tqmlsx = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 SRCBRANCH:tqmlsx = "TQM-v2.4"
-SRCREV:tqmlsx = "e871aeab7cc6f37a406f5662198c355d7305c13e"
+SRCREV:tqmlsx = "6b4dd2515a32afad2fb6cc4948a8acb4a8cecb65"
 
 RCW_FOLDER:tqmls1012al = "tqmls1012al"
 RCW_SUFFIX:tqmls1012al = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
@@ -23,6 +23,7 @@ PLATFORM_ADDITIONAL_TARGET:tqmls1046a = "tqmls1046a_8gb"
 RCW_FOLDER:tqmlx2160a = "tqmlx2160a"
 RCW_SUFFIX:tqmlx2160a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
 PLATFORM:tqmlx2160a = "tqmlx2160a"
+PLATFORM_ADDITIONAL_TARGET:tqmlx2160a = "tqmlx2160a_16gb"
 
 ATF_RCW_VARIANTS ??= ""
 DDR_ECC_EN ?= "yes"
