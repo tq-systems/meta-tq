@@ -9,6 +9,22 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* TQMLX2160A:
+  * Added support for 16GiB variant
+  * Added support for TQMLX2080A variant
+
+### Changed
+
+* TQMLX2160A: Rename wic kickstarter file to `tqmlx2160a.wks.in`
+
+### Fixed
+
+* TQMLX2160A:
+  * U-Boot: Fixed Ethernet DPMAC.17/DPMAC.18 RGMII over Serdes precedence to
+    match behaviour of recent qoriq-mc-binary versions.
+
 ## kirkstone.TQ.ARM.BSP.0005
 
 ### Module BSP Revisions
