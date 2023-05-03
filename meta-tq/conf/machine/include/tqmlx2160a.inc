@@ -86,6 +86,5 @@ UBINIZE_ARGS = "\
 # and u-boot.
 UBI_VOLNAME = "root"
 
-WICVARS:append = " BL2_IMAGE"
-
 BL2_IMAGE ?= "bl2_sd.pbl"
+BL3_IMAGE ?= "fip_uboot.bin"
