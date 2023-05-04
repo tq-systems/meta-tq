@@ -109,7 +109,7 @@ compile_prepare() {
 }
 
 compile_prepare:mx8-generic-bsp() {
-    bbnote 8QM boot binary build
+    bbnote '8QM boot binary build'
     cp ${DEPLOY_DIR_IMAGE}/${SC_FIRMWARE_NAME} ${BOOT_STAGING}/scfw_tcm.bin
     cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}             ${BOOT_STAGING}
     if [ "$1" = "flash_linux_m4" ]; then
@@ -126,7 +126,7 @@ compile_prepare:mx8-generic-bsp() {
 }
 
 compile_prepare:mx8m-generic-bsp() {
-    bbnote 8MQ/8MM/8MN/8MP boot binary build
+    bbnote '8MQ/8MM/8MN/8MP boot binary build'
     for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
         bbnote "Copy ddr_firmware: ${ddr_firmware} from ${DEPLOY_DIR_IMAGE} -> ${BOOT_STAGING} "
         cp ${DEPLOY_DIR_IMAGE}/${ddr_firmware}               ${BOOT_STAGING}
@@ -147,7 +147,7 @@ compile_prepare:mx8m-generic-bsp() {
 }
 
 compile_prepare:mx8x-generic-bsp() {
-    bbnote 8QX boot binary build
+    bbnote '8QX boot binary build'
     if [ "$1" = "flash_linux_m4" ]; then
         cp ${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}           ${BOOT_STAGING}/m4_image.bin
     fi
@@ -163,7 +163,7 @@ compile_prepare:mx8x-generic-bsp() {
 }
 
 compile_prepare:mx9-generic-bsp() {
-    bbnote i.MX9 boot binary build
+    bbnote 'i.MX9 boot binary build'
     for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
         bbnote "Copy ddr_firmware: ${ddr_firmware} from ${DEPLOY_DIR_IMAGE} -> ${BOOT_STAGING} "
         cp ${DEPLOY_DIR_IMAGE}/${ddr_firmware}               ${BOOT_STAGING}
