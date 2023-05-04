@@ -104,7 +104,11 @@ M4_DEFAULT_IMAGE:tqma8xxs ?= "rpmsg_lite_pingpong_rtos_linux_remote.bin"
 M4_DEFAULT_IMAGE:tqma8x ?= "rpmsg_lite_pingpong_rtos_linux_remote_m40.bin"
 M4_1_DEFAULT_IMAGE:tqma8x ?= "rpmsg_lite_pingpong_rtos_linux_remote_m41.bin"
 
-compile_mx8() {
+compile_prepare() {
+    bberror 'Invalid SOC family'
+}
+
+compile_prepare:mx8-generic-bsp() {
     bbnote 8QM boot binary build
     cp ${DEPLOY_DIR_IMAGE}/${SC_FIRMWARE_NAME} ${BOOT_STAGING}/scfw_tcm.bin
     cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}             ${BOOT_STAGING}
@@ -121,7 +125,7 @@ compile_mx8() {
     done
 }
 
-compile_mx8m() {
+compile_prepare:mx8m-generic-bsp() {
     bbnote 8MQ/8MM/8MN/8MP boot binary build
     for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
         bbnote "Copy ddr_firmware: ${ddr_firmware} from ${DEPLOY_DIR_IMAGE} -> ${BOOT_STAGING} "
@@ -142,7 +146,7 @@ compile_mx8m() {
     done
 }
 
-compile_mx8x() {
+compile_prepare:mx8x-generic-bsp() {
     bbnote 8QX boot binary build
     if [ "$1" = "flash_linux_m4" ]; then
         cp ${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}           ${BOOT_STAGING}/m4_image.bin
@@ -158,7 +162,7 @@ compile_mx8x() {
     done
 }
 
-compile_mx9() {
+compile_prepare:mx9-generic-bsp() {
     bbnote i.MX9 boot binary build
     for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
         bbnote "Copy ddr_firmware: ${ddr_firmware} from ${DEPLOY_DIR_IMAGE} -> ${BOOT_STAGING} "
@@ -181,7 +185,8 @@ do_compile() {
     cp ${DEPLOY_DIR_IMAGE}/${ATF_MACHINE_NAME} ${BOOT_STAGING}/bl31.bin
     for target in ${IMXBOOT_TARGETS}; do
         for config in ${UBOOT_CONFIG}; do
-            compile_${SOC_FAMILY} "$target"
+            compile_prepare "$target"
+
             allbins="u-boot.bin u-boot-nodtb.bin u-boot-spl.bin"
             for bin in ${allbins} ; do
                 if [ -e "${BOOT_STAGING}/${bin}" ]; then
