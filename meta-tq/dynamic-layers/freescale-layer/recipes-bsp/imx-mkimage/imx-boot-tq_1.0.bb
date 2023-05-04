@@ -1,5 +1,5 @@
 # Copyright (C) 2017-2020 NXP
-# Copyright (C) 2020-2022 TQ-Systems GmbH
+# Copyright (C) 2020-2023 TQ-Systems GmbH <oss@ew.tq-group.com>, D-82229 Seefeld, Germany.
 
 require imx-mkimage-tq_git.inc
 

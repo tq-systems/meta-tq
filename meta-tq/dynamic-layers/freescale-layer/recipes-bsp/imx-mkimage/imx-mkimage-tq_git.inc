@@ -1,5 +1,5 @@
 # Copyright 2017-2021 NXP
-# Copyright 2021-2022 TQ-Systems GmbH
+# Copyright (C) 2021-2023 TQ-Systems GmbH <oss@ew.tq-group.com>, D-82229 Seefeld, Germany.
 
 DEPENDS = "\
     openssl-native \
