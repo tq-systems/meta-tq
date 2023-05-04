@@ -31,6 +31,8 @@ IMX_EXTRA_FIRMWARE:mx9-generic-bsp = "\
 
 IMX_EXTRA_FIRMWARE:append = " ${@bb.utils.contains('IMXBOOT_TARGETS', 'flash_linux_m4', 'virtual/imx-cortexm-demos', '', d)}"
 
+inherit imx-hab
+
 DEPENDS += "\
     ${IMX_EXTRA_FIRMWARE} \
     imx-atf \
@@ -205,14 +207,42 @@ generate_habinfo_mx8m() {
     echo '"'
 }
 
+generate_csf_mx8m() {
+    local target="$1" type="$2"
+    local flash_bin="${BOOT_NAME}-${MACHINE}-${type}.bin-${target}"
+
+    # habinfo has been sourced by compile_finish for _HAB_BLOCK data
+
+    local hab_blocks="$(
+        printf '%s "%s"' "${SLD_HAB_BLOCK}" "${flash_bin}"
+
+        printf '%s' "${FIT_HAB_BLOCK}" | while IFS= read -r block; do
+            printf '%s' ', \\\n'
+            printf '             %s "%s"' "${block}" "${flash_bin}"
+        done
+    )"
+
+    imx_hab_generate_csf \
+        ${S}/csf_spl-${type}.txt-${target} \
+        ${WORKDIR}/csf_spl.txt.in \
+        "${SPL_HAB_BLOCK} \"${flash_bin}\""
+    imx_hab_generate_csf \
+        ${S}/csf_fit-${type}.txt-${target} \
+        ${WORKDIR}/csf_fit.txt.in \
+        "${hab_blocks}"
+}
+
 compile_finish:mx8m-generic-bsp() {
     local target="$1" type="$2"
 
     generate_habinfo_mx8m "${target}" > ${S}/habinfo-${type}.env-${target}
+
+    . ${S}/habinfo-${type}.env-${target}
+    generate_csf_mx8m "${target}" "${type}"
 }
 
 do_compile() {
-    rm -f ${S}/habinfo-*
+    rm -f ${S}/habinfo-* ${S}/csf_*.txt-* ${S}/csf_*.bin-*
 
     # mkimage for i.MX8
     # Copy TEE binary to SoC target folder to mkimage
@@ -279,9 +309,12 @@ do_deploy() {
         for type in ${UBOOT_CONFIG}; do
             install -m 0644 ${S}/${BOOT_NAME}-${MACHINE}-${type}.bin-${target} \
                                                              ${DEPLOYDIR}
-            if [ -e ${S}/habinfo-${type}.env-${target} ]; then
-                install -m 0644 ${S}/habinfo-${type}.env-${target} ${DEPLOYDIR}/
-            fi
+
+            for file in habinfo-${type}.env csf_spl-${type}.txt csf_fit-${type}.txt; do
+                if [ -e ${S}/${file}-${target} ]; then
+                    install -m 0644 ${S}/${file}-${target} ${DEPLOYDIR}/
+                fi
+            done
         done
     done
 }

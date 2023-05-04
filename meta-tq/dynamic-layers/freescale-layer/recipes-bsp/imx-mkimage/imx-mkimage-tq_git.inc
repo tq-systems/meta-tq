@@ -25,4 +25,9 @@ SRC_URI = "\
     file://0009-iMX8M-print_fit_hab-fix-output-for-symlinked-inputs.patch \
 "
 
+SRC_URI:append:mx8m-generic-bsp = "\
+    file://csf_fit.txt.in \
+    file://csf_spl.txt.in \
+"
+
 S = "${WORKDIR}/git"
