@@ -41,6 +41,9 @@ DEPENDS += "\
     xxd-native \
 "
 
+# Secure Boot / HAB support
+DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'imx-cst-native imx-cst-keys-native', '', d)}"
+
 # imx8m needs mkimage and dtc for ITB images
 DEPENDS:append:mx8m-generic-bsp = "\
     dtc-native \
@@ -146,6 +149,14 @@ compile_prepare:mx8m-generic-bsp() {
                                                              ${BOOT_STAGING}/u-boot-nodtb.bin-${type}
         cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type} ${BOOT_STAGING}/u-boot.bin-${type}
     done
+
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'true', 'false', d)}; then
+        if imx_hab_check_keys_configured; then
+            imx_hab_install_keys ${S}
+        else
+            bbwarn 'IMX_HAB_KEY_NAME unset, skipping signature generation.'
+        fi
+    fi
 }
 
 compile_prepare:mx8x-generic-bsp() {
@@ -232,6 +243,27 @@ generate_csf_mx8m() {
         "${hab_blocks}"
 }
 
+hab_sign_part_mx8m() {
+    local target="$1" type="$2" part="$3" offset="$4"
+    local flash_bin="${BOOT_NAME}-${MACHINE}-${type}.bin-${target}"
+
+    cst -i ${S}/csf_${part}-${type}.txt-${target} -o ${S}/csf_${part}-${type}.bin-${target}
+
+    # Patch signature into bootstream at given offset
+    dd if=${S}/csf_${part}-${type}.bin-${target} of=${flash_bin} seek=$(printf '%d' "${offset}") oflag=seek_bytes conv=notrunc
+}
+
+hab_sign_mx8m() {
+    local target="$1" type="$2"
+
+    # No key set, signing is skipped
+    imx_hab_check_keys_configured || return 0
+
+    # habinfo has been sourced by compile_finish for offsets
+    hab_sign_part_mx8m "${target}" "${type}" spl "${SPL_CSF_OFF}"
+    hab_sign_part_mx8m "${target}" "${type}" fit "${SLD_CSF_OFF}"
+}
+
 compile_finish:mx8m-generic-bsp() {
     local target="$1" type="$2"
 
@@ -239,6 +271,10 @@ compile_finish:mx8m-generic-bsp() {
 
     . ${S}/habinfo-${type}.env-${target}
     generate_csf_mx8m "${target}" "${type}"
+
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'true', 'false', d)}; then
+        hab_sign_mx8m "${target}" "${type}"
+    fi
 }
 
 do_compile() {
