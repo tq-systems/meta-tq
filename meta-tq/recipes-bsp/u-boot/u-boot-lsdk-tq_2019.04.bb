@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
 
 DEPENDS += "bison-native"
 
-SRCREV = "74382e0e5b140d3808ae3b5bc23fc497d02998f5"
+SRCREV = "297359768f8cdf3e14f190878f3a9ee668d93850"
 SRCBRANCH = "TQMLX2160A-v2019.04-lx2160a-early-access-bsp0.7"
 
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
