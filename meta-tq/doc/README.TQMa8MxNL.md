@@ -500,6 +500,10 @@ Change by switching from GPIO2_1 (SEL_USB_HUB_B)
 Default dtb is configured for USB Host support via USB hub. A special dtb
 is provided for USB dual role support, see see [artifacts section](#build-artifacts).
 
+### High Assurance Boot (Secure Boot)
+
+See [i.MX High Assurance Boot](README.IMX-HAB.md).
+
 ## Support Wiki
 
 See [TQ Embedded Wiki for TQMa8MxNL](https://support.tq-group.com/en/arm/tqma8mxnl)
