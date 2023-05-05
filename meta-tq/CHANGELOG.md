@@ -9,6 +9,16 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* TQMa8Mx/TQMa8MPxL/TQMa8MxML/TQMa8MxNL: Add support for
+  [High Assurance Boot](doc/README.IMX-HAB.md)
+
+### Fixed
+
+* TQMa8MPxL/TQMa8MxML/TQMa8MxNL: Fix compatibility with cards from some vendors
+  for SD card boot
+
 ## kirkstone.TQ.ARM.BSP.0007
 
 ### Module BSP Revisions
