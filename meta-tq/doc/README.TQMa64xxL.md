@@ -21,7 +21,7 @@ _Kernel:_
 
 ### Known issues
 
-* USB functions are limited in U-Boot:
+* *In U-Boot,* USB functions are limited:
   - USB 3.0 is disabled in U-Boot, only USB 2.0 is available
   - The OTG ID pin is ignored in U-Boot. The mode of the port is determined
     by the boot mode:
@@ -30,18 +30,19 @@ _Kernel:_
       U-Boot command line.
     - For all other boot modes, the port will be in device mode. The "dfu"
       command can be used to flash the boot media from a connected host.
-* There is no PRU Ethernet support in U-Boot. Only the primary Ethernet port
-  is usable in the bootloader.
-* Most GPIOs can't be read or set from U-Boot, as they are disabled in the
+* *In U-Boot,* there is no PRU Ethernet support. Only the primary Ethernet port
+  X5 is usable in the bootloader.
+* *From U-Boot,* most GPIOs can't be read or set, as they are disabled in the
   default pinmuxing. This also affects LED and button GPIOs. LEDs and buttons
   are working as expected on Linux.
 * There is currently no driver support for the Bluetooth module of the MBaX4XxL
-* On the TQMa64xxL REV.010x, there is an address conflict on I2C addresses
-  0x51 and 0x54. Access to the EEPROMs and the RTC may not work correctly.
-* On the MBaX4XxL REV.010x, the SD card can't be reset by software. This can
-  make the redetection of an SD card unreliable after it has been switched
-  to UHS mode.
-* The WLAN/bluetooth adapter of the MBaX4XxL REV.010x is unsupported
+* TQMa64xxL *REV.010x only*:
+  * There is an address conflict on I2C addresses 0x51 and 0x54. Access to the
+    EEPROMs and the RTC may not work correctly.
+* MBaX4XxL *REV.010x only*:
+  * The SD card can't be reset by software. This can make the redetection of an
+    SD card unreliable after it has been switched to UHS mode.
+  * The WLAN/bluetooth adapter is unsupported
 
 ## Artifacts
 
