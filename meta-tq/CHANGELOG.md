@@ -9,6 +9,12 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQ.ARM.BSP.0005
+
+### Module BSP Revisions
+
+* kirkstone.TQMa8.BSP.SW.0090
+
 ### Added
 
 * TQMa8MxML: add support for 4 GB RAM variant
@@ -24,7 +30,7 @@ Releases are named with the following scheme:
   * increase number of DRAM banks to prepare usage with
   * increase number of DRAM banks to prepare usage with OPTEE
 * TQMa8:
-  * u-boot-imx-tq v2020.04: prepare new TQ-Systems serial numeber format
+  * u-boot-imx-tq v2020.04: prepare new TQ-Systems serial number format
 * TQMa6x / TQMa7x / TQMa6U[L,LL]x[L]:
   * update linux-tq 5.15 to 5.15.104
   * update linux-rt-tq 5.15 to 5.15.96-rt61
