@@ -44,7 +44,7 @@ _Kernel:_
     SD card unreliable after it has been switched to UHS mode.
   * The WLAN/bluetooth adapter is unsupported
 
-## Artifacts
+## Build artifacts
 
 Artifacts can be found at the usual locations for Bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
@@ -220,7 +220,7 @@ root filesystem you are currently running from.
 
 #### SD card / e-MMC
 
-To program a complete system image, write the [WIC image](#artifacts) to
+To program a complete system image, write the [WIC image](#build-artifacts) to
 SD card / e-MMC at offset 0. The following command can be used to write a file
 `/mnt/image.wic` to the e-MMC:
 ```
@@ -247,7 +247,8 @@ mount -t ubifs ubi0:rootfs /mnt
 
 When booting from e-MMC / SD card, the bootloader and system firmware are loaded
 from a FAT partition (the first partition of the boot medium by default). They
-can be updated by replacing the files on this partition.
+can be updated by replacing the files on this partition. See the
+[build artifacts](#build-artifacts) section for a list of relevant files.
 
 For SPI-NOR boot, each stage is loaded from a fixed offset in the flash. The MTD
 partition list is configured to match these offsets.
