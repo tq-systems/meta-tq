@@ -51,7 +51,7 @@ do_compile:append () {
             esac
 
             for bootmode in ${BOOTTYPE}; do
-                if [ -n "$rcw_bootmode}" ] && [ "${rcw_bootmode}" != "${bootmode}" ]; then
+                if [ -n "${rcw_bootmode}" ] && [ "${rcw_bootmode}" != "${bootmode}" ]; then
 	            continue
                 fi
                 make V=1 realclean
