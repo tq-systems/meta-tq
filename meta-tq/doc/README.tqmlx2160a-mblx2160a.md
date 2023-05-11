@@ -97,9 +97,13 @@ On MBLX2160A.0200 the SD-Card interface works properly.
 ## Build Artifacts
 
 * atf/
+  * 32GiB
 	* fip_uboot.bin: U-Boot
-	* bl2_[emmc|flexspi_nor|sd].pbl: Boot-media dependend Primary Boot Loader with RCW
-	* variants: contains RCW-PBL for all supported RCW serdes-configurations and all supported boot sources.
+	* bl2_[auto|flexspi_nor].pbl: Boot-media dependend Primary Boot Loader with RCW
+  * 16GiB
+	* fip_uboot_tqmlx2160a_16gb.bin: U-Boot
+	* bl2_[auto|flexspi_nor]_tqmlx2160a_16gb.pbl: Boot-media dependend Primary Boot Loader with RCW
+* atf/variants/: contains RCW-PBL for all supported RCW serdes-configurations and all supported boot sources.
 * ddr-phy/
 	* fip_ddr.bin: Firmware for DDR-Controller Phy
 * rcw/: different rcw configurations to use with atf-recipe
@@ -146,12 +150,10 @@ These scripts are named `update_[pbl|uboot|fdt|kernel]_[spi|mmc|sd]`.
 * 0x1000000 : "Boot Partition"
 * 0x3000000 : "RootFS ext4"
 
-Note: eMMC and SD-Card Image differ only in RCW-PBL. So a SD-Card Image can be used for eMMC when pbl is replaced.
 
 ## Build-Time Configuration
 * RCWXSPI: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SPI-NOR Boot
-* RCWSD: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SD
-* RCWEMMC: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for e-MMC Boot
+* RCWAUTO: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SD/e-MMC Boot
 * ATF_RCW_VARIANTS: List of RCW binaries used to build variants of the Primary Boot Loader
 * MC_DPC: DPAA2 Configuration File
 * MC_DPL: DPAA2 Data Path Layout file.
