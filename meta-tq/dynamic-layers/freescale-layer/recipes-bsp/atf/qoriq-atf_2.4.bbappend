@@ -1,6 +1,6 @@
 SRC_URI:tqmlsx = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 SRCBRANCH:tqmlsx = "TQM-v2.4"
-SRCREV:tqmlsx = "6b4dd2515a32afad2fb6cc4948a8acb4a8cecb65"
+SRCREV:tqmlsx = "f8932b6b3ec737684fd4d0c7a0730b6c8adcd395"
 
 RCW_FOLDER:tqmls1012al = "tqmls1012al"
 RCW_SUFFIX:tqmls1012al = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
