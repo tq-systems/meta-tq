@@ -17,10 +17,29 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-imx-tq 5.15: (TQMa8M*)
+  * Optimize placement of CortexM reserved memory to prepare examples linked to
+    run from DDR.
+  * Reserve additional peripherals for CortexM to prepare more examples.
+* alsa-state:
+  Share the same asound.state file for all i.MX based boards. All boards have
+  the same codec and use the same signals on codec side. For compatibility reasons
+  with different device trees the new file contains the same data with different
+  sound card model names.
 * TQMLX2160A: Rename wic kickstarter file to `tqmlx2160a.wks.in`
 
 ### Fixed
 
+* linux-imx-tq 5.15:
+  * TQMa8Xx[4,S], TQMa8x: prevent potential deadlocks in LPI2C driver in PM callbacks
+  * TQMa8MPxL: fix memory mapping for Cortex M7 on 1GB module. the rpmsg device
+    tree is now usable on all memory variants.
+* u-boot-imx-tq 2020.04: (TQMa8MxML and potentially others)
+  Prevent long delay when starting kernel after booting from SD-Card and access
+  eMMC before starting kernel from SD-Card
+* alsa-state: (TQMa6x/TQMa7x/TQMa6UL[L]x[L])
+  Disable L-to-R / R-to-L resistors in output path. This only brings crosstalk.
+  Optimize two aplifier stages as done for i.MX8 boards before to prevent clipping.
 * TQMLX2160A:
   * U-Boot: Fixed Ethernet DPMAC.17/DPMAC.18 RGMII over Serdes precedence to
     match behaviour of recent qoriq-mc-binary versions.
