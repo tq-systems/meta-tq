@@ -1,6 +1,6 @@
 SRC_URI:tqmlsx = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 SRCBRANCH:tqmlsx = "TQM-v2.4"
-SRCREV:tqmlsx = "f8932b6b3ec737684fd4d0c7a0730b6c8adcd395"
+SRCREV:tqmlsx = "bb88b48541f97451ae3e20c57daaf5d1c9c98fd0"
 
 RCW_FOLDER:tqmls1012al = "tqmls1012al"
 RCW_SUFFIX:tqmls1012al = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
@@ -19,6 +19,10 @@ PLATFORM_ADDITIONAL_TARGET:tqmls1043a = "tqmls1043a_2gb"
 RCW_FOLDER:tqmls1046a = "tqmls1046a"
 PLATFORM:tqmls1046a = "tqmls1046a"
 PLATFORM_ADDITIONAL_TARGET:tqmls1046a = "tqmls1046a_8gb"
+
+RCW_FOLDER:tqmls1088a = "tqmls1088a"
+RCW_SUFFIX:tqmls1088a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
+PLATFORM:tqmls1088a = "tqmls1088a"
 
 RCW_FOLDER:tqmlx2160a = "tqmlx2160a"
 RCW_SUFFIX:tqmlx2160a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
