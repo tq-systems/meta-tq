@@ -4,5 +4,12 @@ PREFERRED_PROVIDER_virtual/kernel:tqmls1088a ?= "linux-lsdk-tq"
 PREFERRED_PROVIDER_virtual/kernel:tqmlx2160a ?= "linux-lsdk-tq"
 PREFERRED_PROVIDER_virtual/kernel:tqmt10xx ?= "linux-tqmt"
 
-IMAGE_CLASSES += "image_type_bootonly"
-IMAGE_FSTYPES:tqmlx2160a += "wic.bootonly"
+IMAGE_CLASSES += "\
+    image_type_bootonly \
+    image_type_pblvariant \
+"
+
+IMAGE_FSTYPES:tqmlx2160a += "\
+    wic.bootonly \
+    wic.bootonly.pblvariant \
+"
