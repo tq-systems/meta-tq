@@ -39,11 +39,11 @@ EXTRA_IMAGEDEPENDS += "\
     rcw \
     virtual/bootloader \
     virtual/kernel \
+    qoriq-atf \
 "
 
 EXTRA_IMAGEDEPENDS:append:fsl-lsch2 = "\
     fm-ucode \
-    qoriq-atf \
 "
 
 EXTRA_IMAGEDEPENDS:append:fsl-lsch3 = "\
@@ -88,13 +88,15 @@ IMAGE_OFFSET_FIP ?= "1024"
 IMAGE_OFFSET_FMAN_UCODE ?= "9216"
 IMAGE_MAXSIZE_PBL ?= "1020"
 
-BL2_IMAGE ?= "bl2_sd.pbl"
+BL2_IMAGE:tqmls104xa ?= "bl2_sd.pbl"
+BL2_IMAGE:tqmls1088a ?= "bl2_auto.pbl"
 BL3_IMAGE ?= "fip_uboot.bin"
 
-# Different RCW files for booting CPU from SD card and eMMC require
-# setting the correct BOOTMODE:
-# sd -> to boot from SD-Card
-# emmc -> to boot from eMMC
-BOOTMODE ?= "sd"
-
-BOOTTYPE = "sd qspi"
+BOOTTYPE:tqmls104xa ?= "\
+    sd \
+    qspi \
+"
+BOOTTYPE:tqmls1088a ?= "\
+    auto \
+    qspi \
+"
