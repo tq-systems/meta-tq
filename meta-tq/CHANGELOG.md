@@ -14,6 +14,8 @@ Releases are named with the following scheme:
 * TQMLX2160A:
   * Added support for 16GiB variant
   * Added support for TQMLX2080A variant
+  * Support for auto pbl for SD/e-MMC
+  * u-boot-lsdk-tq: mmc hwpartition allows size '-' for whole e-mmc
 
 ### Changed
 
@@ -26,7 +28,10 @@ Releases are named with the following scheme:
   the same codec and use the same signals on codec side. For compatibility reasons
   with different device trees the new file contains the same data with different
   sound card model names.
-* TQMLX2160A: Rename wic kickstarter file to `tqmlx2160a.wks.in`
+* TQMLX2160A:
+  * Rename wic kickstarter file to `tqmlx2160a.wks.in`
+  * u-boot-lsdk-tq: support new serial number format
+  * Move Kernel and DTB to rootfs
 
 ### Fixed
 
@@ -43,6 +48,8 @@ Releases are named with the following scheme:
 * TQMLX2160A:
   * U-Boot: Fixed Ethernet DPMAC.17/DPMAC.18 RGMII over Serdes precedence to
     match behaviour of recent qoriq-mc-binary versions.
+  * Fix SERIAL_CONSOLES to ttyAMA0
+* qoriq-atf: fix pbl variant generation
 
 ## kirkstone.TQ.ARM.BSP.0005
 
