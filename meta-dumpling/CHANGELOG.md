@@ -9,6 +9,12 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* dumpling-ls and spaetzle-ls distro for Layerscape modules.
+* image_type_pblvariant to build bootonly image with alternative pbl for
+  Layerscape modules.
+
 ## kirkstone.TQ.ARM.BSP.0005
 
 ### Module BSP Revisions
