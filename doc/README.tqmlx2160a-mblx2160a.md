@@ -46,15 +46,15 @@ OFF 	X   X X
 ## Versions
 
 ### ATF
-* based on qoriq-atf (https://source.codeaurora.org/external/qoriq/qoriq-components/atf/)
+* based on qoriq-atf (https://github.com/nxp-qoriq/atf/)
 * branched from lf-5.15.5-1.0.0
 
 ### U-Boot
-* U-Boot 2019.04 based on https://source.codeaurora.org/external/qoriq/qoriq-components/u-boot
+* U-Boot 2019.04 based on https://github.com/nxp-qoriq/u-boot
 * Based on Tag lx2160a-early-access-bsp0.7
 
 ### Linux
-* Linux 5.4.33 based on https://source.codeaurora.org/external/qoriq/qoriq-components/linux
+* Linux 5.4.33 based on https://github.com/nxp-qoriq/linux
 * Based on Tag LSDK-20.04-V5.4-update-290520
 
 ## Supported Interfaces:

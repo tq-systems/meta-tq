@@ -10,17 +10,17 @@
 
 ### U-Boot
 
-* based on qoriq-u-boot (https://source.codeaurora.org/external/qoriq/qoriq-components/u-boot/)
+* based on qoriq-u-boot (https://github.com/nxp-qoriq/u-boot/)
 * branched from LSDK-20.04-update-290520
 
 ### ATF
 
-* based on qoriq-atf (https://source.codeaurora.org/external/qoriq/qoriq-components/atf/)
+* based on qoriq-atf (https://github.com/nxp-qoriq/atf/)
 * branched from lf-5.15.5-1.0.0
 
 ### Linux
 
-* based on linux-qoriq (https://source.codeaurora.org/external/qoriq/qoriq-components/linux/)
+* based on linux-qoriq (https://github.com/nxp-qoriq/linux/)
 * branched from lf-5.15.5-1.0.0
 
 ## Kernel variants
