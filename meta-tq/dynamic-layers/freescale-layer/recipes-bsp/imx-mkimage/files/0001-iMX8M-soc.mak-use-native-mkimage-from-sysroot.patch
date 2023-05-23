@@ -16,7 +16,7 @@ Use it from the build sysroot, and do not pull the local version of it.
 Upstream-Status: Inappropriate [OE-specific]
 
 Original patch from 5bc708f56575a878da17f2148e959c95d06cf8db
-https://source.codeaurora.org/external/imx/meta-imx/tree/meta-bsp/recipes-bsp/imx-mkimage/files?h=kirkstone-5.15.32-2.0.0
+https://github.com/nxp-imx/meta-imx/tree/meta-bsp/recipes-bsp/imx-mkimage/files?h=kirkstone-5.15.32-2.0.0
 
 Signed-off-by: Andrey Zhizhikin <andrey.z@gmail.com>
 
