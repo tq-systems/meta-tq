@@ -23,12 +23,18 @@ KERNEL_DEVICETREE += "${@kernel_provider_dtbs(d)}"
 
 IMAGE_BOOT_FILES += "${@create_image_boot_dtb_files(d)}"
 
+IMXBOOT_SDMMC_HDMI_TARGET = "flash_hdmi_spl_uboot"
+IMXBOOT_SDMMC_TARGET = "flash_spl_uboot"
+
 IMXBOOT_TARGETS ?= "\
-    flash_hdmi_spl_uboot \
-    flash_spl_uboot \
+    ${IMXBOOT_SDMMC_HDMI_TARGET} \
+    ${IMXBOOT_SDMMC_TARGET} \
 "
 
 #
-# bootstream name, construction see imx-boot recipe, do_deploy
+# primary bootstream name for WKS / WIC, construction see imx-boot recipe,
+# do_deploy
 #
-MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-flash_hdmi_spl_uboot"
+MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-${IMXBOOT_SDMMC_HDMI_TARGET}"
+# append to prevent overwriting default assignment
+WICVARS:append = " MACHINE_WKS_BOOTSTREAM"
