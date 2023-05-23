@@ -13,17 +13,17 @@ This README contains some useful information for TQMLS1012AL on MBLS1012AL carri
 
 ### U-Boot
 
-* based on uboot-imx (https://source.codeaurora.org/external/qoriq/qoriq-components/u-boot/)
+* based on uboot-imx (https://github.com/nxp-qoriq/u-boot/)
 * branched from lf-5.15.5-1.0.0
 
 ### ATF
 
-* based on imx-atf (https://source.codeaurora.org/external/qoriq/qoriq-components/atf/)
+* based on imx-atf (https://github.com/nxp-qoriq/atf/)
 * branched from lf-5.15.5-1.0.0
 
 ### Linux
 
-* based on linux-imx-fslc (https://source.codeaurora.org/external/qoriq/qoriq-components/linux/)
+* based on linux-imx-fslc (https://github.com/nxp-qoriq/linux/)
 * branched from lf-5.15.5-1.0.0
 
 ## Supported machine configurations

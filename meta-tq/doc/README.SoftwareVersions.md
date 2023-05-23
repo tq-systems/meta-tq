@@ -6,8 +6,8 @@
 
 ### U-Boot:
 
-* based on uboot-imx (https://source.codeaurora.org/external/imx/uboot-imx)
-* branched from `rel_imx_4.1.15_2.0.0_ga` (Branch `imx_v2016.03_4.1.15_2.0.0_ga`)
+* based on uboot-imx (https://github.com/nxp-imx/uboot-imx)
+* branched from rel_imx_4.1.15_2.0.0_ga (Branch imx_v2016.03_4.1.15_2.0.0_ga)
 
 ### Linux:
 
