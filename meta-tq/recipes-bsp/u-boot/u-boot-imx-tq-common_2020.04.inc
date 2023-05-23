@@ -10,6 +10,8 @@ SRC_URI = "\
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
 "
 
+SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'file://imx-hab.cfg', '', d)}"
+
 DEPENDS:append = " bison-native"
 
 S = "${WORKDIR}/git"
