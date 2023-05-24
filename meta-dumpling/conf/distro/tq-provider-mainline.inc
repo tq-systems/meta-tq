@@ -20,11 +20,3 @@ PREFERRED_PROVIDER_virtual/libgbm = "mesa"
 # TODO: remove as soon we have a linux-tq recipe for the machine
 PREFERRED_PROVIDER_virtual/kernel:tqma335x ?= "linux-ti-tq"
 PREFERRED_PROVIDER_virtual/kernel:tqma57xx ?= "linux-ti-tq"
-
-# TODO: Layerscape (ls) config still uses this distro. Therefore we need these
-# assignments here.
-PREFERRED_PROVIDER_virtual/kernel:tqmls1012al ?= "linux-imx-tq"
-PREFERRED_PROVIDER_virtual/kernel:tqmls1028a ?= "linux-imx-tq"
-PREFERRED_PROVIDER_virtual/kernel:tqmls1088a ?= "linux-lsdk-tq"
-PREFERRED_PROVIDER_virtual/kernel:tqmlx2160a ?= "linux-lsdk-tq"
-PREFERRED_PROVIDER_virtual/kernel:tqmt10xx ?= "linux-tqmt"
