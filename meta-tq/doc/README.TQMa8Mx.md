@@ -26,7 +26,7 @@ _MBa8x HW Rev.020x/30x only / TQMa8Mx HW Rev.020x only_
 
 | Feature                                          |                    |
 | :----------------------------------------------- | :----------------: |
-| RAM configs                                      |      1,2,8 GiB     |
+| RAM configs                                      |      1,2,4 GiB     |
 | CPU variants                                     | i.MX8MQ / i.MX8MQL |
 | Fuses / OCRAM                                    |         x          |
 | speed grade / temperature grade detection        |         x          |
@@ -68,7 +68,7 @@ _MBa8x HW Rev.020x/30x only_
 
 | Feature                                          |                    |
 | :----------------------------------------------- | :----------------: |
-| RAM configs                                      |      1,2,8 GiB     |
+| RAM configs                                      |      1,2,4 GiB     |
 | CPU variants                                     | i.MX8MQ / i.MX8MQL |
 | Fuses / OCRAM                                    |          x         |
 | speed grade / temperature grade detection        |          x         |
