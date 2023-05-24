@@ -121,9 +121,9 @@ Note: As U-Boot use the fip_uboot.bin from the atf directory.
 
 In U-Boot update scripts are provided to easily update components.
 
-There are scripts to update the PBL, U-Boot, Kernel and Devicetree.
+There are scripts to update the PBL and U-Boot.
 
-These scripts are named `update_[pbl|uboot|fdt|kernel]_[spi|mmc|sd]`.
+These scripts are named `update_[pbl|uboot]_[spi|mmc|sd]`.
 
 ### Flash UBI to SPI-NOR
 
@@ -139,9 +139,7 @@ These scripts are named `update_[pbl|uboot|fdt|kernel]_[spi|mmc|sd]`.
 * 0x000000a00000-0x000000d00000 : "DPAA2-MC"
 * 0x000000d00000-0x000000e00000 : "DPAA2-DPL"
 * 0x000000e00000-0x000000f00000 : "DPAA2-DPC"
-* 0x000000f00000-0x000001000000 : "Linux-DTB"
-* 0x000001000000-0x000003000000 : "Kernel"
-* 0x000003000000-0x000008000000 : "RootFS UBI"
+* 0x000001000000-0x000008000000 : "RootFS UBI"
 
 ### eMMC / SD-Card
 * 0x1000 : "RCW-PBL"
