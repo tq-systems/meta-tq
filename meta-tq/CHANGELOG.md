@@ -55,6 +55,7 @@ Releases are named with the following scheme:
   * U-Boot: Fixed Ethernet DPMAC.17/DPMAC.18 RGMII over Serdes precedence to
     match behaviour of recent qoriq-mc-binary versions.
   * Fix SERIAL_CONSOLES to ttyAMA0
+  * Fix SPI-NOR partition fixup
 * qoriq-atf: fix pbl variant generation
 
 ## kirkstone.TQ.ARM.BSP.0005
