@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 require linux-imx-tq-common.inc
 
 KBRANCH = "TQM-lf-5.15"
-SRCREV = "70ddbf9e156f634743838a564873dfd39bd8bc8a"
+SRCREV = "f6683a6bd46e6893bd3e91c88228325a88f39f3a"
 KBRANCH:imx-nxp-bsp = "TQMa8-fslc-5.15-2.0.x-imx"
 SRCREV:imx-nxp-bsp = "8e37336286bcfdcf8fba27b04d5142eb2855cf83"
 KBRANCH:mx93-nxp-bsp = "TQMaxx-lf-5.15.y"
