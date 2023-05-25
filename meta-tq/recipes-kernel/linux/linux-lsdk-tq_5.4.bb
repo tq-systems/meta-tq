@@ -16,7 +16,7 @@ SRC_URI = "\
   ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
   file://defconfig \
 "
-SRCREV = "d04b2ec9d778e2d8883848d3726cdc881a1ad93c"
+SRCREV = "9b6ab33bf0538c994c2ac1693d26dd14b4292be4"
 
 COMPATIBLE_MACHINE = "tqmls1088a"
 COMPATIBLE_MACHINE:append = "|tqmlx2160a"
