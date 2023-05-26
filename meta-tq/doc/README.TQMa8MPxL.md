@@ -203,6 +203,8 @@ Artifacs can be found at the usual locations for bitbake:
 * imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / e-MMC
 * imx-boot-${MACHINE}-sd.bin-flash\_evk\_flexspi: boot stream for FlexSPI
 * imx-boot-${MACHINE}-mfgtool.bin-flash\_evk\_uboot:  boot stream for UUU
+* imx-boot-${MACHINE}-ecc.bin-flash\_spl\_uboot: boot stream with inline ECC for SD / e-MMC
+* imx-boot-${MACHINE}-ecc.bin-flash\_evk\_flexspi: boot stream with inline ECC for FlexSPI
 * hello\_world.bin (Cortex M7 demo, UART3, TCM)
 * rpmsg\_lite\_pingpong\_rtos\_linux\_remote.bin (Cortex M7 demo, UART3, TCM)
 
@@ -399,6 +401,94 @@ Detailed documentation for CortexM support can be found [here](./README.CortexM-
 ### High Assurance Boot (Secure Boot)
 
 See [i.MX High Assurance Boot](README.IMX-HAB.md).
+
+### Inline ECC
+
+The i.MX8MP DDR controller supports inline ECC, i.e. using part of RAM for
+ECC data without additional sideband RAM. To use this feature, a special boot
+stream is needed. The U-Boot in this boot stream  will add a reserved memory
+node to the kernel device tree. The reserved region covers 1/8 of total RAM
+size and is located at the top of RAM. This region is used for storing ECC
+parity bits.
+
+To build the ECC boot stream, add the `ecc` configuration to `UBOOT_CONFIG`
+(added by default) and rebuild the boot stream:
+```
+bitbake imx-boot
+```
+
+Replace the current boot stream with the ECC boot stream on SD card or directly
+in the wic image:
+```
+dd if=imx-boot-${MACHINE}-ecc.bin-flash_spl_uboot of=/dev/<SD card device> bs=1K seek=32 conv=fsync
+# OR
+dd if=imx-boot-${MACHINE}-ecc.bin-flash_spl_uboot of=<path/to/wic/image> bs=1K seek=32 conv=notrunc
+```
+
+To test the ECC functionality, the following procedure can be used:
+
+Requirements:
+
+- Boot stream with ECC support: `UBOOT_CONFIG` contains `ecc` (enabled by default)
+- Synopsys EDAC support on Linux: `CONFIG_EDAC_SYNOPSYS=(y|m)`
+- user space access to all of `/dev/mem` for Linux: `CONFIG_STRICT_DEVMEM=n`
+- `devmem` executable in image
+
+Addresses:
+
+- base address of DDRC memory map: `0x3d400000`
+- ECC test addresses
+
+RAM size | `ECC_PARITY_REGION_CORRUPTION_ADDR` | `DATA_REGION_CORRUPTION_ADDR`
+-------- | ----------------------------------- | -----------------------------
+1GB      | `0x79000000`                        | `0x77000000`
+2GB      | `0xB2000000`                        | `0xAE000000`
+4GB      | `0x124000000`                       | `0x11C000000`
+8GB      | `0x208000000`                       | `0x1F8000000`
+
+**Attention:** Corrupting ECC parity data can affect processes using the
+memory at `${DATA_REGION_CORRUPTION_ADDR}`. Use this only for development
+purposes.
+
+Steps:
+1. Enable software write to DDRC registers (set SWCTL (offset `0x320`)
+   register to `0`)
+```
+devmem 0x3d400320 32 0x0
+```
+2. Disable ECC parity region lock (set ECC_REGION_PARITY_LOCK (Bit 4) to `0` in
+   ECCCFG1 (offset `0x74`) register)
+```
+devmem 0x3d400074 32
+0x790
+devmem 0x3d400074 32 0x780
+```
+3. Corrupt ECC parity bit
+   - Single bit error (correctable): Change one bit at
+     `ECC_PARITY_REGION_CORRUPTION_ADDR`
+```
+# Example
+devmem ${ECC_PARITY_REGION_CORRUPTION_ADDR} 8
+0x03
+devmem ${ECC_PARITY_REGION_CORRUPTION_ADDR} 8 0x01
+```
+   - Double bit error (uncorrectable): Change two bits at
+     `ECC_PARITY_REGION_CORRUPTION_ADDR`
+```
+# Example
+devmem ${ECC_PARITY_REGION_CORRUPTION_ADDR} 8
+0x03
+devmem ${ECC_PARITY_REGION_CORRUPTION_ADDR} 8 0x00
+```
+4. Read corrupted data area
+```
+devmem ${DATA_REGION_CORRUPTION_ADDR}
+```
+5. Show error counters
+```
+cat /sys/devices/system/edac/mc/mc0/ce_count
+cat /sys/devices/system/edac/mc/mc0/ue_count
+```
 
 ## Support Wiki
 
