@@ -20,6 +20,10 @@ Releases are named with the following scheme:
 * TQMa8MPxL/TQMa8MxML/TQMa8MxNL: Fix compatibility with cards from some vendors
   for SD card boot
 
+### Changed
+
+* TQMLS1028A: linux-imx-tq 5.15: As DisplayPort is not working properly disable it.
+
 ## kirkstone.TQ.ARM.BSP.0007
 
 ### Module BSP Revisions
