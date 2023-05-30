@@ -126,9 +126,10 @@ There are scripts to update the PBL and U-Boot.
 These scripts are named `update_[pbl|uboot]_[spi|mmc|sd]`.
 
 ### Flash UBI to SPI-NOR
-
-`ubiformat /dev/mtd9 -f tq-image-generic-tqmlx2160a-mblx2160a.ubi`
-`ubiattach /dev/ubi_ctrl -m 9`
+```
+ubiformat /dev/mtd7 -f tq-image-generic-tqmlx2160a-mblx2160a.ubi
+ubiattach /dev/ubi_ctrl -m 7
+```
 
 ## Memory Layout
 ### SPI-NOR
