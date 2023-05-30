@@ -9,6 +9,16 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQ.ARM.BSP.0007
+
+### Module BSP Revisions
+
+* kirkstone.TQMLX2160A.BSP.SW.0010
+
+### Fixed
+
+* TQMLX2160A: Fix SPI-NOR partition fixup
+
 ## kirkstone.TQ.ARM.BSP.0006
 
 ### Module BSP Revisions
@@ -55,7 +65,6 @@ Releases are named with the following scheme:
   * U-Boot: Fixed Ethernet DPMAC.17/DPMAC.18 RGMII over Serdes precedence to
     match behaviour of recent qoriq-mc-binary versions.
   * Fix SERIAL_CONSOLES to ttyAMA0
-  * Fix SPI-NOR partition fixup
 * qoriq-atf: fix pbl variant generation
 
 ## kirkstone.TQ.ARM.BSP.0005
