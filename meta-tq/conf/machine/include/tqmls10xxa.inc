@@ -86,6 +86,8 @@ WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 IMAGE_OFFSET_PBL ?= "4"
 IMAGE_OFFSET_FIP ?= "1024"
 IMAGE_OFFSET_FMAN_UCODE ?= "9216"
+IMAGE_MAXSIZE_PBL ?= "1020"
+
 BL2_IMAGE ?= "bl2_sd.pbl"
 BL3_IMAGE ?= "fip_uboot.bin"
 
