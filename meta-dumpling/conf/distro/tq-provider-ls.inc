@@ -9,7 +9,10 @@ IMAGE_CLASSES += "\
     image_type_pblvariant \
 "
 
-IMAGE_FSTYPES:tqmlx2160a += "\
+BOOTONLY_IMAGE_FSTYPES = "\
     wic.bootonly \
     wic.bootonly.pblvariant \
 "
+
+IMAGE_FSTYPES:tqmls104xa += "${BOOTONLY_IMAGE_FSTYPES}"
+IMAGE_FSTYPES:tqmlx2160a += "${BOOTONLY_IMAGE_FSTYPES}"
