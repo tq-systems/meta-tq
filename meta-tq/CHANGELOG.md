@@ -11,6 +11,7 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMLS104xA: Add variables to allow building pblvariant image.
 * TQMa8Mx/TQMa8MPxL/TQMa8MxML/TQMa8MxNL: Add support for
   [High Assurance Boot](doc/README.IMX-HAB.md)
 
