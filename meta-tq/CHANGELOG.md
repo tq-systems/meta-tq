@@ -11,6 +11,7 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa8MPxL: Support for inline ECC feature
 * TQMLS104xA: Add variables to allow building pblvariant image.
 * TQMa8Mx/TQMa8MPxL/TQMa8MxML/TQMa8MxNL: Add support for
   [High Assurance Boot](doc/README.IMX-HAB.md)
