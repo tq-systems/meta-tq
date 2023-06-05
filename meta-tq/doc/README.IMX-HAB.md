@@ -22,9 +22,11 @@ meta-tq supports HAB signature generation on all i.MX8M-based platforms:
 
 ## Abbreviations
 
+|     | Definition            |
+| --- | --------------------- |
 | CSF | Command Sequence File |
-| CST | Code Signing Tool |
-| HAB | High Assurance Boot |
+| CST | Code Signing Tool     |
+| HAB | High Assurance Boot   |
 
 ## Configuration
 
