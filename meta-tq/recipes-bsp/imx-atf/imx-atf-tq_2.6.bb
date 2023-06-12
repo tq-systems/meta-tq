@@ -106,4 +106,4 @@ do_deploy() {
 
 # needed, since we add machine specific settings
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(mx93-generic-bsp|mx8-generic-bsp)"
+COMPATIBLE_MACHINE = "(mx8-generic-bsp|mx9-generic-bsp)"
