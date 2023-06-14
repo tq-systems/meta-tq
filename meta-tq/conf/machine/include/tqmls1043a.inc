@@ -7,7 +7,7 @@ MACHINEOVERRIDES =. "fsl-lsch2:ls1043a:tqmlsx:tqmls10xxa:tqmls104xa:tqmls1043a:"
 #
 PREFERRED_PROVIDER_u-boot ?= "u-boot-lsdk-tq"
 PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-lsdk-tq"
-PREFERRED_PROVIDER_virtual/kernel ?= "linux-tq"
+PREFERRED_PROVIDER_virtual/kernel ?= "linux-ls-tq"
 
 require conf/machine/include/tqmls10xxa.inc
 
