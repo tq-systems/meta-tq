@@ -1,0 +1,21 @@
+/* Template for boot.scr in FIT format */
+
+/dts-v1/;
+
+/ {
+	description = "U-Boot boot script";
+
+	images {
+		default = "script-1";
+
+		script-1 {
+			compression = "none";
+			data = /incbin/("boot.cmd");
+			type = "script";
+
+			hash-1 {
+				algo = "crc32";
+			};
+		};
+	};
+};
