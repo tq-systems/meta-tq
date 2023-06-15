@@ -15,8 +15,9 @@ Releases are named with the following scheme:
   * add recipe for linux-rt-tq based on stable-rt 6.1 (experimental)
 * TQMa8MPxL: Support for inline ECC feature
 * TQMLS104xA: Add variables to allow building pblvariant image.
-* TQMa8Mx/TQMa8MPxL/TQMa8MxML/TQMa8MxNL: Add support for
-  [High Assurance Boot](doc/README.IMX-HAB.md)
+* TQMa8Mx/TQMa8MPxL/TQMa8MxML/TQMa8MxNL:
+  * Add support for [High Assurance Boot](doc/README.IMX-HAB.md)
+  * Add support for U-Boot Distro / Standard Boot via boot.scr and extlinux.conf
 
 ### Fixed
 
