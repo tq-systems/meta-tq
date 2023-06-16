@@ -15,6 +15,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
 SRC_URI = "\
     git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git;protocol=https;branch=${KBRANCH} \
+    file://imx.cfg \
     file://rm-non-tq-platforms.cfg \
 "
 
