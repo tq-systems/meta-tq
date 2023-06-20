@@ -5,12 +5,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 require linux-tq-common.inc
 
 KBRANCH = "linux-6.1.y"
-SRCREV = "76ba310227d2490018c271f1ecabb6c0a3212eb0"
+SRCREV = "ca87e77a2ef8b298aa9f69658d5898e72ee450fe"
 KERNEL_SOURCE = "git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "6.1"
-LINUX_VERSION = "${LINUX_RELEASE}.32"
+LINUX_VERSION = "${LINUX_RELEASE}.34"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
