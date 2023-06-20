@@ -17,6 +17,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 SRC_URI = "\
     ${KERNEL_SOURCE};protocol=https;branch=${KBRANCH} \
     file://imx.cfg \
+    file://nonimx-drm-removal.cfg \
     file://rm-non-tq-platforms.cfg \
 "
 
