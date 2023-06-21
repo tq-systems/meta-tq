@@ -15,6 +15,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
 SRC_URI += "\
     file://rt.cfg \
+    file://revert-expert-settings.cfg \
 "
 
 LINUX_KERNEL_TYPE = "preempt-rt"
