@@ -10,7 +10,8 @@
 ## ATF:
 
 * based on imx-atf (https://github.com/nxp-imx/imx-atf)
-* branched from v2.2 / imx-5.4.70_2.3.0 + changes from imx-5.4.70-2.3.2
+* branched from v2.6 based branch lf_v2.6 / integrates all commits up to
+  3c1583ba0 ("Merge remote-tracking branch 'origin/imx_v2.6' into lf_v2.6")
 
 ## Linux:
 
@@ -18,3 +19,14 @@
 
 * based on linux-imx-fslc (https://github.com/Freescale/linux-fslc.git)
 * branched from `5.15-2.0.x-imx` / contains commits up to d818413e4d7901cb8a00a631a389326e2c93ae41
+
+### Kernel 6.1 stable
+
+* based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
+* defconfig changes for TQ-Systems starter kits and build time optimisation
+
+### Kernel 6.1 stable-rt
+
+* based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
+* defconfig changes for TQ-Systems starter kits and build time optimisation
+* defconfig not ready for production use
