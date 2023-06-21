@@ -11,6 +11,8 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa8MPxL/TQMa8MxML/TQMa8MxNL/TQMa8Mx:
+  * add recipe for linux-rt-tq based on stable-rt 6.1 (experimental)
 * TQMa8MPxL: Support for inline ECC feature
 * TQMLS104xA: Add variables to allow building pblvariant image.
 * TQMa8Mx/TQMa8MPxL/TQMa8MxML/TQMa8MxNL: Add support for
@@ -18,12 +20,22 @@ Releases are named with the following scheme:
 
 ### Fixed
 
-* TQMa8MPxL/TQMa8MxML/TQMa8MxNL: Fix compatibility with cards from some vendors
-  for SD card boot
+* TQMa8Xx/TQMa8Xx4/TQMa8XxS/TQMa8QM:
+  * imx-sc-firmware-tq: errata fixes and other fixes from NXP version v1.15.0
+* TQMa8MPxL/TQMa8MxML/TQMa8MxNL/TQMa8Mx:
+  * linux-tq 6.1: fix missing Kconfig entries causing long delay to find rootfs
+* TQMa8MPxL/TQMa8MxML/TQMa8MxNL:
+  * U-Boot: Fix compatibility with cards from some vendors
 
 ### Changed
 
-* TQMLS1028A: linux-imx-tq 5.15: As DisplayPort is not working properly disable it.
+* TQMa8Xx/TQMa8Xx4/TQMa8XxS/TQMa8QM:
+  * imx-atf: update to v2.6
+  * imx-sc-firmware-tq: update to support NXP version v1.15.0
+* TQMa8MPxL/TQMa8MxML/TQMa8MxNL/TQMa8Mx:
+  * imx-atf: update to v2.6
+  * linux-tq 6.1: update to v6.1.34
+* TQMLS1028A: linux-imx-tq 5.15: As DisplayPort is not working properly, disable it.
 
 ## kirkstone.TQ.ARM.BSP.0007
 
