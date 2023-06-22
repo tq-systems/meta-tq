@@ -1,3 +1,6 @@
+**ATTENTION**: This branch is only maintained for TQMaRZG2x machines, use
+a more recent branch for all other machines
+
 # OpenEmbedded/Yocto hardware support layer for TQ Systems ARM SOM
 
 This README file contains information on the contents of the meta-tq layer.
@@ -66,6 +69,27 @@ is _mandatory_ - see [table](#supported-machines).
 * LS1028A / LS1017A
 * LS1043A / LS1046A / LS1088A
 * LX2160A
+
+#### Notes for machine with RZG2 CPU
+
+For machines based on following CPU families from Renesas the use of
+meta-renesas is _mandatory_ - see [table](#supported-machines).
+
+* RZ/G2H
+* RZ/G2M
+* RZ/G2N
+
+URI: https://github.com/renesas-rz/meta-renesas.git  
+branch: dunfell/rz  
+revision: HEAD  
+layers: meta-renesas  
+
+Optionally the layer can make use of features from meta-rz-features if using
+this machines. meta-rz-features is proprietary and must be obtained directly
+from Renesas via the [RZ/G Multimedia Package](https://www.renesas.com/us/en/products/microcontrollers-microprocessors/rz-cortex-a-mpus/rzg-linux-platform/rzg-marketplace/verified-linux-package/rzg2-mlp-eva).
+
+**Attention**: meta-arm must not be used together with meta-renesas, because
+meta-renesas redefines the trusted-firmware-a recipe.
 
 #### Notes for machines with TI CPU
 
@@ -149,6 +173,29 @@ BBLAYERS = "\
 "
 ```
 
+If the layer has to be used together with the Renesas layers for
+machines with RZ/G2 CPU, `MACHINEOVERRIDES` and other configuration
+settings are prepared inside the <machine>.conf and their include files.
+See following example:
+
+```
+BBLAYERS = "\
+    ${BSPDIR}/sources/poky/meta \
+    ${BSPDIR}/sources/poky/meta-poky \
+    ${BSPDIR}/sources/poky/meta-yocto-bsp \
+    \
+    ${BSPDIR}/sources/meta-openembedded/meta-oe \
+    ${BSPDIR}/sources/meta-openembedded/meta-python \
+    ${BSPDIR}/sources/meta-openembedded/meta-multimedia \
+    \
+    ${BSPDIR}/sources/meta-renesas \
+    ${BSPDIR}/sources/meta-rz-features \
+    ${BSPDIR}/sources/meta-qt5 \
+    \
+    ${BSPDIR}/sources/meta-tq \
+"
+```
+
 If the layer has to be used together with the meta-ti layer for machines with
 TI CPU, `MACHINEOVERRIDES` and other configuration settings are prepared inside
 the <machine>.conf and their include files.
@@ -228,6 +275,9 @@ Support for the following machines is contained in this version:
 | [p]    | AM6442           | TQMa6442L                | MBaX4XxL       | tqma64xxl-mbax4xxl           | TQMa6442L / MBaX4XxL HW REV.010x |
 | [y]    | AM6548           | TQMa654x                 | MBa65xx        | tqma65xx-2gb-mba65xx         | TQMa6548 HW REV.010x with 2GiB RAM |
 | [y]    | AM6548           | TQMa654x                 | MBa65xx        | tqma65xx-4gb-mba65xx         | TQMa6548 HW REV.010x with 4GiB RAM |
+| [y]    | RZ/G2H           | TQMaRZG2H                | MBaRZG2x       | tqmarzg2h-mbarzg2x           | TQMaRZG2H with 4 GiB RAM
+| [y]    | RZ/G2M           | TQMaRZG2M                | MBaRZG2x       | tqmarzg2m-mbarzg2x           | TQMaRZG2M with 2 GiB RAM
+| [y]    | RZ/G2N           | TQMaRZG2N                | MBaRZG2x       | tqmarzg2n-mbarzg2x           | TQMaRZG2N with 2 GiB RAM
 
 
 \[y\]: fully supported  
@@ -284,6 +334,7 @@ Under the given links SOM specific information can be found:
 [TQMLS102\[0,1\]A](doc/README.TQMLS102xa.md)  
 [TQMLS1017A/TQMLS1028A](doc/README.TQMLS1028A.md)  
 [TQMLX2160A](doc/README.tqmlx2160a-mblx2160a.md)  
+[TQMaRZG2x](doc/README.TQMaRZG2x.md)  
 
 ### Known Issues
 
