@@ -1,3 +1,6 @@
+**ATTENTION**: This branch is only maintained for TQMaRZG2x machines, use
+a more recent branch for all other machines
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
@@ -7,7 +10,19 @@ Releases are named with the following scheme:
 
 [[_TOC_]]
 
-## Next Release
+## dunfell.TQMaRZG2x.BSP.SW.0020
+
+### Changed
+
+* Downgrade to Yocto Dunfell
+
+### Added
+
+* Support for TQMaRZG2x machines
+  * Flash Writer v1.05
+  * ATF v2.7
+  * U-Boot v2021.10
+  * Linux 5.10 (CIP)
 
 ## hardknott.TQMa64xxL.BSP.SW.0001
 
