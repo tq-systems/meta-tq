@@ -25,7 +25,7 @@ KERNEL_DEVICETREE_linux-imx-tq:append:mx8mp-nxp-bsp = "\
 
 KERNEL_DEVICETREE += "${@kernel_provider_dtbs(d)}"
 
-MACHINE_FEATURES:append = "\
+MACHINE_FEATURES += "\
     bluetooth \
     camera \
     screen \
