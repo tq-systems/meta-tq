@@ -36,12 +36,14 @@ MACHINE_FEATURES:append = "\
 MACHINE_EXTRA_RRECOMMENDS += "\
     linux-firmware-ath10k \
     linux-firmware-qca \
+    tq-extlinux \
 "
 
 # Add packages we want to be deployed, even when they are not part of rootfs
 # We need these here to support UBI / NFS boot case
 EXTRA_IMAGEDEPENDS += "\
     virtual/imx-cortexm-demos \
+    tq-bootscripts \
 "
 
 # Set Serial console
@@ -57,6 +59,7 @@ CORTEXM_DEMOS += "\
 
 IMAGE_BOOT_FILES = "\
     ${@create_image_boot_dtb_files(d)} \
+    boot-blockdev.scr;boot.scr \
     ${CORTEXM_DEMOS} \
     ${KERNEL_IMAGETYPE} \
 "
