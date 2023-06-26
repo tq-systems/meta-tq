@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
 
 DEPENDS += "bison-native"
 
-SRCREV = "f8b01c18ead35c9de9fc777b0e9d92373db90ebd"
+SRCREV = "c65a7c40dccf0f8998a67f7c48e9f9db5c57c817"
 SRCBRANCH = "TQMxx-lf_v2022.04"
 
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
