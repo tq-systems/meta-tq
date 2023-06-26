@@ -11,6 +11,11 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMLS1088A: Added support for atf bootstream.
+  * rcw: harmonized file tree structure with other layerscape modules
+  * qoriq-atf: add support
+  * u-boot: update to atf bootstream and to U-Boot version 2022.04
+  * Moved ethernet firmware from wic Image to boot partition.
 * TQMa8MPxL/TQMa8MxML/TQMa8MxNL/TQMa8Mx:
   * add recipe for linux-rt-tq based on stable-rt 6.1 (experimental)
 * TQMa8MPxL: Support for inline ECC feature
