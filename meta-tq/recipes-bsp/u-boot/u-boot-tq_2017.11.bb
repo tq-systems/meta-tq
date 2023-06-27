@@ -22,6 +22,9 @@ SRC_URI = "\
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
 "
 
+# target not supported in U-Boot before v2019.07
+UBOOT_INITIAL_ENV = ""
+
 do_compile:append:tqmls102xa () {
     unset i j
     if [ "${UBOOT_CONFIG}" ]; then

@@ -12,6 +12,9 @@ SRC_URI = "${TQ_GIT_BASEURL}/uboot-tqmt.git;protocol=${TQ_GIT_PROTOCOL};branch=$
 SRCREV = "ddb620b749ecfcadd2709bc0ff754808b9c5386a"
 SRCBRANCH = "TQMTxxxx-u-boot-v2015.07"
 
+# target not supported in U-Boot before v2019.07
+UBOOT_INITIAL_ENV = ""
+
 python () {
     ml = d.getVar("MULTILIB_VARIANTS")
     arch = d.getVar("OVERRIDES")

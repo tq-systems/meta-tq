@@ -13,6 +13,9 @@ SRCBRANCH = "TQMLS10xxA-u-boot-v2018.07"
 
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 
+# target not supported in U-Boot before v2019.07
+UBOOT_INITIAL_ENV = ""
+
 do_configure:prepend() {
     if [ "${UBOOT_RCW_CONFIG}" ]; then
         unset i j

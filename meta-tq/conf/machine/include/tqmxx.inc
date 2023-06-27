@@ -4,9 +4,6 @@
 TQ_GIT_BASEURL ?= "git://github.com/tq-systems"
 TQ_GIT_PROTOCOL ?= "https"
 
-# target not supported in older U-Boot
-UBOOT_INITIAL_ENV ?= ""
-
 DEFAULT_KERNEL:imx ??= "linux-imx-tq"
 DEFAULT_KERNEL:imx:use-mainline-bsp ??= "linux-tq"
 PREFERRED_PROVIDER_virtual/kernel ??= "${DEFAULT_KERNEL}"
