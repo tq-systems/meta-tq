@@ -1,19 +1,25 @@
-# short-description: Create SD card image with a boot partition
+# short-description: Create disk image with a boot partition
 # long-description:
 # Create an image that can be written onto a SD card using dd for use
 # with TQMLS102xa modules
 # It uses u-boot as boot loader
 #
 # The disk layout used is:
-#  - ---------- ------- -------- --------- ------------- -------------
-# | |  u-boot  |  env  | resvd  |  /boot  |    rootfs   |
-#  - ---------- ------- -------- --------- ------------- -------------
-# ^ ^          ^       ^        ^         ^             ^
-# | |          |       |        |         |             |
-# 0 4kiB     1MiB    2MiB     4MiB      24MiB        280MiB
+#  - ---------- ------------- -------- --------- ------------- -------------
+# | |  u-boot  |  uboot-env  | resvd  |  /boot  |    rootfs   |
+#  - ---------- ------------- -------- --------- ------------- -------------
+# ^ ^          ^             ^        ^         ^             ^
+# | |          |             |        |         |             |
+# 0 4kiB      1MiB          2MiB     4MiB       |            variable
+#                                               |
+#                                             4MiB + 20 MiB * overhead-factor
+#                                             (default: `--overhead-factor=1.3`),
+#                                             alignment 4 MiB (managed NAND)
 #
-part u-boot --source rawcopy --sourceparams="file=${MACHINE_WKS_BOOTSTREAM}" --no-table --align 4
-part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 4096 --fixed-size 20M
+part u-boot --source rawcopy --sourceparams="file=${MACHINE_WKS_BOOTSTREAM}" --no-table --offset 4K --fixed-size 1020K
+part uboot-env --no-table --offset 1M --fixed-size 1M
+part resvd --no-table --offset 2M --fixed-size 2M
+part /boot --source bootimg-partition --fstype=vfat --label boot --active --offset 4M --size 20M
 part / --source rootfs --fstype=ext4 --label root --align 4096
 
 bootloader --ptable msdos
