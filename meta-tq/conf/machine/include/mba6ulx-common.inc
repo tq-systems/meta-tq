@@ -30,7 +30,10 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     linux-firmware-qca \
 "
 
-WKS_FILE = "tqmaxx-sdimg.wks"
+WKS_FILE = "tqmaxx-imx-v7-sdimg.wks.in"
+
+# allow to easy override for different configuration
+MACHINE_WKS_BOOTSTREAM ?= "u-boot-${MACHINE}.imx-sd"
 
 # EXTRA_IMAGEDEPENDS are applied to do_image_complete only. do_image_wic may run
 # before and needs those packages as well
