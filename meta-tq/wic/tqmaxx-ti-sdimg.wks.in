@@ -1,16 +1,24 @@
-# short-description: Create SD card image with a boot partition
+# short-description: Create disk image with a boot partition
 # long-description:
-# Create an image that can be written onto a SD card using dd for use
-# with AM65xx/AM64xx/AM57xx/AM355x family
-# It uses u-boot
+# Create an image that can be written onto a SD card / eMMC using dd for use
+# with AM65xx/AM64xx/AM57xx/AM355x family.
+# Note: the machine has to set WIC_BOOTPART_SIZE to a reasonable size for the
+# FAT file system under /boot that will contain the images needed for booting
+# the CPU. See CPU documentation for details on disk layout and files expected
+# by ROM firmware.
 #
 # The disk layout used is:
-# -----------------------------------------------------------
-# | MBR ||  env  | redenv | /boot | rootfs |
-# -----------------------------------------------------------
-# ^      ^       ^        ^       ^
-# |      |       |        |       |
-# 0      1280kiB 1344kiB  4MiB    36MiB
+# ----------------------------------------------------------------
+# | MBR ||  uboot-env  |  uboot-envr  |  resvd  | /boot | rootfs |
+# ----------------------------------------------------------------
+# ^      ^             ^              ^         ^       ^
+# |      |             |              |         |       |
+# 0  1280kiB       1344kiB        1408kiB      4MiB    4MiB + ${WIC_BOOTPART_SIZE}
 #
+# Note: /boot needs fixed size due to CPU ROM code limitations
+
+part uboot-env --no-table --offset 1280K --fixed-size 64K
+part uboot-envr --no-table --offset 1344K --fixed-size 64K
+part resvd  --no-table --offset 1408K --fixed-size 2688K
 part /boot --source bootimg-partition --fstype=vfat --label boot --active --offset 4M --fixed-size ${WIC_BOOTPART_SIZE}
 part / --source rootfs --fstype=ext4 --label root --align 4096
