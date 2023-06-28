@@ -10,6 +10,15 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
 
+#
+# We provide a default fw_env.config for linux userspace access to U-Boot
+# environment. Since this is (nearly) version agnostic, the config templates
+# are located in the files folder for now. If a machine provides it's own version,
+# the SOM override or the machine name can be used as subfolder to place the
+# config file.
+#
+SRC_URI += "file://fw_env.config"
+
 # use "tq" as default value - poky default assignment is empty
 UBOOT_LOCALVERSION = "-tq"
 

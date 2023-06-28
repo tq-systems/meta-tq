@@ -17,10 +17,8 @@ do_compile () {
 
 do_install () {
 	install -d ${D}${base_sbindir}
-	install -d ${D}${sysconfdir}
 	install -m 755 ${S}/tools/env/fw_printenv ${D}${base_sbindir}/fw_printenv
 	install -m 755 ${S}/tools/env/fw_printenv ${D}${base_sbindir}/fw_setenv
-	install -m 0644 ${S}/tools/env/fw_env.config ${D}${sysconfdir}/fw_env.config
 }
 
 do_install:class-cross () {
@@ -34,17 +32,6 @@ SYSROOT_DIRS:append:class-cross = " ${bindir_cross}"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 BBCLASSEXTEND = "cross"
 
-
-# Append path for tq layer to include fw_env.conf
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}/${MACHINE}:${THISDIR}/${PN}:"
-
-SRC_URI:append = "\
-	file://fw_env.config \
-"
-
-do_install:append() {
-	install -m 0644 "${WORKDIR}/fw_env.config" ${D}${sysconfdir}/fw_env.config
-}
-
+RDEPENDS:${PN} += "u-boot-default-env"
 PROVIDES += "u-boot-fw-utils"
 RPROVIDES:${PN} += "u-boot-fw-utils"
