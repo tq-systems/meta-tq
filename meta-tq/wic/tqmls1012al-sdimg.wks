@@ -9,9 +9,12 @@
 #  -- -------- ------------- ---
 # ^  ^        ^             ^
 # |  |        |             |
-# 0 4MiB    36MiB        variable
+# 0 4MiB      |        variable
+#             |
+#            4MiB + 32 MiB * overhead-factor (default: `--overhead-factor=1.3`)
+#            alignment 4 MiB (managed NAND)
 #
-part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 4096 --fixed-size 32M
+part /boot --source bootimg-partition --fstype=vfat --label boot --active --offset 4M --size 32M
 part / --source rootfs --fstype=ext4 --label root --align 4096
 
 bootloader --ptable msdos
