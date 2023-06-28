@@ -6,16 +6,21 @@
 #
 # The disk layout used is:
 #  - ------------- ------------ ------- ------- -------- -------
-# | | rcw-pbi+BL2 | BL3/u-boot |  env  | /boot | rootfs |
-#  - ------------- ------------ ------- ------- -------- -------
-# ^ ^             ^            ^       ^       ^        ^
-# | |             |            |       |       |        |
-# 0 4kiB         1MiB         8MiB    12MiB   44MiB   variable
+# | | rcw-pbi+BL2 | BL3/u-boot |  u-boot-env  | /boot | rootfs |
+#  - ------------- ------------ -------------- ------- -------- -------
+# ^ ^             ^            ^              ^       ^        ^
+# | |             |            |              |       |        |
+# 0 4kiB         1MiB         8MiB          12MiB     |   variable
+#                                                     |
+#                                                  12MiB + 32 MiB * overhead-factor
+#                                                  (default: `--overhead-factor=1.3`),
+#                                                  alignment 4 MiB (managed NAND)
 #
 
-part rcw_pbi --source rawcopy --sourceparams="file=atf/${BL2_IMAGE}" --no-table --align 4
-part u-boot --source rawcopy --sourceparams="file=atf/${BL3_IMAGE}" --no-table --align 1024
-part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 12288 --fixed-size 32M
+part rcw_pbi --source rawcopy --sourceparams="file=atf/${BL2_IMAGE}" --no-table --offset 4K --fixed-size 1020K
+part u-boot --source rawcopy --sourceparams="file=atf/${BL3_IMAGE}" --no-table --offset 1M --fixed-size 7M
+part u-boot-env --no-table --offset 8M --fixed-size 4M
+part /boot --source bootimg-partition --fstype=vfat --label boot --active --offset 12M --size 32M
 part / --source rootfs --fstype=ext4 --label root --align 4096
 
 bootloader --ptable msdos
