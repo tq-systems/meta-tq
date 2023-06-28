@@ -10,12 +10,17 @@
 #  - --------- -------- ---------- ------- -------- ---
 # ^ ^         ^        ^          ^       ^        ^
 # | |         |        |          |       |        |
-# 0 4kiB    1MiB     4MiB      16MiB   48MiB    variable
+# 0 4KiB    1MiB     4MiB      16MiB      |     variable
+#                                         |
+#                                      16MiB + 32 MiB * overhead-factor
+#                                      (default: `--overhead-factor=1.3`),
+#                                      alignment 4 MiB (managed NAND)
 #
 
-part PBL --source rawcopy --sourceparams="file=atf/${BL2_IMAGE}" --no-table --align 4
-part FIP --source rawcopy --sourceparams="file=atf/${BL3_IMAGE}" --no-table --align 1024
-part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 16384 --fixed-size 32M
+part PBL --source rawcopy --sourceparams="file=atf/${BL2_IMAGE}" --no-table --offset 4K --fixed-size 1020K
+part FIP --source rawcopy --sourceparams="file=atf/${BL3_IMAGE}" --no-table --offset 1024K --fixed-size 3M
+part uboot-env --no-table --offset 4M --fixed-size 12M
+part /boot --source bootimg-partition --fstype=vfat --label boot --active --offset 16M --size 32M
 part / --source rootfs --fstype=ext4 --label root --align 4096
 
 bootloader --ptable msdos
