@@ -26,6 +26,9 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TQMa6x / TQMa7x / TQMa6U[L,LL]x[L]:
+  * linux-tq 5.15: fix reading MAC address from fuses
+  * linux-rt-tq 5.15: fix reading MAC address from fuses
 * TQMa8Xx/TQMa8Xx4/TQMa8XxS/TQMa8QM:
   * imx-sc-firmware-tq: errata fixes and other fixes from NXP version v1.15.0
 * TQMa8MPxL/TQMa8MxML/TQMa8MxNL/TQMa8Mx:
@@ -35,6 +38,9 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* TQMa6x / TQMa7x / TQMa6U[L,LL]x[L]:
+  * update linux-tq 5.15 to 5.15.119
+  * update linux-rt-tq 5.15 to 5.15.119-rt65
 * TQMa8Xx/TQMa8Xx4/TQMa8XxS/TQMa8QM:
   * imx-atf: update to v2.6
   * imx-sc-firmware-tq: update to support NXP version v1.15.0
