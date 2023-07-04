@@ -22,10 +22,14 @@
 
 ### Kernel 6.1 stable
 
+__Note__:_ supports only TQMa8M*
+
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
 * defconfig changes for TQ-Systems starter kits and build time optimisation
 
 ### Kernel 6.1 stable-rt
+
+__Note__:_ supports only TQMa8M*
 
 * based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
 * defconfig changes for TQ-Systems starter kits and build time optimisation

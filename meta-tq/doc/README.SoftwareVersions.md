@@ -14,7 +14,14 @@
 #### Kernel based on 5.15 (linux-stable)
 
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
-* branched from `linux-5.15.y` / tag commit is merged into (see `LINUX_VERSION` in `linux-tq-5.15.bb` for exact release)
+* branched from `linux-5.15.y` / tag commit is merged into (see `LINUX_VERSION` in `linux-tq_5.15.bb` for exact release)
+
+#### Kernel based on 5.15-rt (linux-stable-rt)
+
+For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
+
+* based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
+* branched from `v5.15-rt` / tag commit is merged into (see `LINUX_VERSION` in `linux-tq-rt_5.15.bb` for exact release)
 
 #### Kernel based on 5.15 (linux-imx-fslc)
 
