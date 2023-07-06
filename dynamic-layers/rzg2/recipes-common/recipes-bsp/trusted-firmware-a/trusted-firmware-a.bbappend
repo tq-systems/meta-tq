@@ -5,7 +5,7 @@ SRC_URI_remove = " \
 "
 
 SRC_URI_append = " \
-	${TQ_GIT_BASEURL}/atf.git;branch=${BRANCH};protocol=${TMP_GIT_PROTOCOL} \
+	${TQ_GIT_BASEURL}/atf.git;branch=${BRANCH};protocol=${TQ_GIT_PROTOCOL} \
 "
 
 SRCREV = "4d7d8e4778fa54b5b3e997646b177bc00fa91196"
