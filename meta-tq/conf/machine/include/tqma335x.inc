@@ -79,7 +79,6 @@ MACHINE_FEATURES += "\
     kernel26 \
     mmip \
     screen \
-    sgx \
     ubi \
     usbgadget \
     usbhost \

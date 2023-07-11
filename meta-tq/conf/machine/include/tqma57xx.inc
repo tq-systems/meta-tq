@@ -69,7 +69,6 @@ MACHINE_FEATURES += "\
     mmip \
     pci \
     screen \
-    sgx \
     usbgadget \
     usbhost \
     vfat \
