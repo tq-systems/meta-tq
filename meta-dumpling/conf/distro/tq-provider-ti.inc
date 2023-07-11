@@ -1,6 +1,8 @@
 PREFERRED_PROVIDER_virtual/kernel:tqma335x = "linux-ti-tq"
 PREFERRED_PROVIDER_virtual/kernel:tqma57xx = "linux-ti-tq"
 
+# Workaround for incorrect SIGGEN_EXCLUDERECIPES_ABISAFE in meta-ti
+SIGGEN_EXCLUDERECIPES_ABISAFE:remove = "mesa-pvr"
 
 # Add MLO SD/e-MMC image generation for SOM based on TI SOC
 # This image is a stripped down version of the normal .wic, consisting
