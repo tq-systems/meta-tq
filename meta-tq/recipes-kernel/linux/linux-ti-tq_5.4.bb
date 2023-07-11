@@ -1,4 +1,4 @@
-SUMMARY = "Linux kernel based on linux-ti for TQ-Systems GmbH TQ AM335x / AM57xx / AM65xx based modules"
+SUMMARY = "Linux kernel based on linux-ti for TQ-Systems GmbH TQ AM335x / AM57xx based modules"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
@@ -9,10 +9,6 @@ SRCREV = "aef47c78f462af2f74c8cb6167dda17d9bd6cbfa"
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "5.4"
 LINUX_VERSION = "${LINUX_RELEASE}.43"
-
-KBRANCH:tqma65xx = "TQMa65xx-ti-rt-linux-5.4.y"
-SRCREV:tqma65xx = "4437b403c11594bd9d58d35978bd4e33779bc276"
-LINUX_VERSION:tqma65xx = "${LINUX_RELEASE}.109"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
@@ -74,5 +70,4 @@ DEFAULT_PREFERENCE = "1"
 COMPATIBLE_MACHINE = "^("
 COMPATIBLE_MACHINE .= "tqma335x"
 COMPATIBLE_MACHINE .= "|tqma57xx"
-COMPATIBLE_MACHINE .= "|tqma65xx"
 COMPATIBLE_MACHINE .= ")$"

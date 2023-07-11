@@ -1,7 +1,7 @@
 # short-description: Create disk image with a boot partition
 # long-description:
 # Create an image that can be written onto a SD card / eMMC using dd for use
-# with AM65xx/AM64xx/AM57xx/AM355x family.
+# with TI AMxxxx families.
 # Note: the machine has to set WIC_BOOTPART_SIZE to a reasonable size for the
 # FAT file system under /boot that will contain the images needed for booting
 # the CPU. See CPU documentation for details on disk layout and files expected

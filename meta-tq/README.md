@@ -76,7 +76,6 @@ is _mandatory_ - see [table](#supported-machines)
 
 * AM57xx
 * AM64xx
-* AM65xx
 
 URI: https://git.yoctoproject.org/git/meta-ti  
 branch: kirkstone  
@@ -228,8 +227,6 @@ Support for the following machines is contained in this version:
 | [b]    | AM5748           | TQMa5748 ECC             | MBa57xx        | tqma57xx-ecc-mba57xx         | TQMa5748 with ECC / MBa57xx |
 | [y]    | AM6411           | TQMa6411L                | MBaX4XxL       | tqma64xxl-mbax4xxl           | TQMa6411L HW REV.010x / 020x, MBaX4XxL HW REV.010x / 020x |
 | [y]    | AM6442           | TQMa6442L                | MBaX4XxL       | tqma64xxl-mbax4xxl           | TQMa6442L HW REV.010x / 020x, MBaX4XxL HW REV.010x / 020x |
-| [y]    | AM6548           | TQMa654x                 | MBa65xx        | tqma65xx-2gb-mba65xx         | TQMa6548 HW REV.010x with 2GiB RAM |
-| [y]    | AM6548           | TQMa654x                 | MBa65xx        | tqma65xx-4gb-mba65xx         | TQMa6548 HW REV.010x with 4GiB RAM |
 | [y]    | T1040            | TQMT1040                 | STKT104x       | tqmt1040-64bit-stkt104x      | TQMT1040 HW REV.020x with 2GiB RAM |
 | [y]    | T1042            | TQMT1042                 | STKT104x       | tqmt1042-64bit-stkt104x      | TQMT1042 HW REV.020x with 2GiB RAM |
 | [y]    | T1022            | TQMT1022                 | STKT104x       | tqmt1022-64bit-stkt104x      | TQMT1022 HW REV.020x with 2GiB RAM |
@@ -239,7 +236,6 @@ Support for the following machines is contained in this version:
 \[y\]: fully supported  
 \[b\]: build tested only  
 \[p\]: prerelease  
-\[\*\]: not buildable in this version  
 
 **Note:** for TQMa6UL1 and baseboards using this module variant with i.MX6ULG1
           a dedicated device tree is supplied
@@ -288,7 +284,6 @@ Under the given links SOM specific information can be found:
 * [TQMA335x\[L\]](doc/README.TQMa335x.md)
 * [TQMA57xx](doc/README.TQMa57xx.md)
 * [TQMA64xxL](doc/README.TQMa64xxL.md)
-* [TQMA65xx](doc/README.TQMa65xx.md)
 * [TQMLS1012AL](doc/README.TQMLS1012AL.md)
 * [TQMLS102\[0,1\]A](doc/README.TQMLS102xa.md)
 * [TQMLS1017A/TQMLS1028A](doc/README.TQMLS1028A.md)
