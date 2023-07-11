@@ -12,7 +12,6 @@ CORTEXM_DEMOS = "\
 IMAGE_BOOT_FILES = "\
     ${CORTEXM_DEMOS} \
     ${KERNEL_IMAGETYPE} \
-    boot-blockdev.scr;boot.scr \
 "
 
 MACHINE_FEATURES += "\
@@ -24,12 +23,12 @@ MACHINE_FEATURES += "\
 "
 
 MACHINE_EXTRA_RRECOMMENDS += "\
-    tq-extlinux \
     linux-firmware-ath10k \
     linux-firmware-qca \
 "
 
 EXTRA_IMAGEDEPENDS += "\
-    tq-bootscripts \
     virtual/imx-cortexm-demos \
 "
+
+require tq-distroboot.inc
