@@ -5,19 +5,11 @@ MACHINEOVERRIDES =. "tqma64xxl-k3r5:"
 # From meta-ti
 require conf/machine/include/k3r5.inc
 
-# See https://git.ti.com/cgit/k3-image-gen/k3-image-gen/tree/README.md
-# for information on SYSFW configurations
-#
-# The "evm" configuration should work for most usecases. For more advanced
-# setups, in particular those using the R5 core, it may be necessary to create
-# a modified configuration. Unfortunately, meta-ti currently lacks a convenient
-# way to do so.
-
+# The tiboot3.bin filename is built from these variables. The sysfw
+# configuration can be adjusted in the U-Boot source.
+SYSFW_SOC = "am64x"
 SYSFW_CONFIG = "evm"
-SYSFW_TIBOOT3_SYMLINK = ""
-
-SPL_BINARY = ""
-UBOOT_BINARY = "u-boot-spl.${UBOOT_SUFFIX}"
+SYSFW_SUFFIX = "gp"
 
 PREFERRED_PROVIDER_virtual/bootloader = "u-boot-ti-tq"
 PREFERRED_PROVIDER_u-boot = "u-boot-ti-tq"
