@@ -79,7 +79,7 @@ UBINIZE_ARGS = "\
 # needs to be set to have it consistent for kernel command line
 # Use the expected value of the ubifs filesystem's volume name in the kernel
 # and u-boot.
-UBI_VOLNAME = "rootfs"
+UBI_VOLNAME = "root"
 
 # List common SoC features
 MACHINE_FEATURES += "\
