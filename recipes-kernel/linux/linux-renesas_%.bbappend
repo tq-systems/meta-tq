@@ -1,4 +1,4 @@
-SRC_URI_remove = "${KERNEL_URL};protocol=https;nocheckout=1;branch=${BRANCH}"
+SRC_URI_remove = "git://github.com/renesas-rz/rz_linux-cip.git;protocol=https;nocheckout=1;branch=${BRANCH}"
 
 KERNEL_URL = "${TQ_GIT_BASEURL}/linux-tqmaxx.git"
 BRANCH = "TQMaRZG2x-linux-v5.10.x-cip"
