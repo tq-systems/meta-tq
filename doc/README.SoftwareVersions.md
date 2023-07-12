@@ -1,6 +1,31 @@
+**ATTENTION**: This branch is only maintained for TQMaRZG2x machines, use
+a more recent branch for all other machines
+
 # Version information for software components
 
 [[_TOC_]]
+
+## TQMaRZG2 series
+
+### Flash Writer
+
+* based on rzg2_flash_writer (https://github.com/renesas-rz/rzg2_flash_writer.git)
+* branched from master, commit 6606c4f
+
+### ATF
+
+* based on rzg_trusted_firmware-a (https://github.com/renesas-rz/rzg_trusted-firmware-a.git)
+* branched from v2.7/rz, commit 203c78323
+
+### U-Boot
+
+* based on renesas-u-boot-cip (https://github.com/renesas-rz/renesas-u-boot-cip.git)
+* branched from v2021.10/rz, commit 002a9618ee9
+
+### Linux
+
+* based on rz_linux-cip (https://github.com/renesas-rz/rz_linux-cip.git)
+* branched from rz-5.10-cip17, commit 13dea4598e618
 
 ## TQMa6x / TQMa6UL[L]x[L] / TQMa7x
 
