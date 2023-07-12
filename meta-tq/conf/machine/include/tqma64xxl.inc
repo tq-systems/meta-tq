@@ -18,6 +18,8 @@ require conf/machine/include/am64xx.inc
 # Available variants: am64x-gp am64x_sr2-hs-fs am64x_sr2-hs
 SYSFW_DEFAULT_VARIANT ?= "am64x_sr2-hs-fs"
 
+KERNEL_CLASSES += "ti-secdev"
+
 # All 3 variants are installed to the boot partition
 # The default variant is additionally installed as tiboot3.bin
 IMAGE_BOOT_FILES += "tiboot3-${SYSFW_DEFAULT_VARIANT}-evm.bin;tiboot3.bin"
