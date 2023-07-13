@@ -9,6 +9,12 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQ.ARM.BSP.0008
+
+### Module BSP Revisions
+
+* kirkstone.TQMLS1028A.BSP.SW.0109
+
 ## Added
 
 * TQMLS104xA: Append wic.bootonly and wic.bootonly.pblvariant to IMAGE_FSTYPES to
