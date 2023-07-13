@@ -9,6 +9,12 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQ.ARM.BSP.0008
+
+### Module BSP Revisions
+
+* kirkstone.TQMLS1028A.BSP.SW.0109
+
 ### Added
 
 * TQMLS1088A: Added support for atf bootstream.
