@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 require linux-tq.inc
 
 KBRANCH = "TQM-linux-v6.1.y"
-SRCREV = "a3c4397dc097d5642441b87e4bb3782fc1cd5953"
+SRCREV = "5d7025a4cbd5997762edf6951b11613d18023490"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "6.1"
@@ -22,4 +22,4 @@ SRC_URI:append:ls1088a = "\
     file://disable_suspend.cfg \
 "
 
-COMPATIBLE_MACHINE = "tqmls10xxa"
+COMPATIBLE_MACHINE = "tqmls10xxa|tqmlx2160a"
