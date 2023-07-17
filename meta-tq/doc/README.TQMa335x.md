@@ -144,7 +144,7 @@ To create a bootable SPI NOR with boot loader only use the generated
 
 ```
 sf probe
-tftp MLO.bytesawp
+tftp MLO.byteswap
 sf update ${loadaddr} 0 ${filesize}
 tftp u-boot.img
 sf update ${loadaddr} 0x20000 ${filesize}
