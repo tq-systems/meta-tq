@@ -6,8 +6,3 @@ require conf/machine/include/tqmls104xa-mbls10xxa.inc
 KERNEL_DEVICETREE ?= " \
     freescale/fsl-ls1046a-tqmls1046a-mbls10xxa.dtb \
 "
-
-IMAGE_BOOT_FILES = "\
-    ${KERNEL_IMAGETYPE} \
-    fsl-ls1046a-tqmls1046a-mbls10xxa.dtb \
-"
