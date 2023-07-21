@@ -38,7 +38,17 @@ generate_bootonly_image() {
     fi
 
     reverse_part_list=$(partx --show --noheadings  --output NR "${wicfile}" | tac)
-    if [ "$(echo ${reverse_part_list} | wc -w)" -le "1" ]; then
+    partition_count="$(echo ${reverse_part_list} | wc -w)"
+    # If only one Partition is found, cut at start of first partition
+    if [ "${partition_count}" -eq "1" ]; then
+        # Delete all partitions
+        cutoff_partition="START"
+        delete_part_list=${reverse_part_list}
+    elif [ "${partition_count}" -gt "1" ]; then
+        # Remove all but first partition from partition table.
+        cutoff_partition="END"
+        delete_part_list=${reverse_part_list% *}
+    else
         bberror "Unsupported wic image structure."
         exit 1
     fi
@@ -48,16 +58,15 @@ generate_bootonly_image() {
         exit 1
     fi
 
-    sector=$(expr $(partx --nr 1 --bytes --noheadings --output END "${wicfile}") + 1)
+    sector=$(partx --nr 1 --bytes --noheadings --output "${cutoff_partition}" "${wicfile}")
+    [ ${cutoff_partition} = "END" ] && sector=$(expr $sector + 1)
     if [ -z ${sector} ] || [ "${sector}" -le "0" ]; then
         bberror "Unsupported wic image structure."
         exit 1
     fi
 
     dd if="${wicfile}" of="${outfile}" bs=512 count=${sector}
-    # Remove all but first partition from partition table.
-    reverse_part_list=${reverse_part_list% *}
-    for part in ${reverse_part_list}; do
+    for part in ${delete_part_list}; do
         bbdebug 1 "delete P${part}  - ${outfile}";
         sfdisk --delete "${outfile}" ${part};
     done
