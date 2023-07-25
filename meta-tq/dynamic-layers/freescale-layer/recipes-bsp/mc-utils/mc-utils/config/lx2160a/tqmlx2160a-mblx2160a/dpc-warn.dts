@@ -55,6 +55,24 @@
 
 	board_info {
 		ports {
+			mac@9 {
+				link_type = "MAC_LINK_TYPE_PHY";
+			};
+			mac@10 {
+				link_type = "MAC_LINK_TYPE_PHY";
+			};
+			mac@12 {
+				link_type = "MAC_LINK_TYPE_PHY";
+			};
+			mac@13 {
+				link_type = "MAC_LINK_TYPE_PHY";
+			};
+			mac@14 {
+				link_type = "MAC_LINK_TYPE_PHY";
+			};
+			mac@16 {
+				link_type = "MAC_LINK_TYPE_PHY";
+			};
 			mac@17 {
 				link_type = "MAC_LINK_TYPE_PHY";
 			};
