@@ -25,7 +25,7 @@ This README contains some useful information for TQMa93xxCA and TQMa93xxLA
 
 ### U-Boot
 
-| Feature                                          | MBa93xxCA  REV.010x   | MBa93xxLA  REV.010x   |
+| Feature                                          | MBa93xxCA  REV.020x   | MBa93xxLA  REV.010x   |
 | :----------------------------------------------: | :-------------------: | :-------------------: |
 | RAM configs                                      |  1 GiB                |   1 GiB               |
 | CPU variants                                     |     i.MX93            |     i.MX93            |
@@ -65,7 +65,7 @@ This README contains some useful information for TQMa93xxCA and TQMa93xxLA
 
 ### Linux
 
-| Feature                                          | MBa93xxCA  REV.010x   | MBa93xxLA  REV.010x   |
+| Feature                                          | MBa93xxCA  REV.020x   | MBa93xxLA  REV.010x   |
 | :----------------------------------------------: | :-------------------: | :-------------------: |
 | RAM configs                                      |  1 GiB                |   1 GiB               |
 | CPU variants                                     |     i.MX93            |     i.MX93            |
@@ -114,7 +114,7 @@ This README contains some useful information for TQMa93xxCA and TQMa93xxLA
 * SPI
 * MIPI-DSI
 * MIPI-CSI
-* RS485 (technical limitation, will be fixed with MBa93xxCA REV.020x)
+* RS485 (software limitation, will be fixed with kernel 6.1)
 * WiFi (driver and firmware loading OK, needs additional testing)
 * Cortex M33
 * UBI Boot
@@ -122,8 +122,8 @@ This README contains some useful information for TQMa93xxCA and TQMa93xxLA
 
 ## Known Issues
 
-* MBa93xxCA REV.010x EVK not compatible with UUU
-* MBa93xxCA REV.010x EVK RS485 not functional
+* MBa93xxCA REV.020x EVK not compatible with UUU
+* MBa93xxCA REV.020x EVK RS485 not functional
 
 ## Build Artifacts
 
@@ -148,7 +148,7 @@ Artifacs can be found at the usual locations for bitbake:
 
 BOOT\_MODE can be configured using DIP switch S1.
 
-| Bootmode | Description           | S1-1 | S1-2 | S1-3 | S1-4 |
+| Bootmode | Description           | S1-4 | S1-3 | S1-2 | S1-1 |
 | :------: | :-------------------: | :--: | :--: | :--: | :--: |
 | 0000     | Boot from fuses       | OFF  | OFF  | OFF  | OFF  |
 | 0001     | Serial Downloader     | OFF  | OFF  | OFF  | ON   |
