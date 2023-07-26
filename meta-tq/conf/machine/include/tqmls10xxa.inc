@@ -64,7 +64,7 @@ UBI_SUB_PAGE_SIZE = "1"
 # logical erase block size
 UBI_LEB_SIZE = "65408"
 
-UBI_MAX_LEB_COUNT = "640"
+UBI_MAX_LEB_COUNT = "865"
 
 MKUBIFS_ARGS = "\
     --min-io-size=${UBI_MINIMUM_IO_UNIT_SIZE} \
