@@ -9,6 +9,10 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* TQMa93xxCA: Update U-Boot and kernel for MBa93xxCA revision 0200.
+
 ## kirkstone.TQ.ARM.BSP.0008
 
 ### Module BSP Revisions
