@@ -9,9 +9,37 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQ.ARM.BSP.0009
+
+### Module BSP Revisions
+
+* kirkstone.TQMa8.BSP.SW.0092
+
+### Added:
+
+* TQMLS104xA / TQMLS1088A
+  * support for linux-stable 6.1.y
+
 ### Changed
 
+* TQMa8Xx/TQMa8Xx4/TQMa8XxS/TQMa8QM: imx-sc-firmware-tq: update to
+  TQMa8.NXP-v1.15.0.B5624.0037, no functional change.
+* TQMLS104xA:
+  * Remove boot partition from WKS file. Kernel and devicetree are
+    loaded from /boot in rootfs.
+  * Adjust UBI rootfs partition size for QSPI NOR. Kernel and devicetree are
+    loaded from /boot in rootfs.
+* TQMLS104xA / TQMLS1088A:
+  * use linux kernel based on linux-stable 6.1.y as default
+  * adjust mc-utils config to linux-stable 6.1.y
+  * machine config: adjust to new linux kernel fdt names
+  * U-Boot: adjust FDT fixups to linux-stable 6.1.y
 * TQMa93xxCA: Update U-Boot and kernel for MBa93xxCA revision 0200.
+
+### Fixed
+
+* TQMa8x/TQMa8Xx/TQMa8XxS: linux-imx-tq_5.15: fix lpi2c clock handling in probe
+  and resume path
 
 ## kirkstone.TQ.ARM.BSP.0008
 
