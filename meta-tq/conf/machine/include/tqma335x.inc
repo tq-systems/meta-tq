@@ -73,10 +73,8 @@ MACHINE_FEATURES += "\
     apm \
     can \
     dsp \
-    ethernet \
     ext2 \
     gpu \
-    kernel26 \
     mmip \
     screen \
     ubi \

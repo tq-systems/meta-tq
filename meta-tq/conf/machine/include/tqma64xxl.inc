@@ -78,9 +78,7 @@ UBI_VOLNAME = "root"
 MACHINE_FEATURES += "\
     apm \
     can \
-    ethernet \
     ext2 \
-    kernel26 \
     pci \
     ubi \
     usbgadget \
