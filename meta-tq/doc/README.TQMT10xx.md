@@ -77,13 +77,13 @@ To support different configurations a custom device tree has to be created.
 DIP S3 allows switching of signals:
 | DIP-Switch | Serdes Lane   | On  | Off |
 | ---------- | ------------- | --- | ---- |
-| S3-1       | Serdes Lane C | QSGMII (X30) | SGMII (X30BB) |
-| S3-2       | Serdes Lane E | Auroroa (X8) | miniPCIE (X19) |
+| S3-1       | Serdes Lane C | SGMII (X30BB) | QSGMII (X30) |
+| S3-2       | Serdes Lane E | miniPCIE (X19) |Auroroa (X8) |
 | S3-3       | Serdes Lane G | miniPCIE (X20) | see S3.4 |
 | S3-4       | Serdes Lane G | SGMII (X37BB) | SATA(X26) |
 | S2-1       | DIU SEL       | UCC | Display |
 | S2-2       | Boot Source   | SD-Card | Nor Flash |
-| S2-3       | USB Ref CLK   | USBCLK to F8 | USBCLK to D3 (for T1024)|
+| S2-3       | USB Ref CLK   | USBCLK to D3 (for T1024)| USBCLK to F8 |
 | S2-4       | Serdes Ref CLK| 156.25 MHz | 100Mhz |
 | S4-1       | DVDD          | 3.3V | 1.8V |
 | S4-2       | EVDD	     | 3.3V | 1.8V |
@@ -123,12 +123,12 @@ For Serdes Config 0x86
 
 | DIP-Switch | Function      | On  | Off |
 | ---------- | ------------- | --- | ----|
-| S9-1       | Refclk 125 Mhz|     |  X  |
+| S9-1       | Refclk D21    |     |  X  |
 | S9-2       | QSGMII/SGMII  |     |  X  |
 | S3-1       | Serdes Lane C |     |  X  |
 | S3-2       | Serdes Lane E |  X  |     |
 | S3-3       | Serdes Lane G |  X  |     |
-| S2-4       | Refclk D21    |     |  X  |
+| S2-4       | Refclk Serdes |     |  X  |
 
 ### TQMT1024:
 For Serdes Config 0x6B
@@ -137,8 +137,8 @@ For Serdes Config 0x6B
 
 | Linux Name | U-Boot Name |  MAC / Protocoll | Ethernet Port	      |
 | ---------- | ----------- | ---------------- | ----------------------|
-| fm1-mac2    | FM1@DTSEC3  | Lane G SGMII    | X37-BB: (Top Right)   |
-| fm1-mac4    | FM1@DTSEC5  | RGMII EC1       | X37-AB: (Bottom Right)|
+| fm1-mac2    | FM1@DTSEC2  | Lane G SGMII    | X37-BB: (Top Right)   |
+| fm1-mac4    | FM1@DTSEC4  | RGMII EC1       | X37-BA: (Top Left)    |
 
 #### PCIe
 
@@ -152,11 +152,11 @@ Important Dip Switch settings for this configuration
 
 | DIP-Switch | Function      | On  | Off |
 | ---------- | ------------- | --- | ----|
-| S9-1       | Refclk 125 Mhz|     |  X  |
+| S9-1       | Refclk D21    |     |  X  |
 | S9-2       | QSGMII/SGMII  |     |  X  |
 | S3-3       | Serdes Lane G |     |  X  |
 | S3-4       | Serdes Lane G |  X  |     |
-| S2-4       | Refclk D21    |     |  X  |
+| S2-4       | Refclk Serdes |     |  X  |
 
 ### TQMT1040:
 For Serdes Config 0x66
@@ -186,12 +186,12 @@ Important Dip Switch settings for this configuration
 
 | DIP-Switch | Function      | On  | Off |
 | ---------- | ------------- | --- | ----|
-| S9-1       | Refclk 125 Mhz|     |  X  |
+| S9-1       | Refclk D21    |     |  X  |
 | S9-2       | QSGMII/SGMII  |  X  |     |
 | S3-1       | Serdes Lane C |  X  |     |
 | S3-2       | Serdes Lane E |     |  X  |
 | S3-3       | Serdes Lane G |  X  |     |
-| S2-4       | Refclk D21    |     |  X  |
+| S2-4       | Refclk Serdes |     |  X  |
 
 ## LVDS Display
 
