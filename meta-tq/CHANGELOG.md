@@ -9,13 +9,30 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* recipes-bsp/u-boot: backport libubootenv v0.3.4 from poky / openembedded core
+
+### Changed
+
+* TQMa8:
+  * convert U-Boot fw_env.config to new libubootenv yaml format to support env
+    on all boot devices
+  * switch to use libubootenv instead of U-Boot internal env tools.
+* recipes-bsp/u-boot: allow generation and installment of initial environment for
+  all supported U-Boot variants newer than v2019.04.
+
+### Removed
+
+* recipes-bsp/u-boot: recipe for U-Boot env utils from u-boot-imx-tq v2020.04.
+
 ## kirkstone.TQ.ARM.BSP.0009
 
 ### Module BSP Revisions
 
 * kirkstone.TQMa8.BSP.SW.0092
 
-### Added:
+### Added
 
 * TQMLS104xA / TQMLS1088A
   * support for linux-stable 6.1.y
