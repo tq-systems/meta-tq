@@ -119,7 +119,9 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Known Issues
 
-* Default setting for `fdt_file` in u-boot does not match new naming scheme.
+* Default setting for `fdt_file` in u-boot does not match older linux kernel
+  naming scheme. Current naming scheme is `<cpu>-<som>-<baseboard>[-feature].dtb`,
+  old scheme was `<cpu>-<baseboard>[-feature].dtb`.
   See [Build Artifacts](#Build-Artifacts) for complete list of supported Device Tree files
 * CAN
   * CAN FD is only supported on MB-SMARC-2 up to 1MBit/s (system limitation)
@@ -178,7 +180,7 @@ _Note:_
 | ON      | x |   |   |   |
 | OFF     |   | x | x | x |
 
-### QSPI
+### FLEXSPI
 
 | DIP S3  | 1 | 2 | 3 | 4 |
 | ------- | - | - | - | - |
