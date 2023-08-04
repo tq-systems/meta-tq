@@ -127,12 +127,14 @@ See top level README.md for configurations usable as MACHINE.
 
 ## Known Issues
 
-* Default setting for `fdt_file` in u-boot does not match new naming scheme. See [Build Artifacts](#Build-Artifacts) for complete list of supported Device Tree files
+* Default setting for `fdt_file` in u-boot does not match older linux kernel
+  naming scheme. Current naming scheme is `<cpu>-<som>-<baseboard>[-feature].dtb`,
+  old scheme was `<cpu>-<baseboard>[-feature].dtb`.
+  See [Build Artifacts](#Build-Artifacts) for complete list of supported Device Tree files
 * counting of i2c devices bus starts at i2c-2 (because i2c-0 and i2c-1
   are reserved for i2c_rpmsgbus)
 * PWM only works after the second enable command
   (`echo 1 > /sys/class/pwm<X>/enable`)
-* UUU compatible bootstream is not built by default (yocto recipe limitation)
 * USB
   * U-Boot: `EHCI timed out on TD - token` with some USB sticks on USB 2.0 OTG
   * runtime suspend disabled for USB Hub TUSB8041
@@ -172,24 +174,43 @@ _Note:_
 
 ### SD Card
 
-| DIP S1  | 5 | 4 | 3 | 2 | 1 | 0 |
-| ------- | - | - | - | - | - | - |
-| ON      |   |   | x | x |   |   |
-| OFF     | x | x |   |   | x | x |
+| DIP S1   | 6 | 5 | 4 | 3 | 2 | 1 |
+| -------- | - | - | - | - | - | - |
+| BOOTMode | 5 | 4 | 3 | 2 | 1 | 0 |
+| ON       |   |   | x | x |   |   |
+| OFF      | x | x |   |   | x | x |
 
 ### e-MMC
 
-| DIP S1  | 5 | 4 | 3 | 2 | 1 | 0 |
-| ------- | - | - | - | - | - | - |
-| ON      |   |   | x |   |   |   |
-| OFF     | x | x |   | x | x | x |
+| DIP S1   | 6 | 5 | 4 | 3 | 2 | 1 |
+| -------- | - | - | - | - | - | - |
+| BOOTMode | 5 | 4 | 3 | 2 | 1 | 0 |
+| ON       |   |   | x |   |   |   |
+| OFF      | x | x |   | x | x | x |
 
-### FLEXSPI
+### FLEXSPI (4 Byte Address)
 
-| DIP S1  | 5 | 4 | 3 | 2 | 1 | 0 |
-| ------- | - | - | - | - | - | - |
-| ON      |   | x | x | x | x |   |
-| OFF     | x |   |   |   |   | x |
+| DIP S1   | 6 | 5 | 4 | 3 | 2 | 1 |
+| -------- | - | - | - | - | - | - |
+| BOOTMode | 5 | 4 | 3 | 2 | 1 | 0 |
+| ON       |   | x | x | x | x |   |
+| OFF      | x |   |   |   |   | x |
+
+### Serial Downloader
+
+| DIP S1   | 6 | 5 | 4 | 3 | 2 | 1 |
+| -------- | - | - | - | - | - | - |
+| BOOTMode | 5 | 4 | 3 | 2 | 1 | 0 |
+| ON       |   |   |   | x |   |   |
+| OFF      | x | x | x |   | x | x |
+
+### Boot from Fuses
+
+| DIP S1   | 6 | 5 | 4 | 3 | 2 | 1 |
+| -------- | - | - | - | - | - | - |
+| BOOTMode | 5 | 4 | 3 | 2 | 1 | 0 |
+| ON       |   |   |   |   |   |   |
+| OFF      | x | x | x | x | x | x |
 
 ## Boot device initialisation and update
 
