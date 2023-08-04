@@ -11,12 +11,6 @@ This README contains some useful information for TQMa8x on MBa8x
 
 ## Version information for software components
 
-### SCFW:
-
-Version: tq-TQMa8.NXP-v1.13.0.B5561.0035
-
-### Other components
-
 See [here](./README.SoftwareVersions.md) for the software base versions of atf,
 bootloader and Linux kernel.
 

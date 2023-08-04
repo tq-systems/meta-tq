@@ -2,18 +2,27 @@
 
 [[_TOC_]]
 
-## U-Boot:
+## U-Boot
 
 * based on uboot-imx (https://github.com/nxp-imx/uboot-imx)
 * branched from imx-5.4.70-2.3.0 + changes from imx-5.4.70-2.3.2
 
-## ATF:
+## ATF / TF-A
 
 * based on imx-atf (https://github.com/nxp-imx/imx-atf)
 * branched from v2.6 based branch lf_v2.6 / integrates all commits up to
   3c1583ba0 ("Merge remote-tracking branch 'origin/imx_v2.6' into lf_v2.6")
 
-## Linux:
+## SCU / SCFW and SECO
+
+__Note__: not for TQMa8M*
+
+* SCU firmware based on NXP SCFW porting kit v1.15.0
+* TQ-Systems version TQMa8.NXP-v1.15.0.B5624.0037 (source code on request via
+  Support@tq-group.com)
+* SECO firmware from NXP binary package 5.9.0 (imx-seco-5.9.0.bin)
+
+## Linux
 
 ### Kernel based on 5.15
 
