@@ -29,6 +29,9 @@ SPL_BINARY = "spl/u-boot-spl.bin"
 PREFERRED_PROVIDER_imx-atf:mx8-generic-bsp ?= "imx-atf-tq"
 PREFERRED_PROVIDER_u-boot:mx8-generic-bsp ?= "u-boot-imx-tq"
 PREFERRED_PROVIDER_virtual/bootloader:mx8-generic-bsp ?= "u-boot-imx-tq"
+UBOOT_SUFFIX:mx8-generic-bsp = "bin"
+UBOOT_SUFFIX:pn-u-boot-imx-tq = "bin"
+IMX_DEFAULT_BOOTLOADER ?= "u-boot-imx-tq"
 
 PREFERRED_PROVIDER_virtual/imx-cortexm-demos ?= "tqma8-cortexm-demos"
 
