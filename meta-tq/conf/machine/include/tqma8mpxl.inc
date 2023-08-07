@@ -37,7 +37,7 @@ ATF_PLATFORM = "imx8mp"
 # TODO:
 # optee rule filters for matching machine names and expects at least imx for MX8
 #MACHINE_FEATURES:append = " optee"
-#OPTEE_BIN_EXT = "8mn"
+#OPTEE_BIN_EXT = "8mp"
 DISTRO_FEATURES:remove = "optee"
 MACHINE_FEATURES:remove = "optee"
 IMAGE_INSTALL:remove = "packagegroup-fsl-optee-imx"
