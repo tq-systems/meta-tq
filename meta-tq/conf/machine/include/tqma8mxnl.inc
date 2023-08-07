@@ -32,7 +32,6 @@ UBOOT_MAKE_TARGET = ""
 IMX_BOOT_SEEK = "32"
 IMX_BOOT_SOC_TARGET = "iMX8MN"
 
-ATF_PLATFORM = "imx8mn"
 # TODO:
 # optee rule filters for matching machine names and expects at least imx for MX8
 #MACHINE_FEATURES:append = " optee"
