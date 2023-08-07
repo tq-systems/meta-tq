@@ -1,8 +1,14 @@
 # Common definitions for all TQ-Systems GmbH TQMa8Xx / TQMa8XxS modules
 
-require conf/machine/include/tqma8-common.inc
-
 MACHINEOVERRIDES =. "imx:mx8qxp:mx8qxpc0:"
+
+# optionally source the machine specific features for multimedia etc. from
+# meta-freescale
+
+include conf/machine/include/imx-base.inc
+require conf/machine/include/arm/armv8a/tune-cortexa35.inc
+
+require conf/machine/include/tqma8-common.inc
 
 LOADADDR = ""
 
@@ -63,12 +69,6 @@ UBINIZE_ARGS = "\
 # Use the expected value of the ubifs filesystem's volume name in the kernel
 # and u-boot.
 UBI_VOLNAME = "root"
-
-# optionally source the machine specific features for multimedia etc. from
-# meta-freescale
-
-include conf/machine/include/imx-base.inc
-require conf/machine/include/arm/armv8a/tune-cortexa35.inc
 
 # need to do after imx-base, not included in firmware-imx-8.3
 MACHINE_FIRMWARE:remove = "firmware-imx-brcm"

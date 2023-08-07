@@ -14,6 +14,7 @@ MACHINE_FEATURES += "\
     vfat \
 "
 
+# This should be added to 'MACHINE_FEATURES` after inclusion of 'imx-base.inc'
 MACHINE_FEATURES += "vpu"
 MACHINE_FEATURES:remove:mx8mn-generic-bsp = "vpu"
 

@@ -1,8 +1,14 @@
 # Common definitions for TQ-Systems GmbH TQMa8MxNL modules
 
-require conf/machine/include/tqma8-common.inc
-
 MACHINEOVERRIDES =. "imx:mx8mn:tqma8mxnl:"
+
+# optionally source the machine specific features for multimedia etc. from
+# meta-freescale
+
+include conf/machine/include/imx-base.inc
+require conf/machine/include/arm/armv8a/tune-cortexa53.inc
+
+require conf/machine/include/tqma8-common.inc
 
 LOADADDR = ""
 
@@ -74,11 +80,5 @@ UBINIZE_ARGS = "\
 # Use the expected value of the ubifs filesystem's volume name in the kernel
 # and u-boot.
 UBI_VOLNAME = "root"
-
-# optionally source the machine specific features for multimedia etc. from
-# meta-freescale
-
-include conf/machine/include/imx-base.inc
-require conf/machine/include/arm/armv8a/tune-cortexa53.inc
 
 PREFERRED_VERSION_linux-imx-tq = "5.15%"
