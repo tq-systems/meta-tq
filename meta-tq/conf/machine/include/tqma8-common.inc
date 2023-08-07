@@ -33,10 +33,8 @@ UBOOT_SUFFIX:mx8-generic-bsp = "bin"
 UBOOT_SUFFIX:pn-u-boot-imx-tq = "bin"
 IMX_DEFAULT_BOOTLOADER ?= "u-boot-imx-tq"
 
-PREFERRED_PROVIDER_virtual/imx-cortexm-demos ?= "tqma8-cortexm-demos"
 
-# provide dt name handling to prevent a lot of copy and paste
-# in kernel prefix where to find dtb
+PREFERRED_PROVIDER_virtual/imx-cortexm-demos ?= "tqma8-cortexm-demos"
 
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
