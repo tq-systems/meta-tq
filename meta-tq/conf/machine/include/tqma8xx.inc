@@ -1,4 +1,4 @@
-# Common definitions for TQ-Systems GmbH TQMa8Xx b0 modules
+# Common definitions for TQ-Systems GmbH TQMa8Xx modules (C0 CPU step)
 
 MACHINEOVERRIDES =. "tqma8xx:"
 
