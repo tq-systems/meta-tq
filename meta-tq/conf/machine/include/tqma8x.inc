@@ -1,4 +1,4 @@
-# Common definitions for TQ-Systems GmbH TQMa8x b0 modules
+# Common definitions for all TQ-Systems GmbH TQMa8x modules (B0 CPU step)
 
 MACHINEOVERRIDES =. "imx:mx8:mx8qm:tqma8x:"
 
@@ -36,8 +36,8 @@ IMX_BOOT_SOC_TARGET = "iMX8QM"
 EXTRA_IMAGEDEPENDS += "\
     imx-boot \
     imx-sc-firmware \
-    virtual/kernel \
     virtual/bootloader \
+    virtual/kernel \
 "
 
 # Verified values to generate UBI image:
@@ -69,8 +69,5 @@ UBINIZE_ARGS = "\
 # Use the expected value of the ubifs filesystem's volume name in the kernel
 # and u-boot.
 UBI_VOLNAME = "root"
-
-# need to do after imx-base, not included in firmware-imx-8.3
-MACHINE_FIRMWARE:remove = "firmware-imx-brcm"
 
 PREFERRED_VERSION_linux-imx-tq = "5.15%"
