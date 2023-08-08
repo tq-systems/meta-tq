@@ -169,6 +169,13 @@ _MBa8x HW Rev.020x/30x only_
 * HDMI hotplug is sometimes unreliable
 * Note: GPU temperature observation uses CPU thermal-zone! Playing 4K Videos on 4K Display will raise the thermal-zone (CPU) temperature >80°C, reducing VPU clock. Apparently there is no dedicated VPU sensor
 * PCIe driver causes several warnings during suspend
+* UBI / UBIFS images will not be built out of the box since `imx-base.inc` from
+  meta-freescale override machine specific assignment for `MACHINE_FEATURES`.
+  Use following bitbake assignment in one of your `local.conf` / `auto.conf` /
+  `<machine>.conf` files:
+  ```
+  MACHINE_FEATURES:append = " ubi"
+  ```
 
 ## Build Artifacts
 

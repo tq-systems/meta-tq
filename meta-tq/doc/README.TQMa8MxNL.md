@@ -159,6 +159,13 @@ _MBa8x HW Rev.030x only_
     capture again
   * OV9281: gstreamer: capture not starting out of the box, need to use  `yavta` to
     capture some frames, `gstreamer` starts afterwards
+* UBI / UBIFS images will not be built out of the box since `imx-base.inc` from
+  meta-freescale override machine specific assignment for `MACHINE_FEATURES`.
+  Use following bitbake assignment in one of your `local.conf` / `auto.conf` /
+  `<machine>.conf` files:
+  ```
+  MACHINE_FEATURES:append = " ubi"
+  ```
 
 ## Build Artifacts
 

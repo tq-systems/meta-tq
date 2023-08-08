@@ -142,6 +142,13 @@ See top level README.md for configurations usable as MACHINE.
   * By default chip-selects are configured as GPIO, if possible (see below)
   * Note for MBa8Xx: The following pin **cannot** be configured as GPIO:
     * `SPI3_CS1` on pad `SPI3_CS1`
+* UBI / UBIFS images will not be built out of the box since `imx-base.inc` from
+  meta-freescale override machine specific assignment for `MACHINE_FEATURES`.
+  Use following bitbake assignment in one of your `local.conf` / `auto.conf` /
+  `<machine>.conf` files:
+  ```
+  MACHINE_FEATURES:append = " ubi"
+  ```
 
 ## Artifacts
 

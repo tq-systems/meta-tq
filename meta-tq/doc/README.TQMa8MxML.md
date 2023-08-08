@@ -160,6 +160,13 @@ _MBa8Mx HW Rev.030x only_
     of the driver stack. Please follow given examples for a working setup.
   * IMX327: bayer support with 12 Bit does not work at the moment, only 10 Bit with
     1280x720 is tested with gstreamer
+* UBI / UBIFS images will not be built out of the box since `imx-base.inc` from
+  meta-freescale override machine specific assignment for `MACHINE_FEATURES`.
+  Use following bitbake assignment in one of your `local.conf` / `auto.conf` /
+  `<machine>.conf` files:
+  ```
+  MACHINE_FEATURES:append = " ubi"
+  ```
 
 ## Build Artifacts
 

@@ -60,6 +60,13 @@
   kernel, see [Mainline Kernel](#mainline_kernel)
 - Writing to FAT filesystems may cause warnings and errors in U-Boot
   based on v2016.03.
+* UBI / UBIFS images will not be built out of the box since `imx-base.inc` from
+  meta-freescale override machine specific assignment for `MACHINE_FEATURES`.
+  Use following bitbake assignment in one of your `local.conf` / `auto.conf` /
+  `<machine>.conf` files:
+  ```
+  MACHINE_FEATURES:append = " ubi"
+  ```
 
 ## Artifacts
 

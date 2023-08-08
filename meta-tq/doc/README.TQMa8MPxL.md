@@ -179,6 +179,13 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
     `Bluetooth: hci0: unexpected event for opcode 0xfc2f`
 
     According to https://lkml.org/lkml/2019/6/6/868 this can be ignored
+* UBI / UBIFS images will not be built out of the box since `imx-base.inc` from
+  meta-freescale override machine specific assignment for `MACHINE_FEATURES`.
+  Use following bitbake assignment in one of your `local.conf` / `auto.conf` /
+  `<machine>.conf` files:
+  ```
+  MACHINE_FEATURES:append = " ubi"
+  ```
 
 ## Build Artifacts
 
