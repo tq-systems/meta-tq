@@ -43,7 +43,7 @@ See top level README.md for configurations usable as MACHINE.
 | Write                                            |              x              |
 | Boot                                             |              x              |
 | **USB**                                          |                             |
-| USB 2.0 Dual Role                                |              x              |
+| USB 2.0 (Device, for UUU/MFG)                    |              x              |
 | USB 3.0 (Hub on MBa8Xx)                          |              x              |
 | **ENET (GigE via Phy on MBa8x)**                 |                             |
 | ENET 0                                           |              x              |
@@ -125,11 +125,14 @@ See top level README.md for configurations usable as MACHINE.
   * Mic In untested
 * DSI - DP bridge
 
-## Known Issues
+## Known Issues / Limitations
 
-* Default setting for `fdt_file` in u-boot does not match new naming scheme.
+* Default setting for `fdt_file` in u-boot does not match older linux kernel
+  naming scheme. Current naming scheme is `<cpu>-<som>-<baseboard>[-feature].dtb`,
+  old scheme was `<cpu>-<baseboard>[-feature].dtb`.
   See [Build Artifacts](#Build-Artifacts) for complete list of supported Device Tree files
 * USB
+  * U-Boot: USB 2.0 dual role port is limited to device mode for UUU / MFG use case
   * U-Boot: USB 3.0 port does not initialize USB 2.0 subsystem after USB reset
 * Upon resume ethernet PHY will not establish a new link again
 * SPI: Hardware-controlled chipselects are not driven as expected
