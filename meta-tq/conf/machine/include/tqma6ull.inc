@@ -7,8 +7,11 @@ MACHINEOVERRIDES =. "imx:mx6ull:tqma6ullx:"
 
 include conf/machine/include/imx-base.inc
 
-DEFAULTTUNE ?= "cortexa7thf-neon"
 require conf/machine/include/arm/armv7a/tune-cortexa7.inc
+
+# TQ u-boot and kernel
+#
+require conf/machine/include/tqmxx.inc
 
 # Machine specific options
 
@@ -18,36 +21,33 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     linux-firmware-imx-sdma-imx6q \
 "
 
-MACHINE_FEATURES:append = "\
+MACHINE_FEATURES += "\
     alsa \
     can \
     ext2 \
     rtc \
     serial \
+    ubi \
     usbhost \
     vfat \
-    ubi \
 "
-
-# TQ u-boot and kernel
-
-require conf/machine/include/tqmxx.inc
 
 KERNEL_IMAGETYPE = "zImage"
 
-PREFERRED_PROVIDER_u-boot:tqma6ullx ?= "u-boot-imx-tq"
-PREFERRED_PROVIDER_virtual/bootloader:tqma6ullx ?= "u-boot-imx-tq"
-
-UBOOT_SUFFIX:${MACHINE} ?= "imx"
-UBOOT_MAKE_TARGET:${MACHINE} ?= "u-boot.imx"
+PREFERRED_PROVIDER_u-boot:mx6ull-generic-bsp ?= "u-boot-imx-tq"
+PREFERRED_PROVIDER_virtual/bootloader:mx6ull-generic-bsp ?= "u-boot-imx-tq"
+UBOOT_MAKE_TARGET:mx6ull-generic-bsp ?= "u-boot.imx"
+UBOOT_SUFFIX:mx6ull-generic-bsp = "imx"
+UBOOT_SUFFIX:pn-u-boot-imx-tq = "imx"
+IMX_DEFAULT_BOOTLOADER ?= "u-boot-imx-tq"
 
 # Image Options
 
 # Add packages we want to be deployed, even when they are not part of rootfs
 # We need these here to support UBI / NFS boot case
 EXTRA_IMAGEDEPENDS += "\
-    virtual/kernel \
     virtual/bootloader \
+    virtual/kernel \
 "
 
 # Verified values to generate UBI image:
