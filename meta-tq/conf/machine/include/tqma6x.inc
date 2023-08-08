@@ -1,4 +1,4 @@
-# Common definitions for TQ-Systems GmbH TQMa6 modules
+# Common definitions for TQ-Systems GmbH TQMa6 SOM
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale
@@ -7,8 +7,11 @@ MACHINEOVERRIDES =. "imx:mx6:tqma6x:"
 
 include conf/machine/include/imx-base.inc
 
-DEFAULTTUNE ?= "cortexa9thf-neon"
 require conf/machine/include/arm/armv7a/tune-cortexa9.inc
+
+# TQ u-boot and kernel
+#
+require conf/machine/include/tqmxx.inc
 
 # Machine specific options
 
@@ -33,17 +36,14 @@ MACHINE_FEATURES += "\
     vpu \
 "
 
-# TQ u-boot and kernel
-
-require conf/machine/include/tqmxx.inc
-
 KERNEL_IMAGETYPE = "zImage"
 
-PREFERRED_PROVIDER_u-boot:tqma6x ?= "u-boot-imx-tq"
-PREFERRED_PROVIDER_virtual/bootloader:tqma6x ?= "u-boot-imx-tq"
-
-UBOOT_SUFFIX:tqma6x ?= "imx"
-UBOOT_MAKE_TARGET:tqma6x ?= "u-boot.imx"
+PREFERRED_PROVIDER_u-boot:mx6-generic-bsp ?= "u-boot-imx-tq"
+PREFERRED_PROVIDER_virtual/bootloader:mx6-generic-bsp ?= "u-boot-imx-tq"
+UBOOT_MAKE_TARGET:mx6-generic-bsp ?= "u-boot.imx"
+UBOOT_SUFFIX:mx6-generic-bsp = "imx"
+UBOOT_SUFFIX:pn-u-boot-imx-tq = "imx"
+IMX_DEFAULT_BOOTLOADER ?= "u-boot-imx-tq"
 
 # Image Options
 
