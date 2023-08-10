@@ -47,22 +47,6 @@ do_configure:prepend() {
 }
 
 do_deploy:append() {
-    # For sdcard boot, we don't use u-boot.bin, but u-boot-with-spl-pbl.bin
-    unset i j
-    if [ "${UBOOT_CONFIG}" ]; then
-        for config in ${UBOOT_MACHINE}; do
-            i=`expr $i + 1`;
-            for type in ${UBOOT_CONFIG}; do
-                j=`expr $j + 1`;
-                if [ $j -eq $i ] && [ "${type}" = "sdcard" ]; then
-                    install -d ${DEPLOYDIR}
-                    install ${B}/${config}/u-boot-with-spl-pbl.${UBOOT_SUFFIX} ${DEPLOYDIR}/u-boot-${type}-${PV}-${PR}.${UBOOT_SUFFIX}
-                fi
-            done
-            unset j
-        done
-        unset i
-    fi
 
     # Install RCW
     if [ "${UBOOT_CONFIG}" ] && [ "${FSL_RCW}" ]; then
