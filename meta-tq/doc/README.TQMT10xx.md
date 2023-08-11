@@ -158,6 +158,34 @@ Important Dip Switch settings for this configuration
 | S3-4       | Serdes Lane G |  X  |     |
 | S2-4       | Refclk Serdes |     |  X  |
 
+### TQMT1024:
+For Serdes Config 0x95
+
+#### Ethernet
+
+| Linux Name | U-Boot Name |  MAC / Protocoll | Ethernet Port         |
+| ---------- | ----------- | ---------------- | ----------------------|
+| fm1-mac1    | FM1@TGEC1  | Lane A XFI       | J3                    |
+| fm1-mac4    | FM1@DTSEC4 | RGMII EC1        | X37-BA: (Top Left)    |
+
+#### PCIe
+
+| Lane   | Connector |
+| ------ | --------- |
+| Lane A | X19 |
+
+#### Dip Switch settings
+
+Important Dip Switch settings for this configuration
+
+| DIP-Switch | Function      | On  | Off |
+| ---------- | ------------- | --- | ----|
+| S9-1       | Refclk D21    |     |  X  |
+| S9-2       | QSGMII/SGMII  |     |  X  |
+| S3-3       | Serdes Lane G |     |  X  |
+| S3-4       | Serdes Lane G |  X  |     |
+| S2-4       | Refclk Serdes |  X  |     |
+
 ### TQMT1040:
 For Serdes Config 0x66
 
