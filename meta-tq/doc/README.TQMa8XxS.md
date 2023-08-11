@@ -319,6 +319,10 @@ For demos available in the BSP and the device tree to be used see [artifacts sec
 
 Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8X.md).
 
+### Access U-Boot environment from Linux
+
+See [U-Boot environment tools](README.libubootenv.md).
+
 ## Support Wiki
 
 See [TQ Embedded Wiki for TQMa8XxS](https://support.tq-group.com/en/arm/tqma8xxs)

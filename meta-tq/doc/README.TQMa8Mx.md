@@ -546,6 +546,10 @@ Detailed documentation for CortexM support can be found [here](./README.CortexM-
 
 See [i.MX High Assurance Boot](README.IMX-HAB.md).
 
+### Access U-Boot environment from Linux
+
+See [U-Boot environment tools](README.libubootenv.md).
+
 ## Support Wiki
 
 See [TQ Embedded Wiki for TQMa8Mx](https://support.tq-group.com/en/arm/tqma8mx)

@@ -511,6 +511,10 @@ is provided for USB dual role support, see see [artifacts section](#build-artifa
 
 See [i.MX High Assurance Boot](README.IMX-HAB.md).
 
+### Access U-Boot environment from Linux
+
+See [U-Boot environment tools](README.libubootenv.md).
+
 ## Support Wiki
 
 See [TQ Embedded Wiki for TQMa8MxNL](https://support.tq-group.com/en/arm/tqma8mxnl)
