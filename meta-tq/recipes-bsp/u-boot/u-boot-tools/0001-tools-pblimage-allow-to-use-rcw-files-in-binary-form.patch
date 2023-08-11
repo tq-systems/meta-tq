@@ -1,0 +1,99 @@
+From f589b9ec7793574a37f34f86098f2b241ee1ffa9 Mon Sep 17 00:00:00 2001
+From: Gregor Herburger <gregor.herburger@tq-group.com>
+Date: Thu, 10 Aug 2023 16:18:11 +0200
+Subject: [PATCH] tools: pblimage: allow to use rcw files in binary form
+
+The pblimage tool currently only allows to parse rcw files from .cfg
+files. RCW binary files can be generated with external tools. Add
+support to use binary files directly.
+
+If the file has a valid pblimage header use the file directly. Otherwise
+try to parse the file with the pbl_parser function.
+
+Signed-off-by: Gregor Herburger <gregor.herburger@tq-group.com>
+---
+ tools/pblimage.c | 55 +++++++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 52 insertions(+), 3 deletions(-)
+
+diff --git a/tools/pblimage.c b/tools/pblimage.c
+index 205a4c8e541a..ab0be0472cc8 100644
+--- a/tools/pblimage.c
++++ b/tools/pblimage.c
+@@ -40,6 +40,9 @@ static union
+ 	unsigned char l;
+ } endian_test = { {'l', '?', '?', 'b'} };
+ 
++static int pblimage_verify_header(unsigned char *ptr, int image_size,
++				  struct image_tool_params *params);
++
+ #define ENDIANNESS ((char)endian_test.l)
+ 
+ /*
+@@ -187,11 +190,46 @@ static void add_end_cmd(void)
+ 
+ void pbl_load_uboot(int ifd, struct image_tool_params *params)
+ {
+-	FILE *fp_uboot;
++	FILE *fp_uboot, *fp_rcw;
++	uint8_t *data;
+ 	int size;
++	int rcwsize;
++	int ret;
+ 
+-	/* parse the rcw.cfg file. */
+-	pbl_parser(params->imagename);
++	fp_rcw = fopen(params->imagename, "r");
++	if (!fp_rcw)
++		goto err_open;
++
++	ret = fseek(fp_rcw, 0, SEEK_END);
++	if (ret < 0)
++		goto err_file;
++
++	rcwsize = ftell(fp_rcw);
++	if (rcwsize < 0)
++		goto err_file;
++
++	ret = fseek(fp_rcw, 0, SEEK_SET);
++	if (ret < 0)
++		goto err_file;
++
++	data = malloc(rcwsize);
++	if (!data)
++		goto err_alloc;
++
++	if (fread(data, sizeof(*data), rcwsize, fp_rcw) != rcwsize)
++		goto err_alloc;
++
++	fclose(fp_rcw);
++
++	if (pblimage_verify_header(data, rcwsize, params) != 0) {
++		/* Try to parse file */
++		pbl_parser(params->imagename);
++	} else {
++		rcwsize -= 8;
++		memcpy(pmem_buf, data, rcwsize);
++		pmem_buf += rcwsize;
++		pbl_size += rcwsize;
++	}
+ 
+ 	/* parse the pbi.cfg file. */
+ 	if (params->imagename2[0] != '\0')
+@@ -216,6 +254,17 @@ void pbl_load_uboot(int ifd, struct image_tool_params *params)
+ 			params->imagefile, strerror(errno));
+ 		exit(EXIT_FAILURE);
+ 	}
++
++	return;
++
++err_alloc:
++	free(data);
++err_file:
++	fclose(fp_rcw);
++err_open:
++	printf("Error:%s - Can't open\n", params->imagename);
++	exit(EXIT_FAILURE);
++
+ }
+ 
+ static int pblimage_check_image_types(uint8_t type)
