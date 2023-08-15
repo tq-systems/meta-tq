@@ -109,4 +109,13 @@ do_deploy() {
 
 # needed, since we add machine specific settings
 PACKAGE_ARCH = "${MACHINE_ARCH}"
-COMPATIBLE_MACHINE = "(mx9-generic-bsp)"
+
+COMPATIBLE_MACHINE = "^$"
+COMPATIBLE_MACHINE:tqma8mpxl = "tqma8mpxl"
+COMPATIBLE_MACHINE:tqma8mq = "tqma8mq"
+COMPATIBLE_MACHINE:tqma8mxml = "tqma8mxml"
+COMPATIBLE_MACHINE:tqma8mxnl = "tqma8mxnl"
+COMPATIBLE_MACHINE:tqma8x = "tqma8x"
+COMPATIBLE_MACHINE:tqma8xx = "tqma8xx"
+COMPATIBLE_MACHINE:tqma8xxs = "tqma8xxs"
+COMPATIBLE_MACHINE:tqma93xx = "tqma93xx"
