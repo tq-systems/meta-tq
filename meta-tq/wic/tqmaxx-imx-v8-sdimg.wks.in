@@ -1,19 +1,30 @@
-# short-description: Create SD card image with a boot partition
+# short-description: Create disk image with a boot partition
 # long-description:
-# Create an image that can be written onto a SD card using dd for use
+# Create an image that can be written onto a SD card / eMMC using dd for use
 # with i.MX8/i.MX8X/i.MX8M/i.MX9 SoC families
 #
 # The disk layout used is:
-#  - -------------- ------- --------- ----------- -------------
-# | |  bootstream  |  env  |  /boot  |  /rootfs  |
-#  - -------------- ------- --------- ----------- -------------
-# ^ ^              ^       ^         ^
-# | |              |       |         |
-# 0 |             4MiB    8MiB       72MiB
-#   ${IMX_BOOT_SEEK} 32 or 33kiB, see reference manual
+#  - -------------- ------------ ------------ ------- --------- ----------- ---
+# | |  bootstream  |  uboot-env | uboot-envr | resvd |  /boot  |  /rootfs  |
+#  - -------------- ------------ ------------ ------- --------- ----------- ---
+# ^ ^              ^            ^            ^       ^         ^           ^
+# | |              |            |            |       |         |           |
+# 0 |           4096KiB      4128KiB      4160KiB   8MiB       |        variable
+#   ${IMX_BOOT_SEEK} 32 or 33kiB, see reference manual         |
+#                                                              |
+#                                                            8MiB + 64 MiB * overhead-factor
+#                                                            (default: `--overhead-factor=1.3`),
+#                                                            alignment 4 MiB (managed NAND)
 #
-part u-boot --source rawcopy --sourceparams="file=${MACHINE_WKS_BOOTSTREAM}" --no-table --align ${IMX_BOOT_SEEK}
-part /boot --source bootimg-partition --fstype=vfat --label boot --active --align 8192 --size 64M --extra-space 0
-part / --source rootfs --fstype=ext4 --label root --align 8192
+# exact layout with U-Boot env is disabled until
+# https://lists.openembedded.org/g/openembedded-core/message/186361 is applied
+
+part u-boot --source rawcopy --sourceparams="file=${MACHINE_WKS_BOOTSTREAM}" --no-table --offset ${IMX_BOOT_SEEK}K
+# part u-boot-env --no-table --offset 4096K --fixed-size 32K
+# part u-boot-envr --no-table --offset 4128K --fixed-size 32K
+# part resvd --no-table --offset 4160K --fixed-size 4032K
+part resvd --no-table --offset 4M --fixed-size 4M
+part /boot --source bootimg-partition --fstype=vfat --label boot --active --offset 8M --size 64M
+part / --source rootfs --fstype=ext4 --label root --align 4096
 
 bootloader --ptable msdos
