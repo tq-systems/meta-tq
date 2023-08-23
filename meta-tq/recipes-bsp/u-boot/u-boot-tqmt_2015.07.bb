@@ -3,6 +3,7 @@ require u-boot-tq.inc
 
 DESCRIPTION = "U-Boot for TQ-Group TQMT modules"
 PROVIDES += "virtual/bootloader u-boot"
+DEPENDS += "u-boot-mkimage-native rcw"
 
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
@@ -32,37 +33,55 @@ python () {
 
 WRAP_TARGET_PREFIX ?= "${TARGET_PREFIX}"
 
-UBOOT_MAKE_TARGET:append = "${@d.getVar('FSL_RCW', True) and ' fsl_rcw.bin' or ''}"
-
 EXTRA_OEMAKE = 'CROSS_COMPILE=${WRAP_TARGET_PREFIX} CC="${WRAP_TARGET_PREFIX}gcc ${TOOLCHAIN_OPTIONS}"'
 EXTRA_OEMAKE += 'HOSTCC="${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS}"'
 
-do_configure:prepend() {
-    if [ "${UBOOT_CONFIG}" ] && [ "${FSL_RCW}" ]; then
-        for config in ${UBOOT_MACHINE}; do
-            sed -i '/CONFIG_RCW_CFG/d' ${S}/configs/${config}
-            echo "CONFIG_RCW_CFG_${FSL_RCW}=y" >> ${S}/configs/${config}
+RCW_FOLDER ??= "${MACHINE}"
+RCW_FOLDER:tqmt1024 ?= "tqmt1024"
+RCW_FOLDER:tqmt1040 ?= "tqmt1040"
+RCW_FOLDER:tqmt1042 ?= "tqmt1042"
+RCW_FOLDER:tqmt1022 ?= "tqmt1042"
+RCW_SUFFIX ?= ".bin"
+
+do_compile:append() {
+    unset i j
+    for config in ${UBOOT_MACHINE}; do
+        i=$(expr $i + 1);
+        for type in ${UBOOT_CONFIG}; do
+            j=$(expr $j + 1);
+            if [ $j -eq $i ] && [ $type = "sdcard" ]; then
+                cd ${B}/$config
+                for rcw_file in ${UBOOT_RCW_VARIANTS}; do
+                    spl_file="u-boot-spl-$(basename ${rcw_file}).pbl"
+                    spl_pbl_file="u-boot-with-spl-pbl-$(basename ${rcw_file}).bin"
+
+                    uboot-mkimage -n ${DEPLOY_DIR_IMAGE}/rcw/${RCW_FOLDER}/${rcw_file}${RCW_SUFFIX} -T pblimage \
+                                -A powerpc -a 0xFFFD8000 -d spl/u-boot-spl.bin spl/${spl_file}
+
+                    ${OBJCOPY} --gap-fill=0xff -I binary -O binary --pad-to=0x40000 --gap-fill=0xff spl/${spl_file} ${spl_pbl_file}
+                    cat u-boot.bin >> ${spl_pbl_file}
+                done
+
+            fi
         done
-    fi
+        unset j
+    done
+    unset i
 }
 
 do_deploy:append() {
-
-    # Install RCW
-    if [ "${UBOOT_CONFIG}" ] && [ "${FSL_RCW}" ]; then
-        for config in ${UBOOT_MACHINE}; do
-            i=`expr $i + 1`;
-            for type in ${UBOOT_CONFIG}; do
-                j=`expr $j + 1`;
-                if [ $j -eq $i ] && [ "${type}" != "sdcard" ]; then
-                    install -d ${DEPLOYDIR}
-                    install -v ${B}/${config}/fsl_rcw.bin ${DEPLOYDIR}/fsl_rcw-${type}-${FSL_RCW}.bin
-                fi
-            done
-            unset j
+    unset i j
+    for config in ${UBOOT_MACHINE}; do
+        i=$(expr $i + 1);
+        for type in ${UBOOT_CONFIG}; do
+            j=$(expr $j + 1);
+            if [ $j -eq $i ] && [ $type = "sdcard" ]; then
+                cp ${B}/${config}/u-boot-with-spl-pbl-rcw*.bin  ${DEPLOY_DIR_IMAGE}
+            fi
         done
-        unset i
-    fi
+        unset j
+    done
+    unset i
 }
 
 COMPATIBLE_MACHINE = "(tqmt10xx)"
