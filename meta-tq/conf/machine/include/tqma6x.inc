@@ -67,4 +67,4 @@ UBI_VOLNAME = "root"
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
-PREFERRED_VERSION_linux-imx-tq = "5.15%"
+PREFERRED_VERSION_linux-imx-tq ?= "5.15%"
