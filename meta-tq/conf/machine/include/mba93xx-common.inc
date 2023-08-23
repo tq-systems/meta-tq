@@ -21,6 +21,9 @@ MACHINE_FEATURES += "\
     wifi \
 "
 
+# we have no audio interface on our board.
+MACHINE_FEATURES:remove = "alsa"
+
 IMXBOOT_TARGETS ?= "\
     flash_singleboot \
     flash_singleboot_flexspi \

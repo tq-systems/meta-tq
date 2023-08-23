@@ -2,6 +2,12 @@
 
 MACHINEOVERRIDES =. "imx:mx9:mx93:tqma93xx:"
 
+# optionally source the machine specific features for multimedia etc. from
+# meta-freescale
+
+include conf/machine/include/imx-base.inc
+require conf/machine/include/arm/armv8-2a/tune-cortexa55.inc
+
 require conf/machine/include/tqmxx.inc
 
 LOADADDR = ""
@@ -67,18 +73,12 @@ UBI_VOLNAME = "root"
 IMX_BOOT_SEEK = "32"
 IMX_BOOT_SOC_TARGET = "iMX9"
 
-# optionally source the machine specific features for multimedia etc. from
-# meta-freescale
-
-include conf/machine/include/imx-base.inc
-require conf/machine/include/arm/armv8-2a/tune-cortexa55.inc
-
 MACHINE_EXTRA_RRECOMMENDS += "\
     kernel-devicetree \
     kernel-modules \
 "
 
-MACHINE_FEATURES = "\
+MACHINE_FEATURES += "\
     can \
     ext2 \
     ext3 \
@@ -91,6 +91,12 @@ MACHINE_FEATURES = "\
 KERNEL_IMAGETYPE = "Image"
 
 PREFERRED_PROVIDER_imx-boot ?= "imx-boot-tq"
-PREFERRED_PROVIDER_virtual/kernel ?= "linux-imx-tq"
-PREFERRED_VERSION_linux-imx-tq = "5.15%"
-PREFERRED_PROVIDER_imx-atf = "imx-atf-tq"
+PREFERRED_PROVIDER_virtual/kernel:mx93-nxp-bsp ?= "linux-imx-tq"
+# At the moment we support only these forks:
+PREFERRED_PROVIDER_imx-atf:mx93-generic-bsp = "imx-atf-tq"
+PREFERRED_PROVIDER_u-boot:mx93-generic-bsp ?= "u-boot-imx-tq"
+PREFERRED_PROVIDER_virtual/bootloader:mx93-generic-bsp ?= "u-boot-imx-tq"
+UBOOT_SUFFIX:mx93-generic-bsp = "bin"
+UBOOT_SUFFIX:pn-u-boot-imx-tq = "bin"
+IMX_DEFAULT_BOOTLOADER ?= "u-boot-imx-tq"
+
