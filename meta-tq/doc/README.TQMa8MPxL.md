@@ -61,55 +61,56 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 
 ### Linux
 
-| Feature                                                      |  REV.020x   |
-|:-------------------------------------------------------------|:-----------:|
-| RAM configs                                                  | 1,2,4,8 GiB |
-| CPU variants                                                 |  i.MX8MPQ   |
-| Fuses / OCRAM                                                |      x      |
-| speed grade / temperature grade detection                    |      x      |
-| **UART**                                                     |             |
-| console on UART4 (via USB / UART converter)                  |      x      |
-| UART3 via USB UART converter                                 |      x      |
-| UART1 / UART2 via pin header                                 |             |
-| **GPIO**                                                     |             |
-| LED                                                          |      x      |
-| Button                                                       |      x      |
-| 24V IO                                                       |      x      |
-| **I2C**                                                      |             |
-| EEPROMs                                                      |      x      |
-| PMIC                                                         |      x      |
-| RTC                                                          |      x      |
-| Temperature Sensors                                          |      x      |
-| **ENET**                                                     |             |
-| GigE / FEC via Phy on MBa8MPxL                               |      x      |
-| GigE / EQOS via Phy on MBa8MPxL                              |      x      |
-| **USB**                                                      |             |
-| USB 3.0 Host / Hub                                           |      x      |
-| USB DRD (USB 3.0 Cable Detect, VBUS)                         |      x      |
-| **QSPI NOR**                                                 |             |
-| Read with 1-1-4 SDR                                          |      x      |
-| PP / Erase with 1-1-1 SDR                                    |      x      |
-| GPU                                                          |      x      |
-| VPU                                                          |      x      |
-| **Display**                                                  |             |
-| LVDS                                                         |      x      |
-| HDMI                                                         |      x      |
-| **Audio**                                                    |             |
-| HDMI                                                         |             |
-| Codec (Line IN / Line OUT)                                   |      x      |
-| **PCIe**                                                     |             |
-| wireless card at M.2                                         |      x      |
-| **CAN-FD**                                                   |             |
-| CAN-FD                                                       |      x      |
-| **SPI**                                                      |             |
-| spidev at all CS                                             |             |
-| ADC                                                          |      x      |
-| **Cortex M7**                                                |             |
-| examples running from TCM                                    |      x      |
-| use UART3 as debug console (see issues)                      |      x      |
-| **MIPI CSI (see Issues section)**                            |             |
-| Gray with Vision Components GmbH camera (Sensor OV9281)      |      x      |
-| Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |      x      |
+| Feature                                                      |  fslc-5.15  |   fslc-6.1  |
+|:-------------------------------------------------------------|:-----------:|:-----------:|
+| RAM configs                                                  | 1,2,4,8 GiB | 1,2,4,8 GiB |
+| CPU variants                                                 |  i.MX8MPQ   |  i.MX8MPQ   |
+| Fuses / OCRAM                                                |      x      |      x      |
+| speed grade / temperature grade detection                    |      x      |      x      |
+| **UART**                                                     |             |             |
+| console on UART4 (via USB / UART converter)                  |      x      |      x      |
+| UART3 via USB UART converter                                 |      x      |      x      |
+| UART1 / UART2 via pin header                                 |             |             |
+| **GPIO**                                                     |             |             |
+| LED                                                          |      x      |      x      |
+| Button                                                       |      x      |      x      |
+| 24V IO                                                       |      x      |             |
+| **I2C**                                                      |             |             |
+| EEPROMs                                                      |      x      |      x      |
+| PMIC                                                         |      x      |      x      |
+| RTC                                                          |      x      |      x      |
+| Temperature Sensors                                          |      x      |      x      |
+| **ENET**                                                     |             |             |
+| GigE / FEC via Phy on MBa8MPxL                               |      x      |      x      |
+| GigE / EQOS via Phy on MBa8MPxL                              |      x      |      x      |
+| **USB**                                                      |             |             |
+| USB 3.0 Host / Hub                                           |      x      |      x      |
+| USB DRD (USB 3.0 Cable Detect, VBUS)                         |      x      |      x      |
+| **QSPI NOR**                                                 |             |             |
+| Read with 1-1-4 SDR                                          |      x      |      x      |
+| PP / Erase with 1-1-1 SDR                                    |      x      |      x      |
+| **Graphic / Multimedia**                                     |             |             |
+| GPU                                                          |      x      |      x      |
+| VPU                                                          |      x      |      x      |
+| **Display**                                                  |             |             |
+| LVDS                                                         |      x      |      x      |
+| HDMI                                                         |      x      |      x      |
+| **Audio**                                                    |             |             |
+| HDMI                                                         |             |      x      |
+| Codec (Line IN / Line OUT)                                   |      x      |      x      |
+| **PCIe**                                                     |             |             |
+| wireless card at M.2                                         |      x      |      x      |
+| **CAN-FD**                                                   |             |             |
+| CAN-FD                                                       |      x      |      x      |
+| **SPI**                                                      |             |             |
+| spidev at all CS                                             |             |      x      |
+| ADC                                                          |      x      |      x      |
+| **Cortex M7**                                                |             |             |
+| examples running from TCM                                    |      x      |      x      |
+| use UART3 as debug console (see issues)                      |      x      |      x      |
+| **MIPI CSI (see Issues section)**                            |             |             |
+| Gray with Vision Components GmbH camera (Sensor OV9281)      |      x      |      x      |
+| Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |      x      |      x      |
 
 ## TODO:
 
@@ -186,6 +187,9 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
   ```
   MACHINE_FEATURES:append = " ubi"
   ```
+* Starting with linux-imx-tq version 6.1 HDMI support is integrated into standard device tree.
+  `imx8mp-tqma8mpql-mba8mpxl-hdmi.dtb` is just for backward compatibility and is identical to
+  `imx8mp-tqma8mpql-mba8mpxl.dtb`.
 
 ## Build Artifacts
 
@@ -290,6 +294,8 @@ WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! video
 ```
 
 * OpenGL accelerated pipeline:
+Note: This is only supported on fslc-5.15 based kernel for now
+
 ```
 WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! glupload ! glcolorconvert ! glcolorscale ! glcolorconvert ! gldownload ! autovideosink -v sync=false
 ```
