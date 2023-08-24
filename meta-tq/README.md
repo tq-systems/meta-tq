@@ -283,6 +283,7 @@ Under the given links SOM specific information can be found:
 * [TQMLS1012AL](doc/README.TQMLS1012AL.md)
 * [TQMLS102\[0,1\]A](doc/README.TQMLS102xa.md)
 * [TQMLS1017A/TQMLS1028A](doc/README.TQMLS1028A.md)
+* [TQMLS1043/TQMLS1046A/TQMLS1088A](doc/README.TQMLS10xxa.md)
 * [TQMLX2160A](doc/README.tqmlx2160a-mblx2160a.md)
 * [TQMT10xx](doc/README.TQMT10xx.md)
 
