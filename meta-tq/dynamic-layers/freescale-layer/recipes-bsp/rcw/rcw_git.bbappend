@@ -1,6 +1,6 @@
 SRC_URI = "${TQ_GIT_BASEURL}/rcw.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 SRCBRANCH = "TQMLS-Integration"
-SRCREV = "f11713dbbddb3e73109b8329c0e01c2846f01c26"
+SRCREV = "19fa12a3c0de46a77fa28e5cea029fb5d8eee127"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=44a0d0fad189770cc022af4ac6262cbe"
 
 M:tqmls1012al = "tqmls1012al"
