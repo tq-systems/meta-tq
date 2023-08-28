@@ -12,6 +12,7 @@ Releases are named with the following scheme:
 ### Added
 
 * recipes-bsp/u-boot: backport libubootenv v0.3.4 from poky / openembedded core
+* TQMT10xxA: added support for rcw tool
 
 ### Changed
 
@@ -21,6 +22,10 @@ Releases are named with the following scheme:
   * switch to use libubootenv instead of U-Boot internal env tools.
 * recipes-bsp/u-boot: allow generation and installment of initial environment for
   all supported U-Boot variants newer than v2019.04.
+* TQMLS1028A: RCW: add fixes for the SATA erratum A-010554 and the PCIe errata
+  A-008851, A-010477 and A-009531
+* TQMLX2160A: RCW: add fixes for the SATA erratum A-010554, the PCIe errata
+  A-050479, A-009531, A-008851 and the SoC erratum A-050426
 
 ### Removed
 
