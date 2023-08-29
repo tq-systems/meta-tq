@@ -11,11 +11,30 @@ Releases are named with the following scheme:
 
 ### Added
 
+* recipes-kernel/linux: add support for TQMa7 / TQMa6 / TQMa6UL[L]x[L] with linux 6.1
 * recipes-bsp/u-boot: backport libubootenv v0.3.4 from poky / openembedded core
 * TQMT10xxA: added support for rcw tool
 
+### Fixed
+
+* TQMa8MPxL: fix CMA allocation in vendor kernel based on 5.15. Removed unsused
+  reserved memory allocated in SOC part of DT.
+* TQMa93: add missing settings for `SERIAL_CONSOLES`. This make busybox init
+  working.
+* TQMa8: fix UBI image creation based on `MACHINE_FEATURE` containing `ubi`.
+
 ### Changed
 
+* WKS: rewrite WKS files
+  * use `--offset` for all items with fixed placement instead of `--align`
+  * use `--fixed-size` only where needed, relax boot partition size
+  * start preparation for U-Boot initial environment in wic images
+* TQMa93: update to use TF-A based on NXP vendor fork lf_v2.8
+* TQMa93 / TQMa8 /  TQMa7 / TQMa6 /TQMa6UL[L]x[L]: improve machine definition
+  * use `imx-base.inc` from meta-frescale identical as to the machines defined
+    in meta-freescale
+  * adjust `MACHINE_FEATURE` list
+  * remove superfluos assignment to `DEFAULTTUNE` with its default value
 * TQMa8:
   * convert U-Boot fw_env.config to new libubootenv yaml format to support env
     on all boot devices
