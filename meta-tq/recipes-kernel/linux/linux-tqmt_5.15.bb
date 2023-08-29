@@ -7,7 +7,7 @@ PROVIDES = "linux-tqmt"
 require linux-tq-common.inc
 
 KBRANCH = "TQMT10xx-linux-v5.15"
-SRCREV = "0e97f6856c078d6e98dd1c9c798c8423a36ad7e1"
+SRCREV = "68c12d0b1452ab31d9d71a2b53c87da8071983aa"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "5.15"
