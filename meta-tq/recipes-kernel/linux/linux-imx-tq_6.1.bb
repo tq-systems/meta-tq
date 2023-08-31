@@ -35,6 +35,7 @@ SRC_URI:aarch64:imx-nxp-bsp = "\
     file://display-support.cfg \
     file://features/debug.cfg \
     file://features/devicetree.cfg \
+    file://imx8m-platform-support.cfg \
     file://imx93-platform-support.cfg \
     file://input-devices.cfg \
     file://local-version.cfg \
