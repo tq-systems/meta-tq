@@ -33,6 +33,7 @@ SRC_URI:aarch64:imx-nxp-bsp = "\
     file://audio-support.cfg \
     file://bpf-support.cfg \
     file://display-support.cfg \
+    file://features/debug.cfg \
     file://features/devicetree.cfg \
     file://imx93-platform-support.cfg \
     file://input-devices.cfg \
@@ -44,6 +45,7 @@ SRC_URI:aarch64:imx-nxp-bsp = "\
     file://rtc.cfg \
     file://sdma.cfg \
     file://tq-generic-devices.cfg \
+    file://unused-media.cfg \
     file://usb-gadget-support.cfg \
     file://usb-special-drivers.cfg \
     file://v4l2.cfg \
@@ -52,9 +54,6 @@ SRC_URI:aarch64:imx-nxp-bsp = "\
 
 SRC_URI:append = " \
     ${@bb.utils.contains('COMBINED_FEATURES', 'bluetooth', 'file://features/bluetooth-support.cfg', '', d)} \
-"
-SRC_URI:append = " \
-    ${@bb.utils.contains('IMAGE_FEATURES', 'debug-tweaks', 'file://features/debug.cfg', '', d)} \
 "
 
 COMPATIBLE_MACHINE = "^("
