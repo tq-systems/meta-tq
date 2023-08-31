@@ -1,14 +1,22 @@
+# SPDX-License-Identifier: MIT
+#
+# Copyright (c) 2020-2023 TQ-Systems GmbH <oss@ew.tq-group.com>,
+# D-82229 Seefeld, Germany.
+
 inherit gitpkgv-nonexact
+inherit pkgconfig
+
+SECTION = "bootloaders"
 
 PROVIDES += "u-boot"
 
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM ?= "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
 
-PACKAGE_ARCH = "${MACHINE_ARCH}"
-
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
+
+do_configure[cleandirs] = "${B}"
 
 #
 # We provide a default fw_env.config for linux userspace access to U-Boot
