@@ -121,6 +121,7 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 * UART1/UART2 via pin header
 * SPI via pin header
 * I²C interface of PCIe Clock generator not tested
+* NPU is untested
 
 ## Known Issues
 
@@ -190,6 +191,9 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 * Starting with linux-imx-tq version 6.1 HDMI support is integrated into standard device tree.
   `imx8mp-tqma8mpql-mba8mpxl-hdmi.dtb` is just for backward compatibility and is identical to
   `imx8mp-tqma8mpql-mba8mpxl.dtb`.
+
+* Review indicated that, by default, device tree reserves memory for NPU in an
+  area which is only available on 4GiB DDR RAM config.
 
 ## Build Artifacts
 
