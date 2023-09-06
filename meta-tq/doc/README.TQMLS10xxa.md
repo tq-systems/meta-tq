@@ -27,6 +27,10 @@
  * TQMLS1046A with 2 GiB / 8 GiB RAM, HW REV.020x on MBLS10xxa, HW REV.020x
  * TQMLS1088A with 2 GiB RAM, HW REV.020x on MBLS10xxa HW REV.020x
 
+## Known Issues
+
+* TQMLS1088A: Suspend to RAM not supported.
+
 ## HowTo
 
 ### MBLS10xxA DIP-Switch Settings for boot
@@ -80,8 +84,9 @@ SD-Card on MBLS10xxA is accessible.
 * Image: Kernel
 * fsl-ls1043a-tqmls1043a-mbls10xxa.dtb: Device Tree Blob.
 * u-boot-tfa-2022.04-r0.bin: U-Boot Binary
-* tq-image-generic-tqmls1043a-mbls10xxa.wic: Complete eMMC / SD-Card Image
-* tq-image-generic-tqmlx1043a-mbls10xxa.ubi: RootFS UBI-Image
+* \*.wic Complete eMMC / SD-Card Image
+* \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
+* \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 
 ### TQMLS1046A
 * atf/
@@ -98,8 +103,9 @@ SD-Card on MBLS10xxA is accessible.
 * Image: Kernel
 * fsl-ls1046a-tqmls1046a-mbls10xxa.dtb: Device Tree Blob.
 * u-boot-tfa-2022.04-r0.bin: U-Boot Binary
-* tq-image-generic-tqmls1046a-mbls10xxa.wic: Complete eMMC / SD-Card Image
-* tq-image-generic-tqmlx1046a-mbls10xxa.ubi: RootFS UBI-Image
+* \*.wic Complete eMMC / SD-Card Image
+* \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
+* \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 
 ### TQMLS1088a
 * atf/
@@ -113,8 +119,9 @@ SD-Card on MBLS10xxA is accessible.
 * Image: Kernel
 * fsl-ls1088a-tqmls1088a-mbls10xxa.dtb: Device Tree Blob.
 * u-boot-tfa-2022.04-r0.bin: U-Boot Binary
-* tq-image-generic-tqmls1088a-mbls10xxa.wic: Complete eMMC / SD-Card Image
-* tq-image-generic-tqmls1088a-mbls10xxa.ubi: RootFS UBI-Image
+* \*.wic Complete eMMC / SD-Card Image
+* \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
+* \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 
 ## Serdes Configuration
 
@@ -125,6 +132,8 @@ The following tables show the supported Serdes configrations.
 ### TQMLS1043A
 
 The following tables show the supported Serdes configurations.
+For an overview which port can be used at which serdes configuration
+see: [TQ Embedded Wiki for TQMLS10xxA](https://support.tq-group.com/en/layerscape/tqmls10xxa/mbls10xxa/ethernet)
 
 #### Serdes 1
 | Lane / Config | A         | B         | C         | D         |
@@ -195,6 +204,66 @@ Pay attention to the following DIP-Switches:
 | S10-2      | EVDD                  | 3.3V       | 1.8V    |
 |            |                       |            |         |
 | S5-1       | SD-Card / eMMC        | eMMC       | SD-Card |
+
+### Program system image
+
+#### QSPI NOR
+
+To program the rootfs as UBI, write <rootfs.ubi> image to:
+* `/dev/mtd7` for TQMLS1088A
+* `/dev/mtd5` for TQMLS1043A and TQMLS1046A
+(under Linux).
+
+```
+ubiformat /dev/mtd7 -f root.ubi
+```
+or
+```
+ubiformat /dev/mtd5 -f root.ubi
+```
+
+To flash rootfs from U-Boot:
+`run prepare_ubi_part`
+
+This carries out the following tasks:
+
+- ubi partition creation
+- ubi volume creation
+
+Download UBIFS image from TFTP and update:
+
+`run update_rootfs_spi`
+
+#### SD / e-MMC
+
+To program complete system image to SD / e-MMC, write [WIC image](#build-artifacts)
+to SD / e-MMC at offset 0x00 / block #0
+
+### Update parts of system
+
+In U-Boot the following update scripts are available to update the components:
+* RCW/PBL:
+  * update_pbl_mmc
+  * update_pbl_spi
+* U-Boot:
+  * update_uboot_mmc
+  * update_uboot_spi
+* RootFS:
+  * update_rootfs_qspi: Use .ubifs file
+* DPAA Ethernet Firmware TQMLS1043A/TQMLS1046A
+  * update_fmucode_spi
+  * update_fmucode_mmc
+* DPAA2 Ethernet Firmware TQMLS1088A
+* update_dpaa2_dpc_mmc
+* update_dpaa2_dpc_spi
+* update_dpaa2_dpl_mmc
+* update_dpaa2_dpl_spi
+* update_dpaa2_firmware_mmc
+* update_dpaa2_firmware_spi
+
+## Access U-Boot environment from Linux
+
+See [U-Boot environment tools](README.libubootenv.md).
 
 ## Support Wiki
 
