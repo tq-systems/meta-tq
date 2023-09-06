@@ -14,6 +14,9 @@ Releases are named with the following scheme:
 * recipes-kernel/linux: add support for TQMa7 / TQMa6 / TQMa6UL[L]x[L] with linux 6.1
 * recipes-bsp/u-boot: backport libubootenv v0.3.4 from poky / openembedded core
 * TQMT10xxA: added support for rcw tool
+* TQMLS10xxA:
+  * U-Boot: Added Commands to update DPAA2 firmware files
+  * Added config file for U-Boot env tools based on libubootenv
 
 ### Fixed
 
@@ -22,6 +25,7 @@ Releases are named with the following scheme:
 * TQMa93: add missing settings for `SERIAL_CONSOLES`. This make busybox init
   working.
 * TQMa8: fix UBI image creation based on `MACHINE_FEATURE` containing `ubi`.
+* TQMLS1088A: U-Boot: fix netboot command
 
 ### Changed
 
@@ -57,6 +61,7 @@ Releases are named with the following scheme:
   A-008851, A-010477 and A-009531
 * TQMLX2160A: RCW: add fixes for the SATA erratum A-010554, the PCIe errata
   A-050479, A-009531, A-008851 and the SoC erratum A-050426
+* TQMLS10xxA: Linux: Removed unsupported Power Management modes
 
 ### Removed
 
