@@ -18,4 +18,8 @@ SRC_URI = "\
     file://defconfig \
 "
 
+SRC_URI:append:ls1088a = "\
+    file://disable_suspend.cfg \
+"
+
 COMPATIBLE_MACHINE = "tqmls10xxa"
