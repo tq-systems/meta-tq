@@ -76,7 +76,7 @@ from TI.
 To select the variant to use, set the `SYSFW_DEFAULT_VARIANT` variable to
 "am64x-gp", "am64x_sr2-hs-fs" or "am64x_sr2-hs" (in `local.conf` or a custom
 machine definition), to match the used AM64x CPU variant and security
-enforcement status. The default value is "am64x-gp".
+enforcement status. The default value is "am64x_sr2-hs-fs".
 
 The selected variant will be installed to the boot partition of the generated
 WIC images as `tiboot3.bin`. It is possible to change an existing image to boot

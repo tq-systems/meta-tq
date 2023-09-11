@@ -25,6 +25,18 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* TQMa64xxL: Change default sysfw variant to HS-FS
+
+  All series variants of the AM64x are HS-FS, the GP variants only exist
+  as prototypes. Change the default sysfw variant for future BSP releases,
+  so our images will work on series modules without changes.
+
+  For prototype modules with AM64x SR1.0 or SR2.0 GP, the following
+  options are available:
+
+  * Use the old BSP release kirkstone.TQMa64xxL.BSP.SW.0004
+  * Replace tiboot3.bin with tiboot3-am64x-gp-evm.bin in the boot partition
+  * Change `SYSFW_DEFAULT_VARIANT` in the machine configuration or local.conf
 * WKS: rewrite WKS files
   * use `--offset` for all items with fixed placement instead of `--align`
   * use `--fixed-size` only where needed, relax boot partition size

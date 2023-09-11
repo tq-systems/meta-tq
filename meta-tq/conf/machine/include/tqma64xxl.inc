@@ -16,7 +16,7 @@ IMAGE_BOOT_FILES ?= "${SPL_BINARYNAME} u-boot.${UBOOT_SUFFIX} tiboot3-am64x_sr2-
 require conf/machine/include/am64xx.inc
 
 # Available variants: am64x-gp am64x_sr2-hs-fs am64x_sr2-hs
-SYSFW_DEFAULT_VARIANT ?= "am64x-gp"
+SYSFW_DEFAULT_VARIANT ?= "am64x_sr2-hs-fs"
 
 # All 3 variants are installed to the boot partition
 # The default variant is additionally installed as tiboot3.bin
