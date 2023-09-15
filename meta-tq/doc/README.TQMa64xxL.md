@@ -42,6 +42,7 @@ _Kernel:_
 * On variants with only a single R5 core (TQMa6412L, TQMa6411L), booting
   R5 programs and communicating with them using the Linux remoteproc/rpmsg
   drivers is currently unsupported.
+* The AM64x currently doesn't support Suspend-to-RAM
 * TQMa64xxL *REV.010x only*:
   * There is an address conflict on I2C addresses 0x51 and 0x54. Access to the
     EEPROMs and the RTC may not work correctly.
