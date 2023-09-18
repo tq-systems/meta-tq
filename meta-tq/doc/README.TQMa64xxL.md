@@ -272,6 +272,25 @@ to control the filenames requested via TFTP.
 Kernel and Device Trees are part of the root filesystem. They cannot be updated
 from U-Boot separately from the filesystem.
 
+### M4/R5 cores
+
+The M4 and R5 example programs provided by TI can be run out-of-the-box using
+the Linux RemoteProc driver. When a program is found at the location specified
+in the Device Tree, it will be started on the corresponding core automatically
+during Linux boot. The TQ BSP images for the MBaX4XxL contain a simple RPMsg IPC
+echo test program.
+
+The TQMa64xxL DTSI defines a number of reserved memory regions that are used by
+by these progams and the other the M4/R5 examples provided with the AM64x MCU+
+SDK (per-core `main_r5fss_*_memory_region` and `mcu_m4fss_*_memory_region`, as
+well as the common `rtos_ipc_memory_region` used for inter-processor
+communication).
+
+When running M4/R5 programs with a different memory layout, the reserved regions
+must be adjusted accordingly in the board DTS. When the MCU cores are unused, it
+is also possible to disable the reserved regions using `status = "disabled"` to
+free up the memory for use by Linux.
+
 ## Support Wiki
 
 See [TQ Support Wiki for TQMa64xxL](https://support.tq-group.com/en/arm/tqma64xxl)
