@@ -11,6 +11,7 @@ UBOOT_EXTLINUX_FDT ??= ""
 UBOOT_EXTLINUX_FDTDIR ??= "../"
 UBOOT_EXTLINUX_KERNEL_IMAGE ??= "../${KERNEL_IMAGETYPE}"
 UBOOT_EXTLINUX_KERNEL_ARGS ??= "rootwait rw"
+UBOOT_EXTLINUX_KERNEL_ARGS_EXTRA ??= "${bootargs_extra}"
 
 UBOOT_EXTLINUX_LABELS ??= "default"
 UBOOT_EXTLINUX_MENU_DESCRIPTION_default ??= "${DISTRO_NAME}"
@@ -77,7 +78,9 @@ python do_create_extlinux_config() {
             kernel_args = getLabelVar(d, label, 'KERNEL_ARGS')
             root = getLabelVar(d, label, 'ROOT')
             extlinux_console = getLabelVar(d, label, 'CONSOLE')
-            cfgfile.write('\tAPPEND %s %s %s\n' % (kernel_args, root, extlinux_console))
+            kernel_args_extra = getLabelVar(d, label, 'KERNEL_ARGS_EXTRA')
+            cfgfile.write('\tAPPEND %s %s %s %s\n' %
+                (kernel_args, root, extlinux_console, kernel_args_extra))
 }
 
 UBOOT_EXTLINUX_VARS = "MENU_DESCRIPTION KERNEL_IMAGE FDT FDTDIR INITRD KERNEL_ARGS ROOT CONSOLE"
