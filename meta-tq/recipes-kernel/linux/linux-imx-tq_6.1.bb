@@ -33,15 +33,19 @@ SRC_URI:aarch64:imx-nxp-bsp = "\
     file://audio-support.cfg \
     file://bpf-support.cfg \
     file://display-support.cfg \
+    file://enable-led-features.cfg \
     file://features/debug.cfg \
     file://features/devicetree.cfg \
+    file://gpio-enablement.cfg \
     file://imx8m-platform-support.cfg \
     file://imx93-platform-support.cfg \
     file://input-devices.cfg \
     file://local-version.cfg \
     file://network-support.cfg \
     file://nonimx-drm-removal.cfg \
+    file://optimize-filesystem-selection.cfg \
     file://quectel-wwan-support.cfg \
+    file://regulator-support.cfg \
     file://rfkill-support.cfg \
     file://rtc.cfg \
     file://sdma.cfg \
