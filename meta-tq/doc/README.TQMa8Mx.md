@@ -66,57 +66,57 @@ _MBa8x HW Rev.020x/30x only / TQMa8Mx HW Rev.020x only_
 
 _MBa8x HW Rev.020x/30x only_
 
-| Feature                                          |                    |
-| :----------------------------------------------- | :----------------: |
-| RAM configs                                      |      1,2,4 GiB     |
-| CPU variants                                     | i.MX8MQ / i.MX8MQL |
-| Fuses / OCRAM                                    |          x         |
-| speed grade / temperature grade detection        |          x         |
-| DVFS (CPU overdrive mode)                        |          x         |
-| suspend (deep / s2idle)                          |          x         |
-| **UART**                                         |                    |
-| console on UART3 (via USB / UART converter)      |          x         |
-| 2 x UART via pin head or X15                     |          x         |
-| 1 x UART via mikroBUS                            |                    |
-| **GPIO**                                         |                    |
-| LED                                              |          x         |
-| Button                                           |          x         |
-| HOG                                              |          x         |
-| **I2C**                                          |                    |
-| EEPROMs                                          |          x         |
-| PMIC                                             |          x         |
-| GPIO expanders                                   |          x         |
-| RTC (with wakealarm)                             |          x         |
-| Temperature Sensors                              |          x         |
-| **ENET**                                         |                    |
-| GigE via Phy on MBa8Mx                           |          x         |
-| **USB**                                          |                    |
-| USB 3.0 Host / Hub                               |          x         |
-| USB DRD (USB 2.0 DR only, Cable Detect, VBUS)    |          x         |
-| **QSPI NOR**                                     |                    |
-| Read with 1-1-4 SDR                              |                    |
-| PP / Erase with 1-1-1 SDR                        |                    |
-| **GRAPHICS**                                     |                    |
-| GPU                                              |          x         |
-| VPU                                              |          x         |
-| **Display**                                      |                    |
-| LVDS on DCSS                                     |          x         |
-| LVDS on eLCDIF                                   |          x         |
-| HDMI                                             |          x         |
-| **Audio**                                        |                    |
-| HDMI                                             |          x         |
-| Codec (Line IN / Line OUT)                       |          x         |
-| **PCIe**                                         |                    |
-| mini-PCIe on MBa8Mx                              |          x         |
-| PCIe slot with Network Card                      |          x         |
-| **SPI**                                          |                    |
-| 2 x via spidev in userland                       |          x         |
-| **Cortex M4**                                    |                    |
-| examples running from TCM                        |          x         |
-| use UART4 as debug console                       |          x         |
-| **MIPI CSI (see Issues section)**                |                    |
-| Gray with Vision Components GmbH camera (Sensor OV9281) |        x    |
-| Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |   x    |
+| Feature                                                      |                    |
+|:-------------------------------------------------------------|:------------------:|
+| RAM configs                                                  |     1,2,4 GiB      |
+| CPU variants                                                 | i.MX8MQ / i.MX8MQL |
+| Fuses / OCRAM                                                |         x          |
+| speed grade / temperature grade detection                    |         x          |
+| DVFS (CPU overdrive mode)                                    |         x          |
+| suspend (deep / s2idle)                                      |         x          |
+| **UART**                                                     |                    |
+| console on UART3 (via USB / UART converter)                  |         x          |
+| 2 x UART via pin head or X15                                 |         x          |
+| 1 x UART via mikroBUS                                        |                    |
+| **GPIO**                                                     |                    |
+| LED                                                          |         x          |
+| Button                                                       |         x          |
+| HOG                                                          |         x          |
+| **I2C**                                                      |                    |
+| EEPROMs                                                      |         x          |
+| PMIC                                                         |         x          |
+| GPIO expanders                                               |         x          |
+| RTC (with wakealarm)                                         |         x          |
+| Temperature Sensors                                          |         x          |
+| **ENET**                                                     |                    |
+| GigE via Phy on MBa8Mx                                       |         x          |
+| **USB**                                                      |                    |
+| USB 3.0 Host / Hub                                           |         x          |
+| USB DRD (USB 2.0 DR only, Cable Detect, VBUS)                |         x          |
+| **QSPI NOR**                                                 |                    |
+| Read with 1-1-4 SDR                                          |                    |
+| PP / Erase with 1-1-1 SDR                                    |                    |
+| **GRAPHICS**                                                 |                    |
+| GPU                                                          |         x          |
+| VPU                                                          |         x          |
+| **Display**                                                  |                    |
+| LVDS on DCSS                                                 |         x          |
+| LVDS on eLCDIF                                               |         x          |
+| HDMI                                                         |         x          |
+| **Audio**                                                    |                    |
+| HDMI                                                         |         x          |
+| Codec (Line IN / Line OUT)                                   |         x          |
+| **PCIe**                                                     |                    |
+| mini-PCIe on MBa8Mx                                          |         x          |
+| PCIe slot with Network Card                                  |         x          |
+| **SPI**                                                      |                    |
+| 2 x via spidev in userland                                   |         x          |
+| **Cortex M4**                                                |                    |
+| examples running from TCM                                    |         x          |
+| use UART4 as debug console                                   |         x          |
+| **MIPI CSI (see Issues section)**                            |                    |
+| Gray with Vision Components GmbH camera (Sensor OV9281)      |         x          |
+| Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |         x          |
 
 ## TODO
 
