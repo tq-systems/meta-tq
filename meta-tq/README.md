@@ -75,11 +75,12 @@ For machines based on following CPU families from TI usage of meta-ti
 is _mandatory_ - see [table](#supported-machines)
 
 * AM57xx
+* AM62xx
 * AM64xx
 
 URI: https://git.yoctoproject.org/git/meta-ti  
 branch: kirkstone  
-revision: at least commit 38941472e1e3 ("meta-ti-bsp: add BeagleBone AI-64 support")  
+revision: at least commit 9efb0c6fc4f5 (tag 09.01.00.004)  
 layers: meta-ti-bsp  
 
 If using meta-ti, meta-arm is also needed due to dependencies of meta-ti.
@@ -225,6 +226,8 @@ Support for the following machines is contained in this version:
 | [y]    | AM355x           | TQMa335x\[L\]            | MBa335x        | tqma355x-mba335x             | TQMa335x[L] HW REV.020x with 256/512 MiB RAM / MBa335x HW REV.020x |
 | [b]    | AM57\[1,2,4\]8   | TQMa57\[1,2,4\]8         | MBa57xx        | tqma57xx-mba57xx             | TQMa57[1,2,4]8 / MBa57xx |
 | [b]    | AM5748           | TQMa5748 ECC             | MBa57xx        | tqma57xx-ecc-mba57xx         | TQMa5748 with ECC / MBa57xx |
+| [y]    | AM6234           | TQMa6234                 | MBa62xx        | tqma62xx-mba62xx             | TQMa6234 HW REV.010x, MBa62xx HW REV.010x |
+| [y]    | AM6254           | TQMa6254                 | MBa62xx        | tqma62xx-mba62xx             | TQMa6254 HW REV.010x, MBa62xx HW REV.010x |
 | [y]    | AM6411           | TQMa6411L                | MBaX4XxL       | tqma64xxl-mbax4xxl           | TQMa6411L HW REV.010x / 020x, MBaX4XxL HW REV.010x / 020x |
 | [y]    | AM6442           | TQMa6442L                | MBaX4XxL       | tqma64xxl-mbax4xxl           | TQMa6442L HW REV.010x / 020x, MBaX4XxL HW REV.010x / 020x |
 | [y]    | T1040            | TQMT1040                 | STKT104x       | tqmt1040-64bit-stkt104x      | TQMT1040 HW REV.020x with 2GiB RAM |
@@ -283,6 +286,7 @@ Under the given links SOM specific information can be found:
 * [TQMa93\[3,5\]\[1,2\]LA](doc/README.TQMa93xx.md)
 * [TQMA335x\[L\]](doc/README.TQMa335x.md)
 * [TQMA57xx](doc/README.TQMa57xx.md)
+* [TQMA62xx](doc/README.TQMa62xx.md)
 * [TQMA64xxL](doc/README.TQMa64xxL.md)
 * [TQMLS1012AL](doc/README.TQMLS1012AL.md)
 * [TQMLS102\[0,1\]A](doc/README.TQMLS102xa.md)
