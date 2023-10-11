@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 require linux-imx-tq-common.inc
 
 KBRANCH = "TQMa-fslc-6.1-2.0.x-imx"
-SRCREV = "8d94cacbaf54110294b7fd583408db27b3d42c59"
+SRCREV = "a11b54a93196c7c4a86053774d0e022881221a7c"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "6.1"
@@ -63,6 +63,7 @@ SRC_URI:append = " \
 
 COMPATIBLE_MACHINE = "^("
 COMPATIBLE_MACHINE .= "|tqma8mpxl"
+COMPATIBLE_MACHINE .= "|tqma8mq"
 COMPATIBLE_MACHINE .= "|tqma8mxml"
 COMPATIBLE_MACHINE .= "|tqma8mxnl"
 COMPATIBLE_MACHINE .= "|mx93-nxp-bsp"
