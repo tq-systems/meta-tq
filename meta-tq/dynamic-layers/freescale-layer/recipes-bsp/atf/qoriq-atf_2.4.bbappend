@@ -56,7 +56,7 @@ do_compile:append () {
 
             for bootmode in ${BOOTTYPE}; do
                 if [ -n "${rcw_bootmode}" ] && [ "${rcw_bootmode}" != "${bootmode}" ]; then
-	            continue
+                    continue
                 fi
                 make V=1 realclean
                 oe_runmake V=1 pbl PLAT=${plat} BOOT_MODE=${bootmode} RCW=${DEPLOY_DIR_IMAGE}/rcw/${RCW_FOLDER}/${rcw_file}${RCW_SUFFIX}
