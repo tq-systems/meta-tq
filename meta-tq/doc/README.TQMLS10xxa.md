@@ -23,9 +23,9 @@
 
 ### Supported Hardware:
 
- * TQMLS1043A with 1 GiB / 2 GiB RAM, HW REV.020x on MBLS10xxa, HW REV.020x
- * TQMLS1046A with 2 GiB / 8 GiB RAM, HW REV.020x on MBLS10xxa, HW REV.020x
- * TQMLS1088A with 2 GiB RAM, HW REV.020x on MBLS10xxa HW REV.020x
+ * TQMLS1043A with 1 GiB / 2 GiB RAM, HW REV.020x/030x on MBLS10xxa, HW REV.020x
+ * TQMLS1046A with 2 GiB / 4 GiB / 8 GiB RAM, HW REV.020x/030x on MBLS10xxa, HW REV.020x
+ * TQMLS1088A with 2 GiB / 4 GiB RAM, HW REV.020x/030x on MBLS10xxa HW REV.020x
 
 ## Known Issues
 
@@ -70,13 +70,8 @@ SD-Card on MBLS10xxA is accessible.
 
 ### TQMLS1043A
 * atf/
-  * 1GiB
-	* fip_uboot.bin: U-Boot
-	* bl2_[sd|qspi].pbl: Boot-media dependend Primary Boot Loader with RCW
-  * 2GiB
-	* fip_uboot_tqmls1043a_2gb.bin: U-Boot
-	* bl2_[sd|qspi]_tqmls1043a_2gb.pbl: Boot-media dependend Primary Boot
-	  Loader with RCW
+  * fip_uboot.bin: U-Boot
+  * bl2_[sd|qspi].pbl: Boot-media dependent Primary Boot Loader with RCW
 * atf/variants/: contains RCW-PBL for all supported RCW serdes-configurations
   and all supported boot sources.
 * rcw/: different rcw configurations to use with atf-recipe
@@ -90,12 +85,8 @@ SD-Card on MBLS10xxA is accessible.
 
 ### TQMLS1046A
 * atf/
-  * 2GiB
-    * fip_uboot.bin: U-Boot
-    * bl2_[sd|qspi].pbl: Boot-media dependend Primary Boot Loader with RCW
-  * 8GiB
-    * fip_uboot_tqmls1046a_8gb.bin: U-Boot
-    * bl2_[sd|qspi]_tqmls1046a_8gb.pbl: Boot-media dependend Primary Boot Loader with RCW
+  * fip_uboot.bin: U-Boot
+  * bl2_[sd|qspi].pbl: Boot-media dependent Primary Boot Loader with RCW
 * atf/variants/: contains RCW-PBL for all supported RCW serdes-configurations
   and all supported boot sources.
 * rcw/: different rcw configurations to use with atf-recipe
@@ -110,7 +101,7 @@ SD-Card on MBLS10xxA is accessible.
 ### TQMLS1088a
 * atf/
   * fip_uboot.bin: U-Boot
-  * bl2_[auto|qspi].pbl: Boot-media dependend Primary Boot Loader with RCW
+  * bl2_[auto|qspi].pbl: Boot-media dependent Primary Boot Loader with RCW
 * atf/variants/: contains RCW-PBL for all supported RCW serdes-configurations
   and all supported boot sources.
 * rcw/: different rcw configurations to use with atf-recipe
