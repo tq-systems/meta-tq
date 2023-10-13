@@ -209,10 +209,17 @@ Support for the following machines is contained in this version:
 | [y]    | LS1012A          | TQMLS1012AL              | MBLS1012AL     | tqmls1012al-mbls1012al       | TQMLS1012AL HW REV.010x ... 020x / 512 MiB / 1GiB RAM / MBLS1012AL HW REV.020x |
 | [p]    | LS10\[17,28\]A   | TQMLS10\[17,28\]A        | MBLS1028A      | tqmls1028a-mbls1028a         | TQMLS1017A / TQMLS1028A HW REV.010x ... 030x, 1 GiB / 4 GiB RAM, MBLS1028A HW REV.010x |
 | [p]    | LS10\[17,28\]A   | TQMLS10\[17,28\]A        | MBLS1028A-IND  | tqmls1028a-mbls1028a-ind     | TQMLS1017A / TQMLS1028A HW REV.010x ... 030x, 1 GiB / 4 GiB RAM, MBLS1028A-IND HW REV.010x |
-| [p]    | LS1043A          | TQMLS1043A               | MBLS10xxA      | tqmls1043a-mbls10xxa         | TQMLS1043a, 1 GiB / 2 GiB RAM, HW REV.020x / MBLS10xxa, HW REV.020x |
-| [p]    | LS1046A          | TQMLS1046A               | MBLS10xxA      | tqmls1046a-mbls10xxa         | TQMLS1046a, 2 GiB / 8 GiB RAM, HW REV.020x / MBLS10xxa, HW REV.020x |
-| [p]    | LS1046A          | TQMLS1046A               | MBLS10xxA      | tqmls1046a-no-ecc-mbls10xxa  | TQMLS1046a, 2 GiB / 8 GiB RAM without ECC, HW REV.020x / MBLS10xxa, HW REV.020x
-| [p]    | LS1088A          | TQMLS1088A               | MBLS10xxA      | tqmls1088a-mbls10xxa         | TQMLS1088a / MBLS10xxa |
+| [p]    | LS1043A          | TQMLS1043A               | MBLS10xxA      | tqmls1043a-1gb-mbls10xxa     | TQMLS1043a, 1 GiB, HW REV.020x / MBLS10xxa, HW REV.020x |
+| [p]    | LS1043A          | TQMLS1043A               | MBLS10xxA      | tqmls1043a-2gb-mbls10xxa     | TQMLS1043a, 2 GiB, HW REV.020x ... 030x / MBLS10xxa, HW REV.020x |
+| [p]    | LS1043A          | TQMLS1043A               | MBLS10xxA      | tqmls1043a-2gb-rev0300-mbls10xxa| TQMLS1043a, 2 GiB, HW REV.020x ... 030x / MBLS10xxa, HW REV.020x |
+| [p]    | LS1046A          | TQMLS1046A               | MBLS10xxA      | tqmls1046a-2gb-mbls10xxa     | TQMLS1046a, 2 GiB, HW REV.020x / MBLS10xxa, HW REV.020x |
+| [p]    | LS1046A          | TQMLS1046A               | MBLS10xxA      | tqmls1046a-4gb-mbls10xxa     | TQMLS1046a, 4 GiB, HW REV.030x / MBLS10xxa, HW REV.020x |
+| [p]    | LS1046A          | TQMLS1046A               | MBLS10xxA      | tqmls1046a-8gb-mbls10xxa     | TQMLS1046a, 8 GiB, HW REV.020x / MBLS10xxa, HW REV.020x |
+| [p]    | LS1046A          | TQMLS1046A               | MBLS10xxA      | tqmls1046a-2gb-noecc-mbls10xxa | TQMLS1046a, 2 GiB no ECC, HW REV.020x / MBLS10xxa, HW REV.020x |
+| [p]    | LS1046A          | TQMLS1046A               | MBLS10xxA      | tqmls1046a-4gb-noecc-mbls10xxa | TQMLS1046a, 4 GiB no ECC, HW REV.030x / MBLS10xxa, HW REV.020x |
+| [p]    | LS1046A          | TQMLS1046A               | MBLS10xxA      | tqmls1046a-8gb-noecc-mbls10xxa | TQMLS1046a, 8 GiB no ECC, HW REV.020x / MBLS10xxa, HW REV.020x |
+| [p]    | LS1088A          | TQMLS1088A               | MBLS10xxA      | tqmls1088a-2gb-mbls10xxa     | TQMLS1088a, 2 GiB, HW REV.020x ... REV.030x / MBLS10xxa |
+| [p]    | LS1088A          | TQMLS1088A               | MBLS10xxA      | tqmls1088a-4gb-mbls10xxa     | TQMLS1088a, 4 GiB, HW REV.020x ... REV.030x / MBLS10xxa |
 | [y]    | LS102\[0,1\]A    | TQMLS102\[0,1\]A         | MBLS102xA      | tqmls102xa-mbls102xa         | TQMLS102\[0,1\]A HW REV.020x / MBLS102xA HW REV.020x |
 | [y]    | LX2\[16,08\]0A   | TQMLX2\[16,08\]0A        | MBLX2160A      | tqmlx2160a-mblx2160a         | TQMLX2\[16,08\]0A HW REV.010x with 32 GiB / 16 Gib RAM / MBLX2160A HW REV.010x and REV.020x |
 | [y]    | AM355x           | TQMa335x\[L\]            | MBa335x        | tqma355x-mba335x             | TQMa335x[L] HW REV.020x with 256/512 MiB RAM / MBa335x HW REV.020x |
