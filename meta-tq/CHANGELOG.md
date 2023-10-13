@@ -9,6 +9,18 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* TQMLS10xxA
+  * Added support for REV.030X with new memory variants
+
+### Fixed
+
+* TQMLS1088A U-Boot:
+  * Fixed netboot command
+  * Fixed VID Core Voltage initialization
+  * Fixed memory passed to OS
+
 ## kirkstone.TQ.ARM.BSP.0010
 
 ### Module BSP Revisions
