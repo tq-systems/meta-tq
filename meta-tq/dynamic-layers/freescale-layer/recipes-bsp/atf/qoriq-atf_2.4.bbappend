@@ -13,16 +13,14 @@ PLATFORM:tqmls1028a = "tqmls1028a_1gb"
 PLATFORM_ADDITIONAL_TARGET:tqmls1028a = "tqmls1028a_4gb"
 
 RCW_FOLDER:tqmls1043a = "tqmls1043a"
-PLATFORM:tqmls1043a = "tqmls1043a"
-PLATFORM_ADDITIONAL_TARGET:tqmls1043a = "tqmls1043a_2gb"
+PLATFORM:tqmls1043a = "${TQ_ATF_VARIANT}"
 
 RCW_FOLDER:tqmls1046a = "tqmls1046a"
-PLATFORM:tqmls1046a = "tqmls1046a"
-PLATFORM_ADDITIONAL_TARGET:tqmls1046a = "tqmls1046a_8gb"
+PLATFORM:tqmls1046a = "${TQ_ATF_VARIANT}"
 
 RCW_FOLDER:tqmls1088a = "tqmls1088a"
 RCW_SUFFIX:tqmls1088a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
-PLATFORM:tqmls1088a = "tqmls1088a"
+PLATFORM:tqmls1088a = "${TQ_ATF_VARIANT}"
 
 RCW_FOLDER:tqmlx2160a = "tqmlx2160a"
 RCW_SUFFIX:tqmlx2160a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
