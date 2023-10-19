@@ -6,7 +6,7 @@
 
 ### Supported Hardware:
 
-* TQMa6442L: Module revisions REV.010x / 020x
+* TQMa6442L, TQMa6411L: Module revisions REV.010x / 020x
 * MBaX4XxL: Board revisions REV.010x / 020x
 
 ### Versions
@@ -36,6 +36,9 @@ _Kernel:_
   default pinmuxing. This also affects LED and button GPIOs. LEDs and buttons
   are working as expected on Linux.
 * There is currently no driver support for the Bluetooth module of the MBaX4XxL
+* On variants with only a single R5 core (TQMa6412L, TQMa6411L), booting
+  R5 programs and communicating with them using the Linux remoteproc/rpmsg
+  drivers is currently unsupported.
 * TQMa64xxL *REV.010x only*:
   * There is an address conflict on I2C addresses 0x51 and 0x54. Access to the
     EEPROMs and the RTC may not work correctly.
