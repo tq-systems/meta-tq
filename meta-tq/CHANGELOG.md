@@ -11,6 +11,7 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa64xxL: add support for TQMa6411L variant
 * recipes-kernel/linux: add support for TQMa7 / TQMa6 / TQMa6UL[L]x[L] with linux 6.1
 * recipes-bsp/u-boot: backport libubootenv v0.3.4 from poky / openembedded core
 * TQMT10xxA: added support for rcw tool
