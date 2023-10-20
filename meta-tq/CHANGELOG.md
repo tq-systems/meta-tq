@@ -11,63 +11,80 @@ Releases are named with the following scheme:
 
 ### Added
 
-* TQMa8MPxL / TQMa8MxML / TQMa8MxNL / TQMa8Mx:
-  * backport GPU 6.4.11.p1.2 from meta-freescale master
-  * Linux 6.1 fslc support
-* TQMa64xxL: add support for TQMa6411L variant
-* recipes-kernel/linux: add support for TQMa7 / TQMa6 / TQMa6UL[L]x[L] with linux 6.1
-* recipes-bsp/u-boot: backport libubootenv v0.3.4 from poky / openembedded core
-* TQMT10xxA: added support for rcw tool
-* TQMLS10xxA:
-  * U-Boot: Added Commands to update DPAA2 firmware files
+* TQMa8MPxL / TQMa8MxML / TQMa8MxNL / TQMa8Mx
+  * Backported GPU 6.4.11.p1.2 from meta-freescale master
+  * Added Linux 6.1 FSLC support
+* TQMa64xxL
+  * Added support for TQMa6411L variant
+* recipes-kernel/linux
+  * Added support for TQMa7 / TQMa6 / TQMa6UL[L]x[L] with linux 6.1
+* recipes-bsp/u-boot
+  * Backported libubootenv v0.3.4 from poky / openembedded core
+* TQMT10xxA
+  * Added support for rcw tool
+* TQMLS10xxA
+  * u-boot: Added Commands to update DPAA2 firmware files
   * Added config file for U-Boot env tools based on libubootenv
 
 ### Fixed
 
-* TQMa8Mx / TQMa8MxML / TQMa8MxNL / TQMa8MPxL: compatibility for TF-A >= 2.6
-  for Cortex-M demos. Older version does not boot with new TF-A
-* TQMa8MPxL: fix CMA allocation in vendor kernel based on 5.15. Removed unsused
-  reserved memory allocated in SOC part of DT.
-* TQMa93: add missing settings for `SERIAL_CONSOLES`. This make busybox init
-  working.
-* TQMa8: fix UBI image creation based on `MACHINE_FEATURE` containing `ubi`.
-* TQMLS1088A: U-Boot: fix netboot command
+* TQMa8Mx / TQMa8MxML / TQMa8MxNL / TQMa8MPxL
+  * tqma8-cortexm-demos: Fixed compatibility with TF-A >= 2.6
+
+    Older versions do not boot with the new TF-A.
+* TQMa8MPxL
+  * Fixed CMA allocation in vendor kernel based on 5.15. Removed
+    unsused reserved memory allocated in SOC part of DT.
+* TQMa93
+  * Added missing settings for `SERIAL_CONSOLES`. This makes busybox init work.
+* TQMa8
+  * Fixed UBI image creation based on `MACHINE_FEATURE` containing `ubi`.
+* TQMLS1088A
+  * u-boot: Fixed netboot command
 
 ### Changed
 
-* TQMa64xxL: Change default sysfw variant to HS-FS
+* TQMa64xxL
+  * Changed default sysfw variant to HS-FS
 
-  All series variants of the AM64x are HS-FS, the GP variants only exist
-  as prototypes. Change the default sysfw variant for future BSP releases,
-  so our images will work on series modules without changes.
+    All series variants of the AM64x are HS-FS, the GP variants only exist
+    as prototypes. Change the default sysfw variant for future BSP releases,
+    so our images will work on series modules without changes.
 
-  For prototype modules with AM64x SR1.0 or SR2.0 GP, the following
-  options are available:
+    For prototype modules with AM64x SR1.0 or SR2.0 GP, the following
+    options are available:
 
-  * Use the old BSP release kirkstone.TQMa64xxL.BSP.SW.0004
-  * Replace tiboot3.bin with tiboot3-am64x-gp-evm.bin in the boot partition
-  * Change `SYSFW_DEFAULT_VARIANT` in the machine configuration or local.conf
-* WKS: rewrite WKS files
-  * use `--offset` for all items with fixed placement instead of `--align`
-  * use `--fixed-size` only where needed, relax boot partition size
-  * start preparation for U-Boot initial environment in wic images
-* TQMa93: update to use TF-A based on NXP vendor fork lf_v2.8
-* TQMa93 / TQMa8 /  TQMa7 / TQMa6 /TQMa6UL[L]x[L]: improve machine definition
-  * use `imx-base.inc` from meta-frescale identical as to the machines defined
-    in meta-freescale
-  * adjust `MACHINE_FEATURE` list
-  * remove superfluos assignment to `DEFAULTTUNE` with its default value
-* TQMa8:
-  * convert U-Boot fw_env.config to new libubootenv yaml format to support env
-    on all boot devices
-  * switch to use libubootenv instead of U-Boot internal env tools.
-* recipes-bsp/u-boot: allow generation and installment of initial environment for
-  all supported U-Boot variants newer than v2019.04.
-* TQMLS1028A: RCW: add fixes for the SATA erratum A-010554 and the PCIe errata
-  A-008851, A-010477 and A-009531
-* TQMLX2160A: RCW: add fixes for the SATA erratum A-010554, the PCIe errata
-  A-050479, A-009531, A-008851 and the SoC erratum A-050426
-* TQMLS10xxA: Linux: Removed unsupported Power Management modes
+    * Use the old BSP release kirkstone.TQMa64xxL.BSP.SW.0004
+    * Replace tiboot3.bin with tiboot3-am64x-gp-evm.bin in the boot partition
+    * Change `SYSFW_DEFAULT_VARIANT` in the machine configuration or local.conf
+* WKS
+  * Changed to use `--offset` for all items with fixed placement instead of
+    `--align`
+  * Changed to use `--fixed-size` only where needed, relaxed boot partition size
+  * Started preparation for U-Boot initial environment in WIC images
+* TQMa93
+  * Updated to use TF-A based on NXP vendor fork lf_v2.8
+* TQMa93 / TQMa8 /  TQMa7 / TQMa6 /TQMa6UL[L]x[L]
+  * Improved machine definition
+    * Changed to use `imx-base.inc` from meta-frescale like the machines defined
+      in meta-freescale
+    * Adjusted `MACHINE_FEATURE` list
+    * Removed redundant default value assignment to `DEFAULTTUNE`
+* TQMa8
+  * Converted U-Boot fw_env.config to new libubootenv yaml format to support
+    environment on all boot devices
+  * Switched to use libubootenv instead of U-Boot internal env tools
+* recipes-bsp/u-boot
+  * Changed to allow generation and installation of initial environment for
+    all supported U-Boot variants newer than v2019.04
+* TQMLS1028A
+  * rcw: Added fixes for the SATA erratum A-010554 and the PCIe errata
+    A-008851, A-010477 and A-009531
+* TQMLX2160A
+  * rcw: Added fixes for the SATA erratum A-010554, the PCIe errata A-050479,
+  A-009531, A-008851 and the SoC erratum A-050426
+* TQMLS10xxA
+  * linux: Removed unsupported Power Management modes
 
 ### Removed
 
