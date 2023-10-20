@@ -309,7 +309,7 @@ Releases are named with the following scheme:
     due to SPI IP and DMA limitation
 * linux-firmware: fix for multilib configurations
 
-## Removed
+### Removed
 
 * Adjust and mostly remove recipes ported from meta-imx for i.MX93 support. These
   are ported to meta-freescale as of commit 642cf7f2 ("Merge pull request #1433
@@ -841,7 +841,7 @@ __Start of porting to honister__
   to work also with newer kernel versions. In newer kernel node naming was
   changed according to device tree specification.
 
-## Removed
+### Removed
 
 * linux-imx-tq_5.4: remove support for i.MX8 based machines
 
@@ -868,14 +868,14 @@ __Start of porting to honister__
 
 ## hardknott.TQMa8.BSP.SW.0081
 
-## Changed
+### Changed
 
 * doc: add missing links to TQ-Embedded Wiki
 * doc: updates for TQMa8Mx / TQMa8MPxL / TQMa8MxNL
 
 ## hardknott.TQMa8.BSP.SW.0080
 
-## Changed
+### Changed
 
 * rework systemd-machine-units bbappend (add simplification from branch
   zeus-tqma8, adapt to newer systemd version with CAN FD support)
@@ -885,7 +885,7 @@ __Start of porting to honister__
 * rename atf recipe for LS based boards to qoriq-atf (follows changes in meta-freescale)
 * update sub modules to support hardknott
 
-## Added
+### Added
 
 * TQMa8Mx/TQMa8MxML/TQMa8MxNL/TQMa8x/TQMa8MPxL: linux 5.10 support based on
   linux-fslc 5.10 + imx
@@ -896,13 +896,13 @@ __Start of porting to honister__
 * ubi as MACHINE_FEATURE if \[Q\]SPI NOR is supported by machine
 * gitpkgv-nonexact.bbclass
 
-## Fixed
+### Fixed
 
 * weak assignments in machine files wherever possible to allow overwriting for
   custom mainboards or project specific tailoring
 * package dependencies for board specific firmware files in imx-boot-tq
 
-## Removed
+### Removed
 
 * preview support for PowerPC machines
 
