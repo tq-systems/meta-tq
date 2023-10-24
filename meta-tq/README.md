@@ -294,8 +294,3 @@ Under the given links SOM specific information can be found:
 * [TQMLS1043/TQMLS1046A/TQMLS1088A](doc/README.TQMLS10xxa.md)
 * [TQMLX2160A](doc/README.tqmlx2160a-mblx2160a.md)
 * [TQMT10xx](doc/README.TQMT10xx.md)
-
-### Known Issues
-
-- `u-boot-fw-utils` is not buildable currently because it uses the U-Boot Mainline
-repository. To make it buildable a bbappend which changes SRC_URI would be necessary.
