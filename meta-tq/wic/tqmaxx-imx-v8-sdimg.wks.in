@@ -15,15 +15,11 @@
 #                                                            8MiB + 64 MiB * overhead-factor
 #                                                            (default: `--overhead-factor=1.3`),
 #                                                            alignment 4 MiB (managed NAND)
-#
-# exact layout with U-Boot env is disabled until
-# https://lists.openembedded.org/g/openembedded-core/message/186361 is applied
 
 part u-boot --source rawcopy --sourceparams="file=${MACHINE_WKS_BOOTSTREAM}" --no-table --offset ${IMX_BOOT_SEEK}K
-# part u-boot-env --no-table --offset 4096K --fixed-size 32K
-# part u-boot-envr --no-table --offset 4128K --fixed-size 32K
-# part resvd --no-table --offset 4160K --fixed-size 4032K
-part resvd --no-table --offset 4M --fixed-size 4M
+part u-boot-env --no-table --offset 4096K --fixed-size 32K
+part u-boot-envr --no-table --offset 4128K --fixed-size 32K
+part resvd --no-table --offset 4160K --fixed-size 4032K
 part /boot --source bootimg-partition --fstype=vfat --label boot --active --offset 8M --size 64M
 part / --source rootfs --fstype=ext4 --label root --align 4096
 

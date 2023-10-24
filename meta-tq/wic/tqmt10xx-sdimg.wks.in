@@ -14,11 +14,9 @@
 #                                              |
 #                                             16MiB + 32 MiB * overhead-factor
 #                                             (default: `--overhead-factor=1.3`),
-# exact layout with U-Boot env is disabled until
-# https://lists.openembedded.org/g/openembedded-core/message/186361 is applied
 
 part u-boot --source rawcopy --sourceparams="file=u-boot.bin-sdcard" --no-table --offset 4K --fixed-size 1020K
-# part uboot-env --no-table --offset 1024K --fixed-size 16K
+part uboot-env --no-table --offset 1024K --fixed-size 16K
 part fman-ucode --source rawcopy --sourceparams="file=${FMAN_UCODE}" --no-table --offset 1040K --fixed-size 15344K
 part /boot --source bootimg-partition --fstype=vfat --label boot --active --offset 16M --size 32M
 part / --source rootfs --fstype=ext4 --label root --align 4096
