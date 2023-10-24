@@ -11,6 +11,9 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa8MPxL / TQMa8MxML / TQMa8MxNL / TQMa8Mx:
+  * backport GPU 6.4.11.p1.2 from meta-freescale master
+  * Linux 6.1 fslc support
 * TQMa64xxL: add support for TQMa6411L variant
 * recipes-kernel/linux: add support for TQMa7 / TQMa6 / TQMa6UL[L]x[L] with linux 6.1
 * recipes-bsp/u-boot: backport libubootenv v0.3.4 from poky / openembedded core
@@ -21,6 +24,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TQMa8Mx / TQMa8MxML / TQMa8MxNL / TQMa8MPxL: compatibility for TF-A >= 2.6
+  for Cortex-M demos. Older version does not boot with new TF-A
 * TQMa8MPxL: fix CMA allocation in vendor kernel based on 5.15. Removed unsused
   reserved memory allocated in SOC part of DT.
 * TQMa93: add missing settings for `SERIAL_CONSOLES`. This make busybox init
