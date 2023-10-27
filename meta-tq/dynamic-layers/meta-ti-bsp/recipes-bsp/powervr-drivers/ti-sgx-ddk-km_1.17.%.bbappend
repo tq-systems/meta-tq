@@ -1,16 +1,17 @@
-TI_SGX_DDK_KM_KERNVER ??= "5.4"
-OVERRIDES =. "ti-sgx-ddk-km-${TI_SGX_DDK_KM_KERNVER}:"
+# If the machine does not set TI_SGX_DDK_KM_KERNVER to 5.4 or 5.10, the
+# upstream recipe from meta-ti is used
+TI_SGX_DDK_KM_KERNVER ??= ""
 
-FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}/linux-${TI_SGX_DDK_KM_KERNVER}:"
+# Overridden by our recipe for legacy kernels to disarm the SkipRecipe from
+# this .bbappend
+TI_SGX_DDK_KM_LEGACY_RECIPE ??= "0"
 
-SRC_URI:append:ti-sgx-ddk-km-5.4 = "\
-    file://0001-ti-sgx-ddk-km-properly-handle-more-OE-YP-compiler-pr.patch \
-    file://0001-pvr_linux_fence-enable-unconditional-PVR_BUILD_FOR_R.patch \
-"
-SRC_URI:append:ti-sgx-ddk-km-5.10 = "\
-    file://0001-ti-sgx-ddk-km-properly-handle-more-OE-YP-compiler-pr.patch \
-"
-
-MACHINE_KERNEL_PR:append:ti-sgx-ddk-km-5.4 = "v"
-BRANCH:ti-sgx-ddk-km-5.4 = "ti-img-sgx/${PV}/k5.4"
-SRCREV:ti-sgx-ddk-km-5.4 = "50c1ec2308b9f64488d252ac55d65b51a0dfe287"
+# If TI_SGX_DDK_KM_KERNVER is 5.4 or 5.10, skip the recipe from meta-ti-bsp
+# and use ours instead.
+python () {
+    if not oe.types.boolean(d.getVar('TI_SGX_DDK_KM_LEGACY_RECIPE')):
+        if d.getVar('TI_SGX_DDK_KM_KERNVER') == '5.4':
+            raise bb.parse.SkipRecipe('TI_SGX_DDK_KM_KERNVER is 5.4')
+        if d.getVar('TI_SGX_DDK_KM_KERNVER') == '5.10':
+            raise bb.parse.SkipRecipe('TI_SGX_DDK_KM_KERNVER is 5.10')
+}

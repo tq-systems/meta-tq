@@ -8,6 +8,7 @@ MACHINEOVERRIDES =. "tqma65xx:"
 PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-tq"
 PREFERRED_PROVIDER_u-boot ?= "u-boot-ti-tq"
 PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-ti-tq"
+TI_SGX_DDK_KM_KERNVER ?= "5.4"
 
 # From meta-ti-bsp: PREFERRED_PROVIDER and tuning
 require conf/machine/include/am65xx.inc
