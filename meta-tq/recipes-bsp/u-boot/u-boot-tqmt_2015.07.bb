@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
 
 SRC_URI = "${TQ_GIT_BASEURL}/uboot-tqmt.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 
-SRCREV = "ddb620b749ecfcadd2709bc0ff754808b9c5386a"
+SRCREV = "e846803ca31f2d9d25a7298fc4b13271350ab0ab"
 SRCBRANCH = "TQMTxxxx-u-boot-v2015.07"
 
 # target not supported in U-Boot before v2019.07
