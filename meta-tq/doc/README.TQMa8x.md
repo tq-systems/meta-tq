@@ -307,7 +307,7 @@ FD capable transceiver:
 
 ```
 CANIF="can[0,1]"
-ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on‍‍‍‍‍‍‍`
+ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on
 ```
 
 ### Cortex M4
