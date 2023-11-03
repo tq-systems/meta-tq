@@ -287,8 +287,8 @@ In case of problems first check the bus termination:
 
 | Interface | Connector | DIP |
 | --------- | --------- | --- |
-| CAN0      |           | S10 |
-| CAN1      |           | S11 |
+| CAN0      |    X18    | S10 |
+| CAN1      |    X19    | S11 |
 
 #### Enable without CAN-FD
 
