@@ -123,8 +123,6 @@ See top level README.md for configurations usable as MACHINE.
 * FTM
   * PWM (missing in CPU DT)
 * HDMI in
-* PWM
-  * generic PWM IP (missing in CPU DT)
 
 ## Known Issues
 
@@ -268,6 +266,18 @@ afterwards
 ```
 echo mem > /sys/power/state
 ```
+
+### PWM fan
+
+The PWM fan can optionally be used for cooling the SoC. Due to electrical connection
+the configuration value `3` for the `hwmon` attribute `pwm1_enable` is required.
+This can be achived using the following `udev` rule:
+```
+SUBSYSTEM=="hwmon", DRIVERS=="pwm-fan", ATTR{pwm1_enable}="3"
+```
+
+Refer to `Documentation/hwmon/pwm-fan.rst` in Linux source code tree for possible
+configuration values.
 
 ### Display Support
 
