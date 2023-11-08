@@ -9,6 +9,15 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Fixed
+
+* TQMa64xxL
+  * u-boot: Do not set ethXaddr variables in environment for MAC addresses that
+    are not actually assigned to the module
+
+    This affects the TQMa6411L variant, which does not support PRU Ethernet, so
+    only a total of 2 instead of 5 MAC addresses are assigned per module.
+
 ## kirkstone.TQ.ARM.BSP.0011
 
 ### Module BSP Revisions
