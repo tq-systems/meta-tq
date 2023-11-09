@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* TQMT10xx
+  * Added support for new rcw configurations
+
 ### Fixed
 
 * TQMa64xxL
@@ -17,6 +22,9 @@ Releases are named with the following scheme:
 
     This affects the TQMa6411L variant, which does not support PRU Ethernet, so
     only a total of 2 instead of 5 MAC addresses are assigned per module.
+* TQMLX2160A
+  * Fixed wrong UART Clock in U-Boot. The Linux UART driver relies on firmware
+    initialisation of UART clock. So this fixes Linux UART clock as well.
 
 ## kirkstone.TQ.ARM.BSP.0011
 
