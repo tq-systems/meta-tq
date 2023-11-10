@@ -248,7 +248,7 @@ echo mem > /sys/power/state
 Each Display can be used on its own by using the corresponding device tree.
 To allow reusage, the support for each display is separated in a dtsi fragment.
 
-| Interface       | Device tree                              | Type        ----   |
+| Interface       | Device tree                              | Type               |
 |-----------------|------------------------------------------|--------------------|
 | LVDS0           | imx8qxp-mb-smarc-2-lvds0-tm070jvhg33.dtb | Tianma TM070JVHG33 |
 | LVDS0, dual     | imx8qxp-mb-smarc-2-lvds0-g133han01.dtb   | AUO G133HAN.01     |
