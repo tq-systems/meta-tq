@@ -38,12 +38,12 @@ MACHINE_FEATURES += "\
 
 KERNEL_IMAGETYPE = "zImage"
 
-PREFERRED_PROVIDER_u-boot:mx6-generic-bsp ?= "u-boot-imx-tq"
-PREFERRED_PROVIDER_virtual/bootloader:mx6-generic-bsp ?= "u-boot-imx-tq"
-UBOOT_MAKE_TARGET:mx6-generic-bsp ?= "u-boot.imx"
+PREFERRED_PROVIDER_u-boot:mx6-generic-bsp ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader:mx6-generic-bsp ?= "u-boot-tq"
+UBOOT_MAKE_TARGET:mx6-generic-bsp ?= "u-boot-with-spl.imx"
 UBOOT_SUFFIX:mx6-generic-bsp = "imx"
-UBOOT_SUFFIX:pn-u-boot-imx-tq = "imx"
-IMX_DEFAULT_BOOTLOADER ?= "u-boot-imx-tq"
+UBOOT_BINARY:mx6-generic-bsp = "${UBOOT_MAKE_TARGET}"
+IMX_DEFAULT_BOOTLOADER ?= "u-boot-tq"
 
 # Image Options
 
