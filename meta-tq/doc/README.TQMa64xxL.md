@@ -35,7 +35,10 @@ _Kernel:_
 * *From U-Boot,* most GPIOs can't be read or set, as they are disabled in the
   default pinmuxing. This also affects LED and button GPIOs. LEDs and buttons
   are working as expected on Linux.
-* There is currently no driver support for the Bluetooth module of the MBaX4XxL
+* There is currently no driver support for the Bluetooth module of the MBaX4XxL.
+* In rare cases, the USB3 PHY initialization has been observed to fail with the
+  message "Timeout waiting for CMN ready" during boot, leaving the USB
+  controller unusable. A power cycle is necessary to recover from this state.
 * On variants with only a single R5 core (TQMa6412L, TQMa6411L), booting
   R5 programs and communicating with them using the Linux remoteproc/rpmsg
   drivers is currently unsupported.
