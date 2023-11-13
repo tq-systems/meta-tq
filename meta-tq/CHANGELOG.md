@@ -9,6 +9,18 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* TQMa335x
+  * linux-ti-tq-5.4:
+    * Configuration was cleaned up
+    * Verbose GPIO debug log messages have been disabled
+  * Added limited support for newer meta-ti versions
+    * We do not fully support current meta-ti yet (see [README.md](README.md)
+      for the supported version), but in some cases using the new version may
+      be preferable, for example to take advantage of the newer SGX GPU driver
+      userspace.
+
 ## kirkstone.TQ.ARM.BSP.0012
 
 ### Module BSP Revisions
