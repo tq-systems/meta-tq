@@ -60,7 +60,8 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 - PCIe requires a power cycle to work reliably. Asserting a POR using S9 or S10 is not sufficient.
 - eth1 (X12) uses a random MAC address. The one stored in MBa6 EEPROM is currently not used.
   (`linux-imx-tq` only)
-  Workaround: Run `setenv eth1addr ${usbethaddr}; saveenv` once in u-boot console
+  Workaround: Get MAC address from MBa6 EEPROM `i2c dev 0; i2c md 57 20 6` and
+  run `setenv eth1addr <MAC address>; saveenv` once in u-boot console
 - Backlight on parallel displays are enabled upon Power-On which might lead to random output.
   Display will be disabled during bootup and can be used normally afterwards.
 - `asound.state` is not compatible with `linux-5.4` (`linux-imx-tq` as well as `linux-tq`)
@@ -73,6 +74,10 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
   * Using dual LVDS the 2nd framebuffer needs to be unblanked first:
     * `echo 0 > /sys/class/graphics/fb2/blank`
     * `fb-test -f 2 -p 0`
+- U-Boot: FEC Ethernet port is from time to time not working after U-Boot start.
+  Another powercycle/reset or PHY software reset (`mdio write ethernet@2188000 0
+  0x8000`) is required
+- U-Boot: USB dual role port (X8) is deactivated
 
 ## Artifacts
 
@@ -84,8 +89,7 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* u-boot-${MACHINE}.imx-sd: boot stream for SD / e-MMC
-* u-boot-${MACHINE}.imx-spinor: boot stream for SPI NOR
+* u-boot-with-spl-${MACHINE}.imx-sd: boot stream for SD / e-MMC and SPI NOR
 
 ## HowTo:
 
@@ -132,7 +136,8 @@ to SPI NOR at offset 0x400:
 setenv uboot <U-Boot SPI boot image>
 tftp ${loadaddr} ${uboot}
 sf probe
-sf update ${loadaddr} 0x400 ${filesize}
+sf erase 0 0x100000
+sf write ${loadaddr} 0x400 ${filesize}
 ```
 
 #### SD / e-MMC
@@ -162,25 +167,31 @@ Not supported. Only kernel and DTB can be stored at the moment.
 To program complete system image to SD / e-MMC, write [WIC image](#artifacts)
 to SD / e-MMC at offset 0x00 / block #0
 
-### Update parts of system
+### Update bootloader
 
-To update parts of system using U-Boot / TFTP following shortcuts exist, to
-update the part on the active boot device.
+To update the bootloader of system using U-Boot / TFTP following shortcuts
+exist.
 
-```
-setenv zimage <name of linux zimage>
-run update_kernel
-```
+**Note**: Kernel and device tree are stored in the root fs and can be updated
+on the filesystem level.
 
-```
-setenv fdt_file <name of fdt image>
-run update_fdt
-```
+#### SD / e-MMC
 
 ```
 setenv uboot <name of u-boot image>
-run update_uboot
+run update_uboot_mmc
 ```
+
+#### SPI
+
+```
+setenv uboot <name of u-boot image>
+run update_uboot_spi
+```
+
+### Access U-Boot environment from Linux
+
+See [U-Boot environment tools](README.libubootenv.md).
 
 ### Dual LVDS usage
 
