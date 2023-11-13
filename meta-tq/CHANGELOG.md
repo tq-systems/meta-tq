@@ -9,8 +9,25 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQ.ARM.BSP.0013
+
+### Module BSP Revisions
+
+* kirkstone.TQMa6x.BSP.SW.0122
+
+### Added
+
+* TQMa6DL with 2 GiB
+* U-Boot v2023.04 (for TQMa6x machines)
+
 ### Changed
 
+* TQMa6x
+  * U-Boot
+    * use U-Boot SPL
+    * unify mmc and spi defconfigs
+    * use shared TQ U-Boot environment
+  * support libubootenv
 * TQMa335x
   * linux-ti-tq-5.4:
     * Configuration was cleaned up
