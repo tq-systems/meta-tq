@@ -172,6 +172,7 @@ Support for the following machines is contained in this version:
 | [y]    | i.MX6\[Q,D\]     | TQMa6\[Q,D\]             | MBa6x          | tqma6q-mba6x                 | TQMa6\[D,Q\] HW REV.010x ... 040x / MBa6x HW REV.020x                 |
 | [y]    | i.MX6\[Q,D\]     | TQMa6D/TQMa6Q            | MBa6x          | tqma6q-2gb-mba6x             | TQMa6\[D,Q\] with 2 GiB RAM HW REV.040x / MBa6x HW REV.020x           |
 | [y]    | i.MX6DL          | TQMa6DL                  | MBa6x          | tqma6dl-mba6x                | TQMa6DL HW REV.010x ... 040x / MBa6x HW REV.020x                      |
+| [y]    | i.MX6DL          | TQMa6DL                  | MBa6x          | tqma6dl-2gb-mba6x            | TQMa6DL with 2 GiB RAM HW REV.010x ... 040x / MBa6x HW REV.020x       |
 | [y]    | i.MX6S           | TQMa6S                   | MBa6x          | tqma6s-mba6x                 | TQMa6S HW REV.010x ... 040x / MBa6x HW REV.020x                       |
 | [y]    | i.MX6UL          | TQMa6ULx                 | MBaULx         | tqma6ulx-mba6ulx             | TQMa6UL HW REV.030x / MBa6ULx HW REV.020x                             |
 | [y]    | i.MX6UL          | TQMa6ULx                 | MBaULx         | tqma6ulx-512mb-mba6ulx       | TQMa6ULx HW REV.030x 512 MiB RAM / MBa6ULx HW REV.020x                |
