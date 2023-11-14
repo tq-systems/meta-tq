@@ -9,6 +9,39 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* TQMa62xx
+  * This BSP release adds support for the TQMa62xx module and the MBa62xx
+    starterkit baseboard, based on the TI AM62x SoC family. See
+    [README.TQMa62xx.md](doc/README.TQMa62xx.md) for more information.
+* TQMa64xxL
+  * linux: Added support for TI Linux 6.1.y
+  * u-boot: Added support for TI U-Boot 2023.04
+    * The default environment of the new U-Boot version expects a boot.scr
+      script or extlinux.conf to select the kernel, Device Trees and command
+      line to boot ("Distro Boot"). Configuration files to load the kernel from
+      a combined fitImage are provided by meta-tq.
+
+### Changed
+
+* TQMa335x, TQMa57xx, TQMa64xxL
+  * meta-ti has moved `DEPLOY_DIR_IMAGE` out of `TMPDIR` to make deployment
+    of artifacts for multiple configurations (R5 + A53 bootloaders for
+    TQMa64xxL) more robust. Artifacts can now be found under
+    `deploy-ti/image/${MACHINE}` for these module families.
+
+### Removed
+
+* TQMa64xxL
+  * u-boot: Removed support for TI U-Boot 2021.1
+* TQMa65xx
+  * As we currently don't have a TQMa65xx U-Boot version compatible with recent
+    versions of meta-ti, support for the TQMa65xx machine is dropped for now.
+    Please use meta-tq version kirkstone.TQ.ARM.BSP.0012 or older with meta-ti
+    revision 38941472e1e3 ("meta-ti-bsp: add BeagleBone AI-64 support") for this
+    hardware.
+
 ## kirkstone.TQ.ARM.BSP.0013
 
 ### Module BSP Revisions
