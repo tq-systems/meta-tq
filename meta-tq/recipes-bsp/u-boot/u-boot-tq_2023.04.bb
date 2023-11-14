@@ -14,7 +14,7 @@ DEPENDS += "\
     dtc-native \
 "
 
-SRCREV = "66d1a3c10e8ea5ba7c5bd0575af64c845f0c3bb1"
+SRCREV = "97e7edcf25ebe9a90948c7fb8a669b5be1914313"
 SRCBRANCH = "TQM-v2023.04"
 
 SRC_URI = " \
