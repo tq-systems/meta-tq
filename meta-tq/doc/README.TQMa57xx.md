@@ -38,8 +38,8 @@ See [TQ Embedded Wiki for TQMa57xx](https://support.tq-group.com/en/arm/tqma57xx
 
 ## Artifacts
 
-Artifacts can be found at the usual locations for Bitbake:
-`${TMPDIR}/deploy/images/${MACHINE}`
+Artifacts can be found at:
+`deploy-ti/images/${MACHINE}`
 
 * \*.dtb: Device Tree blobs
 * zImage: Compressed Linux kernel image
