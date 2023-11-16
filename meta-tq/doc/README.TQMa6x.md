@@ -62,6 +62,8 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
   (`linux-imx-tq` only)
   Workaround: Get MAC address from MBa6 EEPROM `i2c dev 0; i2c md 57 20 6` and
   run `setenv eth1addr <MAC address>; saveenv` once in u-boot console
+- eth1 (X12) (USB to Ethernet) causes an error on `usb reset` if no MAC address
+  is set: `Error: smsc95xx_eth address not set.`
 - Backlight on parallel displays are enabled upon Power-On which might lead to random output.
   Display will be disabled during bootup and can be used normally afterwards.
 - `asound.state` is not compatible with `linux-5.4` (`linux-imx-tq` as well as `linux-tq`)
@@ -78,6 +80,7 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
   Another powercycle/reset or PHY software reset (`mdio write ethernet@2188000 0
   0x8000`) is required
 - U-Boot: USB dual role port (X8) is deactivated
+- U-Boot: Setting and clearing GPIOs (e.g. for user LEDs) is not working
 
 ## Artifacts
 
