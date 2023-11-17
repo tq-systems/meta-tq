@@ -271,7 +271,7 @@ echo mem > /sys/power/state
 
 The PWM fan can optionally be used for cooling the SoC. Due to electrical connection
 the configuration value `3` for the `hwmon` attribute `pwm1_enable` is required.
-This can be achived using the following `udev` rule:
+This can be achieved using the following `udev` rule:
 ```
 SUBSYSTEM=="hwmon", DRIVERS=="pwm-fan", ATTR{pwm1_enable}="3"
 ```
