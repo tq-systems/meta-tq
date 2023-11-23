@@ -253,7 +253,7 @@ To allow reusage, the support for each display is separated in a dtsi fragment.
 
 *Note:* With MBa8Xx only one control interface for backlight is available (X22).
 
-| Interface       | Device tree                                               | Type        ----   |
+| Interface       | Device tree                                               | Type               |
 |-----------------|-----------------------------------------------------------|--------------------|
 | LVDS0           | imx8\[d,q\]xp-tqma8x\[d,q\]p-mba8xx-lvds0-tm070jvhg33.dtb | Tianma TM070JVHG33 |
 | LVDS1           | imx8\[d,q\]xp-tqma8x\[d,q\]p-mba8xx-lvds1-tm070jvhg33.dtb | Tianma TM070JVHG33 |
