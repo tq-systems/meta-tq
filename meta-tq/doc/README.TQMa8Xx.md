@@ -97,6 +97,7 @@ See top level README.md for configurations usable as MACHINE.
 | VPU                                              |                             |              x              |
 | **Display**                                      |                             |                             |
 | LVDS0/LVDS1                                      |              x              |              x              |
+| Dual-Channel LVDS                                |                             |              x              |
 | **Audio**                                        |                             |                             |
 | Line IN / Line Out (X9, X10)                     |              x              |              x              |
 | **PCIe**                                         |                             |                             |
@@ -123,6 +124,7 @@ See top level README.md for configurations usable as MACHINE.
 * Audio
   * Mic In untested
 * DSI - DP bridge
+* linux-imx-tq_5.15: Dual-Channel LVDS is untested
 
 ## Known Issues / Limitations
 
@@ -257,6 +259,7 @@ To allow reusage, the support for each display is separated in a dtsi fragment.
 |-----------------|-----------------------------------------------------------|--------------------|
 | LVDS0           | imx8\[d,q\]xp-tqma8x\[d,q\]p-mba8xx-lvds0-tm070jvhg33.dtb | Tianma TM070JVHG33 |
 | LVDS1           | imx8\[d,q\]xp-tqma8x\[d,q\]p-mba8xx-lvds1-tm070jvhg33.dtb | Tianma TM070JVHG33 |
+| LVDS, dual      | imx8\[d,q\]xp-tqma8x\[d,q\]p-mba8xx-lvds-g133han01.dtb    | AUO G133HAN.01     |
 
 ### CAN
 
