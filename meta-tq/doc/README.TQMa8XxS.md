@@ -83,13 +83,13 @@ See top level README.md for configurations usable as MACHINE.
 | USB 2.0 Dual Role (X3/X4)                        |              x              |              x              |
 | USB 3.0 (Hub on TQMa8XxS) (X7/X8)                |              x              |              x              |
 | **QSPI NOR**                                     |                             |                             |
-| Read with 1-1-4 SDR                              |              x              |                             |
-| PP / Erase with 1-1-1 SDR                        |              x              |                             |
+| Read with 1-1-4 SDR                              |              x              |              x              |
+| PP / Erase with 1-1-1 SDR                        |              x              |              x              |
 | **Graphic**                                      |                             |                             |
 | GPU                                              |              x              |              x              |
 | VPU                                              |              x              |              x              |
 | **Display**                                      |                             |                             |
-| LVDS0/LVDS1                                      |              x              |                             |
+| LVDS0/LVDS1                                      |              x              |              x              |
 | **Audio**                                        |                             |                             |
 | Line IN / Line Out (X17, X18)                    |              x              |              x              |
 | **PCIe**                                         |                             |                             |
@@ -103,8 +103,8 @@ See top level README.md for configurations usable as MACHINE.
 | **CPU/PMIC thermal sensors**                     |                             |                             |
 | via thermal zone                                 |              x              |              x              |
 | **Cortex M4**                                    |                             |                             |
-| examples running from TCM                        |              x              |                             |
-| use UART as debug console                        |              x              |                             |
+| examples running from TCM                        |              x              |              x              |
+| use UART as debug console                        |              x              |              x              |
 
 **TODO or not tested with new BSP**
 
