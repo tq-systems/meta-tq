@@ -362,7 +362,7 @@ WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 -v v4l2src device=/dev/video0 ! wa
 Each Display can be used on its own by using the corresponding device tree.
 To allow reusage, the support for each display is separated in a dtsi fragment.
 
-| Interface       | Device tree                                    | Type        ----   |
+| Interface       | Device tree                                    | Type               |
 |-----------------|------------------------------------------------|--------------------|
 | LVDS            | imx8mp-tqma8mpql-mba8mpxl-lvds-tm070jvhg33.dtb | Tianma TM070JVHG33 |
 | HDMI            | imx8mp-tqma8mpql-mba8mpxl-hdmi.dtb             | compatible monitor |
