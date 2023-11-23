@@ -88,6 +88,7 @@ See top level README.md for configurations usable as MACHINE.
 | VPU                                              |       x      |       x      |
 | **Display**                                      |              |              |
 | LVDS0/LVDS1                                      |       x      |       x      |
+| Dual-Channel LVDS                                |              |       x      |
 | Display Port                                     |       x      |       x      |
 | **Audio**                                        |              |              |
 | Line IN / Line Out (X16, X17)                    |       x      |       x      |
@@ -123,6 +124,7 @@ See top level README.md for configurations usable as MACHINE.
 * FTM
   * PWM (missing in CPU DT)
 * HDMI in
+* linux-imx-tq_5.15: Dual-Channel LVDS is untested
 
 ## Known Issues
 
@@ -283,11 +285,13 @@ configuration values.
 
 Each Display output could be activated independend by using the corresponding device tree.
 
-| Interface | Device tree                               | Type           |
-|-----------|-------------------------------------------|----------------|
-| LVDS0     | imx8qm-tqma8x-mba8x-lvds0-tm070jvhg33.dtb | Tianma Display |
-| LVDS1     | imx8qm-tqma8x-mba8x-lvds1-tm070jvhg33.dtb | Tianma Display |
-| DP        | imx8qm-tqma8x-mba8x-dp.dtb                | Displayport    |
+| Interface   | Device tree                               | Type           |
+|-------------|-------------------------------------------|----------------|
+| LVDS0       | imx8qm-tqma8x-mba8x-lvds0-tm070jvhg33.dtb | Tianma Display |
+| LVDS1       | imx8qm-tqma8x-mba8x-lvds1-tm070jvhg33.dtb | Tianma Display |
+| LVDS0, dual | imx8qm-tqma8qm-mba8x-lvds0-g133han01.dtb  | AUO G133HAN.01 |
+| LVDS1, dual | imx8qm-tqma8qm-mba8x-lvds1-g133han01.dtb  | AUO G133HAN.01 |
+| DP          | imx8qm-tqma8x-mba8x-dp.dtb                | Displayport    |
 
 ### CAN
 
