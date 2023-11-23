@@ -94,6 +94,7 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 | VPU                                                          |      x      |      x      |
 | **Display**                                                  |             |             |
 | LVDS                                                         |      x      |      x      |
+| Dual-Channel LVDS                                            |             |      x      |
 | HDMI                                                         |      x      |      x      |
 | **Audio**                                                    |             |             |
 | HDMI                                                         |             |      x      |
@@ -122,6 +123,7 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 * SPI via pin header
 * I²C interface of PCIe Clock generator not tested
 * NPU is untested
+* linux-imx-tq_5.15: Dual-Channel LVDS is untested
 
 ## Known Issues
 
@@ -365,6 +367,7 @@ To allow reusage, the support for each display is separated in a dtsi fragment.
 | Interface       | Device tree                                    | Type               |
 |-----------------|------------------------------------------------|--------------------|
 | LVDS            | imx8mp-tqma8mpql-mba8mpxl-lvds-tm070jvhg33.dtb | Tianma TM070JVHG33 |
+| LVDS, dual      | imx8mp-tqma8mpql-mba8mpxl-lvds-g133han01.dtb   | AUO G133HAN.01     |
 | HDMI            | imx8mp-tqma8mpql-mba8mpxl-hdmi.dtb             | compatible monitor |
 
 ### CAN
