@@ -14,6 +14,7 @@ KERNEL_DEVICETREE_linux-imx-tq = "\
     freescale/imx8mp-tqma8mpql-mba8mpxl-hdmi.dtb \
     freescale/imx8mp-tqma8mpql-mba8mpxl-hdmi-imx327.dtb \
     freescale/imx8mp-tqma8mpql-mba8mpxl-hdmi-ov9281.dtb \
+    freescale/imx8mp-tqma8mpql-mba8mpxl-lvds-g133han01.dtb \
     freescale/imx8mp-tqma8mpql-mba8mpxl-lvds-tm070jvhg33.dtb \
     freescale/imx8mp-tqma8mpql-mba8mpxl-rpmsg.dtb \
 "
