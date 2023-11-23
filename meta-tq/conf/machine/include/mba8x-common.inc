@@ -13,7 +13,9 @@ KERNEL_DEVICETREE = ""
 KERNEL_DEVICETREE_linux-imx-tq = "\
     freescale/imx8qm-tqma8qm-mba8x.dtb \
     freescale/imx8qm-tqma8qm-mba8x-dp.dtb \
+    freescale/imx8qm-tqma8qm-mba8x-lvds0-g133han01.dtb \
     freescale/imx8qm-tqma8qm-mba8x-lvds0-tm070jvhg33.dtb \
+    freescale/imx8qm-tqma8qm-mba8x-lvds1-g133han01.dtb \
     freescale/imx8qm-tqma8qm-mba8x-lvds1-tm070jvhg33.dtb \
     freescale/imx8qm-tqma8qm-mba8x-rpmsg.dtb \
 "
