@@ -22,6 +22,8 @@ Releases are named with the following scheme:
       script or extlinux.conf to select the kernel, Device Trees and command
       line to boot ("Distro Boot"). Configuration files to load the kernel from
       a combined fitImage are provided by meta-tq.
+* TQMa8x/TQMa8Xx/TQMa8XxS
+  * linux: Add dual-channel LVDS display device tree
 
 ### Changed
 
