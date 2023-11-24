@@ -197,6 +197,24 @@ run update_uboot_spi
 
 ## Howto
 
+### Display Support
+
+Each Display can be used on its own by using the corresponding device tree.
+To allow reusage, the support for each display is separated in a dtsi fragment.
+Support can vary with kernel branch and version.
+
+*Note:* With MBa6x only one control interface for backlight is available.
+
+| Interface       | Device tree                                               | Type               |
+|-----------------|-----------------------------------------------------------|--------------------|
+| HDMI            | imx6\[dl,q,qp\]-mba6\[a,b\]-hdmi.dtb                      | standard monitor   |
+| HDMI + LVDS     | imx6\[dl,q,qp\]-mba6\[a,b\]-multi.dtb                     | HDMI + LVDS        |
+| LVDS            | imx6\[dl,q,qp\]-mba6\[a,b\]-lvds-tm070jvhg33.dtb          | Tianma TM070JVHG33 |
+| LVDS, dual      | imx6\[dl,q,qp\]-mba6\[a,b\]-duallvds-tm070jvhg33.dtb      | Tianma TM070JVHG33 |
+| LVDS, FullHD    | imx6\[dl,q,qp\]-mba6\[a,b\]-lvds-g133han01.dtb            | AUO G133HAN.01     |
+| Parallel        | imx6\[dl,q,qp\]-mba6\[a,b\]-cdtech-dc44.dtb               | CDTECT DC44 (DMB)  |
+| Parallel        | imx6\[dl,q,qp\]-mba6\[a,b\]-cdtech-fc21.dtb               | CDTECH FC21 (DMB)  |
+
 ### Access U-Boot environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
