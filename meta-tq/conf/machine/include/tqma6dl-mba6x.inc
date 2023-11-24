@@ -16,9 +16,11 @@ KERNEL_DEVICETREE = "\
 KERNEL_DEVICETREE_linux-tq = "\
     imx6dl-mba6a-cdtech-dc44.dtb \
     imx6dl-mba6a-cdtech-fc21.dtb \
+    imx6dl-mba6a-lvds-g133han01.dtb \
     imx6dl-mba6a-multi.dtb \
     \
     imx6dl-mba6b-cdtech-dc44.dtb \
     imx6dl-mba6b-cdtech-fc21.dtb \
+    imx6dl-mba6b-lvds-g133han01.dtb \
     imx6dl-mba6b-multi.dtb \
 "
