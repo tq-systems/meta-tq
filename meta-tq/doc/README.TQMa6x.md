@@ -2,9 +2,7 @@
 
 [[_TOC_]]
 
-## Overview
-
-### Supported Hardware:
+## Variants
 
 * TQMa6x: module revisions REV.010x ... REV.040x
 * MBa6x:  board revisions REV.020x
@@ -13,7 +11,13 @@
 
 See [here](./README.SoftwareVersions.md) for the software base versions.
 
-### Supported Features
+## Supported machine configurations:
+
+See top level README.md for configurations usable as MACHINE.
+
+## Supported Features
+
+### Linux
 
 |                              | linux-imx-tq-5.10 | linux-imx-tq-5.15 | linux-tq-5.15 | linux-tq-6.1  |
 | ---------------------------- | :---------------: | :---------------: | :-----------: | :-----------: |
@@ -56,7 +60,7 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 * MLB (X28)
 * RS-485 (`linux-imx-tq-5.15`)
 
-### Known issues
+## Known issues / Limitations
 
 - PCIe requires a power cycle to work reliably. Asserting a POR using S9 or S10 is not sufficient.
 - eth1 (X12) uses a random MAC address. The one stored in MBa6 EEPROM is currently not used.
@@ -95,9 +99,7 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * u-boot-with-spl-${MACHINE}.imx-sd: boot stream for SD / e-MMC and SPI NOR
 
-## HowTo:
-
-### MBa6x DIP Switch settings for Boot
+## Boot DIP Switches
 
 _Note:_
 
@@ -105,7 +107,7 @@ _Note:_
 * S5 is for Boot Mode.
 * X means position of DIP, - means don't care
 
-#### SD Card
+### SD Card
 
 |         |  S1  |     |      |      |      |      |      |      |    |  S2 |     |     |     |     |     |     |     |    |  S4 |     |     |     |     |     |     |     |    |  S5 |     |
 | ------- | :--: | :-: | :--: | :--: | :--: | :--: | :--: | :--: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: |
@@ -113,7 +115,7 @@ _Note:_
 | ON      |      |  x  |      |  x   |      |      |      |      |    |     |     |  x  |     |  x  |     |     |     |    |     |     |     |     |     |     |     |     |    |  x  |     |
 | OFF     |  x   |     |  x   |      |  x   |  x   |  x   |  x   |    |  x  |  x  |     |  x  |     |  x  |  x  |  x  |    |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |    |     |  x  |
 
-#### e-MMC
+### e-MMC
 
 |         |  S1  |     |      |      |      |      |      |      |    |  S2 |     |     |     |     |     |     |     |    |  S4 |     |     |     |     |     |     |     |    |  S5 |     |
 | ------- | :--: | :-: | :--: | :--: | :--: | :--: | :--: | :--: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: |
@@ -121,7 +123,7 @@ _Note:_
 | ON      |      |  x  |  x   |      |      |      |      |      |    |     |  x  |     |  x  |     |     |     |     |    |     |     |     |     |     |     |     |     |    |  x  |     |
 | OFF     |  x   |     |      |  x   |  x   |  x   |  x   |  x   |    |  x  |     |  x  |     |  x  |  x  |  x  |  x  |    |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |    |     |  x  |
 
-#### SPI
+### SPI
 
 |         |  S1  |     |      |      |      |      |      |      |    |  S2 |     |     |     |     |     |     |     |    |  S4 |     |     |     |     |     |     |     |    |  S5 |     |
 | ------- | :--: | :-: | :--: | :--: | :--: | :--: | :--: | :--: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: |
@@ -129,9 +131,9 @@ _Note:_
 | ON      |      |     |  x   |  x   |      |      |      |      |    |     |     |     |     |     |     |     |     |    |     |     |     |  x  |  x  |     |     |     |    |  x  |     |
 | OFF     |  x   |  x  |      |      |  x   |  x   |  x   |  x   |    |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |    |  x  |  x  |  x  |     |     |  x  |  x  |  x  |    |     |  x  |
 
-### Boot device initialisation
+## Boot device initialisation and update
 
-#### SPI NOR
+### SPI NOR
 
 To initialize SPI NOR with bootloader, write the [bootloader image](#artifacts)
 to SPI NOR at offset 0x400:
@@ -144,7 +146,7 @@ sf erase 0 0x100000
 sf write ${loadaddr} 0x400 ${filesize}
 ```
 
-#### SD / e-MMC
+### SD / e-MMC
 
 To initialize SD / e-MMC with bootloader, write the [bootloader image](#artifacts)
 for SD / e-MMC to SD / e-MMC at offset 0x400 / block #2
@@ -192,6 +194,8 @@ run update_uboot_mmc
 setenv uboot <name of u-boot image>
 run update_uboot_spi
 ```
+
+## Howto
 
 ### Access U-Boot environment from Linux
 
