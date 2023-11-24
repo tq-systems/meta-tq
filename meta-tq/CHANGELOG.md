@@ -27,6 +27,23 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* TQMa335x, TQMa57xx
+  * linux-ti-tq-5.4:
+    * The kernel has been updated to 5.4.257-rt87
+    * The mmcblk devices are now always numbered consistently (mmc0 for
+      eMMC, mmc1 for SD card) on TQMa335x and TQMa57xx
+    * The PMIC IRQ configuration in the TQMa335x Device Trees has been
+      improved, moving baseboard-specific configuration to the MBa335x DTS.
+      In addition, the PMIC RTC is now usable on baseboards that do not
+      connect the PMIC IRQ at all.
+    * Other minor Device Tree cleanups have been applied, reducing warning
+      messages during boot on the TQMa335x/MBa335x
+  * u-boot-tq-2019.04:
+    * The default bootcmd for the TQMa335x will no longer result in errors
+      when booting from eMMC without an SD card inserted
+    * The default environment for the TQMa335x will no longer fall back to
+      other boot devices when booting Linux from the primary boot source
+      has failed
 * TQMa335x, TQMa57xx, TQMa64xxL
   * meta-ti has moved `DEPLOY_DIR_IMAGE` out of `TMPDIR` to make deployment
     of artifacts for multiple configurations (R5 + A53 bootloaders for
