@@ -11,6 +11,9 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa6x: linux-tq 6.1: enabled the build of device tree examples for FullHD
+  LVDS display (AUO G133HAN.01) at MBa6x. See [README.TQMa6x.md](doc/README.TQMa6x.md)
+  for more information.
 * TQMa62xx
   * This BSP release adds support for the TQMa62xx module and the MBa62xx
     starterkit baseboard, based on the TI AM62x SoC family. See
@@ -60,6 +63,11 @@ Releases are named with the following scheme:
     Please use meta-tq version kirkstone.TQ.ARM.BSP.0012 or older with meta-ti
     revision 38941472e1e3 ("meta-ti-bsp: add BeagleBone AI-64 support") for this
     hardware.
+
+### Fixed
+
+* TQMa6x: linux-tq 6.1: fixed wrong assignment of SPI test device for MBa6x to the
+  chip select that is primary used for the optional SPI NOR
 
 ## kirkstone.TQ.ARM.BSP.0013
 
