@@ -9,6 +9,12 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQ.ARM.BSP.0014
+
+### Module BSP Revisions
+
+* kirkstone.TQMa6x.BSP.SW.0123
+
 ### Added
 
 * TQMa6x: linux-tq 6.1: enabled the build of device tree examples for FullHD
