@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 require linux-tq-common.inc
 
 KBRANCH = "TQM-linux-v6.1.y"
-SRCREV = "a9c57d88d4bf910aa2ed377956dadd7b1a0c8e07"
+SRCREV = "deb006241c9fd37fb3b4d90152377a02a71737ba"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "6.1"
