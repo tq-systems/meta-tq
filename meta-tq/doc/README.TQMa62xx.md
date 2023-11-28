@@ -209,6 +209,37 @@ The following labels are currently defined:
 | lvds-vesa-fhd-csi-imx327    | Generic VESA FullHD | VisionComponents module with IMX327 sensor |
 | lvds-vesa-fhd-csi-ov9281    | Generic VESA FullHD | VisionComponents module with OV9281 sensor |
 
+The following commands can be used to capture the camera picture and display it
+on the display:
+
+For IMX327:
+```
+media-ctl -V '"30102000.ticsi2rx":0[fmt:SRGGB10/1280x720]'
+media-ctl -V '"cdns_csi2rx.30101000.csi-bridge":0[fmt:SRGGB10/1280x720]'
+media-ctl -V '"imx327 1-001a":0[fmt:SRGGB10/1280x720 field:none]'
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-bayer,format=rggb,bpp=10,width=1280,height=720 ! \
+  bayer2rgbneon show-fps=t reduce-bpp=t ! video/x-raw,format=RGBx ! autovideoconvert ! waylandsink
+```
+
+For OV9281:
+```
+media-ctl -V '"30102000.ticsi2rx":0[fmt:Y8_1X8/1280x800]'
+media-ctl -V '"cdns_csi2rx.30101000.csi-bridge":0[fmt:Y8_1X8/1280x800]'
+media-ctl -V '"ov9281 1-0060":0[fmt:Y8_1X8/1280x800 field:none]'
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! \
+  autovideoconvert ! waylandsink
+```
+
+`autovideosink` will render the video using Wayland by default. Alternatively,
+the video can be displayed in fullscreen directly on a Linux framebuffer device
+by stopping the Wayland compositor with `systemctl stop weston.service` and
+replacing `autovideosink sync=false` with `fbdevsink` in the gst-launch-1.0
+command.
+
+Note that the TQMa62xx does not have hardware acceleration for the conversion
+from the Bayer pixel format to RGB. Even when using the optimized bayer2rgbneon
+plugin provided in our BSP, framerates with the IMX327 are very low.
+
 ### Program system image
 
 **Note:** Do not use the commands described in the following to overwrite the
