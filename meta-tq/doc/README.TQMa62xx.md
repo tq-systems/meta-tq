@@ -262,6 +262,10 @@ run update_bootscript_sf0 # Update ospi.script partition on SPI-NOR flash
 The environment variables `tiboot3_name`, `tispl_name`, `uboot_name` and
 `bootscript_name` can be modified to control the filenames requested via TFTP.
 
+By default, the files `tiboot3.bin`, `tispl.bin` and `u-boot.img` are requested.
+The 3 stages of the bootloader are always updated at the same time, so potential
+incompatiblities between stages of old and new versions are avoided.
+
 Kernel and Device Trees are part of the root filesystem. They cannot be updated
 from U-Boot separately from the filesystem.
 
