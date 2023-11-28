@@ -29,6 +29,13 @@ _Kernel:_
 * Very rarely, under high system load, the I2C controller of the AM62x has been
   seen to get stuck in a state in which it permanently pulls down the SCL pin
   until the controller is reset.
+* The OTG ID pin of the Micro-USB port (X10) is ignored in U-Boot. The mode of
+  the port is determined by the boot mode:
+  - When booting in USB host mode (from mass storage), the port uses host
+    mode. Access to the connected USB storage device is possible from the
+    U-Boot command line.
+  - For all other boot modes, the port will be in device mode. The "dfu"
+    command can be used to flash the boot media from a connected host.
 
 ## Build artifacts
 
