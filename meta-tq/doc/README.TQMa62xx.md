@@ -169,20 +169,7 @@ for information on the usage of `dfu-util` to flash boot media.
 
 ### OS boot
 
-By default, U-Boot will boot the OS from the same medium that it was started
-from (eMMC, SD card or SPI-NOR). The boot source can be modified by setting
-the `boot_targets` variable to `mmc0` (eMMC), `mmc1` (SD card), `sf0` (SPI-NOR),
-`usb0` (USB mass storage) or `pxe` (netboot). Multiple boot sources separated
-with spaces will be tried in the order they are specified.
-
-For MMC and USB devices, U-Boot will load a script image `boot.scr` from the
-boot partition of the selected medium. The script provided in this BSP's
-default configuration then selects the kernel and its configuration based on
-`/boot/extlinux/extlinux.conf`.
-
-For netboot, a file in the same format will be loaded via TFTP from
-`/pxelinux.cfg/default-arm-k3-tqma62xx` after an IP address has been obtained
-via DHCP.
+See the [Distroboot README](README.Distroboot.md).
 
 ### Display and camera support
 
