@@ -9,6 +9,25 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* TQMa62xx, TQMa64xxL:
+  * u-boot-ti-tq: Do not print EEPROM information twice
+  * A PXE (netboot) example configuration file has been added to the BSP
+    documentation (see the new [Distroboot README](doc/README.Distroboot.md))
+* TQMa62xx:
+  * The system controller firmware for the AM62x HS-FS (High Security - Field
+    Securable) is selected by default now
+
+    See the
+    [TQMa62xx README](doc/README.TQMa62xx.md#first-stage-bootloader-variants)
+    for information on changing the firmware variant to use TQMa62xx variants
+    with AM62x GP (General Purpose).
+  * linux-ti-tq: The internal RTC of the AM62x SoC has been disabled
+
+    Due to Erratum i2327, the AM62x RTC can't be used reliably. The external
+    RTC of the TQMa62xx should be used instead.
+
 ## kirkstone.TQ.ARM.BSP.0014
 
 ### Module BSP Revisions
