@@ -13,7 +13,7 @@ PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-ti-tq"
 require conf/machine/include/am62xx.inc
 
 # Available variants: am62x-gp am62x-hs-fs am62x-hs
-SYSFW_DEFAULT_VARIANT ?= "am62x-gp"
+SYSFW_DEFAULT_VARIANT ?= "am62x-hs-fs"
 
 KERNEL_CLASSES += "ti-secdev"
 
