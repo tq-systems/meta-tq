@@ -41,11 +41,6 @@ IMXBOOT_TARGETS ?= "\
 #
 MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-flash_singleboot"
 
-IMAGE_BOOT_FILES = "\
-    ${@create_image_boot_dtb_files(d)} \
-    ${KERNEL_IMAGETYPE} \
-"
-
 MACHINE_EXTRA_RRECOMMENDS += "\
     linux-firmware-pcie8997 \
     linux-firmware-sd8997 \
