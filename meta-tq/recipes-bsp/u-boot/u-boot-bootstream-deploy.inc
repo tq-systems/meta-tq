@@ -1,4 +1,4 @@
-# Copyright (C) 2022 TQ-Systems GmbH
+# Copyright (C) 2022-2023 TQ-Systems GmbH
 
 do_deploy_uboot_dtb () {
     # Deploy the u-boot-nodtb.bin and ${UBOOT_DTB_NAME} for mkimage to generate boot binary
@@ -11,9 +11,9 @@ do_deploy_uboot_dtb () {
                 if [ $j -eq $i ]
                 then
                     for dtb in ${UBOOT_DTB_NAME}; do
-                        install -m 0777 ${B}/${config}/arch/arm/dts/${dtb}  ${DEPLOYDIR}/u-boot-${dtb}-${MACHINE}-${type}
+                        install -m 0644 ${B}/${config}/arch/arm/dts/${dtb}  ${DEPLOYDIR}/u-boot-${dtb}-${MACHINE}-${type}
                     done
-                    install -m 0777 ${B}/${config}/u-boot-nodtb.bin  ${DEPLOYDIR}/u-boot-nodtb.bin-${MACHINE}-${type}
+                    install -m 0644 ${B}/${config}/u-boot-nodtb.bin  ${DEPLOYDIR}/u-boot-nodtb.bin-${MACHINE}-${type}
                 fi
             done
             unset  j
