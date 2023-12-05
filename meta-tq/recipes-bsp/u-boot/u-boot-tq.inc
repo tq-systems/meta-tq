@@ -37,20 +37,19 @@ SCMVERSION ?= "y"
 # only if it is not present in ${B} and ${S}. If we create the files before, they
 # won't be touched. Let's bring in a consistent version to the bootloader image
 # consisting of Version from Makefile, 'tq' and the git short hash leading to
-# <U-Boot vers>-tq+g<short hash>
+# <U-Boot vers>-tq+g<short hash>+p<#patches>
 # TODO: we should verify, if we can use a localversion-tq file later on to minimize
 # interdependencies to oe / poky and meta-freescale
 ###
 do_compile:prepend() {
-    head=""
-    suffix=""
-
     if [ "${SCMVERSION}" = "y" ]; then
         # Add GIT revision to the local version
-        head=`cd ${S} ; git rev-parse --short HEAD 2> /dev/null`
-        suffix="-g"
+        head=`cd ${S} ; git rev-parse --verify --short ${SRCREV} 2> /dev/null`
+        patches=`cd ${S} ; git rev-list --count ${SRCREV}..HEAD 2> /dev/null`
+        printf "%s%s%s%s%s" "${UBOOT_LOCALVERSION}" +g $head +p $patches > ${S}/.scmversion
+        printf "%s%s%s%s%s" "${UBOOT_LOCALVERSION}" +g $head +p $patches > ${B}/.scmversion
+    else
+        printf "%s" "${UBOOT_LOCALVERSION}" > ${S}/.scmversion
+        printf "%s" "${UBOOT_LOCALVERSION}" > ${B}/.scmversion
     fi
-
-    printf "%s%s%s" "${UBOOT_LOCALVERSION}" ${suffix} ${head} > ${S}/.scmversion
-    printf "%s%s%s" "${UBOOT_LOCALVERSION}" ${suffix} ${head} > ${B}/.scmversion
 }
