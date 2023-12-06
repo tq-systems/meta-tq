@@ -37,10 +37,11 @@ KCONFIG_MODE="--alldefconfig"
 # and without linux-yocto.
 ####
 do_set_localversion_tq() {
-    head=$(git --git-dir=${STAGING_KERNEL_DIR}/.git rev-parse --short HEAD 2> /dev/null)
-    printf '%s%s%s\n' "${KERNEL_LOCALVERSION}" +g ${head} > ${STAGING_KERNEL_DIR}/localversion-tq
+    head=$(git --git-dir=${STAGING_KERNEL_DIR}/.git rev-parse --short ${SRCREV} 2> /dev/null)
+    patches=$(git --git-dir=${STAGING_KERNEL_DIR}/.git rev-list --count ${SRCREV}..HEAD 2> /dev/null)
+    printf '%s%s%s%s%s\n' "${KERNEL_LOCALVERSION}" +g ${head} +p ${patches} > ${STAGING_KERNEL_DIR}/localversion-tq
 }
-addtask set_localversion_tq before do_patch do_configure after do_symlink_kernsrc do_kernel_metadata
+addtask set_localversion_tq before do_configure after do_patch do_symlink_kernsrc do_kernel_metadata
 
 S = "${WORKDIR}/git"
 
