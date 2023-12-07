@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=2ca5f2c35c8cc335f0a19756634782f1"
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 
 SRCBRANCH = "TQMaxx-ti-u-boot-2023.04"
-SRCREV = "4e5fbd7e4b5593ca8c89e1e49a01ba8f4cfa92e3"
+SRCREV = "2fabb6e429861dd2f099ce36eefd88c5f8a959b8"
 
 DEPENDS += "python3-setuptools-native"
 
