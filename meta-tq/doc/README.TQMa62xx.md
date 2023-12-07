@@ -36,6 +36,9 @@ _Kernel:_
     U-Boot command line.
   - For all other boot modes, the port will be in device mode. The "dfu"
     command can be used to flash the boot media from a connected host.
+* On TQMa62xx variants with AM62x GP SoC, SD card boot is slow after
+  power-on, taking several seconds before the first messages of the
+  bootloader
 
 ## Build artifacts
 
