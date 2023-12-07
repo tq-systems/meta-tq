@@ -12,7 +12,10 @@ Releases are named with the following scheme:
 ### Changed
 
 * TQMa62xx, TQMa64xxL:
-  * u-boot-ti-tq: Do not print EEPROM information twice
+  * u-boot-ti-tq:
+    * Fix CPU core clock initialization, which was breaking cpufreq on
+      Linux with ti-dm-fw REL.MCUSDK.09.00.01.17 and newer
+    * Do not print EEPROM information twice
   * A PXE (netboot) example configuration file has been added to the BSP
     documentation (see the new [Distroboot README](doc/README.Distroboot.md))
 * TQMa62xx:
