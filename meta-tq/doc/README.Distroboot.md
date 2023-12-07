@@ -32,4 +32,5 @@ where `arch`, `soc` and `board_name` are variables found in the U-Boot
 environment.
 
 A commented [example configuration](examples/pxelinux.cfg) is provided as a
-starting point for the PXE boot config file.
+starting point for the PXE boot config file, which expects to find the root
+filesystem mountable via NFS.
