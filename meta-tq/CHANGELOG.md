@@ -18,10 +18,6 @@ Releases are named with the following scheme:
 ### Changed
 
 * TQMa62xx, TQMa64xxL:
-  * u-boot-ti-tq:
-    * Fix CPU core clock initialization, which was breaking cpufreq on
-      Linux with ti-dm-fw REL.MCUSDK.09.00.01.17 and newer
-    * Do not print EEPROM information twice
   * A PXE (netboot) example configuration file has been added to the BSP
     documentation (see the new [Distroboot README](doc/README.Distroboot.md))
 * TQMa62xx:
@@ -32,6 +28,14 @@ Releases are named with the following scheme:
     [TQMa62xx README](doc/README.TQMa62xx.md#first-stage-bootloader-variants)
     for information on changing the firmware variant to use TQMa62xx variants
     with AM62x GP (General Purpose).
+
+### Fixed
+
+* TQMa62xx:
+  * u-boot-ti-tq:
+    * Fix CPU core clock initialization, which was breaking cpufreq on
+      Linux with ti-dm-fw REL.MCUSDK.09.00.01.17 and newer
+    * Do not print EEPROM information twice
   * linux-ti-tq: The internal RTC of the AM62x SoC has been disabled
 
     Due to Erratum i2327, the AM62x RTC can't be used reliably. The external
