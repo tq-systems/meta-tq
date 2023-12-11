@@ -9,6 +9,14 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* Bump PREFERRED_VERSION_linux-imx-tq for TQMa8* based machines to 6.1 kernel
+
+### Fixed
+
+* Fix non-deterministic localversion for linux-tq, u-boot-tq recipes
+
 ## kirkstone.TQ.ARM.BSP.0015
 
 ### Module BSP Revisions
