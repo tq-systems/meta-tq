@@ -37,10 +37,21 @@ KCONFIG_MODE="--alldefconfig"
 # and without linux-yocto.
 ####
 do_set_localversion_tq() {
-    head=$(git --git-dir=${STAGING_KERNEL_DIR}/.git rev-parse --short HEAD 2> /dev/null)
-    printf '%s%s%s\n' "${KERNEL_LOCALVERSION}" +g ${head} > ${STAGING_KERNEL_DIR}/localversion-tq
+    if [ "${SRCREV}" = "INVALID" ]; then
+        hash=${SRCREV_machine}
+    else
+        hash=${SRCREV}
+    fi
+    if [ "$hash" = "AUTOINC" ]; then
+        branch=$(git --git-dir=${STAGING_KERNEL_DIR}/.git  symbolic-ref --short -q HEAD)
+        head=$(git --git-dir=${STAGING_KERNEL_DIR}/.git rev-parse --verify --short origin/${branch} 2> /dev/null)
+    else
+        head=$(git --git-dir=${STAGING_KERNEL_DIR}/.git rev-parse --verify --short ${hash} 2> /dev/null)
+    fi
+    patches=$(git --git-dir=${STAGING_KERNEL_DIR}/.git rev-list --count ${head}..HEAD 2> /dev/null)
+    printf '%s%s%s%s%s\n' "${KERNEL_LOCALVERSION}" +g ${head} +p ${patches} > ${STAGING_KERNEL_DIR}/localversion-tq
 }
-addtask set_localversion_tq before do_patch do_configure after do_symlink_kernsrc do_kernel_metadata
+addtask set_localversion_tq before do_configure after do_patch do_symlink_kernsrc do_kernel_metadata
 
 S = "${WORKDIR}/git"
 
