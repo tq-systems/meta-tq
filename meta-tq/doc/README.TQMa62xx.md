@@ -40,6 +40,80 @@ _Kernel:_
   power-on, taking several seconds before the first messages of the
   bootloader
 
+## Supported features
+
+### U-Boot
+
+| Feature                                          |                       |
+| :----------------------------------------------- | :-------------------: |
+| RAM configs                                      | 1 GiB, 2GiB           |
+| CPU variants                                     | AM6234, AM6254        |
+| UART (console on UART0)                          | x                     |
+| GPIO                                             | x                     |
+| I2C                                              | x                     |
+| System EEPROM parsing                            | x                     |
+| eMMC / SD                                        | x                     |
+| SPI-NOR                                          | x                     |
+| Ethernet                                         | Port X14 only         |
+| Cortex-R5F                                       | Booted with DM firmware |
+| Cortex-M4F                                       | no                    |
+| **Boot devices**                                 |                       |
+| eMMC                                             | x                     |
+| SD card                                          | x                     |
+| SPI-NOR                                          | x                     |
+| USB Mass Storage (X10)                           | x                     |
+| USB DFU (X10)                                    | x                     |
+| **USB**                                          |                       |
+| USB Host (X10, via OTG adapter)                  | USB Mass Storage boot only |
+| USB Device (X10)                                 | All boot devices execpt for USB Mass Storage |
+| USB Cable Detect / ID (X10)                      | no                    |
+| USB switchable VBUS (X10)                        | no (fixed setting for boot device) |
+| USB Host (X11, internal HUB)                     | x                     |
+
+### Linux
+
+| Feature                                                      |             |
+| :----------------------------------------------------------- | :---------: |
+| Suspend (deep / s2idle)                                      | no          |
+| **UART**                                                     |             |
+| Console (UART0, via X7 USB / UART converter)                 | x           |
+| RS485 (MCU\_UART0)                                           | x           |
+| **GPIO**                                                     |             |
+| LED                                                          | x           |
+| Button                                                       | x           |
+| **I2C**                                                      |             |
+| EEPROMs                                                      | x           |
+| PMIC                                                         | x           |
+| RTC                                                          | x           |
+| Temperature sensor                                           | x           |
+| **Ethernet**                                                 |             |
+| 2x Gigabit Ethernet on MBa62xx                               | x           |
+| **WLAN/Bluetooth**                                           |             |
+| Marvell/NXP SD8997-based WLAN/BT                             | x           |
+| **CAN**                                                      |             |
+| 2x CAN with CAN FD                                           | x           |
+| **USB**                                                      |             |
+| USB (X10: Dual role, Cable Detect, VBUS)                     | x           |
+| USB (X11: Host ports on internal hub)                        | x           |
+| BG95 IoT module (Virtual UART on internal hub)               | x           |
+| **PWM**                                                      |             |
+| LVDS Backlight                                               | x           |
+| Fan control                                                  | x (disabled by default) |
+| **SPI-NOR**                                                  |             |
+| Read with 1-4-4 SDR                                          | x           |
+| Write / erase with 1-4-4 SDR                                 | x           |
+| **Graphics**                                                 |             |
+| GPU                                                          | x           |
+| **Display**                                                  |             |
+| LVDS                                                         | x           |
+| **Audio**                                                    |             |
+| Analog audio (Line-out, Line-in, Microphone)                 | x           |
+| **MIPI-CSI**                                                 |             |
+| Grayscale with Vision Components camera (Sensor OV9281)      | x           |
+| Raw Bayer with Vision Components camera (Sensor IMX327)      | x           |
+| **SPI**                                                      |             |
+| Analog frontend (NAFE1338)                                   | x           |
+
 ## Build artifacts
 
 Artifacts can be found at:
