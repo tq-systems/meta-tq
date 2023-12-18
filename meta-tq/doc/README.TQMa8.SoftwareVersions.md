@@ -29,16 +29,21 @@ __Note__: not for TQMa8M*
 * based on linux-imx-fslc (https://github.com/Freescale/linux-fslc.git)
 * branched from `5.15-2.0.x-imx` / contains commits up to d818413e4d7901cb8a00a631a389326e2c93ae41
 
+### Kernel based on 6.1
+
+* based on linux-imx-fslc (https://github.com/Freescale/linux-fslc.git)
+* branched from `6.1-2.0.x-imx` / contains commits up to b872b1170fc8843b55e9f8838dd373ff43bb7552
+
 ### Kernel 6.1 stable
 
-__Note__:_ supports only TQMa8M*
+__Note__: supports only TQMa8M*
 
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
 * defconfig changes for TQ-Systems starter kits and build time optimisation
 
 ### Kernel 6.1 stable-rt
 
-__Note__:_ supports only TQMa8M*
+__Note__: supports only TQMa8M*
 
 * based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
 * defconfig changes for TQ-Systems starter kits and build time optimisation
