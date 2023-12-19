@@ -532,7 +532,7 @@ Detailed documentation for CortexM support can be found [here](./README.CortexM-
 
 See [i.MX High Assurance Boot](README.IMX-HAB.md).
 
-### Access U-Boot environment from user land
+### Access U-Boot environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
 
