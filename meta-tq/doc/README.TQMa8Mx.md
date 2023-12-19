@@ -194,7 +194,6 @@ Artifacs can be found at the usual locations for bitbake:
   * imx8mq-tqma8mq-mba8mx-rpmsg.dtb (CortexM / RPMSG Support)
 * Image: Linux kernel image
 * \*.wic: SD / e-MMC system image
-* \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * imx-boot-${MACHINE}-sd.bin-flash\_hdmi\_spl\_uboot: boot stream for SD / e-MMC
 * imx-boot-${MACHINE}-mfgtool.bin-flash\_spl\_uboot: boot stream for UUU

@@ -183,7 +183,6 @@ Artifacs can be found at the usual locations for bitbake:
   * imx8mn-tqma8mqnl-mba8mx-usb0otg.dtb (USB dual role support)
 * Image: Linux kernel image
 * \*.wic: SD / e-MMC system image
-* \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / e-MMC
 * imx-boot-${MACHINE}-sd.bin-flash\_evk\_flexspi: boot stream for FlexSPI

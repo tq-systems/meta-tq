@@ -44,7 +44,6 @@ Artifacts can be found at:
 * \*.dtb: Device Tree blobs
 * zImage: Compressed Linux kernel image
 * \*.wic: SD / e-MMC system image
-* \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * MLO: first-stage bootloader (SPL)
 * u-boot.img: full bootloader

@@ -139,7 +139,6 @@ Artifacs can be found at the usual locations for bitbake:
 * `Image.gz`: Linux kernel image
 * `u-boot-tfa-201010-r0.bin` U-Boot binary
 * \*.wic: SD / e-MMC system image
-* \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 
 ## Build-Time Configuration

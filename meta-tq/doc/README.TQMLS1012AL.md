@@ -61,7 +61,6 @@ Artifacs can be found at the usual locations for bitbake:
 * `Image.gz`: Linux kernel image
 * `u-boot-tfa-2021.04-r0.bin` U-Boot binary
 * \*.wic: SD / e-MMC system image (without boot loader)
-* \*.rootfs.ext4: RootFS image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 
 ## Functional DIP Switches
