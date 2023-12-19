@@ -14,7 +14,6 @@ This README contains some useful information for TQMLS102xA on MBLS102xA
 ### U-Boot
 
 * based on u-boot v2017.11
-* board support for TQMLS102xA and TQMa6x
 
 ### Linux
 
