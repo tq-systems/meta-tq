@@ -11,7 +11,7 @@
 
 See [here](./README.SoftwareVersions.md) for the software base versions.
 
-## Supported machine configurations:
+## Supported machine configurations
 
 See top level README.md for configurations usable as MACHINE.
 

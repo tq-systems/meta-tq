@@ -14,7 +14,7 @@ This README contains some useful information for TQMa8Mx on MBa8Mx
 
 See [here](./README.TQMa8.SoftwareVersions.md) for the software base versions.
 
-## Supported machine configurations:
+## Supported machine configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
@@ -258,7 +258,7 @@ BOOT\_MODE: Internal Boot
 
 *Attention:* Differences from MBa8Mx REV.020x to MBa8Mx REV.030x
 
-###### MBa8Mx REV.020x:
+###### MBa8Mx REV.020x
 
 |         |  S6  |     |      |      |      |      |      |      | S5 |     |     |     |     |     |     |     |     | S9 |     |     |     |     |
 | ------- | :--: | :-: | :--: | :--: | :--: | :--: | :--: | :--: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: |
@@ -277,7 +277,7 @@ BOOT\_MODE: Internal Boot
 * BOOT_CFG\[\11:10\] - 01 - USDHC2
 * BOOT_CFG\[\15:12\] - 0001 - SD Card
 
-###### MBa8Mx REV.030x:
+###### MBa8Mx REV.030x
 
 |         |  S6  |     |      |      |      |      |      |      | S5 |     |     |     |     |     |     |     |     | S9 |     |     |     |     |
 | ------- | :--: | :-: | :--: | :--: | :--: | :--: | :--: | :--: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: |

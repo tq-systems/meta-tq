@@ -14,7 +14,7 @@ This README contains some useful information for TQMa8XxS on MB-SMARC-2
 See [here](./README.SoftwareVersions.md) for the software base versions of atf,
 bootloader and Linux kernel.
 
-## Supported machine configurations:
+## Supported machine configurations
 
 See top level README.md for configurations usable as MACHINE.
 

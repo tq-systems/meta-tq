@@ -12,7 +12,7 @@ This README contains some useful information for TQMa8MPxL on MBa8MPxL
 
 See [here](./README.SoftwareVersions.md) for the software base versions.
 
-## Supported machine configurations:
+## Supported machine configurations
 
 See [top level README.md](./../README.md) for configurations usable as MACHINE.
 
@@ -113,7 +113,7 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 | Gray with Vision Components GmbH camera (Sensor OV9281)      |      x      |      x      |
 | Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |      x      |      x      |
 
-## TODO:
+## TODO
 
 * Audio
   * Codec Microphone in

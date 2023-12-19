@@ -20,7 +20,7 @@ This README contains some useful information for TQMa335x\[L\] on MBa335x
 
 * TI-linux-5.4.43 (Based on TI linux-5.4.y-07.00.00.005-rt)
 
-## Supported machine configurations:
+## Supported machine configurations
 
 See top level README.md for configurations usable as MACHINE.
 
