@@ -38,9 +38,13 @@ SCMVERSION ?= "y"
 # won't be touched. Let's bring in a consistent version to the bootloader image
 # consisting of Version from Makefile, 'tq' and the git short hash leading to
 # <U-Boot vers>-tq+g<short hash>+p<#patches>
+# This needs 'git' as patchtool - default is quilt
 # TODO: we should verify, if we can use a localversion-tq file later on to minimize
 # interdependencies to oe / poky and meta-freescale
 ###
+
+PATCHTOOL = "git"
+
 do_compile:prepend() {
     if [ "${SCMVERSION}" = "y" ]; then
         # Add GIT revision to the local version
