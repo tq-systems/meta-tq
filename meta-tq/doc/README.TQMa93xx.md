@@ -57,6 +57,7 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 | **USB**                                          |                       |                       |
 | USB 2.0 Host / Hub                               |       x               |       x               |
 | USB DRD (USB 2.0 Cable Detect, VBUS)             |       x               |       x               |
+| (configured as device to be usable with UUU )    |                       |                       |
 | **QSPI NOR**                                     |                       |                       |
 | Read with 1-1-4 SDR                              |       x               |       x               |
 | PP / Erase with 1-1-4 SDR                        |       x               |       x               |
@@ -120,11 +121,9 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 
 * MIPI-DSI
 * MIPI-CSI
-* RS485 (software limitation, will be fixed with kernel 6.1)
 * WiFi (driver and firmware loading OK, needs additional testing)
-* Cortex M33
+* Cortex M33 (prerelease on request)
 * LPB Booot modes
-* MBa93xxCA/LA REV.020x EVK missing configurations for UUU
 
 ## Known Issues
 
@@ -148,6 +147,7 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 * imx-boot-${MACHINE}-sd.bin-flash\_singleboot: CortexA boot stream for SD / e-MMC
 * imx-boot-${MACHINE}-sd.bin-flash\_singleboot\_flexspi: CortexA boot stream for FlexSPI
+* imx-boot-${MACHINE}-mfgtool.bin-flash\_singleboot: boot stream for UUU
 
 ## Boot DIP Switches
 
@@ -170,7 +170,7 @@ bootstream image and bootloader support for updating the bootstream.
 
 ## Use UUU Tool
 
-TODO
+See [here](./README.TQMa8.UUU.md) for details about using Serial Download mode and UUU.
 
 ## Howto
 
