@@ -9,12 +9,30 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* TQMa93xx: build UUU compatible boot image
+
 ### Changed
 
+* TQMa93xx:
+  * linux-imx-tq_6.1:
+    * improve pad configuration in device tree
+    * improve compatibility to mainboard REV. 020x in device tree
+    * improve reserved memory configuration in device tree
+  * u-boot-imx-tq_2023.04:
+    * improve pad configuration
+    * add more options for secure boot
+    * backport DT changes from linux
+    * implement UUU configuration
+* TQMa8 / TQMa93xx:
+  * imx-atf-tq_2.8: include NXP changes up to lf-6.1.55-2.2.0 / commit
+    08e9d4eef226 ("LF-10644 plat: imx8ulp: drop my name")
 * Bump PREFERRED_VERSION_linux-imx-tq for TQMa8* based machines to 6.1 kernel
 
 ### Fixed
 
+* TQMa93xx: linux-imx-tq_6.1: correct CMA alloc ranges in DTB
 * Fix non-deterministic localversion for linux-tq, u-boot-tq recipes
 
 ## kirkstone.TQ.ARM.BSP.0015
