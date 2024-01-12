@@ -20,7 +20,7 @@ DDR_FIRMWARE_NAME = "\
     lpddr4_imem_2d_v202201.bin \
 "
 
-SECO_FIRMWARE_NAME = "mx93a0-ahab-container.img"
+IMX_SOC_REV ?= "A1"
 
 ATF_PLATFORM = "imx93"
 
