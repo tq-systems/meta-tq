@@ -252,6 +252,18 @@ TODO
 
 See [U-Boot environment tools](README.libubootenv.md).
 
+### Chip revision A0/1.0
+
+Early release samples of TQMa93xx use i.MX93 chip revision 1.0.
+[AN13997 Migration Guide from i.MX 93 A0 to A1](https://www.nxp.com/webapp/Download?colCode=AN13997)
+lists differences between A0 to A1 parts. An alternative description is "Sillicon Rev" 1.0 and 2.0 as mentioned in Figure 1 "Part number nomenclature - i.MX93" in Datasheet Rev. 3 12/1023.
+
+A0 and A1 need a different sentinel firmware files, defaulting for A1.
+In order to set the older firmware, add the following line to `conf/local.conf`:
+```
+IMX_SOC_REV = "A0"
+```
+
 ## Support Wiki
 
 See [TQ Embedded Wiki for TQMa93xxCA](https://support.tq-group.com/en/arm/tqma93xxca).
