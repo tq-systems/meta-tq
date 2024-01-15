@@ -99,6 +99,7 @@ SOC_FAMILY:mx9-generic-bsp = "mx9"
 REV_OPTION ?= ""
 REV_OPTION:mx8qxp-generic-bsp = \
     "${@bb.utils.contains('MACHINE_FEATURES', 'soc-revb0', '', 'REV=C0', d)}"
+REV_OPTION:mx93-generic-bsp = "REV=${IMX_SOC_REV}"
 
 ##
 # do assignment for TQMa8Xx[S] / TQMa8x SOM to enable bootstream with M4 demo
