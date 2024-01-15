@@ -104,3 +104,6 @@ BOOTTYPE:tqmls1088a ?= "\
     auto \
     qspi \
 "
+
+# Common image configuration
+require conf/machine/include/tq-image.inc

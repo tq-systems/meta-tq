@@ -90,3 +90,6 @@ UBI_VOLNAME = "root"
 
 BL2_IMAGE ?= "bl2_auto.pbl"
 BL3_IMAGE ?= "fip_uboot.bin"
+
+# Common image configuration
+require conf/machine/include/tq-image.inc

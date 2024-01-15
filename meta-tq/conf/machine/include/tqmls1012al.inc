@@ -95,3 +95,6 @@ WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
 # default RCW with 1 GHz core frequency
 RCWQSPI ?= "default/rcw_1000_sd"
+
+# Common image configuration
+require conf/machine/include/tq-image.inc

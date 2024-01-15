@@ -85,3 +85,6 @@ MACHINE_FEATURES += "\
     usbhost \
     vfat \
 "
+
+# Common image configuration
+require conf/machine/include/tq-image.inc

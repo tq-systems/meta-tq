@@ -75,3 +75,6 @@ MACHINE_FEATURES += "\
 # We have no sound support for now.
 # Remove the alsa feature, which is added by default in meta-ti
 MACHINE_FEATURES:remove = "alsa"
+
+# Common image configuration
+require conf/machine/include/tq-image.inc

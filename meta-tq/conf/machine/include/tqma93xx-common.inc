@@ -104,3 +104,5 @@ UBOOT_SUFFIX:mx93-generic-bsp = "bin"
 UBOOT_SUFFIX:pn-u-boot-imx-tq = "bin"
 IMX_DEFAULT_BOOTLOADER ?= "u-boot-imx-tq"
 
+# Common image configuration
+require conf/machine/include/tq-image.inc

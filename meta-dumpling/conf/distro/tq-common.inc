@@ -43,8 +43,6 @@ VIRTUAL-RUNTIME_initscripts = ""
 # home for root is '/root' and nothing else
 ROOT_HOME ?= "/root"
 
-IMAGE_FSTYPES ?= " tar.gz"
-
 #
 # busybox has prio 50 per default, inetutils has 79
 # ping from iputils should have same features as full featured

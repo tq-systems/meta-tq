@@ -108,3 +108,6 @@ ATF_RCW_VARIANTS ?= " \
 "
 RCWAUTO ?= "default/rcw_1300"
 RCWXSPI ?= "default/rcw_1300"
+
+# Common image configuration
+require conf/machine/include/tq-image.inc

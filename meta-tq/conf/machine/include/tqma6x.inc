@@ -68,3 +68,6 @@ UBI_VOLNAME = "root"
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
 PREFERRED_VERSION_linux-imx-tq ?= "5.15%"
+
+# Common image configuration
+require conf/machine/include/tq-image.inc
