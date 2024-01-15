@@ -23,6 +23,7 @@ SRC_URI = "\
     file://0007-iMX8M-add-mkimage_imx8-wrapper-to-redirect-output.patch \
     file://0008-iMX8M-redirect-more-messages-to-stderr.patch \
     file://0009-iMX8M-print_fit_hab-fix-output-for-symlinked-inputs.patch \
+    file://0010-iMX9-Use-REV-to-select-AHAB_IMG.patch \
 "
 
 SRC_URI:append:mx8m-generic-bsp = "\
