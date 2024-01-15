@@ -81,8 +81,5 @@ UBINIZE_ARGS = "\
 # and u-boot.
 UBI_VOLNAME = "root"
 
-# Do not update fstab file when using wic images
-WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
-
 # Common image configuration
 require conf/machine/include/tq-image.inc

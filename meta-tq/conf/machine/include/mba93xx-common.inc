@@ -4,9 +4,6 @@ require conf/machine/include/tqma93xx-common.inc
 
 # Machine specific options
 
-# Do not update fstab file when using wic images
-WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
-
 WKS_FILE = "tqmaxx-imx-v8-sdimg.wks.in"
 
 # EXTRA_IMAGEDEPENDS are applied to do_image_complete only. do_image_wic may run

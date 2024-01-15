@@ -83,9 +83,6 @@ UBINIZE_ARGS = "\
 # and u-boot.
 UBI_VOLNAME = "root"
 
-# Do not update fstab file when using wic images
-WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
-
 # Composite Image Layout (in KBytes)
 IMAGE_OFFSET_PBL ?= "4"
 IMAGE_OFFSET_FIP ?= "1024"

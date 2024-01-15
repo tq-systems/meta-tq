@@ -27,9 +27,6 @@ EXTRA_IMAGEDEPENDS += "\
     virtual/bootloader \
 "
 
-# Do not update fstab file when using wic images
-WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
-
 WKS_FILE = "tqmaxx-ti-sdimg.wks.in"
 
 # EXTRA_IMAGEDEPENDS are applied to do_image_complete only. do_image_wic may run

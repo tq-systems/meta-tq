@@ -95,9 +95,6 @@ ATF_SECURE_SUFFIX ?= "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sec', 
 BL2_IMAGE ?= "bl2_auto${ATF_SECURE_SUFFIX}.pbl"
 BL3_IMAGE ?= "fip_uboot${ATF_SECURE_SUFFIX}.bin"
 
-# Do not update fstab file when using wic images
-WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
-
 # auto boottype can boot from both eMMC and SD card
 BOOTTYPE ?= "auto flexspi_nor"
 
