@@ -43,10 +43,6 @@ UBOOT_SUFFIX = "img"
 # and forces building this ancient image which forces us to provide this var
 KERNEL_EXTRA_ARGS:prepend = "LOADADDR=${UBOOT_ENTRYPOINT} "
 
-# Image Options
-#
-EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-
 # needs to be set to have it consistent for kernel command line
 # Use the expected value of the ubifs filesystem's volume name in the kernel
 # and u-boot.

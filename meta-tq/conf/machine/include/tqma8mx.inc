@@ -50,8 +50,6 @@ IMAGE_INSTALL:remove = "packagegroup-fsl-optee-imx"
 
 EXTRA_IMAGEDEPENDS += "\
     imx-boot \
-    virtual/bootloader \
-    virtual/kernel \
 "
 
 # Verified values to generate UBI image:

@@ -45,13 +45,6 @@ UBOOT_SUFFIX:mx6-generic-bsp = "imx"
 UBOOT_BINARY:mx6-generic-bsp = "${UBOOT_MAKE_TARGET}"
 IMX_DEFAULT_BOOTLOADER ?= "u-boot-tq"
 
-# Image Options
-
-EXTRA_IMAGEDEPENDS += "\
-    virtual/bootloader \
-    virtual/kernel \
-"
-
 # note: These settings are only usable with larger SPI NOR
 # ubinize PEB_SIZE="65536"
 # ubinize MINIMUM_IO_UNIT_SIZE="1"

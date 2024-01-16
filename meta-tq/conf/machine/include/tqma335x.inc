@@ -41,10 +41,6 @@ UBOOT_SUFFIX = "img"
 # and forces building this ancient image which forces us to provide this var
 KERNEL_EXTRA_ARGS:prepend = "LOADADDR=${UBOOT_ENTRYPOINT} "
 
-# Image Options
-#
-EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-
 # note: These settings are only usable with larger SPI NOR
 # ubinize PEB_SIZE="65536"
 # ubinize MINIMUM_IO_UNIT_SIZE="1"

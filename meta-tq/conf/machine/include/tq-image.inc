@@ -9,3 +9,18 @@ IMAGE_FSTYPES = "tar.gz wic wic.bmap"
 
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
+
+# Always build bootloader and kernel
+#
+# Listing the kernel here is primarily needed for machines that include the
+# kernel in IMAGE_BOOT_FILES. For other machines it would be built by default
+# through KERNEL_DEPLOY_DEPEND anyways even if it is not referenced by the
+# root filesystem.
+EXTRA_IMAGEDEPENDS += " \
+    virtual/bootloader \
+    virtual/kernel \
+"
+
+# EXTRA_IMAGEDEPENDS are applied to do_image_complete only. Make the same
+# dependencies available to do_image_wic was well.
+WKS_FILE_DEPENDS += "${EXTRA_IMAGEDEPENDS}"

@@ -34,10 +34,6 @@ IMAGE_BOOT_FILES = "\
 # direct assignment to override empty default from meta-freescale
 WKS_FILE = "tqmls1088a-sdimg.wks.in"
 
-# EXTRA_IMAGEDEPENDS are applied to do_image_complete only. do_image_wic may run
-# before and needs those packages as well
-WKS_FILE_DEPENDS += "${EXTRA_IMAGEDEPENDS}"
-
 # Install kernel and devicetree also under /boot inside the rootfs,
 # needed for UBIFS use case to prevent extra partition(s) for kernel and dtb.
 MACHINE_EXTRA_RRECOMMENDS += "\

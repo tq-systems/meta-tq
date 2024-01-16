@@ -38,11 +38,8 @@ MACHINE_FEATURES:append = "\
 #
 
 # Add packages we want to be deployed, even when they are not part of rootfs
-# We need these here to support UBI / NFS boot case
 EXTRA_IMAGEDEPENDS += "\
     rcw \
-    virtual/bootloader \
-    virtual/kernel \
     qoriq-atf \
 "
 

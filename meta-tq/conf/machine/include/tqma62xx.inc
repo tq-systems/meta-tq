@@ -33,12 +33,6 @@ MACHINE_EXTRA_RRECOMMENDS += "\
 
 require conf/machine/include/tqmxx.inc
 
-# Image Options
-
-# Add packages we want to be deployed, even when they are not part of rootfs
-# We need these here to support UBI / NFS boot case
-EXTRA_IMAGEDEPENDS += "virtual/bootloader"
-
 MACHINE_FEATURES:remove = "efi"
 EFI_PROVIDER = ""
 

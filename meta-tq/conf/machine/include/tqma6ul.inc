@@ -41,15 +41,6 @@ UBOOT_SUFFIX:mx6ul-generic-bsp = "imx"
 UBOOT_SUFFIX:pn-u-boot-imx-tq = "imx"
 IMX_DEFAULT_BOOTLOADER ?= "u-boot-imx-tq"
 
-# Image Options
-
-# Add packages we want to be deployed, even when they are not part of rootfs
-# We need these here to support UBI / NFS boot case
-EXTRA_IMAGEDEPENDS += "\
-    virtual/bootloader \
-    virtual/kernel \
-"
-
 # Verified values to generate UBI image:
 # physical erase block size
 UBI_PEB_SIZE = "65536"

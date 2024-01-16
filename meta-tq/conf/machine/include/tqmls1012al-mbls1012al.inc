@@ -26,9 +26,5 @@ IMAGE_BOOT_FILES = "\
 # direct assignment to override empty default from meta-freescale
 WKS_FILE = "tqmls1012al-sdimg.wks"
 
-# EXTRA_IMAGEDEPENDS are applied to do_image_complete only. do_image_wic may run
-# before and needs those packages as well
-WKS_FILE_DEPENDS += "${EXTRA_IMAGEDEPENDS}"
-
 UBOOT_CONFIG ?= "tfa"
 UBOOT_CONFIG[tfa] = "tqmls1012al_mbls1012al_tfa_defconfig"

@@ -18,7 +18,3 @@ UBOOT_RCW_CONFIG ??= ""
 
 # direct assignment to override empty default from meta-freescale
 WKS_FILE = "tqmls104xa-sdimg.wks.in"
-
-# EXTRA_IMAGEDEPENDS are applied to do_image_complete only. do_image_wic may run
-# before and needs those packages as well
-WKS_FILE_DEPENDS += "${EXTRA_IMAGEDEPENDS}"

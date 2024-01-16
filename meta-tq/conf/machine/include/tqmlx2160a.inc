@@ -49,15 +49,12 @@ MACHINE_FEATURES:append = "\
 # Image Options
 
 # Add packages we want to be deployed, even when they are not part of rootfs
-# We need these here to support UBI / NFS boot case
 EXTRA_IMAGEDEPENDS += "\
     ddr-phy \
     management-complex \
     mc-utils \
     qoriq-atf \
     rcw \
-    virtual/bootloader \
-    virtual/kernel \
 "
 
 # Verified values to generate UBI image:
