@@ -11,11 +11,15 @@ Releases are named with the following scheme:
 
 ### Added
 
-* TQMa93xx: build UUU compatible boot image
+* TQMa93xx:
+  * support for building for different chip revisions
+  * build UUU compatible boot image
 
 ### Changed
 
 * TQMa93xx:
+  * firmware-sentinel: update to 0.11 to enable support for new i.MX93
+    chip revision
   * linux-imx-tq_6.1:
     * improve pad configuration in device tree
     * improve compatibility to mainboard REV. 020x in device tree
@@ -26,6 +30,7 @@ Releases are named with the following scheme:
     * backport DT changes from linux
     * implement UUU configuration
 * TQMa8 / TQMa93xx:
+  * update imx-boot-tq / imx-mkimage recipes to lf-6.1.55-2.2.0
   * imx-atf-tq_2.8: include NXP changes up to lf-6.1.55-2.2.0 / commit
     08e9d4eef226 ("LF-10644 plat: imx8ulp: drop my name")
 * Bump PREFERRED_VERSION_linux-imx-tq for TQMa8* based machines to 6.1 kernel
