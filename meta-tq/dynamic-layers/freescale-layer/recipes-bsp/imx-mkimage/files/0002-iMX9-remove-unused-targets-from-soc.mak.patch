@@ -1,4 +1,4 @@
-From 32b77b6da365f0bd354a9d17bdcdc2aa86a204ac Mon Sep 17 00:00:00 2001
+From ab1b69becc851495c343ca5a93582fe2f7f736fa Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Wed, 12 Oct 2022 11:01:33 +0200
 Subject: [PATCH] iMX9: remove unused targets from soc.mak
@@ -12,10 +12,10 @@ Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
  1 file changed, 11 deletions(-)
 
 diff --git a/iMX9/soc.mak b/iMX9/soc.mak
-index 23f6f64..43d68e9 100644
+index b17db6b..dc09c8d 100644
 --- a/iMX9/soc.mak
 +++ b/iMX9/soc.mak
-@@ -51,17 +51,6 @@ u-boot-hash.bin: u-boot.bin
+@@ -179,17 +179,6 @@ u-boot-hash.bin: u-boot.bin
  	./$(MKIMG) -commit > head.hash
  	@cat u-boot.bin head.hash > u-boot-hash.bin
  
@@ -31,7 +31,7 @@ index 23f6f64..43d68e9 100644
 -	@rm -f u-boot.its
 -
  u-boot-atf-container.img: bl31.bin u-boot-hash.bin
- 	if [ -f tee.bin ]; then \
+ 	if [ -f $(TEE) ]; then \
  		if [ $(shell echo $(ROLLBACK_INDEX_IN_CONTAINER)) ]; then \
 -- 
 2.25.1

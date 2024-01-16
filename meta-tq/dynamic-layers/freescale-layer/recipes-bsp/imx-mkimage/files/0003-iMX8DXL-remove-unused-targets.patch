@@ -1,4 +1,4 @@
-From 0f70847107b1bd07b5b5de1bd105fb7e72713667 Mon Sep 17 00:00:00 2001
+From caf0fba6c8acc8eea111882d0e730100e6262816 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 22 Nov 2022 07:58:31 +0100
 Subject: [PATCH] iMX8DXL: remove unused targets
@@ -11,7 +11,7 @@ Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
  1 file changed, 7 deletions(-)
 
 diff --git a/iMX8DXL/soc.mak b/iMX8DXL/soc.mak
-index 6542712..47cf426 100755
+index ec6f467..f0ab34b 100755
 --- a/iMX8DXL/soc.mak
 +++ b/iMX8DXL/soc.mak
 @@ -41,13 +41,6 @@ u-boot-atf.bin: u-boot-hash.bin bl31.bin

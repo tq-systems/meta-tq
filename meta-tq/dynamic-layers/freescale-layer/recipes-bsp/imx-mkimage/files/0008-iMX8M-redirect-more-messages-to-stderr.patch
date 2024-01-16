@@ -1,4 +1,4 @@
-From 0aaeeeb9897d52e371edffa41a7aeaf0f34bf9b6 Mon Sep 17 00:00:00 2001
+From 333dd11331a7ea9d785f3fdbb349cdd444cec846 Mon Sep 17 00:00:00 2001
 From: Matthias Schiffer <matthias.schiffer@tq-group.com>
 Date: Fri, 28 Apr 2023 14:00:48 +0200
 Subject: [PATCH] iMX8M: redirect more messages to stderr
@@ -11,7 +11,7 @@ Signed-off-by: Matthias Schiffer <matthias.schiffer@tq-group.com>
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/iMX8M/soc.mak b/iMX8M/soc.mak
-index b43061c..ddb2fcf 100644
+index c65ab82..63adc03 100644
 --- a/iMX8M/soc.mak
 +++ b/iMX8M/soc.mak
 @@ -18,8 +18,8 @@ ARCHIVE_NAME ?= $(shell cat nightly.txt).tar
@@ -25,3 +25,6 @@ index b43061c..ddb2fcf 100644
  
  PRINT_FIT_HAB_OFFSET ?= 0x60000
  DEK_BLOB_LOAD_ADDR = 0x40400000
+-- 
+2.25.1
+

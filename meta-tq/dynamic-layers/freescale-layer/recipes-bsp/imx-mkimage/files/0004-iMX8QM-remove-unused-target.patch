@@ -1,4 +1,4 @@
-From d5e19a9428e5d131aa7fed0042aec9bfbca24ab9 Mon Sep 17 00:00:00 2001
+From 5175f3a71f1a7972a9554fa393c2276ce7507ebc Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 22 Nov 2022 08:00:33 +0100
 Subject: [PATCH] iMX8QM: remove unused target
@@ -11,10 +11,10 @@ Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
  1 file changed, 1 insertion(+), 14 deletions(-)
 
 diff --git a/iMX8QM/soc.mak b/iMX8QM/soc.mak
-index b00dd05..2443909 100755
+index 885f7b9..153c5c3 100755
 --- a/iMX8QM/soc.mak
 +++ b/iMX8QM/soc.mak
-@@ -44,19 +44,6 @@ u-boot-atf-a72.bin: u-boot-a72.bin bl31-a72.bin
+@@ -45,19 +45,6 @@ u-boot-atf-a72.bin: u-boot-a72.bin bl31-a72.bin
  	cp u-boot-atf-a72-hdmi.bin u-boot-atf-a72.bin; \
  	fi
  
@@ -34,7 +34,7 @@ index b00dd05..2443909 100755
  u-boot-atf-container.img: bl31.bin u-boot-hash.bin
  	@if [ -f "hdmitxfw.bin" ] && [ -f "hdmirxfw.bin" ]; then \
  	objcopy -I binary -O binary --pad-to 0x20000 --gap-fill=0x0 hdmitxfw.bin hdmitxfw-pad.bin; \
-@@ -83,7 +70,7 @@ u-boot-atf-container-a72.img: u-boot-atf-a72.bin tee-a72.bin
+@@ -89,7 +76,7 @@ u-boot-atf-container-a72.img: u-boot-atf-a72.bin tee-a72.bin
  
  .PHONY: clean
  clean:

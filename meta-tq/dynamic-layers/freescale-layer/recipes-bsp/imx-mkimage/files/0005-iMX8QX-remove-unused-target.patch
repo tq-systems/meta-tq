@@ -1,4 +1,4 @@
-From e396f491d0b57baf1c8aa0b0c84ef2fdf6d45099 Mon Sep 17 00:00:00 2001
+From e2b162c88c779c39c61698293e6c932d7b301794 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 22 Nov 2022 08:01:13 +0100
 Subject: [PATCH] iMX8QX: remove unused target
@@ -11,10 +11,10 @@ Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
  1 file changed, 7 deletions(-)
 
 diff --git a/iMX8QX/soc.mak b/iMX8QX/soc.mak
-index 590476a..b643ce8 100755
+index 4817f32..f2f7849 100755
 --- a/iMX8QX/soc.mak
 +++ b/iMX8QX/soc.mak
-@@ -38,13 +38,6 @@ u-boot-atf.bin: u-boot-hash.bin bl31.bin
+@@ -40,13 +40,6 @@ u-boot-atf.bin: u-boot-hash.bin bl31.bin
  	@cp bl31.bin u-boot-atf.bin
  	@dd if=u-boot-hash.bin of=u-boot-atf.bin bs=1K seek=128
  
@@ -26,8 +26,8 @@ index 590476a..b643ce8 100755
 -	@rm -f u-boot.its
 -
  u-boot-atf-container.img: bl31.bin u-boot-hash.bin
- 	if [ -f tee.bin ]; then \
- 		if [ $(shell echo $(ROLLBACK_INDEX_IN_CONTAINER)) ]; then \
+ 	if [ -f $(TEE) ]; then \
+ 		if [ $(shell echo $(TEE_COMPRESS_ENABLE)) ]; then \
 -- 
 2.25.1
 

@@ -1,5 +1,8 @@
+# SPDX-License-Identifier: MIT
+#
 # Copyright 2017-2021 NXP
-# Copyright (C) 2021-2023 TQ-Systems GmbH <oss@ew.tq-group.com>, D-82229 Seefeld, Germany.
+# Copyright (c) 2021-2024 TQ-Systems GmbH <oss@ew.tq-group.com>,
+# D-82229 Seefeld, Germany.
 
 DEPENDS = "\
     openssl-native \
@@ -8,9 +11,9 @@ DEPENDS = "\
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRCBRANCH = "lf-5.15.52_2.1.0"
+SRCBRANCH = "lf-6.1.55_2.2.0"
 BRANCH_SPEC = "branch=${SRCBRANCH}"
-SRCREV = "37648c8ba5094420faa8206d8cb8e0c6f17d72fc"
+SRCREV = "c4365450fb115d87f245df2864fee1604d97c06a"
 
 SRC_URI = "\
     git://github.com/nxp-imx/imx-mkimage.git;protocol=https;${BRANCH_SPEC} \
@@ -23,7 +26,6 @@ SRC_URI = "\
     file://0007-iMX8M-add-mkimage_imx8-wrapper-to-redirect-output.patch \
     file://0008-iMX8M-redirect-more-messages-to-stderr.patch \
     file://0009-iMX8M-print_fit_hab-fix-output-for-symlinked-inputs.patch \
-    file://0010-iMX9-Use-REV-to-select-AHAB_IMG.patch \
 "
 
 SRC_URI:append:mx8m-generic-bsp = "\
