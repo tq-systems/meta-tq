@@ -55,11 +55,3 @@ def create_image_boot_dtb_files(d):
 # this instructs bitbake to take the dependency established with the
 # above function into account when calculating hashes for IMAGE_BOOTFILES
 IMAGE_BOOT_FILES[vardeps] = "KERNEL_DEVICETREE"
-
-# Tools needed to construct the wic file
-WKS_FILE_DEPENDS += "\
-    dosfstools-native \
-    e2fsprogs-native \
-    mtools-native \
-    parted-native \
-"
