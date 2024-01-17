@@ -16,8 +16,11 @@ CPU mask revisions 1.0 and older are protoypes and have additional erratas.
 ## Version information for software components
 
 * U-Boot based on v2023.04 and NXP vendor BSP
-* Linux based on v6.1.y and NXP vendor BSP
-* TF-A based on v2.8 ands NXP vendor BSP
+  (https://github.com/nxp-imx/uboot-imx.git, tag lf-6.1.55-2.2.0)
+* Linux based on v6.1.y and NXP vendor BSP base community fork
+  (https://github.com/Freescale/linux-fslc.git)
+* TF-A based on v2.8 and NXP vendor BSP
+  (https://github.com/nxp-imx/imx-atf.git, tag lf-6.1.55-2.2.0)
 
 ## Supported machine configurations
 
