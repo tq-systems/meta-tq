@@ -9,6 +9,13 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Fixed
+
+* Fixed compatiblity Weston with the AM335x SGX GPU driver
+
+  Import a patch from TI's meta-arago to make the `GL_EXT_unpack_subimage`
+  dependency optional again.
+
 ## kirkstone.TQ.ARM.BSP.0015
 
 ### Module BSP Revisions
@@ -51,7 +58,7 @@ Releases are named with the following scheme:
 
 * kirkstone.TQMLS1028A.BSP.SW.0109
 
-## Added
+### Added
 
 * TQMLS104xA: Append wic.bootonly and wic.bootonly.pblvariant to IMAGE_FSTYPES to
   build images for RAM variants.
