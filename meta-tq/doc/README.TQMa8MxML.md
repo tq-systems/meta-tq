@@ -129,8 +129,12 @@ _MBa8Mx HW Rev.030x only_
 
 ## Important Notes
 
-* UART4: needs ATF modification, to make it usable for linux. Primary used as
-  debug UART for Cortex M7. Modification is available with current ATF version.
+* UART4: Primarily used as debug UART for Cortex M4. Modification in file
+  `plat/imx/imx8m/imx8mm/imx8mm_bl31_setup.c` removed the exclusive
+  RDC reservation from default NXP TF-A.
+* UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle[-nxp]`.
+  The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
+  `UBI_MAX_LEB_COUNT` on machine level.
 * MBa8Mx before REV.0300 is not supported.
 
 ## Known Issues
@@ -160,13 +164,6 @@ _MBa8Mx HW Rev.030x only_
     of the driver stack. Please follow given examples for a working setup.
   * IMX327: bayer support with 12 Bit does not work at the moment, only 10 Bit with
     1280x720 is tested with gstreamer
-* UBI / UBIFS images will not be built out of the box since `imx-base.inc` from
-  meta-freescale override machine specific assignment for `MACHINE_FEATURES`.
-  Use following bitbake assignment in one of your `local.conf` / `auto.conf` /
-  `<machine>.conf` files:
-  ```
-  MACHINE_FEATURES:append = " ubi"
-  ```
 
 ## Build Artifacts
 
@@ -377,20 +374,6 @@ mmc write ${loadaddr} 42 ${bsz}
 ```
 
 ### Bootable QSPI NOR
-
-To build bootstream adapt yocto configuration, modify _local.conf_ or machine
-config file:
-
-```
-UBOOT_CONFIG:tqma8mxml = "fspi"
-IMXBOOT_TARGETS:tqma8mxml = "flash_evk_flexspi"
-```
-
-Rebuild boot stream:
-
-```
-bitbake imx-boot
-```
 
 To create a bootable QSPI NOR with boot stream only (file name see above)
 
