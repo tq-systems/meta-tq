@@ -124,18 +124,19 @@ _MBa8x HW Rev.030x only_
 
 ## Important Notes
 
-* UART4: needs ATF modification, to make it usable for linux. Primary used as
-  debug UART for Cortex M7. Modification needed in file
-  `plat/imx/imx8m/imx8mn/imx8mn_bl31_setup.c`. Disable assignment of UART4 -
-  delete statement `	RDC_PDAPn(RDC_PDAP_UART4, D1R | D1W),` in rdc configuration
-  table.
+* UART4: Primarily used as debug UART for Cortex M7. Modification in file
+  `plat/imx/imx8m/imx8mn/imx8mn_bl31_setup.c` removed the exclusive
+  RDC reservation from default NXP TF-A.
+* UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle[-nxp]`.
+  The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
+  `UBI_MAX_LEB_COUNT` on machine level.
 * USB: see [USB Howto](#usb)
 * MBa8Mx before REV.0300 is not supported.
 
 ## Known Issues
 
 * U-Boot: mfgtool config fails to write image to eMMC / SD with error -19.
-  The USB gadget is not enabled in U-Boot spacific device tree part. To make it
+  The USB gadget is not enabled in U-Boot specific device tree part. To make it
   work it is needed to add the following changes to
   `arch/arm/dt/imx8mn-mba8mx-u-boot.dtsi`:
   ```
@@ -159,13 +160,6 @@ _MBa8x HW Rev.030x only_
     capture again
   * OV9281: gstreamer: capture not starting out of the box, need to use  `yavta` to
     capture some frames, `gstreamer` starts afterwards
-* UBI / UBIFS images will not be built out of the box since `imx-base.inc` from
-  meta-freescale override machine specific assignment for `MACHINE_FEATURES`.
-  Use following bitbake assignment in one of your `local.conf` / `auto.conf` /
-  `<machine>.conf` files:
-  ```
-  MACHINE_FEATURES:append = " ubi"
-  ```
 
 ## Build Artifacts
 
