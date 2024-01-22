@@ -37,6 +37,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TQMa335x: linux-ti-tq_5.1: add fixes for display flickering/tearing
+  under load
 * TQMa93xx: linux-imx-tq_6.1: correct CMA alloc ranges in DTB
 * Fix non-deterministic localversion for linux-tq, u-boot-tq recipes
 
