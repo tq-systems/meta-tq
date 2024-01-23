@@ -14,7 +14,7 @@ LOADADDR = ""
 
 # Machine specific options
 
-MACHINE_FEATURES:append = " pci can"
+MACHINE_FEATURES:append = " can npu pci"
 
 # Set DDR FIRMWARE
 DDR_FIRMWARE_NAME = "\
