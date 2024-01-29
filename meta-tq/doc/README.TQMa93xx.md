@@ -125,13 +125,21 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 * MIPI-DSI
 * MIPI-CSI
 * WiFi (driver and firmware loading OK, needs additional testing)
+* Bluetooth firmware on MBa93xxLA does not initialize
 * Cortex M33 (prerelease on request)
-* LPB Booot modes
+* LPB Boot modes
+* DVFS not implemented
+
+## Important Notes
+
+* U-Boot: USB Type-C port (X17) is usable as device-only under U-Boot
 
 ## Known Issues
 
 * CPU mask 1.0 and older print an error when loading Edglock driver. Driver loads successful
   but the system may lack secure boot features.
+* Not all USB sticks are detected properly in U-Boot
+* eth1 does not work after suspend, needs `ip link set down/up dev eth1` to be functional
 
 ## Build Artifacts
 
