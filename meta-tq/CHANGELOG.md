@@ -9,6 +9,16 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+### Changed
+
+* linux-imx-tq_6.1:
+  * Enable CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS for better support for
+    PIE post-mortem debugging
+
+### Fixed
+
 ## kirkstone.TQ.ARM.BSP.0016
 
 ### Module BSP Revisions
