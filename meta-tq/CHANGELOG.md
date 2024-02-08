@@ -11,6 +11,9 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa8MPxL: NPU support
+  * Installs tensorflow-lite when meta-freescale-ml is added
+
 ### Changed
 
 * linux-imx-tq_6.1:
