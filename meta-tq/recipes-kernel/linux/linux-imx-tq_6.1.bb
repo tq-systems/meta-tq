@@ -9,12 +9,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
 require linux-imx-tq-common.inc
 
-KBRANCH = "TQMa-fslc-6.1-2.0.x-imx"
-SRCREV = "a22088eb2d12fb85cabe8c2c3e907638de052634"
+KBRANCH = "TQMa-fslc-6.1-2.2.x-imx"
+SRCREV = "744734f393fa9cf47470c944b465cd8a912e6700"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "6.1"
-LINUX_VERSION = "${LINUX_RELEASE}.38"
+LINUX_VERSION = "${LINUX_RELEASE}.70"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 FILESEXTRAPATHS:prepend:aarch64:imx-nxp-bsp := "${THISDIR}/${PN}-${LINUX_RELEASE}/imx-arm64:"
