@@ -9,6 +9,17 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* README.md: add license and copyright header
+* Add Tensorflow Lite VX delegate for i.MX8M Plus platforms
+* distro: dumpling: Add 'npu' DISTRO_FEATURE
+* add packagegroup and machine feature for NPU
+
+### Changed
+
+* README.md: update patches section
+
 ## kirkstone.TQ.ARM.BSP.0016
 
 ### Module BSP Revisions
