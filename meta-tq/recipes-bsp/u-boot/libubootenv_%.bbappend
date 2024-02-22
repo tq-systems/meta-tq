@@ -1,5 +1,5 @@
 # install config file for U-Boot env tools
-RDEPENDS:${PN} += "u-boot-default-env"
+RSUGGESTS:${PN} += "u-boot-default-env"
 
 # This should be removed when all machines supported by meta-tq can use
 # libubootenv
