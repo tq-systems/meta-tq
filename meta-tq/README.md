@@ -1,3 +1,10 @@
+<!---
+SPDX-License-Identifier: CC-BY-4.0
+
+Copyright (c) 2016-2024 TQ-Systems GmbH <oss@ew.tq-group.com>,
+D-82229 Seefeld, Germany.
+--->
+
 # OpenEmbedded/Yocto hardware support layer for TQ-Systems ARM SOM
 
 This README file contains information on the contents of the meta-tq layer.
