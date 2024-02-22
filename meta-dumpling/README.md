@@ -1,3 +1,10 @@
+<!---
+SPDX-License-Identifier: CC-BY-4.0
+
+Copyright (c) 2018-2024 TQ-Systems GmbH <oss@ew.tq-group.com>,
+D-82229 Seefeld, Germany.
+--->
+
 # OpenEmbedded / Yocto Project evaluation BSP layer for TQ-Systems ARM SOM
 
 This README file contains information on the content of the meta-dumpling layer.
