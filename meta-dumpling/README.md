@@ -53,12 +53,11 @@ from openembedded.
 
 ### Patches
 
-Please submit patches against the meta-dumpling layer to the
-maintainer:
+Please submit patches against the meta-dumpling layer via github's collaboration
+features.
 
-Maintainer: Markus Niebel <Markus.Niebel@tq-group.com>
-
-Additionally you can use github's collaboration features.
+Additionally, you can send patches to the maintenance team by email:
+<oss@ew.tq-group.com>
 
 ## Usage
 
