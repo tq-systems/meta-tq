@@ -19,7 +19,7 @@ Releases are named with the following scheme:
 
 * README.md: update patches section
 * linux-imx-tq_6.1:
-  * Enable CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS for better support for
+  * Enable `CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS` for better support for
     PIE post-mortem debugging
 
 ### Fixed
