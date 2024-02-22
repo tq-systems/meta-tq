@@ -11,16 +11,20 @@ Releases are named with the following scheme:
 
 ### Added
 
+* README.md: add license and copyright header
 * TQMa8MPxL: NPU support
   * Installs tensorflow-lite when meta-freescale-ml is added
 
 ### Changed
 
+* README.md: update patches section
 * linux-imx-tq_6.1:
   * Enable CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS for better support for
     PIE post-mortem debugging
 
 ### Fixed
+
+* linux-firmware: packaging fix for versions >=20231030
 
 ## kirkstone.TQ.ARM.BSP.0016
 
