@@ -24,6 +24,12 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TQMa57xx:
+  * u-boot-tq-2019.04:
+    * Make the `run netboot` command work
+    * Do not attempt to load the environment from devices other than the
+      boot source
+    * Fix the SPI-NOR partition list
 * linux-firmware: packaging fix for versions >=20231030
 
 ## kirkstone.TQ.ARM.BSP.0016
