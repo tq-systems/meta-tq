@@ -3,7 +3,6 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 SRC_URI:append = "\
     file://enable-BEEP.cfg \
-    file://enable-CHAT.cfg \
     file://enable-DEVMEM.cfg \
     file://enable-VERBOSE_USAGE.cfg \
     file://enable-DD_ALL_FEATURES.cfg \
