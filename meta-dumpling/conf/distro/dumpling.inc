@@ -3,7 +3,13 @@ require tq-common.inc
 
 DISTRO_SHORT_NAME = "dumpling"
 DISTRO_FEATURES_DEFAULT:remove = "argp irda pcmcia zeroconf x11"
-DISTRO_FEATURES = "${DISTRO_FEATURES_DEFAULT} npu opengl systemd"
+DISTRO_FEATURES = "${DISTRO_FEATURES_DEFAULT}"
+DISTRO_FEATURES += "\
+    npu \
+    opengl \
+    ppp \
+    systemd \
+"
 
 # add some locales per default
 IMAGE_LINGUAS:append = " de-de en-us"
