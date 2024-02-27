@@ -34,9 +34,9 @@ python create_additional_wic_images() {
     imgsuffix = d.getVar("IMAGE_NAME_SUFFIX")
     bl_images = d.getVar('EXTWIC_BOOTLOADER_IMAGES')
     wicfile = os.path.join(deploy_dir, img_name + imgsuffix + ".wic")
-    offset = d.getVar('RAW_BOOT_START_OFFSET_KB')
-    end = d.getVar('RAW_BOOT_END_OFFSET_KB')
-    size = int(end) - int(offset)
+    offset = int(d.getVar('RAW_BOOT_START_OFFSET_KB'))
+    end = int(d.getVar('RAW_BOOT_END_OFFSET_KB'))
+    size = end - offset
     dd_replacement_args = [f'seek={offset}', f'count={size}', 'bs=1k', 'conv=notrunc']
 
     # nothing to do for empty IMAGE_FSTYPES or 'wic' not in IMAGE_FSTYPES
@@ -60,14 +60,35 @@ python create_additional_wic_images() {
         bb.fatal("class 'gen_additional_wic' requires 'RAW_BOOT_START_OFFSET_KB' and  'RAW_BOOT_END_OFFSET_KB'")
     offset = int(d.getVar('RAW_BOOT_START_OFFSET_KB', True))
     end = int(d.getVar('RAW_BOOT_END_OFFSET_KB', True))
-    if not offset < end:
+    if size <= 0:
         bb.fatal("class 'gen_additional_wic' requires 'RAW_BOOT_END_OFFSET_KB' > 'RAW_BOOT_START_OFFSET_KB'")
 
+    wks_file = d.getVar('WKS_TEMPLATE_PATH', expand=True)
+    base, ext = os.path.splitext(wks_file)
+    if ext == '.in' and os.path.exists(wks_file):
+        with open(wks_file, 'r') as f:
+            content = f.read()
+            if "--offset ${RAW_BOOT_START_OFFSET_KB}K" not in content:
+                bb.warn("'RAW_BOOT_START_OFFSET_KB' not used in template 'WKS_FULL_PATH'. Do nothing")
+                return
+            if "--offset ${RAW_BOOT_END_OFFSET_KB}K" not in content:
+                bb.warn("'RAW_BOOT_END_OFFSET_KB' not used in template 'WKS_FULL_PATH'. Do nothing")
+                return
+    else:
+        bb.warn("class 'gen_additional_wic' requires 'WKS_FILE' to be a template. Do nothing")
+        return
+
+    import math
     import subprocess
     bl_images = bl_images.split()
     for bl_image in bl_images:
         outfile = os.path.join(deploy_dir, img_name + "-" + os.path.basename(bl_image) + imgsuffix + ".wic")
         bl_image_file = os.path.join(d.getVar('DEPLOY_DIR_IMAGE'), bl_image)
+        bl_image_size = os.path.getsize(bl_image_file)
+        if math.floor((bl_image_size + 1023) / 1024) > size:
+            bb.warn("size (%d) of %s is to large. Skipping" % (bl_image_size, bl_image_file))
+            continue
+
         bb.utils.copyfile(wicfile, outfile)
         subprocess.run(['dd', 'if=/dev/zero', f'of={outfile}'] + dd_replacement_args, capture_output=True)
         subprocess.run(['dd', f'if={bl_image_file}', f'of={outfile}'] + dd_replacement_args,  capture_output=True)
