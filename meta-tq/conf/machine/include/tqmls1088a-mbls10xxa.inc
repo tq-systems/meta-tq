@@ -45,8 +45,6 @@ MACHINE_EXTRA_RRECOMMENDS += "\
     kernel-image \
 "
 
-WICVARS:append = " RCWIMG MC_DPL MC_DPC"
-
 UBOOT_CONFIG ?= "tfa"
 UBOOT_CONFIG[tfa] = "tqmls1088a_mbls10xxa_tfa_defconfig"
 

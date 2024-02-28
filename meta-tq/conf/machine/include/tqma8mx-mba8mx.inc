@@ -36,5 +36,3 @@ IMXBOOT_TARGETS ?= "\
 # do_deploy
 #
 MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-${IMXBOOT_SDMMC_HDMI_TARGET}"
-# append to prevent overwriting default assignment
-WICVARS:append = " MACHINE_WKS_BOOTSTREAM"
