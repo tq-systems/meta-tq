@@ -31,11 +31,13 @@ _Kernel:_
 
 * USB 3 storage devices do not work in U-Boot. Attempting to run `usb start` or
   `usb reset` when such a device is connected leads to a crash of U-Boot.
+* In U-Boot, only a single Ethernet port can be used (X52)
 * The SPI-NOR flash partition layout used by Linux is outdated. It does not
   match the partitions used by U-Boot for environment storage when booting from
   SPI-NOR.
 * SPI-NOR boot support is incomplete. No scripts for programming U-Boot to the
   flash or booting an Operating System are provided.
+* The Mini PCIe slot does not work.
 * The CAN interfaces do not work at the default bitrate of 500kBit/s and higher.
   A lower bitrate like 250 or 100kBit/s must be configured.
 * The audio interface of the MBa57xx is unsupported.
