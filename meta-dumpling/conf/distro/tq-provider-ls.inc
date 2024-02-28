@@ -14,5 +14,8 @@ BOOTONLY_IMAGE_FSTYPES = "\
     wic.bootonly.pblvariant \
 "
 
-IMAGE_FSTYPES:tqmls10xxa += "wic.bootonly"
-IMAGE_FSTYPES:tqmlx2160a += "${BOOTONLY_IMAGE_FSTYPES}"
+EXTRA_IMAGE_FSTYPES = ""
+EXTRA_IMAGE_FSTYPES:tqmls10xxa = "wic.bootonly"
+EXTRA_IMAGE_FSTYPES:tqmlx2160a = "${BOOTONLY_IMAGE_FSTYPES}"
+
+IMAGE_FSTYPES += "${EXTRA_IMAGE_FSTYPES}"
