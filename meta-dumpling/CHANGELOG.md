@@ -11,6 +11,9 @@ Releases are named with the following scheme:
 
 ### Added
 
+* distros: dumpling: add `ppp` to `DISTRO_FEATURES`. This will install `ppp` and dependencies
+  unconditionally through the selection of `packagegroup-base-ppp`. This allows easy testing
+  of modem cards for GSM/LTE for IoT communication with default images.
 * README.md: add license and copyright header
 * Add Tensorflow Lite VX delegate for i.MX8M Plus platforms
 * distro: dumpling: Add 'npu' DISTRO_FEATURE
@@ -19,6 +22,12 @@ Releases are named with the following scheme:
 ### Changed
 
 * README.md: update patches section
+
+### Removed
+
+* busybox: To prevent conflicts with `chat` program which can be installed as
+  dependency of `ppp` in `DISTRO_FEATURES`the selection of the `chat` applet
+  is removed from `busybox` config patches.
 
 ## kirkstone.TQ.ARM.BSP.0016
 
