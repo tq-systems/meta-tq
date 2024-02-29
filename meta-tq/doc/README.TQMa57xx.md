@@ -37,6 +37,8 @@ _Kernel:_
   SPI-NOR.
 * SPI-NOR boot support is incomplete. No scripts for programming U-Boot to the
   flash or booting an Operating System are provided.
+* Booting with an additional Ethernet adapter connected via PCIe causes the
+  onboard interfaces (eth0-3) to change their names
 * The Mini PCIe slot does not work.
 * The CAN interfaces do not work at the default bitrate of 500kBit/s and higher.
   A lower bitrate like 250 or 100kBit/s must be configured.
