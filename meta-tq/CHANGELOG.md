@@ -17,6 +17,15 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* treewide: Consistently set `IMAGE_FSTYPES` in all machine includes
+
+  All our TQ module machine configs now consistently set
+  `IMAGE_FSTYPES = "tar.gz wic wic.bmap"`, instead of having varying defaults
+  for each SoC and sometimes depending on the included vendor layers.
+
+  To generate different image types, `IMAGE_FSTYPES` can be modified in a
+  custom machine, distro, or in `local.conf`.
+
 * README.md: update patches section
 * linux-imx-tq_6.1:
   * Enable `CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS` for better support for
