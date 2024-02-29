@@ -9,6 +9,12 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQ.ARM.BSP.0017
+
+### Module BSP Revisions
+
+* kirkstone.TQMa57xx.BSP.SW.0015
+
 ### Added
 
 * distros: dumpling: add `ppp` to `DISTRO_FEATURES`. This will install `ppp` and dependencies
