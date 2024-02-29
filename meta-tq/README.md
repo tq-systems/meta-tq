@@ -246,8 +246,13 @@ Support for the following machines is contained in this version:
 
 ### Support for wic
 
-To generate bootable images for SD / e-MMC wic is supported. Config files are
-located in wic directory. Machine files are preconfigured to generate wic images.
+All machines in meta-tq are preconfigured to generate bootable SD/eMMC images
+using wic. Config files are located in wic directory.
+
+To generate images in different formats or disable wic image generation,
+`IMAGE_FSTYPES` can be set in a custom machine configuration, distro, or in
+`local.conf` (in `local.conf`, an override like `IMAGE_FSTYPES:forcevariable`
+is needed for the setting to take precedence).
 
 ### Support custom mainboards
 
