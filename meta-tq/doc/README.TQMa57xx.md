@@ -26,8 +26,8 @@ _Kernel:_
   the following settings to local.conf to select the older kernel 5.4, where
   display support was available:
 
-    PREFERRED_VERSION_linux-ti-tq = "5.4%"
-    TI_SGX_DDK_KM_KERNVER = "5.4"
+      PREFERRED_VERSION_linux-ti-tq = "5.4%"
+      TI_SGX_DDK_KM_KERNVER = "5.4"
 
 * USB 3 storage devices do not work in U-Boot. Attempting to run `usb start` or
   `usb reset` when such a device is connected leads to a crash of U-Boot.
