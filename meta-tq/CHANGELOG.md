@@ -9,6 +9,20 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* TQMa7x: add new machine supporting multiple RAM variants
+  The new machine `tqma7x-multi-mba7` was added. The machine uses bitbake
+  class `gen_additional_wic` to allow building additional wic images for
+  SoM variants. These variants differing only in RAM configuration
+  part of bootloader, exchanging the boot image in wic saves
+  additional machine definitions and build time for CI.
+
+### Removed:
+
+* TQMa7x: machines supporting single RAM variants
+  These machines are superseded by `tqma7x-multi-mba7`.
+
 ## kirkstone.TQ.ARM.BSP.0018
 
 ### Module BSP Revisions
@@ -31,6 +45,12 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa8Mx / TQMa8MxML: add new machines supporting multiple RAM variants
+  New machines `tqma8mx-multi-mba8mx` and `tqma8mxml-multi-mba8mx` were added.
+  The machines using bitbake class `gen_additional_wic` to allow building
+  additional wic images for different RAM configurations. These variants
+  differing only in RAM configuration part of bootloader, exchanging the
+  boot image in wic saves additional machine definitions and build time for CI.
 * README.md: add license and copyright header
 * TQMa8MPxL: NPU support
   * Installs tensorflow-lite when meta-freescale-ml is added
@@ -60,6 +80,12 @@ Releases are named with the following scheme:
       boot source
     * Fix the SPI-NOR partition list
 * linux-firmware: packaging fix for versions >=20231030
+
+### Removed:
+
+* TQMa8Mx / TQMa8MxML: machines supporting single RAM variants
+  These machines are superseded by `tqma8mx-multi-mba8mx` and
+  `tqma8mxml-multi-mba8mx`.
 
 ## kirkstone.TQ.ARM.BSP.0016
 
