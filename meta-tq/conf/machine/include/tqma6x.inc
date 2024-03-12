@@ -60,4 +60,7 @@ UBI_VOLNAME = "root"
 PREFERRED_VERSION_linux-imx-tq ?= "5.15%"
 
 # Common image configuration
+RAW_BOOT_START_OFFSET_KB = "1"
+RAW_BOOT_END_OFFSET_KB = "1024"
+
 require conf/machine/include/tq-image.inc

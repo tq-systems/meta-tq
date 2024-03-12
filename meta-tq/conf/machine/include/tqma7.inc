@@ -72,4 +72,7 @@ UBINIZE_ARGS = "\
 UBI_VOLNAME = "root"
 
 # Common image configuration
+RAW_BOOT_START_OFFSET_KB = "1"
+RAW_BOOT_END_OFFSET_KB = "1024"
+
 require conf/machine/include/tq-image.inc

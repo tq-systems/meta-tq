@@ -9,14 +9,17 @@
 #  - ---------- -------------- -------- --------- ------------- ------
 # ^ ^          ^              ^        ^         ^             ^
 # | |          |              |        |         |             |
-# 0 1KiB      1MiB           2MiB     4MiB       |         variable
+# 0 |          |             2MiB     4MiB       |         variable
+#   |         ${RAW_BOOT_END_OFFSET_KB}          |
+#  ${RAW_BOOT_START_OFFSET_KB}                   |
+#  see CPU reference manual                      |
 #                                                |
 #                                              4MiB + 32 MiB * overhead-factor
 #                                              (default: `--overhead-factor=1.3`),
 #                                              alignment 4 MiB (managed NAND)
 #
-part u-boot --source rawcopy --sourceparams="file=${MACHINE_WKS_BOOTSTREAM}" --no-table --offset 1K --fixed-size 1023K
-part u-boot-env --no-table --offset 1M --fixed-size 1M
+part u-boot --source rawcopy --sourceparams="file=${MACHINE_WKS_BOOTSTREAM}" --no-table --offset ${RAW_BOOT_START_OFFSET_KB}K
+part u-boot-env --no-table --offset ${RAW_BOOT_END_OFFSET_KB}K --fixed-size 1M
 part resvd --no-table --offset 2M --fixed-size 2M
 part /boot --source bootimg-partition --fstype=vfat --label boot --active --offset 4M --size 32M
 part / --source rootfs --fstype=ext4 --label root --align 4096
