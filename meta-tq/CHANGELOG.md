@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* TQMLX2160A:
+  * linux: Added support for Linux 6.1.y
+
 ## kirkstone.TQ.ARM.BSP.0017
 
 ### Module BSP Revisions
