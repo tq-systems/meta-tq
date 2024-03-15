@@ -3,6 +3,7 @@ From: Chunrong Guo <chunrong.guo@nxp.com>
 Date: Tue, 16 Apr 2019 10:55:42 +0200
 Subject: [PATCH] glibc: support e5500 and e6500
 
+Upstream-Status: Pending
 Signed-off-by: C.r. Guo <nxa13725@lsv07005.swis.us-cdc01.nxp.com>
 ---
  sysdeps/powerpc/powerpc64/be/e5500/Implies       |   1 +
