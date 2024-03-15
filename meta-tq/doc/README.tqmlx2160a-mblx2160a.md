@@ -54,8 +54,8 @@ OFF 	X   X X
 * Based on Tag lx2160a-early-access-bsp0.7
 
 ### Linux
-* Linux 5.4.33 based on https://github.com/nxp-qoriq/linux
-* Based on Tag LSDK-20.04-V5.4-update-290520
+* based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/)
+* branched from linux-6.1.y
 
 ## Supported Interfaces:
 
