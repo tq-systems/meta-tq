@@ -15,8 +15,7 @@ GST_PKGS = "\
     gstreamer1.0-plugins-bad-kms \
     gstreamer1.0-plugins-base-tcp \
     gstreamer1.0-plugins-base-typefindfunctions \
-    gstreamer1.0-plugins-base-videoconvert \
-    gstreamer1.0-plugins-base-videoscale \
+    gstreamer1.0-plugins-base-videoconvertscale \
     gstreamer1.0-plugins-base-videotestsrc \
     gstreamer1.0-plugins-good-meta \
     gstreamer1.0-plugins-good-multifile \
