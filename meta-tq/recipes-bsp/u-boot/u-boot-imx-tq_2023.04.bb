@@ -8,7 +8,7 @@ DESCRIPTION = "U-Boot for TQ-Systems GmbH NXP i.MX9 based SOM"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=2ca5f2c35c8cc335f0a19756634782f1"
 
-SRCREV = "2548f8d7eff24685500af398e03b832d6d554adc"
+SRCREV = "f80b2ddaf200741abfd2c650580a8cf319dc18d4"
 SRCBRANCH = "TQM-lf_v2023.04"
 
 SRC_URI = "\
