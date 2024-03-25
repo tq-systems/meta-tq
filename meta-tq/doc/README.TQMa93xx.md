@@ -6,9 +6,9 @@ This README contains some useful information for TQMa93xxCA and TQMa93xxLA
 
 ## Variants
 
-* TQMa93xxCA REV.010x on MBa93xxCA REV.020x
-* TQMa93xxLA REV.010x on MBa93xxCA REV.020x
-* TQMa93xxLA REV.010x on MBa93xxLA REV.020x
+* TQMa93xxCA REV.010x on MBa93xxCA REV.020x (1 / 2 GiB RAM)
+* TQMa93xxLA REV.010x on MBa93xxCA REV.020x (1 / 2 GiB RAM)
+* TQMa93xxLA REV.010x on MBa93xxLA REV.020x (1 / 2 GiB RAM)
 
 __Note__: Depending on the SoM revision different CPU mask variants may be assembled.
 CPU mask revisions 1.0 and older are protoypes and have additional erratas.
@@ -35,7 +35,7 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 
 | Feature                                          | MBa93xxCA  REV.020x   | MBa93xxLA  REV.020x   |
 | :----------------------------------------------: | :-------------------: | :-------------------: |
-| RAM configs                                      |  1 GiB                |   1 GiB               |
+| RAM configs                                      |     1 / 2 GiB         |     1 / 2 GiB         |
 | CPU variants                                     |     i.MX93            |     i.MX93            |
 | Fuses / OCRAM                                    |       x               |       x               |
 | speed grade / temperature grade detection        |       x               |       x               |
@@ -78,7 +78,7 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 
 |                           Feature                            | linux-imx-tq_5.15 | linux-imx-tq_6.1 |
 |:------------------------------------------------------------:|:-----------------:|:----------------:|
-|                         RAM configs                          |       1 GiB       |       1 GiB      |
+|                         RAM configs                          |     1 / 2 GiB     |     1 / 2 GiB    |
 |                         CPU variants                         |      i.MX93       |      i.MX93      |
 |                        Fuses / OCRAM                         |                   |         x        |
 |          speed grade / temperature grade detection           |                   |                  |
@@ -127,8 +127,10 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 * WiFi (driver and firmware loading OK, needs additional testing)
 * Bluetooth firmware on MBa93xxLA does not initialize
 * Cortex M33 (prerelease on request)
+* NPU (prerelease on request)
 * LPB Boot modes
 * DVFS not implemented
+* optee support
 
 ## Important Notes
 
@@ -139,7 +141,11 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 * CPU mask 1.0 and older print an error when loading Edglock driver. Driver loads successful
   but the system may lack secure boot features.
 * Not all USB sticks are detected properly in U-Boot
+* Using `usb reset` in U-Boot will give a warning from Type-C port controller.
 * eth1 does not work after suspend, needs `ip link set down/up dev eth1` to be functional
+* When using `i2c probe` command in U-Boot all valid addresses respond instead of addresses
+  used by a physical connected device.
+* Some Linux kernel boot warnings regarding missing optional supplies in DTB.
 
 ## Build Artifacts
 
@@ -170,9 +176,9 @@ BOOT\_MODE can be configured using DIP switch S1.
 | 0001     | Serial Downloader     | OFF  | OFF  | OFF  | ON   |
 | 0010     | e-MMC (USDHC1)        | OFF  | OFF  | ON   | OFF  |
 | 0011     | SD Card (USDHC2)      | OFF  | OFF  | ON   | ON   |
-| 0100     | QSPI (FlexSPI NOR     | OFF  | ON   | OFF  | OFF  |
+| 0100     | QSPI (FlexSPI NOR)    | OFF  | ON   | OFF  | OFF  |
 
-**NOTE:** LPB boot modes not supported yet.
+**NOTE:** LPB boot modes not supported / tested yet.
 
 ## Boot device initialisation and update
 
