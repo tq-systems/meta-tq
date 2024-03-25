@@ -9,8 +9,17 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQ.ARM.BSP.0018
+
+### Module BSP Revisions
+
+* kirkstone.TQMa93xx.BSP.SW.0002
+
 ### Changed
 
+* TQMa93xx[CA,LA]: u-boot-imx-tq_2023.04:
+  * add support for 2 GiB SoM variants
+  * add timing with multiple frequency set points
 * TQMLX2160A:
   * linux: Added support for Linux 6.1.y
 
