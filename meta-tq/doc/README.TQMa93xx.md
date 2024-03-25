@@ -129,12 +129,13 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 * Cortex M33 (prerelease on request)
 * NPU (prerelease on request)
 * LPB Boot modes
-* DVFS not implemented
 * optee support
 
 ## Important Notes
 
 * U-Boot: USB Type-C port (X17) is usable as device-only under U-Boot
+* DVFS is not supported using cpu-freq framework. See [here](#frequency-scaling)
+  on how to use frequency scaling
 
 ## Known Issues
 
@@ -191,6 +192,18 @@ See [here](./README.TQMa8.UUU.md) for details about using Serial Download mode a
 
 ## Howto
 
+### Frequency scaling
+
+*Attention*: only with CPU stepping A1! Older variants will stall due to CPU
+errata.
+
+To change CPU frequency the lpm-driver is to be used via sysfs.
+
+Switch between Overdrive and Normal Drive mode use:
+
+```
+echo [0,1] > /sys/devices/platform/imx93-lpm/mode
+```
 
 ### Display Support
 
