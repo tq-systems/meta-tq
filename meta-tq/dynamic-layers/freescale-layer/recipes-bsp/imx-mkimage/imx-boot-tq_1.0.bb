@@ -58,6 +58,9 @@ do_compile[depends] += "\
 
 SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
 
+OEI_ENABLE = "${@bb.utils.contains('DEPENDS', 'virtual/imx-oei', 'YES', 'NO', d)}"
+OEI_NAME ?= "oei-${OEI_CORE}-*.bin"
+
 ATF_MACHINE_NAME ?= "bl31-${ATF_PLATFORM}.bin"
 ATF_MACHINE_NAME:append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-optee', '', d)}"
 
@@ -99,6 +102,13 @@ SOC_FAMILY:mx93-generic-bsp   = "mx93"
 SOC_FAMILY:mx95-generic-bsp   = "mx95"
 
 REV_OPTION ?= "REV=${IMX_SOC_REV_UPPER}"
+
+MKIMAGE_EXTRA_ARGS ?= ""
+MKIMAGE_EXTRA_ARGS:mx95-nxp-bsp ?= " \
+    OEI=${OEI_ENABLE} \
+    LPDDR_TYPE=${DDR_TYPE} \
+    ${@'LPDDR_FW_VERSION='+d.getVar('LPDDR_FW_VERSION') if d.getVar('LPDDR_FW_VERSION') else ''} \
+    ${@bb.utils.contains('SYSTEM_MANAGER_CONFIG', 'mx95alt', 'MSEL=1', '', d)}"
 
 ##
 # do assignment for TQMa8Xx[S] / TQMa8x SOM to enable bootstream with M4 demo
@@ -167,18 +177,35 @@ compile_prepare:mx8x-generic-bsp() {
     done
 }
 
-compile_prepare:mx9-generic-bsp() {
+compile_prepare_mx9_common() {
     bbnote 'i.MX9 boot binary build'
     for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
         bbnote "Copy ddr_firmware: ${ddr_firmware} from ${DEPLOY_DIR_IMAGE} -> ${BOOT_STAGING} "
-        cp ${DEPLOY_DIR_IMAGE}/${ddr_firmware}               ${BOOT_STAGING}
+        cp "${DEPLOY_DIR_IMAGE}/${ddr_firmware}"            "${BOOT_STAGING}/"
     done
-    cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}             ${BOOT_STAGING}
+    cp "${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}"          "${BOOT_STAGING}/"
     for type in ${UBOOT_CONFIG}; do
-        cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} \
-                                                             ${BOOT_STAGING}/u-boot-spl.bin-${type}
-        cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type} ${BOOT_STAGING}/u-boot.bin-${type}
+        cp "${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type}" \
+                                                            "${BOOT_STAGING}/u-boot-spl.bin-${type}"
+        cp "${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type}" "${BOOT_STAGING}/u-boot.bin-${type}"
     done
+}
+
+compile_prepare:mx9-generic-bsp() {
+    compile_prepare_mx9_common "$1"
+}
+
+compile_prepare:mx95-generic-bsp() {
+    compile_prepare_mx9_common "$1"
+
+    if [ "${OEI_SOC}" = "mx95" ] ; then
+        bbnote 'i.MX95 copy OEI / SM'
+        # Copy OEI images to be used
+        cp "${DEPLOY_DIR_IMAGE}/oei-m33-ddr.bin" "${BOOT_STAGING}/"
+        cp "${DEPLOY_DIR_IMAGE}/oei-m33-tcm.bin" "${BOOT_STAGING}/"
+        # Copy SM image to be used
+        cp "${DEPLOY_DIR_IMAGE}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}-${SYSTEM_MANAGER_CONFIG}.bin" "${BOOT_STAGING}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}.bin"
+    fi
 }
 
 compile_finish() {
@@ -405,8 +432,8 @@ do_compile() {
                     oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} dtbs=${UBOOT_DTB_NAME} ${imx_bl3x_container}
                     compile_finish "$imx_bl3x_container" "$config"
                 fi
-                bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} ${target}"
-                oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} dtbs=${UBOOT_DTB_NAME} ${target}
+                bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} ${MKIMAGE_EXTRA_ARGS} ${target}"
+                oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} ${MKIMAGE_EXTRA_ARGS} dtbs=${UBOOT_DTB_NAME} ${target}
             fi
 
             if [ -e "${BOOT_STAGING}/flash.bin" ]; then
