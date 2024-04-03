@@ -11,6 +11,18 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa6ULLx[L]: add new machine supporting multiple RAM variants
+  The new machine `tqma6ull-multi-mba6ulx` was added. The machine uses bitbake
+  class `gen_additional_wic` to allow building additional wic images for
+  SoM variants. These variants differing only in RAM configuration
+  part of bootloader, exchanging the boot image in wic saves
+  additional machine definitions and build time for CI.
+* TQMa6ULx[L]: add new machine supporting multiple RAM variants
+  The new machine `tqma6ul-multi-mba6ulx` was added. The machine uses bitbake
+  class `gen_additional_wic` to allow building additional wic images for
+  SoM variants. These variants differing only in RAM configuration
+  part of bootloader, exchanging the boot image in wic saves
+  additional machine definitions and build time for CI.
 * TQMa7x: add new machine supporting multiple RAM variants
   The new machine `tqma7x-multi-mba7` was added. The machine uses bitbake
   class `gen_additional_wic` to allow building additional wic images for
@@ -20,6 +32,10 @@ Releases are named with the following scheme:
 
 ### Removed:
 
+* TQMa6ULLx[L]: machines supporting single RAM variants
+  These machines are superseded by `tqma6ull-multi-mba6ulx`.
+* TQMa6ULx[L]: machines supporting single RAM variants
+  These machines are superseded by `tqma6ul-multi-mba6ulx`.
 * TQMa7x: machines supporting single RAM variants
   These machines are superseded by `tqma7x-multi-mba7`.
 
