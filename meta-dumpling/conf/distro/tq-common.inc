@@ -33,12 +33,7 @@ DISTRO_EXTRA_RDEPENDS += "tq-udev-rules"
 # listed checks from ERROR_QA to WARN_QA (from insane.bbclass)
 ERROR_TO_WARN_QA = "version-going-backwards"
 
-VIRTUAL-RUNTIME_dev_manager = "udev"
-VIRTUAL-RUNTIME_init_manager = "systemd"
-DISTRO_FEATURES_BACKFILL_CONSIDERED += "sysvinit"
-VIRTUAL-RUNTIME_login_manager = "busybox"
-VIRTUAL-RUNTIME_syslog = ""
-VIRTUAL-RUNTIME_initscripts = ""
+INIT_MANAGER = "systemd"
 
 # home for root is '/root' and nothing else
 ROOT_HOME ?= "/root"
