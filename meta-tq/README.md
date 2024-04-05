@@ -192,6 +192,8 @@ Support for the following machines is contained in this version:
 | [y]    | i.MX93 11x11            | TQMa93\[3,5\]\[1,2\]LA  | MBa93xxCA      | tqma93xx-mba93xxca               | TQMa93\[3,5\]\[1,2\]LA on adaptor, 1 / 1.5 / 2 GiB RAM, HW REV.010x / MBa93xxCA REV.020x                                                                     |
 | [y]    | i.MX93 11x11            | TQMa93\[3,5\]\[1,2\]LA  | MBa93xxLA      | tqma93xxla-mba93xxla             | TQMa93\[3,5\]\[1,2\]LA, 1 / 1.5 / 2 GiB RAM, HW REV.010x / MBa93xxLA REV.020x                                                                                |
 | [p]    | i.MX93 11x11            | TQMa93\[3,5\]\[1,2\]LA  | MBa93xxLA-MINI | tqma93xxla-mba93xxla-mini        | TQMa93\[3,5\]\[1,2\]LA, 1 / 1.5 / 2 GiB RAM, HW REV.010x / MBa93xxLA-MINI REV.020x                                                                           |
+| [p]    | i.MX95 19x19            | TQMa95xxSA              | MB-SMARC-2     | tqma95xxsa-2gb-mb-smarc-2        | TQMa95xxSA, 2 GiB RAM, HW REV.010x                                                                                                                           |
+| [p]    | i.MX95 19x19            | TQMa95xxSA              | MB-SMARC-2     | tqma95xxsa-4gb-mb-smarc-2        | TQMa95xxSA, 4 GiB RAM, HW REV.010x                                                                                                                           |
 | [b]    | LS1012A                 | TQMLS1012AL             | MBLS1012AL     | tqmls1012al-mbls1012al           | TQMLS1012AL HW REV.010x ... 020x / 512 MiB / 1GiB RAM / MBLS1012AL HW REV.020x                                                                               |
 | [b]    | LS10\[17,28\]A          | TQMLS10\[17,28\]A       | MBLS1028A      | tqmls1028a-mbls1028a             | TQMLS1017A / TQMLS1028A HW REV.010x ... 030x, 1 GiB / 4 GiB RAM, MBLS1028A HW REV.010x                                                                       |
 | [b]    | LS10\[17,28\]A          | TQMLS10\[17,28\]A       | MBLS1028A-IND  | tqmls1028a-mbls1028a-ind         | TQMLS1017A / TQMLS1028A HW REV.010x ... 030x, 1 GiB / 4 GiB RAM, MBLS1028A-IND HW REV.010x                                                                   |
@@ -282,6 +284,7 @@ Under the given links SOM specific information can be found:
 * [TQMa91\[3,2\]1LA](doc/README.TQMa91xx.md)
 * [TQMa93\[3,5\]\[1,2\]CA](doc/README.TQMa93xx.md)
 * [TQMa93\[3,5\]\[1,2\]LA](doc/README.TQMa93xx.md)
+* [TQMa95xxSA](doc/README.TQMa95xxSA.md)
 * [TQMA335x\[L\]](doc/README.TQMa335x.md)
 * [TQMA57xx](doc/README.TQMa57xx.md)
 * [TQMA62xx](doc/README.TQMa62xx.md)

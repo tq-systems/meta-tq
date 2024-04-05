@@ -23,6 +23,7 @@ For SD-card and eMMC following table applies:
 |    iMX8    |        32 KiB (0x8000)        | 64 / 0x40 |     0 KiB (0x0)     |  0 / 0x0  |
 |   iMX91    |        32 KiB (0x8000)        | 64 / 0x40 |     0 KiB (0x0)     |  0 / 0x0  |
 |   iMX93    |        32 KiB (0x8000)        | 64 / 0x40 |     0 KiB (0x0)     |  0 / 0x0  |
+|   iMX95    |        32 KiB (0x8000)        | 64 / 0x40 |     0 KiB (0x0)     |  0 / 0x0  |
 
 Note: iMX6 applies to all i.MX6, i.MX6UL and i.MX6ULL variants
 
