@@ -260,12 +260,12 @@ BOOT\_MODE: 0110
 
 ## Boot device initialisation and update
 
-See [here](./README.BootMediaTQMa8.md) for detailed information how to write a
+See [here](./README.imx-arm64.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
 
 ## Use UUU Tool
 
-See [here](./README.TQMa8.UUU.md) for details about using Serial Download mode and UUU.
+See [here](./README.imx-arm64.UUU.md) for details about using Serial Download mode and UUU.
 
 ## Howto
 
