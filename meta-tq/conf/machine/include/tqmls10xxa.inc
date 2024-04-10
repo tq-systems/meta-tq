@@ -10,7 +10,7 @@ require conf/machine/include/qoriq-arm64.inc
 
 PREFERRED_PROVIDER_u-boot ?= "u-boot-lsdk-tq"
 PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-lsdk-tq"
-PREFERRED_PROVIDER_virtual/kernel ?= "linux-ls-tq"
+PREFERRED_PROVIDER_virtual/kernel ?= "linux-tq"
 
 # Define the default image type
 KERNEL_IMAGETYPE ?= "Image"
