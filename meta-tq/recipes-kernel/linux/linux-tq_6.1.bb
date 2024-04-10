@@ -1,11 +1,11 @@
-SUMMARY = "Linux kernel based on linux stable 6.1.y for TQ-Systems GmbH i.MX based modules"
+SUMMARY = "Linux kernel based on linux stable 6.1.y for TQ-Systems GmbH i.MX and Layerscape SoM"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
 require linux-tq-common.inc
 
 KBRANCH = "TQM-linux-v6.1.y"
-SRCREV = "deb006241c9fd37fb3b4d90152377a02a71737ba"
+SRCREV = "5d7025a4cbd5997762edf6951b11613d18023490"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "6.1"
