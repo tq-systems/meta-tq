@@ -13,11 +13,25 @@ LINUX_VERSION = "${LINUX_RELEASE}.35"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
-SRC_URI = "\
-    ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
+KERNEL_CONFIG_FILES ?= ""
+
+KERNEL_CONFIG_FILES:imx ?= "\
     file://imx.cfg \
     file://nonimx-drm-removal.cfg \
     file://rm-non-tq-platforms.cfg \
+"
+
+KERNEL_CONFIG_FILES:tqmlsx ?= "\
+    file://defconfig \
+"
+
+KERNEL_CONFIG_FILES:append:tqmls1088a = "\
+    file://disable_suspend.cfg \
+"
+
+SRC_URI = "\
+    ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
+    ${KERNEL_CONFIG_FILES} \
 "
 
 def kbuild_defconfig(d):
@@ -31,6 +45,7 @@ def kbuild_defconfig(d):
 
 KBUILD_DEFCONFIG = "${@kbuild_defconfig(d)}"
 KBUILD_DEFCONFIG[vardeps] = "MACHINEOVERRIDES"
+KBUILD_DEFCONFIG:tqmlsx = ""
 
 DEFAULT_PREFERENCE = "0"
 
@@ -43,4 +58,6 @@ COMPATIBLE_MACHINE .= "|tqma8mq"
 COMPATIBLE_MACHINE .= "|tqma8mxml"
 COMPATIBLE_MACHINE .= "|tqma8mxnl"
 COMPATIBLE_MACHINE .= "|tqma8mpxl"
+COMPATIBLE_MACHINE .= "|tqmls10xxa"
+COMPATIBLE_MACHINE .= "|tqmlx2160a"
 COMPATIBLE_MACHINE .= ")$"
