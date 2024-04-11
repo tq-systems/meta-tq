@@ -11,6 +11,12 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa6x: add new machine supporting multiple RAM variants and multiple SoM variants.
+  The new machine `tqma6qdl-multi-mba6x` was added. The machine uses bitbake
+  class `gen_additional_wic` to allow building additional wic images for
+  SoM variants. These variants differing only in RAM configuration
+  part of bootloader, exchanging the boot image in wic saves
+  additional machine definitions and build time for CI.
 * linux-rt-tq\_6.1: add support for TQMLS1043A / TQMLS1046A / TQMLS1088A / TQMLX2160A
 * TQMa6ULLx[L]: add new machine supporting multiple RAM variants
   The new machine `tqma6ull-multi-mba6ulx` was added. The machine uses bitbake
@@ -40,6 +46,8 @@ linux-tq\_6.1:
 
 ### Removed:
 
+* TQMa6x: machines supporting only single RAM variant and sindle CPI variant.
+  These machines are superseded by `tqma6qdl-multi-mba6x`.
 * linux-ls-tq\_6.1: remove recipe as support for Layerscape SoM is now
   incorporated in linux-tq\_6.1
 * TQMa6ULLx[L]: machines supporting single RAM variants
