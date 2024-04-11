@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* distros: use linux-tq as preferred kernel for TQMLS1043A / TQMLS1046A / TQMLS1088A /
+  TQMLX2160A in Layerscape based distros
+
 ## kirkstone.TQ.ARM.BSP.0018
 
 ### Module BSP Revisions
