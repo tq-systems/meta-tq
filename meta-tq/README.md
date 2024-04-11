@@ -174,12 +174,7 @@ Support for the following machines is contained in this version:
 
 | Status | SOC / CPU        | SOM                      | Base board     | yocto / OpenEmbedded machine | hardware revision                                                     |
 | ------ | ---------------- | -------------------------| ---------------| ---------------------------- | --------------------------------------------------------------------- |
-| [y]    | i.MX6\[QP,DP\]   | TQMa6\[QP,DP\]           | MBa6x          | tqma6qp-mba6x                | TQMa6\[QP,DP\] HW REV.040x / MBa6x HW REV.020x                        |
-| [y]    | i.MX6\[Q,D\]     | TQMa6\[Q,D\]             | MBa6x          | tqma6q-mba6x                 | TQMa6\[D,Q\] HW REV.010x ... 040x / MBa6x HW REV.020x                 |
-| [y]    | i.MX6\[Q,D\]     | TQMa6D/TQMa6Q            | MBa6x          | tqma6q-2gb-mba6x             | TQMa6\[D,Q\] with 2 GiB RAM HW REV.040x / MBa6x HW REV.020x           |
-| [y]    | i.MX6DL          | TQMa6DL                  | MBa6x          | tqma6dl-mba6x                | TQMa6DL HW REV.010x ... 040x / MBa6x HW REV.020x                      |
-| [y]    | i.MX6DL          | TQMa6DL                  | MBa6x          | tqma6dl-2gb-mba6x            | TQMa6DL with 2 GiB RAM HW REV.010x ... 040x / MBa6x HW REV.020x       |
-| [y]    | i.MX6S           | TQMa6S                   | MBa6x          | tqma6s-mba6x                 | TQMa6S HW REV.010x ... 040x / MBa6x HW REV.020x                       |
+| [y]    | i.MX6\[S,DL,D,Q,QP,DP\] | TQMa6\[S,DL,D,Q,QP,DP\] | MBa6x    | tqma6qdl-multi-mba6x         | TQMa6\[QP,DP\] HW REV.040x, TQMa6\[D,Q\] 1/2 GiB HW REV.010x ... 040x, TQMa6DL 1/2 GiB HW REV.010x ... 040x, TQMa6S HW REV.010x ... 040x / MBa6x HW REV.020x                        |
 | [y]    | i.MX6UL          | TQMa6ULx[L]              | MBaULx         | tqma6ul-multi-mba6ulx        | TQMa6ULx HW REV.030x / TQMa6ULxL HW REV.020x 256/512 MB RAM, MBa6ULx HW REV.020x      |
 | [y]    | i.MX6UL          | TQMa6ULxL                | MBaULxL        | tqma6ulx-lga-mba6ulxl        | TQMa6ULxL HW REV.020x / MBa6ULxL HW REV.020x                          |
 | [y]    | i.MX6ULL         | TQMa6ULLx                | MBaULx         | tqma6ull-multi-mba6ulx       | TQMa6ULLx HW REV.030x / TQMa6ULLxL HW REV.020x  256/512 MB RAM, MBa6ULx HW REV.020x    |
