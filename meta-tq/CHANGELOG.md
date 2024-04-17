@@ -11,6 +11,7 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa93xx: build device trees for Cortex-M and NPU support
 * TQMa6x: add new machine supporting multiple RAM variants and multiple SoM variants.
   The new machine `tqma6qdl-multi-mba6x` was added. The machine uses bitbake
   class `gen_additional_wic` to allow building additional wic images for
@@ -39,10 +40,19 @@ Releases are named with the following scheme:
 
 ### Changed:
 
-linux-tq\_6.1:
-* add linux-stable changes up to 6.1.82
-* add support for TQMLS1043A / TQMLS1046A / TQMLS1088A / TQMLX2160A with no
-  functional changes to linux-ls-tq\_6.1
+u-boot-imx-tq_2023.04:
+* TQMa93xx: prepare for Cortex-M demos started from U-Boot
+* imx-atf-tq_2.8: integration of NXP changes up to tag lf-6.6.3-1.0.0 / commit
+  8dbe28631802 ("LF-11383 imx95: Add support for q-channel/lpcg based wakeup sources")
+* linux-imx-tq\_6.1:
+  * TQMa93xx: device tree fixes for LPM mode, Cortex-M33 and NPU
+  * integration from FSLC branch 6.1-2.2.x-imx, changes up to commit
+    2bfda7392e66 ("Merge pull request #658 from tq-niebelm/6.1-2.2.x-imx")
+  * upstream stable changes up to tag v6.1.70
+* linux-tq\_6.1:
+  * add linux-stable changes up to 6.1.82
+  * add support for TQMLS1043A / TQMLS1046A / TQMLS1088A / TQMLX2160A with no
+    functional changes to linux-ls-tq\_6.1
 
 ### Removed:
 
