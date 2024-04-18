@@ -8,7 +8,6 @@ DISTRO_FEATURES += "\
     npu \
     opengl \
     ppp \
-    systemd \
 "
 
 # add some locales per default
