@@ -6,7 +6,7 @@ do_install:append() {
   # Remove backward-compatibility link from ath10k directory to qcom/sdm845.
   # This will create a pseudo dependency of linux-firmware-ath10k to linux-firmware-qcom-sdm845-modem.
   # Do not modify WHENCE file to not affect `WHENCE_CHKSUM`
-  if [ "${PV}" -ge "20231030" ]; then
+  if [ "${PV}" -ge "20231030" ] && [ "${PV}" -lt "20240410"]; then
     rm ${D}${nonarch_base_libdir}/firmware/ath10k/WCN3990/hw1.0/wlanmdsp.mbn
   fi
 
