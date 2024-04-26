@@ -347,7 +347,7 @@ Also several meta layers have to be added in bblayers.conf (if not already done)
   ${BSPDIR}/sources/meta-basler-imx8 \
   ${BSPDIR}/sources/meta-basler-tools \
   ${BSPDIR}/sources/meta-freescale \
-  ${BSPDIR}/sources/meta-qt5 \
+  ${BSPDIR}/sources/meta-qt6 \
 ```
 
 ##### Usage
