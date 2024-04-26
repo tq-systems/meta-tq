@@ -1,4 +1,6 @@
 SRC_URI:tqmlsx = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
+SRC_URI:append:tqmlsx = " file://rwx-segments.patch"
+
 SRCBRANCH:tqmlsx = "TQM-v2.4"
 SRCREV:tqmlsx = "80c3b339c101d3b52787945da119fdd65892292c"
 
