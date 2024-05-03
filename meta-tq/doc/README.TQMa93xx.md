@@ -6,6 +6,8 @@ This README contains some useful information for TQMa93xxCA and TQMa93xxLA
 
 ## Variants
 
+* TQMa93xxLA REV.010x on MBa91xxCA REV.010x (1 / 2 GiB RAM)
+* TQMa93xxCA REV.010x on MBa91xxCA REV.010x (1 / 2 GiB RAM)
 * TQMa93xxCA REV.010x on MBa93xxCA REV.020x (1 / 2 GiB RAM)
 * TQMa93xxLA REV.010x on MBa93xxCA REV.020x (1 / 2 GiB RAM)
 * TQMa93xxLA REV.010x on MBa93xxLA REV.020x (1 / 2 GiB RAM)
@@ -21,6 +23,7 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 
 See [top level README.md](./../README.md) for configurations usable as MACHINE.
 
+* tqma93xx-mba91xxca
 * tqma93xx-mba93xxca
 * tqma93xxla-mba93xxla
 
@@ -143,16 +146,37 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
   used by a physical connected device.
 * Some Linux kernel boot warnings regarding missing optional supplies in DTB.
 
+## MBa91 differences
+
+The SoM TQMa93xx can be mounted on MBa91xxCA as well. Due to the support for TQMa91xx not all
+features provided by TQMa93xx are supported. The differences are listed below:
+* Parallel Display support
+  * alternatively LVDS display support
+* No CAN2
+* No DisplayPort
+* No dedicated LVDS display port
+* No MIPI-CSI
+* No UART2
+* GPIO-based fan, not PWM-based
+* Extension Headers X1/X2
+  * different pin layout
+  * No I2C5
+  * No SPI6
+  * No SAI3
+  * No UART6/8
+  * No PWM
+* Cortex-M33 will not be supported
+  * it's technically possible, but there is no dedicated UART available
+
 ## Build Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
 
 * \*.dtb: device tree blobs
-  * imx93-tqma93xx-mba9xxxca.dtb
-  * imx93-tqma93xx-mba9xxxca-lvds-tm070jvhg33.dtb
-  * imx93-tqma93xxla-mba9xxxla.dtb
-  * imx93-tqma93xxla-mba9xxxla-lvds-tm070jvhg33.dtb
+  * imx93-tqma9352-mba91xxca*.dtb
+  * imx93-tqma9352-mba93xxca*.dtb
+  * imx93-tqma9352-mba93xxla*.dtb
 * Image: Linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
