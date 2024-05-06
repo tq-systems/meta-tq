@@ -15,12 +15,12 @@ SECTION = "BSP"
 inherit use-imx-security-controller-firmware
 
 IMX_EXTRA_FIRMWARE = "\
-    firmware-imx-8 \
+    imx-boot-firmware-files \
     imx-seco \
     imx-sc-firmware \
 "
 
-IMX_EXTRA_FIRMWARE:mx8m-generic-bsp = "firmware-imx-8m"
+IMX_EXTRA_FIRMWARE:mx8m-generic-bsp = "imx-boot-firmware-files"
 
 IMX_EXTRA_FIRMWARE:mx8x-generic-bsp = "\
     imx-seco \
@@ -28,7 +28,7 @@ IMX_EXTRA_FIRMWARE:mx8x-generic-bsp = "\
 "
 
 IMX_EXTRA_FIRMWARE:mx9-generic-bsp = "\
-    firmware-imx-8 \
+    imx-boot-firmware-files \
     firmware-ele-imx \
 "
 
