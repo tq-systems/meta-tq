@@ -29,7 +29,7 @@ IMX_EXTRA_FIRMWARE:mx8x-generic-bsp = "\
 
 IMX_EXTRA_FIRMWARE:mx9-generic-bsp = "\
     firmware-imx-8 \
-    firmware-sentinel \
+    firmware-ele-imx \
 "
 
 IMX_EXTRA_FIRMWARE:append = " ${@bb.utils.contains('IMXBOOT_TARGETS', 'flash_linux_m4', 'virtual/imx-cortexm-demos', '', d)}"
