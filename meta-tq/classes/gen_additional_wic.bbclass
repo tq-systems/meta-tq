@@ -31,9 +31,8 @@ python create_additional_wic_images() {
     deploy_dir = d.getVar('IMGDEPLOYDIR')
     img_name = d.getVar('IMAGE_NAME')
     link_name = d.getVar('IMAGE_LINK_NAME')
-    imgsuffix = d.getVar("IMAGE_NAME_SUFFIX")
     bl_images = d.getVar('EXTWIC_BOOTLOADER_IMAGES')
-    wicfile = os.path.join(deploy_dir, img_name + imgsuffix + ".wic")
+    wicfile = os.path.join(deploy_dir, img_name + ".wic")
     offset = int(d.getVar('RAW_BOOT_START_OFFSET_KB'))
     end = int(d.getVar('RAW_BOOT_END_OFFSET_KB'))
     size = end - offset
@@ -82,7 +81,7 @@ python create_additional_wic_images() {
     import subprocess
     bl_images = bl_images.split()
     for bl_image in bl_images:
-        outfile = os.path.join(deploy_dir, img_name + "-" + os.path.basename(bl_image) + imgsuffix + ".wic")
+        outfile = os.path.join(deploy_dir, img_name + "-" + os.path.basename(bl_image) + ".wic")
         bl_image_file = os.path.join(d.getVar('DEPLOY_DIR_IMAGE'), bl_image)
         bl_image_size = os.path.getsize(bl_image_file)
         if math.floor((bl_image_size + 1023) / 1024) > size:
@@ -95,7 +94,7 @@ python create_additional_wic_images() {
         subprocess.run(['dd', f'if={bl_image_file}', f'of={outfile}'] + dd_replacement_args,  capture_output=True, check=True)
 
         dst = os.path.join(deploy_dir, link_name + "-" + os.path.basename(bl_image) + ".wic" )
-        src = img_name + "-" + os.path.basename(bl_image) + imgsuffix + ".wic"
+        src = img_name + "-" + os.path.basename(bl_image) + ".wic"
         if os.path.exists(os.path.join(deploy_dir, src)):
             bb.note("Creating symlink: %s -> %s" % (dst, src))
             if os.path.islink(dst):
