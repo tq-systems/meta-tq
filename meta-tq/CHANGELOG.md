@@ -38,7 +38,7 @@ Releases are named with the following scheme:
   part of bootloader, exchanging the boot image in wic saves
   additional machine definitions and build time for CI.
 
-### Changed:
+### Changed
 
 u-boot-imx-tq_2023.04:
 * TQMa93xx: prepare for Cortex-M demos started from U-Boot
@@ -54,7 +54,17 @@ u-boot-imx-tq_2023.04:
   * add support for TQMLS1043A / TQMLS1046A / TQMLS1088A / TQMLX2160A with no
     functional changes to linux-ls-tq\_6.1
 
-### Removed:
+### Fixed
+
+* u-boot-ti-tq-2023.04:
+  * TQMa62xx: Fix various issues in U-Boot Ethernet driver, including a stall
+    during TFTP transfers and a crash when booting the OS while netconsole
+    is active
+  * TQMa64xxL: Improve Device Tree fixup for AM64xx variants with
+    single-core R5 (like the AM6411). This fixes using the Remoteproc/Rpmsg
+    drivers for communicating with the R5 from Linux.
+
+### Removed
 
 * TQMa6x: machines supporting only single RAM variant and sindle CPI variant.
   These machines are superseded by `tqma6qdl-multi-mba6x`.
