@@ -89,9 +89,10 @@ python create_additional_wic_images() {
             bb.warn("size (%d) of %s is to large. Skipping" % (bl_image_size, bl_image_file))
             continue
 
-        bb.utils.copyfile(wicfile, outfile)
-        subprocess.run(['dd', 'if=/dev/zero', f'of={outfile}'] + dd_replacement_args, capture_output=True)
-        subprocess.run(['dd', f'if={bl_image_file}', f'of={outfile}'] + dd_replacement_args,  capture_output=True)
+        if not bb.utils.copyfile(wicfile, outfile):
+            bb.fatal("Copying wic file failed")
+        subprocess.run(['dd', 'if=/dev/zero', f'of={outfile}'] + dd_replacement_args, capture_output=True, check=True)
+        subprocess.run(['dd', f'if={bl_image_file}', f'of={outfile}'] + dd_replacement_args,  capture_output=True, check=True)
 
         dst = os.path.join(deploy_dir, link_name + "-" + os.path.basename(bl_image) + ".wic" )
         src = img_name + "-" + os.path.basename(bl_image) + imgsuffix + ".wic"
