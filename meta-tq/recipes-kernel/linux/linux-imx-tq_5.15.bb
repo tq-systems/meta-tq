@@ -58,6 +58,8 @@ SRC_URI:mx6-nxp-bsp = "\
     file://tqma6-wifi-support.cfg \
     file://tqma6x-display-support.cfg \
     file://usb-serial-port.cfg \
+    file://0001-ata-ahci-Match-EM_MAX_SLOTS-with-SATA_PMP_MAX_PORTS.patch \
+    file://0002-ata-ahci-fix-enum-constants-for-gcc-13.patch \
 "
 
 SRC_URI:aarch64:imx-nxp-bsp = "\
