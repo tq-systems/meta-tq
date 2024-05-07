@@ -28,7 +28,7 @@ CONVERSIONTYPES += "bootonly"
 generate_bootonly_image() {
     local type=${1}
     local sector="0"
-    local wicfile="${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}"
+    local wicfile="${IMAGE_NAME}.${type}"
     local outfile="${wicfile}.bootonly"
     local reverse_part_list=""
 
