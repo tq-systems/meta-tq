@@ -37,6 +37,11 @@ generate_bootonly_image() {
         exit 1
     fi
 
+    if [ ! -r ${wicfile} ]; then
+        bberror "wicfile ${wicfile} does not exist"
+        exit 1
+    fi
+
     reverse_part_list=$(partx --show --noheadings  --output NR "${wicfile}" | tac)
     partition_count="$(echo ${reverse_part_list} | wc -w)"
     # If only one Partition is found, cut at start of first partition
