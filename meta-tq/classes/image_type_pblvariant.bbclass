@@ -19,8 +19,8 @@ PBL_VARIANT ?= ""
 generate_pblvariant_image() {
     local type=${1}
     local pbl_file=${DEPLOY_DIR_IMAGE}/atf/${2}.pbl
-    local bootonlyfile="${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}"
-    local outfile="${IMAGE_NAME}${IMAGE_NAME_SUFFIX}.${type}.pblvariant"
+    local bootonlyfile="${IMAGE_NAME}.${type}"
+    local outfile="${IMAGE_NAME}.${type}.pblvariant"
 
     if [ -z ${type} ] || [ "${type}" != "wic.bootonly" ]; then
         bberror "pblvariant image can only be generated from wic.bootonly image."
