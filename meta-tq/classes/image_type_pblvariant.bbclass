@@ -37,6 +37,11 @@ generate_pblvariant_image() {
         exit 1
     fi
 
+    if [ ! -r ${bootonlyfile} ]; then
+        bberror "bootonlyfile ${bootonlyfile} does not exist"
+        exit 1
+    fi
+
     # Make copy and replace bl2 pbl with variant
     dd if=${bootonlyfile} of=${outfile}
     dd if=/dev/zero of=${outfile} bs=1k seek=${IMAGE_OFFSET_PBL} count=${IMAGE_MAXSIZE_PBL} conv=notrunc
