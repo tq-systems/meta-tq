@@ -24,6 +24,7 @@ PROVIDES += "linux-ti-staging"
 SRC_URI = "\
     ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
     file://defconfig \
+    file://0001-ata-ahci-fix-enum-constants-for-gcc-13.patch \
 "
 
 SRC_URI:append:tqma335x = "\
