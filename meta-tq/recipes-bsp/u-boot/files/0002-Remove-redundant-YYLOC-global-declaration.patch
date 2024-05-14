@@ -1,0 +1,29 @@
+From 28b7a14c0a48bfdb605fa6426e9f974a5c193c53 Mon Sep 17 00:00:00 2001
+From: Alexander Stein <alexander.stein@ew.tq-group.com>
+Date: Tue, 14 May 2024 10:20:56 +0200
+Subject: [PATCH 2/2] Remove redundant YYLOC global declaration
+
+Same as the upstream fix for building dtc with gcc 10. Applied to the
+shipped lexer source file.
+
+Upstream-Status: Pending
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+---
+ scripts/dtc/dtc-lexer.lex.c_shipped | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/scripts/dtc/dtc-lexer.lex.c_shipped b/scripts/dtc/dtc-lexer.lex.c_shipped
+index 011bb9632ff..79952cd3cab 100644
+--- a/scripts/dtc/dtc-lexer.lex.c_shipped
++++ b/scripts/dtc/dtc-lexer.lex.c_shipped
+@@ -631,7 +631,6 @@ char *yytext;
+ #include "srcpos.h"
+ #include "dtc-parser.tab.h"
+ 
+-YYLTYPE yylloc;
+ extern bool treesource_error;
+ 
+ /* CAUTION: this will stop working if we ever use yyless() or yyunput() */
+-- 
+2.34.1
+

@@ -21,6 +21,8 @@ SRCBRANCH = "TQMaxx-u-boot-v2017.11"
 SRC_URI = "\
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
 "
+SRC_URI += "file://0001-Remove-redundant-YYLOC-global-declaration.patch"
+SRC_URI += "file://0002-Remove-redundant-YYLOC-global-declaration.patch"
 
 # target not supported in U-Boot before v2019.07
 UBOOT_INITIAL_ENV = ""
