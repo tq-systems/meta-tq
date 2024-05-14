@@ -11,7 +11,9 @@ Releases are named with the following scheme:
 
 ### Added
 
-* TQMa93xx: build device trees for Cortex-M and NPU support
+* TQMa93xx:
+  * build device trees for Cortex-M and NPU support
+  * New machine `tqma93xx-mba91xxca` for usage on MBa91xxCA mainboard
 * TQMa6x: add new machine supporting multiple RAM variants and multiple SoM variants.
   The new machine `tqma6qdl-multi-mba6x` was added. The machine uses bitbake
   class `gen_additional_wic` to allow building additional wic images for
