@@ -42,8 +42,10 @@ Releases are named with the following scheme:
 
 ### Changed
 
-u-boot-imx-tq_2023.04:
-* TQMa93xx: prepare for Cortex-M demos started from U-Boot
+* classes: improve checks for file existence to prevent silent failures in
+  image generation / conversion
+* u-boot-imx-tq_2023.04:
+  * TQMa93xx: prepare for Cortex-M demos started from U-Boot
 * imx-atf-tq_2.8: integration of NXP changes up to tag lf-6.6.3-1.0.0 / commit
   8dbe28631802 ("LF-11383 imx95: Add support for q-channel/lpcg based wakeup sources")
 * linux-imx-tq\_6.1:
