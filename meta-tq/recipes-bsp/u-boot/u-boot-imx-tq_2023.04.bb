@@ -15,6 +15,8 @@ SRC_URI = "\
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
 "
 
+SRC_URI:append:tqma93xx = " ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'file://imx-hab.cfg', '', d)}"
+
 require recipes-bsp/u-boot/u-boot.inc
 require u-boot-tq.inc
 require u-boot-bootstream-deploy.inc
