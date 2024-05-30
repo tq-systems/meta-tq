@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* packagegroups: packagegroup-npu: add support for NPU on TQMa93xx
+  This change requires usage of the master branch of meta-freescale-ml.
+
 ### Changed
 
 * distros: use linux-tq as preferred kernel for TQMLS1043A / TQMLS1046A / TQMLS1088A /
