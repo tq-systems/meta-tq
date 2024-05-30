@@ -12,6 +12,7 @@ Releases are named with the following scheme:
 ### Added
 
 * TQMa93xx:
+  * add 'npu' to `MACHINE_FEATURES`
   * build device trees for Cortex-M and NPU support
   * New machine `tqma93xx-mba91xxca` for usage on MBa91xxCA mainboard
 * TQMa6x: add new machine supporting multiple RAM variants and multiple SoM variants.
