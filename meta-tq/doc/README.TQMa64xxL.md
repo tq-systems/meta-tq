@@ -267,6 +267,16 @@ incompatiblities between stages of old and new versions are avoided.
 Kernel and Device Trees are part of the root filesystem. They cannot be updated
 from U-Boot separately from the filesystem.
 
+### Inline ECC support
+
+Inline ECC can be enabled in the U-Boot configuration, at the cost of slightly
+increasing boot time and reducing usable memory by 1/8. A config snippet for
+this configuration is provided in meta-tq and can be enabled by adding the
+following line to `local.conf`:
+```
+SRC_URI:append:pn-u-boot-ti-tq:k3r5 = " file://inline-ecc.cfg"
+```
+
 ### M4/R5 cores
 
 The M4 and R5 example programs provided by TI can be run out-of-the-box using
