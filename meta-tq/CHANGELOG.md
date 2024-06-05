@@ -43,6 +43,12 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* u-boot-ti-tq-2023.04:
+  * Merge various changes from ti-u-boot 2023.04 upstream
+  * TQMa64xxL: Add GPIO driver that was missing since the update to ti-u-boot 2023.04
+  * TQMa62xx/TQMa64xxL: Include ECC test command in defconfig
+  * TQMa62xx/TQMa64xxL: Allow enabling inline ECC with a single defconfig change
+    (not enabled by default)
 * classes: improve checks for file existence to prevent silent failures in
   image generation / conversion
 * u-boot-imx-tq_2023.04:
