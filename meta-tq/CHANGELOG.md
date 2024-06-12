@@ -60,6 +60,7 @@ Releases are named with the following scheme:
   * integration from FSLC branch 6.1-2.2.x-imx, changes up to commit
     2bfda7392e66 ("Merge pull request #658 from tq-niebelm/6.1-2.2.x-imx")
   * upstream stable changes up to tag v6.1.70
+  * TQMa8MPxL: Fixed videomode settings for supporting for dual-channel LVDS display
 * linux-tq\_6.1:
   * add linux-stable changes up to 6.1.82
   * add support for TQMLS1043A / TQMLS1046A / TQMLS1088A / TQMLX2160A with no
