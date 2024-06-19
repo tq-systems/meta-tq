@@ -32,6 +32,7 @@ GST_PKGS = "\
 RDEPENDS:${PN} = "\
     ${GST_PKGS} \
     bayer2rgb-neon-bin \
+    media-ctl \
     v4l-utils \
     yavta \
 "
