@@ -9,8 +9,18 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQ.ARM.BSP.0019
+
+### Module BSP Revisions
+
+* kirkstone.TQMa93xx.BSP.SW.0003
+
 ### Added
 
+* u-boot-imx-tq_2023.04:
+  * TQMa93xxLA: support for 1.5 GiB variant
+  * devicetree syncs with kernel
+  * TQMa8MQ/TQMa8MM: console support on different UART
 * TQMa93xx:
   * add 'npu' to `MACHINE_FEATURES`
   * build device trees for Cortex-M and NPU support
