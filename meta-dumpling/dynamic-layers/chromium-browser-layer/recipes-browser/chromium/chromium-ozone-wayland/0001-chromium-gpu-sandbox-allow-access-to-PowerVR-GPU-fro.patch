@@ -1,0 +1,77 @@
+From 352d0c30aac32339a7139d321a3d95a8f342e17f Mon Sep 17 00:00:00 2001
+From: Darren Etheridge <a0867391@uda0393673-1.dhcp.ti.com>
+Date: Mon, 20 May 2024 15:48:36 -0500
+Subject: [PATCH] chromium: gpu: sandbox: allow access to PowerVR GPU from
+ sandbox
+
+Upstream-Status: Pending [not strictly necessary, but reduces
+permissions warnings on console]
+
+Chromium runs in a sandbox to limit access to the system, however
+the PowerVR drivers for the Imagination GPU used on TI hardware need
+some extra libraries along with the DRM device nodes to be opened up.
+This patch opens up the necessary pieces.
+
+Signed-off-by: Darren Etheridge <detheridge@ti.com>
+---
+ content/common/gpu_pre_sandbox_hook_linux.cc | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
+
+diff --git a/content/common/gpu_pre_sandbox_hook_linux.cc b/content/common/gpu_pre_sandbox_hook_linux.cc
+index f5df3c667d..ad7b26aec7 100644
+--- a/content/common/gpu_pre_sandbox_hook_linux.cc
++++ b/content/common/gpu_pre_sandbox_hook_linux.cc
+@@ -67,6 +67,11 @@ inline bool UseChromecastSandboxAllowlist() {
+ #endif
+ }
+ 
++inline bool IsGPUIMGRogue() {
++  return true;
++}
++
++
+ inline bool IsArchitectureArm() {
+ #if defined(ARCH_CPU_ARM_FAMILY)
+   return true;
+@@ -495,6 +500,11 @@ std::vector<BrokerFilePermission> FilePermissionsForGpu(
+ 
+   AddVulkanICDPermissions(&permissions);
+ 
++  if (IsGPUIMGRogue()) {
++      // Add standard DRM permissions for snapdragon/PowerVR:
++      AddDrmGpuPermissions(&permissions);
++  }
++
+   if (IsChromeOS()) {
+     // Permissions are additive, there can be multiple GPUs in the system.
+     AddStandardChromeOsPermissions(&permissions);
+@@ -573,6 +583,8 @@ void LoadArmGpuLibraries() {
+         DRI_DRIVER_DIR "/mediatek_dri.so",
+         DRI_DRIVER_DIR "/rockchip_dri.so",
+         DRI_DRIVER_DIR "/asahi_dri.so",
++        DRI_DRIVER_DIR "/pvr_dri.so",
++        DRI_DRIVER_DIR "/tidss_dri.so",
+ #else
+         "/usr/lib64/dri/msm_dri.so",
+         "/usr/lib64/dri/panfrost_dri.so",
+@@ -580,6 +592,8 @@ void LoadArmGpuLibraries() {
+         "/usr/lib64/dri/rockchip_dri.so",
+         "/usr/lib64/dri/asahi_dri.so",
+         "/usr/lib/dri/msm_dri.so",
++        "/usr/lib/dri/tidss_dri.so",
++        "/usr/lib/dri/pvr_dri.so",
+         "/usr/lib/dri/panfrost_dri.so",
+         "/usr/lib/dri/mediatek_dri.so",
+         "/usr/lib/dri/rockchip_dri.so",
+@@ -677,7 +691,7 @@ sandbox::syscall_broker::BrokerCommandSet CommandSetForGPU(
+   command_set.set(sandbox::syscall_broker::COMMAND_ACCESS);
+   command_set.set(sandbox::syscall_broker::COMMAND_OPEN);
+   command_set.set(sandbox::syscall_broker::COMMAND_STAT);
+-  if (IsChromeOS() &&
++  if ((IsGPUIMGRogue() || IsChromeOS()) &&
+       (options.use_amd_specific_policies ||
+        options.use_intel_specific_policies ||
+        options.use_nvidia_specific_policies ||
+-- 
+2.45.2
+

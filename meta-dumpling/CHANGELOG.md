@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+* chromium-ozone-wayland (meta-browser): Include configuration and
+  hardware-specific patch for GPU support on TQMa62xx when the
+  dumpling-wayland-ti distro is used
+
+  The patch currently applies cleanly to Chromium 126.
 * weston-init: Unconditionally disabling blanking the screen on idle
 
   Make idle handling consistent on all hardware. Also works around Weston
