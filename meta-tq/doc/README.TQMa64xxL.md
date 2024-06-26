@@ -4,6 +4,8 @@
 
 ## Overview
 
+See also: [Common features of TQMa62xx\[L\]/TQMa64xxL](README.TQMa6xxx.md)
+
 ### Supported Hardware:
 
 * TQMa6442L, TQMa6411L: Module revisions REV.010x / 020x
@@ -51,26 +53,6 @@ _Kernel:_
   * The SD card can't be reset by software. This can make the redetection of an
     SD card unreliable after it has been switched to UHS mode.
   * The WLAN/bluetooth adapter is unsupported
-
-## Build artifacts
-
-Artifacts can be found at:
-`deploy-ti/images/${MACHINE}`
-
-* fitImage: Combined kernel image with Device Trees and overlays
-* \*.dtb: Device Tree blobs
-* \*.dtbo: Device Tree overlays
-* Image: Linux kernel image
-* \*.wic: SD/eMMC/USB storage system image
-* \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* \*.rootfs.ubifs: UBIFS rootfs
-* \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
-* tiboot3-*-evm.bin: first-stage bootloader (R5 core)
-* tispl.bin: second-stage bootloader (A53 core, includes ATF and OPTEE)
-* u-boot.img: last-stage bootloader
-* extlinux.conf: Boot configuration for U-Boot distroboot
-* boot-blockdev.scr: U-Boot boot script image for boot from eMMC/SD/USB
-* boot-ubi.scr: U-Boot boot script image for boot from UBIFS (SPI-NOR)
 
 ### First-stage bootloader variants
 
@@ -206,97 +188,6 @@ saveenv # Persist configuration
 As the SD card and WLAN adapter require exclusive control of the same SDHC/SDIO
 bus, they can't be enabled at the same time. A different OS boot source (usually
 eMMC or SPI-NOR) must be used when WLAN is enabled.
-
-### Program system image
-
-**Note:** Do not use the commands described in the following to overwrite the
-root filesystem you are currently running from.
-
-#### SD card / eMMC
-
-To program a complete system image, write the [WIC image](#build-artifacts) to
-SD card / eMMC at offset 0. The following command can be used to write a file
-`/mnt/image.wic` to the eMMC:
-```
-dd if=/mnt/image.wic of=/dev/mmcblk0 bs=1M
-```
-
-#### SPI-NOR
-
-To program the root filesystem, format `/dev/mtd/by-name/ospi.rootfs` as a UBI volume and write
-the UBI image to it. If the image is stored at `/mnt/rootfs.ubi` (for example
-on a USB drive), use the following command:
-```
-ubiformat /dev/mtd/by-name/ospi.rootfs -f /mnt/rootfs.ubi
-```
-
-To check check usability of the programmed root filesystem, the following
-commands can be used:
-```
-ubiattach -p /dev/mtd/by-name/ospi.rootfs
-mount -t ubifs ubi0:rootfs /mnt
-```
-
-### Updates
-
-When booting from eMMC / SD card, the bootloader and system firmware are loaded
-from a FAT partition (the first partition of the boot medium by default). They
-can be updated by replacing the files on this partition. See the
-[build artifacts](#build-artifacts) section for a list of relevant files.
-
-For SPI-NOR boot, each stage is loaded from a fixed offset in the flash. The MTD
-partition list is configured to match these offsets.
-
-For convenience, the following commands can be used in U-Boot to update these
-files via TFTP:
-```
-run update_uboot_mmc0 # Update bootloader on eMMC
-run update_bootscript_mmc0 # Update boot.scr on eMMC
-run update_uboot_mmc1 # Update bootloader on SD card
-run update_bootscript_mmc1 # Update boot.scr on SD card
-run update_uboot_sf0 # Update bootloader on SPI-NOR flash
-run update_bootscript_sf0 # Update ospi.script partition on SPI-NOR flash
-```
-The environment variables `tiboot3_name`, `tispl_name`, `uboot_name` and
-`bootscript_name` can be modified to control the filenames requested via TFTP.
-
-By default, the files `tiboot3.bin`, `tispl.bin` and `u-boot.img` are requested.
-The 3 stages of the bootloader are always updated at the same time, so potential
-incompatiblities between stages of old and new versions are avoided.
-
-Kernel and Device Trees are part of the root filesystem. They cannot be updated
-from U-Boot separately from the filesystem.
-
-### Inline ECC support
-
-Inline ECC can be enabled in the U-Boot configuration, at the cost of slightly
-increasing boot time and reducing usable memory by 1/8. A config snippet for
-this configuration is provided in meta-tq and can be enabled by adding the
-following line to `local.conf`:
-```
-SRC_URI:append:pn-u-boot-ti-tq:k3r5 = " file://inline-ecc.cfg"
-```
-
-### M4/R5 cores
-
-The M4 and R5 example programs provided by TI can be run out-of-the-box using
-the Linux RemoteProc driver. When a program is found at the location specified
-in the Device Tree, it will be started on the corresponding core automatically
-during Linux boot. The TQ BSP images for the MBaX4XxL contain a simple RPMsg IPC
-echo test program. By running `modprobe rpmsg_client_sample`, a communication
-test with the echo programs can be run, which will write its results to the
-kernel log.
-
-The TQMa64xxL DTSI defines a number of reserved memory regions that are used by
-by these progams and the other the M4/R5 examples provided with the AM64x MCU+
-SDK (per-core `main_r5fss_*_memory_region` and `mcu_m4fss_*_memory_region`, as
-well as the common `rtos_ipc_memory_region` used for inter-processor
-communication).
-
-When running M4/R5 programs with a different memory layout, the reserved regions
-must be adjusted accordingly in the board DTS. When the MCU cores are unused, it
-is also possible to disable the reserved regions using `status = "disabled"` to
-free up the memory for use by Linux.
 
 ## Support Wiki
 
