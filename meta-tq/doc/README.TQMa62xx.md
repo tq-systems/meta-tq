@@ -8,8 +8,8 @@ See also: [Common features of TQMa62xx\[L\]/TQMa64xxL](README.TQMa6xxx.md)
 
 ### Supported Hardware:
 
-* TQMa6234, TQMa6254: Module revisions REV.010x
-* MBa62xx: Board revisions REV.010x
+* TQMa6234\[L\], TQMa6254\[L\]: Module revisions REV.010x / 020x
+* MBa62xx: Board revisions REV.010x / 020x
 
 ### Versions
 
