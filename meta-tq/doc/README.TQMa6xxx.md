@@ -121,3 +121,39 @@ must be adjusted accordingly in the board DTS. When the MCU cores are unused, it
 is also possible to disable the reserved regions using `status = "disabled"` to
 free up the memory for use by Linux. Note that on the AM62x, the R5 core is
 always used for Device Management and cannot be disabled completely.
+
+### Digital I/O
+
+The boards' digital I/O pins on connector X16 (MBa62xx) and X35 (MBaX4XxL) are
+unpowered by default. To use them, they can either be powered from the board's
+24V rail by connecting pins 1A and 2A, or by connecting an external power supply
+to 2A.
+
+The digital outputs (pins 3A to 6A) can be set using the `gpioset` command:
+```
+gpioset $(gpiofind EN_DIG_OUT_1)=1
+gpioset $(gpiofind EN_DIG_OUT_2)=1
+gpioset $(gpiofind EN_DIG_OUT_3)=1
+gpioset $(gpiofind EN_DIG_OUT_4)=1
+gpioset $(gpiofind EN_DIG_OUT_1)=0
+gpioset $(gpiofind EN_DIG_OUT_2)=0
+gpioset $(gpiofind EN_DIG_OUT_3)=0
+gpioset $(gpiofind EN_DIG_OUT_4)=0
+```
+
+Each of the `EN_DIG_OUT_n` pins has a corresponding `STATUS_OUT_n` pin for
+fault detection:
+```
+gpioget $(gpiofind STATUS_OUT_1)
+gpioget $(gpiofind STATUS_OUT_2)
+gpioget $(gpiofind STATUS_OUT_3)
+gpioget $(gpiofind STATUS_OUT_4)
+```
+
+`gpioget` is also used to query the digital inputs (pins 7A to 10A):
+```
+gpioget $(gpiofind DIG_IN_1)
+gpioget $(gpiofind DIG_IN_2)
+gpioget $(gpiofind DIG_IN_3)
+gpioget $(gpiofind DIG_IN_4)
+```
