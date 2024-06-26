@@ -41,6 +41,9 @@ _Kernel:_
 * On TQMa62xx variants with AM62x GP SoC, SD card boot is slow after
   power-on, taking several seconds before the first messages of the
   bootloader
+* On TQMa62xx variants without user EEPROM, the EEPROM device is not disabled
+  in the Linux Device Tree, resulting in a non-critical error message in the
+  kernel log during boot
 
 ## Supported features
 
