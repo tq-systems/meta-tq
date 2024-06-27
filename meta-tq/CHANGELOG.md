@@ -13,10 +13,12 @@ Releases are named with the following scheme:
 
 ### Module BSP Revisions
 
-* kirkstone.TQMa93xx.BSP.SW.0003
+* kirkstone.TQMLS1028A.BSP.SW.0110
 
 ### Added
 
+* qoriq-atf:
+  * TQMLS1028A: Added support for the 2 and 8 GiB variants
 * u-boot-imx-tq_2023.04:
   * TQMa93xxLA: support for 1.5 GiB variant
   * devicetree syncs with kernel

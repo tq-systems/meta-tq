@@ -9,6 +9,12 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQ.ARM.BSP.0019
+
+### Module BSP Revisions
+
+* kirkstone.TQMLS1028A.BSP.SW.0110
+
 ### Added
 
 * packagegroups: packagegroup-npu: add support for NPU on TQMa93xx
