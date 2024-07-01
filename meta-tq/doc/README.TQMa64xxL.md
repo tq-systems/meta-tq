@@ -19,7 +19,8 @@ _Bootloader:_
 
 _Kernel:_
 
-* linux-ti-tq-6.1 (based on ti-rt-linux-6.1.y; default)
+* linux-ti-tq-6.6 (based on ti-rt-linux-6.6.y; default)
+* linux-ti-tq-6.1 (based on ti-rt-linux-6.1.y)
 * linux-ti-tq-5.10 (based on ti-rt-linux-5.10.y)
 
 ### Known issues

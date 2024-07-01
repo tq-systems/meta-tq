@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* linux-ti-tq-6.6: new default kernel based on ti-linux-kernel 6.6 for
+  TQMa62xx(L)/TQMa64xxL
+
 ## kirkstone.TQ.ARM.BSP.0019
 
 ### Module BSP Revisions
