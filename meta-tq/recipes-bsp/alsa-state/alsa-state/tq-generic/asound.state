@@ -1764,8 +1764,8 @@ state.tqmba8mpras314 {
 	control.5 {
 		iface MIXER
 		name 'LO Driver Gain Volume'
-		value.0 6
-		value.1 6
+		value.0 0
+		value.1 0
 		comment {
 			access 'read write'
 			type INTEGER
@@ -1773,15 +1773,15 @@ state.tqmba8mpras314 {
 			range '0 - 35'
 			dbmin -600
 			dbmax 2900
-			dbvalue.0 0
-			dbvalue.1 0
+			dbvalue.0 -600
+			dbvalue.1 -600
 		}
 	}
 	control.6 {
 		iface MIXER
 		name 'HP DAC Playback Switch'
-		value.0 false
-		value.1 false
+		value.0 true
+		value.1 true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -1791,8 +1791,8 @@ state.tqmba8mpras314 {
 	control.7 {
 		iface MIXER
 		name 'LO DAC Playback Switch'
-		value.0 true
-		value.1 true
+		value.0 false
+		value.1 false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2016,7 +2016,7 @@ state.tqmba8mpras314 {
 	control.26 {
 		iface MIXER
 		name 'HPL Output Mixer L_DAC Switch'
-		value false
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2036,7 +2036,7 @@ state.tqmba8mpras314 {
 	control.28 {
 		iface MIXER
 		name 'LOL Output Mixer L_DAC Switch'
-		value true
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2046,7 +2046,7 @@ state.tqmba8mpras314 {
 	control.29 {
 		iface MIXER
 		name 'HPR Output Mixer R_DAC Switch'
-		value false
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -2066,7 +2066,7 @@ state.tqmba8mpras314 {
 	control.31 {
 		iface MIXER
 		name 'LOR Output Mixer R_DAC Switch'
-		value true
+		value false
 		comment {
 			access 'read write'
 			type BOOLEAN
