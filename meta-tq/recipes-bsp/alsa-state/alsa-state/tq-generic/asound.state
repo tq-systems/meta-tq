@@ -1888,7 +1888,7 @@ state.tqmba8mpras314 {
 	control.15 {
 		iface MIXER
 		name 'AGC Left Switch'
-		value false
+		value true
 		comment {
 			access 'read write'
 			type BOOLEAN
@@ -1956,8 +1956,8 @@ state.tqmba8mpras314 {
 	control.21 {
 		iface MIXER
 		name 'AGC Max PGA'
-		value.0 127
-		value.1 127
+		value.0 0
+		value.1 0
 		comment {
 			access 'read write'
 			type INTEGER
@@ -2076,7 +2076,7 @@ state.tqmba8mpras314 {
 	control.32 {
 		iface MIXER
 		name 'IN1_R to Right Mixer Positive Resistor'
-		value '10 kOhm'
+		value Off
 		comment {
 			access 'read write'
 			type ENUMERATED
@@ -2174,7 +2174,7 @@ state.tqmba8mpras314 {
 	control.39 {
 		iface MIXER
 		name 'IN1_L to Left Mixer Positive Resistor'
-		value '10 kOhm'
+		value Off
 		comment {
 			access 'read write'
 			type ENUMERATED
@@ -2202,7 +2202,7 @@ state.tqmba8mpras314 {
 	control.41 {
 		iface MIXER
 		name 'IN3_L to Left Mixer Positive Resistor'
-		value Off
+		value '10 kOhm'
 		comment {
 			access 'read write'
 			type ENUMERATED
