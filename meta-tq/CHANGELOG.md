@@ -33,6 +33,8 @@ Releases are named with the following scheme:
 * linux-tq\_5.4: Remove machines supported by 6.1
 * linux-rt-tq\_5.4: Remove machines supported by 6.1
 * Remove linux-tq\_5.15 / linux-rt-tq\_5.15
+* Remove local copy of imx-gpu-viv_6.4.11.p1.2
+* Remove local copy of imx-gpu-g2d_6.4.11.p1.2
 
 ### Fixed
 
