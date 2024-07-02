@@ -311,8 +311,8 @@ For IMX327:
 media-ctl -V '"30102000.ticsi2rx":0[fmt:SRGGB10/1280x720]'
 media-ctl -V '"cdns_csi2rx.30101000.csi-bridge":0[fmt:SRGGB10/1280x720]'
 media-ctl -V '"imx327 1-001a":0[fmt:SRGGB10/1280x720 field:none]'
-gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-bayer,format=rggb,bpp=10,width=1280,height=720 ! \
-  bayer2rgbneon show-fps=t reduce-bpp=t ! video/x-raw,format=RGBx ! autovideoconvert ! waylandsink
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-bayer,format=rggb10le,bpp=10,width=1280,height=720 ! \
+  bayer2rgb ! waylandsink sync=false
 ```
 
 For OV9281:

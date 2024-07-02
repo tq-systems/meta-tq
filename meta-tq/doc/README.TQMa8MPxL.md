@@ -320,9 +320,8 @@ Add `text-overlay=false` to fpsdisplaysink for console output only
 yavta -f SRGGB10 -s 1280x720  /dev/video0
 
 # show live video
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! \
-  video/x-bayer,format=rggb,bpp=10,width=1280,height=720 ! bayer2rgbneon show-fps=t reduce-bpp=t ! \
-  autovideoconvert ! autovideosink sync=false
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-bayer,format=rggb10le,bpp=10,width=1280,height=720 ! \
+  bayer2rgb ! waylandsink sync=false
 ```
 
 #### Basler camera
