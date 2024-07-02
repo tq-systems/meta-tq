@@ -13,6 +13,30 @@ Releases are named with the following scheme:
 
 * linux-ti-tq-6.6: new default kernel based on ti-linux-kernel 6.6 for
   TQMa62xx(L)/TQMa64xxL
+* gstreamer-plugins-bad: Add bit depth format support for bayer2rgb
+
+### Changed
+
+* Adjust classes to scarthgap release
+* Add more sanity checks to scarthgap release
+* TQMa8MPxL: WiFi-Firmware only installed if WiFi feature is enabled
+
+### Removed
+
+* linux-imx-tq\_6.1:
+  * Removal of `imx8mp-tqma8mpql-mba8mpxl-hdmi*.dtb`
+    * Use `imx8mp-tqma8mpql-mba8mpxl*.dtb` for direct replacement
+* Remove obsolete recipes, or `.bbappend`s
+* linux-imx-tq\_5.15: Remove machines supported by 6.1
+* Remove linux-imx-tq\_5.10
+* Remove linux-imx-tq\_5.4
+* linux-tq\_5.4: Remove machines supported by 6.1
+* linux-rt-tq\_5.4: Remove machines supported by 6.1
+* Remove linux-tq\_5.15 / linux-rt-tq\_5.15
+
+### Fixed
+
+* Fix GCC-13 support for older kernel version
 
 ## kirkstone.TQ.ARM.BSP.0019
 
