@@ -16,6 +16,8 @@ Releases are named with the following scheme:
   dumpling-wayland-ti distro is used
 
   The patch currently applies cleanly to Chromium 126.
+* chromium-ozone-wayland (meta-browser): Add hardware-specific patches
+  for NXP based platforms using imx-nxp-bsp
 
 ### Changed
 

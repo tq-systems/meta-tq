@@ -1,0 +1,54 @@
+From 214ff91d5615f965be97b40597cd4ce4d3f26f88 Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Mon, 23 Oct 2023 15:21:53 +0800
+Subject: [PATCH] Disable dri for imx gpu
+
+Upstream-Status: Inappropriate [i.MX-specific]
+
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ content/gpu/BUILD.gn       | 7 ++++++-
+ media/gpu/sandbox/BUILD.gn | 2 +-
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/content/gpu/BUILD.gn b/content/gpu/BUILD.gn
+index 098082510e..9befdb8c01 100644
+--- a/content/gpu/BUILD.gn
++++ b/content/gpu/BUILD.gn
+@@ -8,6 +8,11 @@ import("//build/config/ui.gni")
+ import("//gpu/vulkan/features.gni")
+ import("//media/media_options.gni")
+ 
++declare_args() {
++  # Checks if i.MX GPU is being used
++  use_imxgpu = false
++}
++
+ # See //content/BUILD.gn for how this works.
+ group("gpu") {
+   visibility = [ "//content/*" ]  # This is an internal content API.
+@@ -128,7 +133,7 @@ target(link_target_type, "gpu_sources") {
+ 
+   # Use DRI on desktop Linux builds.
+   if (current_cpu != "s390x" && current_cpu != "ppc64" && is_linux &&
+-      !is_castos) {
++      !is_castos && !use_imxgpu) {
+     configs += [ "//build/config/linux/dri" ]
+   }
+ }
+diff --git a/media/gpu/sandbox/BUILD.gn b/media/gpu/sandbox/BUILD.gn
+index cfcb7fa80e..de7e70c3bf 100644
+--- a/media/gpu/sandbox/BUILD.gn
++++ b/media/gpu/sandbox/BUILD.gn
+@@ -31,7 +31,7 @@ source_set("sandbox") {
+     deps += [ "//media/gpu/v4l2" ]
+   }
+   if (current_cpu != "s390x" && current_cpu != "ppc64" && is_linux &&
+-      !is_castos) {
++      !is_castos && !true) {
+     # For DRI_DRIVER_DIR.
+     configs += [ "//build/config/linux/dri" ]
+   }
+-- 
+2.25.1
+

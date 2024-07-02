@@ -1,0 +1,34 @@
+From 2b72a1f8fcf5a8c84c704a0244498403553f1df6 Mon Sep 17 00:00:00 2001
+From: Wujian Sun <wujian.sun_1@nxp.com>
+Date: Wed, 10 Nov 2021 17:28:22 +0800
+Subject: [PATCH] chromium met EGL API GetProcAddress failures
+
+Wayland not use SwANGLE as below commit, so no need
+build SwANGLE on wayland platform.
+
+commit 97f919dd8b544b583b772664f0d7b8e6b6d8da2e
+Reland "Use SwANGLE on all Ozone platforms, except Wayland"
+
+Upstream-Status: Inappropriate [i.MX-specific]
+
+Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
+---
+ ui/gl/BUILD.gn | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/ui/gl/BUILD.gn b/ui/gl/BUILD.gn
+index 5b68e7d051..8ba11ca00a 100644
+--- a/ui/gl/BUILD.gn
++++ b/ui/gl/BUILD.gn
+@@ -240,7 +240,7 @@ component("gl") {
+   }
+ 
+   if (use_ozone) {
+-    if (use_egl && !is_fuchsia) {
++    if (use_egl && !is_fuchsia && !ozone_platform_wayland) {
+       data_deps += [
+         "//third_party/angle:libEGL",
+         "//third_party/angle:libGLESv2",
+-- 
+2.25.1
+

@@ -1,0 +1,76 @@
+From b62e15856aea86eeddd502b1ff5ac1d6b88a1760 Mon Sep 17 00:00:00 2001
+From: Hou Qi <qi.hou@nxp.com>
+Date: Thu, 2 Nov 2023 00:03:11 +0900
+Subject: [PATCH] V4L2VDA: Add hevc format support
+
+Upstream-Status: Inappropriate [NXP specific]
+---
+ media/base/supported_types.cc                          | 2 +-
+ media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc | 1 +
+ media/gpu/v4l2/v4l2_utils.cc                           | 4 +++-
+ media/media_options.gni                                | 2 +-
+ 4 files changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/media/base/supported_types.cc b/media/base/supported_types.cc
+index 7737099b6a..49cf1beb3f 100644
+--- a/media/base/supported_types.cc
++++ b/media/base/supported_types.cc
+@@ -373,7 +373,7 @@ bool IsDefaultSupportedVideoType(const VideoType& type) {
+     case VideoCodec::kVP9:
+       return IsVp9ProfileSupported(type);
+     case VideoCodec::kHEVC:
+-      return IsHevcProfileSupported(type);
++      return true;
+     case VideoCodec::kMPEG4:
+       return IsMPEG4Supported();
+     case VideoCodec::kDolbyVision:
+diff --git a/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc b/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
+index 8bfa229adc..2cd426b035 100644
+--- a/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
++++ b/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
+@@ -90,6 +90,7 @@ static const std::vector<uint32_t> kSupportedInputFourCCs = {
+     V4L2_PIX_FMT_H264,
+     V4L2_PIX_FMT_VP8,
+     V4L2_PIX_FMT_VP9,
++    V4L2_PIX_FMT_HEVC,
+ };
+ 
+ // static
+diff --git a/media/gpu/v4l2/v4l2_utils.cc b/media/gpu/v4l2/v4l2_utils.cc
+index 7131cba379..1c275257df 100644
+--- a/media/gpu/v4l2/v4l2_utils.cc
++++ b/media/gpu/v4l2/v4l2_utils.cc
+@@ -478,7 +478,7 @@ void GetSupportedResolution(const IoctlAsCallback& ioctl_cb,
+                             uint32_t pixelformat,
+                             gfx::Size* min_resolution,
+                             gfx::Size* max_resolution) {
+-  constexpr gfx::Size kDefaultMaxCodedSize(1920, 1088);
++  constexpr gfx::Size kDefaultMaxCodedSize(4096, 4096);
+   *max_resolution = kDefaultMaxCodedSize;
+   constexpr gfx::Size kDefaultMinCodedSize(16, 16);
+   *min_resolution = kDefaultMinCodedSize;
+@@ -521,6 +521,8 @@ uint32_t VideoCodecProfileToV4L2PixFmt(VideoCodecProfile profile,
+     return V4L2_PIX_FMT_VP8;
+   } else if (profile >= VP9PROFILE_MIN && profile <= VP9PROFILE_MAX) {
+     return V4L2_PIX_FMT_VP9;
++  } else if (profile >= HEVCPROFILE_MIN && profile <= HEVCPROFILE_MAX) {
++    return V4L2_PIX_FMT_HEVC;
+   } else if (profile == HEVCPROFILE_MAIN) {
+     return V4L2_PIX_FMT_HEVC;
+   } else {
+diff --git a/media/media_options.gni b/media/media_options.gni
+index e55171c4d1..d2e2e90bad 100644
+--- a/media/media_options.gni
++++ b/media/media_options.gni
+@@ -138,7 +138,7 @@ declare_args() {
+   # applies to video-capable devices.
+   enable_platform_hevc =
+       proprietary_codecs && (enable_hevc_parser_and_hw_decoder ||
+-                             is_cast_media_device || is_chromeos_lacros)
++                             is_cast_media_device || is_chromeos_lacros || use_v4l2_codec)
+ 
+   enable_mse_mpeg2ts_stream_parser =
+       proprietary_codecs &&
+-- 
+2.25.1
+

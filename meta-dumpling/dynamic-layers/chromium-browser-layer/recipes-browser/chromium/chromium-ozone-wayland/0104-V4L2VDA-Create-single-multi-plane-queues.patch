@@ -1,0 +1,148 @@
+From 83fa5525620aea4f18401d6dd2b8909cd72a3c6a Mon Sep 17 00:00:00 2001
+From: Hou Qi <qi.hou@nxp.com>
+Date: Wed, 1 Nov 2023 23:20:47 +0900
+Subject: [PATCH] V4L2VDA: Create single/multi plane queues
+
+Decide to create single-plane queue or multi-plane queue according to
+the capabilities returned by VIDIOC_QUERYCAP.
+
+Upstream-Status: Inappropriate [NXP specific]
+---
+ .../legacy/v4l2_video_decode_accelerator.cc   | 28 +++++++++++++-----
+ media/gpu/v4l2/v4l2_device.cc                 | 29 ++++++++++++++-----
+ 2 files changed, 42 insertions(+), 15 deletions(-)
+
+diff --git a/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc b/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
+index 72b35ed8a9..39e47cc527 100644
+--- a/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
++++ b/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
+@@ -327,21 +327,35 @@ bool V4L2VideoDecodeAccelerator::CheckConfig(const Config& config) {
+ 
+   // Capabilities check.
+   struct v4l2_capability caps;
+-  const __u32 kCapsRequired = V4L2_CAP_VIDEO_M2M_MPLANE | V4L2_CAP_STREAMING;
+-  IOCTL_OR_ERROR_RETURN_FALSE(VIDIOC_QUERYCAP, &caps);
+-  if ((caps.capabilities & kCapsRequired) != kCapsRequired) {
+-    VLOGF(1) << "ioctl() failed: VIDIOC_QUERYCAP"
+-             << ", caps check failed: 0x" << std::hex << caps.capabilities;
++  unsigned int device_caps;
++  enum v4l2_buf_type input_type, output_type;
++  if (device_->Ioctl(VIDIOC_QUERYCAP, &caps) != 0) {
++    VPLOGF(1) << "ioctl() failed: VIDIOC_QUERYCAP"
++              << ", caps check failed: 0x" << std::hex << caps.capabilities;
+     return false;
+   }
+ 
++  if (caps.capabilities & V4L2_CAP_DEVICE_CAPS)
++    device_caps = caps.device_caps;
++  else
++    device_caps = caps.capabilities;
++
++  if (device_caps & (V4L2_CAP_VIDEO_OUTPUT_MPLANE | V4L2_CAP_VIDEO_M2M_MPLANE))
++    input_type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
++  else
++    input_type = V4L2_BUF_TYPE_VIDEO_OUTPUT;
++  if (device_caps & (V4L2_CAP_VIDEO_CAPTURE_MPLANE | V4L2_CAP_VIDEO_M2M_MPLANE))
++    output_type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
++  else
++    output_type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
++
+   output_mode_ = config.output_mode;
+ 
+-  input_queue_ = device_->GetQueue(V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
++  input_queue_ = device_->GetQueue(input_type);
+   if (!input_queue_)
+     return false;
+ 
+-  output_queue_ = device_->GetQueue(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
++  output_queue_ = device_->GetQueue(output_type);
+   if (!output_queue_)
+     return false;
+ 
+diff --git a/media/gpu/v4l2/v4l2_device.cc b/media/gpu/v4l2/v4l2_device.cc
+index 77ff65c277..81ea041fb4 100644
+--- a/media/gpu/v4l2/v4l2_device.cc
++++ b/media/gpu/v4l2/v4l2_device.cc
+@@ -93,6 +93,8 @@ scoped_refptr<V4L2Queue> V4L2Device::GetQueue(enum v4l2_buf_type type) {
+     // Supported queue types.
+     case V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE:
+     case V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE:
++    case V4L2_BUF_TYPE_VIDEO_OUTPUT:
++    case V4L2_BUF_TYPE_VIDEO_CAPTURE:
+       break;
+     default:
+       VLOGF(1) << "Unsupported V4L2 queue type: " << type;
+@@ -603,9 +605,17 @@ V4L2Device::EnumerateSupportedDecodeProfiles(
+     const std::vector<uint32_t>& pixelformats) {
+   VideoDecodeAccelerator::SupportedProfiles profiles;
+ 
+-  const auto v4l2_codecs_as_pix_fmts =
++  std::vector<uint32_t> enumerated_pixelformats;
++  enumerated_pixelformats =
+       EnumerateSupportedPixFmts(base::BindRepeating(&V4L2Device::Ioctl, this),
+-                                V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
++                                V4L2_BUF_TYPE_VIDEO_OUTPUT);
++  if (enumerated_pixelformats.empty()) {
++    VLOG(1) << "empty.... Try Multi-plane";
++    enumerated_pixelformats =
++        EnumerateSupportedPixFmts(base::BindRepeating(&V4L2Device::Ioctl, this),
++                                  V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
++  }
++  const auto v4l2_codecs_as_pix_fmts = enumerated_pixelformats;
+ 
+   for (uint32_t pixelformat : v4l2_codecs_as_pix_fmts) {
+     if (!base::Contains(pixelformats, pixelformat)) {
+@@ -920,27 +930,28 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
+   static const std::string kJpegEncoderDevicePattern = "/dev/jpeg-enc";
+ 
+   std::string device_pattern;
+-  v4l2_buf_type buf_type;
++  std::vector<v4l2_buf_type> candidate_buf_types;
+   switch (type) {
+     case Type::kDecoder:
+       device_pattern = kDecoderDevicePattern;
+-      buf_type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
++      candidate_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_OUTPUT);
++      candidate_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
+       break;
+     case Type::kEncoder:
+       device_pattern = kEncoderDevicePattern;
+-      buf_type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
++      candidate_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
+       break;
+     case Type::kImageProcessor:
+       device_pattern = kImageProcessorDevicePattern;
+-      buf_type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
++      candidate_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
+       break;
+     case Type::kJpegDecoder:
+       device_pattern = kJpegDecoderDevicePattern;
+-      buf_type = V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE;
++      candidate_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE);
+       break;
+     case Type::kJpegEncoder:
+       device_pattern = kJpegEncoderDevicePattern;
+-      buf_type = V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE;
++      candidate_buf_types.push_back(V4L2_BUF_TYPE_VIDEO_CAPTURE_MPLANE);
+       break;
+   }
+ 
+@@ -960,6 +971,7 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
+ 
+   Devices devices;
+   for (const auto& path : candidate_paths) {
++  for (const auto& buf_type : candidate_buf_types){
+     if (!OpenDevicePath(path, type)) {
+       continue;
+     }
+@@ -973,6 +985,7 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
+ 
+     CloseDevice();
+   }
++  }
+ 
+   DCHECK_EQ(devices_by_type_.count(type), 0u);
+   devices_by_type_[type] = devices;
+-- 
+2.25.1
+
