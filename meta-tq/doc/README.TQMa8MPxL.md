@@ -190,9 +190,6 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
   ```
   MACHINE_FEATURES:append = " ubi"
   ```
-* Starting with linux-imx-tq version 6.1 HDMI support is integrated into standard device tree.
-  `imx8mp-tqma8mpql-mba8mpxl-hdmi.dtb` is just for backward compatibility and is identical to
-  `imx8mp-tqma8mpql-mba8mpxl.dtb`.
 
 * Review indicated that, by default, device tree reserves memory for NPU in an
   area which is only available on 4GiB DDR RAM config.
@@ -205,11 +202,8 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.dtb: device tree blobs
   * imx8mp-tqma8mpql-mba8mpxl.dtb
   * imx8mp-tqma8mpql-mba8mpxl-lvds-tm070jvhg33.dtb (LVDS support with TIANMA TM070JVHG33)
-  * imx8mp-tqma8mpql-mba8mpxl-hdmi.dtb (HDMI support)
-  * imx8mp-tqma8mpql-mba8mpxl-hdmi-imx327.dtb (HDMI support plus Vision Components CSI camera
-    with Sony IMX327)
-  * imx8mp-tqma8mpql-mba8mpxl-hdmi-ov9281.dtb (HDMI support plus Vision Components CSI camera
-    with OmniVision OV9281)
+  * imx8mp-tqma8mpql-mba8mpxl-imx327.dtb (Vision Components CSI camera with Sony IMX327)
+  * imx8mp-tqma8mpql-mba8mpxl-ov9281.dtb (Vision Components CSI camera with OmniVision OV9281)
   * imx8mp-tqma8mpql-mba8mpxl-rpmsg.dtb (CortexM / RPMSG Support)
 * Image: Linux kernel image
 * \*.wic: SD / e-MMC system image
@@ -283,7 +277,7 @@ See [here](./README.TQMa8.UUU.md) for details about using Serial Download mode a
 
 ##### Gray with Omnivision OV9281
 
-* Devicetree: `imx8mp-tqma8mpql-mba8mpxl-hdmi-ov9281.dtb`
+* Devicetree: `imx8mp-tqma8mpql-mba8mpxl-ov9281.dtb`
 
 gstreamer examples:
 
@@ -312,7 +306,7 @@ Add `text-overlay=false` to fpsdisplaysink for console output only
 
 ##### Raw Bayer with Sony IMX327
 
-* Devicetree: `imx8mp-tqma8mpql-mba8mpxl-hdmi-imx327.dtb`
+* Devicetree: `imx8mp-tqma8mpql-mba8mpxl-imx327.dtb`
 * gstreamer example:
 
 ```
@@ -359,14 +353,15 @@ WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 -v v4l2src device=/dev/video0 ! wa
 
 ### Display Support
 
-Each Display can be used on its own by using the corresponding device tree.
-To allow reusage, the support for each display is separated in a dtsi fragment.
+HDMI support is enabled by default. Additionally LVDS display can be enabled by using the
+corresponding device tree. To allow reusage, the support for each display is separated
+in a dtsi fragment.
 
 | Interface       | Device tree                                    | Type               |
 |-----------------|------------------------------------------------|--------------------|
+| HDMI            | imx8mp-tqma8mpql-mba8mpxl.dtb                  | compatible monitor |
 | LVDS            | imx8mp-tqma8mpql-mba8mpxl-lvds-tm070jvhg33.dtb | Tianma TM070JVHG33 |
 | LVDS, dual      | imx8mp-tqma8mpql-mba8mpxl-lvds-g133han01.dtb   | AUO G133HAN.01     |
-| HDMI            | imx8mp-tqma8mpql-mba8mpxl-hdmi.dtb             | compatible monitor |
 
 ### CAN
 
