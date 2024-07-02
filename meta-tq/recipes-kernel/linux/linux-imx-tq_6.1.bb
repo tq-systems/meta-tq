@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 require linux-imx-tq-common.inc
 
 KBRANCH = "TQMa-fslc-6.1-2.2.x-imx"
-SRCREV = "d6c7760fbf213f96528d590fe4d9bbfcc70f4d0e"
+SRCREV = "524af0bbd06f5fd023f8580c6fc32d3c77c3505d"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "6.1"
