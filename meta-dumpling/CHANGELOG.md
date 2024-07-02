@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+* weston-init: Unconditionally disabling blanking the screen on idle
+
+  Make idle handling consistent on all hardware. Also works around Weston
+  crashing when reenabling the display on some platforms.
+
 ## kirkstone.TQ.ARM.BSP.0019
 
 ### Module BSP Revisions
