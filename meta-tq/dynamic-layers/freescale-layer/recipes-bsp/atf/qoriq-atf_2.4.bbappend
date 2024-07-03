@@ -2,7 +2,9 @@ SRC_URI:tqmlsx = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=$
 SRC_URI:append:tqmlsx = " file://rwx-segments.patch"
 
 SRCBRANCH:tqmlsx = "TQM-v2.4"
-SRCREV:tqmlsx = "80c3b339c101d3b52787945da119fdd65892292c"
+SRCREV:tqmlsx = "fe0a244188c67edfd9087482af1f7ee7703b0f3b"
+
+PLATFORM_ADDTIONAL_TARGETS_EXTRA = ""
 
 RCW_FOLDER:tqmls1012al = "tqmls1012al"
 RCW_SUFFIX:tqmls1012al = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
@@ -13,6 +15,7 @@ RCW_FOLDER:tqmls1028a = "tqmls1028a"
 RCW_SUFFIX:tqmls1028a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
 PLATFORM:tqmls1028a = "tqmls1028a_1gb"
 PLATFORM_ADDITIONAL_TARGET:tqmls1028a = "tqmls1028a_4gb"
+PLATFORM_ADDITIONAL_TARGETS_EXTRA:tqmls1028a = "tqmls1028a_2gb tqmls1028a_8gb"
 
 RCW_FOLDER:tqmls1043a = "tqmls1043a"
 PLATFORM:tqmls1043a = "${TQ_ATF_VARIANT}"
@@ -40,7 +43,46 @@ do_compile:prepend () {
 }
 
 do_compile:append () {
-    for plat in ${PLATFORM} ${PLATFORM_ADDITIONAL_TARGET}; do
+    for d in ${BOOTTYPE}; do
+        case $d in
+        nor)
+            rcwimg="${RCWNOR}${RCW_SUFFIX}"
+            ;;
+        nand)
+            rcwimg="${RCWNAND}${RCW_SUFFIX}"
+            ;;
+        qspi)
+            rcwimg="${RCWQSPI}${RCW_SUFFIX}"
+            ;;
+        auto)
+            rcwimg="${RCWAUTO}${RCW_SUFFIX}"
+            ;;
+        sd)
+            rcwimg="${RCWSD}${RCW_SUFFIX}"
+            ;;
+        emmc)
+            rcwimg="${RCWEMMC}${RCW_SUFFIX}"
+            ;;
+        flexspi_nor)
+            rcwimg="${RCWXSPI}${RCW_SUFFIX}"
+            ;;
+        esac
+
+	if [ -f ${DEPLOY_DIR_IMAGE}/rcw/${RCW_FOLDER}/$rcwimg ]; then
+            for plat in ${PLATFORM_ADDITIONAL_TARGETS_EXTRA}; do
+                make V=1 realclean
+                oe_runmake V=1 all fip pbl PLAT=$plat BOOT_MODE=${d} RCW=${DEPLOY_DIR_IMAGE}/rcw/${RCW_FOLDER}/${rcwimg} BL33=${UBOOT_BINARY}
+                cp build/$plat/release/bl2_${d}${SECURE_EXTENTION}.pbl bl2_${d}${SECURE_EXTENTION}_$plat.pbl
+                cp build/$plat/release/fip.bin fip_uboot${SECURE_EXTENTION}_$plat.bin
+                if [ -e build/$plat/release/fuse_fip.bin ]; then
+                    cp build/$plat/release/fuse_fip.bin fuse_fip_$plat.bin
+                fi
+            done
+        fi
+        rcwimg=""
+    done
+
+    for plat in ${PLATFORM} ${PLATFORM_ADDITIONAL_TARGET} ${PLATFORM_ADDITIONAL_TARGETS_EXTRA}; do
         for rcw_file in ${ATF_RCW_VARIANTS}; do
             case $rcw_file in
                 *_sd)

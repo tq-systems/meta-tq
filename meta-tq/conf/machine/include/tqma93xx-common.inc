@@ -83,6 +83,7 @@ MACHINE_FEATURES += "\
     can \
     ext2 \
     ext3 \
+    npu \
     rtc \
     serial \
     ubi \

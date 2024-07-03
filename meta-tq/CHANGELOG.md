@@ -9,9 +9,22 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQ.ARM.BSP.0019
+
+### Module BSP Revisions
+
+* kirkstone.TQMLS1028A.BSP.SW.0110
+
 ### Added
 
+* qoriq-atf:
+  * TQMLS1028A: Added support for the 2 and 8 GiB variants
+* u-boot-imx-tq_2023.04:
+  * TQMa93xxLA: support for 1.5 GiB variant
+  * devicetree syncs with kernel
+  * TQMa8MQ/TQMa8MM: console support on different UART
 * TQMa93xx:
+  * add 'npu' to `MACHINE_FEATURES`
   * build device trees for Cortex-M and NPU support
   * New machine `tqma93xx-mba91xxca` for usage on MBa91xxCA mainboard
 * TQMa6x: add new machine supporting multiple RAM variants and multiple SoM variants.
@@ -42,8 +55,16 @@ Releases are named with the following scheme:
 
 ### Changed
 
-u-boot-imx-tq_2023.04:
-* TQMa93xx: prepare for Cortex-M demos started from U-Boot
+* u-boot-ti-tq-2023.04:
+  * Merge various changes from ti-u-boot 2023.04 upstream
+  * TQMa64xxL: Add GPIO driver that was missing since the update to ti-u-boot 2023.04
+  * TQMa62xx/TQMa64xxL: Include ECC test command in defconfig
+  * TQMa62xx/TQMa64xxL: Allow enabling inline ECC with a single defconfig change
+    (not enabled by default)
+* classes: improve checks for file existence to prevent silent failures in
+  image generation / conversion
+* u-boot-imx-tq_2023.04:
+  * TQMa93xx: prepare for Cortex-M demos started from U-Boot
 * imx-atf-tq_2.8: integration of NXP changes up to tag lf-6.6.3-1.0.0 / commit
   8dbe28631802 ("LF-11383 imx95: Add support for q-channel/lpcg based wakeup sources")
 * linux-imx-tq\_6.1:
@@ -51,6 +72,7 @@ u-boot-imx-tq_2023.04:
   * integration from FSLC branch 6.1-2.2.x-imx, changes up to commit
     2bfda7392e66 ("Merge pull request #658 from tq-niebelm/6.1-2.2.x-imx")
   * upstream stable changes up to tag v6.1.70
+  * TQMa8MPxL: Fixed videomode settings for supporting for dual-channel LVDS display
 * linux-tq\_6.1:
   * add linux-stable changes up to 6.1.82
   * add support for TQMLS1043A / TQMLS1046A / TQMLS1088A / TQMLX2160A with no

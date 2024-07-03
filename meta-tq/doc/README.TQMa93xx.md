@@ -6,11 +6,11 @@ This README contains some useful information for TQMa93xxCA and TQMa93xxLA
 
 ## Variants
 
-* TQMa93xxLA REV.010x on MBa91xxCA REV.010x (1 / 2 GiB RAM)
+* TQMa93xxLA REV.010x on MBa91xxCA REV.010x (1 / 1.5 / 2 GiB RAM)
 * TQMa93xxCA REV.010x on MBa91xxCA REV.010x (1 / 2 GiB RAM)
 * TQMa93xxCA REV.010x on MBa93xxCA REV.020x (1 / 2 GiB RAM)
-* TQMa93xxLA REV.010x on MBa93xxCA REV.020x (1 / 2 GiB RAM)
-* TQMa93xxLA REV.010x on MBa93xxLA REV.020x (1 / 2 GiB RAM)
+* TQMa93xxLA REV.010x on MBa93xxCA REV.020x (1 / 1.5 / 2 GiB RAM)
+* TQMa93xxLA REV.010x on MBa93xxLA REV.020x (1 / 1.5 / 2 GiB RAM)
 
 __Note__: Depending on the SoM revision different CPU mask variants may be assembled.
 CPU mask revisions 1.0 and older are protoypes and have additional erratas.
@@ -33,7 +33,7 @@ See [top level README.md](./../README.md) for configurations usable as MACHINE.
 
 | Feature                                          | MBa93xxCA  REV.020x   | MBa93xxLA  REV.020x   |
 | :----------------------------------------------: | :-------------------: | :-------------------: |
-| RAM configs                                      |     1 / 2 GiB         |     1 / 2 GiB         |
+| RAM configs                                      |   1 / 1.5 / 2 GiB     |   1 / 1.5 / 2 GiB     |
 | CPU variants                                     |     i.MX93            |     i.MX93            |
 | Fuses / OCRAM                                    |       x               |       x               |
 | speed grade / temperature grade detection        |       x               |       x               |
@@ -76,7 +76,7 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 
 |                           Feature                            | linux-imx-tq_5.15 | linux-imx-tq_6.1 |
 |:------------------------------------------------------------:|:-----------------:|:----------------:|
-|                         RAM configs                          |     1 / 2 GiB     |     1 / 2 GiB    |
+|                         RAM configs                          |  1 / 1.5 / 2 GiB  | 1 / 1.5 / 2 GiB  |
 |                         CPU variants                         |      i.MX93       |      i.MX93      |
 |                        Fuses / OCRAM                         |                   |         x        |
 |          speed grade / temperature grade detection           |                   |                  |
@@ -114,6 +114,9 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 |                  examples running from TCM                   |                   |  prerelease, on request
 |           use UART3 as debug console (see issues)            |                   |         x        |
 |                           LPB boot                           |                   |                  |
+|                        **NPU**                               |                   |                  |
+|                  Firmware for CORTEX M33                     |                   |         x        |
+|                              Demo                            |                   |         x        |
 |              **MIPI CSI (see Issues section)**               |                   |                  |
 |   Gray with Vision Components GmbH camera (Sensor OV9281)    |                   |                  |
 | Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |                   |                  |
@@ -292,6 +295,16 @@ TODO
 ### Cortex M33
 
 TODO
+
+### NPU
+
+Before running, translate tensorflow lite model to ETHOS-U format using vela compiler:
+
+```
+cd /usr/bin/tensorflow-lite-2.11.1/examples
+vela mobilenet_v1_1.0_224_quant.tflite
+./label_image -m output/mobilenet_v1_1.0_224_quant_vela.tflite --external_delegate_path=/usr/lib/libethosu_delegate.so
+```
 
 ### High Assurance Boot (Secure Boot)
 

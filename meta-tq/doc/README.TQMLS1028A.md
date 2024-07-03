@@ -3,7 +3,7 @@
 [[_TOC_]]
 
 ## Variants
-* TQMLS1028A / TQMLS1017A SOM REV.020x/030x with 1GiB / 4GiB RAM
+* TQMLS1028A / TQMLS1017A SOM REV.020x/030x with 1/2/4/8 GiB RAM
 * MBLS1028A / MBLS1028A-IND carrier board
 
 ## Version information for software components
@@ -149,8 +149,11 @@ Artifacs can be found at the usual locations for bitbake:
 * RCWXSPI: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SPI-NOR Flash
 * ATF_RCW_VARIANTS: List of RCW binaries used to build variants of the Primary Boot Loader
 
-Set BL2_IMAGE to `bl2_auto${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.pbl` and BL3_IMAGE to
-`fip_uboot${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.bin` to create an SD/e-MMC image for the 4GiB variant.
+By default, images for the 1GiB variant are built. Set BL2_IMAGE to
+`bl2_auto${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.pbl` and BL3_IMAGE to
+`fip_uboot${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.bin` to create an SD/e-MMC image for the 4GiB variant
+(or 2gb/8gb for the 2GiB/8GiB variants respectively).
+
 
 ### Secure Boot
 
