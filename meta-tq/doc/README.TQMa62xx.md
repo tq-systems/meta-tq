@@ -307,14 +307,14 @@ media-ctl -V '"30102000.ticsi2rx":0[fmt:Y8_1X8/1280x800]'
 media-ctl -V '"cdns_csi2rx.30101000.csi-bridge":0[fmt:Y8_1X8/1280x800]'
 media-ctl -V '"ov9281 1-0060":0[fmt:Y8_1X8/1280x800 field:none]'
 gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! \
-  autovideoconvert ! waylandsink
+  videoconvert ! waylandsink sync=false
 ```
 
-`autovideosink` will render the video using Wayland by default. Alternatively,
+`waylandsink` will render the video using Wayland by default. Alternatively,
 the video can be displayed in fullscreen directly on a Linux framebuffer device
 by stopping the Wayland compositor with `systemctl stop weston.service` and
-replacing `autovideosink sync=false` with `fbdevsink` in the gst-launch-1.0
-command.
+replacing `waylandsink sync=false` with `fbdevsink sync=false` in the
+gst-launch-1.0 command.
 
 Note that the TQMa62xx does not have hardware acceleration for the conversion
 from the Bayer pixel format to RGB. Even when using the optimized bayer2rgbneon
