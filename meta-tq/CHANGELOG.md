@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* u-boot-lsdk-tq-2019.10: Added support for new alphanumeric TQ serial
+  number format
+
 ## kirkstone.TQ.ARM.BSP.0020
 
 ### Module BSP Revisions
