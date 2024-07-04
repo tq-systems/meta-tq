@@ -14,6 +14,12 @@ Releases are named with the following scheme:
 * u-boot-lsdk-tq-2019.10: Added support for new alphanumeric TQ serial
   number format
 
+### Fixed
+
+* qoriq-atf:
+  * TQMLS1028A: Fixed RAM timing spec conformance for newer module revisions
+    with Micron DDR RAM
+
 ## kirkstone.TQ.ARM.BSP.0020
 
 ### Module BSP Revisions

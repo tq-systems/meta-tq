@@ -1,6 +1,6 @@
 SRC_URI:tqmlsx = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 SRCBRANCH:tqmlsx = "TQM-v2.4"
-SRCREV:tqmlsx = "fe0a244188c67edfd9087482af1f7ee7703b0f3b"
+SRCREV:tqmlsx = "81bba681ebffeab0c8474a141835c3ef61f50776"
 
 PLATFORM_ADDTIONAL_TARGETS_EXTRA = ""
 
