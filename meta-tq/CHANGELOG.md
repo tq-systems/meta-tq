@@ -14,6 +14,11 @@ Releases are named with the following scheme:
 * linux-ti-tq-6.6: new default kernel based on ti-linux-kernel 6.6 for
   TQMa62xx(L)/TQMa64xxL
 * gstreamer-plugins-bad: Add bit depth format support for bayer2rgb
+* Add new match pattern for `end*` to systemd's network configuration files
+* u-boot-imx-tq_2020.04:
+  * Add support for MBa8MP-RAS314
+  * Fix for adding spi-nor device partitions
+* linux-imx-tq-6.6: new kernel based on fslc-6.6 for TQMa8MPxL
 
 ### Changed
 
