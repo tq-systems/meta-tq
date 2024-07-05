@@ -1,7 +1,7 @@
-From eabed752a58fcf56f8d534fe7dab6c07bf7664c0 Mon Sep 17 00:00:00 2001
+From dc5f1312aec01a20f14c822f8db351e98274941a Mon Sep 17 00:00:00 2001
 From: Wujian Sun <wujian.sun_1@nxp.com>
 Date: Wed, 1 Nov 2023 18:19:23 +0800
-Subject: [PATCH] Fixed chromium flicker with g2d-renderer
+Subject: [PATCH 1/4] Fixed chromium flicker with g2d-renderer
 
 chromium V89 reland linux_explicit_synchronization_protocol for
 in-fence feature caused the flicker.

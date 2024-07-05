@@ -1,7 +1,7 @@
-From 3e615f0671fca1c4b50618d115f9ee9a963c9748 Mon Sep 17 00:00:00 2001
+From f8ef4fca6fc488019a00218a370131e8e011f393 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Wed, 29 Nov 2023 11:00:59 +0900
-Subject: [PATCH] V4L2Buffer: Add support for imx95
+Subject: [PATCH 120/120] V4L2Buffer: Add support for imx95
 
 Imx95 allocate capture buffers using NV12 format, while
 amphion allocate capture buffers using NV12M format.

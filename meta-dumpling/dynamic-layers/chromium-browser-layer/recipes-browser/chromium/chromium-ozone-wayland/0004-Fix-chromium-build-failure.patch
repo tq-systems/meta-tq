@@ -1,7 +1,7 @@
-From 53bcce24ca3485e250387d6b8bbae775f7107938 Mon Sep 17 00:00:00 2001
+From a8f5c1646362c0fb3e60d711cd5edf07c9ef0fa7 Mon Sep 17 00:00:00 2001
 From: Wujian Sun <wujian.sun_1@nxp.com>
 Date: Wed, 18 Oct 2023 15:56:59 +0800
-Subject: [PATCH] Fix chromium build failure
+Subject: [PATCH 4/4] Fix chromium build failure
 
 | aarch64-poky-linux-ld.lld: error: undefined symbol:
 gl::NativeViewGLSurfaceEGL::NativeViewGLSurfaceEGL(gl::GLDisplayEGL*,
@@ -22,7 +22,7 @@ Signed-off-by: Wujian Sun <wujian.sun_1@nxp.com>
  1 file changed, 9 insertions(+)
 
 diff --git a/ui/gl/BUILD.gn b/ui/gl/BUILD.gn
-index 6587ec52b9..fd197b3e34 100644
+index 8ba11ca00a..0d511776ba 100644
 --- a/ui/gl/BUILD.gn
 +++ b/ui/gl/BUILD.gn
 @@ -249,6 +249,15 @@ component("gl") {

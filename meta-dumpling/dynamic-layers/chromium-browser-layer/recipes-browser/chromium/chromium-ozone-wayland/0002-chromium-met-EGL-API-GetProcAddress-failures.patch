@@ -1,7 +1,7 @@
-From 2b72a1f8fcf5a8c84c704a0244498403553f1df6 Mon Sep 17 00:00:00 2001
+From a328a5a561ffd405c6f81d7cab377811b02fdb84 Mon Sep 17 00:00:00 2001
 From: Wujian Sun <wujian.sun_1@nxp.com>
 Date: Wed, 10 Nov 2021 17:28:22 +0800
-Subject: [PATCH] chromium met EGL API GetProcAddress failures
+Subject: [PATCH 2/4] chromium met EGL API GetProcAddress failures
 
 Wayland not use SwANGLE as below commit, so no need
 build SwANGLE on wayland platform.

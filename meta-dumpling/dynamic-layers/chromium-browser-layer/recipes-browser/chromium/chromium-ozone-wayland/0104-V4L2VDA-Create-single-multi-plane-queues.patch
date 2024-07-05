@@ -1,7 +1,7 @@
-From 83fa5525620aea4f18401d6dd2b8909cd72a3c6a Mon Sep 17 00:00:00 2001
+From ea21db0b46091c76a2e389874617c64b69c768ce Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Wed, 1 Nov 2023 23:20:47 +0900
-Subject: [PATCH] V4L2VDA: Create single/multi plane queues
+Subject: [PATCH 104/120] V4L2VDA: Create single/multi plane queues
 
 Decide to create single-plane queue or multi-plane queue according to
 the capabilities returned by VIDIOC_QUERYCAP.
@@ -13,10 +13,10 @@ Upstream-Status: Inappropriate [NXP specific]
  2 files changed, 42 insertions(+), 15 deletions(-)
 
 diff --git a/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc b/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
-index 72b35ed8a9..39e47cc527 100644
+index 0269d7ca74..ad73ac674e 100644
 --- a/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
 +++ b/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
-@@ -327,21 +327,35 @@ bool V4L2VideoDecodeAccelerator::CheckConfig(const Config& config) {
+@@ -324,21 +324,35 @@ bool V4L2VideoDecodeAccelerator::CheckConfig(const Config& config) {
  
    // Capabilities check.
    struct v4l2_capability caps;
@@ -60,7 +60,7 @@ index 72b35ed8a9..39e47cc527 100644
      return false;
  
 diff --git a/media/gpu/v4l2/v4l2_device.cc b/media/gpu/v4l2/v4l2_device.cc
-index 77ff65c277..81ea041fb4 100644
+index 326a39273a..daea76c9b6 100644
 --- a/media/gpu/v4l2/v4l2_device.cc
 +++ b/media/gpu/v4l2/v4l2_device.cc
 @@ -93,6 +93,8 @@ scoped_refptr<V4L2Queue> V4L2Device::GetQueue(enum v4l2_buf_type type) {
@@ -72,7 +72,7 @@ index 77ff65c277..81ea041fb4 100644
        break;
      default:
        VLOGF(1) << "Unsupported V4L2 queue type: " << type;
-@@ -603,9 +605,17 @@ V4L2Device::EnumerateSupportedDecodeProfiles(
+@@ -539,9 +541,17 @@ V4L2Device::EnumerateSupportedDecodeProfiles(
      const std::vector<uint32_t>& pixelformats) {
    VideoDecodeAccelerator::SupportedProfiles profiles;
  
@@ -92,7 +92,7 @@ index 77ff65c277..81ea041fb4 100644
  
    for (uint32_t pixelformat : v4l2_codecs_as_pix_fmts) {
      if (!base::Contains(pixelformats, pixelformat)) {
-@@ -920,27 +930,28 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
+@@ -856,27 +866,28 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
    static const std::string kJpegEncoderDevicePattern = "/dev/jpeg-enc";
  
    std::string device_pattern;
@@ -127,15 +127,15 @@ index 77ff65c277..81ea041fb4 100644
        break;
    }
  
-@@ -960,6 +971,7 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
+@@ -896,6 +907,7 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
  
    Devices devices;
    for (const auto& path : candidate_paths) {
 +  for (const auto& buf_type : candidate_buf_types){
-     if (!OpenDevicePath(path, type)) {
+     if (!OpenDevicePath(path)) {
        continue;
      }
-@@ -973,6 +985,7 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
+@@ -909,6 +921,7 @@ void V4L2Device::EnumerateDevicesForType(Type type) {
  
      CloseDevice();
    }

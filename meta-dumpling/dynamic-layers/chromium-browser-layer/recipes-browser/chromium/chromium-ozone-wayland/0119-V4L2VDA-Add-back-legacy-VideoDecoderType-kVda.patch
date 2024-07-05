@@ -1,15 +1,15 @@
-From 859c020a4c8b53605c41aeee239d115af663ba77 Mon Sep 17 00:00:00 2001
+From 4a730e50db3f7d845d667f7b07104d4d8a068baa Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Mon, 6 Nov 2023 17:31:56 +0900
-Subject: [PATCH] V4L2VDA: Add back legacy VideoDecoderType kVda
+Subject: [PATCH 119/120] V4L2VDA: Add back legacy VideoDecoderType kVda
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
- .../services/gpu_mojo_media_client_linux.cc   | 21 +++++++++++++++++++
- 1 file changed, 21 insertions(+)
+ .../services/gpu_mojo_media_client_linux.cc   | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
 diff --git a/media/mojo/services/gpu_mojo_media_client_linux.cc b/media/mojo/services/gpu_mojo_media_client_linux.cc
-index 1cde275dac..f56b592d49 100644
+index 1cde275dac..9f11a10e0a 100644
 --- a/media/mojo/services/gpu_mojo_media_client_linux.cc
 +++ b/media/mojo/services/gpu_mojo_media_client_linux.cc
 @@ -13,6 +13,7 @@
@@ -43,7 +43,7 @@ index 1cde275dac..f56b592d49 100644
      case VideoDecoderType::kV4L2:
        return VideoDecoderType::kV4L2;
      case VideoDecoderType::kVaapi: {
-@@ -168,6 +178,15 @@ class GpuMojoMediaClientLinux final : public GpuMojoMediaClient {
+@@ -168,6 +178,13 @@ class GpuMojoMediaClientLinux final : public GpuMojoMediaClient {
              traits.media_log->Clone(), /*oop_video_decoder=*/{},
              /*in_video_decoder_process=*/false);
        }
@@ -52,14 +52,12 @@ index 1cde275dac..f56b592d49 100644
 +          traits.task_runner, gpu_task_runner_, traits.media_log->Clone(),
 +          *traits.target_color_space, gpu_preferences_,
 +          gpu_workarounds_, traits.get_command_buffer_stub_cb,
-+          VideoDecodeAccelerator::Config::OutputMode::kAllocate,
-+          VideoDecodeAccelerator::TextureAllocationMode::
-+              kDoNotAllocateGLTextures);
++          VideoDecodeAccelerator::Config::OutputMode::kAllocate);
 +    }
        default:
          return nullptr;
      }
-@@ -198,6 +217,8 @@ class GpuMojoMediaClientLinux final : public GpuMojoMediaClient {
+@@ -198,6 +215,8 @@ class GpuMojoMediaClientLinux final : public GpuMojoMediaClient {
      base::UmaHistogramEnumeration("Media.VaapiLinux.SupportedVideoDecoder",
                                    decoder_implementation);
      switch (decoder_implementation) {

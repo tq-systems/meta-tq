@@ -1,7 +1,8 @@
-From 140f656474caead7cbf389cd2fce7758d39e95dd Mon Sep 17 00:00:00 2001
+From f292a840f85cd97ef1f39dd5a929e65b252d9cdc Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Wed, 1 Nov 2023 23:47:31 +0900
-Subject: [PATCH] V4L2VDA: Add function IsMultiQueue for S_FMT and G_FMT
+Subject: [PATCH 107/120] V4L2VDA: Add function IsMultiQueue for S_FMT and
+ G_FMT
 
 Function IsMultiQueue() is used to set correct fotmat type for
 8M and 8Q.
@@ -14,10 +15,10 @@ Upstream-Status: Inappropriate [NXP specific]
  3 files changed, 68 insertions(+), 18 deletions(-)
 
 diff --git a/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc b/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
-index 39e47cc527..5c52dece97 100644
+index ad73ac674e..aa7253928a 100644
 --- a/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
 +++ b/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
-@@ -2184,12 +2184,30 @@ bool V4L2VideoDecodeAccelerator::GetFormatInfo(struct v4l2_format* format,
+@@ -2056,12 +2056,30 @@ bool V4L2VideoDecodeAccelerator::GetFormatInfo(struct v4l2_format* format,
    }
  
    // Make sure we are still getting the format we set on initialization.
@@ -50,7 +51,7 @@ index 39e47cc527..5c52dece97 100644
    if (visible_size != nullptr)
      *visible_size = GetVisibleSize(coded_size);
  
-@@ -2296,7 +2314,7 @@ bool V4L2VideoDecodeAccelerator::SetupFormats() {
+@@ -2168,7 +2186,7 @@ bool V4L2VideoDecodeAccelerator::SetupFormats() {
  
    struct v4l2_fmtdesc fmtdesc;
    memset(&fmtdesc, 0, sizeof(fmtdesc));
@@ -59,7 +60,7 @@ index 39e47cc527..5c52dece97 100644
    bool is_format_supported = false;
    while (device_->Ioctl(VIDIOC_ENUM_FMT, &fmtdesc) == 0) {
      if (fmtdesc.pixelformat == input_format_fourcc_) {
-@@ -2314,10 +2332,16 @@ bool V4L2VideoDecodeAccelerator::SetupFormats() {
+@@ -2186,10 +2204,16 @@ bool V4L2VideoDecodeAccelerator::SetupFormats() {
  
    struct v4l2_format format;
    memset(&format, 0, sizeof(format));
@@ -80,7 +81,7 @@ index 39e47cc527..5c52dece97 100644
    IOCTL_OR_ERROR_RETURN_FALSE(VIDIOC_S_FMT, &format);
    DCHECK_EQ(format.fmt.pix_mp.pixelformat, input_format_fourcc_);
  
-@@ -2325,7 +2349,7 @@ bool V4L2VideoDecodeAccelerator::SetupFormats() {
+@@ -2197,7 +2221,7 @@ bool V4L2VideoDecodeAccelerator::SetupFormats() {
    // changing it once we start streaming; whether it can support our chosen
    // output format or not may depend on the input format.
    memset(&fmtdesc, 0, sizeof(fmtdesc));
@@ -89,7 +90,7 @@ index 39e47cc527..5c52dece97 100644
    while (device_->Ioctl(VIDIOC_ENUM_FMT, &fmtdesc) == 0) {
      auto fourcc = Fourcc::FromV4L2PixFmt(fmtdesc.pixelformat);
      if (fourcc && device_->CanCreateEGLImageFrom(*fourcc)) {
-@@ -2372,8 +2396,13 @@ bool V4L2VideoDecodeAccelerator::SetupFormats() {
+@@ -2244,8 +2268,13 @@ bool V4L2VideoDecodeAccelerator::SetupFormats() {
    // Just set the fourcc for output; resolution, etc., will come from the
    // driver once it extracts it from the stream.
    memset(&format, 0, sizeof(format));

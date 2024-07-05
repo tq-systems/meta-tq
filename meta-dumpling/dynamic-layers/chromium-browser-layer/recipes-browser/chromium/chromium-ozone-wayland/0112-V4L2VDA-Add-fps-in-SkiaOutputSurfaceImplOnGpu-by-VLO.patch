@@ -1,7 +1,8 @@
-From c6a1929fc944efd5b49a9fe4f5614b3998296086 Mon Sep 17 00:00:00 2001
+From 341cb82e43f4bbe5702372f30b2fd13f87d42ce9 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Thu, 2 Nov 2023 11:26:12 +0900
-Subject: [PATCH] V4L2VDA: Add fps in SkiaOutputSurfaceImplOnGpu by VLOG(1)
+Subject: [PATCH 112/120] V4L2VDA: Add fps in SkiaOutputSurfaceImplOnGpu by
+ VLOG(1)
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
@@ -10,7 +11,7 @@ Upstream-Status: Inappropriate [NXP specific]
  2 files changed, 19 insertions(+)
 
 diff --git a/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.cc b/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.cc
-index 87bfbc47aa..76e744f592 100644
+index 00178b9cd0..6974a30bf7 100644
 --- a/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.cc
 +++ b/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.cc
 @@ -9,6 +9,7 @@
@@ -59,7 +60,7 @@ index 87bfbc47aa..76e744f592 100644
  }
  
  void SkiaOutputSurfaceImplOnGpu::EnsureMinNumberOfBuffers(int n) {
-@@ -2104,6 +2121,7 @@ bool SkiaOutputSurfaceImplOnGpu::Initialize() {
+@@ -2103,6 +2120,7 @@ bool SkiaOutputSurfaceImplOnGpu::Initialize() {
      context_state_->AddContextLostObserver(this);
    }
  
@@ -68,7 +69,7 @@ index 87bfbc47aa..76e744f592 100644
  }
  
 diff --git a/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.h b/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.h
-index 3f1d407f5e..d0e0787c4d 100644
+index f3847a7826..f8b833d985 100644
 --- a/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.h
 +++ b/components/viz/service/display_embedder/skia_output_surface_impl_on_gpu.h
 @@ -539,6 +539,7 @@ class SkiaOutputSurfaceImplOnGpu

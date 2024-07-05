@@ -1,7 +1,7 @@
-From b62e15856aea86eeddd502b1ff5ac1d6b88a1760 Mon Sep 17 00:00:00 2001
+From 57c6104b5cd7a2c35caa40cf19c176eb66ab2ee8 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Thu, 2 Nov 2023 00:03:11 +0900
-Subject: [PATCH] V4L2VDA: Add hevc format support
+Subject: [PATCH 110/120] V4L2VDA: Add hevc format support
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
@@ -25,7 +25,7 @@ index 7737099b6a..49cf1beb3f 100644
        return IsMPEG4Supported();
      case VideoCodec::kDolbyVision:
 diff --git a/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc b/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
-index 8bfa229adc..2cd426b035 100644
+index 32b7e97338..05f10ee979 100644
 --- a/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
 +++ b/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.cc
 @@ -90,6 +90,7 @@ static const std::vector<uint32_t> kSupportedInputFourCCs = {
@@ -59,7 +59,7 @@ index 7131cba379..1c275257df 100644
      return V4L2_PIX_FMT_HEVC;
    } else {
 diff --git a/media/media_options.gni b/media/media_options.gni
-index e55171c4d1..d2e2e90bad 100644
+index 156eaebf5d..67b184d3b3 100644
 --- a/media/media_options.gni
 +++ b/media/media_options.gni
 @@ -138,7 +138,7 @@ declare_args() {

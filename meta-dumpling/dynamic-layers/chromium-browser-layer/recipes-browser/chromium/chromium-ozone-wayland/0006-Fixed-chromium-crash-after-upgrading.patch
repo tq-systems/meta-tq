@@ -1,7 +1,7 @@
-From 62c489e037cbaa8c737471b08c041b51103ce6d4 Mon Sep 17 00:00:00 2001
+From a2489f733bb842ee6aa222a97b108e18521e5ee1 Mon Sep 17 00:00:00 2001
 From: Wujian Sun <wujian.sun_1@nxp.com>
 Date: Wed, 22 Nov 2023 16:52:59 +0800
-Subject: [PATCH] Fixed chromium crash after upgrading
+Subject: [PATCH 6/6] Fixed chromium crash after upgrading
 
 Native display fail to get GBM platform,
 add EGL_PLATFORM_GBM_KHR for WAYLAND_GBM.
@@ -44,10 +44,10 @@ index 8d60e2c720..499ad5d9ec 100644
    std::vector<uint64_t> GetFilteredModifiers(
        uint32_t format,
 diff --git a/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc b/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc
-index cacbc9de25..93823fdabb 100644
+index 4e725c5814..0258548fd8 100644
 --- a/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc
 +++ b/ui/ozone/platform/wayland/gpu/wayland_buffer_manager_gpu.cc
-@@ -361,8 +361,6 @@ GbmDevice* WaylandBufferManagerGpu::GetGbmDevice() {
+@@ -363,8 +363,6 @@ GbmDevice* WaylandBufferManagerGpu::GetGbmDevice() {
    if (!supports_dmabuf_ || (!gl::GLSurfaceEGL::GetGLDisplayEGL()
                                   ->ext->b_EGL_EXT_image_dma_buf_import &&
                              !use_fake_gbm_device_for_test_)) {

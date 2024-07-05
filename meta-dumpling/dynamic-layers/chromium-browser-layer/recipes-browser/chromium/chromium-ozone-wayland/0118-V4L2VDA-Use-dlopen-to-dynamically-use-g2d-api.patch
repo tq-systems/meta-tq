@@ -1,7 +1,7 @@
-From 4778fd523a385aee8fb9b56944b850c73e08c013 Mon Sep 17 00:00:00 2001
+From 2831164cc20184e5f470d3eecb99f32a4e330d24 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Thu, 2 Nov 2023 17:41:28 +0900
-Subject: [PATCH] V4L2VDA: Use dlopen to dynamically use g2d api
+Subject: [PATCH 118/120] V4L2VDA: Use dlopen to dynamically use g2d api
 
 Upstream-Status: Inappropriate [NXP specific]
 ---

@@ -1,7 +1,7 @@
-From 0dc413c4eb498a1bf99c6eacd6327c2b9fa6b14d Mon Sep 17 00:00:00 2001
+From 0112d7345d0aa44f83b3f23e0ed6d8c975c2d14c Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Wed, 1 Nov 2023 23:53:06 +0900
-Subject: [PATCH] V4L2VDA: Use correct plane size and bytesused
+Subject: [PATCH 109/120] V4L2VDA: Use correct plane size and bytesused
 
 Upstream-Status: Inappropriate [NXP specific]
 ---

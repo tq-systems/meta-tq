@@ -1,7 +1,7 @@
-From 3389b61163c398d001a8615487b8524aec77abda Mon Sep 17 00:00:00 2001
+From 41142ef256f7f58adf944ab4e910586bcce5dcaf Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Fri, 2 Sep 2022 13:18:34 +0800
-Subject: [PATCH] V4L2VDA: Add macro use_linux_v4l2
+Subject: [PATCH 103/120] V4L2VDA: Add macro use_linux_v4l2
 
 Upstream-Status: Inappropriate [NXP specific]
 ---
@@ -29,7 +29,7 @@ index 8e8ad4a848..156b6bd256 100644
  #endif
  
 diff --git a/media/gpu/BUILD.gn b/media/gpu/BUILD.gn
-index 329784738c..0895d1a61e 100644
+index 0bb5edad02..a55fbd2325 100644
 --- a/media/gpu/BUILD.gn
 +++ b/media/gpu/BUILD.gn
 @@ -22,6 +22,7 @@ buildflag_header("buildflags") {
@@ -174,7 +174,7 @@ index f0dfacdf62..afea7a870a 100644
  
  base::TimeDelta TimeValToTimeDelta(const struct timeval& timeval) {
 diff --git a/media/gpu/v4l2/v4l2_video_decoder.cc b/media/gpu/v4l2/v4l2_video_decoder.cc
-index 27362111fc..638ad962aa 100644
+index 1ba50a5aa6..c6c5d4cb6c 100644
 --- a/media/gpu/v4l2/v4l2_video_decoder.cc
 +++ b/media/gpu/v4l2/v4l2_video_decoder.cc
 @@ -32,7 +32,9 @@

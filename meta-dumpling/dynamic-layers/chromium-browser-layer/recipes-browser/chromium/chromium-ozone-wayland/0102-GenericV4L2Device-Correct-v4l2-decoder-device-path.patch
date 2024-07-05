@@ -1,7 +1,7 @@
-From 38d77d088260b2f6568cbf05eed7ae2b64f53d31 Mon Sep 17 00:00:00 2001
+From e609e5db0a02dff77475beddc9e616818ed0f892 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Wed, 1 Nov 2023 18:55:31 +0900
-Subject: [PATCH] GenericV4L2Device: Correct v4l2 decoder device path
+Subject: [PATCH 102/120] GenericV4L2Device: Correct v4l2 decoder device path
 
 Change decoder device pattern to /dev/video, and select one
 correct device path /dev/videox where x is an integer.
@@ -12,10 +12,10 @@ Upstream-Status: Inappropriate [NXP specific]
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/media/gpu/v4l2/v4l2_device.cc b/media/gpu/v4l2/v4l2_device.cc
-index 0a2a51cea0..77ff65c277 100644
+index e9fc02a472..326a39273a 100644
 --- a/media/gpu/v4l2/v4l2_device.cc
 +++ b/media/gpu/v4l2/v4l2_device.cc
-@@ -913,8 +913,8 @@ void V4L2Device::CloseDevice() {
+@@ -849,8 +849,8 @@ void V4L2Device::CloseDevice() {
  }
  
  void V4L2Device::EnumerateDevicesForType(Type type) {

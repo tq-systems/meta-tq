@@ -1,7 +1,7 @@
-From 90b2df80159ef65aa4dbc498214eb281622f5ab0 Mon Sep 17 00:00:00 2001
+From 796cf27bef13a731f1f36f3c95894fe1db8a4b25 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Thu, 2 Nov 2023 16:21:06 +0900
-Subject: [PATCH] V4L2VDA: Enlarge input buffer count to 16
+Subject: [PATCH 117/120] V4L2VDA: Enlarge input buffer count to 16
 
 Some stream can decode one frame only after queuing over 8 buffers.
 So enlarge input buffer count to 16 to avoid such stream cannot play.
@@ -12,7 +12,7 @@ Upstream-Status: Inappropriate [NXP specific]
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.h b/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.h
-index 095424a0df..3a2737c449 100644
+index 8ae19f53de..b7d43fce53 100644
 --- a/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.h
 +++ b/media/gpu/v4l2/legacy/v4l2_video_decode_accelerator.h
 @@ -157,7 +157,7 @@ class MEDIA_GPU_EXPORT V4L2VideoDecodeAccelerator

@@ -1,7 +1,7 @@
-From 214ff91d5615f965be97b40597cd4ce4d3f26f88 Mon Sep 17 00:00:00 2001
+From 99b7f0b617e0169c90e7f98246ac92ab00afd262 Mon Sep 17 00:00:00 2001
 From: Wujian Sun <wujian.sun_1@nxp.com>
 Date: Mon, 23 Oct 2023 15:21:53 +0800
-Subject: [PATCH] Disable dri for imx gpu
+Subject: [PATCH 3/4] Disable dri for imx gpu
 
 Upstream-Status: Inappropriate [i.MX-specific]
 

@@ -1,7 +1,7 @@
-From 0dd1fb91d5569b578fca3137c31091693b9ba1d5 Mon Sep 17 00:00:00 2001
+From 18e15e665dfd17787841898be4bcf2c4940dbc9e Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Thu, 2 Nov 2023 14:31:34 +0900
-Subject: [PATCH] V4L2VDA: Comment some unused ioctl
+Subject: [PATCH 113/120] V4L2VDA: Comment some unused ioctl
 
 Upstream-Status: Inappropriate [NXP specific]
 ---

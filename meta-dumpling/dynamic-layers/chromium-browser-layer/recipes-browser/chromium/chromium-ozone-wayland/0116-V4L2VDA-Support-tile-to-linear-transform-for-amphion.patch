@@ -1,7 +1,7 @@
-From 6687042f8f3f6640e85db79dd6e74b0eb43eddca Mon Sep 17 00:00:00 2001
+From d59e1fe890fc5815fa4466b8dc0044ce83d750ac Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Thu, 2 Nov 2023 15:29:30 +0900
-Subject: [PATCH] V4L2VDA: Support tile to linear transform for amphion
+Subject: [PATCH 116/120] V4L2VDA: Support tile to linear transform for amphion
 
 Upstream-Status: Inappropriate [NXP specific]
 ---

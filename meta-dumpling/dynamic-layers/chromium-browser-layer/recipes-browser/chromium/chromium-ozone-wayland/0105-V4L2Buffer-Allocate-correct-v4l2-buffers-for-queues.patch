@@ -1,7 +1,7 @@
-From d150642a81eb8908d7f529108dba52e1f6b985e4 Mon Sep 17 00:00:00 2001
+From d004057743fcb63fa6b0e28ad2c3dfd945c7c7d2 Mon Sep 17 00:00:00 2001
 From: Hou Qi <qi.hou@nxp.com>
 Date: Wed, 1 Nov 2023 23:27:25 +0900
-Subject: [PATCH] V4L2Buffer: Allocate correct v4l2 buffers for queues
+Subject: [PATCH 105/120] V4L2Buffer: Allocate correct v4l2 buffers for queues
 
 For single plane queue, need to fill v4l2_planes_[0] with
 correct size quried from v4l2 driver.
