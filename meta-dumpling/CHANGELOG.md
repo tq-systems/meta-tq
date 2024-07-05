@@ -9,15 +9,21 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
 * chromium-ozone-wayland (meta-browser): Include configuration and
   hardware-specific patch for GPU support on TQMa62xx when the
   dumpling-wayland-ti distro is used
 
   The patch currently applies cleanly to Chromium 126.
+
+### Changed
+
 * weston-init: Unconditionally disabling blanking the screen on idle
 
   Make idle handling consistent on all hardware. Also works around Weston
   crashing when reenabling the display on some platforms.
+* Modernize psplash support to use png file directly
 
 ## kirkstone.TQ.ARM.BSP.0019
 
