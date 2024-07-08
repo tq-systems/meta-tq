@@ -16,6 +16,7 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* tq-bootscripts: fix typo in error handling command for UBIFS boot
 * qoriq-atf:
   * TQMLS1028A: Fixed RAM timing spec conformance for newer module revisions
     with Micron DDR RAM
