@@ -284,25 +284,15 @@ gstreamer examples:
 ```
 # configure
 yavta -f Y8 -s 1280x800 -c20 /dev/video0
+
 # grab to file
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! videorate ! \
- video/x-raw,format=GRAY8,width=1280,height=800,framerate=1/1 ! jpegenc ! multifilesink location=test%d.jpg
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! \
+	videorate ! video/x-raw,format=GRAY8,framerate=1/1 ! jpegenc ! multifilesink location=test%d.jpg
 
 # show live video
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! videoconvert ! autovideosink -v sync=false
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! \
+  videoconvert ! waylandsink sync=false
 ```
-
-* OpenGL accelerated pipeline:
-Note: This is only supported on fslc-5.15 based kernel for now
-
-```
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! glupload ! glcolorconvert ! glcolorscale ! glcolorconvert ! gldownload ! autovideosink -v sync=false
-```
-* Show FPS on screen
-```
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! glupload ! glcolorconvert ! glcolorscale ! glcolorconvert ! gldownload ! fpsdisplaysink video-sink="waylandsink" sync=false -v
-```
-Add `text-overlay=false` to fpsdisplaysink for console output only
 
 ##### Raw Bayer with Sony IMX327
 
