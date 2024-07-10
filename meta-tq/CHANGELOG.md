@@ -11,11 +11,15 @@ Releases are named with the following scheme:
 
 ### Added
 
+* u-boot-ti-tq-2023.04:
+  * TQMa64xxL: Added support for new variant with 2GiB RAM
 * u-boot-lsdk-tq-2019.10: Added support for new alphanumeric TQ serial
   number format
 
 ### Fixed
 
+* u-boot-ti-tq-2023.04:
+  * TQMa64xxL: Fixed very slow boot from SPI-NOR
 * tq-bootscripts: fix typo in error handling command for UBIFS boot
 * qoriq-atf:
   * TQMLS1028A: Fixed RAM timing spec conformance for newer module revisions
