@@ -18,13 +18,17 @@ Releases are named with the following scheme:
 * u-boot-imx-tq_2020.04:
   * Add support for MBa8MP-RAS314
   * Fix for adding spi-nor device partitions
-* linux-imx-tq-6.6: new kernel based on fslc-6.6 for TQMa8MPxL
+* linux-imx-tq-6.6: new kernel based on fslc-6.6
+  * support for TQMa8MPxL
+  * support for TQMa8MxML
 
 ### Changed
 
 * Adjust classes to scarthgap release
 * Add more sanity checks to scarthgap release
 * TQMa8MPxL: WiFi-Firmware only installed if WiFi feature is enabled
+* linux-imx-tq-6.6:
+  * Configure gpio-aggregator driver as compiled-in
 
 ### Removed
 
