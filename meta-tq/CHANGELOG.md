@@ -18,6 +18,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* linux-ti-tq-6.1:
+  * TQMa64xxL: Added missing USB (host/device) controller drivers
 * u-boot-ti-tq-2023.04:
   * TQMa64xxL: Fixed very slow boot from SPI-NOR
 * tq-bootscripts: fix typo in error handling command for UBIFS boot
