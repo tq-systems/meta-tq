@@ -449,11 +449,12 @@ __Gray with Omnivision OV9281__
 # configure
 yavta -f Y8 -s 1280x800 -c20 /dev/video0
 # grab to file
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! videorate ! video/x-raw,format=GRAY8,framerate=1/1 ! \
-	jpegenc ! multifilesink location=test%d.jpg
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! \
+	videorate ! video/x-raw,format=GRAY8,framerate=1/1 ! jpegenc ! multifilesink location=test%d.jpg
+
 # show live video
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! videoconvert ! \
-	autovideosink -v sync=false
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! \
+  videoconvert ! waylandsink sync=false
 ```
 
 __Raw Bayer with Sony IMX327__
@@ -462,13 +463,8 @@ __Raw Bayer with Sony IMX327__
 * gstreamer example:
 
 ```
-# configure
-yavta -f SRGGB10 -s 1280x720  /dev/video0
-
-# show live video
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false ! \
-	video/x-bayer,format=rggb,bpp=10,width=1280,height=720,framerate=25/1 ! \
-	bayer2rgbneon show-fps=t reduce-bpp=t ! autovideosink sync=false
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-bayer,format=rggb10le,bpp=10,width=1280,height=720 ! \
+  bayer2rgb ! waylandsink sync=false
 ```
 
 ### Cortex M7
