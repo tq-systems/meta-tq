@@ -21,6 +21,7 @@ Releases are named with the following scheme:
 * linux-imx-tq-6.6: new kernel based on fslc-6.6
   * support for TQMa8MPxL
   * support for TQMa8MxML
+  * support for TQMa8MxNL
 
 ### Changed
 
