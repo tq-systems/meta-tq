@@ -507,21 +507,9 @@ __Gray with Omnivision OV9281__
 * gstreamer example:
 
 ```
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! \
-  video/x-raw,format=GRAY8,width=1280,height=800 ! videoconvert ! autovideosink -v sync=false
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! \
+  videoconvert ! waylandsink sync=false
 ```
-
-* OpenGL accelerated pipeline:
-```
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! \
-  video/x-raw,format=GRAY8,width=1280,height=800 ! glupload ! glcolorconvert ! \
-  glcolorscale ! glcolorconvert ! gldownload ! autovideosink -v sync=false
-```
-* Show FPS on screen
-```
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! glupload ! glcolorconvert ! glcolorscale ! glcolorconvert ! gldownload ! fpsdisplaysink video-sink="waylandsink" sync=false -v
-```
-Add `text-overlay=false` to fpsdisplaysink for console output only
 
 __Raw Bayer with Sony IMX327__
 
@@ -529,10 +517,8 @@ __Raw Bayer with Sony IMX327__
 * gstreamer example:
 
 ```
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 v4l2src device=/dev/video0 force-aspect-ratio=false ! \
-  video/x-bayer,format=rggb,bpp=10,width=1280,height=720,framerate=25/1 ! \
-  bayer2rgbneon show-fps=t reduce-bpp=t ! autovideoconvert ! \
-  autovideosink sync=false
+gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-bayer,format=rggb10le,bpp=10,width=1280,height=720 ! \
+  bayer2rgb ! waylandsink sync=false
 ```
 
 ### Cortex M4
