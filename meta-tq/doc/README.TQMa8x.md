@@ -305,7 +305,7 @@ In case of problems first check the bus termination:
 
 #### Enable without CAN-FD
 
-CAN1/2 should be enabled and configured by default when using with MB-SMARC-2
+CAN1/2 should be enabled and configured by default when using with MBa8x
 and meta-tq / systemd
 
 ```
