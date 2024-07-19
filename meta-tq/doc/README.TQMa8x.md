@@ -151,6 +151,7 @@ See top level README.md for configurations usable as MACHINE.
   ```
   MACHINE_FEATURES:append = " ubi"
   ```
+* `Failed to disable prefetcher [errata #841119 and #826419], check ACR.CACHE_LOCK`
 
 ## Artifacts
 
