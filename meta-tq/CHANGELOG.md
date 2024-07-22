@@ -24,6 +24,7 @@ Releases are named with the following scheme:
   * support for TQMa8MxML
   * support for TQMa8MxNL
   * support for TQMa8x
+  * support for TQMa8Xx
 
 ### Changed
 
