@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 require linux-imx-tq-common.inc
 
 KBRANCH = "TQMa-fslc-6.6-2.0.x-imx"
-SRCREV = "73efda87075d1d41fc8f8e0ea16f3e50cd06c701"
+SRCREV = "3e6618b0ef5c30a5b13be7d8dc8af1e3ff8f83c1"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "6.6"
@@ -69,3 +69,4 @@ COMPATIBLE_MACHINE:tqma8mxnl = "tqma8mxnl"
 COMPATIBLE_MACHINE:tqma8x = "tqma8x"
 COMPATIBLE_MACHINE:tqma8xx = "tqma8xx"
 COMPATIBLE_MACHINE:tqma8xxs = "tqma8xxs"
+COMPATIBLE_MACHINE:tqma93xx = "tqma93xx"
