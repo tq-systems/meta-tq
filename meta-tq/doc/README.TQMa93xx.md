@@ -115,8 +115,8 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 |           use UART3 as debug console (see issues)            |                   |         x        |
 |                           LPB boot                           |                   |                  |
 |                        **NPU**                               |                   |                  |
-|                  Firmware for CORTEX M33                     |                   |         x        |
-|                              Demo                            |                   |         x        |
+|                  Firmware for CORTEX M33                     |                   |                  |
+|                              Demo                            |                   |                  |
 |              **MIPI CSI (see Issues section)**               |                   |                  |
 |   Gray with Vision Components GmbH camera (Sensor OV9281)    |                   |                  |
 | Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |                   |                  |
