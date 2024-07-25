@@ -167,7 +167,6 @@ _MBa8x HW Rev.020x/30x only_
 * The HDMI audio device has to be selected explicitely by passing `-Dsysdefault:CARD=imxaudiohdmi` to `aplay` & friends
 * HDMI: When using large displays, module variants with> = 2 GiB RAM are recommended.
   It is known that some use cases will not work with less memory. Like Weston on a 4K monitor
-* HDMI hotplug is sometimes unreliable
 * Note: GPU temperature observation uses CPU thermal-zone! Playing 4K Videos on 4K Display will raise the thermal-zone (CPU) temperature >80°C, reducing VPU clock. Apparently there is no dedicated VPU sensor
 * PCIe driver causes several warnings during suspend
 * UBI / UBIFS images will not be built out of the box since `imx-base.inc` from
