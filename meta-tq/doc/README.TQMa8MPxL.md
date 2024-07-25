@@ -283,7 +283,7 @@ gstreamer examples:
 
 ```
 # configure
-yavta -f Y8 -s 1280x800 -c20 /dev/video0
+yavta --format Y8 --size 1280x800 --capture=1 /dev/video0
 
 # grab to file
 gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,height=800 ! \
@@ -300,9 +300,6 @@ gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-raw,format=GRAY8,width=1280,
 * gstreamer example:
 
 ```
-# configure
-yavta -f SRGGB10 -s 1280x720  /dev/video0
-
 # show live video
 gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-bayer,format=rggb10le,bpp=10,width=1280,height=720 ! \
   bayer2rgb ! waylandsink sync=false
