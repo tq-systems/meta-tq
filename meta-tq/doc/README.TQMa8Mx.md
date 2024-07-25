@@ -177,6 +177,8 @@ _MBa8x HW Rev.020x/30x only_
   ```
   MACHINE_FEATURES:append = " ubi"
   ```
+* DT-Overlays `imx8mq-tqma8mq-mba8mx-dcss-hdmi.dtso` and `imx8mq-tqma8mq-mba8mx-dcss-lvds.dtso` are mutual exlusive.
+  * Only one display can be used by DCSS at the same time.
 
 ## Build Artifacts
 
