@@ -188,6 +188,8 @@ Artifacs can be found at the usual locations for bitbake:
   * imx8mq-tqma8mq-mba8mx-dcss-hdmi.dtb (HDMI support)
   * imx8mq-tqma8mq-mba8mx-dcss-hdmi-imx327.dtb (HDMI support plus Vision Components CSI camera
     with Sony IMX327)
+  * imx8mq-tqma8mq-mba8mx-dcss-hdmi-imx327-csi2.dtb (HDMI support plus Vision Components CSI camera
+    with Sony IMX327 on CSI-2 channel)
   * imx8mq-tqma8mq-mba8mx-dcss-hdmi-ov9281.dtb (HDMI support plus Vision Components CSI camera
     with OmniVision OV9281)
   * imx8mq-tqma8mq-mba8mx-lcdif-lvds-tm070jvhg33.dtb (LVDS support over LCDIF with TIANMA TM070JVHG33)
