@@ -124,7 +124,6 @@ See top level README.md for configurations usable as MACHINE.
 * FTM
   * PWM (missing in CPU DT)
 * HDMI in
-* linux-imx-tq_5.15: Dual-Channel LVDS is untested
 
 ## Known Issues
 
@@ -134,13 +133,10 @@ See top level README.md for configurations usable as MACHINE.
   See [Build Artifacts](#Build-Artifacts) for complete list of supported Device Tree files
 * counting of i2c devices bus starts at i2c-2 (because i2c-0 and i2c-1
   are reserved for i2c_rpmsgbus)
-* PWM only works after the second enable command
-  (`echo 1 > /sys/class/pwm<X>/enable`)
 * USB
   * U-Boot: `EHCI timed out on TD - token` with some USB sticks on USB 2.0 OTG
   * runtime suspend disabled for USB Hub TUSB8041
 * DT file for rpmsg is too big and needs `fdt_high` to be set to `0xffffffffffffffff`
-* `linux-imx-tq_5.15`: SATA is broken due to link issues
 * SPI: Hardware-controlled chipselects are not driven as expected
   * Toggle after each Byte when using DMA
   * Inbetween each `spi_transfer`
