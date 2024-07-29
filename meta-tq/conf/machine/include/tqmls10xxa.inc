@@ -52,33 +52,8 @@ EXTRA_IMAGEDEPENDS:append:fsl-lsch3 = "\
     mc-utils \
 "
 
-# Verified values to generate UBI image:
-# physical erase block size
-UBI_PEB_SIZE = "65536"
-UBI_MINIMUM_IO_UNIT_SIZE = "1"
-UBI_SUB_PAGE_SIZE = "1"
-# UBI_VID_HEADER_OFFSET="64"
-# logical erase block size
-UBI_LEB_SIZE = "65408"
-
+# bootloader and firmware need more space, so there is less than default LEBs available
 UBI_MAX_LEB_COUNT = "865"
-
-MKUBIFS_ARGS = "\
-    --min-io-size=${UBI_MINIMUM_IO_UNIT_SIZE} \
-    --leb-size=${UBI_LEB_SIZE} \
-    --max-leb-cnt=${UBI_MAX_LEB_COUNT} \
-"
-
-UBINIZE_ARGS = "\
-    --peb-size=${UBI_PEB_SIZE} \
-    --min-io-size=${UBI_MINIMUM_IO_UNIT_SIZE} \
-    --sub-page-size=${UBI_SUB_PAGE_SIZE} \
-"
-
-# needs to be set to have it consistent for kernel command line
-# Use the expected value of the ubifs filesystem's volume name in the kernel
-# and u-boot.
-UBI_VOLNAME = "root"
 
 # Composite Image Layout (in KBytes)
 IMAGE_OFFSET_PBL ?= "4"

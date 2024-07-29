@@ -33,33 +33,13 @@ MACHINE_FEATURES:append = "\
     vfat \
 "
 
-# Verified values to generate UBI image:
+# Overwrite default values
 # physical erase block size
 UBI_PEB_SIZE = "131072"
-UBI_MINIMUM_IO_UNIT_SIZE = "1"
-UBI_SUB_PAGE_SIZE = "1"
-# UBI_VID_HEADER_OFFSET="64"
 # logical erase block size
 UBI_LEB_SIZE = "130944"
-
+# logical erase block count
 UBI_MAX_LEB_COUNT = "896"
-
-MKUBIFS_ARGS = "\
-    --min-io-size=${UBI_MINIMUM_IO_UNIT_SIZE} \
-    --leb-size=${UBI_LEB_SIZE} \
-    --max-leb-cnt=${UBI_MAX_LEB_COUNT} \
-"
-
-UBINIZE_ARGS = "\
-    --peb-size=${UBI_PEB_SIZE} \
-    --min-io-size=${UBI_MINIMUM_IO_UNIT_SIZE} \
-    --sub-page-size=${UBI_SUB_PAGE_SIZE} \
-"
-
-# needs to be set to have it consistent for kernel command line
-# Use the expected value of the ubifs filesystem's volume name in the kernel
-# and u-boot.
-UBI_VOLNAME = "root"
 
 # Common image configuration
 require conf/machine/include/tq-image.inc

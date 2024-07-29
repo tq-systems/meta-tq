@@ -46,18 +46,6 @@ UBOOT_MAKE_TARGET:mx6-generic-bsp = "${UBOOT_BINARY_BASENAME}.${UBOOT_SUFFIX}"
 UBOOT_BINARY:mx6-generic-bsp = "${UBOOT_MAKE_TARGET}"
 IMX_DEFAULT_BOOTLOADER ?= "u-boot-tq"
 
-# note: These settings are only usable with larger SPI NOR
-# ubinize PEB_SIZE="65536"
-# ubinize MINIMUM_IO_UNIT_SIZE="1"
-# ubinize SUB_PAGE_SIZE="1"
-# mkubifs VID_HEADER_OFFSET="64"
-# mkubifs LEB_SIZE="65408"
-
-MKUBIFS_ARGS = " -m 1 -e 65408 -c 896 "
-UBINIZE_ARGS = " -p 65536 -m 1 -s 1 "
-# needs to be set to have it consistent for kernel command line
-UBI_VOLNAME = "root"
-
 PREFERRED_VERSION_linux-imx-tq ?= "5.15%"
 
 # Common image configuration

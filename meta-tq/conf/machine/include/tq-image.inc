@@ -24,3 +24,37 @@ EXTRA_IMAGEDEPENDS += " \
 # EXTRA_IMAGEDEPENDS are applied to do_image_complete only. Make the same
 # dependencies available to do_image_wic was well.
 WKS_FILE_DEPENDS += "${WKS_FILE_DEPENDS_DEFAULT} ${EXTRA_IMAGEDEPENDS}"
+
+# Verified values to generate UBI image - all our SoM that features an
+# assembled QSPI NOR use flash types with 64 kiB erase block size and per default
+# flash chips with 64 MiB total size. These values can be overwritten per machine
+# if needed
+
+# physical erase block size
+UBI_PEB_SIZE ?= "65536"
+UBI_MINIMUM_IO_UNIT_SIZE ?= "1"
+UBI_SUB_PAGE_SIZE ?= "1"
+# logical erase block size
+UBI_LEB_SIZE ?= "65408"
+
+# If assembled, 64 MB SPI-NOR is default,
+# reserve 8 MB for bootloader and env should be enough
+# so use 1024 - 128 LEB as default for this case
+UBI_MAX_LEB_COUNT ?= "896"
+
+MKUBIFS_ARGS = "\
+    --min-io-size=${UBI_MINIMUM_IO_UNIT_SIZE} \
+    --leb-size=${UBI_LEB_SIZE} \
+    --max-leb-cnt=${UBI_MAX_LEB_COUNT} \
+"
+
+UBINIZE_ARGS = "\
+    --peb-size=${UBI_PEB_SIZE} \
+    --min-io-size=${UBI_MINIMUM_IO_UNIT_SIZE} \
+    --sub-page-size=${UBI_SUB_PAGE_SIZE} \
+"
+
+# needs to be set to have it consistent for kernel command line
+# Use the expected value of the ubifs filesystem's volume name in the kernel
+# and u-boot.
+UBI_VOLNAME ?= "root"

@@ -57,33 +57,9 @@ EXTRA_IMAGEDEPENDS += "\
     rcw \
 "
 
-# Verified values to generate UBI image:
-# physical erase block size
-UBI_PEB_SIZE = "65536"
-UBI_MINIMUM_IO_UNIT_SIZE = "1"
-UBI_SUB_PAGE_SIZE = "1"
-# UBI_VID_HEADER_OFFSET="64"
-# logical erase block size
-UBI_LEB_SIZE = "65408"
-
+# The default SPI-NOR assembled on this SoM is larger than the default
+# so we can safely increase count of usable LEBs
 UBI_MAX_LEB_COUNT = "1280"
-
-MKUBIFS_ARGS = "\
-    --min-io-size=${UBI_MINIMUM_IO_UNIT_SIZE} \
-    --leb-size=${UBI_LEB_SIZE} \
-    --max-leb-cnt=${UBI_MAX_LEB_COUNT} \
-"
-
-UBINIZE_ARGS = "\
-    --peb-size=${UBI_PEB_SIZE} \
-    --min-io-size=${UBI_MINIMUM_IO_UNIT_SIZE} \
-    --sub-page-size=${UBI_SUB_PAGE_SIZE} \
-"
-
-# needs to be set to have it consistent for kernel command line
-# Use the expected value of the ubifs filesystem's volume name in the kernel
-# and u-boot.
-UBI_VOLNAME = "root"
 
 BL2_IMAGE ?= "bl2_auto.pbl"
 BL3_IMAGE ?= "fip_uboot.bin"
