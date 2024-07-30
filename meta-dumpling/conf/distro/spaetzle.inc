@@ -51,4 +51,4 @@ VIRTUAL-RUNTIME_base-utils-hwclock = "busybox-hwclock"
 # see above
 DISTRO_FEATURES_BACKFILL_CONSIDERED:append = " systemd"
 
-IMAGE_FSTYPES:append = "${@bb.utils.contains('MACHINE_FEATURES', 'ubi', ' ubi', '', d)}"
+IMAGE_FSTYPES += "${@bb.utils.contains('MACHINE_FEATURES', 'ubi', 'ubi', '', d)}"
