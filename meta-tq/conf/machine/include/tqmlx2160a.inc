@@ -90,3 +90,13 @@ BL3_IMAGE ?= "fip_uboot.bin"
 
 # Common image configuration
 require conf/machine/include/tq-image.inc
+
+# Add bootloader and boot firmware only SD/e-MMC image generation including
+# support for different SoM variants.
+# These images are stripped down versions of the normal .wic, consisting
+# only of partition table, boot loader and VFAT containing firmware images.
+IMAGE_CLASSES += "image_type_bootonly"
+IMAGE_CLASSES += "image_type_pblvariant"
+
+IMAGE_FSTYPES += "wic.bootonly"
+IMAGE_FSTYPES += "wic.bootonly.pblvariant"
