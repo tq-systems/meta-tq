@@ -120,7 +120,9 @@ See top level README.md for configurations usable as MACHINE.
 
 * TQMa8XDP REV.020x
 * temperature grade
-  * SCU limitation
+  * Due to SCU-API limitation temperature grading cannot be queried from SCU.
+    Therfore thermal trip points are hardcoded in devicetree and must match the
+    assembled CPU type. BSP default are trip points for industrial grading.
 * Audio
   * Mic In untested
 * DSI - DP bridge
