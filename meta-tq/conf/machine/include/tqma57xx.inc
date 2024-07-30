@@ -74,3 +74,6 @@ MACHINE_FEATURES:remove = "alsa"
 
 # Common image configuration
 require conf/machine/include/tq-image.inc
+
+# TI image configuration
+require conf/machine/include/tq-image-ti.inc
