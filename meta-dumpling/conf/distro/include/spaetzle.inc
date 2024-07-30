@@ -102,7 +102,7 @@ SKIP_RECIPE[tq-image-qt5] = "not buildable with spaetzle: use tq-image-small"
 # Disable python usage in opkg-utils since it won't build with tiny config
 PACKAGECONFIG:remove:pn-opkg-utils = "python"
 
-require conf/distro/tq-common.inc
+require conf/distro/include/tq-common.inc
 
 # tinification of tq-common.inc (mostly similar to init-manager-mdev-busybox.inc).
 # start with default ...
