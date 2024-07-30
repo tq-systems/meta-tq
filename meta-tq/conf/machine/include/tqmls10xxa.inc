@@ -101,3 +101,11 @@ BOOTTYPE:tqmls1088a ?= "\
 
 # Common image configuration
 require conf/machine/include/tq-image.inc
+
+# Add bootloader and boot firmware only SD/e-MMC image generation including
+# support for different SoM variants.
+# These images are stripped down versions of the normal .wic, consisting
+# only of partition table, boot loader and VFAT containing firmware images.
+IMAGE_CLASSES += "image_type_bootonly"
+
+IMAGE_FSTYPES += "wic.bootonly"
