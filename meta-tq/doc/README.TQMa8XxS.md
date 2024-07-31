@@ -135,8 +135,6 @@ See top level README.md for configurations usable as MACHINE.
   * Linux: overcurrent with some USB Sticks on MB-SMARC-2
 * FlexSPI
   * erase of ranges >= 16 MB fails under linux
-* Suspend / Wakeup
-  * RTC Alarm IRQ via GPIO leads to system stall during resume
 * SPI: Hardware-controlled chipselects are not driven as expected
   * Toggle after each Byte when using DMA
   * Inbetween each `spi_transfer`
