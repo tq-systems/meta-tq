@@ -116,6 +116,7 @@ See top level README.md for configurations usable as MACHINE.
 * Audio
   * Mic In untested
 * DSI - DP bridge
+  * Custom, experimental support upon request
 * GPIO
   * Suspend / Wakeup GPIO
 
