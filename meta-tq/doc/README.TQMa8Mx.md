@@ -169,13 +169,9 @@ _MBa8x HW Rev.020x/30x only_
   It is known that some use cases will not work with less memory. Like Weston on a 4K monitor
 * Note: GPU temperature observation uses CPU thermal-zone! Playing 4K Videos on 4K Display will raise the thermal-zone (CPU) temperature >80°C, reducing VPU clock. Apparently there is no dedicated VPU sensor
 * PCIe driver causes several warnings during suspend
-* UBI / UBIFS images will not be built out of the box since `imx-base.inc` from
-  meta-freescale override machine specific assignment for `MACHINE_FEATURES`.
-  Use following bitbake assignment in one of your `local.conf` / `auto.conf` /
-  `<machine>.conf` files:
-  ```
-  MACHINE_FEATURES:append = " ubi"
-  ```
+* UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle[-nxp]`.
+  The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
+  `UBI_MAX_LEB_COUNT` on machine level.
 * DT-Overlays `imx8mq-tqma8mq-mba8mx-dcss-hdmi.dtso` and `imx8mq-tqma8mq-mba8mx-dcss-lvds.dtso` are mutual exlusive.
   * Only one display can be used by DCSS at the same time.
 

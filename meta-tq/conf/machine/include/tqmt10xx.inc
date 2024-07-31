@@ -33,7 +33,8 @@ MACHINE_FEATURES:append = "\
     vfat \
 "
 
-# Overwrite default values
+# The default flash assembled on this SoM has a different geometry than the default
+# used on most SoM. Adjust values to match the assembled flash.
 # physical erase block size
 UBI_PEB_SIZE = "131072"
 # logical erase block size
