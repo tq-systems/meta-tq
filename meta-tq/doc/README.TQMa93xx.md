@@ -150,7 +150,7 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 * eth1 does not work after suspend, needs `ip link set down/up dev eth1` to be functional
 * When using `i2c probe` command in U-Boot all valid addresses respond instead of addresses
   used by a physical connected device.
-* Some Linux kernel boot warnings regarding missing optional supplies in DTB.
+* linux-imx-tq_6.1: Some Linux kernel boot warnings regarding missing optional supplies in DTB.
 
 ## MBa91 differences
 
