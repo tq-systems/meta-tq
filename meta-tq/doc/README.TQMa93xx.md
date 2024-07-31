@@ -143,7 +143,7 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 
 ## Known Issues
 
-* CPU mask 1.0 and older print an error when loading Edglock driver. Driver loads successful
+* CPU mask 1.0 and older print an error when loading driver for secure enclave driver. Driver loads successful
   but the system may lack secure boot features.
 * Not all USB sticks are detected properly in U-Boot
 * Using `usb reset` in U-Boot will give a warning from Type-C port controller.
