@@ -140,13 +140,9 @@ See top level README.md for configurations usable as MACHINE.
   * Inbetween each `spi_transfer`
   * Use of GPIO controlled chip-selects instead is recommended
   * By default all chip-selects are configured as GPIO
-* UBI / UBIFS images will not be built out of the box since `imx-base.inc` from
-  meta-freescale override machine specific assignment for `MACHINE_FEATURES`.
-  Use following bitbake assignment in one of your `local.conf` / `auto.conf` /
-  `<machine>.conf` files:
-  ```
-  MACHINE_FEATURES:append = " ubi"
-  ```
+* UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle[-nxp]`.
+  The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
+  `UBI_MAX_LEB_COUNT` on machine level.
 
 ## Artifacts
 
