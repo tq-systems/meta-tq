@@ -136,7 +136,6 @@ See top level README.md for configurations usable as MACHINE.
 * USB
   * U-Boot: USB 2.0 dual role port is limited to device mode for UUU / MFG use case
   * U-Boot: USB 3.0 port does not initialize USB 2.0 subsystem after USB reset
-* Upon resume ethernet PHY will not establish a new link again
 * SPI: Hardware-controlled chipselects are not driven as expected
   * Toggle after each Byte when using DMA
   * Inbetween each `spi_transfer`
