@@ -71,5 +71,5 @@ UBINIZE_ARGS = "\
 # and u-boot.
 UBI_VOLNAME = "root"
 
-PREFERRED_VERSION_linux-imx-tq ?= "6.1%"
+PREFERRED_VERSION_linux-imx-tq ?= "6.6%"
 PREFERRED_VERSION_firmware-imx ?= "8.18"
