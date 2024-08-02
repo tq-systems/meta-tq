@@ -1,7 +1,7 @@
 # Common definitions for TQ-Systems GmbH TQMLS1012AL modules on MBLS1012AL
 
 MACHINE_FEATURES += "wifi"
-MACHINE_EXTRA_RRECOMMENDS += "linux-firmware-ath10k"
+MACHINE_EXTRA_RRECOMMENDS += "${@bb.utils.contains('COMBINED_FEATURES', 'wifi', 'linux-firmware-ath10k', '', d)}"
 
 # no default assignment here, since we overwrite defaults from qoriq-arm.inc
 SERIAL_CONSOLES = "115200;ttyS0"
