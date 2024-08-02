@@ -9,6 +9,14 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQ.ARM.BSP.0022
+
+### Module BSP Revisions
+
+* kirkstone.TQMLS1028A.BSP.SW.0111
+
+No changes.
+
 ## kirkstone.TQ.ARM.BSP.0021
 
 ### Module BSP Revisions
