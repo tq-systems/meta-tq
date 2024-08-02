@@ -14,10 +14,8 @@ MACHINE_FEATURES += "\
     wifi \
 "
 
-MACHINE_EXTRA_RRECOMMENDS += "\
-    linux-firmware-ath10k \
-    linux-firmware-qca \
-"
+MACHINE_EXTRA_RRECOMMENDS += "${@bb.utils.contains('COMBINED_FEATURES', 'wifi', 'linux-firmware-ath10k', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS += "${@bb.utils.contains('COMBINED_FEATURES', 'bluetooth', 'linux-firmware-qca', '', d)}"
 
 # TODO: handle optee as soon as supported
 IMXBOOT_TARGETS ?= "\
