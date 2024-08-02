@@ -34,7 +34,7 @@ MACHINE_FEATURES += "\
 "
 
 MACHINE_EXTRA_RRECOMMENDS += "${@bb.utils.contains('COMBINED_FEATURES', 'wifi', 'linux-firmware-ath10k', '', d)}"
-MACHINE_EXTRA_RRECOMMENDS += "${@bb.utils.contains('COMBINED_FEATURES', 'wifi', 'linux-firmware-qca', '', d)}"
+MACHINE_EXTRA_RRECOMMENDS += "${@bb.utils.contains('COMBINED_FEATURES', 'bluetooth', 'linux-firmware-qca', '', d)}"
 
 # Add packages we want to be deployed, even when they are not part of rootfs
 # We need these here to support UBI / NFS boot case
