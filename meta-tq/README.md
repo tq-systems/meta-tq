@@ -178,7 +178,7 @@ Support for the following machines is contained in this version:
 | [y]    | i.MX6UL                 | TQMa6ULx[L]             | MBaULx        | tqma6ul-multi-mba6ulx            | TQMa6ULx HW REV.030x / TQMa6ULxL HW REV.020x 256/512 MB RAM, MBa6ULx HW REV.020x                                                                             |
 | [y]    | i.MX6UL                 | TQMa6ULxL               | MBaULxL       | tqma6ulx-lga-mba6ulxl            | TQMa6ULxL HW REV.020x / MBa6ULxL HW REV.020x                                                                                                                 |
 | [y]    | i.MX6ULL                | TQMa6ULLx               | MBaULx        | tqma6ull-multi-mba6ulx           | TQMa6ULLx HW REV.030x / TQMa6ULLxL HW REV.020x  256/512 MB RAM, MBa6ULx HW REV.020x                                                                          |
-| [y]    | i.MX7\[S,D\]            | TQMa7\[S,D\]            | MBa7x         | tqma7x-multi-mba7                | TQMa7\[S,D\] HW REV.010x ... 020x / 1 GiB / 2 GiB /512 MiB RAM / MBa7x HW REV.020x                                                                           |
+| [y]    | i.MX7D                  | TQMa7D                  | MBa7x         | tqma7x-multi-mba7                | TQMa7D HW REV.010x ... 020x / 1 GiB / 2 GiB /512 MiB RAM / MBa7x HW REV.020x                                                                           |
 | [y]    | i.MX8MP                 | TQMa8MPxL               | MBa8MPxL      | tqma8mpxl-mba8mpxl               | TQMa8MPQL with 1/2/4/8 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x                                                                                              |
 | [y]    | i.MX8M\[D,Q,QL\]        | TQMa8M\[D,Q,QL\]        | MBa8Mx        | tqma8mx-multi-mba8mx             | TQMa8M\[D,Q,QL\] with 1/2/4 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x / 030x                                                                                  |
 | [y]    | i.MX8MM\[D,Q\]          | TQMa8M\[D,Q\]ML         | MBa8Mx        | tqma8mxml-multi-mba8mx           | TQMa8M\[D,Q\]ML / 1/2/4 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x                                                                                             |
@@ -233,6 +233,10 @@ Support for the following machines is contained in this version:
 **Note:** for TQMa6UL1 and baseboards using this module variant with i.MX6ULG1
           a dedicated device tree is supplied
 
+### Obsolete machines
+
+* TQMA7S: Use `kirkstone` branch instead
+
 ### Support for wic
 
 All machines in meta-tq are preconfigured to generate bootable SD/eMMC images
@@ -265,7 +269,7 @@ Under the given links SOM specific information can be found:
 
 * [TQMA6\[Q,D\]](doc/README.TQMa6x.md)
 * [TQMA6UL\[L\]](doc/README.TQMa6ULx.md)
-* [TQMA7\[S,D\]](doc/README.TQMa7x.md)
+* [TQMA7D](doc/README.TQMa7x.md)
 * [TQMa8Mx](doc/README.TQMa8Mx.md)
 * [TQMa8MxML](doc/README.TQMa8MxML.md)
 * [TQMa8MxNL](doc/README.TQMa8MxNL.md)
