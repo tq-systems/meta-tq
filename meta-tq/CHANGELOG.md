@@ -27,6 +27,11 @@ Releases are named with the following scheme:
   * support for TQMa8Xx
   * support for TQMa8XxS
   * support for TQMa93xx
+* doc: Add feature column for linux-6.1.y:
+  * TQMa8MPxL
+  * TQMa8MxML
+  * TQMa8MxNL
+  * TQMa8Mx
 
 ### Changed
 
@@ -44,6 +49,7 @@ Releases are named with the following scheme:
 * linux-imx-tq-6.6:
   * Configure gpio-aggregator driver as compiled-in
 * linux-tq-6.1: Updated to include all changes from linux-stable up to v6.1.103
+* Reformatted features tables for several modules
 
 ### Removed
 
@@ -61,6 +67,10 @@ Releases are named with the following scheme:
 * Remove local copy of imx-gpu-viv_6.4.11.p1.2
 * Remove local copy of imx-gpu-g2d_6.4.11.p1.2
 * Remove superfluous bbappend for mesa
+* Support for TQMa57xx has been removed
+* Support for TQMa654x has been removed
+* Support for MBa6ULxL (SBC with TQMa6UlxL) platform has been removed
+* Support for TQM7S has been removed
 
 ### Fixed
 
