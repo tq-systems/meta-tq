@@ -40,7 +40,7 @@ layers: meta-tq
 
 When using one of the distros definded in this layer you need
 additionally the `meta-poky` layer from the poky repo that defines
-`poky` and `poky-tiny` which the distros defined in this layer depend on.
+`poky` which the distros defined in this layer depend on.
 **Note** Recipes and bbappends in this layer do not depend on `meta-poky`
 
 URI: https://git.yoctoproject.org/poky  
