@@ -11,11 +11,19 @@ Releases are named with the following scheme:
 
 ### Changed
 
-* linux-ti-tq-6.1: Updatd to latest ti-linux-rt-6.1 based on Linux 6.1.83
+* linux-tq-6.1: Updated to include all changes from linux-stable up to v6.1.103
+* linux-ti-tq-6.1: Updated to latest ti-linux-rt-6.1 based on Linux 6.1.83
 
 ### Fixed
 
 * TQMa64xxL: Fixed PRU Ethernet with current prueth firmwares found in meta-ti
+* linux-tq-6.1:
+  * TQMa7x / TQMa6 / TQMa6UL[L]: Enable missing temperature sensor drivers
+  * TQMa7x / TQMa6 / TQMa6UL[L]: Enable missing frequency scaling governors (missing Kconfig)
+  * TQMa7x / TQMa6 / TQMa6UL[L]: Enable PCA953x IRQ  (missing Kconfig)
+  * TQMa7x / TQMa6 / TQMa6UL[L]: Make sound work again (missing Kconfig)
+  * TQMa7x / TQMa6UL[L]: Fix UBI support. UBIfs does not work with 4K erase size (wrong Kconfig)
+  * TQMa8MPxL: Fix USB support
 
 ## kirkstone.TQ.ARM.BSP.0022
 
