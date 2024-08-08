@@ -9,6 +9,14 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* linux-ti-tq-6.1: Updatd to latest ti-linux-rt-6.1 based on Linux 6.1.83
+
+### Fixed
+
+* TQMa64xxL: Fixed PRU Ethernet with current prueth firmwares found in meta-ti
+
 ## kirkstone.TQ.ARM.BSP.0022
 
 ### Module BSP Revisions
