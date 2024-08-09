@@ -1,10 +1,10 @@
 # TQMa6ULx / TQMa6ULLx / TQMa6ULxL / TQMa6ULLxL
 
+This README contains some useful information for TQMa6ULx / TQMa6ULLx / TQMa6ULxL / TQMa6ULLxL
+
 [[_TOC_]]
 
-## Overview
-
-### Supported Hardware
+## Variants
 
 * TQMa6ULx REV.030x on MBa6ULx REV.020x carrier board (aka STKa6ULx)
 * TQMa6ULxL REV.020x on MBa6ULx REV.020x carrier board (aka STKa6ULxL)
@@ -16,43 +16,51 @@
 
 See [here](./README.SoftwareVersions.md) for the software base versions.
 
-### Supported Features
+## Supported machine configurations
 
-|                              | linux-tq-5.15 |
-| ---------------------------- | :-----------: |
-| Fuses                        |      x        |
-| UART1 (console, X15)         |      x        |
-| UART3 (X5)                   |      x        |
-| GPIO                         |      x        |
-| Button (S6, S7, S8)          |      x        |
-| I2C                          |      x        |
-| GPIO expander                |      x        |
-| EEPROM                       |      x        |
-| RTC                          |      x        |
-| QSPI NOR                     |      x        |
-| Buzzer                       |      x        |
-| USB Host (X7/X8/X22)         |      x        |
-| USB Dual Role (X10)          |      x        |
-| eMMC/SD (on-board/X9)        |      x        |
-| Ethernet GigE (X1400)        |      x        |
-| Ethernet GigE (X1500) not G1 |      x        |
-| CAN (X13)                    |      x        |
-| CAN (X14) not G1             |      x        |
-| RS-485 (X16)                 |      x        |
-| LVDS (X17, X18)              |      x        |
-| Parallel LCD (X4)            |      x        |
-| Audio Line In (X20)          |      x        |
-| Audio Line Out (x21)         |      x        |
+See top level [README](../README.md) for configurations usable as MACHINE.
+
+## Supported Features
+
+### Linux
+
+
+|                                      | linux-tq-5.15 | linux-tq-6.1 |
+| ------------------------------------ | :-----------: | :----------: |
+| Fuses                                |       x       |      x       |
+| UART1 (console, X15)                 |       x       |      x       |
+| UART3 (X5)                           |       x       |      x       |
+| GPIO                                 |       x       |      x       |
+| Button (S6, S7, S8)                  |       x       |      x       |
+| I2C                                  |       x       |      x       |
+| GPIO expander                        |       x       |      x       |
+| EEPROM                               |       x       |      x       |
+| RTC                                  |       x       |      x       |
+| QSPI NOR                             |       x       |      x       |
+| Buzzer                               |       x       |      x       |
+| USB Host (X7/X8/X22)                 |       x       |      x       |
+| USB Dual Role (X10)                  |       x       |      x       |
+| eMMC/SD (on-board/X9)                |       x       |      x       |
+| Ethernet 100M (X1400)                |       x       |      x       |
+| Ethernet 100M (X1500) - not G1 CPU   |       x       |      x       |
+| CAN (X13)                            |       x       |      x       |
+| CAN (X14) not G1                     |       x       |      x       |
+| RS-485 (X16)                         |       x       |      x       |
+| LVDS (X17, X18)                      |       x       |      x       |
+| Parallel LCD (X4)                    |       x       |      x       |
+| Audio Line In (X20)                  |       x       |      x       |
+| Audio Line Out (x21)                 |       x       |      x       |
 
 _Note:_ Mini PCIe connector only supports USB.
 
 ### ToDo / Untested
+
 * Mic In (X19)
 * SIM card (X23)
 * Resistive Touch (X4)
 * Pixel Pipeline PXP
 
-### Known issues
+## Known issues
 
 * U-Boot: default device tree names for all machines using the starter kit
   mainboard (aka MBa6ULx) do not match device tree names in current supported
@@ -69,13 +77,13 @@ _Note:_ Mini PCIe connector only supports USB.
   device tree before loding the OS may fail with U-Boot from older BSP versions.
   Device tree path names were changed in CPU device tree fragment to conform the
   device tree specification.
-- Writing to FAT filesystems may cause warnings and errors in U-Boot
+* Writing to FAT filesystems may cause warnings and errors in U-Boot
   based on v2016.03.
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle[-nxp]`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
   `UBI_MAX_LEB_COUNT` on machine level.
 
-## Artifacts
+## Build Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
@@ -89,9 +97,9 @@ Artifacs can be found at the usual locations for bitbake:
 * u-boot-${MACHINE}.imx-sd: boot stream for SD / e-MMC
 * u-boot-${MACHINE}.imx-qspi: boot stream for QSPI
 
-## HowTo
+## Boot DIP Switches
 
-### MBa6ULx DIP Switch settings for Boot
+### MBa6ULx DIP Switches
 
 _Note:_
 
@@ -116,7 +124,6 @@ _Note:_
 | DIP     |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |   |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |
 | ON      |  x  |     |  x  |  x  |     |  x  |  x  |  x  |   |  x  |  x  |  x  |  x  |  x  |     |     |  x  |    |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |    |     |  x  |
 | OFF     |     |  x  |     |     |  x  |     |     |     |   |     |     |     |     |     |  x  |  x  |     |    |     |     |     |     |     |     |     |     |    |  x  |     |
-
 
 #### QSPI
 
@@ -158,9 +165,9 @@ _Note:_
 | ON      |  -  |  -  |  -  |  -  |  x  |  x  |  x  |     |   |     |  x  |
 | OFF     |  -  |  -  |  -  |  -  |     |     |     |  x  |   |  x  |     |
 
-### Boot device initialisation
+## Boot device initialisation
 
-#### QSPI NOR
+### QSPI NOR
 
 To initialize QSPI NOR with bootloader, write the [bootloader image](#artifacts)
 to QSPI NOR at offset 0x00:
@@ -172,7 +179,7 @@ sf probe
 sf update ${loadaddr} 0 ${filesize}
 ```
 
-#### SD / e-MMC
+### SD / e-MMC
 
 To initialize SD / e-MMC with bootloader, write the [bootloader image](#artifacts)
 for SD / e-MMC to SD / e-MMC at offset 0x400 / block #2
@@ -232,6 +239,8 @@ run update_fdt
 setenv uboot <name of u-boot image>
 run update_uboot
 ```
+
+## Howto
 
 ## Support Wiki
 
