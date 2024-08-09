@@ -21,6 +21,12 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* distro/spaetzle: Do not depend on `poky-tiny` from `meta-poky`.
+  This prevents the hard assumtions from `poky-tiny` and allows
+  overwrites from local.conf. Since the primary goal of `spaetzle`
+  is a small system that can be run from a SPI-NOR the distro now
+  uses the same busybox configuration as other poky based distros.
+
 * weston-init: Unconditionally disabling blanking the screen on idle
 
   Make idle handling consistent on all hardware. Also works around Weston
