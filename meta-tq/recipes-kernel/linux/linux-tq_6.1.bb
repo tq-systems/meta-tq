@@ -20,6 +20,7 @@ KERNEL_CONFIG_FILES:imx ?= "\
     file://nonimx-drm-removal.cfg \
     file://rm-non-tq-platforms.cfg \
     file://imx8-usb.cfg \
+    file://ubi.cfg \
 "
 
 KERNEL_CONFIG_FILES:tqmlsx ?= "\
