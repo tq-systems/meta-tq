@@ -30,6 +30,11 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* Centralize configuration of UBI in common machine include and allow
+  overrides per machine to prevent a lot of duplication
+* Move image classes inclusion and IMAGE_FSTYPES modifications from
+  distro to machine
+* Move image classes to new location (recommended since yocto langdale)
 * linux-ti-tq-6.1: Updatd to latest ti-linux-rt-6.1 based on Linux 6.1.83
 * Adjust classes to scarthgap release
 * Add more sanity checks to scarthgap release
