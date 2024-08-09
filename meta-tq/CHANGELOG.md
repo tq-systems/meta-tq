@@ -11,6 +11,10 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* Centralize configuration of UBI in common machine include and allow
+  overrides per machine to prevent a lot of duplication
+* Move image classes inclusion and IMAGE_FSTYPES modifications from
+  distro to machine
 * linux-tq-6.1: Updated to include all changes from linux-stable up to v6.1.103
 * linux-ti-tq-6.1: Updated to latest ti-linux-rt-6.1 based on Linux 6.1.83
 
