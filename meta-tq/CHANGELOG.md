@@ -30,6 +30,7 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-ti-tq-6.1: Updatd to latest ti-linux-rt-6.1 based on Linux 6.1.83
 * Adjust classes to scarthgap release
 * Add more sanity checks to scarthgap release
 * TQMa8MPxL: WiFi-Firmware only installed if WiFi feature is enabled
@@ -53,7 +54,47 @@ Releases are named with the following scheme:
 
 ### Fixed
 
-* Fix GCC-13 support for older kernel version
+* TQMa64xxL: Fixed PRU Ethernet with current prueth firmwares found in meta-ti
+
+## kirkstone.TQ.ARM.BSP.0022
+
+### Module BSP Revisions
+
+* kirkstone.TQMLS1028A.BSP.SW.0111
+
+No changes.
+
+## kirkstone.TQ.ARM.BSP.0021
+
+### Module BSP Revisions
+
+* kirkstone.TQMa64xxL.BSP.SW.0007
+
+### Added
+
+* u-boot-ti-tq-2023.04:
+  * TQMa64xxL: Added support for new variant with 2GiB RAM
+* u-boot-lsdk-tq-2019.10: Added support for new alphanumeric TQ serial
+  number format
+
+### Fixed
+
+* linux-ti-tq-6.1:
+  * TQMa64xxL: Added missing USB (host/device) controller drivers
+* u-boot-ti-tq-2023.04:
+  * TQMa64xxL: Fixed very slow boot from SPI-NOR
+* tq-bootscripts: fix typo in error handling command for UBIFS boot
+* qoriq-atf:
+  * TQMLS1028A: Fixed RAM timing spec conformance for newer module revisions
+    with Micron DDR RAM
+
+## kirkstone.TQ.ARM.BSP.0020
+
+### Module BSP Revisions
+
+* kirkstone.TQMa93xx.BSP.SW.0003
+
+No changes.
 
 ## kirkstone.TQ.ARM.BSP.0019
 
