@@ -36,6 +36,7 @@ Releases are named with the following scheme:
 * TQMa8MPxL: WiFi-Firmware only installed if WiFi feature is enabled
 * linux-imx-tq-6.6:
   * Configure gpio-aggregator driver as compiled-in
+* linux-tq-6.1: Updated to include all changes from linux-stable up to v6.1.103
 
 ### Removed
 
@@ -55,6 +56,14 @@ Releases are named with the following scheme:
 ### Fixed
 
 * TQMa64xxL: Fixed PRU Ethernet with current prueth firmwares found in meta-ti
+* Fix GCC-13 support for older kernel version
+* linux-tq-6.1:
+  * TQMa7x / TQMa6 / TQMa6UL[L]: Enable missing temperature sensor drivers
+  * TQMa7x / TQMa6 / TQMa6UL[L]: Enable missing frequency scaling governors (missing Kconfig)
+  * TQMa7x / TQMa6 / TQMa6UL[L]: Enable PCA953x IRQ  (missing Kconfig)
+  * TQMa7x / TQMa6 / TQMa6UL[L]: Make sound work again (missing Kconfig)
+  * TQMa7x / TQMa6UL[L]: Fix UBI support. UBIfs does not work with 4K erase size (wrong Kconfig)
+  * TQMa8MPxL: Fix USB support
 
 ## kirkstone.TQ.ARM.BSP.0022
 
