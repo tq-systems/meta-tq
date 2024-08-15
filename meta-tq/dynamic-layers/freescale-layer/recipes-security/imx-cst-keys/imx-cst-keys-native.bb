@@ -10,12 +10,12 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/MIT;md5=0835ad
 SECTION = "security"
 
 SRC_URI = " \
-    file://example/CSF1_1_sha256_2048_65537_v3_usr_crt.pem \
-    file://example/CSF1_1_sha256_2048_65537_v3_usr_key.pem \
-    file://example/IMG1_1_sha256_2048_65537_v3_usr_crt.pem \
-    file://example/IMG1_1_sha256_2048_65537_v3_usr_key.pem \
-    file://example/SRK_1_2_3_4_table.bin \
-    file://example/key_pass.txt \
+    file://hab4/CSF1_1_sha256_2048_65537_v3_usr_crt.pem \
+    file://hab4/CSF1_1_sha256_2048_65537_v3_usr_key.pem \
+    file://hab4/IMG1_1_sha256_2048_65537_v3_usr_crt.pem \
+    file://hab4/IMG1_1_sha256_2048_65537_v3_usr_key.pem \
+    file://hab4/SRK_1_2_3_4_table.bin \
+    file://hab4/key_pass.txt \
 "
 
 # This recipe can be extended with additional signing keys from a bbappend. Each
@@ -23,7 +23,7 @@ SRC_URI = " \
 # so it can be selected for a build using IMX_HAB_KEY_NAME.
 
 do_install() {
-   local in="${WORKDIR}/example" out="${D}${datadir}/${BPN}/example"
+   local in="${WORKDIR}/hab4" out="${D}${datadir}/${BPN}/hab4"
 
    install -DT -m644 ${in}/CSF1_1_sha256_2048_65537_v3_usr_crt.pem ${out}/${IMX_HAB_CSF_CERT}
    install -DT -m600 ${in}/CSF1_1_sha256_2048_65537_v3_usr_key.pem ${out}/${IMX_HAB_CSF_KEY}

@@ -102,8 +102,8 @@ using a bbappend file.
 To enable automated signing, the `IMX_HAB_KEY_NAME` variable must be set in a
 distro config or in `local.conf`, for example:
 
-    # This selects the example key provided by meta-tq
-    IMX_HAB_KEY_NAME = "example"
+    # This selects the example key for SoCs with HAB4 support
+    IMX_HAB_KEY_NAME = "hab4"
 
 With this configuration, signatures will be created based on the generated
 CSF files and patched into the corresponding bootstream files
