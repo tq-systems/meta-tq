@@ -16,6 +16,10 @@ SRC_URI = " \
     file://hab4/IMG1_1_sha256_2048_65537_v3_usr_key.pem \
     file://hab4/SRK_1_2_3_4_table.bin \
     file://hab4/key_pass.txt \
+    file://ahab/SRK1_sha512_secp521r1_v3_usr_crt.pem \
+    file://ahab/SRK1_sha512_secp521r1_v3_usr_key.pem \
+    file://ahab/SRK_1_2_3_4_table.bin \
+    file://ahab/key_pass.txt \
 "
 
 # This recipe can be extended with additional signing keys from a bbappend. Each
@@ -29,6 +33,13 @@ do_install() {
    install -DT -m600 ${in}/CSF1_1_sha256_2048_65537_v3_usr_key.pem ${out}/${IMX_HAB_CSF_KEY}
    install -DT -m644 ${in}/IMG1_1_sha256_2048_65537_v3_usr_crt.pem ${out}/${IMX_HAB_IMG_CERT}
    install -DT -m600 ${in}/IMG1_1_sha256_2048_65537_v3_usr_key.pem ${out}/${IMX_HAB_IMG_KEY}
+   install -DT -m644 ${in}/SRK_1_2_3_4_table.bin ${out}/${IMX_HAB_SRK_TABLE}
+   install -DT -m600 ${in}/key_pass.txt ${out}/${IMX_HAB_KEY_PASS}
+
+   local in="${WORKDIR}/ahab" out="${D}${datadir}/${BPN}/ahab"
+
+   install -DT -m644 ${in}/SRK1_sha512_secp521r1_v3_usr_crt.pem ${out}/${IMX_HAB_SRK_CERT}
+   install -DT -m644 ${in}/SRK1_sha512_secp521r1_v3_usr_key.pem ${out}/${IMX_HAB_SRK_KEY}
    install -DT -m644 ${in}/SRK_1_2_3_4_table.bin ${out}/${IMX_HAB_SRK_TABLE}
    install -DT -m600 ${in}/key_pass.txt ${out}/${IMX_HAB_KEY_PASS}
 }
