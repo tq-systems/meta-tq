@@ -34,4 +34,9 @@ SRC_URI:append:nxp-hab4 = "\
     file://csf_spl.txt.in \
 "
 
+SRC_URI:append:nxp-ahab = "\
+    file://csf_boot_image.txt.in \
+    file://csf_uboot_atf.txt.in \
+"
+
 S = "${WORKDIR}/git"
