@@ -16,8 +16,32 @@ IMX_HAB_CSF_CERT = "crts/CSF_1_v3_usr_crt.pem"
 IMX_HAB_CSF_KEY = "keys/CSF_1_v3_usr_key.pem"
 IMX_HAB_IMG_CERT = "crts/IMG_1_v3_usr_crt.pem"
 IMX_HAB_IMG_KEY = "keys/IMG_1_v3_usr_key.pem"
+IMX_HAB_SRK_KEY = "keys/SRK_1_v3_usr_key.pem"
+IMX_HAB_SRK_CERT = "crts/SRK_1_v3_usr_crt.pem"
 IMX_HAB_SRK_TABLE = "crts/SRK_1_2_3_4_table.bin"
 IMX_HAB_KEY_PASS = "keys/key_pass.txt"
+
+IMX_HAB_CERT_FILES = " \
+    ${IMX_HAB_CSF_CERT} \
+    ${IMX_HAB_IMG_CERT} \
+    ${IMX_HAB_SRK_TABLE} \
+"
+
+IMX_HAB_KEY_FILES = " \
+    ${IMX_HAB_CSF_KEY} \
+    ${IMX_HAB_IMG_KEY} \
+    ${IMX_HAB_KEY_PASS} \
+"
+
+IMX_HAB_CERT_FILES:nxp-ahab = " \
+    ${IMX_HAB_SRK_CERT} \
+    ${IMX_HAB_SRK_TABLE} \
+"
+
+IMX_HAB_KEY_FILES:nxp-ahab = " \
+    ${IMX_HAB_SRK_KEY} \
+    ${IMX_HAB_KEY_PASS} \
+"
 
 # Search & replace of strings in a file
 #
@@ -88,18 +112,10 @@ imx_hab_install_keys() {
 
     local src="${STAGING_DATADIR_NATIVE}/imx-cst-keys/${IMX_HAB_KEY_NAME}"
 
-    for file in \
-        ${IMX_HAB_CSF_CERT} \
-        ${IMX_HAB_IMG_CERT} \
-        ${IMX_HAB_SRK_TABLE} \
-    ; do
+    for file in ${IMX_HAB_CERT_FILES}; do
         install -DT -m644 ${src}/${file} ${dest}/${file}
     done
-    for file in \
-        ${IMX_HAB_CSF_KEY} \
-        ${IMX_HAB_IMG_KEY} \
-        ${IMX_HAB_KEY_PASS} \
-    ; do
+    for file in ${IMX_HAB_KEY_FILES}; do
         install -DT -m600 ${src}/${file} ${dest}/${file}
     done
 }
