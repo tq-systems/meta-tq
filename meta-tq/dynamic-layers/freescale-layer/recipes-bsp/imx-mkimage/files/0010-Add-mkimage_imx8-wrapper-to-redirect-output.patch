@@ -1,0 +1,972 @@
+From 92583791674b42847ca59d141bd23ddba9a24f01 Mon Sep 17 00:00:00 2001
+From: Paul Gerber <Paul.Gerber@tq-group.com>
+Date: Wed, 3 Jul 2024 10:29:41 +0200
+Subject: [PATCH 10/10] Add mkimage_imx8 wrapper to redirect output
+
+Add a wrapper that tees the stderr output to a log file, allowing for
+more robust parsing for CSF / HAB block offsets.
+
+This wrapper is for all SoC families except iMX8M, which has its own
+wrapper.
+
+Signed-off-by: Paul Gerber <Paul.Gerber@tq-group.com>
+---
+ Makefile        |  2 +-
+ iMX8DXL/soc.mak | 46 ++++++++++++-------------
+ iMX8QM/soc.mak  | 60 ++++++++++++++++----------------
+ iMX8QX/soc.mak  | 44 +++++++++++------------
+ iMX8ULP/soc.mak | 40 ++++++++++-----------
+ iMX9/soc.mak    | 92 ++++++++++++++++++++++++-------------------------
+ mkimage_imx8    |  5 +++
+ 7 files changed, 147 insertions(+), 142 deletions(-)
+ create mode 100755 mkimage_imx8
+
+diff --git a/Makefile b/Makefile
+index e2f0bc3..59be49a 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,5 +1,5 @@
+ 
+-MKIMG = $(PWD)/mkimage_imx8
++MKIMG = $(PWD)/mkimage_imx8.real
+ CC = gcc
+ CFLAGS ?= -g -O2 -Wall -std=c99 -static
+ INCLUDE += $(CURR_DIR)/src
+diff --git a/iMX8DXL/soc.mak b/iMX8DXL/soc.mak
+index f0ab34b..f652466 100755
+--- a/iMX8DXL/soc.mak
++++ b/iMX8DXL/soc.mak
+@@ -1,4 +1,4 @@
+-MKIMG = ../mkimage_imx8
++MKIMG = ../mkimage_imx8.real
+ 
+ CC ?= gcc
+ V2X ?= YES
+@@ -34,7 +34,7 @@ TEE_LOAD_ADDR ?= 0x96000000
+ FORCE:
+ 
+ u-boot-hash.bin: u-boot.bin
+-	./$(MKIMG) -commit > head.hash
++	../mkimage_imx8 -commit > head.hash
+ 	@cat u-boot.bin head.hash > u-boot-hash.bin
+ 
+ u-boot-atf.bin: u-boot-hash.bin bl31.bin
+@@ -44,12 +44,12 @@ u-boot-atf.bin: u-boot-hash.bin bl31.bin
+ u-boot-atf-container.img: bl31.bin u-boot-hash.bin
+ 	if [ -f tee.bin ]; then \
+ 		if [ $(shell echo $(ROLLBACK_INDEX_IN_CONTAINER)) ]; then \
+-			./$(MKIMG) -soc DXL -rev A0 -sw_version $(ROLLBACK_INDEX_IN_CONTAINER)  -c -ap bl31.bin a35 0x80000000 -ap u-boot-hash.bin a35 0x80020000 -ap tee.bin a35 $(TEE_LOAD_ADDR) -out u-boot-atf-container.img; \
++			../mkimage_imx8 -soc DXL -rev A0 -sw_version $(ROLLBACK_INDEX_IN_CONTAINER)  -c -ap bl31.bin a35 0x80000000 -ap u-boot-hash.bin a35 0x80020000 -ap tee.bin a35 $(TEE_LOAD_ADDR) -out u-boot-atf-container.img; \
+ 		else \
+-			./$(MKIMG) -soc DXL -rev A0 -c -ap bl31.bin a35 0x80000000 -ap u-boot-hash.bin a35 0x80020000 -ap tee.bin a35 $(TEE_LOAD_ADDR) -out u-boot-atf-container.img; \
++			../mkimage_imx8 -soc DXL -rev A0 -c -ap bl31.bin a35 0x80000000 -ap u-boot-hash.bin a35 0x80020000 -ap tee.bin a35 $(TEE_LOAD_ADDR) -out u-boot-atf-container.img; \
+ 		fi; \
+ 	else \
+-	./$(MKIMG) -soc DXL -rev A0 -c -ap bl31.bin a35 0x80000000 -ap u-boot-hash.bin a35 0x80020000 -out u-boot-atf-container.img; \
++	../mkimage_imx8 -soc DXL -rev A0 -c -ap bl31.bin a35 0x80000000 -ap u-boot-hash.bin a35 0x80020000 -out u-boot-atf-container.img; \
+ 	fi
+ 
+ prepare_spl: u-boot-spl.bin
+@@ -67,19 +67,19 @@ clean:
+ 	@echo "imx8dxl clean done"
+ 
+ flash: $(MKIMG) $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf.bin
+-	./$(MKIMG) -soc DXL -rev A0 -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 $(V2X_DUMMY_DDR) -out flash.bin
++	../mkimage_imx8 -soc DXL -rev A0 -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 $(V2X_DUMMY_DDR) -out flash.bin
+ 
+ flash_nand: $(MKIMG) $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf.bin
+-	./$(MKIMG) -soc DXL -rev A0 -dev nand 16K -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 $(V2X_DUMMY_DDR) -out flash.bin
+-	./$(MKIMG) -soc DXL -rev A0 -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 $(V2X_DUMMY_DDR) -out flash_fw.bin
++	../mkimage_imx8 -soc DXL -rev A0 -dev nand 16K -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 $(V2X_DUMMY_DDR) -out flash.bin
++	../mkimage_imx8 -soc DXL -rev A0 -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 $(V2X_DUMMY_DDR) -out flash_fw.bin
+ 
+ flash_flexspi: $(MKIMG) $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf.bin $(QSPI_HEADER)
+-	./$(MKIMG) -soc DXL -rev A0  -dev flexspi -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 $(V2X_DUMMY_OCRAM) -out flash.bin
++	../mkimage_imx8 -soc DXL -rev A0  -dev flexspi -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 $(V2X_DUMMY_OCRAM) -out flash.bin
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_spl: $(MKIMG) prepare_spl $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf-container.img
+ 	SPL_CMD="$(shell cat u-boot-spl.bin_cmd)"; \
+-	./$(MKIMG) -soc DXL -rev A0  -dcd skip -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin $$SPL_CMD $(V2X_DUMMY_OCRAM) -out flash.bin
++	../mkimage_imx8 -soc DXL -rev A0  -dcd skip -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin $$SPL_CMD $(V2X_DUMMY_OCRAM) -out flash.bin
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+                    echo "append u-boot-atf-container.img at $$pad_cnt KB"; \
+@@ -87,7 +87,7 @@ flash_spl: $(MKIMG) prepare_spl $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf-containe
+ 
+ flash_spl_flexspi: $(MKIMG) prepare_spl $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf-container.img
+ 	SPL_CMD="$(shell cat u-boot-spl.bin_cmd)"; \
+-	./$(MKIMG) -soc DXL -rev A0 -dcd skip -dev flexspi -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin $$SPL_CMD $(V2X_DUMMY_OCRAM) -out flash.bin
++	../mkimage_imx8 -soc DXL -rev A0 -dcd skip -dev flexspi -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin $$SPL_CMD $(V2X_DUMMY_OCRAM) -out flash.bin
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+                    echo "append u-boot-atf-container.img at $$pad_cnt KB"; \
+@@ -96,7 +96,7 @@ flash_spl_flexspi: $(MKIMG) prepare_spl $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf-
+ 
+ flash_spl_nand: $(MKIMG) prepare_spl $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf-container.img
+ 	SPL_CMD="$(shell cat u-boot-spl.bin_cmd)"; \
+-	./$(MKIMG) -soc DXL -rev A0 -dcd skip -dev nand 16K -dcd skip -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin $$SPL_CMD $(V2X_DUMMY_OCRAM) -out flash.bin
++	../mkimage_imx8 -soc DXL -rev A0 -dcd skip -dev nand 16K -dcd skip -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin $$SPL_CMD $(V2X_DUMMY_OCRAM) -out flash.bin
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x4000 - 1) / 0x4000)); page=16;\
+                    echo "append u-boot-atf-container.img at $$((pad_cnt * page))  a $$pad_cnt b $$page KB"; \
+@@ -104,7 +104,7 @@ flash_spl_nand: $(MKIMG) prepare_spl $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf-con
+ 
+ flash_linux_m4: $(MKIMG) prepare_spl $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf-container.img m4_image.bin
+ 	SPL_CMD="$(shell cat u-boot-spl.bin_cmd)"; \
+-	./$(MKIMG) -soc DXL -rev A0 -dcd skip -append $(SECO_FW_NAME) -c -flags 0x00200000 -scfw scfw_tcm.bin $$SPL_CMD -p3 -m4 m4_image.bin 0 0x34FE0000 $(V2X_DUMMY_OCRAM) -out flash.bin
++	../mkimage_imx8 -soc DXL -rev A0 -dcd skip -append $(SECO_FW_NAME) -c -flags 0x00200000 -scfw scfw_tcm.bin $$SPL_CMD -p3 -m4 m4_image.bin 0 0x34FE0000 $(V2X_DUMMY_OCRAM) -out flash.bin
+ 
+ 	cp flash.bin boot-spl-container.img
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+@@ -114,7 +114,7 @@ flash_linux_m4: $(MKIMG) prepare_spl $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf-con
+ 
+ flash_linux_m4_ddr: $(MKIMG) prepare_spl $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf-container.img m4_image.bin
+ 	SPL_CMD="$(shell cat u-boot-spl.bin_cmd)"; \
+-	./$(MKIMG) -soc DXL -rev A0 -append $(SECO_FW_NAME) -c -flags 0x00200000 -scfw scfw_tcm.bin $$SPL_CMD -p3 -m4 m4_image.bin 0 0x88000000 $(V2X_DUMMY_DDR) -out flash.bin
++	../mkimage_imx8 -soc DXL -rev A0 -append $(SECO_FW_NAME) -c -flags 0x00200000 -scfw scfw_tcm.bin $$SPL_CMD -p3 -m4 m4_image.bin 0 0x88000000 $(V2X_DUMMY_DDR) -out flash.bin
+ 	cp flash.bin boot-spl-container.img
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+@@ -123,7 +123,7 @@ flash_linux_m4_ddr: $(MKIMG) prepare_spl $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf
+ 
+ flash_linux_m4_xip: $(MKIMG) prepare_spl $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf-container.img m4_image.bin
+ 	SPL_CMD="$(shell cat u-boot-spl.bin_cmd)"; \
+-	./$(MKIMG) -soc DXL -rev A0 -dcd skip -append $(SECO_FW_NAME) -c -flags 0x00200000 -scfw scfw_tcm.bin -fileoff 0x80000 -p3 -m4 m4_image.bin 0 0x08081000 -fileoff 0x180000 $$SPL_CMD $(V2X_DUMMY_OCRAM) -out flash.bin
++	../mkimage_imx8 -soc DXL -rev A0 -dcd skip -append $(SECO_FW_NAME) -c -flags 0x00200000 -scfw scfw_tcm.bin -fileoff 0x80000 -p3 -m4 m4_image.bin 0 0x08081000 -fileoff 0x180000 $$SPL_CMD $(V2X_DUMMY_OCRAM) -out flash.bin
+ 	cp flash.bin boot-spl-container.img
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+@@ -132,29 +132,29 @@ flash_linux_m4_xip: $(MKIMG) prepare_spl $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_regression_linux_m4: $(MKIMG) $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf.bin m4_image.bin
+-	./$(MKIMG) -soc DXL -rev A0 -append $(SECO_FW_NAME) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 -p3 -m4 m4_image.bin 0 0x34FE0000 $(V2X_DUMMY_DDR) -out flash.bin
++	../mkimage_imx8 -soc DXL -rev A0 -append $(SECO_FW_NAME) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 -p3 -m4 m4_image.bin 0 0x34FE0000 $(V2X_DUMMY_DDR) -out flash.bin
+ 
+ flash_regression_linux_m4_ddr: $(MKIMG) $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf.bin m4_image.bin
+-	./$(MKIMG) -soc DXL -rev A0 -append $(SECO_FW_NAME) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 -p3 -m4 m4_image.bin 0 0x88000000 $(V2X_DUMMY_DDR) -out flash.bin
++	../mkimage_imx8 -soc DXL -rev A0 -append $(SECO_FW_NAME) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 -p3 -m4 m4_image.bin 0 0x88000000 $(V2X_DUMMY_DDR) -out flash.bin
+ 
+ flash_regression_linux_m4_xip : $(MKIMG) $(SECO_FW_NAME) scfw_tcm.bin u-boot-atf.bin m4_image.bin $(QSPI_HEADER)
+-	./$(MKIMG) -soc DXL -rev A0 -dev flexspi -append $(SECO_FW_NAME) -c -flags 0x00200000 -scfw scfw_tcm.bin -fileoff 0x80000 -p3 -m4 m4_image.bin 0 0x08081000 -fileoff 0x180000 -ap u-boot-atf.bin a35 0x80000000 $(V2X_DUMMY_OCRAM) -out flash.bin
++	../mkimage_imx8 -soc DXL -rev A0 -dev flexspi -append $(SECO_FW_NAME) -c -flags 0x00200000 -scfw scfw_tcm.bin -fileoff 0x80000 -p3 -m4 m4_image.bin 0 0x08081000 -fileoff 0x180000 -ap u-boot-atf.bin a35 0x80000000 $(V2X_DUMMY_OCRAM) -out flash.bin
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_scfw: $(MKIMG) $(SECO_FW_NAME) scfw_tcm.bin
+-	./$(MKIMG) -soc DXL -rev A0 -dcd skip -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin $(V2X_DUMMY_OCRAM) --out flash.bin
++	../mkimage_imx8 -soc DXL -rev A0 -dcd skip -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin $(V2X_DUMMY_OCRAM) --out flash.bin
+ 
+ flash_patch: $(MKIMG) $(SECO_FW_NAME) scfw_tcm.bin message_signed.bin
+-	./$(MKIMG) -soc DXL -rev A0 -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin -msg_blk message_signed.bin patch 0x80000000 $(V2X_DUMMY_OCRAM) --out flash.bin
++	../mkimage_imx8 -soc DXL -rev A0 -append $(SECO_FW_NAME) -c -scfw scfw_tcm.bin -msg_blk message_signed.bin patch 0x80000000 $(V2X_DUMMY_OCRAM) --out flash.bin
+ 
+ flash_kernel: $(MKIMG) Image imx8dxl-evk.dtb
+-	./$(MKIMG) -soc DXL -rev A0 -h sha256 -c -ap Image a35 0x80200000 --data imx8dxl-evk.dtb a35 0x83000000 -out flash.bin
++	../mkimage_imx8 -soc DXL -rev A0 -h sha256 -c -ap Image a35 0x80200000 --data imx8dxl-evk.dtb a35 0x83000000 -out flash.bin
+ 
+ parse_container: $(MKIMG) flash.bin
+-	./$(MKIMG) -soc DXL -rev A0 -parse flash.bin
++	../mkimage_imx8 -soc DXL -rev A0 -parse flash.bin
+ 
+ extract: $(MKIMG) flash.bin
+-	./$(MKIMG) -soc DXL -rev A0 -extract flash.bin
++	../mkimage_imx8 -soc DXL -rev A0 -extract flash.bin
+ 
+ 
+ ifneq ($(wildcard ../$(SOC_DIR)/scripts/misc.mak),)
+diff --git a/iMX8QM/soc.mak b/iMX8QM/soc.mak
+index 153c5c3..3bedc12 100755
+--- a/iMX8QM/soc.mak
++++ b/iMX8QM/soc.mak
+@@ -1,4 +1,4 @@
+-MKIMG = ../mkimage_imx8
++MKIMG = ../mkimage_imx8.real
+ 
+ CC ?= gcc
+ INCLUDE = ./lib
+@@ -20,7 +20,7 @@ TEE = tee.bin
+ FORCE:
+ 
+ u-boot-hash.bin: u-boot.bin
+-	./$(MKIMG) -commit > head.hash
++	../mkimage_imx8 -commit > head.hash
+ 	@cat u-boot.bin head.hash > u-boot-hash.bin
+ 
+ u-boot-atf.bin: u-boot-hash.bin bl31.bin
+@@ -35,7 +35,7 @@ u-boot-atf.bin: u-boot-hash.bin bl31.bin
+ 
+ u-boot-atf-a72.bin: u-boot-a72.bin bl31-a72.bin
+ 	@cp bl31-a72.bin u-boot-atf-a72.bin
+-	./$(MKIMG) -commit > head.hash
++	../mkimage_imx8 -commit > head.hash
+ 	@cat u-boot-a72.bin head.hash > u-boot-hash-a72.bin
+ 	@dd if=u-boot-hash-a72.bin of=u-boot-atf-a72.bin bs=1K seek=128
+ 	@if [ -f "hdmitxfw.bin" ] && [ -f "hdmirxfw.bin" ]; then \
+@@ -59,19 +59,19 @@ u-boot-atf-container.img: bl31.bin u-boot-hash.bin
+ 			cp $(TEE).lz4 $(TEE); \
+ 		fi; \
+ 		if [ $(shell echo $(ROLLBACK_INDEX_IN_CONTAINER)) ]; then \
+-			./$(MKIMG) -soc QM -sw_version $(ROLLBACK_INDEX_IN_CONTAINER) -rev B0 -c -ap bl31.bin a53 0x80000000 -ap u-boot-hash.bin a53 0x80020000 -ap $(TEE) a53 0xFE000000 -out u-boot-atf-container.img; \
++			../mkimage_imx8 -soc QM -sw_version $(ROLLBACK_INDEX_IN_CONTAINER) -rev B0 -c -ap bl31.bin a53 0x80000000 -ap u-boot-hash.bin a53 0x80020000 -ap $(TEE) a53 0xFE000000 -out u-boot-atf-container.img; \
+ 		else \
+-			./$(MKIMG) -soc QM -rev B0 -c -ap bl31.bin a53 0x80000000 -ap u-boot-hash.bin a53 0x80020000 -ap $(TEE) a53 0xFE000000 -out u-boot-atf-container.img; \
++			../mkimage_imx8 -soc QM -rev B0 -c -ap bl31.bin a53 0x80000000 -ap u-boot-hash.bin a53 0x80020000 -ap $(TEE) a53 0xFE000000 -out u-boot-atf-container.img; \
+ 		fi; \
+ 	else \
+-	./$(MKIMG) -soc QM -rev B0 -c -ap bl31.bin a53 0x80000000 -ap u-boot-hash.bin a53 0x80020000 -out u-boot-atf-container.img; \
++	../mkimage_imx8 -soc QM -rev B0 -c -ap bl31.bin a53 0x80000000 -ap u-boot-hash.bin a53 0x80020000 -out u-boot-atf-container.img; \
+ 	fi
+ 
+ u-boot-atf-container-a72.img: u-boot-atf-a72.bin tee-a72.bin
+ 	if [ $(shell echo $(ROLLBACK_INDEX_IN_CONTAINER)) ]; then \
+-		./$(MKIMG) -soc QM -sw_version $(ROLLBACK_INDEX_IN_CONTAINER) -rev B0 -c -ap u-boot-atf-a72.bin a72 0xC0000000 -ap tee-a72.bin a72 0xFE000000 -out u-boot-atf-container-a72.img; \
++		../mkimage_imx8 -soc QM -sw_version $(ROLLBACK_INDEX_IN_CONTAINER) -rev B0 -c -ap u-boot-atf-a72.bin a72 0xC0000000 -ap tee-a72.bin a72 0xFE000000 -out u-boot-atf-container-a72.img; \
+ 	else \
+-		./$(MKIMG) -soc QM -rev B0 -c -ap u-boot-atf-a72.bin a72 0xC0000000 -ap tee-a72.bin a72 0xFE000000 -out u-boot-atf-container-a72.img; \
++		../mkimage_imx8 -soc QM -rev B0 -c -ap u-boot-atf-a72.bin a72 0xC0000000 -ap tee-a72.bin a72 0xFE000000 -out u-boot-atf-container-a72.img; \
+ 	fi; \
+ 
+ .PHONY: clean
+@@ -81,34 +81,34 @@ clean:
+ 	@echo "imx8qm clean done"
+ 
+ flash: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf.bin
+-	./$(MKIMG) -soc QM -rev B0 -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 -out flash.bin
+ 
+ flash_cockpit: $(MKIMG) scfw_tcm.bin $(AHAB_IMG) u-boot-atf.bin u-boot-atf-a72.bin
+-	./$(MKIMG) -soc QM -rev B0 -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 mu0 pt1 -ap u-boot-atf-a72.bin a72 0xC0000000 mu3 pt3 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 mu0 pt1 -ap u-boot-atf-a72.bin a72 0xC0000000 mu3 pt3 -out flash.bin
+ 
+ flash_cockpit_spl: $(MKIMG) u-boot-atf-container-a72.img scfw_tcm.bin $(AHAB_IMG) u-boot-atf.bin tee.bin u-boot-spl-a72.bin
+-	./$(MKIMG) -soc QM -rev B0 -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 mu0 pt1 -ap u-boot-spl-a72.bin a72 0x00100000 mu3 pt3 -data tee.bin a53 0xBE000000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 mu0 pt1 -ap u-boot-spl-a72.bin a72 0x00100000 mu3 pt3 -data tee.bin a53 0xBE000000 -out flash.bin
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+                    echo "append u-boot-atf-container-a72.img at $$pad_cnt KB"; \
+                    dd if=u-boot-atf-container-a72.img of=flash.bin bs=1K seek=$$pad_cnt;
+ 
+ flash_cockpit_m4: $(MKIMG) scfw_tcm.bin $(AHAB_IMG) u-boot-atf.bin u-boot-atf-a72.bin m4_image.bin m4_1_image.bin
+-	./$(MKIMG) -soc QM -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 mu0 pt1 -ap u-boot-atf-a72.bin a72 0xC0000000 mu3 pt3 -p5 -m4 m4_image.bin 0 0x34FE0000 -p6 -m4 m4_1_image.bin 1 0x38FE0000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 mu0 pt1 -ap u-boot-atf-a72.bin a72 0xC0000000 mu3 pt3 -p5 -m4 m4_image.bin 0 0x34FE0000 -p6 -m4 m4_1_image.bin 1 0x38FE0000 -out flash.bin
+ 
+ flash_cockpit_m4_spl: $(MKIMG) u-boot-atf-container-a72.img scfw_tcm.bin $(AHAB_IMG) m4_image.bin m4_1_image.bin u-boot-atf.bin tee.bin u-boot-spl-a72.bin
+-	./$(MKIMG) -soc QM -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 mu0 pt1 -ap u-boot-spl-a72.bin a72 0x00100000 mu3 pt3 -data tee.bin a53 0xBE000000 -p5 -m4 m4_image.bin 0 0x34FE0000 -p6 -m4 m4_1_image.bin 1 0x38FE0000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 mu0 pt1 -ap u-boot-spl-a72.bin a72 0x00100000 mu3 pt3 -data tee.bin a53 0xBE000000 -p5 -m4 m4_image.bin 0 0x34FE0000 -p6 -m4 m4_1_image.bin 1 0x38FE0000 -out flash.bin
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+                    echo "append u-boot-atf-container-a72.img at $$pad_cnt KB"; \
+                    dd if=u-boot-atf-container-a72.img of=flash.bin bs=1K seek=$$pad_cnt;
+ 
+ flash_flexspi: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf.bin
+-	./$(MKIMG) -soc QM -rev B0 -dev flexspi -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -dev flexspi -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 -out flash.bin
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_spl: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-spl.bin u-boot-atf-container.img
+-	./$(MKIMG) -soc QM -rev B0 -dcd skip -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-spl.bin a53 0x00100000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -dcd skip -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-spl.bin a53 0x00100000 -out flash.bin
+ 	cp flash.bin boot-spl-container.img
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+@@ -116,7 +116,7 @@ flash_spl: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-spl.bin u-boot-atf-container
+                    dd if=u-boot-atf-container.img of=flash.bin bs=1K seek=$$pad_cnt;
+ 
+ flash_spl_flexspi: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-spl.bin u-boot-atf-container.img
+-	./$(MKIMG) -soc QM -rev B0 -dcd skip  -dev flexspi -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-spl.bin a53 0x00100000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -dcd skip  -dev flexspi -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-spl.bin a53 0x00100000 -out flash.bin
+ 	cp flash.bin boot-spl-container.img
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+@@ -125,7 +125,7 @@ flash_spl_flexspi: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-spl.bin u-boot-atf-c
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_linux_m4: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-spl.bin m4_image.bin m4_1_image.bin u-boot-atf-container.img
+-	./$(MKIMG) -soc QM -rev B0 -dcd skip -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-spl.bin a53 0x00100000 -p3 -m4 m4_image.bin 0 0x34FE0000 -p4 -m4 m4_1_image.bin 1 0x38FE0000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -dcd skip -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-spl.bin a53 0x00100000 -p3 -m4 m4_image.bin 0 0x34FE0000 -p4 -m4 m4_1_image.bin 1 0x38FE0000 -out flash.bin
+ 	cp flash.bin boot-spl-container.img
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+@@ -133,7 +133,7 @@ flash_linux_m4: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-spl.bin m4_image.bin m4
+                    dd if=u-boot-atf-container.img of=flash.bin bs=1K seek=$$pad_cnt;
+ 
+ flash_linux_m4_ddr: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-spl.bin m4_image.bin m4_1_image.bin u-boot-atf-container.img
+-	./$(MKIMG) -soc QM -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-spl.bin a53 0x00100000 -p3 -m4 m4_image.bin 0 0x88000000 -p4 -m4 m4_1_image.bin 1 0x88800000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-spl.bin a53 0x00100000 -p3 -m4 m4_image.bin 0 0x88000000 -p4 -m4 m4_1_image.bin 1 0x88800000 -out flash.bin
+ 	cp flash.bin boot-spl-container.img
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+@@ -141,7 +141,7 @@ flash_linux_m4_ddr: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-spl.bin m4_image.bi
+                    dd if=u-boot-atf-container.img of=flash.bin bs=1K seek=$$pad_cnt;
+ 
+ flash_linux_m4_xip: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-spl.bin u-boot-atf-container.img m4_image.bin m4_1_image.bin
+-	./$(MKIMG) -soc QM -rev B0 -dcd skip -dev flexspi -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -fileoff 0x80000 -p3 -m4 m4_image.bin 0 0x08081000 -fileoff 0x180000 -p4 -m4 m4_1_image.bin 1 0x08181000 -fileoff 0x280000 -ap u-boot-spl.bin a53 0x00100000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -dcd skip -dev flexspi -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -fileoff 0x80000 -p3 -m4 m4_image.bin 0 0x08081000 -fileoff 0x180000 -p4 -m4 m4_1_image.bin 1 0x08181000 -fileoff 0x280000 -ap u-boot-spl.bin a53 0x00100000 -out flash.bin
+ 	cp flash.bin boot-spl-container.img
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+@@ -150,39 +150,39 @@ flash_linux_m4_xip: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-spl.bin u-boot-atf-
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_regression_linux_m4: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf.bin m4_image.bin m4_1_image.bin
+-	./$(MKIMG) -soc QM -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 -p3 -m4 m4_image.bin 0 0x34FE0000 -p4 -m4 m4_1_image.bin 1 0x38FE0000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 -p3 -m4 m4_image.bin 0 0x34FE0000 -p4 -m4 m4_1_image.bin 1 0x38FE0000 -out flash.bin
+ 
+ flash_regression_linux_m4_ddr: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf.bin m4_image.bin m4_1_image.bin
+-	./$(MKIMG) -soc QM -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 -p3 -m4 m4_image.bin 0 0x88000000 -p4 -m4 m4_1_image.bin 1 0x88800000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 -p3 -m4 m4_image.bin 0 0x88000000 -p4 -m4 m4_1_image.bin 1 0x88800000 -out flash.bin
+ 
+ flash_regression_linux_m4_xip: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf.bin m4_image.bin m4_1_image.bin $(QSPI_HEADER)
+-	./$(MKIMG) -soc QM -rev B0 -dev flexspi -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -fileoff 0x80000 -p3 -m4 m4_image.bin 0 0x08081000 -fileoff 0x180000 -p4 -m4 m4_1_image.bin 1 0x08181000 -fileoff 0x280000 -ap u-boot-atf.bin a35 0x80000000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -dev flexspi -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -fileoff 0x80000 -p3 -m4 m4_image.bin 0 0x08081000 -fileoff 0x180000 -p4 -m4 m4_1_image.bin 1 0x08181000 -fileoff 0x280000 -ap u-boot-atf.bin a35 0x80000000 -out flash.bin
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_regression_linux_m41: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf.bin m4_1_image.bin
+-	./$(MKIMG) -soc QM -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 -p4 -m4 m4_1_image.bin 1 0x38FE0000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 -p4 -m4 m4_1_image.bin 1 0x38FE0000 -out flash.bin
+ 
+ flash_regression_linux_m41_ddr: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf.bin m4_1_image.bin
+-	./$(MKIMG) -soc QM -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 -p4 -m4 m4_1_image.bin 1 0x88800000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a53 0x80000000 -p4 -m4 m4_1_image.bin 1 0x88800000 -out flash.bin
+ 
+ flash_regression_linux_m41_xip: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf.bin m4_1_image.bin $(QSPI_HEADER)
+-	./$(MKIMG) -soc QM -rev B0 -dev flexspi -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -fileoff 0x180000 -p4 -m4 m4_1_image.bin 1 0x08181000 -fileoff 0x280000 -ap u-boot-atf.bin a35 0x80000000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -dev flexspi -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -fileoff 0x180000 -p4 -m4 m4_1_image.bin 1 0x08181000 -fileoff 0x280000 -ap u-boot-atf.bin a35 0x80000000 -out flash.bin
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_scfw: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin
+-	./$(MKIMG) -soc QM -rev B0 -dcd skip -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -dcd skip -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -out flash.bin
+ 
+ flash_kernel: $(MKIMG) Image imx8qm-mek.dtb
+-	./$(MKIMG) -soc QM -rev B0 -c -ap Image a53 0x80200000 --data imx8qm-mek.dtb a53 0x83000000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -c -ap Image a53 0x80200000 --data imx8qm-mek.dtb a53 0x83000000 -out flash.bin
+ 
+ flash_ca72: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf.bin
+-	./$(MKIMG) -soc QM -rev B0 -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a72 0x80000000 -out flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a72 0x80000000 -out flash.bin
+ 
+ parse_container: $(MKIMG) flash.bin
+-	./$(MKIMG) -soc QM -rev B0 -parse flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -parse flash.bin
+ 
+ extract: $(MKIMG) flash.bin
+-	./$(MKIMG) -soc QM -rev B0 -extract flash.bin
++	../mkimage_imx8 -soc QM -rev B0 -extract flash.bin
+ 
+ ifneq ($(wildcard ../$(SOC_DIR)/scripts/misc.mak),)
+ $(info include misc.mak)
+diff --git a/iMX8QX/soc.mak b/iMX8QX/soc.mak
+index f2f7849..db747f6 100755
+--- a/iMX8QX/soc.mak
++++ b/iMX8QX/soc.mak
+@@ -1,4 +1,4 @@
+-MKIMG = ../mkimage_imx8
++MKIMG = ../mkimage_imx8.real
+ 
+ CC ?= gcc
+ REV ?= B0
+@@ -33,7 +33,7 @@ endif
+ FORCE:
+ 
+ u-boot-hash.bin: u-boot.bin
+-	./$(MKIMG) -commit > head.hash
++	../mkimage_imx8 -commit > head.hash
+ 	@cat u-boot.bin head.hash > u-boot-hash.bin
+ 
+ u-boot-atf.bin: u-boot-hash.bin bl31.bin
+@@ -48,12 +48,12 @@ u-boot-atf-container.img: bl31.bin u-boot-hash.bin
+ 			cp $(TEE).lz4 $(TEE); \
+ 		fi; \
+ 		if [ $(shell echo $(ROLLBACK_INDEX_IN_CONTAINER)) ]; then \
+-			./$(MKIMG) -soc QX -sw_version $(ROLLBACK_INDEX_IN_CONTAINER) -rev B0 -c -ap bl31.bin a35 0x80000000 -ap u-boot-hash.bin a35 0x80020000 -ap $(TEE) a35 $(TEE_LOAD_ADDR) -out u-boot-atf-container.img; \
++			../mkimage_imx8 -soc QX -sw_version $(ROLLBACK_INDEX_IN_CONTAINER) -rev B0 -c -ap bl31.bin a35 0x80000000 -ap u-boot-hash.bin a35 0x80020000 -ap $(TEE) a35 $(TEE_LOAD_ADDR) -out u-boot-atf-container.img; \
+ 		else \
+-			./$(MKIMG) -soc QX -rev B0 -c -ap bl31.bin a35 0x80000000 -ap u-boot-hash.bin a35 0x80020000 -ap $(TEE) a35 $(TEE_LOAD_ADDR) -out u-boot-atf-container.img; \
++			../mkimage_imx8 -soc QX -rev B0 -c -ap bl31.bin a35 0x80000000 -ap u-boot-hash.bin a35 0x80020000 -ap $(TEE) a35 $(TEE_LOAD_ADDR) -out u-boot-atf-container.img; \
+ 		fi; \
+ 	else \
+-	./$(MKIMG) -soc QX -rev B0 -c -ap bl31.bin a35 0x80000000 -ap u-boot-hash.bin a35 0x80020000 -out u-boot-atf-container.img; \
++	../mkimage_imx8 -soc QX -rev B0 -c -ap bl31.bin a35 0x80000000 -ap u-boot-hash.bin a35 0x80020000 -out u-boot-atf-container.img; \
+ 	fi
+ 
+ Image0: Image
+@@ -68,25 +68,25 @@ clean:
+ 	@echo "imx8qx clean done"
+ 
+ flash: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf.bin
+-	./$(MKIMG) -soc QX -rev B0 -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 -out flash.bin
++	../mkimage_imx8 -soc QX -rev B0 -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 -out flash.bin
+ 
+ flash_flexspi: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf.bin $(QSPI_HEADER)
+-	./$(MKIMG) -soc QX -rev B0 -dev flexspi -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 -out flash.bin
++	../mkimage_imx8 -soc QX -rev B0 -dev flexspi -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 -out flash.bin
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_nand: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf.bin
+-	./$(MKIMG) -soc QX -rev B0 -dev nand 16K -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 -out flash.bin
+-	./$(MKIMG) -soc QX -rev B0 -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 -out flash_fw.bin
++	../mkimage_imx8 -soc QX -rev B0 -dev nand 16K -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 -out flash.bin
++	../mkimage_imx8 -soc QX -rev B0 -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 -out flash_fw.bin
+ 
+ flash_spl: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-spl.bin u-boot-atf-container.img
+-	./$(MKIMG) -soc QX -rev B0 -dcd skip -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-spl.bin a35 0x00100000 -out flash.bin
++	../mkimage_imx8 -soc QX -rev B0 -dcd skip -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-spl.bin a35 0x00100000 -out flash.bin
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+                    echo "append u-boot-atf-container.img at $$pad_cnt KB"; \
+                    dd if=u-boot-atf-container.img of=flash.bin bs=1K seek=$$pad_cnt;
+ 
+ flash_spl_flexspi: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-spl.bin u-boot-atf-container.img
+-	./$(MKIMG) -soc QX -rev B0 -dcd skip -dev flexspi -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-spl.bin a35 0x00100000 -out flash.bin
++	../mkimage_imx8 -soc QX -rev B0 -dcd skip -dev flexspi -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-spl.bin a35 0x00100000 -out flash.bin
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+                    echo "append u-boot-atf-container.img at $$pad_cnt KB"; \
+@@ -94,14 +94,14 @@ flash_spl_flexspi: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-spl.bin u-boot-atf-c
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_spl_nand: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-spl.bin u-boot-atf-container.img
+-	./$(MKIMG) -soc QX -rev B0 -dcd skip -dev nand 16K -dcd skip -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-spl.bin a35 0x00100000 -out flash.bin
++	../mkimage_imx8 -soc QX -rev B0 -dcd skip -dev nand 16K -dcd skip -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -ap u-boot-spl.bin a35 0x00100000 -out flash.bin
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x4000 - 1) / 0x4000)); page=16;\
+                    echo "append u-boot-atf-container.img at $$((pad_cnt * page))  a $$pad_cnt b $$page KB"; \
+                    dd if=u-boot-atf-container.img of=flash.bin bs=1K seek=$$((pad_cnt * page))
+ 
+ flash_linux_m4: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf-container.img m4_image.bin u-boot-spl.bin
+-	./$(MKIMG) -soc QX -rev B0 -dcd skip -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-spl.bin a35 0x00100000 -p3 -m4 m4_image.bin 0 0x34FE0000 -out flash.bin
++	../mkimage_imx8 -soc QX -rev B0 -dcd skip -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-spl.bin a35 0x00100000 -p3 -m4 m4_image.bin 0 0x34FE0000 -out flash.bin
+ 	cp flash.bin boot-spl-container.img
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+@@ -109,7 +109,7 @@ flash_linux_m4: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf-container.img m4_im
+                    dd if=u-boot-atf-container.img of=flash.bin bs=1K seek=$$pad_cnt; \
+ 
+ flash_linux_m4_ddr: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf-container.img m4_image.bin u-boot-spl.bin
+-	./$(MKIMG) -soc QX -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-spl.bin a35 0x00100000 -p3 -m4 m4_image.bin 0 0x88000000 -out flash.bin
++	../mkimage_imx8 -soc QX -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-spl.bin a35 0x00100000 -p3 -m4 m4_image.bin 0 0x88000000 -out flash.bin
+ 	cp flash.bin boot-spl-container.img
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+@@ -117,7 +117,7 @@ flash_linux_m4_ddr: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf-container.img m
+                    dd if=u-boot-atf-container.img of=flash.bin bs=1K seek=$$pad_cnt; \
+ 
+ flash_linux_m4_xip: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf-container.img m4_image.bin u-boot-spl.bin
+-	./$(MKIMG) -soc QX -rev B0 -dcd skip -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -fileoff 0x80000 -p3 -m4 m4_image.bin 0 0x08081000 -fileoff 0x180000 -ap u-boot-spl.bin a35 0x00100000 -out flash.bin
++	../mkimage_imx8 -soc QX -rev B0 -dcd skip -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -fileoff 0x80000 -p3 -m4 m4_image.bin 0 0x08081000 -fileoff 0x180000 -ap u-boot-spl.bin a35 0x00100000 -out flash.bin
+ 	cp flash.bin boot-spl-container.img
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+@@ -126,26 +126,26 @@ flash_linux_m4_xip: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf-container.img m
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_regression_linux_m4: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf.bin m4_image.bin
+-	./$(MKIMG) -soc QX -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 -p3 -m4 m4_image.bin 0 0x34FE0000 -out flash.bin
++	../mkimage_imx8 -soc QX -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 -p3 -m4 m4_image.bin 0 0x34FE0000 -out flash.bin
+ 
+ flash_regression_linux_m4_ddr: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf.bin m4_image.bin
+-	./$(MKIMG) -soc QX -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 -p3 -m4 m4_image.bin 0 0x88000000 -out flash.bin
++	../mkimage_imx8 -soc QX -rev B0 -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -ap u-boot-atf.bin a35 0x80000000 -p3 -m4 m4_image.bin 0 0x88000000 -out flash.bin
+ 
+ flash_regression_linux_m4_xip : $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf.bin m4_image.bin $(QSPI_HEADER)
+-	./$(MKIMG) -soc QX -rev B0 -dev flexspi -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -fileoff 0x80000 -p3 -m4 m4_image.bin 0 0x08081000 -fileoff 0x180000 -ap u-boot-atf.bin a35 0x80000000 -out flash.bin
++	../mkimage_imx8 -soc QX -rev B0 -dev flexspi -append $(AHAB_IMG) -c -flags 0x00200000 -scfw scfw_tcm.bin -fileoff 0x80000 -p3 -m4 m4_image.bin 0 0x08081000 -fileoff 0x180000 -ap u-boot-atf.bin a35 0x80000000 -out flash.bin
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_scfw: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin
+-	./$(MKIMG) -soc QX -rev B0 -dcd skip -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -out flash.bin
++	../mkimage_imx8 -soc QX -rev B0 -dcd skip -append $(AHAB_IMG) -c -scfw scfw_tcm.bin -out flash.bin
+ 
+ flash_kernel: $(MKIMG) Image imx8qxp-mek.dtb
+-	./$(MKIMG) -soc QX -rev B0 -c -ap Image a35 0x80200000 --data imx8qxp-mek.dtb a35 0x83000000 -out flash.bin
++	../mkimage_imx8 -soc QX -rev B0 -c -ap Image a35 0x80200000 --data imx8qxp-mek.dtb a35 0x83000000 -out flash.bin
+ 
+ parse_container: $(MKIMG) flash.bin
+-	./$(MKIMG) -soc QX -rev B0 -parse flash.bin
++	../mkimage_imx8 -soc QX -rev B0 -parse flash.bin
+ 
+ extract: $(MKIMG) flash.bin
+-	./$(MKIMG) -soc QX -rev B0 -extract flash.bin
++	../mkimage_imx8 -soc QX -rev B0 -extract flash.bin
+ 
+ 
+ ifneq ($(wildcard ../$(SOC_DIR)/scripts/misc.mak),)
+diff --git a/iMX8ULP/soc.mak b/iMX8ULP/soc.mak
+index ef74ecd..5b96d04 100644
+--- a/iMX8ULP/soc.mak
++++ b/iMX8ULP/soc.mak
+@@ -1,4 +1,4 @@
+-MKIMG = ../mkimage_imx8
++MKIMG = ../mkimage_imx8.real
+ 
+ CC ?= gcc
+ REV ?= A2
+@@ -37,7 +37,7 @@ M33_IMAGE_XIP_OFFSET ?= 0x31000 # 1st container offset is 0x1000 when boot devic
+ FORCE:
+ 
+ u-boot-hash.bin: u-boot.bin
+-	./$(MKIMG) -commit > head.hash
++	../mkimage_imx8 -commit > head.hash
+ 	@cat u-boot.bin head.hash > u-boot-hash.bin
+ 
+ u-boot-atf-container.img: bl31.bin u-boot-hash.bin
+@@ -48,12 +48,12 @@ u-boot-atf-container.img: bl31.bin u-boot-hash.bin
+ 			cp $(TEE).lz4 $(TEE); \
+ 		fi; \
+ 		if [ $(shell echo $(ROLLBACK_INDEX_IN_CONTAINER)) ]; then \
+-			./$(MKIMG) -soc ULP -sw_version $(ROLLBACK_INDEX_IN_CONTAINER)  -c -ap bl31.bin a35 $(ATF_LOAD_ADDR) -ap u-boot-hash.bin a35 $(UBOOT_LOAD_ADDR) -ap $(TEE) a35 $(TEE_LOAD_ADDR) -out u-boot-atf-container.img; \
++			../mkimage_imx8 -soc ULP -sw_version $(ROLLBACK_INDEX_IN_CONTAINER)  -c -ap bl31.bin a35 $(ATF_LOAD_ADDR) -ap u-boot-hash.bin a35 $(UBOOT_LOAD_ADDR) -ap $(TEE) a35 $(TEE_LOAD_ADDR) -out u-boot-atf-container.img; \
+ 		else \
+-			./$(MKIMG) -soc ULP -c -ap bl31.bin a35 $(ATF_LOAD_ADDR) -ap u-boot-hash.bin a35 $(UBOOT_LOAD_ADDR) -ap $(TEE) a35 $(TEE_LOAD_ADDR) -out u-boot-atf-container.img; \
++			../mkimage_imx8 -soc ULP -c -ap bl31.bin a35 $(ATF_LOAD_ADDR) -ap u-boot-hash.bin a35 $(UBOOT_LOAD_ADDR) -ap $(TEE) a35 $(TEE_LOAD_ADDR) -out u-boot-atf-container.img; \
+ 		fi; \
+ 	else \
+-		./$(MKIMG) -soc ULP -c -ap bl31.bin a35 $(ATF_LOAD_ADDR) -ap u-boot-hash.bin a35 $(UBOOT_LOAD_ADDR) -out u-boot-atf-container.img; \
++		../mkimage_imx8 -soc ULP -c -ap bl31.bin a35 $(ATF_LOAD_ADDR) -ap u-boot-hash.bin a35 $(UBOOT_LOAD_ADDR) -out u-boot-atf-container.img; \
+ 	fi
+ 
+ .PHONY: clean nightly
+@@ -63,14 +63,14 @@ clean:
+ 	@echo "imx8ulp clean done"
+ 
+ flash_dualboot: $(MKIMG) u-boot-spl.bin u-boot-atf-container.img
+-	./$(MKIMG) -soc ULP -c -ap u-boot-spl.bin a35 $(SPL_LOAD_ADDR) -out flash.bin
++	../mkimage_imx8 -soc ULP -c -ap u-boot-spl.bin a35 $(SPL_LOAD_ADDR) -out flash.bin
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+                    echo "append u-boot-atf-container.img at $$pad_cnt KB"; \
+                    dd if=u-boot-atf-container.img of=flash.bin bs=1K seek=$$pad_cnt;
+ 
+ flash_dualboot_flexspi: $(MKIMG) u-boot-spl.bin u-boot-atf-container.img
+-	./$(MKIMG) -soc ULP -dev flexspi -c -ap u-boot-spl.bin a35 $(SPL_LOAD_ADDR) -out flash.bin
++	../mkimage_imx8 -soc ULP -dev flexspi -c -ap u-boot-spl.bin a35 $(SPL_LOAD_ADDR) -out flash.bin
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+                    echo "append u-boot-atf-container.img at $$pad_cnt KB"; \
+@@ -78,23 +78,23 @@ flash_dualboot_flexspi: $(MKIMG) u-boot-spl.bin u-boot-atf-container.img
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_dualboot_m33: $(MKIMG) $(MCU_IMG)
+-	./$(MKIMG) -soc ULP -append $(AHAB_IMG) -c -upower $(UPOWER_IMG) -m4 $(MCU_IMG) 0 $(MCU_SSRAM_ADDR) -out flash.bin
++	../mkimage_imx8 -soc ULP -append $(AHAB_IMG) -c -upower $(UPOWER_IMG) -m4 $(MCU_IMG) 0 $(MCU_SSRAM_ADDR) -out flash.bin
+ 	./$(QSPI_PACKER) $(QSPI_HEADER_MCU)
+ 
+ # For m33, write the flash.bin(make SOC=iMX8ULP flash_dualboot_m33_xip) to flexspi0 nor flash of m33.
+ flash_dualboot_m33_xip: $(MKIMG) $(MCU_IMG)
+-	./$(MKIMG) -soc ULP -dev flexspi -append $(AHAB_IMG) -c -upower $(UPOWER_IMG) -fileoff $(M33_IMAGE_XIP_OFFSET) -m4 $(MCU_IMG) 0 $(MCU_XIP_ADDR) -out flash.bin
++	../mkimage_imx8 -soc ULP -dev flexspi -append $(AHAB_IMG) -c -upower $(UPOWER_IMG) -fileoff $(M33_IMAGE_XIP_OFFSET) -m4 $(MCU_IMG) 0 $(MCU_XIP_ADDR) -out flash.bin
+ 	./$(QSPI_PACKER) $(QSPI_HEADER_MCU)
+ 
+ flash_singleboot: $(MKIMG) $(AHAB_IMG) $(UPOWER_IMG) u-boot-spl.bin u-boot-atf-container.img
+-	./$(MKIMG) -soc ULP -append $(AHAB_IMG) -c -upower $(UPOWER_IMG) -ap u-boot-spl.bin a35 $(SPL_LOAD_ADDR) -out flash.bin
++	../mkimage_imx8 -soc ULP -append $(AHAB_IMG) -c -upower $(UPOWER_IMG) -ap u-boot-spl.bin a35 $(SPL_LOAD_ADDR) -out flash.bin
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+                    echo "append u-boot-atf-container.img at $$pad_cnt KB"; \
+                    dd if=u-boot-atf-container.img of=flash.bin bs=1K seek=$$pad_cnt;
+ 
+ flash_singleboot_flexspi: $(MKIMG) $(AHAB_IMG) $(UPOWER_IMG) u-boot-spl.bin u-boot-atf-container.img
+-	./$(MKIMG) -soc ULP -dev flexspi -append $(AHAB_IMG) -c -upower $(UPOWER_IMG) -ap u-boot-spl.bin a35 $(SPL_LOAD_ADDR) -out flash.bin
++	../mkimage_imx8 -soc ULP -dev flexspi -append $(AHAB_IMG) -c -upower $(UPOWER_IMG) -ap u-boot-spl.bin a35 $(SPL_LOAD_ADDR) -out flash.bin
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+                    echo "append u-boot-atf-container.img at $$pad_cnt KB"; \
+@@ -102,7 +102,7 @@ flash_singleboot_flexspi: $(MKIMG) $(AHAB_IMG) $(UPOWER_IMG) u-boot-spl.bin u-bo
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_singleboot_m33: $(MKIMG) $(AHAB_IMG) $(UPOWER_IMG) u-boot-atf-container.img $(MCU_IMG) u-boot-spl.bin
+-	./$(MKIMG) -soc ULP -append $(AHAB_IMG) -c -upower $(UPOWER_IMG) -m4 $(MCU_IMG) 0 $(MCU_SSRAM_ADDR) -ap u-boot-spl.bin a35 $(SPL_LOAD_ADDR) -out flash.bin
++	../mkimage_imx8 -soc ULP -append $(AHAB_IMG) -c -upower $(UPOWER_IMG) -m4 $(MCU_IMG) 0 $(MCU_SSRAM_ADDR) -ap u-boot-spl.bin a35 $(SPL_LOAD_ADDR) -out flash.bin
+ 	cp flash.bin boot-spl-container.img
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+@@ -110,7 +110,7 @@ flash_singleboot_m33: $(MKIMG) $(AHAB_IMG) $(UPOWER_IMG) u-boot-atf-container.im
+                    dd if=u-boot-atf-container.img of=flash.bin bs=1K seek=$$pad_cnt;
+ 
+ flash_singleboot_m33_rom_patch: $(MKIMG) $(AHAB_IMG) $(UPOWER_IMG) u-boot-atf-container.img $(MCU_IMG) u-boot-spl.bin $(ROM_PATCH_IMG)
+-	./$(MKIMG) -soc ULP -append $(AHAB_IMG) -c -upower $(UPOWER_IMG) -m4 $(MCU_IMG) 0 $(MCU_SSRAM_ADDR) --data $(ROM_PATCH_IMG) a35 0x1fff9000 -ap u-boot-spl.bin a35 $(SPL_LOAD_ADDR) -out flash.bin
++	../mkimage_imx8 -soc ULP -append $(AHAB_IMG) -c -upower $(UPOWER_IMG) -m4 $(MCU_IMG) 0 $(MCU_SSRAM_ADDR) --data $(ROM_PATCH_IMG) a35 0x1fff9000 -ap u-boot-spl.bin a35 $(SPL_LOAD_ADDR) -out flash.bin
+ 	cp flash.bin boot-spl-container.img
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+@@ -118,7 +118,7 @@ flash_singleboot_m33_rom_patch: $(MKIMG) $(AHAB_IMG) $(UPOWER_IMG) u-boot-atf-co
+                    dd if=u-boot-atf-container.img of=flash.bin bs=1K seek=$$pad_cnt;
+ 
+ flash_singleboot_m33_no_ahabfw: $(MKIMG) $(UPOWER_IMG) u-boot-atf-container.img $(MCU_IMG) u-boot-spl.bin
+-	./$(MKIMG) -soc ULP -c -upower $(UPOWER_IMG) -m4 $(MCU_IMG) 0 $(MCU_SSRAM_ADDR) -ap u-boot-spl.bin a35 $(SPL_LOAD_ADDR) -out flash.bin
++	../mkimage_imx8 -soc ULP -c -upower $(UPOWER_IMG) -m4 $(MCU_IMG) 0 $(MCU_SSRAM_ADDR) -ap u-boot-spl.bin a35 $(SPL_LOAD_ADDR) -out flash.bin
+ 	cp flash.bin boot-spl-container.img
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+@@ -126,7 +126,7 @@ flash_singleboot_m33_no_ahabfw: $(MKIMG) $(UPOWER_IMG) u-boot-atf-container.img
+                    dd if=u-boot-atf-container.img of=flash.bin bs=1K seek=$$pad_cnt;
+ 
+ flash_singleboot_m33_flexspi: $(MKIMG) $(AHAB_IMG) $(UPOWER_IMG) u-boot-atf-container.img $(MCU_IMG) u-boot-spl.bin
+-	./$(MKIMG) -soc ULP  -dev flexspi -append $(AHAB_IMG) -c -upower $(UPOWER_IMG) -m4 $(MCU_IMG) 0 $(MCU_SSRAM_ADDR) -ap u-boot-spl.bin a35 $(SPL_LOAD_ADDR) -out flash.bin
++	../mkimage_imx8 -soc ULP  -dev flexspi -append $(AHAB_IMG) -c -upower $(UPOWER_IMG) -m4 $(MCU_IMG) 0 $(MCU_SSRAM_ADDR) -ap u-boot-spl.bin a35 $(SPL_LOAD_ADDR) -out flash.bin
+ 	cp flash.bin boot-spl-container.img
+ 	@flashbin_size=`wc -c flash.bin | awk '{print $$1}'`; \
+                    pad_cnt=$$(((flashbin_size + 0x400 - 1) / 0x400)); \
+@@ -135,7 +135,7 @@ flash_singleboot_m33_flexspi: $(MKIMG) $(AHAB_IMG) $(UPOWER_IMG) u-boot-atf-cont
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_sentinel: $(MKIMG) ahabfw.bin
+-	./$(MKIMG) -soc ULP -c -sentinel ahabfw.bin -out flash.bin
++	../mkimage_imx8 -soc ULP -c -sentinel ahabfw.bin -out flash.bin
+ 
+ ifeq ($(REV),A0)
+ prepare_kernel_chunks: Image
+@@ -143,15 +143,15 @@ prepare_kernel_chunks: Image
+ 
+ flash_kernel: $(MKIMG) prepare_kernel_chunks imx8ulp-evk.dtb
+ 	KERNEL_CMD="$(shell cat Image_cmd)"; \
+-	./$(MKIMG) -soc ULP -c $$KERNEL_CMD --data imx8ulp-evk.dtb a35 0x83000000 -out flash.bin
++	../mkimage_imx8 -soc ULP -c $$KERNEL_CMD --data imx8ulp-evk.dtb a35 0x83000000 -out flash.bin
+ else
+ flash_kernel: $(MKIMG) Image imx8ulp-evk.dtb
+-	./$(MKIMG) -soc ULP -c -ap Image a35 0x80400000 --data imx8ulp-evk.dtb a35 0x83000000 -out flash.bin
++	../mkimage_imx8 -soc ULP -c -ap Image a35 0x80400000 --data imx8ulp-evk.dtb a35 0x83000000 -out flash.bin
+ endif
+ 
+ parse_container: $(MKIMG) flash.bin
+-	./$(MKIMG) -soc ULP  -parse flash.bin
++	../mkimage_imx8 -soc ULP  -parse flash.bin
+ 
+ extract: $(MKIMG) flash.bin
+-	./$(MKIMG) -soc ULP  -extract flash.bin
++	../mkimage_imx8 -soc ULP  -extract flash.bin
+ 
+diff --git a/iMX9/soc.mak b/iMX9/soc.mak
+index dc09c8d..984d0d7 100644
+--- a/iMX9/soc.mak
++++ b/iMX9/soc.mak
+@@ -1,4 +1,4 @@
+-MKIMG = ../mkimage_imx8
++MKIMG = ../mkimage_imx8.real
+ 
+ CC ?= gcc
+ REV ?= A0
+@@ -176,25 +176,25 @@ u-boot-spl-ddr-qb.bin: u-boot-spl.bin $(lpddr4_imem_qb) $(lpddr4_dmem_qb) $(lpdd
+ 	@rm -f u-boot-spl-pad.bin lpddr4_pmu_qb_imem_pad.bin lpddr4_pmu_qb_dmem_pad.bin lpddr4_pmu_qb_fw.bin
+ 
+ u-boot-hash.bin: u-boot.bin
+-	./$(MKIMG) -commit > head.hash
++	../mkimage_imx8 -commit > head.hash
+ 	@cat u-boot.bin head.hash > u-boot-hash.bin
+ 
+ u-boot-atf-container.img: bl31.bin u-boot-hash.bin
+ 	if [ -f $(TEE) ]; then \
+ 		if [ $(shell echo $(ROLLBACK_INDEX_IN_CONTAINER)) ]; then \
+-			./$(MKIMG) -soc IMX9 -sw_version $(ROLLBACK_INDEX_IN_CONTAINER) -c \
++			../mkimage_imx8 -soc IMX9 -sw_version $(ROLLBACK_INDEX_IN_CONTAINER) -c \
+ 				   -ap bl31.bin a55 $(ATF_LOAD_ADDR) \
+ 				   -ap u-boot-hash.bin a55 $(UBOOT_LOAD_ADDR) \
+ 				   -ap $(TEE) a55 $(TEE_LOAD_ADDR) \
+ 				   -out u-boot-atf-container.img; \
+ 		else \
+-			./$(MKIMG) -soc IMX9 -c \
++			../mkimage_imx8 -soc IMX9 -c \
+ 				   -ap bl31.bin a55 $(ATF_LOAD_ADDR) \
+ 				   -ap u-boot-hash.bin a55 $(UBOOT_LOAD_ADDR) \
+ 				   -ap $(TEE) a55 $(TEE_LOAD_ADDR) -out u-boot-atf-container.img; \
+ 		fi; \
+ 	else \
+-		./$(MKIMG) -soc IMX9 -c \
++		../mkimage_imx8 -soc IMX9 -c \
+ 			   -ap bl31.bin a55 $(ATF_LOAD_ADDR) \
+ 			   -ap u-boot-hash.bin a55 $(UBOOT_LOAD_ADDR) \
+ 			   -out u-boot-atf-container.img; \
+@@ -203,21 +203,21 @@ u-boot-atf-container.img: bl31.bin u-boot-hash.bin
+ u-boot-atf-container-spinand.img: bl31.bin u-boot-hash.bin
+ 	if [ -f $(TEE) ]; then \
+ 		if [ $(shell echo $(ROLLBACK_INDEX_IN_CONTAINER)) ]; then \
+-			./$(MKIMG) -soc IMX9 -sw_version $(ROLLBACK_INDEX_IN_CONTAINER) \
++			../mkimage_imx8 -soc IMX9 -sw_version $(ROLLBACK_INDEX_IN_CONTAINER) \
+ 				   -dev nand 4K -c \
+ 				   -ap bl31.bin a55 $(ATF_LOAD_ADDR) \
+ 				   -ap u-boot-hash.bin a55 $(UBOOT_LOAD_ADDR) \
+ 				   -ap $(TEE) a55 $(TEE_LOAD_ADDR) \
+ 				   -out u-boot-atf-container-spinand.img; \
+ 		else \
+-			./$(MKIMG) -soc IMX9 -dev nand 4K -c \
++			../mkimage_imx8 -soc IMX9 -dev nand 4K -c \
+ 				   -ap bl31.bin a55 $(ATF_LOAD_ADDR) \
+ 				   -ap u-boot-hash.bin a55 $(UBOOT_LOAD_ADDR) \
+ 				   -ap $(TEE) a55 $(TEE_LOAD_ADDR) \
+ 				   -out u-boot-atf-container-spinand.img; \
+ 		fi; \
+ 	else \
+-		./$(MKIMG) -soc IMX9 -dev nand 4K -c \
++		../mkimage_imx8 -soc IMX9 -dev nand 4K -c \
+ 			   -ap bl31.bin a55 $(ATF_LOAD_ADDR) \
+ 			   -ap u-boot-hash.bin a55 $(UBOOT_LOAD_ADDR) \
+ 			   -out u-boot-atf-container-spinand.img; \
+@@ -232,7 +232,7 @@ flash_fw.bin: FORCE
+ 
+ .PHONY: clean nightly
+ clean:
+-	@rm -f $(MKIMG) u-boot-atf-container.img u-boot-spl-ddr.bin u-boot-spl-ddr-qb.bin u-boot-hash.bin
++	@rm -f $(MKIMG) u-boot-atf-container.img u-boot-spl-ddr.bin u-boot-spl-ddr-qb.bin u-boot-hash.bin mkimage.log
+ 	@rm -rf extracted_imgs
+ 	@echo "imx9 clean done"
+ 
+@@ -255,7 +255,7 @@ delete_capsule_key:
+ 	@rm -rf CRT.*
+ 
+ overlay: u-boot.bin
+-	./$(MKIMG) -soc IMX9 -split u-boot.bin
++	../mkimage_imx8 -soc IMX9 -split u-boot.bin
+ 	dtc -@ -I dts -O dtb -o signature.dtbo signature.dts
+ 	fdtoverlay -i gen-uboot.dtb -o gen-uboot.dtb signature.dtbo
+ 	@cat gen-u-boot-nodtb.bin gen-uboot.dtb > gen-u-boot.bin
+@@ -274,17 +274,17 @@ endif
+ 
+ 
+ flash_singleboot: $(MKIMG) $(AHAB_IMG) $(SPL_A55_IMG) u-boot-atf-container.img $(OEI_A55_DDR)
+-	./$(MKIMG) -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_A55) \
++	../mkimage_imx8 -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_A55) \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR) -out flash.bin
+ 	$(call append_container,u-boot-atf-container.img,1)
+ 
+ flash_singleboot_no_ahabfw: $(MKIMG) $(SPL_A55_IMG) u-boot-atf-container.img $(OEI_A55_DDR)
+-	./$(MKIMG) -soc IMX9 -c $(OEI_OPT_A55) \
++	../mkimage_imx8 -soc IMX9 -c $(OEI_OPT_A55) \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR) -out flash.bin
+ 	$(call append_container,u-boot-atf-container.img,1)
+ 
+ flash_singleboot_spinand: $(MKIMG) $(AHAB_IMG) $(SPL_A55_IMG) u-boot-atf-container-spinand.img $(OEI_OPT_A55) flash_fw.bin
+-	./$(MKIMG) -soc IMX9 -dev nand 4K -append $(AHAB_IMG) -c $(OEI_OPT_A55) \
++	../mkimage_imx8 -soc IMX9 -dev nand 4K -append $(AHAB_IMG) -c $(OEI_OPT_A55) \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR) -out flash.bin
+ 	$(call append_container,u-boot-atf-container-spinand.img,4)
+ 
+@@ -292,30 +292,30 @@ flash_singleboot_spinand_fw: flash_fw.bin
+ 	@mv -f flash_fw.bin flash.bin
+ 
+ flash_singleboot_qb: $(MKIMG) $(AHAB_IMG) u-boot-spl-ddr-qb.bin u-boot-atf-container.img
+-	./$(MKIMG) -soc IMX9 -append $(AHAB_IMG) -c -ap u-boot-spl-ddr-qb.bin a55 $(SPL_LOAD_ADDR) -out flash.bin
++	../mkimage_imx8 -soc IMX9 -append $(AHAB_IMG) -c -ap u-boot-spl-ddr-qb.bin a55 $(SPL_LOAD_ADDR) -out flash.bin
+ 	$(call append_container,u-boot-atf-container.img,1)
+ 
+ flash_singleboot_flexspi: $(MKIMG) $(AHAB_IMG) $(OEI_A55_DDR) $(SPL_A55_IMG) u-boot-atf-container.img fcb.bin
+-	./$(MKIMG) -soc IMX9 -dev flexspi -append $(AHAB_IMG) -c $(OEI_OPT_A55) \
++	../mkimage_imx8 -soc IMX9 -dev flexspi -append $(AHAB_IMG) -c $(OEI_OPT_A55) \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR) \
+ 		   -fcb fcb.bin $(FCB_LOAD_ADDR) -out flash.bin
+ 	$(call append_container,u-boot-atf-container.img,1)
+ 	$(call append_fcb)
+ 
+ flash_singleboot_m33: $(MKIMG) $(AHAB_IMG) u-boot-atf-container.img $(MCU_IMG) $(SPL_A55_IMG) $(OEI_A55_DDR)
+-	./$(MKIMG) -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_A55) \
++	../mkimage_imx8 -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_A55) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) $(MCU_TCM_ADDR_ACORE_VIEW) \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR) -out flash.bin
+ 	$(call append_container,u-boot-atf-container.img,1)
+ 
+ flash_singleboot_m33_no_ahabfw: $(MKIMG) u-boot-atf-container.img $(MCU_IMG) $(SPL_A55_IMG) $(OEI_A55_DDR)
+-	./$(MKIMG) -soc IMX9 -c $(OEI_OPT_A55) \
++	../mkimage_imx8 -soc IMX9 -c $(OEI_OPT_A55) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) $(MCU_TCM_ADDR_ACORE_VIEW) \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR) -out flash.bin
+ 	$(call append_container,u-boot-atf-container.img,1)
+ 
+ flash_singleboot_m33_flexspi: $(MKIMG) $(AHAB_IMG) $(UPOWER_IMG) u-boot-atf-container.img $(MCU_IMG) $(SPL_A55_IMG) $(OEI_A55_DDR) fcb.bin
+-	./$(MKIMG) -soc IMX9 -dev flexspi -append $(AHAB_IMG) -c $(OEI_OPT_A55) \
++	../mkimage_imx8 -soc IMX9 -dev flexspi -append $(AHAB_IMG) -c $(OEI_OPT_A55) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) $(MCU_TCM_ADDR_ACORE_VIEW) \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR) \
+ 		   -fcb fcb.bin $(FCB_LOAD_ADDR) -out flash.bin
+@@ -323,90 +323,90 @@ flash_singleboot_m33_flexspi: $(MKIMG) $(AHAB_IMG) $(UPOWER_IMG) u-boot-atf-cont
+ 	$(call append_fcb)
+ 
+ flash_singleboot_all: $(MKIMG) $(AHAB_IMG) u-boot-atf-container.img $(MCU_IMG) $(M7_IMG) $(SPL_A55_IMG) $(OEI_A55_DDR)
+-	./$(MKIMG) -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_A55) \
++	../mkimage_imx8 -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_A55) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) $(MCU_TCM_ADDR_ACORE_VIEW) \
+ 		   -m7 $(M7_IMG) 0 $(M7_TCM_ADDR) $(M7_TCM_ADDR_ALIAS) \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR) -out flash.bin
+ 	$(call append_container,u-boot-atf-container.img,1)
+ 
+ flash_singleboot_all_no_ahabfw: $(MKIMG) u-boot-atf-container.img $(MCU_IMG) $(M7_IMG) $(SPL_A55_IMG) $(OEI_A55_DDR)
+-	./$(MKIMG) -soc IMX9 -c $(OEI_OPT_A55) \
++	../mkimage_imx8 -soc IMX9 -c $(OEI_OPT_A55) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) $(MCU_TCM_ADDR_ACORE_VIEW) \
+ 		   -m7 $(M7_IMG) 0 $(M7_TCM_ADDR) $(M7_TCM_ADDR_ALIAS) \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR) -out flash.bin
+ 	$(call append_container,u-boot-atf-container.img,1)
+ 
+ flash_lpboot: $(MKIMG) $(AHAB_IMG) $(MCU_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_M33) \
++	../mkimage_imx8 -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_M33) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) -out flash.bin
+ 
+ flash_lpboot_no_ahabfw: $(MKIMG) $(MCU_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -c $(OEI_OPT_M33) \
++	../mkimage_imx8 -soc IMX9 -c $(OEI_OPT_M33) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) -out flash.bin
+ 
+ flash_lpboot_a55: $(MKIMG) $(AHAB_IMG) $(MCU_IMG) $(SPL_A55_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_M33) \
++	../mkimage_imx8 -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_M33) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR_M33_VIEW) -out flash.bin
+ 
+ flash_lpboot_a55_no_ahabfw: $(MKIMG) $(MCU_IMG) $(SPL_A55_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -c $(OEI_OPT_M33) \
++	../mkimage_imx8 -soc IMX9 -c $(OEI_OPT_M33) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR_M33_VIEW) -out flash.bin
+ 
+ flash_lpboot_all: $(MKIMG) $(AHAB_IMG) $(MCU_IMG) $(M7_IMG) $(SPL_A55_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_M33) \
++	../mkimage_imx8 -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_M33) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) \
+ 		   -m7 $(M7_IMG) 0 $(M7_TCM_ADDR) $(M7_TCM_ADDR_ALIAS) \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR_M33_VIEW) -out flash.bin
+ 
+ flash_lpboot_all_no_ahabfw: $(MKIMG) $(MCU_IMG) $(M7_IMG) $(SPL_A55_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -c $(OEI_OPT_M33) \
++	../mkimage_imx8 -soc IMX9 -c $(OEI_OPT_M33) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) \
+ 		   -m7 $(M7_IMG) 0 $(M7_TCM_ADDR) $(M7_TCM_ADDR_ALIAS) \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR_M33_VIEW) -out flash.bin
+ 
+ flash_lpboot_flexspi: $(MKIMG) $(AHAB_IMG) $(MCU_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -dev flexspi -append $(AHAB_IMG) -c $(OEI_OPT_M33) \
++	../mkimage_imx8 -soc IMX9 -dev flexspi -append $(AHAB_IMG) -c $(OEI_OPT_M33) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) -out flash.bin
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_lpboot_flexspi_no_ahabfw: $(MKIMG) $(MCU_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -dev flexspi -c $(OEI_OPT_M33) \
++	../mkimage_imx8 -soc IMX9 -dev flexspi -c $(OEI_OPT_M33) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) -out flash.bin
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_lpboot_flexspi_a55: $(MKIMG) $(AHAB_IMG) $(MCU_IMG) $(SPL_A55_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -dev flexspi -append $(AHAB_IMG) -c $(OEI_OPT_M33) \
++	../mkimage_imx8 -soc IMX9 -dev flexspi -append $(AHAB_IMG) -c $(OEI_OPT_M33) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR_M33_VIEW) -out flash.bin
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_lpboot_flexspi_a55_no_ahabfw: $(MKIMG) $(MCU_IMG) $(SPL_A55_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -dev flexspi -c $(OEI_OPT_M33) \
++	../mkimage_imx8 -soc IMX9 -dev flexspi -c $(OEI_OPT_M33) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) \
+ 		   -ap  $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR_M33_VIEW) -out flash.bin
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_lpboot_flexspi_xip: $(MKIMG) $(AHAB_IMG) $(MCU_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -dev flexspi -append $(AHAB_IMG) -fileoff $(M33_IMAGE_XIP_OFFSET) \
++	../mkimage_imx8 -soc IMX9 -dev flexspi -append $(AHAB_IMG) -fileoff $(M33_IMAGE_XIP_OFFSET) \
+ 		   -c $(OEI_OPT_M33) -m33 $(MCU_IMG) 0 $(MCU_XIP_ADDR) -out flash.bin
+ 	./$(QSPI_PACKER) $(QSPI_HEADER)
+ 
+ flash_lpboot_sm_a55: $(MKIMG) $(AHAB_IMG) $(MCU_IMG) u-boot-atf-container.img $(SPL_A55_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_M33) -msel $(MSEL) \
++	../mkimage_imx8 -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_M33) -msel $(MSEL) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR_M33_VIEW) -out flash.bin
+ 	$(call append_container,u-boot-atf-container.img,1)
+ 
+ flash_lpboot_sm_a55_no_ahabfw: $(MKIMG) $(MCU_IMG) u-boot-atf-container.img $(SPL_A55_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -c $(OEI_OPT_M33) -msel $(MSEL) \
++	../mkimage_imx8 -soc IMX9 -c $(OEI_OPT_M33) -msel $(MSEL) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR_M33_VIEW) -out flash.bin
+ 	$(call append_container,u-boot-atf-container.img,1)
+ 
+ flash_lpboot_sm_a55_flexspi: $(MKIMG) $(AHAB_IMG) $(MCU_IMG) $(SPL_A55_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -dev flexspi -append $(AHAB_IMG) -c $(OEI_OPT_M33) -msel $(MSEL) \
++	../mkimage_imx8 -soc IMX9 -dev flexspi -append $(AHAB_IMG) -c $(OEI_OPT_M33) -msel $(MSEL) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR_M33_VIEW) -out flash.bin
+ 	$(call append_container,u-boot-atf-container.img,1)
+@@ -417,58 +417,58 @@ flash_lpboot_sm: flash_lpboot
+ flash_lpboot_sm_no_ahabfw: flash_lpboot_no_ahabfw
+ 
+ flash_lpboot_sm_m7_no_ahabfw: $(MKIMG) $(MCU_IMG) $(M7_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -c $(OEI_OPT_M33) -msel $(MSEL) \
++	../mkimage_imx8 -soc IMX9 -c $(OEI_OPT_M33) -msel $(MSEL) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) \
+ 		   -m7 $(M7_IMG) 0 $(M7_TCM_ADDR) $(M7_TCM_ADDR_ALIAS) -out flash.bin
+ 
+ flash_lpboot_sm_m7: $(MKIMG) $(MCU_IMG) $(M7_IMG) $(AHAB_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_M33) -msel $(MSEL) \
++	../mkimage_imx8 -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_M33) -msel $(MSEL) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) \
+ 		   -m7 $(M7_IMG) 0 $(M7_TCM_ADDR) $(M7_TCM_ADDR_ALIAS) -out flash.bin
+ 
+ # The diff with "flash_lpboot_sm_m7_no_ahabfw" is M7_TCM_ADDR vs M7_DDR_ADDR in -m7 option
+ flash_lpboot_sm_m7_ddr_no_ahabfw: $(MKIMG) $(MCU_IMG) $(M7_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -c $(OEI_OPT_M33) -msel $(MSEL) \
++	../mkimage_imx8 -soc IMX9 -c $(OEI_OPT_M33) -msel $(MSEL) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) \
+ 		   -m7 $(M7_IMG) 0 $(M7_DDR_ADDR) $(M7_DDR_ADDR) -out flash.bin
+ 
+ # The diff with "flash_lpboot_sm_m7" is M7_TCM_ADDR vs M7_DDR_ADDR in -m7 option
+ flash_lpboot_sm_m7_ddr: $(MKIMG) $(MCU_IMG) $(M7_IMG) $(OEI_M33_DDR) $(AHAB_IMG)
+-	./$(MKIMG) -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_M33) -msel $(MSEL) \
++	../mkimage_imx8 -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_M33) -msel $(MSEL) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) \
+ 		   -m7 $(M7_IMG) 0 $(M7_DDR_ADDR) $(M7_DDR_ADDR) -out flash.bin
+ 
+ flash_lpboot_sm_all: $(MKIMG) $(AHAB_IMG) $(MCU_IMG) $(M7_IMG) u-boot-atf-container.img $(SPL_A55_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_M33) -msel $(MSEL) \
++	../mkimage_imx8 -soc IMX9 -append $(AHAB_IMG) -c $(OEI_OPT_M33) -msel $(MSEL) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) \
+ 		   -m7 $(M7_IMG) 0 $(M7_TCM_ADDR) $(M7_TCM_ADDR_ALIAS)  \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR_M33_VIEW) -out flash.bin
+ 	$(call append_container,u-boot-atf-container.img,1)
+ 
+ flash_lpboot_sm_all_no_ahabfw: $(MKIMG) $(MCU_IMG) $(M7_IMG) u-boot-atf-container.img $(SPL_A55_IMG) $(OEI_M33_DDR)
+-	./$(MKIMG) -soc IMX9 -c $(OEI_OPT_M33) -msel $(MSEL) \
++	../mkimage_imx8 -soc IMX9 -c $(OEI_OPT_M33) -msel $(MSEL) \
+ 		   -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) \
+ 		   -m7 $(M7_IMG) 0 $(M7_TCM_ADDR) $(M7_TCM_ADDR_ALIAS)  \
+ 		   -ap $(SPL_A55_IMG) a55 $(SPL_LOAD_ADDR_M33_VIEW) -out flash.bin
+ 	$(call append_container,u-boot-atf-container.img,1)
+ 
+ flash_sentinel: $(MKIMG) ahabfw.bin
+-	./$(MKIMG) -soc IMX9 -c -sentinel ahabfw.bin -out flash.bin
++	../mkimage_imx8 -soc IMX9 -c -sentinel ahabfw.bin -out flash.bin
+ 
+ flash_kernel: $(MKIMG) Image $(KERNEL_DTB)
+-	./$(MKIMG) -soc IMX9 -c -ap Image a55 $(KERNEL_ADDR) --data $(KERNEL_DTB) a55 $(KERNEL_DTB_ADDR) -out flash.bin
++	../mkimage_imx8 -soc IMX9 -c -ap Image a55 $(KERNEL_ADDR) --data $(KERNEL_DTB) a55 $(KERNEL_DTB_ADDR) -out flash.bin
+ 
+ flash_bootaux_cntr: $(MKIMG) $(MCU_IMG)
+-	./$(MKIMG) -soc IMX9 -c -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) $(MCU_TCM_ADDR_ACORE_VIEW) -out flash.bin
++	../mkimage_imx8 -soc IMX9 -c -m33 $(MCU_IMG) 0 $(MCU_TCM_ADDR) $(MCU_TCM_ADDR_ACORE_VIEW) -out flash.bin
+ 
+ flash_bootaux_cntr_xip: $(MKIMG) $(MCU_IMG)
+-	./$(MKIMG) -soc IMX9 -c -fileoff $(M33_IMAGE_XIP_OFFSET) -m33 $(MCU_IMG) 0 $(MCU_XIP_ADDR) -out flash.bin
++	../mkimage_imx8 -soc IMX9 -c -fileoff $(M33_IMAGE_XIP_OFFSET) -m33 $(MCU_IMG) 0 $(MCU_XIP_ADDR) -out flash.bin
+ 
+ parse_container: $(MKIMG) flash.bin
+-	./$(MKIMG) -soc IMX9 -parse flash.bin
++	../mkimage_imx8 -soc IMX9 -parse flash.bin
+ 
+ extract: $(MKIMG) flash.bin
+-	./$(MKIMG) -soc IMX9 -extract flash.bin
++	../mkimage_imx8 -soc IMX9 -extract flash.bin
+ 
+ ifneq ($(wildcard ../$(SOC_DIR)/scripts/autobuild.mak),)
+ $(info include autobuild.mak)
+diff --git a/mkimage_imx8 b/mkimage_imx8
+new file mode 100755
+index 0000000..50538c0
+--- /dev/null
++++ b/mkimage_imx8
+@@ -0,0 +1,5 @@
++#!/bin/sh
++
++OUTLOG=mkimage.log
++
++exec ../mkimage_imx8.real "$@" 2>&1 | tee "${OUTLOG}" >&2
+-- 
+2.44.1
+
