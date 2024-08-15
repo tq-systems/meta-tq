@@ -9,6 +9,10 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* distro: move distro includes to subfolder and include them with
+  complete path
 * distro/spaetzle: Do not depend on `poky-tiny` from `meta-poky`.
   This prevents the hard assumtions from `poky-tiny` and allows
   overwrites from local.conf. Since the primary goal of `spaetzle`
