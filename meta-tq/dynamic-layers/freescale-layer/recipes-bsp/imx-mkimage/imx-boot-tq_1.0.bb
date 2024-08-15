@@ -237,11 +237,11 @@ generate_csf_hab4() {
         done
     )"
 
-    imx_hab_generate_csf \
+    imx_hab_generate_csf_hab4 \
         ${S}/csf_spl-${type}.txt-${target} \
         ${WORKDIR}/csf_spl.txt.in \
         "${SPL_HAB_BLOCK} \"${flash_bin}\""
-    imx_hab_generate_csf \
+    imx_hab_generate_csf_hab4 \
         ${S}/csf_fit-${type}.txt-${target} \
         ${WORKDIR}/csf_fit.txt.in \
         "${hab_blocks}"

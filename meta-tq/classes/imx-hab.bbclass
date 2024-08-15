@@ -40,7 +40,7 @@ imx_hab_replace_template_string() {
 # $1 - output filename
 # $2 - input template filename
 # $3 - HAB block list
-imx_hab_generate_csf() {
+imx_hab_generate_csf_hab4() {
     local output="$1" template="$2" hab_blocks="$3"
 
     cp ${template} ${output}
