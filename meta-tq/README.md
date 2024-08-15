@@ -234,6 +234,7 @@ Support for the following machines is contained in this version:
 
 * TQMa57: Use `kirkstone` branch instead, last release is kirkstone.TQMa57xx.BSP.SW.0015
 * MBaULxL (SBC with TQMa6ULxL): Use `kirkstone` branch instead
+* TQMa65xx: Use `hardknott` branch or `kirkstone.TQMa65xx.BSP.SW.0009` release instead
 * TQMA7S: Use `kirkstone` branch instead
 
 ### Support for wic
