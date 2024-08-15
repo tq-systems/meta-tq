@@ -50,6 +50,24 @@ imx_hab_generate_csf_hab4() {
     imx_hab_replace_template_string @HAB_BLOCKS@ "${hab_blocks}" ${output}
 }
 
+# Builds a CSF input file based on a given template by filling in filenames
+# and AHAB block offsets
+#
+# Arguments:
+# $1 - output filename
+# $2 - input template filename
+# $3 - AHAB block offsets
+# $4 - input filename (file to be signed)
+imx_hab_generate_csf_ahab() {
+    local output="$1" template="$2" ahab_offsets="$3" img_file="$4"
+
+    cp ${template} ${output}
+    imx_hab_replace_template_string @SRK_TABLE@ "${IMX_HAB_SRK_TABLE}" ${output}
+    imx_hab_replace_template_string @SRK_CERT@ "${IMX_HAB_SRK_CERT}" ${output}
+    imx_hab_replace_template_string @AHAB_OFFSETS@ "${ahab_offsets}" ${output}
+    imx_hab_replace_template_string @IMG_FILE@ "${img_file}" ${output}
+}
+
 # Checks whether signing keys are configured for installation by
 # imx_hab_install_keys
 imx_hab_check_keys_configured() {
