@@ -10,24 +10,17 @@ USE_VT = "0"
 KERNEL_DEVICETREE = "\
     imx7d-mba7.dtb \
     imx7d-mba7-lvds.dtb \
-    imx7s-mba7.dtb \
-    imx7s-mba7-lvds.dtb \
 "
 
 KERNEL_DEVICETREE_linux-imx-tq = "\
     imx7d-mba7-dmb-ct21.dtb \
     imx7d-mba7-dmb-ct44.dtb \
     imx7d-mba7-glyn-etm0700g0edh6.dtb \
-    imx7s-mba7-dmb-ct21.dtb \
-    imx7s-mba7-dmb-ct44.dtb \
-    imx7s-mba7-glyn-etm0700g0edh6.dtb \
 "
 
 KERNEL_DEVICETREE_linux-tq = "\
     imx7d-mba7-cdtech-fc21.dtb \
     imx7d-mba7-cdtech-dc44.dtb \
-    imx7s-mba7-cdtech-fc21.dtb \
-    imx7s-mba7-cdtech-dc44.dtb \
 "
 
 KERNEL_DEVICETREE += "${@kernel_provider_dtbs(d)}"
