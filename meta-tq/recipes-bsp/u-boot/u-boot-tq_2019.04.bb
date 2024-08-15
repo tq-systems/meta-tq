@@ -17,7 +17,6 @@ UBOOT_INITIAL_ENV = ""
 
 COMPATIBLE_MACHINE = "^("
 COMPATIBLE_MACHINE .= "tqma335x"
-COMPATIBLE_MACHINE .= "|tqma57xx"
 COMPATIBLE_MACHINE .= ")$"
 
 do_install:append:tqma335x () {
