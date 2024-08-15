@@ -191,6 +191,14 @@ compile_prepare:mx9-generic-bsp() {
                                                              ${BOOT_STAGING}/u-boot-spl.bin-${type}
         cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type} ${BOOT_STAGING}/u-boot.bin-${type}
     done
+
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'true', 'false', d)}; then
+        if imx_hab_check_keys_configured; then
+            imx_hab_install_keys ${S}
+        else
+            bbwarn 'IMX_HAB_KEY_NAME unset, skipping signature generation.'
+        fi
+    fi
 }
 
 compile_finish() {
@@ -222,6 +230,17 @@ generate_habinfo_hab4() {
     echo '"'
 }
 
+generate_habinfo_ahab() {
+    local target="$1" print_fit_hab_target
+
+    awk '
+        /^\tOffsets = / {
+            print "CONTAINER_HEADER_OFF=\""$3"\""
+            print "SIGNATURE_BLOCK_OFF=\""$4"\""
+        }
+    ' ${BOOT_STAGING}/mkimage.log
+}
+
 generate_csf_hab4() {
     local target="$1" type="$2"
     local flash_bin="${BOOT_NAME}-${MACHINE}-${type}.bin-${target}"
@@ -247,6 +266,33 @@ generate_csf_hab4() {
         "${hab_blocks}"
 }
 
+generate_csf_ahab() {
+    local target="$1" type="$2"
+    local flash_bin="${BOOT_NAME}-${MACHINE}-${type}.bin-${target}"
+    local csf_template="csf_boot_image"
+    if [ "${target}" = "u-boot-atf-container.img" ] ; then
+        csf_template="csf_uboot_atf"
+        flash_bin="${S}/iMX9/u-boot-atf-container.img"
+    fi
+
+    # The offsets for flexspi build are calculated before prepending the
+    # SPI header to the bootstream. Therefore, the size and padding for SPI
+    # header (which is 4kiB) needs to be added to the offsets for container
+    # header and signature block.
+    if [ "${target}" = "flash_singleboot_flexspi" ] ; then
+        CONTAINER_HEADER_OFF=$(sh -c 'printf '0x%x' $(($1 + 0x1000))' - "${CONTAINER_HEADER_OFF}")
+        SIGNATURE_BLOCK_OFF=$(sh -c 'printf '0x%x' $(($1 + 0x1000))' - "${SIGNATURE_BLOCK_OFF}")
+    fi
+
+    local offsets="${CONTAINER_HEADER_OFF} ${SIGNATURE_BLOCK_OFF}"
+
+    imx_hab_generate_csf_ahab \
+        ${S}/${csf_template}-${type}.txt-${target} \
+        ${WORKDIR}/${csf_template}.txt.in \
+        "${offsets}" \
+        "${flash_bin}"
+}
+
 hab_sign_part_hab4() {
     local target="$1" type="$2" part="$3" offset="$4"
     local flash_bin="${BOOT_NAME}-${MACHINE}-${type}.bin-${target}"
@@ -268,6 +314,20 @@ hab_sign_hab4() {
     hab_sign_part_hab4 "${target}" "${type}" fit "${SLD_CSF_OFF}"
 }
 
+hab_sign_ahab() {
+    local target="$1" type="$2"
+    local flash_bin="${BOOT_NAME}-${MACHINE}-${type}.bin-${target}"
+
+    # No key set, signing is skipped
+    imx_hab_check_keys_configured || return 0
+
+    if [ "${target}" = "u-boot-atf-container.img" ] ; then
+        cst -i ${S}/csf_uboot_atf-${type}.txt-${target} -o ${S}/csf_uboot_atf-${type}.bin-${target}
+    else
+        cst -i ${S}/csf_boot_image-${type}.txt-${target} -o ${flash_bin}
+    fi
+}
+
 compile_finish:nxp-hab4() {
     local target="$1" type="$2"
 
@@ -278,6 +338,24 @@ compile_finish:nxp-hab4() {
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'true', 'false', d)}; then
         hab_sign_hab4 "${target}" "${type}"
+    fi
+}
+
+compile_finish:nxp-ahab() {
+    local target="$1" type="$2"
+
+    generate_habinfo_ahab "${target}" > ${S}/habinfo-${type}.env-${target}
+
+    . ${S}/habinfo-${type}.env-${target}
+    generate_csf_ahab "${target}" "${type}"
+
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'true', 'false', d)}; then
+	hab_sign_ahab "${target}" "${type}"
+        if [ "${target}" = "u-boot-atf-container.img" ]; then
+            # Copy signed container back to working directory, needed for
+            # generation of flash.bin
+            cp ${S}/csf_uboot_atf-${type}.bin-${target} ${S}/iMX9/u-boot-atf-container.img
+        fi
     fi
 }
 
@@ -322,6 +400,18 @@ do_compile() {
                 bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} V2X=NO ${target}"
                 oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} V2X=NO dtbs=${UBOOT_DTB_NAME} flash_linux_m4
             else
+                if ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'true', 'false', d)} \
+                   && imx_hab_check_keys_configured \
+                   && [ "${SOC_FAMILY}" = "mx9" ]
+                then
+                    # If bootstream should be signed during build, make
+                    # u-boot-atf-container.img first and sign it before
+                    # building flash.bin.
+                    mx93_temp_target="u-boot-atf-container.img"
+                    bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} ${mx93_temp_target}"
+                    oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} dtbs=${UBOOT_DTB_NAME} ${mx93_temp_target}
+                    compile_finish "$mx93_temp_target" "$config"
+                fi
                 bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} ${target}"
                 oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} dtbs=${UBOOT_DTB_NAME} ${target}
             fi
@@ -343,14 +433,25 @@ do_install () {
     done
 }
 
+IMX_HAB_DEPLOY_TARGETS = "${IMXBOOT_TARGETS}"
+IMX_HAB_DEPLOY_TARGETS:nxp-ahab = "${IMXBOOT_TARGETS} u-boot-atf-container.img"
+
 do_deploy() {
     # copy the generated boot images to deploy path
     for target in ${IMXBOOT_TARGETS}; do
         for type in ${UBOOT_CONFIG}; do
             install -m 0644 ${S}/${BOOT_NAME}-${MACHINE}-${type}.bin-${target} \
                                                              ${DEPLOYDIR}
+        done
+    done
 
-            for file in habinfo-${type}.env csf_spl-${type}.txt csf_fit-${type}.txt; do
+    for target in ${IMX_HAB_DEPLOY_TARGETS}; do
+        for type in ${UBOOT_CONFIG}; do
+            for file in habinfo-${type}.env \
+                        csf_spl-${type}.txt \
+                        csf_fit-${type}.txt \
+                        csf_uboot_atf-${type}.txt \
+                        csf_boot_image-${type}.txt; do
                 if [ -e ${S}/${file}-${target} ]; then
                     install -m 0644 ${S}/${file}-${target} ${DEPLOYDIR}/
                 fi
