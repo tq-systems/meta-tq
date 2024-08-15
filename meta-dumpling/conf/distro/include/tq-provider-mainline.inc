@@ -19,4 +19,3 @@ PREFERRED_PROVIDER_virtual/libgbm = "mesa"
 # nor linux-yocto-tiny
 # TODO: remove as soon we have a linux-tq recipe for the machine
 PREFERRED_PROVIDER_virtual/kernel:tqma335x ?= "linux-ti-tq"
-PREFERRED_PROVIDER_virtual/kernel:tqma57xx ?= "linux-ti-tq"
