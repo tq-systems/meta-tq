@@ -6,7 +6,9 @@
 
 ### Supported Hardware:
 
-* TQMa7x: module revisions REV.020x
+* TQMa7D module revisions REV.020x 512 MiB RAM
+* TQMa7D module revisions REV.020x 1024 MiB RAM
+* TQMa7D module revisions REV.020x 2048 MiB RAM
 * MBa7x:  board revisions REV.020x
 
 ### Supported Features
