@@ -213,8 +213,6 @@ Support for the following machines is contained in this version:
 | [b]    | LS102\[0,1\]A           | TQMLS102\[0,1\]A        | MBLS102xA     | tqmls102xa-mbls102xa             | TQMLS102\[0,1\]A HW REV.020x / MBLS102xA HW REV.020x                                                                                                         |
 | [b]    | LX2\[16,08\]0A          | TQMLX2\[16,08\]0A       | MBLX2160A     | tqmlx2160a-mblx2160a             | TQMLX2\[16,08\]0A HW REV.010x with 32 GiB / 16 Gib RAM / MBLX2160A HW REV.010x and REV.020x                                                                  |
 | [b]    | AM355x                  | TQMa335x\[L\]           | MBa335x       | tqma355x-mba335x                 | TQMa335x[L] HW REV.020x with 256/512 MiB RAM / MBa335x HW REV.020x                                                                                           |
-| [b]    | AM57\[1,2,4\]8          | TQMa57\[1,2,4\]8        | MBa57xx       | tqma57xx-mba57xx                 | TQMa57[1,2,4]8 / MBa57xx                                                                                                                                     |
-| [b]    | AM5748                  | TQMa5748 ECC            | MBa57xx       | tqma57xx-ecc-mba57xx             | TQMa5748 with ECC / MBa57xx                                                                                                                                  |
 | [b]    | AM6234                  | TQMa6234                | MBa62xx       | tqma62xx-mba62xx                 | TQMa6234 HW REV.010x, MBa62xx HW REV.010x                                                                                                                    |
 | [b]    | AM6254                  | TQMa6254                | MBa62xx       | tqma62xx-mba62xx                 | TQMa6254 HW REV.010x, MBa62xx HW REV.010x                                                                                                                    |
 | [b]    | AM6411                  | TQMa6411L               | MBaX4XxL      | tqma64xxl-mbax4xxl               | TQMa6411L HW REV.010x / 020x, MBaX4XxL HW REV.010x / 020x                                                                                                    |
@@ -234,6 +232,7 @@ Support for the following machines is contained in this version:
 
 ### Obsolete machines
 
+* TQMa57: Use `kirkstone` branch instead, last release is kirkstone.TQMa57xx.BSP.SW.0015
 * MBaULxL (SBC with TQMa6ULxL): Use `kirkstone` branch instead
 * TQMA7S: Use `kirkstone` branch instead
 
