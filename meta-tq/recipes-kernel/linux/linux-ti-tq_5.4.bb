@@ -40,35 +40,8 @@ SRC_URI:append:tqma335x = "\
     file://bpf-support.cfg \
 "
 
-SRC_URI:append:tqma57xx = "\
-    file://config-only-armv7.cfg \
-    file://disable-highpte.cfg \
-    file://dynamic-debug.cfg \
-    file://general-optimizations.cfg \
-    file://kallsyms.cfg \
-    file://local-version.cfg \
-    file://neon.cfg \
-    file://pack-lzo.cfg \
-    file://remove-debug.cfg \
-    file://bpf-support.cfg \
-    file://enable-legacy-drm.cfg \
-"
-
-KERNEL_DEVICETREE:append:tqma57xx = "\
-    am571x-mba57xx-cdtech-dc44.dtb \
-    am571x-mba57xx-edt-etm0700g0edh6.dtb \
-    am571x-mba57xx-tianma-tm070jvhg33.dtb \
-    am572x-mba57xx-cdtech-dc44.dtb \
-    am572x-mba57xx-edt-etm0700g0edh6.dtb \
-    am572x-mba57xx-tianma-tm070jvhg33.dtb \
-    am574x-mba57xx-cdtech-dc44.dtb \
-    am574x-mba57xx-edt-etm0700g0edh6.dtb \
-    am574x-mba57xx-tianma-tm070jvhg33.dtb \
-"
-
 DEFAULT_PREFERENCE = "1"
 
 COMPATIBLE_MACHINE = "^("
 COMPATIBLE_MACHINE .= "tqma335x"
-COMPATIBLE_MACHINE .= "|tqma57xx"
 COMPATIBLE_MACHINE .= ")$"
