@@ -11,12 +11,18 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-rt-tq-6.1: Updated to include all changes from linux-stable up to v6.1.103
+  and stable-rt up to v6.1.102-rt37 plus changes from linux-tq-6.1
 * Centralize configuration of UBI in common machine include and allow
   overrides per machine to prevent a lot of duplication
 * Move image classes inclusion and IMAGE_FSTYPES modifications from
   distro to machine
 * linux-tq-6.1: Updated to include all changes from linux-stable up to v6.1.103
 * linux-ti-tq-6.1: Updated to latest ti-linux-rt-6.1 based on Linux 6.1.83
+
+### Removed
+
+* local.conf: remove `BBMASK` for long gone recipe `firmware-imx-tq`
 
 ### Fixed
 
