@@ -1,5 +1,7 @@
+#
+
 # Copyright (C) 2017-2023 NXP
-# Copyright (C) 2022-2023 TQ-Systems GmbH
+# Copyright (C) 2022-2024 TQ-Systems GmbH
 
 DESCRIPTION = "i.MX ARM Trusted Firmware"
 SECTION = "BSP"
@@ -10,20 +12,23 @@ PROVIDES += "imx-atf"
 
 PV .= "+git${SRCPV}"
 
-ATF_BRANCH = "TQM-lf_v2.8"
+ATF_BRANCH = "TQM-lf_v2.10"
 ATF_SRC = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL}"
 
 SRC_URI = "${ATF_SRC};branch=${ATF_BRANCH}"
-SRCREV = "50b659ebe7d59c80d6bf1ec90b1081f33ff361c7"
+SRCREV = "5db3ccb0fc0c2244980c9a2f816980ec1c0d726d"
 
 S = "${WORKDIR}/git"
 
 inherit deploy
 
 ATF_PLATFORM ??= "INVALID"
-# FIXME: We should return INVALID here but currently only i.MX8M has support to override the UART
-# base address in source code.
-ATF_IMX_BOOT_UART_BASE ??= "" 
+
+# We return INVALID here since this is highly machine dependend.
+# Currently only i.MX8[M,MMini,MNano,MPlus] have support to override
+# the debug / boot UART base address.
+ATF_IMX_BOOT_UART_BASE ??= "INVALID"
+
 # UART3
 ATF_IMX_BOOT_UART_BASE:tqma8mq ?= "0x30880000"
 ATF_IMX_BOOT_UART_BASE:tqma8mxml ?= "0x30880000"
@@ -31,18 +36,18 @@ ATF_IMX_BOOT_UART_BASE:tqma8mxnl ?= "0x30880000"
 # UART4
 ATF_IMX_BOOT_UART_BASE:tqma8mpxl ?= "0x30a60000"
 
-# debug uart index (lpuart<n>)
-ATF_IMX_DEBUG_UART ?= ""
+# We return INVALID here since this is highly machine dependend.
+# Currently only i.MX8QM / i.MX8[D,Q]XP have support to override the UART index.
+ATF_IMX_DEBUG_UART ??= "INVALID"
 ATF_IMX_DEBUG_UART:tqma8x ?= "0"
-ATF_IMX_DEBUG_UART:tqma8xx ?= "0"
+ATF_IMX_DEBUG_UART:tqma8xx ?= "1"
 ATF_IMX_DEBUG_UART:tqma8xxs ?= "0"
 
-# TODO
-# enable / disable debug console
-ATF_DEBUG_CONSOLE ?= "0"
+# Debug console enable for i.MX8QXP / i.MX8QM
+ATF_IMX_DEBUG_CONSOLE ??= "0"
 
 EXTRA_OEMAKE += " \
-    CROSS_COMPILE="${TARGET_PREFIX}" \
+    CROSS_COMPILE=${TARGET_PREFIX} \
     PLAT=${ATF_PLATFORM} \
 "
 
@@ -72,19 +77,23 @@ EXTRA_OEMAKE += 'LD="${@remove_options_tail(d.getVar('LD'))}.bfd"'
 
 EXTRA_OEMAKE += 'CC="${@remove_options_tail(d.getVar('CC'))}"'
 
-EXTRA_OEMAKE:append:mx8m-generic-bsp = "\
+# Set the UART to use during the boot for i.MX8M.
+IMX_EXTRA_OEMAKE_UART:mx8m-generic-bsp += "\
     IMX_BOOT_UART_BASE=${ATF_IMX_BOOT_UART_BASE} \
 "
 
-EXTRA_OEMAKE:append:mx8qm-generic-bsp = "\
+IMX8_EXTRA_OEMAKE_UART = "\
     IMX_DEBUG_UART=${ATF_IMX_DEBUG_UART} \
-    DEBUG_CONSOLE=${ATF_DEBUG_CONSOLE} \
+    DEBUG_CONSOLE=${ATF_IMX_DEBUG_CONSOLE} \
 "
 
-EXTRA_OEMAKE:append:mx8x-generic-bsp = "\
-    IMX_DEBUG_UART=${ATF_IMX_DEBUG_UART} \
-    DEBUG_CONSOLE=${ATF_DEBUG_CONSOLE} \
-"
+# Set the UART to use during the boot for i.MX8QM.
+IMX_EXTRA_OEMAKE_UART:mx8qm-generic-bsp = "${IMX8_EXTRA_OEMAKE_UART}"
+
+# Set the UART to use during the boot for i.MX8[D,Q]XQP.
+IMX_EXTRA_OEMAKE_UART:mx8x-generic-bsp += "${IMX8_EXTRA_OEMAKE_UART}"
+
+EXTRA_OEMAKE += "${IMX_EXTRA_OEMAKE_UART}"
 
 do_configure[noexec] = "1"
 
