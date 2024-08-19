@@ -11,6 +11,18 @@ Releases are named with the following scheme:
 
 ### Changed
 
+### Added
+
+* imx-atf-tq: new TF-A version based on NXP lf_v2.10
+  * support for TQMa8MPxL
+  * support for TQMa8Mx
+  * support for TQMa8MxML
+  * support for TQMa8MxNL
+  * support for TQMa8x
+  * support for TQMa8Xx
+  * support for TQMa8XxS
+  * support for TQMa93xx
+
 * TQMa62xx:
   * Remove M4 RPMsg example firmware
 
@@ -27,6 +39,10 @@ Releases are named with the following scheme:
   kirkstone-based release is affected.
 * TQMa8Mx: Add libimxvpuapi2 patches to fix gstreamer1.0-plugins-imx build
   with latest meta-freescale
+
+### Removed
+
+* imx-atf-tq: remove recipe for TF-A version based on NXP lf_v2.8
 
 ## scarthgap.TQ.ARM.BSP.0001 (unreleased)
 
