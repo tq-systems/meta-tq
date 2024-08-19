@@ -29,19 +29,9 @@ ATF_PLATFORM ??= "INVALID"
 # the debug / boot UART base address.
 ATF_IMX_BOOT_UART_BASE ??= "INVALID"
 
-# UART3
-ATF_IMX_BOOT_UART_BASE:tqma8mq ?= "0x30880000"
-ATF_IMX_BOOT_UART_BASE:tqma8mxml ?= "0x30880000"
-ATF_IMX_BOOT_UART_BASE:tqma8mxnl ?= "0x30880000"
-# UART4
-ATF_IMX_BOOT_UART_BASE:tqma8mpxl ?= "0x30a60000"
-
 # We return INVALID here since this is highly machine dependend.
 # Currently only i.MX8QM / i.MX8[D,Q]XP have support to override the UART index.
 ATF_IMX_DEBUG_UART ??= "INVALID"
-ATF_IMX_DEBUG_UART:tqma8x ?= "0"
-ATF_IMX_DEBUG_UART:tqma8xx ?= "1"
-ATF_IMX_DEBUG_UART:tqma8xxs ?= "0"
 
 # Debug console enable for i.MX8QXP / i.MX8QM
 ATF_IMX_DEBUG_CONSOLE ??= "0"

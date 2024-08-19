@@ -1,8 +1,11 @@
 
 require mba8-common.inc
 
-# Set Serial console
+# Set Serial console @ UART3
 SERIAL_CONSOLES = "115200;ttymxc2"
+# recipe imx-atf-tq: boot / debug UART. i.MX8M families have the same IP base addresses
+# for UART3
+ATF_IMX_BOOT_UART_BASE ?= "0x30880000"
 
 CORTEXM_DEMOS = "\
     hello_world.bin \

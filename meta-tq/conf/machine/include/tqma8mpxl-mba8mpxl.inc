@@ -42,8 +42,10 @@ EXTRA_IMAGEDEPENDS += "\
     virtual/imx-cortexm-demos \
 "
 
-# Set Serial console
+# Set Serial console @ UART4
 SERIAL_CONSOLES = "115200;ttymxc3"
+# recipe imx-atf-tq: boot / debug UART address for UART4
+ATF_IMX_BOOT_UART_BASE ?= "0x30a60000"
 
 # disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
 USE_VT = "0"
