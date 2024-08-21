@@ -155,8 +155,8 @@ setenv uboot <U-Boot SD/e-MMC boot image>
 tftp ${loadaddr} ${uboot}
 mmc dev [0,1]
 mmc rescan
-setenv blkc ${filesize} + 1ff
-setenv blkc ${blkc} / 200
+setexpr blkc ${filesize} + 1ff
+setexpr blkc ${blkc} / 200
 mmc write ${loadaddr} 2 ${blkc}
 setenv blkc
 ```
