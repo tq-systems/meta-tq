@@ -7,17 +7,22 @@ how default U-Boot env supports update for development purpose.
 
 ## Boot device initialisation
 
-### Bootstream location on SD and e-MMC
+### Bootstream location on SD and eMMC
 
-| CPU family | 32 kiB (0x8000) | 33k (0x8400) |
-| ---------- | --------------- | ------------ |
-| iMX8MQ     |                 |     x        |
-| iMX8MM     |                 |     x        |
-| iMX8MN     |       x         |              |
-| iMX8MP     |       x         |              |
-| iMX8X      |       x         |              |
-| iMX8       |       x         |              |
-| iMX93      |       x         |              |
+For SD-card and eMMC user partition following table applies:
+
+| CPU family | 32 kiB (0x8000) | 33k (0x8400) | Block (512 Bytes) |
+| :--------: | :-------------: | :----------: | :---------------: |
+|   iMX8MQ   |                 |      x       |     66 / 0x42     |
+|   iMX8MM   |                 |      x       |     66 / 0x42     |
+|   iMX8MN   |        x        |              |     64 / 0x40     |
+|   iMX8MP   |        x        |              |     64 / 0x40     |
+|   iMX8X    |        x        |              |     64 / 0x40     |
+|    iMX8    |        x        |              |     64 / 0x40     |
+|   iMX93    |        x        |              |     64 / 0x40     |
+
+When using eMMC boot partition the offset of bootstream is always 0x0 aka eMMC block
+0x0.
 
 ### Bootable SD-Card
 
@@ -28,39 +33,49 @@ write *.wic Image to SD (offset 0)
 To create a bootable SD-Card with boot stream only (for exact file name see
 SOM specific documentation):
 
-Write bootstream with correct [offset](#bootstream-location-on-sd-and-e-mmc) to SD-Card
+Write bootstream with correct [offset](#bootstream-location-on-sd-and-emmc) to SD-Card
 
 Example for Linux:
 
 `sudo dd if=<bootstream> of=/dev/sd<x> bs=1k seek=<kiB offset> conv=fsync`
 
-### Bootable e-MMC
+### Bootable eMMC
 
-To create a bootable e-MMC with complete system image:
+To create a bootable eMMC with complete system image:
 
-write *.wic image to e-MMC (offset 0)
+write *.wic image to eMMC (offset 0)
 
-To create a bootable e-MMC with boot stream only (for exact file name see
+To create a bootable eMMC with boot stream only (for exact file name see
 SOM specific documentation)
 
-Boot from SD-Card and write bootstream with correct [offset](#bootstream-location-on-sd-and-e-mmc)
-to e-MMC
+Boot with working boot source and write bootstream with correct [offset](#bootstream-location-on-sd-and-emmc)
+to eMMC
 
 Example for Linux:
 
 `sudo dd if=<bootstream> of=/dev/mmcblk0 bs=1k seek=<kiB offset> conv=fsync`
 
-Example for U-Boot:
+Example for U-Boot, see [SD-card / eMMC partition start block number](#bootstream-location-on-sd-and-emmc).
+
+**Attention**: partition in this context means the eMMC hardware partitions. This is unrelated to MBR or
+GPT partitions in eMMC user partition.
 
 ```
-# 32k -> 64 blocks -> 0x40
+# assign bstart with start block number in hex
+# use correct partition
+# eMMC user partition: 0
+# eMMC boot partition: 1 or 2
+# assign partnum with partition number to use
 
+setenv bstart <block number>
+setenv partnum <part number>
 tftp <bootstream>
 setexpr bsz ${filesize} + 1ff
 setexpr bsz ${bsz} / 200
 printenv bsz
-mmc dev 0
-mmc write ${loadaddr} 40 ${bsz}
+mmc dev 0 ${partnum}
+mmc write ${loadaddr} ${bstart} ${bsz}
+mmc dev 0 0
 ```
 
 ### Bootable QSPI NOR
@@ -81,12 +96,12 @@ sf update ${loadaddr} 0 ${filesize}
 For ease of development a set of variables and scripts are in default env.
 
 _Note_: Update and start scripts expect a partitioned / initialized SD-Card or
-e-MMC.
+eMMC.
 
 ### U-Boot environment variables
 
 * `uboot`: name of bootstream image (default = bootstream.bin)
-* `mmcdev`: 0 for e-MMC, 1 for SD-Card (automatically generated,
+* `mmcdev`: 0 for eMMC, 1 for SD-Card (automatically generated,
   can be overwritten)
 * `mmcpart`: partition number for kernel and devicetree (default = 1)
 * `mmcpath`: path to kernel and device tree (default = /)
@@ -101,19 +116,11 @@ e-MMC.
 _Attention_ UBI related variables have to be in sync with `mtdparts` and
 `mtdids` variables.
 
-### SD / e-MMC
+### SD / eMMC
 
 Download bootstream from TFTP and update:
 
 `run update_uboot_mmc`
-
-Download device tree blob from TFTP and update:
-
-`run update_fdt_mmc`
-
-Download kernel image from TFTP and update:
-
-`run update_kernel_mmc`
 
 ### FLEXSPI
 
@@ -139,10 +146,10 @@ Download UBIFS image from TFTP and update:
 To boot a Linux OS from a running U-Boot following scripts are implemented in
 environment:
 
-* `mmboot`: load kernel and dtb from SD/e-MMC instance given with variable `mmcdev`
-  * Boot device is SD / e-MMC: `mcdev` is set to device index of the boot device if
+* `mmboot`: load kernel and dtb from SD/eMMC instance given with variable `mmcdev`
+  * Boot device is SD / eMMC: `mcdev` is set to device index of the boot device if
     `mmcautodetect` is `yes` (default)
-  * Boot device is not SD / e-MMC: `mmcdev` has to be set before using `mmcboo`
+  * Boot device is not SD / eMMC: `mmcdev` has to be set before using `mmcboo`
 * `ubiboot`: load kernel and dtb from UBIFS in default UBI volume and boots into
   ubifs rootfs in this volume
 * `netboot`: load kernel and dtb using tftpboot and boots into rootfs on a NFS
@@ -162,4 +169,4 @@ This section only applies to  following CPU families:
 | iMX8MPlus  |           |      x     |
 
 Cortex M image: set env var `cm_image` to the name of your Cortex M image,
-provide the file via TFTP and update on SD / e-MMC via `run update_cm_mmc`
+provide the file via TFTP and update on SD / eMMC via `run update_cm_mmc`
