@@ -9,6 +9,12 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQ.ARM.BSP.0023
+
+### Module BSP Revisions
+
+* kirkstone.TQMa64xxL.BSP.SW.0008
+
 ### Changed
 
 * distro: move distro includes to subfolder and include them with
