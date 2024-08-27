@@ -28,7 +28,7 @@ SRC_URI = "\
     file://0009-iMX8M-print_fit_hab-fix-output-for-symlinked-inputs.patch \
 "
 
-SRC_URI:append:mx8m-generic-bsp = "\
+SRC_URI:append:nxp-hab4 = "\
     file://csf_fit.txt.in \
     file://csf_spl.txt.in \
 "

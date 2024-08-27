@@ -198,7 +198,7 @@ compile_finish() {
     :
 }
 
-generate_habinfo_mx8m() {
+generate_habinfo_hab4() {
     local target="$1" print_fit_hab_target
 
     awk '
@@ -222,7 +222,7 @@ generate_habinfo_mx8m() {
     echo '"'
 }
 
-generate_csf_mx8m() {
+generate_csf_hab4() {
     local target="$1" type="$2"
     local flash_bin="${BOOT_NAME}-${MACHINE}-${type}.bin-${target}"
 
@@ -247,7 +247,7 @@ generate_csf_mx8m() {
         "${hab_blocks}"
 }
 
-hab_sign_part_mx8m() {
+hab_sign_part_hab4() {
     local target="$1" type="$2" part="$3" offset="$4"
     local flash_bin="${BOOT_NAME}-${MACHINE}-${type}.bin-${target}"
 
@@ -257,27 +257,27 @@ hab_sign_part_mx8m() {
     dd if=${S}/csf_${part}-${type}.bin-${target} of=${flash_bin} seek=$(printf '%d' "${offset}") oflag=seek_bytes conv=notrunc
 }
 
-hab_sign_mx8m() {
+hab_sign_hab4() {
     local target="$1" type="$2"
 
     # No key set, signing is skipped
     imx_hab_check_keys_configured || return 0
 
     # habinfo has been sourced by compile_finish for offsets
-    hab_sign_part_mx8m "${target}" "${type}" spl "${SPL_CSF_OFF}"
-    hab_sign_part_mx8m "${target}" "${type}" fit "${SLD_CSF_OFF}"
+    hab_sign_part_hab4 "${target}" "${type}" spl "${SPL_CSF_OFF}"
+    hab_sign_part_hab4 "${target}" "${type}" fit "${SLD_CSF_OFF}"
 }
 
-compile_finish:mx8m-generic-bsp() {
+compile_finish:nxp-hab4() {
     local target="$1" type="$2"
 
-    generate_habinfo_mx8m "${target}" > ${S}/habinfo-${type}.env-${target}
+    generate_habinfo_hab4 "${target}" > ${S}/habinfo-${type}.env-${target}
 
     . ${S}/habinfo-${type}.env-${target}
-    generate_csf_mx8m "${target}" "${type}"
+    generate_csf_hab4 "${target}" "${type}"
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'true', 'false', d)}; then
-        hab_sign_mx8m "${target}" "${type}"
+        hab_sign_hab4 "${target}" "${type}"
     fi
 }
 
