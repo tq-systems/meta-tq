@@ -9,6 +9,13 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Fixed
+
+* systemd: Fix predictable network interface names on TQMa64xxL/TQMa62xx[L]
+
+  Ethernet interfaces are now renamed to `endX` based on `ethernetX` Device
+  Tree aliases on linux-ti-tq-6.6.
+
 ### Removed
 
 * Custom patches for NXP patched gstreamer-plugins-good/gstreamer-plugins-bad
