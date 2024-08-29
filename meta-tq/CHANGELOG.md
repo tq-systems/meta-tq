@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## scarthgap.TQ.ARM.BSP.0001 (unreleased)
+
 ### Added
 
 * linux-ti-tq-6.6: new default kernel based on ti-linux-kernel 6.6 for

@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## scarthgap.TQ.ARM.BSP.0001 (unreleased)
+
 ### Added
 
 * chromium-ozone-wayland (meta-browser): Include configuration and
