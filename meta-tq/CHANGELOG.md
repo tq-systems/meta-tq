@@ -11,6 +11,10 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* linux-ti-tq-6.1: Fix disabled eMMC on TQMa64xxL
+
+  This is a regression in scarthgap.TQ.ARM.BSP.0001 only, no
+  kirkstone-based release is affected.
 * TQMa8Mx: Add libimxvpuapi2 patches to fix gstreamer1.0-plugins-imx build
   with latest meta-freescale
 
