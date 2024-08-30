@@ -1,4 +1,4 @@
-From 483cb1299d5a0ff8b45be1f47391d71ae5e6a269 Mon Sep 17 00:00:00 2001
+From 413f7e530728db300c9cbc39e7b558df5f3c5962 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 11 Oct 2022 16:20:15 +0200
 Subject: [PATCH] iMX8M: soc.mak: use native mkimage from sysroot
@@ -28,7 +28,7 @@ Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
  1 file changed, 5 insertions(+), 6 deletions(-)
 
 diff --git a/iMX8M/soc.mak b/iMX8M/soc.mak
-index baf687e..0ff1dff 100644
+index e7c762b..f1b37a4 100644
 --- a/iMX8M/soc.mak
 +++ b/iMX8M/soc.mak
 @@ -160,7 +160,7 @@ u-boot.itb: $(dtb) $(supp_dtbs)
@@ -85,5 +85,5 @@ index baf687e..0ff1dff 100644
  archive :
  	git ls-files --others --exclude-standard -z | xargs -0 tar rvf $(ARCHIVE_PATH)/$(ARCHIVE_NAME)
 -- 
-2.25.1
+2.34.1
 

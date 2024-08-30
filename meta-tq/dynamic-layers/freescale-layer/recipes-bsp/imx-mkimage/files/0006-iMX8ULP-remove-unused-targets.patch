@@ -1,4 +1,4 @@
-From 2b4fcac5212baefccd63c4bc3158b6c42434e851 Mon Sep 17 00:00:00 2001
+From 5cacae1b3121b962f7656b1b2cfa1e0808c04607 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 22 Nov 2022 08:01:43 +0100
 Subject: [PATCH] iMX8ULP: remove unused targets
@@ -34,5 +34,5 @@ index dd61cd7..ef74ecd 100644
  	if [ -f $(TEE) ]; then \
  		if [ $(shell echo $(TEE_COMPRESS_ENABLE)) ]; then \
 -- 
-2.25.1
+2.34.1
 

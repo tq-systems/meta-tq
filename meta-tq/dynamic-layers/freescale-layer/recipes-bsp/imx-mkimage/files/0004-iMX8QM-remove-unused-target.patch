@@ -1,4 +1,4 @@
-From 5175f3a71f1a7972a9554fa393c2276ce7507ebc Mon Sep 17 00:00:00 2001
+From 8c4192755cefbb26ce2283f0be336a55fab1898c Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 22 Nov 2022 08:00:33 +0100
 Subject: [PATCH] iMX8QM: remove unused target
@@ -44,5 +44,5 @@ index 885f7b9..153c5c3 100755
  	@echo "imx8qm clean done"
  
 -- 
-2.25.1
+2.34.1
 

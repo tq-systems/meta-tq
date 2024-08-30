@@ -1,4 +1,4 @@
-From e2b162c88c779c39c61698293e6c932d7b301794 Mon Sep 17 00:00:00 2001
+From b09e5ff5b7cdca64f4985ce0e28ac4b41422ded0 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 22 Nov 2022 08:01:13 +0100
 Subject: [PATCH] iMX8QX: remove unused target
@@ -29,5 +29,5 @@ index 4817f32..f2f7849 100755
  	if [ -f $(TEE) ]; then \
  		if [ $(shell echo $(TEE_COMPRESS_ENABLE)) ]; then \
 -- 
-2.25.1
+2.34.1
 

@@ -11,9 +11,9 @@ DEPENDS = "\
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRCBRANCH = "lf-6.1.55_2.2.0"
+SRCBRANCH = "lf-6.6.36_2.1.0"
 BRANCH_SPEC = "branch=${SRCBRANCH}"
-SRCREV = "c4365450fb115d87f245df2864fee1604d97c06a"
+SRCREV = "4622115cbc037f79039c4522faeced4aabea986b"
 
 SRC_URI = "\
     git://github.com/nxp-imx/imx-mkimage.git;protocol=https;${BRANCH_SPEC} \

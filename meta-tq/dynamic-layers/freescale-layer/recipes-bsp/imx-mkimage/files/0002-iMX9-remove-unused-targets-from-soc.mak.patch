@@ -1,4 +1,4 @@
-From ab1b69becc851495c343ca5a93582fe2f7f736fa Mon Sep 17 00:00:00 2001
+From 0a87e06d4183745d4d508de871053ceda054961e Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Wed, 12 Oct 2022 11:01:33 +0200
 Subject: [PATCH] iMX9: remove unused targets from soc.mak
@@ -8,14 +8,14 @@ on the presence of mkimage_uboot and mkimage_fit_atf.sh. Remove.
 
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 ---
- iMX9/soc.mak | 11 -----------
+ iMX93/soc.mak | 11 -----------
  1 file changed, 11 deletions(-)
 
-diff --git a/iMX9/soc.mak b/iMX9/soc.mak
-index b17db6b..dc09c8d 100644
---- a/iMX9/soc.mak
-+++ b/iMX9/soc.mak
-@@ -179,17 +179,6 @@ u-boot-hash.bin: u-boot.bin
+diff --git a/iMX93/soc.mak b/iMX93/soc.mak
+index 560d38e..8953168 100644
+--- a/iMX93/soc.mak
++++ b/iMX93/soc.mak
+@@ -103,17 +103,6 @@ u-boot-hash.bin: u-boot.bin
  	./$(MKIMG) -commit > head.hash
  	@cat u-boot.bin head.hash > u-boot-hash.bin
  
@@ -32,7 +32,7 @@ index b17db6b..dc09c8d 100644
 -
  u-boot-atf-container.img: bl31.bin u-boot-hash.bin
  	if [ -f $(TEE) ]; then \
- 		if [ $(shell echo $(ROLLBACK_INDEX_IN_CONTAINER)) ]; then \
+ 		if [ $(shell echo $(TEE_COMPRESS_ENABLE)) ]; then \
 -- 
-2.25.1
+2.34.1
 

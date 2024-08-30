@@ -1,4 +1,4 @@
-From caf0fba6c8acc8eea111882d0e730100e6262816 Mon Sep 17 00:00:00 2001
+From a70b3fbe95f27316a403f559438e3ea87b4dcddf Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 22 Nov 2022 07:58:31 +0100
 Subject: [PATCH] iMX8DXL: remove unused targets
@@ -29,5 +29,5 @@ index ec6f467..f0ab34b 100755
  	if [ -f tee.bin ]; then \
  		if [ $(shell echo $(ROLLBACK_INDEX_IN_CONTAINER)) ]; then \
 -- 
-2.25.1
+2.34.1
 

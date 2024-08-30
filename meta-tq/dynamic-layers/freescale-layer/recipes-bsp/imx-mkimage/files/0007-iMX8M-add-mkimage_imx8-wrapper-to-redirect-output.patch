@@ -1,4 +1,4 @@
-From 8ea56ec81a6aa309148caf7a3f8c92aa899cdbf6 Mon Sep 17 00:00:00 2001
+From 8a54f93e76244a74c7688e6ff072603c5c96f54d Mon Sep 17 00:00:00 2001
 From: Matthias Schiffer <matthias.schiffer@tq-group.com>
 Date: Fri, 28 Apr 2023 10:39:37 +0200
 Subject: [PATCH] iMX8M: add mkimage_imx8 wrapper to redirect output
@@ -25,7 +25,7 @@ index 0000000..4810d13
 +
 +exec ./mkimage_imx8.real "$@" 2>&1 | tee "${OUTLOG}" >&2
 diff --git a/iMX8M/soc.mak b/iMX8M/soc.mak
-index 0ff1dff..c65ab82 100644
+index f1b37a4..9f81b94 100644
 --- a/iMX8M/soc.mak
 +++ b/iMX8M/soc.mak
 @@ -1,4 +1,4 @@
@@ -35,5 +35,5 @@ index 0ff1dff..c65ab82 100644
  
  CC ?= gcc
 -- 
-2.25.1
+2.34.1
 
