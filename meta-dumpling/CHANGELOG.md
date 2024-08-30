@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Removed
+
+* Custom patches for NXP patched gstreamer-plugins-good/gstreamer-plugins-bad
+  which are already included in updated version
+
 ## scarthgap.TQ.ARM.BSP.0001 (unreleased)
 
 ### Added
