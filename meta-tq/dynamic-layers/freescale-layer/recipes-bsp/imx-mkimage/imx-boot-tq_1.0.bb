@@ -92,17 +92,20 @@ IMXBOOT_TARGETS ??= "unknown"
 BOOT_STAGING = "${S}/${IMX_BOOT_SOC_TARGET}"
 BOOT_STAGING:mx8m-generic-bsp = "${S}/iMX8M"
 BOOT_STAGING:mx8dx-generic-bsp = "${S}/iMX8QX"
+BOOT_STAGING:mx91-generic-bsp  = "${S}/iMX91"
+BOOT_STAGING:mx93-generic-bsp  = "${S}/iMX93"
+BOOT_STAGING:mx95-generic-bsp  = "${S}/iMX95"
 
 SOC_FAMILY = "INVALID"
 SOC_FAMILY:mx8-generic-bsp = "mx8"
 SOC_FAMILY:mx8m-generic-bsp = "mx8m"
 SOC_FAMILY:mx8x-generic-bsp = "mx8x"
-SOC_FAMILY:mx9-generic-bsp = "mx9"
+SOC_FAMILY:mx8ulp-generic-bsp = "mx8ulp"
+SOC_FAMILY:mx91-generic-bsp   = "mx91"
+SOC_FAMILY:mx93-generic-bsp   = "mx93"
+SOC_FAMILY:mx95-generic-bsp   = "mx95"
 
-REV_OPTION ?= ""
-REV_OPTION:mx8qxp-generic-bsp = \
-    "${@bb.utils.contains('MACHINE_FEATURES', 'soc-revb0', '', 'REV=C0', d)}"
-REV_OPTION:mx93-generic-bsp = "REV=${IMX_SOC_REV}"
+REV_OPTION ?= "REV=${IMX_SOC_REV_UPPER}"
 
 ##
 # do assignment for TQMa8Xx[S] / TQMa8x SOM to enable bootstream with M4 demo
@@ -272,7 +275,7 @@ generate_csf_ahab() {
     local csf_template="csf_boot_image"
     if [ "${target}" = "u-boot-atf-container.img" ] ; then
         csf_template="csf_uboot_atf"
-        flash_bin="${S}/iMX9/u-boot-atf-container.img"
+        flash_bin="${BOOT_STAGING}/u-boot-atf-container.img"
     fi
 
     # The offsets for flexspi build are calculated before prepending the
@@ -354,7 +357,7 @@ compile_finish:nxp-ahab() {
         if [ "${target}" = "u-boot-atf-container.img" ]; then
             # Copy signed container back to working directory, needed for
             # generation of flash.bin
-            cp ${S}/csf_uboot_atf-${type}.bin-${target} ${S}/iMX9/u-boot-atf-container.img
+            cp ${S}/csf_uboot_atf-${type}.bin-${target} ${BOOT_STAGING}/u-boot-atf-container.img
         fi
     fi
 }
