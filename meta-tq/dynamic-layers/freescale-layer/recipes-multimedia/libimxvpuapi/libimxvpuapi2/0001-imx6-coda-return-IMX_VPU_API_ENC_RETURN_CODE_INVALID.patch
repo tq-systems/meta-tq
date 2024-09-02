@@ -1,0 +1,32 @@
+From f21f20bd4f991285315fe732460cd77a4d4116c7 Mon Sep 17 00:00:00 2001
+From: Matthias Schiffer <matthias.schiffer@tq-group.com>
+Date: Mon, 2 Sep 2024 11:46:42 +0200
+Subject: [PATCH] imx6-coda: return IMX_VPU_API_ENC_RETURN_CODE_INVALID_CALL
+ from imx_vpu_api_enc_get_skipped_frame_info()
+
+imx8m-hantro-h1 returns IMX_VPU_API_ENC_RETURN_CODE_INVALID_CALL when
+imx_vpu_api_enc_get_skipped_frame_info() is called when no frame was
+actually skipped.
+
+imx6-coda currently doesn't return a value from
+imx_vpu_api_enc_get_skipped_frame_info() at all. As imx6-coda does not
+support frame skipping, it is consistent to just always return
+IMX_VPU_API_ENC_RETURN_CODE_INVALID_CALL.
+
+Signed-off-by: Matthias Schiffer <matthias.schiffer@tq-group.com>
+Upstream-Status: Submitted [https://github.com/Freescale/libimxvpuapi/pull/62]
+---
+ imxvpuapi2/imxvpuapi2_imx6_coda.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/imxvpuapi2/imxvpuapi2_imx6_coda.c b/imxvpuapi2/imxvpuapi2_imx6_coda.c
+index 240bb65..e6c0db3 100644
+--- a/imxvpuapi2/imxvpuapi2_imx6_coda.c
++++ b/imxvpuapi2/imxvpuapi2_imx6_coda.c
+@@ -4196,4 +4196,6 @@ ImxVpuApiEncReturnCodes imx_vpu_api_enc_get_skipped_frame_info(ImxVpuApiEncoder
+ 	IMX_VPU_API_UNUSED_PARAM(dts);
+ 
+ 	/* TODO: Frameskipping with CODA960 is not supported at this point */
++
++	return IMX_VPU_API_ENC_RETURN_CODE_INVALID_CALL;
+ }

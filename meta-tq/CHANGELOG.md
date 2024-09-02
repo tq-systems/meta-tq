@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Fixed
+
+* TQMa8Mx: Add libimxvpuapi2 patches to fix gstreamer1.0-plugins-imx build
+  with latest meta-freescale
+
 ## scarthgap.TQ.ARM.BSP.0001 (unreleased)
 
 ### Added
