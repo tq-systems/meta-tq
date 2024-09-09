@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 require linux-ti-tq-common.inc
 
 KBRANCH = "TQMaxx-ti-rt-linux-6.6.y"
-SRCREV = "ad1b66c9052abb6d46de5d19e93aa5da8b716dd2"
+SRCREV = "8dd5af57d6dee156654b9204db85f78f58f069bb"
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "6.6"
 LINUX_VERSION = "${LINUX_RELEASE}.32"

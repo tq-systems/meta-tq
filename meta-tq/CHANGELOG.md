@@ -11,6 +11,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* linux-ti-tq-6.6:
+  * TQMa62xx: Fix race condition in simultaneous audio playback and recording
 * linux-ti-tq-6.1: Fix disabled eMMC on TQMa64xxL
 
   This is a regression in scarthgap.TQ.ARM.BSP.0001 only, no
