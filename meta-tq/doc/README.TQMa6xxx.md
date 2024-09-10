@@ -106,11 +106,35 @@ AM64x, the R5 can be programmed freely.
 The M4 and R5 example programs provided by TI can be run out-of-the-box using
 the Linux RemoteProc driver. When a program is found at the location specified
 in the Device Tree, it will be started on the corresponding core automatically
-during Linux boot. The TQ BSP images contain a simple RPMsg IPC echo test
-program. By running `modprobe rpmsg_client_sample`, a communication test with
-the echo programs can be run, which will write its results to the kernel log.
+during Linux boot.
 
-The TQMa62xx/TQMa64xxL DTSIs defines a number of reserved memory regions that
+If a program is started by the RemoteProc driver, or a program already running
+is detected, their RPMsg devices can be found as symlinks under
+`/sys/bus/rpmsg/devices` (with the symlink targets showing which RemoteProc
+device they're associated with). Linux will automatically probe kernel drivers
+for such devices based on their names, but it is also possible manually bind a
+driver to a device.
+
+The TQ BSP images contain simple RPMsg echo test programs for all R5 cores.
+By running the following commands, communication tests with the echo programs
+can be run, which will write their results to the kernel log:
+```sh
+modprobe rpmsg_client_sample
+
+# Set one of the following:
+
+# R5 core on TQMa62xx[L]
+virtios='virtio0'
+# 4x R5 core on TQMa64xxL
+virtios='virtio0 virtio1 virtio2 virtio3'
+
+for virtio in ${virtios}; do
+    echo rpmsg_client_sample > /sys/bus/rpmsg/devices/${virtio}.ti.ipc4.ping-pong.-1.13/driver_override
+    echo ${virtio}.ti.ipc4.ping-pong.-1.13 > /sys/bus/rpmsg/drivers/rpmsg_client_sample/bind
+done
+```
+
+The TQMa62xx/TQMa64xxL DTSIs define a number of reserved memory regions that
 are used by by these progams and the other the M4/R5 examples provided with the
 AM62x/AM64x MCU+ SDKs (per-core `main_r5fss_*_memory_region` and
 `mcu_m4fss_*_memory_region`, as well as the common `rtos_ipc_memory_region` used
