@@ -115,7 +115,7 @@ device they're associated with). Linux will automatically probe kernel drivers
 for such devices based on their names, but it is also possible manually bind a
 driver to a device.
 
-The TQ BSP images contain simple RPMsg echo test programs for all M4/R5 cores.
+The TQ BSP images contain simple RPMsg echo test programs for all R5 cores.
 By running the following commands, communication tests with the echo programs
 can be run, which will write their results to the kernel log:
 ```sh
@@ -123,8 +123,8 @@ modprobe rpmsg_client_sample
 
 # Set one of the following:
 
-# R5 + M4 core on TQMa62xx[L]
-virtios='virtio0 virtio1'
+# R5 core on TQMa62xx[L]
+virtios='virtio0'
 # 4x R5 core on TQMa64xxL
 virtios='virtio0 virtio1 virtio2 virtio3'
 
