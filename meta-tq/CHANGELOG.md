@@ -9,6 +9,14 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* TQMa62xx:
+  * Remove M4 RPMsg example firmware
+
+    The current M4 RPMsg example from meta-ti is incompatible with the MBa62xx
+    due to conflicting use of `MCU_UART0`.
+
 ### Fixed
 
 * linux-ti-tq-6.6:
