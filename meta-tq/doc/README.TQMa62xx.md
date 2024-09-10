@@ -45,6 +45,9 @@ _Kernel:_
 * On TQMa62xx variants without user EEPROM, the EEPROM device is not disabled
   in the Linux Device Tree, resulting in a non-critical error message in the
   kernel log during boot
+* On the TQMa6234, the probe of the RemoteProc driver for the R5 core running
+  the Device Management firmware fails. The RPMsg echo example can't be run
+  on this SoC variant.
 
 ## Supported features
 
