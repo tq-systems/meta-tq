@@ -11,6 +11,11 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* TQMa62xx:
+  * Remove M4 RPMsg example firmware
+
+    The current M4 RPMsg example from meta-ti is incompatible with the MBa62xx
+    due to conflicting use of `MCU_UART0`.
 * linux-imx-tq 6.1
   * TQMa93: add OpenDrain to MDIO pins
   * TQMa8x: assign DP firmware in device tree
