@@ -9,6 +9,27 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* linux-imx-tq 6.1
+  * TQMa93: add OpenDrain to MDIO pins
+  * TQMa8x: assign DP firmware in device tree
+* u-boot-imx-tq v2020.04:
+  * TQMa8MPxL:
+    * split SOM specific u-boot dtsi
+    * allow speed selection for USB gadget
+    * remove unneeded earlycon in kernel command line
+    * improve device tree fixups for mainline kernel
+  * TQMa8MPxL, TQMa8Xx, TQMa8XxS, TQMa8x:
+    * improve FlexSPI DT fixups
+  * TQ-Systems GmbH boards:
+    * add weak defaults for common baseboard API
+
+### Fixed
+
+* u-boot-imx-tq v2020.04: backport patches for i.MX USDHC controller to fix
+  protocoll and errors seen with some SD 3.0 cards.
+
 ## kirkstone.TQ.ARM.BSP.0023
 
 ### Module BSP Revisions
