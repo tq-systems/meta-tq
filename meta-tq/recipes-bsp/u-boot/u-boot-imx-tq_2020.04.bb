@@ -8,7 +8,7 @@ DESCRIPTION = "U-Boot for TQ-Systems GmbH NXP i.MX8 based SOM"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
 
-SRCREV = "0855b434efef96e80fa939889651557daac75704"
+SRCREV = "948f078446e0acf62eb07473586dccf68e326407"
 SRCBRANCH = "TQMa8-v2020.04_imx_5.4.70_2.3.0"
 
 SRC_URI = "\
@@ -16,6 +16,8 @@ SRC_URI = "\
 "
 
 SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'file://imx-hab.cfg', '', d)}"
+
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 require recipes-bsp/u-boot/u-boot.inc
 require u-boot-tq.inc
