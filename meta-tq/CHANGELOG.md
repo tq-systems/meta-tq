@@ -29,6 +29,10 @@ Releases are named with the following scheme:
 
 * u-boot-imx-tq v2020.04: backport patches for i.MX USDHC controller to fix
   protocoll and errors seen with some SD 3.0 cards.
+* linux-imx-tq 6.1
+  * TQMa93: Enable messaging unit for M33 communication
+* TQMa93xx:
+  * use correct path in NPU example code
 
 ## kirkstone.TQ.ARM.BSP.0023
 
