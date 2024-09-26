@@ -301,7 +301,7 @@ TODO
 Before running, translate tensorflow lite model to ETHOS-U format using vela compiler:
 
 ```
-cd /usr/bin/tensorflow-lite-2.11.1/examples
+cd /usr/bin/tensorflow-lite-2.10.0/examples
 vela mobilenet_v1_1.0_224_quant.tflite
 ./label_image -m output/mobilenet_v1_1.0_224_quant_vela.tflite --external_delegate_path=/usr/lib/libethosu_delegate.so
 ```
