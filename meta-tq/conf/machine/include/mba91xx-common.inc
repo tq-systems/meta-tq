@@ -22,6 +22,10 @@ SERIAL_CONSOLES = "115200;ttyLP0"
 # disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
 USE_VT = "0"
 
+# recipe imx-atf-tq: boot / debug UART.
+# Settings for UART1 (default on MBa91xxCA)
+ATF_IMX_BOOT_UART_BASE ?= "0x44380000"
+
 IMXBOOT_TARGETS ?= "\
     flash_singleboot \
     flash_singleboot_flexspi \

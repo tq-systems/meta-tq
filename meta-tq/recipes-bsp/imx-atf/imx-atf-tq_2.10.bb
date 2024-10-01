@@ -25,7 +25,7 @@ inherit deploy
 ATF_PLATFORM ??= "INVALID"
 
 # We return INVALID here since this is highly machine dependend.
-# Currently only i.MX8[M,MMini,MNano,MPlus] have support to override
+# Currently only i.MX8[M,MMini,MNano,MPlus] and i.MX93 have support to override
 # the debug / boot UART base address.
 ATF_IMX_BOOT_UART_BASE ??= "INVALID"
 
@@ -70,6 +70,11 @@ EXTRA_OEMAKE += 'CC="${@remove_options_tail(d.getVar('CC'))}"'
 # Set the UART to use during the boot for i.MX8M.
 IMX_EXTRA_OEMAKE_UART:mx8m-generic-bsp += "\
     IMX_BOOT_UART_BASE=${ATF_IMX_BOOT_UART_BASE} \
+"
+
+# Set the UART to use during the boot for i.MX93 and upcoming.
+IMX_EXTRA_OEMAKE_UART:mx9-generic-bsp += "\
+    IMX_LPUART_BASE=${ATF_IMX_BOOT_UART_BASE} \
 "
 
 IMX8_EXTRA_OEMAKE_UART = "\
