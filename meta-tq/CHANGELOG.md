@@ -11,9 +11,17 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* u-boot-imx-tq-2023.04:
+  * TQMa93: adjust MDIO pad settings
+  * TQMa93: Kconfig cleanup and select CMD_PMIC
+  * tq_som_features / tq_spi_nor: improve dt fixup logic
+  * TQ shared environment: handle eMMC boot partitions in update scripts
+
 ### Added
 
-* imx-atf-tq: new TF-A version based on NXP lf_v2.10
+* imx-boot-tq / imx-cst-keys / imx-hab.bbclass:
+  * TQMa93: add support for AHAB / secure boot
+* imx-atf-tq: new TF-A version based on NXP lf_v2.10 / tag lf-6.6.36-2.1.0
   * support for TQMa8MPxL
   * support for TQMa8Mx
   * support for TQMa8MxML
@@ -31,6 +39,9 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* u-boot-imx-tq-2020.04:
+  * TQMa8MPxL, TQMa8Mx, TQMa8MxML, TQMa8MxNL, TQMa8x, TQMa8Xx, TQMa8XxS: backport fixes for UHS SD-Cards
+  * TQMa8MPxL: support also i.MX8MP6 mainline in DT fixups
 * linux-ti-tq-6.6:
   * TQMa62xx: Fix race condition in simultaneous audio playback and recording
 * linux-ti-tq-6.1: Fix disabled eMMC on TQMa64xxL
