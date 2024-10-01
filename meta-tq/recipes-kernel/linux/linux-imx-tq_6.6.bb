@@ -60,6 +60,7 @@ SRC_URI:aarch64:imx-nxp-bsp = "\
 
 SRC_URI:append = " \
     ${@bb.utils.contains('COMBINED_FEATURES', 'bluetooth', 'file://features/bluetooth-support.cfg', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'file://features/dm-verity.cfg', '', d)} \
 "
 
 COMPATIBLE_MACHINE = "^$"
