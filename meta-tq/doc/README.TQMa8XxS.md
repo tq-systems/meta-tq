@@ -284,6 +284,8 @@ To (permanently) configure CAN1/2 in systemd network file, set in files
 
 `FDMode=no` to disable CAN-FD.
 
+Note: If CAN-FD is disabled, the option `DataBitRate` needs to be removed!
+
 #### Enable CAN-FD
 
 CAN1/2 should be enabled (without CAN-FD) and configured by default when using with
@@ -301,7 +303,7 @@ To (permanently) configure CAN1/2 in systemd network file, set in files
 * /lib/systemd/network/20-can0.network
 * /lib/systemd/network/20-can1.network
 
-`FDMode=yes` to disable CAN-FD.
+`FDMode=yes` to enable CAN-FD.
 
 **Note**: There is an absolute hardware limit on the bitrate of 1MBit/s, independently from CAN-FD.
 When CAN-FD is enabled, the non-datarate needs to be lower than the datarate. The Linux kernel will emit a warning if it is deemed the `brp` setting do not match.
