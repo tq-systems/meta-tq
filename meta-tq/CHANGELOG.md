@@ -85,6 +85,9 @@ Releases are named with the following scheme:
   * TQMa7x / TQMa6 / TQMa6UL[L]: Make sound work again (missing Kconfig)
   * TQMa7x / TQMa6UL[L]: Fix UBI support. UBIfs does not work with 4K erase size (wrong Kconfig)
   * TQMa8MPxL: Fix USB support
+* TQMa8XxS:
+  * Fix standard CAN (non-FD mode) configuration
+  * Adjust documentation accordingly
 
 ## kirkstone.TQ.ARM.BSP.0022
 
