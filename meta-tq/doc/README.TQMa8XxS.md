@@ -125,7 +125,7 @@ See top level README.md for configurations usable as MACHINE.
 * Default setting for `fdt_file` in u-boot does not match older linux kernel
   naming scheme. Current naming scheme is `<cpu>-<som>-<baseboard>[-feature].dtb`,
   old scheme was `<cpu>-<baseboard>[-feature].dtb`.
-  See [Build Artifacts](#Build-Artifacts) for complete list of supported Device Tree files
+  See [Build Artifacts](#artifacts) for complete list of supported Device Tree files
 * CAN
   * CAN FD is only supported on MB-SMARC-2 up to 1MBit/s (system limitation)
 * USB
@@ -311,7 +311,7 @@ When CAN-FD is enabled, the non-datarate needs to be lower than the datarate. Th
 ### Cortex M4
 
 Demos are compiled to use Cortex M4 UART with 115200 8N1 on Pins SCU\_GPIO\_00 and SCU\_GPIO\_01
-For demos available in the BSP and the device tree to be used see [artifacts section](#build-artifacts).
+For demos available in the BSP and the device tree to be used see [artifacts section](#artifacts).
 
 *Note:* UART3 uses the same pins as Cortex M4 UART and has to be disabled when using Cortex M4.
 
