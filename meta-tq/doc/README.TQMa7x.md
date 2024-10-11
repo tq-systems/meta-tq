@@ -71,7 +71,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   Occurs when gadget is disabled again. USB host might fail to detect a new USB
   descriptor once gadget is restarted.
 * U-Boot v2016.03 needs special environment setting for booting a mainline
-  kernel, see [Mainline Kernel](#mainline_kernel)
+  kernel, see [Mainline Kernel](#mainline-kernel)
 * Writing to FAT filesystems may cause warnings and errors in U-Boot
   based on v2016.03.
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle[-nxp]`.
