@@ -286,7 +286,6 @@ Each Display output could be activated independend by using the corresponding de
 | LVDS1       | imx8qm-tqma8x-mba8x-lvds1-tm070jvhg33.dtb | Tianma Display |
 | LVDS0, dual | imx8qm-tqma8qm-mba8x-lvds0-g133han01.dtb  | AUO G133HAN.01 |
 | LVDS1, dual | imx8qm-tqma8qm-mba8x-lvds1-g133han01.dtb  | AUO G133HAN.01 |
-| DP          | imx8qm-tqma8x-mba8x-dp.dtb                | Displayport    |
 
 Note: Tianma Display device tree is configured using LVDS channel CH0 on either X11 or X8.
 
