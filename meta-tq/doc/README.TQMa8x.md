@@ -141,6 +141,14 @@ See top level README.md for configurations usable as MACHINE.
   * U-Boot: `EHCI timed out on TD - token` with some USB sticks on USB 2.0 OTG
   * runtime suspend disabled for USB Hub TUSB8041
 * DT file for rpmsg is too big and needs `fdt_high` to be set to `0xffffffffffffffff`
+* DP
+  * Broken resume due to driver issues
+  * Workaround: disable DP in the Device Tree if system suspend is required:
+  ```
+  &hdmi {
+	  status = "disabled";
+  };
+  ```
 * SPI: Hardware-controlled chipselects are not driven as expected
   * Toggle after each Byte when using DMA
   * Inbetween each `spi_transfer`
