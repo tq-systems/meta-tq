@@ -39,7 +39,7 @@ See top level README.md for configurations usable as MACHINE.
   * tailor image recipe and kernel configuration to get real tiny
   * use SoM variant with larger SPI-NOR
 
-## Build Artifacts
+## Artifacts
 
 Artifacs can be found at `deploy-ti/images/${MACHINE}` (with meta-ti-bsp in
 `bblayers.conf`) or `${TMPDIR}/deploy/images/${MACHINE}` (without meta-ti-bsp).
