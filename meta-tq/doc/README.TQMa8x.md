@@ -134,7 +134,7 @@ See top level README.md for configurations usable as MACHINE.
 * Default setting for `fdt_file` in u-boot does not match older linux kernel
   naming scheme. Current naming scheme is `<cpu>-<som>-<baseboard>[-feature].dtb`,
   old scheme was `<cpu>-<baseboard>[-feature].dtb`.
-  See [Build Artifacts](#Build-Artifacts) for complete list of supported Device Tree files
+  See [Build Artifacts](#artifacts) for complete list of supported Device Tree files
 * counting of i2c devices bus starts at i2c-2 (because i2c-0 and i2c-1
   are reserved for i2c_rpmsgbus)
 * USB
@@ -323,7 +323,7 @@ ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 40000
 ### Cortex M4
 
 Demos are compiled to use Cortex M4 0/1 UARTS with 115200 8N1.
-For demos available in the BSP and the device tree to be used see [artifacts section](#build-artifacts).
+For demos available in the BSP and the device tree to be used see [artifacts section](#artifacts).
 
 Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8X.md).
 
