@@ -44,7 +44,7 @@ recovery via JTAG is needed.
 * Linux: Wake Up support not working (RTC / GPIO button)
 * Linux: tftp does not work on swp0@eth1 (X13 next to X6)
 
-## Build Artifacts
+## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
