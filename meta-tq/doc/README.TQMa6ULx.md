@@ -82,7 +82,7 @@ _Note:_ Mini PCIe connector only supports USB.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
   `UBI_MAX_LEB_COUNT` on machine level.
 
-## Build Artifacts
+## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
