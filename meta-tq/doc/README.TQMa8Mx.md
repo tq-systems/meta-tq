@@ -136,7 +136,7 @@ _MBa8x HW Rev.020x/30x only_
   running at lower DDR frequencies does not work in this version of BSP.
 * Default setting for `fdt_file` in u-boot from older BSP version does
   not match kernel naming scheme since linux 5.10. Use U-Boot from this
-  BSP release or see [Build Artifacts](#Build-Artifacts) for complete
+  BSP release or see [Build Artifacts](#artifacts) for complete
   list of supported Device Tree files.
 * LVDS shows wrong colors on older Tianma display kit (HW issue on older
   display kit revisions)
@@ -175,7 +175,7 @@ _MBa8x HW Rev.020x/30x only_
 * DT-Overlays `imx8mq-tqma8mq-mba8mx-dcss-hdmi.dtso` and `imx8mq-tqma8mq-mba8mx-dcss-lvds.dtso` are mutual exlusive.
   * Only one display can be used by DCSS at the same time.
 
-## Build Artifacts
+## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
