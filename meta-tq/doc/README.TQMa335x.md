@@ -22,7 +22,7 @@ This README contains some useful information for TQMa335x\[L\] on MBa335x
 
 ## Supported machine configurations
 
-See top level README.md for configurations usable as MACHINE.
+See top level [README](../README.md) for configurations usable as MACHINE.
 
 ## Known Issues
 

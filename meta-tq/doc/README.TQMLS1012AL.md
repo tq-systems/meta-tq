@@ -28,7 +28,7 @@ This README contains some useful information for TQMLS1012AL on MBLS1012AL carri
 
 ## Supported machine configurations
 
-See top level README.md for configurations usable as MACHINE.
+See top level [README](../README.md) for configurations usable as MACHINE.
 
 ## Important notes
 
