@@ -151,6 +151,15 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 * When using `i2c probe` command in U-Boot all valid addresses respond instead of addresses
   used by a physical connected device.
 * linux-imx-tq_6.1: Some Linux kernel boot warnings regarding missing optional supplies in DTB.
+* Suspend/Resume
+  * When resuming using wakeup GPIO the following error can occur:
+    `pca953x 2-0070: failed reading register`. The (wakeup) IRQ handler is executed before the expander
+    has been resumed. This message can be ignored.
+* ENET1/ENET2 does not match Linux/u-boot interface device order end0/end1 (eth0/eth1)
+* When using the parallel display on MBa91xxCA the system might deadlock during boot
+* LPUART 7 & 8:
+  * DMA is non-functional
+  * Workaround: Remove `dmas` and `dma-names` from DT nodes
 
 ## MBa91 differences
 
