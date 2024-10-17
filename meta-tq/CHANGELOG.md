@@ -16,6 +16,9 @@ Releases are named with the following scheme:
   * TQMa93: Kconfig cleanup and select CMD_PMIC
   * tq_som_features / tq_spi_nor: improve dt fixup logic
   * TQ shared environment: handle eMMC boot partitions in update scripts
+* linux-ti-tq-6.6:
+  * Update to latest ti-rt-linux-6.6.y, including upstream changes up to
+    v6.6.44-rt39
 
 ### Added
 
@@ -44,6 +47,7 @@ Releases are named with the following scheme:
   * TQMa8MPxL: support also i.MX8MP6 mainline in DT fixups
 * linux-ti-tq-6.6:
   * TQMa62xx: Fix race condition in simultaneous audio playback and recording
+  * TQMa62xx: Fix incorrect setup of PRU clock resulting in error messages
 * linux-ti-tq-6.1: Fix disabled eMMC on TQMa64xxL
 
   This is a regression in scarthgap.TQ.ARM.BSP.0001 only, no
