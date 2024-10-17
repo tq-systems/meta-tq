@@ -34,7 +34,7 @@ root filesystem you are currently running from.
 To program a complete system image, write the [WIC image](#build-artifacts) to
 SD card / eMMC at offset 0. The following command can be used to write a file
 `/mnt/image.wic` to the eMMC:
-```
+```sh
 dd if=/mnt/image.wic of=/dev/mmcblk0 bs=1M
 ```
 
@@ -43,13 +43,13 @@ dd if=/mnt/image.wic of=/dev/mmcblk0 bs=1M
 To program the root filesystem, format `/dev/mtd/by-name/ospi.rootfs` as a UBI volume and write
 the UBI image to it. If the image is stored at `/mnt/rootfs.ubi` (for example
 on a USB drive), use the following command:
-```
+```sh
 ubiformat /dev/mtd/by-name/ospi.rootfs -f /mnt/rootfs.ubi
 ```
 
 To check check usability of the programmed root filesystem, the following
 commands can be used:
-```
+```sh
 ubiattach -p /dev/mtd/by-name/ospi.rootfs
 mount -t ubifs ubi0:rootfs /mnt
 ```
@@ -154,7 +154,7 @@ unpowered by default. To use them, they can either be powered from the board's
 to 2A.
 
 The digital outputs (pins 3A to 6A) can be set using the `gpioset` command:
-```
+```sh
 gpioset $(gpiofind EN_DIG_OUT_1)=1
 gpioset $(gpiofind EN_DIG_OUT_2)=1
 gpioset $(gpiofind EN_DIG_OUT_3)=1
@@ -167,7 +167,7 @@ gpioset $(gpiofind EN_DIG_OUT_4)=0
 
 Each of the `EN_DIG_OUT_n` pins has a corresponding `STATUS_OUT_n` pin for
 fault detection:
-```
+```sh
 gpioget $(gpiofind STATUS_OUT_1)
 gpioget $(gpiofind STATUS_OUT_2)
 gpioget $(gpiofind STATUS_OUT_3)
@@ -175,7 +175,7 @@ gpioget $(gpiofind STATUS_OUT_4)
 ```
 
 `gpioget` is also used to query the digital inputs (pins 7A to 10A):
-```
+```sh
 gpioget $(gpiofind DIG_IN_1)
 gpioget $(gpiofind DIG_IN_2)
 gpioget $(gpiofind DIG_IN_3)
