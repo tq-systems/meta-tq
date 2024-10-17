@@ -49,6 +49,7 @@ Releases are named with the following scheme:
   * TQMa62xx: Fix race condition in simultaneous audio playback and recording
   * TQMa62xx: Fix incorrect setup of PRU clock resulting in error messages
   * Add TCP SYN cookie support (expected by default sysctl.conf)
+  * Enable ACL support for (dev)tmpfs (expected by systemd)
 * linux-ti-tq-6.1: Fix disabled eMMC on TQMa64xxL
 
   This is a regression in scarthgap.TQ.ARM.BSP.0001 only, no
