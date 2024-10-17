@@ -128,7 +128,7 @@ virtios='virtio0'
 # 4x R5 core on TQMa64xxL
 virtios='virtio0 virtio1 virtio2 virtio3'
 
-for virtio in in ${virtios}; do
+for virtio in ${virtios}; do
     echo rpmsg_client_sample > /sys/bus/rpmsg/devices/${virtio}.ti.ipc4.ping-pong.-1.13/driver_override
     echo ${virtio}.ti.ipc4.ping-pong.-1.13 > /sys/bus/rpmsg/drivers/rpmsg_client_sample/bind
 done
