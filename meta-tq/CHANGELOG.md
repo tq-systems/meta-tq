@@ -88,6 +88,7 @@ Releases are named with the following scheme:
 * TQMa8XxS:
   * Fix standard CAN (non-FD mode) configuration
   * Adjust documentation accordingly
+* doc: Fixed references
 
 ## kirkstone.TQ.ARM.BSP.0022
 
