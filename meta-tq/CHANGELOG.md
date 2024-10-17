@@ -19,6 +19,8 @@ Releases are named with the following scheme:
 * linux-ti-tq-6.6:
   * Update to latest ti-rt-linux-6.6.y, including upstream changes up to
     v6.6.44-rt39
+* u-boot-ti-tq-2023.04:
+  * Update to latest ti-u-boot-2023.04
 
 ### Added
 
