@@ -22,7 +22,7 @@ Please see the corresponding sections below for details.
 This layer in the checked out branch depends on:
 
 URI: https://git.yoctoproject.org/poky  
-branch: kirkstone  
+branch: scarthgap  
 revision: HEAD  
 layers: meta, meta-poky  
 
@@ -48,9 +48,8 @@ is _mandatory_ - see [table](#supported-machines).
 * i.MX93
 
 URI: https://git.yoctoproject.org/git/meta-freescale  
-branch: kirkstone  
-revision: tested with HEAD, at least commit 642cf7f2 ("Merge pull request #1433
-from Freescale/backport-1432-to-kirkstone")  
+branch: scarthgap  
+revision: tested with HEAD, at least commit 1425fda6 ("Merge pull request #1872 from hiagofranco/sync_scarthgap_imx-atf")  
 layers: meta-freeescale  
 
 **Attention:** The following distros defined in meta-freescale-distro are not
@@ -86,8 +85,8 @@ is _mandatory_ - see [table](#supported-machines)
 * AM64xx
 
 URI: https://git.yoctoproject.org/git/meta-ti  
-branch: kirkstone  
-revision: at least commit 9efb0c6fc4f5 (tag 09.01.00.004)  
+branch: scarthgap  
+revision: at least commit 84328ead (tag 10.00.08)  
 layers: meta-ti-bsp  
 
 If using meta-ti, meta-arm is also needed due to dependencies of meta-ti.
