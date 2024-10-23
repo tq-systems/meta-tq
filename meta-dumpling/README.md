@@ -27,15 +27,15 @@ for TQ-Systems SOM and some initial example distro support.
 This layer in the checked out branch depends on:
 
 URI: https://git.yoctoproject.org/poky  
-branch: kirkstone  
+branch: scarthgap  
 layers: meta  
 
 URI: https://github.com/openembedded/meta-openembedded.git
-branch: kirkstone  
+branch: scarthgap  
 layers: meta-oe  
 
 URI: https://github.com/tq-systems/meta-tq.git  
-branch: kirkstone  
+branch: scarthgap  
 layers: meta-tq  
 
 When using one of the distros definded in this layer you need
@@ -44,7 +44,7 @@ additionally the `meta-poky` layer from the poky repo that defines
 **Note** Recipes and bbappends in this layer do not depend on `meta-poky`
 
 URI: https://git.yoctoproject.org/poky  
-branch: kirkstone  
+branch: scarthgap  
 layers: meta-poky  
 
 This layer additionally contains optional fixes and extensions for other layers

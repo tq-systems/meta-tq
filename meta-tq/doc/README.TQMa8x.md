@@ -16,7 +16,7 @@ bootloader and Linux kernel.
 
 ## Supported machine configurations
 
-See top level README.md for configurations usable as MACHINE.
+See top level [README](../README.md) for configurations usable as MACHINE.
 
 ## Supported Features
 
@@ -134,13 +134,21 @@ See top level README.md for configurations usable as MACHINE.
 * Default setting for `fdt_file` in u-boot does not match older linux kernel
   naming scheme. Current naming scheme is `<cpu>-<som>-<baseboard>[-feature].dtb`,
   old scheme was `<cpu>-<baseboard>[-feature].dtb`.
-  See [Build Artifacts](#Build-Artifacts) for complete list of supported Device Tree files
+  See [Build Artifacts](#artifacts) for complete list of supported Device Tree files
 * counting of i2c devices bus starts at i2c-2 (because i2c-0 and i2c-1
   are reserved for i2c_rpmsgbus)
 * USB
   * U-Boot: `EHCI timed out on TD - token` with some USB sticks on USB 2.0 OTG
   * runtime suspend disabled for USB Hub TUSB8041
 * DT file for rpmsg is too big and needs `fdt_high` to be set to `0xffffffffffffffff`
+* DP
+  * Broken resume due to driver issues
+  * Workaround: disable DP in the Device Tree if system suspend is required:
+  ```
+  &hdmi {
+	  status = "disabled";
+  };
+  ```
 * SPI: Hardware-controlled chipselects are not driven as expected
   * Toggle after each Byte when using DMA
   * Inbetween each `spi_transfer`
@@ -286,7 +294,8 @@ Each Display output could be activated independend by using the corresponding de
 | LVDS1       | imx8qm-tqma8x-mba8x-lvds1-tm070jvhg33.dtb | Tianma Display |
 | LVDS0, dual | imx8qm-tqma8qm-mba8x-lvds0-g133han01.dtb  | AUO G133HAN.01 |
 | LVDS1, dual | imx8qm-tqma8qm-mba8x-lvds1-g133han01.dtb  | AUO G133HAN.01 |
-| DP          | imx8qm-tqma8x-mba8x-dp.dtb                | Displayport    |
+
+Note: Tianma Display device tree is configured using LVDS channel CH0 on either X11 or X8.
 
 ### CAN
 
@@ -322,7 +331,7 @@ ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 40000
 ### Cortex M4
 
 Demos are compiled to use Cortex M4 0/1 UARTS with 115200 8N1.
-For demos available in the BSP and the device tree to be used see [artifacts section](#build-artifacts).
+For demos available in the BSP and the device tree to be used see [artifacts section](#artifacts).
 
 Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8X.md).
 

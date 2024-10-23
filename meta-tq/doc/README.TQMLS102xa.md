@@ -64,7 +64,7 @@ Artifacs can be found at the usual locations for bitbake:
 
 ## Boot DIP Switches
 
-_<Note:>_
+_Note:_
 
 * S3: Boot device
 * S9: CPLD

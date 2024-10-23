@@ -28,7 +28,7 @@ This README contains some useful information for TQMLS1012AL on MBLS1012AL carri
 
 ## Supported machine configurations
 
-See top level README.md for configurations usable as MACHINE.
+See top level [README](../README.md) for configurations usable as MACHINE.
 
 ## Important notes
 
@@ -44,7 +44,7 @@ recovery via JTAG is needed.
 * Linux: Wake Up support not working (RTC / GPIO button)
 * Linux: tftp does not work on swp0@eth1 (X13 next to X6)
 
-## Build Artifacts
+## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
