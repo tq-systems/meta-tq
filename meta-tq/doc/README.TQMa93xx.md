@@ -140,6 +140,7 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 * U-Boot: USB Type-C port (X17) is usable as device-only under U-Boot
 * DVFS is not supported using cpu-freq framework. See [here](#frequency-scaling)
   on how to use frequency scaling
+* Ethernet device order is defined by DT aliases. Linux and bootloader DT need to match
 
 ## Known Issues
 
@@ -155,7 +156,6 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
   * When resuming using wakeup GPIO the following error can occur:
     `pca953x 2-0070: failed reading register`. The (wakeup) IRQ handler is executed before the expander
     has been resumed. This message can be ignored.
-* ENET1/ENET2 does not match Linux/u-boot interface device order end0/end1 (eth0/eth1)
 * When using the parallel display on MBa91xxCA the system might deadlock during boot
 * LPUART 7 & 8:
   * DMA is non-functional
