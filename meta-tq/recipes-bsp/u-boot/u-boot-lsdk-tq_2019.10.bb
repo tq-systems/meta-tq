@@ -15,5 +15,5 @@ SRCBRANCH = "TQMLSxx-LSDK-20.04-update-290520"
 
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 
-COMPATIBLE_MACHINE = "tqmls1012al"
-COMPATIBLE_MACHINE:append = "|tqmls1028a"
+COMPATIBLE_MACHINE = "^$"
+COMPATIBLE_MACHINE:tqmls1028a = "tqmls1028a"
