@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## scarthgap.TQ.ARM.BSP.0002 (unreleased)
+
 ### Changed
 
 * u-boot-imx-tq-2023.04:
@@ -41,6 +43,9 @@ Releases are named with the following scheme:
 
     The current M4 RPMsg example from meta-ti is incompatible with the MBa62xx
     due to conflicting use of `MCU_UART0`.
+* linux-imx-tq-6.6:
+  * Add XCVR support in TQMa8MPxL, used for HDMI ARC
+  * Add workaround for DMA issue on LPUART8
 
 ### Fixed
 
@@ -58,10 +63,20 @@ Releases are named with the following scheme:
   kirkstone-based release is affected.
 * TQMa8Mx: Add libimxvpuapi2 patches to fix gstreamer1.0-plugins-imx build
   with latest meta-freescale
+* linux-imx-tq-6.6:
+  * Fix firmware load for some USB BT devices, `btusb` is now configured as a module
+  * Enable Open Drain for MDIO pads
+* TQMa93xx:
+  * Fixed ethernet device ordering in `linux` and `u-boot`
+* libubootenv: Fixed package installation
 
 ### Removed
 
 * imx-atf-tq: remove recipe for TF-A version based on NXP lf_v2.8
+* u-boot-2021.10: remove obsolete recipe
+* linux-rt-lsdk-tq-5.4: remove obsolete recipe
+* u-boot-lsdk-tq-2019.10: remove obsolete TQMLS1012AL compatible, use version 2021.04 instead
+* libubootenv-0.3.4: poky provides already version 0.3.5
 
 ## scarthgap.TQ.ARM.BSP.0001
 
