@@ -11,18 +11,22 @@ how default U-Boot env supports update for development purpose.
 
 For SD-card and eMMC user partition following table applies:
 
-| CPU family | 32 kiB (0x8000) | 33k (0x8400) | Block (512 Bytes) |
-| :--------: | :-------------: | :----------: | :---------------: |
-|   iMX8MQ   |                 |      x       |     66 / 0x42     |
-|   iMX8MM   |                 |      x       |     66 / 0x42     |
-|   iMX8MN   |        x        |              |     64 / 0x40     |
-|   iMX8MP   |        x        |              |     64 / 0x40     |
-|   iMX8X    |        x        |              |     64 / 0x40     |
-|    iMX8    |        x        |              |     64 / 0x40     |
-|   iMX93    |        x        |              |     64 / 0x40     |
+| CPU family |     offset      | Block (512 Bytes) |
+|:----------:|:---------------:|:-----------------:|
+|    iMX6    |  1 KiB (0x400)  |      2 / 0x2      |
+|    iMX7    |  1 KiB (0x400)  |      2 / 0x2      |
+|   iMX8MQ   | 33 KiB (0x8400) |     66 / 0x42     |
+|   iMX8MM   | 33 KiB (0x8400) |     66 / 0x42     |
+|   iMX8MN   | 32 KiB (0x8000) |     64 / 0x40     |
+|   iMX8MP   | 32 KiB (0x8000) |     64 / 0x40     |
+|   iMX8X    | 32 KiB (0x8000) |     64 / 0x40     |
+|    iMX8    | 32 KiB (0x8000) |     64 / 0x40     |
+|   iMX93    | 32 KiB (0x8000) |     64 / 0x40     |
 
 When using eMMC boot partition the offset of bootstream is always 0x0 aka eMMC block
 0x0.
+
+Note: iMX6 applies to all i.MX6, i.MX6UL and i.MX6ULL variants
 
 ### Bootable SD-Card
 
