@@ -157,9 +157,6 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
     `pca953x 2-0070: failed reading register`. The (wakeup) IRQ handler is executed before the expander
     has been resumed. This message can be ignored.
 * When using the parallel display on MBa91xxCA the system might deadlock during boot
-* LPUART 7 & 8:
-  * DMA is non-functional
-  * Workaround: Remove `dmas` and `dma-names` from DT nodes
 
 ## MBa91 differences
 
