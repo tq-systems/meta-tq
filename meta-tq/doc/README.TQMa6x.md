@@ -145,21 +145,8 @@ sf erase 0 0x100000
 sf write ${loadaddr} 0x400 ${filesize}
 ```
 
-### SD / e-MMC
-
-To initialize SD / e-MMC with bootloader, write the [bootloader image](#artifacts)
-for SD / e-MMC to SD / e-MMC at offset 0x400 / block #2
-
-```
-setenv uboot <U-Boot SD/e-MMC boot image>
-tftp ${loadaddr} ${uboot}
-mmc dev [0,1]
-mmc rescan
-setexpr blkc ${filesize} + 1ff
-setexpr blkc ${blkc} / 200
-mmc write ${loadaddr} 2 ${blkc}
-setenv blkc
-```
+See [here](./README.imx-arm64.BootMedia.md) for detailed information how to write a
+bootstream image and bootloader support for updating the bootstream.
 
 ### Program system image
 
