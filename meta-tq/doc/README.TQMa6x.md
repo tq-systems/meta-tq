@@ -205,12 +205,6 @@ Support can vary with kernel branch and version.
 
 See [U-Boot environment tools](README.libubootenv.md).
 
-### Dual LVDS usage
-
-_Note:_ Only valid for `linux-imx-tq-5.10`
-
-The 2nd framebuffer / display is blanked by default. In order to use the display on `LVDS1` it need to be unblanked: `echo 0 > /sys/devices/platform/fb@3/graphics/fb2/blank`
-
 ## Support Wiki
 
 See [TQ Embedded Wiki for TQMa6x](https://support.tq-group.com/en/arm/tqma6x)
