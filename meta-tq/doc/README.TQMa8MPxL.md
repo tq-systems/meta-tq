@@ -112,6 +112,8 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **MIPI CSI (see Issues section)**                            |             |             |             |
 | Gray with Vision Components GmbH camera (Sensor OV9281)      |      x      |      x      |             |
 | Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |      x      |      x      |             |
+| **NPU**                                                      |             |             |             |
+| NPU                                                          |             |      x      |             |
 
 ## TODO
 
@@ -122,7 +124,6 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * UART1/UART2 via pin header
 * SPI via pin header
 * I²C interface of PCIe Clock generator not tested
-* NPU is untested
 * linux-imx-tq_5.15: Dual-Channel LVDS is untested
 
 ## Known Issues
@@ -392,6 +393,14 @@ Demos are compiled to use UART3 with 115200 8N1.
 For demos available in the BSP and the device tree to be used see [artifacts section](#build-artifacts).
 
 Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8M.md).
+
+### NPU
+
+```
+cd /usr/bin/tensorflow-lite-2.15.0/examples
+./label_image -m mobilenet_v1_1.0_224_quant.tflite --external_delegate_path=/usr/lib/libvx_delegate.so
+```
+__Note:__ There is some notable warmup time
 
 ### High Assurance Boot (Secure Boot)
 
