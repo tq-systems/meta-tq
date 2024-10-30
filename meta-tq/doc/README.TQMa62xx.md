@@ -15,7 +15,7 @@ See also: [Common features of TQMa62xx\[L\]/TQMa64xxL](README.TQMa6xxx.md)
 
 _Bootloader:_
 
-* uboot-ti-tq-2023.01 (based on ti-u-boot 2023.01)
+* uboot-ti-tq-2023.04 (based on ti-u-boot 2023.04)
 
 _Kernel:_
 
