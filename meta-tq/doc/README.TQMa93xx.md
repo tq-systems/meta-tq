@@ -117,7 +117,7 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 |           use UART3 as debug console (see issues)            |         x        |         x        |
 |                           LPB boot                           |                  |                  |
 |                        **NPU**                               |                  |                  |
-|                  Firmware for CORTEX M33                     |                  |                  |
+|                  Firmware for CORTEX M33                     |                  |         x        |
 |                              Demo                            |                  |                  |
 |              **MIPI CSI (see Issues section)**               |                  |                  |
 |   Gray with Vision Components GmbH camera (Sensor OV9281)    |                  |                  |
@@ -189,6 +189,7 @@ Artifacs can be found at the usual locations for bitbake:
   * imx93-tqma9352-mba91xxca*.dtb
   * imx93-tqma9352-mba93xxca*.dtb
   * imx93-tqma9352-mba93xxla*.dtb
+  * imx93-tqma9352-mba93xx*-rpmsg.dtb (NPU enabled)
 * Image: Linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
@@ -307,13 +308,17 @@ TODO
 
 ### NPU
 
+__Note:__ For using the NPU, the Cortex-M33 needs to be loaded with a firmware controlling the NPU and the rpmsg-DeviceTree (`imx93-tqma9352-mba93xx*-rpmsg.dtb` has to be used.
+
 Before running, translate tensorflow lite model to ETHOS-U format using vela compiler:
 
 ```
-cd /usr/bin/tensorflow-lite-2.11.1/examples
+cd /usr/bin/tensorflow-lite-2.15.0/examples
 vela mobilenet_v1_1.0_224_quant.tflite
 ./label_image -m output/mobilenet_v1_1.0_224_quant_vela.tflite --external_delegate_path=/usr/lib/libethosu_delegate.so
 ```
+
+__Note:__ Due to API incompatibilities in the ethos-u driver stack and Cortex-M33 firmware only kernel v6.6.23 is supported.
 
 ### High Assurance Boot (Secure Boot)
 
