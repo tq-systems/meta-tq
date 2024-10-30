@@ -26,6 +26,8 @@ SRC_URI = "\
     file://0007-iMX8M-add-mkimage_imx8-wrapper-to-redirect-output.patch \
     file://0008-iMX8M-redirect-more-messages-to-stderr.patch \
     file://0009-iMX8M-print_fit_hab-fix-output-for-symlinked-inputs.patch \
+    file://0010-Add-generic-wrapper-for-mkimage_imx8.patch \
+    file://0011-iMX8-9-redirect-more-messages-to-stderr.patch \
 "
 
 SRC_URI:append:nxp-hab4 = "\

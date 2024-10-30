@@ -1,0 +1,95 @@
+From 4e496c6f8e2c8826d3bb55d1fb7696daf4f00e87 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Thu, 24 Oct 2024 17:26:56 +0200
+Subject: [PATCH] iMX8/9: redirect more messages to stderr
+
+Make the print_fit_hab target only print the HAB block data to stdout.
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ iMX8DXL/soc.mak | 2 +-
+ iMX8QM/soc.mak  | 2 +-
+ iMX8QX/soc.mak  | 2 +-
+ iMX91/soc.mak   | 2 +-
+ iMX93/soc.mak   | 2 +-
+ iMX95/soc.mak   | 2 +-
+ 6 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/iMX8DXL/soc.mak b/iMX8DXL/soc.mak
+index 231bd09..528b4b2 100755
+--- a/iMX8DXL/soc.mak
++++ b/iMX8DXL/soc.mak
+@@ -12,7 +12,7 @@ SECO_FW_NAME = mx8dxl$(LC_REVISION)-ahab-container.img
+ #define the F(Q)SPI header file
+ QSPI_HEADER = ../scripts/fspi_header
+ QSPI_PACKER = ../scripts/fspi_packer.sh
+-PAD_IMAGE = ../scripts/pad_image.sh
++PAD_IMAGE = ../scripts/pad_image.sh >&2
+ SPLIT_SPL = ../scripts/split_spl.sh
+ 
+ ifneq ($(wildcard /usr/bin/rename.ul),)
+diff --git a/iMX8QM/soc.mak b/iMX8QM/soc.mak
+index 153c5c3..e7d19b0 100755
+--- a/iMX8QM/soc.mak
++++ b/iMX8QM/soc.mak
+@@ -12,7 +12,7 @@ endif
+ #define the F(Q)SPI header file
+ QSPI_HEADER = ../scripts/fspi_header
+ QSPI_PACKER = ../scripts/fspi_packer.sh
+-PAD_IMAGE = ../scripts/pad_image.sh
++PAD_IMAGE = ../scripts/pad_image.sh >&2
+ 
+ AHAB_IMG = mx8qmb0-ahab-container.img
+ TEE = tee.bin
+diff --git a/iMX8QX/soc.mak b/iMX8QX/soc.mak
+index 8f19a57..e27e0f0 100755
+--- a/iMX8QX/soc.mak
++++ b/iMX8QX/soc.mak
+@@ -8,7 +8,7 @@ INCLUDE = ./lib
+ #define the F(Q)SPI header file
+ QSPI_HEADER = ../scripts/fspi_header
+ QSPI_PACKER = ../scripts/fspi_packer.sh
+-PAD_IMAGE = ../scripts/pad_image.sh
++PAD_IMAGE = ../scripts/pad_image.sh >&2
+ 
+ ifneq ($(wildcard /usr/bin/rename.ul),)
+     RENAME = rename.ul
+diff --git a/iMX91/soc.mak b/iMX91/soc.mak
+index 25fd7d2..f36d5dc 100644
+--- a/iMX91/soc.mak
++++ b/iMX91/soc.mak
+@@ -11,7 +11,7 @@ INCLUDE = ./lib
+ QSPI_HEADER = ../scripts/fspi_header
+ QSPI_PACKER = ../scripts/fspi_packer.sh
+ QSPI_FCB_GEN = ../scripts/fspi_fcb_gen.sh
+-PAD_IMAGE = ../scripts/pad_image.sh
++PAD_IMAGE = ../scripts/pad_image.sh >&2
+ 
+ ifneq ($(wildcard /usr/bin/rename.ul),)
+     RENAME = rename.ul
+diff --git a/iMX93/soc.mak b/iMX93/soc.mak
+index d0679ff..9f72202 100644
+--- a/iMX93/soc.mak
++++ b/iMX93/soc.mak
+@@ -11,7 +11,7 @@ INCLUDE = ./lib
+ QSPI_HEADER = ../scripts/fspi_header
+ QSPI_PACKER = ../scripts/fspi_packer.sh
+ QSPI_FCB_GEN = ../scripts/fspi_fcb_gen.sh
+-PAD_IMAGE = ../scripts/pad_image.sh
++PAD_IMAGE = ../scripts/pad_image.sh >&2
+ 
+ ifneq ($(wildcard /usr/bin/rename.ul),)
+     RENAME = rename.ul
+diff --git a/iMX95/soc.mak b/iMX95/soc.mak
+index 9940e66..ae68296 100644
+--- a/iMX95/soc.mak
++++ b/iMX95/soc.mak
+@@ -16,7 +16,7 @@ endif
+ 
+ QSPI_PACKER = ../scripts/fspi_packer.sh
+ QSPI_FCB_GEN = ../scripts/fspi_fcb_gen.sh
+-PAD_IMAGE = ../scripts/pad_image.sh
++PAD_IMAGE = ../scripts/pad_image.sh >&2
+ SPLIT_KERNEL = ../scripts/split_kernel.sh
+ 
+ ifneq ($(wildcard /usr/bin/rename.ul),)
