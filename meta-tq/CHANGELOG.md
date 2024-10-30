@@ -145,6 +145,9 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TQMa62xx: Do not install "Image" kernel image type
+
+  The TQMa62xx always uses the fitImage kernel image type.
 * TQMa64xxL: Fixed PRU Ethernet with current prueth firmwares found in meta-ti
 * Fix GCC-13 support for older kernel version
 * linux-tq-6.1:
