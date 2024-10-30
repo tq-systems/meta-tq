@@ -9,6 +9,13 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## scarthgap.TQ.ARM.BSP.0002 (unreleased)
+
+### Added
+
+* TQMa93xx: Add NPU support for scarthgap
+* TQMa8MPxL: Add NPU support for scarthgap
+
 ### Fixed
 
 * systemd: Fix predictable network interface names on TQMa64xxL/TQMa62xx[L]
