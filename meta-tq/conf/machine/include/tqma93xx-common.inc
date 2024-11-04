@@ -75,4 +75,4 @@ IMX_DEFAULT_BOOTLOADER ?= "u-boot-imx-tq"
 # Common image configuration
 require conf/machine/include/tq-image.inc
 
-PREFERRED_VERSION_linux-imx-tq ?= "6.6%"
+PREFERRED_VERSION_linux-imx-tq ?= "6.6.%"

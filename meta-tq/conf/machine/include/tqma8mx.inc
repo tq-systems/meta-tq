@@ -52,4 +52,4 @@ EXTRA_IMAGEDEPENDS += "\
     imx-boot \
 "
 
-PREFERRED_VERSION_linux-imx-tq ?= "6.6%"
+PREFERRED_VERSION_linux-imx-tq ?= "6.6.%"

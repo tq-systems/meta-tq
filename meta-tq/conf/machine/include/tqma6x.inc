@@ -46,7 +46,7 @@ UBOOT_MAKE_TARGET:mx6-generic-bsp = "${UBOOT_BINARY_BASENAME}.${UBOOT_SUFFIX}"
 UBOOT_BINARY:mx6-generic-bsp = "${UBOOT_MAKE_TARGET}"
 IMX_DEFAULT_BOOTLOADER ?= "u-boot-tq"
 
-PREFERRED_VERSION_linux-imx-tq ?= "5.15%"
+PREFERRED_VERSION_linux-imx-tq ?= "5.15.%"
 
 # Common image configuration
 RAW_BOOT_START_OFFSET_KB = "1"

@@ -13,6 +13,12 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* Avoid `PREFERRED_VERSION` matching unintended versions of kernel recipes
+
+  Following a similar change in meta-ti, update `PREFERRED_VERSION_*` from
+  patterns like `6.6%` to `6.6.%`. In particular, the pattern `6.1%` would
+  also match the upcoming `6.12` release (which is not an issue in current
+  meta-tq however, as we don't have any linux 6.1.y recipes anymore).
 * u-boot-imx-tq-2023.04:
   * TQMa93: adjust MDIO pad settings
   * TQMa93: Kconfig cleanup and select CMD_PMIC

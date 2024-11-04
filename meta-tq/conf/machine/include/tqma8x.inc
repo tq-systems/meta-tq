@@ -41,7 +41,7 @@ EXTRA_IMAGEDEPENDS += "\
     imx-sc-firmware \
 "
 
-PREFERRED_VERSION_linux-imx-tq ?= "6.6%"
+PREFERRED_VERSION_linux-imx-tq ?= "6.6.%"
 PREFERRED_VERSION_firmware-imx ?= "8.18"
 
 # Debug UART index. To activate 'ATF_IMX_DEBUG_CONSOLE' must be set to '1'
