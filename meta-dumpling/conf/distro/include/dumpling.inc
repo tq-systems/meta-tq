@@ -9,6 +9,7 @@ DISTRO_FEATURES += "opengl"
 DISTRO_FEATURES += "pam"
 DISTRO_FEATURES += "ppp"
 DISTRO_FEATURES += "vulkan"
+DISTRO_FEATURES += "wayland"
 
 # add some locales per default
 IMAGE_LINGUAS:append = " de-de en-us"
