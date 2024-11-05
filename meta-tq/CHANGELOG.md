@@ -35,6 +35,13 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* example keys and certificates for AHAB are changed to prepare Secure Boot for
+  TQMa8x and TQMa8Xx
+* u-boot-imx-tq-[2020.04,2023.04]: use generic overrides for secure boot
+  The recipe for imx-boot-tq uses `nxp-hab4` and `nxp-ahab`. These are added
+  by machine config. Use them for consistency.
+* imx-boot-tq: adjust to i.MX9 target split in imx-mkimage lf-6.6.36_2.1.0
+* imx-mkimage-tq: update to use NXP lf-6.6.36_2.1.0 code base
 * linux-ti-tq-6.6: Enable DMVerity kernel module
 
   Used for integrity checking of RAUC bundles in verity format.
@@ -56,6 +63,10 @@ Releases are named with the following scheme:
   Please note that images generated with imx-mkimage version before `lf-6.1.55_2.2.0`
   are not compatible with newer images and vice versa. Image generation and
   U-Boot has to be updated in lock step.
+
+### Added
+
+* Secure Boot support for TQMa8x and TQMa8Xx
 
 ## scarthgap.TQ.ARM.BSP.0002 (unreleased)
 
