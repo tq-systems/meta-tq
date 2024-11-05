@@ -142,17 +142,16 @@ The meta-dumpling layer defines distros as starting point for own customization.
 These distros are also available for usage together with vendor based kernel /
 vendor hardware support layer.
 
-| distro name          | purpose                                                              |
-| -------------------- | -------------------------------------------------------------------- |
-| spaetzle             | small size for usage with \[Q\]SPI-NOR flash                         |
-| spaetzle-nxp         | small size for usage with \[Q\]SPI-NOR flash with NXP / FSLC kernel  |
-| spaetzle-ti          | small size for usage with \[Q\]SPI-NOR flash with TI kernel          |
-| dumpling             | systemd, features depends on machine settings                        |
-| dumpling-nxp         | systemd, features depends on machine settings with NXP / FSLC kernel |
-| dumpling-ti          | systemd, features depends on machine settings with TI kernel         |
-| dumpling-wayland     | like dumpling, additional wayland / weston                           |
-| dumpling-wayland-nxp | like dumpling-nxp, additional wayland / weston                       |
-| dumpling-wayland-ti  | like dumpling-ti, additional wayland / weston                       |
+| distro name          | purpose                                                                 |
+| -------------------- | ----------------------------------------------------------------------- |
+| spaetzle             | size optimized for \[Q\]SPI-NOR, kernel based on linux-stable           |
+| spaetzle-ls          | size optimized for \[Q\]SPI-NOR for Layerscape ARM                      |
+| spaetzle-nxp         | size optimized for \[Q\]SPI-NOR, packages based on meta-freescale + NXP |
+| spaetzle-ti          | size optimized for \[Q\]SPI-NOR, packages based on meta-ti-bsp          |
+| dumpling-ls          | systemd, features depends on machine settings for Layerscape ARM        |
+| dumpling-wayland     | systemd, wayland / weston, kernel based on linux-stable                 |
+| dumpling-wayland-nxp | systemd, wayland / weston, packages based on meta-freescale + NXP       |
+| dumpling-wayland-ti  | systemd, wayland / weston, packages based on meta-ti-bsp                |
 
 **Attention:** These distro configs can be used as a starting point for own
 customization. Because of the intended usage, they are focused on demonstration.
