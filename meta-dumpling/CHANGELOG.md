@@ -9,6 +9,17 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* distros: move DISTRO_FEATURES `pam`, `wayland`, `vulkan` from distro definition
+  files to shared `dumpling.inc` include to prevent copies of the same settings
+  in multiple nearly identical distro definitions.
+
+### Removed
+
+* distros: remove `dumpling`, `dumpling-nxp` and `dumpling-ti` as they are identical
+  to their wayland distros counterparts.
+
 ## scarthgap.TQ.ARM.BSP.0002 (unreleased)
 
 ### Added
