@@ -11,9 +11,12 @@ Releases are named with the following scheme:
 
 ### Changed
 
-* distros: move DISTRO_FEATURES `pam`, `wayland`, `vulkan` from distro definition
-  files to shared `dumpling.inc` include to prevent copies of the same settings
-  in multiple nearly identical distro definitions.
+* distros:
+  * use `armv8a-crc-crypto` as tuning for all ARM64 based machines to allow
+    more artifact reuse when building for multiple machines.
+  * move DISTRO_FEATURES `pam`, `wayland`, `vulkan` from distro definition
+    files to shared `dumpling.inc` include to prevent copies of the same settings
+    in multiple nearly identical distro definitions.
 
 ### Removed
 
