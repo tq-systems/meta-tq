@@ -2,11 +2,11 @@
 
 require conf/machine/include/tqmxx.inc
 
-require conf/machine/include/arm/arch-arm64.inc
-
 # source the machine specific features for RCW, MC, multimedia etc. from
 # meta-freescale
 require conf/machine/include/qoriq-arm64.inc
+
+require conf/machine/include/arm/arch-armv8a.inc
 
 PREFERRED_PROVIDER_u-boot ?= "u-boot-lsdk-tq"
 PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-lsdk-tq"
