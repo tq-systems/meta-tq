@@ -12,6 +12,9 @@ PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-ti-tq"
 # From meta-ti-bsp: PREFERRED_PROVIDER and tuning
 require conf/machine/include/am62xx.inc
 
+# be more specific then arch-arm64 used from meta-ti
+require conf/machine/include/arm/arch-armv8a.inc
+
 # Available variants: am62x-gp am62x-hs-fs am62x-hs
 SYSFW_DEFAULT_VARIANT ?= "am62x-hs-fs"
 

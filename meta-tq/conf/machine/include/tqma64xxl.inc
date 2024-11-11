@@ -15,6 +15,9 @@ IMAGE_BOOT_FILES ?= "${SPL_BINARYNAME} u-boot.${UBOOT_SUFFIX} tiboot3-am64x_sr2-
 # From meta-ti-bsp: PREFERRED_PROVIDER and tuning
 require conf/machine/include/am64xx.inc
 
+# be more specific then arch-arm64 used from meta-ti
+require conf/machine/include/arm/arch-armv8a.inc
+
 # Available variants: am64x-gp am64x_sr2-hs-fs am64x_sr2-hs
 SYSFW_DEFAULT_VARIANT ?= "am64x_sr2-hs-fs"
 
