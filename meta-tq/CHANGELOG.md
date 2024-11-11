@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* tqma62xx / tqma64xx: require arch-armv8a.inc to allow more specific tuning.
+* tqmls10xxa.inc: require arch-armv8a.inc to allow more specific tuning.
+
 ## scarthgap.TQ.ARM.BSP.0002 (unreleased)
 
 ### Changed
