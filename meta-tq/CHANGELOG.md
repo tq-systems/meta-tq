@@ -11,6 +11,8 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* TQMa62xx / TQMa64xx: allow more specific tuning.
+* tqmls10xxa.inc: require arch-armv8a.inc to allow more specific tuning.
 * TQMa62xx:
   * Remove M4 RPMsg example firmware
 
