@@ -405,15 +405,15 @@ do_compile() {
             else
                 if ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'true', 'false', d)} \
                    && imx_hab_check_keys_configured \
-                   && [ "${SOC_FAMILY}" = "mx9" ]
+                   && [ "${HAB_TYPE}" = "ahab" ]
                 then
                     # If bootstream should be signed during build, make
                     # u-boot-atf-container.img first and sign it before
                     # building flash.bin.
-                    mx93_temp_target="u-boot-atf-container.img"
-                    bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} ${mx93_temp_target}"
-                    oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} dtbs=${UBOOT_DTB_NAME} ${mx93_temp_target}
-                    compile_finish "$mx93_temp_target" "$config"
+                    imx_bl3x_container="u-boot-atf-container.img"
+                    bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} ${imx_bl3x_container}"
+                    oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} dtbs=${UBOOT_DTB_NAME} ${imx_bl3x_container}
+                    compile_finish "$imx_bl3x_container" "$config"
                 fi
                 bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} ${target}"
                 oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} dtbs=${UBOOT_DTB_NAME} ${target}
