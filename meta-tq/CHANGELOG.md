@@ -20,6 +20,12 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* u-boot-\*-env: Do not leave any enabled configurations in the default/fallback
+  `fw_env.config`
+
+  If no hardware-specific configuration exists, accessing the environment is
+  not supported out-of-the-box. Avoid shipping an incorrect configuration that
+  might write to the wrong MTD partition on `fw_setenv`.
 * imx-atf-tq-2.10: prepare support for TQMa91xx
 * tqma62xx / tqma64xx: require arch-armv8a.inc to allow more specific tuning.
 * tqmls10xxa.inc: require arch-armv8a.inc to allow more specific tuning.
