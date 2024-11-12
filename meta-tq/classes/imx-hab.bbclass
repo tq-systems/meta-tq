@@ -119,3 +119,9 @@ imx_hab_install_keys() {
         install -DT -m600 ${src}/${file} ${dest}/${file}
     done
 }
+
+# Sets HAB_TYPE variable based on MACHINEOVERRIDES. The variable value can
+# be checked from inside a shell function
+HAB_TYPE ??= "INVALID"
+HAB_TYPE:nxp-ahab = "ahab"
+HAB_TYPE:nxp-hab4 = "hab4"
