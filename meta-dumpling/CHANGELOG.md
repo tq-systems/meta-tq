@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Fixed
+
+* Avoid duplicate installation of "persistent-storage-mtd" udev rules in
+  dumpling distros
+
 ### Changed
 
 * procps: lower `console_loglevel` in `sysctl.conf` to `KERN_ERR`

@@ -118,6 +118,9 @@ VIRTUAL-RUNTIME_init_manager = "busybox"
 VIRTUAL-RUNTIME_initscripts = "initscripts"
 VIRTUAL-RUNTIME_keymaps = "keymaps"
 
+# include additional udev rules for eudev
+DISTRO_EXTRA_RDEPENDS += "tq-udev-rules"
+
 # point some runtime providers to busybox
 PREFERRED_PROVIDER_virtual/base-utils = "busybox"
 VIRTUAL-RUNTIME_base-utils = "busybox"
