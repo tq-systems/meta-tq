@@ -10,6 +10,10 @@ IMAGE_FSTYPES = "tar.gz wic wic.bmap"
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"
 
+# For RAUC - demo values only, must be adjusted to actual requirements
+WIC_ROOTPART_SIZE ?= "1G"
+WIC_DATAPART_SIZE ?= "100M"
+
 # Always build bootloader and kernel
 #
 # Listing the kernel here is primarily needed for machines that include the
