@@ -55,6 +55,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TQMa62xx/TQMa64xxL:
+  * Fix `UBI_VOLNAME` default value to match our boot script for SPI-NOR/UBI boot
 * u-boot-imx-tq-2020.04:
   * TQMa8MPxL, TQMa8Mx, TQMa8MxML, TQMa8MxNL, TQMa8x, TQMa8Xx, TQMa8XxS: backport fixes for UHS SD-Cards
   * TQMa8MPxL: support also i.MX8MP6 mainline in DT fixups
