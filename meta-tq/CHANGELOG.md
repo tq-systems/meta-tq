@@ -11,6 +11,13 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa62xx/TQMa64xxL: Add new WKS template with two root partitions and a
+  separate data partition for A/B boot with RAUC updates
+
+  The new partitioning will be selected automatically when "rauc" is enabled
+  in `DISTRO_FEATURES`. The `WIC_ROOTPART_SIZE` and ``WIC_DATAPART_SIZE`
+  variables default to "1G" and "100M", respectively, and can be adjusted as
+  needed.
 * u-boot-\*-env: Provide separate `fw_env.config` variants for different boot
   media on TQMa62xx/TQMa64xxL (u-boot-ti-tq-2023.04)
 * tq-bootscripts: Provide new `boot-blockdev-rauc` boot script for A/B boot with
