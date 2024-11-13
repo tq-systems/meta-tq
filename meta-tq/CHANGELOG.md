@@ -78,6 +78,8 @@ Releases are named with the following scheme:
 
 ### Removed
 
+* TQMa64xxL/MBa64xxL: Support for the prototype revision 010x and AM64x Silicon Revision 1.0
+  has been removed.
 * imx-atf-tq: remove recipe for TF-A version based on NXP lf_v2.8
 * u-boot-2021.10: remove obsolete recipe
 * linux-rt-lsdk-tq-5.4: remove obsolete recipe

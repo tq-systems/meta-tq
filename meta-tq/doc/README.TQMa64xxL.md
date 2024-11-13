@@ -8,8 +8,8 @@ See also: [Common features of TQMa62xx\[L\]/TQMa64xxL](README.TQMa6xxx.md)
 
 ### Supported Hardware:
 
-* TQMa6442L, TQMa6411L: Module revisions REV.010x / 020x
-* MBaX4XxL: Board revisions REV.010x / 020x
+* TQMa6442L, TQMa6411L: Module revisions 020x
+* MBaX4XxL: Board revisions 020x
 
 ### Versions
 
@@ -46,22 +46,15 @@ _Kernel:_
   R5 programs and communicating with them using the Linux remoteproc/rpmsg
   drivers is currently unsupported.
 * The AM64x currently doesn't support Suspend-to-RAM
-* TQMa64xxL *REV.010x only*:
-  * There is an address conflict on I2C addresses 0x51 and 0x54. Access to the
-    EEPROMs and the RTC may not work correctly.
-* MBaX4XxL *REV.010x only*:
-  * The SD card can't be reset by software. This can make the redetection of an
-    SD card unreliable after it has been switched to UHS mode.
-  * The WLAN/bluetooth adapter is unsupported
 
 ### First-stage bootloader variants
 
 The first-stage bootloader comes in three variants, each including a different
 version of the system controller firmware:
 
-* tiboot3-am64x-gp-evm.bin (AM64x Silicon Revision 1.0 or 2.0, General Purpose variant)
-* tiboot3-am64x_sr2-hs-fs-evm.bin (AM64x Silicon Revision 2.0, High Security variant, field-securable)
-* tiboot3-am64x_sr2-hs-evm.bin (AM64x Silicon Revision 2.0, High Security variant, security enforced)
+* tiboot3-am64x-gp-evm.bin (General Purpose variant)
+* tiboot3-am64x_sr2-hs-fs-evm.bin (High Security variant, field-securable)
+* tiboot3-am64x_sr2-hs-evm.bin (High Security variant, security enforced)
 
 Please refer to the Secure Device Processor SDK documention for more information
 on the High Security CPU variants. This documentation must be obtained directly
