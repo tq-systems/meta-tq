@@ -51,7 +51,7 @@ To check check usability of the programmed root filesystem, the following
 commands can be used:
 ```sh
 ubiattach -p /dev/mtd/by-name/ospi.rootfs
-mount -t ubifs ubi0:rootfs /mnt
+mount -t ubifs ubi0:root /mnt
 ```
 
 ### Updates
