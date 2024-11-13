@@ -12,6 +12,8 @@ PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-ti-tq"
 # am64x-gp and am64x_sr2-hs variants are added by am64xx.inc
 IMAGE_BOOT_FILES ?= "${SPL_BINARYNAME} u-boot.${UBOOT_SUFFIX} tiboot3-am64x_sr2-hs-fs-evm.bin"
 
+TQ_FW_ENV_CONFIGS = "mmc0 mmc1 spi"
+
 # Copied from arch-armv8a.inc
 DEFAULTTUNE ?= "armv8a-crc"
 

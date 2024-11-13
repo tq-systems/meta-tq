@@ -11,6 +11,8 @@ Releases are named with the following scheme:
 
 ### Added
 
+* u-boot-\*-env: Provide separate `fw_env.config` variants for different boot
+  media on TQMa62xx/TQMa64xxL (u-boot-ti-tq-2023.04)
 * tq-bootscripts: Provide new `boot-blockdev-rauc` boot script for A/B boot with
   RAUC updates
 * u-boot-tq-2023.04: new default bootloader based on mainline-u-boot

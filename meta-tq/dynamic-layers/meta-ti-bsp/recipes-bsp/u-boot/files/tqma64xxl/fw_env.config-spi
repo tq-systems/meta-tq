@@ -1,0 +1,9 @@
+uboot:
+  size: 0x10000
+  devices:
+    - path: /dev/mtd/by-name/ospi.env
+      offset: 0x0
+      sectorsize: 0x10000
+    - path: /dev/mtd/by-name/ospi.env.backup
+      offset: 0x0
+      sectorsize: 0x10000

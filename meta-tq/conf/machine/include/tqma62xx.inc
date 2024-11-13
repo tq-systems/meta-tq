@@ -9,6 +9,8 @@ PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-tq"
 PREFERRED_PROVIDER_u-boot ?= "u-boot-ti-tq"
 PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-ti-tq"
 
+TQ_FW_ENV_CONFIGS = "mmc0 mmc1 spi"
+
 # Copied from arch-armv8a.inc
 DEFAULTTUNE ?= "armv8a-crc"
 

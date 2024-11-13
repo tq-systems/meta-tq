@@ -1,5 +1,4 @@
 require recipes-bsp/u-boot/u-boot-ti.inc
-require recipes-bsp/u-boot/u-boot-tq.inc
 
 DESCRIPTION = "U-boot for TQ-Systems TI AM62/64 based modules"
 
@@ -7,6 +6,12 @@ LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=2ca5f2c35c8cc335f0a19756634782f1"
 
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
+
+TQ_FW_ENV_CONFIG:k3r5 = ""
+
+require recipes-bsp/u-boot/u-boot-tq.inc
+
+UBOOT_INITIAL_ENV = "u-boot-initial-env"
 
 SRCBRANCH = "TQMaxx-ti-u-boot-2023.04"
 SRCREV = "8dd5fa310d210f23f1e5d4e93ec7308f98ed9887"
