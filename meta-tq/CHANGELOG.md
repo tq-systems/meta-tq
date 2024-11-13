@@ -20,6 +20,7 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* tq-bootscripts: Do not add temporary variables to the U-Boot environment
 * u-boot-\*-env: Do not leave any enabled configurations in the default/fallback
   `fw_env.config`
 
