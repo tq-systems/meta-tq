@@ -25,7 +25,19 @@ do_configure[cleandirs] = "${B}"
 # the SOM override or the machine name can be used as subfolder to place the
 # config file.
 #
-SRC_URI += "file://fw_env.config"
+# Machines can also opt to install multiple configs under alternative names by setting
+# the TQ_FW_ENV_CONFIGS variable. An example script for selecting the correct version
+# automatically on boot in provided in meta-dumpling.
+#
+TQ_FW_ENV_CONFIGS ?= ""
+TQ_FW_ENV_CONFIG ?= "${@ \
+    'file://fw_env.config' \
+        if d.getVar('TQ_FW_ENV_CONFIGS') == '' else \
+    ' '.join([ f'file://fw_env.config-{config}' for config in d.getVar('TQ_FW_ENV_CONFIGS').split()]) \
+}"
+TQ_FW_ENV_CONFIG[vardeps] += "TQ_FW_ENV_CONFIGS"
+
+SRC_URI += "${TQ_FW_ENV_CONFIG}"
 
 # use "tq" as default value - poky default assignment is empty
 UBOOT_LOCALVERSION = "-tq"
@@ -67,3 +79,10 @@ do_compile:prepend() {
         printf "%s" "${UBOOT_LOCALVERSION}" > ${B}/.scmversion
     fi
 }
+
+do_install:append() {
+    for config in ${TQ_FW_ENV_CONFIGS}; do
+        install -m 644 "${WORKDIR}/fw_env.config-${config}" "${D}${sysconfdir}/fw_env.config-${config}"
+    done
+}
+FILES:${PN}-env += "${sysconfdir}/fw_env.config-*"
