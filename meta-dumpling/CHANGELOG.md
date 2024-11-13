@@ -11,6 +11,11 @@ Releases are named with the following scheme:
 
 ### Added
 
+* Add example RAUC config
+
+  This includes an example certificate and key, `system.conf` variants for
+  mmc0 and mmc1 (automatically selected during boot), and an example bundle
+  recipe `tq-bundle`.
 * Automatically select `fw_env.config` based on the boot medium
 
   This is currently supported on the TQMa62xx/TQMa64xxL, which provide separate
