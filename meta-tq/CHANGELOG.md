@@ -22,6 +22,10 @@ Releases are named with the following scheme:
 * linux-rt-tq-6.6: new realtime kernel based on linux-tq-6.6
   * support for TQMa7x, TQMa6x, TQMa6ul, TQMa6ull
 
+  On platforms with Distroboot support (TQMa62xx/TQMa64xxL) the new script will
+  be installed automatically instead of `boot-blockdev` when "rauc" is enabled
+  in `DISTRO_FEATURES`.
+
 ### Changed
 
 * linux-ti-tq-6.6: Enable DMVerity kernel module
