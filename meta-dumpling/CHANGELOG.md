@@ -9,6 +9,16 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* Automatically select `fw_env.config` based on the boot medium
+
+  This is currently supported on the TQMa62xx/TQMa64xxL, which provide separate
+  config files for each boot medium. The selection makes the assumption that
+  the bootloader environment is stored on the same medium that the rootfs is
+  mounted from, which may not be the case if `boot_targets` is modified in the
+  environment.
+
 ### Fixed
 
 * Avoid duplicate installation of "persistent-storage-mtd" udev rules in

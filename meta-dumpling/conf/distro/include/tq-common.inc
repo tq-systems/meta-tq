@@ -24,8 +24,7 @@ INHERIT += "sanity"
 INHERIT += "insane"
 QA_LOG = "1"
 
-# include the version package
-DISTRO_EXTRA_RDEPENDS += "os-release"
+DISTRO_EXTRA_RDEPENDS += "os-release u-boot-env-tq"
 
 # listed checks from ERROR_QA to WARN_QA (from insane.bbclass)
 ERROR_TO_WARN_QA = "version-going-backwards"
