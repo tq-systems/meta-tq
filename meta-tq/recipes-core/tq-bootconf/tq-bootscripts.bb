@@ -9,9 +9,14 @@ inherit deploy
 SRC_URI = "\
     file://boot.its \
     file://boot-blockdev.cmd \
+    file://boot-blockdev-rauc.cmd \
     file://boot-ubi.cmd \
 "
-VARIANTS = "boot-blockdev boot-ubi"
+VARIANTS = "\
+    boot-blockdev \
+    boot-blockdev-rauc \
+    boot-ubi \
+"
 
 build_scr () {
     local input="$1" output="$2"

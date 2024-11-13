@@ -11,6 +11,8 @@ Releases are named with the following scheme:
 
 ### Added
 
+* tq-bootscripts: Provide new `boot-blockdev-rauc` boot script for A/B boot with
+  RAUC updates
 * u-boot-tq-2023.04: new default bootloader based on mainline-u-boot
   * support for TQMa7x
 * linux-tq-6.6: new default kernel based on mainline-linux-kernel
