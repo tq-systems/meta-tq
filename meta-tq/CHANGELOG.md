@@ -24,6 +24,9 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-ti-tq-6.6: Enable DMVerity kernel module
+
+  Used for integrity checking of RAUC bundles in verity format.
 * tq-bootscripts: Do not add temporary variables to the U-Boot environment
 * u-boot-\*-env: Do not leave any enabled configurations in the default/fallback
   `fw_env.config`
