@@ -1,6 +1,9 @@
 DESCRIPTION = "tools needed to test basic hw support"
 LICENSE = "MIT"
 
+# allow depend on machine specific packages
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+
 inherit packagegroup
 
 RDEPENDS:${PN} = "\
