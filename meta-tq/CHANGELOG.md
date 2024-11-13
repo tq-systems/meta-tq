@@ -34,6 +34,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TQMa62xx/TQMa64xxL:
+  * Fix `UBI_VOLNAME` default value to match our boot script for SPI-NOR/UBI boot
 * u-boot-imx-tq v2020.04: backport patches for i.MX USDHC controller to fix
   protocoll and errors seen with some SD 3.0 cards.
 * linux-imx-tq 6.1
