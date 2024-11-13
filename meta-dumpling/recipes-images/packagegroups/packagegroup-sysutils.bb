@@ -5,7 +5,7 @@ inherit packagegroup
 
 RDEPENDS:${PN} = "\
     cpufrequtils \
+    ${@oe.utils.ifelse(d.getVar('PREFERRED_PROVIDER_virtual/bootloader').startswith('u-boot'), 'libubootenv', '')} \
     linuxptp \
     rng-tools \
-    u-boot-fw-utils \
 "
