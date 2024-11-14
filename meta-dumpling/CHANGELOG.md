@@ -22,6 +22,8 @@ Releases are named with the following scheme:
 
   Ethernet interfaces are now renamed to `endX` based on `ethernetX` Device
   Tree aliases on linux-ti-tq-6.6.
+* weston: Fix start on TQMa93xx due to insufficient privileges
+  Note: `weston` now starts as root
 
 ### Removed
 
