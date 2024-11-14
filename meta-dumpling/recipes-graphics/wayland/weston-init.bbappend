@@ -6,6 +6,13 @@ do_install:append() {
     install -Dm0755 ${WORKDIR}/wayland_display.sh ${D}${sysconfdir}/profile.d/wayland_display.sh
 }
 
+do_install:append:mx93-nxp-bsp() {
+    # imx-pxp-g2d needs root access to some devices
+    if [ "${@bb.utils.contains('PACKAGECONFIG', 'use-g2d', 'yes', 'no', d)}" = "yes" ]; then
+        sed -i -e "s/User=weston/User=root/g" ${D}${systemd_system_unitdir}/weston.service
+    fi
+}
+
 FILES:${PN} += "\
     ${sysconfdir}/profile.d/wayland_display.sh \
 "
