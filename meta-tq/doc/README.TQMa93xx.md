@@ -137,6 +137,7 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 * U-Boot: USB Type-C port (X17) is usable as device-only under U-Boot
 * DVFS is not supported using cpu-freq framework. See [here](#frequency-scaling)
   on how to use frequency scaling
+* G2D driver for PXP needs access to `root`-only devices. Thus `weston` needs to be started as `root`
 
 ## Known Issues
 
