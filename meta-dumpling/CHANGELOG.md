@@ -11,6 +11,11 @@ Releases are named with the following scheme:
 
 ### Added
 
+* Add support for separate data partition
+
+  The data partition is mounted from the same device as the rootfs during boot
+  when the `tq-mount-data` package is installed (default with "rauc" in
+  `DISTRO_FEATURES`)
 * Add example RAUC config
 
   This includes an example certificate and key, `system.conf` variants for
