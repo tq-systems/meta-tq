@@ -157,6 +157,8 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
     `pca953x 2-0070: failed reading register`. The (wakeup) IRQ handler is executed before the expander
     has been resumed. This message can be ignored.
 * When using the parallel display on MBa91xxCA the system might deadlock during boot
+* The NPU driver `ethosu` assumes the Cortex-M33 is not running. Starting Cortex-M33 from e.g. u-boot
+  or using remoteproc is not supported by `ethosu` driver
 
 ## MBa91 differences
 
