@@ -9,6 +9,12 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* distros:
+  * use `armv8a-crc-crypto` as tuning for all ARM64 based machines to allow
+    more artifact reuse when building for multiple machines.
+
 ### Fixed
 
 * weston: Fix start on TQMa93xx due to insufficient privileges
