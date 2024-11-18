@@ -141,14 +141,16 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 
 ## Known Issues
 
-* CPU mask 1.0 and older print an error when loading Edglock driver. Driver loads successful
+* CPU mask 1.0 and older print an error when loading driver for secure enclave driver. Driver loads successful
   but the system may lack secure boot features.
 * Not all USB sticks are detected properly in U-Boot
 * Using `usb reset` in U-Boot will give a warning from Type-C port controller.
 * eth1 does not work after suspend, needs `ip link set down/up dev eth1` to be functional
 * When using `i2c probe` command in U-Boot all valid addresses respond instead of addresses
   used by a physical connected device.
-* Some Linux kernel boot warnings regarding missing optional supplies in DTB.
+* linux-imx-tq_6.1: Some Linux kernel boot warnings regarding missing optional supplies in DTB.
+* The NPU driver `ethosu` assumes the Cortex-M33 is not running. Starting Cortex-M33 from e.g. u-boot
+  or using remoteproc is not supported by `ethosu` driver
 
 ## MBa91 differences
 
@@ -181,6 +183,7 @@ Artifacs can be found at the usual locations for bitbake:
   * imx93-tqma9352-mba91xxca*.dtb
   * imx93-tqma9352-mba93xxca*.dtb
   * imx93-tqma9352-mba93xxla*.dtb
+  * imx93-tqma9352-mba93xx*-rpmsg.dtb (NPU enabled)
 * Image: Linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
@@ -298,6 +301,8 @@ TODO
 TODO
 
 ### NPU
+
+__Note:__ For using the NPU, the Cortex-M33 needs to be loaded with a firmware controlling the NPU and the rpmsg-DeviceTree (`imx93-tqma9352-mba93xx*-rpmsg.dtb` has to be used.
 
 Before running, translate tensorflow lite model to ETHOS-U format using vela compiler:
 
