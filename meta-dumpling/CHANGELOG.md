@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Fixed
+
+* weston: Fix start on TQMa93xx due to insufficient privileges
+  Note: `weston` now starts as root
+
 ## kirkstone.TQ.ARM.BSP.0023
 
 ### Module BSP Revisions
