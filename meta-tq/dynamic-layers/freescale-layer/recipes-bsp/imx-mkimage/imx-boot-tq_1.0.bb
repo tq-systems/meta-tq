@@ -156,14 +156,6 @@ compile_prepare:mx8m-generic-bsp() {
                                                              ${BOOT_STAGING}/u-boot-nodtb.bin-${type}
         cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type} ${BOOT_STAGING}/u-boot.bin-${type}
     done
-
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'true', 'false', d)}; then
-        if imx_hab_check_keys_configured; then
-            imx_hab_install_keys ${S}
-        else
-            bbwarn 'IMX_HAB_KEY_NAME unset, skipping signature generation.'
-        fi
-    fi
 }
 
 compile_prepare:mx8x-generic-bsp() {
@@ -194,14 +186,6 @@ compile_prepare:mx9-generic-bsp() {
                                                              ${BOOT_STAGING}/u-boot-spl.bin-${type}
         cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type} ${BOOT_STAGING}/u-boot.bin-${type}
     done
-
-    if ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'true', 'false', d)}; then
-        if imx_hab_check_keys_configured; then
-            imx_hab_install_keys ${S}
-        else
-            bbwarn 'IMX_HAB_KEY_NAME unset, skipping signature generation.'
-        fi
-    fi
 }
 
 compile_finish() {
@@ -364,6 +348,14 @@ compile_finish:nxp-ahab() {
 
 do_compile() {
     rm -f ${S}/habinfo-* ${S}/csf_*.txt-* ${S}/csf_*.bin-*
+
+    if ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'true', 'false', d)}; then
+        if imx_hab_check_keys_configured; then
+            imx_hab_install_keys ${S}
+        else
+            bbwarn 'IMX_HAB_KEY_NAME unset, skipping signature generation.'
+        fi
+    fi
 
     # mkimage for i.MX8
     # Copy TEE binary to SoC target folder to mkimage
