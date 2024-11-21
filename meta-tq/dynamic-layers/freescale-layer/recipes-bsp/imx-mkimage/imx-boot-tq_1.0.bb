@@ -266,7 +266,12 @@ generate_csf_ahab() {
     # SPI header to the bootstream. Therefore, the size and padding for SPI
     # header (which is 4kiB) needs to be added to the offsets for container
     # header and signature block.
-    if [ "${target}" = "flash_singleboot_flexspi" ] ; then
+    # 
+    # ${string##*pattern} is substring parameter expansion for delete largest
+    # prefix pattern, i.e. the largest prefix from 'string' that matches
+    # 'pattern' is removed from 'string'. If ${target} is anything that ends
+    # on 'flexspi' the resulting output is an empty string.
+    if [ -z "${target##*flexspi}" ] ; then
         CONTAINER_HEADER_OFF=$(sh -c 'printf '0x%x' $(($1 + 0x1000))' - "${CONTAINER_HEADER_OFF}")
         SIGNATURE_BLOCK_OFF=$(sh -c 'printf '0x%x' $(($1 + 0x1000))' - "${SIGNATURE_BLOCK_OFF}")
     fi
