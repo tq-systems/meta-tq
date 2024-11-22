@@ -16,7 +16,7 @@ ATF_BRANCH = "TQM-lf_v2.10"
 ATF_SRC = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL}"
 
 SRC_URI = "${ATF_SRC};branch=${ATF_BRANCH}"
-SRCREV = "5af9d6dc949d9cb7c3513cde6c5773ba3f6ab7f6"
+SRCREV = "a1946103fbb4718e9e41b947542b270c9530818b"
 
 S = "${WORKDIR}/git"
 
@@ -124,4 +124,5 @@ COMPATIBLE_MACHINE:tqma8mxnl = "tqma8mxnl"
 COMPATIBLE_MACHINE:tqma8x = "tqma8x"
 COMPATIBLE_MACHINE:tqma8xx = "tqma8xx"
 COMPATIBLE_MACHINE:tqma8xxs = "tqma8xxs"
+COMPATIBLE_MACHINE:tqma91xx = "tqma91xx"
 COMPATIBLE_MACHINE:tqma93xx = "tqma93xx"
