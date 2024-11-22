@@ -27,6 +27,9 @@ IMX_EXTRA_FIRMWARE:mx8x-generic-bsp = "\
     imx-sc-firmware \
 "
 
+#
+# mx91, mx93, mx95
+#
 IMX_EXTRA_FIRMWARE:mx9-generic-bsp = "\
     imx-boot-firmware-files \
     firmware-ele-imx \
@@ -83,11 +86,21 @@ UBOOT_SPL_NAME = "${@os.path.basename(d.getVar("SPL_BINARY"))}-${MACHINE}-${UBOO
 
 TOOLS_NAME ?= "mkimage_imx8"
 
-IMX_BOOT_SOC_TARGET       ??= "INVALID"
-
 DEPLOY_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false', d)}"
 
 IMXBOOT_TARGETS ??= "unknown"
+
+# used as SOC parameter for make invocation of imx-mkimage tool
+IMX_BOOT_SOC_TARGET = "INVALID"
+IMX_BOOT_SOC_TARGET:mx8mq-generic-bsp = "iMX8M"
+IMX_BOOT_SOC_TARGET:mx8mm-generic-bsp = "iMX8MM"
+IMX_BOOT_SOC_TARGET:mx8mn-generic-bsp = "iMX8MN"
+IMX_BOOT_SOC_TARGET:mx8mp-generic-bsp = "iMX8MP"
+IMX_BOOT_SOC_TARGET:mx8qm-generic-bsp = "iMX8QM"
+IMX_BOOT_SOC_TARGET:mx8x-generic-bsp = "iMX8QX"
+IMX_BOOT_SOC_TARGET:mx91-generic-bsp = "iMX91"
+IMX_BOOT_SOC_TARGET:mx93-generic-bsp = "iMX93"
+IMX_BOOT_SOC_TARGET:mx95-generic-bsp = "iMX95"
 
 BOOT_STAGING = "${S}/${IMX_BOOT_SOC_TARGET}"
 BOOT_STAGING:mx8m-generic-bsp = "${S}/iMX8M"
