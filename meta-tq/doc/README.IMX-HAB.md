@@ -22,7 +22,11 @@ meta-tq supports HAB4 signature generation on all i.MX8M-based platforms:
 - TQMa8MxML
 - TQMa8MxNL
 
-meta-tq supports AHAB signature generation on TQMa93xx.
+meta-tq supports AHAB signature generation on the following platforms:
+
+- TQMa8x
+- TQMa8Xx
+- TQMa93xx
 
 ## Abbreviations
 

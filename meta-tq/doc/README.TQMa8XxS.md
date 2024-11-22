@@ -317,6 +317,10 @@ For demos available in the BSP and the device tree to be used see [artifacts sec
 
 Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8X.md).
 
+### High Assurance Boot (Secure Boot)
+
+See [i.MX High Assurance Boot](README.IMX-HAB.md).
+
 ### Access U-Boot environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
