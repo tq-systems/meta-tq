@@ -16,7 +16,7 @@ ATF_BRANCH = "TQM-lf_v2.10"
 ATF_SRC = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL}"
 
 SRC_URI = "${ATF_SRC};branch=${ATF_BRANCH}"
-SRCREV = "0be8bfe19aa8fbd57f177808987974ef6df5692d"
+SRCREV = "5af9d6dc949d9cb7c3513cde6c5773ba3f6ab7f6"
 
 S = "${WORKDIR}/git"
 
