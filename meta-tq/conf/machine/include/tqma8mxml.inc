@@ -38,8 +38,6 @@ RAW_BOOT_START_OFFSET_KB = "33"
 RAW_BOOT_END_OFFSET_KB = "4096"
 # compatibility with meta-freescale
 IMX_BOOT_SEEK = "${RAW_BOOT_START_OFFSET_KB}"
-# imx-mkimage[-tq]
-IMX_BOOT_SOC_TARGET = "iMX8MM"
 
 # TODO:
 # optee rule filters for matching machine names and expects at least imx for MX8
