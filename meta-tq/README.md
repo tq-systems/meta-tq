@@ -45,6 +45,7 @@ is _mandatory_ - see [table](#supported-machines).
 * i.MX8MM
 * i.MX8MN
 * i.MX8MP
+* i.MX91
 * i.MX93
 
 URI: https://git.yoctoproject.org/git/meta-freescale  
@@ -190,6 +191,8 @@ Support for the following machines is contained in this version:
 | [y]    | i.MX8QXP                | TQMa8XQP4               | MBa8Xx        | tqma8xqp4-mba8xx                 | TQMa8XQP / 2 GiB LPDDR4 RAM, HW REV.010x                                                                                                                     |
 | [y]    | i.MX8DXP                | TQMa8XDPS               | MB-SMARC-2    | tqma8xdps-mb-smarc-2             | TQMa8XDPS / 2 GiB RAM, HW REV.030x                                                                                                                           |
 | [y]    | i.MX8QXP                | TQMa8XQPS               | MB-SMARC-2    | tqma8xqps-mb-smarc-2             | TQMa8XQPS / 2 GiB RAM, HW REV.030x                                                                                                                           |
+| [y]    | i.MX91 11x11            | TQMa91\[3,2\]1CA        | MBa91xxCA     | tqma91xx-mba91xxca               | TQMa91\[3,2\]1CA, 1 GiB RAM, HW REV.010x / MBa91xxCA REV.010x                                                                                                |
+| [y]    | i.MX91 11x11            | TQMa91\[3,2\]1LA        | MBa91xxCA     | tqma91xx-mba91xxca               | TQMa91\[3,2\]1LA, 1 GiB RAM, HW REV.010x / MBa91xxCA REV.010x                                                                                                |
 | [y]    | i.MX93 11x11            | TQMa93\[3,5\]\[1,2\]CA  | MBa91xxCA     | tqma93xx-mba91xxca               | TQMa93\[3,5\]\[1,2\]CA, 1 / 2 GiB RAM, HW REV.010x / MBa91xxCA REV.010x                                                                                      |
 | [y]    | i.MX93 11x11            | TQMa93\[3,5\]\[1,2\]LA  | MBa91xxCA     | tqma93xx-mba91xxca               | TQMa93\[3,5\]\[1,2\]LA on adaptor, 1 / 1.5 / 2 GiB RAM, HW REV.010x / MBa91xxCA REV.010x                                                                     |
 | [y]    | i.MX93 11x11            | TQMa93\[3,5\]\[1,2\]CA  | MBa93xxCA     | tqma93xx-mba93xxca               | TQMa93\[3,5\]\[1,2\]CA, 1 / 2 GiB RAM, HW REV.010x / MBa93xxCA REV.020x                                                                                      |
@@ -280,6 +283,8 @@ Under the given links SOM specific information can be found:
 * [TQMa8XDPS](doc/README.TQMa8XxS.md)
 * [TQMa8XQPS](doc/README.TQMa8XxS.md)
 * [TQMa8QM](doc/README.TQMa8x.md)
+* [TQMa91\[3,2\]1CA](doc/README.TQMa91xx.md)
+* [TQMa91\[3,2\]1LA](doc/README.TQMa91xx.md)
 * [TQMa93\[3,5\]\[1,2\]CA](doc/README.TQMa93xx.md)
 * [TQMa93\[3,5\]\[1,2\]LA](doc/README.TQMa93xx.md)
 * [TQMA335x\[L\]](doc/README.TQMa335x.md)
