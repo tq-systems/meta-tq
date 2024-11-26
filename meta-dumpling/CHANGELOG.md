@@ -11,7 +11,9 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* procps: lower `console_loglevel` in `sysctl.conf` to `KERN_ERR`
 * distros:
+  * enforce usage of `sysctl` from `procps`package
   * use `armv8a-crc-crypto` as tuning for all ARM64 based machines to allow
     more artifact reuse when building for multiple machines.
 
