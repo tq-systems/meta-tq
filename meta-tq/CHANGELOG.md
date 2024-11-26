@@ -11,6 +11,7 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* imx-atf-tq-2.10: prepare support for TQMa91xx
 * tqma62xx / tqma64xx: require arch-armv8a.inc to allow more specific tuning.
 * tqmls10xxa.inc: require arch-armv8a.inc to allow more specific tuning.
 
