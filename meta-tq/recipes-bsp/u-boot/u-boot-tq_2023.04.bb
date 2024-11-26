@@ -14,7 +14,7 @@ DEPENDS += "\
     dtc-native \
 "
 
-SRCREV = "534a95cd61662252b7affa86065aab7c651a0564"
+SRCREV = "301582d880bc787c6b987afab5bcaed5afb88af0"
 SRCBRANCH = "TQM-v2023.04"
 
 SRC_URI = " \
@@ -24,4 +24,6 @@ SRC_URI = " \
 require recipes-bsp/u-boot/u-boot.inc
 require u-boot-tq.inc
 
-COMPATIBLE_MACHINE = "tqma6x"
+COMPATIBLE_MACHINE = "^$"
+COMPATIBLE_MACHINE:tqma6x = "tqma6x"
+COMPATIBLE_MACHINE:tqma7x = "tqma7x"
