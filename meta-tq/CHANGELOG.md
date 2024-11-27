@@ -9,6 +9,13 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* u-boot-tq-2023.04: new default bootloader based on mainline-u-boot
+  * support for TQMa7x
+* linux-tq-6.6: new default kernel based on mainline-linux-kernel
+  * support for TQMa7x
+
 ### Changed
 
 * imx-atf-tq-2.10: prepare support for TQMa91xx
