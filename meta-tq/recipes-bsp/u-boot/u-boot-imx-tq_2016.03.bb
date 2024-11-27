@@ -21,7 +21,6 @@ SRC_URI = "\
 # target not supported in U-Boot before v2019.07
 UBOOT_INITIAL_ENV = ""
 
-COMPATIBLE_MACHINE = "tqma7x"
+COMPATIBLE_MACHINE = "tqma6x"
 COMPATIBLE_MACHINE:append = "|tqma6ulx"
 COMPATIBLE_MACHINE:append = "|tqma6ullx"
-COMPATIBLE_MACHINE:append = "|tqma6x"
