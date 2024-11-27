@@ -23,34 +23,34 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ### Linux
 
-|                            | linux-tq-5.15 | linux-tq-6.1 |
-| :------------------------- | :-----------: | :----------: |
-| Fuses                      |       x       |      x       |
-| UART (console, X13 or X14) |       x       |      x       |
-| GPIO                       |       x       |      x       |
-| Button (S11, S12, S13)     |       x       |      x       |
-| I2C                        |       x       |      x       |
-| GPIO expander              |       x       |      x       |
-| EEPROM                     |       x       |      x       |
-| RTC                        |       x       |      x       |
-| SPI NOR                    |       x       |      x       |
-| Buzzer                     |       x       |      x       |
-| LEDs                       |       x       |      x       |
-| SPI                        |       x       |      x       |
-| USB Host (X4)              |       x       |      x       |
-| USB Dual Role (X5)         |       x       |      x       |
-| USB on Mini PCIe (X17)     |       x       |      x       |
-| eMMC/SD (on-board/X7)      |       x       |      x       |
-| Ethernet GigE (X8/X9)      |       x       |      x       |
-| CAN (X10/X11)              |       x       |      x       |
-| RS-485 (X12)               |       x       |      x       |
-| LVDS (X15, X16)            |       x       |      x       |
-| PCIe (X17)                 |               |              |
-| Audio Line In (X20)        |       x       |      x       |
-| Audio Line Out (x21)       |       x       |      x       |
-| Parallel LCD (X23)         |       x       |      x       |
-| Touch (X23)                |       x       |      x       |
-| ADC (X23/X24)              |               |      x       |
+|                            | linux-tq-6.1 | linux-tq-6.6 |
+| :------------------------- | :----------: | :----------: |
+| Fuses                      |      x       |      x       |
+| UART (console, X13 or X14) |      x       |      x       |
+| GPIO                       |      x       |      x       |
+| Button (S11, S12, S13)     |      x       |      x       |
+| I2C                        |      x       |      x       |
+| GPIO expander              |      x       |      x       |
+| EEPROM                     |      x       |      x       |
+| RTC                        |      x       |      x       |
+| SPI NOR                    |      x       |      x       |
+| Buzzer                     |      x       |      x       |
+| LEDs                       |      x       |      x       |
+| SPI                        |      x       |      x       |
+| USB Host (X4)              |      x       |      x       |
+| USB Dual Role (X5)         |      x       |      x       |
+| USB on Mini PCIe (X17)     |      x       |      x       |
+| eMMC/SD (on-board/X7)      |      x       |      x       |
+| Ethernet GigE (X8/X9)      |      x       |      x       |
+| CAN (X10/X11)              |      x       |      x       |
+| RS-485 (X12)               |      x       |      x       |
+| LVDS (X15, X16)            |      x       |      x       |
+| PCIe (X17)                 |              |              |
+| Audio Line In (X20)        |      x       |      x       |
+| Audio Line Out (x21)       |      x       |      x       |
+| Parallel LCD (X23)         |      x       |      x       |
+| Touch (X23)                |      x       |      x       |
+| ADC (X23/X24)              |      x       |      x       |
 
 ## ToDo / Untested
 
@@ -63,20 +63,19 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * Using internal PCIe PHY clock is currently not supported by the Linux
   mainline and newer NXP vendor kernel. PCIe can not be used on MBa7x
   with these kernel versions.
-* `asound.state` is not compatible with `linux-5.4`
-  (`linux-imx-tq` as well as `linux-tq`). Use newer kernel - default is
-  based on 5.15.y stable
+* `asound.state` is not compatible to older kernel versions. Use newer kernel - default
+  is based on 6.6.y stable
 * USB Dual Role gadget: Causing a device disconnect is not possible. D+ is
   erroneously supplying VBUS as well preventing a device disconnect per software.
   Occurs when gadget is disabled again. USB host might fail to detect a new USB
   descriptor once gadget is restarted.
-* U-Boot v2016.03 needs special environment setting for booting a mainline
-  kernel, see [Mainline Kernel](#mainline-kernel)
 * Writing to FAT filesystems may cause warnings and errors in U-Boot
   based on v2016.03.
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle[-nxp]`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
   `UBI_MAX_LEB_COUNT` on machine level.
+* Environment-variables of U-Boot v2023.04 were reworked and are now based on
+  `tq-imx-shared-env.h`. Environments of older u-boot versions are incompatible.
 
 ## Artifacts
 
@@ -139,21 +138,8 @@ sf probe
 sf update ${loadaddr} 0 ${filesize}
 ```
 
-### SD / e-MMC
-
-To initialize SD / e-MMC with bootloader, write the [bootloader image](#artifacts)
-for SD / e-MMC to SD / e-MMC at offset 0x400 / block #2
-
-```
-setenv uboot <U-Boot SD/e-MMC boot image>
-tftp ${loadaddr} ${uboot}
-mmc dev [0,1]
-mmc rescan
-setenv blkc ${filesize} + 1ff
-setenv blkc ${blkc} / 200
-mmc write ${loadaddr} 2 ${blkc}
-setenv blkc
-```
+See [here](./README.imx-arm64.BootMedia.md) for detailed information how to write a
+bootstream image and bootloader support for updating the bootstream.
 
 ### Program system image
 
@@ -166,41 +152,30 @@ Not supported. Only kernel and DTB can be stored at the moment.
 To program complete system image to SD / e-MMC, write [WIC image](#artifacts)
 to SD / e-MMC at offset 0x00 / block #0
 
-### Update parts of system
+### Update bootloader
 
-To update parts of system using U-Boot / TFTP following shortcuts exist, to
-update the part on the active boot device.
+To update the bootloader of system using U-Boot / TFTP following shortcuts
+exist.
 
-```
-setenv zimage <name of linux zimage>
-run update_kernel
-```
-
-```
-setenv fdt_file <name of fdt image>
-run update_fdt
-```
+**Note**: Kernel and device tree are stored in the root fs and can be updated
+on the filesystem level.
 
 ```
 setenv uboot <name of u-boot image>
-run update_uboot
+run update_uboot_mmc
 ```
 
 ## Howto
 
 ### Mainline Kernel
 
-Mainline kernel depends on the presence of running firmware in TrustZone
-that implements the PSCI. Default U-Boot does not leave TrustZone before
-booting linux, resulting in only one CPU core available with mainline kernel.
+Mainline kernel before v5.15 depends on the presence of running firmware in
+TrustZone that implements the PSCI to start a second core. Starting with
+commit e34645f45805 ("ARM: imx: add smp support for imx7d") linux is able to
+handle the second CPU core without PSCI.
 
-In order to be able to use both CPU cores of i.MX7 with the TQMa7D, the
-kernel has to be started outside of TrustZone. To achieve this, following
-change has to be made to the U-boot environment:
-
-```
-setenv bootm_boot_mode nonsec
-```
+This version of BSP is only tested with an U-Boot version that implements PSCI
+and starting linux outside of Trustzone (`non secure`).
 
 The number of running CPUs can be checked with `nproc` under linux.
 
