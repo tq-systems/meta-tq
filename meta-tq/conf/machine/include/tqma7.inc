@@ -34,12 +34,11 @@ MACHINE_FEATURES += "\
 
 KERNEL_IMAGETYPE = "zImage"
 
-PREFERRED_PROVIDER_u-boot:mx7-generic-bsp ?= "u-boot-imx-tq"
-PREFERRED_PROVIDER_virtual/bootloader:mx7-generic-bsp ?= "u-boot-imx-tq"
+PREFERRED_PROVIDER_u-boot:mx7-generic-bsp ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader:mx7-generic-bsp ?= "u-boot-tq"
 UBOOT_MAKE_TARGET:mx7-generic-bsp ?= "u-boot.imx"
 UBOOT_SUFFIX:mx7-generic-bsp = "imx"
-UBOOT_SUFFIX:pn-u-boot-imx-tq = "imx"
-IMX_DEFAULT_BOOTLOADER ?= "u-boot-imx-tq"
+IMX_DEFAULT_BOOTLOADER ?= "u-boot-tq"
 
 # Common image configuration
 RAW_BOOT_START_OFFSET_KB = "1"

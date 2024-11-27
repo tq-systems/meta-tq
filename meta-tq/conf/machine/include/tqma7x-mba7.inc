@@ -28,8 +28,8 @@ KERNEL_DEVICETREE += "${@kernel_provider_dtbs(d)}"
 # Files are needed in IMAGE_BOOT_FILES because we use an extra partition for
 # backward compatibility.
 IMAGE_BOOT_FILES = "\
-    ${KERNEL_IMAGETYPE};linuximage \
-    ${KERNEL_DEVICETREE} \
+    ${@create_image_boot_dtb_files(d)} \
+    ${KERNEL_IMAGETYPE} \
 "
 
 MACHINE_FEATURES += "\
