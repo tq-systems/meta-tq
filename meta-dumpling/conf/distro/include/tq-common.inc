@@ -49,6 +49,8 @@ ROOT_HOME ?= "/root"
 ALTERNATIVE_PRIORITY_inetutils-ping[ping] = "27"
 ALTERNATIVE_PRIORITY_inetutils-ping6[ping6] = "27"
 
+ALTERNATIVE_PRIORITY_busybox-sysctl[sysctl] = "27"
+
 # Set a more generic tuning for code reuse across parts
 DEFAULTTUNE:am62xx              ?= "armv8a-crc-crypto"
 DEFAULTTUNE:am64xx              ?= "armv8a-crc-crypto"

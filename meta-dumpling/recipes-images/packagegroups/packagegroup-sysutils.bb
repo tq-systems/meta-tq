@@ -10,5 +10,6 @@ RDEPENDS:${PN} = "\
     cpufrequtils \
     ${@oe.utils.ifelse(d.getVar('PREFERRED_PROVIDER_virtual/bootloader').startswith('u-boot'), 'libubootenv', '')} \
     linuxptp \
+    procps-sysctl \
     rng-tools \
 "
