@@ -6,6 +6,7 @@ inherit packagegroup
 RDEPENDS:${PN} = "\
     cpufrequtils \
     linuxptp \
+    procps-sysctl \
     rng-tools \
     u-boot-fw-utils \
 "
