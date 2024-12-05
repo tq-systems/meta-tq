@@ -6,12 +6,12 @@
 
 ### U-Boot:
 
-#### U-Boot based on v2016.03 (uboot-imx, not TQMa6x)
+#### U-Boot based on v2016.03 (uboot-imx, TQMa6ulx)
 
 * based on uboot-imx (https://github.com/nxp-imx/uboot-imx)
 * branched from rel_imx_4.1.15_2.0.0_ga (Branch imx_v2016.03_4.1.15_2.0.0_ga)
 
-#### U-Boot based on v2023.04 (forked from mainline U-Boot, TQMa6x and TQMa7x only)
+#### U-Boot based on v2023.04 (forked from mainline U-Boot, TQMa6x and TQMa7x)
 
 * based on U-Boot (https://github.com/u-boot/u-boot)
 * branched from v2023.04 (Branch master)
@@ -23,11 +23,6 @@ lifetime degradation.
 
 ### Linux:
 
-#### Kernel based on 6.1 (linux-stable)
-
-* based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
-* branched from `linux-6.1.y` / tag commit is merged into (see `LINUX_VERSION` in `linux-tq_6.1.bb` for exact release)
-
 #### Kernel based on 6.1-rt (linux-stable-rt)
 
 For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
@@ -35,7 +30,7 @@ For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 * based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
 * branched from `v6.1-rt` / tag commit is merged into (see `LINUX_VERSION` in `linux-tq-rt_6.1.bb` for exact release)
 
-#### Kernel based on 6.6 (linux-stable, TQMa7x only)
+#### Kernel based on 6.6 (linux-stable, TQMa6x, TQMa6ulx, TQMa6ullx, TQMa7x)
 
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git)
 * branched from `linux-6.6.y` / tag commit is merged into (see `LINUX_VERSION` in `linux-tq_6.6.bb` for exact release)
