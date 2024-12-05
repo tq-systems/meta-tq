@@ -14,7 +14,7 @@ Releases are named with the following scheme:
 * u-boot-tq-2023.04: new default bootloader based on mainline-u-boot
   * support for TQMa7x
 * linux-tq-6.6: new default kernel based on mainline-linux-kernel
-  * support for TQMa7x
+  * support for TQMa7x, TQMa6x, TQMa6ul, TQMa6ull
 
 ### Changed
 
