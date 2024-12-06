@@ -23,32 +23,34 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ### Linux
 
+NOTE: Linux Kernel 6.1 is incompatible to yocto scarthgap.
+For Linux 6.1 use yocto kirkstone.
 
-|                                      | linux-tq-5.15 | linux-tq-6.1 |
-| ------------------------------------ | :-----------: | :----------: |
-| Fuses                                |       x       |      x       |
-| UART1 (console, X15)                 |       x       |      x       |
-| UART3 (X5)                           |       x       |      x       |
-| GPIO                                 |       x       |      x       |
-| Button (S6, S7, S8)                  |       x       |      x       |
-| I2C                                  |       x       |      x       |
-| GPIO expander                        |       x       |      x       |
-| EEPROM                               |       x       |      x       |
-| RTC                                  |       x       |      x       |
-| QSPI NOR                             |       x       |      x       |
-| Buzzer                               |       x       |      x       |
-| USB Host (X7/X8/X22)                 |       x       |      x       |
-| USB Dual Role (X10)                  |       x       |      x       |
-| eMMC/SD (on-board/X9)                |       x       |      x       |
-| Ethernet 100M (X1400)                |       x       |      x       |
-| Ethernet 100M (X1500) - not G1 CPU   |       x       |      x       |
-| CAN (X13)                            |       x       |      x       |
-| CAN (X14) not G1                     |       x       |      x       |
-| RS-485 (X16)                         |       x       |      x       |
-| LVDS (X17, X18)                      |       x       |      x       |
-| Parallel LCD (X4)                    |       x       |      x       |
-| Audio Line In (X20)                  |       x       |      x       |
-| Audio Line Out (x21)                 |       x       |      x       |
+|                                      | linux-tq-6.6 |
+| ------------------------------------ | :----------: |
+| Fuses                                |      x       |
+| UART1 (console, X15)                 |      x       |
+| UART3 (X5)                           |      x       |
+| GPIO                                 |      x       |
+| Button (S6, S7, S8)                  |      x       |
+| I2C                                  |      x       |
+| GPIO expander                        |      x       |
+| EEPROM                               |      x       |
+| RTC                                  |      x       |
+| QSPI NOR                             |      x       |
+| Buzzer                               |      x       |
+| USB Host (X7/X8/X22)                 |      x       |
+| USB Dual Role (X10)                  |      x       |
+| eMMC/SD (on-board/X9)                |      x       |
+| Ethernet 100M (X1400)                |      x       |
+| Ethernet 100M (X1500) - not G1 CPU   |      x       |
+| CAN (X13)                            |      x       |
+| CAN (X14) not G1                     |      x       |
+| RS-485 (X16)                         |      x       |
+| LVDS (X17, X18)                      |      x       |
+| Parallel LCD (X4)                    |      x       |
+| Audio Line In (X20)                  |      x       |
+| Audio Line Out (x21)                 |      x       |
 
 _Note:_ Mini PCIe connector only supports USB.
 
@@ -78,7 +80,7 @@ _Note:_ Mini PCIe connector only supports USB.
   device tree specification.
 * Writing to FAT filesystems may cause warnings and errors in U-Boot
   based on v2016.03.
-* UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle[-nxp]`.
+* UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
   `UBI_MAX_LEB_COUNT` on machine level.
 
