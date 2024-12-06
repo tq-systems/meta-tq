@@ -19,38 +19,41 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ### Linux
 
-|                              | linux-imx-tq-5.10 | linux-imx-tq-5.15 | linux-tq-5.15 | linux-tq-6.1  |
-| ---------------------------- | :---------------: | :---------------: | :-----------: | :-----------: |
-| Fuses                        |       x           |        x          |      x        |      x        |
-| UART (console on UART3, X15) |       x           |        x          |      x        |      x        |
-| GPIO                         |       x           |        x          |      x        |      x        |
-| Button (S6, S7, S8)          |       x           |        x          |      x        |      x        |
-| I2C                          |       x           |        x          |      x        |      x        |
-| EEPROM                       |       x           |        x          |      x        |      x        |
-| RTC                          |       x           |        x          |      x        |      x        |
-| SPI NOR                      |       x           |        x          |      x        |      x        |
-| Buzzer                       |       x           |        x          |      x        |      x        |
-| GPU                          |       x           |        x          |      x        |      x        |
-| VPU H.264                    |       x           |        x          |      x        |      x        |
-| VPU VP8                      |       x           |        x          |               |               |
-| USB Host (X6/X7)             |       x           |        x          |      x        |      x        |
-| USB Dual Role (X8)           |       x           |        x          |      x        |      x        |
-| eMMC/SD (on-board/X9)        |       x           |        x          |      x        |      x        |
-| SATA (X10)                   |       x           |        x          |      x        |      x        |
-| Ethernet 1GiB/s (X11)        |       x           |        x          |      x        |      x        |
-| Ethernet 100MBit/s (X12)     |       x           |        x          |      x        |      x        |
-| CAN (X13/X14)                |       x           |        x          |      x        |      x        |
-| RS-485 (X16)                 |       x           |                   |      x        |      x        |
-| HDMI (X17)                   |       x           |        x          |      x        |      x        |
-| LVDS (X18, X19)              |       x           |        x          |      x        |      x        |
-| LVDS FullHD (X18, X19)       |                   |                   |               |      x        |
-| HDMI + LVDS (X17, X18)       |                   |                   |      x        |      x        |
-| Audio Line In (X20)          |       x           |        x          |      x        |      x        |
-| Audio Line Out (x22)         |       x           |        x          |      x        |      x        |
-| PCIe (X23)                   |       x           |        x          |      x        |      x        |
-| Parallel LCD (X27)           |                   |                   |      x        |      x        |
-| I2C Touch (X27)              |                   |                   |      x        |      x        |
-| Multi-Display                |                   |                   |      x        |      x        |
+NOTE: Linux Kernel 6.1 is incompatible to yocto scarthgap.
+For Linux 6.1 use yocto kirkstone.
+
+|                              | linux-tq-6.6  |
+| ---------------------------- | :-----------: |
+| Fuses                        |      x        |
+| UART (console on UART3, X15) |      x        |
+| GPIO                         |      x        |
+| Button (S6, S7, S8)          |      x        |
+| I2C                          |      x        |
+| EEPROM                       |      x        |
+| RTC                          |      x        |
+| SPI NOR                      |      x        |
+| Buzzer                       |      x        |
+| GPU                          |      x        |
+| VPU H.264                    |      x        |
+| VPU VP8                      |               |
+| USB Host (X6/X7)             |      x        |
+| USB Dual Role (X8)           |      x        |
+| eMMC/SD (on-board/X9)        |      x        |
+| SATA (X10)                   |      x        |
+| Ethernet 1GiB/s (X11)        |      x        |
+| Ethernet 100MBit/s (X12)     |      x        |
+| CAN (X13/X14)                |      x        |
+| RS-485 (X16)                 |      x        |
+| HDMI (X17)                   |      x        |
+| LVDS (X18, X19)              |      x        |
+| LVDS FullHD (X18, X19)       |      x        |
+| HDMI + LVDS (X17, X18)       |      x        |
+| Audio Line In (X20)          |      x        |
+| Audio Line Out (x22)         |      x        |
+| PCIe (X23)                   |      x        |
+| Parallel LCD (X27)           |      x        |
+| I2C Touch (X27)              |      x        |
+| Multi-Display                |      x        |
 
 ### ToDo / Untested
 * Mic In (X21)
@@ -58,29 +61,18 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * MIPI-CSI (X28)
 * MIPI-DSI (X28)
 * MLB (X28)
-* RS-485 (`linux-imx-tq-5.15`)
 
 ## Known issues / Limitations
 
 - PCIe requires a power cycle to work reliably. Asserting a POR using S9 or S10 is not sufficient.
-- eth1 (X12) uses a random MAC address. The one stored in MBa6 EEPROM is currently not used.
-  (`linux-imx-tq` only)
-  Workaround: Get MAC address from MBa6 EEPROM `i2c dev 0; i2c md 57 20 6` and
-  run `setenv eth1addr <MAC address>; saveenv` once in u-boot console
 - eth1 (X12) (USB to Ethernet) causes an error on `usb reset` if no MAC address
   is set: `Error: smsc95xx_eth address not set.`
 - Backlight on parallel displays are enabled upon Power-On which might lead to random output.
   Display will be disabled during bootup and can be used normally afterwards.
-- `asound.state` is not compatible with `linux-5.4` (`linux-imx-tq` as well as `linux-tq`)
 - The generated UBIFS does not fit into the default SPI-NOR (16 MiB). If
   rootfs on SPI NOR is required, following solutions:
   * tailor image recipe and kernel configuration to get real tiny
   * use SoM variant with larger SPI-NOR
-- `linux-imx-tq-5.15`
-  * Default CMA size too small for HDMI. e.g. run `setenv cma_size 320M` once in u-boot console
-  * Using dual LVDS the 2nd framebuffer needs to be unblanked first:
-    * `echo 0 > /sys/class/graphics/fb2/blank`
-    * `fb-test -f 2 -p 0`
 - U-Boot: FEC Ethernet port is from time to time not working after U-Boot start.
   Another powercycle/reset or PHY software reset (`mdio write ethernet@2188000 0
   0x8000`) is required
