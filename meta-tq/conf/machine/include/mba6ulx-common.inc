@@ -10,7 +10,7 @@ USE_VT = "0"
 # backward compatibility.
 IMAGE_BOOT_FILES = "\
     ${KERNEL_IMAGETYPE};linuximage \
-    ${KERNEL_DEVICETREE} \
+    ${@create_image_boot_dtb_files(d)} \
 "
 
 MACHINE_FEATURES += "\
