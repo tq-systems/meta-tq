@@ -11,6 +11,10 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-rt-tq 6.1: integrate fixes up to Tag v6.1.119-rt45 /
+  commit 10c8fc980d4b ("Linux 6.1.119-rt45") from linux-stable-rt
+* linux-tq 6.1: integrate fixes up to Tag v6.1.119 /
+  commit e4d90d63d385 ("Linux 6.1.119") from linux-stable
 * TQMa62xx / TQMa64xx: allow more specific tuning.
 * tqmls10xxa.inc: require arch-armv8a.inc to allow more specific tuning.
 * TQMa62xx:
@@ -34,6 +38,10 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TQMa7x / TQMa6UL[L]x[L]: linux-[rt-]tq 6.1:
+  I2C temperature sensor on SoM sometimes not probed. Fixed with
+  integration of upstream updates from linux-stable[-rt],
+  commit e2852a02469f ("i2c: core: Lock address during client device instantiation")
 * TQMa62xx/TQMa64xxL:
   * Fix `UBI_VOLNAME` default value to match our boot script for SPI-NOR/UBI boot
 * u-boot-imx-tq v2020.04: backport patches for i.MX USDHC controller to fix
