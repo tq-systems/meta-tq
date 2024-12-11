@@ -6,9 +6,6 @@ PROVIDES += "virtual/kernel"
 
 inherit kernel-yocto kernel
 
-# empty initialized from kernel.bbclass
-KERNEL_LOCALVERSION = "-tq"
-
 # Set the PV to the correct kernel version to satisfy the kernel version sanity check
 LINUX_VERSION ??= "invalid"
 PV = "${LINUX_VERSION}+git${SRCPV}"
@@ -29,13 +26,24 @@ PV = "${LINUX_VERSION}+git${SRCPV}"
 KCONFIG_MODE="--alldefconfig"
 
 ####
-# kernel.bbclass unconditionally creates empty .scmversion files in ${B} and ${S}.
-# This prevents using CONFIG_LOCALVERSION_AUTO without additional provisioning.
-# Instead of fiddling with the .scmversion file we fix this by using a localversion
-# file in the shared source directory.
+# kernel.bbclass unconditionally creates .scmversion files in ${B} and ${S}.
+# starting with 6.3 these are not used anymore. When building from git
+# CONFIG_LOCALVERSION_AUTO therefore adds the SCM version unconditionally.
+# When the kernel is patched git will be used. As result the kernel build system
+# generates different version strings everytime patching is executed even if patches
+# do not change.
+# To simplify handling and to generate a reproducible version string a localversion file
+# is generated in the shared source directory which works with older and newer kernel
+# versions.
+#
 # Multiple before/after tasks are listed, so the order is correct for recipes with
 # and without linux-yocto.
+# CONFIG_LOCALVERSION_AUTO will be disabled unconditionally using an append to the
+# configure task to prevent doubled entries in the kernel version string.
 ####
+KERNEL_LOCALVERSION = "-tq"
+
+do_set_localversion_tq[dirs] += "${STAGING_KERNEL_DIR} ${WORKDIR}"
 do_set_localversion_tq() {
     if [ "${SRCREV}" = "INVALID" ]; then
         hash=${SRCREV_machine}
@@ -49,9 +57,14 @@ do_set_localversion_tq() {
         head=$(git --git-dir=${STAGING_KERNEL_DIR}/.git rev-parse --verify --short ${hash} 2> /dev/null)
     fi
     patches=$(git --git-dir=${STAGING_KERNEL_DIR}/.git rev-list --count ${head}..HEAD 2> /dev/null)
-    printf '%s%s%s%s%s\n' "${KERNEL_LOCALVERSION}" +g ${head} +p ${patches} > ${STAGING_KERNEL_DIR}/localversion-tq
+    printf "%s%s%s%s\n" "-g" "${head}" "-p" "${patches}" > ${STAGING_KERNEL_DIR}/localversion-tq
 }
 addtask set_localversion_tq before do_configure after do_patch do_symlink_kernsrc do_kernel_metadata
+
+do_configure:append() {
+    sed -i -e "/CONFIG_LOCALVERSION_AUTO[ =]/d" ${B}/.config
+    echo "# CONFIG_LOCALVERSION_AUTO is not set" >> ${B}/.config
+}
 
 S = "${WORKDIR}/git"
 
