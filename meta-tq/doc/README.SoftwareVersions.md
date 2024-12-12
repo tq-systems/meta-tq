@@ -30,6 +30,13 @@ For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 * based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
 * branched from `v6.1-rt` / tag commit is merged into (see `LINUX_VERSION` in `linux-tq-rt_6.1.bb` for exact release)
 
+#### Kernel based on 6.6-rt (linux-stable-rt)
+
+For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
+
+* based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
+* branched from `v6.6-rt` / tag commit is merged into (see `LINUX_VERSION` in `linux-tq-rt_6.6.bb` for exact release)
+
 #### Kernel based on 6.6 (linux-stable, TQMa6x, TQMa6ulx, TQMa6ullx, TQMa7x)
 
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git)
