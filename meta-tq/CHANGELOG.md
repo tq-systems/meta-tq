@@ -15,6 +15,8 @@ Releases are named with the following scheme:
   * support for TQMa7x
 * linux-tq-6.6: new default kernel based on mainline-linux-kernel
   * support for TQMa7x, TQMa6x, TQMa6ul, TQMa6ull
+* linux-rt-tq-6.6: new realtime kernel based on linux-tq-6.6
+  * support for TQMa7x, TQMa6x, TQMa6ul, TQMa6ull
 
 ### Changed
 
