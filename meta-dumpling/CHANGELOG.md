@@ -11,6 +11,11 @@ Releases are named with the following scheme:
 
 ### Added
 
+* dynamic-layers: add support for `meta-qt6`
+
+  Provide support for Qt6 demo images. The debug version contains also the built examples.
+  Reuse the `packagegroup-qt6-essentials` and add support for more features based on
+  `DISTRO_FEATURES`.
 * Add support for separate data partition
 
   The data partition is mounted from the same device as the rootfs during boot
@@ -47,6 +52,7 @@ Releases are named with the following scheme:
 
 ### Removed
 
+* dynamic-layers: remove support for `meta-qt5`
 * distros: remove `dumpling`, `dumpling-nxp` and `dumpling-ti` as they are identical
   to their wayland distros counterparts.
 
