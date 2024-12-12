@@ -7,16 +7,18 @@ This README contains some useful information for using Linux Preempt-RT
 # Supported platforms
 
 Currently with Linux 6.1 the supported platforms are
-* TQMa6x
-* TQMx6ULx
-* TQMa6ULLx
-* TQMa7x
 * TQMa8MPxL
 * TQMa8Mx
 * TQMa8MxML
 * TQMa8MxNL
 * TQMLS10xxA
 * TQMLX2160A
+
+Currently with Linux 6.6 the supported platforms are
+* TQMa6x
+* TQMx6ULx
+* TQMa6ULLx
+* TQMa7x
 
 # Usage
 
