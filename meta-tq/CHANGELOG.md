@@ -38,6 +38,12 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TQMa8M: fix U-Boot compatibility to generated signed images.
+
+  Please note that images generated with imx-mkimage version before `lf-6.1.55_2.2.0`
+  are not compatible with newer images and vice versa. Image generation and
+  U-Boot has to be updated in lock step.
+
 * TQMa7x / TQMa6UL[L]x[L]: linux-[rt-]tq 6.1:
   I2C temperature sensor on SoM sometimes not probed. Fixed with
   integration of upstream updates from linux-stable[-rt],
