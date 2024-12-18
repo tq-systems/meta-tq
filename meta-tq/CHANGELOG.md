@@ -43,15 +43,8 @@ Releases are named with the following scheme:
   * support for TQMa8Xx
   * support for TQMa8XxS
   * support for TQMa93xx
-
-* TQMa62xx:
-  * Remove M4 RPMsg example firmware
-
-    The current M4 RPMsg example from meta-ti is incompatible with the MBa62xx
-    due to conflicting use of `MCU_UART0`.
 * linux-imx-tq-6.6:
   * Add XCVR support in TQMa8MPxL, used for HDMI ARC
-  * Add workaround for DMA issue on LPUART8
 
 ### Fixed
 
@@ -74,12 +67,17 @@ Releases are named with the following scheme:
 * linux-imx-tq-6.6:
   * Fix firmware load for some USB BT devices, `btusb` is now configured as a module
   * Enable Open Drain for MDIO pads
+  * Add workaround for DMA issue on LPUART8
 * TQMa93xx:
   * Fixed ethernet device ordering in `linux` and `u-boot`
 * libubootenv: Fixed package installation
 
 ### Removed
 
+* TQMa62xx: Remove M4 RPMsg example firmware
+
+  The current M4 RPMsg example from meta-ti is incompatible with the MBa62xx
+  due to conflicting use of `MCU_UART0`.
 * TQMa64xxL/MBa64xxL: Support for the prototype revision 010x and AM64x Silicon Revision 1.0
   has been removed.
 * imx-atf-tq: remove recipe for TF-A version based on NXP lf_v2.8
