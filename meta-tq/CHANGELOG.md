@@ -49,6 +49,14 @@ Releases are named with the following scheme:
 * tqma62xx / tqma64xx: require arch-armv8a.inc to allow more specific tuning.
 * tqmls10xxa.inc: require arch-armv8a.inc to allow more specific tuning.
 
+### Fixed
+
+* TQMa8M: fix U-Boot compatibility to generated signed images.
+
+  Please note that images generated with imx-mkimage version before `lf-6.1.55_2.2.0`
+  are not compatible with newer images and vice versa. Image generation and
+  U-Boot has to be updated in lock step.
+
 ## scarthgap.TQ.ARM.BSP.0002 (unreleased)
 
 ### Changed
