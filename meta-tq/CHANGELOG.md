@@ -68,7 +68,7 @@ Releases are named with the following scheme:
 
 * Secure Boot support for TQMa8x and TQMa8Xx
 
-## scarthgap.TQ.ARM.BSP.0002 (unreleased)
+## scarthgap.TQ.ARM.BSP.0002
 
 ### Changed
 
@@ -102,18 +102,13 @@ Releases are named with the following scheme:
   * support for TQMa8Xx
   * support for TQMa8XxS
   * support for TQMa93xx
-
-* TQMa62xx:
-  * Remove M4 RPMsg example firmware
-
-    The current M4 RPMsg example from meta-ti is incompatible with the MBa62xx
-    due to conflicting use of `MCU_UART0`.
 * linux-imx-tq-6.6:
   * Add XCVR support in TQMa8MPxL, used for HDMI ARC
-  * Add workaround for DMA issue on LPUART8
 
 ### Fixed
 
+* TQMa62xx/TQMa64xxL:
+  * Fix `UBI_VOLNAME` default value to match our boot script for SPI-NOR/UBI boot
 * u-boot-imx-tq-2020.04:
   * TQMa8MPxL, TQMa8Mx, TQMa8MxML, TQMa8MxNL, TQMa8x, TQMa8Xx, TQMa8XxS: backport fixes for UHS SD-Cards
   * TQMa8MPxL: support also i.MX8MP6 mainline in DT fixups
@@ -131,12 +126,19 @@ Releases are named with the following scheme:
 * linux-imx-tq-6.6:
   * Fix firmware load for some USB BT devices, `btusb` is now configured as a module
   * Enable Open Drain for MDIO pads
+  * Add workaround for DMA issue on LPUART8
 * TQMa93xx:
   * Fixed ethernet device ordering in `linux` and `u-boot`
 * libubootenv: Fixed package installation
 
 ### Removed
 
+* TQMa62xx: Remove M4 RPMsg example firmware
+
+  The current M4 RPMsg example from meta-ti is incompatible with the MBa62xx
+  due to conflicting use of `MCU_UART0`.
+* TQMa64xxL/MBa64xxL: Support for the prototype revision 010x and AM64x Silicon Revision 1.0
+  has been removed.
 * imx-atf-tq: remove recipe for TF-A version based on NXP lf_v2.8
 * u-boot-2021.10: remove obsolete recipe
 * linux-rt-lsdk-tq-5.4: remove obsolete recipe

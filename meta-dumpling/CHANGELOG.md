@@ -50,7 +50,7 @@ Releases are named with the following scheme:
 * distros: remove `dumpling`, `dumpling-nxp` and `dumpling-ti` as they are identical
   to their wayland distros counterparts.
 
-## scarthgap.TQ.ARM.BSP.0002 (unreleased)
+## scarthgap.TQ.ARM.BSP.0002
 
 ### Added
 
@@ -63,6 +63,8 @@ Releases are named with the following scheme:
 
   Ethernet interfaces are now renamed to `endX` based on `ethernetX` Device
   Tree aliases on linux-ti-tq-6.6.
+* weston: Fix start on TQMa93xx due to insufficient privileges
+  Note: `weston` now starts as root
 
 ### Removed
 

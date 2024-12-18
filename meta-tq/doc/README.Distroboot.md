@@ -16,7 +16,10 @@ By default, U-Boot will boot the OS from the same medium that it was started
 from (eMMC, SD card or SPI-NOR). The boot source can be modified by setting
 the `boot_targets` variable to `mmc0` (eMMC), `mmc1` (SD card), `sf0` (SPI-NOR),
 `usb0` (USB mass storage) or `pxe` (netboot). Multiple boot sources separated
-with spaces will be tried in the order they are specified.
+with spaces will be tried in the order they are specified, for example:
+```
+setenv boot_targets pxe sf0 mmc0
+```
 
 For MMC and USB devices, U-Boot will load a script image `boot.scr` from the
 boot partition of the selected medium. The script provided in this BSP's
