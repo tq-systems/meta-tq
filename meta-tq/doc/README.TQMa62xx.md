@@ -45,6 +45,11 @@ _Kernel:_
 * On TQMa62xx variants without user EEPROM, the EEPROM device is not disabled
   in the Linux Device Tree, resulting in a non-critical error message in the
   kernel log during boot
+* After an unclean reboot without power cycle while the IMX327 camera is
+  running, the camera can be in an inconsistent state where the next attempt
+  to use it will result in a hang (of gst-launch, when using the example
+  commands). Terminating and re-running gst-launch will usually fix this issue;
+  it is unknown if a power cycle may be necessary in some cases.
 
 ## Supported features
 
