@@ -4,12 +4,32 @@
 
 ## Bootstream
 
+### ARMv7a / 32 Bit i.MX SoC
+
+To build a bootstream usable with UUU tool the following settings needs to be in your
+configuration. (This is already the case for starterkit machine configurations, which
+supports UUU enabled images):
+
+```
+UBOOT_CONFIG += "uuu"
+# or
+UBOOT_CONFIG += "uuu_lga"
+```
+
+Rebuild boot loader:
+
+```
+bitbake virtual/bootloader
+```
+
+### ARMv8a / 64 Bit i.MX SoC
+
 To build a bootstream usable with UUU tool the following settings needs to be in your
 configuration. (This is already the case for starterkit machine configurations):
 
 ```
-UBOOT_CONFIG = "mfgtool"
-IMXBOOT_TARGETS = "flash_spl_uboot"
+UBOOT_CONFIG += "mfgtool"
+IMXBOOT_TARGETS += "flash_spl_uboot"
 ```
 
 Rebuild boot stream:
