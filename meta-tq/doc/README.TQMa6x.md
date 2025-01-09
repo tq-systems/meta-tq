@@ -124,54 +124,12 @@ _Note:_
 
 ## Boot device initialisation and update
 
-### SPI NOR
-
-To initialize SPI NOR with bootloader, write the [bootloader image](#artifacts)
-to SPI NOR at offset 0x400:
-
-```
-setenv uboot <U-Boot SPI boot image>
-tftp ${loadaddr} ${uboot}
-sf probe
-sf erase 0 0x100000
-sf write ${loadaddr} 0x400 ${filesize}
-```
-
 See [here](./README.imx-arm64.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
 
-### Program system image
+## Use UUU Tool
 
-#### SPI NOR
-
-Not supported. Only kernel and DTB can be stored at the moment.
-
-#### SD / e-MMC
-
-To program complete system image to SD / e-MMC, write [WIC image](#artifacts)
-to SD / e-MMC at offset 0x00 / block #0
-
-### Update bootloader
-
-To update the bootloader of system using U-Boot / TFTP following shortcuts
-exist.
-
-**Note**: Kernel and device tree are stored in the root fs and can be updated
-on the filesystem level.
-
-#### SD / e-MMC
-
-```
-setenv uboot <name of u-boot image>
-run update_uboot_mmc
-```
-
-#### SPI
-
-```
-setenv uboot <name of u-boot image>
-run update_uboot_spi
-```
+See [here](./README.imx-arm64.UUU.md) for details about using Serial Download mode and UUU.
 
 ## Howto
 
