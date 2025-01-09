@@ -12,9 +12,10 @@ DEPENDS += "\
     bc-native \
     bison-native \
     dtc-native \
+    lzop-native \
 "
 
-SRCREV = "301582d880bc787c6b987afab5bcaed5afb88af0"
+SRCREV = "b74fa944eeddfc1e91398e5973f0345ff386e230"
 SRCBRANCH = "TQM-v2023.04"
 
 SRC_URI = " \
