@@ -61,7 +61,7 @@ For Linux 6.1 use yocto kirkstone.
 * SIM card (X18)
 * Mic In (X19)
 
-## Known issues
+## Known issues / Limitations
 
 * Using internal PCIe PHY clock is currently not supported by the Linux
   mainline and newer NXP vendor kernel. PCIe can not be used on MBa7x
@@ -72,8 +72,6 @@ For Linux 6.1 use yocto kirkstone.
   erroneously supplying VBUS as well preventing a device disconnect per software.
   Occurs when gadget is disabled again. USB host might fail to detect a new USB
   descriptor once gadget is restarted.
-* Writing to FAT filesystems may cause warnings and errors in U-Boot
-  based on v2016.03.
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
   `UBI_MAX_LEB_COUNT` on machine level.
@@ -127,46 +125,14 @@ _Note:_
 | ON      |      |     |     |     |     |     |     |     |    |      |     |     |     |     |     |  x  |     |    |     |     |     |     |    |  x  |     |
 | OFF     |  x   |  x  |  x  |  x  |  x  |  x  |  x  |  x  |    |  x   |  x  |  x  |  x  |  x  |  x  |     |  x  |    |  -  |  -  |  -  |  -  |    |     |  x  |
 
-## Boot device initialisation
-
-### QSPI NOR
-
-To initialize QSPI NOR with bootloader, write the [bootloader image](#artifacts)
-to QSPI NOR at offset 0x00:
-
-```
-setenv uboot <U-Boot QSPI boot image>
-tftp ${loadaddr} ${uboot}
-sf probe
-sf update ${loadaddr} 0 ${filesize}
-```
+## Boot device initialisation and update
 
 See [here](./README.imx-arm64.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
 
-### Program system image
+## Use UUU Tool
 
-#### QSPI NOR
-
-Not supported. Only kernel and DTB can be stored at the moment.
-
-#### SD / e-MMC
-
-To program complete system image to SD / e-MMC, write [WIC image](#artifacts)
-to SD / e-MMC at offset 0x00 / block #0
-
-### Update bootloader
-
-To update the bootloader of system using U-Boot / TFTP following shortcuts
-exist.
-
-**Note**: Kernel and device tree are stored in the root fs and can be updated
-on the filesystem level.
-
-```
-setenv uboot <name of u-boot image>
-run update_uboot_mmc
-```
+See [here](./README.imx-arm64.UUU.md) for details about using Serial Download mode and UUU.
 
 ## Howto
 
@@ -181,6 +147,10 @@ This version of BSP is only tested with an U-Boot version that implements PSCI
 and starting linux outside of Trustzone (`non secure`).
 
 The number of running CPUs can be checked with `nproc` under linux.
+
+### Access U-Boot environment from Linux
+
+See [U-Boot environment tools](README.libubootenv.md).
 
 ## Support Wiki
 
