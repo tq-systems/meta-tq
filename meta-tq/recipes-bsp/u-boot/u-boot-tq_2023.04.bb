@@ -27,5 +27,6 @@ require u-boot-tq.inc
 
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:tqma6ulx = "tqma6ulx"
+COMPATIBLE_MACHINE:tqma6ullx = "tqma6ullx"
 COMPATIBLE_MACHINE:tqma6x = "tqma6x"
 COMPATIBLE_MACHINE:tqma7x = "tqma7x"
