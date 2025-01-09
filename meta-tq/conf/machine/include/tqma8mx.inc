@@ -28,6 +28,9 @@ LOADADDR = ""
 UBOOT_SUFFIX = "bin"
 UBOOT_MAKE_TARGET = ""
 
+# multiple U-Boot env locations
+TQ_FW_ENV_CONFIGS = "mmc0 mmc1"
+
 ATF_PLATFORM = "imx8mq"
 
 # for sdcard + wic image rule

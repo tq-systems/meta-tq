@@ -1,0 +1,9 @@
+uboot:
+  size: 0x8000
+  devices:
+    - path: /dev/mtd0
+      offset: 0x400000
+      sectorsize: 0x10000
+    - path: /dev/mtd0
+      offset: 0x410000
+      sectorsize: 0x10000

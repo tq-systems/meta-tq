@@ -22,6 +22,9 @@ PREFERRED_PROVIDER_imx-sc-firmware ?= "imx-sc-firmware-tq"
 UBOOT_MAKE_TARGET ?= "all"
 UBOOT_SUFFIX ?= "bin"
 
+# multiple U-Boot env locations
+TQ_FW_ENV_CONFIGS = "mmc0 mmc1 spi"
+
 ATF_PLATFORM = "imx8qm"
 
 # for sdcard + wic image rule

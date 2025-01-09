@@ -35,6 +35,8 @@ do_deploy:append:mx8m-generic-bsp () {
 
 UBOOT_NAME:mx8-generic-bsp = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
 
+UBOOT_INITIAL_ENV = "u-boot-initial-env"
+
 COMPATIBLE_MACHINE = "tqma8xx"
 COMPATIBLE_MACHINE:append = "|tqma8xxs"
 COMPATIBLE_MACHINE:append = "|tqma8qm"

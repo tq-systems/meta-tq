@@ -28,6 +28,9 @@ LOADADDR = ""
 UBOOT_SUFFIX = "bin"
 UBOOT_MAKE_TARGET = ""
 
+# multiple U-Boot env locations
+TQ_FW_ENV_CONFIGS = "mmc0 mmc1 spi"
+
 # for sdcard + wic image rule
 RAW_BOOT_START_OFFSET_KB = "32"
 RAW_BOOT_END_OFFSET_KB = "4096"
