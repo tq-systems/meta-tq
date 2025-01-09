@@ -24,7 +24,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 ### U-Boot
 
 | Feature                                          |   REV.020x   |
-| :----------------------------------------------- | :----------: |
+| :----------------------------------------------: | :----------: |
 | RAM configs                                      | 256, 512 MiB |
 | CPU variants                                     | i.MX6UL[L]   |
 | Fuses / OCRAM                                    |       x      |
@@ -57,7 +57,7 @@ NOTE: Linux Kernel 6.1 is incompatible to yocto scarthgap.
 For Linux 6.1 use yocto kirkstone.
 
 | Feature                              | linux-tq-6.6 |
-| ------------------------------------ | :----------: |
+| :----------------------------------: | :----------: |
 | Fuses                                |      x       |
 | UART1 (console, X15)                 |      x       |
 | UART3 (X5)                           |      x       |
@@ -108,19 +108,20 @@ _Note:_ Mini PCIe connector only supports USB.
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
   `UBI_MAX_LEB_COUNT` on machine level.
-* Environment-variables of U-Boot v2023.04 were reworked and are now based on
-  `tq-imx-shared-env.h`. Environments of older u-boot versions are incompatible.
+* Environment of U-Boot v2023.04 was reworked to use variable names that conforms with
+  distroboot contract. The default environment of older U-Boot versions are incompatible.
 
 ## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/${MACHINE}`
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs
 * zImage: Linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
+* \*.rootfs.ubifs: UBIFS rootfs for updating the rootfs from bootloader
+   (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 * u-boot-with-spl-${MACHINE}.imx-sd: bootloader for SD / e-MMC
 * u-boot-with-spl-${MACHINE}.imx-qspi: bootloader for QSPI
@@ -136,7 +137,7 @@ _Note:_
 * S11: BOOT_CFG2\[0 .. 7\]
 * S13: BOOT_CFG4\[0 .. 7\]
 * S5: BOOT\_MODE\[0 .. 1\]
-* X means position of DIP, - means don't care
+* `x` means position of DIP, `-` means don't care
 
 #### SD Card
 
