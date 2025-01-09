@@ -40,6 +40,9 @@ UBOOT_MAKE_TARGET:mx7-generic-bsp ?= "u-boot.imx"
 UBOOT_SUFFIX:mx7-generic-bsp = "imx"
 IMX_DEFAULT_BOOTLOADER ?= "u-boot-tq"
 
+# multiple U-Boot env locations
+TQ_FW_ENV_CONFIGS = "mmc0 mmc1 spi"
+
 # Common image configuration
 RAW_BOOT_START_OFFSET_KB = "1"
 RAW_BOOT_END_OFFSET_KB = "1024"
