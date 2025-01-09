@@ -25,6 +25,8 @@ SRC_URI = " \
 require recipes-bsp/u-boot/u-boot.inc
 require u-boot-tq.inc
 
+UBOOT_INITIAL_ENV = "u-boot-initial-env"
+
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:tqma6ulx = "tqma6ulx"
 COMPATIBLE_MACHINE:tqma6ullx = "tqma6ullx"
