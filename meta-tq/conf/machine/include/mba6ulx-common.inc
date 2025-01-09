@@ -33,4 +33,4 @@ MACHINE_EXTRA_RRECOMMENDS += "${@bb.utils.contains('COMBINED_FEATURES', 'bluetoo
 WKS_FILE = "tqmaxx-imx-v7-sdimg.wks.in"
 
 # allow to easy override for different configuration
-MACHINE_WKS_BOOTSTREAM ?= "u-boot-${MACHINE}.imx-sd"
+MACHINE_WKS_BOOTSTREAM ?= "${UBOOT_BINARY_BASENAME}-${MACHINE}.${UBOOT_SUFFIX}-sd"
