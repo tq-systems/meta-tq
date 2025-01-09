@@ -105,8 +105,8 @@ TQ-Systems SOM:
 | tq-image-generic-rt-debug | based on tq-image-generic-rt, added debug features and packages  |
 | tq-image-weston           | based on poky core-image-weston                                  |
 | tq-image-weston-debug     | based on tq-image-weston, added debug features and packages      |
-| tq-image-qt5              | based on tq-image-weston, added qt5 support                      |
-| tq-image-qt5-debug        | based on tq-image-qt5, added debug features and packages         |
+| tq-image-qt6              | based on tq-image-weston, added Qt6 support                      |
+| tq-image-qt6-debug        | based on tq-image-qt6, added debug features and examples         |
 
 **Attention:** These image recipes can be used as a starting point for own customization.
 Every recipe comes in two flavours. The images suffixed with `debug` add `debug-tweaks` to
