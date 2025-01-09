@@ -97,7 +97,7 @@ SKIP_RECIPE[core-image-weston] = "not buildable with spaetzle"
 
 SKIP_RECIPE[tq-image-generic] = "not buildable with spaetzle: use tq-image-small"
 SKIP_RECIPE[tq-image-weston] = "not buildable with spaetzle: use tq-image-small"
-SKIP_RECIPE[tq-image-qt5] = "not buildable with spaetzle: use tq-image-small"
+SKIP_RECIPE[tq-image-qt6] = "not buildable with spaetzle: use tq-image-small"
 
 # Disable python usage in opkg-utils since it won't build with tiny config
 PACKAGECONFIG:remove:pn-opkg-utils = "python"
