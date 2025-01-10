@@ -11,6 +11,11 @@ Releases are named with the following scheme:
 
 ### Added
 
+* linux-tq-6.12: new kernel based on linux-stable kernel
+  * support TQMa8MPxL on MBa8MPxL incl. DisplayPort
+
+* Secure Boot support for TQMa8x and TQMa8Xx
+
 * TQMa62xx/TQMa64xxL: Add new WKS template with two root partitions and a
   separate data partition for A/B boot with RAUC updates
 
@@ -22,19 +27,45 @@ Releases are named with the following scheme:
   media on TQMa62xx/TQMa64xxL (u-boot-ti-tq-2023.04)
 * tq-bootscripts: Provide new `boot-blockdev-rauc` boot script for A/B boot with
   RAUC updates
-* u-boot-tq-2023.04: new default bootloader based on mainline-u-boot
-  * support for TQMa7x
-* linux-tq-6.6: new default kernel based on mainline-linux-kernel
-  * support for TQMa7x, TQMa6x, TQMa6ul, TQMa6ull
-* linux-rt-tq-6.6: new realtime kernel based on linux-tq-6.6
-  * support for TQMa7x, TQMa6x, TQMa6ul, TQMa6ull
-
   On platforms with Distroboot support (TQMa62xx/TQMa64xxL) the new script will
   be installed automatically instead of `boot-blockdev` when "rauc" is enabled
   in `DISTRO_FEATURES`.
 
+* u-boot-tq-2023.04: new default bootloader based on upstream U-Boot. With the update
+  the default environment was completely reworked to use canonical variable names compatible
+  with distro boot etc. Kernel and devicetree are expected in rootfs.
+  * support for TQMa6ULx
+  * support for TQMa6ULxL
+  * support for TQMa6ULLx
+  * support for TQMa6ULLxL
+  * support for TQMa7x
+* linux-tq-6.6: new default kernel based on mainline-linux-kernel
+  * support for TQMa6ULx
+  * support for TQMa6ULxL
+  * support for TQMa6ULLx
+  * support for TQMa6ULLxL
+  * support for TQMa7x
+  * support for TQMa8Mx
+  * support for TQMa8MxML
+  * support for TQMa8MxNL
+  * support for TQMa8MPxL
+* linux-rt-tq-6.6: new realtime kernel based on linux-tq-6.6
+  * support for TQMa6ULx
+  * support for TQMa6ULxL
+  * support for TQMa6ULLx
+  * support for TQMa6ULLxL
+  * support for TQMa7x
+  * support for TQMa8Mx
+  * support for TQMa8MxML
+  * support for TQMa8MxNL
+  * support for TQMa8MPxL
+
 ### Changed
 
+* linux[-ti,-imx,-lsdk,-rt,]-tq recipes: improve local version generation.
+  Upstream poky kernel classes change usage of `.scmversion` files and start
+  using `KERNEL_LOCALVERSION`. To keep reproducible version string
+  `CONFIG_LOCALVERSION_AUTO` will be forcibly disabled.
 * example keys and certificates for AHAB are changed to prepare Secure Boot for
   TQMa8x and TQMa8Xx
 * u-boot-imx-tq-[2020.04,2023.04]: use generic overrides for secure boot
@@ -64,9 +95,9 @@ Releases are named with the following scheme:
   are not compatible with newer images and vice versa. Image generation and
   U-Boot has to be updated in lock step.
 
-### Added
+### Removed
 
-* Secure Boot support for TQMa8x and TQMa8Xx
+* u-boot-imx-tq_2016.03: recipe is removed since no SoM uses it anymore.
 
 ## scarthgap.TQ.ARM.BSP.0002
 
