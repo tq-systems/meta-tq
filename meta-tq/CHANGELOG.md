@@ -33,7 +33,8 @@ Releases are named with the following scheme:
 
 * u-boot-tq-2023.04: new default bootloader based on upstream U-Boot. With the update
   the default environment was completely reworked to use canonical variable names compatible
-  with distro boot etc. Kernel and devicetree are expected in rootfs.
+  with distro boot etc. Kernel and devicetree are expected in rootfs. This adds also
+  support for U-Boot environment access from Linux OS.
   * support for TQMa6ULx
   * support for TQMa6ULxL
   * support for TQMa6ULLx
@@ -88,6 +89,10 @@ Releases are named with the following scheme:
 * tqmls10xxa.inc: require arch-armv8a.inc to allow more specific tuning.
 
 ### Fixed
+
+* u-boot-imx-tq_2020.04 / u-boot-imx-tq_2023.04 / u-boot-tq_2023.04: provide
+  configurations for U-Boot env tools based on rootfs. Multiconfiguration config
+  file does not work in on device in the configuration is not present.
 
 * TQMa8M: fix U-Boot compatibility to generated signed images.
 
