@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/BSD-3-Clause;m
 
 PROVIDES += "imx-atf"
 
-PV .= "+git${SRCPV}"
+PV .= "+git"
 
 ATF_BRANCH = "TQM-lf_v2.10"
 ATF_SRC = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL}"

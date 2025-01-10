@@ -8,7 +8,7 @@ inherit kernel-yocto kernel
 
 # Set the PV to the correct kernel version to satisfy the kernel version sanity check
 LINUX_VERSION ??= "invalid"
-PV = "${LINUX_VERSION}+git${SRCPV}"
+PV = "${LINUX_VERSION}+git"
 
 # This comment was copied from linux-imx recipes in meta-freescale:
 # Tell to kernel class that we would like to use our defconfig to configure the kernel.
