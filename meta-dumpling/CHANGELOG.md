@@ -36,6 +36,9 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* Reenable installation of U-Boot environment utils in root file system.
+  After switching to use libubootenv as dependency the binaries were not
+  longer installed.
 * Avoid duplicate installation of "persistent-storage-mtd" udev rules in
   dumpling distros
 
