@@ -30,5 +30,7 @@ DEPENDS:append = "\
 
 UBOOT_NAME:mx9-generic-bsp = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
 
+UBOOT_INITIAL_ENV = "u-boot-initial-env"
+
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:tqma93xx = "tqma93xx"
