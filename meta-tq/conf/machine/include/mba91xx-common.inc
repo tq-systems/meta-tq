@@ -4,7 +4,19 @@
 
 require conf/machine/include/tq-machine.inc
 
-WKS_FILE = "tqmaxx-imx-v8-sdimg${@bb.utils.contains('DISTRO_FEATURES', 'rauc', '-rauc-ab', '', d)}.wks.in"
+python() {
+    wks_type = ""
+
+    if bb.utils.contains("DISTRO_FEATURES", "secure", True, False, d):
+        wks_type = "-verity"
+    if bb.utils.contains("DISTRO_FEATURES", "rauc", True, False, d):
+        if not bb.utils.contains("DISTRO_FEATURES", "secure", True, False, d):
+            wks_type = "-rauc-ab"
+        else:
+            bb.warn("DISTRO_FEATURES contains 'rauc' and 'secure', using WKS_FILE selected by distro feature 'secure'")
+
+    d.setVar("WKS_FILE", "tqmaxx-imx-v8-sdimg%s.wks.in" % wks_type)
+}
 
 MACHINE_FEATURES += "\
     bluetooth \
