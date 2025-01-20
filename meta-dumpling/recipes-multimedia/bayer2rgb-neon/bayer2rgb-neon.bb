@@ -11,7 +11,7 @@ SRC_URI = "git://gitlab-ext.sigma-chemnitz.de/ensc/bayer2rgb.git;protocol=https;
 S = "${WORKDIR}/git"
 
 SRCREV = "15feb1115b4828488cc36d09f625e23e8b6a0ec5"
-PV = "0.6.1+git${SRCPV}"
+PV = "0.6.1+git"
 
 inherit autotools ptest pkgconfig lib_package
 

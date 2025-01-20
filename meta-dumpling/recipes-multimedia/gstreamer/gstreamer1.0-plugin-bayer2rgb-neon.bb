@@ -11,7 +11,7 @@ SRC_URI = "git://gitlab-ext.sigma-chemnitz.de/ensc/gst-bayer2rgb-neon.git;protoc
 S = "${WORKDIR}/git"
 
 SRCREV = "4fe7bba3f0a84db89e1412fefe6adfcdb515761f"
-PV = "0.6.1+git${SRCPV}"
+PV = "0.6.1+git"
 
 inherit pkgconfig autotools
 
