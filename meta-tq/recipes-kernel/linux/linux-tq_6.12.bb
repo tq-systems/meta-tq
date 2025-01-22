@@ -4,12 +4,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
 require linux-tq-common.inc
 
-KBRANCH = "linux-6.12.y"
-SRCREV = "77f85ccd3618f324d221f0faaed6d9cdc118c74a"
+KBRANCH = "TQM-linux-v6.12.y"
+SRCREV = "a6ad5510dbb5f55cd2d1b44b11a18120bf79a5a3"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "6.12"
-LINUX_VERSION = "${LINUX_RELEASE}.8"
+LINUX_VERSION = "${LINUX_RELEASE}.10"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
@@ -24,11 +24,11 @@ KERNEL_CONFIG_FILES:imx ?= "\
     file://features/devicetree.cfg \
 "
 
-GIT_URL ?= "git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
-GIT_PROTOCOL ?= "https"
+GIT_URL ?= "${TQ_GIT_BASEURL}/linux-tqmaxx.git"
+GIT_PROTOCOL ?= "${TQ_GIT_PROTOCOL}"
 
 SRC_URI = "\
-    git://${GIT_URL};protocol=${GIT_PROTOCOL};branch=${KBRANCH} \
+    ${GIT_URL};protocol=${GIT_PROTOCOL};branch=${KBRANCH} \
     ${KERNEL_CONFIG_FILES} \
     file://0001-arm64-dts-imx8mp-Add-TC9595-DSI-DP-bridge-on-TQMa8MP.patch \
     file://0002-drm-bridge-samsung-dsim-Initialize-bridge-on-attach.patch \
