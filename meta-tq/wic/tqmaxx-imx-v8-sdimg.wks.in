@@ -11,9 +11,9 @@
 # | |              |            |            |       |         |           |
 # 0 |              |         4128KiB      4160KiB   8MiB       |        variable
 #   |              |                                           |
-#   |            ${RAW_BOOT_END_OFFSET_KB}                            |
+#   |            ${RAW_BOOT_END_OFFSET_KB}                     |
 #   |                                                          |
-#  ${RAW_BOOT_START_OFFSET_KB} see CPU reference manual              |
+#  ${RAW_BOOT_START_OFFSET_KB} see CPU reference manual        |
 #  synonym to ${IMX_BOOT_SEEK}                                 |
 #                                                            8MiB + 64 MiB * overhead-factor
 #                                                            (default: `--overhead-factor=1.3`),
