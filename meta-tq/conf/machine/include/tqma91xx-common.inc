@@ -68,6 +68,9 @@ UBOOT_SUFFIX:mx91-generic-bsp = "bin"
 UBOOT_SUFFIX:pn-u-boot-imx-tq = "bin"
 IMX_DEFAULT_BOOTLOADER ?= "u-boot-imx-tq"
 
+# multiple U-Boot env locations
+TQ_FW_ENV_CONFIGS = "mmc0 mmc1 spi"
+
 # Common image configuration
 require conf/machine/include/tq-image.inc
 
