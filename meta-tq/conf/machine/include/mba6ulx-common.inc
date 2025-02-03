@@ -6,13 +6,6 @@ SERIAL_CONSOLES = "115200;ttymxc0"
 # disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
 USE_VT = "0"
 
-# Files are needed in IMAGE_BOOT_FILES because we use an extra partition for
-# backward compatibility.
-IMAGE_BOOT_FILES = "\
-    ${KERNEL_IMAGETYPE};linuximage \
-    ${@create_image_boot_dtb_files(d)} \
-"
-
 MACHINE_FEATURES += "\
     bluetooth \
     screen \
@@ -20,9 +13,7 @@ MACHINE_FEATURES += "\
     wifi \
 "
 
-# install kernel and devicetree also under /boot inside the rootfs,
-# needed for UBIFS use case and perpare removal of extra FAT boot partition
-# on SD / e-MMC
+# rootfs with kernel modules, device tree and kernel image
 MACHINE_EXTRA_RRECOMMENDS += "\
     kernel-devicetree \
     kernel-image \
