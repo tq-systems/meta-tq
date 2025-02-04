@@ -7,6 +7,9 @@ TQ_GIT_PROTOCOL ?= "https"
 DEFAULT_KERNEL:imx ??= "linux-imx-tq"
 DEFAULT_KERNEL:imx:use-mainline-bsp ??= "linux-tq"
 PREFERRED_PROVIDER_virtual/kernel ??= "${DEFAULT_KERNEL}"
+# weak default provided in meta-freescale/conf/machine/include/imx-base.inc
+IMX_DEFAULT_ATF_PROVIDER:imx ?= "imx-atf-tq"
+PREFERRED_PROVIDER_imx-atf ?= "imx-atf-tq"
 
 # Return a list of device tree files depending on the virtual/kernel
 # provider. The (optional) list is named KERNEL_DEVICETREE_<provider>

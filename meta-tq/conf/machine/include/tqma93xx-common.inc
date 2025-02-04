@@ -65,7 +65,6 @@ KERNEL_IMAGETYPE = "Image"
 PREFERRED_PROVIDER_imx-boot ?= "imx-boot-tq"
 PREFERRED_PROVIDER_virtual/kernel:mx93-nxp-bsp ?= "linux-imx-tq"
 # At the moment we support only these forks:
-PREFERRED_PROVIDER_imx-atf:mx93-generic-bsp = "imx-atf-tq"
 PREFERRED_PROVIDER_u-boot:mx93-generic-bsp ?= "u-boot-imx-tq"
 PREFERRED_PROVIDER_virtual/bootloader:mx93-generic-bsp ?= "u-boot-imx-tq"
 UBOOT_SUFFIX:mx93-generic-bsp = "bin"
