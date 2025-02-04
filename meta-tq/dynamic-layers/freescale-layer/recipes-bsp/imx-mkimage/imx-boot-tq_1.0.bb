@@ -38,7 +38,7 @@ inherit imx-hab
 
 DEPENDS += "\
     ${IMX_EXTRA_FIRMWARE} \
-    imx-atf \
+    ${IMX_DEFAULT_ATF_PROVIDER} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os', '', d)} \
     u-boot \
     xxd-native \
@@ -67,7 +67,7 @@ M4_1_DEFAULT_IMAGE  ??= "INVALID"
 # This package aggregates output deployed by other packages,
 # so set the appropriate dependencies
 do_compile[depends] += "\
-    imx-atf:do_deploy \
+    ${IMX_DEFAULT_ATF_PROVIDER}:do_deploy \
     ${@' '.join('%s:do_deploy' % r for r in '${IMX_EXTRA_FIRMWARE}'.split() )} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os:do_deploy', '', d)} \
     virtual/bootloader:do_deploy \
