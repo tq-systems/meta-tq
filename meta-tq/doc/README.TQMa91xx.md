@@ -162,13 +162,7 @@ See [here](./README.imx-arm64.UUU.md) for details about using Serial Download mo
 
 ### Frequency scaling
 
-To change CPU frequency the lpm-driver is to be used via sysfs.
-
-Switch between Overdrive and Normal Drive mode use:
-
-```
-echo [0,1] > /sys/devices/platform/imx93-lpm/mode
-```
+See [here](./README.TQMa9-non-scmi-dvfs.md) for details about frequency scaling.
 
 ### OS boot
 
