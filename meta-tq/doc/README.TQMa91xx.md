@@ -174,6 +174,26 @@ __Note:__ Default u-boot environment variable `bootcmd` has to be set to `run di
 
 See [RAUC](RAUC.md).
 
+### Sleep mode and wakeup
+
+Supported sleep states can be queried as follow:
+
+```
+cat /sys/power/state
+```
+
+Usually `mem` and `freeze` should be supported. To test the modes one can use the RTC
+to generate a wakeup IRQ. Following example use rtc0 (I2C RTC on SoM) or
+rtc1 (RTC in CPU BBNS domain) to wakeup after 20 seconds:
+
+```
+RTC=<rtc0,rtc1>
+echo enabled > /sys/class/rtc/${RTC}/device/power/wakeup
+echo 0 > /sys/class/rtc/${RTC}/wakealarm
+echo +20 > /sys/class/rtc/${RTC}/wakealarm
+echo <state> > /sys/power/state
+```
+
 ### Display Support
 
 Each Display can be used on its own by using the corresponding device tree.
