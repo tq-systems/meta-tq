@@ -34,7 +34,7 @@ Releases are named with the following scheme:
 * u-boot-tq-2023.04: new default bootloader based on upstream U-Boot. With the update
   the default environment was completely reworked to use canonical variable names compatible
   with distro boot etc. Kernel and devicetree are expected in rootfs. This adds also
-  support for U-Boot environment access from Linux OS.
+  support for U-Boot environment access from Linux OS. Additionally, SDP support is added.
   * support for TQMa6ULx
   * support for TQMa6ULxL
   * support for TQMa6ULLx
