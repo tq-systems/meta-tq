@@ -11,11 +11,15 @@ Releases are named with the following scheme:
 
 ### Added
 
+* machines: add new machine for TQMa91xxCA/LA on MBa91xxCA starter kit
+* u-boot-imx-tq_2024.03: new recipe with support for TQMa91xx and TQMa93xx
+* imx-tq-atf_2.10: support for TQMa91xxCA/LA
 * linux-tq-6.12: new kernel based on linux-stable kernel
   * support TQMa93xx[CA/LA] on MBa93xxCA / MBa93xxLA / MBa91xxCA
 
 ### Changed
 
+* imx-tq-atf_2.10: integrate changes from NXP BSP release `lf-6.6.52-2.2.0`
 * linux-imx-tq-6.6: integrate changes from NXP BSP release `lf-6.6.52-2.2.0`
   via the matching branch of linux-fslc repo. Integrates linux-stable fixes
   up to v6.6.69
