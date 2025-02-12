@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## scarthgap.TQ.ARM.BSP.0003 (unreleased)
+
 ### Added
 
 * dynamic-layers: add support for `meta-qt6`

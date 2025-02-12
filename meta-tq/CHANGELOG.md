@@ -12,8 +12,20 @@ Releases are named with the following scheme:
 ### Added
 
 * linux-tq-6.12: new kernel based on linux-stable kernel
-  * support TQMa8MPxL on MBa8MPxL incl. DisplayPort
   * support TQMa93xx[CA/LA] on MBa93xxCA / MBa93xxLA / MBa91xxCA
+
+### Changed
+
+* linux-imx-tq-6.6: integrate changes from NXP BSP release `lf-6.6.52-2.2.0`
+  via the matching branch of linux-fslc repo. Integrates linux-stable fixes
+  up to v6.6.69
+
+## scarthgap.TQ.ARM.BSP.0003 (unreleased)
+
+### Added
+
+* linux-tq-6.12: new kernel based on linux-stable kernel
+  * support TQMa8MPxL on MBa8MPxL incl. DisplayPort
 
 * Secure Boot support for TQMa8x and TQMa8Xx
 
@@ -64,9 +76,6 @@ Releases are named with the following scheme:
 
 ### Changed
 
-* linux-imx-tq-6.6: integrate changes from NXP BSP release `lf-6.6.52-2.2.0`
-  via the matching branch of linux-fslc repo. Integrates linux-stable fixes
-  up to v6.6.69
 * linux[-ti,-imx,-lsdk,-rt,]-tq recipes: improve local version generation.
   Upstream poky kernel classes change usage of `.scmversion` files and start
   using `KERNEL_LOCALVERSION`. To keep reproducible version string
