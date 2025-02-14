@@ -23,7 +23,7 @@ NOTE: Linux Kernel 6.1 is incompatible to yocto scarthgap.
 For Linux 6.1 use yocto kirkstone.
 
 |                              | linux-tq-6.6  |
-| ---------------------------- | :-----------: |
+| :--------------------------: | :-----------: |
 | Fuses                        |      x        |
 | UART (console on UART3, X15) |      x        |
 | GPIO                         |      x        |
@@ -56,6 +56,7 @@ For Linux 6.1 use yocto kirkstone.
 | Multi-Display                |      x        |
 
 ### ToDo / Untested
+
 * Mic In (X21)
 * SIM card (X24)
 * MIPI-CSI (X28)
@@ -64,25 +65,25 @@ For Linux 6.1 use yocto kirkstone.
 
 ## Known issues / Limitations
 
-- PCIe requires a power cycle to work reliably. Asserting a POR using S9 or S10 is not sufficient.
-- eth1 (X12) (USB to Ethernet) causes an error on `usb reset` if no MAC address
+* PCIe requires a power cycle to work reliably. Asserting a POR using S9 or S10 is not sufficient.
+* eth1 (X12) (USB to Ethernet) causes an error on `usb reset` if no MAC address
   is set: `Error: smsc95xx_eth address not set.`
-- Backlight on parallel displays are enabled upon Power-On which might lead to random output.
+* Backlight on parallel displays are enabled upon Power-On which might lead to random output.
   Display will be disabled during bootup and can be used normally afterwards.
-- The generated UBIFS does not fit into the default SPI-NOR (16 MiB). If
+* The generated UBIFS does not fit into the default SPI-NOR (16 MiB). If
   rootfs on SPI NOR is required, following solutions:
   * tailor image recipe and kernel configuration to get real tiny
   * use SoM variant with larger SPI-NOR
-- U-Boot: FEC Ethernet port is from time to time not working after U-Boot start.
+* U-Boot: FEC Ethernet port is from time to time not working after U-Boot start.
   Another powercycle/reset or PHY software reset (`mdio write ethernet@2188000 0
   0x8000`) is required
-- U-Boot: USB dual role port (X8) is deactivated
-- U-Boot: Setting and clearing GPIOs (e.g. for user LEDs) is not working
+* U-Boot: USB dual role port (X8) is deactivated
+* U-Boot: Setting and clearing GPIOs (e.g. for user LEDs) is not working
 
 ## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/${MACHINE}`
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs
 * zImage: Linux kernel image
@@ -92,11 +93,13 @@ Artifacs can be found at the usual locations for bitbake:
 
 ## Boot DIP Switches
 
+### MBa6x DIP Switches
+
 _Note:_
 
 * S1/2/4 are for BOOT_CFG.
 * S5 is for Boot Mode.
-* X means position of DIP, - means don't care
+* `x` means position of DIP, `-` means don't care
 
 ### SD Card
 
@@ -148,7 +151,7 @@ Support can vary with kernel branch and version.
 | LVDS            | imx6\[dl,q,qp\]-mba6\[a,b\]-lvds-tm070jvhg33.dtb          | Tianma TM070JVHG33 |
 | LVDS, dual      | imx6\[dl,q,qp\]-mba6\[a,b\]-duallvds-tm070jvhg33.dtb      | Tianma TM070JVHG33 |
 | LVDS, FullHD    | imx6\[dl,q,qp\]-mba6\[a,b\]-lvds-g133han01.dtb            | AUO G133HAN.01     |
-| Parallel        | imx6\[dl,q,qp\]-mba6\[a,b\]-cdtech-dc44.dtb               | CDTECT DC44 (DMB)  |
+| Parallel        | imx6\[dl,q,qp\]-mba6\[a,b\]-cdtech-dc44.dtb               | CDTECH DC44 (DMB)  |
 | Parallel        | imx6\[dl,q,qp\]-mba6\[a,b\]-cdtech-fc21.dtb               | CDTECH FC21 (DMB)  |
 
 ### Access U-Boot environment from Linux
