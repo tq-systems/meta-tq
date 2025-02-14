@@ -108,11 +108,12 @@ eMMC.
   can be overwritten)
 * `mmcpart`: partition number for kernel and devicetree (default = 1)
 * `mmcpath`: path to kernel and device tree (default = /)
-* `fdt_file`: device tree blob,
+* `fdtfile`: device tree blob (`fdt_file` on U-Boot based on version v2020.04)
 * `image`: kernel image,
 * `ubirootfspart`: name of ubi partition for rootfs  (default = ubi)
 * `ubirootfsvol`: name of ubi volume for rootfs (default = rootfs)
-* `ubimtdidx`: number of ubi partition for rootfs (default = 3)
+* `ubimtdidx`: number or name of of mtd partition containing the ubi volume for
+   rootfs (default = 3 or `ubi`)
 * `ubirootfs`: name of ubifs image to be used for the update command
   (default = rootfs.ubifs)
 
@@ -125,13 +126,15 @@ Download bootstream from TFTP and update:
 
 `run update_uboot_mmc`
 
+For eMMC this updates the U-Boot on the active Boot Partition or the USER Area.
+
 ### FLEXSPI
 
 Download bootstream from TFTP and update:
 
 `run update_uboot_spi`
 
-To use UBIFS on SPI NOR, one time initialisation is needed:
+To use UBIFS on SPI NOR, __one time__ initialisation is needed:
 
 `run prepare_ubi_part`
 
@@ -143,6 +146,9 @@ This carries out the following tasks:
 Download UBIFS image from TFTP and update:
 
 `run update_rootfs_spi`
+
+__Note:__: set `ubirootfs` to the correct image name. This is usually the artifact with the extension
+`.rootfs.ubifs`
 
 ## Booting Linux OS
 
