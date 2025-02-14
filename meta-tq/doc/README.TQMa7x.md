@@ -27,7 +27,7 @@ NOTE: Linux Kernel 6.1 is incompatible to yocto scarthgap.
 For Linux 6.1 use yocto kirkstone.
 
 |                            | linux-tq-6.6 |
-| :------------------------- | :----------: |
+| :------------------------: | :----------: |
 | Fuses                      |      x       |
 | UART (console, X13 or X14) |      x       |
 | GPIO                       |      x       |
@@ -55,11 +55,12 @@ For Linux 6.1 use yocto kirkstone.
 | Touch (X23)                |      x       |
 | ADC (X23/X24)              |      x       |
 
-## ToDo / Untested
+### ToDo / Untested
 
 * Smart card (X6)
 * SIM card (X18)
 * Mic In (X19)
+* Pixel Pipeline PXP
 
 ## Known issues / Limitations
 
@@ -75,19 +76,20 @@ For Linux 6.1 use yocto kirkstone.
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
   `UBI_MAX_LEB_COUNT` on machine level.
-* Environment-variables of U-Boot v2023.04 were reworked and are now based on
-  `tq-imx-shared-env.h`. Environments of older u-boot versions are incompatible.
+* Environment of U-Boot v2023.04 was reworked to use variable names that conforms with
+  distroboot contract. The default environment of older U-Boot versions are incompatible.
 
 ## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/${MACHINE}`
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs
 * zImage: Linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
+* \*.rootfs.ubifs: UBIFS rootfs for updating the rootfs from bootloader
+   (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 * u-boot-${MACHINE}.imx-sd: boot stream for SD / e-MMC
 * u-boot-${MACHINE}.imx-qspi: boot stream for QSPI
@@ -100,6 +102,7 @@ _Note:_
 
 * S2/3/4 are for BOOT_CFG 0..20.
 * S1 is for Boot Mode.
+* `x` means position of DIP, `-` means don't care
 
 ### SD Card
 
