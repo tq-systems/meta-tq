@@ -76,6 +76,9 @@ For Linux 6.1 use yocto kirkstone.
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
   `UBI_MAX_LEB_COUNT` on machine level.
+* Kernel image and device tree files are loaded from `/boot` in rootfs. They are
+  installed in the SD/eMMC image twice in partition `boot`. Removing them from
+  `IMAGE_BOOT_FILES` prevents this doubled installation.
 * Environment of U-Boot v2023.04 was reworked to use variable names that conforms with
   distroboot contract. The default environment of older U-Boot versions are incompatible.
 

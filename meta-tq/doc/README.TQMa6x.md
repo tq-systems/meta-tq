@@ -79,6 +79,9 @@ For Linux 6.1 use yocto kirkstone.
   0x8000`) is required
 * U-Boot: USB dual role port (X8) is tested in U-Boot in peripheral mode only.
 * U-Boot: Setting and clearing GPIOs (e.g. for user LEDs) is not working
+* Kernel image and device tree files are loaded from `/boot` in rootfs. They are
+  installed in the SD/eMMC image twice in partition `boot`. Removing them from
+  `IMAGE_BOOT_FILES` prevents this doubled installation.
 
 ## Artifacts
 
