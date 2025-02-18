@@ -3,7 +3,11 @@ require u-boot-tq.inc
 
 DESCRIPTION = "U-Boot for TQ-Group TQMT modules"
 PROVIDES += "virtual/bootloader u-boot"
-DEPENDS += "u-boot-mkimage-native rcw"
+DEPENDS += "\
+    u-boot-mkimage-native \
+    rcw \
+    bc-native \
+"
 
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
@@ -42,6 +46,12 @@ RCW_FOLDER:tqmt1040 ?= "tqmt1040"
 RCW_FOLDER:tqmt1042 ?= "tqmt1042"
 RCW_FOLDER:tqmt1022 ?= "tqmt1042"
 RCW_SUFFIX ?= ".bin"
+
+# This package aggregates output deployed by other packages,
+# so set the appropriate dependencies
+do_compile[depends] += "\
+    rcw:do_deploy \
+"
 
 do_compile:append() {
     unset i j
