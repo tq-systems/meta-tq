@@ -76,7 +76,7 @@ For Linux 6.1 use yocto kirkstone.
 | Ethernet 100M (X1500) - not G1 CPU   |      x       |
 | CAN (X13)                            |      x       |
 | CAN (X14) not G1                     |      x       |
-| RS-485 (X16)                         |      x       |
+| RS-485 (X16)                         |              |
 | LVDS (X17, X18)                      |      x       |
 | Parallel LCD (X4)                    |      x       |
 | Audio Line In (X20)                  |      x       |
@@ -90,6 +90,7 @@ _Note:_ Mini PCIe connector only supports USB.
 * SIM card (X23)
 * Resistive Touch (X4)
 * Pixel Pipeline PXP
+* RS485 (X16)
 
 ## Known issues / Limitations
 

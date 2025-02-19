@@ -46,7 +46,7 @@ For Linux 6.1 use yocto kirkstone.
 | eMMC/SD (on-board/X7)      |      x       |
 | Ethernet GigE (X8/X9)      |      x       |
 | CAN (X10/X11)              |      x       |
-| RS-485 (X12)               |      x       |
+| RS-485 (X12)               |              |
 | LVDS (X15, X16)            |      x       |
 | PCIe (X17)                 |              |
 | Audio Line In (X20)        |      x       |
@@ -61,6 +61,7 @@ For Linux 6.1 use yocto kirkstone.
 * SIM card (X18)
 * Mic In (X19)
 * Pixel Pipeline PXP
+* RS485 (X12)
 
 ## Known issues / Limitations
 

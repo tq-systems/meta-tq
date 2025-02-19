@@ -43,7 +43,7 @@ For Linux 6.1 use yocto kirkstone.
 | Ethernet 1GiB/s (X11)        |      x        |
 | Ethernet 100MBit/s (X12)     |      x        |
 | CAN (X13/X14)                |      x        |
-| RS-485 (X16)                 |      x        |
+| RS-485 (X16)                 |               |
 | HDMI (X17)                   |      x        |
 | LVDS (X18, X19)              |      x        |
 | LVDS FullHD (X18, X19)       |      x        |
@@ -62,6 +62,7 @@ For Linux 6.1 use yocto kirkstone.
 * MIPI-CSI (X28)
 * MIPI-DSI (X28)
 * MLB (X28)
+* RS485 (UART4 / X16)
 
 ## Known issues / Limitations
 
