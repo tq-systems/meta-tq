@@ -6,34 +6,14 @@
 
 require imx-mkimage-tq_git.inc
 
-DESCRIPTION = "Generate Boot Stream for i.MX 8 device"
+DESCRIPTION = "Generate Boot Stream for i.MX 8/9 device"
 LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/GPL-2.0-only;md5=801f80980d171dd6425610833a22dbe6"
 SECTION = "BSP"
 
 # This is needed to set SECO_FIRMWARE_NAME for imx8 / imx8x
+# and EdgeLock firmware for i.MX9
 inherit use-imx-security-controller-firmware
-
-IMX_EXTRA_FIRMWARE = "\
-    imx-boot-firmware-files \
-    imx-seco \
-    imx-sc-firmware \
-"
-
-IMX_EXTRA_FIRMWARE:mx8m-generic-bsp = "imx-boot-firmware-files"
-
-IMX_EXTRA_FIRMWARE:mx8x-generic-bsp = "\
-    imx-seco \
-    imx-sc-firmware \
-"
-
-#
-# mx91, mx93, mx95
-#
-IMX_EXTRA_FIRMWARE:mx9-generic-bsp = "\
-    imx-boot-firmware-files \
-    firmware-ele-imx \
-"
 
 IMX_EXTRA_FIRMWARE:append = " ${@bb.utils.contains('IMXBOOT_TARGETS', 'flash_linux_m4', 'virtual/imx-cortexm-demos', '', d)}"
 
