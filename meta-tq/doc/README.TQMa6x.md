@@ -77,7 +77,7 @@ For Linux 6.1 use yocto kirkstone.
 * U-Boot: FEC Ethernet port is from time to time not working after U-Boot start.
   Another powercycle/reset or PHY software reset (`mdio write ethernet@2188000 0
   0x8000`) is required
-* U-Boot: USB dual role port (X8) is deactivated
+* U-Boot: USB dual role port (X8) is tested in U-Boot in peripheral mode only.
 * U-Boot: Setting and clearing GPIOs (e.g. for user LEDs) is not working
 
 ## Artifacts
