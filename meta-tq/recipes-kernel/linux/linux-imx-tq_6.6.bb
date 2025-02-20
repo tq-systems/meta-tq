@@ -36,6 +36,7 @@ SRC_URI:aarch64:imx-nxp-bsp = "\
     file://enable-led-features.cfg \
     file://features/debug.cfg \
     file://features/devicetree.cfg \
+    file://features/network.cfg \
     file://gpio-enablement.cfg \
     file://imx8m-platform-support.cfg \
     file://imx93-platform-support.cfg \
