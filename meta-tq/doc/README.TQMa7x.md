@@ -79,6 +79,9 @@ For Linux 6.1 use yocto kirkstone.
   `UBI_MAX_LEB_COUNT` on machine level. The distro definition and the image recipes
   `tq-image-small-[debug]` are intended for demonstration of howto generate a system
   running from SPI-NOR. This does not make any claims on feature / functional completeness.
+* U-Boot: USB dual role port (X5) is tested in U-Boot in peripheral mode only.
+* U-Boot: A POR might fail even if main power supply is disconnected, when running with
+  USB dual role port (X5) connected to PC / HUB with powered VBUS.
 * Kernel image and device tree files are loaded from `/boot` in rootfs. They are
   installed in the SD/eMMC image twice in partition `boot`. Removing them from
   `IMAGE_BOOT_FILES` prevents this doubled installation.
