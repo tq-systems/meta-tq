@@ -22,6 +22,7 @@ KERNEL_CONFIG_FILES:imx ?= "\
     file://usb.cfg \
     file://ubi.cfg \
     file://features/devicetree.cfg \
+    file://features/network.cfg \
 "
 
 GIT_URL ?= "git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git"
