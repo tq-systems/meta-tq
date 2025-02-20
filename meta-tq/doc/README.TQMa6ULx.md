@@ -116,6 +116,8 @@ _Note:_ Mini PCIe connector only supports USB.
   `IMAGE_BOOT_FILES` prevents this doubled installation.
 * Environment of U-Boot v2023.04 was reworked to use variable names that conforms with
   distroboot contract. The default environment of older U-Boot versions are incompatible.
+* USB devices at miniPCIe connector (X22) are not detected after POR. After warm reset
+  devices enumerate.
 
 ## Artifacts
 
