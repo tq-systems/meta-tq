@@ -71,10 +71,14 @@ For Linux 6.1 use yocto kirkstone.
   is set: `Error: smsc95xx_eth address not set.`
 * Backlight on parallel displays are enabled upon Power-On which might lead to random output.
   Display will be disabled during bootup and can be used normally afterwards.
-* The generated UBIFS does not fit into the default SPI-NOR (16 MiB). If
+* UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle`.
+  The values for `UBI_LEB_SIZE` and `UBI_MAX_LEB_COUNT` are predefined for 64 MiB SPI-NOR.
+  The generated UBIFS does not fit into the default SPI-NOR (16 MiB). If
   rootfs on SPI NOR is required, following solutions:
   * tailor image recipe and kernel configuration to get real tiny
   * use SoM variant with larger SPI-NOR
+* U-Boot: MTD and UBI Support are not configured. Only U-Boot and environment on SPI NOR
+  are supported by built U-Boot configuration..
 * U-Boot: FEC Ethernet port is from time to time not working after U-Boot start.
   Another powercycle/reset or PHY software reset (`mdio write ethernet@2188000 0
   0x8000`) is required
