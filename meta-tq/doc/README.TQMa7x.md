@@ -157,6 +157,19 @@ and starting linux outside of Trustzone (`non secure`).
 
 The number of running CPUs can be checked with `nproc` under linux.
 
+### Display Support
+
+Each Display can be used on its own by using the corresponding device tree.
+Using as device tree overlay is prepared.
+
+*Note:* With MBa7x only one control interface for backlight is available.
+
+| Interface       | Device tree                              | Type               |
+|-----------------|------------------------------------------|--------------------|
+| LVDS            | imx7d-mba7-lvds-tm070jvhg33.dtb          | Tianma TM070JVHG33 |
+| Parallel        | imx7d-mba7-rgb-cdtech-dc44.dtb           | CDTECH DC44 (DMB)  |
+| Parallel        | imx7d-mba7-rgb-cdtech-fc21.dtb           | CDTECH FC21 (DMB)  |
+
 ### Access U-Boot environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
