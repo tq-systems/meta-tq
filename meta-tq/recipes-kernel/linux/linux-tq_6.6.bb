@@ -22,6 +22,7 @@ KERNEL_CONFIG_FILES:imx ?= "\
     file://usb.cfg \
     file://ubi.cfg \
     file://features/devicetree.cfg \
+    file://features/network.cfg \
 "
 
 SRC_URI = "\
