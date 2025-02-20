@@ -108,7 +108,9 @@ _Note:_ Mini PCIe connector only supports USB.
   device tree specification.
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
-  `UBI_MAX_LEB_COUNT` on machine level.
+  `UBI_MAX_LEB_COUNT` on machine level. The distro definition and the image recipes
+  `tq-image-small-[debug]` are intended for demonstration of howto generate a system
+  running from SPI-NOR. This does not make any claims on feature / functional completeness.
 * Kernel image and device tree files are loaded from `/boot` in rootfs. They are
   installed in the SD/eMMC image twice in partition `boot`. Removing them from
   `IMAGE_BOOT_FILES` prevents this doubled installation.
