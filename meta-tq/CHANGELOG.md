@@ -92,6 +92,9 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* u-boot-tq_2023.04: fix a warning in MTD partition parsing when the last partition
+  uses remaining size but free space is left before this partition.
+
 * u-boot-imx-tq_2020.04 / u-boot-imx-tq_2023.04 / u-boot-tq_2023.04: provide
   configurations for U-Boot env tools based on rootfs. Multiconfiguration config
   file does not work in on device in the configuration is not present.
