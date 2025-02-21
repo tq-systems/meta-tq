@@ -10,6 +10,7 @@ DISTRO_FEATURES += "pam"
 DISTRO_FEATURES += "ppp"
 DISTRO_FEATURES += "vulkan"
 DISTRO_FEATURES += "wayland"
+DISTRO_FEATURES += "wifi"
 
 # add some locales per default
 IMAGE_LINGUAS:append = " de-de en-us"
