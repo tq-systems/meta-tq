@@ -24,6 +24,9 @@ INHERIT += "sanity"
 INHERIT += "insane"
 QA_LOG = "1"
 
+# generate 'etc/buildinfo' in image and in 'DEPLOY_DIR_IMAGE' folder
+INHERIT += "tq-buildinfo"
+
 # include the version package
 DISTRO_EXTRA_RDEPENDS += "os-release"
 
