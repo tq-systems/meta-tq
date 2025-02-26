@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* distros: enable `wifi` as `DISTRO_FEATURE` for all distros based on `dumpling`
+  this will automatically install packages needed via predefined packagegroups.
+
 ## scarthgap.TQ.ARM.BSP.0003
 
 ### Added
