@@ -20,9 +20,15 @@ Releases are named with the following scheme:
 ### Changed
 
 * imx-tq-atf_2.10: integrate changes from NXP BSP release `lf-6.6.52-2.2.0`
-* linux-imx-tq-6.6: integrate changes from NXP BSP release `lf-6.6.52-2.2.0`
-  via the matching branch of linux-fslc repo. Integrates linux-stable fixes
-  up to v6.6.69
+* linux-imx-tq-6.6:
+  * Add TCP SYN cookie support (expected by default sysctl.conf)
+  * integrate changes from NXP BSP release `lf-6.6.52-2.2.0`
+    via the matching branch of linux-fslc repo. Integrates linux-stable fixes
+    up to v6.6.74
+
+### Fixed
+
+* imx-boot-tq: do not overwrite settings for IMX_EXTRA_FIRMWARE.
 
 ## scarthgap.TQ.ARM.BSP.0003
 
