@@ -255,8 +255,8 @@ To allow reusage, the support for each display is separated in a dtsi fragment.
 
 | Interface       | Device tree                                         | Type        ----   |
 |-----------------|-----------------------------------------------------|--------------------|
-| LVDS            | imx93-tqma93xx-mba93xxca-lvds-tm070jvhg33.dtb       | Tianma TM070JVHG33 |
-| LVDS            | imx93-tqma93xxla-mba93xxla-lvds-tm070jvhg33.dtb     | Tianma TM070JVHG33 |
+| LVDS            | imx93-tqma9352-mba93xxca-lvds-tm070jvhg33.dtb       | Tianma TM070JVHG33 |
+| LVDS            | imx93-tqma9352la-mba93xxla-lvds-tm070jvhg33.dtb     | Tianma TM070JVHG33 |
 
 ### CAN
 

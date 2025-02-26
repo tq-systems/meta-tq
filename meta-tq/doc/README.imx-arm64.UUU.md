@@ -4,12 +4,32 @@
 
 ## Bootstream
 
+### ARMv7a / 32 Bit i.MX SoC
+
+To build a bootstream usable with UUU tool the following settings needs to be in your
+configuration. (This is already the case for starterkit machine configurations, which
+supports UUU enabled images):
+
+```
+UBOOT_CONFIG += "uuu"
+# or
+UBOOT_CONFIG += "uuu_lga"
+```
+
+Rebuild boot loader:
+
+```
+bitbake virtual/bootloader
+```
+
+### ARMv8a / 64 Bit i.MX SoC
+
 To build a bootstream usable with UUU tool the following settings needs to be in your
 configuration. (This is already the case for starterkit machine configurations):
 
 ```
-UBOOT_CONFIG = "mfgtool"
-IMXBOOT_TARGETS = "flash_spl_uboot"
+UBOOT_CONFIG += "mfgtool"
+IMXBOOT_TARGETS += "flash_spl_uboot"
 ```
 
 Rebuild boot stream:
@@ -27,19 +47,46 @@ no bootstream can be found on the selected boot media and on eventually configur
 fallback media. See your boards Boot DIP Switches section how to configure Boot Mode
 for `Serial Downloader`.
 
-### use builtin commands
+Please note, that the builtin scripts of UUU make some assumtions that may or may not fit
+your use case. Check if your U-Boot configuration and the builtins fit your use case.
+You can use the cmdlist support of UUU to create tailored workflows. Some board specific
+examples are given below.
+
+### BSP example configuration
+
+For all boards with support for `Serial Download Mode` multiple U-Boot configurations
+are given:
+
+- Configuration with support for `Serial Download Mode`. The resulting image has features enabled
+  for provisioning / service use:
+  * random MAC address if none is in environment / fuses
+  * no access to stored environments
+  * SDP (serial download protocol)
+  * fastboot (also preconfigured as bootcmd, can be terminated with `CTRL_C`)
+- Configuration(s) with support for boot devices. The images have the above features disabled
+  since they are mostly not needed or undesired for production firmware.
+
+### Use builtin commands
 
 #### Boot a board
 
 Use the bootstream containing U-Boot capable of handling SDP together with
 UUU tool to boot a new / bricked board (see Artifacts section for your board for
-name the exact name of the bootstream image for mfgtool/uuu configuration):
+the exact name of the bootstream image for mfgtool/uuu configuration):
+
+If using U-Boot with SPL:
 
 ```
 sudo uuu -b spl <bootstream for mfgtool/uuu>
 ```
 
-#### Program eMMC
+If using U-Boot without SPL:
+
+```
+sudo uuu <bootstream for mfgtool/uuu>
+```
+
+#### Program image to eMMC
 
 Use the bootstream containing U-Boot capable of handling SDP together with
 UUU tool to boot a new / bricked board and use the booted system to programm
@@ -50,9 +97,9 @@ for the exact names of the images to use):
 sudo uuu -b emmc_all <bootstream for mfgtool/uuu> <wic image>
 ```
 
-**Attention:** The bootstream is written to eMMC boot partition and eMMC is
-configured to use boot partition. Simple update script for bootstream updates
-only bootstream in user area of eMMC.
+**Attention:** The bootstream from first argument will be written to eMMC boot partition
+and eMMC is configured to use boot partition. This bootstream is expected to be able
+to boot from eMMC and to handle serial download.
 
 #### Use a custom workflow
 

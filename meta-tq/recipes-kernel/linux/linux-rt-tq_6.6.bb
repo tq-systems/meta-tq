@@ -4,7 +4,7 @@ require ${PN_BASE}_${PV}.bb
 SUMMARY = "Linux kernel with PREEMPT_RT support from linux mainline v6.6-rt for TQ-Systems GmbH i.MX based modules"
 
 KBRANCH = "TQM-linux-v6.6.y-rt"
-SRCREV = "bd6d88b5ce1b87fcd67cae0e4762012ed51bedc1"
+SRCREV = "90867bef8342651e274b7aacfe8afbb72ca5df2b"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_VERSION = "${LINUX_RELEASE}.63"

@@ -23,7 +23,7 @@ NOTE: Linux Kernel 6.1 is incompatible to yocto scarthgap.
 For Linux 6.1 use yocto kirkstone.
 
 |                              | linux-tq-6.6  |
-| ---------------------------- | :-----------: |
+| :--------------------------: | :-----------: |
 | Fuses                        |      x        |
 | UART (console on UART3, X15) |      x        |
 | GPIO                         |      x        |
@@ -43,7 +43,7 @@ For Linux 6.1 use yocto kirkstone.
 | Ethernet 1GiB/s (X11)        |      x        |
 | Ethernet 100MBit/s (X12)     |      x        |
 | CAN (X13/X14)                |      x        |
-| RS-485 (X16)                 |      x        |
+| RS-485 (X16)                 |               |
 | HDMI (X17)                   |      x        |
 | LVDS (X18, X19)              |      x        |
 | LVDS FullHD (X18, X19)       |      x        |
@@ -56,33 +56,45 @@ For Linux 6.1 use yocto kirkstone.
 | Multi-Display                |      x        |
 
 ### ToDo / Untested
+
 * Mic In (X21)
 * SIM card (X24)
 * MIPI-CSI (X28)
 * MIPI-DSI (X28)
 * MLB (X28)
+* RS485 (UART4 / X16)
 
 ## Known issues / Limitations
 
-- PCIe requires a power cycle to work reliably. Asserting a POR using S9 or S10 is not sufficient.
-- eth1 (X12) (USB to Ethernet) causes an error on `usb reset` if no MAC address
+* PCIe requires a power cycle to work reliably. Asserting a POR using S9 or S10 is not sufficient.
+* eth1 (X12) (USB to Ethernet) causes an error on `usb reset` if no MAC address
   is set: `Error: smsc95xx_eth address not set.`
-- Backlight on parallel displays are enabled upon Power-On which might lead to random output.
+* Backlight on parallel displays are enabled upon Power-On which might lead to random output.
   Display will be disabled during bootup and can be used normally afterwards.
-- The generated UBIFS does not fit into the default SPI-NOR (16 MiB). If
+* UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle`.
+  The values for `UBI_LEB_SIZE` and `UBI_MAX_LEB_COUNT` are predefined for 64 MiB SPI-NOR.
+  The generated UBIFS does not fit into the default SPI-NOR (16 MiB). If
   rootfs on SPI NOR is required, following solutions:
   * tailor image recipe and kernel configuration to get real tiny
   * use SoM variant with larger SPI-NOR
-- U-Boot: FEC Ethernet port is from time to time not working after U-Boot start.
+* U-Boot: MTD and UBI Support are not configured. Only U-Boot and environment on SPI NOR
+  are supported by built U-Boot configuration..
+* U-Boot: FEC Ethernet port is from time to time not working after U-Boot start.
   Another powercycle/reset or PHY software reset (`mdio write ethernet@2188000 0
   0x8000`) is required
-- U-Boot: USB dual role port (X8) is deactivated
-- U-Boot: Setting and clearing GPIOs (e.g. for user LEDs) is not working
+* U-Boot: USB dual role port (X8) is tested in U-Boot in peripheral mode only.
+* U-Boot: Setting and clearing GPIOs (e.g. for user LEDs) is not working
+* U-Boot: USB Ethernet (LAN9500 / X12C) is only usable after `usb start` and with valid
+  MAC in `usbethaddr` environment variable. Parsing the MBa6x specific value from
+  EEPROM is not implemented in U-Boot.
+* Kernel image and device tree files are loaded from `/boot` in rootfs. They are
+  installed in the SD/eMMC image twice in partition `boot`. Removing them from
+  `IMAGE_BOOT_FILES` prevents this doubled installation.
 
 ## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/${MACHINE}`
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs
 * zImage: Linux kernel image
@@ -92,11 +104,13 @@ Artifacs can be found at the usual locations for bitbake:
 
 ## Boot DIP Switches
 
+### MBa6x DIP Switches
+
 _Note:_
 
 * S1/2/4 are for BOOT_CFG.
 * S5 is for Boot Mode.
-* X means position of DIP, - means don't care
+* `x` means position of DIP, `-` means don't care
 
 ### SD Card
 
@@ -124,54 +138,12 @@ _Note:_
 
 ## Boot device initialisation and update
 
-### SPI NOR
-
-To initialize SPI NOR with bootloader, write the [bootloader image](#artifacts)
-to SPI NOR at offset 0x400:
-
-```
-setenv uboot <U-Boot SPI boot image>
-tftp ${loadaddr} ${uboot}
-sf probe
-sf erase 0 0x100000
-sf write ${loadaddr} 0x400 ${filesize}
-```
-
 See [here](./README.imx-arm64.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
 
-### Program system image
+## Use UUU Tool
 
-#### SPI NOR
-
-Not supported. Only kernel and DTB can be stored at the moment.
-
-#### SD / e-MMC
-
-To program complete system image to SD / e-MMC, write [WIC image](#artifacts)
-to SD / e-MMC at offset 0x00 / block #0
-
-### Update bootloader
-
-To update the bootloader of system using U-Boot / TFTP following shortcuts
-exist.
-
-**Note**: Kernel and device tree are stored in the root fs and can be updated
-on the filesystem level.
-
-#### SD / e-MMC
-
-```
-setenv uboot <name of u-boot image>
-run update_uboot_mmc
-```
-
-#### SPI
-
-```
-setenv uboot <name of u-boot image>
-run update_uboot_spi
-```
+See [here](./README.imx-arm64.UUU.md) for details about using Serial Download mode and UUU.
 
 ## Howto
 
@@ -190,7 +162,7 @@ Support can vary with kernel branch and version.
 | LVDS            | imx6\[dl,q,qp\]-mba6\[a,b\]-lvds-tm070jvhg33.dtb          | Tianma TM070JVHG33 |
 | LVDS, dual      | imx6\[dl,q,qp\]-mba6\[a,b\]-duallvds-tm070jvhg33.dtb      | Tianma TM070JVHG33 |
 | LVDS, FullHD    | imx6\[dl,q,qp\]-mba6\[a,b\]-lvds-g133han01.dtb            | AUO G133HAN.01     |
-| Parallel        | imx6\[dl,q,qp\]-mba6\[a,b\]-cdtech-dc44.dtb               | CDTECT DC44 (DMB)  |
+| Parallel        | imx6\[dl,q,qp\]-mba6\[a,b\]-cdtech-dc44.dtb               | CDTECH DC44 (DMB)  |
 | Parallel        | imx6\[dl,q,qp\]-mba6\[a,b\]-cdtech-fc21.dtb               | CDTECH FC21 (DMB)  |
 
 ### Access U-Boot environment from Linux

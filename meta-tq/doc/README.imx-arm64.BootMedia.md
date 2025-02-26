@@ -9,24 +9,23 @@ how default U-Boot env supports update for development purpose.
 
 ### Bootstream location on SD and eMMC
 
-For SD-card and eMMC user partition following table applies:
+For SD-card and eMMC following table applies:
 
-| CPU family |     offset      | Block (512 Bytes) |
-|:----------:|:---------------:|:-----------------:|
-|    iMX6    |  1 KiB (0x400)  |      2 / 0x2      |
-|    iMX7    |  1 KiB (0x400)  |      2 / 0x2      |
-|   iMX8MQ   | 33 KiB (0x8400) |     66 / 0x42     |
-|   iMX8MM   | 33 KiB (0x8400) |     66 / 0x42     |
-|   iMX8MN   | 32 KiB (0x8000) |     64 / 0x40     |
-|   iMX8MP   | 32 KiB (0x8000) |     64 / 0x40     |
-|   iMX8X    | 32 KiB (0x8000) |     64 / 0x40     |
-|    iMX8    | 32 KiB (0x8000) |     64 / 0x40     |
-|   iMX93    | 32 KiB (0x8000) |     64 / 0x40     |
-
-When using eMMC boot partition the offset of bootstream is always 0x0 aka eMMC block
-0x0.
+| CPU family | SD-card / eMMC user partition |   Block   | eMMC boot partition |   Block   |
+|:----------:|:-----------------------------:|:---------:|:-------------------:|:---------:|
+|    iMX6    |         1 KiB (0x400)         |  2 / 0x2  |    1 KiB (0x400)    |  2 / 0x2  |
+|    iMX7    |         1 KiB (0x400)         |  2 / 0x2  |    1 KiB (0x400)    |  2 / 0x2  |
+|   iMX8MQ   |        33 KiB (0x8400)        | 66 / 0x42 |   33 KiB (0x8400)   | 66 / 0x42 |
+|   iMX8MM   |        33 KiB (0x8400)        | 66 / 0x42 |   33 KiB (0x8400)   | 66 / 0x42 |
+|   iMX8MN   |        32 KiB (0x8000)        | 64 / 0x40 |     0 KiB (0x0)     |  0 / 0x0  |
+|   iMX8MP   |        32 KiB (0x8000)        | 64 / 0x40 |     0 KiB (0x0)     |  0 / 0x0  |
+|   iMX8X    |        32 KiB (0x8000)        | 64 / 0x40 |     0 KiB (0x0)     |  0 / 0x0  |
+|    iMX8    |        32 KiB (0x8000)        | 64 / 0x40 |     0 KiB (0x0)     |  0 / 0x0  |
+|   iMX93    |        32 KiB (0x8000)        | 64 / 0x40 |     0 KiB (0x0)     |  0 / 0x0  |
 
 Note: iMX6 applies to all i.MX6, i.MX6UL and i.MX6ULL variants
+
+Note: Blocks are in sizes of 512 Bytes
 
 ### Bootable SD-Card
 
@@ -109,11 +108,12 @@ eMMC.
   can be overwritten)
 * `mmcpart`: partition number for kernel and devicetree (default = 1)
 * `mmcpath`: path to kernel and device tree (default = /)
-* `fdt_file`: device tree blob,
+* `fdtfile`: device tree blob (`fdt_file` on U-Boot based on version v2020.04)
 * `image`: kernel image,
 * `ubirootfspart`: name of ubi partition for rootfs  (default = ubi)
 * `ubirootfsvol`: name of ubi volume for rootfs (default = rootfs)
-* `ubimtdidx`: number of ubi partition for rootfs (default = 3)
+* `ubimtdidx`: number or name of of mtd partition containing the ubi volume for
+   rootfs (default = 3 or `ubi`)
 * `ubirootfs`: name of ubifs image to be used for the update command
   (default = rootfs.ubifs)
 
@@ -126,13 +126,15 @@ Download bootstream from TFTP and update:
 
 `run update_uboot_mmc`
 
+For eMMC this updates the U-Boot on the active Boot Partition or the USER Area.
+
 ### FLEXSPI
 
 Download bootstream from TFTP and update:
 
 `run update_uboot_spi`
 
-To use UBIFS on SPI NOR, one time initialisation is needed:
+To use UBIFS on SPI NOR, __one time__ initialisation is needed:
 
 `run prepare_ubi_part`
 
@@ -144,6 +146,9 @@ This carries out the following tasks:
 Download UBIFS image from TFTP and update:
 
 `run update_rootfs_spi`
+
+__Note:__: set `ubirootfs` to the correct image name. This is usually the artifact with the extension
+`.rootfs.ubifs`
 
 ## Booting Linux OS
 

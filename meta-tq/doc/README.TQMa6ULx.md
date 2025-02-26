@@ -21,13 +21,43 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ## Supported Features
 
+### U-Boot
+
+| Feature                                          |   REV.020x   |
+| :----------------------------------------------: | :----------: |
+| RAM configs                                      | 256, 512 MiB |
+| CPU variants                                     | i.MX6UL[L]   |
+| Fuses / OCRAM                                    |       x      |
+| speed grade / temperature grade detection        |       x      |
+| UART (console)                                   |       x      |
+| **GPIO**                                         |              |
+| generic                                          |       x      |
+| **I2C**                                          |              |
+| PMIC                                             |       x      |
+| **e-MMC / SD**                                   |              |
+| Read                                             |       x      |
+| Write                                            |       x      |
+| **Ethernet**                                     |              |
+| 2 x FEC via Phy on MBa6ULx                       |       x      |
+| **Bootdevices**                                  |              |
+| SD-Card                                          |       x      |
+| e-MMC                                            |       x      |
+| QSPI-NOR on QuadSPI                              |       x      |
+| Serial Downloader                                |       x      |
+| **USB**                                          |              |
+| USB 2.0 Host / Hub                               |       x      |
+| USB DRD (USB 2.0 Cable Detect, VBUS)             |              |
+| **QSPI NOR**                                     |              |
+| Read                                             |       x      |
+| PP / Erase                                       |       x      |
+
 ### Linux
 
 NOTE: Linux Kernel 6.1 is incompatible to yocto scarthgap.
 For Linux 6.1 use yocto kirkstone.
 
-|                                      | linux-tq-6.6 |
-| ------------------------------------ | :----------: |
+| Feature                              | linux-tq-6.6 |
+| :----------------------------------: | :----------: |
 | Fuses                                |      x       |
 | UART1 (console, X15)                 |      x       |
 | UART3 (X5)                           |      x       |
@@ -46,7 +76,7 @@ For Linux 6.1 use yocto kirkstone.
 | Ethernet 100M (X1500) - not G1 CPU   |      x       |
 | CAN (X13)                            |      x       |
 | CAN (X14) not G1                     |      x       |
-| RS-485 (X16)                         |      x       |
+| RS-485 (X16)                         |              |
 | LVDS (X17, X18)                      |      x       |
 | Parallel LCD (X4)                    |      x       |
 | Audio Line In (X20)                  |      x       |
@@ -60,12 +90,10 @@ _Note:_ Mini PCIe connector only supports USB.
 * SIM card (X23)
 * Resistive Touch (X4)
 * Pixel Pipeline PXP
+* RS485 (X16)
 
-## Known issues
+## Known issues / Limitations
 
-* U-Boot: default device tree names for all machines using the starter kit
-  mainboard (aka MBa6ULx) do not match device tree names in current supported
-  mainline kernel version.
 * edt-ft5406 touch controller on some Glyn displays might cause CRC errors
   after restart using `reboot` command. At startup as well as during runtime. The device
   is still functioning though.
@@ -78,25 +106,34 @@ _Note:_ Mini PCIe connector only supports USB.
   device tree before loding the OS may fail with U-Boot from older BSP versions.
   Device tree path names were changed in CPU device tree fragment to conform the
   device tree specification.
-* Writing to FAT filesystems may cause warnings and errors in U-Boot
-  based on v2016.03.
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
-  `UBI_MAX_LEB_COUNT` on machine level.
+  `UBI_MAX_LEB_COUNT` on machine level. The distro definition and the image recipes
+  `tq-image-small-[debug]` are intended for demonstration of howto generate a system
+  running from SPI-NOR. This does not make any claims on feature / functional completeness.
+* Kernel image and device tree files are loaded from `/boot` in rootfs. They are
+  installed in the SD/eMMC image twice in partition `boot`. Removing them from
+  `IMAGE_BOOT_FILES` prevents this doubled installation.
+* Environment of U-Boot v2023.04 was reworked to use variable names that conforms with
+  distroboot contract. The default environment of older U-Boot versions are incompatible.
+* USB devices at miniPCIe connector (X22) are not detected after POR. After warm reset
+  devices enumerate.
 
 ## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/${MACHINE}`
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs
 * zImage: Linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
+* \*.rootfs.ubifs: UBIFS rootfs for updating the rootfs from bootloader
+   (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
-* u-boot-${MACHINE}.imx-sd: boot stream for SD / e-MMC
-* u-boot-${MACHINE}.imx-qspi: boot stream for QSPI
+* u-boot-with-spl-${MACHINE}.imx-sd: bootloader for SD / e-MMC
+* u-boot-with-spl-${MACHINE}.imx-qspi: bootloader for QSPI
+* u-boot-with-spl-${MACHINE}.imx-uuu: bootloader for UUU / USB serial download
 
 ## Boot DIP Switches
 
@@ -108,7 +145,7 @@ _Note:_
 * S11: BOOT_CFG2\[0 .. 7\]
 * S13: BOOT_CFG4\[0 .. 7\]
 * S5: BOOT\_MODE\[0 .. 1\]
-* X means position of DIP, - means don't care
+* `x` means position of DIP, `-` means don't care
 
 #### SD Card
 
@@ -134,114 +171,35 @@ _Note:_
 | ON      |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |   |  x  |  x  |  x  |  x  |     |  x  |  x  |  x  |    |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |    |     |  x  |
 | OFF     |     |     |     |     |     |     |     |     |   |     |     |     |     |  x  |     |     |     |    |     |     |     |     |     |     |     |     |    |  x  |     |
 
+## Boot device initialisation and update
 
-### MBa6ULxL DIP Switch settings for Boot
+See [here](./README.imx-arm64.BootMedia.md) for detailed information how to write a
+bootstream image and bootloader support for updating the bootstream.
 
-_Note:_
+## Use UUU Tool
 
-* S16 are for BOOT_CFG 0..07.
-* S13 is for Boot Mode.
-
-#### SD Card
-
-|         | S16 |     |     |     |     |     |     |     |   | S13 |     |
-| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: |
-| DIP     |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |   |  1  |  2  |
-| ON      |  -  |  x  |     |  x  |  x  |     |     |  x  |   |     |  x  |
-| OFF     |  -  |     |  x  |     |     |  x  |  x  |     |   |  x  |     |
-
-#### e-MMC
-
-|         | S16 |     |     |     |     |     |     |     |   | S13 |     |
-| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: |
-| DIP     |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |   |  1  |  2  |
-| ON      |  -  |     |  x  |     |     |     |  x  |  x  |   |     |  x  |
-| OFF     |  -  |  x  |     |  x  |  x  |  x  |     |     |   |  x  |     |
-
-#### QSPI
-
-|         | S16 |     |     |     |     |     |     |     |   | S13 |     |
-| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: |
-| DIP     |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |   |  1  |  2  |
-| ON      |  -  |  -  |  -  |  -  |  x  |  x  |  x  |     |   |     |  x  |
-| OFF     |  -  |  -  |  -  |  -  |     |     |     |  x  |   |  x  |     |
-
-## Boot device initialisation
-
-### QSPI NOR
-
-To initialize QSPI NOR with bootloader, write the [bootloader image](#artifacts)
-to QSPI NOR at offset 0x00:
-
-```
-setenv uboot <U-Boot QSPI boot image>
-tftp ${loadaddr} ${uboot}
-sf probe
-sf update ${loadaddr} 0 ${filesize}
-```
-
-### SD / e-MMC
-
-To initialize SD / e-MMC with bootloader, write the [bootloader image](#artifacts)
-for SD / e-MMC to SD / e-MMC at offset 0x400 / block #2
-
-```
-setenv uboot <U-Boot SD/e-MMC boot image>
-tftp ${loadaddr} ${uboot}
-mmc dev [0,1]
-mmc rescan
-setenv blkc ${filesize} + 1ff
-setenv blkc ${blkc} / 200
-mmc write ${loadaddr} 2 ${blkc}
-setenv blkc
-```
-
-### Program system image
-
-#### QSPI NOR
-
-__Attention__: This section is subject to change.
-
-To program the rootfs as UBI, write <rootfs.ubi> image to `/dev/mtd5` (under Linux)
-Copy the image on a USB stick and mount it to `/mnt`
-
-```
-ubiformat /dev/mtd5 -f /mnt/root.ubi
-```
-
-To check check usability of the programmed rootfs one can use
-
-```
-ubiattach /dev/ubi_ctrl -m 5
-mount -t ubifs ubi0:rootfs /mnt
-```
-
-#### SD / e-MMC
-
-To program complete system image to SD / e-MMC, write [WIC image](#artifacts)
-to SD / e-MMC at offset 0x00 / block #0
-
-### Update parts of system
-
-To update parts of system using U-Boot / TFTP following shortcuts exist, to
-update the part on the active boot device.
-
-```
-setenv zimage <name of linux zimage>
-run update_kernel
-```
-
-```
-setenv fdt_file <name of fdt image>
-run update_fdt
-```
-
-```
-setenv uboot <name of u-boot image>
-run update_uboot
-```
+See [here](./README.imx-arm64.UUU.md) for details about using Serial Download mode and UUU.
 
 ## Howto
+
+### Display Support
+
+Each Display can be used on its own by using the corresponding device tree.
+
+*Note:* With MBa6ULx only one control interface for backlight is available.
+
+| Interface       | Device tree                                  | Type               |
+|-----------------|----------------------------------------------|--------------------|
+| LVDS            | imx6ul-tqma6ul2[l]-mba6ulx-lvds.dtb          | Tianma TM070JVHG33 |
+| Parallel        | imx6ul-tqma6ul2[l]-mba6ulx-cdtech-dc44.dtb   | CDTECH DC44 (DMB)  |
+| Parallel        | imx6ul-tqma6ul2[l]-mba6ulx-cdtech-fc21.dtb   | CDTECH FC21 (DMB)  |
+| LVDS            | imx6ull-tqma6ull2[l]-mba6ulx-lvds.dtb        | Tianma TM070JVHG33 |
+| Parallel        | imx6ull-tqma6ull2[l]-mba6ulx-cdtech-dc44.dtb | CDTECH DC44 (DMB)  |
+| Parallel        | imx6ull-tqma6ull2[l]-mba6ulx-cdtech-fc21.dtb | CDTECH FC21 (DMB)  |
+
+### Access U-Boot environment from Linux
+
+See [U-Boot environment tools](README.libubootenv.md).
 
 ## Support Wiki
 

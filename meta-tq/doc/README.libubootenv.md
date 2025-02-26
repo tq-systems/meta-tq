@@ -15,15 +15,10 @@ For details see https://github.com/sbabic/libubootenv
 ## Implementation details
 
 The new configuration file format uses YAML. For every boot device supported by
-a machine the environment settings are placed as a `configuration`. The first /
-top level configuration is treated as default if none is given on the command
-line
-
-| configuration name | description                                       |
-| :----------------: | :-----------------------------------------------: |
-| uboot              | default, on most boards this is the eMMC          |
-| uboot-sd           | SD-Card                                           |
-| uboot-qspi         | QSPI NOR                                          |
+a machine the environment settings are placed in a separate configuration file.
+A service running during early boot links the correct config file to the standard
+configuration. This assumes that root file system and environment are on the same
+device.
 
 Please note:
 

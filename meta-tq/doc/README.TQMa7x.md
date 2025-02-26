@@ -27,7 +27,7 @@ NOTE: Linux Kernel 6.1 is incompatible to yocto scarthgap.
 For Linux 6.1 use yocto kirkstone.
 
 |                            | linux-tq-6.6 |
-| :------------------------- | :----------: |
+| :------------------------: | :----------: |
 | Fuses                      |      x       |
 | UART (console, X13 or X14) |      x       |
 | GPIO                       |      x       |
@@ -46,7 +46,7 @@ For Linux 6.1 use yocto kirkstone.
 | eMMC/SD (on-board/X7)      |      x       |
 | Ethernet GigE (X8/X9)      |      x       |
 | CAN (X10/X11)              |      x       |
-| RS-485 (X12)               |      x       |
+| RS-485 (X12)               |              |
 | LVDS (X15, X16)            |      x       |
 | PCIe (X17)                 |              |
 | Audio Line In (X20)        |      x       |
@@ -55,13 +55,15 @@ For Linux 6.1 use yocto kirkstone.
 | Touch (X23)                |      x       |
 | ADC (X23/X24)              |      x       |
 
-## ToDo / Untested
+### ToDo / Untested
 
 * Smart card (X6)
 * SIM card (X18)
 * Mic In (X19)
+* Pixel Pipeline PXP
+* RS485 (X12)
 
-## Known issues
+## Known issues / Limitations
 
 * Using internal PCIe PHY clock is currently not supported by the Linux
   mainline and newer NXP vendor kernel. PCIe can not be used on MBa7x
@@ -72,24 +74,31 @@ For Linux 6.1 use yocto kirkstone.
   erroneously supplying VBUS as well preventing a device disconnect per software.
   Occurs when gadget is disabled again. USB host might fail to detect a new USB
   descriptor once gadget is restarted.
-* Writing to FAT filesystems may cause warnings and errors in U-Boot
-  based on v2016.03.
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
-  `UBI_MAX_LEB_COUNT` on machine level.
-* Environment-variables of U-Boot v2023.04 were reworked and are now based on
-  `tq-imx-shared-env.h`. Environments of older u-boot versions are incompatible.
+  `UBI_MAX_LEB_COUNT` on machine level. The distro definition and the image recipes
+  `tq-image-small-[debug]` are intended for demonstration of howto generate a system
+  running from SPI-NOR. This does not make any claims on feature / functional completeness.
+* U-Boot: USB dual role port (X5) is tested in U-Boot in peripheral mode only.
+* U-Boot: A POR might fail even if main power supply is disconnected, when running with
+  USB dual role port (X5) connected to PC / HUB with powered VBUS.
+* Kernel image and device tree files are loaded from `/boot` in rootfs. They are
+  installed in the SD/eMMC image twice in partition `boot`. Removing them from
+  `IMAGE_BOOT_FILES` prevents this doubled installation.
+* Environment of U-Boot v2023.04 was reworked to use variable names that conforms with
+  distroboot contract. The default environment of older U-Boot versions are incompatible.
 
 ## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/${MACHINE}`
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs
 * zImage: Linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
+* \*.rootfs.ubifs: UBIFS rootfs for updating the rootfs from bootloader
+   (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 * u-boot-${MACHINE}.imx-sd: boot stream for SD / e-MMC
 * u-boot-${MACHINE}.imx-qspi: boot stream for QSPI
@@ -102,6 +111,7 @@ _Note:_
 
 * S2/3/4 are for BOOT_CFG 0..20.
 * S1 is for Boot Mode.
+* `x` means position of DIP, `-` means don't care
 
 ### SD Card
 
@@ -127,46 +137,14 @@ _Note:_
 | ON      |      |     |     |     |     |     |     |     |    |      |     |     |     |     |     |  x  |     |    |     |     |     |     |    |  x  |     |
 | OFF     |  x   |  x  |  x  |  x  |  x  |  x  |  x  |  x  |    |  x   |  x  |  x  |  x  |  x  |  x  |     |  x  |    |  -  |  -  |  -  |  -  |    |     |  x  |
 
-## Boot device initialisation
-
-### QSPI NOR
-
-To initialize QSPI NOR with bootloader, write the [bootloader image](#artifacts)
-to QSPI NOR at offset 0x00:
-
-```
-setenv uboot <U-Boot QSPI boot image>
-tftp ${loadaddr} ${uboot}
-sf probe
-sf update ${loadaddr} 0 ${filesize}
-```
+## Boot device initialisation and update
 
 See [here](./README.imx-arm64.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
 
-### Program system image
+## Use UUU Tool
 
-#### QSPI NOR
-
-Not supported. Only kernel and DTB can be stored at the moment.
-
-#### SD / e-MMC
-
-To program complete system image to SD / e-MMC, write [WIC image](#artifacts)
-to SD / e-MMC at offset 0x00 / block #0
-
-### Update bootloader
-
-To update the bootloader of system using U-Boot / TFTP following shortcuts
-exist.
-
-**Note**: Kernel and device tree are stored in the root fs and can be updated
-on the filesystem level.
-
-```
-setenv uboot <name of u-boot image>
-run update_uboot_mmc
-```
+See [here](./README.imx-arm64.UUU.md) for details about using Serial Download mode and UUU.
 
 ## Howto
 
@@ -181,6 +159,23 @@ This version of BSP is only tested with an U-Boot version that implements PSCI
 and starting linux outside of Trustzone (`non secure`).
 
 The number of running CPUs can be checked with `nproc` under linux.
+
+### Display Support
+
+Each Display can be used on its own by using the corresponding device tree.
+Using as device tree overlay is prepared.
+
+*Note:* With MBa7x only one control interface for backlight is available.
+
+| Interface       | Device tree                              | Type               |
+|-----------------|------------------------------------------|--------------------|
+| LVDS            | imx7d-mba7-lvds-tm070jvhg33.dtb          | Tianma TM070JVHG33 |
+| Parallel        | imx7d-mba7-rgb-cdtech-dc44.dtb           | CDTECH DC44 (DMB)  |
+| Parallel        | imx7d-mba7-rgb-cdtech-fc21.dtb           | CDTECH FC21 (DMB)  |
+
+### Access U-Boot environment from Linux
+
+See [U-Boot environment tools](README.libubootenv.md).
 
 ## Support Wiki
 

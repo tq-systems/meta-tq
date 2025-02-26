@@ -36,8 +36,10 @@ KERNEL_IMAGETYPE = "zImage"
 
 PREFERRED_PROVIDER_u-boot:mx7-generic-bsp ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/bootloader:mx7-generic-bsp ?= "u-boot-tq"
-UBOOT_MAKE_TARGET:mx7-generic-bsp ?= "u-boot.imx"
 UBOOT_SUFFIX:mx7-generic-bsp = "imx"
+UBOOT_BINARY_BASENAME:mx7-generic-bsp = "u-boot-dtb"
+UBOOT_MAKE_TARGET:mx7-generic-bsp ?= "${UBOOT_BINARY_BASENAME}.${UBOOT_SUFFIX}"
+UBOOT_BINARY:mx7-generic-bsp = "${UBOOT_MAKE_TARGET}"
 IMX_DEFAULT_BOOTLOADER ?= "u-boot-tq"
 
 # multiple U-Boot env locations
