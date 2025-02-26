@@ -36,6 +36,9 @@ INHERIT += "sanity"
 INHERIT += "insane"
 QA_LOG = "1"
 
+# generate 'etc/buildinfo' in image and in 'DEPLOY_DIR_IMAGE' folder
+INHERIT += "tq-buildinfo"
+
 DISTRO_EXTRA_RDEPENDS += "os-release u-boot-env-tq"
 DISTRO_EXTRA_RRECOMMENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'rauc', 'tq-mount-data', '', d)}"
 
