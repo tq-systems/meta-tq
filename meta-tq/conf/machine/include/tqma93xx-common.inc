@@ -6,6 +6,10 @@ MACHINEOVERRIDES =. "imx:mx9:mx93:tqma93xx:nxp-ahab:"
 # meta-freescale
 
 include conf/machine/include/imx-base.inc
+
+# Override incompatible defaults from imx-base.inc.
+IMAGE_BOOT_FILES = "u-boot-initial-env-sd"
+
 require conf/machine/include/arm/armv8-2a/tune-cortexa55.inc
 
 require conf/machine/include/tqmxx.inc
