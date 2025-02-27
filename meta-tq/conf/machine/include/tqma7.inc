@@ -6,6 +6,9 @@ MACHINEOVERRIDES =. "imx:mx7:mx7d:tqma7x:"
 # meta-freescale
 include conf/machine/include/imx-base.inc
 
+# Override incompatible defaults from imx-base.inc.
+IMAGE_BOOT_FILES = "u-boot-initial-env-sd"
+
 require conf/machine/include/arm/armv7a/tune-cortexa7.inc
 
 # TQ u-boot and kernel
