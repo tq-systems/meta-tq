@@ -30,6 +30,12 @@ Releases are named with the following scheme:
 
 * imx-boot-tq: do not overwrite settings for IMX_EXTRA_FIRMWARE.
 
+### Removed
+
+* libimxvpuapi2:
+  * Remove custom patches
+  * Requires meta-freescale >= commit 1699cb16 ("libimxvpuapi2: Upgrade to version 2.3.1")
+
 ## scarthgap.TQ.ARM.BSP.0003
 
 ### Added
