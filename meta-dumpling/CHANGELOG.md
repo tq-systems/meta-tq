@@ -11,8 +11,16 @@ Releases are named with the following scheme:
 
 ### Changed
 
-* distros: enable `wifi` as `DISTRO_FEATURE` for all distros based on `dumpling`
-  this will automatically install packages needed via predefined packagegroups.
+* distros:
+  * INHERIT `tq-buildinfo` to generate `etc/buildinfo` and
+    "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.buildinfo
+  * enable `wifi` as `DISTRO_FEATURE` for all distros based on `dumpling`
+    this will automatically install packages needed via predefined packagegroups.
+
+### Added
+
+* class `tq-buildinfo` as an extension of `buildinfo` class. This class is
+  intended to be used for CI and image indentification.
 
 ## scarthgap.TQ.ARM.BSP.0003
 
