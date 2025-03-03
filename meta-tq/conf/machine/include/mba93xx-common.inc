@@ -3,7 +3,7 @@
 # Machine specific options
 require conf/machine/include/tq-machine.inc
 
-WKS_FILE = "tqmaxx-imx-v8-sdimg.wks.in"
+WKS_FILE = "tqmaxx-imx-v8-sdimg${@bb.utils.contains('DISTRO_FEATURES', 'rauc', '-rauc-ab', '', d)}.wks.in"
 
 MACHINE_FEATURES += "\
     bluetooth \
