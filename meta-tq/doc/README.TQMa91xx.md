@@ -170,6 +170,16 @@ Switch between Overdrive and Normal Drive mode use:
 echo [0,1] > /sys/devices/platform/imx93-lpm/mode
 ```
 
+### OS boot
+
+See the [Distroboot README](README.Distroboot.md).
+
+__Note:__ Default u-boot environment variable `bootcmd` need to be set to `run distro_bootcmd`
+
+### OS updates
+
+See [RAUC](RAUC.md).
+
 ### Display Support
 
 Each Display can be used on its own by using the corresponding device tree.
