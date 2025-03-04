@@ -11,6 +11,13 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa91xx/TQMa93xx: Add new WKS template with two root partitions and a
+  separate data partition for A/B boot with RAUC updates
+
+  The new partitioning will be selected automatically when "rauc" is enabled
+  in `DISTRO_FEATURES`. The `WIC_ROOTPART_SIZE` and ``WIC_DATAPART_SIZE`
+  variables default to "1G" and "100M", respectively, and can be adjusted as
+  needed.
 * machines:
   * add new machine for TQMa8MPxL on MBa8MP-RAS314 starter kit
   * add new machine for TQMa91xxCA/LA on MBa91xxCA starter kit
@@ -55,6 +62,10 @@ Releases are named with the following scheme:
   * integrate changes from NXP BSP release `lf-6.6.52-2.2.0`
     via the matching branch of linux-fslc repo. Integrates linux-stable fixes
     up to v6.6.74
+  * Enable kernel options required for RAUC updates:
+    * DMVerity
+    * Squashfs
+    * Loop block device
 
 ### Fixed
 
