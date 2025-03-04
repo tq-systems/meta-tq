@@ -334,6 +334,16 @@ Also several meta layers have to be added in bblayers.conf (if not already done)
 WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 -v v4l2src device=/dev/video0 ! waylandsink
 ```
 
+### OS boot
+
+See the [Distroboot README](README.Distroboot.md).
+
+__Note:__ Default u-boot environment variable `bootcmd` need to be set to `run distro_bootcmd`
+
+### OS updates
+
+See [RAUC](RAUC.md).
+
 ### Display Support
 
 HDMI support is enabled by default. Additionally LVDS display can be enabled by using the
