@@ -4,9 +4,9 @@
 # with i.MX8/i.MX8X/i.MX8M/i.MX9 SoC families
 #
 # The disk layout used is:
-#  - -------------- ------------ ------------ ------- --------- ----------- ---
-# | |  bootstream  |  uboot-env | uboot-envr | resvd |  /boot  |  /rootfs  |
-#  - -------------- ------------ ------------ ------- --------- ----------- ---
+#  - -------------- ------------ ------------ ------- --------- ---------- ---------- ------ ---
+# | |  bootstream  |  uboot-env | uboot-envr | resvd |  /boot  | /rootfs1 | /rootfs2 | data |
+#  - -------------- ------------ ------------ ------- --------- ---------- ---------- ------ ---
 # ^ ^              ^            ^            ^       ^         ^           ^
 # | |              |            |            |       |         |           |
 # 0 |              |         4128KiB      4160KiB   8MiB       |        variable
@@ -18,12 +18,15 @@
 #                                                            8MiB + 64 MiB * overhead-factor
 #                                                            (default: `--overhead-factor=1.3`),
 #                                                            alignment 4 MiB (managed NAND)
+# /root needs fixed size to allow for A/B update
 
 part u-boot --source rawcopy --sourceparams="file=${MACHINE_WKS_BOOTSTREAM}" --no-table --offset ${RAW_BOOT_START_OFFSET_KB}K
 part u-boot-env --no-table --offset ${RAW_BOOT_END_OFFSET_KB}K --fixed-size 32K
 part u-boot-envr --no-table --offset 4128K --fixed-size 32K
 part resvd --no-table --offset 4160K --fixed-size 4032K
 part /boot --source bootimg-partition --fstype=vfat --label boot --active --offset 8M --size 64M
-part / --source rootfs --fstype=ext4 --label root --align 4096
+part / --source rootfs --fstype=ext4 --label root --align 4096 --fixed-size ${WIC_ROOTPART_SIZE}
+part rootfs2 --source empty --fstype=ext4 --align 4096 --fixed-size ${WIC_ROOTPART_SIZE}
+part data --fstype ext4 --label data --align 4096 --size ${WIC_DATAPART_SIZE}
 
 bootloader --ptable msdos

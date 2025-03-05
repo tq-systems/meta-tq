@@ -7,6 +7,8 @@ platforms using [Distroboot](README.Distroboot.md), which are:
 
 - TQMa62xx\[L\]
 - TQMa64xxL
+- TQma91xx
+- TQma93xx
 
 ## Features
 
