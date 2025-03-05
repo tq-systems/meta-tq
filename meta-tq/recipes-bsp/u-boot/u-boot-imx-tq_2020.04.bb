@@ -29,10 +29,6 @@ DEPENDS:append = "\
     python3-native \
 "
 
-do_deploy:append:mx8m-generic-bsp () {
-    do_deploy_uboot_dtb
-}
-
 UBOOT_NAME:mx8-generic-bsp = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
 
 UBOOT_INITIAL_ENV = "u-boot-initial-env"
