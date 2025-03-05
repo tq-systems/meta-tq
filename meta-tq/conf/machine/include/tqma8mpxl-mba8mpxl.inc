@@ -3,6 +3,8 @@
 require conf/machine/include/tqma8mpxl.inc
 require conf/machine/include/mba8-common.inc
 
+WKS_FILE = "tqmaxx-imx-v8-sdimg${@bb.utils.contains('DISTRO_FEATURES', 'rauc', '-rauc-ab', '', d)}.wks.in"
+
 # Set u-boot DTB
 UBOOT_DTB_NAME = "imx8mp-tqma8mpql-mba8mpxl.dtb"
 

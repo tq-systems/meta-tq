@@ -23,6 +23,7 @@ KERNEL_CONFIG_FILES:imx ?= "\
     file://ubi.cfg \
     file://features/devicetree.cfg \
     file://features/network.cfg \
+    file://features/rauc.cfg \
 "
 
 GIT_URL ?= "${TQ_GIT_BASEURL}/linux-tqmaxx.git"
