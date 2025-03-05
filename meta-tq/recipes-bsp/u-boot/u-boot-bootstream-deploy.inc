@@ -21,3 +21,7 @@ do_deploy_uboot_dtb () {
         unset  i
     fi
 }
+
+do_deploy:append:mx8m-generic-bsp () {
+    do_deploy_uboot_dtb
+}
