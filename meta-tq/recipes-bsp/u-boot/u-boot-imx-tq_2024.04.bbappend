@@ -1,17 +1,7 @@
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-SRC_URI:append:tqma91xx = "\
-    file://loadaddr.cfg \
-"
-
-SRC_URI:append:tqma93xx = "\
-    file://loadaddr.cfg \
-"
-#
-#     file://loadaddr.cfg \
-#
-SRC_URI:append:tqma8mpxl = "\
+SRC_URI += "\
     file://0001-ddr-imx9-limit-visibility-of-SAVED_DRAM_TIMING_BASE.patch \
     file://0002-imx9-scmi-Add-missing-UART-clocks.patch \
     file://0003-imx9-native-Add-missing-UART-clocks.patch \
@@ -39,3 +29,15 @@ SRC_URI:append:tqma8mpxl = "\
     file://0025-boards-tqma8mpxl-WIP-tqma8mpxl-mba8mp-ras314.patch \
     file://0026-tqma8mpxl-add-tqma8mpxl_multi_mba8mp_ras314_defconfi.patch \
 "
+
+DISTROBOOT_EXTRA_SOURCES = ""
+
+DISTROBOOT_EXTRA_SOURCES:tqma91xx = "\
+    file://loadaddr.cfg \
+"
+
+DISTROBOOT_EXTRA_SOURCES:tqma93xx = "\
+    file://loadaddr.cfg \
+"
+
+SRC_URI += "${DISTROBOOT_EXTRA_SOURCES}"
