@@ -1,7 +1,7 @@
 From 4c06ca259be74f3ecd64fb46c94dcd284fa9242e Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 4 Mar 2025 10:37:12 +0100
-Subject: [PATCH 11/26] tq: add missing definitions for private bloblist
+Subject: [PATCH 11/29] tq: add missing definitions for private bloblist
  entries
 
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>

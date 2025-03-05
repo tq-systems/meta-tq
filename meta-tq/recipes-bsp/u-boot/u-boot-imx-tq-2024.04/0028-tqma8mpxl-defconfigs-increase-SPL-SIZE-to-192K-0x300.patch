@@ -1,0 +1,41 @@
+From 43b637d64242c0686ba188c61de0f89f0a119d6b Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Wed, 5 Mar 2025 16:36:21 +0100
+Subject: [PATCH 28/29] tqma8mpxl: defconfigs: increase SPL SIZE to 192K /
+ 0x30000
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ configs/tqma8mpxl_multi_mba8mp_ras314_defconfig | 2 +-
+ configs/tqma8mpxl_multi_mba8mpxl_defconfig      | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/configs/tqma8mpxl_multi_mba8mp_ras314_defconfig b/configs/tqma8mpxl_multi_mba8mp_ras314_defconfig
+index 239c9161b8d..dbb7ca768a0 100644
+--- a/configs/tqma8mpxl_multi_mba8mp_ras314_defconfig
++++ b/configs/tqma8mpxl_multi_mba8mp_ras314_defconfig
+@@ -52,7 +52,7 @@ CONFIG_BOARD_EARLY_INIT_F=y
+ CONFIG_BOARD_LATE_INIT=y
+ CONFIG_BLOBLIST=y
+ CONFIG_BLOBLIST_ADDR=0x60000000
+-CONFIG_SPL_MAX_SIZE=0x26000
++CONFIG_SPL_MAX_SIZE=0x30000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x96e000
+ CONFIG_SPL_BSS_MAX_SIZE=0x2000
+diff --git a/configs/tqma8mpxl_multi_mba8mpxl_defconfig b/configs/tqma8mpxl_multi_mba8mpxl_defconfig
+index 976e9978058..2401fce7f6e 100644
+--- a/configs/tqma8mpxl_multi_mba8mpxl_defconfig
++++ b/configs/tqma8mpxl_multi_mba8mpxl_defconfig
+@@ -51,7 +51,7 @@ CONFIG_BOARD_EARLY_INIT_F=y
+ CONFIG_BOARD_LATE_INIT=y
+ CONFIG_BLOBLIST=y
+ CONFIG_BLOBLIST_ADDR=0x60000000
+-CONFIG_SPL_MAX_SIZE=0x26000
++CONFIG_SPL_MAX_SIZE=0x30000
+ CONFIG_SPL_HAS_BSS_LINKER_SECTION=y
+ CONFIG_SPL_BSS_START_ADDR=0x96e000
+ CONFIG_SPL_BSS_MAX_SIZE=0x2000
+-- 
+2.34.1
+

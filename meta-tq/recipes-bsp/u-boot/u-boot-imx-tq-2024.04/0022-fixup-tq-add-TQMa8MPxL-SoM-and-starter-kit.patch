@@ -1,7 +1,7 @@
 From e1c8baaaf791effca99772c200e6d8c85b9eaddc Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Wed, 5 Mar 2025 11:05:17 +0100
-Subject: [PATCH 22/26] fixup! tq: add TQMa8MPxL SoM and starter kit
+Subject: [PATCH 22/29] fixup! tq: add TQMa8MPxL SoM and starter kit
 
 ---
  board/tq/tqma8mpxl/Kconfig  | 7 ++++++-

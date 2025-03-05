@@ -1,7 +1,7 @@
 From 50e9d0daf92ad5542d185067b0e5e8befacf050a Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Mon, 3 Jun 2024 17:39:29 +0200
-Subject: [PATCH 20/26] tqma8mpxl: add defconfigs
+Subject: [PATCH 20/29] tqma8mpxl: add defconfigs
 
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 ---

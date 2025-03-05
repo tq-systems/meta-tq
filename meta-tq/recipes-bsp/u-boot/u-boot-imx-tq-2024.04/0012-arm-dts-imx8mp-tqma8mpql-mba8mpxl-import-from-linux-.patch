@@ -1,7 +1,7 @@
 From 249f20fdc96d887df4bbca1bff242f993c65a1fe Mon Sep 17 00:00:00 2001
 From: Alexander Stein <alexander.stein@ew.tq-group.com>
 Date: Fri, 26 Apr 2024 11:26:21 +0200
-Subject: [PATCH 12/26] arm: dts: imx8mp-tqma8mpql-mba8mpxl: import from
+Subject: [PATCH 12/29] arm: dts: imx8mp-tqma8mpql-mba8mpxl: import from
  linux-next
 
 Import module and mainboard DT files.

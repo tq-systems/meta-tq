@@ -1,7 +1,7 @@
 From dcb407767b128c6b97e49d925a54bcac7f1da202 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Wed, 5 Mar 2025 11:04:15 +0100
-Subject: [PATCH 21/26] fixup! arm: dts: tqma8mpql: add U-Boot dtsi fragments
+Subject: [PATCH 21/29] fixup! arm: dts: tqma8mpql: add U-Boot dtsi fragments
 
 ---
  arch/arm/dts/imx8mp-tqma8mpql-mba8mpxl-u-boot.dtsi | 9 +++------

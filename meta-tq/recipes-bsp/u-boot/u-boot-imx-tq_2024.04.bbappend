@@ -28,6 +28,9 @@ SRC_URI += "\
     file://0024-fixup-tq-add-TQMa8MPxL-SoM-and-starter-kit.patch \
     file://0025-boards-tqma8mpxl-WIP-tqma8mpxl-mba8mp-ras314.patch \
     file://0026-tqma8mpxl-add-tqma8mpxl_multi_mba8mp_ras314_defconfi.patch \
+    file://0027-tqma8mpxl-remove-USB-MMC-SPL-support.patch \
+    file://0028-tqma8mpxl-defconfigs-increase-SPL-SIZE-to-192K-0x300.patch \
+    file://0029-tqma8mpxl-defconfig-move-BLOBLIST-to-start-of-RAM.patch \
 "
 
 DISTROBOOT_EXTRA_SOURCES = ""
@@ -37,6 +40,10 @@ DISTROBOOT_EXTRA_SOURCES:tqma91xx = "\
 "
 
 DISTROBOOT_EXTRA_SOURCES:tqma93xx = "\
+    file://loadaddr.cfg \
+"
+
+DISTROBOOT_EXTRA_SOURCES:tqma8mpxl = "\
     file://loadaddr.cfg \
 "
 

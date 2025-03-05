@@ -1,7 +1,7 @@
 From 3c623527d395b5a41c518e3f11012c386cc1c54b Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Wed, 31 Jul 2024 08:49:05 -0600
-Subject: [PATCH 05/26] fdt: Correct condition for devicetree from bloblist
+Subject: [PATCH 05/29] fdt: Correct condition for devicetree from bloblist
 
 On some boards, the bloblist is created in SPL once SDRAM is ready. It
 cannot be accessed until that point, so is not available early in SPL.

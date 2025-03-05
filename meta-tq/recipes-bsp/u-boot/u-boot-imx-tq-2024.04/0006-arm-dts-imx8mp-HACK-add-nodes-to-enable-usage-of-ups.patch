@@ -1,7 +1,7 @@
 From eb1784185732c03a4324c141e151dc67b2e47f75 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Fri, 28 Feb 2025 17:18:09 +0100
-Subject: [PATCH 06/26] arm: dts: imx8mp: [HACK] add nodes to enable usage of
+Subject: [PATCH 06/29] arm: dts: imx8mp: [HACK] add nodes to enable usage of
  upstream dt
 
 Some nodes for audio / HDMI are missing to compile with upstream trees.

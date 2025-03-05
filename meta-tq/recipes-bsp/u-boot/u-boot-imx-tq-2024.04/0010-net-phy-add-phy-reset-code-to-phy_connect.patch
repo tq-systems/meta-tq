@@ -1,7 +1,7 @@
 From e40c5fa4f15e8357a994e13648a682e8c4279a25 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Fri, 22 Mar 2024 16:56:29 +0100
-Subject: [PATCH 10/26] net: phy: add phy reset code to phy_connect
+Subject: [PATCH 10/29] net: phy: add phy reset code to phy_connect
 
 As generalized fallback phy_find_by_mask is used to
 create a phy_device. Implement the same aproach as

@@ -1,7 +1,7 @@
 From 812119f7a2f7aae9faaf69d42dd566778e590973 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Fri, 28 Feb 2025 17:05:40 +0100
-Subject: [PATCH 07/26] arm: dts: imx8mp-pinfunc.h: add upstream names for USB
+Subject: [PATCH 07/29] arm: dts: imx8mp-pinfunc.h: add upstream names for USB
  pinmux
 
 Upstream dt has different names for USB related pinmux macros
