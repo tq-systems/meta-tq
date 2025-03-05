@@ -58,10 +58,42 @@ CORTEXM_DEMOS += "\
 "
 
 IMAGE_BOOT_FILES = "\
-    ${@create_image_boot_dtb_files(d)} \
     ${CORTEXM_DEMOS} \
-    ${KERNEL_IMAGETYPE} \
 "
+
+KERNEL_IMAGETYPE = "fitImage"
+KERNEL_IMAGETYPE:mx8m-generic-bsp = "fitImage"
+KERNEL_IMAGETYPES = "${KERNEL_IMAGETYPE} Image"
+KERNEL_CLASSES += "kernel-fitimage"
+UBOOT_EXTLINUX_FDTDIR ?= ""
+
+#
+# fitImage Settings:
+# Kernel image offset in RAM:               16 MiB
+# reserved space for uncompressed kernel:   48 MiB
+# fdt/dtb offset in RAM:                    64 MiB
+# dtbo offset in RAM:                       65 MiB
+# init(rd) offset in RAM:                   80 MiB
+# (loadaddr                                512 MiB)
+# (optee offset                       256 + 96 MiB)
+# (optee size                               32 MiB)
+FIT_KERNEL_COMP_ALG = "none"
+UBOOT_ENTRYPOINT = "0x41000000"
+UBOOT_LOADADDRESS = "0x41000000"
+UBOOT_DTB_LOADADDRESS = "0x44000000"
+UBOOT_DTBO_LOADADDRESS = "0x4410000"
+
+UBOOT_RD_LOADADDRESS = "0x45000000"
+UBOOT_RD_ENTRYPOINT = "0x45000000"
+
+UBOOT_EXTLINUX_LABELS ?= " \
+    default \
+"
+
+UBOOT_EXTLINUX_DEFAULT_LABEL ?= "default"
+
+UBOOT_EXTLINUX_KERNEL_IMAGE_default = "../fitImage"
+UBOOT_EXTLINUX_MENU_DESCRIPTION_default = "${DISTRO_NAME} on ${MACHINE} (default)"
 
 # SD boot image and FlexSPI boot image can be built using same U-Boot config
 IMXBOOT_TARGETS ?= "\
