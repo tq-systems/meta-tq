@@ -1,0 +1,56 @@
+From 3c623527d395b5a41c518e3f11012c386cc1c54b Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Wed, 31 Jul 2024 08:49:05 -0600
+Subject: [PATCH 05/26] fdt: Correct condition for devicetree from bloblist
+
+On some boards, the bloblist is created in SPL once SDRAM is ready. It
+cannot be accessed until that point, so is not available early in SPL.
+Add a condition to avoid a hang in this case.
+
+This fixes a hang in tqma8mpxl. Picking the exisiting upstream fixes
+does not help.
+
+The condition for receiving a bloblist from TPL is not correct. Instead
+make sure all condditions are met:
+
+- BLOBLIST is enabled
+- u_boot_first_phase() was run
+- TPL or SPL Bloblist is enabled.
+
+This ensures that a previous stage should have setup a bloblist. Only
+in this case we are allowed to check. Otherwise we can lock before
+console is available (SPL as BL2 with limited devicetree. bloblist
+is not ready during board_init_f)
+
+Fixes: 70fe2385943 ("fdt: Allow the devicetree to come from a bloblist")
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ lib/fdtdec.c | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/lib/fdtdec.c b/lib/fdtdec.c
+index b2c59ab3818..22f53146490 100644
+--- a/lib/fdtdec.c
++++ b/lib/fdtdec.c
+@@ -1669,8 +1669,15 @@ int fdtdec_setup(void)
+ {
+ 	int ret = -ENOENT;
+ 
+-	/* If allowing a bloblist, check that first */
+-	if (CONFIG_IS_ENABLED(BLOBLIST)) {
++	/*
++	 * If allowing a bloblist, check that first. There was discussion about
++	 * adding an OF_BLOBLIST Kconfig, but this was rejected.
++	 *
++	 * The necessary test is whether the previous phase passed a bloblist,
++	 * not whether this phase creates one.
++	 */
++	if (CONFIG_IS_ENABLED(BLOBLIST) && !u_boot_first_phase() &&
++	    (IS_ENABLED(CONFIG_TPL_BLOBLIST) || IS_ENABLED(CONFIG_SPL_BLOBLIST))) {
+ 		ret = bloblist_maybe_init();
+ 		if (!ret) {
+ 			gd->fdt_blob = bloblist_find(BLOBLISTT_CONTROL_FDT, 0);
+-- 
+2.34.1
+

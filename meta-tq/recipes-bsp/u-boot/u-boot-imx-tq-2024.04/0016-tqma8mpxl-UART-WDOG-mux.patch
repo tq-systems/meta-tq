@@ -1,0 +1,41 @@
+From 475bf6578b9d6801ff7b294d71054f85f8aa2cfc Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Mon, 3 Mar 2025 16:18:06 +0100
+Subject: [PATCH 16/26] tqma8mpxl: UART /WDOG mux
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ board/tq/tqma8mpxl/tqma8mpxl.c | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/board/tq/tqma8mpxl/tqma8mpxl.c b/board/tq/tqma8mpxl/tqma8mpxl.c
+index 3ac62454b31..5c00bd42dbd 100644
+--- a/board/tq/tqma8mpxl/tqma8mpxl.c
++++ b/board/tq/tqma8mpxl/tqma8mpxl.c
+@@ -32,11 +32,21 @@
+ 
+ DECLARE_GLOBAL_DATA_PTR;
+ 
++#define WDOG_PAD_CTRL	(PAD_CTL_DSE6 | PAD_CTL_ODE | PAD_CTL_PUE | PAD_CTL_PE)
++
++static iomux_v3_cfg_t const wdog_pads[] = {
++	MX8MP_PAD_GPIO1_IO02__WDOG1_WDOG_B  | MUX_PAD_CTRL(WDOG_PAD_CTRL),
++};
++
+ int board_early_init_f(void)
+ {
+-	tq_bb_board_early_init_f();
++	struct wdog_regs *wdog = (struct wdog_regs *)WDOG1_BASE_ADDR;
+ 
+-	return 0;
++	imx_iomux_v3_setup_multiple_pads(wdog_pads, ARRAY_SIZE(wdog_pads));
++
++	set_wdog_reset(wdog);
++
++	return tq_bb_board_early_init_f();
+ }
+ 
+ #if !defined(CONFIG_SPL_BUILD)
+-- 
+2.34.1
+

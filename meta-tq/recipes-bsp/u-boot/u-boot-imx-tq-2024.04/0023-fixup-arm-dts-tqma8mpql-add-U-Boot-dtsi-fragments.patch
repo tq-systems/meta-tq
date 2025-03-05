@@ -1,0 +1,94 @@
+From f3261601fe7e5c017216465473b3f9f72aa69e8e Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Wed, 5 Mar 2025 11:05:43 +0100
+Subject: [PATCH 23/26] fixup! arm: dts: tqma8mpql: add U-Boot dtsi fragments
+
+---
+ ...imx8mp-tqma8mpql-mba8mp-ras314-u-boot.dtsi | 75 +++++++++++++++++++
+ 1 file changed, 75 insertions(+)
+ create mode 100644 arch/arm/dts/imx8mp-tqma8mpql-mba8mp-ras314-u-boot.dtsi
+
+diff --git a/arch/arm/dts/imx8mp-tqma8mpql-mba8mp-ras314-u-boot.dtsi b/arch/arm/dts/imx8mp-tqma8mpql-mba8mp-ras314-u-boot.dtsi
+new file mode 100644
+index 00000000000..369ef22ca06
+--- /dev/null
++++ b/arch/arm/dts/imx8mp-tqma8mpql-mba8mp-ras314-u-boot.dtsi
+@@ -0,0 +1,75 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
++/*
++ * Copyright (c) 2021-2025 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++ * D-82229 Seefeld, Germany.
++ * Author: Martin Schmiedel
++ */
++
++/* SOM shared settings for U-Boot */
++#include "imx8mp-tqma8mpql-u-boot.dtsi"
++
++/ {
++	config {
++		/* 64 kiB redundant env */
++		u-boot,mmc-env-offset = <0x400000>;
++		u-boot,mmc-env-offset-redundant = <0x410000>;
++	};
++};
++
++&ecspi3 {
++	status = "disabled";
++};
++
++&eqos {
++	/delete-property/ assigned-clocks;
++	/delete-property/ assigned-clock-parents;
++	/delete-property/ assigned-clock-rates;
++};
++
++&iomuxc {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_wdog>, <&pinctrl_gpioled>;
++	u-boot,dm-spl;
++};
++
++&pcie {
++	status = "disabled";
++};
++
++&pcie_phy {
++	status = "disabled";
++};
++
++&pinctrl_uart4 {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc2_gpio {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc2 {
++	bootph-pre-ram;
++};
++
++&reg_usdhc2_vmmc {
++	bootph-pre-ram;
++};
++
++&tlv320aic3x04 {
++	status = "disabled";
++};
++
++&uart4 {
++	bootph-pre-ram;
++};
++
++&usdhc2 {
++	bootph-pre-ram;
++	sd-uhs-sdr104;
++	sd-uhs-ddr50;
++	assigned-clocks = <&clk IMX8MP_CLK_USDHC2>;
++	assigned-clock-rates = <400000000>;
++	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_400M>;
++};
++
+-- 
+2.34.1
+

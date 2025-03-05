@@ -1,0 +1,45 @@
+From 917c1ba6e7c60aca4514f498205bfd3a0a5d84b1 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Tue, 4 Mar 2025 09:01:39 +0100
+Subject: [PATCH 17/26] tqma8mpxl: [WIP] rely on board_interface_eth_init
+
+prevent code duplication
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ board/tq/tqma8mpxl/tqma8mpxl-mba8mpxl.c | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/board/tq/tqma8mpxl/tqma8mpxl-mba8mpxl.c b/board/tq/tqma8mpxl/tqma8mpxl-mba8mpxl.c
+index 25d02b66128..ba7d1b5611c 100644
+--- a/board/tq/tqma8mpxl/tqma8mpxl-mba8mpxl.c
++++ b/board/tq/tqma8mpxl/tqma8mpxl-mba8mpxl.c
+@@ -186,6 +186,8 @@ static struct tq_gpio_init_data mba8mpxl_gid[] = {
+ 	GPIO_INIT_DATA_ENTRY(CSI0_ENABLE, "GPIO5_9", GPIOD_IS_OUT),
+ };
+ 
++/* See board_interface_eth_init in arch/arm/mach-imx/imx8m/clock_imx8mm.c */
++#if 0
+ static void setup_enet(void)
+ {
+ 	struct iomuxc_gpr_base_regs *gpr =
+@@ -205,6 +207,7 @@ static void setup_enet(void)
+ 		set_clk_eqos(ENET_125MHZ);
+ 	}
+ }
++#endif
+ 
+ /*
+  * USDHC3 (devno 2, e-MMC) -> mmc0 / mmcblk0
+@@ -353,7 +356,7 @@ int tq_bb_board_init(void)
+ {
+ 	tq_board_gpio_init(mba8mpxl_gid, ARRAY_SIZE(mba8mpxl_gid));
+ 
+-	setup_enet();
++	/* setup_enet(); */
+ 
+ #if (IS_ENABLED(CONFIG_USB))
+ 	init_usb_clk();
+-- 
+2.34.1
+

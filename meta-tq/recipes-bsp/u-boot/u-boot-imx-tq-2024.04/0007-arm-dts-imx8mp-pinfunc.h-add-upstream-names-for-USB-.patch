@@ -1,0 +1,35 @@
+From 812119f7a2f7aae9faaf69d42dd566778e590973 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Fri, 28 Feb 2025 17:05:40 +0100
+Subject: [PATCH 07/26] arm: dts: imx8mp-pinfunc.h: add upstream names for USB
+ pinmux
+
+Upstream dt has different names for USB related pinmux macros
+(ID / OC / PWR). Add upstream names so that dt can be used
+without modifications.
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ arch/arm/dts/imx8mp-pinfunc.h | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/arch/arm/dts/imx8mp-pinfunc.h b/arch/arm/dts/imx8mp-pinfunc.h
+index 6e2ba6c7ba0..7e658d5eacb 100644
+--- a/arch/arm/dts/imx8mp-pinfunc.h
++++ b/arch/arm/dts/imx8mp-pinfunc.h
+@@ -796,4 +796,12 @@
+ #define MX8MP_IOMUXC_HDMI_HPD__CAN2_RX                               0x24C 0x4AC 0x550 0x4 0x3
+ #define MX8MP_IOMUXC_HDMI_HPD__GPIO3_IO29                            0x24C 0x4AC 0x000 0x5 0x0
+ 
++/* mainline compatibility: */
++#define MX8MP_IOMUXC_GPIO1_IO10__USB1_OTG_ID	MX8MP_IOMUXC_GPIO1_IO10__USB1_ID
++#define MX8MP_IOMUXC_GPIO1_IO11__USB2_OTG_ID	MX8MP_IOMUXC_GPIO1_IO11__USB2_ID
++#define MX8MP_IOMUXC_GPIO1_IO12__USB1_OTG_PWR	MX8MP_IOMUXC_GPIO1_IO12__USB1_PWR
++#define MX8MP_IOMUXC_GPIO1_IO13__USB1_OTG_OC	MX8MP_IOMUXC_GPIO1_IO13__USB1_OC
++#define MX8MP_IOMUXC_GPIO1_IO14__USB2_OTG_PWR	MX8MP_IOMUXC_GPIO1_IO14__USB2_PWR
++#define MX8MP_IOMUXC_GPIO1_IO15__USB2_OTG_OC	MX8MP_IOMUXC_GPIO1_IO15__USB2_OC
++
+ #endif /* __DTS_IMX8MP_PINFUNC_H */
+-- 
+2.34.1
+

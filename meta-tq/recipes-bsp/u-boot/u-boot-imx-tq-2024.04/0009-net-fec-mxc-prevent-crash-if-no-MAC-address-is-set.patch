@@ -1,0 +1,80 @@
+From bbc3988d8a796228b962f7f432a45404a7f4cc1a Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@tq-group.com>
+Date: Mon, 7 Dec 2020 00:27:52 +0100
+Subject: [PATCH 09/26] net: fec-mxc: prevent crash if no MAC address is set
+
+If no MAC address can be found (either in ROM, device tree or env),
+the post_probe of an ethernet device will fail and therefore
+the device cannot be instantiated.
+
+The DM_ETH_PHY (eth-phy-uclass) use case must not be mixed with
+using CONFIG_FEC_MXC_MDIO_BASE.
+
+This prevents following error for MAC not fused, no eth[1]addr
+env is present and providing a random MAC is disabled:
+
+Net:
+Error: ethernet@5b040000 address not set.
+
+Error: ethernet@5b040000 address not set.
+FEC: can't find phy-handle
+"Error" handler, esr 0xbf000002
+elr: 000000008004e4b8 lr : 000000008004e4b4 (reloc)
+elr: 00000000bfe984b8 lr : 00000000bfe984b4
+x0 : 0000000000000000 x1 : 0000000000000020
+x2 : 00000000bbe61e50 x3 : 00000000bbe6e1a0
+x4 : 0000000000000020 x5 : 0000000000000020
+x6 : 000000000000000a x7 : 0000000000000000
+x8 : 0000000000000000 x9 : 0000000000000008
+x10: 00000000ffffffd8 x11: 0000000000000006
+x12: 000000000001869f x13: 0000000000002c50
+x14: 0000000000000000 x15: 00000000ffffffff
+x16: 0000000000000000 x17: 0000000000000000
+x18: 00000000bbe61d98 x19: 00000000bbe4fa68
+x20: 00000000bbe78c10 x21: 00000000bbe6e460
+x22: 00000000bbe78c10 x23: 00000000bbe91780
+x24: 00000000bbe6e510 x25: 00000000000001f8
+x26: 00000000ffff8000 x27: 0000000000000000
+x28: 0000000000000000 x29: 00000000bbe4fa10
+
+Code: f900003f 9100a3a1 97ffff6e 35000100 (f94017a1)
+Resetting CPU ...
+
+Signed-off-by: Markus Niebel <Markus.Niebel@tq-group.com>
+---
+ drivers/net/fec_mxc.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
+
+diff --git a/drivers/net/fec_mxc.c b/drivers/net/fec_mxc.c
+index 4347ece97e1..e69896b44a0 100644
+--- a/drivers/net/fec_mxc.c
++++ b/drivers/net/fec_mxc.c
+@@ -1383,17 +1383,18 @@ static int fecmxc_probe(struct udevice *dev)
+ 
+ #ifdef CONFIG_DM_ETH_PHY
+ 	bus = eth_phy_get_mdio_bus(dev);
+-#endif
++	if (!bus)
++		bus = fec_get_miibus((ulong)priv->eth, dev_seq(dev));
++#else
+ 
+-	if (!bus) {
+-		dm_mii_bus = false;
++	dm_mii_bus = false;
+ #ifdef CONFIG_FEC_MXC_MDIO_BASE
+-		bus = fec_get_miibus((ulong)CONFIG_FEC_MXC_MDIO_BASE,
+-				     dev_seq(dev));
++	bus = fec_get_miibus((ulong)CONFIG_FEC_MXC_MDIO_BASE, dev_seq(dev));
+ #else
+-		bus = fec_get_miibus((ulong)priv->eth, dev_seq(dev));
++	bus = fec_get_miibus((ulong)priv->eth, dev_seq(dev));
+ #endif
+-	}
++
++#endif /* CONFIG_DM_ETH_PHY */
+ 	if (!bus) {
+ 		ret = -ENOMEM;
+ 		goto err_mii;
+-- 
+2.34.1
+

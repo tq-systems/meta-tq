@@ -1,0 +1,115 @@
+From 7272297f74cd1b49ef1ec07a611d136af91ede1e Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Tue, 4 Mar 2025 13:51:13 +0100
+Subject: [PATCH 19/26] tqma8mpxl: add guards for BLOBLIST related code
+
+BLOBLIST was moved to defconfig. Since we cannot rely on a fixed
+configuration setup compile BLOBLIST stuff only if configured.
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ board/tq/tqma8mpxl/spl.c       | 56 +++++++++++++++++++---------------
+ board/tq/tqma8mpxl/tqma8mpxl.c |  4 +++
+ 2 files changed, 35 insertions(+), 25 deletions(-)
+
+diff --git a/board/tq/tqma8mpxl/spl.c b/board/tq/tqma8mpxl/spl.c
+index 1eafc4e8efb..11ede5d4fd4 100644
+--- a/board/tq/tqma8mpxl/spl.c
++++ b/board/tq/tqma8mpxl/spl.c
+@@ -197,12 +197,6 @@ unsigned long spl_mmc_get_uboot_raw_sector(struct mmc *mmc,
+ 
+ void spl_board_init(void)
+ {
+-	/*
+-	 * board_init_f runs before bloblist_init, so we need this here in in
+-	 * spl_board_init
+-	 */
+-	 struct tq_raminfo *raminfo_blob;
+-
+ 	 arch_misc_init();
+ 
+ 	/*
+@@ -219,27 +213,39 @@ void spl_board_init(void)
+ #endif
+ 	tq_bb_spl_board_init();
+ 
+-	raminfo_blob = bloblist_ensure(BLOBLISTT_TQ_RAMSIZE,
+-				       sizeof(*raminfo_blob));
+-	if (raminfo_blob && tqma8mpxl_ram_timing_idx >= 0) {
+-#if defined(CONFIG_IMX8M_DRAM_INLINE_ECC)
++	if (tqma8mpxl_ram_timing_idx >= 0) {
++#if CONFIG_IS_ENABLED(BLOBLIST)
++#if 1
+ 		/*
+-		 * All 7 ECC protectable main memory regions (7/8 of main
+-		 * memory) are configured to be ECC protected with the
+-		 * shipped timings, so the top 1/8 of memory is used for
+-		 * ECC parity data.
+-		 *
+-		 * Hence, if inline ECC is used, only propagate 7/8 of total
+-		 * memory to U-Boot proper and Linux. Upper 1/8 is used for
+-		 * ECC parity data.
+-		 */
+-		raminfo_blob->memsize =
+-			(tqma8mpxl_dram_info[tqma8mpxl_ram_timing_idx].size /
+-			 8ULL) *
+-			7ULL;
++		* board_init_f runs before bloblist_init (board_init_r),
++		* so we need this here in in spl_board_init
++		*/
++		struct tq_raminfo *raminfo_blob;
++
++		raminfo_blob = bloblist_ensure(BLOBLISTT_TQ_RAMSIZE,
++					       sizeof(*raminfo_blob));
++		if (raminfo_blob && tqma8mpxl_ram_timing_idx >= 0) {
++#if defined(CONFIG_IMX8M_DRAM_INLINE_ECC)
++			/*
++			 * All 7 ECC protectable main memory regions (7/8 of main
++			 * memory) are configured to be ECC protected with the
++			 * shipped timings, so the top 1/8 of memory is used for
++			 * ECC parity data.
++			 *
++			 * Hence, if inline ECC is used, only propagate 7/8 of total
++			 * memory to U-Boot proper and Linux. Upper 1/8 is used for
++			 * ECC parity data.
++			 */
++			raminfo_blob->memsize =
++				(tqma8mpxl_dram_info[tqma8mpxl_ram_timing_idx].size /
++				 8ULL) *
++				7ULL;
+ #else
+-		raminfo_blob->memsize =
+-			tqma8mpxl_dram_info[tqma8mpxl_ram_timing_idx].size;
++			raminfo_blob->memsize =
++				tqma8mpxl_dram_info[tqma8mpxl_ram_timing_idx].size;
++#endif
++		}
++#endif
+ #endif
+ 	} else {
+ 		printf("ERROR: no valid ram configuration, please reset\n");
+diff --git a/board/tq/tqma8mpxl/tqma8mpxl.c b/board/tq/tqma8mpxl/tqma8mpxl.c
+index 5c00bd42dbd..95311f5b4ef 100644
+--- a/board/tq/tqma8mpxl/tqma8mpxl.c
++++ b/board/tq/tqma8mpxl/tqma8mpxl.c
+@@ -58,6 +58,8 @@ int board_early_init_f(void)
+  */
+ static struct tq_eeprom_data eeprom;
+ 
++#if CONFIG_IS_ENABLED(BLOBLIST)
++
+ int board_phys_sdram_size(phys_size_t *size)
+ {
+ 	struct tq_raminfo *raminfo;
+@@ -76,6 +78,8 @@ int board_phys_sdram_size(phys_size_t *size)
+ 	return 0;
+ }
+ 
++#endif
++
+ /**
+  * Translate detected CPU variante into TQ-Systems SOM variant short name
+  *
+-- 
+2.34.1
+

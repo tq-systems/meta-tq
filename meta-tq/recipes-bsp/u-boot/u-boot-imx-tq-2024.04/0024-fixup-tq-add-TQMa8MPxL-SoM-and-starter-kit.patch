@@ -1,0 +1,115 @@
+From 089575fae3361d31235e7ed5a965163f68ff0eb3 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Wed, 5 Mar 2025 12:35:39 +0100
+Subject: [PATCH 24/26] fixup! tq: add TQMa8MPxL SoM and starter kit
+
+---
+ board/tq/tqma8mpxl/spl-mba8mpxl.c       |  2 +-
+ board/tq/tqma8mpxl/tqma8mpxl-mba8mpxl.c | 23 +++++++++--------------
+ include/configs/tqma8mpxl-mba8mpxl.h    |  2 +-
+ include/configs/tqma8mpxl.h             |  2 +-
+ 4 files changed, 12 insertions(+), 17 deletions(-)
+
+diff --git a/board/tq/tqma8mpxl/spl-mba8mpxl.c b/board/tq/tqma8mpxl/spl-mba8mpxl.c
+index e98b357e55b..1b8e94aa99f 100644
+--- a/board/tq/tqma8mpxl/spl-mba8mpxl.c
++++ b/board/tq/tqma8mpxl/spl-mba8mpxl.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0-or-later
+ /*
+- * Copyright (c) 2021-2024 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++ * Copyright (c) 2021-2025 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
+  * D-82229 Seefeld, Germany.
+  * Author: Markus Niebel
+  */
+diff --git a/board/tq/tqma8mpxl/tqma8mpxl-mba8mpxl.c b/board/tq/tqma8mpxl/tqma8mpxl-mba8mpxl.c
+index ba7d1b5611c..2e7e3e072b6 100644
+--- a/board/tq/tqma8mpxl/tqma8mpxl-mba8mpxl.c
++++ b/board/tq/tqma8mpxl/tqma8mpxl-mba8mpxl.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0-or-later
+ /*
+- * Copyright (c) 2021-2024 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++ * Copyright (c) 2021-2025 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
+  * D-82229 Seefeld, Germany.
+  * Author: Markus Niebel
+  */
+@@ -11,8 +11,8 @@
+ #include <asm/io.h>
+ #include <asm/mach-imx/iomux-v3.h>
+ #include <asm-generic/gpio.h>
+-#include <asm/arch/imx8mp_pins.h>
+ #include <asm/arch/clock.h>
++#include <asm/arch/imx8mp_pins.h>
+ #include <asm/arch/sys_proto.h>
+ #include <linux/delay.h>
+ #include <usb.h>
+@@ -92,12 +92,13 @@ enum {
+ #define UART_PAD_CTRL	(PAD_CTL_DSE6 | PAD_CTL_FSEL1)
+ 
+ static iomux_v3_cfg_t const uart_pads[] = {
+-	MX8MP_PAD_UART2_RXD__UART2_DCE_RX | MUX_PAD_CTRL(UART_PAD_CTRL),
+-	MX8MP_PAD_UART2_TXD__UART2_DCE_TX | MUX_PAD_CTRL(UART_PAD_CTRL),
+-	MX8MP_PAD_UART4_RXD__UART4_DCE_RX | 0x140,
+-	MX8MP_PAD_UART4_TXD__UART4_DCE_TX | 0x140,
++	MX8MP_PAD_UART4_RXD__UART4_DCE_RX | MUX_PAD_CTRL(UART_PAD_CTRL),
++	MX8MP_PAD_UART4_TXD__UART4_DCE_TX | MUX_PAD_CTRL(UART_PAD_CTRL),
+ };
+ 
++/*
++ * NOTE: this is also used by SPL
++ */
+ int tq_bb_board_early_init_f(void)
+ {
+ 	init_uart_clk(0);
+@@ -117,11 +118,6 @@ const char *tq_bb_get_boardname(void)
+ 	return MBA8MPXL_BOARD_NAME;
+ }
+ 
+-int tq_bb_checkboard(void)
+-{
+-	return 0;
+-}
+-
+ static struct tq_gpio_init_data mba8mpxl_gid[] = {
+ 	GPIO_INIT_DATA_ENTRY(USB_OTG_ID, "GPIO1_10", GPIOD_IS_IN),
+ 	GPIO_INIT_DATA_ENTRY(USB_OTG_PWR, "GPIO1_12", GPIOD_IS_OUT),
+@@ -270,9 +266,8 @@ static int mba8mpxl_usb0_init(enum usb_init_type init)
+ 			return -ENODEV;
+ 		/* VBUS disable */
+ 		dm_gpio_set_value(&mba8mpxl_gid[USB_OTG_PWR].desc, 0);
+-#ifdef CONFIG_USB_DWC3_GADGET
+-		ret = tqma8mpxl_usb_dwc3_gadget_init(USB_SPEED_SUPER);
+-#endif
++		if (IS_ENABLED(CONFIG_USB_DWC3_GADGET))
++			ret = tqma8mpxl_usb_dwc3_gadget_init(USB_SPEED_SUPER);
+ 		break;
+ 	case USB_INIT_HOST:
+ 		if (otg_id)
+diff --git a/include/configs/tqma8mpxl-mba8mpxl.h b/include/configs/tqma8mpxl-mba8mpxl.h
+index 2a13175d1ae..10b15ebce48 100644
+--- a/include/configs/tqma8mpxl-mba8mpxl.h
++++ b/include/configs/tqma8mpxl-mba8mpxl.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-or-later */
+ /*
+- * Copyright (c) 2021 - 2024 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++ * Copyright (c) 2021 - 2025 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
+  * D-82229 Seefeld, Germany.
+  * Author: Markus Niebel
+  */
+diff --git a/include/configs/tqma8mpxl.h b/include/configs/tqma8mpxl.h
+index 47873f03b37..9b9dfdd3179 100644
+--- a/include/configs/tqma8mpxl.h
++++ b/include/configs/tqma8mpxl.h
+@@ -1,6 +1,6 @@
+ /* SPDX-License-Identifier: GPL-2.0-or-later */
+ /*
+- * Copyright (c) 2022-2024 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++ * Copyright (c) 2022-2025 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
+  * D-82229 Seefeld, Germany.
+  * Author: Markus Niebel
+  */
+-- 
+2.34.1
+

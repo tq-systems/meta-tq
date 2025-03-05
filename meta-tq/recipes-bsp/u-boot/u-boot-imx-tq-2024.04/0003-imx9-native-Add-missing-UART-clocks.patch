@@ -1,0 +1,67 @@
+From 6e148a600500daa0036427c47eae1f571e731809 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Tue, 18 Feb 2025 10:13:13 +0100
+Subject: [PATCH 03/26] imx9: native: Add missing UART clocks
+
+For some reason only clock for LPUART1 has been added to
+init_uart_clk(). Add the missing clocks as well.
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ arch/arm/mach-imx/imx9/native/clock.c | 35 +++++++++++++++++++++++----
+ 1 file changed, 30 insertions(+), 5 deletions(-)
+
+diff --git a/arch/arm/mach-imx/imx9/native/clock.c b/arch/arm/mach-imx/imx9/native/clock.c
+index f0af34c677c..ac066e4fa75 100644
+--- a/arch/arm/mach-imx/imx9/native/clock.c
++++ b/arch/arm/mach-imx/imx9/native/clock.c
+@@ -593,16 +593,41 @@ u32 get_lpuart_clk(void)
+ 
+ void init_uart_clk(u32 index)
+ {
++	u32 gate;
++
+ 	switch (index) {
+ 	case LPUART1_CLK_ROOT:
+-		/* 24M */
+-		ccm_lpcg_on(CCGR_URT1, false);
+-		ccm_clk_root_cfg(LPUART1_CLK_ROOT, OSC_24M_CLK, 1);
+-		ccm_lpcg_on(CCGR_URT1, true);
++		gate = CCGR_URT1;
+ 		break;
+-	default:
++	case LPUART2_CLK_ROOT:
++		gate = CCGR_URT2;
++		break;
++	case LPUART3_CLK_ROOT:
++		gate = CCGR_URT3;
++		break;
++	case LPUART4_CLK_ROOT:
++		gate = CCGR_URT4;
++		break;
++	case LPUART5_CLK_ROOT:
++		gate = CCGR_URT5;
+ 		break;
++	case LPUART6_CLK_ROOT:
++		gate = CCGR_URT6;
++		break;
++	case LPUART7_CLK_ROOT:
++		gate = CCGR_URT7;
++		break;
++	case LPUART8_CLK_ROOT:
++		gate = CCGR_URT8;
++		break;
++	default:
++		return;
+ 	}
++
++	/* 24M */
++	ccm_lpcg_on(gate, false);
++	ccm_clk_root_cfg(index, OSC_24M_CLK, 1);
++	ccm_lpcg_on(gate, true);
+ }
+ 
+ void init_clk_usdhc(u32 index)
+-- 
+2.34.1
+

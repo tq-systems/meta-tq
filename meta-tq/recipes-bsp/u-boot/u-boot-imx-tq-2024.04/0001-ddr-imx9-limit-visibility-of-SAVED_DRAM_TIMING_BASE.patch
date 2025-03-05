@@ -1,0 +1,47 @@
+From 16b44ccde39f9b382a0d4056582126c035e476d6 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Wed, 5 Feb 2025 17:29:36 +0100
+Subject: [PATCH 01/26] ddr: imx9: limit visibility of SAVED_DRAM_TIMING_BASE
+
+When compiling for i.MX95 a value will be queried although the
+symbol has no meaning on this CPU. Depend on IMX91/93 to hide
+the symbol when not needed.
+
+fixes: 9f6598130eae ("ddr: imx9: add default value for i.MX91 SAVED_DRAM_TIMING_BASE")
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ drivers/ddr/imx/imx9/Kconfig | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/ddr/imx/imx9/Kconfig b/drivers/ddr/imx/imx9/Kconfig
+index 00deb14a357..146facb75a8 100644
+--- a/drivers/ddr/imx/imx9/Kconfig
++++ b/drivers/ddr/imx/imx9/Kconfig
+@@ -25,19 +25,20 @@ config IMX9_DRAM_INLINE_ECC
+ 
+ config SAVED_DRAM_TIMING_BASE
+ 	hex "Define the base address for saved dram timing"
++	depends on IMX91 || IMX93
++	default 0x2051C000 if IMX93
++	default 0x2049C000 if IMX91
+ 	help
+ 	  after DRAM is trained, need to save the dram related timming
+ 	  info into memory for low power use. This value needs to be the
+ 	  same as used in TF-A
+-	default 0x2051C000 if IMX93
+-	default 0x2049C000 if IMX91
+ 
+ config SAVED_QB_STATE_BASE
+ 	hex "Define the base address for saved QuickBoot state"
+ 	depends on IMX_SNPS_DDR_PHY_QB_GEN
++	default 0x83100000
+ 	help
+ 	  Once DRAM is trained, need to save the dram related timing
+ 	  info into memory in order to be reachable from U-Boot.
+-	default 0x83100000
+ 
+ endmenu
+-- 
+2.34.1
+

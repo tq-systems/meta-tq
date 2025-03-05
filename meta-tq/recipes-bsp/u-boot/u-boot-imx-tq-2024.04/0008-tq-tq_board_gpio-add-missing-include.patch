@@ -1,0 +1,31 @@
+From 5cb5b9cb4cdcc4f4526d532a7f77a7e6972ecfb8 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Fri, 28 Feb 2025 17:20:42 +0100
+Subject: [PATCH 08/26] tq: tq_board_gpio: add missing include
+
+Use DM generic gpio header instead of SOC specific one.
+
+Fixes: a5124bea6d01 ("tq/common: forward port tq_board_gpio")
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ board/tq/common/tq_board_gpio.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/board/tq/common/tq_board_gpio.c b/board/tq/common/tq_board_gpio.c
+index bb3a970d702..b7c0456ed0a 100644
+--- a/board/tq/common/tq_board_gpio.c
++++ b/board/tq/common/tq_board_gpio.c
+@@ -5,7 +5,8 @@
+  * Author: Markus Niebel
+  */
+ 
+-#include <asm/gpio.h>
++#include <asm-generic/gpio.h>
++
+ #include "tq_board_gpio.h"
+ 
+ int tq_board_gpio_init(struct tq_gpio_init_data *data, int count)
+-- 
+2.34.1
+

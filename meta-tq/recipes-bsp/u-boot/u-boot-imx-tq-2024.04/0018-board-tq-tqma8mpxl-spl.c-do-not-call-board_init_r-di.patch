@@ -1,0 +1,34 @@
+From 7d38cd3b4071d23430f16d4db9c858d292e4cede Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Tue, 4 Mar 2025 13:51:54 +0100
+Subject: [PATCH 18/26] board/tq/tqma8mpxl/spl.c: do not call board_init_r
+ directly
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ board/tq/tqma8mpxl/spl.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/board/tq/tqma8mpxl/spl.c b/board/tq/tqma8mpxl/spl.c
+index 76f14159fd1..1eafc4e8efb 100644
+--- a/board/tq/tqma8mpxl/spl.c
++++ b/board/tq/tqma8mpxl/spl.c
+@@ -353,7 +353,7 @@ void board_init_f(ulong dummy)
+ 	 * Clear the BSS here. No need to return but must call
+ 	 * board_init_r at end
+ 	 */
+-	memset(__bss_start, 0, __bss_end - __bss_start);
++	/* memset(__bss_start, 0, __bss_end - __bss_start); */
+ 
+ 	arch_cpu_init();
+ 
+@@ -385,5 +385,5 @@ void board_init_f(ulong dummy)
+ 	tq_vard_show(&vard);
+ 	spl_dram_init(ramtype);
+ 
+-	board_init_r(NULL, 0);
++	/* board_init_r(NULL, 0); */
+ }
+-- 
+2.34.1
+

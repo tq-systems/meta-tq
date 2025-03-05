@@ -1,0 +1,343 @@
+From 14b4038a77607e7ffae32906859977ee067cd5be Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Wed, 5 Mar 2025 12:36:22 +0100
+Subject: [PATCH 25/26] boards: tqma8mpxl: [WIP]: tqma8mpxl-mba8mp-ras314
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ board/tq/tqma8mpxl/spl-mba8mp-ras314.c       |  51 ++++
+ board/tq/tqma8mpxl/tqma8mpxl-mba8mp-ras314.c | 250 +++++++++++++++++++
+ include/configs/tqma8mpxl.h                  |   2 +
+ 3 files changed, 303 insertions(+)
+ create mode 100644 board/tq/tqma8mpxl/spl-mba8mp-ras314.c
+ create mode 100644 board/tq/tqma8mpxl/tqma8mpxl-mba8mp-ras314.c
+
+diff --git a/board/tq/tqma8mpxl/spl-mba8mp-ras314.c b/board/tq/tqma8mpxl/spl-mba8mp-ras314.c
+new file mode 100644
+index 00000000000..2d17ece133f
+--- /dev/null
++++ b/board/tq/tqma8mpxl/spl-mba8mp-ras314.c
+@@ -0,0 +1,51 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Copyright (c) 2021-2025 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++ * D-82229 Seefeld, Germany.
++ * Author: Martin Schmiedel
++ */
++
++#include <common.h>
++#include <spl.h>
++#include <asm/arch/sys_proto.h>
++#include <asm/mach-imx/boot_mode.h>
++
++#include "../common/tq_bb.h"
++
++DECLARE_GLOBAL_DATA_PTR;
++
++int spl_board_boot_device(enum boot_device boot_dev_spl)
++{
++#ifdef CONFIG_SPL_BOOTROM_SUPPORT
++	return BOOT_DEVICE_BOOTROM;
++#else
++	switch (boot_dev_spl) {
++	case SD1_BOOT:
++	case MMC1_BOOT:
++	case SD2_BOOT:
++	case MMC2_BOOT:
++		return BOOT_DEVICE_MMC1;
++	case SD3_BOOT:
++	case MMC3_BOOT:
++		return BOOT_DEVICE_MMC2;
++	case QSPI_BOOT:
++		return BOOT_DEVICE_NOR;
++	case NAND_BOOT:
++		return BOOT_DEVICE_NAND;
++	case USB_BOOT:
++		return BOOT_DEVICE_BOARD;
++	default:
++		return BOOT_DEVICE_NONE;
++	}
++#endif
++}
++
++#ifdef CONFIG_SPL_LOAD_FIT
++int board_fit_config_name_match(const char *name)
++{
++	/* Just empty function now - can't decide what to choose */
++	debug("%s: %s\n", __func__, name);
++
++	return 0;
++}
++#endif
+diff --git a/board/tq/tqma8mpxl/tqma8mpxl-mba8mp-ras314.c b/board/tq/tqma8mpxl/tqma8mpxl-mba8mp-ras314.c
+new file mode 100644
+index 00000000000..668ad067bbf
+--- /dev/null
++++ b/board/tq/tqma8mpxl/tqma8mpxl-mba8mp-ras314.c
+@@ -0,0 +1,250 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++/*
++ * Copyright (c) 2021-2025 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++ * D-82229 Seefeld, Germany.
++ * Author: Martin Schmiedel
++ */
++
++#include <common.h>
++#include <env.h>
++#include <errno.h>
++#include <asm/io.h>
++#include <asm/mach-imx/iomux-v3.h>
++#include <asm-generic/gpio.h>
++#include <asm/arch/clock.h>
++#include <asm/arch/imx8mp_pins.h>
++#include <asm/arch/sys_proto.h>
++#include <linux/delay.h>
++#include <usb.h>
++
++#include "../common/tq_board_gpio.h"
++#include "../common/tq_som_features.h"
++#include "tqma8mpxl-usbg.h"
++
++#define MBA8MP_RAS314_BOARD_NAME "MBa8MP-RAS314"
++
++DECLARE_GLOBAL_DATA_PTR;
++
++enum {
++	USB_RST_B,
++	USER_LED1,
++	USER_LED2,
++	LVDS_RESET_B,
++	HDMI_OC,
++	PMIC_IRQ,
++	ENET0_INT,
++	ENET1_INT,
++	TEMP_EVENT,
++	RTC_EVENT,
++	CODEC_RST,
++	CAM_GPIO1,
++	CAM_GPIO2,
++};
++
++#define UART_PAD_CTRL	(PAD_CTL_DSE6 | PAD_CTL_FSEL1)
++
++static iomux_v3_cfg_t const uart_pads[] = {
++	MX8MP_PAD_UART4_RXD__UART4_DCE_RX | MUX_PAD_CTRL(UART_PAD_CTRL),
++	MX8MP_PAD_UART4_TXD__UART4_DCE_TX | MUX_PAD_CTRL(UART_PAD_CTRL),
++};
++
++/*
++ * NOTE: this is also used by SPL
++ */
++int tq_bb_board_early_init_f(void)
++{
++	init_uart_clk(3);
++	imx_iomux_v3_setup_multiple_pads(uart_pads, ARRAY_SIZE(uart_pads));
++
++	return 0;
++}
++
++#if !defined(CONFIG_SPL_BUILD)
++
++const char *tq_bb_get_boardname(void)
++{
++	return MBA8MP_RAS314_BOARD_NAME;
++}
++
++static struct tq_gpio_init_data mba8mpxl_gid[] = {
++	GPIO_INIT_DATA_ENTRY(USB_RST_B, "GPIO5_26",
++			     GPIOD_IS_OUT | GPIOD_ACTIVE_LOW |
++			     GPIOD_IS_OUT_ACTIVE),
++
++	GPIO_INIT_DATA_ENTRY(USER_LED1, "GPIO4_18", GPIOD_IS_OUT),
++	GPIO_INIT_DATA_ENTRY(USER_LED2, "GPIO4_19", GPIOD_IS_OUT),
++
++	GPIO_INIT_DATA_ENTRY(LVDS_RESET_B, "GPIO1_01",
++			     GPIOD_IS_OUT | GPIOD_ACTIVE_LOW |
++			     GPIOD_IS_OUT_ACTIVE),
++
++	GPIO_INIT_DATA_ENTRY(HDMI_OC, "GPIO4_20", GPIOD_IS_IN),
++	GPIO_INIT_DATA_ENTRY(PMIC_IRQ, "GPIO1_8", GPIOD_IS_IN),
++	GPIO_INIT_DATA_ENTRY(ENET0_INT, "GPIO4_1", GPIOD_IS_IN),
++	GPIO_INIT_DATA_ENTRY(ENET1_INT, "GPIO4_3", GPIOD_IS_IN),
++	GPIO_INIT_DATA_ENTRY(TEMP_EVENT, "GPIO3_20", GPIOD_IS_IN),
++	GPIO_INIT_DATA_ENTRY(RTC_EVENT, "GPIO3_19", GPIOD_IS_IN),
++	GPIO_INIT_DATA_ENTRY(CODEC_RST, "GPIO5_11", GPIOD_IS_OUT | GPIOD_ACTIVE_LOW | GPIOD_IS_OUT_ACTIVE),
++	GPIO_INIT_DATA_ENTRY(CAM_GPIO1, "GPIO2_6", GPIOD_IS_OUT),
++	GPIO_INIT_DATA_ENTRY(CAM_GPIO2, "GPIO2_7", GPIOD_IS_OUT),
++};
++
++/* See board_interface_eth_init in arch/arm/mach-imx/imx8m/clock_imx8mm.c */
++#if 0
++static void setup_enet(void)
++{
++	struct iomuxc_gpr_base_regs *gpr =
++		(struct iomuxc_gpr_base_regs *)IOMUXC_GPR_BASE_ADDR;
++
++	if (CONFIG_IS_ENABLED(FEC_MXC)) {
++		/* Enable RGMII TX clk output */
++		setbits_le32(&gpr->gpr[1], BIT(22));
++	}
++
++	if (CONFIG_IS_ENABLED(DWC_ETH_QOS)) {
++		/* set INTF as RGMII, enable RGMII TXC clock */
++		clrsetbits_le32(&gpr->gpr[1],
++				IOMUXC_GPR_GPR1_GPR_ENET_QOS_INTF_SEL_MASK,
++				BIT(16));
++		setbits_le32(&gpr->gpr[1], BIT(19) | BIT(21));
++		set_clk_eqos(ENET_125MHZ);
++	}
++}
++#endif
++
++/*
++ * USDHC3 (devno 2, e-MMC) -> mmc0 / mmcblk0
++ * USDHC2 (devno 1, SD) -> mmc1 / mmcblk1
++ */
++int board_mmc_get_env_dev(int devno)
++{
++	switch (devno) {
++	case 2:
++		return 0;
++	case 1:
++		return 1;
++	default:
++		printf("Error: USDHC%d not handled for environment\n", devno);
++		return (int)env_get_ulong("mmcdev", 10, (ulong)CONFIG_SYS_MMC_ENV_DEV);
++	}
++}
++
++/*
++ * we use dt alias based indexing, so kernel uses same index. See above
++ */
++int mmc_map_to_kernel_blk(int devno)
++{
++	return devno;
++}
++
++#if (IS_ENABLED(CONFIG_USB))
++
++int board_usb_init(int index, enum usb_init_type init)
++{
++	int ret = 0;
++	struct gpio_desc *gpio;
++
++	imx8m_usb_power(index, true);
++
++	switch (index) {
++	case 0:
++		puts("USB0/DEVICE\n");
++
++		if (IS_ENABLED(CONFIG_USB_DWC3_GADGET))
++			ret = tqma8mpxl_usb_dwc3_gadget_init(USB_SPEED_SUPER);
++
++		break;
++	case 1:
++		puts("USB1/HUB\n");
++		gpio = &mba8mpxl_gid[USB_RST_B].desc;
++		dm_gpio_set_value(gpio, 1);
++		udelay(100);
++		dm_gpio_set_value(gpio, 0);
++		udelay(100);
++		break;
++	default:
++		printf("invalid USB port %d\n", index);
++		ret = -EINVAL;
++	}
++
++	return ret;
++}
++
++int board_usb_cleanup(int index, enum usb_init_type init)
++{
++	int ret = 0;
++	struct gpio_desc *gpio;
++
++	switch (index) {
++	case 0:
++		puts("USB0/DEVICE\n");
++		break;
++	case 1:
++		puts("USB1/HUB\n");
++		gpio = &mba8mpxl_gid[USB_RST_B].desc;
++		dm_gpio_set_value(gpio, 1);
++		break;
++	default:
++		printf("invalid USB port %d\n", index);
++		ret = -EINVAL;
++	}
++
++	imx8m_usb_power(index, false);
++
++	return ret;
++}
++
++#endif
++
++#define FSL_SIP_GPC			0xC2000000
++#define FSL_SIP_CONFIG_GPC_PM_DOMAIN	0x3
++#define DISPMIX				13
++#define MIPI				15
++
++int tq_bb_board_init(void)
++{
++	tq_board_gpio_init(mba8mpxl_gid, ARRAY_SIZE(mba8mpxl_gid));
++
++	/* setup_enet(); */
++
++#if (IS_ENABLED(CONFIG_USB))
++	init_usb_clk();
++#endif
++
++	if (CONFIG_IS_ENABLED(TQMA8MPXL_LVDS)) {
++		/* enable the dispmix & mipi phy power domain */
++		call_imx_sip(FSL_SIP_GPC, FSL_SIP_CONFIG_GPC_PM_DOMAIN, DISPMIX, true, 0);
++		call_imx_sip(FSL_SIP_GPC, FSL_SIP_CONFIG_GPC_PM_DOMAIN, MIPI, true, 0);
++	}
++
++	return 0;
++}
++
++#ifdef CONFIG_OF_BOARD_SETUP
++
++int tq_bb_ft_board_setup(void *blob, struct bd_info *bis)
++{
++	const struct tq_som_feature_list *features;
++
++	features = tq_board_detect_features();
++	if (!features) {
++		pr_warn("tq_board_detect_features failed\n");
++		return -ENODATA;
++	}
++
++	tq_ft_fixup_features(blob, features);
++
++	return 0;
++}
++#endif
++
++int tq_bb_board_late_init(void)
++{
++#ifdef CONFIG_ENV_IS_IN_MMC
++	board_late_mmc_env_init();
++#endif
++
++	return 0;
++}
++
++#endif
+diff --git a/include/configs/tqma8mpxl.h b/include/configs/tqma8mpxl.h
+index 9b9dfdd3179..fc5c7f211a2 100644
+--- a/include/configs/tqma8mpxl.h
++++ b/include/configs/tqma8mpxl.h
+@@ -96,6 +96,8 @@
+ /* both variants use the same settings */
+ #if defined(CONFIG_TQMA8MPXL_BB_MBA8MPXL)
+ #include "tqma8mpxl-mba8mpxl.h"
++#elif defined(CONFIG_TQMA8MPXL_BB_MBA8MP_RAS314)
++#include "tqma8mpxl-mba8mpxl.h"
+ #else
+ #error "no mainboard variant selected"
+ #endif
+-- 
+2.34.1
+

@@ -1,0 +1,259 @@
+From b6194187e3ebe2cf6c6e1e442f49ad4e620c1f5e Mon Sep 17 00:00:00 2001
+From: Alexander Stein <alexander.stein@ew.tq-group.com>
+Date: Fri, 26 Apr 2024 11:30:35 +0200
+Subject: [PATCH 13/26] arm: dts: tqma8mpql: add U-Boot dtsi fragments
+
+Add fragments for TQMa8MPxL SoM and for said SoM on MBa8MPxL
+starter kit mainboard.
+
+Add U-Boot specific settings for eMMC/SD environment, USB support
+and device model.
+
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ .../dts/imx8mp-tqma8mpql-mba8mpxl-u-boot.dtsi |  87 +++++++++++
+ arch/arm/dts/imx8mp-tqma8mpql-u-boot.dtsi     | 137 ++++++++++++++++++
+ 2 files changed, 224 insertions(+)
+ create mode 100644 arch/arm/dts/imx8mp-tqma8mpql-mba8mpxl-u-boot.dtsi
+ create mode 100644 arch/arm/dts/imx8mp-tqma8mpql-u-boot.dtsi
+
+diff --git a/arch/arm/dts/imx8mp-tqma8mpql-mba8mpxl-u-boot.dtsi b/arch/arm/dts/imx8mp-tqma8mpql-mba8mpxl-u-boot.dtsi
+new file mode 100644
+index 00000000000..af2c8dc1e40
+--- /dev/null
++++ b/arch/arm/dts/imx8mp-tqma8mpql-mba8mpxl-u-boot.dtsi
+@@ -0,0 +1,87 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
++/*
++ * Copyright (c) 2021-2024 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++ * D-82229 Seefeld, Germany.
++ * Author: Markus Niebel
++ */
++
++#include "imx8mp-tqma8mpql-u-boot.dtsi"
++
++/ {
++	config {
++		/* 32 kiB redundant env */
++		u-boot,mmc-env-offset = <0x400000>;
++		u-boot,mmc-env-offset-redundant = <0x410000>;
++	};
++};
++
++&eqos {
++	/delete-property/ assigned-clocks;
++	/delete-property/ assigned-clock-parents;
++	/delete-property/ assigned-clock-rates;
++};
++
++&fec {
++	phy-reset-gpios = <&gpio4 0 GPIO_ACTIVE_LOW>;
++};
++
++&flexspi {
++	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_400M>;
++};
++
++&iomuxc {
++	pinctrl-names = "default";
++	pinctrl-0 = <&pinctrl_gpioled>, <&pinctrl_gpiobutton>,
++		    <&pinctrl_wdog>;
++};
++
++&pinctrl_uart4 {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc2_gpio {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc2 {
++	bootph-pre-ram;
++};
++
++&reg_usdhc2_vmmc {
++	bootph-pre-ram;
++};
++
++&uart4 {
++	bootph-pre-ram;
++};
++
++/* TODO: USB */
++&usb_dwc3_0 {
++	compatible = "fsl,imx8mq-dwc3", "snps,dwc3";
++	assigned-clocks = <&clk IMX8MP_CLK_HSIO_AXI>;
++	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_800M>;
++	assigned-clock-rates = <400000000>;
++};
++
++&usb_dwc3_1 {
++	compatible = "fsl,imx8mq-dwc3", "snps,dwc3";
++	assigned-clocks = <&clk IMX8MP_CLK_HSIO_AXI>;
++	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_800M>;
++	assigned-clock-rates = <400000000>;
++};
++
++&usdhc1 {
++	bootph-pre-ram;
++	assigned-clocks = <&clk IMX8MP_CLK_USDHC1>;
++	assigned-clock-rates = <400000000>;
++	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_400M>;
++};
++
++&usdhc2 {
++	bootph-pre-ram;
++	sd-uhs-sdr104;
++	sd-uhs-ddr50;
++	assigned-clocks = <&clk IMX8MP_CLK_USDHC2>;
++	assigned-clock-rates = <400000000>;
++	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_400M>;
++};
+diff --git a/arch/arm/dts/imx8mp-tqma8mpql-u-boot.dtsi b/arch/arm/dts/imx8mp-tqma8mpql-u-boot.dtsi
+new file mode 100644
+index 00000000000..ccd7afb9326
+--- /dev/null
++++ b/arch/arm/dts/imx8mp-tqma8mpql-u-boot.dtsi
+@@ -0,0 +1,137 @@
++// SPDX-License-Identifier: (GPL-2.0-or-later OR MIT)
++/*
++ * Copyright (c) 2020-2024 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++ * D-82229 Seefeld, Germany.
++ */
++
++#include "imx8mp-u-boot.dtsi"
++
++/ {
++	aliases {
++		i2c_eeprom0 = &at24c02;
++	};
++
++	wdt-reboot {
++		compatible = "wdt-reboot";
++		wdt = <&wdog1>;
++		bootph-pre-ram;
++	};
++
++	firmware {
++		optee {
++			compatible = "linaro,optee-tz";
++			method = "smc";
++		};
++	};
++};
++
++&at24c02 {
++	bootph-pre-ram;
++	bootph-all;
++};
++
++&crypto {
++	bootph-pre-ram;
++};
++
++/* USB */
++&aips4 {
++	bootph-pre-ram;
++};
++
++&flash0 {
++	spi-tx-bus-width = <1>;
++	spi-rx-bus-width = <1>;
++};
++
++&flexspi {
++	assigned-clock-rates = <100000000>;
++	assigned-clocks = <&clk IMX8MP_CLK_QSPI_ROOT>;
++	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_100M>;
++};
++
++&gpio1 {
++	bootph-pre-ram;
++	bootph-all;
++};
++
++&gpio5 {
++	bootph-pre-ram;
++	bootph-all;
++};
++
++&i2c1 {
++	bootph-pre-ram;
++	bootph-all;
++};
++
++&iomuxc {
++	bootph-pre-ram;
++	bootph-all;
++};
++
++&pinctrl_i2c1 {
++	bootph-pre-ram;
++	bootph-all;
++};
++
++&pinctrl_i2c1_gpio {
++	bootph-pre-ram;
++	bootph-all;
++};
++
++&pinctrl_usdhc3 {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc3_100mhz {
++	bootph-pre-ram;
++};
++
++&pinctrl_usdhc3_200mhz {
++	bootph-pre-ram;
++};
++
++&pinctrl_pmic {
++	bootph-pre-ram;
++	bootph-all;
++};
++
++&pinctrl_wdog {
++	bootph-pre-ram;
++};
++
++&pmic {
++	bootph-pre-ram;
++	bootph-all;
++
++	regulators {
++		bootph-pre-ram;
++		bootph-all;
++	};
++};
++
++&sec_jr0 {
++	bootph-pre-ram;
++};
++
++&sec_jr1 {
++	bootph-pre-ram;
++};
++
++&sec_jr2 {
++	bootph-pre-ram;
++};
++
++&usdhc3 {
++	bootph-pre-ram;
++	mmc-hs400-1_8v;
++	mmc-hs400-enhanced-strobe;
++	assigned-clocks = <&clk IMX8MP_CLK_USDHC3>;
++	assigned-clock-rates = <400000000>;
++	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_400M>;
++};
++
++&wdog1 {
++	bootph-pre-ram;
++};
+-- 
+2.34.1
+

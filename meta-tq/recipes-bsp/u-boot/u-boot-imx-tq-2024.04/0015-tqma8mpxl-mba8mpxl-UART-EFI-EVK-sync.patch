@@ -1,0 +1,85 @@
+From 30a73773211a7710edf485e102bab1ea333eb141 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Mon, 3 Mar 2025 16:15:25 +0100
+Subject: [PATCH 15/26] tqma8mpxl-mba8mpxl: UART / EFI EVK sync
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ board/tq/tqma8mpxl/tqma8mpxl-mba8mpxl.c | 40 +++++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
+
+diff --git a/board/tq/tqma8mpxl/tqma8mpxl-mba8mpxl.c b/board/tq/tqma8mpxl/tqma8mpxl-mba8mpxl.c
+index 7e75a52dff9..25d02b66128 100644
+--- a/board/tq/tqma8mpxl/tqma8mpxl-mba8mpxl.c
++++ b/board/tq/tqma8mpxl/tqma8mpxl-mba8mpxl.c
+@@ -9,12 +9,16 @@
+ #include <env.h>
+ #include <errno.h>
+ #include <asm/io.h>
++#include <asm/mach-imx/iomux-v3.h>
+ #include <asm-generic/gpio.h>
++#include <asm/arch/imx8mp_pins.h>
+ #include <asm/arch/clock.h>
+ #include <asm/arch/sys_proto.h>
+ #include <linux/delay.h>
+ #include <usb.h>
+ 
++#include <efi_loader.h>
++
+ #include "../common/tq_board_gpio.h"
+ #include "../common/tq_som_features.h"
+ #include "tqma8mpxl-usbg.h"
+@@ -85,10 +89,24 @@ enum {
+ 	CSI0_ENABLE,
+ };
+ 
++#define UART_PAD_CTRL	(PAD_CTL_DSE6 | PAD_CTL_FSEL1)
++
++static iomux_v3_cfg_t const uart_pads[] = {
++	MX8MP_PAD_UART2_RXD__UART2_DCE_RX | MUX_PAD_CTRL(UART_PAD_CTRL),
++	MX8MP_PAD_UART2_TXD__UART2_DCE_TX | MUX_PAD_CTRL(UART_PAD_CTRL),
++	MX8MP_PAD_UART4_RXD__UART4_DCE_RX | 0x140,
++	MX8MP_PAD_UART4_TXD__UART4_DCE_TX | 0x140,
++};
++
+ int tq_bb_board_early_init_f(void)
+ {
++	init_uart_clk(0);
++	init_uart_clk(1);
++	init_uart_clk(2);
+ 	init_uart_clk(3);
+ 
++	imx_iomux_v3_setup_multiple_pads(uart_pads, ARRAY_SIZE(uart_pads));
++
+ 	return 0;
+ }
+ 
+@@ -378,3 +396,25 @@ int tq_bb_board_late_init(void)
+ }
+ 
+ #endif
++
++#if CONFIG_IS_ENABLED(EFI_HAVE_CAPSULE_SUPPORT)
++
++#define IMX_BOOT_IMAGE_GUID \
++	EFI_GUID(0x928b33bc, 0xe58b, 0x4247, 0x9f, 0x1d, \
++		 0x3b, 0xf1, 0xee, 0x1c, 0xda, 0xff)
++
++struct efi_fw_image fw_images[] = {
++	{
++		.image_type_id = IMX_BOOT_IMAGE_GUID,
++		.fw_name = u"IMX8MP-EVK-RAW",
++		.image_index = 1,
++	},
++};
++
++struct efi_capsule_update_info update_info = {
++	.dfu_string = "mmc 2=flash-bin raw 0 0x2000 mmcpart 1",
++	.num_images = ARRAY_SIZE(fw_images),
++	.images = fw_images,
++};
++
++#endif /* EFI_HAVE_CAPSULE_SUPPORT */
+-- 
+2.34.1
+

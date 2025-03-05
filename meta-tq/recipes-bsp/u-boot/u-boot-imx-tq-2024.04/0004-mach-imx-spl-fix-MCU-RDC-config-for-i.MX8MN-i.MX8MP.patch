@@ -1,0 +1,33 @@
+From 35ba913cdb4d12c3d77b869ca657676f8201f336 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Fri, 28 Feb 2025 18:00:51 +0100
+Subject: [PATCH 04/26] mach-imx: spl: fix MCU RDC config for i.MX8MN / i.MX8MP
+
+SPL_FIT_BYPASS_POST_LOAD was introduced in older vendor branch and
+is not defined in this branch. Do not use the define to prevent
+compilation error.
+
+Fixes: 8e44a62004c5 ("mach-imx: spl: add conditions and cleanup for MCU RDC config")
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ arch/arm/mach-imx/spl.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/arch/arm/mach-imx/spl.c b/arch/arm/mach-imx/spl.c
+index 7854fbe5bbd..dbf0f4e6713 100644
+--- a/arch/arm/mach-imx/spl.c
++++ b/arch/arm/mach-imx/spl.c
+@@ -534,8 +534,7 @@ int board_spl_fit_post_load(const void *fit, struct spl_image_info *spl_image)
+ 	}
+ #if defined(CONFIG_IMX8MP) || defined(CONFIG_IMX8MN)
+ #define MCU_RDC_MAGIC "mcu_rdc"
+-	if (!(spl_image->flags & SPL_FIT_BYPASS_POST_LOAD) &&
+-	    CONFIG_IMX8M_MCU_RDC_START_CONFIG_ADDR != 0ull &&
++	if (CONFIG_IMX8M_MCU_RDC_START_CONFIG_ADDR != 0ull &&
+ 	    CONFIG_IMX8M_MCU_RDC_STOP_CONFIG_ADDR != 0ull) {
+ 		if (!board_handle_rdc_config(spl_image->fdt_addr, "start-config",
+ 					     (void *)(CONFIG_IMX8M_MCU_RDC_START_CONFIG_ADDR +
+-- 
+2.34.1
+

@@ -1,0 +1,42 @@
+From f0e5e8377af2f12574716559feaf64dafdd88911 Mon Sep 17 00:00:00 2001
+From: Alexander Stein <alexander.stein@ew.tq-group.com>
+Date: Tue, 4 Feb 2025 13:27:04 +0100
+Subject: [PATCH 02/26] imx9: scmi: Add missing UART clocks
+
+For some reason only clocks for LPUART1-3 has been added to
+init_uart_clk(). Add the missing clocks as well.
+
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+---
+ arch/arm/mach-imx/imx9/scmi/clock.c | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/arch/arm/mach-imx/imx9/scmi/clock.c b/arch/arm/mach-imx/imx9/scmi/clock.c
+index 8b361838f08..06a8bcaa35f 100644
+--- a/arch/arm/mach-imx/imx9/scmi/clock.c
++++ b/arch/arm/mach-imx/imx9/scmi/clock.c
+@@ -90,6 +90,21 @@ void init_uart_clk(u32 index)
+ 	case 2:
+ 		clock_id = IMX95_CLK_LPUART3;
+ 		break;
++	case 3:
++		clock_id = IMX95_CLK_LPUART4;
++		break;
++	case 4:
++		clock_id = IMX95_CLK_LPUART5;
++		break;
++	case 5:
++		clock_id = IMX95_CLK_LPUART6;
++		break;
++	case 6:
++		clock_id = IMX95_CLK_LPUART7;
++		break;
++	case 7:
++		clock_id = IMX95_CLK_LPUART8;
++		break;
+ 	default:
+ 		return;
+ 	}
+-- 
+2.34.1
+

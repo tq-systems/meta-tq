@@ -1,0 +1,41 @@
+From 4c06ca259be74f3ecd64fb46c94dcd284fa9242e Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Tue, 4 Mar 2025 10:37:12 +0100
+Subject: [PATCH 11/26] tq: add missing definitions for private bloblist
+ entries
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ board/tq/common/tq_blob.h | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 board/tq/common/tq_blob.h
+
+diff --git a/board/tq/common/tq_blob.h b/board/tq/common/tq_blob.h
+new file mode 100644
+index 00000000000..0c5bf72d519
+--- /dev/null
++++ b/board/tq/common/tq_blob.h
+@@ -0,0 +1,20 @@
++/* SPDX-License-Identifier: GPL-2.0-or-later */
++/*
++ * Copyright (c) 2022-2023 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++ * D-82229 Seefeld, Germany.
++ * Author: Markus Niebel
++ */
++
++/*
++ * start private blobs at BLOBLISTT_VENDOR_AREA
++ * to not conflict with bloblist_tag_t
++ */
++
++/* forward VARD EEPROM struct */
++#define BLOBLISTT_TQ_VARD	(BLOBLISTT_PRIVATE_AREA + 0x20)
++/* forward only memory size info */
++#define BLOBLISTT_TQ_RAMSIZE	(BLOBLISTT_PRIVATE_AREA + 0x21)
++
++struct tq_raminfo {
++	phys_size_t memsize;
++};
+-- 
+2.34.1
+

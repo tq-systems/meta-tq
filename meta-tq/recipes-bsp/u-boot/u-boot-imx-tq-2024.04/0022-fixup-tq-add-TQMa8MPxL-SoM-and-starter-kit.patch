@@ -1,0 +1,51 @@
+From e1c8baaaf791effca99772c200e6d8c85b9eaddc Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Wed, 5 Mar 2025 11:05:17 +0100
+Subject: [PATCH 22/26] fixup! tq: add TQMa8MPxL SoM and starter kit
+
+---
+ board/tq/tqma8mpxl/Kconfig  | 7 ++++++-
+ board/tq/tqma8mpxl/Makefile | 3 ++-
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/board/tq/tqma8mpxl/Kconfig b/board/tq/tqma8mpxl/Kconfig
+index a09a8445477..3cda7240483 100644
+--- a/board/tq/tqma8mpxl/Kconfig
++++ b/board/tq/tqma8mpxl/Kconfig
+@@ -81,7 +81,12 @@ config TQMA8MPXL_BB_MBA8MPXL
+ 	imply ENV_OVERWRITE
+ 	help
+ 	  Select the MBa8MPxL starterkit for TQMa8MPxL board.
+-	  This features most interfaces the CPU can provide
++	  This features most interfaces the CPU can provide.
++
++config TQMA8MPXL_BB_MBA8MP_RAS314
++	bool "TQMa8MPxL on MBa8MP-RAS314 SBC"
++	help
++	  Select the MBa8MP-RAS314 SBC for TQMa8MPxL board.
+ 
+ endchoice
+ 
+diff --git a/board/tq/tqma8mpxl/Makefile b/board/tq/tqma8mpxl/Makefile
+index c6b4c6062cc..5607b92b4e0 100644
+--- a/board/tq/tqma8mpxl/Makefile
++++ b/board/tq/tqma8mpxl/Makefile
+@@ -1,6 +1,6 @@
+ ## SPDX-License-Identifier: GPL-2.0-or-later
+ ##
+-## Copyright (c) 2021-2024 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
++## Copyright (c) 2021-2025 TQ-Systems GmbH <u-boot@ew.tq-group.com>,
+ ## D-82229 Seefeld, Germany.
+ ## Author: Markus Niebel
+ ##
+@@ -12,6 +12,7 @@ obj-$(CONFIG_TQMA8MPXL_BB_MBA8MP_RAS314) += tqma8mpxl-mba8mp-ras314.o
+ ifdef CONFIG_SPL_BUILD
+ obj-y += spl.o
+ obj-$(CONFIG_TQMA8MPXL_BB_MBA8MPXL) += spl-mba8mpxl.o
++obj-$(CONFIG_TQMA8MPXL_BB_MBA8MP_RAS314) += spl-mba8mp-ras314.o
+ 
+ ifdef CONFIG_IMX8M_DRAM_INLINE_ECC
+ obj-$(CONFIG_TQMA8MPXL_RAM_1024MB) += lpddr4_timing_1gb_ecc.o
+-- 
+2.34.1
+
