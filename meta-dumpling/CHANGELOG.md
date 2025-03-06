@@ -13,6 +13,8 @@ Releases are named with the following scheme:
 
 * procps: lower `console_loglevel` in `sysctl.conf` to `KERN_ERR`
 * distros:
+  * INHERIT `tq-buildinfo` to generate `etc/buildinfo` and
+    "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.buildinfo
   * enforce usage of `sysctl` from `procps`package
   * use `armv8a-crc-crypto` as tuning for all ARM64 based machines to allow
     more artifact reuse when building for multiple machines.
@@ -21,6 +23,11 @@ Releases are named with the following scheme:
 
 * weston: Fix start on TQMa93xx due to insufficient privileges
   Note: `weston` now starts as root
+
+### Added
+
+* class `tq-buildinfo` as an extension of `buildinfo` class. This class is
+  intended to be used for CI and image identification.
 
 ## kirkstone.TQ.ARM.BSP.0023
 
