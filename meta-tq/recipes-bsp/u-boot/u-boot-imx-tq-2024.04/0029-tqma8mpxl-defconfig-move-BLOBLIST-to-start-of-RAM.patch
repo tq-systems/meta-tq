@@ -1,7 +1,7 @@
-From 5370e597f887383e8c333fcf60ede6e5a7349598 Mon Sep 17 00:00:00 2001
+From 9e8176ae4002430b6b2092d1952a5cc594af28fd Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Wed, 5 Mar 2025 17:49:03 +0100
-Subject: [PATCH 29/29] tqma8mpxl: defconfig: move BLOBLIST to start of RAM
+Subject: [PATCH 29/35] tqma8mpxl: defconfig: move BLOBLIST to start of RAM
 
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 ---

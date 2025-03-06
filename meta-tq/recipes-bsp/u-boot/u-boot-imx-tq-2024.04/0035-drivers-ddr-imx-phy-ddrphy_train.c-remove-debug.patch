@@ -1,0 +1,26 @@
+From 60253bad3a439a91e59c058fd04cb40d095fcb70 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Thu, 6 Mar 2025 12:44:15 +0100
+Subject: [PATCH 35/35] drivers/ddr/imx/phy/ddrphy_train.c: remove debug
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ drivers/ddr/imx/phy/ddrphy_train.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/ddr/imx/phy/ddrphy_train.c b/drivers/ddr/imx/phy/ddrphy_train.c
+index ca959b83923..70ddedaf30f 100644
+--- a/drivers/ddr/imx/phy/ddrphy_train.c
++++ b/drivers/ddr/imx/phy/ddrphy_train.c
+@@ -9,7 +9,7 @@
+ #include <asm/arch/ddr.h>
+ #include <asm/arch/sys_proto.h>
+ 
+-#define debug printf
++// #define debug printf
+ 
+ int ddr_cfg_phy(struct dram_timing_info *dram_timing)
+ {
+-- 
+2.34.1
+

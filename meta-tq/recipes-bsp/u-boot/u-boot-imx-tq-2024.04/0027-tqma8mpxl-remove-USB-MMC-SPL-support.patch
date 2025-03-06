@@ -1,7 +1,7 @@
-From f0449f5e8aa6cdb59c1b694effb7609f1815a3d5 Mon Sep 17 00:00:00 2001
+From 0a0a8bfce7717ac1086abd61ee98f5aef00aa79a Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Wed, 5 Mar 2025 14:30:30 +0100
-Subject: [PATCH 27/29] tqma8mpxl: remove USB / MMC SPL support
+Subject: [PATCH 27/35] tqma8mpxl: remove USB / MMC SPL support
 
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 ---

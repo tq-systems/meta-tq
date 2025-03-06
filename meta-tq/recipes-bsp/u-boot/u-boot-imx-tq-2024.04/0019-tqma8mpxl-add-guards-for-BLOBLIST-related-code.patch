@@ -1,7 +1,7 @@
-From 7272297f74cd1b49ef1ec07a611d136af91ede1e Mon Sep 17 00:00:00 2001
+From 6bd2cc0e158848d379455dea20c43e6d97aa04fa Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 4 Mar 2025 13:51:13 +0100
-Subject: [PATCH 19/29] tqma8mpxl: add guards for BLOBLIST related code
+Subject: [PATCH 19/35] tqma8mpxl: add guards for BLOBLIST related code
 
 BLOBLIST was moved to defconfig. Since we cannot rely on a fixed
 configuration setup compile BLOBLIST stuff only if configured.

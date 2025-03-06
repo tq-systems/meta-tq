@@ -1,0 +1,26 @@
+From 836508d278f22e02548d80b98b56486d0e6d05cb Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Thu, 6 Mar 2025 10:37:50 +0100
+Subject: [PATCH 33/35] ddr/imx/phy/ddrphy_train.c: debug
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ drivers/ddr/imx/phy/ddrphy_train.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/ddr/imx/phy/ddrphy_train.c b/drivers/ddr/imx/phy/ddrphy_train.c
+index e500e552bff..ca959b83923 100644
+--- a/drivers/ddr/imx/phy/ddrphy_train.c
++++ b/drivers/ddr/imx/phy/ddrphy_train.c
+@@ -9,6 +9,8 @@
+ #include <asm/arch/ddr.h>
+ #include <asm/arch/sys_proto.h>
+ 
++#define debug printf
++
+ int ddr_cfg_phy(struct dram_timing_info *dram_timing)
+ {
+ 	struct dram_cfg_param *dram_cfg;
+-- 
+2.34.1
+

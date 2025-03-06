@@ -1,7 +1,7 @@
-From 35ba913cdb4d12c3d77b869ca657676f8201f336 Mon Sep 17 00:00:00 2001
+From 1e87404d709d52ac9482d3c7754d2b63dac567c3 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Fri, 28 Feb 2025 18:00:51 +0100
-Subject: [PATCH 04/29] mach-imx: spl: fix MCU RDC config for i.MX8MN / i.MX8MP
+Subject: [PATCH 04/35] mach-imx: spl: fix MCU RDC config for i.MX8MN / i.MX8MP
 
 SPL_FIT_BYPASS_POST_LOAD was introduced in older vendor branch and
 is not defined in this branch. Do not use the define to prevent

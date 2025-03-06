@@ -1,7 +1,7 @@
-From 917c1ba6e7c60aca4514f498205bfd3a0a5d84b1 Mon Sep 17 00:00:00 2001
+From fb0ef3556b0598d1a5cf67e03ea7d8cb5ce9801b Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 4 Mar 2025 09:01:39 +0100
-Subject: [PATCH 17/29] tqma8mpxl: [WIP] rely on board_interface_eth_init
+Subject: [PATCH 17/35] tqma8mpxl: [WIP] rely on board_interface_eth_init
 
 prevent code duplication
 

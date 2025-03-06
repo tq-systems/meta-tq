@@ -1,7 +1,7 @@
-From 6e148a600500daa0036427c47eae1f571e731809 Mon Sep 17 00:00:00 2001
+From 3831484156f88df8a5219bce5d652828c019cfaa Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 18 Feb 2025 10:13:13 +0100
-Subject: [PATCH 03/29] imx9: native: Add missing UART clocks
+Subject: [PATCH 03/35] imx9: native: Add missing UART clocks
 
 For some reason only clock for LPUART1 has been added to
 init_uart_clk(). Add the missing clocks as well.

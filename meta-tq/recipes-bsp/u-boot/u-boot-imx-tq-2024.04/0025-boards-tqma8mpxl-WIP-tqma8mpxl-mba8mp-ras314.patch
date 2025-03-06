@@ -1,7 +1,7 @@
-From 14b4038a77607e7ffae32906859977ee067cd5be Mon Sep 17 00:00:00 2001
+From 60214b4df134ed5cc4b0dac40e12d1e0fc9611e8 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Wed, 5 Mar 2025 12:36:22 +0100
-Subject: [PATCH 25/29] boards: tqma8mpxl: [WIP]: tqma8mpxl-mba8mp-ras314
+Subject: [PATCH 25/35] boards: tqma8mpxl: [WIP]: tqma8mpxl-mba8mp-ras314
 
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 ---

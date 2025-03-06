@@ -1,7 +1,7 @@
-From 475bf6578b9d6801ff7b294d71054f85f8aa2cfc Mon Sep 17 00:00:00 2001
+From a49f516353215e13af1304edb6ba6264eebd4093 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Mon, 3 Mar 2025 16:18:06 +0100
-Subject: [PATCH 16/29] tqma8mpxl: UART /WDOG mux
+Subject: [PATCH 16/35] tqma8mpxl: UART /WDOG mux
 
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 ---

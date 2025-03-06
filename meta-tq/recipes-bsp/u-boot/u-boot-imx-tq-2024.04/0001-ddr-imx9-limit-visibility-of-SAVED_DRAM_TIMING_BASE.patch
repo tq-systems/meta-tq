@@ -1,7 +1,7 @@
-From 16b44ccde39f9b382a0d4056582126c035e476d6 Mon Sep 17 00:00:00 2001
+From 987e034705c3056400076cdb439d2764d31cf339 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Wed, 5 Feb 2025 17:29:36 +0100
-Subject: [PATCH 01/29] ddr: imx9: limit visibility of SAVED_DRAM_TIMING_BASE
+Subject: [PATCH 01/35] ddr: imx9: limit visibility of SAVED_DRAM_TIMING_BASE
 
 When compiling for i.MX95 a value will be queried although the
 symbol has no meaning on this CPU. Depend on IMX91/93 to hide

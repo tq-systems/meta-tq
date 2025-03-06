@@ -1,7 +1,7 @@
-From 43b637d64242c0686ba188c61de0f89f0a119d6b Mon Sep 17 00:00:00 2001
+From a258d434988ba3e72c75413d46efbca387785e6f Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Wed, 5 Mar 2025 16:36:21 +0100
-Subject: [PATCH 28/29] tqma8mpxl: defconfigs: increase SPL SIZE to 192K /
+Subject: [PATCH 28/35] tqma8mpxl: defconfigs: increase SPL SIZE to 192K /
  0x30000
 
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>

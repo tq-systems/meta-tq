@@ -1,7 +1,7 @@
-From b6194187e3ebe2cf6c6e1e442f49ad4e620c1f5e Mon Sep 17 00:00:00 2001
+From e97dc75867de1db913ad0cc5f2aa148949176499 Mon Sep 17 00:00:00 2001
 From: Alexander Stein <alexander.stein@ew.tq-group.com>
 Date: Fri, 26 Apr 2024 11:30:35 +0200
-Subject: [PATCH 13/29] arm: dts: tqma8mpql: add U-Boot dtsi fragments
+Subject: [PATCH 13/35] arm: dts: tqma8mpql: add U-Boot dtsi fragments
 
 Add fragments for TQMa8MPxL SoM and for said SoM on MBa8MPxL
 starter kit mainboard.

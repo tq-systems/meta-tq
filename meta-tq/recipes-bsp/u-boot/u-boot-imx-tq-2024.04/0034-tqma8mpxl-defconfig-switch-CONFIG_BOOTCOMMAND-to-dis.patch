@@ -1,0 +1,41 @@
+From 9816636a4fd7816d2c52ebecc234e3d07441b8b7 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Thu, 6 Mar 2025 12:43:11 +0100
+Subject: [PATCH 34/35] tqma8mpxl: defconfig: switch CONFIG_BOOTCOMMAND to
+ distrobootcmd
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ configs/tqma8mpxl_multi_mba8mp_ras314_defconfig | 2 +-
+ configs/tqma8mpxl_multi_mba8mpxl_defconfig      | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/configs/tqma8mpxl_multi_mba8mp_ras314_defconfig b/configs/tqma8mpxl_multi_mba8mp_ras314_defconfig
+index 8619cefff97..9d074cd19bf 100644
+--- a/configs/tqma8mpxl_multi_mba8mp_ras314_defconfig
++++ b/configs/tqma8mpxl_multi_mba8mp_ras314_defconfig
+@@ -44,7 +44,7 @@ CONFIG_BOOTDELAY=3
+ CONFIG_OF_BOARD_SETUP=y
+ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_FDT_FIXUP_PARTITIONS=y
+-CONFIG_BOOTCOMMAND="run mmcboot; run distro_bootcmd"
++CONFIG_BOOTCOMMAND="run distro_bootcmd"
+ CONFIG_DEFAULT_FDT_FILE="imx8mp-tqma8mpql-mba8mp-ras314.dtb"
+ CONFIG_SYS_CBSIZE=2048
+ CONFIG_SYS_PBSIZE=2074
+diff --git a/configs/tqma8mpxl_multi_mba8mpxl_defconfig b/configs/tqma8mpxl_multi_mba8mpxl_defconfig
+index ccb68d85dc6..312e662d5cf 100644
+--- a/configs/tqma8mpxl_multi_mba8mpxl_defconfig
++++ b/configs/tqma8mpxl_multi_mba8mpxl_defconfig
+@@ -43,7 +43,7 @@ CONFIG_BOOTDELAY=3
+ CONFIG_OF_BOARD_SETUP=y
+ CONFIG_OF_SYSTEM_SETUP=y
+ CONFIG_FDT_FIXUP_PARTITIONS=y
+-CONFIG_BOOTCOMMAND="run mmcboot; run distro_bootcmd"
++CONFIG_BOOTCOMMAND="run distro_bootcmd"
+ CONFIG_DEFAULT_FDT_FILE="imx8mp-tqma8mpql-mba8mpxl.dtb"
+ CONFIG_SYS_CBSIZE=2048
+ CONFIG_SYS_PBSIZE=2074
+-- 
+2.34.1
+

@@ -1,7 +1,7 @@
-From 00b62cccf47b975cb59cc6650ac505b513c322c5 Mon Sep 17 00:00:00 2001
+From 37cbd619163691f4836be613a01a58d2f58ea9f9 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Wed, 5 Mar 2025 12:37:10 +0100
-Subject: [PATCH 26/29] tqma8mpxl: add tqma8mpxl_multi_mba8mp_ras314_defconfig
+Subject: [PATCH 26/35] tqma8mpxl: add tqma8mpxl_multi_mba8mp_ras314_defconfig
 
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 ---

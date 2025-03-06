@@ -1,7 +1,7 @@
-From 7d38cd3b4071d23430f16d4db9c858d292e4cede Mon Sep 17 00:00:00 2001
+From 5f62f2a40521142ae4ab5242082a62614b113baa Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 4 Mar 2025 13:51:54 +0100
-Subject: [PATCH 18/29] board/tq/tqma8mpxl/spl.c: do not call board_init_r
+Subject: [PATCH 18/35] board/tq/tqma8mpxl/spl.c: do not call board_init_r
  directly
 
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>

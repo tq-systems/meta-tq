@@ -1,7 +1,7 @@
-From 0e2213c1d8003f704092995c37e8dd9943141ea4 Mon Sep 17 00:00:00 2001
+From 550ff293fbc8422ca009df78347a7aa287a71c9c Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Fri, 31 May 2024 16:37:42 +0200
-Subject: [PATCH 14/29] tq: add TQMa8MPxL SoM and starter kit
+Subject: [PATCH 14/35] tq: add TQMa8MPxL SoM and starter kit
 
 Add board code including the different RAM configuration data
 for TQ-Systems GmbH solderable SoM based on i.MX8MP SoC family.

@@ -31,7 +31,16 @@ SRC_URI += "\
     file://0027-tqma8mpxl-remove-USB-MMC-SPL-support.patch \
     file://0028-tqma8mpxl-defconfigs-increase-SPL-SIZE-to-192K-0x300.patch \
     file://0029-tqma8mpxl-defconfig-move-BLOBLIST-to-start-of-RAM.patch \
+    file://0030-imx8mp-tqma8mpql-u-boot.dtsi-cleanup.patch \
+    file://0031-tqma8mpxl-board-env-fix.patch \
+    file://0032-tqma93xx-board-env-fix.patch \
+    file://0033-ddr-imx-phy-ddrphy_train.c-debug.patch \
+    file://0034-tqma8mpxl-defconfig-switch-CONFIG_BOOTCOMMAND-to-dis.patch \
 "
+
+#
+#    file://0035-drivers-ddr-imx-phy-ddrphy_train.c-remove-debug.patch \
+#
 
 DISTROBOOT_EXTRA_SOURCES = ""
 

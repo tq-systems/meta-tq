@@ -1,0 +1,178 @@
+From 8ac7b4f40b8e11aadb297a82468e95c0cbf82271 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Thu, 6 Mar 2025 10:36:01 +0100
+Subject: [PATCH 30/35] imx8mp-tqma8mpql: u-boot.dtsi cleanup
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ ...imx8mp-tqma8mpql-mba8mp-ras314-u-boot.dtsi | 14 --------
+ .../dts/imx8mp-tqma8mpql-mba8mpxl-u-boot.dtsi | 30 +---------------
+ arch/arm/dts/imx8mp-tqma8mpql-u-boot.dtsi     | 35 -------------------
+ 3 files changed, 1 insertion(+), 78 deletions(-)
+
+diff --git a/arch/arm/dts/imx8mp-tqma8mpql-mba8mp-ras314-u-boot.dtsi b/arch/arm/dts/imx8mp-tqma8mpql-mba8mp-ras314-u-boot.dtsi
+index 369ef22ca06..97ac16a5c48 100644
+--- a/arch/arm/dts/imx8mp-tqma8mpql-mba8mp-ras314-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-tqma8mpql-mba8mp-ras314-u-boot.dtsi
+@@ -29,7 +29,6 @@
+ &iomuxc {
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_wdog>, <&pinctrl_gpioled>;
+-	u-boot,dm-spl;
+ };
+ 
+ &pcie {
+@@ -44,18 +43,6 @@
+ 	bootph-pre-ram;
+ };
+ 
+-&pinctrl_usdhc2_gpio {
+-	bootph-pre-ram;
+-};
+-
+-&pinctrl_usdhc2 {
+-	bootph-pre-ram;
+-};
+-
+-&reg_usdhc2_vmmc {
+-	bootph-pre-ram;
+-};
+-
+ &tlv320aic3x04 {
+ 	status = "disabled";
+ };
+@@ -65,7 +52,6 @@
+ };
+ 
+ &usdhc2 {
+-	bootph-pre-ram;
+ 	sd-uhs-sdr104;
+ 	sd-uhs-ddr50;
+ 	assigned-clocks = <&clk IMX8MP_CLK_USDHC2>;
+diff --git a/arch/arm/dts/imx8mp-tqma8mpql-mba8mpxl-u-boot.dtsi b/arch/arm/dts/imx8mp-tqma8mpql-mba8mpxl-u-boot.dtsi
+index 65084904824..e0f3b571f06 100644
+--- a/arch/arm/dts/imx8mp-tqma8mpql-mba8mpxl-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-tqma8mpql-mba8mpxl-u-boot.dtsi
+@@ -35,50 +35,22 @@
+ 	bootph-pre-ram;
+ };
+ 
+-&pinctrl_usdhc2_gpio {
+-	bootph-pre-ram;
+-};
+-
+-&pinctrl_usdhc2 {
+-	bootph-pre-ram;
+-};
+-
+-&reg_usdhc2_vmmc {
+-	bootph-pre-ram;
+-};
+-
+ &uart4 {
+ 	bootph-pre-ram;
+ };
+ 
+-/* TODO: USB */
+-&usb_dwc3_0 {
+-	compatible = "fsl,imx8mq-dwc3", "snps,dwc3";
+-	assigned-clocks = <&clk IMX8MP_CLK_HSIO_AXI>;
+-	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_800M>;
+-	assigned-clock-rates = <400000000>;
+-};
+-
+-&usb_dwc3_1 {
+-	compatible = "fsl,imx8mq-dwc3", "snps,dwc3";
+-	assigned-clocks = <&clk IMX8MP_CLK_HSIO_AXI>;
+-	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_800M>;
+-	assigned-clock-rates = <400000000>;
+-};
+-
+ /* TODO: SDIO? */
+ &usdhc1 {
+-	bootph-pre-ram;
+ 	assigned-clocks = <&clk IMX8MP_CLK_USDHC1>;
+ 	assigned-clock-rates = <400000000>;
+ 	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_400M>;
+ };
+ 
+ &usdhc2 {
+-	bootph-pre-ram;
+ 	sd-uhs-sdr104;
+ 	sd-uhs-ddr50;
+ 	assigned-clocks = <&clk IMX8MP_CLK_USDHC2>;
+ 	assigned-clock-rates = <400000000>;
+ 	assigned-clock-parents = <&clk IMX8MP_SYS_PLL1_400M>;
+ };
++
+diff --git a/arch/arm/dts/imx8mp-tqma8mpql-u-boot.dtsi b/arch/arm/dts/imx8mp-tqma8mpql-u-boot.dtsi
+index ccd7afb9326..fb84b38c640 100644
+--- a/arch/arm/dts/imx8mp-tqma8mpql-u-boot.dtsi
++++ b/arch/arm/dts/imx8mp-tqma8mpql-u-boot.dtsi
+@@ -34,11 +34,6 @@
+ 	bootph-pre-ram;
+ };
+ 
+-/* USB */
+-&aips4 {
+-	bootph-pre-ram;
+-};
+-
+ &flash0 {
+ 	spi-tx-bus-width = <1>;
+ 	spi-rx-bus-width = <1>;
+@@ -65,11 +60,6 @@
+ 	bootph-all;
+ };
+ 
+-&iomuxc {
+-	bootph-pre-ram;
+-	bootph-all;
+-};
+-
+ &pinctrl_i2c1 {
+ 	bootph-pre-ram;
+ 	bootph-all;
+@@ -80,18 +70,6 @@
+ 	bootph-all;
+ };
+ 
+-&pinctrl_usdhc3 {
+-	bootph-pre-ram;
+-};
+-
+-&pinctrl_usdhc3_100mhz {
+-	bootph-pre-ram;
+-};
+-
+-&pinctrl_usdhc3_200mhz {
+-	bootph-pre-ram;
+-};
+-
+ &pinctrl_pmic {
+ 	bootph-pre-ram;
+ 	bootph-all;
+@@ -111,20 +89,7 @@
+ 	};
+ };
+ 
+-&sec_jr0 {
+-	bootph-pre-ram;
+-};
+-
+-&sec_jr1 {
+-	bootph-pre-ram;
+-};
+-
+-&sec_jr2 {
+-	bootph-pre-ram;
+-};
+-
+ &usdhc3 {
+-	bootph-pre-ram;
+ 	mmc-hs400-1_8v;
+ 	mmc-hs400-enhanced-strobe;
+ 	assigned-clocks = <&clk IMX8MP_CLK_USDHC3>;
+-- 
+2.34.1
+

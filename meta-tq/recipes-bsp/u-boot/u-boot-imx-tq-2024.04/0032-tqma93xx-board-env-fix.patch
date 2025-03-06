@@ -1,0 +1,32 @@
+From bc8ac1104743f76fc28ce74a93a8e2132a2bd962 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Thu, 6 Mar 2025 10:37:19 +0100
+Subject: [PATCH 32/35] tqma93xx: board env fix
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ include/configs/tqma93xx.h | 7 -------
+ 1 file changed, 7 deletions(-)
+
+diff --git a/include/configs/tqma93xx.h b/include/configs/tqma93xx.h
+index d4cd3a50f5b..1eb15f0133b 100644
+--- a/include/configs/tqma93xx.h
++++ b/include/configs/tqma93xx.h
+@@ -47,14 +47,7 @@
+ 	"fdtoverlay_addr_r=0x83080000\0"                               \
+ 	"initrd_addr=0x83800000\0"                                     \
+ 	"mmcdev=" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0"             \
+-	"mmcfwpart=1\0"                                                \
+-	"mmcfwpath=/\0"                                                \
+ 	"mmcautodetect=yes\0"                                          \
+-	"loadbootscript=mmc dev ${mmcdev}; mmc rescan;"                \
+-		"load mmc ${mmcdev}:${mmcfwpart} ${loadaddr} "         \
+-		"${mmcfwpath}${script};\0"                             \
+-	"bootscript=echo Running bootscript from mmc ...; "            \
+-		"source\0"                                             \
+ 	"boot_os=booti ${kernel_addr_r} - ${fdt_addr_r};\0"            \
+ 	"emmc_bootp_start=0x0\0"                                       \
+ 	"uboot_mmc_start=0x40\0"                                       \
+-- 
+2.34.1
+

@@ -1,7 +1,7 @@
-From 30a73773211a7710edf485e102bab1ea333eb141 Mon Sep 17 00:00:00 2001
+From 1ca1cf085f2992e37472189f07af2542ad224e46 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Mon, 3 Mar 2025 16:15:25 +0100
-Subject: [PATCH 15/29] tqma8mpxl-mba8mpxl: UART / EFI EVK sync
+Subject: [PATCH 15/35] tqma8mpxl-mba8mpxl: UART / EFI EVK sync
 
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 ---

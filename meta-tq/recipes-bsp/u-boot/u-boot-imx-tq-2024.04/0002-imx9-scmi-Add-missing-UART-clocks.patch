@@ -1,7 +1,7 @@
-From f0e5e8377af2f12574716559feaf64dafdd88911 Mon Sep 17 00:00:00 2001
+From c295568757dadb8d67269575d9cf15cfe73458b8 Mon Sep 17 00:00:00 2001
 From: Alexander Stein <alexander.stein@ew.tq-group.com>
 Date: Tue, 4 Feb 2025 13:27:04 +0100
-Subject: [PATCH 02/29] imx9: scmi: Add missing UART clocks
+Subject: [PATCH 02/35] imx9: scmi: Add missing UART clocks
 
 For some reason only clocks for LPUART1-3 has been added to
 init_uart_clk(). Add the missing clocks as well.

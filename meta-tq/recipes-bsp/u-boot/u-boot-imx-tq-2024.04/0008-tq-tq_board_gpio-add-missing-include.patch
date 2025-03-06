@@ -1,7 +1,7 @@
-From 5cb5b9cb4cdcc4f4526d532a7f77a7e6972ecfb8 Mon Sep 17 00:00:00 2001
+From c411db8b957c6f3829c709a319dea7f04ae1a46d Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Fri, 28 Feb 2025 17:20:42 +0100
-Subject: [PATCH 08/29] tq: tq_board_gpio: add missing include
+Subject: [PATCH 08/35] tq: tq_board_gpio: add missing include
 
 Use DM generic gpio header instead of SOC specific one.
 

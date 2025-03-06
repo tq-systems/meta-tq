@@ -1,0 +1,39 @@
+From 5ecf84a3233a91c98182f805bf242c0c1e69b8d2 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Thu, 6 Mar 2025 10:36:50 +0100
+Subject: [PATCH 31/35] tqma8mpxl: board env fix
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ include/configs/tqma8mpxl.h | 10 +++-------
+ 1 file changed, 3 insertions(+), 7 deletions(-)
+
+diff --git a/include/configs/tqma8mpxl.h b/include/configs/tqma8mpxl.h
+index fc5c7f211a2..e1cd6c398d9 100644
+--- a/include/configs/tqma8mpxl.h
++++ b/include/configs/tqma8mpxl.h
+@@ -58,18 +58,14 @@
+ 	"scriptaddr=0x43500000\0"                                      \
+ 	"image=Image\0"                                                \
+ 	"kernel_addr_r=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0"        \
++	"pxefile_addr_r=" __stringify(CONFIG_SYS_LOAD_ADDR) "\0"       \
+ 	"fdt_addr_r=0x43000000\0"                                      \
++	"fdtoverlay_addr_r=0x43080000\0"                               \
+ 	"initrd_addr=0x43800000\0"                                     \
+ 	"mmcdev=" __stringify(CONFIG_SYS_MMC_ENV_DEV) "\0"             \
+-	"mmcfwpart=1\0"                                                \
+-	"mmcfwpath=/\0"                                                \
+ 	"mmcautodetect=yes\0"                                          \
+-	"loadbootscript=mmc dev ${mmcdev}; mmc rescan;"                \
+-		"load mmc ${mmcdev}:${mmcfwpart} ${loadaddr} "         \
+-		"${mmcfwpath}${script};\0"                             \
+-	"bootscript=echo Running bootscript from mmc ...; "            \
+-		"source\0"                                             \
+ 	"boot_os=booti ${kernel_addr_r} - ${fdt_addr_r};\0"            \
++	"emmc_bootp_start=0x0\0"                                       \
+ 	"uboot_mmc_start=0x40\0"                                       \
+ 	"uboot_mmc_size=0xfc0\0"                                       \
+ 	"uboot_spi_start=0x0\0"                                        \
+-- 
+2.34.1
+
