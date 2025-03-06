@@ -8,7 +8,6 @@ MACHINEOVERRIDES =. "tqma335x:"
 PREFERRED_PROVIDER_virtual/kernel ?= "linux-tq"
 PREFERRED_PROVIDER_u-boot ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-tq"
-TI_SGX_DDK_KM_KERNVER ?= "5.4"
 
 # from meta-ti-bsp: will handle SOC_FAMILY:append ?= ":ti33x" needed for TI recipes
 include conf/machine/include/ti33x.inc
