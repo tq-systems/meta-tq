@@ -19,6 +19,7 @@ Releases are named with the following scheme:
   variables default to "1G" and "100M", respectively, and can be adjusted as
   needed.
 * machines:
+  * restore support for TQMa6ULxL on MBa6ULxL SBC
   * add new machine for TQMa8MPxL on MBa8MP-RAS314 starter kit
   * add new machine for TQMa91xxCA/LA on MBa91xxCA starter kit
 * u-boot-imx-tq_2024.03: new recipe with support for TQMa91xx and TQMa93xx
