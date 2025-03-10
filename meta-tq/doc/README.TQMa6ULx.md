@@ -54,8 +54,8 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ### Linux
 
-NOTE: Linux Kernel 6.1 is incompatible to yocto scarthgap.
-For Linux 6.1 use yocto kirkstone.
+NOTE: Device tree from Linux Kernel 6.1 is not out of the box compatible to
+yocto scarthgap. For Linux 6.1 support use yocto kirkstone.
 
 | Feature                              | linux-tq-6.6 |
 | :----------------------------------: | :----------: |
@@ -104,8 +104,8 @@ _Note:_ Mini PCIe connector only supports USB.
   before ENET1 and both share the same MDIO bus. Network device numbering in U-Boot
   is inverse to Linux.
 * Linux / DTB: when booting kernel versions from this BSP the disabling of fused IP in
-  device tree before loding the OS may fail with U-Boot from older BSP versions.
-  Device tree path names were changed in CPU device tree fragment to conform the
+  device tree before loading the OS may fail with U-Boot from older BSP versions.
+  Device tree path names were changed several times in CPU device tree fragment to conform the
   device tree specification.
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
@@ -117,7 +117,7 @@ _Note:_ Mini PCIe connector only supports USB.
   `IMAGE_BOOT_FILES` prevents this doubled installation.
 * Environment of U-Boot v2023.04 was reworked to use variable names that conforms with
   distroboot contract. The default environment of older U-Boot versions are incompatible.
-* USB devices at miniPCIe connector (X22) are not detected after POR. After warm reset
+* MBa6ULx: USB devices at miniPCIe connector (X22) are not detected after POR. After warm reset
   devices enumerate.
 
 ## Artifacts
