@@ -183,9 +183,9 @@ See [here](./README.imx-arm64.UUU.md) for details about using Serial Download mo
 
 ## Howto
 
-### Display Support
+### Display Support MBa6ULx
 
-Each Display can be used on its own by using the corresponding device tree.
+Each display can be used on its own by using the corresponding device tree.
 
 *Note:* With MBa6ULx only one control interface for backlight is available.
 
@@ -197,6 +197,11 @@ Each Display can be used on its own by using the corresponding device tree.
 | LVDS            | imx6ull-tqma6ull2[l]-mba6ulx-lvds.dtb        | Tianma TM070JVHG33 |
 | Parallel        | imx6ull-tqma6ull2[l]-mba6ulx-cdtech-dc44.dtb | CDTECH DC44 (DMB)  |
 | Parallel        | imx6ull-tqma6ull2[l]-mba6ulx-cdtech-fc21.dtb | CDTECH FC21 (DMB)  |
+
+### Display Support MBa6ULxL
+
+Support for parallel display is provided using `imx6ul-tqma6ul2l-mba6ulxl-glyn-etm0700g0edh6.dtb`
+(type Glyn ETM0700 REV. G0EDH6 )
 
 ### Access U-Boot environment from Linux
 
