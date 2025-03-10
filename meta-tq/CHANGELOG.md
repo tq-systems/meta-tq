@@ -14,13 +14,28 @@ Releases are named with the following scheme:
 * machines: add new machine for TQMa91xxCA/LA on MBa91xxCA starter kit
 * u-boot-imx-tq_2024.03: new recipe with support for TQMa91xx and TQMa93xx
 * imx-tq-atf_2.10: support for TQMa91xxCA/LA
-* linux-tq-6.12: new kernel based on linux-stable kernel
+* linux-rt-tq-6.12:
+  add recipe to support PREEMPT_RT with the same branch as used for linux-tq-6.12
+* linux-tq-6.12:
   * support TQMa93xx[CA/LA] on MBa93xxCA / MBa93xxLA / MBa91xxCA
 
 ### Changed
 
+* linux-tq-6.12:
+  * integrate changes from linux-stable up to tag v6.12.17
+* linux-tq-6.6:
+  * backport upstream fix for TMPDIR leakage
+  * integrate changes from linux-stable up to tag v6.6.80
+* linux-rt-tq-6.6: integrate changes from linux-stable up to tag v6.6.80
+  via TQ Systems branch TQM-linux-v6.6.y and changes from stable-rt up to
+  tag v6.6.78-rt51
+* linux-tq-6.1:
+  * backport upstream fixes for TMPDIR leakage
+  * integrate changes from linux-stable up to tag v6.1.129
 * imx-tq-atf_2.10: integrate changes from NXP BSP release `lf-6.6.52-2.2.0`
 * linux-imx-tq-6.6:
+  * integrate fixes from linux-fslc up to
+    5ff4cf4d61e1 ("Merge pull request #713 from angolini/fix_imx93")
   * Add TCP SYN cookie support (expected by default sysctl.conf)
   * integrate changes from NXP BSP release `lf-6.6.52-2.2.0`
     via the matching branch of linux-fslc repo. Integrates linux-stable fixes
