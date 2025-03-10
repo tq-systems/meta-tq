@@ -10,6 +10,7 @@ This README contains some useful information for TQMa6ULx / TQMa6ULLx / TQMa6ULx
 * TQMa6ULxL REV.020x on MBa6ULx REV.020x carrier board (aka STKa6ULxL)
 * TQMa6ULLx REV.030x on MBa6ULx REV.020x carrier board (aka STKa6ULLx)
 * TQMa6ULLxL REV.020x on MBa6ULx REV.020x carrier board (aka STKa6ULLxL)
+* TQMa6ULxL REV.020x on MBa6ULxL REV.020x carrier board
 
 ## Version information for software components
 
