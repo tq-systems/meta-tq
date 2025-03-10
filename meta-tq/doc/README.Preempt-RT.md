@@ -6,19 +6,23 @@ This README contains some useful information for using Linux Preempt-RT
 
 # Supported platforms
 
-Currently with Linux 6.1 the supported platforms are
-* TQMa8MPxL
-* TQMa8Mx
-* TQMa8MxML
-* TQMa8MxNL
-* TQMLS10xxA
-* TQMLX2160A
+| Board      | linux 6.1 | linux 6.6| linux 6.12 |
+|------------|-----------|----------|------------|
+| TQMa6ULx   |     x  1) |    x     |            |
+| TQMa6ULxL  |     x  1) |    x     |            |
+| TQMa6x     |     x  1) |    x     |            |
+| TQMa7x     |     x  1) |    x     |            |
+| TQMa8Mx    |     x  1) |    x     |            |
+| TQMa8MxML  |     x  1) |    x     |            |
+| TQMa8MxNL  |     x  1) |    x     |            |
+| TQMa8MPxL  |     x  1) |    x     |    x       |
+| TQMa93xx   |           |          |    x       |
+| TQMLS10xxA |     x     |          |            |
+| TQMLX2160A |     x     |          |            |
 
-Currently with Linux 6.6 the supported platforms are
-* TQMa6x
-* TQMx6ULx
-* TQMa6ULLx
-* TQMa7x
+Notes:
+
+* **1):** if `linux-rt-6.1` is needed, prefer `kirkstone` branch
 
 # Usage
 
