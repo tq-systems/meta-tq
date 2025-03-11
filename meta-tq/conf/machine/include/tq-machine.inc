@@ -4,8 +4,11 @@
 # settings to be included by <machine>.conf
 # this keeps reusability and easier settings for custom boards
 
-MACHINE_EXTRA_RRECOMMENDS += "\
+MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
     kernel-devicetree \
     kernel-image \
+"
+
+MACHINE_EXTRA_RRECOMMENDS += "\
     kernel-modules \
 "
