@@ -10,8 +10,3 @@ directly suitable for production - also from the aspect of security."
 # force dropbear
 IMAGE_FEATURES:append = " ssh-server-dropbear"
 IMAGE_FEATURES:remove = "ssh-server-openssh"
-
-IMAGE_INSTALL:append = "\
-    kernel-devicetree \
-    kernel-image \
-"
