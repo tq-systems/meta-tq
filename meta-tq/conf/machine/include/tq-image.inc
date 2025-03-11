@@ -25,7 +25,7 @@ EXTRA_IMAGEDEPENDS += " \
     virtual/kernel \
 "
 
-# Override unwanded dependencies from SoC includes
+# Override unwanted dependencies from SoC includes
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS = ""
 
 # EXTRA_IMAGEDEPENDS are applied to do_image_complete only. Make the same
