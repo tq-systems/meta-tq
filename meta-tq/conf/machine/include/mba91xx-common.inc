@@ -2,6 +2,8 @@
 
 # Machine specific options
 
+require conf/machine/include/tq-machine.inc
+
 WKS_FILE = "tqmaxx-imx-v8-sdimg.wks.in"
 
 MACHINE_FEATURES += "\

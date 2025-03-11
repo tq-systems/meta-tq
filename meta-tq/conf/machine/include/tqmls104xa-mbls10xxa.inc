@@ -7,13 +7,6 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
 # SERIAL_CONSOLES only
 USE_VT = "0"
 
-# Install kernel and devicetree also under /boot inside the rootfs,
-# needed for UBIFS use case to prevent extra partition(s) for kernel and dtb.
-MACHINE_EXTRA_RRECOMMENDS += "\
-    kernel-devicetree \
-    kernel-image \
-"
-
 UBOOT_RCW_CONFIG ??= ""
 
 # direct assignment to override empty default from meta-freescale

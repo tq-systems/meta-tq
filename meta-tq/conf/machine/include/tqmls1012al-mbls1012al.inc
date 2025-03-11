@@ -1,5 +1,7 @@
 # Common definitions for TQ-Systems GmbH TQMLS1012AL modules on MBLS1012AL
 
+require conf/machine/include/tq-machine.inc
+
 MACHINE_FEATURES += "wifi"
 MACHINE_EXTRA_RRECOMMENDS += "${@bb.utils.contains('COMBINED_FEATURES', 'wifi', 'linux-firmware-ath10k', '', d)}"
 
