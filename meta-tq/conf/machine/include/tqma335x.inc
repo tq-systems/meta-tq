@@ -20,10 +20,6 @@ require ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-ti-bsp", '', 'conf/mach
 
 # Machine specific options
 #
-MACHINE_EXTRA_RRECOMMENDS += "\
-    kernel-devicetree \
-    kernel-modules \
-"
 
 # TQ u-boot and kernel
 #

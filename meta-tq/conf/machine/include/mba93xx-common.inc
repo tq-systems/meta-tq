@@ -1,6 +1,7 @@
 # Common definitions for TQ-Systems GmbH MBa93xxCA / MBa93xxLA
 
 # Machine specific options
+require conf/machine/include/tq-machine.inc
 
 WKS_FILE = "tqmaxx-imx-v8-sdimg.wks.in"
 

@@ -1,6 +1,7 @@
 # Common definitions for TQ-Systems GmbH MBa7x baseboard for TQMa7x modules
 
 include conf/machine/include/tqma7.inc
+require conf/machine/include/tq-machine.inc
 
 SERIAL_CONSOLES = "115200;ttymxc5"
 
@@ -46,13 +47,6 @@ MACHINE_FEATURES += "\
     wifi \
 "
 
-# install kernel and devicetree also under /boot inside the rootfs,
-# needed for UBIFS use case and perpare removal of extra FAT boot partition
-# on SD / e-MMC
-MACHINE_EXTRA_RRECOMMENDS += "\
-    kernel-devicetree \
-    kernel-image \
-"
 MACHINE_EXTRA_RRECOMMENDS += "${@bb.utils.contains('COMBINED_FEATURES', 'wifi', 'linux-firmware-ath10k', '', d)}"
 MACHINE_EXTRA_RRECOMMENDS += "${@bb.utils.contains('COMBINED_FEATURES', 'bluetooth', 'linux-firmware-qca', '', d)}"
 

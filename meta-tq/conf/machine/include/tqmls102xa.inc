@@ -32,8 +32,6 @@ UBOOT_SUFFIX = "bin"
 #
 
 MACHINE_EXTRA_RRECOMMENDS += "\
-    kernel-devicetree \
-    kernel-modules \
     udev-extraconf \
 "
 

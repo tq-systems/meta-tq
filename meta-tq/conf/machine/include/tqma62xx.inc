@@ -54,11 +54,6 @@ IMAGE_BOOT_FILES += "tiboot3-${SYSFW_DEFAULT_VARIANT}-evm.bin;tiboot3.bin"
 
 # Machine specific options
 
-MACHINE_EXTRA_RRECOMMENDS += "\
-    kernel-devicetree \
-    kernel-modules \
-"
-
 # TQ u-boot and kernel
 
 require conf/machine/include/tqmxx.inc

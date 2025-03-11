@@ -2,6 +2,7 @@
 
 require conf/machine/include/tqmls1043a.inc
 require conf/machine/include/tqmls104xa-mbls10xxa.inc
+require conf/machine/include/tq-machine.inc
 
 KERNEL_DEVICETREE ?= " \
     freescale/fsl-ls1043a-tqmls1043a-mbls10xxa.dtb \

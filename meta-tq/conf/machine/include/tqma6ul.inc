@@ -16,8 +16,6 @@ require conf/machine/include/tqmxx.inc
 # Machine specific options
 
 MACHINE_EXTRA_RRECOMMENDS += "\
-    kernel-devicetree \
-    kernel-modules \
     linux-firmware-imx-sdma-imx6q \
 "
 

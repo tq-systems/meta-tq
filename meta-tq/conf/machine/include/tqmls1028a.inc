@@ -26,8 +26,6 @@ UBOOT_ENTRYPOINT:ls1028a = "0x80008000"
 #
 
 MACHINE_EXTRA_RRECOMMENDS += "\
-    kernel-devicetree \
-    kernel-modules \
     udev-extraconf \
 "
 

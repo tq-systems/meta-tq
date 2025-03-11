@@ -18,8 +18,6 @@ KERNEL_IMAGETYPE ?= "Image"
 # Machine specific options
 #
 MACHINE_EXTRA_RRECOMMENDS += "\
-    kernel-devicetree \
-    kernel-modules \
     udev-extraconf \
 "
 

@@ -1,6 +1,8 @@
 # Common definitions for TQ-Systems GmbH MBa6ULx baseboard for
 # TQMa6ULx/TQMa6ULLx/TQMa6ULxL/TQMa6ULLxL SOM
 
+require conf/machine/include/tq-machine.inc
+
 SERIAL_CONSOLES = "115200;ttymxc0"
 
 # disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
@@ -20,13 +22,6 @@ MACHINE_FEATURES += "\
     wifi \
 "
 
-# install kernel and devicetree also under /boot inside the rootfs,
-# needed for UBIFS use case and perpare removal of extra FAT boot partition
-# on SD / e-MMC
-MACHINE_EXTRA_RRECOMMENDS += "\
-    kernel-devicetree \
-    kernel-image \
-"
 MACHINE_EXTRA_RRECOMMENDS += "${@bb.utils.contains('COMBINED_FEATURES', 'wifi', 'linux-firmware-ath10k', '', d)}"
 MACHINE_EXTRA_RRECOMMENDS += "${@bb.utils.contains('COMBINED_FEATURES', 'bluetooth', 'linux-firmware-qca', '', d)}"
 

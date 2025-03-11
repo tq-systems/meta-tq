@@ -44,11 +44,6 @@ IMX_BOOT_SEEK = "${RAW_BOOT_START_OFFSET_KB}"
 # imx-mkimage[-tq]
 IMX_BOOT_SOC_TARGET = "iMX9"
 
-MACHINE_EXTRA_RRECOMMENDS += "\
-    kernel-devicetree \
-    kernel-modules \
-"
-
 MACHINE_FEATURES += "\
     can \
     ext2 \

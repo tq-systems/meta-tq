@@ -18,8 +18,6 @@ require conf/machine/include/tqmxx.inc
 MACHINE_EXTRA_RRECOMMENDS += "\
     firmware-imx-vpu-imx6d \
     firmware-imx-vpu-imx6q \
-    kernel-devicetree \
-    kernel-modules \
     linux-firmware-imx-sdma-imx6q \
 "
 

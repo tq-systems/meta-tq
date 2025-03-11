@@ -14,6 +14,8 @@
 #
 
 require conf/machine/include/tqmls1088a.inc
+require conf/machine/include/tq-machine.inc
+
 
 # no default assignment here, since we overwrite defaults from qoriq-arm64.inc
 SERIAL_CONSOLES = "115200;ttyS1"
@@ -33,13 +35,6 @@ IMAGE_BOOT_FILES = "\
 
 # direct assignment to override empty default from meta-freescale
 WKS_FILE = "tqmls1088a-sdimg.wks.in"
-
-# Install kernel and devicetree also under /boot inside the rootfs,
-# needed for UBIFS use case to prevent extra partition(s) for kernel and dtb.
-MACHINE_EXTRA_RRECOMMENDS += "\
-    kernel-devicetree \
-    kernel-image \
-"
 
 UBOOT_CONFIG ?= "tfa"
 UBOOT_CONFIG[tfa] = "tqmls1088a_mbls10xxa_tfa_defconfig"
