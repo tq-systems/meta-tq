@@ -11,6 +11,8 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* tq-image-small: remove `kernel-devicetree` and `kernel-image` from `IMAGE_INSTALL`
+  These package dependencies should be declared by machines.
 * distros:
   * INHERIT `tq-buildinfo` to generate `etc/buildinfo` and
     "${DEPLOY_DIR_IMAGE}/${IMAGE_NAME}.buildinfo
