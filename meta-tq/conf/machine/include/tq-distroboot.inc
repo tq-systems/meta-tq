@@ -4,4 +4,4 @@ TQ_BOOTSCRIPT ?= "boot-blockdev${@bb.utils.contains('DISTRO_FEATURES', 'rauc', '
 
 IMAGE_BOOT_FILES += "${TQ_BOOTSCRIPT};boot.scr"
 EXTRA_IMAGEDEPENDS += "tq-bootscripts"
-MACHINE_EXTRA_RRECOMMENDS += "tq-extlinux"
+MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "tq-extlinux"
