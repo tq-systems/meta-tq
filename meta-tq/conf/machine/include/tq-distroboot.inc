@@ -2,4 +2,4 @@
 
 IMAGE_BOOT_FILES += "boot-blockdev.scr;boot.scr"
 EXTRA_IMAGEDEPENDS += "tq-bootscripts"
-MACHINE_EXTRA_RRECOMMENDS += "tq-extlinux"
+MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS += "tq-extlinux"
