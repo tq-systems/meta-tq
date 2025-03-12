@@ -1,12 +1,13 @@
 # TQMa8MPxL
 
-This README contains some useful information for TQMa8MPxL on MBa8MPxL
+This README contains some useful information for TQMa8MPxL on MBa8MPxL and MBa8MP-RAS314
 
 [[_TOC_]]
 
 ## Variants
 
 * TQMa8MPQL REV.020x on MBa8MPxL REV.020x
+* TQMa8MPQL REV.020x on REV.010x
 
 ## Version information for software components
 
@@ -118,18 +119,25 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **NPU**                                                      |             |             |             |
 | NPU                                                          |             |      x      |             |
 
-## TODO
+## TODO / Untested
+
+### MBa8MPxL
 
 * Audio
   * Codec Microphone in
-* Display
-  * DSI / DSI DP bridge
 * UART1/UART2 via pin header
 * SPI via pin header
 * I²C interface of PCIe Clock generator not tested
 * linux-imx-tq_5.15: Dual-Channel LVDS is untested
 
-## Known Issues
+### MBa8MP-RAS314
+
+* Audio
+  * no valid asound.state in BSP
+* Linux / BSP
+  * no support for vendor kernel and BSP.
+
+## Known Issues / Limitations
 
 * REV.020x SoM without variant data in EEPROM (prototypes)
   * With the default U-Boot configuration the boot flow is interrupted in
@@ -190,13 +198,16 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle[-nxp]`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
   `UBI_MAX_LEB_COUNT` on machine level.
-* Review indicated that, by default, device tree reserves memory for NPU in an
-  area which is only available on 4GiB DDR RAM config.
+* Kernel based on linux-imx / linux-fslc: Review indicated that, by default, device tree
+  reserves memory for NPU in an area which is only available on 4GiB DDR RAM config.
+  Upstream kernel is not affected.
 
 ## Build Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/${MACHINE}`
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
+
+### MBa8MPxL specific
 
 * \*.dtb: device tree blobs
   * imx8mp-tqma8mpql-mba8mpxl.dtb
@@ -204,6 +215,14 @@ Artifacs can be found at the usual locations for bitbake:
   * imx8mp-tqma8mpql-mba8mpxl-imx327.dtb (Vision Components CSI camera with Sony IMX327)
   * imx8mp-tqma8mpql-mba8mpxl-ov9281.dtb (Vision Components CSI camera with OmniVision OV9281)
   * imx8mp-tqma8mpql-mba8mpxl-rpmsg.dtb (CortexM / RPMSG Support)
+
+### MBa8MP-RAS314 specific
+
+* \*.dtb: device tree blobs
+  * imx8mp-tqma8mpql-mba8mp-ras314.dtb
+
+### All boards
+
 * Image: Linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
@@ -219,13 +238,13 @@ Artifacs can be found at the usual locations for bitbake:
 
 ## Boot DIP Switches
 
-BOOT\_MODE can be configured using DIP switch S1.
+BOOT\_MODE can be configured using DIP switch S1 (MBa8MPxL) or S4 (MBa8MP-RAS314).
 
 ### Serial Downloader
 
 *BOOT\_MODE: 0001*
 
-| DIP S1     | 1 | 2 | 3 | 4 |
+| DIP S1/S4  | 1 | 2 | 3 | 4 |
 | ---------- | - | - | - | - |
 | On         | x |   |   |   |
 | Off        |   | x | x | x |
@@ -234,7 +253,7 @@ BOOT\_MODE can be configured using DIP switch S1.
 
 BOOT\_MODE: 0010
 
-| DIP S1     | 1 | 2 | 3 | 4 |
+| DIP S1/S4  | 1 | 2 | 3 | 4 |
 | ---------- | - | - | - | - |
 | On         |   | x |   |   |
 | Off        | x |   | x | x |
@@ -243,7 +262,7 @@ BOOT\_MODE: 0010
 
 BOOT\_MODE: 0011
 
-| DIP S1     | 1 | 2 | 3 | 4 |
+| DIP S1/S4  | 1 | 2 | 3 | 4 |
 | ---------- | - | - | - | - |
 | On         | x | x |   |   |
 | Off        |   |   | x | x |
@@ -252,7 +271,7 @@ BOOT\_MODE: 0011
 
 BOOT\_MODE: 0110
 
-| DIP S1     | 1 | 2 | 3 | 4 |
+| DIP S1/S4  | 1 | 2 | 3 | 4 |
 | ---------- | - | - | - | - |
 | On         |   | x | x |   |
 | Off        | x |   |   | x |
@@ -304,7 +323,7 @@ gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-bayer,format=rggb10le,bpp=10
   bayer2rgb ! waylandsink sync=false
 ```
 
-#### Basler camera
+#### Basler camera (MBa8MPxL only)
 
 __daA3840-30mc__
 
@@ -343,13 +362,21 @@ HDMI support is enabled by default. Additionally LVDS display can be enabled by 
 corresponding device tree. To allow reusage, the support for each display is separated
 in a dtsi fragment.
 
+#### MBa8MPxL
+
 | Interface       | Device tree                                    | Type               |
 |-----------------|------------------------------------------------|--------------------|
 | HDMI            | imx8mp-tqma8mpql-mba8mpxl.dtb                  | compatible monitor |
 | LVDS            | imx8mp-tqma8mpql-mba8mpxl-lvds-tm070jvhg33.dtb | Tianma TM070JVHG33 |
 | LVDS, dual      | imx8mp-tqma8mpql-mba8mpxl-lvds-g133han01.dtb   | AUO G133HAN.01     |
 
-### CAN
+#### MBa8MP-RAS314
+
+| Interface       | Device tree                                    | Type               |
+|-----------------|------------------------------------------------|--------------------|
+| HDMI / DP       | imx8mp-tqma8mpql-mba8mp-ras314.dtb             | compatible monitor |
+
+### CAN (MBa8MPxL only)
 
 #### Troubleshooting
 
@@ -496,6 +523,10 @@ devmem ${DATA_REGION_CORRUPTION_ADDR}
 cat /sys/devices/system/edac/mc/mc0/ce_count
 cat /sys/devices/system/edac/mc/mc0/ue_count
 ```
+
+### Access U-Boot environment from Linux
+
+See [U-Boot environment tools](README.libubootenv.md).
 
 ## Support Wiki
 
