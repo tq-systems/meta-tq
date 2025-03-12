@@ -23,6 +23,13 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* machines
+  * tq-distroboot.inc: add `tq-extlinux` to `MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS` since
+    this is needed for booting system if using U-Boot distroboot
+  * tq-machine.inc: new config include that adds `kernel-devicetree` and `kernel-image`
+    to `MACHINE_ESSENTIAL_EXTRA_RDEPENDS` since they are needed for booting system when
+    expecting them in `/boot`. `linux-modules` are added to `MACHINE_EXTRA_RRECOMMENDS`.
+    This file is included at board level to simplify machine configs.
 * linux-tq-6.12:
   * integrate changes from linux-stable up to tag v6.12.17
 * linux-tq-6.6:
