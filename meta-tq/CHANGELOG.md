@@ -11,7 +11,9 @@ Releases are named with the following scheme:
 
 ### Added
 
-* machines: add new machine for TQMa91xxCA/LA on MBa91xxCA starter kit
+* machines:
+  * add new machine for TQMa8MPxL on MBa8MP-RAS314 starter kit
+  * add new machine for TQMa91xxCA/LA on MBa91xxCA starter kit
 * u-boot-imx-tq_2024.03: new recipe with support for TQMa91xx and TQMa93xx
 * imx-tq-atf_2.10: support for TQMa91xxCA/LA
 * linux-rt-tq-6.12:
