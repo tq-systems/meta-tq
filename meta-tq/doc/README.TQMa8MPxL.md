@@ -61,12 +61,14 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ### Linux
 
-| Feature                                                      |   fslc-6.1  |   fslc-6.6  |    6.1.y    |
+**Note:** For Linux 6.1 based on NXP / vendor branch prefer using `kirkstone` branch.
+
+| Feature                                                      |   fslc-6.1  |   fslc-6.6  |    6.12.y   |
 |:-------------------------------------------------------------|:-----------:|:-----------:| :---------: |
 | RAM configs                                                  | 1,2,4,8 GiB | 1,2,4,8 GiB | 1,2,4,8 GiB |
 | CPU variants                                                 |  i.MX8MPQ   |  i.MX8MPQ   |  i.MX8MPQ   |
-| Fuses / OCRAM                                                |      x      |      x      |             |
-| speed grade / temperature grade detection                    |      x      |      x      |             |
+| Fuses / OCRAM                                                |      x      |      x      |      x      |
+| speed grade / temperature grade detection                    |      x      |      x      |      x      |
 | **UART**                                                     |             |             |             |
 | console on UART4 (via USB / UART converter) (X28 USB If 3)   |      x      |      x      |      x      |
 | UART3 via USB UART converter (X28 USB If 2)                  |      x      |      x      |      x      |
@@ -95,10 +97,11 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **Display**                                                  |             |             |             |
 | LVDS                                                         |      x      |      x      |             |
 | Dual-Channel LVDS                                            |      x      |      x      |             |
-| HDMI                                                         |      x      |      x      |             |
+| HDMI                                                         |      x      |      x      |      x      |
+| MIPI-DSI (DP Bridge)                                         |             |             |      x      |
 | **Audio**                                                    |             |             |             |
 | HDMI                                                         |      x      |      x      |             |
-| Codec (Line IN / Line OUT)                                   |      x      |      x      |             |
+| Codec (Line IN / Line OUT)                                   |      x      |      x      |      x      |
 | **PCIe**                                                     |             |             |             |
 | wireless card at M.2                                         |      x      |      x      |             |
 | **CAN-FD**                                                   |             |             |             |
