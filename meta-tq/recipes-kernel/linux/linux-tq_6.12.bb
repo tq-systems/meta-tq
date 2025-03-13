@@ -45,8 +45,6 @@ def kbuild_defconfig(d):
 KBUILD_DEFCONFIG = "${@kbuild_defconfig(d)}"
 KBUILD_DEFCONFIG[vardeps] = "MACHINEOVERRIDES"
 
-DEFAULT_PREFERENCE = "0"
-
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:tqma8mpxl = "tqma8mpxl"
 COMPATIBLE_MACHINE:tqma93xx = "tqma93xx"

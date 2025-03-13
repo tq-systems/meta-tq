@@ -20,8 +20,6 @@ SRC_URI = "\
     file://defconfig \
 "
 
-DEFAULT_PREFERENCE = "0"
-
 SRC_URI:append = " \
     ${@bb.utils.contains('COMBINED_FEATURES', 'bluetooth', 'file://features/bluetooth-support.cfg', '', d)} \
 "
