@@ -66,6 +66,12 @@ do_configure:append() {
     echo "# CONFIG_LOCALVERSION_AUTO is not set" >> ${B}/.config
 }
 
+do_install:append(){
+    if [ -n "${KMETA}" ]; then
+        rm -rf "${STAGING_KERNEL_DIR}/${KMETA}"
+    fi
+}
+
 S = "${WORKDIR}/git"
 
 # copied from linux-yocto.inc

@@ -3,7 +3,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 require linux-tq-common.inc
 
 KBRANCH = "TQM-linux-v6.12.y"
-SRCREV = "7af74ea494e58ba2457b7df79c189752aa665c0f"
+KMETA = "kernel-meta"
+SRCREV_machine = "7af74ea494e58ba2457b7df79c189752aa665c0f"
+SRCREV_meta = "cf35a8d4adea70d86608241d50e1372d50a1484f"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "6.12"
@@ -18,16 +20,28 @@ KERNEL_CONFIG_FILES:imx ?= "\
     file://nonimx-drm-removal.cfg \
     file://rm-non-tq-platforms.cfg \
     file://usb.cfg \
-    file://ubi.cfg \
     file://features/devicetree.cfg \
     file://features/network.cfg \
+    file://features/ubi.cfg \
+"
+
+KERNEL_CONFIG_FILES:tqma335x ?= "\
+    file://tqma335x.cfg \
+    file://can.cfg \
+    file://display.cfg \
+    file://sound.cfg \
+    file://spi.cfg \
+    file://features/devicetree.cfg \
+    file://features/network.cfg \
+    file://features/ubi.cfg \
 "
 
 GIT_URL ?= "${TQ_GIT_BASEURL}/linux-tqmaxx.git"
 GIT_PROTOCOL ?= "${TQ_GIT_PROTOCOL}"
 
 SRC_URI = "\
-    ${GIT_URL};protocol=${GIT_PROTOCOL};branch=${KBRANCH} \
+    ${GIT_URL};protocol=${GIT_PROTOCOL};name=machine;branch=${KBRANCH} \
+    git://git.yoctoproject.org/yocto-kernel-cache;type=kmeta;name=meta;branch=yocto-${LINUX_RELEASE};destsuffix=${KMETA};protocol=https \
     ${KERNEL_CONFIG_FILES} \
 "
 
@@ -38,3 +52,9 @@ KBUILD_DEFCONFIG_DEFAULT:qoriq-arm:armv7a = "imx_v6_v7_defconfig"
 KBUILD_DEFCONFIG_DEFAULT:qoriq-arm:armv7ve = "imx_v6_v7_defconfig"
 KBUILD_DEFCONFIG_DEFAULT:aarch64 = "defconfig"
 KBUILD_DEFCONFIG ?= "${KBUILD_DEFCONFIG_DEFAULT}"
+
+KMACHINE:ti33x ?= "ti-am335x"
+
+KERNEL_EXTRA_FEATURES ?= ""
+KERNEL_EXTRA_FEATURES:tqma335x ?= "features/leds/leds.scc"
+KERNEL_FEATURES:append = " ${KERNEL_EXTRA_FEATURES}"

@@ -5,7 +5,7 @@ MACHINEOVERRIDES =. "tqma335x:"
 
 # Default providers, may need to override for specific machines
 # needs to be set before inclusion of ti33x.inc
-PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-tq"
+PREFERRED_PROVIDER_virtual/kernel ?= "linux-tq"
 PREFERRED_PROVIDER_u-boot ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-tq"
 TI_SGX_DDK_KM_KERNVER ?= "5.4"

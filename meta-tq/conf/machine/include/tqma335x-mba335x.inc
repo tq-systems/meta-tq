@@ -3,10 +3,9 @@
 require conf/machine/include/tq-machine.inc
 
 KERNEL_DEVICETREE = "\
-    am335x-mba335x.dtb \
-    am335x-mba335x-dmb-ct44.dtb \
-    am335x-mba335x-glyn-etm0700.dtb \
-    am335x-mba335x-lvds-g104x1.dtb \
+    ti/omap/am335x-mba335x.dtb \
+    ti/omap/am335x-mba335x-dmb-ct44.dtb \
+    ti/omap/am335x-mba335x-glyn-etm0700.dtb \
 "
 
 MACHINE_FEATURES:append = "\
