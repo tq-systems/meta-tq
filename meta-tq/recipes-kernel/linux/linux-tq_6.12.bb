@@ -33,17 +33,13 @@ SRC_URI = "\
     ${KERNEL_CONFIG_FILES} \
 "
 
-def kbuild_defconfig(d):
-    overrides = d.getVar('MACHINEOVERRIDES').split(':')
-    if 'armv7a' in overrides:
-        return "imx_v6_v7_defconfig"
-    elif 'armv7ve' in overrides:
-        return "imx_v6_v7_defconfig"
-    else:
-        return "defconfig"
-
-KBUILD_DEFCONFIG = "${@kbuild_defconfig(d)}"
-KBUILD_DEFCONFIG[vardeps] = "MACHINEOVERRIDES"
+KBUILD_DEFCONFIG_DEFAULT = ""
+KBUILD_DEFCONFIG_DEFAULT:imx:armv7a = "imx_v6_v7_defconfig"
+KBUILD_DEFCONFIG_DEFAULT:imx:armv7ve = "imx_v6_v7_defconfig"
+KBUILD_DEFCONFIG_DEFAULT:qoriq-arm:armv7a = "imx_v6_v7_defconfig"
+KBUILD_DEFCONFIG_DEFAULT:qoriq-arm:armv7ve = "imx_v6_v7_defconfig"
+KBUILD_DEFCONFIG_DEFAULT:aarch64 = "defconfig"
+KBUILD_DEFCONFIG ?= "${KBUILD_DEFCONFIG_DEFAULT}"
 
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:tqma8mpxl = "tqma8mpxl"
