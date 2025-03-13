@@ -31,7 +31,7 @@ Releases are named with the following scheme:
     expecting them in `/boot`. `linux-modules` are added to `MACHINE_EXTRA_RRECOMMENDS`.
     This file is included at board level to simplify machine configs.
 * linux-tq-6.12:
-  * integrate changes from linux-stable up to tag v6.12.17
+  * integrate changes from linux-stable up to tag v6.12.18
 * linux-tq-6.6:
   * backport upstream fix for TMPDIR leakage
   * integrate changes from linux-stable up to tag v6.6.80
