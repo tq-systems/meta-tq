@@ -14,11 +14,55 @@ This README contains some useful information for TQMa335x\[L\] on MBa335x
 
 ### U-Boot
 
-* uboot-tq (Based on Mainline 2019.04)
+* uboot-tq (based on mainline 2019.04)
 
 ### Linux
 
-* TI-linux-5.4.43 (Based on TI linux-5.4.y-07.00.00.005-rt)
+* linux-tq (based on mainline 6.12.y)
+
+## Supported Features
+
+### U-Boot
+
+| Feature                                          |   REV.020x   |
+| :----------------------------------------------: | :----------: |
+| UART (console on X15)                            |       x      |
+| GPIO                                             |       x      |
+| I2C                                              |       x      |
+| eMMC / SD card                                   |       x      |
+| SPI-NOR                                          |       x      |
+| Ethernet                                         | Port X11 only |
+| **Boot devices**                                 |              |
+| SD card                                          |       x      |
+| eMMC                                             |       x      |
+| SPI-NOR                                          |       x      |
+| **USB**                                          |              |
+| USB 2.0 Host / Hub                               |       x      |
+
+### Linux
+
+| Feature                              | linux-tq-6.16 |
+| :----------------------------------: | :-----------: |
+| UART4 (console on X15)               |      x        |
+| UART0 (RS485 on X16)                 |      x        |
+| GPIO                                 |      x        |
+| Button (S5, S6, S7)                  |      x        |
+| I2C                                  |      x        |
+| GPIO expander                        |      x        |
+| EEPROM                               |      x        |
+| RTC                                  |      x        |
+| SPI-NOR                              |      x        |
+| USB 2.0 Host / Hub (X7/X8)           |      x        |
+| USB-OTG (X9)                         | Peripheral only |
+| eMMC/SD                              |      x        |
+| Ethernet (X11, X12)                  |      x        |
+| CAN (X13, X14)                       |      x        |
+| Parallel LCD (X4)                    |      x        |
+| LVDS (X17, X18)                      |               |
+| GPU                                  |      x        |
+| Audio Line In (X19, X20, X21)        |      x        |
+| Mini-PCIe (USB only) (X22)           |      x        |
+| PRU                                  |               |
 
 ## Supported machine configurations
 
@@ -38,6 +82,9 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   rootfs on SPI NOR is required, following solutions:
   * tailor image recipe and kernel configuration to get real tiny
   * use SoM variant with larger SPI-NOR
+* Role switching does not work on the USB-OTG port (X9); only peripheral mode
+  is usable.
+* No Device Trees for LVDS displays are provided.
 
 ## Artifacts
 
@@ -185,6 +232,16 @@ Download bootloader from TFTP and update:
 `run update_uboot_spi`
 
 ## HowTo
+
+### Display Support
+
+Set the `fdtfile` variable in the U-Boot environment to select one of the
+supported displays:
+
+| Interface  | Device tree                     | Type                |
+|------------|---------------------------------|---------------------|
+| Parallel   | am335x-mba335x-dmb-ct44.dtb     | CDTECH DC44 (DMB)   |
+| Parallel   | am335x-mba335x-glyn-etm0700.dtb | GLYN ETM0700G0EDH6  |
 
 ### Booting Linux OS
 
