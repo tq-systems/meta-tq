@@ -20,6 +20,7 @@ Releases are named with the following scheme:
   add recipe to support PREEMPT_RT with the same branch as used for linux-tq-6.12
 * linux-tq-6.12:
   * support TQMa93xx[CA/LA] on MBa93xxCA / MBa93xxLA / MBa91xxCA
+  * support TQMa335x[L] on MBa335x
 
 ### Changed
 
@@ -30,6 +31,11 @@ Releases are named with the following scheme:
     to `MACHINE_ESSENTIAL_EXTRA_RDEPENDS` since they are needed for booting system when
     expecting them in `/boot`. `linux-modules` are added to `MACHINE_EXTRA_RRECOMMENDS`.
     This file is included at board level to simplify machine configs.
+* u-boot-tq-2019.04:
+  * TQMa335x:
+    * Update MMC indices to use mmc0 for eMMC and mmc1 for SD card
+    * Clean up default environment
+    * Various code cleanups
 * linux-tq-6.12:
   * integrate changes from linux-stable up to tag v6.12.18
 * linux-tq-6.6:
@@ -59,6 +65,8 @@ Releases are named with the following scheme:
 * libimxvpuapi2:
   * Remove custom patches
   * Requires meta-freescale >= commit 1699cb16 ("libimxvpuapi2: Upgrade to version 2.3.1")
+* linux-ti-tq-5.4:
+  * Removed recipe
 
 ## scarthgap.TQ.ARM.BSP.0003
 
