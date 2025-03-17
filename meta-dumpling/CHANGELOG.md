@@ -11,6 +11,7 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* Re-added weston patch to support TQMa335x variants with GPU
 * tq-image-small: remove `kernel-devicetree` and `kernel-image` from `IMAGE_INSTALL`
   These package dependencies should be declared by machines.
 * distros:
