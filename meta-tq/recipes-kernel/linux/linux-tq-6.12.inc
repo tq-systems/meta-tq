@@ -53,7 +53,7 @@ KBUILD_DEFCONFIG_DEFAULT:qoriq-arm:armv7ve = "imx_v6_v7_defconfig"
 KBUILD_DEFCONFIG_DEFAULT:aarch64 = "defconfig"
 KBUILD_DEFCONFIG ?= "${KBUILD_DEFCONFIG_DEFAULT}"
 
-KMACHINE:ti33x ?= "ti-am335x"
+KMACHINE:tqma335x ?= "ti-am335x"
 
 KERNEL_EXTRA_FEATURES ?= ""
 KERNEL_EXTRA_FEATURES:tqma335x ?= "features/leds/leds.scc"
