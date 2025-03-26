@@ -13,6 +13,7 @@ SRCBRANCH = "TQMa8-v2020.04_imx_5.4.70_2.3.0"
 
 SRC_URI = "\
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
+    file://0001-tqma8-set-CONFIG_SYS_BOOTM_LEN-to-64M.patch \
 "
 
 SRC_URI:append:nxp-ahab = " ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'file://imx-hab.cfg', '', d)}"
