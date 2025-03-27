@@ -18,14 +18,14 @@ KERNEL_CONFIG_FILES ?= ""
 KERNEL_CONFIG_FILES:imx ?= "\
     file://imx.cfg \
     file://nonimx-drm-removal.cfg \
-    file://rm-non-tq-platforms.cfg \
-    file://usb.cfg \
     file://features/devicetree.cfg \
     file://features/disable-hibernate.cfg \
     file://features/network.cfg \
     file://features/rauc.cfg \
     file://features/spidev.cfg \
+    file://features/rm-non-tq-platforms.cfg \
     file://features/ubi.cfg \
+    file://features/usb.cfg \
 "
 
 KERNEL_CONFIG_FILES:tqma335x ?= "\
