@@ -17,9 +17,8 @@ This README contains some useful information for TQMLS102xA on MBLS102xA
 
 ### Linux
 
-* based on linux-5.4.y
-* contains upstream changes up to v5.4.87
-* board support for TQMLS102xA and TQMa6x
+* based on linux-6.12.y
+* contains upstream changes up to v6.12.18
 
 ## Important Notes
 
@@ -33,6 +32,10 @@ This README contains some useful information for TQMLS102xA on MBLS102xA
   MBLS102xA. The port must not be used in device mode.
 - Enumeration of USB devices connected to the USB-OTG port (X40) via a USB-OTG
   cable fails
+- After Power-On or restart the display might be blanked
+  Use `echo 0 > /sys/class/backlight/backlight/bl_power` to unblank the display
+- HDMI's DDC channel is shared with on-board I2C. Not all displays might be supported
+  due to address conflicts with DDC device IDs.
 
 ## Build Artifacts
 
@@ -40,11 +43,11 @@ Artifacs can be found at the usual locations for bitbake:
 <`${TMPDIR}/deploy/images/${MACHINE}`>
 
 * \*.dtb: device tree blobs
-  * ls1021a-mbls1021a.dtb
-  * ls1021a-mbls1021a-hdmi.dtb (HDMI support)
-  * ls1021a-mbls1021a-dmb-ct44.dtb (LVDS support for display CT44)
-  * ls1021a-mbls1021a-dmb-ct21.dtb (LVDS support for display CT21)
-  * ls1021a-mbls1021a-glyn-etm0700g0edh6.dtb (LVDS support for display GLYN ETM0700G0EDH6)
+  * ls1021a-tqmls1021a-mbls1021a.dtb
+  * ls1021a-tqmls1021a-mbls1021a-hdmi.dtb (HDMI support)
+  * ls1021a-tqmls1021a-mbls1021a-lvds-tm070jvhg33.dtb (support for LVDS display Tianma TM070JVHG33)
+  * ls1021a-tqmls1021a-mbls1021a-rgb-cdtech-dc44.dtb (support for RGB display DC44)
+  * ls1021a-tqmls1021a-mbls1021a-rgb-cdtech-fc21.dtb (support for RGB display FC21)
 * zImage: Linux kernel image
 * \*.wic: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive
