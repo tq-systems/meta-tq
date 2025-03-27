@@ -41,6 +41,22 @@ KERNEL_CONFIG_FILES:tqma335x ?= "\
     file://features/ubi.cfg \
 "
 
+KERNEL_CONFIG_FILES:qoriq ?= "\
+    file://disable-imx-platforms.cfg \
+    file://disable_suspend.cfg \
+    file://features/nonimx-drm-removal.cfg \
+    file://features/debug.cfg \
+    file://features/devicetree.cfg \
+    file://features/network.cfg \
+    file://features/rm-non-tq-platforms.cfg \
+    file://features/ubi.cfg \
+    file://features/usb.cfg \
+"
+
+KERNEL_CONFIG_FILES:append:tqmls102xa ?= "\
+    file://ls1021a.cfg \
+"
+
 GIT_URL ?= "${TQ_GIT_BASEURL}/linux-tqmaxx.git"
 GIT_PROTOCOL ?= "${TQ_GIT_PROTOCOL}"
 
