@@ -39,6 +39,13 @@ Releases are named with the following scheme:
     This only has an effect on U-Boot build that do not embed a public key to
     check a signature against (which is the default now). If `UBOOT_SIGN_ENABLE`
     is set, a key will be built into U-Boot and signatures will be verified.
+* linux-imx-tq-6.6:
+  * integrate changes from linux fslc up to
+    commit 237948c6e22c "Merge pull request #719 from Gerbach/6.6-2.2.x-imx"
+    including stable tag v6.6.84
+* u-boot-imx-tq-2024.04:
+  * TQMa93xx/TQMa91xx: enable KASLR support
+  * integrate changes from NXP BSP release `lf-6.6.52-2.2.0`
 * machines
   * tq-distroboot.inc: add `tq-extlinux` to `MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS` since
     this is needed for booting system if using U-Boot distroboot
@@ -54,6 +61,7 @@ Releases are named with the following scheme:
 * linux-tq-6.12:
   * integrate changes from linux-stable up to tag v6.12.18
 * linux-tq-6.6:
+  * rewrite recipe to reuse settings shared with `linux-rt-tq-6.6`
   * backport upstream fix for TMPDIR leakage
   * integrate changes from linux-stable up to tag v6.6.80
 * linux-rt-tq-6.6: integrate changes from linux-stable up to tag v6.6.80
@@ -77,6 +85,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* linux-imx-tq-6.6: fix flexspi driver error caused by update to new fslc branch:
+  commit 791210cc944a ("meta-tq: linux-imx-tq_6.6: update to new branch TQMa-fslc-6.6-2.2.x-imx")
 * imx-boot-tq: do not overwrite settings for IMX_EXTRA_FIRMWARE.
 
 ### Removed
