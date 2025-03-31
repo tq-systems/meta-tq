@@ -11,6 +11,11 @@ Releases are named with the following scheme:
 
 ### Added
 
+* Verified Boot with signed U-Boot, signed FIT image and dm-verity rootfs for
+  * TQMa8x
+  * TQMa8Xx
+  * TQMa8XxS
+  * TQMa91xx/TQMa93xx
 * TQMa91xx/TQMa93xx: Add new WKS template with two root partitions and a
   separate data partition for A/B boot with RAUC updates
 
