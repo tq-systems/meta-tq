@@ -48,4 +48,8 @@ MACHINE_FEATURES:append = "\
 "
 
 # Common image configuration
+RAW_BOOT_START_OFFSET_KB = "4"
+RAW_BOOT_END_OFFSET_KB = "1024"
+
+# Common image configuration
 require conf/machine/include/tq-image.inc
