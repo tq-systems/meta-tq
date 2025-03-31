@@ -9,6 +9,19 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* linux-tq-6.12:
+  * support TQMLS102xA
+* TQMLS102xA: Add support for non-u-boot managed RCW configurations
+
+### Changed
+
+* TQMLS102xA
+  * Machine uses the common ALSA configuration (alsa-state)
+  * Machine uses the common WKS file for ARMv7-A modules
+  * Uses 'mainline' BSP as defined in meta-freescale
+
 ## scarthgap.TQ.ARM.BSP.0004
 
 ### Added
