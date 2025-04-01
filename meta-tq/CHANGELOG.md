@@ -31,6 +31,13 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* u-boot-ti-tq-2023.04: allow boot without signed kernel
+  * meta-ti does not set `UBOOT_SIGN_ENABLE` by default anymore, breaking boot
+    with our U-Boot branch. Disable enforcement of signature checks.
+
+    This only has an effect on U-Boot build that do not embed a public key to
+    check a signature against (which is the default now). If `UBOOT_SIGN_ENABLE`
+    is set, a key will be built into U-Boot and signatures will be verified.
 * machines
   * tq-distroboot.inc: add `tq-extlinux` to `MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS` since
     this is needed for booting system if using U-Boot distroboot
