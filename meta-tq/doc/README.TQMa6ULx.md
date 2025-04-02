@@ -172,6 +172,60 @@ _Note:_
 | ON      |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |   |  x  |  x  |  x  |  x  |     |  x  |  x  |  x  |    |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |    |     |  x  |
 | OFF     |     |     |     |     |     |     |     |     |   |     |     |     |     |  x  |     |     |     |    |     |     |     |     |     |     |     |     |    |  x  |     |
 
+### MBa6ULxL DIP Switches
+
+_Note:_
+
+* S13: BOOT\_MODE\[1:0\]
+
+| Mode              | S13 |     |
+| ----------------- | --- | --- |
+|                   |  2  |  1  |
+| Boot from Fuses   |  0  |  0  |
+| Serial Downloader |  0  |  1  |
+| Internal Boot     |  1  |  0  |
+| Reserved          |  1  |  1  |
+
+* S16: BOOT_CFG (reduced set)
+
+| S16 DIP | i.MX6UL BOOT_CFG      |
+| ------- | --------------------- |
+|   8     |  BOOT_CFG04           |
+|   7     |  BOOT_CFG02           |
+|   6     |  BOOT_CFG06           |
+|   5     |  BOOT_CFG05           |
+|   4     |  BOOT_CFG11           |
+|   3     |  BOOT_CFG13           |
+|   2     |  BOOT_CFG14           |
+|   1     |  DEBUG UART / CSI MUX |
+
+
+* `x` means position of DIP, * `-` means don't care
+
+#### SD Card
+
+|         | S16 |     |     |     |     |     |     |     |   |S13  |     |
+| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: |
+| DIP     |  8  |  7  |  6  |  5  |  4  |  3  |  2  |  1  |   |  2  | 1   |
+| ON      |  x  |     |     |  x  |  x  |     |  x  |     |   |  x  |     |
+| OFF     |     |  x  |  x  |     |     |  x  |     | (x) |   |     |  x  |
+
+#### eMMC
+
+|         | S16 |     |     |     |     |     |     |     |   |S13  |     |
+| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: |
+| DIP     |  8  |  7  |  6  |  5  |  4  |  3  |  2  |  1  |   |  2  |  1  |
+| ON      |  x  |  x  |     |     |     |  x  |     |     |   |  x  |     |
+| OFF     |     |     |  x  |  x  |  x  |     |  x  | (x) |   |     |  x  |
+
+#### QSPI
+
+|         | S16 |     |     |     |     |     |     |     |   |S13  |     |
+| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: |
+| DIP     |  8  |  7  |  6  |  5  |  4  |  3  |  2  |  1  |   |  2  |  1  |
+| ON      |     |  x  |  x  |  x  |  -  |  -  |  -  |     |   |  x  |     |
+| OFF     |  x  |     |     |     |     |     |     | (x) |   |     |  x  |
+
 ## Boot device initialisation and update
 
 See [here](./README.imx-arm64.BootMedia.md) for detailed information how to write a
