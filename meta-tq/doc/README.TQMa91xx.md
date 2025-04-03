@@ -174,7 +174,7 @@ echo [0,1] > /sys/devices/platform/imx93-lpm/mode
 
 See the [Distroboot README](README.Distroboot.md).
 
-__Note:__ Default u-boot environment variable `bootcmd` need to be set to `run distro_bootcmd`
+__Note:__ Default u-boot environment variable `bootcmd` has to be set to `run distro_bootcmd`
 
 ### OS updates
 
