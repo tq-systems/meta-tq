@@ -88,5 +88,33 @@ do_install:append() {
     for config in ${TQ_FW_ENV_CONFIGS}; do
         install -m 644 "${WORKDIR}/fw_env.config-${config}" "${D}${sysconfdir}/fw_env.config-${config}"
     done
+
+    i=0
+    for config in ${UBOOT_MACHINE}; do
+        i=$(expr $i + 1)
+        j=0
+        for type in ${UBOOT_CONFIG}; do
+            j=$(expr $j + 1)
+            if [ $j -eq $i ]; then
+                (cd "${B}/${config}" && uboot_tq_install_config "${type}")
+            fi
+        done
+    done
+    unset i j
 }
+
+uboot_tq_install_config() {
+    type="$1"
+
+    if [ -e "${UBOOT_DTB_BINARY}" ]; then
+        install -D -m 644 "${UBOOT_DTB_BINARY}" "${D}/boot/${UBOOT_DTB_BINARY}-${type}"
+    fi
+    if [ -e "${UBOOT_DTB_SIGNED}" ]; then
+        install -D -m 644 "${UBOOT_DTB_SIGNED}" "${D}/boot/${UBOOT_DTB_SIGNED}-${type}"
+    fi
+    if [ -e "${UBOOT_NODTB_BINARY}" ]; then
+        install -m 0644 "${UBOOT_NODTB_BINARY}" "${D}/boot/${UBOOT_NODTB_BINARY}-${type}"
+    fi
+}
+
 FILES:${PN}-env += "${sysconfdir}/fw_env.config-*"
