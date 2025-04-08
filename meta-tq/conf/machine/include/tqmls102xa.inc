@@ -11,12 +11,11 @@ PREFERRED_PROVIDER_u-boot ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-tq"
 PREFERRED_PROVIDER_virtual/kernel ?= "linux-tq"
 
+MACHINEOVERRIDES =. "ls102xa:tqmls102xa:"
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale
 include conf/machine/include/qoriq-arm.inc
-
-MACHINEOVERRIDES =. "ls102xa:tqmls102xa:"
 
 DEFAULTTUNE ?= "cortexa7thf-neon"
 require conf/machine/include/arm/armv7a/tune-cortexa7.inc
