@@ -23,6 +23,10 @@ KERNEL_DEVICETREE_linux-imx-tq:append:mx8mp-nxp-bsp = "\
         ' freescale/imx8mp-tqma8mpql-mba8mpxl-lvds-basler.dtb', '', d)} \
 "
 
+KERNEL_DEVICETREE_linux-tq = "\
+    freescale/imx8mp-tqma8mpql-mba8mpxl-lvds.dtb \
+"
+
 KERNEL_DEVICETREE += "${@kernel_provider_dtbs(d)}"
 
 MACHINE_FEATURES += "\
