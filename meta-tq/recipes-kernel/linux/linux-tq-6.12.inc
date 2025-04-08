@@ -23,6 +23,7 @@ KERNEL_CONFIG_FILES:imx ?= "\
     file://features/devicetree.cfg \
     file://features/network.cfg \
     file://features/rauc.cfg \
+    file://features/spidev.cfg \
     file://features/ubi.cfg \
 "
 
@@ -34,6 +35,7 @@ KERNEL_CONFIG_FILES:tqma335x ?= "\
     file://spi.cfg \
     file://features/devicetree.cfg \
     file://features/network.cfg \
+    file://features/spidev.cfg \
     file://features/ubi.cfg \
 "
 
