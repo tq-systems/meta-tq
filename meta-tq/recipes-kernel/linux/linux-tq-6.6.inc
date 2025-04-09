@@ -21,6 +21,7 @@ KERNEL_CONFIG_FILES:imx ?= "\
     file://features/devicetree.cfg \
     file://features/network.cfg \
     file://features/spidev.cfg \
+    file://features/usb-gadget-support.cfg \
 "
 
 SRC_URI = "\
