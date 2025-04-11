@@ -44,6 +44,8 @@ KERNEL_CONFIG_FILES:tqma335x ?= "\
 KERNEL_CONFIG_FILES:qoriq ?= "\
     file://disable-imx-platforms.cfg \
     file://disable_suspend.cfg \
+    file://dpaa2.cfg \
+    file://smmu-bypass.cfg \
     file://features/nonimx-drm-removal.cfg \
     file://features/debug.cfg \
     file://features/devicetree.cfg \
