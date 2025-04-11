@@ -17,7 +17,7 @@ KERNEL_CONFIG_FILES ?= ""
 
 KERNEL_CONFIG_FILES:imx ?= "\
     file://imx.cfg \
-    file://nonimx-drm-removal.cfg \
+    file://features/nonimx-drm-removal.cfg \
     file://features/debug.cfg \
     file://features/devicetree.cfg \
     file://features/disable-hibernate.cfg \
