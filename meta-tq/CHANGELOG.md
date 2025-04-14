@@ -37,6 +37,11 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-rt-tq-6.1:
+  * backport upstream fixes for TMPDIR leakage
+  * integrate changes from linux stable-rt up to tag v6.1.132-rt50
+  * rewrite recipe to keep shared settings in include file
+
 * u-boot-ti-tq-2023.04: allow boot without signed kernel
   * meta-ti does not set `UBOOT_SIGN_ENABLE` by default anymore, breaking boot
     with our U-Boot branch. Disable enforcement of signature checks.
@@ -64,8 +69,10 @@ Releases are named with the following scheme:
     * Clean up default environment
     * Various code cleanups
 * linux-tq-6.12:
+  * enable BACKLIGHT_CLASS_DEVICE and SPI_SPIDEV as module
   * integrate changes from linux-stable up to tag v6.12.18
 * linux-tq-6.6:
+  * enable SPI_SPIDEV as module
   * rewrite recipe to reuse settings shared with `linux-rt-tq-6.6`
   * backport upstream fix for TMPDIR leakage
   * integrate changes from linux-stable up to tag v6.6.80
@@ -73,8 +80,9 @@ Releases are named with the following scheme:
   via TQ Systems branch TQM-linux-v6.6.y and changes from stable-rt up to
   tag v6.6.78-rt51
 * linux-tq-6.1:
+  * rewrite recipe to keep shared settings in include file
   * backport upstream fixes for TMPDIR leakage
-  * integrate changes from linux-stable up to tag v6.1.129
+  * integrate changes from linux-stable up to tag v6.1.132
 * imx-tq-atf_2.10: integrate changes from NXP BSP release `lf-6.6.52-2.2.0`
 * linux-imx-tq-6.6:
   * integrate fixes from linux-fslc up to
@@ -89,6 +97,10 @@ Releases are named with the following scheme:
     * Loop block device
 
 ### Fixed
+
+* linux-tq-6.6 / 6.1:
+  * Change USB_ONBOARD_HUB from module to builtin to prevent USB bus reenumeration
+    when loading as module. Follow the recommendation from Linux Kconfig
 
 * linux-imx-tq-6.6: fix flexspi driver error caused by update to new fslc branch:
   commit 791210cc944a ("meta-tq: linux-imx-tq_6.6: update to new branch TQMa-fslc-6.6-2.2.x-imx")
