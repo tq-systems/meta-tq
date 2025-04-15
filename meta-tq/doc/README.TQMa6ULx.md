@@ -110,9 +110,6 @@ _Note:_ Mini PCIe connector only supports USB.
   `UBI_MAX_LEB_COUNT` on machine level. The distro definition and the image recipes
   `tq-image-small-[debug]` are intended for demonstration of howto generate a system
   running from SPI-NOR. This does not make any claims on feature / functional completeness.
-* Kernel image and device tree files are loaded from `/boot` in rootfs. They are
-  installed in the SD/eMMC image twice in partition `boot`. Removing them from
-  `IMAGE_BOOT_FILES` prevents this doubled installation.
 * Environment of U-Boot v2023.04 was reworked to use variable names that conforms with
   distroboot contract. The default environment of older U-Boot versions are incompatible.
 * MBa6ULx: USB devices at miniPCIe connector (X22) are not detected after POR. After warm reset

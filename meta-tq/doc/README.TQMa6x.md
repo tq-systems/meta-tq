@@ -87,9 +87,6 @@ yocto scarthgap. For Linux 6.1 support use yocto kirkstone.
 * U-Boot: USB Ethernet (LAN9500 / X12C) is only usable after `usb start` and with valid
   MAC in `usbethaddr` environment variable. Parsing the MBa6x specific value from
   EEPROM is not implemented in U-Boot.
-* Kernel image and device tree files are loaded from `/boot` in rootfs. They are
-  installed in the SD/eMMC image twice in partition `boot`. Removing them from
-  `IMAGE_BOOT_FILES` prevents this doubled installation.
 
 ## Artifacts
 

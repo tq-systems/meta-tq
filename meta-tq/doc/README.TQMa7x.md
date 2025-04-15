@@ -82,9 +82,6 @@ yocto scarthgap. For Linux 6.1 support use yocto kirkstone.
 * U-Boot: USB dual role port (X5) is tested in U-Boot in peripheral mode only.
 * U-Boot: A POR might fail even if main power supply is disconnected, when running with
   USB dual role port (X5) connected to PC / HUB with powered VBUS.
-* Kernel image and device tree files are loaded from `/boot` in rootfs. They are
-  installed in the SD/eMMC image twice in partition `boot`. Removing them from
-  `IMAGE_BOOT_FILES` prevents this doubled installation.
 * Environment of U-Boot v2023.04 was reworked to use variable names that conforms with
   distroboot contract. The default environment of older U-Boot versions are incompatible.
 
