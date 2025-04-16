@@ -15,14 +15,12 @@ DEPENDS:append:tqmls102xa = "\
     swap-file-endianess-native \
 "
 
-SRCREV = "f6e872244f807f68b2c984936b6fdd77cb91c31b"
+SRCREV = "bf6ec668e5adc1963be23031a583839cda228a17"
 SRCBRANCH = "TQMaxx-u-boot-v2017.11"
 
 SRC_URI = "\
     ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
 "
-SRC_URI += "file://0001-Remove-redundant-YYLOC-global-declaration.patch"
-SRC_URI += "file://0002-Remove-redundant-YYLOC-global-declaration.patch"
 
 # target not supported in U-Boot before v2019.07
 UBOOT_INITIAL_ENV = ""
