@@ -50,11 +50,16 @@ Releases are named with the following scheme:
     check a signature against (which is the default now). If `UBOOT_SIGN_ENABLE`
     is set, a key will be built into U-Boot and signatures will be verified.
 * linux-imx-tq-6.6:
+  * TQMa91/TQMa93:
+    * improve DVFS support
+    * revert Open Drain for MDIO pads to prevent signal spec violation
   * integrate changes from linux fslc up to
     commit 237948c6e22c "Merge pull request #719 from Gerbach/6.6-2.2.x-imx"
     including stable tag v6.6.84
 * u-boot-imx-tq-2024.04:
-  * TQMa93xx/TQMa91xx: enable KASLR support
+  * TQMa93xx/TQMa91xx:
+    * revert Open Drain for MDIO pads to prevent signal spec violation
+    * enable KASLR support
   * integrate changes from NXP BSP release `lf-6.6.52-2.2.0`
 * machines
   * tq-distroboot.inc: add `tq-extlinux` to `MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS` since
@@ -69,6 +74,7 @@ Releases are named with the following scheme:
     * Clean up default environment
     * Various code cleanups
 * linux-tq-6.12:
+  * TQMa93: revert Open Drain for MDIO pads to prevent signal spec violation
   * enable BACKLIGHT_CLASS_DEVICE and SPI_SPIDEV as module
   * integrate changes from linux-stable up to tag v6.12.18
 * linux-tq-6.6:
@@ -97,6 +103,10 @@ Releases are named with the following scheme:
     * Loop block device
 
 ### Fixed
+
+* u-boot-tq-2023-04:
+  * TQMa6x: SMSC9500 USB-ethernetbridge did not work after update to new U-Boot version
+  * TQMa6x/6ULx[L]/6ULLx[L]/TQMa7x: `save env` does not work after `usb start`
 
 * linux-tq-6.6 / 6.1:
   * Change USB_ONBOARD_HUB from module to builtin to prevent USB bus reenumeration
