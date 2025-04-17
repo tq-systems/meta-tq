@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## scarthgap.TQ.ARM.BSP.0004 (unreleased)
+
 ### Added
 
 * Verified Boot with signed U-Boot, signed FIT image and dm-verity rootfs for

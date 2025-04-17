@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## scarthgap.TQ.ARM.BSP.0004 (unreleased)
+
 ### Changed
 
 * Re-added weston patch to support TQMa335x variants with GPU
