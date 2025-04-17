@@ -44,25 +44,31 @@ For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
 * branched from `5.4.y` / tag commit is merged into (see `LINUX_VERSION` in linux-tq-5.4.bb for exact release)
 
-## TQMa8 / TQMa93 series
+### U-Boot based on v2027.11
+
+* based on U-Boot (https://github.com/u-boot/u-boot)
+* branched from v2017.11 (Branch master)
+
+## TQMa8 / TQMa9 series
 
 ### U-Boot (TQMa8 series)
 
 * based on uboot-imx (https://github.com/nxp-imx/uboot-imx)
 * branched from imx-5.4.70-2.3.0 + changes from imx-5.4.70-2.3.2
 
-### U-Boot (TQMa93 series)
+### U-Boot (TQMa93/TQMa91 series)
 
-* U-Boot based on v2023.04 and NXP vendor BSP
+* U-Boot based on v2024.04 and NXP vendor BSP
   [`uboot-imx`](https://github.com/nxp-imx/uboot-imx)
-* branched from lf_v2023.04 (changes up to lf-6.6.3-1.0.0)
+* branched from lf_v2024.04  / integrates all commits up to
+  6c4545203d123c246c5d7995f2893959506d28e0 / tag lf-6.6.52-2.2.0)
 
 ### ATF / TF-A
 
-* TF-A based on v2.8 and NXP vendor BSP
+* TF-A based on v2.10 and NXP vendor BSP
   (https://github.com/nxp-imx/imx-atf.git),
-* branched from v2.8 based branch lf_v2.8 / integrates all commits up to
-  8dbe28631802a51b3ec8179b2c5635b00393ad97 / tag lf-6.6.3-1.0.0
+* branched from v2.10 based branch lf_v2.10 / integrates all commits up to
+  1b27ee3edbb40ef9432c69ccaa744d1ac5d54c5d / tag lf-6.6.52-2.2.0
 
 ### SCU / SCFW and SECO
 
@@ -75,22 +81,32 @@ __Note__: only for TQMa8X* and TQMa8QM
 
 ### Linux
 
-#### Kernel based on 6.1 (linux-imx-fslc)
+#### Kernel based on 6.6 (linux-imx-fslc)
 
 * based on linux-imx-fslc (https://github.com/Freescale/linux-fslc.git)
-* branched from `6.1-2.0.x-imx` and merged in changes from branch `6.1-2.2.x-imx` /
-  contains commits up to 2bfda7392e6621dd9060f87d7f9d601bb1906dbf
+* branched from `6.6-2.2.x-imx`
+  contains commits up to 237948c6e22c90b64818531871f1f28611eb363e and
+  stable tags up to 6.6.84
 
-#### Kernel 6.1 stable
+#### Kernel 6.12 stable
 
-__Note__: supports only TQMa8M*
+__Note__: supports TQMa8MPxL / TQMa93xx
+
+* based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
+* defconfig changes for TQ-Systems starter kits and build time optimisation
+* device tree adjustments for TQ-Systems starter kits
+* Supports Preempt-RT
+
+#### Kernel 6.6 stable
+
+__Note__: supports TQMa8MQ/MxML/MxNL
 
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
 * defconfig changes for TQ-Systems starter kits and build time optimisation
 
-#### Kernel 6.1 stable-rt
+#### Kernel 6.6 stable-rt
 
-__Note__: supports only TQMa8M*
+__Note__: supports only TQMa8MQ/MxML/MxNL/
 
 * based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
 * defconfig changes for TQ-Systems starter kits and build time optimisation
