@@ -1,4 +1,4 @@
-# TQMLS1012AL on MBLS1012AL carrier board
+# TQMLS1012AL
 
 This README contains some useful information for TQMLS1012AL on MBLS1012AL carrier board
 
@@ -11,24 +11,45 @@ This README contains some useful information for TQMLS1012AL on MBLS1012AL carri
 
 ## Version information for software components
 
-### U-Boot
-
-* based on uboot-imx (https://github.com/nxp-qoriq/u-boot/)
-* branched from lf-5.15.5-1.0.0
-
-### ATF
-
-* based on imx-atf (https://github.com/nxp-qoriq/atf/)
-* branched from lf-5.15.5-1.0.0
-
-### Linux
-
-* based on linux-imx-fslc (https://github.com/nxp-qoriq/linux/)
-* branched from lf-5.15.5-1.0.0
+See [here](./README.SoftwareVersions.md) for the software base versions.
 
 ## Supported machine configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
+
+## Supported Features
+
+### Linux
+
+**Note:** For Linux 5.15 based on NXP / vendor branch prefer using `kirkstone` branch.
+
+| Feature                                           |   fslc-6.6    |
+|:--------------------------------------------------|:-------------:|
+| RAM configs                                       | 512MiB, 1 GiB |
+| Fuses / OCRAM                                     |       x       |
+| speed grade / temperature grade detection         |       x       |
+| **UART**                                          |               |
+| console on UART1 (via USB / UART converter) (X25) |       x       |
+| **GPIO**                                          |               |
+| LED                                               |       x       |
+| Button                                            |       x       |
+| **I2C**                                           |               |
+| EEPROMs                                           |       x       |
+| RTC                                               |       x       |
+| Temperature Sensors                               |       x       |
+| **ENET**                                          |               |
+| GigE / SGMII (X23)                                |       x       |
+| GigE / RGMII on Ethernetswitch (X12/X13)          |       x       |
+| **USB**                                           |               |
+| USB 3.0 Host / Hub (X6)                           |       x       |
+| wireless card at Mini-PCIe (X3)                   |       x       |
+| **QSPI NOR**                                      |               |
+| Read with 1-1-4 SDR                               |       x       |
+| PP / Erase with 1-1-1 SDR                         |       x       |
+| **PCIe**                                          |               |
+| Ethernet card at Mini-PCIe (X4)                   |       x       |
+| **SATA**                                          |               |
+| SATA M.2 (X10)                                    |       x       |
 
 ## Important notes
 
@@ -39,15 +60,14 @@ recovery via JTAG is needed.
 
 * U-Boot: USB HUB(X3): sometimes lock after second 'usb reset` when using USB stick
   * seems to be hardware dependend
-  * only with multiple connected USB mass storage devices
 * Linux: currently no out of the box support for RootFS on SPI
+  * `tq-image-small-debug` image from `spaetzle` distrubution is too big
 * Linux: Wake Up support not working (RTC / GPIO button)
-* Linux: tftp does not work on swp0@eth1 (X13 next to X6)
 
 ## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/${MACHINE}`
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 * `atf/`
   * 512MiB
     * `bl2_qspi.pbl` Primary Boot Loader with RCW
@@ -57,7 +77,7 @@ Artifacs can be found at the usual locations for bitbake:
     * `fip_uboot_tqmls1012al_1gb.bin` U-Boot
 * `engine-pfe-bin/pfe_fw_sbl.itb` PFE engine firmware file
 * `rcw/`: different rcw configurations to use with atf-recipe
-* `fsl-ls1012a-mbls1012al-tqmls1012al-mbls1012al.dtb`: device tree blob
+* `fsl-ls1012a-tqmls1012al-mbls1012al.dtb`: device tree blob
 * `Image.gz`: Linux kernel image
 * `u-boot-tfa-2021.04-r0.bin` U-Boot binary
 * \*.wic[.<compress>]: SD / e-MMC system image (without boot loader)
@@ -65,13 +85,12 @@ Artifacs can be found at the usual locations for bitbake:
 
 ## Functional DIP Switches
 
-```
-DIP S1  ON                              OFF
-1       Hard-coded RCW enabled          Hard-coded RCW disabled
-2       Short RESET_REQ# and RESET#     Isolate RESET_REQ# from RESET#
-3       Debug-UART on USB / pin header  Debug-UART on OpenSDA
-4       CPU-JTAG disabled               CPU-JTAG enabled
-```
+| DIP S1 | On                             | Off                            |
+|:------:|:-------------------------------|:-------------------------------|
+|   1    | Hard-coded RCW enabled         | Hard-coded RCW disabled        |
+|   2    | Short RESET_REQ# and RESET#    | Isolate RESET_REQ# from RESET# |
+|   3    | Debug-UART on USB / pin header | Debug-UART on OpenSDA          |
+|   4    | CPU-JTAG disabled              | CPU-JTAG enabled               |
 
 ## Boot device initialisation and update
 
