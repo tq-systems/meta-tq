@@ -17,15 +17,15 @@ LINUX_RELEASE = "6.6"
 LINUX_VERSION = "${LINUX_RELEASE}.84"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
-FILESEXTRAPATHS:prepend:aarch64:imx-nxp-bsp := "${THISDIR}/${PN}-${LINUX_RELEASE}/imx-arm64:"
+FILESEXTRAPATHS:prepend:aarch64 := "${THISDIR}/${PN}-${LINUX_RELEASE}/imx-arm64:"
 
 SRC_URI = "\
     ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
 "
 
-KBUILD_DEFCONFIG:aarch64:imx-nxp-bsp = "imx_v8_defconfig"
+KBUILD_DEFCONFIG:aarch64 = "imx_v8_defconfig"
 
-SRC_URI:aarch64:imx-nxp-bsp = "\
+SRC_URI:aarch64 = "\
     ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
     file://acpi-removal.cfg \
     file://adc-hwmon-support.cfg \
