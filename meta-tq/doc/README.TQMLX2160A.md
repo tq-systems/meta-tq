@@ -9,40 +9,6 @@
 * TQMLX2080A/TQMLX2160A: module revisions REV.010x
 * MBLX2160A:  board revisions REV.010x .. REV.020x
 
-## HowTo
-
-### DIP-Switch Settings
-
-_BOOT\_MODE_
-
-* SPI-Nor-Flash
-
-```
-	S1
-DIP 	1 2 3 4
-ON
-OFF 	X X X X
-```
-
-
-* SD-Card
-
-```
-	S1
-DIP 	1 2 3 4
-ON	X
-OFF 	  X X X
-```
-
-* eMMC
-
-```
-	S1
-DIP 	1 2 3 4
-ON	  X
-OFF 	X   X X
-```
-
 ## Versions
 
 ### ATF
@@ -117,7 +83,34 @@ On MBLX2160A.0200 the SD-Card interface works properly.
 
 Note: As U-Boot use the fip_uboot.bin from the atf directory.
 
-### Update Scripts
+## HowTo
+
+### DIP-Switch Settings
+
+BOOT\_MODE can be configured using DIP switch S1
+
+* SPI-Nor-Flash
+
+| DIP S1 | 1 | 2 | 3 | 4 |
+|--------|---|---|---|---|
+| On     |   |   |   |   |
+| Off    | x | x | x | x |
+
+* SD-Card
+
+| DIP S1 | 1 | 2 | 3 | 4 |
+|--------|---|---|---|---|
+| On     | x |   |   |   |
+| Off    |   | x | x | x |
+
+* eMMC
+
+| DIP S1 | 1 | 2 | 3 | 4 |
+|--------|---|---|---|---|
+| On     |   | x |   |   |
+| Off    | x |   | x | x |
+
+## Update Scripts
 
 In U-Boot update scripts are provided to easily update components.
 
@@ -125,7 +118,7 @@ There are scripts to update the PBL and U-Boot.
 
 These scripts are named `update_[pbl|uboot]_[spi|mmc|sd]`.
 
-### Flash UBI to SPI-NOR
+## Flash UBI to SPI-NOR
 ```
 ubiformat /dev/mtd7 -f tq-image-generic-tqmlx2160a-mblx2160a.ubi
 ubiattach /dev/ubi_ctrl -m 7
