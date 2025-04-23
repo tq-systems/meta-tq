@@ -30,7 +30,26 @@ For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git)
 * branched from `linux-6.6.y` / tag commit is merged into (see `LINUX_VERSION` in `linux-tq_6.6.bb` for exact release)
 
-## TQMLS1012AL and TQMLS1028A
+## TQMLS1012AL
+
+### U-Boot
+
+* based on uboot-imx (https://github.com/nxp-qoriq/u-boot/)
+* branched from lf-5.15.5-1.0.0
+
+### ATF
+
+* based on imx-atf (https://github.com/nxp-qoriq/atf/)
+* branched from lf-5.15.5-1.0.0
+
+### Kernel based on 6.6 (linux-imx-fslc)
+
+* based on linux-imx-fslc (https://github.com/Freescale/linux-fslc.git)
+* branched from `6.6-2.2.x-imx`
+  contains commits up to 237948c6e22c90b64818531871f1f28611eb363e and
+  stable tags up to 6.6.84
+
+## TQMLS1028A
 
 ### Kernel based on 5.15 (linux-imx-fslc)
 
