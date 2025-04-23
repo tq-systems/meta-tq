@@ -55,7 +55,7 @@ OFF 	X   X X
 
 ### Linux
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/)
-* branched from linux-6.1.y
+* branched from linux-6.12.y
 
 ## Supported Interfaces:
 
