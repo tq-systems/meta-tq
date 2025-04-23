@@ -13,6 +13,7 @@ Releases are named with the following scheme:
 
 * linux-tq-6.12:
   * support TQMLS102xA
+  * support TQMLX2160A
 
 ### Changed
 
@@ -33,6 +34,17 @@ Releases are named with the following scheme:
   * Machine uses the common ALSA configuration (alsa-state)
   * Machine uses the common WKS file for ARMv7-A modules
   * Uses 'mainline' BSP as defined in meta-freescale
+* TQMLX2160A:
+  * u-boot-lsdk-tq-2019.04: Update XFI & retimer configuration
+
+### Fixed
+
+* TQMLX2160A:
+  * Set snoop-delayed exclusive handling. Fixes load/store exclusive
+    related issues
+  * qoriq-atf: Fix applying errata #841119 and #826419 in Linux
+  * Configure DPMAC 17 and 18 for SGMII in SERDES2 configs 7 and 11
+    * RGMII usage is not supported in this case
 
 ### Removed
 
