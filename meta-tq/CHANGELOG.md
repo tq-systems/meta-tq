@@ -11,6 +11,8 @@ Releases are named with the following scheme:
 
 ### Added
 
+* linux-imx-tq-6.6:
+  * support TQMLS1012AL
 * linux-tq-6.12:
   * support TQMLS102xA
   * support TQMLX2160A
@@ -83,6 +85,9 @@ Releases are named with the following scheme:
 * linux-tq-6.12:
   * support TQMa93xx[CA/LA] on MBa93xxCA / MBa93xxLA / MBa91xxCA
   * support TQMa335x[L] on MBa335x
+* u-boot-lsdk-tq-2021.04 (TQMLS1012AL):
+  * PFE-Update script
+  * Adjust default device tree file name according to linux-imx-tq-6.6
 
 ### Changed
 
