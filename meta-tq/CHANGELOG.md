@@ -79,6 +79,7 @@ Releases are named with the following scheme:
   * TQMa93: revert Open Drain for MDIO pads to prevent signal spec violation
   * enable BACKLIGHT_CLASS_DEVICE and SPI_SPIDEV as module
   * integrate changes from linux-stable up to tag v6.12.18
+  * Compile UBI/UBIFS support into kernel to support boot from QSPI
 * linux-tq-6.6:
   * enable SPI_SPIDEV as module
   * rewrite recipe to reuse settings shared with `linux-rt-tq-6.6`
