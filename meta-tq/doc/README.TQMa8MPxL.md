@@ -132,8 +132,6 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ### MBa8MP-RAS314
 
-* Audio
-  * no valid asound.state in BSP
 * Linux / BSP
   * no support for vendor kernel and BSP.
 
