@@ -7,7 +7,7 @@ This README contains some useful information for TQMa8MPxL on MBa8MPxL and MBa8M
 ## Variants
 
 * TQMa8MPQL REV.020x on MBa8MPxL REV.020x
-* TQMa8MPQL REV.020x on REV.010x
+* TQMa8MPQL REV.020x on MBa8MP-RAS314 REV.010x
 
 ## Version information for software components
 
