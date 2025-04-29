@@ -173,12 +173,10 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * UART1/UART2 via pin header
 * SPI via pin header
 * I²C interface of PCIe Clock generator not tested
-* linux-imx-tq_5.15: Dual-Channel LVDS is untested
 
 ### MBa8MP-RAS314
 
-* Linux / BSP
-  * no support for vendor kernel and BSP.
+* HDMI Audio
 
 ## Known Issues / Limitations
 
@@ -244,6 +242,10 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * Kernel based on linux-imx / linux-fslc: Review indicated that, by default, device tree
   reserves memory for NPU in an area which is only available on 4GiB DDR RAM config.
   Upstream kernel is not affected.
+* Kernel based on linux-tq / linux-rt-tq
+  * Suspend & resume not supported (yet)
+* MBa8MP-RAS314
+  * no support for vendor kernel and BSP
 
 ## Build Artifacts
 
