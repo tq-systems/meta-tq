@@ -131,6 +131,7 @@ Releases are named with the following scheme:
   * Requires meta-freescale >= commit 1699cb16 ("libimxvpuapi2: Upgrade to version 2.3.1")
 * linux-ti-tq-5.4:
   * Removed recipe
+* Support for Basler cameras on TQMa8MPxL
 
 ## scarthgap.TQ.ARM.BSP.0003
 
