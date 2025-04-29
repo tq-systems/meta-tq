@@ -421,6 +421,9 @@ in a dtsi fragment.
 |-----------------|------------------------------------------------|--------------------|
 | HDMI / DP       | imx8mp-tqma8mpql-mba8mp-ras314.dtb             | compatible monitor |
 
+*Note*: `weston` by default uses the DRI device with highest number. This is usually Display Port.
+To explicitely select a DRI device, please refer to `--drm-device` argument during startup.
+
 ### CAN (MBa8MPxL only)
 
 #### Troubleshooting
