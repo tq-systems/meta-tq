@@ -117,9 +117,9 @@ Support matrix for `MBa91xxCA` REV.010x
 
 * Not all USB sticks are detected properly in U-Boot
 * Using `usb reset` in U-Boot will give a warning from Type-C port controller.
-* linux-imx-tq_6.6:
-  * Some Linux kernel boot warnings regarding missing optional supplies in DTB.
-  * QSPI NOR is not working under linux. The wrong Jedec ID is read from NOR.
+* NFS boot: The interface to be used for NFS boot (`netdev`) has inverted order, compared
+  to u-boot and Linux. Device renaming in Linux happens after mounting rootfs.
+* Watchdog is not enabled by default
 
 ## Build Artifacts
 
