@@ -11,6 +11,12 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* u-boot-tq-2023.04: TQMa93:
+  * TQMa93: improve default environment
+  * do not enable devices labeled as disabled in kernel device tree
+  * support holes in mtd partitioning via environment
+* u-boot-tq-2019.04:
+  * add support TQMa335x[L] and starterkit mainboard MBa335x
 * machines
   * tq-distroboot.inc: add `tq-extlinux` to `MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS` since
     this is needed for booting system if using U-Boot distroboot
@@ -18,10 +24,10 @@ Releases are named with the following scheme:
     to `MACHINE_ESSENTIAL_EXTRA_RDEPENDS` since they are needed for booting system when
     expecting them in `/boot`. `linux-modules` are added to `MACHINE_EXTRA_RRECOMMENDS`.
     This file is included at board level to simplify machine configs.
-* linux-rt-tq 6.1: integrate fixes up to Tag v6.1.119-rt45 /
-  commit 10c8fc980d4b ("Linux 6.1.119-rt45") from linux-stable-rt
-* linux-tq 6.1: integrate fixes up to Tag v6.1.119 /
-  commit e4d90d63d385 ("Linux 6.1.119") from linux-stable
+* linux-rt-tq 6.1: integrate fixes up to Tag v6.1.132-rt50 /
+  commit 2039809c11c6 ("Linux 6.1.132-rt50") from linux-stable-rt
+* linux-tq 6.1: integrate fixes up to Tag v6.1.132 /
+  commit 8e60a714ba3b ("Linux 6.1.132") from linux-stable
 * TQMa62xx / TQMa64xx: allow more specific tuning.
 * tqmls10xxa.inc: require arch-armv8a.inc to allow more specific tuning.
 * TQMa62xx:
@@ -30,6 +36,10 @@ Releases are named with the following scheme:
     The current M4 RPMsg example from meta-ti is incompatible with the MBa62xx
     due to conflicting use of `MCU_UART0`.
 * linux-imx-tq 6.1
+  * TQMa93: remove OpenDrain from MDIO pins
+  * remove CONFIG_USB_EHSET_TEST_FIXTURE from imx-arm64/usb-gadget-support.cfg config fragment.
+    This option is intended for hardware qualification only and also available in newer U-Boot
+    versions
   * TQMa93: add OpenDrain to MDIO pins
   * TQMa8x: assign DP firmware in device tree
 * u-boot-imx-tq v2020.04:
@@ -45,6 +55,13 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* linux-[rt-]tq 6.1:
+  * backport patches to improve reproducible builds. There were some places where
+    the completed file path slipped in the binaries.
+  * set `CONFIG_USB_ONBOARD_HUB` to builtin. This must be in
+    sync with `CONFIG_USB`, otherwise USB devices connected via an onboard hub
+    will be disconnected and detected again after the hub driver is inserted as
+    module.
 * TQMa8M: fix U-Boot compatibility to generated signed images.
 
   Please note that images generated with imx-mkimage version before `lf-6.1.55_2.2.0`
