@@ -18,11 +18,6 @@ KERNEL_DEVICETREE_linux-imx-tq = "\
     freescale/imx8mp-tqma8mpql-mba8mpxl-rpmsg.dtb \
 "
 
-KERNEL_DEVICETREE_linux-imx-tq:append:mx8mp-nxp-bsp = "\
-    ${@bb.utils.contains('MACHINE_FEATURES', 'basler', \
-        ' freescale/imx8mp-tqma8mpql-mba8mpxl-lvds-basler.dtb', '', d)} \
-"
-
 KERNEL_DEVICETREE_linux-tq = "\
     freescale/imx8mp-tqma8mpql-mba8mpxl-lvds.dtb \
 "

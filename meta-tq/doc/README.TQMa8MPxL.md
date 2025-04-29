@@ -368,39 +368,6 @@ gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-bayer,format=rggb10le,bpp=10
   bayer2rgb ! waylandsink sync=false
 ```
 
-#### Basler camera (MBa8MPxL only)
-
-__daA3840-30mc__
-
-##### Build
-
-In order to avoid any unforseen side effects for different cameras, basler support has to be enabled explicitely by adding the following lines to `local.conf`
-```
-# Basler camera support
-ACCEPT_BASLER_EULA = "1"
-IMAGE_INSTALL:append = " packagegroup-fsl-isp packagegroup-dart-bcon-mipi"
-DISTRO_FEATURES:append = " x11"
-MACHINE_FEATURES:append = " basler"
-```
-
-This enabled additional patches required for this camera as well as a dedicated DT and additional pacages.
-
-Also several meta layers have to be added in bblayers.conf (if not already done):
-```
-  ${BSPDIR}/sources/meta-basler-imx8 \
-  ${BSPDIR}/sources/meta-basler-tools \
-  ${BSPDIR}/sources/meta-freescale \
-  ${BSPDIR}/sources/meta-qt6 \
-```
-
-##### Usage
-* Devicetree: `imx8mp-tqma8mpql-mba8mpxl-lvds-basler.dtb`
-* gstreamer example:
-
-```
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 -v v4l2src device=/dev/video0 ! waylandsink
-```
-
 ### Display Support
 
 HDMI support is enabled by default. Additionally LVDS display can be enabled by using the
