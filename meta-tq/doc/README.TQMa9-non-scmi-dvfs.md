@@ -15,7 +15,7 @@ Depending on SOC following modes can be supported
 To change SOC frequency mode the mode can be switched via sysfs.
 
 ```
-echo <mode> /sys/devices/platform/imx93-lpm/mode
+echo <sysfs> > /sys/devices/platform/imx93-lpm/mode
 ```
 
 The mode can be read from the same file:
