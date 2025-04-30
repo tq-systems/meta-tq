@@ -54,6 +54,11 @@ be useful to persist across updates.
 The examples found in the "dumpling*" distros in `meta-dumpling` provide a
 starting point for project-specific configuration.
 
+To allow fallback from non booting OS in an A/B setup it is important to make sure,
+that the bootloader activates the hardware watchdog of the CPU und configures the
+watchdog timeout long enough that the OS to be booted can service the watchdog and mark
+the boot as successful before the watchdog times out.
+
 ## Configuration
 
 Enabling the "rauc" distro feature will result in a number of changes in the
