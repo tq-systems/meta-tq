@@ -39,6 +39,10 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* u-boot-tq-2023-04:
+  * TQMa6UL: decrease bootdelay for mfg / uuu defconfigs to 1 sec
+  * TQMa6UL: bootcmd is adjusted to start only fasbboot gadget for
+    mfg / uuu defconfigs.
 * linux-rt-tq-6.1:
   * backport upstream fixes for TMPDIR leakage
   * integrate changes from linux stable-rt up to tag v6.1.132-rt50
@@ -108,6 +112,7 @@ Releases are named with the following scheme:
 ### Fixed
 
 * u-boot-tq-2023-04:
+  * MBa6ULxL: fix SPL bootflow for serial downloader mode
   * TQMa6x: SMSC9500 USB-ethernetbridge did not work after update to new U-Boot version
   * TQMa6x/6ULx[L]/6ULLx[L]/TQMa7x: `save env` does not work after `usb start`
 
