@@ -151,7 +151,7 @@ BOOT\_MODE can be configured using DIP switch S1.
 
 ## Boot device initialisation and update
 
-See [here](./README.imx-arm64.BootMedia.md) for detailed information how to write a
+See [here](./README.imx.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
 
 ## Use UUU Tool
