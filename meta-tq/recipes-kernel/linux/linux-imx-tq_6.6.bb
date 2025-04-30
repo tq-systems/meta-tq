@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 require linux-imx-tq-common.inc
 
 KBRANCH = "TQMa-fslc-6.6-2.2.x-imx"
-SRCREV = "46eb020c6f9634bed9e2437e2d5775a3c84d4c09"
+SRCREV = "1785bc9e86660fc4ee4a49948cd16e97499d31ac"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "6.6"
@@ -58,6 +58,10 @@ SRC_URI:aarch64 = "\
     file://wifi-support.cfg \
 "
 
+SRC_URI:append:tqmls1012al ?= "\
+    file://ls1012a.cfg \
+"
+
 SRC_URI:append = " \
     ${@bb.utils.contains('COMBINED_FEATURES', 'bluetooth', 'file://features/bluetooth-support.cfg', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'file://features/dm-verity.cfg', '', d)} \
@@ -73,3 +77,4 @@ COMPATIBLE_MACHINE:tqma8xx = "tqma8xx"
 COMPATIBLE_MACHINE:tqma8xxs = "tqma8xxs"
 COMPATIBLE_MACHINE:tqma91xx = "tqma91xx"
 COMPATIBLE_MACHINE:tqma93xx = "tqma93xx"
+COMPATIBLE_MACHINE:tqmls1012al = "tqmls1012al"

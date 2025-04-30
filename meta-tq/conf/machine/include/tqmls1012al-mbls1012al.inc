@@ -12,7 +12,7 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
 USE_VT = "0"
 
 KERNEL_DEVICETREE ?= " \
-  freescale/fsl-ls1012a-mbls1012al.dtb \
+  freescale/fsl-ls1012a-tqmls1012al-mbls1012al.dtb \
 "
 
 # Files are needed in IMAGE_BOOT_FILES because /boot is on an extra partition.
@@ -22,7 +22,7 @@ KERNEL_DEVICETREE ?= " \
 #
 IMAGE_BOOT_FILES = "\
     ${KERNEL_IMAGETYPE} \
-    fsl-ls1012a-mbls1012al.dtb \
+    fsl-ls1012a-tqmls1012al-mbls1012al.dtb \
 "
 
 # direct assignment to override empty default from meta-freescale
