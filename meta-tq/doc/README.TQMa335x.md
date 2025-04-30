@@ -41,7 +41,7 @@ This README contains some useful information for TQMa335x\[L\] on MBa335x
 
 ### Linux
 
-| Feature                              | linux-tq-6.16 |
+| Feature                              | linux-tq-6.12 |
 | :----------------------------------: | :-----------: |
 | UART4 (console on X15)               |      x        |
 | UART0 (RS485 on X16)                 |      x        |
