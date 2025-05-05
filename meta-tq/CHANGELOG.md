@@ -41,7 +41,7 @@ Releases are named with the following scheme:
 
 * u-boot-tq-2023-04:
   * TQMa6UL: decrease bootdelay for mfg / uuu defconfigs to 1 sec
-  * TQMa6UL: bootcmd is adjusted to start only fasbboot gadget for
+  * TQMa6UL: bootcmd is adjusted to start only fastboot gadget for
     mfg / uuu defconfigs.
 * linux-rt-tq-6.1:
   * backport upstream fixes for TMPDIR leakage
