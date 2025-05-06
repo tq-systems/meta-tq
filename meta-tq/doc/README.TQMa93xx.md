@@ -152,7 +152,8 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 * eth1 does not work after suspend, needs `ip link set down/up dev eth1` to be functional
 * When using `i2c probe` command in U-Boot all valid addresses respond instead of addresses
   used by a physical connected device.
-* linux-imx-tq_6.1: Some Linux kernel boot warnings regarding missing optional supplies in DTB.
+* NFS boot: The interface to be used for NFS boot (`netdev`) has inverted order, compared
+  to u-boot and Linux. Device renaming in Linux happens after mounting rootfs.
 * Suspend/Resume
   * When resuming using wakeup GPIO the following error can occur:
     `pca953x 2-0070: failed reading register`. The (wakeup) IRQ handler is executed before the expander
@@ -162,6 +163,7 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
   or using remoteproc is not supported by `ethosu` driver. The driver is not working with `linux-imx-tq`
   based on NXP `lf-6.6.52-2.2.0` release. Switching back to old release is posible with following
   changes in `linux-imx-tq_6.6.bb` recipe.
+* Watchdog is not enabled by default
 
 ```
 KBRANCH:tqma93xx = "TQMa-fslc-6.6-2.0.x-imx"
@@ -251,6 +253,7 @@ __Note:__ Default u-boot environment variable `bootcmd` has to be set to `run di
 ### OS updates
 
 See [RAUC](RAUC.md).
+
 ### Sleep mode and wakeup
 
 Supported sleep states can be queried as follow:
