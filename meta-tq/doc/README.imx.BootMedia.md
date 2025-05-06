@@ -159,7 +159,7 @@ environment:
 * `mmboot`: load kernel and dtb from SD/eMMC instance given with variable `mmcdev`
   * Boot device is SD / eMMC: `mcdev` is set to device index of the boot device if
     `mmcautodetect` is `yes` (default)
-  * Boot device is not SD / eMMC: `mmcdev` has to be set before using `mmcboo`
+  * Boot device is not SD / eMMC: `mmcdev` has to be set before using `mmcboot`
 * `ubiboot`: load kernel and dtb from UBIFS in default UBI volume and boots into
   ubifs rootfs in this volume
 * `netboot`: load kernel and dtb using tftpboot and boots into rootfs on a NFS
@@ -169,7 +169,7 @@ environment:
 
 ## Cortex M4/M7 support
 
-This section only applies to  following CPU families:
+This section only applies to following CPU families:
 
 | CPU family | Cortex M4 | Cortex M7  |
 | ---------- | ----------| ---------- |
