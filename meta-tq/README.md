@@ -50,7 +50,7 @@ is _mandatory_ - see [table](#supported-machines).
 
 URI: https://git.yoctoproject.org/git/meta-freescale  
 branch: scarthgap  
-revision: tested with HEAD, at least commit df2f3b06 ("Merge pull request #2220 from tq-steina/scarthgap-imx-cst")
+revision: tested with HEAD, at least commit c3630a3a ("Merge pull request #2232 from Freescale/backport-2195-to-scarthgap")
 layers: meta-freeescale  
 
 **Attention:** The following distros defined in meta-freescale-distro are not
@@ -67,6 +67,7 @@ For machines based on following CPU families from NXP usage of meta-freescale
 is _mandatory_ - see [table](#supported-machines).
 
 * LS1012A
+* LS102xA
 * LS1028A / LS1017A
 * LS1043A / LS1046A / LS1088A
 * LX2160A
