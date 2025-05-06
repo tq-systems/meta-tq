@@ -50,7 +50,7 @@ is _mandatory_ - see [table](#supported-machines).
 
 URI: https://git.yoctoproject.org/git/meta-freescale  
 branch: scarthgap  
-revision: tested with HEAD, at least commit 1425fda6 ("Merge pull request #1872 from hiagofranco/sync_scarthgap_imx-atf")  
+revision: tested with HEAD, at least commit df2f3b06 ("Merge pull request #2220 from tq-steina/scarthgap-imx-cst")
 layers: meta-freeescale  
 
 **Attention:** The following distros defined in meta-freescale-distro are not
