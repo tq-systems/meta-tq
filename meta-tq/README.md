@@ -26,7 +26,7 @@ branch: scarthgap
 revision: HEAD  
 layers: meta, meta-poky  
 
-#### Notes for machines with i.MX CPU
+#### Notes for machines with i.MX or Layerscape CPU
 
 Optionally the layer can make use of features from meta-freescale /
 meta-freeescale-distro if using CPU from following NXP families - see
@@ -47,6 +47,11 @@ is _mandatory_ - see [table](#supported-machines).
 * i.MX8MP
 * i.MX91
 * i.MX93
+* LS1012A
+* LS102xA
+* LS1028A / LS1017A
+* LS1043A / LS1046A / LS1088A
+* LX2160A
 
 URI: https://git.yoctoproject.org/git/meta-freescale  
 branch: scarthgap  
@@ -60,17 +65,6 @@ tested with machines in meta-tq:
 - fsl-wayland
 - fsl-x11
 - fsl-xwayland
-
-#### Notes for machines with Layerscape CPU
-
-For machines based on following CPU families from NXP usage of meta-freescale
-is _mandatory_ - see [table](#supported-machines).
-
-* LS1012A
-* LS102xA
-* LS1028A / LS1017A
-* LS1043A / LS1046A / LS1088A
-* LX2160A
 
 #### Notes for machines with TI CPU
 
