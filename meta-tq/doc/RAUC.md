@@ -54,6 +54,10 @@ be useful to persist across updates.
 The examples found in the "dumpling*" distros in `meta-dumpling` provide a
 starting point for project-specific configuration.
 
+The bootloader / boot flow needs to interact with RAUC and the A/B partitioning scheme
+as described by RAUC documentation. For `meta-tq` an example implementation is given
+using U-Boot and [Distroboot](README.Distroboot.md).
+
 To allow fallback from non booting OS in an A/B setup it is important to make sure,
 that the bootloader activates the hardware watchdog of the CPU und configures the
 watchdog timeout long enough that the OS to be booted can service the watchdog and mark
@@ -94,14 +98,28 @@ The compatible string in the bundle and `system.conf` defaults to
 `dumpling-${MACHINE}`, which can be modified by setting the
 `RAUC_BUNDLE_COMPATIBLE` variable.
 
+### Testing RAUC
+
+Before using RAUC on the eMMC make sure that the U-Boot supports
+Distroboot and configure the environment accordingly:
+```sh
+setenv bootcmd "run distro_bootcmd"
+setenv boot_targets "mmc0"
+```
+
 On the running system, the update bundle can be installed into the inactive boot
 slot by running
 ```sh
-rauc install BUNDLE-FILE
+rauc install <BUNDLE-FILE>
 ```
 after copying the file onto the device. After successful installation, the
 U-Boot environment is modified to activate the other slot, so a following reboot
 will boot into the newly installed system.
+
+To verify which slot is in use one can query using
+```sh
+rauc status
+```
 
 ### rauc-mark-good.service
 
