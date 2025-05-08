@@ -21,6 +21,7 @@ KERNEL_CONFIG_FILES:imx ?= "\
     file://rm-non-tq-platforms.cfg \
     file://usb.cfg \
     file://features/devicetree.cfg \
+    file://features/disable-hibernate.cfg \
     file://features/network.cfg \
     file://features/rauc.cfg \
     file://features/spidev.cfg \
