@@ -85,6 +85,9 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * Role switching does not work on the USB-OTG port (X9); only peripheral mode
   is usable.
 * No Device Trees for LVDS displays are provided.
+* U-Boot:
+  * USB mass storage support may vary among different USB flash drive models/vendors
+* Suspend/Resume is currently not supported
 
 ## Artifacts
 
