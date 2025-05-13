@@ -87,6 +87,8 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * No Device Trees for LVDS displays are provided.
 * U-Boot:
   * USB mass storage support may vary among different USB flash drive models/vendors
+  * `usb reset` (or `usb start` / `usb stop`) fails every second time
+    Workaround: Repeat command
 * Suspend/Resume is currently not supported
 
 ## Artifacts
