@@ -393,7 +393,7 @@ Download bootstream from TFTP and update:
 
 ## Use UUU Tool
 
-See [here](./README.imx-arm64.UUU.md) for details about using Serial Download mode and UUU.
+See [here](./README.imx.UUU.md) for details about using Serial Download mode and UUU.
 
 ## Howto
 

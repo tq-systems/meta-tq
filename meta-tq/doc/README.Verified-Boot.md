@@ -229,7 +229,7 @@ an initramfs image:
 
 The FIT image with the initramfs must be deployed to the boot partition:
 
-    IMAGE_BOOT_FILES += "fitImage-${INITRAMFS_IMAGE}-${MACHINE}-${MACHINE};fitImage"
+    IMAGE_BOOT_FILES:append = " fitImage-${INITRAMFS_IMAGE}-${MACHINE}-${MACHINE};fitImage"
 
 To apply dm-verity to a root filesystem image, set `DM_VERITY_IMAGE` and
 `DM_VERITY_IMAGE_TYPE` accordingly. For example, building

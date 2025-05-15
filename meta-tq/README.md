@@ -50,7 +50,7 @@ is _mandatory_ - see [table](#supported-machines).
 
 URI: https://git.yoctoproject.org/git/meta-freescale  
 branch: scarthgap  
-revision: tested with HEAD, at least commit 1425fda6 ("Merge pull request #1872 from hiagofranco/sync_scarthgap_imx-atf")  
+revision: tested with HEAD, at least commit df2f3b06 ("Merge pull request #2220 from tq-steina/scarthgap-imx-cst")
 layers: meta-freeescale  
 
 **Attention:** The following distros defined in meta-freescale-distro are not
@@ -87,7 +87,7 @@ is _mandatory_ - see [table](#supported-machines)
 
 URI: https://git.yoctoproject.org/git/meta-ti  
 branch: scarthgap  
-revision: at least commit 84328ead (tag 10.00.08)  
+revision: at least commit ed05150b (tag 11.00.06)
 layers: meta-ti-bsp  
 
 If using meta-ti, meta-arm is also needed due to dependencies of meta-ti.
@@ -174,13 +174,13 @@ Support for the following machines is contained in this version:
 
 | Status | SOC / CPU               | SOM                     | Base board    | yocto / OpenEmbedded machine     | hardware revision                                                                                                                                            |
 |--------|-------------------------|-------------------------|---------------|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [b]    | i.MX6\[S,DL,D,Q,QP,DP\] | TQMa6\[S,DL,D,Q,QP,DP\] | MBa6x         | tqma6qdl-multi-mba6x             | TQMa6\[QP,DP\] HW REV.040x, TQMa6\[D,Q\] 1/2 GiB HW REV.010x ... 040x, TQMa6DL 1/2 GiB HW REV.010x ... 040x, TQMa6S HW REV.010x ... 040x / MBa6x HW REV.020x |
-| [b]    | i.MX6UL                 | TQMa6ULx[L]             | MBaULx        | tqma6ul-multi-mba6ulx            | TQMa6ULx HW REV.030x / TQMa6ULxL HW REV.020x 256/512 MB RAM, MBa6ULx HW REV.020x                                                                             |
-| [b]    | i.MX6UL                 | TQMa6ULxL               | MBaULxL       | tqma6ulx-lga-mba6ulxl            | TQMa6ULxL HW REV.020x / MBa6ULxL HW REV.020x                                                                                                                 |
-| [b]    | i.MX6ULL                | TQMa6ULLx               | MBaULx        | tqma6ull-multi-mba6ulx           | TQMa6ULLx HW REV.030x / TQMa6ULLxL HW REV.020x  256/512 MB RAM, MBa6ULx HW REV.020x                                                                          |
-| [b]    | i.MX7D                  | TQMa7D                  | MBa7x         | tqma7x-multi-mba7                | TQMa7D HW REV.010x ... 020x / 1 GiB / 2 GiB /512 MiB RAM / MBa7x HW REV.020x                                                                                 |
+| [y]    | i.MX6\[S,DL,D,Q,QP,DP\] | TQMa6\[S,DL,D,Q,QP,DP\] | MBa6x         | tqma6qdl-multi-mba6x             | TQMa6\[QP,DP\] HW REV.040x, TQMa6\[D,Q\] 1/2 GiB HW REV.010x ... 040x, TQMa6DL 1/2 GiB HW REV.010x ... 040x, TQMa6S HW REV.010x ... 040x / MBa6x HW REV.020x |
+| [y]    | i.MX6UL                 | TQMa6ULx[L]             | MBaULx        | tqma6ul-multi-mba6ulx            | TQMa6ULx HW REV.030x / TQMa6ULxL HW REV.020x 256/512 MB RAM, MBa6ULx HW REV.020x                                                                             |
+| [y]    | i.MX6UL                 | TQMa6ULxL               | MBaULxL       | tqma6ulx-lga-mba6ulxl            | TQMa6ULxL HW REV.020x / MBa6ULxL HW REV.020x                                                                                                                 |
+| [y]    | i.MX6ULL                | TQMa6ULLx               | MBaULx        | tqma6ull-multi-mba6ulx           | TQMa6ULLx HW REV.030x / TQMa6ULLxL HW REV.020x  256/512 MB RAM, MBa6ULx HW REV.020x                                                                          |
+| [y]    | i.MX7D                  | TQMa7D                  | MBa7x         | tqma7x-multi-mba7                | TQMa7D HW REV.010x ... 020x / 1 GiB / 2 GiB /512 MiB RAM / MBa7x HW REV.020x                                                                                 |
 | [y]    | i.MX8MP                 | TQMa8MPxL               | MBa8MPxL      | tqma8mpxl-mba8mpxl               | TQMa8MPQL with 1/2/4/8 GiB RAM, HW REV.020x, MBa8MPxL HW REV.020x                                                                                            |
-| [b]    | i.MX8MP                 | TQMa8MPxL               | MBa8MP-RAS314 | tqma8mpxl-mba8mp-ras314          | TQMa8MPQL with 1/2/4/8 GiB RAM, HW REV.020x, MBa8MP-RAS314 HW REV.010x                                                                                       |
+| [y]    | i.MX8MP                 | TQMa8MPxL               | MBa8MP-RAS314 | tqma8mpxl-mba8mp-ras314          | TQMa8MPQL with 1/2/4/8 GiB RAM, HW REV.020x, MBa8MP-RAS314 HW REV.010x                                                                                       |
 | [y]    | i.MX8M\[D,Q,QL\]        | TQMa8M\[D,Q,QL\]        | MBa8Mx        | tqma8mx-multi-mba8mx             | TQMa8M\[D,Q,QL\] with 1/2/4 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x / 030x                                                                                  |
 | [y]    | i.MX8MM\[D,Q\]          | TQMa8M\[D,Q\]ML         | MBa8Mx        | tqma8mxml-multi-mba8mx           | TQMa8M\[D,Q\]ML / 1/2/4 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x                                                                                             |
 | [y]    | i.MX8MN\[Q,DL\]         | TQMa8M\[Q,DL\]NL        | MBa8Mx        | tqma8mxnl-1gb-mba8mx             | TQMa8M\[Q,DL\]NL / 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x                                                                                                |
@@ -216,7 +216,7 @@ Support for the following machines is contained in this version:
 | [b]    | LS1088A                 | TQMLS1088A              | MBLS10xxA     | tqmls1088a-4gb-mbls10xxa         | TQMLS1088a, 4 GiB, HW REV.020x ... REV.030x / MBLS10xxa                                                                                                      |
 | [b]    | LS102\[0,1\]A           | TQMLS102\[0,1\]A        | MBLS102xA     | tqmls102xa-mbls102xa             | TQMLS102\[0,1\]A HW REV.020x / MBLS102xA HW REV.020x                                                                                                         |
 | [b]    | LX2\[16,08\]0A          | TQMLX2\[16,08\]0A       | MBLX2160A     | tqmlx2160a-mblx2160a             | TQMLX2\[16,08\]0A HW REV.010x with 32 GiB / 16 Gib RAM / MBLX2160A HW REV.010x and REV.020x                                                                  |
-| [b]    | AM355x                  | TQMa335x\[L\]           | MBa335x       | tqma355x-mba335x                 | TQMa335x[L] HW REV.020x with 256/512 MiB RAM / MBa335x HW REV.020x                                                                                           |
+| [y]    | AM335x                  | TQMa335x\[L\]           | MBa335x       | tqma355x-mba335x                 | TQMa335x[L] HW REV.020x with 256/512 MiB RAM / MBa335x HW REV.020x                                                                                           |
 | [y]    | AM6234                  | TQMa6234\[L\]           | MBa62xx       | tqma62xx-mba62xx                 | TQMa6234\[L\] HW REV.010x ... 020x, MBa62xx HW REV.010x ... 020x                                                                                             |
 | [y]    | AM6254                  | TQMa6254\[L\]           | MBa62xx       | tqma62xx-mba62xx                 | TQMa6254\[L\] HW REV.010x ... 020x, MBa62xx HW REV.010x ... 020x                                                                                             |
 | [y]    | AM6411                  | TQMa6411L               | MBaX4XxL      | tqma64xxl-mbax4xxl               | TQMa6411L HW REV.020x, MBaX4XxL HW REV.020x                                                                                                                  |

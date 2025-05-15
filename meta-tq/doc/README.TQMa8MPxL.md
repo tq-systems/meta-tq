@@ -7,7 +7,7 @@ This README contains some useful information for TQMa8MPxL on MBa8MPxL and MBa8M
 ## Variants
 
 * TQMa8MPQL REV.020x on MBa8MPxL REV.020x
-* TQMa8MPQL REV.020x on REV.010x
+* TQMa8MPQL REV.020x on MBa8MP-RAS314 REV.010x
 
 ## Version information for software components
 
@@ -64,6 +64,8 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 **Note:** For Linux 6.1 based on NXP / vendor branch prefer using `kirkstone` branch.
 
+#### MBa8MPxL
+
 | Feature                                                      |   fslc-6.1  |   fslc-6.6  |    6.12.y   |
 |:-------------------------------------------------------------|:-----------:|:-----------:| :---------: |
 | RAM configs                                                  | 1,2,4,8 GiB | 1,2,4,8 GiB | 1,2,4,8 GiB |
@@ -119,6 +121,49 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **NPU**                                                      |             |             |             |
 | NPU                                                          |             |      x      |             |
 
+#### MBa8MP-RAS314
+
+| Feature                                                      |    6.12.y   |
+|:-------------------------------------------------------------| :---------: |
+| RAM configs                                                  | 1,2,4,8 GiB |
+| CPU variants                                                 |  i.MX8MPQ   |
+| Fuses / OCRAM                                                |      x      |
+| speed grade / temperature grade detection                    |      x      |
+| **UART**                                                     |             |
+| console on UART4 (via USB / UART converter) (X4 USB If 2)    |      x      |
+| UART3 via USB UART converter (X4 USB If 1)                   |      x      |
+| **GPIO**                                                     |             |
+| LED                                                          |      x      |
+| **I2C**                                                      |      x      |
+| EEPROMs                                                      |      x      |
+| PMIC                                                         |             |
+| RTC                                                          |      x      |
+| Temperature Sensors                                          |      x      |
+| **ENET**                                                     |      x      |
+| GigE / FEC via Phy on MBa8MPxL                               |      x      |
+| GigE / EQOS via Phy on MBa8MPxL                              |      x      |
+| **USB**                                                      |             |
+| USB 3.0 Host / Hub (X12/X13)                                 |      x      |
+| USB Device (X14)                                             |      x      |
+| **QSPI NOR**                                                 |             |
+| Read with 1-1-4 SDR                                          |      x      |
+| PP / Erase with 1-1-1 SDR                                    |      x      |
+| **Graphic / Multimedia**                                     |             |
+| GPU                                                          |      x      |
+| VPU                                                          |      x      |
+| **Display**                                                  |             |
+| LVDS                                                         |             |
+| HDMI                                                         |      x      |
+| **Audio**                                                    |             |
+| HDMI                                                         |             |
+| Codec (Headphone / Mic In)                                   |      x      |
+| **PCIe**                                                     |             |
+| wireless & BT card on-board                                  |      x      |
+| **MIPI CSI**                                                 |             |
+| Raspberry Pi Camera Module 2                                 |             |
+| **NPU**                                                      |             |
+| NPU                                                          |             |
+
 ## TODO / Untested
 
 ### MBa8MPxL
@@ -128,14 +173,10 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * UART1/UART2 via pin header
 * SPI via pin header
 * I²C interface of PCIe Clock generator not tested
-* linux-imx-tq_5.15: Dual-Channel LVDS is untested
 
 ### MBa8MP-RAS314
 
-* Audio
-  * no valid asound.state in BSP
-* Linux / BSP
-  * no support for vendor kernel and BSP.
+* HDMI Audio
 
 ## Known Issues / Limitations
 
@@ -201,6 +242,10 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * Kernel based on linux-imx / linux-fslc: Review indicated that, by default, device tree
   reserves memory for NPU in an area which is only available on 4GiB DDR RAM config.
   Upstream kernel is not affected.
+* Kernel based on linux-tq / linux-rt-tq
+  * Suspend & resume not supported (yet)
+* MBa8MP-RAS314
+  * no support for vendor kernel and BSP
 
 ## Build Artifacts
 
@@ -278,12 +323,12 @@ BOOT\_MODE: 0110
 
 ## Boot device initialisation and update
 
-See [here](./README.imx-arm64.BootMedia.md) for detailed information how to write a
+See [here](./README.imx.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
 
 ## Use UUU Tool
 
-See [here](./README.imx-arm64.UUU.md) for details about using Serial Download mode and UUU.
+See [here](./README.imx.UUU.md) for details about using Serial Download mode and UUU.
 
 ## Howto
 
@@ -323,39 +368,6 @@ gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-bayer,format=rggb10le,bpp=10
   bayer2rgb ! waylandsink sync=false
 ```
 
-#### Basler camera (MBa8MPxL only)
-
-__daA3840-30mc__
-
-##### Build
-
-In order to avoid any unforseen side effects for different cameras, basler support has to be enabled explicitely by adding the following lines to `local.conf`
-```
-# Basler camera support
-ACCEPT_BASLER_EULA = "1"
-IMAGE_INSTALL:append = " packagegroup-fsl-isp packagegroup-dart-bcon-mipi"
-DISTRO_FEATURES:append = " x11"
-MACHINE_FEATURES:append = " basler"
-```
-
-This enabled additional patches required for this camera as well as a dedicated DT and additional pacages.
-
-Also several meta layers have to be added in bblayers.conf (if not already done):
-```
-  ${BSPDIR}/sources/meta-basler-imx8 \
-  ${BSPDIR}/sources/meta-basler-tools \
-  ${BSPDIR}/sources/meta-freescale \
-  ${BSPDIR}/sources/meta-qt6 \
-```
-
-##### Usage
-* Devicetree: `imx8mp-tqma8mpql-mba8mpxl-lvds-basler.dtb`
-* gstreamer example:
-
-```
-WAYLAND_DISPLAY=/run/wayland-0 gst-launch-1.0 -v v4l2src device=/dev/video0 ! waylandsink
-```
-
 ### Display Support
 
 HDMI support is enabled by default. Additionally LVDS display can be enabled by using the
@@ -375,6 +387,9 @@ in a dtsi fragment.
 | Interface       | Device tree                                    | Type               |
 |-----------------|------------------------------------------------|--------------------|
 | HDMI / DP       | imx8mp-tqma8mpql-mba8mp-ras314.dtb             | compatible monitor |
+
+*Note*: `weston` by default uses the DRI device with highest number. This is usually Display Port.
+To explicitely select a DRI device, please refer to `--drm-device` argument during startup.
 
 ### CAN (MBa8MPxL only)
 
