@@ -13,14 +13,36 @@ Releases are named with the following scheme:
 
 * linux-tq-6.12:
   * support TQMLS102xA
-* TQMLS102xA: Add support for non-u-boot managed RCW configurations
 
 ### Changed
+
+* machines: use `wic.xz` instead of uncompessed `wic` for default `IMAGE_FSTYPES`
+  for all machines. `bmaptool` supports also packed images. So we can lower the
+  IO pressure for copying artifacts while keeping usability.
+
+* u-boot-tq-2017.11:
+  * TQMLS102xA: use external generated RCW images from `rcw` recipe instead of
+    in tree RCW.
+
+* rcw:
+  * TQMLS102xA: improve RCW generation
+  * incorporate changes from NXP upstream since lf-5.15.32-2.0.0 up to
+    tag lf-6.6.52-2.2.0 / lf-6.12.3-1.0.0
 
 * TQMLS102xA
   * Machine uses the common ALSA configuration (alsa-state)
   * Machine uses the common WKS file for ARMv7-A modules
   * Uses 'mainline' BSP as defined in meta-freescale
+
+### Removed
+
+### Fixed
+
+* u-boot-imx-tq-2024.04
+  * TQMa93xx: Cortex M33 is usable again. Basic initialisation in secure Cortex A55
+    was hidden behind a conditional since TQMa91xx support was added
+* rcw
+  * TQMLX2160A: Mux RGMII pins as GPIO if SGMII is used at SERDES2
 
 ## scarthgap.TQ.ARM.BSP.0004
 
