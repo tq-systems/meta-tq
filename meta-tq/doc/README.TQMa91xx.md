@@ -129,7 +129,7 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.dtb: device tree blobs
   * imx91-tqma9131-mba91xxca*.dtb
 * Image: Linux kernel image
-* \*.wic: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR

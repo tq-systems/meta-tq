@@ -98,7 +98,7 @@ Artifacs can be found at `deploy-ti/images/${MACHINE}` (with meta-ti-bsp in
 
 * \*.dtb: device tree blobs
 * zImage: Linux kernel image
-* \*.wic: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * MLO-${MACHINE}: U-Boot MLO (SPL image for SD / e-MMC)
 * MLO-${MACHINE}.byteswap: U-Boot MLO (SPL image for SPI NOR flash)

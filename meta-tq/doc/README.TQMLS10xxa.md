@@ -79,7 +79,7 @@ SD-Card on MBLS10xxA is accessible.
 * Image: Kernel
 * fsl-ls1043a-tqmls1043a-mbls10xxa.dtb: Device Tree Blob.
 * u-boot-tfa-2022.04-r0.bin: U-Boot Binary
-* \*.wic Complete eMMC / SD-Card Image
+* \*.wic[.<compress>]: Complete eMMC / SD-Card Image
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 
@@ -94,7 +94,7 @@ SD-Card on MBLS10xxA is accessible.
 * Image: Kernel
 * fsl-ls1046a-tqmls1046a-mbls10xxa.dtb: Device Tree Blob.
 * u-boot-tfa-2022.04-r0.bin: U-Boot Binary
-* \*.wic Complete eMMC / SD-Card Image
+* \*.wic[.<compress>]: Complete eMMC / SD-Card Image
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 
@@ -110,7 +110,7 @@ SD-Card on MBLS10xxA is accessible.
 * Image: Kernel
 * fsl-ls1088a-tqmls1088a-mbls10xxa.dtb: Device Tree Blob.
 * u-boot-tfa-2022.04-r0.bin: U-Boot Binary
-* \*.wic Complete eMMC / SD-Card Image
+* \*.wic[.<compress>]: Complete eMMC / SD-Card Image
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 

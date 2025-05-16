@@ -126,7 +126,7 @@ Artifacs can be found at the usual locations for bitbake:
 * `fsl-ls1028a-mbls1028a-tqmls1028a-mbls1028a-ind.dtb`: device tree blob for mbls1028a-ind board
 * `Image.gz`: Linux kernel image
 * `u-boot-tfa-201010-r0.bin` U-Boot binary
-* \*.wic: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 
 ## Build-Time Configuration
