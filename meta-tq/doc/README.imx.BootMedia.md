@@ -29,16 +29,26 @@ Note: iMX6 applies to all i.MX6, i.MX6UL and i.MX6ULL variants
 
 Note: Blocks are in sizes of 512 Bytes
 
+### Prerequisites for block devices
+
+Compressed WIC images and matching BMAP-files (block map files) are created by default.
+To make use of this feature, install the `bmap-tools` package to use `bmaptool`. Current
+versions of `UUU` (https://github.com/nxp-imx/mfgtools) supports packed WIC and BMAP, too.
+The packed WIC can also be decompressed and used with `dd` or other disk image tools.
+
 ### Bootable SD-Card
 
-To create a bootable SD-Card with complete system image:
+Write the `*.wic` image to SD-Card to create a bootable SD-Card with complete system image.
+The following command can be used (the example assumes an SD-Card reader on PC and
+`bmap-tools` package is installed):
 
-write *.wic Image to SD (offset 0)
+```bash
+bmaptool copy <image>.wic[.compress] --bmap <image>.bmap /dev/sd<y>
+```
 
 To create a bootable SD-Card with boot stream only (for exact file name see
-SOM specific documentation):
-
-Write bootstream with correct [offset](#bootstream-location-on-sd-and-emmc) to SD-Card
+SOM specific documentation), write bootstream image with correct
+[offset](#bootstream-location-on-sd-and-emmc) to SD-Card:
 
 Example for Linux:
 
@@ -46,9 +56,16 @@ Example for Linux:
 
 ### Bootable eMMC
 
-To create a bootable eMMC with complete system image:
+Write the `*.wic` image to eMMC user partition, offset 0x0 to create a bootable eMMC with
+complete system image. The following command can be used (the example assumes running target
+system with installed `bmaptool`):
 
-write *.wic image to eMMC (offset 0)
+```bash
+bmaptool copy <image>.wic[.compress] /dev/mmcblk0
+```
+
+For provisioning etc. one can use `uuu` tool from NXP `mfgtools`, too. See [here](./README.imx.UUU.md)
+for details.
 
 To create a bootable eMMC with boot stream only (for exact file name see
 SOM specific documentation)
