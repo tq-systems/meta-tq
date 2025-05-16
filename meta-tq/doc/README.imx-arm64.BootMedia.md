@@ -19,11 +19,22 @@ how default U-Boot env supports update for development purpose.
 | iMX8       |       x         |              |
 | iMX93      |       x         |              |
 
+### Prerequisites for block devices
+
+Compressed WIC images and matching BMAP-files (block map files) are created by default.
+To make use of this feature, install the `bmap-tools` package to use `bmaptool`. Current
+versions of `UUU` (https://github.com/nxp-imx/mfgtools) supports packed WIC and BMAP, too.
+The packed WIC can also be decompressed and used with `dd` or other disk image tools.
+
 ### Bootable SD-Card
 
-To create a bootable SD-Card with complete system image:
+Write the `*.wic` image to SD-Card to create a bootable SD-Card with complete system image.
+The following command can be used (the example assumes an SD-Card reader on PC and
+`bmap-tools` package is installed):
 
-write *.wic Image to SD (offset 0)
+```bash
+bmaptool copy <image>.wic[.compress] --bmap <image>.bmap /dev/sd<y>
+```
 
 To create a bootable SD-Card with boot stream only (for exact file name see
 SOM specific documentation):
@@ -34,11 +45,15 @@ Example for Linux:
 
 `sudo dd if=<bootstream> of=/dev/sd<x> bs=1k seek=<kiB offset> conv=fsync`
 
-### Bootable e-MMC
+### Bootable eMMC
 
-To create a bootable e-MMC with complete system image:
+Write the `*.wic` image to eMMC user partition, offset 0x0 to create a bootable eMMC with
+complete system image. The following command can be used (the example assumes running target
+system with installed `bmaptool`):
 
-write *.wic image to e-MMC (offset 0)
+```bash
+bmaptool copy <image>.wic[.compress] /dev/mmcblk0
+```
 
 To create a bootable e-MMC with boot stream only (for exact file name see
 SOM specific documentation)
