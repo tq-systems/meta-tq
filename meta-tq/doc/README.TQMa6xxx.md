@@ -11,7 +11,7 @@ Artifacts can be found at:
 * \*.dtb: Device Tree blobs
 * \*.dtbo: Device Tree overlays
 * Image: Linux kernel image
-* \*.wic: SD/eMMC/USB storage system image
+* \*.wic[.<compress>]: SD/eMMC/USB storage system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * \*.rootfs.ubifs: UBIFS rootfs
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR

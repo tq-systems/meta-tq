@@ -179,7 +179,7 @@ Artifacs can be found at the usual locations for bitbake:
     plus Vision Components CSI camera with OmniVision OV9281)
   * imx8mm-tqma8mqml-mba8mx-rpmsg.dtb (CortexM / RPMSG Support)
 * Image: Linux kernel image
-* \*.wic: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / e-MMC
 * imx-boot-${MACHINE}-fspi.bin-flash\_evk\_flexspi: boot stream for FlexSPI

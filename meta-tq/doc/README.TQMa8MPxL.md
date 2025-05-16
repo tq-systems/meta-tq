@@ -209,7 +209,7 @@ Artifacs can be found at the usual locations for bitbake:
     with OmniVision OV9281)
   * imx8mp-tqma8mpql-mba8mpxl-rpmsg.dtb (CortexM / RPMSG Support)
 * Image: Linux kernel image
-* \*.wic: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR

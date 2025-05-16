@@ -53,7 +53,7 @@ Artifacs can be found at the usual locations for bitbake:
 * `uImage`: Linux kernel image
 * `u-boot-nor-*.bin` U-Boot binary for nor flash
 * `u-boot-sdcard-*.bin` U-Boot binary for nor flash
-* \*.wic: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 
 ## Build-Time Configuration

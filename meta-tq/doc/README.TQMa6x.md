@@ -94,7 +94,7 @@ Artifacs can be found at the usual locations for bitbake:
 
 * \*.dtb: device tree blobs
 * zImage: Linux kernel image
-* \*.wic: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * u-boot-with-spl-${MACHINE}.imx-sd: boot stream for SD / e-MMC and SPI NOR
 
