@@ -53,44 +53,44 @@
 
 ### Linux
 
-| Feature                                          |              |
-| :----------------------------------------------- | :----------: |
-| RAM configs                                      |    1,4 GiB   |
-| CPU variants                                     |LS1017/LS1028A|
-| speed grade / temperature grade detection        |       x      |
-| **UART**                                         |              |
-| console on UART1 (X19)                           |       x      |
-| additional UART2 on pin heads (X38)              |       x      |
-| **GPIO**                                         |              |
-| LED                                              |       x      |
-| Button                                           |       x      |
-| **I2C**                                          |              |
-| Temperature Sensors                              |       x      |
-| RTC                                              |       x      |
-| EEPROMS                                          |       x      |
-| **ENET**                                         |              |
-| ENET 0                                           |       x      |
-| ENET 1                                           |       x      |
-| ENET Switch                                      |       x      |
-| **USB**                                          |              |
-| USB 3.0 Hub                                      |       x      |
-| USB 2.0 Dual Role (X5)                           |       x      |
-| **QSPI NOR**                                     |              |
-| Read                                             |       x      |
-| Write                                            |       x      |
-| **Graphic**                                      |              |
-| GPU                                              |       x      |
-| **Display**                                      |              |
-| DisplayPort                                      |       x      |
-| **PCIe**                                         |              |
-| mini-PCIe on MBLs1028a                           |       x      |
-| **SATA**                                         |              |
-| M.2 SATA                                         |       x      |
-| **CAN**                                          |              |
-| CAN 1                                            |       x      |
-| CAN 2                                            |       x      |
-| **SPI**                                          |              |
-| SPI user space device                            |       x      |
+| Feature                                   |    fslc-6.6     |
+|:------------------------------------------|:---------------:|
+| RAM configs                               |     1,4 GiB     |
+| CPU variants                              | LS1027A,LS1028A |
+| CPU variants                              | LS1017A,LS1018A |
+| speed grade / temperature grade detection |        x        |
+| **UART**                                  |                 |
+| console on UART1 (X19)                    |        x        |
+| additional UART2 on pin heads (X38)       |        x        |
+| **GPIO**                                  |                 |
+| LED                                       |        x        |
+| Button                                    |        x        |
+| **I2C**                                   |                 |
+| Temperature Sensors                       |        x        |
+| RTC                                       |        x        |
+| EEPROMS                                   |        x        |
+| **ENET**                                  |                 |
+| ENET 0  (X7)                              |        x        |
+| ENET 1  (X6)                              |        x        |
+| ENET Switch (X8, X9)                      |        x        |
+| **USB**                                   |                 |
+| USB 3.0 Hub (X10)                         |        x        |
+| USB 2.0 Dual Role (X5)                    |        x        |
+| **QSPI NOR**                              |                 |
+| Read with 1-4-4 SDR                       |        x        |
+| PP / Erase with 1-4-4 SDR                 |        x        |
+| **Graphic**                               |                 |
+| GPU                                       |        x        |
+| **Display**                               |                 |
+| DisplayPort                               |        x        |
+| **PCIe**                                  |                 |
+| mini-PCIe (X12)                           |        x        |
+| **SATA**                                  |                 |
+| M.2 SATA  (X35)                           |        x        |
+| **CAN**                                   |                 |
+| CAN-FD (X17, X29)                         |        x        |
+| **SPI**                                   |                 |
+| SPI user space device                     |        x        |
 
 ## Notes
 
@@ -122,8 +122,8 @@ Artifacs can be found at the usual locations for bitbake:
     * `fip_uboot_tqmls1028a_4gb.bin` U-Boot
 * `atf/variants/`: different Primary Boot Loader variants built with RCW binaries form `rcw/`
 * `rcw/`: different RCW configuration binaries
-* `fsl-ls1028a-mbls1028a-tqmls1028a-mbls1028a.dtb`: device tree blob for mbls1028a board
-* `fsl-ls1028a-mbls1028a-tqmls1028a-mbls1028a-ind.dtb`: device tree blob for mbls1028a-ind board
+* `fsl-ls1028a-tqmls1028a-mbls1028a.dtb`: device tree blob for mbls1028a board
+* `fsl-ls1028a-tqmls1028a-mbls1028a-ind.dtb`: device tree blob for mbls1028a-ind board
 * `Image.gz`: Linux kernel image
 * `u-boot-tfa-201010-r0.bin` U-Boot binary
 * \*.wic[.<compress>]: SD / e-MMC system image
