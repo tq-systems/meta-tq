@@ -196,10 +196,12 @@ like the Linux kernel.
 ## Signal Switch Select
 
 DIP S10 allows switching of signals:
- * S10-1: 0: IIC5 to Mikro-Module 1: IIC5 to Baseboard I2C
- * S10-2: 0: UART2 to Mikro-Module 1: UART2 to Baseboard X38 Pin 15 and Pin 17
- * S10-3: 0: SPI3 to Mikro-Module 1: SPI3 to Baseboard X25 Pin 38/40/42/44
- * S10-4: 0: Fan on X37 active 1: Fan on X37 not active
+| DIP S10 | off                   | on                                    |
+|---------|-----------------------|---------------------------------------|
+| S10-1   | IIC5 to Mikro-Module  | IIC5 to Baseboard I2C                 |
+| S10-2   | UART2 to Mikro-Module | UART2 to Baseboard X38 Pin 15/17      |
+| S10-3   | SPI3 to Mikro-Module  | SPI3 to Baseboard X25 Pin 38/40/42/44 |
+| S10-4   | Fan on X37 active     | Fan on X37 not active                 |
 
 ## Support Wiki
 
