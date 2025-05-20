@@ -13,10 +13,9 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
 
 DEPENDS += "bison-native"
 
-SRCREV = "6e60b946ce1a3d3d87f8fb1649872c37f8a75921"
+SRCREV = "e88b353e036f2e66f7582035e40fb446db41680e"
 SRCBRANCH = "TQMLX2160A-v2019.04-lx2160a-early-access-bsp0.7"
 
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
-SRC_URI += "file://0001-Remove-redundant-YYLOC-global-declaration.patch"
 
 COMPATIBLE_MACHINE = "tqmlx2160a"
