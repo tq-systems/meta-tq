@@ -1,11 +1,12 @@
 # SPDX-License-Identifier: MIT
 # Copyright (C) 2024 TQ-Systems GmbH <oss@ew.tq-group.com>, D-82229 Seefeld, Germany.
 
-# We will have tar.gz for NFS, wic for SD/eMMC
+# We default to tar.gz for NFS, wic.zst for SD/eMMC
 #
 # It is set unconditionally and should be included after SoC includes to override differing
 # settings from vendor layers.
-IMAGE_FSTYPES = "tar.gz wic.xz wic.bmap"
+TQ_IMAGE_COMPRESSION ?= ".zst"
+IMAGE_FSTYPES = "tar.gz wic${TQ_IMAGE_COMPRESSION} wic.bmap"
 
 # Do not update fstab file when using wic images
 WIC_CREATE_EXTRA_ARGS ?= "--no-fstab-update"

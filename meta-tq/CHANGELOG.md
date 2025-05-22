@@ -27,9 +27,14 @@ Releases are named with the following scheme:
 * linux-imx-tq-6.6: update with fixes from FSLC 6.6-2.2.x-imx branch including stable fixes
   up to v6.6.91
 
-* machines: use `wic.xz` instead of uncompessed `wic` for default `IMAGE_FSTYPES`
-  for all machines. `bmaptool` supports also packed images. So we can lower the
-  IO pressure for copying artifacts while keeping usability.
+* machines: use `wic.zst` instead of uncompressed `wic` for default `IMAGE_FSTYPES`
+  for all machines. `bmaptool` supports also packed images, so we can lower
+  the IO pressure for copying artifacts while keeping usability.
+
+  The `TQ_IMAGE_COMPRESSION` variable (defined in
+  `meta-tq/conf/machine/include/tq-image.inc`) can be adjusted in `local.conf`
+  or a custom distro to use a different compression algorithm; setting it
+  to an empty value will leave the files uncompressed.
 
 * u-boot-tq-2017.11:
   * TQMLS102xA: use external generated RCW images from `rcw` recipe instead of
