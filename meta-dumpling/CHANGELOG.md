@@ -23,6 +23,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* lmsensors: build fix to compile without enabling sensord. Fix can be removed once
+  meta-openembedded contains backport of fix in kirkstone.
 * weston: Fix start on TQMa93xx due to insufficient privileges
   Note: `weston` now starts as root
 
