@@ -13,9 +13,12 @@ Releases are named with the following scheme:
 
 * linux-imx-tq-6.6:
   * support TQMLS1012AL
+  * support TQMLS1028A
 * linux-tq-6.12:
   * support TQMLS102xA
   * support TQMLX2160A
+* TQMLS1028A:
+  * u-boot-lsdk-tq: Insert MTD partitions into DT for Linux
 
 ### Changed
 
@@ -41,11 +44,20 @@ Releases are named with the following scheme:
   * Machine uses the common ALSA configuration (alsa-state)
   * Machine uses the common WKS file for ARMv7-A modules
   * Uses 'mainline' BSP as defined in meta-freescale
+* TQMLS1028A:
+  * Use mainline BSP graphic software stack
 * TQMLX2160A:
   * u-boot-lsdk-tq-2019.04: Update XFI & retimer configuration
 
+### Removed
+
+* linux-imx-tq-5.15
+  * Both TQMLS1012AL and TQMLS10128A are now supported by linux-imx-tq-6.6
+
 ### Fixed
 
+* TQMLS1028A:
+  * qoriq-atf: Fix applying errata #841119 and #826419 in Linux
 * TQMLX2160A:
   * Set snoop-delayed exclusive handling. Fixes load/store exclusive
     related issues
