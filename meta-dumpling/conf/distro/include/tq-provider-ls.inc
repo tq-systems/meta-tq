@@ -5,3 +5,4 @@ PREFERRED_PROVIDER_virtual/kernel:tqmlx2160a ?= "linux-tq"
 PREFERRED_PROVIDER_virtual/kernel:tqmt10xx ?= "linux-tqmt"
 
 QORIQ_DEFAULT_BSP:tqmls102xa = "mainline"
+QORIQ_DEFAULT_BSP:tqmls1028a = "mainline"
