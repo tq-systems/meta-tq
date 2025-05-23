@@ -19,6 +19,11 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-tq-6.12: include stable fixes up to v6.12.30
+* linux-tq-6.6: include stable fixes up to v6.6.92
+* linux-imx-tq-6.6: update with fixes from FSLC 6.6-2.2.x-imx branch including stable fixes
+  up to v6.6.91
+
 * machines: use `wic.xz` instead of uncompessed `wic` for default `IMAGE_FSTYPES`
   for all machines. `bmaptool` supports also packed images. So we can lower the
   IO pressure for copying artifacts while keeping usability.
@@ -47,11 +52,6 @@ Releases are named with the following scheme:
   * qoriq-atf: Fix applying errata #841119 and #826419 in Linux
   * Configure DPMAC 17 and 18 for SGMII in SERDES2 configs 7 and 11
     * RGMII usage is not supported in this case
-
-### Removed
-
-### Fixed
-
 * u-boot-imx-tq-2024.04
   * TQMa93xx: Cortex M33 is usable again. Basic initialisation in secure Cortex A55
     was hidden behind a conditional since TQMa91xx support was added
