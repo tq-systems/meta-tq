@@ -105,12 +105,17 @@ case of overheating.
 
 ## Known Issues
 
-DisplayPort only works with some monitors and only in 1920x1080.
+* DisplayPort only works with some monitors and only in 1920x1080.
+* Buzzer does not work
+* MBLS1028A: Missing Pull-up for `SPI3_PCS0`
+* SPI: XSPI mode might get stuck
+* CAN-FD: possible CAN (data) bitrates combinations are limited due to platform clock
+* USB DR (X5) does not support SuperSpeed (CPU limitation for cable detection with ID-pin)
 
 ## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/${MACHINE}`
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 * `atf/`
   * 1GiB
     * `bl2_flexspi_nor.pbl` Primary Boot Loader with RCW
