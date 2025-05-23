@@ -4,12 +4,12 @@ require linux-tq-common.inc
 
 KBRANCH = "TQM-linux-v6.12.y"
 KMETA = "kernel-meta"
-SRCREV_machine = "55132150b13f48ac8870708563ad13c6e18daed7"
+SRCREV_machine = "2e72b6b0631995b759d486e0aefb31ee37594415"
 SRCREV_meta = "cf35a8d4adea70d86608241d50e1372d50a1484f"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "6.12"
-LINUX_VERSION = "${LINUX_RELEASE}.18"
+LINUX_VERSION = "${LINUX_RELEASE}.30"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/linux-tq-${LINUX_RELEASE}:"
 
