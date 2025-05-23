@@ -51,10 +51,22 @@ For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 
 ## TQMLS1028A
 
-### Kernel based on 5.15 (linux-imx-fslc)
+### U-Boot
 
-* based on [lf-5.15.y](https://github.com/nxp-imx/linux-imx/tree/lf-5.15.y)
-* branched from lf-5.15.5-1.0.0 / contains commits up to c1084c2773fc1005ed140db625399d5334d94a28
+* based on qoriq-u-boot (https://github.com/nxp-qoriq/u-boot/)
+* branched from LSDK-20.04-update-290520
+
+### ATF
+
+* based on qoriq-atf (https://github.com/nxp-qoriq/atf/)
+* branched from lf-5.15.5-1.0.0
+
+### Kernel based on 6.6 (linux-imx-fslc)
+
+* based on linux-imx-fslc (https://github.com/Freescale/linux-fslc.git)
+* branched from `6.6-2.2.x-imx`
+  contains commits up to 237948c6e22c90b64818531871f1f28611eb363e and
+  stable tags up to 6.6.84
 
 ## TQMLS102xA
 
