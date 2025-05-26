@@ -19,6 +19,8 @@ Releases are named with the following scheme:
   * support TQMLX2160A
 * TQMLS1028A:
   * u-boot-lsdk-tq: Insert MTD partitions into DT for Linux
+* TQMLX2160A:
+  * Re-add SFP support
 
 ### Changed
 
