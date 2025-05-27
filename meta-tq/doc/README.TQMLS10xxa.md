@@ -19,7 +19,7 @@
 #### Linux
 
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/)
-* branched from linux-6.1.y
+* branched from linux-6.12.y
 
 ### Supported Hardware:
 
@@ -27,9 +27,62 @@
  * TQMLS1046A with 2 GiB / 4 GiB / 8 GiB RAM, HW REV.020x/030x on MBLS10xxa, HW REV.020x
  * TQMLS1088A with 2 GiB / 4 GiB RAM, HW REV.020x/030x on MBLS10xxa HW REV.020x
 
+## Supported Features
+
+### Linux
+
+| Feature                                                   |   6.12.y    |
+|:----------------------------------------------------------|:-----------:|
+| RAM configs                                               | 1,2,4,8 GiB |
+| CPU variants                                              | TQMLS1043A  |
+|                                                           | TQMLS1046A  |
+|                                                           | TQMLS1088A  |
+| Fuses                                                     |      x      |
+| **UART**                                                  |             |
+| console on UART2 (X29)                                    |      x      |
+| RS-485 on UART1 (X23)                                     |      x      |
+| **GPIO**                                                  |             |
+| LED                                                       |      x      |
+| **I2C**                                                   |             |
+| EEPROMs                                                   |      x      |
+| RTC                                                       |      x      |
+| Temperature Sensors                                       |      x      |
+| **ENET**                                                  |             |
+| 1 GBit/s Ethernet RGMII (X12)                             |      x      |
+| 1 GBit/s Ethernet (Q)SGMII (X39, X40)                     |      x      |
+| 10 GBit/s Ethernet XFI (X41, X42)                         |      x      |
+| **USB**                                                   |             |
+| USB 3.0 Host / Hub (X15)                                  |      x      |
+| USB 3.0 Type-C (X16)                                      |      x      |
+| USB Device (X35)                                          |      x      |
+| **QSPI NOR**                                              |             |
+| Read with 1-4-4 SDR                                       |      x      |
+| PP / Erase with 1-4-4 SDR                                 |      x      |
+| **PCIe**                                                  |             |
+| M.2 PCIe SSD (X5)                                         |      x      |
+| Mini-PCIe (X6, X7)                                        |      x      |
+| PCIe slot (X13)                                           |      x      |
+| **SATA**                                                  |             |
+| SATA SSD (X9)                                             |      x      |
+
+### ToDo / Untested
+
+* CAN-FD (X24)
+* 10 GBit/s Ethernet (X34)
+
 ## Known Issues
 
 * TQMLS1088A: Suspend to RAM not supported.
+* SMMU bypass is required
+* MBLS10xxA: Interrupt of GPIO expander `D57` (`IRQ2`) is permanently asserted
+  because `CLKO` from CAN controller (`D60`) generates continuously interrupts
+  on input of GPIO expander
+  * There is no support for masking interrupts on the GPIO expander
+  * This also affects the shared interrupts of `D58` and `D59` GPIO expander
+  * Therefore the IRQ of GPIO expander is unsed
+* CAN-FD controller (D60) is not accessible using SPI
+* USB 3.0 Type-C (X16) is host-only
+* RS-485 (X23): `linux,rs485-enabled-at-boot-time` property must **not** be set
 
 ## HowTo
 
@@ -37,27 +90,24 @@
 
 #### SD-Card
 
-|         |  S5 |     |     |     |
-| ------- | :-: | :-: | :-: | :-: |
-| DIP     |  1  |  2  |  3  |  4  |
-| ON      |     |     |  x  |     |
-| OFF     |  x  |  x  |     |     |
+| DIP S5 | 1 | 2 | 3 | 4 |
+|--------|:-:|:-:|:-:|:-:|
+| ON     |   |   | x |   |
+| OFF    | x | x |   |   |
 
 #### eMMC
 
-|         |  S5 |     |     |     |
-| ------- | :-: | :-: | :-: | :-: |
-| DIP     |  1  |  2  |  3  |  4  |
-| ON      |  x  |     |  x  |     |
-| OFF     |     |  x  |     |     |
+| DIP S5 | 1 | 2 | 3 | 4 |
+|--------|:-:|:-:|:-:|:-:|
+| ON     | x |   | x |   |
+| OFF    |   | x |   |   |
 
 #### SPI-NOR
 
-|         |  S5 |     |     |     |
-| ------- | :-: | :-: | :-: | :-: |
-| DIP     |  1  |  2  |  3  |  4  |
-| ON      |     |  x  |  x  |     |
-| OFF     |     |     |     |  x  |
+| DIP S5 | 1 | 2 | 3 | 4 |
+|--------|:-:|:-:|:-:|:-:|
+| ON     |   | x | x |   |
+| OFF    |   |   |   | x |
 
 #### Notes:
 
@@ -127,47 +177,52 @@ For an overview which port can be used at which serdes configuration
 see: [TQ Embedded Wiki for TQMLS10xxA](https://support.tq-group.com/en/layerscape/tqmls10xxa/mbls10xxa/ethernet)
 
 #### Serdes 1
-| Lane / Config | A         | B         | C         | D         |
-| ------------- | --------- | --------- | --------- | --------- |
-| 1355          | XFI.2     | SGMII.2   | PCIe.2    | PCIe.3    |
-| 1455          | XFI.2     | QSGMIIb   | PCIe.2    | PCIe.3    |
-| 3355          | SGMII.9   | SGMII.2   | PCIe.2    | PCIe.3    |
-| 3358          | SGMII.9   | SGMII.2   | PCIe.2    | SATA      |
+
+| Lane / Config | A       | B       | C      | D      |
+|---------------|---------|---------|--------|--------|
+| 1355          | XFI.2   | SGMII.2 | PCIe.2 | PCIe.3 |
+| 1455          | XFI.2   | QSGMIIb | PCIe.2 | PCIe.3 |
+| 3355          | SGMII.9 | SGMII.2 | PCIe.2 | PCIe.3 |
+| 3358          | SGMII.9 | SGMII.2 | PCIe.2 | SATA   |
 
 ### TQMLS1046A
 
 #### Serdes 1
-| Lane / Config | D - 0     | C - 1     | B - 2     | A - 3     |
-| ------------- | --------- | --------- | --------- | --------- |
-| 1040          | XFI.2     |           | QSGMIIb   |           |
-| 1133          | XFI.2     | SGMII.10  | SGMII.5   | SGMII.6   |
-| 3333          | SGMII.9   | SGMII.10  | SGMII.5   | SGMII.6   |
+
+| Lane / Config | D - 0   | C - 1    | B - 2   | A - 3   |
+|---------------|---------|----------|---------|---------|
+| 1040          | XFI.2   |          | QSGMIIb |         |
+| 1133          | XFI.2   | SGMII.10 | SGMII.5 | SGMII.6 |
+| 3333          | SGMII.9 | SGMII.10 | SGMII.5 | SGMII.6 |
 
 #### Serdes 2
-| Lane / Config | A - 0     | B - 1     | C - 2     | D - 3     |
-| ------------- | --------- | --------- | --------- | --------- |
-| 5506          | PCIe.1    | PCIe.2    |           | PCIe.3    |
-| 5559          | PCIe.1    | PCIe.2    | PCIe.3    | SATA      |
-| 5577          | PCIe.1    | PCIe.2    | PCIe.3 x 2| PCIe.3 x 2|
-| 5A06          | PCIe.1    | SGMII.2   |           | PCIe.3 x 1|
-| 5A59          | PCIe.1    | SGMII.2   | PCIe.3 x 1| SATA      |
+
+| Lane / Config | A - 0  | B - 1   | C - 2      | D - 3      |
+|---------------|--------|---------|------------|------------|
+| 5506          | PCIe.1 | PCIe.2  |            | PCIe.3     |
+| 5559          | PCIe.1 | PCIe.2  | PCIe.3     | SATA       |
+| 5577          | PCIe.1 | PCIe.2  | PCIe.3 x 2 | PCIe.3 x 2 |
+| 5A06          | PCIe.1 | SGMII.2 |            | PCIe.3 x 1 |
+| 5A59          | PCIe.1 | SGMII.2 | PCIe.3 x 1 | SATA       |
 
 ### TQMLS1088A
 
 #### Serdes 1
-| Lane / Config | D - 0     | C - 1     | B - 2     | A - 3     |
-| ------------- | --------- | --------- | --------- | --------- |
-| 3333 (18)     | SGMII.2   | SGMII.1   | SGMII.7   | SGMII.3   |
-| 1133 (21)     | XFI.2     | XFI.1     | SGMII.7   | SGMII.3   |
-| 1143 (25)     | XFI.2     | XFI.1     | QSGMIIb   | SGMII.3   |
-| 1144 (29)     | XFI.2     | XFI.1     | QSGMIIb   | QSGMIIa   |
+
+| Lane / Config | D - 0   | C - 1   | B - 2   | A - 3   |
+|---------------|---------|---------|---------|---------|
+| 3333 (18)     | SGMII.2 | SGMII.1 | SGMII.7 | SGMII.3 |
+| 1133 (21)     | XFI.2   | XFI.1   | SGMII.7 | SGMII.3 |
+| 1143 (25)     | XFI.2   | XFI.1   | QSGMIIb | SGMII.3 |
+| 1144 (29)     | XFI.2   | XFI.1   | QSGMIIb | QSGMIIa |
 
 #### Serdes 2
-| Lane / Config | A - 0     | B - 1     | C - 2     | D - 3     |
-| ------------- | --------- | --------- | --------- | --------- |
-| 5506 (59)     | PCIe.1    | PCIe.2    |           | PCIe.3    |
-| 5559 (13)     | PCIe.1    | PCIe.2    | PCIe.3    | SATA      |
-| 5577 (20)     | PCIe.1    | PCIe.2    | PCIe.3 x 2| PCIe.3 x 2|
+
+| Lane / Config | A - 0  | B - 1  | C - 2      | D - 3      |
+|---------------|--------|--------|------------|------------|
+| 5506 (59)     | PCIe.1 | PCIe.2 |            | PCIe.3     |
+| 5559 (13)     | PCIe.1 | PCIe.2 | PCIe.3     | SATA       |
+| 5577 (20)     | PCIe.1 | PCIe.2 | PCIe.3 x 2 | PCIe.3 x 2 |
 
 ## DIP-Switch settings
 The DIP-switches should match the used RCW, otherwise interfaces will not work,
@@ -175,7 +230,7 @@ or will not start. See [Serdes Config](#serdes-configuration)
 Pay attention to the following DIP-Switches:
 
 | DIP-Switch | Function              | On         | Off     |
-| ---------- | --------------------- | ---------- | ------- |
+|------------|-----------------------|------------|---------|
 | S6-1       | SD1 Lane A            | SGMII      | QSGMIIa |
 | S6-2       | SD1 Lane B            | SGMII      | QSGMIIb |
 | S6-3       | SD1 Lane D            | SGMII      | XFI2    |
