@@ -16,6 +16,7 @@ Releases are named with the following scheme:
   * support TQMLS1028A
 * linux-tq-6.12:
   * support TQMLS102xA
+  * support TQMLS10xxA
   * support TQMLX2160A
 * TQMLS1028A:
   * u-boot-lsdk-tq: Insert MTD partitions into DT for Linux
@@ -52,6 +53,8 @@ Releases are named with the following scheme:
 * u-boot-tq-2017.11:
   * TQMLS102xA: use external generated RCW images from `rcw` recipe instead of
     in tree RCW.
+* u-boot-lsdk-tq-2022.04:
+  * TQMLS10xxA: adjust for node names in v6.12 Linux kernel
 
 * rcw:
   * TQMLS102xA: improve RCW generation
