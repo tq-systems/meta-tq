@@ -28,17 +28,12 @@ layers: meta, meta-poky
 
 #### Notes for machines with i.MX or Layerscape CPU
 
-Optionally the layer can make use of features from meta-freescale /
-meta-freeescale-distro if using CPU from following NXP families - see
-[table](#supported-machines)
+For machines based on following CPU families from NXP the use of `meta-freescale` layer
+is _mandatory_ - see [table](#supported-machines).
 
 * i.MX6
 * i.MX6UL / i.MX6ULL
 * i.MX7
-
-For machines based on following CPU families from NXP the use of meta-freescale
-is _mandatory_ - see [table](#supported-machines).
-
 * i.MX8
 * i.MX8X
 * i.MX8MQ
@@ -55,11 +50,11 @@ is _mandatory_ - see [table](#supported-machines).
 
 URI: https://git.yoctoproject.org/git/meta-freescale  
 branch: scarthgap  
-revision: tested with HEAD, at least commit c3630a3a ("Merge pull request #2232 from Freescale/backport-2195-to-scarthgap")
+revision: tested with HEAD, at least commit c3630a3aca9f ("Merge pull request #2232 from Freescale/backport-2195-to-scarthgap")
 layers: meta-freeescale  
 
-**Attention:** The following distros defined in meta-freescale-distro are not
-tested with machines in meta-tq:
+**Attention:** The distros defined in `meta-freescale-distro` layer are not
+tested with machines in `meta-tq`:
 
 - fsl-framebuffer
 - fsl-wayland
