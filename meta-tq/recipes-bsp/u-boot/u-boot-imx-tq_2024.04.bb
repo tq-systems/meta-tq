@@ -16,6 +16,7 @@ SRC_URI = "\
 "
 
 SRC_URI:append:nxp-ahab = " ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'file://imx-hab.cfg', '', d)}"
+SRC_URI:append:nxp-hab4 = " ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'file://imx-hab.cfg', '', d)}"
 
 require recipes-bsp/u-boot/u-boot.inc
 require u-boot-tq.inc
@@ -28,10 +29,12 @@ DEPENDS:append = "\
     python3-native \
 "
 
+UBOOT_NAME:mx8-generic-bsp = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
 UBOOT_NAME:mx9-generic-bsp = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
 
 UBOOT_INITIAL_ENV = "u-boot-initial-env"
 
 COMPATIBLE_MACHINE = "^$"
+COMPATIBLE_MACHINE:tqma8mpxl = "tqma8mpxl"
 COMPATIBLE_MACHINE:tqma91xx = "tqma91xx"
 COMPATIBLE_MACHINE:tqma93xx = "tqma93xx"
