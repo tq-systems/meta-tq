@@ -68,24 +68,24 @@ tested with machines in meta-tq:
 
 #### Notes for machines with TI CPU
 
-Optionally the layer can make use of features from meta-ti if using machines
-with the following CPU families from TI  - see [table](#supported-machines).
+Optionally the layer can make use of features from layers in `meta-ti` if using machines
+with the following CPU families from TI  - see [table](#supported-machines):
 
 * AM355x
 
-For machines based on following CPU families from TI usage of meta-ti
-is _mandatory_ - see [table](#supported-machines)
+For machines based on following CPU families from TI usage of `meta-ti-bsp` layer
+is _mandatory_ - see [table](#supported-machines):
 
-* AM57xx
 * AM62xx
 * AM64xx
 
 URI: https://git.yoctoproject.org/git/meta-ti  
 branch: scarthgap  
-revision: at least commit ed05150b (tag 11.00.06)
+revision: at least commit fe69a3232982 (tag 11.00.13)
 layers: meta-ti-bsp  
 
-If using meta-ti, meta-arm is also needed due to dependencies of meta-ti.
+**Note:** If using the `meta-ti-bsp` layer from `meta-ti`, the `meta-arm` and `meta-arm-toolchain` layers
+are needed too, since `meta-ti-bsp` depends on them.
 
 ### Coding style
 
