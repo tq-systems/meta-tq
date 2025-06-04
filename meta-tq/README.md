@@ -73,13 +73,13 @@ is _mandatory_ - see [table](#supported-machines).
 
 #### Notes for machines with TI CPU
 
-Optionally the layer can make use of features from meta-ti if using machines
-with the following CPU families from TI  - see [table](#supported-machines).
+Optionally the layer can make use of features from layers in `meta-ti` if using machines
+with the following CPU families from TI  - see [table](#supported-machines):
 
 * AM355x
 
-For machines based on following CPU families from TI usage of meta-ti
-is _mandatory_ - see [table](#supported-machines)
+For machines based on following CPU families from TI usage of `meta-ti-bsp` layer
+is _mandatory_ - see [table](#supported-machines):
 
 * AM57xx
 * AM62xx
@@ -90,7 +90,8 @@ branch: kirkstone
 revision: at least commit 9efb0c6fc4f5 (tag 09.01.00.004)  
 layers: meta-ti-bsp  
 
-If using meta-ti, meta-arm is also needed due to dependencies of meta-ti.
+**Note:** If using the `meta-ti-bsp` layer from `meta-ti`, the `meta-arm` and `meta-arm-toolchain` layers
+are needed too, since `meta-ti-bsp` depends on them.
 
 ### Coding style
 
@@ -232,6 +233,10 @@ Support for the following machines is contained in this version:
 
 **Note:** for TQMa6UL1 and baseboards using this module variant with i.MX6ULG1
           a dedicated device tree is supplied
+
+### Obsolete machines
+
+* TQMa65xx: Use `hardknott` branch or `kirkstone.TQMa65xx.BSP.SW.0009` release instead
 
 ### Support for wic
 
