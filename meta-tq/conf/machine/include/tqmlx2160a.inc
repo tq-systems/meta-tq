@@ -25,11 +25,10 @@ KERNEL_IMAGETYPE ?= "Image"
 # Machine specific options
 
 MACHINE_EXTRA_RRECOMMENDS += "\
+    mc-utils-image \
+    restool \
     udev-extraconf \
 "
-
-# DPAA2 manament utility
-MACHINE_EXTRA_RRECOMMENDS += "restool"
 
 # provide info about machine's capabilities
 MACHINE_FEATURES:append = "\

@@ -10,4 +10,7 @@ UBOOT_ENTRYPOINT:ls1088a = "0x80008000"
 #
 
 # DPAA2 manament utility
-MACHINE_EXTRA_RRECOMMENDS += "restool"
+MACHINE_EXTRA_RRECOMMENDS += " \
+    mc-utils-image \
+    restool \
+"
