@@ -21,6 +21,7 @@ Releases are named with the following scheme:
   * u-boot-lsdk-tq: Insert MTD partitions into DT for Linux
 * TQMLX2160A:
   * Re-add SFP support
+  * Install fitImage into root filesystem
 
 ### Changed
 

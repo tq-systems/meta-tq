@@ -22,6 +22,8 @@ require conf/machine/include/arm/armv8a/tune-cortexa72.inc
 # Define the default image type
 KERNEL_IMAGETYPE ?= "Image"
 
+UBOOT_ENTRYPOINT:lx2160a = "0x81000000"
+
 # Machine specific options
 
 MACHINE_EXTRA_RRECOMMENDS += "\
