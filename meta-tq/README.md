@@ -28,17 +28,12 @@ layers: meta, meta-poky
 
 #### Notes for machines with i.MX CPU
 
-Optionally the layer can make use of features from meta-freescale /
-meta-freeescale-distro if using CPU from following NXP families - see
-[table](#supported-machines)
+For machines based on following CPU families from NXP the use of `meta-freescale` layer
+is _mandatory_ - see [table](#supported-machines).
 
 * i.MX6
 * i.MX6UL / i.MX6ULL
 * i.MX7
-
-For machines based on following CPU families from NXP the use of meta-freescale
-is _mandatory_ - see [table](#supported-machines).
-
 * i.MX8
 * i.MX8X
 * i.MX8MQ
@@ -46,30 +41,25 @@ is _mandatory_ - see [table](#supported-machines).
 * i.MX8MN
 * i.MX8MP
 * i.MX93
+* LS1012A
+* LS102xA
+* LS1028A / LS1017A
+* LS1043A / LS1046A / LS1088A
+* LX2160A
 
 URI: https://git.yoctoproject.org/git/meta-freescale  
 branch: kirkstone  
-revision: tested with HEAD, at least commit 642cf7f2 ("Merge pull request #1433
-from Freescale/backport-1432-to-kirkstone")  
+revision: tested with HEAD, at least commit ccb66d5754fb
+("Auto-update LICENSE file with current recipe licenses")
 layers: meta-freeescale  
 
-**Attention:** The following distros defined in meta-freescale-distro are not
-tested with machines in meta-tq:
+**Attention:** The distros defined in `meta-freescale-distro` layer are not
+tested with machines in `meta-tq`:
 
 - fsl-framebuffer
 - fsl-wayland
 - fsl-x11
 - fsl-xwayland
-
-#### Notes for machines with Layerscape CPU
-
-For machines based on following CPU families from NXP usage of meta-freescale
-is _mandatory_ - see [table](#supported-machines).
-
-* LS1012A
-* LS1028A / LS1017A
-* LS1043A / LS1046A / LS1088A
-* LX2160A
 
 #### Notes for machines with TI CPU
 
@@ -81,7 +71,6 @@ with the following CPU families from TI  - see [table](#supported-machines):
 For machines based on following CPU families from TI usage of `meta-ti-bsp` layer
 is _mandatory_ - see [table](#supported-machines):
 
-* AM57xx
 * AM62xx
 * AM64xx
 
