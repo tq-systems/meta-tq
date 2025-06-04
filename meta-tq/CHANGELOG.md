@@ -22,6 +22,7 @@ Releases are named with the following scheme:
 * TQMLX2160A:
   * Re-add SFP support
   * Install fitImage into root filesystem
+  * Add SATA support in U-Boot
 
 ### Changed
 
@@ -72,6 +73,7 @@ Releases are named with the following scheme:
   * qoriq-atf: Fix applying errata #841119 and #826419 in Linux
   * Configure DPMAC 17 and 18 for SGMII in SERDES2 configs 7 and 11
     * RGMII usage is not supported in this case
+  * Fix unreliable detection of onboard USB hub
 * u-boot-imx-tq-2024.04
   * TQMa93xx: Cortex M33 is usable again. Basic initialisation in secure Cortex A55
     was hidden behind a conditional since TQMa91xx support was added
