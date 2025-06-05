@@ -26,10 +26,19 @@ Releases are named with the following scheme:
 
 ### Changed
 
-* linux-tq-6.12: include stable fixes up to v6.12.30
-* linux-tq-6.6: include stable fixes up to v6.6.92
-* linux-imx-tq-6.6: update with fixes from FSLC 6.6-2.2.x-imx branch including stable fixes
-  up to v6.6.91
+* linux-tq-6.12:
+  * use generic sound card name for MBa8Mx (TQMa8Mx, TQMa8MxNL, TQMa8MxNL), MBa8MPxL (TQMa8MPxL),
+    MBa6ULxL (TQMa6ULx, TQMa6ULLx), MBa7x (TQMa7x)
+  * include stable fixes up to v6.12.30
+* linux-tq-6.6:
+  * use generic sound card name for MBa8Mx (TQMa8Mx, TQMa8MxNL, TQMa8MxNL), MBa8MPxL (TQMa8MPxL),
+    MBa6ULxL (TQMa6ULx, TQMa6ULLx), MBa7x (TQMa7x)
+  * include stable fixes up to v6.6.92
+* linux-imx-tq-6.6:
+  * use generic sound card name for MBa8Mx (TQMa8Mx, TQMa8MxNL, TQMa8MxNL), MBa8MPxL (TQMa8MPxL),
+    MBa6ULxL (TQMa6ULx, TQMa6ULLx), MBa7x (TQMa7x)
+  * update with fixes from FSLC 6.6-2.2.x-imx branch including stable fixes
+    up to v6.6.91
 
 * machines: use `wic.zst` instead of uncompressed `wic` for default `IMAGE_FSTYPES`
   for all machines. `bmaptool` supports also packed images, so we can lower
@@ -65,6 +74,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TMa8MPxL:
+  * linux-tq-6.12: Fix SD-Card disconnect due to automatic disable of LDO5.
 * TQMLS1028A:
   * qoriq-atf: Fix applying errata #841119 and #826419 in Linux
 * TQMLX2160A:
