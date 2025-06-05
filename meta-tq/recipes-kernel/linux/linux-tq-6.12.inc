@@ -4,7 +4,7 @@ require linux-tq-common.inc
 
 KBRANCH = "TQM-linux-v6.12.y"
 KMETA = "kernel-meta"
-SRCREV_machine = "2e72b6b0631995b759d486e0aefb31ee37594415"
+SRCREV_machine = "4a848cd585c23adc7a45b2a7db48f5a3353c7593"
 SRCREV_meta = "cf35a8d4adea70d86608241d50e1372d50a1484f"
 
 # LINUX_VERSION must match version from Makefile
