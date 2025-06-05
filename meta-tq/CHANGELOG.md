@@ -18,6 +18,9 @@ Releases are named with the following scheme:
 * u-boot-tq-2019.04:
   * add support TQMa335x[L] and starterkit mainboard MBa335x
 * machines
+  * use `wic.xz` instead of uncompessed `wic` for default `IMAGE_FSTYPES`
+    for all machines. `bmaptool` supports also packed images. So we can lower the
+    IO pressure for copying artifacts while keeping usability.
   * tq-distroboot.inc: add `tq-extlinux` to `MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS` since
     this is needed for booting system if using U-Boot distroboot
   * tq-machine.inc: new config include that adds `kernel-devicetree` and `kernel-image`
