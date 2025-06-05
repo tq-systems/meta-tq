@@ -18,15 +18,23 @@ Releases are named with the following scheme:
 * u-boot-tq-2019.04:
   * add support TQMa335x[L] and starterkit mainboard MBa335x
 * machines
-  * use `wic.xz` instead of uncompessed `wic` for default `IMAGE_FSTYPES`
-    for all machines. `bmaptool` supports also packed images. So we can lower the
-    IO pressure for copying artifacts while keeping usability.
+  * use `wic.zst` instead of uncompressed `wic` for default `IMAGE_FSTYPES`
+    for all machines. `bmaptool` supports also packed images, so we can lower
+    the IO pressure for copying artifacts while keeping usability.
+
+    The `TQ_IMAGE_COMPRESSION` variable (defined in
+    `meta-tq/conf/machine/include/tq-image.inc`) can be adjusted in `local.conf`
+    or a custom distro to use a different compression algorithm; setting it
+    to an empty value will leave the files uncompressed.
+
   * tq-distroboot.inc: add `tq-extlinux` to `MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS` since
     this is needed for booting system if using U-Boot distroboot
+
   * tq-machine.inc: new config include that adds `kernel-devicetree` and `kernel-image`
     to `MACHINE_ESSENTIAL_EXTRA_RDEPENDS` since they are needed for booting system when
     expecting them in `/boot`. `linux-modules` are added to `MACHINE_EXTRA_RRECOMMENDS`.
     This file is included at board level to simplify machine configs.
+
 * linux-rt-tq 6.1: integrate fixes up to Tag v6.1.132-rt50 /
   commit 2039809c11c6 ("Linux 6.1.132-rt50") from linux-stable-rt
 * linux-tq 6.1: integrate fixes up to Tag v6.1.132 /
