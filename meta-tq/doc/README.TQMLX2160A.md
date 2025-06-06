@@ -112,8 +112,10 @@ On MBLX2160A.0200 the SD-Card interface works properly.
 * Image: Kernel
 * fsl-lx2160a-tqmlx2160a-mblx2160a.dtb: Device Tree Blob.
 * u-boot-tfa-2019.04-r0.bin: U-Boot Binary
-* tq-image-generic-tqmlx2160a-mblx2160a.wic[.<compress>]: Complete eMMC / SD-Card Image
-* tq-image-generic-tqmlx2160a-mblx2160a.ubi: RootFS UBI-Image
+* \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
+* \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
+* \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
+* \*.wic[.<compress>]: Complete eMMC / SD-Card Image
 
 Note: As U-Boot use the fip_uboot.bin from the atf directory.
 
