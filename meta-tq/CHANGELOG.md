@@ -11,6 +11,11 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa8MPxL:
+  * add optionally usable RAUC A/B support
+  * add optionally usable distroboot support (need to modify U-Boot `bootcmd`)
+* u-boot-imx-tq-2024.04:
+  * support TQMa8MPxL on MBa8MPxL and MBa8MP-RAS414
 * linux-imx-tq-6.6:
   * support TQMLS1012AL
   * support TQMLS1028A
@@ -27,6 +32,9 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* u-boot-imx-tq-2024.04:
+  * TQMa91 / TQMa93: enable watchdog support. The watchdog is used as sysreset provider. It can be enabled
+    from console before booting kernel.
 * linux-tq-6.12:
   * use generic sound card name for MBa8Mx (TQMa8Mx, TQMa8MxNL, TQMa8MxNL), MBa8MPxL (TQMa8MPxL),
     MBa6ULxL (TQMa6ULx, TQMa6ULLx), MBa7x (TQMa7x)
