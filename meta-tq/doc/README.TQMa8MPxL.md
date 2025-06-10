@@ -332,6 +332,16 @@ See [here](./README.imx.UUU.md) for details about using Serial Download mode and
 
 ## Howto
 
+### OS boot
+
+See the [Distroboot README](README.Distroboot.md).
+
+__Note:__ Default u-boot environment variable `bootcmd` has to be set to `run distro_bootcmd`
+
+### OS updates
+
+See [RAUC](RAUC.md).
+
 ### MIPI-CSI
 
 #### Vision Components GmbH cameras
