@@ -82,12 +82,12 @@ For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 
 ## TQMa8 / TQMa9 series
 
-### U-Boot (TQMa8 series)
+### U-Boot (TQMa8 series except TQMa8MPxL)
 
 * based on uboot-imx (https://github.com/nxp-imx/uboot-imx)
 * branched from imx-5.4.70-2.3.0 + changes from imx-5.4.70-2.3.2
 
-### U-Boot (TQMa93/TQMa91 series)
+### U-Boot (TQMa8MPxL and TQMa93/TQMa91 series)
 
 * U-Boot based on v2024.04 and NXP vendor BSP
   [`uboot-imx`](https://github.com/nxp-imx/uboot-imx)
