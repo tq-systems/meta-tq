@@ -12,6 +12,16 @@ The TQ Yocto BSP currently uses Distroboot by default for the following modules:
 - TQMa62xx
 - TQMa64xxL
 
+The TQ Yocto BSP currently supports Distroboot additionally for the following modules:
+
+- TQMa8MPxL
+- TQMa91xx[LA/CA]
+- TQMa93xx[LA/CA]
+
+To use Distroboot on these modules, U-Boot environment `bootcmd` has to be modified:
+
+`env set bootcmd 'run distro_bootcmd'
+
 By default, U-Boot will boot the OS from the same medium that it was started
 from (eMMC, SD card or SPI-NOR). The boot source can be modified by setting
 the `boot_targets` variable to `mmc0` (eMMC), `mmc1` (SD card), `sf0` (SPI-NOR),
