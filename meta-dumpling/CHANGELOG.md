@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## kirkstone.TQ.ARM.BSP.0024 (not released yet)
+
 ### Changed
 
 * tq-image-small: remove `kernel-devicetree` and `kernel-image` from `IMAGE_INSTALL`

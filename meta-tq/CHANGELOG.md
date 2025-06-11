@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+##  kirkstone.TQ.ARM.BSP.0024 (not released yet)
+
 ### Changed
 
 * u-boot-tq-2023.04: TQMa93:
@@ -37,8 +39,8 @@ Releases are named with the following scheme:
 
 * linux-rt-tq 6.1: integrate fixes up to Tag v6.1.132-rt50 /
   commit 2039809c11c6 ("Linux 6.1.132-rt50") from linux-stable-rt
-* linux-tq 6.1: integrate fixes up to Tag v6.1.132 /
-  commit 8e60a714ba3b ("Linux 6.1.132") from linux-stable
+* linux-tq 6.1: integrate fixes up to Tag v6.1.140 /
+  commit da3c5173c55f ("Linux 6.1.140") from linux-stable
 * TQMa62xx / TQMa64xx: allow more specific tuning.
 * tqmls10xxa.inc: require arch-armv8a.inc to allow more specific tuning.
 * TQMa62xx:
