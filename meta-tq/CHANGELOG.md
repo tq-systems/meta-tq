@@ -32,6 +32,9 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* tq-extlinux: The `console` option in the kernel cmdline is now populated based
+  on `SERIAL_CONSOLES` instead of relying on the `console` and `baudrate`
+  variables in the U-Boot environment
 * TQMLS1028A:
   * u-boot-lsdk-tq-2019.10:
     * update module EEPROM handling, use DM for I2C and I2C EEPROM

@@ -6,7 +6,6 @@ inherit uboot-config deploy
 # We intentionally don't set a FDT filename, so the bootloader can choose the
 # correct variant based on the hardware, or the default can be overridden
 # in the environment to enabled advanced features.
-UBOOT_EXTLINUX_CONSOLE ??= "console=${console},${baudrate}"
 UBOOT_EXTLINUX_FDT ??= ""
 UBOOT_EXTLINUX_FDTDIR ??= "../"
 UBOOT_EXTLINUX_KERNEL_IMAGE ??= "../${KERNEL_IMAGETYPE}"
@@ -24,6 +23,12 @@ UBOOT_EXTLINUX_TIMEOUT ??= "30"
 UBOOT_EXTLINUX_ROOT ??= "${bootargs_root}"
 
 UBOOT_EXTLINUX_CONFIG = "${B}/extlinux.conf"
+
+def serial_consoles(d):
+    consoles = (d.getVar('SERIAL_CONSOLES') or '').split()
+    return ' '.join(['console={1},{0}'.format(*console.split(';')) for console in consoles])
+
+UBOOT_EXTLINUX_CONSOLE ??= "${@serial_consoles(d)}"
 
 def getLabelVar(d, label, name):
     value = d.getVar('UBOOT_EXTLINUX_%s_%s' % (name, label))
