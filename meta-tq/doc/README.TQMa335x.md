@@ -104,7 +104,6 @@ Artifacs can be found at the usual locations for bitbake:
 * MLO-${MACHINE}.byteswap: U-Boot MLO (SPL image for SPI NOR flash)
 * u-boot-${MACHINE}.img: U-Boot image to be booted by MLO
 
-
 ## DIP Switches
 
 | Switch  | Description       |
@@ -145,17 +144,23 @@ Boot sequence: SPI0 (NOR) → MMC0 (SD) → USB0 (N/A) → UART0 (N/A)
 
 ## Boot device initialisation
 
+### Prerequisites for block devices
+
+Compressed WIC images and matching BMAP-files (block map files) are created by default.
+To make use of this feature, install the `bmap-tools` package to use `bmaptool`.
+The packed WIC can also be decompressed and used with `dd` or other disk image tools.
+
 ### Bootable SD-Card
 
-To create a bootable SD-Card with complete system image use the generated
-[wic image](#artifacts):
+Write the `*.wic` image to SD-Card to create a bootable SD-Card with complete system image.
+The following command can be used (the example assumes an SD-Card reader on PC and
+`bmap-tools` package is installed):
 
-write *.wic Image to SD (offset 0)
+```bash
+bmaptool copy <image>.wic[.compress] --bmap <image>.bmap /dev/sd<x>
+```
 
-To create a bootable SD-Card with minimum boot image use the generated
-[minimal wic image](#artifacts):
-
-write *.wic.bootonly to SD (offset 0)
+To create a bootable SD-Card with boot stream only write `*.wic.bootonly` to SD (offset 0x0)
 
 Example for Linux:
 
