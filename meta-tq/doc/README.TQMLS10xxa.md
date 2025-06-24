@@ -228,10 +228,10 @@ Download UBIFS image from TFTP and update:
 
 `run update_rootfs_spi`
 
-#### SD / e-MMC
+#### SD / eMMC
 
-To program complete system image to SD / e-MMC, write [WIC image](#build-artifacts)
-to SD / e-MMC at offset 0x00 / block #0
+To program complete system image to SD / eMMC, write [WIC image](#build-artifacts)
+to SD / eMMC at offset 0x00 / block #0
 
 ### Update parts of system
 

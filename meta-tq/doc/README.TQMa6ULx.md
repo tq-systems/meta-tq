@@ -90,11 +90,11 @@ Artifacs can be found at the usual locations for bitbake:
 
 * \*.dtb: device tree blobs
 * zImage: Linux kernel image
-* \*.wic[.<compress>]: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
-* u-boot-${MACHINE}.imx-sd: boot stream for SD / e-MMC
+* u-boot-${MACHINE}.imx-sd: boot stream for SD / eMMC
 * u-boot-${MACHINE}.imx-qspi: boot stream for QSPI
 
 ## Boot DIP Switches
@@ -117,7 +117,7 @@ _Note:_
 | ON      |  x  |  x  |     |  x  |  x  |  x  |  x  |  x  |   |  x  |  x  |     |  x  |  x  |  x  |     |  x  |    |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |    |     |  x  |
 | OFF     |     |     |  x  |     |     |     |     |     |   |     |     |  x  |     |     |     |  x  |     |    |     |     |     |     |     |     |     |     |    |  x  |     |
 
-#### e-MMC
+#### eMMC
 
 |         | S11 |     |     |     |     |     |     |     |   | S12 |     |     |     |     |     |     |     |    | S13 |     |     |     |     |     |     |     |    |  S5 |     |
 | ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: |
@@ -149,7 +149,7 @@ _Note:_
 | ON      |  -  |  x  |     |  x  |  x  |     |     |  x  |   |     |  x  |
 | OFF     |  -  |     |  x  |     |     |  x  |  x  |     |   |  x  |     |
 
-#### e-MMC
+#### eMMC
 
 |         | S16 |     |     |     |     |     |     |     |   | S13 |     |
 | ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: |
@@ -179,13 +179,13 @@ sf probe
 sf update ${loadaddr} 0 ${filesize}
 ```
 
-### SD / e-MMC
+### SD / eMMC
 
-To initialize SD / e-MMC with bootloader, write the [bootloader image](#artifacts)
-for SD / e-MMC to SD / e-MMC at offset 0x400 / block #2
+To initialize SD / eMMC with bootloader, write the [bootloader image](#artifacts)
+for SD / eMMC to SD / eMMC at offset 0x400 / block #2
 
 ```
-setenv uboot <U-Boot SD/e-MMC boot image>
+setenv uboot <U-Boot SD/eMMC boot image>
 tftp ${loadaddr} ${uboot}
 mmc dev [0,1]
 mmc rescan
@@ -215,10 +215,10 @@ ubiattach /dev/ubi_ctrl -m 5
 mount -t ubifs ubi0:rootfs /mnt
 ```
 
-#### SD / e-MMC
+#### SD / eMMC
 
-To program complete system image to SD / e-MMC, write [WIC image](#artifacts)
-to SD / e-MMC at offset 0x00 / block #0
+To program complete system image to SD / eMMC, write [WIC image](#artifacts)
+to SD / eMMC at offset 0x00 / block #0
 
 ### Update parts of system
 

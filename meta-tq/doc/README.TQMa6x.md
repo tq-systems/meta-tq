@@ -94,9 +94,9 @@ Artifacs can be found at the usual locations for bitbake:
 
 * \*.dtb: device tree blobs
 * zImage: Linux kernel image
-* \*.wic[.<compress>]: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* u-boot-with-spl-${MACHINE}.imx-sd: boot stream for SD / e-MMC and SPI NOR
+* u-boot-with-spl-${MACHINE}.imx-sd: boot stream for SD / eMMC and SPI NOR
 
 ## Boot DIP Switches
 
@@ -114,7 +114,7 @@ _Note:_
 | ON      |      |  x  |      |  x   |      |      |      |      |    |     |     |  x  |     |  x  |     |     |     |    |     |     |     |     |     |     |     |     |    |  x  |     |
 | OFF     |  x   |     |  x   |      |  x   |  x   |  x   |  x   |    |  x  |  x  |     |  x  |     |  x  |  x  |  x  |    |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |    |     |  x  |
 
-### e-MMC
+### eMMC
 
 |         |  S1  |     |      |      |      |      |      |      |    |  S2 |     |     |     |     |     |     |     |    |  S4 |     |     |     |     |     |     |     |    |  S5 |     |
 | ------- | :--: | :-: | :--: | :--: | :--: | :--: | :--: | :--: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: |
@@ -145,13 +145,13 @@ sf erase 0 0x100000
 sf write ${loadaddr} 0x400 ${filesize}
 ```
 
-### SD / e-MMC
+### SD / eMMC
 
-To initialize SD / e-MMC with bootloader, write the [bootloader image](#artifacts)
-for SD / e-MMC to SD / e-MMC at offset 0x400 / block #2
+To initialize SD / eMMC with bootloader, write the [bootloader image](#artifacts)
+for SD / eMMC to SD / eMMC at offset 0x400 / block #2
 
 ```
-setenv uboot <U-Boot SD/e-MMC boot image>
+setenv uboot <U-Boot SD/eMMC boot image>
 tftp ${loadaddr} ${uboot}
 mmc dev [0,1]
 mmc rescan
@@ -167,10 +167,10 @@ setenv blkc
 
 Not supported. Only kernel and DTB can be stored at the moment.
 
-#### SD / e-MMC
+#### SD / eMMC
 
-To program complete system image to SD / e-MMC, write [WIC image](#artifacts)
-to SD / e-MMC at offset 0x00 / block #0
+To program complete system image to SD / eMMC, write [WIC image](#artifacts)
+to SD / eMMC at offset 0x00 / block #0
 
 ### Update bootloader
 
@@ -180,7 +180,7 @@ exist.
 **Note**: Kernel and device tree are stored in the root fs and can be updated
 on the filesystem level.
 
-#### SD / e-MMC
+#### SD / eMMC
 
 ```
 setenv uboot <name of u-boot image>

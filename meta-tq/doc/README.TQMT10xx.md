@@ -59,7 +59,7 @@ Artifacs can be found at the usual locations for bitbake:
 * `u-boot-nor-*.bin` U-Boot binary for NOR flash
 * `u-boot-sdcard-*.bin` U-Boot binary for SD card / eMMC
 * `u-boot-with-spl-pbl-rcw_*_sdcard.bin` U-Boot binary with spl, pbl, rcw and Serdes for SD card /eMMC
-* `\*.wic[.<compress>]`: SD / e-MMC system image
+* `\*.wic[.<compress>]`: SD / eMMC system image
 * `\*.rootfs.tar.gz`: RootFS archive (NFS root etc.)
 
 ## Build-Time Configuration
@@ -306,10 +306,10 @@ Compressed WIC images and matching BMAP-files (block map files) are created by d
 To make use of this feature, install the `bmap-tools` package to use `bmaptool`.
 The packed WIC can also be decompressed and used with `dd` or other disk image tools.
 
-#### SD card / e-MMC
+#### SD card / eMMC
 
 To program a complete system image, write the [WIC image](#artifacts) to
-SD card / e-MMC at offset 0x0.
+SD card / eMMC at offset 0x0.
 
 The following command can be used (the example assumes `bmaptool`):
 ```bash
