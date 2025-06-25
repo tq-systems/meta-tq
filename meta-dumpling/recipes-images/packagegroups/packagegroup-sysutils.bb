@@ -5,6 +5,7 @@ inherit packagegroup
 
 RDEPENDS:${PN} = "\
     cpufrequtils \
+    cpupower \
     linuxptp \
     procps-sysctl \
     rng-tools \
