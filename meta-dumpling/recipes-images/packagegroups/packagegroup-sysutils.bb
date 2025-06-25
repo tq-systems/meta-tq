@@ -8,6 +8,7 @@ inherit packagegroup
 
 RDEPENDS:${PN} = "\
     cpufrequtils \
+    cpupower \
     ${@oe.utils.ifelse(d.getVar('PREFERRED_PROVIDER_virtual/bootloader').startswith('u-boot'), 'libubootenv-bin', '')} \
     linuxptp \
     procps-sysctl \
