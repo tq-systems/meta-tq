@@ -11,8 +11,12 @@ KERNEL_IMAGETYPES_INSTALL = "\
     )} \
 "
 
+# Only install kernel-devicetree if a non-fitImage kernel is installed
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-    kernel-devicetree \
+    ${@oe.utils.ifelse(oe.utils.str_filter_out('^fitImage$', d.getVar('KERNEL_IMAGETYPES_INSTALL'), d) != '', \
+        'kernel-devicetree', \
+        '', \
+    )} \
 "
 
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
