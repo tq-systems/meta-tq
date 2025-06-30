@@ -21,6 +21,7 @@ require conf/machine/include/am64xx.inc
 SYSFW_DEFAULT_VARIANT ?= "am64x_sr2-hs-fs"
 
 KERNEL_CLASSES += "ti-secdev"
+KERNEL_IMAGETYPE = "fitImage"
 
 # All 3 variants are installed to the boot partition
 # The default variant is additionally installed as tiboot3.bin

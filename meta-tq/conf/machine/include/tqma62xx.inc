@@ -18,6 +18,7 @@ require conf/machine/include/am62xx.inc
 SYSFW_DEFAULT_VARIANT ?= "am62x-hs-fs"
 
 KERNEL_CLASSES += "ti-secdev"
+KERNEL_IMAGETYPE = "fitImage"
 
 IMAGE_BOOT_FILES:remove = "ti_logo_414x97_32bpp.bmp.gz"
 # All 3 variants are installed to the boot partition
