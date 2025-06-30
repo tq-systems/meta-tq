@@ -32,6 +32,17 @@ MACHINE_ESSENTIAL_EXTRA_RDEPENDS = ""
 # Do not unconditionally install kernel-image (which pulls in all image types)
 RRECOMMENDS:${KERNEL_PACKAGE_NAME}-base = ""
 
+KERNEL_CLASSES += "kernel-fitimage"
+
+# Additionally build fitImage unless the primary KERNEL_IMAGETYPE is already fitImage
+KERNEL_IMAGETYPES = " \
+    ${KERNEL_IMAGETYPE} \
+    ${@oe.utils.ifelse( \
+        d.getVar('KERNEL_IMAGETYPE') != 'fitImage', \
+        'fitImage', '', \
+    )} \
+"
+
 # EXTRA_IMAGEDEPENDS are applied to do_image_complete only. Make the same
 # dependencies available to do_image_wic was well.
 WKS_FILE_DEPENDS += "${WKS_FILE_DEPENDS_DEFAULT} ${EXTRA_IMAGEDEPENDS}"
