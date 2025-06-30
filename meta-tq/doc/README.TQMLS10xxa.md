@@ -69,7 +69,6 @@
 ### ToDo / Untested
 
 * CAN-FD (X24)
-* 10 GBit/s Ethernet (X34)
 
 ## Known Issues
 
