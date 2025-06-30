@@ -55,12 +55,13 @@
 | USB 3.0 Host / Hub (X15)                                  |      x      |
 | USB 3.0 Type-C (X16)                                      |      x      |
 | USB Device (X35)                                          |      x      |
+| Mini-PCIe (X6)                                            |      x      |
 | **QSPI NOR**                                              |             |
 | Read with 1-4-4 SDR                                       |      x      |
 | PP / Erase with 1-4-4 SDR                                 |      x      |
 | **PCIe**                                                  |             |
 | M.2 PCIe SSD (X5)                                         |      x      |
-| Mini-PCIe (X6, X7)                                        |      x      |
+| Mini-PCIe (X7)                                            |      x      |
 | PCIe slot (X13)                                           |      x      |
 | **SATA**                                                  |             |
 | SATA SSD (X9)                                             |      x      |
