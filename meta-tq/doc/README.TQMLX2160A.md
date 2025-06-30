@@ -57,6 +57,15 @@ OFF 	X   X X
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/)
 * branched from linux-6.1.y
 
+## Known issues
+
+- The XFI retimers are not configured correctly, resulting in nonfunctional SFP
+  (10GBit/s Ethernet)
+- The driver for virtual DPAA2 switches (DPSW) is missing
+- The RGMII Ethernet interfaces (X14) may not work in all DPAA2 configurations
+  when SerDes 2 configuration 7 or 11 is used
+- The SPI-NOR flashes not detected and cannot be used on Linux
+
 ## Supported Interfaces:
 
 ### U-Boot:
