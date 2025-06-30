@@ -99,6 +99,12 @@ Releases are named with the following scheme:
   * TQMLS102xA is now supported by linux-tq-6.12
 * linux-imx-tq-5.15
   * Both TQMLS1012AL and TQMLS10128A are now supported by linux-imx-tq-6.6
+* MBaX4XxL
+  * The legacy Image kernel image has been removed from the root filesystem
+
+    We boot the fitImage by default since kirkstone.TQMa64xxL.BSP.SW.0007.
+    U-Boot versions older than that release need to be updated, or a custom
+    BSP image including Image in KERNEL_IMAGETYPES needs to be built.
 
 ### Fixed
 
