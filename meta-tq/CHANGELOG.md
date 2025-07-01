@@ -32,6 +32,11 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* TQMLS1028A:
+  * u-boot-lsdk-tq-2019.10:
+    * update module EEPROM handling, use DM for I2C and I2C EEPROM
+    * use GPIO HOG for inputs
+    * update default devicetree name (matching updated kernel version)
 * u-boot-imx-tq-2024.04:
   * TQMa91 / TQMa93: enable watchdog support. The watchdog is used as sysreset provider. It can be enabled
     from console before booting kernel.
@@ -88,7 +93,13 @@ Releases are named with the following scheme:
 * TMa8MPxL:
   * linux-tq-6.12: Fix SD-Card disconnect due to automatic disable of LDO5.
 * TQMLS1028A:
+  * u-boot-lsdk-tq: implement reset pulse for PCIe and SATA ports, deactivate
+    W_DISABLE (PCIE_DIS). This allows PCIe link training and PCIe device tree fixups.
+    for Linux. Cards with bridges were previously not detected and handled in linux.
   * qoriq-atf: Fix applying errata #841119 and #826419 in Linux
+* TQMLS1088A:
+  * Fix muxing of USB2_DRVVBUS/USB2_PWRFAULT. These pins were previously GPIO and
+    could not be used for USB host power control.
 * TQMLX2160A:
   * Set snoop-delayed exclusive handling. Fixes load/store exclusive
     related issues
