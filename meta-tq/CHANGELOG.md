@@ -95,6 +95,10 @@ Releases are named with the following scheme:
 
 ### Removed
 
+* u-boot-ti-tq-2023.04: remove recipe
+
+  Only u-boot-tq-2025.07 is supported for the TQMa62xx\[L\], TQMa64xxL and
+  TQMa67xx\[L\] in future BSP releases.
 * linux-imx-tq-5.4
   * TQMLS102xA is now supported by linux-tq-6.12
 * linux-imx-tq-5.15
