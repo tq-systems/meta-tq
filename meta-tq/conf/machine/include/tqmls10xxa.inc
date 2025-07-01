@@ -33,12 +33,11 @@ MACHINE_FEATURES:append = "\
 "
 
 # Image Options
-#
 
 # Add packages we want to be deployed, even when they are not part of rootfs
 EXTRA_IMAGEDEPENDS += "\
-    rcw \
     qoriq-atf \
+    rcw \
 "
 
 EXTRA_IMAGEDEPENDS:append:fsl-lsch2 = "\
