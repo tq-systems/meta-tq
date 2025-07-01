@@ -11,6 +11,10 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa67xx: new module
+
+  The TQMa67xx SoM and its starterkit baseboard MBa67xx are a new platform based
+  on the TI J722S/AM67(A) SoC family.
 * TQMa8MPxL:
   * add optionally usable RAUC A/B support
   * add optionally usable distroboot support (need to modify U-Boot `bootcmd`)
