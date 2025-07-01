@@ -30,6 +30,10 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 | Boot                                             |      x       |
 | **USB**                                          |              |
 | USB 3.0                                          |      x       |
+| **SATA**                                         |              |
+| M.2 card (SSD)                                   |      x       |
+| **PCIe**                                         |              |
+| mPCIe on mainboard                               |      x       |
 | **ENET**                                         |              |
 | ENET 0                                           |      x       |
 | ENET 1                                           |      x       |
@@ -104,36 +108,38 @@ case of overheating.
 Artifacs can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 * `atf/`
-  * 1GiB
+  * 1 GiB
     * `bl2_flexspi_nor.pbl` Primary Boot Loader with RCW
     * `bl2_auto.pbl` Primary Boot Loader with RCW for SD/e-MMC boot
-    * `fip_uboot.bin` U-Boot
-  * 4GiB
-    * `bl2_flexspi_nor_tqmls1028a_4gb.pbl` Primary Boot Loader with RCW
-    * `bl2_auto_tqmls1028a_4gb.pbl` Primary Boot Loader with RCW for SD/e-MMC boot
-    * `fip_uboot_tqmls1028a_4gb.bin` U-Boot
-* `atf/variants/`: different Primary Boot Loader variants built with RCW binaries form `rcw/`
+    * `fip_uboot.bin` Firmware Image Package for BL3 (TF-A as BL31
+       and U-Boot as BL33 non secure payload)
+  * 2/4/8 GiB
+    * `bl2_flexspi_nor_tqmls1028a_<size>gb.pbl` Primary Boot Loader with RCW
+    * `bl2_auto_tqmls1028a_<size>gb.pbl` Primary Boot Loader with RCW for SD/e-MMC boot
+    * `fip_uboot_tqmls1028a_<size>gb.bin` Firmware Image Package for BL3 (TF-A as BL31
+       and U-Boot as BL33 non secure payload)
+    * `atf/variants/`: different Primary Boot Loader variants built with RCW binaries form `rcw/`
 * `rcw/`: different RCW configuration binaries
 * `fsl-ls1028a-tqmls1028a-mbls1028a.dtb`: device tree blob for mbls1028a board
 * `fsl-ls1028a-tqmls1028a-mbls1028a-ind.dtb`: device tree blob for mbls1028a-ind board
 * `Image.gz`: Linux kernel image
-* `u-boot-tfa-201010-r0.bin` U-Boot binary
 * \*.wic[.<compress>]: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 
-## Build-Time Configuration
+Artifacts under `atf` can be used to manually update boot images on SOM or exchange them in WIC image.
 
-* BL2_IMAGE: ATF BL2 file used for WIC image creation
-* BL3_IMAGE: ATF BL3 file used for WIC image creation
+## Build-Time Configuration (default boot images for SPI-NOR and WIC)
+
+* BL2_IMAGE: ATF/TF-A BL2 file used for WIC image creation
+* BL3_IMAGE: ATF/TF-A BL3 file used for WIC image creation
 * RCWAUTO: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SD/e-MMC Boot
 * RCWXSPI: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SPI-NOR Flash
 * ATF_RCW_VARIANTS: List of RCW binaries used to build variants of the Primary Boot Loader
 
-By default, images for the 1GiB variant are built. Set BL2_IMAGE to
-`bl2_auto${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.pbl` and BL3_IMAGE to
-`fip_uboot${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.bin` to create an SD/e-MMC image for the 4GiB variant
-(or 2gb/8gb for the 2GiB/8GiB variants respectively).
-
+By default, all images will be built and the 1GiB variant is set as default for WIC-creation.
+Set `BL2_IMAGE` to `bl2_auto${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.pbl` and
+`BL3_IMAGE` to `fip_uboot${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.bin` to create an SD/e-MMC image for the 4GiB
+variant (or 2gb/8gb for the 2GiB/8GiB variants respectively).
 
 ### Secure Boot
 
@@ -161,6 +167,10 @@ for more information on the Secure Boot process and the required hardware prepar
 For now, only the early boot stages (up to U-Boot) are signed and verified.
 Additional configuration of U-Boot is required to verify subsequent boot images
 like the Linux kernel.
+
+## Boot Media
+
+See [Layerscape Boot Media](./README.ls.Bootmedia.md) for details.
 
 ## Boot DIP Switches
 
