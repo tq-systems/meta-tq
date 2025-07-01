@@ -6,11 +6,8 @@ MACHINEOVERRIDES =. "tqma64xxl:"
 # Default providers, may need to override for specific machines
 # needs to be set before inclusion of am64xx.inc
 PREFERRED_PROVIDER_virtual/kernel ?= "linux-ti-tq"
-PREFERRED_PROVIDER_u-boot ?= "u-boot-ti-tq"
-PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-ti-tq"
-
-# am64x-gp and am64x_sr2-hs variants are added by am64xx.inc
-IMAGE_BOOT_FILES ?= "${SPL_BINARYNAME} u-boot.${UBOOT_SUFFIX} tiboot3-am64x_sr2-hs-fs-evm.bin"
+PREFERRED_PROVIDER_u-boot ?= "u-boot-tq"
+PREFERRED_PROVIDER_virtual/bootloader ?= "u-boot-tq"
 
 TQ_FW_ENV_CONFIGS = "mmc0 mmc1 spi"
 
@@ -23,11 +20,15 @@ SYSFW_DEFAULT_VARIANT ?= "am64x_sr2-hs-fs"
 KERNEL_CLASSES += "ti-secdev"
 KERNEL_IMAGETYPE = "fitImage"
 
-# All 3 variants are installed to the boot partition
+# All 3 tiboot3 variants are installed to the boot partition
 # The default variant is additionally installed as tiboot3.bin
-IMAGE_BOOT_FILES += "tiboot3-${SYSFW_DEFAULT_VARIANT}-evm.bin;tiboot3.bin"
-
-# Machine specific options
+IMAGE_BOOT_FILES = " \
+    u-boot.${UBOOT_SUFFIX} \
+    tiboot3-am64x-gp-tqma64xxl.bin \
+    tiboot3-am64x_sr2-hs-fs-tqma64xxl.bin \
+    tiboot3-am64x_sr2-hs-tqma64xxl.bin \
+    tiboot3-${SYSFW_DEFAULT_VARIANT}-tqma64xxl.bin;tiboot3.bin \
+"
 
 # TQ u-boot and kernel
 
