@@ -23,6 +23,8 @@ Releases are named with the following scheme:
   * support TQMLS102xA
   * support TQMLS10xxA
   * support TQMLX2160A
+* linux-ti-tq-6.12: New default kernel for TQMa62xx\[L\], TQMa64xxL and
+  TQMa67xx\[L\]
 * TQMLS1028A:
   * u-boot-lsdk-tq: Insert MTD partitions into DT for Linux
 * TQMLX2160A:
