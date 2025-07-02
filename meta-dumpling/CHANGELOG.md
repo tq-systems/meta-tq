@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* packagegroup-sysutils: add cpupower package since cpufrequtils is not maintained anymore and
+  shall be removed after next release.
+
 ## kirkstone.TQ.ARM.BSP.0025 (not released yet)
 
 ## kirkstone.TQ.ARM.BSP.0024
