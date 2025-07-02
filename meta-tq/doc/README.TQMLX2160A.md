@@ -110,7 +110,9 @@ BOOT\_MODE can be configured using DIP switch S1
 | On     |   | x |   |   |
 | Off    | x |   | x | x |
 
-## Update Scripts
+## Boot Media
+
+### Update Scripts
 
 In U-Boot update scripts are provided to easily update components.
 
@@ -118,13 +120,19 @@ There are scripts to update the PBL and U-Boot.
 
 These scripts are named `update_[pbl|uboot]_[spi|mmc|sd]`.
 
-## Flash UBI to SPI-NOR
+### Flash UBI to SPI-NOR
+
 ```
 ubiformat /dev/mtd7 -f tq-image-generic-tqmlx2160a-mblx2160a.ubi
 ubiattach /dev/ubi_ctrl -m 7
 ```
 
+### SD / eMMC images
+
+See [Layerscape Boot Media](./README.ls.Bootmedia.md) for details.
+
 ## Memory Layout
+
 ### SPI-NOR
 * 0x000000000000-0x000000100000 : "RCW-PBL"
 * 0x000000100000-0x000000300000 : "U-Boot"
