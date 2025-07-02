@@ -230,30 +230,29 @@ Download UBIFS image from TFTP and update:
 
 #### SD / eMMC
 
-To program complete system image to SD / eMMC, write [WIC image](#build-artifacts)
-to SD / eMMC at offset 0x00 / block #0
+See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 
 ### Update parts of system
 
 In U-Boot the following update scripts are available to update the components:
 * RCW/PBL:
-  * update_pbl_mmc
-  * update_pbl_spi
-* U-Boot:
-  * update_uboot_mmc
-  * update_uboot_spi
+  * `update_pbl_mmc`
+  * `update_pbl_spi`
+* TF-A / U-Boot:
+  * `update_uboot_mmc`
+  * `update_uboot_spi`
 * RootFS:
-  * update_rootfs_qspi: Use .ubifs file
+  * `update_rootfs_qspi`: Use .ubifs file
 * DPAA Ethernet Firmware TQMLS1043A/TQMLS1046A
-  * update_fmucode_spi
-  * update_fmucode_mmc
+  * `update_fmucode_spi`
+  * `update_fmucode_mmc`
 * DPAA2 Ethernet Firmware TQMLS1088A
-* update_dpaa2_dpc_mmc
-* update_dpaa2_dpc_spi
-* update_dpaa2_dpl_mmc
-* update_dpaa2_dpl_spi
-* update_dpaa2_firmware_mmc
-* update_dpaa2_firmware_spi
+* `update_dpaa2_dpc_mmc`
+* `update_dpaa2_dpc_spi`
+* `update_dpaa2_dpl_mmc`
+* `update_dpaa2_dpl_spi`
+* `update_dpaa2_firmware_mmc`
+* `update_dpaa2_firmware_spi`
 
 ## Access U-Boot environment from Linux
 
