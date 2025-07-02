@@ -95,6 +95,12 @@ Releases are named with the following scheme:
 
 ### Removed
 
+* linux-ti-tq-6.1
+
+  linux-ti-tq-6.1 has been obsolete since scarthgap.TQ.ARM.BSP.0001 in favor of
+  linux-ti-tq-6.6. With the addition of linux-ti-tq-6.12 as the new default
+  kernel for TQMa62xx\[L\]/TQMa64xxL/TQMa67xx\[L\], the linux-ti-tq-6.1 recipe
+  is removed.
 * u-boot-ti-tq-2023.04: remove recipe
 
   Only u-boot-tq-2025.07 is supported for the TQMa62xx\[L\], TQMa64xxL and
