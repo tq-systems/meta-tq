@@ -102,6 +102,10 @@ setenv uboot_spi_file <filename>	# U-boot file name
 run update_uboot			# update U-boot
 ```
 
+### SD / eMMC images
+
+See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
+
 ## Howto
 
 ### U-Boot mtest
