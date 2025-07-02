@@ -16,10 +16,12 @@
 * branched from lf-5.15.5-1.0.0
 
 ### U-Boot
+
 * U-Boot 2019.04 based on https://github.com/nxp-qoriq/u-boot
 * Based on Tag lx2160a-early-access-bsp0.7
 
 ### Linux
+
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/)
 * branched from linux-6.1.y
 
@@ -64,12 +66,14 @@
 * USB - OTG
 
 ## Not Supported
+
 * SIM-Card
 
 ## Notes:
+
 * SDHC:
-On MBLX2160A.0100 the SD-Card only works a few start-ups and is therefore not properly tested.
-On MBLX2160A.0200 the SD-Card interface works properly.
+  * On MBLX2160A.0100 the SD-Card only works a few start-ups and is therefore not properly tested.
+  * On MBLX2160A.0200 the SD-Card interface works properly.
 
 ## Build Artifacts
 
@@ -147,6 +151,7 @@ See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 ## Memory Layout
 
 ### SPI-NOR
+
 * 0x000000000000-0x000000100000 : "RCW-PBL"
 * 0x000000100000-0x000000300000 : "U-Boot"
 * 0x000000500000-0x000000600000 : "U-Boot-Env"
@@ -157,6 +162,7 @@ See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 * 0x000001000000-0x000008000000 : "RootFS UBI"
 
 ### eMMC / SD-Card
+
 * 0x1000 : "RCW-PBL"
 * 0x100000 : "U-Boot"
 * 0x800000 : "DDR-PHY"
@@ -165,6 +171,7 @@ See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 
 
 ## Build-Time Configuration
+
 * RCWXSPI: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SPI-NOR Boot
 * RCWAUTO: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SD/eMMC Boot
 * ATF_RCW_VARIANTS: List of RCW binaries used to build variants of the Primary Boot Loader
@@ -177,7 +184,9 @@ Set BL2_IMAGE to `bl2_tqmlx2160a_16gb.pbl` and BL3_IMAGE to `fip_uboot_tqmlx2160
 to create an SD/eMMC image for the 16GiB variant.
 
 ## Ethernet and DPAA2
+
 ### RCW - SerDes Configuration
+
 The RCW Configuration specifies the Ethernet Configuration.
 The currently available serdes configurations are (Serdes1_Serdes2_Serdes3):
 * 0_0_0
@@ -195,6 +204,7 @@ To add another configuration the rcw sources have to be modified.
 To use a specific Serdes Configuration on build-time use the rcw variable to specify a supported configuration.
 
 ### Ethernet in U-Boot
+
 For working ethernet the DPAA2 firmware has to be loaded in U-Boot. It needs the DPC file when loaded.
 The command `fsl_mc start mc ${addr_mc} ${addr_dpc}` loads the firmware with the DPC file.
 
@@ -202,6 +212,7 @@ For Ethernet in Linux additionaly a Data-Path-Layout file (DPL) has to be loaded
 This is done with the command `fsl_mc lazyapply DPL ${addr_dpl}`.
 
 ### Ethernet in Linux
+
 The ethernet configuration in Linux is determined by the DPL file. In the BSP a basic setup is configured in the dpl-min.dts file.
 With the restool command a more specific setup can be configured.
 
@@ -215,6 +226,7 @@ Some useful restool commands are:
 * `dtc -I dts -O dtb <my_dpl>.dts -o <my_dpl>.dtb`: To generate a dtb file of the dts file.
 
 ### Ethernet Interfaces:
+
 The following table shows which MAC is connected to which port depending on the interface.
 |  MAC  | RGMII | SGMII | XFI | CAUI4 |
 | ----- | ----- | ----- | --- | ----- |
@@ -237,12 +249,14 @@ The following tables show the supported Serdes configrations.
 For Ethernet protocols: `[Protocoll].[Mac-nr]` for PCIe: `PCIe.[Controller-Nr] x[Width]`
 
 ### Serdes 1
+
 | Lane / Config | H - 0   | G - 1   | F - 2   | E - 3   | D - 4     | C - 5     | B - 6     | A - 7     |
 | ------------- | ------- | ------- | ------- | ------- | --------- | --------- | --------- | --------- |
 | 12            | -       | -       | -       | -       | PCIe.2 x2 | PCIe.2 x2 | SGMII.9   | SGMII.10  |
 | 14            | CAUI4.1 | CAUI4.1 | CAUI4.1 | CAUI4.1 | PCIe.2 x2 | PCIe.2 x2 | PCIe.2 x2 | PCIe.2 x2 |
 
 ### Serdes 2
+
 | Lane / Config | A - 0     | B - 1    | C - 2    | D - 3    | E - 4     | F - 5    | G - 6    | H - 7    |
 | ------------- | --------- | -------- | -------- | -------- | --------- | -------- | -------- | -------- |
 | 7             | PCIe.3 x1 | SGMII.12 | SGMII.17 | SGMII.18 | PCIe.4 x1 | SGMII.16 | XFI.13   | XFI.14   |
@@ -250,12 +264,14 @@ For Ethernet protocols: `[Protocoll].[Mac-nr]` for PCIe: `PCIe.[Controller-Nr] x
 | 11            | PCIe.3 x1 | SGMII.12 | SGMII.17 | SGMII.18 | PCIe.4 x1 | SGMII.16 | SGMII.13 | SGMII.14 |
 
 ### Serdes 3
+
 | Lane / Config | A - 0     | B - 1     | C - 2     | D - 3     | E - 4     | F - 5     | G - 6     | H -   7   |
 | ------------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- |
 | 2             | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 |
 | 3             | PCIe.5 x4 | PCIe.5 x4 | PCIe.5 x4 | PCIe.5 x4 | PCIe.6 x4 | PCIe.6 x4 | PCIe.6 x4 | PCIe.6 x4 |
 
 ## DIP-Switch settings
+
 The DIP-switches should match the used RCW, otherwise interfaces will not work.
 Pay attention to the following DIP-Switches:
 
