@@ -119,6 +119,10 @@ eMMC is a placement option on TQMLS102xA
 | SAI1 / SAI2 | - | - | on  | off |
 | Reserved    | - | - | off | off |
 
+## Boot Media
+
+See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
+
 ## Howto
 
 ### HDMI
