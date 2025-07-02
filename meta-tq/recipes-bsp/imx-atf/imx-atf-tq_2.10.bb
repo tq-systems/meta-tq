@@ -118,6 +118,7 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:tqma8mpxl = "tqma8mpxl"
+COMPATIBLE_MACHINE:tqma8mpxs = "tqma8mpxs"
 COMPATIBLE_MACHINE:tqma8mq = "tqma8mq"
 COMPATIBLE_MACHINE:tqma8mxml = "tqma8mxml"
 COMPATIBLE_MACHINE:tqma8mxnl = "tqma8mxnl"
