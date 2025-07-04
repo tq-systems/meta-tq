@@ -164,7 +164,7 @@ _MBa8x HW Rev.030x only_
 ## Build Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/${MACHINE}`
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs
   * imx8mn-tqma8mqnl-mba8mx.dtb
