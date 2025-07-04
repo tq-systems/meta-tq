@@ -47,7 +47,8 @@
 ## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/${MACHINE}`
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
+
 * `fsl_rcw-nor-TQMT*_SERDES*.bin`: RCW binary
 * `tqmt10xx-stkt104x.dtb`: device tree blob for STKT104x board
 * `uImage`: Linux kernel image
