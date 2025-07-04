@@ -124,7 +124,7 @@ Support matrix for `MBa91xxCA` REV.010x
 ## Build Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/${MACHINE}`
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs
   * imx91-tqma9131-mba91xxca*.dtb
