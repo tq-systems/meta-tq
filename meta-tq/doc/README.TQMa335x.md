@@ -93,8 +93,8 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ## Artifacts
 
-Artifacs can be found at `deploy-ti/images/${MACHINE}` (with meta-ti-bsp in
-`bblayers.conf`) or `${TMPDIR}/deploy/images/${MACHINE}` (without meta-ti-bsp).
+Artifacs can be found at the usual locations for bitbake:
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs
 * zImage: Linux kernel image
