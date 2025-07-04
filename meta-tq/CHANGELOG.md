@@ -85,6 +85,8 @@ Releases are named with the following scheme:
 
 ### Removed
 
+* linux-imx-tq-5.4
+  * TQMLS102xA is now supported by linux-tq-6.12
 * linux-imx-tq-5.15
   * Both TQMLS1012AL and TQMLS10128A are now supported by linux-imx-tq-6.6
 
