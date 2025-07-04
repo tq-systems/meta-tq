@@ -28,9 +28,9 @@ Compressed WIC images and matching BMAP-files (block map files) are created by d
 To make use of this feature, install the `bmap-tools` package to use `bmaptool`.
 
 **Attention**: when using `bmaptool` with BMAP-files keep in mind that only parts of the
-image with valid information is written. As a consequence parts like U-Boot environemt
+image with valid information is written. As a consequence parts like U-Boot environment
 may be left over from a previous version. If this could be an issue, use
-`bmaptool copy --nobmap` or uncompress the wic-image and use `dd`
+`bmaptool copy --nobmap` or uncompress the wic-image and use `dd`.
 
 ### Bootable eMMC / SD-Card
 
