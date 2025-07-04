@@ -36,6 +36,11 @@ To make use of this feature, install the `bmap-tools` package to use `bmaptool`.
 versions of `UUU` (https://github.com/nxp-imx/mfgtools) supports packed WIC and BMAP, too.
 The packed WIC can also be decompressed and used with `dd` or other disk image tools.
 
+**Attention**: when using `bmaptool` with BMAP-files keep in mind that only parts of the
+image with valid information is written. As a consequence parts like U-Boot environment
+may be left over from a previous version. If this could be an issue, use
+`bmaptool copy --nobmap` or uncompress the wic-image and use `dd`.
+
 ### Bootable SD-Card
 
 Write the `*.wic` image to SD-Card to create a bootable SD-Card with complete system image.
