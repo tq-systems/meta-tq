@@ -147,7 +147,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 ## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/${MACHINE}`
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * imx8qxp\*.dtb: device tree blobs for TQMa8XQPS
 * imx8dxp\*.dtb: device tree blobs for TQMa8XDPS
