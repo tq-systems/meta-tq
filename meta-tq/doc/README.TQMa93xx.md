@@ -360,7 +360,7 @@ __Note:__ Due to API incompatibilities in the ethos-u driver stack and Cortex-M3
 
 ### High Assurance Boot (Secure Boot)
 
-See [i.MX High Assurance Boot](README.IMX-HAB.md).
+See [i.MX High Assurance Boot](README.Verified-Boot.md).
 
 ### Access U-Boot environment from Linux
 

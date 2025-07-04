@@ -501,7 +501,7 @@ is provided for USB dual role support, see see [artifacts section](#build-artifa
 
 ### High Assurance Boot (Secure Boot)
 
-See [i.MX High Assurance Boot](README.IMX-HAB.md).
+See [i.MX High Assurance Boot](README.Verified-Boot.md).
 
 ### Access U-Boot environment from Linux
 

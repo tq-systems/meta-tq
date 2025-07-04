@@ -459,7 +459,7 @@ __Note:__ There is some notable warmup time
 
 ### High Assurance Boot (Secure Boot)
 
-See [i.MX High Assurance Boot](README.IMX-HAB.md).
+See [i.MX High Assurance Boot](README.Verified-Boot.md).
 
 ### Inline ECC
 
