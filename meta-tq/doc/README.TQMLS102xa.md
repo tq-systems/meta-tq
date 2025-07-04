@@ -40,7 +40,7 @@ This README contains some useful information for TQMLS102xA on MBLS102xA
 ## Build Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-<`${TMPDIR}/deploy/images/${MACHINE}`>
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs
   * ls1021a-tqmls1021a-mbls1021a.dtb
