@@ -40,7 +40,10 @@ QA_LOG = "1"
 INHERIT += "tq-buildinfo"
 
 DISTRO_EXTRA_RDEPENDS += "os-release u-boot-env-tq"
-DISTRO_EXTRA_RRECOMMENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'rauc', 'tq-mount-data', '', d)}"
+DISTRO_EXTRA_RRECOMMENDS += " \
+    zstd \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'rauc', 'tq-mount-data', '', d)} \
+"
 
 # listed checks from ERROR_QA to WARN_QA (from insane.bbclass)
 ERROR_TO_WARN_QA = "version-going-backwards"
