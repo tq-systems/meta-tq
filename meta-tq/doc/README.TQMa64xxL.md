@@ -4,7 +4,7 @@
 
 ## Overview
 
-See also: [Common features of TQMa62xx\[L\]/TQMa64xxL](README.TQMa6xxx.md)
+See also: [Common features of TQMa62xx\[L\]/TQMa64xxL/TQMa67xx\[L\]](README.TQMa6xxx.md)
 
 ### Supported Hardware:
 
@@ -15,12 +15,12 @@ See also: [Common features of TQMa62xx\[L\]/TQMa64xxL](README.TQMa6xxx.md)
 
 _Bootloader:_
 
-* uboot-ti-tq-2023.04 (based on ti-u-boot 2023.04)
+* uboot-ti-tq-2025.07 (based on U-Boot 2025.07)
 
 _Kernel:_
 
-* linux-ti-tq-6.6 (based on ti-rt-linux-6.6.y; default)
-* linux-ti-tq-6.1 (based on ti-rt-linux-6.1.y)
+* linux-ti-tq-6.12 (based on ti-linux-6.12.y; default)
+* linux-ti-tq-6.6 (based on ti-rt-linux-6.6.y)
 
 ### Known issues
 
@@ -115,13 +115,13 @@ _Kernel:_
 The first-stage bootloader comes in three variants, each including a different
 version of the system controller firmware:
 
-* tiboot3-am64x-gp-evm.bin (General Purpose variant)
-* tiboot3-am64x_sr2-hs-fs-evm.bin (High Security variant, field-securable)
-* tiboot3-am64x_sr2-hs-evm.bin (High Security variant, security enforced)
+* tiboot3-am64x-gp-tqma64xxl.bin (General Purpose variant)
+* tiboot3-am64x_sr2-hs-fs-tqma64xxl.bin (High Security variant, field-securable)
+* tiboot3-am64x_sr2-hs-tqma64xxl.bin (High Security variant, security enforced)
 
-Please refer to the Secure Device Processor SDK documention for more information
-on the High Security CPU variants. This documentation must be obtained directly
-from TI.
+Please refer to the Secure Device Processor SDK documentation for more
+information on the High Security CPU variants. This documentation must be
+obtained directly from TI.
 
 To select the variant to use, set the `SYSFW_DEFAULT_VARIANT` variable to
 "am64x-gp", "am64x_sr2-hs-fs" or "am64x_sr2-hs" (in `local.conf` or a custom
@@ -216,9 +216,8 @@ The `dfu-util` command can be used to load U-Boot from a connected USB host:
 # skipped.
 dfu-util -a bootloader -D tiboot3.bin
 
-# Load all U-Boot stages in sequence
+# Load both U-Boot stages in sequence
 dfu-util -R -a bootloader -D tiboot3.bin
-dfu-util -R -a tispl.bin -D tispl.bin
 dfu-util -R -a u-boot.img -D u-boot.img
 ```
 

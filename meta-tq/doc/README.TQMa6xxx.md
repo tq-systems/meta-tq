@@ -1,4 +1,4 @@
-# Common features of TQMa62xx\[L\]/TQMa64xxL
+# Common features of TQMa62xx\[L\]/TQMa64xxL/TQMa67xx\[L\]
 
 [[_TOC_]]
 
@@ -15,9 +15,8 @@ Artifacts can be found at:
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * \*.rootfs.ubifs: UBIFS rootfs
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
-* tiboot3-*-evm.bin: first-stage bootloader (R5 core)
-* tispl.bin: second-stage bootloader (A53 core, includes ATF and OPTEE)
-* u-boot.img: last-stage bootloader
+* tiboot3-*.bin: first-stage bootloader (R5 core)
+* u-boot.img: last-stage bootloader (A53 core, includes ATF and OPTEE)
 * extlinux.conf: Boot configuration for U-Boot distroboot
 * boot-blockdev.scr: U-Boot boot script image for boot from eMMC/SD/USB
 * boot-ubi.scr: U-Boot boot script image for boot from UBIFS (SPI-NOR)
@@ -74,11 +73,11 @@ run update_bootscript_mmc1 # Update boot.scr on SD card
 run update_uboot_sf0 # Update bootloader on SPI-NOR flash
 run update_bootscript_sf0 # Update ospi.script partition on SPI-NOR flash
 ```
-The environment variables `tiboot3_name`, `tispl_name`, `uboot_name` and
-`bootscript_name` can be modified to control the filenames requested via TFTP.
+The environment variables `tiboot3_name`, `uboot_name` and `bootscript_name`
+can be modified to control the filenames requested via TFTP.
 
-By default, the files `tiboot3.bin`, `tispl.bin` and `u-boot.img` are requested.
-The 3 stages of the bootloader are always updated at the same time, so potential
+By default, the files `tiboot3.bin` and `u-boot.img` are requested. The 2 stages
+of the bootloader are always updated at the same time, so potential
 incompatiblities between stages of old and new versions are avoided.
 
 Kernel and Device Trees are part of the root filesystem. They cannot be updated
@@ -134,9 +133,9 @@ for virtio in ${virtios}; do
 done
 ```
 
-The TQMa62xx/TQMa64xxL DTSIs define a number of reserved memory regions that
-are used by by these progams and the other the M4/R5 examples provided with the
-AM62x/AM64x MCU+ SDKs (per-core `main_r5fss_*_memory_region` and
+The TQMa6xxx DTSIs define a number of reserved memory regions that are used by
+these programs and the other the M4/R5 examples provided with the
+AM62x/AM64x/J722S MCU+ SDKs (per-core `main_r5fss_*_memory_region` and
 `mcu_m4fss_*_memory_region`, as well as the common `rtos_ipc_memory_region` used
 for inter-processor communication).
 

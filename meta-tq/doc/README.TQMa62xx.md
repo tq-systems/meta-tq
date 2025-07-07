@@ -4,7 +4,7 @@
 
 ## Overview
 
-See also: [Common features of TQMa62xx\[L\]/TQMa64xxL](README.TQMa6xxx.md)
+See also: [Common features of TQMa62xx\[L\]/TQMa64xxL/TQMa67xx\[L\]](README.TQMa6xxx.md)
 
 ### Supported Hardware:
 
@@ -15,12 +15,12 @@ See also: [Common features of TQMa62xx\[L\]/TQMa64xxL](README.TQMa6xxx.md)
 
 _Bootloader:_
 
-* uboot-ti-tq-2023.04 (based on ti-u-boot 2023.04)
+* uboot-ti-tq-2025.07 (based on U-Boot 2025.07)
 
 _Kernel:_
 
-* linux-ti-tq-6.6 (based on ti-rt-linux-6.6.y; default)
-* linux-ti-tq-6.1 (based on ti-rt-linux-6.1.y)
+* linux-ti-tq-6.12 (based on ti-linux-6.12.y; default)
+* linux-ti-tq-6.6 (based on ti-rt-linux-6.6.y)
 
 ### Known issues
 
@@ -45,11 +45,6 @@ _Kernel:_
 * On TQMa62xx variants without user EEPROM, the EEPROM device is not disabled
   in the Linux Device Tree, resulting in a non-critical error message in the
   kernel log during boot
-* After an unclean reboot without power cycle while the IMX327 camera is
-  running, the camera can be in an inconsistent state where the next attempt
-  to use it will result in a hang (of gst-launch, when using the example
-  commands). Terminating and re-running gst-launch will usually fix this issue;
-  it is unknown if a power cycle may be necessary in some cases.
 
 ## Supported features
 
@@ -130,13 +125,13 @@ _Kernel:_
 The first-stage bootloader comes in three variants, each including a different
 version of the system controller firmware:
 
-* tiboot3-am62x-gp-evm.bin (AM62x General Purpose variant)
-* tiboot3-am62x-hs-fs-evm.bin (AM62x High Security variant, field-securable)
-* tiboot3-am62x-hs-evm.bin (AM62x High Security variant, security enforced)
+* tiboot3-am62x-gp-tqma62xx.bin (AM62x General Purpose variant)
+* tiboot3-am62x-hs-fs-tqma62xx.bin (AM62x High Security variant, field-securable)
+* tiboot3-am62x-hs-tqma62xx.bin (AM62x High Security variant, security enforced)
 
-Please refer to the Secure Device Processor SDK documention for more information
-on the High Security CPU variants. This documentation must be obtained directly
-from TI.
+Please refer to the Secure Device Processor SDK documentation for more
+information on the High Security CPU variants. This documentation must be
+obtained directly from TI.
 
 To select the variant to use, set the `SYSFW_DEFAULT_VARIANT` variable to
 "am62x-gp", "am62x-hs-fs" or "am62x-hs" (in `local.conf` or a custom
@@ -255,9 +250,8 @@ the bootloader binaries to `tiboot3.bin`.
 The `dfu-util` command can be used to load U-Boot from a connected USB host:
 
 ```
-# Load all U-Boot stages in sequence
+# Load both U-Boot stages in sequence
 dfu-util -R -a bootloader -D tiboot3.bin
-dfu-util -R -a tispl.bin -D tispl.bin
 dfu-util -R -a u-boot.img -D u-boot.img
 ```
 
