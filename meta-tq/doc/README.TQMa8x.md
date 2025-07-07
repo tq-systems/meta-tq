@@ -222,25 +222,7 @@ bootstream image and bootloader support for updating the bootstream.
 
 ## Use UUU Tool
 
-To build bootstream for UUU tool the following settings needs to be in your
-configuration. (This is already the case for starterkit machine configurations):
-
-```
-UBOOT_CONFIG_tqma8x = "mfgtool"
-IMXBOOT_TARGETS_tqma8x = "flash_spl"
-```
-
-Rebuild boot stream:
-
-```
-bitbake imx-boot
-```
-
-Use new compiled bootstream containing U-Boot capable of handling SDP together
-with UUU tool:
-
-```
-sudo uuu -b spl imx-boot-<machine>-mfgtool.bin
+See [here](./README.imx-arm64.UUU.md) for details about using Serial Download mode and UUU.
 ```
 
 ## Howto

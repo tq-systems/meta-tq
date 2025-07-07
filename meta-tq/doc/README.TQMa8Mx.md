@@ -354,79 +354,10 @@ _S9_
   * ON: DSI to eDP bridge
   * OFF: DSI to LVDS bridge
 
-## Boot device initialisation
+## Boot device initialisation and update
 
-### Bootable SD-Card
-
-To create a bootable SD-Card with complete system image:
-
-write *.wic Image to SD (offset 0)
-
-To create a bootable SD-Card with boot stream only (file name see above):
-
-write bootstream at offset 33 kiB (0x8400) to SD-Card
-
-Example for Linux:
-
-`sudo dd if=<bootstream> of=/dev/sd<x> bs=1k seek=33 conv=fsync`
-
-### Bootable eMMC
-
-To create a bootable eMMC with complete system image:
-
-write *.wic image to eMMC (offset 0)
-
-To create a bootable eMMC with boot stream only (file name see above)
-
-Boot from SD-Card and write bootstream at offset 33 kiB (0x8400) to eMMC
-
-Example for Linux:
-
-`sudo dd if=<bootstream> of=/dev/mmcblk0 bs=1k seek=33 conv=fsync`
-
-Example for U-Boot:
-
-```
-# 33k -> 66 Blocks -> 0x42
-
-tftp <bootstream>
-setexpr bsz ${filesize} + 1ff
-setexpr bsz ${bsz} / 200
-printenv bsz
-mmc dev 0
-mmc write ${loadaddr} 42 ${bsz}
-```
-
-## Update components via U-Boot
-
-For ease of development a set of variables and scripts are in default env.
-
-_Note_: Update and start scripts expect a partitioned / initialized SD-Card or
-eMMC.
-
-_U-Boot environment variables_
-
-* `uboot`: name of bootstream image (default = bootstream.bin)
-* `mmcdev`: 0 for eMMC, 1 for SD-Card (automatically generated,
-  can be overwritten)
-  `mmcpart`: partition number for kernel and devicetree (default = 1)
-  `mmcpath`: path to kernel and device tree (default = /)
-* `fdt_file`: device tree blob,
-* `image`: kernel image,
-
-_SD / eMMC_
-
-Download bootstream from TFTP and update:
-
-`run update_uboot`
-
-Download device tree blob from TFTP and update:
-
-`run update_fdt`
-
-Download kernel image from TFTP and update:
-
-`run update_kernel`
+See [here](./README.imx-arm64.BootMedia.md) for detailed information how to write a
+bootstream image and bootloader support for updating the bootstream.
 
 ## Use UUU Tool
 
