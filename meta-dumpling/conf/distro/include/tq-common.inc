@@ -33,6 +33,10 @@ DISTRO_EXTRA_RDEPENDS += "os-release"
 # include additional udev rules
 DISTRO_EXTRA_RDEPENDS += "tq-udev-rules"
 
+DISTRO_EXTRA_RRECOMMENDS += " \
+    zstd \
+"
+
 # listed checks from ERROR_QA to WARN_QA (from insane.bbclass)
 ERROR_TO_WARN_QA = "version-going-backwards"
 

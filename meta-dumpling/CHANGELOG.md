@@ -9,6 +9,10 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* Added zstd to `DISTRO_EXTRA_RRECOMMEND`
+
 ### Changed
 
 * packagegroup-sysutils: add cpupower package since cpufrequtils is not maintained anymore and
