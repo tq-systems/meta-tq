@@ -1,5 +1,5 @@
 # shared definitions for MB-SMARC-2 mainboard
-require conf/machine/include/mba8-common.inc
+require conf/machine/include/tq-machine.inc
 
 # disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
 USE_VT = "0"

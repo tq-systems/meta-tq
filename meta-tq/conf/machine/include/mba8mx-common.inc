@@ -1,5 +1,5 @@
 
-require mba8-common.inc
+require conf/machine/include/tq-machine.inc
 
 # Set Serial console @ UART3
 SERIAL_CONSOLES = "115200;ttymxc2"
