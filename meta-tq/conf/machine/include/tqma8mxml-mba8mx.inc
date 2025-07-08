@@ -28,9 +28,3 @@ IMXBOOT_TARGETS ?= "\
     ${IMXBOOT_FSPI_TARGET} \
     ${IMXBOOT_SDMMC_TARGET} \
 "
-
-#
-# primary bootstream name for WKS / WIC, construction see imx-boot recipe,
-# do_deploy
-#
-MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-${IMXBOOT_SDMMC_TARGET}"

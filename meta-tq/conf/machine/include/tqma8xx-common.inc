@@ -43,3 +43,8 @@ EXTRA_IMAGEDEPENDS += "\
 "
 
 PREFERRED_VERSION_linux-imx-tq ?= "6.6.%"
+
+#
+# bootstream name, construction see imx-boot recipe, do_deploy
+#
+MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-flash_spl"

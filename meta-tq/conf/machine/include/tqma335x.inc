@@ -41,6 +41,9 @@ IMAGE_BOOT_FILES = "\
     u-boot.img \
 "
 
+WIC_BOOTPART_SIZE = "4M"
+WKS_FILE = "tqmaxx-ti-sdimg.wks.in"
+
 # List common SoC features
 MACHINE_FEATURES += "\
     alsa \

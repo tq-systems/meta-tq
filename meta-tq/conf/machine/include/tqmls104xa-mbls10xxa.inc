@@ -8,6 +8,3 @@ SERIAL_CONSOLES_CHECK = "${SERIAL_CONSOLES}"
 USE_VT = "0"
 
 UBOOT_RCW_CONFIG ??= ""
-
-# direct assignment to override empty default from meta-freescale
-WKS_FILE = "tqmls104xa-sdimg.wks.in"

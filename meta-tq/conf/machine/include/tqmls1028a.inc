@@ -76,5 +76,7 @@ PLATFORM:${MACHINE} = "tqmls1028a_1gb"
 PLATFORM_ADDITIONAL_TARGET:${MACHINE} = "tqmls1028a_4gb"
 PLATFORM_ADDITIONAL_TARGETS_EXTRA:${MACHINE} = "tqmls1028a_2gb tqmls1028a_8gb"
 
+WKS_FILE = "tqmls1028a-sdimg.wks.in"
+
 # Common image configuration
 require conf/machine/include/tq-image.inc

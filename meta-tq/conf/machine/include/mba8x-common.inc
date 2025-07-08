@@ -39,11 +39,6 @@ IMXBOOT_TARGETS ?= "\
     flash_spl_flexspi \
 "
 
-#
-# bootstream name, construction see imx-boot recipe, do_deploy
-#
-MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-flash_spl"
-
 MACHINE_FEATURES += "\
     bluetooth \
     display \

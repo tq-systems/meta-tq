@@ -2,5 +2,3 @@
 # based on i.MX8 CPU
 
 require conf/machine/include/tq-machine.inc
-
-WKS_FILE = "tqmaxx-imx-v8-sdimg${@bb.utils.contains('DISTRO_FEATURES', 'secure', '-verity', '', d)}.wks.in"

@@ -50,6 +50,11 @@ IMX_DEFAULT_BOOTLOADER ?= "u-boot-tq"
 # multiple U-Boot env locations
 TQ_FW_ENV_CONFIGS = "mmc0 mmc1 spi"
 
+# allow to easy override for different configuration
+MACHINE_WKS_BOOTSTREAM ?= "${UBOOT_BINARY_BASENAME}-${MACHINE}.${UBOOT_SUFFIX}-sd"
+
+WKS_FILE = "tqmaxx-imx-v7-sdimg.wks.in"
+
 # Common image configuration
 RAW_BOOT_START_OFFSET_KB = "1"
 RAW_BOOT_END_OFFSET_KB = "1024"

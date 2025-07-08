@@ -44,6 +44,9 @@ require conf/machine/include/tqmxx.inc
 MACHINE_FEATURES:remove = "efi"
 EFI_PROVIDER = ""
 
+WIC_BOOTPART_SIZE = "12M"
+WKS_FILE = "tqmaxx-ti-sdimg${@bb.utils.contains('DISTRO_FEATURES', 'rauc', '-rauc-ab', '', d)}.wks.in"
+
 # List common SoC features
 MACHINE_FEATURES += "\
     apm \

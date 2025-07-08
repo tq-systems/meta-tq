@@ -14,3 +14,5 @@ PLATFORM:${MACHINE} = "${TQ_ATF_VARIANT}"
 
 IMAGE_OFFSET_FMAN_UCODE ?= "9216"
 FMAN_UCODE ?= "fsl_fman_ucode_ls1043_r1.1_106_4_18.bin"
+
+WKS_FILE = "tqmls104xa-sdimg.wks.in"

@@ -33,9 +33,6 @@ IMAGE_BOOT_FILES = "\
     mc-utils/${MC_DPL};${MC_DPL} \
 "
 
-# direct assignment to override empty default from meta-freescale
-WKS_FILE = "tqmls1088a-sdimg.wks.in"
-
 UBOOT_CONFIG ?= "tfa"
 UBOOT_CONFIG[tfa] = "tqmls1088a_mbls10xxa_tfa_defconfig"
 

@@ -45,3 +45,8 @@ PREFERRED_VERSION_linux-imx-tq ?= "6.6.%"
 
 # Debug UART index. To activate 'ATF_IMX_DEBUG_CONSOLE' must be set to '1'
 ATF_IMX_DEBUG_UART ?= "0"
+
+#
+# bootstream name, construction see imx-boot recipe, do_deploy
+#
+MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-flash_spl"

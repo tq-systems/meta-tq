@@ -17,3 +17,6 @@ MACHINE_EXTRA_RRECOMMENDS += " \
     mc-utils-image \
     restool \
 "
+
+# direct assignment to override empty default from meta-freescale
+WKS_FILE = "tqmls1088a-sdimg.wks.in"

@@ -16,7 +16,3 @@ SERIAL_CONSOLES ?= "115200;ttyS4"
 
 # disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
 USE_VT = "0"
-
-WKS_FILE = "tqmaxx-ti-sdimg.wks.in"
-
-WIC_BOOTPART_SIZE = "4M"

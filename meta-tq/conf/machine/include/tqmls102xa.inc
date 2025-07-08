@@ -51,5 +51,10 @@ MACHINE_FEATURES:append = "\
 RAW_BOOT_START_OFFSET_KB = "4"
 RAW_BOOT_END_OFFSET_KB = "1024"
 
+# allow to easy override for different rcw
+MACHINE_WKS_BOOTSTREAM ?= "u-boot-${MACHINE}.bin"
+
+WKS_FILE = "tqmaxx-imx-v7-sdimg.wks.in"
+
 # Common image configuration
 require conf/machine/include/tq-image.inc

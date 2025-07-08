@@ -63,5 +63,7 @@ RCW_SUFFIX:${MACHINE} = ".bin"
 PLATFORM:${MACHINE} = "tqmls1012al_512mb"
 PLATFORM_ADDITIONAL_TARGET:${MACHINE} = "tqmls1012al_1gb"
 
+WKS_FILE = "tqmls1012al-sdimg.wks"
+
 # Common image configuration
 require conf/machine/include/tq-image.inc

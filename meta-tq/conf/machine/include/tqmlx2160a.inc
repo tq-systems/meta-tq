@@ -68,6 +68,8 @@ RCW_FOLDER:${MACHINE} = "tqmlx2160a"
 PLATFORM:${MACHINE} = "tqmlx2160a_32gb"
 PLATFORM_ADDITIONAL_TARGET:${MACHINE} = "tqmlx2160a_16gb"
 
+WKS_FILE = "tqmlx2160a.wks.in"
+
 # Common image configuration
 require conf/machine/include/tq-image.inc
 

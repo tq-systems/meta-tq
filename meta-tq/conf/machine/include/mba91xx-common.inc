@@ -4,20 +4,6 @@
 
 require conf/machine/include/tq-machine.inc
 
-python() {
-    wks_type = ""
-
-    if bb.utils.contains("DISTRO_FEATURES", "secure", True, False, d):
-        wks_type = "-verity"
-    if bb.utils.contains("DISTRO_FEATURES", "rauc", True, False, d):
-        if not bb.utils.contains("DISTRO_FEATURES", "secure", True, False, d):
-            wks_type = "-rauc-ab"
-        else:
-            bb.warn("DISTRO_FEATURES contains 'rauc' and 'secure', using WKS_FILE selected by distro feature 'secure'")
-
-    d.setVar("WKS_FILE", "tqmaxx-imx-v8-sdimg%s.wks.in" % wks_type)
-}
-
 MACHINE_FEATURES += "\
     bluetooth \
     screen \
@@ -43,11 +29,6 @@ IMXBOOT_TARGETS ?= "\
     flash_singleboot \
     flash_singleboot_flexspi \
 "
-
-#
-# bootstream name, construction see imx-boot-tq recipe, do_deploy()
-#
-MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-flash_singleboot"
 
 MACHINE_EXTRA_RRECOMMENDS += "\
     linux-firmware-pcie8997 \
