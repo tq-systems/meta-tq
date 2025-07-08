@@ -25,6 +25,11 @@ Releases are named with the following scheme:
   * support TQMLX2160A
 * linux-ti-tq-6.12: New default kernel for TQMa62xx\[L\], TQMa64xxL and
   TQMa67xx\[L\]
+* u-boot-tq-2025.07: New U-Boot for TQMa62xx\[L\], TQMa64xxL and TQMa67xx\[L\]
+
+  Differing from u-boot-ti-tq-2023.04, the A53 SPL stage (`tispl.bin`) has been
+  dropped, simplifying and speeding up the boot process. The R5 SPL
+  (`tiboot3.bin`) now directly boots into the U-Boot proper (`u-boot.img`).
 * TQMLS1028A:
   * u-boot-lsdk-tq: Insert MTD partitions into DT for Linux
 * TQMLX2160A:

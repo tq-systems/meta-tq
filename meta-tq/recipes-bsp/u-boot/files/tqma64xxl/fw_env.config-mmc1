@@ -1,0 +1,7 @@
+uboot:
+  size: 0x10000
+  devices:
+    - path: /dev/mmcblk1
+      offset: 0x3c0000
+    - path: /dev/mmcblk1
+      offset: 0x3e0000
