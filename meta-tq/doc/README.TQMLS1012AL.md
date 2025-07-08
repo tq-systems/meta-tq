@@ -58,7 +58,7 @@ recovery via JTAG is needed.
 
 ## Known Issues
 
-* U-Boot: USB HUB(X3): sometimes lock after second 'usb reset` when using USB stick
+* U-Boot: USB HUB(X3): sometimes lock after second `usb reset` when using USB stick
   * seems to be hardware dependend
 * Linux: currently no out of the box support for RootFS on SPI
   * `tq-image-small-debug` image from `spaetzle` distrubution is too big
