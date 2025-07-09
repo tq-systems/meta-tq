@@ -2,30 +2,28 @@
 
 [[_TOC_]]
 
-## Overview
+## Supported Hardware
 
-### Version information for software components
+* TQMLS1043A with 1 GiB / 2 GiB RAM, HW REV.020x/030x on MBLS10xxa, HW REV.020x
+* TQMLS1046A with 2 GiB / 4 GiB / 8 GiB RAM, HW REV.020x/030x on MBLS10xxa, HW REV.020x
+* TQMLS1088A with 2 GiB / 4 GiB RAM, HW REV.020x/030x on MBLS10xxa HW REV.020x
 
-#### U-Boot
+## Version information for software components
+
+### U-Boot
 
 * based on qoriq-u-boot (https://github.com/nxp-qoriq/u-boot/)
 * branched from lf-5.15.71-2.2.0 (v2022.04)
 
-#### ATF
+### ATF
 
 * based on qoriq-atf (https://github.com/nxp-qoriq/atf/)
 * branched from lf-5.15.5-1.0.0 (v2.4)
 
-#### Linux
+### Linux
 
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/)
 * branched from linux-6.12.y
-
-### Supported Hardware:
-
- * TQMLS1043A with 1 GiB / 2 GiB RAM, HW REV.020x/030x on MBLS10xxa, HW REV.020x
- * TQMLS1046A with 2 GiB / 4 GiB / 8 GiB RAM, HW REV.020x/030x on MBLS10xxa, HW REV.020x
- * TQMLS1088A with 2 GiB / 4 GiB RAM, HW REV.020x/030x on MBLS10xxa HW REV.020x
 
 ## Supported Features
 
