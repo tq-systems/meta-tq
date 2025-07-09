@@ -1,4 +1,4 @@
-# Common definitions for TQ-Systems GmbH TQMLS1028a modules
+# Common definitions for TQ-Systems GmbH TQMLS1028A modules
 
 require conf/machine/include/soc-family.inc
 
