@@ -29,7 +29,10 @@
 
 ## Known Issues
 
-* TQMLS1088A: Suspend to RAM not supported.
+### TQMLS1088A
+
+* Suspend to RAM not supported.
+* USB on X35 has wrong pin mux settings in RCW and does not work.
 
 ## HowTo
 
