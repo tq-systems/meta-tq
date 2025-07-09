@@ -117,6 +117,7 @@ SD-Card on MBLS10xxA is accessible.
 ## Build Artifacts
 
 ### TQMLS1043A
+
 * atf/
   * fip_uboot.bin: U-Boot
   * bl2_[sd|qspi].pbl: Boot-media dependent Primary Boot Loader with RCW
@@ -132,6 +133,7 @@ SD-Card on MBLS10xxA is accessible.
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 
 ### TQMLS1046A
+
 * atf/
   * fip_uboot.bin: U-Boot
   * bl2_[sd|qspi].pbl: Boot-media dependent Primary Boot Loader with RCW
@@ -146,7 +148,8 @@ SD-Card on MBLS10xxA is accessible.
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 
-### TQMLS1088a
+### TQMLS1088A
+
 * atf/
   * fip_uboot.bin: U-Boot
   * bl2_[auto|qspi].pbl: Boot-media dependent Primary Boot Loader with RCW
@@ -223,6 +226,7 @@ see: [TQ Embedded Wiki for TQMLS10xxA](https://support.tq-group.com/en/layerscap
 | 5577 (20)     | PCIe.1 | PCIe.2 | PCIe.3 x 2 | PCIe.3 x 2 |
 
 ## DIP-Switch settings
+
 The DIP-switches should match the used RCW, otherwise interfaces will not work,
 or will not start. See [Serdes Config](#serdes-configuration)
 Pay attention to the following DIP-Switches:
