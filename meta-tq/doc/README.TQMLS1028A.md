@@ -3,6 +3,7 @@
 [[_TOC_]]
 
 ## Variants
+
 * TQMLS1028A / TQMLS1017A SOM REV.020x/030x with 1/2/4/8 GiB RAM
 * MBLS1028A / MBLS1028A-IND carrier board
 
@@ -11,26 +12,26 @@
 ### U-Boot
 
 * based on qoriq-u-boot (https://github.com/nxp-qoriq/u-boot/)
-* branched from LSDK-20.04-update-290520
+* branched from LSDK-20.04-update-290520 (v2019.10)
 
 ### ATF
 
 * based on qoriq-atf (https://github.com/nxp-qoriq/atf/)
-* branched from lf-5.15.5-1.0.0
+* branched from lf-5.15.5-1.0.0 (v2.4)
 
 ### Linux
 
 * based on linux-qoriq (https://github.com/nxp-qoriq/linux/)
 * branched from lf-5.15.5-1.0.0
 
-## Kernel variants
+### Kernel variants
 
 By default, the kernel recipe linux-imx-tq (based on qoriq kernel
 5.15.5) is built. An alternative kernel based on LSDK-20.12-V5.4-RT
 can be selected for PREEMPT_RT support by adding the following to
 local.conf or a custom DISTRO config:
 
-    PREFERRED_PROVIDER_virtual/kernel = "linux-rt-lsdk-tq"
+`PREFERRED_PROVIDER_virtual/kernel = "linux-rt-lsdk-tq"`
 
 Please note that the default linux-imx-tq kernel has received more thorough
 testing and it is therefore recommended for most usecases.
@@ -143,6 +144,8 @@ Artifacs can be found at the usual locations for bitbake:
 * `Image.gz`: Linux kernel image
 * \*.wic[.<compress>]: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
+* \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
+* \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 
 Artifacts under `atf` can be used to manually update boot images on SOM or exchange them in WIC image.
 
