@@ -70,6 +70,7 @@ SD-Card on MBLS10xxA is accessible.
 ## Build Artifacts
 
 ### TQMLS1043A
+
 * atf/
   * fip_uboot.bin: U-Boot
   * bl2_[sd|qspi].pbl: Boot-media dependent Primary Boot Loader with RCW
@@ -86,6 +87,7 @@ SD-Card on MBLS10xxA is accessible.
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 
 ### TQMLS1046A
+
 * atf/
   * fip_uboot.bin: U-Boot
   * bl2_[sd|qspi].pbl: Boot-media dependent Primary Boot Loader with RCW
@@ -101,7 +103,8 @@ SD-Card on MBLS10xxA is accessible.
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 
-### TQMLS1088a
+### TQMLS1088A
+
 * atf/
   * fip_uboot.bin: U-Boot
   * bl2_[auto|qspi].pbl: Boot-media dependent Primary Boot Loader with RCW
@@ -131,6 +134,7 @@ For an overview which port can be used at which serdes configuration
 see: [TQ Embedded Wiki for TQMLS10xxA](https://support.tq-group.com/en/layerscape/tqmls10xxa/mbls10xxa/ethernet)
 
 #### Serdes 1
+
 | Lane / Config | A         | B         | C         | D         |
 | ------------- | --------- | --------- | --------- | --------- |
 | 1355          | XFI.2     | SGMII.2   | PCIe.2    | PCIe.3    |
@@ -141,6 +145,7 @@ see: [TQ Embedded Wiki for TQMLS10xxA](https://support.tq-group.com/en/layerscap
 ### TQMLS1046A
 
 #### Serdes 1
+
 | Lane / Config | D - 0     | C - 1     | B - 2     | A - 3     |
 | ------------- | --------- | --------- | --------- | --------- |
 | 1040          | XFI.2     |           | QSGMIIb   |           |
@@ -159,6 +164,7 @@ see: [TQ Embedded Wiki for TQMLS10xxA](https://support.tq-group.com/en/layerscap
 ### TQMLS1088A
 
 #### Serdes 1
+
 | Lane / Config | D - 0     | C - 1     | B - 2     | A - 3     |
 | ------------- | --------- | --------- | --------- | --------- |
 | 3333 (18)     | SGMII.2   | SGMII.1   | SGMII.7   | SGMII.3   |
@@ -167,6 +173,7 @@ see: [TQ Embedded Wiki for TQMLS10xxA](https://support.tq-group.com/en/layerscap
 | 1144 (29)     | XFI.2     | XFI.1     | QSGMIIb   | QSGMIIa   |
 
 #### Serdes 2
+
 | Lane / Config | A - 0     | B - 1     | C - 2     | D - 3     |
 | ------------- | --------- | --------- | --------- | --------- |
 | 5506 (59)     | PCIe.1    | PCIe.2    |           | PCIe.3    |
@@ -174,6 +181,7 @@ see: [TQ Embedded Wiki for TQMLS10xxA](https://support.tq-group.com/en/layerscap
 | 5577 (20)     | PCIe.1    | PCIe.2    | PCIe.3 x 2| PCIe.3 x 2|
 
 ## DIP-Switch settings
+
 The DIP-switches should match the used RCW, otherwise interfaces will not work,
 or will not start. See [Serdes Config](#serdes-configuration)
 Pay attention to the following DIP-Switches:
