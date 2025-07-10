@@ -280,7 +280,7 @@ Download UBIFS image from TFTP and update:
 
 `run update_rootfs_spi`
 
-#### SD / e-MMC
+#### SD / eMMC
 
 See [Layerscape Boot Media](./README.ls.Bootmedia.md) for details.
 

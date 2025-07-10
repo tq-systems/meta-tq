@@ -35,14 +35,14 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | generic                                          |       x      |
 | **I2C**                                          |              |
 | PMIC                                             |       x      |
-| **e-MMC / SD**                                   |              |
+| **eMMC / SD**                                    |              |
 | Read                                             |       x      |
 | Write                                            |       x      |
 | **Ethernet**                                     |              |
 | 2 x FEC via Phy on MBa6ULx                       |       x      |
 | **Bootdevices**                                  |              |
 | SD-Card                                          |       x      |
-| e-MMC                                            |       x      |
+| eMMC                                             |       x      |
 | QSPI-NOR on QuadSPI                              |       x      |
 | Serial Downloader                                |       x      |
 | **USB**                                          |              |
@@ -122,12 +122,12 @@ Artifacs can be found at the usual locations for bitbake:
 
 * \*.dtb: device tree blobs
 * zImage: Linux kernel image
-* \*.wic[.<compress>]: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * \*.rootfs.ubifs: UBIFS rootfs for updating the rootfs from bootloader
    (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
-* u-boot-with-spl-${MACHINE}.imx-sd: bootloader for SD / e-MMC
+* u-boot-with-spl-${MACHINE}.imx-sd: bootloader for SD / eMMC
 * u-boot-with-spl-${MACHINE}.imx-qspi: bootloader for QSPI
 * u-boot-with-spl-${MACHINE}.imx-uuu: bootloader for UUU / USB serial download
 
@@ -151,7 +151,7 @@ _Note:_
 | ON      |  x  |  x  |     |  x  |  x  |  x  |  x  |  x  |   |  x  |  x  |     |  x  |  x  |  x  |     |  x  |    |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |    |     |  x  |
 | OFF     |     |     |  x  |     |     |     |     |     |   |     |     |  x  |     |     |     |  x  |     |    |     |     |     |     |     |     |     |     |    |  x  |     |
 
-#### e-MMC
+#### eMMC
 
 |         | S11 |     |     |     |     |     |     |     |   | S12 |     |     |     |     |     |     |     |    | S13 |     |     |     |     |     |     |     |    |  S5 |     |
 | ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: |

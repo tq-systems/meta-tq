@@ -38,14 +38,14 @@ _MBa8x HW Rev.030x only_
 | **I2C**                                          |                       |
 | GPIO expander                                    |          x            |
 | system EEPROM parsing                            |          x            |
-| **e-MMC / SD**                                   |                       |
+| **eMMC / SD**                                    |                       |
 | Read                                             |          x            |
 | Write                                            |          x            |
 | **Ethernet**                                     |                       |
 | GigE via Phy on MBa8Mx                           |          x            |
 | **Bootdevices**                                  |                       |
 | SD-Card on USDHC2                                |          x            |
-| e-MMC on USDHC3                                  |          x            |
+| eMMC on USDHC3                                   |          x            |
 | QSPI-NOR on FlexSPI                              |          x            |
 | **USB**                                          |                       |
 | USB Host (USB1 via hub 2.0)                      |          x            |
@@ -178,9 +178,9 @@ Artifacs can be found at the usual locations for bitbake:
   * imx8mn-tqma8mqnl-mba8mx-rpmsg.dtb (CortexM / RPMSG Support)
   * imx8mn-tqma8mqnl-mba8mx-usb0otg.dtb (USB dual role support)
 * Image: Linux kernel image
-* \*.wic[.<compress>]: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / e-MMC
+* imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / eMMC
 * imx-boot-${MACHINE}-sd.bin-flash\_evk\_flexspi: boot stream for FlexSPI
 * imx-boot-${MACHINE}-mfgtool.bin-flash\_spl\_uboot:  boot stream for UUU
 * hello\_world.bin (Cortex M7 demo, UART4, TCM)
@@ -231,7 +231,7 @@ BOOT\_MODE: 0001
 | ON                  |   |   | x |   |              |   | x |   |   |
 | OFF                 | - | x |   | - |              | - |   | x | - |
 
-#### e-MMC (USDHC3)
+#### eMMC (USDHC3)
 
 BOOT\_MODE: 0010
 
@@ -310,15 +310,15 @@ Example for Linux:
 
 `sudo dd if=<bootstream> of=/dev/sd<x> bs=1k seek=32 conv=fsync`
 
-### Bootable e-MMC
+### Bootable eMMC
 
-To create a bootable e-MMC with complete system image:
+To create a bootable eMMC with complete system image:
 
-write *.wic image to e-MMC (offset 0)
+write *.wic image to eMMC (offset 0)
 
-To create a bootable e-MMC with boot stream only (file name see above)
+To create a bootable eMMC with boot stream only (file name see above)
 
-Boot from SD-Card and write bootstream at offset 32 kiB (0x8000) to e-MMC
+Boot from SD-Card and write bootstream at offset 32 kiB (0x8000) to eMMC
 
 Example for Linux:
 
@@ -356,19 +356,19 @@ sf update ${loadaddr} 0 ${filesize}
 For ease of development a set of variables and scripts are in default env.
 
 _Note_: Update and start scripts expect a partitioned / initialized SD-Card or
-e-MMC.
+eMMC.
 
 _U-Boot environment variables_
 
 * `uboot`: name of bootstream image (default = bootstream.bin)
-* `mmcdev`: 0 for e-MMC, 1 for SD-Card (automatically generated,
+* `mmcdev`: 0 for eMMC, 1 for SD-Card (automatically generated,
   can be overwritten)
   `mmcpart`: partition number for kernel and devicetree (default = 1)
   `mmcpath`: path to kernel and device tree (default = /)
 * `fdt_file`: device tree blob,
 * `image`: kernel image,
 
-_SD / e-MMC_
+_SD / eMMC_
 
 Download bootstream from TFTP and update:
 

@@ -80,7 +80,7 @@ Artifacs can be found at the usual locations for bitbake:
 * `fsl-ls1012a-tqmls1012al-mbls1012al.dtb`: device tree blob
 * `Image.gz`: Linux kernel image
 * `u-boot-tfa-2021.04-r0.bin` U-Boot binary
-* \*.wic[.<compress>]: SD / e-MMC system image (without boot loader)
+* \*.wic[.<compress>]: SD / eMMC system image (without boot loader)
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 
 ## Functional DIP Switches

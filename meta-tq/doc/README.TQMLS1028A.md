@@ -24,7 +24,7 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 | Read                                             |      x       |
 | Write                                            |      x       |
 | Boot                                             |      x       |
-| **e-MMC / SD-Card**                              |              |
+| **eMMC / SD-Card**                               |              |
 | Read                                             |      x       |
 | Write                                            |      x       |
 | Boot                                             |      x       |
@@ -40,7 +40,7 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 | ENET Switch                                      |      x       |
 | **Bootstreams**                                  |              |
 | FlexSPI                                          |      x       |
-| SD / e-MMC                                       |      x       |
+| SD / eMMC                                        |      x       |
 
 ### Linux
 
@@ -110,12 +110,12 @@ Artifacs can be found at the usual locations for bitbake:
 * `atf/`
   * 1 GiB
     * `bl2_flexspi_nor.pbl` Primary Boot Loader with RCW
-    * `bl2_auto.pbl` Primary Boot Loader with RCW for SD/e-MMC boot
+    * `bl2_auto.pbl` Primary Boot Loader with RCW for SD/eMMC boot
     * `fip_uboot.bin` Firmware Image Package for BL3 (TF-A as BL31
        and U-Boot as BL33 non secure payload)
   * 2/4/8 GiB
     * `bl2_flexspi_nor_tqmls1028a_<size>gb.pbl` Primary Boot Loader with RCW
-    * `bl2_auto_tqmls1028a_<size>gb.pbl` Primary Boot Loader with RCW for SD/e-MMC boot
+    * `bl2_auto_tqmls1028a_<size>gb.pbl` Primary Boot Loader with RCW for SD/eMMC boot
     * `fip_uboot_tqmls1028a_<size>gb.bin` Firmware Image Package for BL3 (TF-A as BL31
        and U-Boot as BL33 non secure payload)
     * `atf/variants/`: different Primary Boot Loader variants built with RCW binaries form `rcw/`
@@ -123,7 +123,7 @@ Artifacs can be found at the usual locations for bitbake:
 * `fsl-ls1028a-tqmls1028a-mbls1028a.dtb`: device tree blob for mbls1028a board
 * `fsl-ls1028a-tqmls1028a-mbls1028a-ind.dtb`: device tree blob for mbls1028a-ind board
 * `Image.gz`: Linux kernel image
-* \*.wic[.<compress>]: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 
 Artifacts under `atf` can be used to manually update boot images on SOM or exchange them in WIC image.
@@ -132,19 +132,19 @@ Artifacts under `atf` can be used to manually update boot images on SOM or excha
 
 * BL2_IMAGE: ATF/TF-A BL2 file used for WIC image creation
 * BL3_IMAGE: ATF/TF-A BL3 file used for WIC image creation
-* RCWAUTO: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SD/e-MMC Boot
+* RCWAUTO: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SD/eMMC Boot
 * RCWXSPI: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SPI-NOR Flash
 * ATF_RCW_VARIANTS: List of RCW binaries used to build variants of the Primary Boot Loader
 
 By default, all images will be built and the 1GiB variant is set as default for WIC-creation.
 Set `BL2_IMAGE` to `bl2_auto${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.pbl` and
-`BL3_IMAGE` to `fip_uboot${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.bin` to create an SD/e-MMC image for the 4GiB
+`BL3_IMAGE` to `fip_uboot${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.bin` to create an SD/eMMC image for the 4GiB
 variant (or 2gb/8gb for the 2GiB/8GiB variants respectively).
 
 ### Secure Boot
 
 Secure Boot is enabled by adding "secure" to `DISTRO_FEATURES`. With this setting, signed variants
-of all ATF components are generated and built into the SD/e-MMC system image.
+of all ATF components are generated and built into the SD/eMMC system image.
 
 By default, a newly generated keypair will be used for signing, which may be lost when certain
 packages are rebuilt. To enable the build of secured images with a pregenerated keypair, the
@@ -181,7 +181,7 @@ See [Layerscape Boot Media](./README.ls.Bootmedia.md) for details.
 | ON      |   |   |   |   |
 | OFF     | x | x | x | x |
 
-### e-MMC
+### eMMC
 
 | DIP S9  | 1 | 2 | 3 | 4 |
 | ------- | - | - | - | - |

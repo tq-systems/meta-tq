@@ -162,7 +162,7 @@ See [Layerscape Boot Media](./README.ls.Bootmedia.md) for details.
 ## Build-Time Configuration
 
 * RCWXSPI: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SPI-NOR Boot
-* RCWAUTO: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SD/e-MMC Boot
+* RCWAUTO: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SD/eMMC Boot
 * ATF_RCW_VARIANTS: List of RCW binaries used to build variants of the Primary Boot Loader
 * MC_DPC: DPAA2 Configuration File
 * MC_DPL: DPAA2 Data Path Layout file.
@@ -170,7 +170,7 @@ See [Layerscape Boot Media](./README.ls.Bootmedia.md) for details.
 * BL3_IMAGE: ATF BL3 (U-Boot) file used for WIC image generation.
 
 Set BL2_IMAGE to `bl2_tqmlx2160a_16gb.pbl` and BL3_IMAGE to `fip_uboot_tqmlx2160a_16gb.bin`
-to create an SD/e-MMC image for the 16GiB variant.
+to create an SD/eMMC image for the 16GiB variant.
 
 ## Ethernet and DPAA2
 

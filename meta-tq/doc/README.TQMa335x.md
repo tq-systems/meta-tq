@@ -98,9 +98,9 @@ Artifacs can be found at the usual locations for bitbake:
 
 * \*.dtb: device tree blobs
 * zImage: Linux kernel image
-* \*.wic[.<compress>]: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* MLO-${MACHINE}: U-Boot MLO (SPL image for SD / e-MMC)
+* MLO-${MACHINE}: U-Boot MLO (SPL image for SD / eMMC)
 * MLO-${MACHINE}.byteswap: U-Boot MLO (SPL image for SPI NOR flash)
 * u-boot-${MACHINE}.img: U-Boot image to be booted by MLO
 
@@ -125,9 +125,9 @@ Boot sequence: MMC0 (SD) → SPI0 (NOR) → UART0 (N/A) → USB0 (N/A)
 | ON      |     |     |     |  x  |     |     |     |     |
 | OFF     |  x  |  x  |  x  |     |  x  |  x  |  x  |  x  |
 
-#### e-MMC
+#### eMMC
 
-Boot sequence: MMC1 (e-MMC) → SPI0 (NOR) → UART0 (N/A) → USB0 (N/A)
+Boot sequence: MMC1 (eMMC) → SPI0 (NOR) → UART0 (N/A) → USB0 (N/A)
 
 | S2      |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |
 | ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
@@ -161,17 +161,17 @@ Example for Linux:
 
 `sudo dd if=<image> of=/dev/sd<x> bs=4M conv=fsync`
 
-### Bootable e-MMC
+### Bootable eMMC
 
-To create a bootable e-MMC with complete system image use the generated
+To create a bootable eMMC with complete system image use the generated
 [wic image](#artifacts):
 
-write *.wic image to e-MMC (offset 0)
+write *.wic image to eMMC (offset 0)
 
-To create a bootable e-MMC with minimum boot image use the generated
+To create a bootable eMMC with minimum boot image use the generated
 [minimal wic image](#artifacts):
 
-write *.wic.bootonly to e-MMC (offset 0)
+write *.wic.bootonly to eMMC (offset 0)
 
 Example for Linux:
 
@@ -210,19 +210,19 @@ Depending on your configuration some variable values needs to bet changend
 to the right values. For files to use see the [artifacts](#artifacts) section.
 
 _Note_: Update and start scripts expect a partitioned / initialized SD-Card or
-e-MMC.
+eMMC.
 
-* `uboot`: name of U-Boot payload image for SD / e-MMC (default = u-boot.img)
-* `mlo`: name of U-Boot SPL image for SD / e-MMC (default = MLO)
+* `uboot`: name of U-Boot payload image for SD / eMMC (default = u-boot.img)
+* `mlo`: name of U-Boot SPL image for SD / eMMC (default = MLO)
 * `uboot_spi`: name of U-Boot payload image for SPI flash (default = u-boot.img)
 * `mlo_spi`: name of U-Boot SPL image for SPI flash (default = MLO.byteswap)
-* `mmcdev`: 1 for e-MMC, 2 for SD-Card (automatically generated when booting
-   from SD / e-MMC with the index of the boot device, can be overwritten;
+* `mmcdev`: 1 for eMMC, 2 for SD-Card (automatically generated when booting
+   from SD / eMMC with the index of the boot device, can be overwritten;
    must be set if needed when booting from SPI NOR)
 * `fdtfile`: device tree blob,
 * `bootfile`: kernel image,
 
-### SD / e-MMC
+### SD / eMMC
 
 Download bootloader from TFTP and update (make sure `mmcdev` is correctly set):
 
@@ -253,10 +253,10 @@ supported displays:
 To boot a Linux OS from a running U-Boot following scripts are implemented in
 environment:
 
-* `mmcboot`: load kernel and dtb from SD/e-MMC instance given with variable `mmcdev`
-  * Boot device is SD / e-MMC: `mmcdev` is set to device index of the boot device if
+* `mmcboot`: load kernel and dtb from SD/eMMC instance given with variable `mmcdev`
+  * Boot device is SD / eMMC: `mmcdev` is set to device index of the boot device if
     `mmcautodetect` is `yes` (default)
-  * Boot device is not SD / e-MMC: `mmcdev` has to be set before using `mmcboot`
+  * Boot device is not SD / eMMC: `mmcdev` has to be set before using `mmcboot`
 * `netboot`: load kernel and dtb using tftpboot and boots into rootfs on a NFS
   mount.
 

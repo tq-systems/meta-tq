@@ -43,10 +43,10 @@ Artifacs can be found at the usual locations for bitbake:
   * ls1021a-tqmls1021a-mbls1021a-rgb-cdtech-dc44.dtb (support for RGB display DC44)
   * ls1021a-tqmls1021a-mbls1021a-rgb-cdtech-fc21.dtb (support for RGB display FC21)
 * zImage: Linux kernel image
-* \*.wic[.<compress>]: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive
 * u-boot.bin-\*:
-  * sd: boot stream for SD / e-MMC
+  * sd: boot stream for SD / eMMC
     * _can: including CAN support
     * _ecc: including ECC support
       * _can: including ECC and CAN support
