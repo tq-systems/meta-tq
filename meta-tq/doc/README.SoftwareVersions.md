@@ -70,10 +70,10 @@ For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 
 ## TQMLS102xA
 
-### Kernel based on 5.4 (linux-stable)
+### Kernel based on 6.12 (linux-stable)
 
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
-* branched from `5.4.y` / tag commit is merged into (see `LINUX_VERSION` in linux-tq-5.4.bb for exact release)
+* branched from `6.12.y`
 
 ### U-Boot based on v2027.11
 

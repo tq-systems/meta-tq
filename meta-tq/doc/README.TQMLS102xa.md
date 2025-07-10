@@ -11,14 +11,8 @@ This README contains some useful information for TQMLS102xA on MBLS102xA
 
 ## Version information for software components
 
-### U-Boot
-
-* based on u-boot v2017.11
-
-### Linux
-
-* based on linux-6.12.y
-* contains upstream changes up to v6.12.18
+See [here](./README.SoftwareVersions.md) for the software base versions of
+bootloader and Linux kernel.
 
 ## Important Notes
 
