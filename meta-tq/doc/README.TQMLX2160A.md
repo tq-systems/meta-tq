@@ -70,11 +70,11 @@
 
 * atf/
   * 32GiB
-	* fip_uboot.bin: U-Boot
-	* bl2_[auto|flexspi_nor].pbl: Boot-media dependend Primary Boot Loader with RCW
+	  * fip_uboot.bin: TF-A / U-Boot Firmware Image Package
+	  * bl2_[auto|flexspi_nor].pbl: Boot-media dependend Primary Boot Loader with RCW
   * 16GiB
-	* fip_uboot_tqmlx2160a_16gb.bin: U-Boot
-	* bl2_[auto|flexspi_nor]_tqmlx2160a_16gb.pbl: Boot-media dependend Primary Boot Loader with RCW
+	  * fip_uboot_tqmlx2160a_16gb.bin: TF-A / U-Boot Firmware Image Package
+	  * bl2_[auto|flexspi_nor]_tqmlx2160a_16gb.pbl: Boot-media dependend Primary Boot Loader with RCW
 * atf/variants/: contains RCW-PBL for all supported RCW serdes-configurations and all supported boot sources.
 * ddr-phy/
 	* fip_ddr.bin: Firmware for DDR-Controller Phy
@@ -83,9 +83,10 @@
 * mc-utils: the DPAA2-Ethernet Configuration files
 * Image: Kernel
 * fsl-lx2160a-tqmlx2160a-mblx2160a.dtb: Device Tree Blob.
-* u-boot-tfa-2019.04-r0.bin: U-Boot Binary
-* tq-image-generic-tqmlx2160a-mblx2160a.wic[.<compress>]: Complete eMMC / SD-Card Image
-* tq-image-generic-tqmlx2160a-mblx2160a.ubi: RootFS UBI-Image
+* \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
+* \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
+* \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
+* \*.wic[.<compress>]: Complete eMMC / SD-Card Image
 
 Note: As U-Boot use the fip_uboot.bin from the atf directory.
 
@@ -122,9 +123,14 @@ BOOT\_MODE can be configured using DIP switch S1
 
 In U-Boot update scripts are provided to easily update components.
 
-There are scripts to update the PBL and U-Boot.
+There are scripts to update the PBL and TF-A / U-Boot FIP.
 
 These scripts are named `update_[pbl|uboot]_[spi|mmc|sd]`.
+
+**Attention**
+
+* use PBL/RCW image to update PBL
+* use FIP to update TF-A / U-Boot
 
 ### Flash UBI to SPI-NOR
 
