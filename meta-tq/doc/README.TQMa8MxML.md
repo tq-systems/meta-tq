@@ -436,8 +436,13 @@ See [here](./README.imx.UUU.md) for details about using Serial Download mode and
 
 ## Howto
 
-### RTC wakeup alarm
-By default the `RTC_EVENT#` is not connect to any input, but left open on `X4` pin 11 on TQMa8MxML-ADAP. In order to use the RTC IRQ feature this output has to be connected to a GPIO input with IRQ support, e.g. `GPIO01_06` on `X17` pin 9 on MBa8Mx.
+### Using RTC for wakeup
+
+See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RTC.
+
+**Note**: On this platform `rtc0` is the I2C RTC on SoM and `rtc1` is the RTC in CPU SNVS domain
+
+**Note**: By default the `RTC_EVENT#` is not connect to any input, but left open on `X4` pin 11 on TQMa8MxML-ADAP. In order to use the RTC IRQ feature this output has to be connected to a GPIO input with IRQ support, e.g. `GPIO01_06` on `X17` pin 9 on MBa8Mx.
 
 #### DT changes
 For the example from above the following DT change has to be applied in order to support RTC IRQ support.
