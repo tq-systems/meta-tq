@@ -109,8 +109,11 @@ Releases are named with the following scheme:
 
   Only u-boot-tq-2025.07 is supported for the TQMa62xx\[L\], TQMa64xxL and
   TQMa67xx\[L\] in future BSP releases.
-* linux-imx-tq-5.4
+* linux-tq-5.4
   * TQMLS102xA is now supported by linux-tq-6.12
+* linux-rt-tq-5.4
+  * Currently there is no replacement for RT-enabled kernel on TQMLS102xA
+  * Support for newer kernels can be added on request
 * linux-imx-tq-5.15
   * Both TQMLS1012AL and TQMLS10128A are now supported by linux-imx-tq-6.6
 * MBaX4XxL
