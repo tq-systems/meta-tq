@@ -438,25 +438,13 @@ See [here](./README.imx.UUU.md) for details about using Serial Download mode and
 
 ## Howto
 
-### Sleep Modes
+### Using RTC for wakeup
 
-Read supported sleep modes:
+See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RTC.
 
-```
-cat /sys/power/state
-```
+**Note**: On this platform `rtc0` is the I2C RTC on SoM and `rtc1` is the RTC in CPU SNVS domain
 
-Test sleepmode and wakeup:
-
-Use rtc\[0,1\] to wakeup after 20 seconds:
-
-```
-RTC=rtc[0,1]
-echo enabled > /sys/class/rtc/${RTC}/device/power/wakeup
-echo 0 > /sys/class/rtc/${RTC}/wakealarm
-echo +20 > /sys/class/rtc/${RTC}/wakealarm
-echo mem > /sys/power/state
-```
+### Using GPIOs for wakeup
 
 Send Linux to sleep mode and press one of the gpio buttons S\[1,2,3\] afterwards:
 
