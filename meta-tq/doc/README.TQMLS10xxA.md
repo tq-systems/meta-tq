@@ -281,7 +281,7 @@ Download UBIFS image from TFTP and update:
 
 #### SD / eMMC
 
-See [Layerscape Boot Media](./README.ls.Bootmedia.md) for details.
+See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 
 ### Update parts of system
 

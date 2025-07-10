@@ -170,7 +170,7 @@ like the Linux kernel.
 
 ## Boot Media
 
-See [Layerscape Boot Media](./README.ls.Bootmedia.md) for details.
+See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 
 ## Boot DIP Switches
 

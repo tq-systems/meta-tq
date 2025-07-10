@@ -141,7 +141,7 @@ ubiattach /dev/ubi_ctrl -m 7
 
 ### SD / eMMC images
 
-See [Layerscape Boot Media](./README.ls.Bootmedia.md) for details.
+See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 
 ## Memory Layout
 

@@ -122,7 +122,7 @@ run update_uboot			# update U-Boot FIP
 
 ### SD / eMMC images
 
-See [Layerscape Boot Media](./README.ls.Bootmedia.md) for details.
+See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 
 ## Howto
 

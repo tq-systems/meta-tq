@@ -118,7 +118,7 @@ eMMC is a placement option on TQMLS102xA
 
 ## Boot Media
 
-See [Layerscape Boot Media](./README.ls.Bootmedia.md) for details.
+See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 
 ## Howto
 
