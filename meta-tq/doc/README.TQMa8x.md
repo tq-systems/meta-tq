@@ -304,25 +304,7 @@ In case of problems first check the bus termination:
 | CAN0      |    X18    | S10 |
 | CAN1      |    X19    | S11 |
 
-#### Enable without CAN-FD
-
-CAN1/2 should be enabled and configured by default when using with MBa8x
-and meta-tq / systemd
-
-```
-CANIF="can[0,1]"
-ip link set ${CANIF} up type can bitrate 500000 fd off
-```
-
-#### Enable CAN-FD
-
-To enable CAN-FD the following command can be used, if using a carrier board with
-FD capable transceiver:
-
-```
-CANIF="can[0,1]"
-ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on
-```
+See [here](./README.CAN.md) for details about configurating of CAN interfaces.
 
 ### Cortex M4
 
