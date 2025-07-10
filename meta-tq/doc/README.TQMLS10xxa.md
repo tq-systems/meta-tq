@@ -119,7 +119,7 @@ SD-Card on MBLS10xxA is accessible.
 ### TQMLS1043A
 
 * atf/
-  * fip_uboot.bin: U-Boot
+  * fip_uboot.bin: TF-A / U-Boot Firmware Image Package
   * bl2_[sd|qspi].pbl: Boot-media dependent Primary Boot Loader with RCW
 * atf/variants/: contains RCW-PBL for all supported RCW serdes-configurations
   and all supported boot sources.
@@ -127,7 +127,6 @@ SD-Card on MBLS10xxA is accessible.
 * fsl_fman_ucode_ls1043_r1.1_106_4_18.bin: Fman Ethernet Firmware
 * Image: Kernel
 * fsl-ls1043a-tqmls1043a-mbls10xxa.dtb: Device Tree Blob.
-* u-boot-tfa-2022.04-r0.bin: U-Boot Binary
 * \*.wic[.<compress>]: Complete eMMC / SD-Card Image
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
@@ -135,7 +134,7 @@ SD-Card on MBLS10xxA is accessible.
 ### TQMLS1046A
 
 * atf/
-  * fip_uboot.bin: U-Boot
+  * fip_uboot.bin: TF-A / U-Boot Firmware Image Package
   * bl2_[sd|qspi].pbl: Boot-media dependent Primary Boot Loader with RCW
 * atf/variants/: contains RCW-PBL for all supported RCW serdes-configurations
   and all supported boot sources.
@@ -143,7 +142,6 @@ SD-Card on MBLS10xxA is accessible.
 * fsl_fman_ucode_ls1046_r1.0_106_4_18.bin: Fman Ethernet Firmware
 * Image: Kernel
 * fsl-ls1046a-tqmls1046a-mbls10xxa.dtb: Device Tree Blob.
-* u-boot-tfa-2022.04-r0.bin: U-Boot Binary
 * \*.wic[.<compress>]: Complete eMMC / SD-Card Image
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
@@ -151,7 +149,7 @@ SD-Card on MBLS10xxA is accessible.
 ### TQMLS1088A
 
 * atf/
-  * fip_uboot.bin: U-Boot
+  * fip_uboot.bin: TF-A / U-Boot Firmware Image Package
   * bl2_[auto|qspi].pbl: Boot-media dependent Primary Boot Loader with RCW
 * atf/variants/: contains RCW-PBL for all supported RCW serdes-configurations
   and all supported boot sources.
@@ -160,7 +158,6 @@ SD-Card on MBLS10xxA is accessible.
 * mc-utils: the DPAA2-Ethernet Configuration files
 * Image: Kernel
 * fsl-ls1088a-tqmls1088a-mbls10xxa.dtb: Device Tree Blob.
-* u-boot-tfa-2022.04-r0.bin: U-Boot Binary
 * \*.wic[.<compress>]: Complete eMMC / SD-Card Image
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
@@ -289,10 +286,10 @@ See [Layerscape Boot Media](./README.ls.Bootmedia.md) for details.
 ### Update parts of system
 
 In U-Boot the following update scripts are available to update the components:
-* RCW/PBL:
+* RCW/PBL (use `*.pbl` file ):
   * `update_pbl_mmc`
   * `update_pbl_spi`
-* TF-A / U-Boot:
+* TF-A / U-Boot (use FIP Firmware Image Package):
   * `update_uboot_mmc`
   * `update_uboot_spi`
 * RootFS:
