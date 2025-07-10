@@ -345,6 +345,10 @@ __Note:__ Default u-boot environment variable `bootcmd` has to be set to `run di
 
 See [RAUC](RAUC.md).
 
+### Using RTC for wakeup
+
+See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RTC.
+
 ### MIPI-CSI
 
 #### Vision Components GmbH cameras
