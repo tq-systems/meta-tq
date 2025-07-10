@@ -227,17 +227,11 @@ sudo uuu -b spl imx-boot-<machine>-mfgtool.bin
 
 ## Howto
 
-### Test sleepmode and wakeup
+### Using RTC for wakeup
 
-Use rtc1 (RTC in CPU SNVS domain) to wakeup after 20 seconds:
+See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RTC.
 
-```
-RTC=rtc1
-echo enabled > /sys/class/rtc/${RTC}/device/power/wakeup
-echo 0 > /sys/class/rtc/${RTC}/wakealarm
-echo +20 > /sys/class/rtc//${RTC}/wakealarm
-echo mem > /sys/power/state
-```
+Note: Only `rtc1` (RTC in CPU SNVS domain) can be used on this platform
 
 ### Display Support
 
