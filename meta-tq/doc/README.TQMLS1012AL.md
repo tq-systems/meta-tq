@@ -71,15 +71,14 @@ Artifacs can be found at the usual locations for bitbake:
 * `atf/`
   * 512MiB
     * `bl2_qspi.pbl` Primary Boot Loader with RCW
-    * `fip_uboot.bin` U-Boot
+    * `fip_uboot.bin` U-Boot / TF-A Firmware Image Package
   * 1GiB
     * `bl2_qspi_tqmls1012al_1gb.pbl` Primary Boot Loader with RCW
-    * `fip_uboot_tqmls1012al_1gb.bin` U-Boot
+    * `fip_uboot_tqmls1012al_1gb.bin` U-Boot / TF-A Firmware Image Package
 * `engine-pfe-bin/pfe_fw_sbl.itb` PFE engine firmware file
 * `rcw/`: different rcw configurations to use with atf-recipe
 * `fsl-ls1012a-tqmls1012al-mbls1012al.dtb`: device tree blob
 * `Image.gz`: Linux kernel image
-* `u-boot-tfa-2021.04-r0.bin` U-Boot binary
 * \*.wic[.<compress>]: SD / eMMC system image (without boot loader)
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 
@@ -107,8 +106,8 @@ setenv ipaddr <ipaddr>
 setenv serverip <serverip>
 setenv pbl_spi_file <filename>		# RCW/PBL/BL2 file name
 run update_pbl				# update PCW/PBL/BL2
-setenv uboot_spi_file <filename>	# U-boot file name
-run update_uboot			# update U-boot
+setenv uboot_spi_file <filename>	# U-Boot FIP file name
+run update_uboot			# update U-Boot FIP
 ```
 
 ### Update with dynamic IP
@@ -117,8 +116,8 @@ run update_uboot			# update U-boot
 setenv ipmode dynamic			# obtain IP configuration via DHCP
 setenv pbl_spi_file <filename>		# RCW/PBL/BL2 file name
 run update_pbl				# update PCW/PBL/BL2
-setenv uboot_spi_file <filename>	# U-boot file name
-run update_uboot			# update U-boot
+setenv uboot_spi_file <filename>	# U-Boot FIP file name
+run update_uboot			# update U-Boot FIP
 ```
 
 ### SD / eMMC images
