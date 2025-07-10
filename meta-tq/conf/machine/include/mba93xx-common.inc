@@ -20,7 +20,6 @@ python() {
 MACHINE_FEATURES += "\
     bluetooth \
     screen \
-    touchscreen \
     usbhost \
     wifi \
 "
