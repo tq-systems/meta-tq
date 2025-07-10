@@ -13,4 +13,5 @@ LINUX_KERNEL_TYPE = "preempt-rt"
 
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:tqma8mpxl = "tqma8mpxl"
+COMPATIBLE_MACHINE:tqma8mpxs = "tqma8mpxs"
 COMPATIBLE_MACHINE:tqma93xx = "tqma93xx"
