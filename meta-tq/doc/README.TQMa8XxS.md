@@ -258,49 +258,13 @@ In case of problems first check the bus termination:
 | CAN0      | X29       | `TERM CAN0` |
 | CAN1      | X30       | `TERM CAN1` |
 
-#### Enable without CAN-FD
-
-CAN1/2 should be enabled and configured by default when using with
-MB-SMARC-2 and meta-tq / systemd. CAN-FD is disabled by default, as the
-transceiver only supports bitrates up to 1MBit/s.
-While technically possible using CAN-FD with 1MBit/s, the non-datarate
-has to be lowered accordingly.
-
-Configure CAN1/2 per commandline without CAN-FD:
-```
-CANIF="can[0,1]"
-ip link set ${CANIF} up type can bitrate 500000 fd off
-```
-
-To (permanently) configure CAN1/2 in systemd network file, set in files
-* /lib/systemd/network/20-can0.network
-* /lib/systemd/network/20-can1.network
-
-`FDMode=no` to disable CAN-FD.
-
-Note: If CAN-FD is disabled, the option `DataBitRate` needs to be removed!
-
-#### Enable CAN-FD
-
-CAN1/2 should be enabled (without CAN-FD) and configured by default when using with
-MB-SMARC-2 and meta-tq / systemd.
-
-To enable CAN-FD the following command can be used, if using a carrier board with
-FD capable transceiver:
-
-```
-CANIF="can[0,1]"
-ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 1000000 dsample-point 0.8 fd on
-```
-
-To (permanently) configure CAN1/2 in systemd network file, set in files
-* /lib/systemd/network/20-can0.network
-* /lib/systemd/network/20-can1.network
-
-`FDMode=yes` to enable CAN-FD.
+See [here](./README.CAN.md) for details about configurating of CAN interfaces.
 
 **Note**: There is an absolute hardware limit on the bitrate of 1MBit/s, independently from CAN-FD.
-When CAN-FD is enabled, the non-datarate needs to be lower than the datarate. The Linux kernel will emit a warning if it is deemed the `brp` setting do not match.
+  For that reason CAN-FD is disabled by default. While technically possible using CAN-FD with 1MBit/s, the non-datarate
+  has to be lowered accordingly.
+
+  When CAN-FD is enabled, the non-datarate needs to be lower than the datarate. The Linux kernel will emit a warning if it is deemed the `brp` setting do not match.
 
 ### Cortex M4
 
