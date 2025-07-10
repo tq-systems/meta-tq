@@ -277,47 +277,12 @@ To allow reusage, the support for each display is separated in a dtsi fragment.
 
 In case of problems first check the bus termination
 
-CAN1/2 are enabled and configured by default with CAN-FD when using with
-MBa93xx\[CA,LA\] and meta-tq / systemd.
-
-##### CAN bus termination MBa93xx\[CA/LA\]
-
 | Interface | Connector | DIP                             |
 | --------- | --------- | ------------------------------- |
 | CAN1      | X8        | S4.1 (CAN1\_H) / S4.2 (CAN1\_L) |
 | CAN2      | X9        | S5.1 (CAN1\_H) / S5.2 (CAN1\_L) |
 
-#### Enable without CAN-FD
-
-Configure CAN1/2 per commandline without CAN-FD:
-
-```
-CANIF="can[0,1]"
-ip link set ${CANIF} up type can bitrate 500000 fd off
-```
-
-__Note:__ Value for bitrate depends on your hardware setup.
-
-
-To (permanently) configure CAN1/2 with CAN-FD disabled using systemd network files,
-modify following files
-
-* /lib/systemd/network/20-can0.network
-* /lib/systemd/network/20-can1.network
-
-and set:
-
-`FDMode=no`
-
-#### Enable CAN-FD
-
-If using a carrier board with FD capable transceiver one can configure CAN1/2
-per commandline with CAN-FD:
-
-```
-CANIF="can[0,1]"
-ip link set ${CANIF} up type can ,  500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on
-```
+See [here](./README.CAN.md) for details about configurating of CAN interfaces.
 
 __Note:__ Values for bitrate, sample-point, dbitrate and dsample-point depend
 on your hardware setup.
