@@ -419,35 +419,7 @@ In case of problems first check the bus termination:
 | CAN0      | X18       | S12 |
 | CAN1      | X19       | S11 |
 
-#### Enable without CAN-FD
-
-CAN1/2 should be enabled (with CAN-FD) and configured by default when using with MBa8MPxL
-and meta-tq / systemd
-
-Configure CAN1/2 per commandline without CAN-FD:
-```
-CANIF="can[0,1]"
-ip link set ${CANIF} up type can bitrate 500000 fd off
-```
-
-To (permanently) configure CAN1/2 in systemd network file, set in files
-* /lib/systemd/network/20-can0.network
-* /lib/systemd/network/20-can1.network
-
-`FDMode=no` to disable CAN-FD.
-
-#### Enable CAN-FD
-
-CAN1/2 should be enabled (with CAN-FD) and configured by default when using with MBa8MPxL
-and meta-tq / systemd.
-
-To enable CAN-FD the following command can be used, if using a carrier board with
-FD capable transceiver:
-
-```
-CANIF="can[0,1]"
-ip link set ${CANIF} up type can bitrate 500000 sample-point 0.75 dbitrate 4000000 dsample-point 0.8 fd on
-```
+See [here](./README.CAN.md) for details about configurating of CAN interfaces.
 
 ### Cortex M7
 
