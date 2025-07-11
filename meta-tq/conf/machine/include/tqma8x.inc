@@ -1,6 +1,6 @@
 # Common definitions for all TQ-Systems GmbH TQMa8x modules (B0 CPU step)
 
-MACHINEOVERRIDES =. "imx:mx8:mx8qm:tqma8x:nxp-ahab:"
+MACHINEOVERRIDES =. "imx:nxp-ahab:mx8:mx8qm:tqma8x:"
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale

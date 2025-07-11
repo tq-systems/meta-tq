@@ -1,6 +1,6 @@
 # Common definitions for TQ-Systems GmbH TQMa8MxNL modules
 
-MACHINEOVERRIDES =. "imx:mx8mn:tqma8mxnl:nxp-hab4:"
+MACHINEOVERRIDES =. "imx:nxp-hab4:mx8mn:tqma8mxnl:"
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale
