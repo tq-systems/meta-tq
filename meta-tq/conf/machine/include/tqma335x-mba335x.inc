@@ -10,7 +10,6 @@ KERNEL_DEVICETREE = "\
 
 MACHINE_FEATURES:append = "\
     screen \
-    touchscreen \
 "
 
 SERIAL_CONSOLES ?= "115200;ttyS4"
