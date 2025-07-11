@@ -21,7 +21,7 @@
 inherit image-artifact-names
 
 # Since this is a special type of 'conversion' that can produce more than one
-# artifact we implement this not as image conversion class but as a set of postfuctions
+# artifact we implement this not as image conversion class but as a set of postfunctions
 # for the wic image generation class.
 
 # Add an additional postfunction for wic image generation class
