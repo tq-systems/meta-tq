@@ -22,7 +22,6 @@ MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-flash_spl"
 MACHINE_FEATURES += "\
     bluetooth \
     screen \
-    touchscreen \
     wifi \
 "
 
