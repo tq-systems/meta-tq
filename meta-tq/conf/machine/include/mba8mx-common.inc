@@ -21,7 +21,6 @@ MACHINE_FEATURES += "\
     bluetooth \
     camera \
     screen \
-    touchscreen \
     wifi \
 "
 
