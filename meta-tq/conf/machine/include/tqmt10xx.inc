@@ -27,7 +27,6 @@ MACHINE_FEATURES:append = "\
     rtc \
     screen \
     serial \
-    touchscreen \
     ubi \
     usbhost \
     vfat \
