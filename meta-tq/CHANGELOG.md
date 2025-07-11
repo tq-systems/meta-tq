@@ -9,13 +9,30 @@ Releases are named with the following scheme:
 
 ## Next Release
 
-## kirkstone.TQ.ARM.BSP.0025 (not released yet)
+## kirkstone.TQ.ARM.BSP.0025
+
+### Module specific BSP notes
+
+* generic bugfix release
+
+### Changed
+
+* u-boot-imx-tq-2020.04
+  * TQMa8MxML / TQMa8MxNL: improve SPI NOR support. Use generalized TQ-Systems
+    environment settings and use MTD partition names instead of numbers
+
+### Fixed
+
+* u-boot-imx-tq-2020.04
+  * mtdpart: Support `MTD_SIZE_REMAINING` with unallocated memory area
+  * TQMa8MxNL: compatibility of GPU device tree fixups with upstream kernel
+  * TQMa8MxML / TQMa8MxNL: fix ethernet PHY reset handling
 
 ## kirkstone.TQ.ARM.BSP.0024
 
-### Module BSP Revisions
+### Module specific BSP notes
 
-* TQMTxxxx
+* TQMTxxxx preinstalled boot firmware update
 
 ### Changed
 

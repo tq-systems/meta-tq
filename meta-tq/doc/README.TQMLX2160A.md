@@ -9,40 +9,6 @@
 * TQMLX2080A/TQMLX2160A: module revisions REV.010x
 * MBLX2160A:  board revisions REV.010x .. REV.020x
 
-## HowTo
-
-### DIP-Switch Settings
-
-_BOOT\_MODE_
-
-* SPI-Nor-Flash
-
-```
-	S1
-DIP 	1 2 3 4
-ON
-OFF 	X X X X
-```
-
-
-* SD-Card
-
-```
-	S1
-DIP 	1 2 3 4
-ON	X
-OFF 	  X X X
-```
-
-* eMMC
-
-```
-	S1
-DIP 	1 2 3 4
-ON	  X
-OFF 	X   X X
-```
-
 ## Versions
 
 ### ATF
@@ -50,10 +16,12 @@ OFF 	X   X X
 * branched from lf-5.15.5-1.0.0
 
 ### U-Boot
+
 * U-Boot 2019.04 based on https://github.com/nxp-qoriq/u-boot
 * Based on Tag lx2160a-early-access-bsp0.7
 
 ### Linux
+
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/)
 * branched from linux-6.1.y
 
@@ -69,6 +37,7 @@ OFF 	X   X X
 ## Supported Interfaces:
 
 ### U-Boot:
+
 * GPIOs
 * eMMC
 * ESDHC
@@ -82,6 +51,7 @@ OFF 	X   X X
 * USB
 
 ### Linux:
+
 * GPIOs
 * eMMC
 * ESDHC
@@ -96,22 +66,24 @@ OFF 	X   X X
 * USB - OTG
 
 ## Not Supported
+
 * SIM-Card
 
 ## Notes:
+
 * SDHC:
-On MBLX2160A.0100 the SD-Card only works a few start-ups and is therefore not properly tested.
-On MBLX2160A.0200 the SD-Card interface works properly.
+  * On MBLX2160A.0100 the SD-Card only works a few start-ups and is therefore not properly tested.
+  * On MBLX2160A.0200 the SD-Card interface works properly.
 
 ## Build Artifacts
 
 * atf/
   * 32GiB
-	* fip_uboot.bin: U-Boot
-	* bl2_[auto|flexspi_nor].pbl: Boot-media dependend Primary Boot Loader with RCW
+	  * fip_uboot.bin: TF-A / U-Boot Firmware Image Package
+	  * bl2_[auto|flexspi_nor].pbl: Boot-media dependend Primary Boot Loader with RCW
   * 16GiB
-	* fip_uboot_tqmlx2160a_16gb.bin: U-Boot
-	* bl2_[auto|flexspi_nor]_tqmlx2160a_16gb.pbl: Boot-media dependend Primary Boot Loader with RCW
+	  * fip_uboot_tqmlx2160a_16gb.bin: TF-A / U-Boot Firmware Image Package
+	  * bl2_[auto|flexspi_nor]_tqmlx2160a_16gb.pbl: Boot-media dependend Primary Boot Loader with RCW
 * atf/variants/: contains RCW-PBL for all supported RCW serdes-configurations and all supported boot sources.
 * ddr-phy/
 	* fip_ddr.bin: Firmware for DDR-Controller Phy
@@ -120,7 +92,6 @@ On MBLX2160A.0200 the SD-Card interface works properly.
 * mc-utils: the DPAA2-Ethernet Configuration files
 * Image: Kernel
 * fsl-lx2160a-tqmlx2160a-mblx2160a.dtb: Device Tree Blob.
-* u-boot-tfa-2019.04-r0.bin: U-Boot Binary
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
@@ -128,22 +99,63 @@ On MBLX2160A.0200 the SD-Card interface works properly.
 
 Note: As U-Boot use the fip_uboot.bin from the atf directory.
 
+## HowTo
+
+### DIP-Switch Settings
+
+BOOT\_MODE can be configured using DIP switch S1
+
+* SPI-Nor-Flash
+
+| DIP S1 | 1 | 2 | 3 | 4 |
+|--------|---|---|---|---|
+| On     |   |   |   |   |
+| Off    | x | x | x | x |
+
+* SD-Card
+
+| DIP S1 | 1 | 2 | 3 | 4 |
+|--------|---|---|---|---|
+| On     | x |   |   |   |
+| Off    |   | x | x | x |
+
+* eMMC
+
+| DIP S1 | 1 | 2 | 3 | 4 |
+|--------|---|---|---|---|
+| On     |   | x |   |   |
+| Off    | x |   | x | x |
+
+## Boot Media
+
 ### Update Scripts
 
 In U-Boot update scripts are provided to easily update components.
 
-There are scripts to update the PBL and U-Boot.
+There are scripts to update the PBL and TF-A / U-Boot FIP.
 
 These scripts are named `update_[pbl|uboot]_[spi|mmc|sd]`.
 
+**Attention**
+
+* use PBL/RCW image to update PBL
+* use FIP to update TF-A / U-Boot
+
 ### Flash UBI to SPI-NOR
+
 ```
 ubiformat /dev/mtd7 -f tq-image-generic-tqmlx2160a-mblx2160a.ubi
 ubiattach /dev/ubi_ctrl -m 7
 ```
 
+### SD / eMMC images
+
+See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
+
 ## Memory Layout
+
 ### SPI-NOR
+
 * 0x000000000000-0x000000100000 : "RCW-PBL"
 * 0x000000100000-0x000000300000 : "U-Boot"
 * 0x000000500000-0x000000600000 : "U-Boot-Env"
@@ -154,6 +166,7 @@ ubiattach /dev/ubi_ctrl -m 7
 * 0x000001000000-0x000008000000 : "RootFS UBI"
 
 ### eMMC / SD-Card
+
 * 0x1000 : "RCW-PBL"
 * 0x100000 : "U-Boot"
 * 0x800000 : "DDR-PHY"
@@ -162,8 +175,9 @@ ubiattach /dev/ubi_ctrl -m 7
 
 
 ## Build-Time Configuration
+
 * RCWXSPI: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SPI-NOR Boot
-* RCWAUTO: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SD/e-MMC Boot
+* RCWAUTO: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SD/eMMC Boot
 * ATF_RCW_VARIANTS: List of RCW binaries used to build variants of the Primary Boot Loader
 * MC_DPC: DPAA2 Configuration File
 * MC_DPL: DPAA2 Data Path Layout file.
@@ -171,10 +185,12 @@ ubiattach /dev/ubi_ctrl -m 7
 * BL3_IMAGE: ATF BL3 (U-Boot) file used for WIC image generation.
 
 Set BL2_IMAGE to `bl2_tqmlx2160a_16gb.pbl` and BL3_IMAGE to `fip_uboot_tqmlx2160a_16gb.bin`
-to create an SD/e-MMC image for the 16GiB variant.
+to create an SD/eMMC image for the 16GiB variant.
 
 ## Ethernet and DPAA2
+
 ### RCW - SerDes Configuration
+
 The RCW Configuration specifies the Ethernet Configuration.
 The currently available serdes configurations are (Serdes1_Serdes2_Serdes3):
 * 0_0_0
@@ -192,6 +208,7 @@ To add another configuration the rcw sources have to be modified.
 To use a specific Serdes Configuration on build-time use the rcw variable to specify a supported configuration.
 
 ### Ethernet in U-Boot
+
 For working ethernet the DPAA2 firmware has to be loaded in U-Boot. It needs the DPC file when loaded.
 The command `fsl_mc start mc ${addr_mc} ${addr_dpc}` loads the firmware with the DPC file.
 
@@ -199,6 +216,7 @@ For Ethernet in Linux additionaly a Data-Path-Layout file (DPL) has to be loaded
 This is done with the command `fsl_mc lazyapply DPL ${addr_dpl}`.
 
 ### Ethernet in Linux
+
 The ethernet configuration in Linux is determined by the DPL file. In the BSP a basic setup is configured in the dpl-min.dts file.
 With the restool command a more specific setup can be configured.
 
@@ -212,6 +230,7 @@ Some useful restool commands are:
 * `dtc -I dts -O dtb <my_dpl>.dts -o <my_dpl>.dtb`: To generate a dtb file of the dts file.
 
 ### Ethernet Interfaces:
+
 The following table shows which MAC is connected to which port depending on the interface.
 |  MAC  | RGMII | SGMII | XFI | CAUI4 |
 | ----- | ----- | ----- | --- | ----- |
@@ -234,12 +253,14 @@ The following tables show the supported Serdes configrations.
 For Ethernet protocols: `[Protocoll].[Mac-nr]` for PCIe: `PCIe.[Controller-Nr] x[Width]`
 
 ### Serdes 1
+
 | Lane / Config | H - 0   | G - 1   | F - 2   | E - 3   | D - 4     | C - 5     | B - 6     | A - 7     |
 | ------------- | ------- | ------- | ------- | ------- | --------- | --------- | --------- | --------- |
 | 12            | -       | -       | -       | -       | PCIe.2 x2 | PCIe.2 x2 | SGMII.9   | SGMII.10  |
 | 14            | CAUI4.1 | CAUI4.1 | CAUI4.1 | CAUI4.1 | PCIe.2 x2 | PCIe.2 x2 | PCIe.2 x2 | PCIe.2 x2 |
 
 ### Serdes 2
+
 | Lane / Config | A - 0     | B - 1    | C - 2    | D - 3    | E - 4     | F - 5    | G - 6    | H - 7    |
 | ------------- | --------- | -------- | -------- | -------- | --------- | -------- | -------- | -------- |
 | 7             | PCIe.3 x1 | SGMII.12 | SGMII.17 | SGMII.18 | PCIe.4 x1 | SGMII.16 | XFI.13   | XFI.14   |
@@ -247,12 +268,14 @@ For Ethernet protocols: `[Protocoll].[Mac-nr]` for PCIe: `PCIe.[Controller-Nr] x
 | 11            | PCIe.3 x1 | SGMII.12 | SGMII.17 | SGMII.18 | PCIe.4 x1 | SGMII.16 | SGMII.13 | SGMII.14 |
 
 ### Serdes 3
+
 | Lane / Config | A - 0     | B - 1     | C - 2     | D - 3     | E - 4     | F - 5     | G - 6     | H -   7   |
 | ------------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- |
 | 2             | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 |
 | 3             | PCIe.5 x4 | PCIe.5 x4 | PCIe.5 x4 | PCIe.5 x4 | PCIe.6 x4 | PCIe.6 x4 | PCIe.6 x4 | PCIe.6 x4 |
 
 ## DIP-Switch settings
+
 The DIP-switches should match the used RCW, otherwise interfaces will not work.
 Pay attention to the following DIP-Switches:
 

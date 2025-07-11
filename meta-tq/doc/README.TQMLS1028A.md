@@ -3,6 +3,7 @@
 [[_TOC_]]
 
 ## Variants
+
 * TQMLS1028A / TQMLS1017A SOM REV.020x/030x with 1/2/4/8 GiB RAM
 * MBLS1028A / MBLS1028A-IND carrier board
 
@@ -11,26 +12,26 @@
 ### U-Boot
 
 * based on qoriq-u-boot (https://github.com/nxp-qoriq/u-boot/)
-* branched from LSDK-20.04-update-290520
+* branched from LSDK-20.04-update-290520 (v2019.10)
 
 ### ATF
 
 * based on qoriq-atf (https://github.com/nxp-qoriq/atf/)
-* branched from lf-5.15.5-1.0.0
+* branched from lf-5.15.5-1.0.0 (v2.4)
 
 ### Linux
 
 * based on linux-qoriq (https://github.com/nxp-qoriq/linux/)
 * branched from lf-5.15.5-1.0.0
 
-## Kernel variants
+### Kernel variants
 
 By default, the kernel recipe linux-imx-tq (based on qoriq kernel
 5.15.5) is built. An alternative kernel based on LSDK-20.12-V5.4-RT
 can be selected for PREEMPT_RT support by adding the following to
 local.conf or a custom DISTRO config:
 
-    PREFERRED_PROVIDER_virtual/kernel = "linux-rt-lsdk-tq"
+`PREFERRED_PROVIDER_virtual/kernel = "linux-rt-lsdk-tq"`
 
 Please note that the default linux-imx-tq kernel has received more thorough
 testing and it is therefore recommended for most usecases.
@@ -41,7 +42,7 @@ testing and it is therefore recommended for most usecases.
 
 | Feature                                          |              |
 | :----------------------------------------------- | :----------: |
-| RAM configs                                      |   1,4 GiB    |
+| RAM configs                                      | 1,2,4,8 GiB  |
 | CPU variants                                     |LS1017/LS1028A|
 | GPIO                                             |      x       |
 | I2C                                              |      x       |
@@ -49,7 +50,7 @@ testing and it is therefore recommended for most usecases.
 | Read                                             |      x       |
 | Write                                            |      x       |
 | Boot                                             |      x       |
-| **e-MMC / SD-Card**                              |              |
+| **eMMC / SD-Card**                               |              |
 | Read                                             |      x       |
 | Write                                            |      x       |
 | Boot                                             |      x       |
@@ -61,13 +62,13 @@ testing and it is therefore recommended for most usecases.
 | ENET Switch                                      |      x       |
 | **Bootstreams**                                  |              |
 | FlexSPI                                          |      x       |
-| SD / e-MMC                                       |      x       |
+| SD / eMMC                                        |      x       |
 
 ### Linux
 
 | Feature                                          |              |
 | :----------------------------------------------- | :----------: |
-| RAM configs                                      |    1,4 GiB   |
+| RAM configs                                      | 1,2,4,8 GiB  |
 | CPU variants                                     |LS1017/LS1028A|
 | speed grade / temperature grade detection        |       x      |
 | **UART**                                         |              |
@@ -117,48 +118,54 @@ case of overheating.
 
 ## Known Issues
 
-DisplayPort only works with some monitors and only in 1920x1080.
+* DisplayPort only works with some monitors and only in 1920x1080.
+* mPCIE cards with bridges may not be enumerated caused by failed fixup
+  handling in U-Boot.
 
 ## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
 `${TMPDIR}/deploy/images/${MACHINE}`
 * `atf/`
-  * 1GiB
+  * 1 GiB
     * `bl2_flexspi_nor.pbl` Primary Boot Loader with RCW
     * `bl2_auto.pbl` Primary Boot Loader with RCW for SD/e-MMC boot
-    * `fip_uboot.bin` U-Boot
-  * 4GiB
-    * `bl2_flexspi_nor_tqmls1028a_4gb.pbl` Primary Boot Loader with RCW
-    * `bl2_auto_tqmls1028a_4gb.pbl` Primary Boot Loader with RCW for SD/e-MMC boot
-    * `fip_uboot_tqmls1028a_4gb.bin` U-Boot
-* `atf/variants/`: different Primary Boot Loader variants built with RCW binaries form `rcw/`
+    * `fip_uboot.bin` Firmware Image Package for BL3 (TF-A as BL31
+       and U-Boot as BL33 non secure payload)
+  * 2/4/8 GiB
+    * `bl2_flexspi_nor_tqmls1028a_<size>gb.pbl` Primary Boot Loader with RCW
+    * `bl2_auto_tqmls1028a_<size>gb.pbl` Primary Boot Loader with RCW for SD/e-MMC boot
+    * `fip_uboot_tqmls1028a_<size>gb.bin` Firmware Image Package for BL3 (TF-A as BL31
+       and U-Boot as BL33 non secure payload)
+    * `atf/variants/`: different Primary Boot Loader variants built with RCW binaries form `rcw/`
 * `rcw/`: different RCW configuration binaries
 * `fsl-ls1028a-mbls1028a-tqmls1028a-mbls1028a.dtb`: device tree blob for mbls1028a board
 * `fsl-ls1028a-mbls1028a-tqmls1028a-mbls1028a-ind.dtb`: device tree blob for mbls1028a-ind board
 * `Image.gz`: Linux kernel image
-* `u-boot-tfa-201010-r0.bin` U-Boot binary
 * \*.wic[.<compress>]: SD / e-MMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
+* \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
+* \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 
-## Build-Time Configuration
+Artifacts under `atf` can be used to manually update boot images on SOM or exchange them in WIC image.
 
-* BL2_IMAGE: ATF BL2 file used for WIC image creation
-* BL3_IMAGE: ATF BL3 file used for WIC image creation
+## Build-Time Configuration (default boot images for SPI-NOR and WIC)
+
+* BL2_IMAGE: ATF/TF-A BL2 file used for WIC image creation
+* BL3_IMAGE: ATF/TF-A BL3 file used for WIC image creation
 * RCWAUTO: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SD/e-MMC Boot
 * RCWXSPI: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SPI-NOR Flash
 * ATF_RCW_VARIANTS: List of RCW binaries used to build variants of the Primary Boot Loader
 
-By default, images for the 1GiB variant are built. Set BL2_IMAGE to
-`bl2_auto${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.pbl` and BL3_IMAGE to
-`fip_uboot${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.bin` to create an SD/e-MMC image for the 4GiB variant
-(or 2gb/8gb for the 2GiB/8GiB variants respectively).
-
+By default, all images will be built and the 1GiB variant is set as default for WIC-creation.
+Set `BL2_IMAGE` to `bl2_auto${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.pbl` and
+`BL3_IMAGE` to `fip_uboot${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.bin` to create an SD/e-MMC image for the 4GiB
+variant (or 2gb/8gb for the 2GiB/8GiB variants respectively).
 
 ### Secure Boot
 
 Secure Boot is enabled by adding "secure" to `DISTRO_FEATURES`. With this setting, signed variants
-of all ATF components are generated and built into the SD/e-MMC system image.
+of all ATF components are generated and built into the SD/eMMC system image.
 
 By default, a newly generated keypair will be used for signing, which may be lost when certain
 packages are rebuilt. To enable the build of secured images with a pregenerated keypair, the
@@ -182,6 +189,10 @@ For now, only the early boot stages (up to U-Boot) are signed and verified.
 Additional configuration of U-Boot is required to verify subsequent boot images
 like the Linux kernel.
 
+## Boot Media
+
+See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
+
 ## Boot DIP Switches
 
 ### SD Card
@@ -191,7 +202,7 @@ like the Linux kernel.
 | ON      |   |   |   |   |
 | OFF     | x | x | x | x |
 
-### e-MMC
+### eMMC
 
 | DIP S9  | 1 | 2 | 3 | 4 |
 | ------- | - | - | - | - |

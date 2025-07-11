@@ -37,7 +37,7 @@ This README contains some useful information for TQMLS102xA on MBLS102xA
 ## Build Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-<`${TMPDIR}/deploy/images/${MACHINE}`>
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs
   * ls1021a-mbls1021a.dtb
@@ -46,10 +46,10 @@ Artifacs can be found at the usual locations for bitbake:
   * ls1021a-mbls1021a-dmb-ct21.dtb (LVDS support for display CT21)
   * ls1021a-mbls1021a-glyn-etm0700g0edh6.dtb (LVDS support for display GLYN ETM0700G0EDH6)
 * zImage: Linux kernel image
-* \*.wic[.<compress>]: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive
 * u-boot.bin-\*:
-  * sd: boot stream for SD / e-MMC
+  * sd: boot stream for SD / eMMC
     * _can: including CAN support
     * _ecc: including ECC support
       * _can: including ECC and CAN support
@@ -118,6 +118,10 @@ eMMC is a placement option on TQMLS102xA
 | CAN1 / CAN2 | - | - | off | on  |
 | SAI1 / SAI2 | - | - | on  | off |
 | Reserved    | - | - | off | off |
+
+## Boot Media
+
+See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 
 ## Howto
 

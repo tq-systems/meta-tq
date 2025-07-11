@@ -37,14 +37,14 @@ _MBa8Mx HW Rev.030x only_
 | **I2C**                                          |                      |
 | GPIO expander                                    |          x           |
 | system EEPROM parsing                            |          x           |
-| **e-MMC / SD**                                   |                      |
+| **eMMC / SD**                                    |                      |
 | Read                                             |          x           |
 | Write                                            |          x           |
 | **Ethernet**                                     |                      |
 | GigE via Phy on MBa8Mx                           |          x           |
 | **Bootdevices**                                  |                      |
 | SD-Card on USDHC2                                |          x           |
-| e-MMC on USDHC3                                  |          x           |
+| eMMC on USDHC3                                   |          x           |
 | QSPI-NOR on FlexSPI                              |          x           |
 | **USB**                                          |                      |
 | USB Host (USB1 via hub 2.0)                      |          x           |
@@ -168,7 +168,7 @@ _MBa8Mx HW Rev.030x only_
 ## Build Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/${MACHINE}`
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs
   * imx8mm-tqma8mqml-mba8mx.dtb
@@ -179,9 +179,9 @@ Artifacs can be found at the usual locations for bitbake:
     plus Vision Components CSI camera with OmniVision OV9281)
   * imx8mm-tqma8mqml-mba8mx-rpmsg.dtb (CortexM / RPMSG Support)
 * Image: Linux kernel image
-* \*.wic[.<compress>]: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / e-MMC
+* imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / eMMC
 * imx-boot-${MACHINE}-fspi.bin-flash\_evk\_flexspi: boot stream for FlexSPI
 * imx-boot-${MACHINE}-mfgtool.bin-flash\_spl\_uboot:  boot stream for UUU
 * hello\_world.bin (Cortex M4 demo, UART4, TCM)
@@ -259,7 +259,7 @@ BOOT\_MODE: Internal Boot
 * BOOT_CFG\[\11:10\] - 01 - USDHC2
 * BOOT_CFG\[\15:12\] - 0001 - SD Card
 
-##### e-MMC (USDHC3)
+##### eMMC (USDHC3)
 
 |         |  S6  |     |      |      |      |      |      |      | S5 |     |     |     |     |     |     |     |     | S9 |     |     |     |     |
 | ------- | :--: | :-: | :--: | :--: | :--: | :--: | :--: | :--: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: |
@@ -276,7 +276,7 @@ BOOT\_MODE: Internal Boot
 * BOOT_CFG\[8\]      - 0 - USDHC loopback clock through SD pad
 * BOOT_CFG\[9\]      - 0 - eMMC reset enable
 * BOOT_CFG\[\11:10\] - 10 - USDHC3
-* BOOT_CFG\[\15:12\] - 0010 - MMC / e-MMC
+* BOOT_CFG\[\15:12\] - 0010 - MMC / eMMC
 
 ##### FlexSPI
 
@@ -330,102 +330,10 @@ _S9_
   * ON: DSI to eDP bridge
   * OFF: DSI to LVDS bridge
 
-## Boot device initialisation
+## Boot device initialisation and update
 
-### Bootable SD-Card
-
-Complete system image:
-
-write *.wic Image to SD (offset 0)
-
-To create a bootable SD-Card with boot stream only (file name see above):
-
-write bootstream at offset 33 kiB (0x8400) to SD-Card
-
-Example for Linux:
-
-`sudo dd if=<bootstream> of=/dev/sd<x> bs=1k seek=33 conv=fsync`
-
-### Bootable e-MMC
-
-To create a bootable e-MMC with complete system image:
-
-write *.wic image to e-MMC (offset 0)
-
-To create a bootable e-MMC with boot stream only (file name see above)
-
-Boot from SD-Card and write bootstream at offset 33 kiB (0x8400) to e-MMC
-
-Example for Linux:
-
-`sudo dd if=<bootstream> of=/dev/mmcblk0 bs=1k seek=33 conv=fsync`
-
-Example for U-Boot:
-
-```
-# 33k -> 66 Blocks -> 0x42
-
-tftp <bootstream>
-setexpr bsz ${filesize} + 1ff
-setexpr bsz ${bsz} / 200
-printenv bsz
-mmc dev 0
-mmc write ${loadaddr} 42 ${bsz}
-```
-
-### Bootable QSPI NOR
-
-To create a bootable QSPI NOR with boot stream only (file name see above)
-
-Example for U-Boot, booting from SD-Card:
-
-```
-# SPI-NOR @ FlexSPI, offset 0
-
-tftp <bootstream>
-sf probe
-sf update ${loadaddr} 0 ${filesize}
-```
-
-## Update components via U-Boot
-
-For ease of development a set of variables and scripts are in default env.
-
-_Note_: Update and start scripts expect a partitioned / initialized SD-Card or
-e-MMC.
-
-_U-Boot environment variables_
-
-* `uboot`: name of bootstream image (default = bootstream.bin)
-* `mmcdev`: 0 for e-MMC, 1 for SD-Card (automatically generated,
-  can be overwritten)
-  `mmcpart`: partition number for kernel and devicetree (default = 1)
-  `mmcpath`: path to kernel and device tree (default = /)
-* `fdt_file`: device tree blob,
-* `image`: kernel image,
-
-_SD / e-MMC_
-
-Download bootstream from TFTP and update:
-
-`run update_uboot_mmc`
-
-Download device tree blob from TFTP and update:
-
-`run update_fdt_mmc`
-
-Download kernel image from TFTP and update:
-
-`run update_kernel_mmc`
-
-Cortex M4 image: set env var `cm_image` to name of your Cortex M4 image,
-provide the file via TFTP and update via `run update_cm_mmc`
-
-_FLEXSPI_
-
-Download bootstream from TFTP and update:
-
-`run update_uboot_spi`
+See [here](./README.imx-arm64.BootMedia.md) for detailed information how to write a
+bootstream image and bootloader support for updating the bootstream.
 
 ## Use UUU Tool
 

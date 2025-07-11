@@ -35,7 +35,7 @@ See top level README.md for configurations usable as MACHINE.
 | Read                                             |              x              |
 | Write                                            |              x              |
 | Boot                                             |              x              |
-| **e-MMC / SD-Card**                              |                             |
+| **eMMC / SD-Card**                               |                             |
 | Read                                             |              x              |
 | Write                                            |              x              |
 | Boot                                             |              x              |
@@ -47,7 +47,7 @@ See top level README.md for configurations usable as MACHINE.
 | ENET 1                                           |              x              |
 | **Bootstreams**                                  |                             |
 | FlexSPI                                          |              x              |
-| SD / e-MMC                                       |              x              |
+| SD / eMMC                                        |              x              |
 | UUU / mfgtool                                    |              x              |
 
 **TODO or not tested / supported**
@@ -147,17 +147,17 @@ See top level README.md for configurations usable as MACHINE.
 ## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
-`${TMPDIR}/deploy/images/${MACHINE}`
+`${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * imx8qxp\*.dtb: device tree blobs for TQMa8XQPS
 * imx8dxp\*.dtb: device tree blobs for TQMa8XDPS
 * Image: Linux kernel image
-* \*.wic[.<compress>]: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
-* imx-boot-${MACHINE}-sd.bin-flash\_spl: boot stream for SD / e-MMC
-* imx-boot-${MACHINE}-sd.bin-flash\_linux\_m4: boot stream for SD / e-MMC + M4 Demo
+* imx-boot-${MACHINE}-sd.bin-flash\_spl: boot stream for SD / eMMC
+* imx-boot-${MACHINE}-sd.bin-flash\_linux\_m4: boot stream for SD / eMMC + M4 Demo
 * imx-boot-${MACHINE}-sd.bin-flash\_spl_flexspi: boot stream for QSPI
 * imx-boot-mfgtool-${MACHINE}-mfgtool.bin-flash\_spl: boot stream for UUU
 * hello\_world.bin (Cortex M4 demo, CM4 UART, TCM)
@@ -176,7 +176,7 @@ _Note:_
 | ON      |   | x | x |   |
 | OFF     | x |   |   | x |
 
-### e-MMC
+### eMMC
 
 | DIP S3  | 1 | 2 | 3 | 4 |
 | ------- | - | - | - | - |
@@ -204,26 +204,7 @@ bootstream image and bootloader support for updating the bootstream.
 
 ## Use UUU Tool
 
-To build bootstream for UUU tool the following settings needs to be in your
-configuration. (This is already the case for starterkit machine configurations):
-
-```
-UBOOT_CONFIG:tqma8xxs = "mfgtool"
-IMXBOOT_TARGETS:tqma8xxs = "flash_spl"
-```
-
-Rebuild boot stream:
-
-```
-bitbake imx-boot
-```
-
-Use new compiled bootstream containing U-Boot capable of handling SDP together
-with UUU tool:
-
-```
-sudo uuu -b spl imx-boot-<machine>-mfgtool.bin
-```
+See [here](./README.imx-arm64.UUU.md) for details about using Serial Download mode and UUU.
 
 ## Howto
 

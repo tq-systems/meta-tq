@@ -45,7 +45,7 @@ The following SOM specific variables have to be adjusted for the machine to buil
 
 * `M4_DEFAULT_IMAGE`: defaults to `rpmsg_lite_pingpong_rtos_linux_remote.bin`
 
-To build a bootstream with M4 binary in SD / e-MMC the bitbake variable 
+To build a bootstream with M4 binary in SD / eMMC the bitbake variable
 `IMXBOOT_TARGETS` must contain the target `flash_linux_m4`
 
 ### TQMa8x
@@ -53,15 +53,15 @@ To build a bootstream with M4 binary in SD / e-MMC the bitbake variable
 `M4_DEFAULT_IMAGE`: defaults to `rpmsg_lite_pingpong_rtos_linux_remote_m40.bin`
 `M4_1_DEFAULT_IMAGE`: defaults to `rpmsg_lite_pingpong_rtos_linux_remote_m41.bin`
 
-To build a bootstream with M4 binaries in SD / e-MMC the bitbake variable
+To build a bootstream with M4 binaries in SD / eMMC the bitbake variable
 `IMXBOOT_TARGETS` must contain the target `flash_linux_m4`
 
 ### Preparing the system
 
-Per default SD / e-MMC wic images are built using a bootstream without M4
+Per default SD / eMMC wic images are built using a bootstream without M4
 firmware. Bootstreams with M4 firmware follow the naming convention
 `imx-boot-${MACHINE}-sd.bin-flash\_linux\_m4`. See SOM specific documentation
-how to change the bootstream on SD / e-MMC. To boot with new bootstream a
+how to change the bootstream on SD / eMMC. To boot with new bootstream a
 power cycle of the board is needed after updating the bootstream.
 
 Before running Linux the devicetree in U-Boot environment has to be changed to
@@ -70,7 +70,7 @@ and how to change them.
 
 ### Starting
 
-To demonstrate `rpmsg` and `freertos` start the prepared SD / e-MMC. The CortexM4
+To demonstrate `rpmsg` and `freertos` start the prepared SD / eMMC. The CortexM4
 firmware uses the CortexM UART(s) connecte to the FTDI USB / UART converter on
 the starter kits. The M4 firmware is started by the bootstream. You should see
 a banner message on the UART for the M4 when the demo is started.

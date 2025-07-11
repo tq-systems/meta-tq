@@ -51,7 +51,7 @@ Artifacts can be found at:
 
 * \*.dtb: Device Tree blobs
 * zImage: Compressed Linux kernel image
-* \*.wic[.compress]: SD / e-MMC system image
+* \*.wic[.compress]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * MLO: first-stage bootloader (SPL)
 * u-boot.img: full bootloader
@@ -92,7 +92,15 @@ The DIP switch S2 are used to select the device to boot from.
 
 ## Boot medium creation
 
+### Prerequisites for block devices
+
+Compressed WIC images and matching BMAP-files (block map files) are created by default.
+To make use of this feature, install the `bmap-tools` package to use `bmaptool`.
+The packed WIC can also be decompressed and used with `dd` or other disk image tools.
+
 ### SD card / eMMC
+
+#### Bootable SD-Card
 
 To create a bootable SD card or prepare the eMMC with a boot image, write the
 [WIC image](#build-artifacts) (`*.wic`) to the SD card or eMMC at offset 0.
@@ -101,6 +109,14 @@ A minimal image (`*.wic.bootonly`) containing only the bootloader partition
 without the OS can be used alternatively.
 
 #### Example for Linux
+
+The following command can be used (the example assumes `bmap-tools` package is installed):
+
+```bash
+bmaptool copy <image>.wic[.compress] --bmap <image>.bmap /dev/sd<x>
+```
+
+without `bmap-tools`
 
 ```
 sudo dd if=<image> of=/dev/sd<x> bs=4M conv=fsync

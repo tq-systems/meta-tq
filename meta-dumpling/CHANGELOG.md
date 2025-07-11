@@ -18,13 +18,17 @@ Releases are named with the following scheme:
 * packagegroup-sysutils: add cpupower package since cpufrequtils is not maintained anymore and
   shall be removed after next release.
 
-## kirkstone.TQ.ARM.BSP.0025 (not released yet)
+## kirkstone.TQ.ARM.BSP.0025
+
+### Module specific BSP notes
+
+* generic bugfix release
 
 ## kirkstone.TQ.ARM.BSP.0024
 
-### Module BSP Revisions
+### Module specific BSP notes
 
-* TQMTxxxx
+* TQMTxxxx preinstalled boot firmware update
 
 ### Changed
 
