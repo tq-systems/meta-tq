@@ -3,6 +3,9 @@ LICENSE = "MIT"
 
 inherit uboot-config deploy
 
+# reproducible default for 'FIT_CONF_PREFIX'
+require conf/image-fitimage.conf
+
 # We intentionally don't set a FDT filename, so the bootloader can choose the
 # correct variant based on the hardware, or the default can be overridden
 # in the environment to enabled advanced features.
