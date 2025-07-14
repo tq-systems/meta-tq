@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## scarthgap.TQ.ARM.BSP.0005 (not released yet)
+
 ### Added
 
 * TQMa67xx: new module
