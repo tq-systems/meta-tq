@@ -44,7 +44,7 @@ is _mandatory_ - see [table](#supported-machines).
 * i.MX93
 * LS1012A
 * LS102xA
-* LS1028A / LS1017A
+* LS1028A (incl. LS1017A / LS1018A / LS1027A)
 * LS1043A / LS1046A / LS1088A
 * LX2160A
 
