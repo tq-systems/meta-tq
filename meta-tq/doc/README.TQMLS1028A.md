@@ -14,33 +14,33 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 
 ### U-Boot
 
-| Feature                                          |              |
-| :----------------------------------------------- | :----------: |
-| RAM configs                                      |   1,4 GiB    |
-| CPU variants                                     |LS1017/LS1028A|
-| GPIO                                             |      x       |
-| I2C                                              |      x       |
-| **QSPI**                                         |              |
-| Read                                             |      x       |
-| Write                                            |      x       |
-| Boot                                             |      x       |
-| **eMMC / SD-Card**                               |              |
-| Read                                             |      x       |
-| Write                                            |      x       |
-| Boot                                             |      x       |
-| **USB**                                          |              |
-| USB 3.0                                          |      x       |
-| **SATA**                                         |              |
-| M.2 card (SSD)                                   |      x       |
-| **PCIe**                                         |              |
-| mPCIe on mainboard                               |      x       |
-| **ENET**                                         |              |
-| ENET 0                                           |      x       |
-| ENET 1                                           |      x       |
-| ENET Switch                                      |      x       |
-| **Bootstreams**                                  |              |
-| FlexSPI                                          |      x       |
-| SD / eMMC                                        |      x       |
+| Feature                                   |                 |
+|:------------------------------------------|:---------------:|
+| RAM configs                               |     1,4 GiB     |
+| CPU variants                              | LS1017/LS1028A  |
+| GPIO                                      |        x        |
+| I2C                                       |        x        |
+| **QSPI**                                  |                 |
+| Read                                      |        x        |
+| Write                                     |        x        |
+| Boot                                      |        x        |
+| **eMMC / SD-Card**                        |                 |
+| Read                                      |        x        |
+| Write                                     |        x        |
+| Boot                                      |        x        |
+| **USB**                                   |                 |
+| USB 3.0                                   |        x        |
+| **SATA**                                  |                 |
+| M.2 card (SSD)                            |        x        |
+| **PCIe**                                  |                 |
+| mPCIe on mainboard                        |        x        |
+| **ENET**                                  |                 |
+| ENET 0                                    |        x        |
+| ENET 1                                    |        x        |
+| ENET Switch                               |        x        |
+| **Bootstreams**                           |                 |
+| FlexSPI                                   |        x        |
+| SD / eMMC                                 |        x        |
 
 ### Linux
 
