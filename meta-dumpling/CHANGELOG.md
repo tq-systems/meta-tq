@@ -20,7 +20,7 @@ Releases are named with the following scheme:
 
 ### Fixes
 
-* lmsensors: build fix to compile without enabling sensord. Fix can renmoved once meta-openembedded
+* lmsensors: build fix to compile without enabling sensord. Fix can be removed once meta-openembedded
   contains backport of fix in scarthgap.
 
 ## scarthgap.TQ.ARM.BSP.0004
