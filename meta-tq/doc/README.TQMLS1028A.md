@@ -17,7 +17,8 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 | Feature                                   |                 |
 |:------------------------------------------|:---------------:|
 | RAM configs                               |     1,4 GiB     |
-| CPU variants                              | LS1017/LS1028A  |
+| CPU variants                              | LS1027A,LS1028A |
+| CPU variants                              | LS1017A,LS1018A |
 | GPIO                                      |        x        |
 | I2C                                       |        x        |
 | **QSPI**                                  |                 |
