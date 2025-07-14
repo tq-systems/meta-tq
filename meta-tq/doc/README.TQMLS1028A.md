@@ -16,7 +16,7 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 
 | Feature                                   |                 |
 |:------------------------------------------|:---------------:|
-| RAM configs                               |     1,4 GiB     |
+| RAM configs                               |   1,2,4,8 GiB   |
 | CPU variants                              | LS1027A,LS1028A |
 | CPU variants                              | LS1017A,LS1018A |
 | GPIO                                      |        x        |
@@ -47,7 +47,7 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 
 | Feature                                   |    fslc-6.6     |
 |:------------------------------------------|:---------------:|
-| RAM configs                               |     1,4 GiB     |
+| RAM configs                               |   1,2,4,8 GiB   |
 | CPU variants                              | LS1027A,LS1028A |
 | CPU variants                              | LS1017A,LS1018A |
 | speed grade / temperature grade detection |        x        |
