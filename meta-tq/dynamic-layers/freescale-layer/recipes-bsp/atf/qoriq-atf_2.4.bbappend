@@ -5,11 +5,6 @@ SRCREV:tqmlsx = "9b7d9e274c2f956064f1ba4341d28633da9c0db0"
 
 PLATFORM_ADDTIONAL_TARGETS_EXTRA = ""
 
-RCW_FOLDER:tqmls1012al = "tqmls1012al"
-RCW_SUFFIX:tqmls1012al = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
-PLATFORM:tqmls1012al = "tqmls1012al"
-PLATFORM_ADDITIONAL_TARGET:tqmls1012al = "tqmls1012al_1gb"
-
 RCW_FOLDER:tqmls1028a = "tqmls1028a"
 RCW_SUFFIX:tqmls1028a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
 PLATFORM:tqmls1028a = "tqmls1028a_1gb"
