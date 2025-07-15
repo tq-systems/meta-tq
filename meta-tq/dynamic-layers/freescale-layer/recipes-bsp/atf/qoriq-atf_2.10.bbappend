@@ -1,9 +1,6 @@
-SRC_URI:tqmlsx = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
-
-SRCBRANCH:tqmlsx = "TQM-v2.4"
-SRCREV:tqmlsx = "9b7d9e274c2f956064f1ba4341d28633da9c0db0"
-
-PLATFORM_ADDTIONAL_TARGETS_EXTRA = ""
+ATF_SRC = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL}"
+ATF_BRANCH = "TQM-lf_v2.10"
+SRCREV = "e395efdec88aecb3650551f99a841ef604a1ee21"
 
 ATF_RCW_VARIANTS ??= ""
 DDR_ECC_EN ?= "yes"

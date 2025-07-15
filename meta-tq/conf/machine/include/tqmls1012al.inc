@@ -60,7 +60,7 @@ RCWQSPI ?= "default/rcw_1000_sd"
 
 RCW_FOLDER:${MACHINE} = "tqmls1012al"
 RCW_SUFFIX:${MACHINE} = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
-PLATFORM:${MACHINE} = "tqmls1012al"
+PLATFORM:${MACHINE} = "tqmls1012al_512mb"
 PLATFORM_ADDITIONAL_TARGET:${MACHINE} = "tqmls1012al_1gb"
 
 # Common image configuration

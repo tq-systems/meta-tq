@@ -63,7 +63,7 @@ BL2_IMAGE ?= "bl2_auto.pbl"
 BL3_IMAGE ?= "fip_uboot.bin"
 
 RCW_FOLDER:${MACHINE} = "tqmlx2160a"
-PLATFORM:${MACHINE} = "tqmlx2160a"
+PLATFORM:${MACHINE} = "tqmlx2160a_32gb"
 PLATFORM_ADDITIONAL_TARGET:${MACHINE} = "tqmlx2160a_16gb"
 
 # Common image configuration
