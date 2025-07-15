@@ -6,6 +6,9 @@ require conf/machine/include/tqmls10xxa.inc
 
 UBOOT_ENTRYPOINT:ls1046a = "0x80008000"
 
+RCW_FOLDER:${MACHINE} = "tqmls1046a"
+PLATFORM:${MACHINE} = "${TQ_ATF_VARIANT}"
+
 # Image Options
 #
 
