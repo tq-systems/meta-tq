@@ -62,6 +62,10 @@ UBI_MAX_LEB_COUNT = "1280"
 BL2_IMAGE ?= "bl2_auto.pbl"
 BL3_IMAGE ?= "fip_uboot.bin"
 
+RCW_FOLDER:${MACHINE} = "tqmlx2160a"
+PLATFORM:${MACHINE} = "tqmlx2160a"
+PLATFORM_ADDITIONAL_TARGET:${MACHINE} = "tqmlx2160a_16gb"
+
 # Common image configuration
 require conf/machine/include/tq-image.inc
 
