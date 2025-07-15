@@ -71,5 +71,10 @@ ATF_RCW_VARIANTS ?= " \
 RCWAUTO ?= "default/rcw_1300"
 RCWXSPI ?= "default/rcw_1300"
 
+RCW_FOLDER:${MACHINE} = "tqmls1028a"
+PLATFORM:${MACHINE} = "tqmls1028a_1gb"
+PLATFORM_ADDITIONAL_TARGET:${MACHINE} = "tqmls1028a_4gb"
+PLATFORM_ADDITIONAL_TARGETS_EXTRA:${MACHINE} = "tqmls1028a_2gb tqmls1028a_8gb"
+
 # Common image configuration
 require conf/machine/include/tq-image.inc
