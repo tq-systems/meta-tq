@@ -5,10 +5,6 @@ SRCREV:tqmlsx = "9b7d9e274c2f956064f1ba4341d28633da9c0db0"
 
 PLATFORM_ADDTIONAL_TARGETS_EXTRA = ""
 
-RCW_FOLDER:tqmls1088a = "tqmls1088a"
-RCW_SUFFIX:tqmls1088a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
-PLATFORM:tqmls1088a = "${TQ_ATF_VARIANT}"
-
 RCW_FOLDER:tqmlx2160a = "tqmlx2160a"
 RCW_SUFFIX:tqmlx2160a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
 PLATFORM:tqmlx2160a = "tqmlx2160a"
