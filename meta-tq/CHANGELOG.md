@@ -45,6 +45,9 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* TQMa6ULx[L] / TQMa6ULLx[L]:
+  * u-boot-tq-2023.04: enable some more features like gpio button, LED, CLI
+    regulator and PMIC support.
 * tq-extlinux: The `console` option in the kernel cmdline is now populated based
   on `SERIAL_CONSOLES` instead of relying on the `console` and `baudrate`
   variables in the U-Boot environment
@@ -126,6 +129,23 @@ Releases are named with the following scheme:
     BSP image including Image in KERNEL_IMAGETYPES needs to be built.
 
 ### Fixed
+
+* TQMa6x / TQMa6ULx[L] / TQMa6ULLx[L] / TQMa7x:
+  * u-boot-tq-2023.04: fix FEC initialisation flow for compiling with DM_MDIO and DM_ETH_PHY
+    without the fixes depending on presence of MAC addresses, multiple instances of MDIO bus
+    will be allocated but never freed. If no MAC address is given, `mdio` command may cause
+    an infinite loop.
+* TQMa6ULx[L] / TQMa6ULLx[L]:
+  * u-boot-tq-2023.04: redundand environment was not configured but is expected by environment
+    access tools in rootfs
+* machines: fix creation of multiple wic images for machines with a fixed boot firmware dependency
+  to the actual assembled RAM.
+  * TQMa6x
+  * TQMa6ULx[L]
+  * TQMa6ULLx[L]
+  * TQMa7x
+  * TQMa8Mx
+  * TQMa8MxML
 
 * TMa8MPxL:
   * linux-tq-6.12: Fix SD-Card disconnect due to automatic disable of LDO5.
