@@ -15,7 +15,7 @@ DEPENDS += "\
     lzop-native \
 "
 
-SRCREV = "ce7614f9dc378e82573e87d9973bf5af6f7cb98e"
+SRCREV = "4a665057b7bd2a7ce776046625d0f56d5dad0edc"
 SRCBRANCH = "TQM-v2023.04"
 
 SRC_URI = " \
