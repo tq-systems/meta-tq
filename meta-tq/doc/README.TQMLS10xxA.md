@@ -2,30 +2,28 @@
 
 [[_TOC_]]
 
-## Overview
+## Supported Hardware
 
-### Version information for software components
+* TQMLS1043A with 1 GiB / 2 GiB RAM, HW REV.020x/030x on MBLS10xxA, HW REV.020x
+* TQMLS1046A with 2 GiB / 4 GiB / 8 GiB RAM, HW REV.020x/030x on MBLS10xxA, HW REV.020x
+* TQMLS1088A with 2 GiB / 4 GiB RAM, HW REV.020x/030x on MBLS10xxA HW REV.020x
 
-#### U-Boot
+## Version information for software components
+
+### U-Boot
 
 * based on qoriq-u-boot (https://github.com/nxp-qoriq/u-boot/)
 * branched from lf-5.15.71-2.2.0 (v2022.04)
 
-#### ATF
+### ATF
 
 * based on qoriq-atf (https://github.com/nxp-qoriq/atf/)
 * branched from lf-5.15.5-1.0.0 (v2.4)
 
-#### Linux
+### Linux
 
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/)
 * branched from linux-6.12.y
-
-### Supported Hardware:
-
- * TQMLS1043A with 1 GiB / 2 GiB RAM, HW REV.020x/030x on MBLS10xxa, HW REV.020x
- * TQMLS1046A with 2 GiB / 4 GiB / 8 GiB RAM, HW REV.020x/030x on MBLS10xxa, HW REV.020x
- * TQMLS1088A with 2 GiB / 4 GiB RAM, HW REV.020x/030x on MBLS10xxa HW REV.020x
 
 ## Supported Features
 
@@ -119,8 +117,9 @@ SD-Card on MBLS10xxA is accessible.
 ## Build Artifacts
 
 ### TQMLS1043A
+
 * atf/
-  * fip_uboot.bin: U-Boot
+  * fip_uboot.bin: TF-A / U-Boot Firmware Image Package
   * bl2_[sd|qspi].pbl: Boot-media dependent Primary Boot Loader with RCW
 * atf/variants/: contains RCW-PBL for all supported RCW serdes-configurations
   and all supported boot sources.
@@ -128,14 +127,14 @@ SD-Card on MBLS10xxA is accessible.
 * fsl_fman_ucode_ls1043_r1.1_106_4_18.bin: Fman Ethernet Firmware
 * Image: Kernel
 * fsl-ls1043a-tqmls1043a-mbls10xxa.dtb: Device Tree Blob.
-* u-boot-tfa-2022.04-r0.bin: U-Boot Binary
 * \*.wic[.<compress>]: Complete eMMC / SD-Card Image
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 
 ### TQMLS1046A
+
 * atf/
-  * fip_uboot.bin: U-Boot
+  * fip_uboot.bin: TF-A / U-Boot Firmware Image Package
   * bl2_[sd|qspi].pbl: Boot-media dependent Primary Boot Loader with RCW
 * atf/variants/: contains RCW-PBL for all supported RCW serdes-configurations
   and all supported boot sources.
@@ -143,14 +142,14 @@ SD-Card on MBLS10xxA is accessible.
 * fsl_fman_ucode_ls1046_r1.0_106_4_18.bin: Fman Ethernet Firmware
 * Image: Kernel
 * fsl-ls1046a-tqmls1046a-mbls10xxa.dtb: Device Tree Blob.
-* u-boot-tfa-2022.04-r0.bin: U-Boot Binary
 * \*.wic[.<compress>]: Complete eMMC / SD-Card Image
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 
-### TQMLS1088a
+### TQMLS1088A
+
 * atf/
-  * fip_uboot.bin: U-Boot
+  * fip_uboot.bin: TF-A / U-Boot Firmware Image Package
   * bl2_[auto|qspi].pbl: Boot-media dependent Primary Boot Loader with RCW
 * atf/variants/: contains RCW-PBL for all supported RCW serdes-configurations
   and all supported boot sources.
@@ -159,7 +158,6 @@ SD-Card on MBLS10xxA is accessible.
 * mc-utils: the DPAA2-Ethernet Configuration files
 * Image: Kernel
 * fsl-ls1088a-tqmls1088a-mbls10xxa.dtb: Device Tree Blob.
-* u-boot-tfa-2022.04-r0.bin: U-Boot Binary
 * \*.wic[.<compress>]: Complete eMMC / SD-Card Image
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
@@ -225,6 +223,7 @@ see: [TQ Embedded Wiki for TQMLS10xxA](https://support.tq-group.com/en/layerscap
 | 5577 (20)     | PCIe.1 | PCIe.2 | PCIe.3 x 2 | PCIe.3 x 2 |
 
 ## DIP-Switch settings
+
 The DIP-switches should match the used RCW, otherwise interfaces will not work,
 or will not start. See [Serdes Config](#serdes-configuration)
 Pay attention to the following DIP-Switches:
@@ -280,17 +279,17 @@ Download UBIFS image from TFTP and update:
 
 `run update_rootfs_spi`
 
-#### SD / e-MMC
+#### SD / eMMC
 
-See [Layerscape Boot Media](./README.ls.Bootmedia.md) for details.
+See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 
 ### Update parts of system
 
 In U-Boot the following update scripts are available to update the components:
-* RCW/PBL:
+* RCW/PBL (use `*.pbl` file ):
   * `update_pbl_mmc`
   * `update_pbl_spi`
-* TF-A / U-Boot:
+* TF-A / U-Boot (use FIP Firmware Image Package):
   * `update_uboot_mmc`
   * `update_uboot_spi`
 * RootFS:

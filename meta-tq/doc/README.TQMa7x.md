@@ -92,12 +92,12 @@ Artifacs can be found at the usual locations for bitbake:
 
 * \*.dtb: device tree blobs
 * zImage: Linux kernel image
-* \*.wic[.<compress>]: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * \*.rootfs.ubifs: UBIFS rootfs for updating the rootfs from bootloader
    (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
-* u-boot-${MACHINE}.imx-sd: boot stream for SD / e-MMC
+* u-boot-${MACHINE}.imx-sd: boot stream for SD / eMMC
 * u-boot-${MACHINE}.imx-qspi: boot stream for QSPI
 
 ## Boot DIP Switches
@@ -118,7 +118,7 @@ _Note:_
 | ON      |      |  x  |     |     |  x  |     |     |     |    |      |     |     |     |  x  |     |     |     |    |     |     |     |     |    |  x  |     |
 | OFF     |  x   |     |  x  |  x  |     |  x  |  x  |  x  |    |  x   |  x  |  x  |  x  |     |  x  |  x  |  x  |    |  -  |  -  |  -  |  -  |    |     |  x  |
 
-### e-MMC
+### eMMC
 
 |         |  S2  |     |     |     |     |     |     |     |    |  S3  |     |     |     |     |     |     |     |    |  S4 |     |     |     |    |  S1 |     |
 | ------- | :--: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :--: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: | -- | :-: | :-: |

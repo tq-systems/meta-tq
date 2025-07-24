@@ -54,7 +54,7 @@ Artifacs can be found at the usual locations for bitbake:
 * `uImage`: Linux kernel image
 * `u-boot-nor-*.bin` U-Boot binary for nor flash
 * `u-boot-sdcard-*.bin` U-Boot binary for nor flash
-* \*.wic[.<compress>]: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 
 ## Build-Time Configuration
@@ -227,10 +227,10 @@ Note that the output of the LVDS interface is in Jeida-24 mode.
 
 ## Program system image
 
-### SD card / e-MMC
+### SD card / eMMC
 
 To program a complete system image, write the [WIC image](#Artifacts) to
-SD card / e-MMC at offset 0.
+SD card / eMMC at offset 0.
 
 ### SPI-NOR
 

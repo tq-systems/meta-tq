@@ -44,7 +44,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **I2C**                                          |                       |                       |
 | system EEPROM parsing                            |       x               |       x               |
 | PMIC                                             |       x               |       x               |
-| **e-MMC / SD**                                   |                       |                       |
+| **eMMC / SD**                                    |                       |                       |
 | Read                                             |       x               |       x               |
 | Write                                            |       x               |       x               |
 | **Ethernet**                                     |                       |                       |
@@ -52,7 +52,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | GigE / EQOS via Phy on MBa93xxCA                 |       x               |       x               |
 | **Bootdevices**                                  |                       |                       |
 | SD-Card on USDHC2                                |       x               |       x               |
-| e-MMC on USDHC1                                  |       x               |       x               |
+| eMMC on USDHC1                                   |       x               |       x               |
 | QSPI-NOR on FlexSPI                              |       x               |       x               |
 | Serial Downloader                                |                       |       x               |
 | **USB**                                          |                       |                       |
@@ -205,11 +205,11 @@ Artifacs can be found at the usual locations for bitbake:
   * imx93-tqma9352-mba93xxla*.dtb
   * imx93-tqma9352-mba93xx*-rpmsg.dtb (NPU enabled)
 * Image: Linux kernel image
-* \*.wic[.<compress>]: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
-* imx-boot-${MACHINE}-sd.bin-flash\_singleboot: CortexA boot stream for SD / e-MMC
+* imx-boot-${MACHINE}-sd.bin-flash\_singleboot: CortexA boot stream for SD / eMMC
 * imx-boot-${MACHINE}-sd.bin-flash\_singleboot\_flexspi: CortexA boot stream for FlexSPI
 * imx-boot-${MACHINE}-mfgtool.bin-flash\_singleboot: boot stream for UUU
 
@@ -221,7 +221,7 @@ BOOT\_MODE can be configured using DIP switch S1.
 | :------: | :-------------------: | :--: | :--: | :--: | :--: |
 | 0000     | Boot from fuses       | OFF  | OFF  | OFF  | OFF  |
 | 0001     | Serial Downloader     | OFF  | OFF  | OFF  | ON   |
-| 0010     | e-MMC (USDHC1)        | OFF  | OFF  | ON   | OFF  |
+| 0010     | eMMC (USDHC1)         | OFF  | OFF  | ON   | OFF  |
 | 0011     | SD Card (USDHC2)      | OFF  | OFF  | ON   | ON   |
 | 0100     | QSPI (FlexSPI NOR)    | OFF  | ON   | OFF  | OFF  |
 

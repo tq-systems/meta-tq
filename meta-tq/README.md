@@ -44,7 +44,7 @@ is _mandatory_ - see [table](#supported-machines).
 * i.MX93
 * LS1012A
 * LS102xA
-* LS1028A / LS1017A
+* LS1028A (incl. LS1017A / LS1018A / LS1027A)
 * LS1043A / LS1046A / LS1088A
 * LX2160A
 
@@ -193,17 +193,17 @@ Support for the following machines is contained in this version:
 | [b]    | LS1012A                 | TQMLS1012AL             | MBLS1012AL    | tqmls1012al-mbls1012al           | TQMLS1012AL HW REV.010x ... 020x / 512 MiB / 1GiB RAM / MBLS1012AL HW REV.020x                                                                               |
 | [b]    | LS10\[17,28\]A          | TQMLS10\[17,28\]A       | MBLS1028A     | tqmls1028a-mbls1028a             | TQMLS1017A / TQMLS1028A HW REV.010x ... 030x, 1 GiB / 4 GiB RAM, MBLS1028A HW REV.010x                                                                       |
 | [b]    | LS10\[17,28\]A          | TQMLS10\[17,28\]A       | MBLS1028A-IND | tqmls1028a-mbls1028a-ind         | TQMLS1017A / TQMLS1028A HW REV.010x ... 030x, 1 GiB / 4 GiB RAM, MBLS1028A-IND HW REV.010x                                                                   |
-| [b]    | LS1043A                 | TQMLS1043A              | MBLS10xxA     | tqmls1043a-1gb-mbls10xxa         | TQMLS1043a, 1 GiB, HW REV.020x / MBLS10xxa, HW REV.020x                                                                                                      |
-| [b]    | LS1043A                 | TQMLS1043A              | MBLS10xxA     | tqmls1043a-2gb-mbls10xxa         | TQMLS1043a, 2 GiB, HW REV.020x ... 030x / MBLS10xxa, HW REV.020x                                                                                             |
-| [b]    | LS1043A                 | TQMLS1043A              | MBLS10xxA     | tqmls1043a-2gb-rev0300-mbls10xxa | TQMLS1043a, 2 GiB, HW REV.020x ... 030x / MBLS10xxa, HW REV.020x                                                                                             |
-| [b]    | LS1046A                 | TQMLS1046A              | MBLS10xxA     | tqmls1046a-2gb-mbls10xxa         | TQMLS1046a, 2 GiB, HW REV.020x / MBLS10xxa, HW REV.020x                                                                                                      |
-| [b]    | LS1046A                 | TQMLS1046A              | MBLS10xxA     | tqmls1046a-4gb-mbls10xxa         | TQMLS1046a, 4 GiB, HW REV.030x / MBLS10xxa, HW REV.020x                                                                                                      |
-| [b]    | LS1046A                 | TQMLS1046A              | MBLS10xxA     | tqmls1046a-8gb-mbls10xxa         | TQMLS1046a, 8 GiB, HW REV.020x / MBLS10xxa, HW REV.020x                                                                                                      |
-| [b]    | LS1046A                 | TQMLS1046A              | MBLS10xxA     | tqmls1046a-2gb-noecc-mbls10xxa   | TQMLS1046a, 2 GiB no ECC, HW REV.020x / MBLS10xxa, HW REV.020x                                                                                               |
-| [b]    | LS1046A                 | TQMLS1046A              | MBLS10xxA     | tqmls1046a-4gb-noecc-mbls10xxa   | TQMLS1046a, 4 GiB no ECC, HW REV.030x / MBLS10xxa, HW REV.020x                                                                                               |
-| [b]    | LS1046A                 | TQMLS1046A              | MBLS10xxA     | tqmls1046a-8gb-noecc-mbls10xxa   | TQMLS1046a, 8 GiB no ECC, HW REV.020x / MBLS10xxa, HW REV.020x                                                                                               |
-| [b]    | LS1088A                 | TQMLS1088A              | MBLS10xxA     | tqmls1088a-2gb-mbls10xxa         | TQMLS1088a, 2 GiB, HW REV.020x ... REV.030x / MBLS10xxa                                                                                                      |
-| [b]    | LS1088A                 | TQMLS1088A              | MBLS10xxA     | tqmls1088a-4gb-mbls10xxa         | TQMLS1088a, 4 GiB, HW REV.020x ... REV.030x / MBLS10xxa                                                                                                      |
+| [b]    | LS1043A                 | TQMLS1043A              | MBLS10xxA     | tqmls1043a-1gb-mbls10xxa         | TQMLS1043A, 1 GiB, HW REV.020x / MBLS10xxA, HW REV.020x                                                                                                      |
+| [b]    | LS1043A                 | TQMLS1043A              | MBLS10xxA     | tqmls1043a-2gb-mbls10xxa         | TQMLS1043A, 2 GiB, HW REV.020x ... 030x / MBLS10xxA, HW REV.020x                                                                                             |
+| [b]    | LS1043A                 | TQMLS1043A              | MBLS10xxA     | tqmls1043a-2gb-rev0300-mbls10xxa | TQMLS1043A, 2 GiB, HW REV.020x ... 030x / MBLS10xxA, HW REV.020x                                                                                             |
+| [b]    | LS1046A                 | TQMLS1046A              | MBLS10xxA     | tqmls1046a-2gb-mbls10xxa         | TQMLS1046A, 2 GiB, HW REV.020x / MBLS10xxA, HW REV.020x                                                                                                      |
+| [b]    | LS1046A                 | TQMLS1046A              | MBLS10xxA     | tqmls1046a-4gb-mbls10xxa         | TQMLS1046A, 4 GiB, HW REV.030x / MBLS10xxA, HW REV.020x                                                                                                      |
+| [b]    | LS1046A                 | TQMLS1046A              | MBLS10xxA     | tqmls1046a-8gb-mbls10xxa         | TQMLS1046A, 8 GiB, HW REV.020x / MBLS10xxA, HW REV.020x                                                                                                      |
+| [b]    | LS1046A                 | TQMLS1046A              | MBLS10xxA     | tqmls1046a-2gb-noecc-mbls10xxa   | TQMLS1046A, 2 GiB no ECC, HW REV.020x / MBLS10xxA, HW REV.020x                                                                                               |
+| [b]    | LS1046A                 | TQMLS1046A              | MBLS10xxA     | tqmls1046a-4gb-noecc-mbls10xxa   | TQMLS1046A, 4 GiB no ECC, HW REV.030x / MBLS10xxA, HW REV.020x                                                                                               |
+| [b]    | LS1046A                 | TQMLS1046A              | MBLS10xxA     | tqmls1046a-8gb-noecc-mbls10xxa   | TQMLS1046A, 8 GiB no ECC, HW REV.020x / MBLS10xxA, HW REV.020x                                                                                               |
+| [b]    | LS1088A                 | TQMLS1088A              | MBLS10xxA     | tqmls1088a-2gb-mbls10xxa         | TQMLS1088A, 2 GiB, HW REV.020x ... REV.030x / MBLS10xxA                                                                                                      |
+| [b]    | LS1088A                 | TQMLS1088A              | MBLS10xxA     | tqmls1088a-4gb-mbls10xxa         | TQMLS1088A, 4 GiB, HW REV.020x ... REV.030x / MBLS10xxA                                                                                                      |
 | [y]    | LS102\[0,1\]A           | TQMLS102\[0,1\]A        | MBLS102xA     | tqmls102xa-mbls102xa             | TQMLS102\[0,1\]A HW REV.020x / MBLS102xA HW REV.020x                                                                                                         |
 | [b]    | LX2\[16,08\]0A          | TQMLX2\[16,08\]0A       | MBLX2160A     | tqmlx2160a-mblx2160a             | TQMLX2\[16,08\]0A HW REV.010x with 32 GiB / 16 Gib RAM / MBLX2160A HW REV.010x and REV.020x                                                                  |
 | [y]    | AM335x                  | TQMa335x\[L\]           | MBa335x       | tqma355x-mba335x                 | TQMa335x[L] HW REV.020x with 256/512 MiB RAM / MBa335x HW REV.020x                                                                                           |
@@ -285,8 +285,8 @@ Under the given links SOM specific information can be found:
 * [TQMA64xxL](doc/README.TQMa64xxL.md)
 * [TQMA67xx](doc/README.TQMa67xx.md)
 * [TQMLS1012AL](doc/README.TQMLS1012AL.md)
-* [TQMLS102\[0,1\]A](doc/README.TQMLS102xa.md)
+* [TQMLS102\[0,1\]A](doc/README.TQMLS102xA.md)
 * [TQMLS1017A/TQMLS1028A](doc/README.TQMLS1028A.md)
-* [TQMLS1043/TQMLS1046A/TQMLS1088A](doc/README.TQMLS10xxa.md)
+* [TQMLS1043/TQMLS1046A/TQMLS1088A](doc/README.TQMLS10xxA.md)
 * [TQMLX2160A](doc/README.TQMLX2160A.md)
 * [TQMT10xx](doc/README.TQMT10xx.md)

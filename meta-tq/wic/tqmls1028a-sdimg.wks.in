@@ -1,7 +1,7 @@
 # short-description: Create SD card image with a boot partition
 # long-description:
 # Create an image that can be written onto a SD card using dd for use with
-# TQMLS1028a modules
+# TQMLS1028A modules
 # It uses u-boot as boot loader
 #
 # The disk layout used is:

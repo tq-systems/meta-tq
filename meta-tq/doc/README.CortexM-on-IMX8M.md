@@ -1,6 +1,6 @@
 # CortexM Support for TQ-Systems SOM with i.MX8M
 
-To start a demo stored on SD / e-MMC from U-Boot:
+To start a demo stored on SD / eMMC from U-Boot:
 
 ```
 setenv fdt_file <rpmsg enabled device tree>

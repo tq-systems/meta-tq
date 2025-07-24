@@ -35,7 +35,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **I2C**                                          |              |
 | system EEPROM parsing                            |       x      |
 | PMIC                                             |       x      |
-| **e-MMC / SD**                                   |              |
+| **eMMC / SD**                                    |              |
 | Read                                             |       x      |
 | Write                                            |       x      |
 | **Ethernet**                                     |              |
@@ -43,7 +43,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | GigE / EQOS via Phy on MBa8MPxL                  |       x      |
 | **Bootdevices**                                  |              |
 | SD-Card on USDHC2                                |       x      |
-| e-MMC on USDHC3                                  |       x      |
+| eMMC on USDHC3                                   |       x      |
 | QSPI-NOR on FlexSPI                              |       x      |
 | Serial Downloader                                |       x      |
 | **USB**                                          |              |
@@ -272,14 +272,14 @@ Artifacs can be found at the usual locations for bitbake:
 ### All boards
 
 * Image: Linux kernel image
-* \*.wic[.<compress>]: SD / e-MMC system image
+* \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
-* imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / e-MMC
+* imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / eMMC
 * imx-boot-${MACHINE}-sd.bin-flash\_evk\_flexspi: boot stream for FlexSPI
 * imx-boot-${MACHINE}-mfgtool.bin-flash\_evk\_uboot:  boot stream for UUU
-* imx-boot-${MACHINE}-ecc.bin-flash\_spl\_uboot: boot stream with inline ECC for SD / e-MMC
+* imx-boot-${MACHINE}-ecc.bin-flash\_spl\_uboot: boot stream with inline ECC for SD / eMMC
 * imx-boot-${MACHINE}-ecc.bin-flash\_evk\_flexspi: boot stream with inline ECC for FlexSPI
 * hello\_world.bin (Cortex M7 demo, UART3, TCM)
 * rpmsg\_lite\_pingpong\_rtos\_linux\_remote.bin (Cortex M7 demo, UART3, TCM)
@@ -297,7 +297,7 @@ BOOT\_MODE can be configured using DIP switch S1 (MBa8MPxL) or S4 (MBa8MP-RAS314
 | On         | x |   |   |   |
 | Off        |   | x | x | x |
 
-### e-MMC (USDHC3)
+### eMMC (USDHC3)
 
 BOOT\_MODE: 0010
 
