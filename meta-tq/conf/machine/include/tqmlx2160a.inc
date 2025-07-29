@@ -48,7 +48,6 @@ MACHINE_FEATURES:append = "\
 
 # Add packages we want to be deployed, even when they are not part of rootfs
 EXTRA_IMAGEDEPENDS += "\
-    ddr-phy \
     management-complex \
     mc-utils \
     qoriq-atf \
