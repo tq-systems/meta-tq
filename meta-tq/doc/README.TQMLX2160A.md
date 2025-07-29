@@ -175,8 +175,36 @@ See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 * BL2_IMAGE: ATF BL2 (PBL) file used for WIC image generation.
 * BL3_IMAGE: ATF BL3 (U-Boot) file used for WIC image generation.
 
-Set BL2_IMAGE to `bl2_tqmlx2160a_16gb.pbl` and BL3_IMAGE to `fip_uboot_tqmlx2160a_16gb.bin`
-to create an SD/eMMC image for the 16GiB variant.
+Set BL2_IMAGE to `bl2_auto${ATF_SECURE_SUFFIX}_tqmlx2160a_16gb.pbl` and BL3_IMAGE
+to `fip_uboot${ATF_SECURE_SUFFIX}_tqmlx2160a_16gb.bin` to create an SD/eMMC image
+for the 16GiB variant.
+
+### Secure Boot
+
+Secure Boot is enabled by adding "secure" to `DISTRO_FEATURES`. With this setting, signed variants
+of all ATF components are generated and built into the SD/eMMC system image.
+
+By default, a newly generated keypair will be used for signing, which may be lost when certain
+packages are rebuilt. To enable the build of secured images with a pregenerated keypair, the
+following settings can be added to a distro configuration or `local.conf`:
+
+```
+DISTRO_FEATURES:append = " secure"
+
+SRK_PATH = "/path/to/my/srk/keypair"
+SRC_URI:append:pn-qoriq-cst-native = " file://${SRK_PATH}/srk.pri file://${SRK_PATH}/srk.pub"
+SECURE_PRI_KEY:pn-qoriq-cst-native = "${SRK_PATH}/srk.pri"
+SECURE_PUB_KEY:pn-qoriq-cst-native = "${SRK_PATH}/srk.pub
+```
+
+To boot a secured image, a LX2160A\[C\]E CPU (with cryptography support) with
+programmed OTPMK fuses is required. Please refer to the
+[LSDK User Guide](https://www.nxp.com/design/software/embedded-software/linux-software-and-development-tools/layerscape-linux-distribution-poc:LAYERSCAPE-SDK#documentation)
+for more information on the Secure Boot process and the required hardware preparation.
+
+For now, only the early boot stages (up to U-Boot) are signed and verified.
+Additional configuration of U-Boot is required to verify subsequent boot images
+like the Linux kernel.
 
 ## Ethernet and DPAA2
 
