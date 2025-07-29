@@ -46,8 +46,8 @@ chassistype:ls1043a = "ls104x_1012"
 chassistype:ls1046a = "ls104x_1012"
 
 FIP_DDR ?= ""
-FIP_DDR:lx2160a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'fip_ddr', '', d)}"
-FIP_DDR:lx2162a = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'fip_ddr', '', d)}"
+FIP_DDR:lx2160a = "fip_ddr"
+FIP_DDR:lx2162a = "fip_ddr"
 
 # requires CROSS_COMPILE set by hand as there is no configure script
 export CROSS_COMPILE="${TARGET_PREFIX}"
@@ -137,8 +137,8 @@ do_compile() {
                 cp build/${PLATFORM}/release/fuse_fip.bin .
             fi
 
-            if [ -e build/${PLATFORM}/release/ddr_fip_sec.bin ] && [ ! -f ddr_fip_sec.bin ]; then
-                cp build/${PLATFORM}/release/ddr_fip_sec.bin .
+            if [ -e build/${PLATFORM}/release/ddr_fip${SECURE_EXTENTION}.bin ] && [ ! -f ddr_fip${SECURE_EXTENTION}.bin ]; then
+                cp build/${PLATFORM}/release/ddr_fip${SECURE_EXTENTION}.bin .
             fi
 
             if [ -e build/${PLATFORM}/release/rot_key.pem ] && [ ! -f rot_key.pem ]; then
