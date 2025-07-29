@@ -9,6 +9,14 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* TQMLX2160A: Add Secure Boot support
+
+  See the [TQMLX2160A README](doc/README.TQMLX2160A.md) for more information.
+  The current implementation only secures the boot process up to the bootloader.
+  The kernel and userspace are not verified.
+
 ## scarthgap.TQ.ARM.BSP.0005
 
 ### Added
