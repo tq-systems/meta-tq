@@ -28,5 +28,6 @@ IMAGE_BOOT_FILES = "\
 # direct assignment to override empty default from meta-freescale
 WKS_FILE = "tqmls1012al-sdimg.wks"
 
-UBOOT_CONFIG ?= "tfa"
+UBOOT_CONFIG ?= "tfa tfa-secure-boot"
 UBOOT_CONFIG[tfa] = "tqmls1012al_mbls1012al_tfa_defconfig"
+UBOOT_CONFIG[tfa-secure-boot] = "tqmls1012al_mbls1012al_tfa_defconfig"

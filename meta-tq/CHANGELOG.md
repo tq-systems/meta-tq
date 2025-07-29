@@ -17,6 +17,12 @@ Releases are named with the following scheme:
   The current implementation only secures the boot process up to the bootloader.
   The kernel and userspace are not verified.
 
+### Fixed
+
+* TQMLS1012AL: Fix build with Secure Boot support
+
+  Secure Boot on the TQMLS1012AL is build-tested only.
+
 ## scarthgap.TQ.ARM.BSP.0005
 
 ### Added

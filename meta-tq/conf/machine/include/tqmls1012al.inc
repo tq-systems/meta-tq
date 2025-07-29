@@ -59,7 +59,7 @@ EXTRA_IMAGEDEPENDS += "\
 RCWQSPI ?= "default/rcw_1000_sd"
 
 RCW_FOLDER:${MACHINE} = "tqmls1012al"
-RCW_SUFFIX:${MACHINE} = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sben.bin', '.bin', d)}"
+RCW_SUFFIX:${MACHINE} = ".bin"
 PLATFORM:${MACHINE} = "tqmls1012al_512mb"
 PLATFORM_ADDITIONAL_TARGET:${MACHINE} = "tqmls1012al_1gb"
 
