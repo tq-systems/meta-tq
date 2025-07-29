@@ -59,8 +59,11 @@ EXTRA_IMAGEDEPENDS += "\
 # so we can safely increase count of usable LEBs
 UBI_MAX_LEB_COUNT = "1280"
 
-BL2_IMAGE ?= "bl2_auto.pbl"
-BL3_IMAGE ?= "fip_uboot.bin"
+ATF_SECURE_SUFFIX ?= "${@bb.utils.contains('DISTRO_FEATURES', 'secure', '_sec', '', d)}"
+
+BL2_IMAGE ?= "bl2_auto${ATF_SECURE_SUFFIX}.pbl"
+BL3_IMAGE ?= "fip_uboot${ATF_SECURE_SUFFIX}.bin"
+DDR_IMAGE ?= "ddr_fip${ATF_SECURE_SUFFIX}.bin"
 
 RCW_FOLDER:${MACHINE} = "tqmlx2160a"
 PLATFORM:${MACHINE} = "tqmlx2160a_32gb"

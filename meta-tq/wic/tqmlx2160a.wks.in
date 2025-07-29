@@ -19,7 +19,7 @@
 part rcw_pbi --source rawcopy --sourceparams="file=atf/${BL2_IMAGE}" --no-table --offset 4K --fixed-size 1020K
 part u-boot --source rawcopy --sourceparams="file=atf/${BL3_IMAGE}" --no-table --offset 1M --fixed-size 2M
 part uboot-env --no-table --offset 5M --fixed-size 3M
-part ddr_phy_firmware --source rawcopy --sourceparams="file=ddr-phy/fip_ddr.bin" --no-table --offset 8M --fixed-size 8M
+part ddr_phy_firmware --source rawcopy --sourceparams="file=atf/${DDR_IMAGE}" --no-table --offset 8M --fixed-size 8M
 part /boot --source bootimg-partition --fstype=vfat --label boot --active --offset 16M --size 32M
 part / --source rootfs --fstype=ext4 --label root --align 4096
 
