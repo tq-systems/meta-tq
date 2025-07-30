@@ -170,6 +170,7 @@ Support for the following machines is contained in this version:
 | [y]    | i.MX6ULL                | TQMa6ULLx               | MBaULx        | tqma6ull-multi-mba6ulx           | TQMa6ULLx HW REV.030x / TQMa6ULLxL HW REV.020x  256/512 MB RAM, MBa6ULx HW REV.020x                                                                          |
 | [y]    | i.MX7D                  | TQMa7D                  | MBa7x         | tqma7x-multi-mba7                | TQMa7D HW REV.010x ... 020x / 1 GiB / 2 GiB /512 MiB RAM / MBa7x HW REV.020x                                                                                 |
 | [y]    | i.MX8MP                 | TQMa8MPxL               | MBa8MPxL      | tqma8mpxl-mba8mpxl               | TQMa8MPQL with 1/2/4/8 GiB RAM, HW REV.020x, MBa8MPxL HW REV.020x                                                                                            |
+| [p]    | i.MX8MP                 | TQMa8MPxS               | MMB-SMARC-2   | tqma8mpxs-mb-smarc-2             | TQMa8MPQS with 1/2/4/8 GiB RAM, HW REV.010x,                                                                                                                 |
 | [y]    | i.MX8MP                 | TQMa8MPxL               | MBa8MP-RAS314 | tqma8mpxl-mba8mp-ras314          | TQMa8MPQL with 1/2/4/8 GiB RAM, HW REV.020x, MBa8MP-RAS314 HW REV.010x                                                                                       |
 | [y]    | i.MX8M\[D,Q,QL\]        | TQMa8M\[D,Q,QL\]        | MBa8Mx        | tqma8mx-multi-mba8mx             | TQMa8M\[D,Q,QL\] with 1/2/4 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x / 030x                                                                                  |
 | [y]    | i.MX8MM\[D,Q\]          | TQMa8M\[D,Q\]ML         | MBa8Mx        | tqma8mxml-multi-mba8mx           | TQMa8M\[D,Q\]ML / 1/2/4 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x                                                                                             |
@@ -268,6 +269,7 @@ Under the given links SOM specific information can be found:
 * [TQMa8MxML](doc/README.TQMa8MxML.md)
 * [TQMa8MxNL](doc/README.TQMa8MxNL.md)
 * [TQMa8MPxL](doc/README.TQMa8MPxL.md)
+* [TQMa8MPxS](doc/README.TQMa8MPxS.md)
 * [TQMa8XDP](doc/README.TQMa8Xx.md)
 * [TQMa8XDP4](doc/README.TQMa8Xx.md)
 * [TQMa8XQP](doc/README.TQMa8Xx.md)
