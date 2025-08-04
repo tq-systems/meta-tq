@@ -19,9 +19,7 @@ SRCREV = "71f528b1ac59bd53351a439e31f969ad1aed4128"
 
 S = "${WORKDIR}/git"
 
-# TODO: use full path after patches are ported to meta-freescale
-require imx-system-manager.inc
-# require recipes-bsp/imx-system-manager/imx-system-manager.inc
+require dynamic-layers/arm-toolchain/recipes-bsp/imx-system-manager/imx-system-manager.inc
 
 # needs to be removed for production releases
 PACKAGECONFIG ?= "m1"
