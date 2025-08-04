@@ -13,9 +13,6 @@ SRCREV = "b22a3f9d57701351c23e22f913d99fbbd0eb4ce9"
 
 S = "${WORKDIR}/git"
 
-# Support for TQ-Systems SOM wit hdifferent RAM sizes
-EXTRA_OEMAKE += "RAM_SIZE=${OEI_RAM_SIZE}"
-
 # TODO: use full path after patches are ported to meta-freescale
 require imx-oei.inc
 # require recipes-bsp/imx-oei/imx-oei.inc
