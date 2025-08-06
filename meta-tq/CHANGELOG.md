@@ -22,6 +22,9 @@ Releases are named with the following scheme:
 * TQMLS1012AL: Fix build with Secure Boot support
 
   Secure Boot on the TQMLS1012AL is build-tested only.
+* qoriq-atf: Fix hash calculation on all Layerscape platforms
+
+  Fixes validation failure when Secure Boot is enabled.
 
 ## scarthgap.TQ.ARM.BSP.0005
 
