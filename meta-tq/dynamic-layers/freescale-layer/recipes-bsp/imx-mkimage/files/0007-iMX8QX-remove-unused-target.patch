@@ -1,10 +1,11 @@
-From b09e5ff5b7cdca64f4985ce0e28ac4b41422ded0 Mon Sep 17 00:00:00 2001
+From 0cc6242fdcafd87219450b703060d300e4517fe1 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 22 Nov 2022 08:01:13 +0100
 Subject: [PATCH] iMX8QX: remove unused target
 
 u-boot-atf.itb is not used but references unavailable ./mkimage_uboot
 
+Upstream-Status: Inappropriate
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 ---
  iMX8QX/soc.mak | 7 -------
@@ -28,6 +29,3 @@ index 4817f32..f2f7849 100755
  u-boot-atf-container.img: bl31.bin u-boot-hash.bin
  	if [ -f $(TEE) ]; then \
  		if [ $(shell echo $(TEE_COMPRESS_ENABLE)) ]; then \
--- 
-2.34.1
-

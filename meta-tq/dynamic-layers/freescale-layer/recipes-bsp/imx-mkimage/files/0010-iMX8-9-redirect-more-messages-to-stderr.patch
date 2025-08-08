@@ -1,22 +1,26 @@
-From 4e496c6f8e2c8826d3bb55d1fb7696daf4f00e87 Mon Sep 17 00:00:00 2001
+From 2dd1e2772f9c539e6fcc0c1c2bc4fb13ad6c79fd Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Thu, 24 Oct 2024 17:26:56 +0200
 Subject: [PATCH] iMX8/9: redirect more messages to stderr
 
 Make the print_fit_hab target only print the HAB block data to stdout.
 
+Upstream-Status: Inappropriate
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 ---
  iMX8DXL/soc.mak | 2 +-
+ iMX8M/soc.mak   | 4 ++--
  iMX8QM/soc.mak  | 2 +-
  iMX8QX/soc.mak  | 2 +-
+ iMX8ULP/soc.mak | 2 +-
  iMX91/soc.mak   | 2 +-
  iMX93/soc.mak   | 2 +-
+ iMX94/soc.mak   | 2 +-
  iMX95/soc.mak   | 2 +-
- 6 files changed, 6 insertions(+), 6 deletions(-)
+ 9 files changed, 10 insertions(+), 10 deletions(-)
 
 diff --git a/iMX8DXL/soc.mak b/iMX8DXL/soc.mak
-index 231bd09..528b4b2 100755
+index f0ab34b..6dbfc73 100755
 --- a/iMX8DXL/soc.mak
 +++ b/iMX8DXL/soc.mak
 @@ -12,7 +12,7 @@ SECO_FW_NAME = mx8dxl$(LC_REVISION)-ahab-container.img
@@ -28,6 +32,21 @@ index 231bd09..528b4b2 100755
  SPLIT_SPL = ../scripts/split_spl.sh
  
  ifneq ($(wildcard /usr/bin/rename.ul),)
+diff --git a/iMX8M/soc.mak b/iMX8M/soc.mak
+index 0fd5574..4d7c5b1 100644
+--- a/iMX8M/soc.mak
++++ b/iMX8M/soc.mak
+@@ -18,8 +18,8 @@ ARCHIVE_NAME ?= $(shell cat nightly.txt).tar
+ 
+ BITBUCKET_SERVER=https://bitbucket.sw.nxp.com
+ DDR_FW_DIR=projects/IMX/repos/linux-firmware-imx/raw/firmware/ddr/synopsys
+-PAD_IMAGE = ../scripts/pad_image.sh
+-DTB_PREPROC = ../scripts/dtb_check.sh
++PAD_IMAGE = ../scripts/pad_image.sh >&2
++DTB_PREPROC = ../scripts/dtb_check.sh >&2
+ 
+ PRINT_FIT_HAB_OFFSET ?= 0x60000
+ DEK_BLOB_LOAD_ADDR = 0x40400000
 diff --git a/iMX8QM/soc.mak b/iMX8QM/soc.mak
 index 153c5c3..e7d19b0 100755
 --- a/iMX8QM/soc.mak
@@ -42,7 +61,7 @@ index 153c5c3..e7d19b0 100755
  AHAB_IMG = mx8qmb0-ahab-container.img
  TEE = tee.bin
 diff --git a/iMX8QX/soc.mak b/iMX8QX/soc.mak
-index 8f19a57..e27e0f0 100755
+index f2f7849..41791a7 100755
 --- a/iMX8QX/soc.mak
 +++ b/iMX8QX/soc.mak
 @@ -8,7 +8,7 @@ INCLUDE = ./lib
@@ -54,8 +73,21 @@ index 8f19a57..e27e0f0 100755
  
  ifneq ($(wildcard /usr/bin/rename.ul),)
      RENAME = rename.ul
+diff --git a/iMX8ULP/soc.mak b/iMX8ULP/soc.mak
+index ef74ecd..1460bfe 100644
+--- a/iMX8ULP/soc.mak
++++ b/iMX8ULP/soc.mak
+@@ -9,7 +9,7 @@ INCLUDE = ./lib
+ QSPI_HEADER_MCU = ../scripts/fspi_header_atxp
+ QSPI_HEADER = ../scripts/fspi_header
+ QSPI_PACKER = ../scripts/fspi_packer.sh
+-PAD_IMAGE = ../scripts/pad_image.sh
++PAD_IMAGE = ../scripts/pad_image.sh >&2
+ SPLIT_KERNEL = ../scripts/split_kernel.sh
+ 
+ ifneq ($(wildcard /usr/bin/rename.ul),)
 diff --git a/iMX91/soc.mak b/iMX91/soc.mak
-index 25fd7d2..f36d5dc 100644
+index 4ff8988..2f975ff 100644
 --- a/iMX91/soc.mak
 +++ b/iMX91/soc.mak
 @@ -11,7 +11,7 @@ INCLUDE = ./lib
@@ -68,7 +100,7 @@ index 25fd7d2..f36d5dc 100644
  ifneq ($(wildcard /usr/bin/rename.ul),)
      RENAME = rename.ul
 diff --git a/iMX93/soc.mak b/iMX93/soc.mak
-index d0679ff..9f72202 100644
+index 9421904..fd522e6 100644
 --- a/iMX93/soc.mak
 +++ b/iMX93/soc.mak
 @@ -11,7 +11,7 @@ INCLUDE = ./lib
@@ -80,8 +112,21 @@ index d0679ff..9f72202 100644
  
  ifneq ($(wildcard /usr/bin/rename.ul),)
      RENAME = rename.ul
+diff --git a/iMX94/soc.mak b/iMX94/soc.mak
+index dceb9db..14de569 100644
+--- a/iMX94/soc.mak
++++ b/iMX94/soc.mak
+@@ -16,7 +16,7 @@ endif
+ 
+ QSPI_PACKER = ../scripts/fspi_packer.sh
+ QSPI_FCB_GEN = ../scripts/fspi_fcb_gen.sh
+-PAD_IMAGE = ../scripts/pad_image.sh
++PAD_IMAGE = ../scripts/pad_image.sh >&2
+ 
+ ifneq ($(wildcard /usr/bin/rename.ul),)
+     RENAME = rename.ul
 diff --git a/iMX95/soc.mak b/iMX95/soc.mak
-index 9940e66..ae68296 100644
+index 060531e..501c537 100644
 --- a/iMX95/soc.mak
 +++ b/iMX95/soc.mak
 @@ -16,7 +16,7 @@ endif

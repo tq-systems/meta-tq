@@ -1,4 +1,4 @@
-From 413f7e530728db300c9cbc39e7b558df5f3c5962 Mon Sep 17 00:00:00 2001
+From bd0c82295a63b576f1c9f213965ac4654e6e4fee Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 11 Oct 2022 16:20:15 +0200
 Subject: [PATCH] iMX8M: soc.mak: use native mkimage from sysroot
@@ -84,6 +84,3 @@ index e7c762b..f1b37a4 100644
  
  archive :
  	git ls-files --others --exclude-standard -z | xargs -0 tar rvf $(ARCHIVE_PATH)/$(ARCHIVE_NAME)
--- 
-2.34.1
-

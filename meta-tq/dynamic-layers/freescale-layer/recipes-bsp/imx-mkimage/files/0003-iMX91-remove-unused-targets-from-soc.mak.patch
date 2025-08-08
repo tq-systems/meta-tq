@@ -1,21 +1,23 @@
-From 5cacae1b3121b962f7656b1b2cfa1e0808c04607 Mon Sep 17 00:00:00 2001
+From ace007abc030980c8ae465bae5c5ebf7b6ddd85a Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
-Date: Tue, 22 Nov 2022 08:01:43 +0100
-Subject: [PATCH] iMX8ULP: remove unused targets
+Date: Thu, 4 Sep 2025 12:59:03 +0200
+Subject: [PATCH] iMX91: remove unused targets from soc.mak
 
-u-boot-atf.itb is not used but references unavailable ./mkimage_uboot.
-u-boot-atf.bin is only a dependency for u-boot-atf.itb
+u-boot-atf.bin and u-boot-atf.itb are not valid for i.MX93 and depend
+on the presence of mkimage_uboot and mkimage_fit_atf.sh. Remove.
+
+Upstream-Status: Inappropriate
 
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 ---
- iMX8ULP/soc.mak | 11 -----------
+ iMX91/soc.mak | 11 -----------
  1 file changed, 11 deletions(-)
 
-diff --git a/iMX8ULP/soc.mak b/iMX8ULP/soc.mak
-index dd61cd7..ef74ecd 100644
---- a/iMX8ULP/soc.mak
-+++ b/iMX8ULP/soc.mak
-@@ -40,17 +40,6 @@ u-boot-hash.bin: u-boot.bin
+diff --git a/iMX91/soc.mak b/iMX91/soc.mak
+index fca7fdc..4ff8988 100644
+--- a/iMX91/soc.mak
++++ b/iMX91/soc.mak
+@@ -96,17 +96,6 @@ u-boot-hash.bin: u-boot.bin
  	./$(MKIMG) -commit > head.hash
  	@cat u-boot.bin head.hash > u-boot-hash.bin
  
@@ -32,7 +34,4 @@ index dd61cd7..ef74ecd 100644
 -
  u-boot-atf-container.img: bl31.bin u-boot-hash.bin
  	if [ -f $(TEE) ]; then \
- 		if [ $(shell echo $(TEE_COMPRESS_ENABLE)) ]; then \
--- 
-2.34.1
-
+ 		if [ $(shell echo $(ROLLBACK_INDEX_IN_CONTAINER)) ]; then \

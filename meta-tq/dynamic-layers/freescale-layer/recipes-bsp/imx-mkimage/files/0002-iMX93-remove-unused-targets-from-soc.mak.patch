@@ -1,10 +1,12 @@
-From 0a87e06d4183745d4d508de871053ceda054961e Mon Sep 17 00:00:00 2001
+From 6e915c5de4d25579ed1acf5c5c1c0321e4bc95f3 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Wed, 12 Oct 2022 11:01:33 +0200
-Subject: [PATCH] iMX9: remove unused targets from soc.mak
+Subject: [PATCH] iMX93: remove unused targets from soc.mak
 
-u-boot-atf.bin and u-boot-atf.itb are not valid for i.MX9 and depend
+u-boot-atf.bin and u-boot-atf.itb are not valid for i.MX93 and depend
 on the presence of mkimage_uboot and mkimage_fit_atf.sh. Remove.
+
+Upstream-Status: Inappropriate
 
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 ---
@@ -12,7 +14,7 @@ Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
  1 file changed, 11 deletions(-)
 
 diff --git a/iMX93/soc.mak b/iMX93/soc.mak
-index 560d38e..8953168 100644
+index 4ea92e3..9421904 100644
 --- a/iMX93/soc.mak
 +++ b/iMX93/soc.mak
 @@ -103,17 +103,6 @@ u-boot-hash.bin: u-boot.bin
@@ -33,6 +35,3 @@ index 560d38e..8953168 100644
  u-boot-atf-container.img: bl31.bin u-boot-hash.bin
  	if [ -f $(TEE) ]; then \
  		if [ $(shell echo $(TEE_COMPRESS_ENABLE)) ]; then \
--- 
-2.34.1
-
