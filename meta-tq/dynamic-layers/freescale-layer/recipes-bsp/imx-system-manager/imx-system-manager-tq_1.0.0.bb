@@ -10,12 +10,12 @@ and pin control via a client RPC API based on ARM's System Control and \
 Management Interface (SCMI). This recipe provides the implementation for \
 TQ-Systems SOM"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b66f32a90f9577a5a3255c21d79bc619"
+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=f2a70813bc08547f509361c08b718861"
 
 SRC_URI = "${IMX_SYSTEM_MANAGER_SRC};branch=${SRCBRANCH}"
 IMX_SYSTEM_MANAGER_SRC = "${TQ_GIT_BASEURL}/tq-imx-sm.git;protocol=${TQ_GIT_PROTOCOL}"
-SRCBRANCH = "TQM-lf-6.6.52"
-SRCREV = "71f528b1ac59bd53351a439e31f969ad1aed4128"
+SRCBRANCH = "TQM-lf-6.12.20"
+SRCREV = "359b90c65aff364db169e570676101f62376e416"
 
 S = "${WORKDIR}/git"
 
