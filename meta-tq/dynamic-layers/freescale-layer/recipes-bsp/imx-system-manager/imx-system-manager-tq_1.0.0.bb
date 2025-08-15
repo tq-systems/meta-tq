@@ -21,8 +21,19 @@ S = "${WORKDIR}/git"
 
 require dynamic-layers/arm-toolchain/recipes-bsp/imx-system-manager/imx-system-manager.inc
 
-# needs to be removed for production releases
-PACKAGECONFIG ?= "m1"
+# for production releases monitor and console needs to be disabled
+# Pass "c0 m0" in this case
+SYSTEM_MANAGER_DEBUG ?= "0"
+
+# using 'c1 m0' can be used for informal debug output without monitor while
+# 'c0 m0' is intended for release builds
+PACKAGECONFIG[c0] = ",,,,,c1 m1 m2"
+PACKAGECONFIG[c1] = "C=1,,,,,c0"
+
+PACKAGECONFIG_FOR_RELEASE = "m0 c0"
+PACKAGECONFIG_FOR_DEBUG = "c1 m1"
+
+PACKAGECONFIG ?= "${@oe.utils.ifelse(int(d.getVar('SYSTEM_MANAGER_DEBUG')), '${PACKAGECONFIG_FOR_DEBUG}', '${PACKAGECONFIG_FOR_RELEASE}')}"
 
 # should be the output file name w/o extension
 SYSTEM_MANAGER_FIRMWARE_BASENAME ?= "m33_image"
