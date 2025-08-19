@@ -11,20 +11,64 @@ Releases are named with the following scheme:
 
 ### Added
 
+* linux-rt-tq-6.12: TQMLS10xxA / TQMLX2160A:
+
+  Mark recipe as compatible for these machines
+* TQMa8MPxS: add board support for SoM on MB-SMARC-2
 * TQMLX2160A: Add Secure Boot support
 
   See the [TQMLX2160A README](doc/README.TQMLX2160A.md) for more information.
   The current implementation only secures the boot process up to the bootloader.
   The kernel and userspace are not verified.
 
+### Changed
+
+* imx-atf-tq: TQMa8 / TQMa9:
+
+  Include  NXP fixes up to tag lf-6.6.52-2.2.1 and adjustments
+  for Layerscape.
+* linux-rt-tq-6.6:  TQMa6 / TQMa6UL[L]x[L] / TQMa7 / TQMa8Mx / TQMa8MxML / TQMa8MxNL:
+
+  Include stable fixes up to v6.6.101 and stable-rt fixes up to v6.6.101-rt59
+* linux-tq-6.6:  TQMa6 / TQMa6UL[L]x[L] / TQMa7 / TQMa8Mx / TQMa8MxML / TQMa8MxNL:
+
+  Include stable fixes up to v6.6.102
+
+* linux-imx-tq-6.6:  TQMa8 / TQMa9:
+
+  Include NXP fixes up to tag lf-6.6.52-2.2.1 and
+  stable fixes up to 6.6.101 from linux-fslc
+* linux-[rt-]tq-6.12: TQMa335x / TQMa93 / TQMa8MP / TQMLS10xx / TQMLX2160:
+  * Include linux-stable fixes up to 6.12.41
+  * configure STMMAC as built-in to support NFS root on boards
+    with MDIO on STMMAC
+* machines: use `require` for machine config includes
+* alsa-state: enable IN3_L / Left Mixer input path (prepare MicIn support) for
+  i.MX base SoM
+* layer.conf: add LAYERRECOMMENDS
+
 ### Fixed
 
+* u-boot-lsdk-tq-2019.04: TQMLS1028A: Fix PCIe initialisation flow
+
+  Backport some fixes to the initalisation flow, limit to Gen2 and
+  add wait for link polling. Both the limitation and the polling loop
+  improve compatibility to more cards, since bootloader support is
+  crucial for working PCIe under Linux.
+* tq-bootconf: add reproducible default for 'FIT_CONF_PREFIX'
+
+  When adding support to machines a reproducible default is needed to keep
+  boot configurations and fitImages in sync.
 * TQMLS1012AL: Fix build with Secure Boot support
 
   Secure Boot on the TQMLS1012AL is build-tested only.
 * qoriq-atf: Fix hash calculation on all Layerscape platforms
 
   Fixes validation failure when Secure Boot is enabled.
+
+### Removed
+
+* u-boot-tq_2018.07: remove recipe after TQMLS10xxA was upgraded to v2022.04
 
 ## scarthgap.TQ.ARM.BSP.0005
 
