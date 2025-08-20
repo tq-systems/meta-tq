@@ -44,7 +44,8 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **USB**                                   |             |
 | USB 3.0 Host / Hub (X7)                   |      x      |
 | USB 2.0 Host / Hub (X8)                   |      x      |
-| USB DRD (USB 2.0 Cable Detect, VBUS, X4)  |      x      |
+| USB 3.0 Micro / Hub, (X3, host only)      |             |
+| USB DRD USB 2.0 (X4, peripheral only)     |      x      |
 | **QSPI NOR**                              |             |
 | Read with 1-4-4 SDR                       |      x      |
 | PP / Erase with 1-1-4 SDR                 |      x      |
@@ -80,8 +81,8 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **USB**                                                      |             |
 | USB 3.0 Host / Hub (X7)                                      |      x      |
 | USB 2.0 Host / Hub (X8)                                      |      x      |
-| USB DRD USB 2.0 (X4, peripheral only)                        |      x      |
-| USB DRD (USB 3.0 Cable Detect, VBUS, X3)                     |             |
+| USB 3.0 Micro / Hub, (X3, host only)                         |             |
+| USB DRD (USB 2.0 Cable Detect, VBUS, X4)                     |      x      |
 | **QSPI NOR**                                                 |             |
 | Read with 1-4-4 SDR                                          |      x      |
 | PP / Erase with 1-4-4 SDR                                    |      x      |
@@ -134,8 +135,12 @@ See top level [README](../README.md) for configurations usable as MACHINE.
     BUG!
     �esetting ...
     ```
-* USB DR ports don't detect USB devices in host mode
-* USB DR ports don't setup a USB device in peripheral mode
+* USB 2.0 DRD (X4):
+  * Linux: no detection of USB devices in host mode
+  * U-Boot: limited to peripheral in (dual role not supported by upstream DWC3 driver)
+* USB 3.0 micro (X3)
+  * peripheral mode not supported (hardware limitation on SoM, connected to Hub)
+  * USB 3.0 devices are known to cause over-current condition
 * USB Bluetooth:
   * Some adapters cause the following error during bootup
 
