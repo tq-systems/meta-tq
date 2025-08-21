@@ -498,7 +498,7 @@ state.tqmtlv320aic32 {
 	control.41 {
 		iface MIXER
 		name 'IN3_L to Left Mixer Positive Resistor'
-		value Off
+		value '20 kOhm'
 		comment {
 			access 'read write'
 			type ENUMERATED
