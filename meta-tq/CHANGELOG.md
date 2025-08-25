@@ -49,6 +49,12 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* u-boot-tq-2023.04: TQMa7x:
+
+  No MDIO bus was found after fixing several bugs in fec-mxc driver.
+  Bug was caused by forcing unique MDIO bus names via device tree.
+  Naming should be handled by FEC driver that creates the bus depending
+  on Kconfig settings.
 * u-boot-lsdk-tq-2019.04: TQMLS1028A: Fix PCIe initialisation flow
 
   Backport some fixes to the initalisation flow, limit to Gen2 and
