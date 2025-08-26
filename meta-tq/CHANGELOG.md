@@ -49,6 +49,19 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* u-boot-tq-2023.04: TQMa6x:
+
+  Add errata workarounds for KSZ9031 ethernet phy to improve reliability of
+  establishing a link.
+* u-boot-tq-2017.11: TQMLS102xA:
+
+  Upstream device tree node naming for ESDHC controller was changes. Fix board
+  specific DSR code to be compatibel with old and new naming.
+* u-boot-imx-tq-2024.04:
+
+  FEC driver MDIO bus handling for enabled DM_MDIO and DM_ETH_PHY
+  has several flaws that were hidden behind ifdefs. The code has
+  fixes for the relevant code paths.
 * u-boot-tq-2023.04: TQMa7x:
 
   No MDIO bus was found after fixing several bugs in fec-mxc driver.
