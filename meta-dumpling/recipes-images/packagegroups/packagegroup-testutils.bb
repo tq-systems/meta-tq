@@ -66,12 +66,12 @@ python () {
     if bb.utils.contains('DISTRO_FEATURES', 'opengl', True, False, d):
         provider_libgbm = d.getVar('PREFERRED_PROVIDER_virtual/libgbm') or None
         if provider_libgbm:
-             bb.note("opengl and libgbm provided: adding kmscube")
+             bb.debug(2, "opengl and libgbm provided: adding kmscube")
              opengl_rrecommends += 'kmscube'
         else:
-             bb.note("opengl but no libgbm provider")
+             bb.debug(2, "opengl but no libgbm provider")
     else:
-        bb.note("no opengl and no libgbm")
+        bb.debug(2, "no opengl and no libgbm")
 
     d.setVar('OPENGL_RRECOMMENDS', opengl_rrecommends)
 }
