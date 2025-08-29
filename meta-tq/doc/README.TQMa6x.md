@@ -66,27 +66,32 @@ yocto scarthgap. For Linux 6.1 support use yocto kirkstone.
 
 ## Known issues / Limitations
 
+### General
+
 * PCIe requires a power cycle to work reliably. Asserting a POR using S9 or S10 is not sufficient.
-* eth1 (X12) (USB to Ethernet) causes an error on `usb reset` if no MAC address
-  is set: `Error: smsc95xx_eth address not set.`
-* Backlight on parallel displays are enabled upon Power-On which might lead to random output.
-  Display will be disabled during bootup and can be used normally afterwards.
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle`.
   The values for `UBI_LEB_SIZE` and `UBI_MAX_LEB_COUNT` are predefined for 64 MiB SPI-NOR.
   The generated UBIFS does not fit into the default SPI-NOR (16 MiB). If
   rootfs on SPI NOR is required, following solutions:
   * tailor image recipe and kernel configuration to get real tiny
   * use SoM variant with larger SPI-NOR
-* U-Boot: MTD and UBI Support are not configured. Only U-Boot and environment on SPI NOR
+* Backlight on parallel displays are enabled upon Power-On which might lead to random output.
+  Display will be disabled during bootup and can be used normally afterwards.
+
+### U-Boot
+
+* FEC Ethernet port may have ARP timeouts. Restart the network command usually fixes
+  the issue. Root cause is ethernet PHY on MBa6x.
+* USB Ethernet (LAN9500 / X12C) is only usable after `usb start` and with valid
+  MAC in `eth1addr` environment variable. Default value is parsed from EEPROM on MBa6x.
+  To select the device, set `ethact` to the devicename. The name can be determined using
+  `dm tree` and look for the device name.
+* MTD and UBI Support are not configured. Only U-Boot and environment on SPI NOR
   are supported by built U-Boot configuration..
-* U-Boot: FEC Ethernet port is from time to time not working after U-Boot start.
-  Another powercycle/reset or PHY software reset (`mdio write ethernet@2188000 0
-  0x8000`) is required
-* U-Boot: USB dual role port (X8) is tested in U-Boot in peripheral mode only.
-* U-Boot: Setting and clearing GPIOs (e.g. for user LEDs) is not working
-* U-Boot: USB Ethernet (LAN9500 / X12C) is only usable after `usb start` and with valid
-  MAC in `usbethaddr` environment variable. Parsing the MBa6x specific value from
-  EEPROM is not implemented in U-Boot.
+* USB dual role port (X8) is tested in U-Boot in peripheral mode only.
+* Setting and clearing of several GPIOs (e.g. for user LEDs) is not working.
+  Workaround: enable `GPIO_LED` support and other releated settings. Will be fixed in next
+  release.
 
 ## Artifacts
 
