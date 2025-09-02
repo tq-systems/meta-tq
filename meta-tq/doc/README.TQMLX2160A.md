@@ -13,7 +13,7 @@
 
 ### ATF
 * based on qoriq-atf (https://github.com/nxp-qoriq/atf/)
-* branched from lf-5.15.5-1.0.0
+* branched from lf_v2.10
 
 ### U-Boot
 
@@ -25,46 +25,96 @@
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/)
 * branched from linux-6.12.y
 
-## Supported Interfaces:
+## Supported Features
 
-### U-Boot:
+### U-Boot
 
-* GPIOs
-* eMMC
-* ESDHC
-* SPI Nor - Flash
-* I2C
-* Ethernet
-  * SGMII / RGMII
-  * XFI 10G
-  * CAUI4 100G
-* PCIe
-* USB
+| Feature                                   |                 |
+|:------------------------------------------|:---------------:|
+| RAM configs                               |    16, 32 GiB   |
+| CPU variants                              | LX2160A, LX2080A|
+| GPIO                                      |        x        |
+| I2C                                       |        x        |
+| **UART**                                  |                 |
+| console on UART1 (X21)                    |        x        |
+| **QSPI-NOR**                              |                 |
+| Read                                      |        x        |
+| Write                                     |        x        |
+| Boot                                      |        x        |
+| **eMMC / SD card**                        |                 |
+| Read                                      |        x        |
+| Write                                     |        x        |
+| Boot                                      |        x        |
+| **USB**                                   |                 |
+| USB 3.0 Hub (X20)                         |        x        |
+| **SATA**                                  |                 |
+| SATA connector (X18)                      |        \*       |
+| M.2 (X42, X43)                            |        \*       |
+| **PCIe**                                  |                 |
+| PCIe x4/x8 (X35, X36, X37)                |        \*       |
+| mPCIe (X16, X17)                          |        \*       |
+| **Ethernet**                              |                 |
+| SGMII / RGMII 1G                          |        \*       |
+| XFI 10G                                   |        \*       |
+| CAUI4 100G                                |        \*       |
+| **Bootstreams**                           |                 |
+| FlexSPI                                   |        x        |
+| SD / eMMC                                 |        x        |
 
-### Linux:
+\*: In some SerDes configurations; see the User Manual and Support Wiki for
+details
 
-* GPIOs
-* eMMC
-* ESDHC
-* SPI Nor - Flash
-* I2C
-* Ethernet - SGMII / RGMII
-* Ethernet - XFI 10G
-* Ethernet - CAUI4 100G
-* CAN
-* PCIe
-* USB
-* USB - OTG
+### Linux
+
+| Feature                                   |      6.12       |
+|:------------------------------------------|:---------------:|
+| RAM configs                               |    16, 32 GiB   |
+| CPU variants                              | LX2160A, LX2080A|
+| **UART**                                  |                 |
+| console on UART1 (X21)                    |        x        |
+| additional UARTs 2-4 on pin header (X27)  |        x        |
+| **GPIO**                                  |                 |
+| LED                                       |        x        |
+| Button                                    |        x        |
+| **I2C**                                   |                 |
+| Temperature Sensors                       |        x        |
+| RTC                                       |        x        |
+| EEPROMS                                   |        x        |
+| **QSPI-NOR**                              |                 |
+| Read                                      |        x        |
+| Write                                     |        x        |
+| **eMMC / SD card**                        |                 |
+| Read                                      |        x        |
+| Write                                     |        x        |
+| **USB**                                   |                 |
+| USB 3.0 Hub (X20)                         |        x        |
+| USB 3.0 OTG (X38)                         |        x        |
+| **SATA**                                  |                 |
+| SATA connector (X18)                      |        \*       |
+| M.2 (X42, X43)                            |        \*       |
+| **PCIe**                                  |                 |
+| PCIe x4/x8 (X35, X36, X37)                |        \*       |
+| mPCIe (X16, X17)                          |        \*       |
+| **Ethernet**                              |                 |
+| SGMII / RGMII 1G                          |        \*       |
+| XFI 10G                                   |        \*       |
+| CAUI4 100G                                |        \*       |
+| DPAA2                                     |        x        |
+| **CAN**                                   |                 |
+| CAN-FD (X33, X34)                         |        x        |
+
+\*: In some SerDes configurations; see the User Manual and Support Wiki for
+details
 
 ## Not Supported
 
-* SIM-Card
+* SIM card (X15)
 
-## Notes:
+## Known issues
 
 * SDHC:
-  * On MBLX2160A.0100 the SD-Card only works a few start-ups and is therefore not properly tested.
-  * On MBLX2160A.0200 the SD-Card interface works properly.
+  * On MBLX2160A REV.0100, the SD card only works for a few start-ups and is
+    therefore not properly tested. On REV.0200, the SD card interface works properly.
 
 ## Build Artifacts
 
@@ -211,7 +261,8 @@ like the Linux kernel.
 ### RCW - SerDes Configuration
 
 The RCW Configuration specifies the Ethernet Configuration.
-The currently available serdes configurations are (Serdes1_Serdes2_Serdes3):
+The currently available serdes configurations are (naming scheme `<Serdes1>_<Serdes2>_<Serdes3>`):
+
 * 0_0_0
 * 12_7_3
 * 12_8_3
@@ -224,7 +275,8 @@ The currently available serdes configurations are (Serdes1_Serdes2_Serdes3):
 * 14_11_3
 
 To add another configuration the rcw sources have to be modified.
-To use a specific Serdes Configuration on build-time use the rcw variable to specify a supported configuration.
+To use a specific Serdes Configuration on build-time for the boot firmware image
+use the `rcw` variable to specify the configuration to use.
 
 ### Ethernet in U-Boot
 
