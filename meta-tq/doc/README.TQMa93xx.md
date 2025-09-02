@@ -332,6 +332,10 @@ In order to set the older firmware, add the following line to `conf/local.conf`:
 IMX_SOC_REV = "A0"
 ```
 
+### PREEMPT-RT / Realtime support
+
+For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
+
 ## Support Wiki
 
 See [TQ Embedded Wiki for TQMa93xxCA](https://support.tq-group.com/en/arm/tqma93xxca).

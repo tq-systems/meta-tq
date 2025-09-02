@@ -317,6 +317,10 @@ Pay attention to the following DIP-Switches:
 * X16 -> SD2 Lane 0
 * X17 -> SD2 Lane 4
 
+### PREEMPT-RT / Realtime support
+
+For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
+
 ## Support Wiki
 
 See [TQ Embedded Wiki for TQMLX2160A](https://support.tq-group.com/en/layerscape/tqmlx2160a)

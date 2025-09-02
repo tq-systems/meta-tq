@@ -171,6 +171,10 @@ Support can vary with kernel branch and version.
 
 See [U-Boot environment tools](README.libubootenv.md).
 
+### PREEMPT-RT / Realtime support
+
+For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
+
 ## Support Wiki
 
 See [TQ Embedded Wiki for TQMa6x](https://support.tq-group.com/en/arm/tqma6x)

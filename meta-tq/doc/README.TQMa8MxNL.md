@@ -512,6 +512,10 @@ See [i.MX High Assurance Boot](README.Verified-Boot.md).
 
 See [U-Boot environment tools](README.libubootenv.md).
 
+### PREEMPT-RT / Realtime support
+
+For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
+
 ## Support Wiki
 
 See [TQ Embedded Wiki for TQMa8MxNL](https://support.tq-group.com/en/arm/tqma8mxnl)

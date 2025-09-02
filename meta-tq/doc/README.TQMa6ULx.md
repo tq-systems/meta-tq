@@ -256,6 +256,10 @@ Support for parallel display is provided using `imx6ul-tqma6ul2l-mba6ulxl-glyn-e
 
 See [U-Boot environment tools](README.libubootenv.md).
 
+### PREEMPT-RT / Realtime support
+
+For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
+
 ## Support Wiki
 
 See [TQ Embedded Wiki for TQMa6ULx and TQMa6ULLx](https://support.tq-group.com/en/arm/tqma6ulx)  
