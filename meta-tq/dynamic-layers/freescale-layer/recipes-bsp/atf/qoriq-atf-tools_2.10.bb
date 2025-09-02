@@ -2,8 +2,6 @@ require qoriq-atf-${PV}.inc
 
 DEPENDS += "openssl"
 
-PV:append = "+${SRCPV}"
-
 EXTRA_OEMAKE = "fiptool V=1 PLAT=lx2162aqds HOSTCC='${CC} ${CPPFLAGS} ${CFLAGS} ${LDFLAGS}'"
 
 do_install () {
@@ -12,4 +10,3 @@ do_install () {
 }
 
 BBCLASSEXTEND = "native"
-
