@@ -13,6 +13,15 @@ Releases are named with the following scheme:
 
 * Added bmaptools to `packagegroup-testutil`
 
+### Changed
+
+* weston: drop patch for PowerVR SGX GPU support now provided by meta-ti
+
+  The weston patch required for SGX GPU support (TQMa335x) is now provided by
+  meta-ti and has been dropped from meta-tq. meta-ti commit bce130af3032
+  ("recipes-graphics: Add weston fix for SGX from meta-arago") must be used
+  for weston to work on these platforms now.
+
 ## scarthgap.TQ.ARM.BSP.0006 (not released yet)
 
 ## scarthgap.TQ.ARM.BSP.0005
