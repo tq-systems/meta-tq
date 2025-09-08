@@ -11,6 +11,7 @@ Releases are named with the following scheme:
 
 ### Added
 
+* Added bmaptools to `packagegroup-testutil`
 * Added zstd to `DISTRO_EXTRA_RRECOMMEND`
 
 ### Changed
