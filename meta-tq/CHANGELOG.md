@@ -11,6 +11,13 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* u-boot-imx-tq: TQMa8MPxL / TQMa8MPxS
+
+  Disable `FASTBOOT_FSL` in uuu defconfigs. This is an NXP downstream config with
+  some bogus dependencies.
+* imx-boot-tq: TQMa8 / TQMa9
+
+  Update to use NXP lf-6.12.20-2.0.0 release, needed for upcoming TQMa95xx support.
 * linux-tq-6.12: TQMa8MPxL / TQMa8MPxS / TQMa93xx / TQMLS10xxA / TQMLX2160A / TQMLS102xA
 
   Integrate stable fixes up to tag 6.12.45
