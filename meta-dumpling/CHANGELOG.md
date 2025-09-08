@@ -11,7 +11,15 @@ Releases are named with the following scheme:
 
 ### Added
 
-* Added bmaptools to `packagegroup-testutil`
+* Added bmaptools to `packagegroup-testutils`
+
+### Changed
+
+* packagegroup-testutils: use bb.debug for kmscube filter
+
+  bb.note is printed to the console in default configuration. The reason
+  for this output is debugging why `kmscube`in / is not installed. The
+  output is still visible in the log files.
 
 ### Changed
 
