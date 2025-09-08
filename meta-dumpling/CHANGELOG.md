@@ -9,6 +9,10 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* Added bmaptools to `packagegroup-testutil`
+
 ## scarthgap.TQ.ARM.BSP.0006 (not released yet)
 
 ## scarthgap.TQ.ARM.BSP.0005
