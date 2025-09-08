@@ -21,6 +21,7 @@ ALSA_RDEPENDS = "\
 RDEPENDS:${PN} = "\
     ${@bb.utils.contains('COMBINED_FEATURES', 'alsa', ' ${ALSA_RDEPENDS}', '', d)} \
     atop \
+    bmaptool \
     dool \
     evtest \
     gdbserver \
