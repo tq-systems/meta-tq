@@ -9,6 +9,29 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* linux-tq-6.12: TQMa8MPxL / TQMa8MPxS / TQMa93xx / TQMLS10xxA / TQMLX2160A / TQMLS102xA
+
+  Integrate stable fixes up to tag 6.12.45
+* linux-rt-tq-6.12: TQMa8MPxL / TQMa8MPxS / TQMa93xx / TQMLS10xxA / TQMLX2160A
+
+  Integrate stable fixes up to tag 6.12.45
+* linux-tq-6.6: TQMa6 / TQMa6UL[L]x[L] / TQMa7 / TQMa8Mx / TQMa8MxML / TQMa8MxNL:
+
+  Include stable fixes up to v6.6.104
+
+### Fixed
+
+* linux-[rt-]tq-6.12:  TQMa93 (MBa93xxCA):
+
+  Mark regulators for mPCIe Slot (X16) as always on. This is needed to support
+  USB devices.
+* linux-imx-tq-6.6:  TQMa93/TQMa91 (MBa93xxCA):
+
+  Mark regulators for mPCIe Slot (X16) as always on. This is needed to support
+  USB devices.
+
 ## scarthgap.TQ.ARM.BSP.0006 (not released yet)
 
 ### Added
