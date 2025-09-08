@@ -11,11 +11,16 @@ Releases are named with the following scheme:
 
 ### Added
 
-* Added bmaptools to `packagegroup-testutil`
+* Added bmaptools to `packagegroup-testutils`
 * Added zstd to `DISTRO_EXTRA_RRECOMMEND`
 
 ### Changed
 
+* packagegroup-testutils: use bb.debug for kmscube filter
+
+  bb.note is printed to the console in default configuration. The reason
+  for this output is debugging why `kmscube`in / is not installed. The
+  output is still visible in the log files.
 * packagegroup-sysutils: add cpupower package since cpufrequtils is not maintained anymore and
   shall be removed after next release.
 
