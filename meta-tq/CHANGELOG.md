@@ -9,6 +9,24 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* linux-rt-tq-6.1: compatibility for TQMa6x / TQMa6ULx[L] / TQMa6ULLx[L] / TQMa7x
+
+### Changed
+
+* linux-tq-6.1: TQMa6x / TQMa6ULx[L] / TQMa6ULLx[L] / TQMa7x / TQMa8Mx / TQMa8MxML / TQMa8MxNL / TQMa8MPxL
+  - Update to 6.1.150
+  - Change soundcard names for codec on mainboards. Since all routings on mainboards are equal,
+    this enables sharing the same asound.state configurations in BSP
+
+### Fixed
+
+* wic image generation:  TQMa6x / TQMa6ULx[L] / TQMa6ULLx[L] / TQMa7x / TQMa8Mx / TQMa8MxML
+
+  Temporary disable packed wic images. These boards use gen_additional_wic which depends on
+  unpacked wic at the moment.
+
 ## kirkstone.TQ.ARM.BSP.0025
 
 ### Module specific BSP notes
