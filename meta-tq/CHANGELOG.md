@@ -9,6 +9,13 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* linux-rt-tq-6.12: TQMLS102xA / TQMa335x:
+
+  Update to branch containing all fixes from stable-rt.
+  Mark recipe as compatible for these machines.
+
 ### Changed
 
 * imx-system-amanager-tq: update to NXP lf-6.12.20 baseline. This is needed
