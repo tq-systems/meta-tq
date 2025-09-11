@@ -4,16 +4,12 @@ SUMMARY = "Linux kernel with PREEMPT_RT support from linux mainline v6.12-rt for
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
+KBRANCH = "TQM-linux-v6.12.y-rt"
+SRCREV_machine = "aae546fd738a8ad8202d5904755b3af14a1236a5"
+
 SRC_URI += "\
     file://rt.cfg \
     file://revert-expert-settings.cfg \
 "
 
 LINUX_KERNEL_TYPE = "preempt-rt"
-
-COMPATIBLE_MACHINE = "^$"
-COMPATIBLE_MACHINE:tqma8mpxl = "tqma8mpxl"
-COMPATIBLE_MACHINE:tqma8mpxs = "tqma8mpxs"
-COMPATIBLE_MACHINE:tqma93xx = "tqma93xx"
-COMPATIBLE_MACHINE:tqmls10xxa = "tqmls10xxa"
-COMPATIBLE_MACHINE:tqmlx2160a = "tqmlx2160a"
