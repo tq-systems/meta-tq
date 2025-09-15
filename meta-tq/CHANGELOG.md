@@ -11,6 +11,9 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* imx-oei-tq: update to NXP lf-6.12.20 baseline. This gives better support for
+  multiple DDR configurations and is needed for new i.MX95 chip revisions.
+
 * u-boot-imx-tq: TQMa8MPxL / TQMa8MPxS
 
   Disable `FASTBOOT_FSL` in uuu defconfigs. This is an NXP downstream config with
