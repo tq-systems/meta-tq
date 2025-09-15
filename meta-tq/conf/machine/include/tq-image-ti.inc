@@ -8,3 +8,6 @@
 IMAGE_CLASSES += "image_type_bootonly"
 
 IMAGE_FSTYPES += "wic.bootonly"
+
+# Disable meta-ti's dynamic generation of KERNEL_DEVICETREE
+KERNEL_DEVICETREE_PREFIX = ""
