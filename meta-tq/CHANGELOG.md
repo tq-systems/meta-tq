@@ -11,6 +11,10 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* imx-system-amanager-tq: update to NXP lf-6.12.20 baseline. This is needed
+  to support newer i.MX95 chip revisions. While at it use common include
+  from `meta-freescale` and prepare building without debug console / monitor.
+
 * imx-oei-tq: update to NXP lf-6.12.20 baseline. This gives better support for
   multiple DDR configurations and is needed for new i.MX95 chip revisions.
 
