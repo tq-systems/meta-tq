@@ -124,7 +124,7 @@ __Note__: supports TQMa8MPxL / TQMa8MPxS / TQMa93xx
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
 * defconfig changes for TQ-Systems starter kits and build time optimisation
 * device tree adjustments for TQ-Systems starter kits
-  (see `LINUX_VERSION` in `linux-imx-tq_6.6.bb` for exact release)
+  (see `LINUX_VERSION` in `linux-tq_6.12.bb` for exact release)
 * Supports Preempt-RT
 
 For usage with Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
@@ -135,7 +135,7 @@ __Note__: supports TQMa8MQ/MxML/MxNL
 
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
 * defconfig changes for TQ-Systems starter kits and build time optimisation
-  (see `LINUX_VERSION` in `linux-imx-tq_6.6.bb` for exact release)
+  (see `LINUX_VERSION` in `linux-tq_6.6.bb` for exact release)
 
 #### Kernel 6.6 stable-rt
 
@@ -146,4 +146,4 @@ For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
 * based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
 * defconfig changes for TQ-Systems starter kits and build time optimisation
 * defconfig not ready for production use
-  (see `LINUX_VERSION` in `linux-imx-tq_6.6.bb` for exact release)
+  (see `LINUX_VERSION` in `linux-rt-tq_6.6.bb` for exact release)
