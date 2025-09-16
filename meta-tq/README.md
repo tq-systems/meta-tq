@@ -76,7 +76,7 @@ is _mandatory_ - see [table](#supported-machines):
 
 URI: https://git.yoctoproject.org/git/meta-ti  
 branch: scarthgap  
-revision: at least commit fe69a3232982 (tag 11.00.13)
+revision: at least commit 11a60314cf00 (tag 11.01.12)
 layers: meta-ti-bsp  
 
 **Note:** If using the `meta-ti-bsp` layer from `meta-ti`, the `meta-arm` and `meta-arm-toolchain` layers
