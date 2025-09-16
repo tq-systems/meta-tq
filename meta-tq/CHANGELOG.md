@@ -51,6 +51,7 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* linux-tq-6.12: TQMLX2106A: Fix creation of multiple DPAA2 DPSW objects
 * u-boot-tq-2023.04: TQMa6x:
 
   Add errata workarounds for KSZ9031 ethernet phy to improve reliability of

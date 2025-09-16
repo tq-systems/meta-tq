@@ -65,6 +65,7 @@ GIT_PROTOCOL ?= "${TQ_GIT_PROTOCOL}"
 SRC_URI = "\
     ${GIT_URL};protocol=${GIT_PROTOCOL};name=machine;branch=${KBRANCH} \
     git://git.yoctoproject.org/yocto-kernel-cache;type=kmeta;name=meta;branch=yocto-${LINUX_RELEASE};destsuffix=${KMETA};protocol=https \
+    file://0001-dpaa2-switch-fix-buffer-pool-seeding-for-control-tra.patch \
     ${KERNEL_CONFIG_FILES} \
 "
 
