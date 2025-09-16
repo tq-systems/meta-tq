@@ -163,6 +163,25 @@ Version information:
 * branched from `6.12.y`
   (see `LINUX_VERSION` in `linux-tq_6.12.bb` for exact release)
 
+#### Kernel 6.12 stable-rt
+
+Supported SOM families:
+
+* TQMLS102xA
+* TQMLS1043A
+* TQMLS1046A
+* TQMLS1088A
+* TQMLX2160A
+
+Version information:
+
+* based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
+* defconfig changes and patches for TQ-Systems starter kits and build time optimisation
+* defconfig not ready for production use
+  (see `LINUX_VERSION` in `linux-rt-tq_6.12.bb` for exact release)
+
+For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
+
 ## SOM with i.MX ARMv8-A CPU
 
 ### Supported SOM families
@@ -278,6 +297,23 @@ Version information:
 * device tree adjustments for TQ-Systems starter kits
   (see `LINUX_VERSION` in `linux-tq_6.12.bb` for exact release)
 * Supports Preempt-RT
+
+#### Kernel 6.12 stable-rt
+
+Supported SOM families
+
+* TQMa8MPxL
+* TQMa8MPxS
+* TQMa93xxCA / TQMa93xxLA
+
+Version information:
+
+For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
+
+* based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
+* defconfig changes for TQ-Systems starter kits and build time optimisation
+* defconfig not ready for production use
+  (see `LINUX_VERSION` in `linux-rt-tq_6.12.bb` for exact release)
 
 #### Kernel 6.6 stable
 
