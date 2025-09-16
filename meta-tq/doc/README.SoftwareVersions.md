@@ -12,7 +12,7 @@
 * branched from v2023.04 (Branch master)
 
 **Attention**: This U-Boot version must not be used with Linux kernel versions
-before v5.9. for SOM hardware revisions before 040x. Due to changes in device
+before v5.9. on TQMa6x SOM hardware revisions before 040x. Due to changes in device
 tree node naming DSR settings can not be applied to eMMC. This may lead to
 lifetime degradation.
 
