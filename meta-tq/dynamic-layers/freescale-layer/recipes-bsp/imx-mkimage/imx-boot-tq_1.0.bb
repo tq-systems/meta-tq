@@ -123,21 +123,28 @@ compile_prepare() {
     bberror 'Invalid SOC family'
 }
 
-compile_prepare:mx8-generic-bsp() {
-    bbnote '8QM boot binary build'
-    cp ${DEPLOY_DIR_IMAGE}/${SC_FIRMWARE_NAME} ${BOOT_STAGING}/scfw_tcm.bin
-    cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}             ${BOOT_STAGING}
+compile_prepare_mx8_common() {
     if [ "$1" = "flash_linux_m4" ]; then
-        cp ${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}           ${BOOT_STAGING}/m4_image.bin
-        cp ${DEPLOY_DIR_IMAGE}/${M4_1_DEFAULT_IMAGE}           ${BOOT_STAGING}/m4_1_image.bin
+        cp "${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}"        "${BOOT_STAGING}/m4_image.bin"
     fi
+    cp "${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}"          "${BOOT_STAGING}"
+    cp "${DEPLOY_DIR_IMAGE}/${SC_FIRMWARE_NAME}"            "${BOOT_STAGING}/scfw_tcm.bin"
     for type in ${UBOOT_CONFIG}; do
-        cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type} ${BOOT_STAGING}/u-boot.bin-${type}
-        if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} ] ; then
-            cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} \
-                                                             ${BOOT_STAGING}/u-boot-spl.bin-${type}
+        cp "${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type}" "${BOOT_STAGING}/u-boot.bin-${type}"
+        if [ -e "${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type}" ] ; then
+            cp "${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type}" \
+                                                            "${BOOT_STAGING}/u-boot-spl.bin-${type}"
         fi
     done
+}
+
+compile_prepare:mx8-generic-bsp() {
+    bbnote '8QM boot binary build'
+    compile_prepare_mx8_common "$1"
+
+    if [ "$1" = "flash_linux_m4" ]; then
+        cp "${DEPLOY_DIR_IMAGE}/${M4_1_DEFAULT_IMAGE}"       "${BOOT_STAGING}/m4_1_image.bin"
+    fi
 }
 
 compile_prepare:mx8m-generic-bsp() {
@@ -163,18 +170,7 @@ compile_prepare:mx8m-generic-bsp() {
 
 compile_prepare:mx8x-generic-bsp() {
     bbnote '8QX boot binary build'
-    if [ "$1" = "flash_linux_m4" ]; then
-        cp ${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}           ${BOOT_STAGING}/m4_image.bin
-    fi
-    cp ${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}             ${BOOT_STAGING}
-    cp ${DEPLOY_DIR_IMAGE}/${SC_FIRMWARE_NAME}               ${BOOT_STAGING}/scfw_tcm.bin
-    for type in ${UBOOT_CONFIG}; do
-        cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type} ${BOOT_STAGING}/u-boot.bin-${type}
-        if [ -e ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} ] ; then
-            cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} \
-                                                             ${BOOT_STAGING}/u-boot-spl.bin-${type}
-        fi
-    done
+    compile_prepare_mx8_common "$1"
 }
 
 compile_prepare_mx9_common() {
