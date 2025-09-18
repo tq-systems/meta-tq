@@ -151,21 +151,33 @@ compile_prepare:mx8m-generic-bsp() {
     bbnote '8MQ/8MM/8MN/8MP boot binary build'
     for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
         bbnote "Copy ddr_firmware: ${ddr_firmware} from ${DEPLOY_DIR_IMAGE} -> ${BOOT_STAGING} "
-        cp ${DEPLOY_DIR_IMAGE}/${ddr_firmware}               ${BOOT_STAGING}
+        cp "${DEPLOY_DIR_IMAGE}/${ddr_firmware}"             "${BOOT_STAGING}"
     done
-    cp ${DEPLOY_DIR_IMAGE}/signed_dp_imx8m.bin               ${BOOT_STAGING}
-    cp ${DEPLOY_DIR_IMAGE}/signed_hdmi_imx8m.bin             ${BOOT_STAGING}
+    cp "${DEPLOY_DIR_IMAGE}/signed_dp_imx8m.bin"             "${BOOT_STAGING}"
+    cp "${DEPLOY_DIR_IMAGE}/signed_hdmi_imx8m.bin"           "${BOOT_STAGING}"
     for type in ${UBOOT_CONFIG}; do
         for dtb in ${UBOOT_DTB_NAME}; do
-            cp ${DEPLOY_DIR_IMAGE}/u-boot-${dtb}-${MACHINE}-${type} \
-                                                             ${BOOT_STAGING}/${dtb}-${type}
+            cp "${DEPLOY_DIR_IMAGE}/u-boot-${dtb}-${MACHINE}-${type}" \
+                                                             "${BOOT_STAGING}/${dtb}-${type}"
         done
-        cp ${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type} \
-                                                             ${BOOT_STAGING}/u-boot-spl.bin-${type}
-        cp ${DEPLOY_DIR_IMAGE}/u-boot-nodtb.bin-${MACHINE}-${type} \
-                                                             ${BOOT_STAGING}/u-boot-nodtb.bin-${type}
-        cp ${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type} ${BOOT_STAGING}/u-boot.bin-${type}
+        cp "${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type}" \
+                                                             "${BOOT_STAGING}/u-boot-spl.bin-${type}"
+        cp "${DEPLOY_DIR_IMAGE}/u-boot-nodtb.bin-${MACHINE}-${type}" \
+                                                             "${BOOT_STAGING}/u-boot-nodtb.bin-${type}"
+        cp "${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type}" "${BOOT_STAGING}/u-boot.bin-${type}"
     done
+
+    if [ -n "${2}" ] ; then
+        local config="${2}"
+        for dtb in ${UBOOT_DTB_NAME}; do
+            if [ -e "${BOOT_STAGING}/${dtb}" ]; then
+                rm "${BOOT_STAGING}/${dtb}"
+            fi
+            if [ -e "${BOOT_STAGING}/${dtb}-${config}" ]; then
+                ln -s "${dtb}-${config}" "${BOOT_STAGING}/${dtb}"
+            fi
+        done
+    fi
 }
 
 compile_prepare:mx8x-generic-bsp() {
@@ -386,7 +398,7 @@ do_compile() {
     cp ${DEPLOY_DIR_IMAGE}/${ATF_MACHINE_NAME} ${BOOT_STAGING}/bl31.bin
     for target in ${IMXBOOT_TARGETS}; do
         for config in ${UBOOT_CONFIG}; do
-            compile_prepare "$target"
+            compile_prepare "${target}" "${config}"
 
             allbins="u-boot.bin u-boot-nodtb.bin u-boot-spl.bin"
             for bin in ${allbins} ; do
@@ -397,17 +409,6 @@ do_compile() {
                     ln -s ${bin}-${config} ${BOOT_STAGING}/${bin}
                 fi
             done
-            #bbnote "SOC_FAMILY is "${SOC_FAMILY}"
-            if [ "${SOC_FAMILY}" = "mx8m" ] ; then
-                for dtb in ${UBOOT_DTB_NAME}; do
-                    if [ -e "${BOOT_STAGING}/${dtb}" ]; then
-                        rm ${BOOT_STAGING}/${dtb}
-                    fi
-                    if [ -e "${BOOT_STAGING}/${dtb}-${config}" ]; then
-                        ln -s ${dtb}-${config} ${BOOT_STAGING}/${dtb}
-                    fi
-                done
-            fi
 
             oe_runmake clean
 
