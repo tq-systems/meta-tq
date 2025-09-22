@@ -11,6 +11,17 @@ Releases are named with the following scheme:
 
 ### Added
 
+* Build fitImage kernels by default
+
+  `KERNEL_IMAGETYPES` now contains `fitImage` by default on all platforms. Note
+  that the fitImage has not been tested on all machines yet.
+* Introduce `KERNEL_IMAGETYPES_INSTALL`
+
+  `KERNEL_IMAGETYPES_INSTALL` can be used to select a subset of `KERNEL_IMAGETYPES`
+  to install to the target images. By default, all images except for `vmlinux`
+  are installed, unless "tiny" is listed in `DISTRO_FEATURES`. With the "tiny"
+  distro feature, only the primary image defined via `KERNEL_IMAGETYPE` is
+  installed.
 * linux-rt-tq-6.12: TQMLS102xA / TQMa335x:
 
   Update to branch containing all fixes from stable-rt.
@@ -18,6 +29,14 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* machines:
+  * Only install `kernel-devicetree` when needed
+
+    If the only installed kernel image is a fitImage, the DTBs do not need to be
+    installed separately.
+  * Set defaults for `WKS_FILE`, `MACHINE_WKS_BOOTSTREAM`, and
+    `WIC_BOOTPART_SIZE` in module includes. They can still be overridden in
+    individual machine configurations if needed.
 * imx-system-amanager-tq: update to NXP lf-6.12.20 baseline. This is needed
   to support newer i.MX95 chip revisions. While at it use common include
   from `meta-freescale` and prepare building without debug console / monitor.
