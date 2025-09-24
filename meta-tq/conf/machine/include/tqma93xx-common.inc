@@ -51,19 +51,7 @@ IMX_BOOT_SEEK = "${RAW_BOOT_START_OFFSET_KB}"
 #
 MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-flash_singleboot"
 
-python() {
-    wks_type = ""
-
-    if bb.utils.contains("DISTRO_FEATURES", "secure", True, False, d):
-        wks_type = "-verity"
-    if bb.utils.contains("DISTRO_FEATURES", "rauc", True, False, d):
-        if not bb.utils.contains("DISTRO_FEATURES", "secure", True, False, d):
-            wks_type = "-rauc-ab"
-        else:
-            bb.warn("DISTRO_FEATURES contains 'rauc' and 'secure', using WKS_FILE selected by distro feature 'secure'")
-
-    d.setVar("WKS_FILE", "tqmaxx-imx-v8-sdimg%s.wks.in" % wks_type)
-}
+WKS_FILE = "${@imx_v8_wks_from_distro_features(d)}"
 
 MACHINE_FEATURES += "\
     can \

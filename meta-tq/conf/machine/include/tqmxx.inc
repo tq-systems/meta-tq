@@ -58,3 +58,16 @@ def create_image_boot_dtb_files(d):
 # this instructs bitbake to take the dependency established with the
 # above function into account when calculating hashes for IMAGE_BOOTFILES
 IMAGE_BOOT_FILES[vardeps] = "KERNEL_DEVICETREE"
+
+def imx_v8_wks_from_distro_features(d):
+    wks_type = ""
+
+    if bb.utils.contains("DISTRO_FEATURES", "secure", True, False, d):
+        wks_type = "-verity"
+    if bb.utils.contains("DISTRO_FEATURES", "rauc", True, False, d):
+        if not bb.utils.contains("DISTRO_FEATURES", "secure", True, False, d):
+            wks_type = "-rauc-ab"
+        else:
+            bb.warn("DISTRO_FEATURES contains 'rauc' and 'secure', using WKS_FILE selected by distro feature 'secure'")
+
+    return "tqmaxx-imx-v8-sdimg" + wks_type + ".wks.in"
