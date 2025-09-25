@@ -27,15 +27,32 @@ bitbake virtual/bootloader
 To build a bootstream usable with UUU tool the following settings needs to be in your
 configuration. (This is already the case for starterkit machine configurations):
 
+|  SOC      |  SOM       | IMXBOOT_TARGET   | U-Boot Config    |
+|-----------|------------|------------------|------------------|
+| i.MX8MQ   | TQMa8Mx    | flash_spl_uboot  | <size>gb_mfgtool |
+| i.MX8MMini| TQMa8MxML  | flash_spl_uboot  | <size>gb_mfgtool |
+| i.MX8MNano| TQMa8MxNL  | flash_spl_uboot  | mfgtool          |
+| i.MX8MPlus| TQMa8MPxL  | flash_spl_uboot  | mfgtool          |
+|           | TQMa8MPxS  | flash_spl_uboot  | mfgtool          |
+| i.MX8     | TQMa8QM    | flash_spl        | mfgtool          |
+| i.MX8X    | TQMa8Xx    | flash_spl        | mfgtool          |
+|           | TQMa8Xx4   | flash_spl        | mfgtool          |
+|           | TQMa8XxS   | flash_spl        | mfgtool          |
+| i.MX91    | TQMa91xxCA | flash_singleboot | mfgtool          |
+|           | TQMa91xxLA | flash_singleboot | mfgtool          |
+| i.MX93    | TQMa93xxCA | flash_singleboot | mfgtool          |
+|           | TQMa93xxLA | flash_singleboot | mfgtool          |
+
+
 ```
-UBOOT_CONFIG += "mfgtool"
-IMXBOOT_TARGETS += "flash_spl_uboot"
+UBOOT_CONFIG += "<U-Boot Config>"
+IMXBOOT_TARGETS += "<IMXBOOT_TARGET>"
 ```
 
 Rebuild boot stream:
 
 ```
-bitbake imx-boot
+bitbake imx-boot-tq
 ```
 
 ## Usage
