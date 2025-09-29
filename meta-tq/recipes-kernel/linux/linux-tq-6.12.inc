@@ -2,14 +2,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
 require linux-tq-common.inc
 
-KBRANCH = "TQM-linux-v6.12.y"
 KMETA = "kernel-meta"
-SRCREV_machine = "c5600566fa9b3c4a07f903dfe8def74e6a34f269"
 SRCREV_meta = "cf35a8d4adea70d86608241d50e1372d50a1484f"
 
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "6.12"
-LINUX_VERSION = "${LINUX_RELEASE}.45"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/linux-tq-${LINUX_RELEASE}:"
 
