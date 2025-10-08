@@ -10,10 +10,9 @@ LINUX_VERSION = "${LINUX_RELEASE}.106"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
-LINUX_KERNEL_TYPE = "preempt-rt"
-
 KERNEL_EXTRA_CONFIG_FILES += "\
     file://rt.cfg \
     file://revert-expert-settings.cfg \
 "
 
+LINUX_KERNEL_TYPE = "preempt-rt"
