@@ -11,6 +11,7 @@ This README contains some useful information for TQMa93xxCA and TQMa93xxLA
 * TQMa93xxCA REV.010x on MBa93xxCA REV.020x (1 / 2 GiB RAM)
 * TQMa93xxLA REV.010x on MBa93xxCA REV.020x (1 / 1.5 / 2 GiB RAM)
 * TQMa93xxLA REV.010x on MBa93xxLA REV.020x (1 / 1.5 / 2 GiB RAM)
+* TQMa93xxLA REV.010x on MBa93xxLA-MINI REV.020x (1 / 1.5 / 2 GiB RAM)
 
 __Note__: Depending on the SoM revision different CPU mask variants may be assembled.
 CPU mask revisions 1.0 and older are protoypes and have additional erratas.
@@ -26,45 +27,47 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * tqma93xx-mba91xxca
 * tqma93xx-mba93xxca
 * tqma93xxla-mba93xxla
+* tqma93xxla-mba93xxla-mini
 
 ## Supported Features
 
 ### U-Boot
 
-| Feature                                          | MBa93xxCA  REV.020x   | MBa93xxLA  REV.020x   |
-| :----------------------------------------------: | :-------------------: | :-------------------: |
-| RAM configs                                      |   1 / 1.5 / 2 GiB     |   1 / 1.5 / 2 GiB     |
-| CPU variants                                     |     i.MX93            |     i.MX93            |
-| Fuses / OCRAM                                    |       x               |       x               |
-| speed grade / temperature grade detection        |       x               |       x               |
-| UART (console on UART1)                          |       x               |       x               |
-| **GPIO**                                         |                       |                       |
-| LED                                              |       x               |       x               |
-| Button                                           |       x               |       x               |
-| **I2C**                                          |                       |                       |
-| system EEPROM parsing                            |       x               |       x               |
-| PMIC                                             |       x               |       x               |
-| **eMMC / SD**                                    |                       |                       |
-| Read                                             |       x               |       x               |
-| Write                                            |       x               |       x               |
-| **Ethernet**                                     |                       |                       |
-| GigE / FEC via Phy on MBa93xxCA                  |       x               |       x               |
-| GigE / EQOS via Phy on MBa93xxCA                 |       x               |       x               |
-| **Bootdevices**                                  |                       |                       |
-| SD-Card on USDHC2                                |       x               |       x               |
-| eMMC on USDHC1                                   |       x               |       x               |
-| QSPI-NOR on FlexSPI                              |       x               |       x               |
-| Serial Downloader                                |                       |       x               |
-| **USB**                                          |                       |                       |
-| USB 2.0 Host / Hub                               |       x               |       x               |
-| USB DRD (USB 2.0 Cable Detect, VBUS)             |       x               |       x               |
-| (configured as device to be usable with UUU )    |                       |                       |
-| **QSPI NOR**                                     |                       |                       |
-| Read with 1-1-4 SDR                              |       x               |       x               |
-| PP / Erase with 1-1-4 SDR                        |       x               |       x               |
-| **Cortex M33**                                   |                       |                       |
-| env settings for starting from TCM               |                       |                       |
-| examples with UART3 as debug console             |                       |                       |
+| Feature                                          | MBa93xxCA  REV.020x   | MBa93xxLA  REV.020x   | MBa93xxLA-MINI REV.020x |
+| :----------------------------------------------: | :-------------------: | :-------------------: | :---------------------: |
+| RAM configs                                      |   1 / 1.5 / 2 GiB     |   1 / 1.5 / 2 GiB     |     1 / 1.5 / 2 GiB     |
+| CPU variants                                     |     i.MX93            |     i.MX93            |       i.MX93            |
+| Fuses / OCRAM                                    |       x               |       x               |         x               |
+| speed grade / temperature grade detection        |       x               |       x               |         x               |
+| UART (console on UART1)                          |       x               |       x               |         x               |
+| **GPIO**                                         |                       |                       |                         |
+| LED                                              |       x               |       x               |                         |
+| Button                                           |       x               |       x               |                         |
+| **I2C**                                          |                       |                       |                         |
+| system EEPROM parsing                            |       x               |       x               |         x               |
+| PMIC                                             |       x               |       x               |         x               |
+| **eMMC / SD**                                    |                       |                       |                         |
+| Read                                             |       x               |       x               |         x               |
+| Write                                            |       x               |       x               |         x               |
+| **Ethernet**                                     |                       |                       |                         |
+| GigE / FEC via Phy on MBa93xxCA                  |       x               |       x               |         x               |
+| GigE / EQOS via Phy on MBa93xxCA                 |       x               |       x               |         x               |
+| **Bootdevices**                                  |                       |                       |                         |
+| SD-Card on USDHC2                                |       x               |       x               |         x               |
+| eMMC on USDHC1                                   |       x               |       x               |         x               |
+| QSPI-NOR on FlexSPI                              |       x               |       x               |   see Known Issues      |
+| Serial Downloader                                |                       |       x               |         x               |
+| **USB**                                          |                       |                       |                         |
+| USB 2.0 Host / Hub                               |       x               |       x               |         x               |
+| USB DRD (USB 2.0 Cable Detect, VBUS)             |       x               |       x               |         x               |
+| **QSPI NOR**                                     |                       |                       |                         |
+| Read with 1-1-4 SDR                              |       x               |       x               |   see Known Issues      |
+| PP / Erase with 1-1-4 SDR                        |       x               |       x               |   see Known Issues      |
+| **Cortex M33**                                   |                       |                       |                         |
+| env settings for starting from TCM               |                       |                       |                         |
+| examples with UART3 as debug console             |                       |                       |                         | 
+
+**NOTE:** for MBa93xxLA-MINI REV.010x is only be used for IBPQ  customers will get REV.020x or later
 
 **TODO or not tested / supported**
 
@@ -106,7 +109,7 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 |                  PP / Erase with 1-1-4 SDR                   |         x        |                  |                 |
 |                  PP / Erase with 1-4-4 SDR                   |                  |         x        |         x       |
 |                         **Display**                          |                  |                  |                 |
-|                             LVDS                             |         x        |         x        |                 |
+|                             LVDS                             |         x        |         x        |         x       |
 |                          **CAN-FD**                          |                  |                  |                 |
 |                            CAN-FD                            |         x        |         x        |         x       |
 |                           **SPI**                            |                  |                  |                 |
@@ -123,6 +126,8 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 |              **MIPI CSI (see Issues section)**               |                  |                  |                 |
 |   Gray with Vision Components GmbH camera (Sensor OV9281)    |                  |                  |                 |
 | Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |                  |                  |                 |
+
+**NOTE** LVDS support for `linux-tq_6.12` on MBA93xxCA is missing. 
 
 ## TODO
 
@@ -142,7 +147,7 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 * DVFS is not supported using cpu-freq framework. See [here](#frequency-scaling)
   on how to use frequency scaling
 * Ethernet device order is defined by DT aliases. Linux and bootloader DT need to match
-* G2D driver for PXP needs access to `root`-only devices. Thus `weston` needs to be started as `root`
+* In NXP releases, the G2D driver for PXP needs access to `root`-only devices. Thus `weston` needs to be started as `root`
 
 ## Known Issues
 
@@ -164,13 +169,16 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
   or using remoteproc is not supported by `ethosu` driver. The driver is not working with `linux-imx-tq`
   based on NXP `lf-6.6.52-2.2.0` release. Switching back to old release is posible with following
   changes in `linux-imx-tq_6.6.bb` recipe.
-* Watchdog is not enabled by default
-
 ```
 KBRANCH:tqma93xx = "TQMa-fslc-6.6-2.0.x-imx"
 SRCREV:tqma93xx = "6d8a66ee71659362646d93f2752354858c04f205"
 LINUX_VERSION:tqma93xx = "${LINUX_RELEASE}.23"
 ```
+* Watchdog is not enabled by default
+* on MBa93xxLA-MINI the QSPI pins are used for SDIO
+  If a module with QSPI is required, a specially adapted mainboard devicetree must be created.
+
+
 
 ## MBa91 differences
 
@@ -264,12 +272,13 @@ See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RT
 ### Display Support
 
 Each Display can be used on its own by using the corresponding device tree.
-To allow reusage, the support for each display is separated in a dtsi fragment.
+To allow reusage, the support for each display is separated in a dtso overlay.
 
-| Interface       | Device tree                                         | Type        ----   |
-|-----------------|-----------------------------------------------------|--------------------|
-| LVDS            | imx93-tqma9352-mba93xxca-lvds-tm070jvhg33.dtb       | Tianma TM070JVHG33 |
-| LVDS            | imx93-tqma9352la-mba93xxla-lvds-tm070jvhg33.dtb     | Tianma TM070JVHG33 |
+| Interface       | Device tree                                          | Type        ----   |
+|-----------------|------------------------------------------------------|--------------------|
+| LVDS            | imx93-tqma9352-mba93xxca-lvds-tm070jvhg33.dtb        | Tianma TM070JVHG33 |
+| LVDS            | imx93-tqma9352la-mba93xxla-lvds-tm070jvhg33.dtb      | Tianma TM070JVHG33 |
+| LVDS            | imx93-tqma9352la-mba93xxla-mini-lvds-tm070jvhg33.dtb | Tianma TM070JVHG33 |
 
 ### CAN
 
@@ -286,6 +295,18 @@ See [here](./README.CAN.md) for details about configurating of CAN interfaces.
 
 __Note:__ Values for bitrate, sample-point, dbitrate and dsample-point depend
 on your hardware setup.
+
+#### MBa93xxLA-MINI (Wifi)
+
+Support for Ezurio Wlan/Bluetooth Module (LWB5+ M.2) on MBa93xxLA-MINI.
+
+| Interface        | Device tree                                   | Type      |
+|------------------|-----------------------------------------------|-----------|
+| M.2 Key E Socket | imx93-tqma9352-mba93xxla-mini-ezurio-wlan.dtb | LWB5+ M.2 |
+
+Ezurio recommends using their own yocto layer (especially for radio certification), which includes adaptations to the core modules and its own firmware variants.
+
+The Ezurio firmware in combination with the current kernel modules was sufficient to get WLAN and Bluethooth up and running.
 
 ### RS485
 
@@ -334,3 +355,4 @@ IMX_SOC_REV = "A0"
 See [TQ Embedded Wiki for TQMa93xxCA](https://support.tq-group.com/en/arm/tqma93xxca).
 
 See [TQ Embedded Wiki for TQMa93xxLA](https://support.tq-group.com/en/arm/tqma93xxla).
+
