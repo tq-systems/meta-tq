@@ -24,6 +24,7 @@ KERNEL_CONFIG_FILES:imx ?= "\
     file://features/rm-non-tq-platforms.cfg \
     file://features/ubi.cfg \
     file://features/usb.cfg \
+    file://features/pwm.cfg \
 "
 
 KERNEL_CONFIG_FILES:tqma335x ?= "\
