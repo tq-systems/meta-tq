@@ -197,22 +197,26 @@ See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 
 ### SPI-NOR
 
-* 0x000000000000-0x000000100000 : "RCW-PBL"
-* 0x000000100000-0x000000300000 : "U-Boot"
-* 0x000000500000-0x000000600000 : "U-Boot-Env"
-* 0x000000800000-0x000000a00000 : "DDR-PHY"
-* 0x000000a00000-0x000000d00000 : "DPAA2-MC"
-* 0x000000d00000-0x000000e00000 : "DPAA2-DPL"
-* 0x000000e00000-0x000000f00000 : "DPAA2-DPC"
-* 0x000001000000-0x000008000000 : "RootFS UBI"
+|     start |       end | content    |
+| --------: | --------: | ---------- |
+|       0x0 |  0x100000 | RCW-PBL    |
+|  0x100000 |  0x300000 | U-Boot     |
+|  0x500000 |  0x600000 | U-Boot-Env |
+|  0x800000 |  0xa00000 | DDR-PHY    |
+|  0xa00000 |  0xd00000 | DPAA2-MC   |
+|  0xd00000 |  0xe00000 | DPAA2-DPL  |
+|  0xe00000 |  0xf00000 | DPAA2-DPC  |
+| 0x1000000 | 0x8000000 | RootFS UBI |
 
 ### eMMC / SD-Card
 
-* 0x1000 : "RCW-PBL"
-* 0x100000 : "U-Boot"
-* 0x800000 : "DDR-PHY"
-* 0x1000000 : "Boot Partition"
-* 0x3000000 : "RootFS ext4"
+|     start | content        |
+| --------: | -------------- |
+|    0x1000 | RCW-PBL        |
+|  0x100000 | U-Boot         |
+|  0x800000 | DDR-PHY        |
+| 0x1000000 | Boot Partition |
+| 0x3000000 | RootFS ext4    |
 
 
 ## Build-Time Configuration
