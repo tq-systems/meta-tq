@@ -29,6 +29,8 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* imx-boot-tq: simplify compile_prepare for i.MX8M / i.MX8 / i.MX8X
+
 * machines:
   * Only install `kernel-devicetree` when needed
 
@@ -53,16 +55,23 @@ Releases are named with the following scheme:
   Update to use NXP lf-6.12.20-2.0.0 release, needed for upcoming TQMa95xx support.
 * linux-tq-6.12: TQMa8MPxL / TQMa8MPxS / TQMa93xx / TQMLS10xxA / TQMLX2160A / TQMLS102xA
 
-  Integrate stable fixes up to tag 6.12.45
+  Integrate stable fixes up to tag 6.12.49
 * linux-rt-tq-6.12: TQMa8MPxL / TQMa8MPxS / TQMa93xx / TQMLS10xxA / TQMLX2160A
 
-  Integrate stable fixes up to tag 6.12.45
+  Integrate stable fixes up to tag v6.12.49-rt13
 * linux-tq-6.6: TQMa6 / TQMa6UL[L]x[L] / TQMa7 / TQMa8Mx / TQMa8MxML / TQMa8MxNL:
 
-  Include stable fixes up to v6.6.104
+  Include stable fixes up to v6.6.108
+* linux-rt-tq-6.6: TQMa6 / TQMa6UL[L]x[L] / TQMa7 / TQMa8Mx / TQMa8MxML / TQMa8MxNL:
+
+  Include stable fixes up to v6.6.106-rt61
 
 ### Fixed
 
+* TQMa8 / TQMa9: fix default WKS_FILE assignment for machines
+
+  Instead of using an anonymous python function use a named function and do
+  an explicit assignment to make the assignment reproducible.
 * linux-[rt-]tq-6.12:  TQMa93 (MBa93xxCA):
 
   Mark regulators for mPCIe Slot (X16) as always on. This is needed to support
