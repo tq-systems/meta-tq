@@ -8,13 +8,10 @@ DESCRIPTION = "U-Boot for TQ-Systems GmbH NXP i.MX8 based SOM"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
 
-SRCREV = "49f377bafecc3b5d5d38d8d12d2d770804dc8f92"
+SRCREV = "32a07fab26c134d763fb8427c6bd171dfa6a3a71"
 SRCBRANCH = "TQMa8-v2020.04_imx_5.4.70_2.3.0"
 
-SRC_URI = "\
-    ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
-    file://0001-tqma8-set-CONFIG_SYS_BOOTM_LEN-to-64M.patch \
-"
+SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
 
 SRC_URI:append:nxp-ahab = " ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'file://imx-hab.cfg', '', d)}"
 SRC_URI:append:nxp-hab4 = " ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'file://imx-hab.cfg', '', d)}"
