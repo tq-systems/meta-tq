@@ -48,10 +48,8 @@ _MBa8x HW Rev.030x only_
 | eMMC on USDHC3                                   |          x            |
 | QSPI-NOR on FlexSPI                              |          x            |
 | **USB**                                          |                       |
-| USB Host (USB1 via hub 2.0)                      |          x            |
-| USB Dual Role (USB0, 2.0)                        |          x            |
-|   Cable Detect / ID                              |          x            |
-|   switchable VBUS                                |          x            |
+|     USB DRD (USB 2.0 Cable Detect, VBUS)         |          x            |
+| (configured as device to be usable with UUU )    |                       |
 | **QSPI NOR**                                     |                       |
 | Read with 1-1-1 SDR                              |          x            |
 | PP / Erase with 1-1-1 SDR                        |          x            |
@@ -136,16 +134,7 @@ _MBa8x HW Rev.030x only_
 ## Known Issues
 
 * U-Boot:
-  * mfgtool config fails to write image to eMMC / SD with error -19 (No such device).
-    The USB gadget is not enabled in U-Boot specific device tree part. To make it
-    work, the following changes need to be added to
-    `arch/arm/dt/imx8mn-mba8mx-u-boot.dtsi`:
-    ```
-    &usbg1 {
-	  status = "okay";
-    };
-    ```
-  * USB mass storage support may vary among different USB flash drive models/vendors
+  * USB is limited to device mode in favour of SDP
 * Linux: operating points for DDR controller missing in device tree.
   running at lower DDR frequencies does not work in this version of BSP.
 * LVDS shows wrong colors on older Tianma display kit (HW issue on older
