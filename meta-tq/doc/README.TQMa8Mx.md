@@ -51,9 +51,7 @@ _MBa8x HW Rev.020x/30x only / TQMa8Mx HW Rev.020x only_
 | HDMI (fixed resolution)                          |         x          |
 | **USB**                                          |                    |
 | USB Host (USB1 via hub 2.0 and 3.0)              |         x          |
-| USB Dual Role (USB0, 2.0 host only)              |         x          |
-|   Cable Detect / ID                              |         x          |
-|   switchable VBUS                                |         x          |
+| USB DRD (USB 2.0 Cable Detect, VBUS)             |         x          |
 | **QSPI NOR**                                     |                    |
 | 4 byte adressing, SPI mode                       |         x          |
 | see Known Issues                                 |                    |
