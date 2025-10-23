@@ -31,6 +31,8 @@ Releases are named with the following scheme:
 
 * imx-boot-tq: simplify compile_prepare for i.MX8M / i.MX8 / i.MX8X
 
+* TQMa8Mx / TQMa8Mx[M,N]L: u-boot-imx-tq-2020.04 always run fastboot when usb boot detected in uuu capable image
+  
 * machines:
   * Only install `kernel-devicetree` when needed
 
@@ -67,6 +69,10 @@ Releases are named with the following scheme:
   Include stable fixes up to v6.6.106-rt61
 
 ### Fixed
+
+* TQMa8Mx / TQMa8Mx[M,N]L: add uuu support in u-boot-imx-tq-2020.04
+  
+  Enables USB gadget support in u-boot devicetree and removes USB host support in favour of SDP on 8Mx[M,N]L
 
 * TQMa8 / TQMa9: fix default WKS_FILE assignment for machines
 
