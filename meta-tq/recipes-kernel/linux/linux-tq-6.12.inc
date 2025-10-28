@@ -11,6 +11,7 @@ LINUX_RELEASE = "6.12"
 FILESEXTRAPATHS:prepend := "${THISDIR}/linux-tq-${LINUX_RELEASE}:"
 
 KERNEL_CONFIG_FILES ?= ""
+KERNEL_EXTRA_CONFIG_FILES ?= ""
 
 KERNEL_CONFIG_FILES:imx ?= "\
     file://imx.cfg \
@@ -64,6 +65,7 @@ SRC_URI = "\
     ${GIT_URL};protocol=${GIT_PROTOCOL};name=machine;branch=${KBRANCH} \
     git://git.yoctoproject.org/yocto-kernel-cache;type=kmeta;name=meta;branch=yocto-${LINUX_RELEASE};destsuffix=${KMETA};protocol=https \
     ${KERNEL_CONFIG_FILES} \
+    ${KERNEL_EXTRA_CONFIG_FILES} \
 "
 
 KBUILD_DEFCONFIG_DEFAULT = ""
