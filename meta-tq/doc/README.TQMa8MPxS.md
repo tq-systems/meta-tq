@@ -172,7 +172,7 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 * imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / eMMC
 * imx-boot-${MACHINE}-sd.bin-flash\_evk\_flexspi: boot stream for FlexSPI
-* imx-boot-${MACHINE}-mfgtool.bin-flash\_evk\_uboot: boot stream for UUU
+* imx-boot-${MACHINE}-uuu.bin-flash\_evk\_uboot: boot stream for UUU
 
 ## Boot DIP Switches
 

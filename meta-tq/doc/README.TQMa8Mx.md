@@ -194,7 +194,7 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * imx-boot-${MACHINE}-sd.bin-flash\_hdmi\_spl\_uboot: boot stream for SD / eMMC
-* imx-boot-${MACHINE}-mfgtool.bin-flash\_spl\_uboot: boot stream for UUU
+* imx-boot-${MACHINE}-uuu.bin-flash\_spl\_uboot: boot stream for UUU
 * hello\_world.bin (Cortex M4 demo, UART4, TCM)
 * rpmsg\_lite\_pingpong\_rtos\_linux\_remote.bin (Cortex M4 demo, UART4, TCM)
 

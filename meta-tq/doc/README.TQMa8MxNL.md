@@ -171,7 +171,7 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / eMMC
 * imx-boot-${MACHINE}-sd.bin-flash\_evk\_flexspi: boot stream for FlexSPI
-* imx-boot-${MACHINE}-mfgtool.bin-flash\_spl\_uboot:  boot stream for UUU
+* imx-boot-${MACHINE}-uuu.bin-flash\_spl\_uboot:  boot stream for UUU
 * hello\_world.bin (Cortex M7 demo, UART4, TCM)
 * rpmsg\_lite\_pingpong\_rtos\_linux\_remote.bin (Cortex M7 demo, UART4, TCM)
 

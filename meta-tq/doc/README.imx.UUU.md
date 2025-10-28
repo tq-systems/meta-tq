@@ -29,19 +29,19 @@ configuration. (This is already the case for starterkit machine configurations):
 
 |  SOC      |  SOM       | IMXBOOT_TARGET   | U-Boot Config    |
 |-----------|------------|------------------|------------------|
-| i.MX8MQ   | TQMa8Mx    | flash_spl_uboot  | <size>gb_mfgtool |
-| i.MX8MMini| TQMa8MxML  | flash_spl_uboot  | <size>gb_mfgtool |
-| i.MX8MNano| TQMa8MxNL  | flash_spl_uboot  | mfgtool          |
-| i.MX8MPlus| TQMa8MPxL  | flash_spl_uboot  | mfgtool          |
-|           | TQMa8MPxS  | flash_spl_uboot  | mfgtool          |
-| i.MX8     | TQMa8QM    | flash_spl        | mfgtool          |
-| i.MX8X    | TQMa8Xx    | flash_spl        | mfgtool          |
-|           | TQMa8Xx4   | flash_spl        | mfgtool          |
-|           | TQMa8XxS   | flash_spl        | mfgtool          |
-| i.MX91    | TQMa91xxCA | flash_singleboot | mfgtool          |
-|           | TQMa91xxLA | flash_singleboot | mfgtool          |
-| i.MX93    | TQMa93xxCA | flash_singleboot | mfgtool          |
-|           | TQMa93xxLA | flash_singleboot | mfgtool          |
+| i.MX8MQ   | TQMa8Mx    | flash_spl_uboot  | <size>gb_uuu |
+| i.MX8MMini| TQMa8MxML  | flash_spl_uboot  | <size>gb_uuu |
+| i.MX8MNano| TQMa8MxNL  | flash_spl_uboot  | uuu          |
+| i.MX8MPlus| TQMa8MPxL  | flash_spl_uboot  | uuu          |
+|           | TQMa8MPxS  | flash_spl_uboot  | uuu          |
+| i.MX8     | TQMa8QM    | flash_spl        | uuu          |
+| i.MX8X    | TQMa8Xx    | flash_spl        | uuu          |
+|           | TQMa8Xx4   | flash_spl        | uuu          |
+|           | TQMa8XxS   | flash_spl        | uuu          |
+| i.MX91    | TQMa91xxCA | flash_singleboot | uuu          |
+|           | TQMa91xxLA | flash_singleboot | uuu          |
+| i.MX93    | TQMa93xxCA | flash_singleboot | uuu          |
+|           | TQMa93xxLA | flash_singleboot | uuu          |
 
 
 ```
@@ -89,18 +89,18 @@ are given:
 
 Use the bootstream containing U-Boot capable of handling SDP together with
 UUU tool to boot a new / bricked board (see Artifacts section for your board for
-the exact name of the bootstream image for mfgtool/uuu configuration):
+the exact name of the bootstream image for uuu configuration):
 
 If using U-Boot with SPL:
 
 ```
-sudo uuu -b spl <bootstream for mfgtool/uuu>
+sudo uuu -b spl <bootstream for uuu>
 ```
 
 If using U-Boot without SPL:
 
 ```
-sudo uuu <bootstream for mfgtool/uuu>
+sudo uuu <bootstream for uuu>
 ```
 
 #### Program image to eMMC
@@ -111,7 +111,7 @@ the bootstream and the wic image to eMMC (see Artifacts section for your board
 for the exact names of the images to use):
 
 ```
-sudo uuu -b emmc_all <bootstream for mfgtool/uuu> <wic image>
+sudo uuu -b emmc_all <bootstream for uuu> <wic image>
 ```
 
 **Attention:** The bootstream from first argument will be written to eMMC boot partition

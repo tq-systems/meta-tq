@@ -184,7 +184,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   * With the default U-Boot configuration the boot flow is interrupted in
     SPL and waits for input of the assembled RAM size (1, 2, 4, 8).
   * Use fixed 2GB U-Boot configuration. This is built by default `UBOOT_CONFIG`
-    entries `sd-2gb` and `mfgtool-2gb`
+    entries `sd-2gb` and `uuu-2gb`
     **Note:** the generated wic-File uses the U-Boot multi RAM config
 * MIPI CSI
   * driver stack is not completely v4l2-compliance test proof. The IOCTLS for format / resolution
@@ -278,7 +278,7 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 * imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / eMMC
 * imx-boot-${MACHINE}-sd.bin-flash\_evk\_flexspi: boot stream for FlexSPI
-* imx-boot-${MACHINE}-mfgtool.bin-flash\_evk\_uboot:  boot stream for UUU
+* imx-boot-${MACHINE}-uuu.bin-flash\_evk\_uboot:  boot stream for UUU
 * imx-boot-${MACHINE}-ecc.bin-flash\_spl\_uboot: boot stream with inline ECC for SD / eMMC
 * imx-boot-${MACHINE}-ecc.bin-flash\_evk\_flexspi: boot stream with inline ECC for FlexSPI
 * hello\_world.bin (Cortex M7 demo, UART3, TCM)
