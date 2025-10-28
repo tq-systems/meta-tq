@@ -33,7 +33,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | Read                                             |      x       |
 | Write                                            |      x       |
 | Boot                                             |      x       |
-| **eMMC / SD-Card**                              |              |
+| **eMMC / SD-Card**                               |              |
 | Read                                             |      x       |
 | Write                                            |      x       |
 | Boot                                             |      x       |
@@ -45,7 +45,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | ENET 1                                           |      x       |
 | **Bootstreams**                                  |              |
 | FlexSPI                                          |      x       |
-| SD / eMMC                                       |      x       |
+| SD / eMMC                                        |      x       |
 | UUU / mfgtool                                    |      x       |
 
 **TODO or not tested / supported**
