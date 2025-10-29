@@ -142,7 +142,6 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 * DVFS is not supported using cpu-freq framework. See [here](#frequency-scaling)
   on how to use frequency scaling
 * Ethernet device order is defined by DT aliases. Linux and bootloader DT need to match
-* G2D driver for PXP needs access to `root`-only devices. Thus `weston` needs to be started as `root`
 
 ## Known Issues
 
