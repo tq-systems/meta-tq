@@ -11,11 +11,7 @@ IMX_OEI_SRC = "${TQ_GIT_BASEURL}/tq-imx-oei.git;protocol=${TQ_GIT_PROTOCOL}"
 SRCBRANCH = "TQM-lf-6.12.20"
 SRCREV = "b22a3f9d57701351c23e22f913d99fbbd0eb4ce9"
 
-S = "${WORKDIR}/git"
-
-# TODO: use full path after patches are ported to meta-freescale
-require imx-oei.inc
-# require recipes-bsp/imx-oei/imx-oei.inc
+require dynamic-layers/arm-toolchain/recipes-bsp/imx-oei/imx-oei.inc
 
 COMPATIBLE_MACHINE = "^$"
 COMPATIBLE_MACHINE:tqma95xx = "tqma95xx"
