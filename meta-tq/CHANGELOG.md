@@ -15,13 +15,28 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-imx-tq-6.1: TQMa6x / TQMa6ULx[L] / TQMa6ULLx[L] / TQMa7x / TQMa8Mx / TQMa8MxML / TQMa8MxNL: change soundcard model name in device tree
+
+ The name equals the one used in upstream device trees. Since the audio codec on the
+ main boards is integrated in the same way, this allows using a single default configuration
+ for multiple boards.
+* u-boot-imx-tq-2020.04: TQMa8Mx / TQMa8Mx[M,N]L: always run fastboot as boot command
+  when USB boot detected in supported U-Boot configuration.
+* linux-rt-tq-6.1: TQMa6x / TQMa6ULx[L] / TQMa6ULLx[L] / TQMa7x / TQMa8Mx / TQMa8MxML / TQMa8MxNL / TQMa8MPxL
+  - Update to integrate upstream tag v6.1.156-rt56
 * linux-tq-6.1: TQMa6x / TQMa6ULx[L] / TQMa6ULLx[L] / TQMa7x / TQMa8Mx / TQMa8MxML / TQMa8MxNL / TQMa8MPxL
-  - Update to 6.1.150
+  - Update to integrate upstream tag v6.1.159
+* linux[-rt]-tq-6.1: TQMa6x / TQMa6ULx[L] / TQMa6ULLx[L] / TQMa7x / TQMa8Mx / TQMa8MxML / TQMa8MxNL / TQMa8MPxL
   - Change soundcard names for codec on mainboards. Since all routings on mainboards are equal,
     this enables sharing the same asound.state configurations in BSP
 
 ### Fixed
 
+* u-boot-imx-tq-2020.04: TQMa8Mx / TQMa8Mx[M,N]L: fix incomplete uuu compatibility
+
+  Enable USB gadget support in u-boot device tree and remove USB host support in favour
+  of SDP / fastboot on TQMa8Mx[M,N]L USB1. Enable gadget support in U-Boot proper for
+  TQMa8Mx.
 * wic image generation:  TQMa6x / TQMa6ULx[L] / TQMa6ULLx[L] / TQMa7x / TQMa8Mx / TQMa8MxML
 
   Temporary disable packed wic images. These boards use gen_additional_wic which depends on
