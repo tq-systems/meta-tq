@@ -3,6 +3,10 @@
 # Copyright (c) 2022-2023 TQ-Systems GmbH <oss@ew.tq-group.com>,
 # D-82229 Seefeld, Germany.
 
+require recipes-bsp/u-boot/u-boot.inc
+require u-boot-tq.inc
+require u-boot-bootstream-deploy.inc
+
 DESCRIPTION = "U-Boot for TQ-Systems GmbH NXP i.MX8 based SOM"
 
 LICENSE = "GPL-2.0-or-later"
@@ -13,10 +17,6 @@ SRCBRANCH = "TQMa8-v2020.04_imx_5.4.70_2.3.0"
 
 SRC_URI:append:nxp-ahab = " ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'file://imx-hab.cfg', '', d)}"
 SRC_URI:append:nxp-hab4 = " ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'file://imx-hab.cfg', '', d)}"
-
-require recipes-bsp/u-boot/u-boot.inc
-require u-boot-tq.inc
-require u-boot-bootstream-deploy.inc
 
 DEPENDS:append = "\
     bc-native \

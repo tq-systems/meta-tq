@@ -3,6 +3,9 @@
 # Copyright (c) 2020-2023 TQ-Systems GmbH <oss@ew.tq-group.com>,
 # D-82229 Seefeld, Germany.
 
+require recipes-bsp/u-boot/u-boot.inc
+require u-boot-tq.inc
+
 DESCRIPTION = "U-Boot for TQ-Systems GmbH NXP i.MX6 based modules"
 
 LICENSE = "GPL-2.0-or-later"
@@ -17,9 +20,6 @@ DEPENDS += "\
 
 SRCREV = "cc88ef2ca7197e840680faae2e03b74fa875266c"
 SRCBRANCH = "TQM-v2023.04"
-
-require recipes-bsp/u-boot/u-boot.inc
-require u-boot-tq.inc
 
 UBOOT_INITIAL_ENV = "u-boot-initial-env"
 
