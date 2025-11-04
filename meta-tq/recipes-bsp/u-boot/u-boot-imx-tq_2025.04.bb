@@ -19,7 +19,6 @@ SRC_URI:append:nxp-hab4 = " ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'f
 
 DEPENDS += "\
     bc-native \
-    bison-native \
     dtc-native \
     flex-native \
     gnutls-native \

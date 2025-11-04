@@ -3,7 +3,7 @@ require u-boot-tq.inc
 
 DESCRIPTION = "u-boot for TQ-Systems GmbH TI AM57 and TI AM335 based modules"
 
-DEPENDS += "xxd-native bison-native"
+DEPENDS += "xxd-native"
 
 SRCREV = "8090f7cab5233d9d56eef23f1f7402114ffeb52a"
 SRCBRANCH = "TQMa57xx-u-boot-v2019.04"

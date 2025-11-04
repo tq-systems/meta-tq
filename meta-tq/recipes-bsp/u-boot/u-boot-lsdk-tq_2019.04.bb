@@ -6,8 +6,6 @@ DESCRIPTION = "u-boot for TQ-Systems GmbH LX2160A based modules"
 # target not supported in U-Boot before v2019.07
 UBOOT_INITIAL_ENV = ""
 
-DEPENDS += "bison-native"
-
 SRCREV = "e2b38dc398203f043d607e7de3fa192b4c99f009"
 SRCBRANCH = "TQMLX2160A-v2019.04-lx2160a-early-access-bsp0.7"
 

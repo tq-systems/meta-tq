@@ -7,7 +7,6 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=a2c678cfd4a4d97135585cad908541c6"
 
 DEPENDS += "\
     bc-native \
-    bison-native \
     rcw \
 "
 
