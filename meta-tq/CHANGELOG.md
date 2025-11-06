@@ -11,6 +11,7 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa95xxSA: add board support for MB-SMARC-2
 * TQMa93xxLA: add board support for MBa93xxLA-MINI
 * TQMa93xxLA: enable LVDS for mainline-linux-kernel
 * Build fitImage kernels by default
