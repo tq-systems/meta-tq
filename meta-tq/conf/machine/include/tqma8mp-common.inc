@@ -38,8 +38,6 @@ RAW_BOOT_START_OFFSET_KB = "32"
 RAW_BOOT_END_OFFSET_KB = "4096"
 # compatibility with meta-freescale
 IMX_BOOT_SEEK = "${RAW_BOOT_START_OFFSET_KB}"
-# imx-mkimage[-tq]
-IMX_BOOT_SOC_TARGET = "iMX8MP"
 
 ATF_PLATFORM = "imx8mp"
 
