@@ -9,7 +9,6 @@ require u-boot-bootstream-deploy.inc
 
 DESCRIPTION = "U-Boot for TQ-Systems GmbH NXP i.MX9 based SOM"
 
-LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=2ca5f2c35c8cc335f0a19756634782f1"
 
 SRCREV = "4127107fd03d4f3e4666603d7708c666741a08a0"

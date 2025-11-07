@@ -9,7 +9,6 @@ require ${UBOOT_BASE_INC}
 
 DESCRIPTION = "U-boot 2025.10 for TQ-Systems modules"
 
-LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=2ca5f2c35c8cc335f0a19756634782f1"
 
 SPL_BINARY = ""

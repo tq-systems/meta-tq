@@ -2,8 +2,6 @@ require recipes-bsp/u-boot/u-boot.inc
 require u-boot-tq.inc
 
 DESCRIPTION = "u-boot for TQ-Systems GmbH TI AM57 and TI AM335 based modules"
-LICENSE = "GPL-2.0-or-later"
-LIC_FILES_CHKSUM = "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
 
 DEPENDS += "xxd-native bison-native"
 

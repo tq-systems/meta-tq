@@ -8,7 +8,6 @@ require u-boot-tq.inc
 
 DESCRIPTION = "U-Boot for TQ-Systems GmbH NXP i.MX6 based modules"
 
-LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=2ca5f2c35c8cc335f0a19756634782f1"
 
 DEPENDS += "\
