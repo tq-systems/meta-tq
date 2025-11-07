@@ -3,8 +3,6 @@ require u-boot-tq.inc
 
 DESCRIPTION = "u-boot for TQ-Systems GmbH LX2160A based modules"
 
-PROVIDES += "u-boot"
-
 # target not supported in U-Boot before v2019.07
 UBOOT_INITIAL_ENV = ""
 
