@@ -13,6 +13,4 @@ DEPENDS += "bison-native"
 SRCREV = "043de483fb12d05a0bcdbbbb4473e290c22eec38"
 SRCBRANCH = "TQM-lf-5.15"
 
-SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
-
 COMPATIBLE_MACHINE = "tqmls1012al"

@@ -18,10 +18,6 @@ DEPENDS += "\
 SRCREV = "cc88ef2ca7197e840680faae2e03b74fa875266c"
 SRCBRANCH = "TQM-v2023.04"
 
-SRC_URI = " \
-    ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
-"
-
 require recipes-bsp/u-boot/u-boot.inc
 require u-boot-tq.inc
 

@@ -11,8 +11,6 @@ LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
 SRCREV = "14aa49225710ec7955ac76e1a6e807b529f3cd92"
 SRCBRANCH = "TQMxx-lf_v2022.04"
 
-SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
-
 require recipes-bsp/u-boot/u-boot.inc
 require u-boot-tq.inc
 

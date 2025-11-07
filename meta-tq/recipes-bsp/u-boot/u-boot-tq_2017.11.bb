@@ -19,10 +19,6 @@ DEPENDS:append:tqmls102xa = "\
 SRCREV = "f22901aa6b3d4f746cbe2dd39cd29f693df65b3d"
 SRCBRANCH = "TQMaxx-u-boot-v2017.11"
 
-SRC_URI = "\
-    ${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH} \
-"
-
 # target not supported in U-Boot before v2019.07
 UBOOT_INITIAL_ENV = ""
 

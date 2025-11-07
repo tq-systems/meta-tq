@@ -13,6 +13,8 @@ PROVIDES += "u-boot"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM ?= "file://Licenses/README;md5=30503fd321432fc713238f582193b78e"
 
+SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
+
 S = "${WORKDIR}/git"
 B = "${WORKDIR}/build"
 

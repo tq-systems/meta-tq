@@ -12,8 +12,6 @@ DESCRIPTION = "U-boot 2025.10 for TQ-Systems modules"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=2ca5f2c35c8cc335f0a19756634782f1"
 
-SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
-
 SPL_BINARY = ""
 SPL_BINARYNAME = ""
 SPL_UART_BINARY = ""

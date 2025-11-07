@@ -16,6 +16,4 @@ DEPENDS += "bison-native"
 SRCREV = "e2b38dc398203f043d607e7de3fa192b4c99f009"
 SRCBRANCH = "TQMLX2160A-v2019.04-lx2160a-early-access-bsp0.7"
 
-SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
-
 COMPATIBLE_MACHINE = "tqmlx2160a"
