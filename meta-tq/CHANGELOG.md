@@ -13,7 +13,7 @@ Releases are named with the following scheme:
 
 * TQMa95xxSA: add board support for MB-SMARC-2
 * TQMa93xxLA: add board support for MBa93xxLA-MINI
-* TQMa93xxLA: enable LVDS for mainline-linux-kernel
+* TQMa93xxLA / TQMa93xxLA: enable LVDS for mainline linux-kernel on MBa93xxCA and MBa93xxLA
 * Build fitImage kernels by default
 
   `KERNEL_IMAGETYPES` now contains `fitImage` by default on all platforms. Note
@@ -75,7 +75,7 @@ Releases are named with the following scheme:
 ### Fixed
 
 * TQMa8Mx / TQMa8Mx[M,N]L: add uuu support in u-boot-imx-tq-2020.04
-  
+
   Enables USB gadget support in u-boot devicetree and removes USB host support in favour of SDP on 8Mx[M,N]L
 
 * TQMa8 / TQMa9: fix default WKS_FILE assignment for machines
