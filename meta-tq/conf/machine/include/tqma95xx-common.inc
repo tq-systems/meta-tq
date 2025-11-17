@@ -60,9 +60,7 @@ RAW_BOOT_END_OFFSET_KB = "4096"
 # compatibility with meta-freescale
 IMX_BOOT_SEEK = "${RAW_BOOT_START_OFFSET_KB}"
 
-MACHINE_EXTRA_RRECOMMENDS += "\
-    mali-imx-libgles1 \
-"
+MACHINE_EXTRA_RRECOMMENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'vulkan', 'mali-imx-libgles1', '', d)}"
 
 MACHINE_FEATURES += "\
     can \
