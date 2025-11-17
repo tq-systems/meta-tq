@@ -3,7 +3,7 @@ SUMMARY = "Linux kernel based on linux stable 6.12.y for TQ-Systems SoMs"
 require linux-tq-6.12.inc
 
 KBRANCH = "TQM-linux-v6.12.y"
-SRCREV_machine = "ee5758d5af97f4741cb2d4acc46cd54d6717b463"
+SRCREV_machine = "863f89987444adde8cc88d6d80de751c31d6f5b3"
 
 # LINUX_VERSION must match version from Makefile
-LINUX_VERSION = "${LINUX_RELEASE}.54"
+LINUX_VERSION = "${LINUX_RELEASE}.57"
