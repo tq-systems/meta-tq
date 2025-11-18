@@ -57,7 +57,6 @@ yocto scarthgap. For Linux 6.1 support use yocto kirkstone.
 
 ### ToDo / Untested
 
-* Mic In (X21)
 * SIM card (X24)
 * MIPI-CSI (X28)
 * MIPI-DSI (X28)

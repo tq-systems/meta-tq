@@ -122,8 +122,6 @@ _MBa8x HW Rev.020x/30x only_
 * SIM
 * QSPI NOR
   * see Known Issues
-* Audio
-  * Audio codec mic in not tested
 * DSI
   * DSI to DP bridge
 * HDMI ARC is untested

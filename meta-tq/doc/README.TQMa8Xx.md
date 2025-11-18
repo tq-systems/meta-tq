@@ -123,8 +123,6 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   * Due to SCU-API limitation temperature grading cannot be queried from SCU.
     Therfore thermal trip points are hardcoded in devicetree and must match the
     assembled CPU type. BSP default are trip points for industrial grading.
-* Audio
-  * Mic In untested
 * DSI - DP bridge
 
 ## Known Issues / Limitations

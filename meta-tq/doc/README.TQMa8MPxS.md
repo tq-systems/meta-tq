@@ -112,8 +112,6 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ## TODO / Untested
 
-* Audio
-  * Codec Microphone in
 * I²C interface of PCIe Clock generator not tested
 * HDMI Audio
 

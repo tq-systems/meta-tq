@@ -59,7 +59,6 @@ yocto scarthgap. For Linux 6.1 support use yocto kirkstone.
 
 * Smart card (X6)
 * SIM card (X18)
-* Mic In (X19)
 * Pixel Pipeline PXP
 * RS485 (X12)
 

@@ -87,7 +87,6 @@ _Note:_ Mini PCIe connector only supports USB.
 
 ### ToDo / Untested
 
-* Mic In (X19)
 * SIM card (X23)
 * Resistive Touch (X4)
 * Pixel Pipeline PXP

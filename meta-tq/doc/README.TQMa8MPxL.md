@@ -168,8 +168,6 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ### MBa8MPxL
 
-* Audio
-  * Codec Microphone in
 * UART1/UART2 via pin header
 * SPI via pin header
 * I²C interface of PCIe Clock generator not tested

@@ -115,8 +115,6 @@ _MBa8x HW Rev.030x only_
 
 * MIKRO Bus
 * SIM
-* Audio
-  * Audio codec mic in not tested
 * DSI
   * DSI to DP bridge
 
