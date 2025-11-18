@@ -29,6 +29,8 @@ Releases are named with the following scheme:
 
   Update to branch containing all fixes from stable-rt.
   Mark recipe as compatible for these machines.
+* MicIn support for all platforms
+  * Depending on the used hardware codec control adjustments might be necessary
 
 ### Changed
 
