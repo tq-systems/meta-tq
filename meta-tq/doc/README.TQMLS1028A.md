@@ -103,6 +103,7 @@ case of overheating.
 * SPI: XSPI mode might get stuck
 * CAN-FD: possible CAN (data) bitrates combinations are limited due to platform clock
 * USB DR (X5) does not support SuperSpeed (CPU limitation for cable detection with ID-pin)
+* Wake up using GPIO buttons does not work
 
 ## Artifacts
 
