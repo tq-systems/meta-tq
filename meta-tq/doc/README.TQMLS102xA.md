@@ -45,6 +45,8 @@ Artifacs can be found at the usual locations for bitbake:
 * zImage: Linux kernel image
 * \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive
+* \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
+* \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 * u-boot.bin-\*:
   * sd: boot stream for SD / eMMC
     * _can: including CAN support
