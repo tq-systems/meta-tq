@@ -62,7 +62,7 @@ recovery via JTAG is needed.
   * seems to be hardware dependend
 * Linux: currently no out of the box support for RootFS on SPI
   * `tq-image-small-debug` image from `spaetzle` distrubution is too big
-* Linux: Wake Up support not working (RTC / GPIO button)
+* Linux: Wake up support using GPIO button not working
 
 ## Artifacts
 
