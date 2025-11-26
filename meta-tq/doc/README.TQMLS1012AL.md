@@ -19,6 +19,28 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ## Supported Features
 
+### U-Boot
+
+| Feature                   |    REV.020x    |
+|:--------------------------|:--------------:|
+| RAM configs               | 512 MiB, 1 GiB |
+| UART (console on DUART0)  |       x        |
+| **GPIO**                  |                |
+| Button                    |       x        |
+| **I2C**                   |                |
+| system EEPROM parsing     |       x        |
+| **eMMC / SD**             |                |
+| Read                      |       x        |
+| Write                     |       x        |
+| **Ethernet**              |                |
+| GigE SGMII (X23)          |       x        |
+| GigE Switch (X12, X13)    |       x        |
+| **USB**                   |                |
+| USB 3.0 Host / Hub        |       x        |
+| **QSPI NOR**              |                |
+| Read with 1-1-1 SDR       |       x        |
+| PP / Erase with 1-1-1 SDR |       x        |
+
 ### Linux
 
 **Note:** For Linux 5.15 based on NXP / vendor branch prefer using `kirkstone` branch.
