@@ -91,7 +91,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | VPU                                                          |      x      |
 | **Display**                                                  |             |
 | LVDS (X46, X48)                                              |      x      |
-| Dual-Channel LVDS                                            |             |
+| Dual-Channel LVDS                                            |      x      |
 | HDMI (X6)                                                    |      x      |
 | DisplayPort using MIPI-DSI Bridge (X5)                       |      x      |
 | **Audio**                                                    |             |
@@ -152,6 +152,8 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   * Suspend & resume not supported (yet)
 * no support for vendor kernel and BSP
 * SER2's RTS and CTS signals are controlled by GPIO only
+* LVDS
+  * Display AUO G185HAN01 not tested on regular base
 
 ## Build Artifacts
 
@@ -240,6 +242,8 @@ is separated in a dtsi fragment.
 | HDMI + DP       | imx8mp-tqma8mpqs-mb-smarc-2.dtb                   | compatible monitor |
 | LVDS0           | imx8mp-tqma8mpqs-mb-smarc-2-lvds0-tm070jvhg33.dtb | Tianma TM070JVHG33 |
 | LVDS1           | imx8mp-tqma8mpqs-mb-smarc-2-lvds1-tm070jvhg33.dtb | Tianma TM070JVHG33 |
+| LVDS0, dual     | imx8mp-tqma8mpqs-mb-smarc-2-lvds-g133han01.dtb    | AUO G133HAN.01     |
+| LVDS0, dual     | mimx8mp-tqma8mpqs-b-smarc-2-lvds-g185han01.dtb    | AUO G185HAN.01     |
 
 *Note*: `weston` by default uses the DRI device with highest number. This is usually Display Port.
 To explicitely select a DRI device, please refer to `--drm-device` argument during startup.
