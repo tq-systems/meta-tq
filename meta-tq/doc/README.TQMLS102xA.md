@@ -130,6 +130,17 @@ When using HDMI output the default CMA size (16MiB) might be too small, `weston`
 
 Using an HDMI monitor might require color space conversion. Without a GPU this causes a high CPU usage.
 
+### NFS boot
+
+When booting from NFS the `netdev` variable needs to be set correspondent to the used Ethernet interface,
+specified in variable `ethact`.
+
+| ethact | netdev |
+|--------|--------|
+| eTSEC1 | eth0   |
+| eTSEC2 | eth1   |
+| eTSEC3 | eth2   |
+
 ## Support Wiki
 
 See [TQ Embedded Wiki for TQMLS102xA](https://support.tq-group.com/en/layerscape/tqmls102xa)
