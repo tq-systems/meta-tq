@@ -109,17 +109,15 @@ case of overheating.
 Artifacs can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 * `atf/`
-  * 1 GiB
-    * `bl2_flexspi_nor.pbl` Primary Boot Loader with RCW
-    * `bl2_auto.pbl` Primary Boot Loader with RCW for SD/eMMC boot
-    * `fip_uboot.bin` Firmware Image Package for BL3 (TF-A as BL31
-       and U-Boot as BL33 non secure payload)
-  * 2/4/8 GiB
-    * `bl2_flexspi_nor_tqmls1028a_<size>gb.pbl` Primary Boot Loader with RCW
-    * `bl2_auto_tqmls1028a_<size>gb.pbl` Primary Boot Loader with RCW for SD/eMMC boot
-    * `fip_uboot_tqmls1028a_<size>gb.bin` Firmware Image Package for BL3 (TF-A as BL31
-       and U-Boot as BL33 non secure payload)
-    * `atf/variants/`: different Primary Boot Loader variants built with RCW binaries form `rcw/`
+  * `bl2_flexspi_nor.pbl` Primary Boot Loader with RCW (1 GiB)
+  * `bl2_auto.pbl` Primary Boot Loader with RCW for SD/eMMC boot (1 GiB)
+  * `fip_uboot.bin` Firmware Image Package for BL3 (TF-A as BL31
+     and U-Boot as BL33 non secure payload) (1 GiB)
+  * `bl2_flexspi_nor_tqmls1028a_<size>gb.pbl` Primary Boot Loader with RCW (2/4/8 GiB)
+  * `bl2_auto_tqmls1028a_<size>gb.pbl` Primary Boot Loader with RCW for SD/eMMC boot (2/4/8 GiB)
+  * `fip_uboot_tqmls1028a_<size>gb.bin` Firmware Image Package for BL3 (TF-A as BL31
+     and U-Boot as BL33 non secure payload) (2/4/8 GiB)
+  * `atf/variants/`: different Primary Boot Loader variants built with RCW binaries form `rcw/`
 * `rcw/`: different RCW configuration binaries
 * `fsl-ls1028a-tqmls1028a-mbls1028a.dtb`: device tree blob for mbls1028a board
 * `fsl-ls1028a-tqmls1028a-mbls1028a-ind.dtb`: device tree blob for mbls1028a-ind board
