@@ -105,6 +105,7 @@ case of overheating.
 * USB DR (X5) does not support SuperSpeed (CPU limitation for cable detection with ID-pin)
 * Wake up using GPIO buttons does not work
 * QSPI boot does not work
+* PCIe device causes timeout for L2 entry preventing suspend
 
 ## Artifacts
 
