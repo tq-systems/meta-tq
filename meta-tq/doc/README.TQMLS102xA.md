@@ -30,7 +30,10 @@ bootloader and Linux kernel.
   Use `echo 0 > /sys/class/backlight/backlight/bl_power` to unblank the display
 - HDMI's DDC channel is shared with on-board I2C. Not all displays might be supported
   due to address conflicts with DDC device IDs.
-- u-boot: Default MTD partition layout and boot script don't load files from UBIFS
+- USB (X40) does not work
+- u-boot
+  - Default MTD partition layout and boot script don't load files from UBIFS
+  - No USB support
 
 ## Build Artifacts
 
