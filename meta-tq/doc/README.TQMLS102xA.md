@@ -14,8 +14,88 @@ This README contains some useful information for TQMLS102xA on MBLS102xA
 See [here](./README.SoftwareVersions.md) for the software base versions of
 bootloader and Linux kernel.
 
+## Supported machine configurations
+
+See top level [README](../README.md) for configurations usable as MACHINE.
+
+## Supported Features
+
+### U-Boot
+
+| Feature                              | REV.030x |
+|:-------------------------------------|:--------:|
+| RAM configs                          |  1 GiB   |
+| **UART**                             |          |
+| console on DUART0 (X5)               |    x     |
+| RS-485 on LPUART0 (X1)               |          |
+| **GPIO**                             |          |
+| generic GPIOs                        |    x     |
+| LED                                  |          |
+| Button                               |          |
+| **I2C**                              |          |
+| EEPROMs                              |    x     |
+| RTC                                  |          |
+| Temperature Sensors                  |          |
+| **ENET**                             |          |
+| GigE RGMII (X11)                     |    x     |
+| GigE RGMII (X12)                     |    x     |
+| GigE SGMII (X13)                     |    x     |
+| **USB**                              |          |
+| USB 2.0 Host / Hub                   |          |
+| USB DRD (USB 3.0 Cable Detect, VBUS) |          |
+| **SPI NOR**                          |          |
+| Read with 1-4-4 SDR                  |    x     |
+| PP / Erase with 1-4-4 SDR            |    x     |
+| **Display**                          |          |
+| LVDS interface                       |          |
+| RGB interface                        |          |
+| HDMI                                 |          |
+| **Audio**                            |          |
+| Codec (Line IN / Line OUT)           |          |
+| **PCIe**                             |          |
+| networking card at Mini PCIe (X35)   |          |
+| **CAN-FD**                           |          |
+| CAN-FD                               |          |
+
+### Linux
+
+| Feature                              | 6.12.y |
+|:-------------------------------------|:------:|
+| RAM configs                          | 1 GiB  |
+| **UART**                             |        |
+| console on DUART0 (X5)               |   x    |
+| RS-485 on LPUART0 (X1)               |   x    |
+| **GPIO**                             |        |
+| LED                                  |   x    |
+| Button                               |   x    |
+| **I2C**                              |        |
+| EEPROMs                              |   x    |
+| RTC                                  |   x    |
+| Temperature Sensors                  |   x    |
+| **ENET**                             |        |
+| GigE RGMII (X11)                     |   x    |
+| GigE RGMII (X12)                     |   x    |
+| GigE SGMII (X13)                     |   x    |
+| **USB**                              |        |
+| USB 2.0 Host / Hub                   |   x    |
+| USB DRD (USB 3.0 Cable Detect, VBUS) |        |
+| **SPI NOR**                          |        |
+| Read with 1-4-4 SDR                  |   x    |
+| PP / Erase with 1-4-4 SDR            |   x    |
+| **Display**                          |        |
+| LVDS interface                       |   x    |
+| RGB interface                        |        |
+| HDMI                                 |   x    |
+| **Audio**                            |        |
+| Codec (Line IN / Line OUT)           |   x    |
+| **PCIe**                             |        |
+| networking card at Mini PCIe (X35)   |   x    |
+| **CAN-FD**                           |        |
+| CAN-FD                               |   x    |
+
 ## Important Notes
 
+* Supported features depend on specific RCW configuration
 * CPLD mux must match RCW configuration
 * CPLD mux mode #1 EC1_HDMI matches the default RCW configuration of the TQMLS102xA BSP.
 * If DIP S9 is not set to one of the CPLD mux modes #1 - #12, the CPLD firmware selects mux mode #1.
