@@ -34,6 +34,7 @@ bootloader and Linux kernel.
 - u-boot
   - Default MTD partition layout and boot script don't load files from UBIFS
   - No USB support
+- RGB displays stay black although drivers are initialized properly
 
 ## Build Artifacts
 
