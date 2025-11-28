@@ -48,9 +48,15 @@ Releases are named with the following scheme:
 * alsa-state: enable IN3_L / Left Mixer input path (prepare MicIn support) for
   i.MX base SoM
 * layer.conf: add LAYERRECOMMENDS
+* doc:
+  * Added known issues for TQMa1012AL, TQMLS102xA, TQMLS1028A
+  * Added feature matrix for TQMa1012AL, TQMLS102xA
+  * various improvements
 
 ### Fixed
 
+* TQMLS102xA: Enable missing Linux drivers
+* TQMLS10xxA: Fix UBIFS rootfs partition selection
 * linux-tq-6.12: TQMLX2106A: Fix creation of multiple DPAA2 DPSW objects
 * u-boot-tq-2023.04: TQMa6x:
 
