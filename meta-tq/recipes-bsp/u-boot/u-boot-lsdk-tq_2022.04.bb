@@ -8,7 +8,7 @@ DESCRIPTION = "U-Boot for TQ-Systems GmbH Freescale LS10xx based modules"
 LICENSE = "GPL-2.0-or-later"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=5a7450c57ffe5ae63fd732446b988025"
 
-SRCREV = "2e7b60fd307ab5bf12e4b37d75597a557b1d892d"
+SRCREV = "14aa49225710ec7955ac76e1a6e807b529f3cd92"
 SRCBRANCH = "TQMxx-lf_v2022.04"
 
 SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${SRCBRANCH}"
