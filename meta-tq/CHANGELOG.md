@@ -64,6 +64,10 @@ Releases are named with the following scheme:
 * linux-tq-6.12: TQMa8MPxL / TQMa8MPxS / TQMa93xx / TQMLS10xxA / TQMLX2160A / TQMLS102xA
 
   Integrate stable fixes up to tag 6.12.49
+
+* linux-tq-6.12: TQMa8MPxS
+
+  Add Dual LVDS devicetrees (AUO G133HAN.01, AUO G185HAN.01)
 * linux-rt-tq-6.12: TQMa8MPxL / TQMa8MPxS / TQMa93xx / TQMLS10xxA / TQMLX2160A
 
   Integrate stable fixes up to tag v6.12.49-rt13
