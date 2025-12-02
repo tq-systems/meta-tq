@@ -148,6 +148,8 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 
 * Not all USB sticks are detected properly in U-Boot
 * Using `usb reset` in U-Boot will give a warning from Type-C port controller.
+  The USB controller is configured as device only via device tree to support
+  serial download use case.
 * eth1 does not work after suspend, needs `ip link set down/up dev eth1` to be functional
 * When using `i2c probe` command in U-Boot all valid addresses respond instead of addresses
   used by a physical connected device.
