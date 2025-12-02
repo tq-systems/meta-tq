@@ -1,16 +1,11 @@
-# SPDX-License-Identifier: MIT
-# Copyright (C) 2025 TQ-Systems GmbH <oss@ew.tq-group.com>, D-82229 Seefeld, Germany.
-#
-# Based on a recipe from https://git.yoctoproject.org/meta-ti/
-
 SUMMARY = "Firmware files for use with TI cc33xx"
 LICENSE = "TI-TSPA"
 LIC_FILES_CHKSUM = "file://LICENCE;md5=df68504cbd0a4da1643ebcfd5783dbc9"
 
-SRCREV = "92a809a88e5598d38dd92f8e94e11a0518043a94"
+SRCREV = "0b4f850d6c0fd8e0fe0ae1d3e80ac6733aced29b"
 SRC_URI = "git://git.ti.com/git/cc33xx-wlan/cc33xx-fw.git;protocol=https;branch=master"
 
-PV = "1.7.0.237"
+PV = "1.7.0.323"
 
 CLEANBROKEN = "1"
 
