@@ -161,14 +161,15 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 * The NPU driver `ethosu` assumes the Cortex-M33 is not running. Starting Cortex-M33 from e.g. u-boot
   or using remoteproc is not supported by `ethosu` driver. The driver is not working with `linux-imx-tq`
   based on NXP `lf-6.6.52-2.2.0` release. Switching back to old release is posible with following
-  changes in `linux-imx-tq_6.6.bb` recipe.
-* Watchdog is not enabled by default
+  changes in `linux-imx-tq_6.6.bb` recipe:
 
 ```
 KBRANCH:tqma93xx = "TQMa-fslc-6.6-2.0.x-imx"
 SRCREV:tqma93xx = "6d8a66ee71659362646d93f2752354858c04f205"
 LINUX_VERSION:tqma93xx = "${LINUX_RELEASE}.23"
 ```
+
+* Watchdog is not enabled by default
 
 ## MBa91 differences
 
