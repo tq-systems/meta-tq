@@ -117,6 +117,8 @@ Support matrix for `MBa91xxCA` REV.010x
 
 * Not all USB sticks are detected properly in U-Boot
 * Using `usb reset` in U-Boot will give a warning from Type-C port controller.
+  The USB controller is configured as device only via device tree to support
+  serial download use case.
 * NFS boot: The interface to be used for NFS boot (`netdev`) has inverted order, compared
   to u-boot and Linux. Device renaming in Linux happens after mounting rootfs.
 * U-Boot: boot from USB using `uuu` config displays misleading pinctrl / iomux warning.
