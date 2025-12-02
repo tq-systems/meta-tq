@@ -207,6 +207,18 @@ DIP S10 allows switching of signals:
 | S10-3   | SPI3 to Mikro-Module  | SPI3 to Baseboard X25 Pin 38/40/42/44 |
 | S10-4   | Fan on X37 active     | Fan on X37 not active                 |
 
+## Boot Media
+
+### Update Scripts
+
+In U-Boot the following update scripts are available to update the components:
+* RCW/PBL (use `*.pbl` file ):
+  * `update_pbl_mmc`
+  * `update_pbl_spi`
+* TF-A / U-Boot (use FIP Firmware Image Package):
+  * `update_uboot_mmc`
+  * `update_uboot_spi`
+
 ## Support Wiki
 
 See [TQ Embedded Wiki for TQMLS1028A](https://support.tq-group.com/en/layerscape/tqmls1028a)
