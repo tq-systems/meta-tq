@@ -106,6 +106,7 @@ case of overheating.
 * Wake up using GPIO buttons does not work
 * QSPI boot does not work
 * PCIe device causes timeout for L2 entry preventing suspend
+* u-boot: boot script don't load files from UBIFS
 
 ## Artifacts
 
