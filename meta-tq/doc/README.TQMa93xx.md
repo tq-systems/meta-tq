@@ -142,11 +142,10 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 * DVFS is not supported using cpu-freq framework. See [here](#frequency-scaling)
   on how to use frequency scaling
 * Ethernet device order is defined by DT aliases. Linux and bootloader DT need to match
+* CPU mask 1.0 and older is not longer supported. No up to date firmare available from NXP.
 
 ## Known Issues
 
-* CPU mask 1.0 and older print an error when loading driver for secure enclave driver. Driver loads successful
-  but the system may lack secure boot features.
 * Not all USB sticks are detected properly in U-Boot
 * Using `usb reset` in U-Boot will give a warning from Type-C port controller.
 * eth1 does not work after suspend, needs `ip link set down/up dev eth1` to be functional
