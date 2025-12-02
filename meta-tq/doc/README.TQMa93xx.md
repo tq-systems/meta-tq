@@ -157,7 +157,6 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
   * When resuming using wakeup GPIO the following error can occur:
     `pca953x 2-0070: failed reading register`. The (wakeup) IRQ handler is executed before the expander
     has been resumed. This message can be ignored.
-* When using the parallel display on MBa91xxCA the system might deadlock during boot
 * The NPU driver `ethosu` assumes the Cortex-M33 is not running. Starting Cortex-M33 from e.g. u-boot
   or using remoteproc is not supported by `ethosu` driver. The driver is not working with `linux-imx-tq`
   based on NXP `lf-6.6.52-2.2.0` release. Switching back to old release is posible with following
