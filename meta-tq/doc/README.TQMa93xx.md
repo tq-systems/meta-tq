@@ -153,6 +153,9 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
   used by a physical connected device.
 * NFS boot: The interface to be used for NFS boot (`netdev`) has inverted order, compared
   to u-boot and Linux. Device renaming in Linux happens after mounting rootfs.
+* U-Boot: boot from USB using `uuu` config displays misleading pinctrl / iomux warning.
+  The UDC gadget driver warns not only for faild pinmux but also when no pinmux group
+  is assigned in device tree.
 * Suspend/Resume
   * When resuming using wakeup GPIO the following error can occur:
     `pca953x 2-0070: failed reading register`. The (wakeup) IRQ handler is executed before the expander
