@@ -119,6 +119,9 @@ Support matrix for `MBa91xxCA` REV.010x
 * Using `usb reset` in U-Boot will give a warning from Type-C port controller.
 * NFS boot: The interface to be used for NFS boot (`netdev`) has inverted order, compared
   to u-boot and Linux. Device renaming in Linux happens after mounting rootfs.
+* U-Boot: boot from USB using `uuu` config displays misleading pinctrl / iomux warning.
+  The UDC gadget driver warns not only for faild pinmux but also when no pinmux group
+  is assigned in device tree.
 * Watchdog is not enabled by default
 
 ## Build Artifacts
