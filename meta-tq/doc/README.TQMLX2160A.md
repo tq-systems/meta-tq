@@ -233,6 +233,16 @@ Set BL2_IMAGE to `bl2_auto${ATF_SECURE_SUFFIX}_tqmlx2160a_16gb.pbl` and BL3_IMAG
 to `fip_uboot${ATF_SECURE_SUFFIX}_tqmlx2160a_16gb.bin` to create an SD/eMMC image
 for the 16GiB variant.
 
+### Reset Configuration Word
+
+The Reset Configuration Word (RCW) is a data block that is built into the primary bootloader (BL2)
+and contains basic hardware configuration for the LX2160A, including pinmuxing and selection of the
+[SerDes Configuration](#serdes-configuration).
+
+The `RCWXSPI` and `RCWAUTO` variables, set in `meta-tq/conf/machine/tqmlx2160a-mblx2160a.conf` by
+default, can be modified to select an RCW variant at build time. To provide additional configuration
+variants not included in the BSP, the *rcw* recipe must be extended through a `.bbappend` file.
+
 ### Secure Boot
 
 Secure Boot is enabled by adding "secure" to `DISTRO_FEATURES`. With this setting, signed variants
