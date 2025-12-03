@@ -55,6 +55,13 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TQMa62xx[L]/TQMa64xxL/TQMa67xx[L]: Fix MAC address assignments
+
+  On each of these modules, two addresses more than intended (and reserved
+  for the module) were assigned to `ethXaddr` variables in U-Boot.
+
+  This issue is a regression in the new U-Boot version added in
+  scarthgap.TQ.ARM.BSP.0005.
 * TQMLS102xA: Enable missing Linux drivers
 * TQMLS10xxA: Fix UBIFS rootfs partition selection
 * linux-tq-6.12: TQMLX2106A: Fix creation of multiple DPAA2 DPSW objects
