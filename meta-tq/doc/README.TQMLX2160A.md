@@ -219,7 +219,7 @@ See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 | 0x3000000 | RootFS ext4    |
 
 
-## Build-Time Configuration
+## Build Time Configuration
 
 * RCWXSPI: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SPI-NOR Boot
 * RCWAUTO: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SD/eMMC Boot
@@ -383,7 +383,7 @@ Pay attention to the following DIP-Switches:
 * X16 -> SD2 Lane 0
 * X17 -> SD2 Lane 4
 
-### PREEMPT-RT / Realtime support
+## PREEMPT-RT / Realtime support
 
 For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
 
