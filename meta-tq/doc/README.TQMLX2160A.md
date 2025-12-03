@@ -375,14 +375,14 @@ connectors.
 | Lane / Config | H - 0   | G - 1   | F - 2   | E - 3   | D - 4     | C - 5     | B - 6     | A - 7     |
 | ------------- | ------- | ------- | ------- | ------- | --------- | --------- | --------- | --------- |
 | 12            | -       | -       | -       | -       | PCIe.2 x2 | PCIe.2 x2 | SGMII.9   | SGMII.10  |
-| 14            | CAUI4.1 | CAUI4.1 | CAUI4.1 | CAUI4.1 | PCIe.2 x2 | PCIe.2 x2 | PCIe.2 x2 | PCIe.2 x2 |
+| 14            | CAUI4.1 | CAUI4.1 | CAUI4.1 | CAUI4.1 | PCIe.2 x4 | PCIe.2 x4 | PCIe.2 x4 | PCIe.2 x4 |
 
 ### SerDes 2
 
 | Lane / Config | A - 0     | B - 1    | C - 2    | D - 3    | E - 4     | F - 5    | G - 6    | H - 7    |
 | ------------- | --------- | -------- | -------- | -------- | --------- | -------- | -------- | -------- |
 | 7             | PCIe.3 x1 | SGMII.12 | SGMII.17 | SGMII.18 | PCIe.4 x1 | SGMII.16 | XFI.13   | XFI.14   |
-| 8             | -         | -        | SATA.1   | SATA.2   | SATA.3    | SATA.4   | XFI.13   | XFI.14   |
+| 8             | -         | -        | SATA.1   | SATA.2   | SATA.3    | -        | XFI.13   | XFI.14   |
 | 11            | PCIe.3 x1 | SGMII.12 | SGMII.17 | SGMII.18 | PCIe.4 x1 | SGMII.16 | SGMII.13 | SGMII.14 |
 
 ### SerDes 3
@@ -392,29 +392,34 @@ connectors.
 | 2             | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 |
 | 3             | PCIe.5 x4 | PCIe.5 x4 | PCIe.5 x4 | PCIe.5 x4 | PCIe.6 x4 | PCIe.6 x4 | PCIe.6 x4 | PCIe.6 x4 |
 
-## DIP-Switch settings
+### PCIe and SATA Interfaces
 
-The DIP-switches should match the used RCW, otherwise interfaces will not work.
-Pay attention to the following DIP-Switches:
+| Interface | Connector         |
+| :-------- | :---------------- |
+| PCIe.2    | X36 (PCIe x4)     |
+| PCIe.3    | X16 (mPCIe + SIM) |
+| PCIe.4    | X17 (mPCIe)       |
+| PCIe.5    | X37 (PCIe x8)     |
+| PCIe.6    | X35 (PCIe x4)     |
+| SATA.1    | X18 (SSD)         |
+| SATA.2    | X42 (M.2)         |
+| SATA.3    | X43 (M.2)         |
 
-| DIP-Switch | Serdes Lane | On  | Off |
-| ---------- | ----------- | --- | ---- |
-| S3-1       | SD1 Lane 6 & 7 | PCIe.2 | SGMII.9 & 10 |
-| S3-2       | SD2 Lane 2 | SGMII.17 | SATA.1 |
-| S3-3       | SD2 Lane 3 | SGMII.18 | SATA.2 |
-| S3-4       | SD2 Lane 4 | PCIe.4 | SATA.3 |
-| S4-1       | SD2 Lane 6 | XFI.13 | SGMII.13 |
-| S4-2       | SD2 Lane 7 | XFI.14 | SGMII.14 |
-| S4-3       | SD3 Lane 4 -7 | PCIe.5 x8 | PCIe.6 x4 |
-| S5-1       | EC2| ETH.1588 | RGMII.18 |
+### DIP switch settings
 
-## PCIe Configuration
+Depending on the selected RCW, the DIP switches on the MBLX2160A must be set
+accordingly for the interfaces to work:
 
-* X35 -> SD3 Land 4-7
-* X36 -> SD1 Lane 4-7
-* X37 -> SD3 Lane 0-3 and additional Lane 4-7 when x8 (Pay attention to DIP switch)
-* X16 -> SD2 Lane 0
-* X17 -> SD2 Lane 4
+| DIP Switch | SerDes Lane   | On        | Off            |
+| ---------- | ------------- | --------- | -------------- |
+| S3-1       | SD1 Lanes 6-7 | PCIe.2    | SGMII.9 & 10   |
+| S3-2       | SD2 Lane 2    | SGMII.17  | SATA.1         |
+| S3-3       | SD2 Lane 3    | SGMII.18  | SATA.2         |
+| S3-4       | SD2 Lane 4    | PCIe.4    | SATA.3         |
+| S4-1       | SD2 Lane 6    | XFI.13    | SGMII.13       |
+| S4-2       | SD2 Lane 7    | XFI.14    | SGMII.14       |
+| S4-3       | SD3 Lanes 4-7 | PCIe.5 x8 | PCIe.6 x4      |
+| S5-1       | None (EC2)    | RGMII.18  | IEEE1588 (X32) |
 
 ## PREEMPT-RT / Realtime support
 
