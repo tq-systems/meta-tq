@@ -249,6 +249,9 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * When using HDMI the default audio device changes to HDMI output.
   For using I2S audio codec `aplay` requires the parameter `-Dsysdefault:CARD=tqmtlv320aic32`
 * The HDMI audio device has to be selected explicitely by passing `-Dsysdefault:CARD=audiohdmi` to `aplay` & friends
+* U-Boot: watchdog will reset the system after using `wdt start [timeout]`.  
+  Watchdog is enabled but not configured for automatic servicing.
+  If needed, `CONFIG_WATCHDOG` can be activated in defconfig.
 
 ## Build Artifacts
 
