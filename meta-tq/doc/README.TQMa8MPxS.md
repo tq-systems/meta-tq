@@ -157,6 +157,9 @@ _Only mainline kernel supported_
   Therefore, the U-Boot environment variable `netdev` must be swapped to the U-Boot network device used.
   *  For U-Boot **eth0** (ethernet@30bf0000) set `netdev=eth1` (default)
   *  For U-Boot **eth1** (ethernet@30be0000) set `netdev=eth0`
+* U-Boot: watchdog will reset the system after using `wdt start [timeout]`.  
+  Watchdog is enabled but not configured for automatic servicing.
+  If needed, `CONFIG_WATCHDOG` can be activated in defconfig.
 
 ## Build Artifacts
 
