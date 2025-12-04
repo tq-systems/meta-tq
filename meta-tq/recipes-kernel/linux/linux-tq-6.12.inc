@@ -19,6 +19,7 @@ KERNEL_CONFIG_FILES:imx ?= "\
     file://features/debug.cfg \
     file://features/devicetree.cfg \
     file://features/disable-hibernate.cfg \
+    file://features/iio.cfg \
     file://features/network.cfg \
     file://features/rauc.cfg \
     file://features/spidev.cfg \
