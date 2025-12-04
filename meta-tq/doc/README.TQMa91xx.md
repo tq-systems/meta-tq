@@ -115,16 +115,19 @@ Support matrix for `MBa91xxCA` REV.010x
 
 ## Known Issues
 
-* Not all USB sticks are detected properly in U-Boot
-* Using `usb reset` in U-Boot will give a warning from Type-C port controller.
-  The USB controller is configured as device only via device tree to support
-  serial download use case.
 * NFS boot: The interface to be used for NFS boot (`netdev`) has inverted order, compared
   to u-boot and Linux. Device renaming in Linux happens after mounting rootfs.
-* U-Boot: boot from USB using `uuu` config displays misleading pinctrl / iomux warning.
-  The UDC gadget driver warns not only for faild pinmux but also when no pinmux group
-  is assigned in device tree.
-* Watchdog is not enabled by default
+* U-Boot:
+  * Not all USB sticks are detected properly.
+  * Using `usb reset` in U-Boot will give a warning from Type-C port controller.  
+    The USB controller is configured as device only via device tree to support
+    serial download use case.
+  * boot from USB using `uuu` config displays misleading pinctrl / iomux warning.  
+    The UDC gadget driver warns not only for failed pinmux but also when no pinmux group
+    is assigned in device tree.
+  * watchdog will reset the system after using `wdt start [timeout]`.  
+    Watchdog is enabled but not configured for automatic servicing.
+    If needed, `CONFIG_WATCHDOG` can be activated in defconfig.
 
 ## Build Artifacts
 
