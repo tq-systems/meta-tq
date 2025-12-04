@@ -143,10 +143,8 @@ _Only mainline kernel supported_
   * peripheral mode not supported (hardware limitation on SoM, connected to Hub)
   * USB 3.0 devices are known to cause over-current condition
 * USB Bluetooth:
-  * Some adapters cause the following error during bootup
-
-    `Bluetooth: hci0: unexpected event for opcode 0xfc2f`
-
+  * Some adapters cause the following error during bootup  
+    `Bluetooth: hci0: unexpected event for opcode 0xfc2f`  
     According to https://lkml.org/lkml/2019/6/6/868 this can be ignored
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle[-nxp]`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
