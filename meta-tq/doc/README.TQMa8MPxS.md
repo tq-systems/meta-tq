@@ -158,6 +158,11 @@ _Only mainline kernel supported_
 * U-Boot: watchdog will reset the system after using `wdt start [timeout]`.  
   Watchdog is enabled but not configured for automatic servicing.
   If needed, `CONFIG_WATCHDOG` can be activated in defconfig.
+* U-Boot: not booting when building with secure boot enabled. With updating to NXP base v2024.04
+  the size of SPL is larger than with older versions. This requires to build with only one
+  RAM configuration enabled. As example on how to add this for TQMa8MPxS, see `TQMA8MPXL_RAM_SINGLE_2GB`
+  as example for TQMa8MPxL and use it instead of `TQMA8MPXS_RAM_MULTI`
+  in U-Boot defconfig. Other config settings can easily be added.
 
 ## Build Artifacts
 
