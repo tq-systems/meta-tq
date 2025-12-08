@@ -18,9 +18,19 @@ ALSA_RDEPENDS = "\
     alsa-utils-speakertest \
 "
 
+BENCHMARK_TOOLS = "\
+    coremark \
+    dhrystone \
+    mbw \
+    pmbw \
+    sysbench \
+    whetstone \
+"
+
 RDEPENDS:${PN} = "\
     ${@bb.utils.contains('COMBINED_FEATURES', 'alsa', ' ${ALSA_RDEPENDS}', '', d)} \
     atop \
+    ${BENCHMARK_TOOLS} \
     bmaptool \
     dool \
     evtest \
