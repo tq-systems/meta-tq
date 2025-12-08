@@ -15,7 +15,7 @@ bootloader and Linux kernel.
 
 ## Supported machine configurations
 
-See top level README.md for configurations usable as MACHINE.
+See top level [README](../README.md) for configurations usable as MACHINE.
 
 ## Supported Features
 
@@ -105,9 +105,7 @@ See top level README.md for configurations usable as MACHINE.
 | examples running from TCM             |           |
 | use UART as debug console             |           |
 
-**TODO or not tested with new BSP**
-
-## Known Issues
+## Known Issues / Limitations
 
 * Following GPIOs are not accessible from Cortex-A (only from SM):
   * GPIO7
@@ -122,7 +120,8 @@ See top level README.md for configurations usable as MACHINE.
   * USB host is not supported with serial download mode, USB0 controller is routed to X4 in this mode
   * USB dual role port on X4 via USB1 is not supported with serial download mode, USB1 controller is disabled in this mode
   * Serial download mode needs S3:4 set to on, automatic fallback does not work
-* Boot from SPI-NOR is currently unsupported
+* Boot from SPI-NOR is currently unsupported (needs redesign)
+* Currently no separate boot image for serial download
 
 ## Artifacts
 
@@ -143,7 +142,7 @@ Artifacs can be found at the usual locations for bitbake:
 
 _Note:_
 
-* DIP S3 is for Boot Mode.
+* DIP S3 (MB-SMARC-2) is for `BOOT\_MODE`.
 
 ### SD Card
 
@@ -152,7 +151,7 @@ _Note:_
 | ON      |   | x | x |   |
 | OFF     | x |   |   | x |
 
-### e-MMC
+### eMMC
 
 | DIP S3  | 1 | 2 | 3 | 4 |
 | ------- | - | - | - | - |
@@ -175,7 +174,7 @@ _Note:_
 
 ## Boot device initialisation and update
 
-See [here](./README.imx-arm64.BootMedia.md) for detailed information how to write a
+See [here](./README.imx.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
 
 ## Use UUU Tool
