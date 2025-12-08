@@ -309,6 +309,10 @@ In U-Boot the following update scripts are available to update the components:
 
 See [U-Boot environment tools](README.libubootenv.md).
 
+### PREEMPT-RT / Realtime support
+
+For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
+
 ## Support Wiki
 
 See [TQ Embedded Wiki for TQMLS10xxA](https://support.tq-group.com/en/layerscape/tqmls10xxa)

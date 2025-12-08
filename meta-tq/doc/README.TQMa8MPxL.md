@@ -229,10 +229,8 @@ See top level [README](../README.md) for configurations usable as MACHINE.
     �esetting ...
     ```
 * USB Bluetooth:
-  * Some adapters cause the following error during bootup
-
-    `Bluetooth: hci0: unexpected event for opcode 0xfc2f`
-
+  * Some adapters cause the following error during bootup  
+    `Bluetooth: hci0: unexpected event for opcode 0xfc2f`  
     According to https://lkml.org/lkml/2019/6/6/868 this can be ignored
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle[-nxp]`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
@@ -247,6 +245,9 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * When using HDMI the default audio device changes to HDMI output.
   For using I2S audio codec `aplay` requires the parameter `-Dsysdefault:CARD=tqmtlv320aic32`
 * The HDMI audio device has to be selected explicitely by passing `-Dsysdefault:CARD=audiohdmi` to `aplay` & friends
+* U-Boot: watchdog will reset the system after using `wdt start [timeout]`.  
+  Watchdog is enabled but not configured for automatic servicing.
+  If needed, `CONFIG_WATCHDOG` can be activated in defconfig.
 
 ## Build Artifacts
 
@@ -276,7 +277,7 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 * imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / eMMC
 * imx-boot-${MACHINE}-sd.bin-flash\_evk\_flexspi: boot stream for FlexSPI
-* imx-boot-${MACHINE}-uuu.bin-flash\_evk\_uboot:  boot stream for UUU
+* imx-boot-${MACHINE}-uuu.bin-flash\_spl\_uboot:  boot stream for UUU
 * imx-boot-${MACHINE}-ecc.bin-flash\_spl\_uboot: boot stream with inline ECC for SD / eMMC
 * imx-boot-${MACHINE}-ecc.bin-flash\_evk\_flexspi: boot stream with inline ECC for FlexSPI
 * hello\_world.bin (Cortex M7 demo, UART3, TCM)
@@ -529,6 +530,10 @@ cat /sys/devices/system/edac/mc/mc0/ue_count
 ### Access U-Boot environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
+
+### PREEMPT-RT / Realtime support
+
+For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
 
 ## Support Wiki
 

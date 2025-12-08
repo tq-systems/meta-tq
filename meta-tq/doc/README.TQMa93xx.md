@@ -147,28 +147,35 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 * DVFS is not supported using cpu-freq framework. See [here](#frequency-scaling)
   on how to use frequency scaling
 * Ethernet device order is defined by DT aliases. Linux and bootloader DT need to match
-* In NXP releases, the G2D driver for PXP needs access to `root`-only devices. Thus `weston` needs to be started as `root`
+* CPU mask 1.0 and older is not longer supported. No up to date firmare available from NXP.
 
 ## Known Issues
 
-* CPU mask 1.0 and older print an error when loading driver for secure enclave driver. Driver loads successful
-  but the system may lack secure boot features.
-* Not all USB sticks are detected properly in U-Boot
-* Using `usb reset` in U-Boot will give a warning from Type-C port controller.
+* NFS boot: The interface to be used for NFS boot (`netdev`) has inverted order, compared
+  to u-boot and Linux. Device renaming in Linux happens after mounting rootfs.
+* U-Boot:
+  * Not all USB sticks are detected properly.
+  * Using `usb reset` in U-Boot will give a warning from Type-C port controller.  
+    The USB controller is configured as device only via device tree to support
+    serial download use case.
+  * boot from USB using `uuu` config displays misleading pinctrl / iomux warning.  
+    The UDC gadget driver warns not only for faild pinmux but also when no pinmux group
+    is assigned in device tree.
+  * watchdog will reset the system after using `wdt start [timeout]`.  
+    Watchdog is enabled but not configured for automatic servicing.
+    If needed, `CONFIG_WATCHDOG` can be activated in defconfig.
 * eth1 does not work after suspend, needs `ip link set down/up dev eth1` to be functional
 * When using `i2c probe` command in U-Boot all valid addresses respond instead of addresses
   used by a physical connected device.
-* NFS boot: The interface to be used for NFS boot (`netdev`) has inverted order, compared
-  to u-boot and Linux. Device renaming in Linux happens after mounting rootfs.
 * Suspend/Resume
   * When resuming using wakeup GPIO the following error can occur:
     `pca953x 2-0070: failed reading register`. The (wakeup) IRQ handler is executed before the expander
     has been resumed. This message can be ignored.
-* When using the parallel display on MBa91xxCA the system might deadlock during boot
 * The NPU driver `ethosu` assumes the Cortex-M33 is not running. Starting Cortex-M33 from e.g. u-boot
   or using remoteproc is not supported by `ethosu` driver. The driver is not working with `linux-imx-tq`
   based on NXP `lf-6.6.52-2.2.0` release. Switching back to old release is posible with following
-  changes in `linux-imx-tq_6.6.bb` recipe.
+  changes in `linux-imx-tq_6.6.bb` recipe:
+
 ```
 KBRANCH:tqma93xx = "TQMa-fslc-6.6-2.0.x-imx"
 SRCREV:tqma93xx = "6d8a66ee71659362646d93f2752354858c04f205"
@@ -177,8 +184,6 @@ LINUX_VERSION:tqma93xx = "${LINUX_RELEASE}.23"
 * Watchdog is not enabled by default
 * on MBa93xxLA-MINI the QSPI pins are used for SDIO
   If a module with QSPI is required, a specially adapted mainboard devicetree must be created.
-
-
 
 ## MBa91 differences
 
@@ -349,6 +354,10 @@ In order to set the older firmware, add the following line to `conf/local.conf`:
 ```
 IMX_SOC_REV = "A0"
 ```
+
+### PREEMPT-RT / Realtime support
+
+For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
 
 ## Support Wiki
 

@@ -298,6 +298,8 @@ Version information:
   (see `LINUX_VERSION` in `linux-tq_6.12.bb` for exact release)
 * Supports Preempt-RT
 
+For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
+
 #### Kernel 6.12 stable-rt
 
 Supported SOM families

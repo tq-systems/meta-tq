@@ -21,7 +21,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 ### U-Boot
 
 | Feature                                   |  REV.010x   |
-|:------------------------------------------|:-----------:|
+| :---------------------------------------- | :---------: |
 | RAM configs                               | 1,2,4,8 GiB |
 | CPU variants                              |  i.MX8MPQ   |
 | Fuses / OCRAM                             |      x      |
@@ -59,8 +59,10 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ### Linux
 
-| Feature                                                      |    6.12.y   |
-|:-------------------------------------------------------------| :---------: |
+_Only mainline kernel supported_
+
+| Feature                                                      |   6.12.y    |
+| :----------------------------------------------------------- | :---------: |
 | RAM configs                                                  | 1,2,4,8 GiB |
 | CPU variants                                                 |  i.MX8MPQ   |
 | Fuses / OCRAM                                                |      x      |
@@ -70,12 +72,12 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | SER1 on UART3 (console, X20)                                 |      x      |
 | SER2 on UART2 (X25)                                          |      x      |
 | SER3 on UART4 (X40)                                          |      x      |
-| **I2C**                                                      |      x      |
+| **I2C**                                                      |             |
 | EEPROMs                                                      |      x      |
 | PMIC                                                         |      x      |
 | RTC                                                          |      x      |
 | Temperature Sensors                                          |      x      |
-| **ENET**                                                     |      x      |
+| **ENET**                                                     |             |
 | GBE0 (X11)                                                   |      x      |
 | GBE1 (X10)                                                   |      x      |
 | **USB**                                                      |             |
@@ -96,7 +98,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | DisplayPort using MIPI-DSI Bridge (X5)                       |      x      |
 | **Audio**                                                    |             |
 | HDMI                                                         |             |
-| Codec (Line IN / Line OUT)                                   |      x      |
+| Codec (Line IN / Line OUT / MIC)                             |      x      |
 | **PCIe**                                                     |             |
 | wireless card at M.2 (X44)                                   |      x      |
 | **CAN-FD**                                                   |             |
@@ -114,6 +116,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 * I²C interface of PCIe Clock generator not tested
 * HDMI Audio
+* Sleep modes
 
 ## Known Issues / Limitations
 
@@ -140,39 +143,45 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   * peripheral mode not supported (hardware limitation on SoM, connected to Hub)
   * USB 3.0 devices are known to cause over-current condition
 * USB Bluetooth:
-  * Some adapters cause the following error during bootup
-
-    `Bluetooth: hci0: unexpected event for opcode 0xfc2f`
-
+  * Some adapters cause the following error during bootup  
+    `Bluetooth: hci0: unexpected event for opcode 0xfc2f`  
     According to https://lkml.org/lkml/2019/6/6/868 this can be ignored
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle[-nxp]`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
   `UBI_MAX_LEB_COUNT` on machine level.
-* Kernel based on linux-tq / linux-rt-tq
-  * Suspend & resume not supported (yet)
-* no support for vendor kernel and BSP
 * SER2's RTS and CTS signals are controlled by GPIO only
 * LVDS
   * Display AUO G185HAN01 not tested on regular base
+* Sleep modes: Wake-up doesn't work.
+* NFS boot: The order of network devices is swapped during Linux boot.
+  Therefore, the U-Boot environment variable `netdev` must be swapped to the U-Boot network device used.
+  *  For U-Boot **eth0** (ethernet@30bf0000) set `netdev=eth1` (default)
+  *  For U-Boot **eth1** (ethernet@30be0000) set `netdev=eth0`
+* U-Boot: watchdog will reset the system after using `wdt start [timeout]`.  
+  Watchdog is enabled but not configured for automatic servicing.
+  If needed, `CONFIG_WATCHDOG` can be activated in defconfig.
 
 ## Build Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
-* \*.dtb: device tree blobs
-  * imx8mp-tqma8mpqs-mb-smarc-2.dtb
-  * imx8mp-tqma8mpqs-mb-smarc-2-lvds0-tm070jvhg33.dtb (LVDS display TIANMA TM070JVHG33 on LVDS0, X46, X48)
-  * imx8mp-tqma8mpqs-mb-smarc-2-lvds1-tm070jvhg33.dtb (LVDS display TIANMA TM070JVHG33 on LVDS1, X46, X48)
+| device tree name                                  | description                                        |
+| ------------------------------------------------- | -------------------------------------------------- |
+| imx8mp-tqma8mpqs-mb-smarc-2.dtb                   | (default)                                          |
+| imx8mp-tqma8mpqs-mb-smarc-2-lvds0-tm070jvhg33.dtb | LVDS display TIANMA TM070JVHG33 on LVDS0, X46, X48 |
+| imx8mp-tqma8mpqs-mb-smarc-2-lvds1-tm070jvhg33.dtb | LVDS display TIANMA TM070JVHG33 on LVDS1, X46, X48 |
 
-* Image: Linux kernel image
-* \*.wic[.<compress>]: SD / eMMC system image
-* \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
-* \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
-* imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot: boot stream for SD / eMMC
-* imx-boot-${MACHINE}-sd.bin-flash\_evk\_flexspi: boot stream for FlexSPI
-* imx-boot-${MACHINE}-uuu.bin-flash\_evk\_uboot: boot stream for UUU
+| Image name                                        | description                                   |
+| ------------------------------------------------- | --------------------------------------------- |
+| Image                                             | Linux kernel image                            |
+| \*.wic[.<compress>]                               | SD / eMMC system image                        |
+| \*.rootfs.tar.gz                                  | RootFS archive (NFS root etc.)                |
+| \*.rootfs.ubifs                                   | UBIFS rootfs (incl. kernel and device trees)  |
+| \*.rootfs.ubi                                     | UBI image containing UBIFS rootfs for SPI-NOR |
+| imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot      | boot stream for SD / eMMC                     |
+| imx-boot-${MACHINE}-sd.bin-flash\_evk\_flexspi    | boot stream for FlexSPI                       |
+| imx-boot-${MACHINE}-uuu.bin-flash\_spl\_uboot     | boot stream for UUU                           |
 
 ## Boot DIP Switches
 
@@ -180,31 +189,31 @@ BOOT\_MODE can be configured using DIP switch S3 on MB-SMARC-2.
 
 ### SD Card
 
-| DIP S3  | 1 | 2 | 3 | 4 |
-| ------- | - | - | - | - |
-| ON      |   | x | x |   |
-| OFF     | x |   |   | x |
+| DIP S3 |   1   |   2   |   3   |   4   |
+| ------ | :---: | :---: | :---: | :---: |
+| ON     |       |   x   |   x   |       |
+| OFF    |   x   |       |       |   x   |
 
 ### eMMC
 
-| DIP S3  | 1 | 2 | 3 | 4 |
-| ------- | - | - | - | - |
-| ON      | x |   |   |   |
-| OFF     |   | x | x | x |
+| DIP S3 |   1   |   2   |   3   |   4   |
+| ------ | :---: | :---: | :---: | :---: |
+| ON     |   x   |       |       |       |
+| OFF    |       |   x   |   x   |   x   |
 
 ### FLEXSPI
 
-| DIP S3  | 1 | 2 | 3 | 4 |
-| ------- | - | - | - | - |
-| ON      | x | x |   |   |
-| OFF     |   |   | x | x |
+| DIP S3 |   1   |   2   |   3   |   4   |
+| ------ | :---: | :---: | :---: | :---: |
+| ON     |   x   |   x   |       |       |
+| OFF    |       |       |   x   |   x   |
 
 ### Serial Downloader
 
-| DIP S3  | 1 | 2 | 3 | 4 |
-| ------- | - | - | - | - |
-| ON      |   |   |   | x |
-| OFF     | x | x | x |   |
+| DIP S3 |   1   |   2   |   3   |   4   |
+| ------ | :---: | :---: | :---: | :---: |
+| ON     |       |       |       |   x   |
+| OFF    |   x   |   x   |   x   |       |
 
 ## Boot device initialisation and update
 
@@ -237,16 +246,19 @@ HDMI and DP support are enabled by default. Additionally LVDS display can be ena
 using the corresponding device tree. To allow reusage, the support for each display
 is separated in a dtsi fragment.
 
-| Interface       | Device tree                                       | Type               |
-|-----------------|---------------------------------------------------|--------------------|
-| HDMI + DP       | imx8mp-tqma8mpqs-mb-smarc-2.dtb                   | compatible monitor |
-| LVDS0           | imx8mp-tqma8mpqs-mb-smarc-2-lvds0-tm070jvhg33.dtb | Tianma TM070JVHG33 |
-| LVDS1           | imx8mp-tqma8mpqs-mb-smarc-2-lvds1-tm070jvhg33.dtb | Tianma TM070JVHG33 |
-| LVDS0, dual     | imx8mp-tqma8mpqs-mb-smarc-2-lvds-g133han01.dtb    | AUO G133HAN.01     |
-| LVDS0, dual     | mimx8mp-tqma8mpqs-b-smarc-2-lvds-g185han01.dtb    | AUO G185HAN.01     |
+| Interface   | Device tree                                       | Type               |
+| :---------- | :------------------------------------------------ | :----------------- |
+| HDMI + DP   | imx8mp-tqma8mpqs-mb-smarc-2.dtb                   | compatible monitor |
+| LVDS0       | imx8mp-tqma8mpqs-mb-smarc-2-lvds0-tm070jvhg33.dtb | Tianma TM070JVHG33 |
+| LVDS0, dual | imx8mp-tqma8mpqs-mb-smarc-2-lvds-g133han01.dtb    | AUO G133HAN.01     |
+| LVDS0, dual | imx8mp-tqma8mpqs-mb-smarc-2-lvds-g185han01.dtb    | AUO G185HAN.01     |
+| LVDS1       | imx8mp-tqma8mpqs-mb-smarc-2-lvds1-tm070jvhg33.dtb | Tianma TM070JVHG33 |
 
 *Note*: `weston` by default uses the DRI device with highest number. This is usually Display Port.
 To explicitely select a DRI device, please refer to `--drm-device` argument during startup.
+
+Please note manual for backlight power supply. For MB-SMARC-2 you can bridge
+X14 pin 1 and 2 to provide 12V.
 
 ### CAN
 
@@ -254,10 +266,10 @@ To explicitely select a DRI device, please refer to `--drm-device` argument duri
 
 In case of problems first check the bus termination:
 
-| Interface | Connector | DIP |
-| --------- | --------- | --- |
-| CAN0      | X29       |  S4 |
-| CAN1      | X30       |  S4 |
+| Interface | Connector |  DIP  |
+| :-------- | :-------- | :---: |
+| CAN0      | X29       |  S4   |
+| CAN1      | X30       |  S4   |
 
 See [here](./README.CAN.md) for details about configurating of CAN interfaces.
 
@@ -265,7 +277,8 @@ See [here](./README.CAN.md) for details about configurating of CAN interfaces.
   For that reason CAN-FD is disabled by default. While technically possible using CAN-FD with 1MBit/s, the non-datarate
   has to be lowered accordingly.
 
-  When CAN-FD is enabled, the non-datarate needs to be lower than the datarate. The Linux kernel will emit a warning if it is deemed the `brp` setting do not match.
+  When CAN-FD is enabled, the non-datarate needs to be lower than the datarate.
+  The Linux kernel will emit a warning if it is deemed the `brp` setting do not match.
 
 ### High Assurance Boot (Secure Boot)
 
@@ -274,6 +287,10 @@ See [i.MX High Assurance Boot](README.Verified-Boot.md).
 ### Access U-Boot environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
+
+### PREEMPT-RT / Realtime support
+
+For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
 
 ## Support Wiki
 

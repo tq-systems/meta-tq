@@ -17,12 +17,12 @@ This README contains some useful information for using Linux Preempt-RT
 | TQMa8MxNL  |     x  1) |    x     |            |
 | TQMa8MPxL  |     x  1) |    x     |    x       |
 | TQMa93xx   |           |          |    x       |
-| TQMLS10xxA |     x     |          |            |
-| TQMLX2160A |     x     |          |            |
+| TQMLS10xxA |     x  1) |          |    x       |
+| TQMLX2160A |     x  1) |          |    x       |
 
 Notes:
 
-* **1):** if `linux-rt-6.1` is needed, prefer `kirkstone` branch
+* **1):** if `linux-rt-6.1` is needed, use `kirkstone` branch
 
 # Usage
 
@@ -51,7 +51,6 @@ testing / meassuring RT features. These are based on the regular `tq-image-gener
 Once booted to check that an RT patched kernel is used a simple test is
 ```
 $ uname -a
-Linux tqma7x-512mb-mba7 5.15.27-tq+ga6a8aed2ddcc-rt35 #1 SMP PREEMPT_RT Fri Mar 11 08:42:34 UTC 2022 armv7l armv7l armv7l GNU/Linux
 ```
 
 The output `PREEMPT_RT` indicates that Preempt-RT is enabled.

@@ -103,23 +103,25 @@ case of overheating.
 * SPI: XSPI mode might get stuck
 * CAN-FD: possible CAN (data) bitrates combinations are limited due to platform clock
 * USB DR (X5) does not support SuperSpeed (CPU limitation for cable detection with ID-pin)
+* Wake up using GPIO buttons does not work
+* QSPI boot does not work
+* PCIe device causes timeout for L2 entry preventing suspend
+* u-boot: boot script don't load files from UBIFS
 
 ## Artifacts
 
 Artifacs can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 * `atf/`
-  * 1 GiB
-    * `bl2_flexspi_nor.pbl` Primary Boot Loader with RCW
-    * `bl2_auto.pbl` Primary Boot Loader with RCW for SD/eMMC boot
-    * `fip_uboot.bin` Firmware Image Package for BL3 (TF-A as BL31
-       and U-Boot as BL33 non secure payload)
-  * 2/4/8 GiB
-    * `bl2_flexspi_nor_tqmls1028a_<size>gb.pbl` Primary Boot Loader with RCW
-    * `bl2_auto_tqmls1028a_<size>gb.pbl` Primary Boot Loader with RCW for SD/eMMC boot
-    * `fip_uboot_tqmls1028a_<size>gb.bin` Firmware Image Package for BL3 (TF-A as BL31
-       and U-Boot as BL33 non secure payload)
-    * `atf/variants/`: different Primary Boot Loader variants built with RCW binaries form `rcw/`
+  * `bl2_flexspi_nor.pbl` Primary Boot Loader with RCW (1 GiB)
+  * `bl2_auto.pbl` Primary Boot Loader with RCW for SD/eMMC boot (1 GiB)
+  * `fip_uboot.bin` Firmware Image Package for BL3 (TF-A as BL31
+     and U-Boot as BL33 non secure payload) (1 GiB)
+  * `bl2_flexspi_nor_tqmls1028a_<size>gb.pbl` Primary Boot Loader with RCW (2/4/8 GiB)
+  * `bl2_auto_tqmls1028a_<size>gb.pbl` Primary Boot Loader with RCW for SD/eMMC boot (2/4/8 GiB)
+  * `fip_uboot_tqmls1028a_<size>gb.bin` Firmware Image Package for BL3 (TF-A as BL31
+     and U-Boot as BL33 non secure payload) (2/4/8 GiB)
+  * `atf/variants/`: different Primary Boot Loader variants built with RCW binaries form `rcw/`
 * `rcw/`: different RCW configuration binaries
 * `fsl-ls1028a-tqmls1028a-mbls1028a.dtb`: device tree blob for mbls1028a board
 * `fsl-ls1028a-tqmls1028a-mbls1028a-ind.dtb`: device tree blob for mbls1028a-ind board
@@ -205,6 +207,18 @@ DIP S10 allows switching of signals:
 | S10-2   | UART2 to Mikro-Module | UART2 to Baseboard X38 Pin 15/17      |
 | S10-3   | SPI3 to Mikro-Module  | SPI3 to Baseboard X25 Pin 38/40/42/44 |
 | S10-4   | Fan on X37 active     | Fan on X37 not active                 |
+
+## Boot Media
+
+### Update Scripts
+
+In U-Boot the following update scripts are available to update the components:
+* RCW/PBL (use `*.pbl` file ):
+  * `update_pbl_mmc`
+  * `update_pbl_spi`
+* TF-A / U-Boot (use FIP Firmware Image Package):
+  * `update_uboot_mmc`
+  * `update_uboot_spi`
 
 ## Support Wiki
 

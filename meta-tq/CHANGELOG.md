@@ -138,9 +138,23 @@ Releases are named with the following scheme:
 * alsa-state: enable IN3_L / Left Mixer input path (prepare MicIn support) for
   i.MX base SoM
 * layer.conf: add LAYERRECOMMENDS
+* doc:
+  * Added known issues for TQMa1012AL, TQMLS102xA, TQMLS1028A
+  * Added feature matrix for TQMa1012AL, TQMLS102xA
+  * various improvements
 
 ### Fixed
 
+* TQMa62xx[L]/TQMa64xxL/TQMa67xx[L]: Fix MAC address assignments
+
+  On each of these modules, two addresses more than intended (and reserved
+  for the module) were assigned to `ethXaddr` variables in U-Boot.
+
+  This issue is a regression in the new U-Boot version added in
+  scarthgap.TQ.ARM.BSP.0005.
+* TQMLS102xA: Enable missing Linux drivers
+* TQMLS10xxA: Fix UBIFS rootfs partition selection
+* linux-tq-6.12: TQMLX2106A: Fix creation of multiple DPAA2 DPSW objects
 * u-boot-tq-2023.04: TQMa6x:
 
   Add errata workarounds for KSZ9031 ethernet phy to improve reliability of
