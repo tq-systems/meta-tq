@@ -29,6 +29,7 @@ RDEPENDS:${PN} = "\
     htop \
     iotop \
     libiio-tests \
+    linux-serial-test \
     mc \
     memtester \
     nano \
