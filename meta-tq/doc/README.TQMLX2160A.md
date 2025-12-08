@@ -272,51 +272,59 @@ like the Linux kernel.
 
 ## Ethernet and DPAA2
 
-### RCW - SerDes Configuration
+Ethernet depends on the DPAA2 Management-Complex firmware, which is automatically loaded by U-Boot
+during network initization by running the `mcinitcmd` command from the environment.
 
-The RCW Configuration specifies the Ethernet Configuration.
-The currently available serdes configurations are (naming scheme `<Serdes1>_<Serdes2>_<Serdes3>`):
+Not all Ethernet interfaces can be enabled at the same time; which interfaces are available depends
+on the selected [SerDes Configuration](#serdes-configuration). To be usable on Linux, the available
+interfaces need to be enabled either in a DPL (Data Path Layout) file loaded by U-Boot or configured
+at runtime using the `ls-*` and `restool` commands.
 
-* 0_0_0
-* 12_7_3
-* 12_8_3
-* 12_11_3
-* 14_7_2
-* 14_7_3
-* 14_8_2
-* 14_8_3
-* 14_11_2
-* 14_11_3
+A few useful commands are described in the following table:
 
-To add another configuration the rcw sources have to be modified.
-To use a specific Serdes Configuration on build-time for the boot firmware image
-use the `rcw` variable to specify the configuration to use.
+| Command                                           | Description                                                 |
+| ------------------------------------------------- | ----------------------------------------------------------- |
+| `ls-listni`                                       | Show configured interfaces                                  |
+| `ls-listmac`                                      | Show MACs                                                   |
+| `ls-addni dpmac.<mac-nr>`                         | Add Interface with MAC                                      |
+| `restool dpmac info dpmac.<mac-nr>`               | Display detailed information about MAC                      |
+| `restool dpmac create --mac-id=<mac-nr>`          | Create MAC                                                  |
+| `restool dprc generate-dpl dprc.1 > <my_dpl>.dts` | Generate a dpl file (as dts) from the current configuration |
+| `dtc -I dts -O dtb <my_dpl>.dts -o <my_dpl>.dtb`  | Generate a dtb file from the dts file                       |
 
-### Ethernet in U-Boot
+The DPL file is loaded by U-Boot before starting the kernel using the command
+`fsl_mc lazyapply DPL ${addr_dpl}`. Note that the default BSP DPL file (`dpl-min.dts`) does not
+configure any Ethernet interfaces.
 
-For working ethernet the DPAA2 firmware has to be loaded in U-Boot. It needs the DPC file when loaded.
-The command `fsl_mc start mc ${addr_mc} ${addr_dpc}` loads the firmware with the DPC file.
+### DPL configuration example
 
-For Ethernet in Linux additionaly a Data-Path-Layout file (DPL) has to be loaded before starting the kernel.
-This is done with the command `fsl_mc lazyapply DPL ${addr_dpl}`.
+This example shows how to:
 
-### Ethernet in Linux
+* create a DPL DTB with `dpmac.12`
+* store the DPL DTB in first partition of `/dev/mmcblk1`
+* use the DPL DTB from U-Boot
 
-The ethernet configuration in Linux is determined by the DPL file. In the BSP a basic setup is configured in the dpl-min.dts file.
-With the restool command a more specific setup can be configured.
+Linux
+```bash
+ls-addni dpmac.12
+restool dprc generate-dpl dprc.1 > dpl-12.dts
+dtc -I dts -O dtb dpl-12.dts -o dpl-12.dtb
+mount /dev/mmcblk1p1 /mnt/
+cp dpl-12.dtb /mnt/
+reboot
+```
 
-Some useful restool commands are:
+U-Boot
+```bash
+setenv dpl_file dpl-12.dtb
+saveenv
+boot
+```
 
-* `restool dpmac create --mac-id=<mac-nr>`: create mac.
-* `ls-addni dpmac.<mac-nr>`: Add Interface with Mac.
-* `ls-listmac`: Show current Macs
-* `ls-listni`: Show current Interfaces
-* `restool dprc generate-dpl dprc.1 > <my_dpl>.dts`: generate a dpl file from the current configuration.
-* `dtc -I dts -O dtb <my_dpl>.dts -o <my_dpl>.dtb`: To generate a dtb file of the dts file.
+### Ethernet Interfaces
 
-### Ethernet Interfaces:
+The following table shows which MAC is connected to which port depending on the interface:
 
-The following table shows which MAC is connected to which port depending on the interface.
 |  MAC  | RGMII | SGMII | XFI | CAUI4 |
 | ----- | ----- | ----- | --- | ----- |
 | MAC1  |   -   |   -   |  -  |  X29  |
@@ -329,22 +337,47 @@ The following table shows which MAC is connected to which port depending on the 
 | MAC17 | X14.A | X10.B |  -  |   -   |
 | MAC18 | X14.B | X11.A |  -  |   -   |
 
-Interfaces in U-Boot are named like this: DPMACxx@interface (e.g. DPMAC17@rgmii-id).
-Note: On MAC.17 and MAC.18 RGMII configuration takes precedence over SGMII.
+__Notes:__
 
-## Serdes Configuration
+* In U-Boot, Ethernet interfaces are named `DPMAC<xx>@<interface>` (e.g. "DPMAC17@rgmii-id")
+* On MAC.17 and MAC.18, SGMII configuration takes precedence over RGMII. The RGMII interfaces (X14)
+  are only used in SerDes confgurations that don't include SGMII.17 and SGMII.18.
+* Port names follow the schematic names; `X<nn>.A` refers to the lower and `X<nn>.B` to the upper
+  socket of a dual port connector
 
-The following tables show the supported Serdes configrations.
-For Ethernet protocols: `[Protocoll].[Mac-nr]` for PCIe: `PCIe.[Controller-Nr] x[Width]`
+## SerDes Configuration
 
-### Serdes 1
+The following tables show the supported SerDes configrations. The SerDes configuration must be
+selected using the RCW (Reset Configuration Word), which is built into the BL2 bootloader image.
+The *meta-tq* BSP provides RCWs for the following combinations of SerDes configurations
+(where *X\_Y\_Z* refers to configuration *X* on SerDes 1, *Y* on SerDes 2 and *Z* on SerDes 3):
+
+* 0\_0\_0 (disabled)
+* 12\_7\_3
+* 12\_8\_3
+* 12\_11\_3
+* 14\_7\_2
+* 14\_7\_3
+* 14\_8\_2
+* 14\_8\_3
+* 14\_11\_2
+* 14\_11\_3
+
+Each table entry in the following has the form *\[interface\].\[controller index\]*, optionally
+followed by a lane count in the case of PCIe. For Ethernet interfaces (SGMII, XFI and CAUI4), the
+controller index is equivalent to the DPAA2 MAC ID listed in the
+[Ethernet Interfaces](#ethernet-interfaces) section. See the
+[PCIe and SATA Interfaces](#pcie-and-sata-interfaces) section for information on their respective
+connectors.
+
+### SerDes 1
 
 | Lane / Config | H - 0   | G - 1   | F - 2   | E - 3   | D - 4     | C - 5     | B - 6     | A - 7     |
 | ------------- | ------- | ------- | ------- | ------- | --------- | --------- | --------- | --------- |
 | 12            | -       | -       | -       | -       | PCIe.2 x2 | PCIe.2 x2 | SGMII.9   | SGMII.10  |
 | 14            | CAUI4.1 | CAUI4.1 | CAUI4.1 | CAUI4.1 | PCIe.2 x2 | PCIe.2 x2 | PCIe.2 x2 | PCIe.2 x2 |
 
-### Serdes 2
+### SerDes 2
 
 | Lane / Config | A - 0     | B - 1    | C - 2    | D - 3    | E - 4     | F - 5    | G - 6    | H - 7    |
 | ------------- | --------- | -------- | -------- | -------- | --------- | -------- | -------- | -------- |
@@ -352,9 +385,9 @@ For Ethernet protocols: `[Protocoll].[Mac-nr]` for PCIe: `PCIe.[Controller-Nr] x
 | 8             | -         | -        | SATA.1   | SATA.2   | SATA.3    | SATA.4   | XFI.13   | XFI.14   |
 | 11            | PCIe.3 x1 | SGMII.12 | SGMII.17 | SGMII.18 | PCIe.4 x1 | SGMII.16 | SGMII.13 | SGMII.14 |
 
-### Serdes 3
+### SerDes 3
 
-| Lane / Config | A - 0     | B - 1     | C - 2     | D - 3     | E - 4     | F - 5     | G - 6     | H -   7   |
+| Lane / Config | A - 0     | B - 1     | C - 2     | D - 3     | E - 4     | F - 5     | G - 6     | H - 7     |
 | ------------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- |
 | 2             | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 |
 | 3             | PCIe.5 x4 | PCIe.5 x4 | PCIe.5 x4 | PCIe.5 x4 | PCIe.6 x4 | PCIe.6 x4 | PCIe.6 x4 | PCIe.6 x4 |
