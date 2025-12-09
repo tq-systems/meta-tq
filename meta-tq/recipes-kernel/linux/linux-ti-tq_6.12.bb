@@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 require linux-ti-tq-common.inc
 
 KBRANCH = "TQMaxx-ti-linux-6.12.y"
-SRCREV = "dfc0f13a43d2ceef19fa7af840f44dc23636e44b"
+SRCREV = "b7c77338d7c91d1d5da712847f94da82ef072218"
 # LINUX_VERSION must match version from Makefile
 LINUX_RELEASE = "6.12"
-LINUX_VERSION = "${LINUX_RELEASE}.35"
+LINUX_VERSION = "${LINUX_RELEASE}.57"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
