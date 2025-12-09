@@ -11,6 +11,7 @@ Releases are named with the following scheme:
 
 ### Added
 
+* u-boot-tq-2025.10: new recipe (supports TQMa62xx[L]/TQMa64xxL/TQMa67xx[L])
 * TQMa95xxSA: add board support for MB-SMARC-2
 * TQMa93xxLA: add board support for MBa93xxLA-MINI
 * TQMa93xxLA / TQMa93xxLA: enable LVDS for mainline linux-kernel on MBa93xxCA and MBa93xxLA
@@ -34,11 +35,21 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* TQMa62xx[L]: Add support for 1400MHz CPU frequency (in PMIC configurations with 0.85V core
+  voltage)
+* TQMa67xx[L]/MBa67xx: Add support for SoM and Starterkit revisions 02xx, drop support for
+  revisions 01xx
+
+  DisplayPort support is now enabled by default.
+* linux-ti-tq-6.12:
+  * Update to latest version of ti-linux-6.12.y (includes linux-stable up to v6.12.57 and the cc33xx
+    WLAN and Bluetooth drivers version 1.0.2.10). cc33xx-fw has been updated to 1.7.0.323 for
+    compatiblity with the new driver version.
 * doc: add MBa93xxLA-MINI
 * imx-boot-tq: simplify compile_prepare for i.MX8M / i.MX8 / i.MX8X
 
 * TQMa8Mx / TQMa8Mx[M,N]L: u-boot-imx-tq-2020.04 always run fastboot when usb boot detected in uuu capable image
-  
+
 * machines:
   * Only install `kernel-devicetree` when needed
 
@@ -142,6 +153,10 @@ Releases are named with the following scheme:
   * Added known issues for TQMa1012AL, TQMLS102xA, TQMLS1028A
   * Added feature matrix for TQMa1012AL, TQMLS102xA
   * various improvements
+
+### Removed
+
+* u-boot-tq-2025.07: TQMa62xx[L]/TQMa64xxL/TQMa67xx[L] use u-boot-tq-2025.10 now
 
 ### Fixed
 
