@@ -8,14 +8,14 @@ See also: [Common features of TQMa62xx\[L\]/TQMa64xxL/TQMa67xx\[L\]](README.TQMa
 
 ### Supported Hardware:
 
-* TQMa67A94\[L\]: Module revisions REV.010x
-* MBa67xx: Board revisions REV.010x
+* TQMa67A94\[L\]: Module revisions REV.020x
+* MBa67xx: Board revisions REV.020x
 
 ### Versions
 
 _Bootloader:_
 
-* uboot-ti-tq-2025.07 (based on U-Boot 2025.07)
+* uboot-ti-tq-2025.10 (based on U-Boot 2025.10)
 
 _Kernel:_
 
@@ -98,7 +98,8 @@ _Kernel:_
 | GPU                                                          | x           |
 | **Display**                                                  |             |
 | LVDS                                                         | x           |
-| DSI (X24: RasberryPi 7")                                     | x           |
+| DisplayPort                                                  | x           |
+| DSI (X24: RasberryPi 7"; replaces DisplayPort)               | x           |
 | **Audio**                                                    |             |
 | Analog audio (Line-out, Line-in, Microphone)                 | x           |
 | **MIPI-CSI**                                                 |             |
@@ -261,7 +262,7 @@ saveenv # Persist configuration
 
 The following labels are currently defined:
 
-| Label                        |  Display            | Camera                                             |
+| Label                        | Display             | Camera                                             |
 | ---------------------------- | ------------------- | -------------------------------------------------- |
 | default                      | none                | none                                               |
 | dsi-rpi-7inch-panel          | RaspberryPi 7"      | none                                               |
@@ -280,6 +281,10 @@ The following labels are currently defined:
 | lvds-vesa-fhd-csi2-imx219    | Generic VESA FullHD | RaspberryPi camera module with IMX219 sensor (X19) |
 | lvds-vesa-fhd-csi3-imx219    | Generic VESA FullHD | RaspberryPi camera module with IMX219 sensor (X20) |
 | spe                          | none                | none                                               |
+
+Most configurations support DisplayPort in addition to the other display options. Only the
+`dsi-rpi-7inch-panel` configuration disables the DisplayPort, as both are connected to the same
+DSI interface of the AM67x internally.
 
 Simulaneous operation of multiple cameras is possible in some combinations, but
 no labels are defined in `extlinux.conf` for such configurations at the moment.
