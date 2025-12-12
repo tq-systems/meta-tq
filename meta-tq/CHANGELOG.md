@@ -12,6 +12,7 @@ Releases are named with the following scheme:
 ### Added
 
 * u-boot-tq-2025.10: new recipe (supports TQMa62xx[L]/TQMa64xxL/TQMa67xx[L])
+* TQMa91xxCA / TQMa91xxCA: add board support for MBa93xxCA
 * TQMa95xxSA: add board support for MB-SMARC-2
 * TQMa93xxLA: add board support for MBa93xxLA-MINI
 * TQMa93xxLA / TQMa93xxLA: enable LVDS for mainline linux-kernel on MBa93xxCA and MBa93xxLA
@@ -48,7 +49,8 @@ Releases are named with the following scheme:
 * doc: add MBa93xxLA-MINI
 * imx-boot-tq: simplify compile_prepare for i.MX8M / i.MX8 / i.MX8X
 
-* TQMa8Mx / TQMa8Mx[M,N]L: u-boot-imx-tq-2020.04 always run fastboot when usb boot detected in uuu capable image
+* u-boot-imx-tq-2020.04:
+  * TQMa8Mx / TQMa8Mx[M,N]L:  always run fastboot when usb boot detected in uuu capable image
 
 * machines:
   * Only install `kernel-devicetree` when needed
@@ -65,16 +67,19 @@ Releases are named with the following scheme:
 * imx-oei-tq: update to NXP lf-6.12.20 baseline. This gives better support for
   multiple DDR configurations and is needed for new i.MX95 chip revisions.
 
-* u-boot-imx-tq: TQMa8MPxL / TQMa8MPxS
+* u-boot-imx-tq_2024.04:
+  * TQMa8MPxL / TQMa8MPxS / TQMa93xx / TQMa91xx: improve defconfigs
 
-  Disable `FASTBOOT_FSL` in uuu defconfigs. This is an NXP downstream config with
-  some bogus dependencies.
+    Remove unused commands and settings
+  * TQMa8MPxL / TQMa8MPxS: Disable `FASTBOOT_FSL` in uuu defconfigs.
+
+    This is an NXP downstream config with some bogus dependencies.
 * imx-boot-tq: TQMa8 / TQMa9
 
   Update to use NXP lf-6.12.20-2.0.0 release, needed for upcoming TQMa95xx support.
 * linux-tq-6.12: TQMa8MPxL / TQMa8MPxS / TQMa93xx / TQMLS10xxA / TQMLX2160A / TQMLS102xA
 
-  Integrate stable fixes up to tag 6.12.49
+  Integrate stable fixes up to tag 6.12.61
 
 * linux-tq-6.12: TQMa8MPxS
 
@@ -82,18 +87,27 @@ Releases are named with the following scheme:
 * linux-rt-tq-6.12: TQMa8MPxL / TQMa8MPxS / TQMa93xx / TQMLS10xxA / TQMLX2160A
 
   Integrate stable fixes up to tag v6.12.49-rt13
+* linux-imx-tq-6.6: TQMa8Mx / TQMa8MxML / TQMa8MxNL / TQMa8Xx / TQMa8XxS / TQMa8x:
+
+  Include stable fixes up to v6.6.115
 * linux-tq-6.6: TQMa6 / TQMa6UL[L]x[L] / TQMa7 / TQMa8Mx / TQMa8MxML / TQMa8MxNL:
 
-  Include stable fixes up to v6.6.108
+  Include stable fixes up to v6.6.119
 * linux-rt-tq-6.6: TQMa6 / TQMa6UL[L]x[L] / TQMa7 / TQMa8Mx / TQMa8MxML / TQMa8MxNL:
 
   Include stable fixes up to v6.6.106-rt61
 
 ### Fixed
 
-* TQMa8Mx / TQMa8Mx[M,N]L: add uuu support in u-boot-imx-tq-2020.04
+* u-boot-imx-tq_2024.04:
+  * TQMa8MPxL / TQMa8MPxS / TQMa91xx / TQMa93xx: enable cyclic watchdog service
 
-  Enables USB gadget support in u-boot devicetree and removes USB host support in favour of SDP on 8Mx[M,N]L
+    When watchdog is started but cyclic service is not configured the system will
+    reboot after timeout. Add missing defconfig.
+* u-boot-imx-tq-2020.04:
+  * TQMa8Mx / TQMa8Mx[M,N]L: fix uuu support
+
+    Enable USB gadget support in u-boot devicetree and remove USB host support in favour of SDP on 8Mx[M,N]L
 
 * TQMa8 / TQMa9: fix default WKS_FILE assignment for machines
 
