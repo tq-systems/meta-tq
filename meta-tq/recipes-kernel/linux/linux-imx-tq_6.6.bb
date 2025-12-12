@@ -37,6 +37,7 @@ SRC_URI:aarch64 = "\
     file://features/devicetree.cfg \
     file://features/network.cfg \
     file://features/rauc.cfg \
+    file://features/trusted-keys.cfg \
     file://gpio-enablement.cfg \
     file://imx8m-platform-support.cfg \
     file://imx93-platform-support.cfg \
