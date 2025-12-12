@@ -6,8 +6,8 @@ This README contains some useful information for TQMa91xxCA and TQMa91xxLA
 
 ## Variants
 
-* TQMa91xxLA REV.010x on MBa91xxCA REV.010x (1 GiB RAM)
-* TQMa91xxCA REV.010x on MBa91xxCA REV.010x (1 GiB RAM)
+* TQMa91xxCA / TQMa91xxLA (1 GiB RAM) REV.010x on MBa91xxCA REV.010x
+* TQMa91xxCA / TQMa91xxLA (1 GiB RAM) REV.010x on MBa93xxCA REV.020x
 
 ## Version information for software components
 
@@ -18,46 +18,49 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 See top level [README](../README.md) for configurations usable as MACHINE.
 
 * tqma91xx-mba91xxca
+* tqma91xx-mba93xxca
 
 ## Supported Features
 
 ### U-Boot
 
-|                    Feature                      | MBa91xxCA  REV.010x |
-| :---------------------------------------------: | :-----------------: |
-|                  RAM configs                    |        1 GiB        |
-|                 CPU variants                    |       i.MX91        |
-|                 Fuses / OCRAM                   |          x          |
-|   speed grade / temperature grade detection     |          x          |
-|            UART (console on UART1)              |          x          |
-|                   **GPIO**                      |                     |
-|                      LED                        |          x          |
-|                    Button                       |          x          |
-|                    **I2C**                      |                     |
-|             system EEPROM parsing               |          x          |
-|                     PMIC                        |          x          |
-|                **eMMC / SD**                    |                     |
-|                     Read                        |          x          |
-|                     Write                       |          x          |
-|                 **Ethernet**                    |                     |
-|        GigE / FEC via Phy on MBa91xxCA          |          x          |
-|       GigE / EQOS via Phy on MBa91xxCA          |          x          |
-|                **Bootdevices**                  |                     |
-|               SD-Card on USDHC2                 |          x          |
-|                eMMC on USDHC1                   |          x          |
-|              QSPI-NOR on FlexSPI                |          x          |
-|               Serial Downloader                 |          x          |
-|                    **USB**                      |                     |
-|              USB 2.0 Host / Hub                 |          x          |
-|     USB DRD (USB 2.0 Cable Detect, VBUS)        |          x          |
-| (configured as device to be usable with UUU )   |                     |
-|                 **QSPI NOR**                    |                     |
-|              Read with 1-1-4 SDR                |          x          |
-|           PP / Erase with 1-1-4 SDR             |          x          |
+Support matrix for `MBa91xxCA` REV.010x / `MBa93xxCA` REV.020x
+
+|                    Feature                      | u-boot-imx-tq_2024.04 |
+| :---------------------------------------------: | :-------------------: |
+|                  RAM configs                    |        1 GiB          |
+|                 CPU variants                    |        i.MX91         |
+|                 Fuses / OCRAM                   |          x            |
+|   speed grade / temperature grade detection     |          x            |
+|            UART (console on UART1)              |          x            |
+|                   **GPIO**                      |                       |
+|                      LED                        |          x            |
+|                    Button                       |          x            |
+|                    **I2C**                      |                       |
+|             system EEPROM parsing               |          x            |
+|                     PMIC                        |          x            |
+|                **eMMC / SD**                    |                       |
+|                     Read                        |          x            |
+|                     Write                       |          x            |
+|                 **Ethernet**                    |                       |
+|        GigE / FEC via Phy on MBa91xxCA          |          x            |
+|       GigE / EQOS via Phy on MBa91xxCA          |          x            |
+|                **Bootdevices**                  |                       |
+|               SD-Card on USDHC2                 |          x            |
+|                eMMC on USDHC1                   |          x            |
+|              QSPI-NOR on FlexSPI                |          x            |
+|               Serial Downloader                 |          x            |
+|                    **USB**                      |                       |
+|              USB 2.0 Host / Hub                 |          x            |
+|     USB DRD (USB 2.0 Cable Detect, VBUS)        |          x            |
+| (configured as device to be usable with UUU )   |                       |
+|                 **QSPI NOR**                    |                       |
+|              Read with 1-1-4 SDR                |          x            |
+|           PP / Erase with 1-1-4 SDR             |          x            |
 
 ### Linux
 
-Support matrix for `MBa91xxCA` REV.010x
+Support matrix for `MBa91xxCA` REV.010x / `MBa93xxCA` REV.020x
 
 
 |                   Feature                     | linux-imx-tq_6.6   |
@@ -80,8 +83,8 @@ Support matrix for `MBa91xxCA` REV.010x
 |               IMU / Gyroscope                 |        x           |
 |                Port expander                  |        x           |
 |                  **ENET**                     |                    |
-|       GigE / FEC via Phy on MBa91xxCA         |        x           |
-|      GigE / EQOS via Phy on MBa91xxCA         |        x           |
+|       GigE / FEC via Phy on MBa9[1,3]xxCA     |        x           |
+|      GigE / EQOS via Phy on MBa9[1,3]xxCA     |        x           |
 |                   **USB**                     |                    |
 |             USB 2.0 Host / Hub                |        x           |
 |    USB DRD (USB 2.0 Cable Detect, VBUS)       |        x           |
@@ -90,7 +93,7 @@ Support matrix for `MBa91xxCA` REV.010x
 |             Read with 1-4-4 SDR               |                    |
 |          PP / Erase with 1-1-4 SDR            |                    |
 |          PP / Erase with 1-4-4 SDR            |                    |
-|                 **Display**                   |                    |
+|          **Display (MBa91xxCA only)**         |                    |
 |               LVDS via Bridge                 |        x           |
 |                  DPI / RGB                    |        x           |
 |                 **CAN-FD**                    |                    |
@@ -147,7 +150,7 @@ Artifacs can be found at the usual locations for bitbake:
 
 ## Boot DIP Switches
 
-BOOT\_MODE can be configured using DIP switch S1.
+BOOT\_MODE can be configured using DIP switch S1 on mainboard.
 
 | Bootmode | Description           | S1-4 | S1-3 | S1-2 | S1-1 |
 | :------: | :-------------------: | :--: | :--: | :--: | :--: |
@@ -188,7 +191,7 @@ See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RT
 
 **Note**: On this platform `rtc0` is the I2C RTC on SoM and `rtc1` is the RTC in CPU BBNS domain
 
-### Display Support
+### Display Support (MBa91xxCA)
 
 Each Display can be used on its own by using the corresponding device tree.
 To allow reusage, the support for each display is separated in a dtsi fragment.
