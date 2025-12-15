@@ -35,9 +35,13 @@ SRC_URI:aarch64 = "\
     file://enable-led-features.cfg \
     file://features/debug.cfg \
     file://features/devicetree.cfg \
+    file://features/iio.cfg \
     file://features/network.cfg \
+    file://features/pwm.cfg \
     file://features/rauc.cfg \
+    file://features/spidev.cfg \
     file://features/trusted-keys.cfg \
+    file://features/ubi.cfg \
     file://features/usb.cfg \
     file://gpio-enablement.cfg \
     file://imx8m-platform-support.cfg \
