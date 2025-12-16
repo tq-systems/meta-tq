@@ -27,6 +27,7 @@ KERNEL_CONFIG_FILES:imx ?= "\
     file://features/ubi.cfg \
     file://features/usb.cfg \
     file://features/pwm.cfg \
+    file://features/trusted-keys.cfg \
 "
 
 KERNEL_CONFIG_FILES:tqma335x ?= "\
