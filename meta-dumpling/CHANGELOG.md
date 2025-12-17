@@ -11,6 +11,9 @@ Releases are named with the following scheme:
 
 ### Added
 
+* packagegroup-testutils: add a set of benchmark utils
+* Add recipe for `coremark` benchmark
+* Add recipe for `pmbw`, a parallel memory bandwidth testtool
 * Added bmaptools to `packagegroup-testutils`
 
 ### Changed
