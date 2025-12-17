@@ -68,6 +68,6 @@ def imx_v8_wks_from_distro_features(d):
         if not bb.utils.contains("DISTRO_FEATURES", "secure", True, False, d):
             wks_type = "-rauc-ab"
         else:
-            bb.warn("DISTRO_FEATURES contains 'rauc' and 'secure', using WKS_FILE selected by distro feature 'secure'")
+            bb.warnonce("DISTRO_FEATURES contains 'rauc' and 'secure', using WKS_FILE selected by distro feature 'secure'")
 
     return "tqmaxx-imx-v8-sdimg" + wks_type + ".wks.in"
