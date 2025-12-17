@@ -13,9 +13,16 @@ Releases are named with the following scheme:
 
 * u-boot-tq-2025.10: new recipe (supports TQMa62xx[L]/TQMa64xxL/TQMa67xx[L])
 * TQMa91xxCA / TQMa91xxCA: add board support for MBa93xxCA
+
+  board support is available with imx / nxp flavour only and uses `linux-imx-tq-6.6`
 * TQMa95xxSA: add board support for MB-SMARC-2
+
+  This adds new versions for `u-boot-imx-rq` (based on NXP lf_v2025.04) and
+  `linux-imx-tq` (based on NXP + FSLC 6.12-2.0.x-imx)
 * TQMa93xxLA: add board support for MBa93xxLA-MINI
-* TQMa93xxLA / TQMa93xxLA: enable LVDS for mainline linux-kernel on MBa93xxCA and MBa93xxLA
+
+  board support is available with mainline flavour only and uses `linux-tq-6.12`
+* TQMa93xxCA / TQMa93xxLA: enable LVDS for mainline linux-kernel on MBa93xxCA and MBa93xxLA
 * Build fitImage kernels by default
 
   `KERNEL_IMAGETYPES` now contains `fitImage` by default on all platforms. Note
@@ -77,19 +84,21 @@ Releases are named with the following scheme:
 * imx-boot-tq: TQMa8 / TQMa9
 
   Update to use NXP lf-6.12.20-2.0.0 release, needed for upcoming TQMa95xx support.
-* linux-tq-6.12: TQMa8MPxL / TQMa8MPxS / TQMa93xx / TQMLS10xxA / TQMLX2160A / TQMLS102xA
+* linux-tq-6.12:
+  * TQMa8MPxL / TQMa8MPxS / TQMa93xx / TQMLS10xxA / TQMLX2160A / TQMLS102xA
+    * allow using truested keys from different providers: CAAM, TPM, TEE
+    * Integrate stable fixes up to tag 6.12.61
+  * TQMa8MPxS
 
-  Integrate stable fixes up to tag 6.12.61
-
-* linux-tq-6.12: TQMa8MPxS
-
-  Add Dual LVDS devicetrees (AUO G133HAN.01, AUO G185HAN.01)
+    Add Dual LVDS devicetrees (AUO G133HAN.01, AUO G185HAN.01)
 * linux-rt-tq-6.12: TQMa8MPxL / TQMa8MPxS / TQMa93xx / TQMLS10xxA / TQMLX2160A
 
   Integrate stable fixes up to tag v6.12.49-rt13
-* linux-imx-tq-6.6: TQMa8Mx / TQMa8MxML / TQMa8MxNL / TQMa8Xx / TQMa8XxS / TQMa8x:
+* linux-imx-tq-6.6:
+  * TQMa8Mx / TQMa8MxML / TQMa8MxNL / TQMa8Xx / TQMa8XxS / TQMa8x:
+    * allow using truested keys from different providers: CAAM, TPM, TEE
+    * Include stable fixes up to v6.6.119
 
-  Include stable fixes up to v6.6.115
 * linux-tq-6.6: TQMa6 / TQMa6UL[L]x[L] / TQMa7 / TQMa8Mx / TQMa8MxML / TQMa8MxNL:
 
   Include stable fixes up to v6.6.119
