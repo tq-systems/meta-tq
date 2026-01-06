@@ -124,23 +124,24 @@ compile_prepare() {
 }
 
 compile_prepare_mx8_common() {
-    if [ "$1" = "flash_linux_m4" ]; then
+    local target="$1" type="$2"
+
+    if [ "$target" = "flash_linux_m4" ]; then
         cp "${DEPLOY_DIR_IMAGE}/${M4_DEFAULT_IMAGE}"        "${BOOT_STAGING}/m4_image.bin"
     fi
     cp "${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}"          "${BOOT_STAGING}"
     cp "${DEPLOY_DIR_IMAGE}/${SC_FIRMWARE_NAME}"            "${BOOT_STAGING}/scfw_tcm.bin"
-    for type in ${UBOOT_CONFIG}; do
-        cp "${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type}" "${BOOT_STAGING}/u-boot.bin-${type}"
-        if [ -e "${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type}" ] ; then
-            cp "${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type}" \
-                                                            "${BOOT_STAGING}/u-boot-spl.bin-${type}"
-        fi
-    done
+
+    cp "${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type}" "${BOOT_STAGING}/u-boot.bin"
+    rm -f "${BOOT_STAGING}/u-boot-spl.bin"
+    if [ -e "${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type}" ] ; then
+        cp "${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type}" "${BOOT_STAGING}/u-boot-spl.bin"
+    fi
 }
 
 compile_prepare:mx8-generic-bsp() {
     bbnote '8QM boot binary build'
-    compile_prepare_mx8_common "$1"
+    compile_prepare_mx8_common "$@"
 
     if [ "$1" = "flash_linux_m4" ]; then
         cp "${DEPLOY_DIR_IMAGE}/${M4_1_DEFAULT_IMAGE}"       "${BOOT_STAGING}/m4_1_image.bin"
@@ -148,6 +149,8 @@ compile_prepare:mx8-generic-bsp() {
 }
 
 compile_prepare:mx8m-generic-bsp() {
+    local type="$2"
+
     bbnote '8MQ/8MM/8MN/8MP boot binary build'
     for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
         bbnote "Copy ddr_firmware: ${ddr_firmware} from ${DEPLOY_DIR_IMAGE} -> ${BOOT_STAGING} "
@@ -155,56 +158,41 @@ compile_prepare:mx8m-generic-bsp() {
     done
     cp "${DEPLOY_DIR_IMAGE}/signed_dp_imx8m.bin"             "${BOOT_STAGING}"
     cp "${DEPLOY_DIR_IMAGE}/signed_hdmi_imx8m.bin"           "${BOOT_STAGING}"
-    for type in ${UBOOT_CONFIG}; do
-        for dtb in ${UBOOT_DTB_NAME}; do
-            cp "${DEPLOY_DIR_IMAGE}/u-boot-${dtb}-${MACHINE}-${type}" \
-                                                             "${BOOT_STAGING}/${dtb}-${type}"
-        done
-        cp "${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type}" \
-                                                             "${BOOT_STAGING}/u-boot-spl.bin-${type}"
-        cp "${DEPLOY_DIR_IMAGE}/u-boot-nodtb.bin-${MACHINE}-${type}" \
-                                                             "${BOOT_STAGING}/u-boot-nodtb.bin-${type}"
-        cp "${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type}" "${BOOT_STAGING}/u-boot.bin-${type}"
-    done
 
-    if [ -n "${2}" ] ; then
-        local config="${2}"
-        for dtb in ${UBOOT_DTB_NAME}; do
-            if [ -e "${BOOT_STAGING}/${dtb}" ]; then
-                rm "${BOOT_STAGING}/${dtb}"
-            fi
-            if [ -e "${BOOT_STAGING}/${dtb}-${config}" ]; then
-                ln -s "${dtb}-${config}" "${BOOT_STAGING}/${dtb}"
-            fi
-        done
-    fi
+    for dtb in ${UBOOT_DTB_NAME}; do
+        cp "${DEPLOY_DIR_IMAGE}/u-boot-${dtb}-${MACHINE}-${type}" \
+                                                         "${BOOT_STAGING}/${dtb}"
+    done
+    cp "${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type}" "${BOOT_STAGING}/u-boot-spl.bin"
+    cp "${DEPLOY_DIR_IMAGE}/u-boot-nodtb.bin-${MACHINE}-${type}" "${BOOT_STAGING}/u-boot-nodtb.bin"
+    cp "${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type}" "${BOOT_STAGING}/u-boot.bin"
 }
 
 compile_prepare:mx8x-generic-bsp() {
     bbnote '8QX boot binary build'
-    compile_prepare_mx8_common "$1"
+    compile_prepare_mx8_common "$@"
 }
 
 compile_prepare_mx9_common() {
+    local type="$2"
+
     bbnote 'i.MX9 boot binary build'
     for ddr_firmware in ${DDR_FIRMWARE_NAME}; do
         bbnote "Copy ddr_firmware: ${ddr_firmware} from ${DEPLOY_DIR_IMAGE} -> ${BOOT_STAGING} "
         cp "${DEPLOY_DIR_IMAGE}/${ddr_firmware}"            "${BOOT_STAGING}/"
     done
     cp "${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}"          "${BOOT_STAGING}/"
-    for type in ${UBOOT_CONFIG}; do
-        cp "${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type}" \
-                                                            "${BOOT_STAGING}/u-boot-spl.bin-${type}"
-        cp "${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type}" "${BOOT_STAGING}/u-boot.bin-${type}"
-    done
+
+    cp "${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type}" "${BOOT_STAGING}/u-boot-spl.bin"
+    cp "${DEPLOY_DIR_IMAGE}/u-boot.bin-${MACHINE}-${type}" "${BOOT_STAGING}/u-boot.bin"
 }
 
 compile_prepare:mx9-generic-bsp() {
-    compile_prepare_mx9_common "$1"
+    compile_prepare_mx9_common "$@"
 }
 
 compile_prepare:mx95-generic-bsp() {
-    compile_prepare_mx9_common "$1"
+    compile_prepare_mx9_common "$@"
 
     if [ "${OEI_SOC}" = "mx95" ] ; then
         bbnote 'i.MX95 copy OEI / SM'
@@ -399,16 +387,6 @@ do_compile() {
     for target in ${IMXBOOT_TARGETS}; do
         for config in ${UBOOT_CONFIG}; do
             compile_prepare "${target}" "${config}"
-
-            allbins="u-boot.bin u-boot-nodtb.bin u-boot-spl.bin"
-            for bin in ${allbins} ; do
-                if [ -e "${BOOT_STAGING}/${bin}" ]; then
-                    rm ${BOOT_STAGING}/${bin}
-                fi
-                if [ -e "${BOOT_STAGING}/${bin}-${config}" ]; then
-                    ln -s ${bin}-${config} ${BOOT_STAGING}/${bin}
-                fi
-            done
 
             oe_runmake clean
 
