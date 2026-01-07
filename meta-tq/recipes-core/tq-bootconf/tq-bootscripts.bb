@@ -4,7 +4,13 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 DEPENDS = "dtc-native u-boot-mkimage-native"
 
-inherit deploy
+require conf/image-fitimage.conf
+
+EXTRA_INHERIT = ""
+# UBOOT_SIGN_KEYDIR depends on ti-secdev.bbclass for K3 machines
+EXTRA_INHERIT:k3 = "ti-secdev"
+
+inherit uboot-config deploy ${EXTRA_INHERIT}
 
 SRC_URI = "\
     file://boot-blockdev.cmd \
@@ -18,16 +24,50 @@ VARIANTS = "\
 "
 
 build_scr () {
-    local input="$1" output="$2"
+    local variant="$1"
+    local input="$2"
+    local output="$3"
 
-    cat >boot.its <<END
+    local csum="${FIT_HASH_ALG}"
+    local sign_algo="${FIT_SIGN_ALG}"
+    local sign_keyname
+    if [ "${UBOOT_SIGN_ENABLE}" = "1" ]; then
+        sign_keyname="${UBOOT_SIGN_KEYNAME}"
+    fi
+
+    cat >boot.its <<EOF
 /dts-v1/;
 
 / {
         description = "U-Boot boot script";
 
+        configurations {
+                default = "conf-1";
+
+                conf-1 {
+                        description = "Boot configuration '$variant'";
+                        script = "script-1";
+
+                        hash-1 {
+                                algo = "$csum";
+                        };
+EOF
+
+    if [ -n "$sign_keyname" ]; then
+        cat >>boot.its << EOF
+                        signature-1 {
+                                algo = "$csum,$sign_algo";
+                                key-name-hint = "$sign_keyname";
+                                sign-images = "script";
+                        };
+EOF
+    fi
+
+    cat >>boot.its <<EOF
+                };
+        };
+
         images {
-                default = "script-1";
 
                 script-1 {
                         compression = "none";
@@ -35,19 +75,29 @@ build_scr () {
                         type = "script";
 
                         hash-1 {
-                                algo = "crc32";
+                                algo = "$csum";
                         };
                 };
         };
 };
-END
+EOF
 
-    mkimage -f boot.its "${output}"
+    ${UBOOT_MKIMAGE} \
+        ${@'-D "${UBOOT_MKIMAGE_DTCOPTS}"' if len('${UBOOT_MKIMAGE_DTCOPTS}') else ''} \
+        -f boot.its "${output}"
+
+    if [ "${UBOOT_SIGN_ENABLE}" = '1' ] ; then
+        ${UBOOT_MKIMAGE_SIGN} \
+            ${@'-D "${UBOOT_MKIMAGE_DTCOPTS}"' if len('${UBOOT_MKIMAGE_DTCOPTS}') else ''} \
+            -F -k "${UBOOT_SIGN_KEYDIR}" \
+            -r "${output}" \
+            ${UBOOT_MKIMAGE_SIGN_ARGS}
+    fi
 }
 
 do_compile() {
     for variant in ${VARIANTS}; do
-        build_scr "${WORKDIR}/${variant}.cmd" "${variant}.scr"
+        build_scr "${variant}" "${WORKDIR}/${variant}.cmd" "${variant}.scr"
     done
 }
 
