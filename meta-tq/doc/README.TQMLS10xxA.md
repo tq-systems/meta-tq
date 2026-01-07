@@ -70,6 +70,8 @@
 
 ## Known Issues
 
+* TQMLS1088A: software `reset` or `reboot` always boots from QSPI when the flash
+  contains a valid boot image.
 * TQMLS1088A: Suspend to RAM not supported.
 * SMMU bypass is required
 * MBLS10xxA: Interrupt of GPIO expander `D57` (`IRQ2`) is permanently asserted
