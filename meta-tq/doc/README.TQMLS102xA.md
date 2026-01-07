@@ -114,6 +114,8 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 - u-boot
   - Default MTD partition layout and boot script don't load files from UBIFS
   - No USB support
+- Linux: currently no out of the box support for Linux kernel on SPI-NOR
+  - `tq-image-small-debug` image from `spaetzle` distribution is too large
 - RGB displays stay black although drivers are initialized properly
 
 ## Build Artifacts
