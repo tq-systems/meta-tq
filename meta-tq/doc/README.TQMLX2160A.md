@@ -120,6 +120,7 @@ details
 ## Build Artifacts
 
 * atf/
+  * ddr_fip.bin: firmware for DDR controller PHY
   * 32GiB
     * fip_uboot.bin: TF-A / U-Boot Firmware Image Package
     * bl2_[auto|flexspi_nor].pbl: Boot-media dependend Primary Boot Loader with RCW
@@ -127,8 +128,6 @@ details
     * fip_uboot_tqmlx2160a_16gb.bin: TF-A / U-Boot Firmware Image Package
     * bl2_[auto|flexspi_nor]_tqmlx2160a_16gb.pbl: Boot-media dependend Primary Boot Loader with RCW
 * atf/variants/: contains RCW-PBL for all supported RCW serdes-configurations and all supported boot sources.
-* ddr-phy/
-	* fip_ddr.bin: Firmware for DDR-Controller Phy
 * rcw/: different rcw configurations to use with atf-recipe
 * mc_app/: the DPAA2-Ethernet Firmware
 * mc-utils: the DPAA2-Ethernet Configuration files
