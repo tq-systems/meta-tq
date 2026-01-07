@@ -7,7 +7,6 @@ DEPENDS = "dtc-native u-boot-mkimage-native"
 inherit deploy
 
 SRC_URI = "\
-    file://boot.its \
     file://boot-blockdev.cmd \
     file://boot-blockdev-rauc.cmd \
     file://boot-ubi.cmd \
@@ -21,15 +20,32 @@ VARIANTS = "\
 build_scr () {
     local input="$1" output="$2"
 
-    ln -sf "${input}" boot.cmd
+    cat >boot.its <<END
+/dts-v1/;
+
+/ {
+        description = "U-Boot boot script";
+
+        images {
+                default = "script-1";
+
+                script-1 {
+                        compression = "none";
+                        data = /incbin/("$input");
+                        type = "script";
+
+                        hash-1 {
+                                algo = "crc32";
+                        };
+                };
+        };
+};
+END
+
     mkimage -f boot.its "${output}"
 }
 
 do_compile() {
-    # Add symlink to build directory - /incbin/ requires the ITS and the
-    # referenced boot.cmd in the same directory
-    ln -sf ${WORKDIR}/boot.its .
-
     for variant in ${VARIANTS}; do
         build_scr "${WORKDIR}/${variant}.cmd" "${variant}.scr"
     done
