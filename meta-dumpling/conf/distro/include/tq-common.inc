@@ -53,6 +53,14 @@ INIT_MANAGER = "systemd"
 # home for root is '/root' and nothing else
 ROOT_HOME ?= "/root"
 
+# FIT image signature generation defaults
+# To actually enable signature generation, add
+# UBOOT_SIGN_ENABLE = "1"
+# to your local.conf
+UBOOT_SIGN_KEYDIR ?= "${DUMPLING_LAYERDIR}/files/keys/u-boot"
+UBOOT_SIGN_KEYNAME ?= "dev"
+UBOOT_MKIMAGE_DTCOPTS = "--in-format dts --out-format dtb"
+
 #
 # busybox has prio 50 per default, inetutils has 79
 # ping from iputils should have same features as full featured

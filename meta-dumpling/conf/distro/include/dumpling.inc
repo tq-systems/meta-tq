@@ -33,12 +33,3 @@ SYSTEMD_AUTO_ENABLE:dhcpcd = "disable"
 
 # TODO: cairo and gdk-pixbuf are default on - if not gstreamer dependencies
 # can be removed.
-
-# this is needed for FIT image signature generation
-# to actually enable signature generation, you must add
-# UBOOT_SIGN_ENABLE = "1"
-# to your local.conf
-
-UBOOT_SIGN_KEYDIR ?= "${DUMPLING_LAYERDIR}/files/keys/u-boot"
-UBOOT_SIGN_KEYNAME ?= "dev"
-UBOOT_MKIMAGE_DTCOPTS = "--in-format dts --out-format dtb"
