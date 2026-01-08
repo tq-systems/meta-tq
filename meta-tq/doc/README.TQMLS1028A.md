@@ -104,9 +104,9 @@ case of overheating.
 * CAN-FD: possible CAN (data) bitrates combinations are limited due to platform clock
 * USB DR (X5) does not support SuperSpeed (CPU limitation for cable detection with ID-pin)
 * Wake up using GPIO buttons does not work
-* QSPI boot does not work
 * PCIe device causes timeout for L2 entry preventing suspend
-* u-boot: boot script don't load files from UBIFS
+* Linux: currently no out of the box support for Linux kernel on SPI-NOR
+  * `tq-image-small-debug` image from `spaetzle` distribution is too large
 
 ## Artifacts
 
