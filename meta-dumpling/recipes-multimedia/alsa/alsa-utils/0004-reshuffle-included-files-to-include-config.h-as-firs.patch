@@ -1,0 +1,149 @@
+From a46a9f4c9e113d49f2fe04df99e6f59902c828ed Mon Sep 17 00:00:00 2001
+From: Jaroslav Kysela <perex@perex.cz>
+Date: Wed, 30 Aug 2023 18:48:23 +0200
+Subject: [PATCH 4/7] reshuffle included files to include config.h as first
+
+config.h may contain defines like _FILE_OFFSET_BITS which influence
+the system wide include files (off_t types, open -> open64 function
+usage etc.).
+
+Changes restricted to bat only.
+
+Related: https://github.com/alsa-project/alsa-utils/pull/223
+Signed-off-by: Jaroslav Kysela <perex@perex.cz>
+(cherry picked from commit feb9c4cdecb24d6d52496487aa7f074651c4907a)
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ bat/alsa.c        | 3 ++-
+ bat/analyze.c     | 3 ++-
+ bat/common.c      | 3 ++-
+ bat/convert.c     | 1 +
+ bat/latencytest.c | 2 ++
+ bat/signal.c      | 2 ++
+ bat/tinyalsa.c    | 3 ++-
+ 7 files changed, 13 insertions(+), 4 deletions(-)
+
+diff --git a/bat/alsa.c b/bat/alsa.c
+index d2f1f84..1559ed4 100644
+--- a/bat/alsa.c
++++ b/bat/alsa.c
+@@ -13,6 +13,8 @@
+  *
+  */
+ 
++#include "aconfig.h"
++
+ #include <stdio.h>
+ #include <string.h>
+ #include <stdbool.h>
+@@ -22,7 +24,6 @@
+ 
+ #include <alsa/asoundlib.h>
+ 
+-#include "aconfig.h"
+ #include "gettext.h"
+ 
+ #include "common.h"
+diff --git a/bat/analyze.c b/bat/analyze.c
+index 211dfc1..6867880 100644
+--- a/bat/analyze.c
++++ b/bat/analyze.c
+@@ -13,6 +13,8 @@
+  *
+  */
+ 
++#include "aconfig.h"
++
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <errno.h>
+@@ -22,7 +24,6 @@
+ #include <math.h>
+ #include <fftw3.h>
+ 
+-#include "aconfig.h"
+ #include "gettext.h"
+ 
+ #include "common.h"
+diff --git a/bat/common.c b/bat/common.c
+index 47c3ea5..9ff9405 100644
+--- a/bat/common.c
++++ b/bat/common.c
+@@ -13,13 +13,14 @@
+  *
+  */
+ 
++#include "aconfig.h"
++
+ #include <stdio.h>
+ #include <stddef.h>
+ #include <stdlib.h>
+ #include <stdbool.h>
+ #include <errno.h>
+ 
+-#include "aconfig.h"
+ #include "gettext.h"
+ 
+ #include "common.h"
+diff --git a/bat/convert.c b/bat/convert.c
+index f555389..c502ae5 100644
+--- a/bat/convert.c
++++ b/bat/convert.c
+@@ -13,6 +13,7 @@
+  *
+  */
+ 
++#include "aconfig.h"
+ #include <stdio.h>
+ #include <stddef.h>
+ #include <stdlib.h>
+diff --git a/bat/latencytest.c b/bat/latencytest.c
+index 8c10efb..7c9db61 100644
+--- a/bat/latencytest.c
++++ b/bat/latencytest.c
+@@ -13,6 +13,8 @@
+  *
+  */
+ 
++#include "aconfig.h"
++
+ #include <math.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+diff --git a/bat/signal.c b/bat/signal.c
+index c9b5c7b..da5368c 100644
+--- a/bat/signal.c
++++ b/bat/signal.c
+@@ -20,6 +20,8 @@
+  * stable indefinitely
+  */
+ 
++#include "aconfig.h"
++
+ #include <stdio.h>
+ #include <stddef.h>
+ #include <stdlib.h>
+diff --git a/bat/tinyalsa.c b/bat/tinyalsa.c
+index f1c20fa..cde5709 100644
+--- a/bat/tinyalsa.c
++++ b/bat/tinyalsa.c
+@@ -13,6 +13,8 @@
+  *
+  */
+ 
++#include "aconfig.h"
++
+ #include <stdio.h>
+ #include <string.h>
+ #include <stdbool.h>
+@@ -22,7 +24,6 @@
+ 
+ #include <tinyalsa/asoundlib.h>
+ 
+-#include "aconfig.h"
+ #include "gettext.h"
+ 
+ #include "common.h"
+-- 
+2.43.0
+

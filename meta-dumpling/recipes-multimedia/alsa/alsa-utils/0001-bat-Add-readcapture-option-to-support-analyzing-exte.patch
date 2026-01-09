@@ -1,0 +1,104 @@
+From 21f0e73461021099c15a32940ead12367ffe75f1 Mon Sep 17 00:00:00 2001
+From: Tim Bird <tim.bird@sony.com>
+Date: Tue, 17 May 2022 09:50:49 -0600
+Subject: [PATCH 1/7] bat: Add 'readcapture' option to support analyzing
+ external audio
+
+If audio data is captured on another device (ie we are NOT using
+loopback mode), then allow alsabat to analyze that data, by passing
+a filename reference on the command line.
+
+Add the '--readcapture' option to the argument parser. When
+this option is specified, avoid doing a local capture, and instead
+just read the audio data from the indicated file, and analyze that.
+
+Fixes: https://github.com/alsa-project/alsa-utils/pull/166
+Signed-off-by: Tim Bird <tim.bird@sony.com>
+Signed-off-by: Jaroslav Kysela <perex@perex.cz>
+(cherry picked from commit 9e525074d2463adaf4da0e428903675bb9fc91f6)
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ bat/bat.c    | 17 +++++++++++++++++
+ bat/common.h |  3 +++
+ 2 files changed, 20 insertions(+)
+
+diff --git a/bat/bat.c b/bat/bat.c
+index 8645770..17d025d 100644
+--- a/bat/bat.c
++++ b/bat/bat.c
+@@ -331,6 +331,8 @@ _("Usage: alsabat [-options]...\n"
+ "      --log=#            file that both stdout and strerr redirecting to\n"
+ "      --file=#           file for playback\n"
+ "      --saveplay=#       file that storing playback content, for debug\n"
++"      --readcapture=#    file with previously captured content.  File data\n"
++"                         is used for analysis instead of capturing it.\n"
+ "      --local            internal loop, set to bypass pcm hardware devices\n"
+ "      --standalone       standalone mode, to bypass analysis\n"
+ "      --roundtriplatency round trip latency mode\n"
+@@ -397,6 +399,7 @@ static void parse_arguments(struct bat *bat, int argc, char *argv[])
+ 		{"roundtriplatency", 0, 0, OPT_ROUNDTRIPLATENCY},
+ 		{"snr-db",   1, 0, OPT_SNRTHD_DB},
+ 		{"snr-pc",   1, 0, OPT_SNRTHD_PC},
++		{"readcapture", 1, 0, OPT_READCAPTURE},
+ 		{0, 0, 0, 0}
+ 	};
+ 
+@@ -412,6 +415,11 @@ static void parse_arguments(struct bat *bat, int argc, char *argv[])
+ 		case OPT_SAVEPLAY:
+ 			bat->debugplay = optarg;
+ 			break;
++		case OPT_READCAPTURE:
++			bat->capturefile = optarg;
++			bat->capture.mode = MODE_ANALYZE_ONLY;
++			bat->playback.mode = MODE_ANALYZE_ONLY;
++			break;
+ 		case OPT_LOCAL:
+ 			bat->local = true;
+ 			break;
+@@ -708,6 +716,15 @@ int main(int argc, char *argv[])
+ 		goto analyze;
+ 	}
+ 
++	if (bat.capture.mode == MODE_ANALYZE_ONLY && bat.capturefile) {
++		bat.capture.file = strdup(bat.capturefile);
++		fprintf(bat.log,
++			_("Using data from file %s for analysis\n"),
++			bat.capture.file);
++		fprintf(bat.log, _("Skipping playback and capture\n"));
++		goto analyze;
++	}
++
+ 	/* loopback thread: playback and capture in a loop */
+ 	if (bat.local == false)
+ 		test_loopback(&bat);
+diff --git a/bat/common.h b/bat/common.h
+index 1b07fbe..a9bae5d 100644
+--- a/bat/common.h
++++ b/bat/common.h
+@@ -25,6 +25,7 @@
+ #define OPT_ROUNDTRIPLATENCY		(OPT_BASE + 6)
+ #define OPT_SNRTHD_DB			(OPT_BASE + 7)
+ #define OPT_SNRTHD_PC			(OPT_BASE + 8)
++#define OPT_READCAPTURE			(OPT_BASE + 9)
+ 
+ #define COMPOSE(a, b, c, d)		((a) | ((b)<<8) | ((c)<<16) | ((d)<<24))
+ #define WAV_RIFF			COMPOSE('R', 'I', 'F', 'F')
+@@ -151,6 +152,7 @@ enum _bat_op_mode {
+ 	MODE_UNKNOWN = -1,
+ 	MODE_SINGLE = 0,
+ 	MODE_LOOPBACK,
++	MODE_ANALYZE_ONLY,
+ 	MODE_LAST
+ };
+ 
+@@ -223,6 +225,7 @@ struct bat {
+ 	char *narg;			/* argument string of duration */
+ 	char *logarg;			/* path name of log file */
+ 	char *debugplay;		/* path name to store playback signal */
++	char *capturefile;		/* path name for previously saved recording */
+ 	bool standalone;		/* enable to bypass analysis */
+ 	bool roundtriplatency;		/* enable round trip latency */
+ 
+-- 
+2.43.0
+
