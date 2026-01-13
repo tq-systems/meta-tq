@@ -16,6 +16,9 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* alsa-utils: backport fixes for `alsabat`
+
+  These fixes make `alsabat` more suitable for automated testing.
 * packagegroup-testutils: use bb.debug for kmscube filter
 
   bb.note is printed to the console in default configuration. The reason
