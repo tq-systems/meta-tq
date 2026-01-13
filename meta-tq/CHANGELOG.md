@@ -9,7 +9,7 @@ Releases are named with the following scheme:
 
 ## Next Release
 
-## scarthgap.TQ.ARM.BSP.0006 (not released yet)
+## scarthgap.TQ.ARM.BSP.0006
 
 ### Added
 
