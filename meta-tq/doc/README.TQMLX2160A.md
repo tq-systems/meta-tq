@@ -121,11 +121,11 @@ details
 
 * atf/
   * 32GiB
-	  * fip_uboot.bin: TF-A / U-Boot Firmware Image Package
-	  * bl2_[auto|flexspi_nor].pbl: Boot-media dependend Primary Boot Loader with RCW
+    * fip_uboot.bin: TF-A / U-Boot Firmware Image Package
+    * bl2_[auto|flexspi_nor].pbl: Boot-media dependend Primary Boot Loader with RCW
   * 16GiB
-	  * fip_uboot_tqmlx2160a_16gb.bin: TF-A / U-Boot Firmware Image Package
-	  * bl2_[auto|flexspi_nor]_tqmlx2160a_16gb.pbl: Boot-media dependend Primary Boot Loader with RCW
+    * fip_uboot_tqmlx2160a_16gb.bin: TF-A / U-Boot Firmware Image Package
+    * bl2_[auto|flexspi_nor]_tqmlx2160a_16gb.pbl: Boot-media dependend Primary Boot Loader with RCW
 * atf/variants/: contains RCW-PBL for all supported RCW serdes-configurations and all supported boot sources.
 * ddr-phy/
 	* fip_ddr.bin: Firmware for DDR-Controller Phy
