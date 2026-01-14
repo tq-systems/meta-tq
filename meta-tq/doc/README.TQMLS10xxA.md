@@ -83,6 +83,8 @@
 * CAN-FD controller (D60) is not accessible using SPI
 * USB 3.0 Type-C (X16) is host-only
 * RS-485 (X23): `linux,rs485-enabled-at-boot-time` property must **not** be set
+* In BSP, suspend to disk is not supported, despite CONFIG_HIBERNATION being
+  compiled into the kernel.
 
 ## HowTo
 
