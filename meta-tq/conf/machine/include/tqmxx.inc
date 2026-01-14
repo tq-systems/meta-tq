@@ -62,12 +62,12 @@ IMAGE_BOOT_FILES[vardeps] = "KERNEL_DEVICETREE"
 def imx_v8_wks_from_distro_features(d):
     wks_type = ""
 
-    if bb.utils.contains("DISTRO_FEATURES", "secure", True, False, d):
+    if bb.utils.contains("DISTRO_FEATURES", "verity", True, False, d):
         wks_type = "-verity"
     if bb.utils.contains("DISTRO_FEATURES", "rauc", True, False, d):
-        if not bb.utils.contains("DISTRO_FEATURES", "secure", True, False, d):
+        if not bb.utils.contains("DISTRO_FEATURES", "verity", True, False, d):
             wks_type = "-rauc-ab"
         else:
-            bb.warnonce("DISTRO_FEATURES contains 'rauc' and 'secure', using WKS_FILE selected by distro feature 'secure'")
+            bb.warnonce("DISTRO_FEATURES contains 'rauc' and 'verity', using WKS_FILE selected by distro feature 'verity'")
 
     return "tqmaxx-imx-v8-sdimg" + wks_type + ".wks.in"
