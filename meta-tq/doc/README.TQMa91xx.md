@@ -179,8 +179,6 @@ See [here](./README.TQMa9-non-scmi-dvfs.md) for details about frequency scaling.
 
 See the [Distroboot README](README.Distroboot.md).
 
-__Note:__ Default u-boot environment variable `bootcmd` has to be set to `run distro_bootcmd`
-
 ### OS updates
 
 See [RAUC](RAUC.md).

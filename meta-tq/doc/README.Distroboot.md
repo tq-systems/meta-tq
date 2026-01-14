@@ -1,40 +1,42 @@
-# Distroboot
+# Standard boot/Distroboot
 
-The term "Distroboot" describes a standardized interface between the U-Boot
-bootloader and the operating system. The operating system can provide its own
-boot script as a `boot.scr` image (which can optionally be signed for Secure
-Boot) and/or a `extlinux.conf`, which define the loaded kernel, Device Trees,
-command line or other details of the OS boot, rather than hardcoding these
-in the bootloader.
+The terms "Standard boot and "Distroboot" describe a standardized interface
+between the U-Boot bootloader and the operating system. The operating system can
+provide its own boot script as a `boot.scr` image (which can optionally be
+signed for Secure Boot) and/or a `extlinux.conf`, which define the loaded
+kernel, Device Trees, command line or other details of the OS boot, rather than
+hardcoding these in the bootloader.
 
-The TQ Yocto BSP currently uses Distroboot by default for the following modules:
+The older "Distroboot" based on scripts in the U-Boot environment and the newer
+"Standard boot" implemented in U-Boot itself are functionally more or less
+equivalent.
 
-- TQMa62xx
-- TQMa64xxL
+The TQ Yocto BSP currently uses Standard boot or Distroboot by default for the
+following modules:
 
-The TQ Yocto BSP currently supports Distroboot additionally for the following modules:
-
-- TQMa8MPxL
-- TQMa91xx[LA/CA]
-- TQMa93xx[LA/CA]
-
-To use Distroboot on these modules, U-Boot environment `bootcmd` has to be modified:
-
-`env set bootcmd 'run distro_bootcmd'
+- TQMa62xx\[L\] (Standard boot)
+- TQMa64xxL (Standard boot)
+- TQMa67xx\[L\] (Standard boot)
+- TQMa8MPxL (Distroboot)
+- TQMa8MPxS (Distroboot)
+- TQMa91xx[LA/CA] (Distroboot)
+- TQMa93xx[LA/CA] (Distroboot)
 
 By default, U-Boot will boot the OS from the same medium that it was started
 from (eMMC, SD card or SPI-NOR). The boot source can be modified by setting
-the `boot_targets` variable to `mmc0` (eMMC), `mmc1` (SD card), `sf0` (SPI-NOR),
-`usb0` (USB mass storage) or `pxe` (netboot). Multiple boot sources separated
-with spaces will be tried in the order they are specified, for example:
+the `boot_targets` variable to `mmc0` (eMMC), `mmc1` (SD card), `serial_flash0`
+(SPI-NOR, Standard Boot) or `sf0` (SPI-NOR, Distroboot), `usb0` (USB mass
+storage) or `pxe` (netboot). Multiple boot sources separated with spaces will be
+tried in the order they are specified, for example:
 ```
-setenv boot_targets pxe sf0 mmc0
+setenv boot_targets pxe serial_flash0 mmc0
 ```
 
 For MMC and USB devices, U-Boot will load a script image `boot.scr` from the
 boot partition of the selected medium. The script provided in this BSP's
 default configuration then selects the kernel and its configuration based on
-`/boot/extlinux/extlinux.conf`.
+`/boot/extlinux/extlinux.conf`. For SPI-NOR, the script is loaded from a
+dedicated MTD partition.
 
 For netboot, first an IP address is obtained via DHCP; static IP addresses are
 not supported. A configuration file in the `extlinux.conf` format is then loaded

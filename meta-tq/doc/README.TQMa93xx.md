@@ -262,8 +262,6 @@ See [here](./README.TQMa9-non-scmi-dvfs.md) for details about frequency scaling.
 
 See the [Distroboot README](README.Distroboot.md).
 
-__Note:__ Default u-boot environment variable `bootcmd` has to be set to `run distro_bootcmd`
-
 ### OS updates
 
 See [RAUC](RAUC.md).
@@ -364,4 +362,3 @@ For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
 See [TQ Embedded Wiki for TQMa93xxCA](https://support.tq-group.com/en/arm/tqma93xxca).
 
 See [TQ Embedded Wiki for TQMa93xxLA](https://support.tq-group.com/en/arm/tqma93xxla).
-
