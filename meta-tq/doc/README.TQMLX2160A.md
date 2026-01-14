@@ -116,6 +116,8 @@ details
   * On MBLX2160A REV.0100, the SD card only works for a few start-ups and is
     therefore not properly tested. On REV.0200, the SD card interface works properly.
 * In U-Boot, reading more than 750KiB at a time from QSPI-NOR results in incorrect data
+* In BSP, suspend to disk is not supported, despite CONFIG_HIBERNATION being
+  compiled into the kernel.
 
 ## Build Artifacts
 
