@@ -46,6 +46,20 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* Introduce "verity" distro feature
+
+  Move verity support to a separate feature instead of enabling the build of
+  verity images when the "secure" feature is set.
+
+  The "secure" distro feature can now be enabled without setting `DM_VERITY_IMAGE_TYPE`
+* TQMa8MPxL/TQMa8MPxS/TQMa93xx/TQMa91xx:
+  * Build kernel as fitImage
+
+    The kernel is now combined with the Device Trees to a fitImage, which can
+    optionally be signed using `UBOOT_SIGN_ENABLE`.
+  * Use [Distroboot](doc/README.Distroboot.md) by default
+* imx-boot-tq: fix signature verification with `UBOOT_SIGN_ENABLE`
+* tq-bootscripts: sign scripts when `UBOOT_SIGN_ENABLE` is set
 * u-boot-imx-tq-2024.04:
   * TQMa8MPxL / TQMa8MPxS: do not override CONFIG_SYS_BOOTM_LEN
 * TQMa62xx[L]: Add support for 1400MHz CPU frequency (in PMIC configurations with 0.85V core
