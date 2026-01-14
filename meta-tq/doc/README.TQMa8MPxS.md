@@ -163,6 +163,7 @@ _Only mainline kernel supported_
   RAM configuration enabled. As example on how to add this for TQMa8MPxS, see `TQMA8MPXL_RAM_SINGLE_2GB`
   as example for TQMa8MPxL and use it instead of `TQMA8MPXS_RAM_MULTI`
   in U-Boot defconfig. Other config settings can easily be added.
+* Wake-Up via RTC currently does not work
 
 ## Build Artifacts
 
