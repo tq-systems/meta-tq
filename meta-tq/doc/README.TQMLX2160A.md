@@ -13,7 +13,7 @@
 
 ### ATF
 * based on qoriq-atf (https://github.com/nxp-qoriq/atf/)
-* branched from lf-5.15.5-1.0.0
+* branched from lf_v2.10
 
 ### U-Boot
 
@@ -25,59 +25,111 @@
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/)
 * branched from linux-6.12.y
 
-## Supported Interfaces:
+## Supported Features
 
-### U-Boot:
+### U-Boot
 
-* GPIOs
-* eMMC
-* ESDHC
-* SPI Nor - Flash
-* I2C
-* Ethernet
-  * SGMII / RGMII
-  * XFI 10G
-  * CAUI4 100G
-* PCIe
-* USB
+| Feature                                   |                 |
+|:------------------------------------------|:---------------:|
+| RAM configs                               |    16, 32 GiB   |
+| CPU variants                              | LX2160A, LX2080A|
+| GPIO                                      |        x        |
+| I2C                                       |        x        |
+| **UART**                                  |                 |
+| console on UART1 (X21)                    |        x        |
+| **QSPI-NOR**                              |                 |
+| Read                                      |        x        |
+| Write                                     |        x        |
+| Boot                                      |        x        |
+| **eMMC / SD card**                        |                 |
+| Read                                      |        x        |
+| Write                                     |        x        |
+| Boot                                      |        x        |
+| **USB**                                   |                 |
+| USB 3.0 Hub (X20)                         |        x        |
+| **SATA**                                  |                 |
+| SATA connector (X18)                      |        \*       |
+| M.2 (X42, X43)                            |        \*       |
+| **PCIe**                                  |                 |
+| PCIe x4/x8 (X35, X36, X37)                |        \*       |
+| mPCIe (X16, X17)                          |        \*       |
+| **Ethernet**                              |                 |
+| SGMII / RGMII 1G                          |        \*       |
+| XFI 10G                                   |        \*       |
+| CAUI4 100G                                |        \*       |
+| **Bootstreams**                           |                 |
+| FlexSPI                                   |        x        |
+| SD / eMMC                                 |        x        |
 
-### Linux:
+\*: In some SerDes configurations; see the User Manual and Support Wiki for
+details
 
-* GPIOs
-* eMMC
-* ESDHC
-* SPI Nor - Flash
-* I2C
-* Ethernet - SGMII / RGMII
-* Ethernet - XFI 10G
-* Ethernet - CAUI4 100G
-* CAN
-* PCIe
-* USB
-* USB - OTG
+### Linux
+
+| Feature                                   |      6.12       |
+|:------------------------------------------|:---------------:|
+| RAM configs                               |    16, 32 GiB   |
+| CPU variants                              | LX2160A, LX2080A|
+| **UART**                                  |                 |
+| console on UART1 (X21)                    |        x        |
+| additional UARTs 2-4 on pin header (X27)  |        x        |
+| **GPIO**                                  |                 |
+| LED                                       |        x        |
+| Button                                    |        x        |
+| **I2C**                                   |                 |
+| Temperature Sensors                       |        x        |
+| RTC                                       |        x        |
+| EEPROMS                                   |        x        |
+| **QSPI-NOR**                              |                 |
+| Read                                      |        x        |
+| Write                                     |        x        |
+| **eMMC / SD card**                        |                 |
+| Read                                      |        x        |
+| Write                                     |        x        |
+| **USB**                                   |                 |
+| USB 3.0 Hub (X20)                         |        x        |
+| USB 3.0 OTG (X38)                         |        x        |
+| **SATA**                                  |                 |
+| SATA connector (X18)                      |        \*       |
+| M.2 (X42, X43)                            |        \*       |
+| **PCIe**                                  |                 |
+| PCIe x4/x8 (X35, X36, X37)                |        \*       |
+| mPCIe (X16, X17)                          |        \*       |
+| **Ethernet**                              |                 |
+| SGMII / RGMII 1G                          |        \*       |
+| XFI 10G                                   |        \*       |
+| CAUI4 100G                                |        \*       |
+| DPAA2                                     |        x        |
+| **CAN**                                   |                 |
+| CAN-FD (X33, X34)                         |        x        |
+
+\*: In some SerDes configurations; see the User Manual and Support Wiki for
+details
 
 ## Not Supported
 
-* SIM-Card
+* SIM card (X15)
 
-## Notes:
+## Known issues
 
 * SDHC:
-  * On MBLX2160A.0100 the SD-Card only works a few start-ups and is therefore not properly tested.
-  * On MBLX2160A.0200 the SD-Card interface works properly.
+  * On MBLX2160A REV.0100, the SD card only works for a few start-ups and is
+    therefore not properly tested. On REV.0200, the SD card interface works properly.
+* In U-Boot, reading more than 750KiB at a time from QSPI-NOR results in incorrect data
+* In BSP, suspend to disk is not supported, despite CONFIG_HIBERNATION being
+  compiled into the kernel.
 
 ## Build Artifacts
 
 * atf/
+  * ddr_fip.bin: firmware for DDR controller PHY
   * 32GiB
-	  * fip_uboot.bin: TF-A / U-Boot Firmware Image Package
-	  * bl2_[auto|flexspi_nor].pbl: Boot-media dependend Primary Boot Loader with RCW
+    * fip_uboot.bin: TF-A / U-Boot Firmware Image Package
+    * bl2_[auto|flexspi_nor].pbl: Boot-media dependend Primary Boot Loader with RCW
   * 16GiB
-	  * fip_uboot_tqmlx2160a_16gb.bin: TF-A / U-Boot Firmware Image Package
-	  * bl2_[auto|flexspi_nor]_tqmlx2160a_16gb.pbl: Boot-media dependend Primary Boot Loader with RCW
+    * fip_uboot_tqmlx2160a_16gb.bin: TF-A / U-Boot Firmware Image Package
+    * bl2_[auto|flexspi_nor]_tqmlx2160a_16gb.pbl: Boot-media dependend Primary Boot Loader with RCW
 * atf/variants/: contains RCW-PBL for all supported RCW serdes-configurations and all supported boot sources.
-* ddr-phy/
-	* fip_ddr.bin: Firmware for DDR-Controller Phy
 * rcw/: different rcw configurations to use with atf-recipe
 * mc_app/: the DPAA2-Ethernet Firmware
 * mc-utils: the DPAA2-Ethernet Configuration files
@@ -147,25 +199,29 @@ See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 
 ### SPI-NOR
 
-* 0x000000000000-0x000000100000 : "RCW-PBL"
-* 0x000000100000-0x000000300000 : "U-Boot"
-* 0x000000500000-0x000000600000 : "U-Boot-Env"
-* 0x000000800000-0x000000a00000 : "DDR-PHY"
-* 0x000000a00000-0x000000d00000 : "DPAA2-MC"
-* 0x000000d00000-0x000000e00000 : "DPAA2-DPL"
-* 0x000000e00000-0x000000f00000 : "DPAA2-DPC"
-* 0x000001000000-0x000008000000 : "RootFS UBI"
+|     start |       end | content    |
+| --------: | --------: | ---------- |
+|       0x0 |  0x100000 | RCW-PBL    |
+|  0x100000 |  0x300000 | U-Boot     |
+|  0x500000 |  0x600000 | U-Boot-Env |
+|  0x800000 |  0xa00000 | DDR-PHY    |
+|  0xa00000 |  0xd00000 | DPAA2-MC   |
+|  0xd00000 |  0xe00000 | DPAA2-DPL  |
+|  0xe00000 |  0xf00000 | DPAA2-DPC  |
+| 0x1000000 | 0x8000000 | RootFS UBI |
 
 ### eMMC / SD-Card
 
-* 0x1000 : "RCW-PBL"
-* 0x100000 : "U-Boot"
-* 0x800000 : "DDR-PHY"
-* 0x1000000 : "Boot Partition"
-* 0x3000000 : "RootFS ext4"
+|     start | content        |
+| --------: | -------------- |
+|    0x1000 | RCW-PBL        |
+|  0x100000 | U-Boot         |
+|  0x800000 | DDR-PHY        |
+| 0x1000000 | Boot Partition |
+| 0x3000000 | RootFS ext4    |
 
 
-## Build-Time Configuration
+## Build Time Configuration
 
 * RCWXSPI: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SPI-NOR Boot
 * RCWAUTO: default RCW binary file used by qoriq-atf recipe to build Primary Boot Loader for SD/eMMC Boot
@@ -178,6 +234,16 @@ See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 Set BL2_IMAGE to `bl2_auto${ATF_SECURE_SUFFIX}_tqmlx2160a_16gb.pbl` and BL3_IMAGE
 to `fip_uboot${ATF_SECURE_SUFFIX}_tqmlx2160a_16gb.bin` to create an SD/eMMC image
 for the 16GiB variant.
+
+### Reset Configuration Word
+
+The Reset Configuration Word (RCW) is a data block that is built into the primary bootloader (BL2)
+and contains basic hardware configuration for the LX2160A, including pinmuxing and selection of the
+[SerDes Configuration](#serdes-configuration).
+
+The `RCWXSPI` and `RCWAUTO` variables, set in `meta-tq/conf/machine/tqmlx2160a-mblx2160a.conf` by
+default, can be modified to select an RCW variant at build time. To provide additional configuration
+variants not included in the BSP, the *rcw* recipe must be extended through a `.bbappend` file.
 
 ### Secure Boot
 
@@ -208,49 +274,59 @@ like the Linux kernel.
 
 ## Ethernet and DPAA2
 
-### RCW - SerDes Configuration
+Ethernet depends on the DPAA2 Management-Complex firmware, which is automatically loaded by U-Boot
+during network initization by running the `mcinitcmd` command from the environment.
 
-The RCW Configuration specifies the Ethernet Configuration.
-The currently available serdes configurations are (Serdes1_Serdes2_Serdes3):
-* 0_0_0
-* 12_7_3
-* 12_8_3
-* 12_11_3
-* 14_7_2
-* 14_7_3
-* 14_8_2
-* 14_8_3
-* 14_11_2
-* 14_11_3
+Not all Ethernet interfaces can be enabled at the same time; which interfaces are available depends
+on the selected [SerDes Configuration](#serdes-configuration). To be usable on Linux, the available
+interfaces need to be enabled either in a DPL (Data Path Layout) file loaded by U-Boot or configured
+at runtime using the `ls-*` and `restool` commands.
 
-To add another configuration the rcw sources have to be modified.
-To use a specific Serdes Configuration on build-time use the rcw variable to specify a supported configuration.
+A few useful commands are described in the following table:
 
-### Ethernet in U-Boot
+| Command                                           | Description                                                 |
+| ------------------------------------------------- | ----------------------------------------------------------- |
+| `ls-listni`                                       | Show configured interfaces                                  |
+| `ls-listmac`                                      | Show MACs                                                   |
+| `ls-addni dpmac.<mac-nr>`                         | Add Interface with MAC                                      |
+| `restool dpmac info dpmac.<mac-nr>`               | Display detailed information about MAC                      |
+| `restool dpmac create --mac-id=<mac-nr>`          | Create MAC                                                  |
+| `restool dprc generate-dpl dprc.1 > <my_dpl>.dts` | Generate a dpl file (as dts) from the current configuration |
+| `dtc -I dts -O dtb <my_dpl>.dts -o <my_dpl>.dtb`  | Generate a dtb file from the dts file                       |
 
-For working ethernet the DPAA2 firmware has to be loaded in U-Boot. It needs the DPC file when loaded.
-The command `fsl_mc start mc ${addr_mc} ${addr_dpc}` loads the firmware with the DPC file.
+The DPL file is loaded by U-Boot before starting the kernel using the command
+`fsl_mc lazyapply DPL ${addr_dpl}`. Note that the default BSP DPL file (`dpl-min.dts`) does not
+configure any Ethernet interfaces.
 
-For Ethernet in Linux additionaly a Data-Path-Layout file (DPL) has to be loaded before starting the kernel.
-This is done with the command `fsl_mc lazyapply DPL ${addr_dpl}`.
+### DPL configuration example
 
-### Ethernet in Linux
+This example shows how to:
 
-The ethernet configuration in Linux is determined by the DPL file. In the BSP a basic setup is configured in the dpl-min.dts file.
-With the restool command a more specific setup can be configured.
+* create a DPL DTB with `dpmac.12`
+* store the DPL DTB in first partition of `/dev/mmcblk1`
+* use the DPL DTB from U-Boot
 
-Some useful restool commands are:
+Linux
+```bash
+ls-addni dpmac.12
+restool dprc generate-dpl dprc.1 > dpl-12.dts
+dtc -I dts -O dtb dpl-12.dts -o dpl-12.dtb
+mount /dev/mmcblk1p1 /mnt/
+cp dpl-12.dtb /mnt/
+reboot
+```
 
-* `restool dpmac create --mac-id=<mac-nr>`: create mac.
-* `ls-addni dpmac.<mac-nr>`: Add Interface with Mac.
-* `ls-listmac`: Show current Macs
-* `ls-listni`: Show current Interfaces
-* `restool dprc generate-dpl dprc.1 > <my_dpl>.dts`: generate a dpl file from the current configuration.
-* `dtc -I dts -O dtb <my_dpl>.dts -o <my_dpl>.dtb`: To generate a dtb file of the dts file.
+U-Boot
+```bash
+setenv dpl_file dpl-12.dtb
+saveenv
+boot
+```
 
-### Ethernet Interfaces:
+### Ethernet Interfaces
 
-The following table shows which MAC is connected to which port depending on the interface.
+The following table shows which MAC is connected to which port depending on the interface:
+
 |  MAC  | RGMII | SGMII | XFI | CAUI4 |
 | ----- | ----- | ----- | --- | ----- |
 | MAC1  |   -   |   -   |  -  |  X29  |
@@ -263,61 +339,91 @@ The following table shows which MAC is connected to which port depending on the 
 | MAC17 | X14.A | X10.B |  -  |   -   |
 | MAC18 | X14.B | X11.A |  -  |   -   |
 
-Interfaces in U-Boot are named like this: DPMACxx@interface (e.g. DPMAC17@rgmii-id).
-Note: On MAC.17 and MAC.18 RGMII configuration takes precedence over SGMII.
+__Notes:__
 
-## Serdes Configuration
+* In U-Boot, Ethernet interfaces are named `DPMAC<xx>@<interface>` (e.g. "DPMAC17@rgmii-id")
+* On MAC.17 and MAC.18, SGMII configuration takes precedence over RGMII. The RGMII interfaces (X14)
+  are only used in SerDes confgurations that don't include SGMII.17 and SGMII.18.
+* Port names follow the schematic names; `X<nn>.A` refers to the lower and `X<nn>.B` to the upper
+  socket of a dual port connector
 
-The following tables show the supported Serdes configrations.
-For Ethernet protocols: `[Protocoll].[Mac-nr]` for PCIe: `PCIe.[Controller-Nr] x[Width]`
+## SerDes Configuration
 
-### Serdes 1
+The following tables show the supported SerDes configrations. The SerDes configuration must be
+selected using the RCW (Reset Configuration Word), which is built into the BL2 bootloader image.
+The *meta-tq* BSP provides RCWs for the following combinations of SerDes configurations
+(where *X\_Y\_Z* refers to configuration *X* on SerDes 1, *Y* on SerDes 2 and *Z* on SerDes 3):
+
+* 0\_0\_0 (disabled)
+* 12\_7\_3
+* 12\_8\_3
+* 12\_11\_3
+* 14\_7\_2
+* 14\_7\_3
+* 14\_8\_2
+* 14\_8\_3
+* 14\_11\_2
+* 14\_11\_3
+
+Each table entry in the following has the form *\[interface\].\[controller index\]*, optionally
+followed by a lane count in the case of PCIe. For Ethernet interfaces (SGMII, XFI and CAUI4), the
+controller index is equivalent to the DPAA2 MAC ID listed in the
+[Ethernet Interfaces](#ethernet-interfaces) section. See the
+[PCIe and SATA Interfaces](#pcie-and-sata-interfaces) section for information on their respective
+connectors.
+
+### SerDes 1
 
 | Lane / Config | H - 0   | G - 1   | F - 2   | E - 3   | D - 4     | C - 5     | B - 6     | A - 7     |
 | ------------- | ------- | ------- | ------- | ------- | --------- | --------- | --------- | --------- |
 | 12            | -       | -       | -       | -       | PCIe.2 x2 | PCIe.2 x2 | SGMII.9   | SGMII.10  |
-| 14            | CAUI4.1 | CAUI4.1 | CAUI4.1 | CAUI4.1 | PCIe.2 x2 | PCIe.2 x2 | PCIe.2 x2 | PCIe.2 x2 |
+| 14            | CAUI4.1 | CAUI4.1 | CAUI4.1 | CAUI4.1 | PCIe.2 x4 | PCIe.2 x4 | PCIe.2 x4 | PCIe.2 x4 |
 
-### Serdes 2
+### SerDes 2
 
 | Lane / Config | A - 0     | B - 1    | C - 2    | D - 3    | E - 4     | F - 5    | G - 6    | H - 7    |
 | ------------- | --------- | -------- | -------- | -------- | --------- | -------- | -------- | -------- |
 | 7             | PCIe.3 x1 | SGMII.12 | SGMII.17 | SGMII.18 | PCIe.4 x1 | SGMII.16 | XFI.13   | XFI.14   |
-| 8             | -         | -        | SATA.1   | SATA.2   | SATA.3    | SATA.4   | XFI.13   | XFI.14   |
+| 8             | -         | -        | SATA.1   | SATA.2   | SATA.3    | -        | XFI.13   | XFI.14   |
 | 11            | PCIe.3 x1 | SGMII.12 | SGMII.17 | SGMII.18 | PCIe.4 x1 | SGMII.16 | SGMII.13 | SGMII.14 |
 
-### Serdes 3
+### SerDes 3
 
-| Lane / Config | A - 0     | B - 1     | C - 2     | D - 3     | E - 4     | F - 5     | G - 6     | H -   7   |
+| Lane / Config | A - 0     | B - 1     | C - 2     | D - 3     | E - 4     | F - 5     | G - 6     | H - 7     |
 | ------------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- |
 | 2             | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 | PCIe.5 x8 |
 | 3             | PCIe.5 x4 | PCIe.5 x4 | PCIe.5 x4 | PCIe.5 x4 | PCIe.6 x4 | PCIe.6 x4 | PCIe.6 x4 | PCIe.6 x4 |
 
-## DIP-Switch settings
+### PCIe and SATA Interfaces
 
-The DIP-switches should match the used RCW, otherwise interfaces will not work.
-Pay attention to the following DIP-Switches:
+| Interface | Connector         |
+| :-------- | :---------------- |
+| PCIe.2    | X36 (PCIe x4)     |
+| PCIe.3    | X16 (mPCIe + SIM) |
+| PCIe.4    | X17 (mPCIe)       |
+| PCIe.5    | X37 (PCIe x8)     |
+| PCIe.6    | X35 (PCIe x4)     |
+| SATA.1    | X18 (SSD)         |
+| SATA.2    | X42 (M.2)         |
+| SATA.3    | X43 (M.2)         |
 
-| DIP-Switch | Serdes Lane | On  | Off |
-| ---------- | ----------- | --- | ---- |
-| S3-1       | SD1 Lane 6 & 7 | PCIe.2 | SGMII.9 & 10 |
-| S3-2       | SD2 Lane 2 | SGMII.17 | SATA.1 |
-| S3-3       | SD2 Lane 3 | SGMII.18 | SATA.2 |
-| S3-4       | SD2 Lane 4 | PCIe.4 | SATA.3 |
-| S4-1       | SD2 Lane 6 | XFI.13 | SGMII.13 |
-| S4-2       | SD2 Lane 7 | XFI.14 | SGMII.14 |
-| S4-3       | SD3 Lane 4 -7 | PCIe.5 x8 | PCIe.6 x4 |
-| S5-1       | EC2| ETH.1588 | RGMII.18 |
+### DIP switch settings
 
-## PCIe Configuration
+Depending on the selected RCW, the DIP switches on the MBLX2160A must be set
+accordingly for the interfaces to work:
 
-* X35 -> SD3 Land 4-7
-* X36 -> SD1 Lane 4-7
-* X37 -> SD3 Lane 0-3 and additional Lane 4-7 when x8 (Pay attention to DIP switch)
-* X16 -> SD2 Lane 0
-* X17 -> SD2 Lane 4
+| DIP Switch | SerDes Lane   | On        | Off            |
+| ---------- | ------------- | --------- | -------------- |
+| S3-1       | SD1 Lanes 6-7 | PCIe.2    | SGMII.9 & 10   |
+| S3-2       | SD2 Lane 2    | SGMII.17  | SATA.1         |
+| S3-3       | SD2 Lane 3    | SGMII.18  | SATA.2         |
+| S3-4       | SD2 Lane 4    | PCIe.4    | SATA.3         |
+| S4-1       | SD2 Lane 6    | XFI.13    | SGMII.13       |
+| S4-2       | SD2 Lane 7    | XFI.14    | SGMII.14       |
+| S4-3       | SD3 Lanes 4-7 | PCIe.5 x8 | PCIe.6 x4      |
+| S5-1       | None (EC2)    | RGMII.18  | IEEE1588 (X32) |
 
-### PREEMPT-RT / Realtime support
+## PREEMPT-RT / Realtime support
 
 For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
 

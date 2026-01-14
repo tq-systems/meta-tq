@@ -133,7 +133,7 @@ Releases are named with the following scheme:
 * TQMa62xx, TQMa64xxL, TQMa67xx: Various fixes for compatibility with latest
   meta-ti (tag 11.01.12)
 
-## scarthgap.TQ.ARM.BSP.0006 (not released yet)
+## scarthgap.TQ.ARM.BSP.0006
 
 ### Added
 

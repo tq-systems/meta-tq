@@ -70,6 +70,8 @@
 
 ## Known Issues
 
+* TQMLS1088A: software `reset` or `reboot` always boots from QSPI when the flash
+  contains a valid boot image.
 * TQMLS1088A: Suspend to RAM not supported.
 * SMMU bypass is required
 * MBLS10xxA: Interrupt of GPIO expander `D57` (`IRQ2`) is permanently asserted
@@ -81,6 +83,8 @@
 * CAN-FD controller (D60) is not accessible using SPI
 * USB 3.0 Type-C (X16) is host-only
 * RS-485 (X23): `linux,rs485-enabled-at-boot-time` property must **not** be set
+* In BSP, suspend to disk is not supported, despite CONFIG_HIBERNATION being
+  compiled into the kernel.
 
 ## HowTo
 
@@ -227,6 +231,30 @@ see: [TQ Embedded Wiki for TQMLS10xxA](https://support.tq-group.com/en/layerscap
 The DIP-switches should match the used RCW, otherwise interfaces will not work,
 or will not start. See [Serdes Config](#serdes-configuration)
 Pay attention to the following DIP-Switches:
+
+### TQMLS1043A
+
+| DIP-Switch | Function              | On         | Off     |
+|------------|-----------------------|------------|---------|
+| S6-1       | -                     | -          | -       |
+| S6-2       | SD1 Lane B            | SGMII      | QSGMIIb |
+| S6-3       | SD1 Lane A            | SGMII      | XFI2    |
+| S6-4       | SD1 Lane C            | PCIe       | SGMII   |
+|            |                       |            |         |
+| S8-1       | SD1 Lane D            | PCIe       | S8-2    |
+| S8-2       | SD1 Lane D            | SATA       | MPCIe   |
+| S8-3       | Demuxing              | off        | on      |
+| S8-4       | SD1 Refclk 1          | 156.25 Mhz | 125 Mhz |
+|            |                       |            |         |
+| S7-3       | QSGMIIb Phy 2 CLK Sel | 156.25 MHz | 125 Mhz |
+| S7-4       | QSGMIIb Phy 2 Config  | QSGMII     | SGMII   |
+|            |                       |            |         |
+| S10-1      | DVDD                  | 3.3V       | 1.8V    |
+| S10-2      | EVDD                  | 3.3V       | 1.8V    |
+|            |                       |            |         |
+| S5-1       | SD-Card / eMMC        | eMMC       | SD-Card |
+
+### TQMLS1046A and TQMLS1088A
 
 | DIP-Switch | Function              | On         | Off     |
 |------------|-----------------------|------------|---------|

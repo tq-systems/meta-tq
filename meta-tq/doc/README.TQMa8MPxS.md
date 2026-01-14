@@ -126,18 +126,12 @@ _Only mainline kernel supported_
     configuration uses DHCP with fallback. Has to be adjusted if needed.
 * USB Host
   * USB Superspeed U3 powersave mode is broken
-  * U-Boot: some USB stick types are not working correctly in U-Boot.
-    After `usb reset` they may fail to enumerate correctly or causing
-    a system reset during enumeration with errors like:
-    ```
-    WARN halted endpoint, queueing URB anyway.
-    Unexpected XHCI event TRB, skipping... (fbf120f0 00000000 13000000 03008401)
-    BUG at drivers/usb/host/xhci-ring.c:496/abort_td()!
-    BUG!
-    �esetting ...
-    ```
+  * Enumeration of USB devices may fail with different error conditions.
+
+    This is caused by erroneous overcurrent detection. As a result this sometimes
+    triggers CPU reset in U-Boot caused by exceptions in USB stack.
 * USB 2.0 DRD (X4):
-  * Linux: no detection of USB devices in host mode
+  * Linux: no detection of USB devices in host mode (hardware limitation on SoM)
   * U-Boot: limited to peripheral in (dual role not supported by upstream DWC3 driver)
 * USB 3.0 micro (X3)
   * peripheral mode not supported (hardware limitation on SoM, connected to Hub)
@@ -160,6 +154,12 @@ _Only mainline kernel supported_
 * U-Boot: watchdog will reset the system after using `wdt start [timeout]`.  
   Watchdog is enabled but not configured for automatic servicing.
   If needed, `CONFIG_WATCHDOG` can be activated in defconfig.
+* U-Boot: not booting when building with secure boot enabled. With updating to NXP base v2024.04
+  the size of SPL is larger than with older versions. This requires to build with only one
+  RAM configuration enabled. As example on how to add this for TQMa8MPxS, see `TQMA8MPXL_RAM_SINGLE_2GB`
+  as example for TQMa8MPxL and use it instead of `TQMA8MPXS_RAM_MULTI`
+  in U-Boot defconfig. Other config settings can easily be added.
+* Wake-Up via RTC currently does not work
 
 ## Build Artifacts
 

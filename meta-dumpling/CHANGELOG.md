@@ -33,7 +33,7 @@ Releases are named with the following scheme:
   ("recipes-graphics: Add weston fix for SGX from meta-arago") must be used
   for weston to work on these platforms now.
 
-## scarthgap.TQ.ARM.BSP.0006 (not released yet)
+## scarthgap.TQ.ARM.BSP.0006
 
 ## scarthgap.TQ.ARM.BSP.0005
 
