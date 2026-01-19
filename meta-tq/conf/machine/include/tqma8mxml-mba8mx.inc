@@ -3,9 +3,6 @@
 require conf/machine/include/tqma8mxml.inc
 require conf/machine/include/mba8mx-common.inc
 
-# Set u-boot DTB
-UBOOT_DTB_NAME = "imx8mm-mba8mx.dtb"
-
 KERNEL_DEVICETREE = "\
     freescale/imx8mm-tqma8mqml-mba8mx.dtb \
 "
