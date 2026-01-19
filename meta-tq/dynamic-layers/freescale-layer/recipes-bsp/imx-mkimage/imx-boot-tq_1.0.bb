@@ -53,7 +53,6 @@ do_compile[depends] += "\
     ${IMX_DEFAULT_ATF_PROVIDER}:do_deploy \
     ${@' '.join('%s:do_deploy' % r for r in '${IMX_EXTRA_FIRMWARE}'.split() )} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os:do_deploy', '', d)} \
-    virtual/bootloader:do_deploy \
 "
 
 SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
@@ -64,8 +63,9 @@ OEI_NAME ?= "oei-${OEI_CORE}-*.bin"
 ATF_MACHINE_NAME ?= "bl31-${ATF_PLATFORM}.bin"
 ATF_MACHINE_NAME:append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-optee', '', d)}"
 
-UBOOT_NAME = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
-UBOOT_SPL_NAME = "${@os.path.basename(d.getVar("SPL_BINARY"))}-${MACHINE}-${UBOOT_CONFIG}"
+# Defaults from uboot-sign.bbclass
+UBOOT_DTB_BINARY ?= "u-boot.dtb"
+UBOOT_DTB_SIGNED ?= "${UBOOT_DTB_BINARY}-signed"
 
 TOOLS_NAME ?= "mkimage_imx8"
 
@@ -132,10 +132,10 @@ compile_prepare_mx8_common() {
     cp "${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}"          "${BOOT_STAGING}"
     cp "${DEPLOY_DIR_IMAGE}/${SC_FIRMWARE_NAME}"            "${BOOT_STAGING}/scfw_tcm.bin"
 
-    cp "${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type}" "${BOOT_STAGING}/u-boot.bin"
+    cp "${RECIPE_SYSROOT}/boot/u-boot.bin-${type}" "${BOOT_STAGING}/u-boot.bin"
     rm -f "${BOOT_STAGING}/u-boot-spl.bin"
-    if [ -e "${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type}" ] ; then
-        cp "${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type}" "${BOOT_STAGING}/u-boot-spl.bin"
+    if [ -e "${RECIPE_SYSROOT}/boot/u-boot-spl.bin-${type}" ] ; then
+        cp "${RECIPE_SYSROOT}/boot/u-boot-spl.bin-${type}" "${BOOT_STAGING}/u-boot-spl.bin"
     fi
 }
 
@@ -159,13 +159,14 @@ compile_prepare:mx8m-generic-bsp() {
     cp "${DEPLOY_DIR_IMAGE}/signed_dp_imx8m.bin"             "${BOOT_STAGING}"
     cp "${DEPLOY_DIR_IMAGE}/signed_hdmi_imx8m.bin"           "${BOOT_STAGING}"
 
-    for dtb in ${UBOOT_DTB_NAME}; do
-        cp "${DEPLOY_DIR_IMAGE}/u-boot-${dtb}-${MACHINE}-${type}" \
-                                                         "${BOOT_STAGING}/${dtb}"
-    done
-    cp "${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type}" "${BOOT_STAGING}/u-boot-spl.bin"
-    cp "${DEPLOY_DIR_IMAGE}/u-boot-nodtb.bin-${MACHINE}-${type}" "${BOOT_STAGING}/u-boot-nodtb.bin"
-    cp "${DEPLOY_DIR_IMAGE}/u-boot-${MACHINE}.bin-${type}" "${BOOT_STAGING}/u-boot.bin"
+    if [ "${UBOOT_SIGN_ENABLE}" = 1 ]; then
+        cp "${RECIPE_SYSROOT}/boot/${UBOOT_DTB_SIGNED}-${type}" "${BOOT_STAGING}/u-boot.dtb"
+    else
+        cp "${RECIPE_SYSROOT}/boot/${UBOOT_DTB_BINARY}-${type}" "${BOOT_STAGING}/u-boot.dtb"
+    fi
+    cp "${RECIPE_SYSROOT}/boot/u-boot-spl.bin-${type}" "${BOOT_STAGING}/u-boot-spl.bin"
+    cp "${RECIPE_SYSROOT}/boot/u-boot-nodtb.bin-${type}" "${BOOT_STAGING}/u-boot-nodtb.bin"
+    cp "${RECIPE_SYSROOT}/boot/u-boot.bin-${type}" "${BOOT_STAGING}/u-boot.bin"
 }
 
 compile_prepare:mx8x-generic-bsp() {
@@ -183,8 +184,8 @@ compile_prepare_mx9_common() {
     done
     cp "${DEPLOY_DIR_IMAGE}/${SECO_FIRMWARE_NAME}"          "${BOOT_STAGING}/"
 
-    cp "${DEPLOY_DIR_IMAGE}/u-boot-spl.bin-${MACHINE}-${type}" "${BOOT_STAGING}/u-boot-spl.bin"
-    cp "${DEPLOY_DIR_IMAGE}/u-boot.bin-${MACHINE}-${type}" "${BOOT_STAGING}/u-boot.bin"
+    cp "${RECIPE_SYSROOT}/boot/u-boot-spl.bin-${type}" "${BOOT_STAGING}/u-boot-spl.bin"
+    cp "${RECIPE_SYSROOT}/boot/u-boot.bin-${type}" "${BOOT_STAGING}/u-boot.bin"
 }
 
 compile_prepare:mx9-generic-bsp() {
@@ -229,7 +230,7 @@ generate_habinfo_hab4() {
     esac
 
     echo -n 'FIT_HAB_BLOCK="'
-    oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} dtbs=${UBOOT_DTB_NAME} -s ${print_fit_hab_target}
+    oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} dtbs=u-boot.dtb -s ${print_fit_hab_target}
     echo '"'
 }
 
@@ -393,7 +394,7 @@ do_compile() {
             if [ "$target" = "flash_linux_m4_no_v2x" ]; then
                 # Special target build for i.MX 8DXL with V2X off
                 bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} V2X=NO ${target}"
-                oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} V2X=NO dtbs=${UBOOT_DTB_NAME} flash_linux_m4
+                oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} V2X=NO dtbs=u-boot.dtb flash_linux_m4
             else
                 if ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'true', 'false', d)} \
                    && imx_hab_check_keys_configured \
@@ -404,11 +405,11 @@ do_compile() {
                     # building flash.bin.
                     imx_bl3x_container="u-boot-atf-container.img"
                     bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} ${imx_bl3x_container}"
-                    oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} dtbs=${UBOOT_DTB_NAME} ${imx_bl3x_container}
+                    oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} dtbs=u-boot.dtb ${imx_bl3x_container}
                     compile_finish "$imx_bl3x_container" "$config"
                 fi
                 bbnote "building ${IMX_BOOT_SOC_TARGET} - ${REV_OPTION} ${MKIMAGE_EXTRA_ARGS} ${target}"
-                oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} ${MKIMAGE_EXTRA_ARGS} dtbs=${UBOOT_DTB_NAME} ${target}
+                oe_runmake SOC=${IMX_BOOT_SOC_TARGET} ${REV_OPTION} ${MKIMAGE_EXTRA_ARGS} dtbs=u-boot.dtb ${target}
             fi
 
             if [ -e "${BOOT_STAGING}/flash.bin" ]; then
