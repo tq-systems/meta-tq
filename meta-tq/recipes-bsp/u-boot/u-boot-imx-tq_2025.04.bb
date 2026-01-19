@@ -5,7 +5,6 @@
 
 require recipes-bsp/u-boot/u-boot.inc
 require u-boot-tq.inc
-require u-boot-bootstream-deploy.inc
 
 DESCRIPTION = "U-Boot for TQ-Systems GmbH NXP i.MX9 based SOM"
 
