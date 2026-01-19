@@ -11,6 +11,9 @@ Releases are named with the following scheme:
 
 ### Added
 
+* u-boot-imx-tq-2024.04:
+  * TQMa8MPxL / TQMa8MPxS / TQMa91xx / TQMa93xx: distro boot as default
+  * TQMa8MPxL / TQMa8MPxS / TQMa91xx / TQMa93xx: distro boot support for SPI-NOR
 * u-boot-tq-2025.10: new recipe (supports TQMa62xx[L]/TQMa64xxL/TQMa67xx[L])
 * TQMa91xxCA / TQMa91xxCA: add board support for MBa93xxCA
 
@@ -43,6 +46,8 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* u-boot-imx-tq-2024.04:
+  * TQMa8MPxL / TQMa8MPxS: do not override CONFIG_SYS_BOOTM_LEN
 * TQMa62xx[L]: Add support for 1400MHz CPU frequency (in PMIC configurations with 0.85V core
   voltage)
 * TQMa67xx[L]/MBa67xx: Add support for SoM and Starterkit revisions 02xx, drop support for
@@ -87,7 +92,7 @@ Releases are named with the following scheme:
 * linux-tq-6.12:
   * TQMa8MPxL / TQMa8MPxS / TQMa93xx / TQMLS10xxA / TQMLX2160A / TQMLS102xA
     * allow using truested keys from different providers: CAAM, TPM, TEE
-    * Integrate stable fixes up to tag 6.12.61
+    * Integrate stable fixes up to tag 6.12.64
   * TQMa8MPxS
 
     Add Dual LVDS devicetrees (AUO G133HAN.01, AUO G185HAN.01)
@@ -108,7 +113,35 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* linux-tq_6.12:
+  * TQMa8MPxS: fix SD card reset
+
+    Implement long reset pulse to guarantee a clean reset of the card to bring
+    cards out of UHS signalling. Otherwise a card may not be detected.
+  * TQMa93xx: fix eMMC detection at low temperatures
+
+  At temperatures < -25°C eMMC data errors may be detected and detection only works
+  with a retry. A warning in bootlog will be seen in this case.
+  Detection works as expected with optimized pad configuration.
+* linux-imx-tq_6.6:
+  * TQMa91xx / TQMa93xx: fix eMMC detection at low temperatures
+
+  At temperatures < -25°C eMMC data errors may be detected and detection only works
+  with a retry. A warning in bootlog will be seen in this case.
+  Detection works as expected with optimized pad configuration.
 * u-boot-imx-tq_2024.04:
+  * TQMa8MPxL / TQMa8MPxS / TQMa91xx / TQMa93xx: avoid address conflicts for boot scripts
+
+    Select addresses in env to prevent overrides for use cases like PXE boot.
+  * TQMa8MPxS: fix SD card reset
+
+    Implement long reset pulse to guarantee a clean reset of the card to bring
+    cards out of UHS signalling. Otherwise a card may not be detected.
+  * TQMa8MPxL / TQMa8MPxS: fix secure boot for multi DDR config build
+
+    When enabling additional features, SPL size with 4 DDR configs enabled
+    does not fit in SRAM. All DDR configs have the same board specific `ddrphy_trained_csr`
+    data. Share the data to save space for SPL.
   * TQMa8MPxL / TQMa8MPxS / TQMa91xx / TQMa93xx: enable cyclic watchdog service
 
     When watchdog is started but cyclic service is not configured the system will
