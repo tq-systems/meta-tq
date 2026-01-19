@@ -11,7 +11,7 @@ DESCRIPTION = "U-Boot for TQ-Systems GmbH NXP i.MX8MP / i.MX9 based SOM"
 
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=2ca5f2c35c8cc335f0a19756634782f1"
 
-SRCREV = "10b4e4e474121a0b62e4041572e3c00705b9636c"
+SRCREV = "387df314e846b80f08fab778a6aea53fdbab1ab9"
 SRCBRANCH = "TQM-lf_v2024.04"
 
 SRC_URI:append:nxp-ahab = " ${@bb.utils.contains('DISTRO_FEATURES', 'secure', 'file://imx-hab.cfg', '', d)}"
