@@ -45,7 +45,6 @@ SRC_URI:aarch64 = "\
     file://features/usb.cfg \
     file://gpio-enablement.cfg \
     file://imx8m-platform-support.cfg \
-    file://imx93-platform-support.cfg \
     file://input-devices.cfg \
     file://local-version.cfg \
     file://network-support.cfg \
