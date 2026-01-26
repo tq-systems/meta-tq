@@ -61,6 +61,10 @@ Releases are named with the following scheme:
 * imx-boot-tq: fix signature verification with `UBOOT_SIGN_ENABLE`
 * tq-bootscripts: sign scripts when `UBOOT_SIGN_ENABLE` is set
 * u-boot-imx-tq-2024.04:
+  * TQMa93xx/TQMa91xx: update DDR config and prepare for more variants
+
+    Use configurations generated with up to date tools from NXP and use shared ddrphy_trained_csr
+    to decrease space needed for SPL as already implemented for TQMa8MPxL
   * TQMa8MPxL / TQMa8MPxS: do not override CONFIG_SYS_BOOTM_LEN
 * TQMa62xx[L]: Add support for 1400MHz CPU frequency (in PMIC configurations with 0.85V core
   voltage)
@@ -106,13 +110,15 @@ Releases are named with the following scheme:
 * linux-tq-6.12:
   * TQMa8MPxL / TQMa8MPxS / TQMa93xx / TQMLS10xxA / TQMLX2160A / TQMLS102xA
     * allow using truested keys from different providers: CAAM, TPM, TEE
-    * Integrate stable fixes up to tag 6.12.64
+    * Integrate stable fixes up to tag 6.12.66
   * TQMa8MPxS
 
     Add Dual LVDS devicetrees (AUO G133HAN.01, AUO G185HAN.01)
 * linux-rt-tq-6.12: TQMa8MPxL / TQMa8MPxS / TQMa93xx / TQMLS10xxA / TQMLX2160A
 
-  Integrate stable fixes up to tag v6.12.49-rt13
+  * Integrate fixes from TQ Systems downstream branch
+  * Integrate stable fixes up to tag v6.12.64
+  * Integrate stable-rt fixes up to tag v6.12.57-rt14
 * linux-imx-tq-6.6:
   * TQMa8Mx / TQMa8MxML / TQMa8MxNL / TQMa8Xx / TQMa8XxS / TQMa8x:
     * allow using truested keys from different providers: CAAM, TPM, TEE
