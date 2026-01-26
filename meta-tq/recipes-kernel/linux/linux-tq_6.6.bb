@@ -3,7 +3,7 @@ SUMMARY = "Linux kernel based on linux stable 6.6.y for TQ-Systems GmbH i.MX and
 require linux-tq-6.6.inc
 
 KBRANCH = "TQM-linux-v6.6.y"
-SRCREV = "c60a2575cec25176c06d9f66d562d76ecc86cfe9"
+SRCREV = "b409fef0acc126aa6c617195d70fe939efea3e66"
 
 # LINUX_VERSION must match version from Makefile
-LINUX_VERSION = "${LINUX_RELEASE}.119"
+LINUX_VERSION = "${LINUX_RELEASE}.121"
