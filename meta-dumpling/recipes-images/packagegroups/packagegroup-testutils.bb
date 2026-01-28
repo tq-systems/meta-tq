@@ -38,6 +38,7 @@ RDEPENDS:${PN} = "\
     ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', ' glmark2', '', d)} \
     htop \
     iotop \
+    kernel-selftest \
     libiio-tests \
     linux-serial-test \
     mc \
