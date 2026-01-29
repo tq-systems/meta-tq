@@ -26,6 +26,7 @@ KERNEL_CONFIG_FILES:imx ?= "\
     file://features/rm-non-tq-platforms.cfg \
     file://features/ubi.cfg \
     file://features/usb.cfg \
+    file://features/ptp-1588.cfg \
     file://features/pwm.cfg \
     file://features/trusted-keys.cfg \
 "
