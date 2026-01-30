@@ -19,12 +19,18 @@ Please see the corresponding sections below for details.
 
 ### Dependencies
 
-This layer in the checked out branch depends on:
+This layer in the checked out branch depends on [bitbake](https://git.openembedded.org/bitbake) and
+the following layers:
 
-URI: https://git.yoctoproject.org/poky  
-branch: scarthgap  
-revision: HEAD  
-layers: meta, meta-poky  
+| URI                                             | branch     | layer              | remark                            |
+| :---------------------------------------------- | :--------: | :----------------: | :-------------------------------: |
+| https://git.openembedded.org/openembedded-core  | scarthgap  | meta               |                                   |
+| https://git.yoctoproject.org/git/meta-freescale | scarthgap  | meta-freescale     | mandatory for Layerscape and i.MX |
+| https://git.yoctoproject.org/git/meta-ti        | scarthgap  | meta-ti-bsp        | mandatory for TI SOC              |
+| https://git.yoctoproject.org/git/meta-arm       | scarthgap  | meta-arm           |                                   |
+| https://git.yoctoproject.org/git/meta-arm       | scarthgap  | meta-arm-toolchain |                                   |
+
+For tested revisions of the referenced layers see BSP setup and release notes.
 
 #### Notes for machines with i.MX or Layerscape CPU
 
@@ -49,11 +55,6 @@ is _mandatory_ - see [table](#supported-machines).
 * LS1043A / LS1046A / LS1088A
 * LX2160A
 
-URI: https://git.yoctoproject.org/git/meta-freescale  
-branch: scarthgap  
-revision: tested with HEAD, at least commit c3630a3aca9f ("Merge pull request #2232 from Freescale/backport-2195-to-scarthgap")
-layers: meta-freeescale  
-
 **Note:** For i.MX95 the `meta-arm` and `meta-arm-toolchain` layers
 are needed too, since boot firmware recipe depends on them.
 
@@ -67,21 +68,12 @@ tested with machines in `meta-tq`:
 
 #### Notes for machines with TI CPU
 
-Optionally the layer can make use of features from layers in `meta-ti` if using machines
-with the following CPU families from TI  - see [table](#supported-machines):
-
-* AM355x
-
 For machines based on following CPU families from TI usage of `meta-ti-bsp` layer
 is _mandatory_ - see [table](#supported-machines):
 
+* AM355x
 * AM62xx
 * AM64xx
-
-URI: https://git.yoctoproject.org/git/meta-ti  
-branch: scarthgap  
-revision: at least commit 11a60314cf00 (tag 11.01.12)
-layers: meta-ti-bsp  
 
 **Note:** If using the `meta-ti-bsp` layer from `meta-ti`, the `meta-arm` and `meta-arm-toolchain` layers
 are needed too, since `meta-ti-bsp` depends on them.
