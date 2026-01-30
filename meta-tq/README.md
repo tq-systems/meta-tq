@@ -42,6 +42,7 @@ is _mandatory_ - see [table](#supported-machines).
 * i.MX8MP
 * i.MX91
 * i.MX93
+* i.MX95
 * LS1012A
 * LS102xA
 * LS1028A (incl. LS1017A / LS1018A / LS1027A)
@@ -52,6 +53,9 @@ URI: https://git.yoctoproject.org/git/meta-freescale
 branch: scarthgap  
 revision: tested with HEAD, at least commit c3630a3aca9f ("Merge pull request #2232 from Freescale/backport-2195-to-scarthgap")
 layers: meta-freeescale  
+
+**Note:** For i.MX95 the `meta-arm` and `meta-arm-toolchain` layers
+are needed too, since boot firmware recipe depends on them.
 
 **Attention:** The distros defined in `meta-freescale-distro` layer are not
 tested with machines in `meta-tq`:
@@ -194,6 +198,7 @@ Support for the following machines is contained in this version:
 | [y]    | i.MX93 11x11            | TQMa93\[3,5\]\[1,2\]LA  | MBa93xxCA      | tqma93xx-mba93xxca               | TQMa93\[3,5\]\[1,2\]LA on adaptor, 1 / 1.5 / 2 GiB RAM, HW REV.010x / MBa93xxCA REV.020x                                                                     |
 | [y]    | i.MX93 11x11            | TQMa93\[3,5\]\[1,2\]LA  | MBa93xxLA      | tqma93xxla-mba93xxla             | TQMa93\[3,5\]\[1,2\]LA, 1 / 1.5 / 2 GiB RAM, HW REV.010x / MBa93xxLA REV.020x                                                                                |
 | [p]    | i.MX93 11x11            | TQMa93\[3,5\]\[1,2\]LA  | MBa93xxLA-MINI | tqma93xxla-mba93xxla-mini        | TQMa93\[3,5\]\[1,2\]LA, 1 / 1.5 / 2 GiB RAM, HW REV.010x / MBa93xxLA-MINI REV.020x                                                                           |
+| [p]    | i.MX95 19x19            | TQMa95xxLA              | MBa95xxCA      | tqma95xxla-4gb-mba95xxca         | TQMa95xxLA, 4 GiB RAM, HW REV.010x                                                                                                                           |
 | [p]    | i.MX95 19x19            | TQMa95xxSA              | MB-SMARC-2     | tqma95xxsa-2gb-mb-smarc-2        | TQMa95xxSA, 2 GiB RAM, HW REV.010x                                                                                                                           |
 | [p]    | i.MX95 19x19            | TQMa95xxSA              | MB-SMARC-2     | tqma95xxsa-4gb-mb-smarc-2        | TQMa95xxSA, 4 GiB RAM, HW REV.010x                                                                                                                           |
 | [y]    | LS1012A                 | TQMLS1012AL             | MBLS1012AL     | tqmls1012al-mbls1012al           | TQMLS1012AL HW REV.010x ... 020x / 512 MiB / 1GiB RAM / MBLS1012AL HW REV.020x                                                                               |
@@ -223,10 +228,13 @@ Support for the following machines is contained in this version:
 | [ ]    | T1022                   | TQMT1022                | STKT104x       | tqmt1022-64bit-stkt104x          | TQMT1022 HW REV.020x with 2GiB RAM                                                                                                                           |
 | [ ]    | T1024                   | TQMT1024                | STKT104x       | tqmt1024-64bit-stkt104x          | TQMT1024 HW REV.020x with 2GiB RAM                                                                                                                           |
 
+Definition of support status:
 
-\[y\]: fully supported  
-\[b\]: build tested only  
-\[p\]: prerelease  
+| Mark| Meaning                          |
+|-----|----------------------------------|
+|\[y\]| fully supported                  |
+|\[p\]| prerelease                       |
+|\[b\]| builds but not completely tested |
 
 **Note:** for TQMa6UL1 and baseboards using this module variant with i.MX6ULG1
           a dedicated device tree is supplied
