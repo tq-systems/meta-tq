@@ -11,6 +11,10 @@ Releases are named with the following scheme:
 
 ### Added
 
+* TQMa95xxLA: add board support for MBa95xxCA
+
+  This adds the board support based on the same recipe versions used for
+  TQMa95xxSA
 * u-boot-imx-tq-2024.04:
   * TQMa8MPxL / TQMa8MPxS / TQMa91xx / TQMa93xx: distro boot as default
   * TQMa8MPxL / TQMa8MPxS / TQMa91xx / TQMa93xx: distro boot support for SPI-NOR
@@ -20,7 +24,7 @@ Releases are named with the following scheme:
   board support is available with imx / nxp flavour only and uses `linux-imx-tq-6.6`
 * TQMa95xxSA: add board support for MB-SMARC-2
 
-  This adds new versions for `u-boot-imx-rq` (based on NXP lf_v2025.04) and
+  This adds new versions for `u-boot-imx-tq` (based on NXP lf_v2025.04) and
   `linux-imx-tq` (based on NXP + FSLC 6.12-2.0.x-imx)
 * TQMa93xxLA: add board support for MBa93xxLA-MINI
 
