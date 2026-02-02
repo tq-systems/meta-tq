@@ -88,7 +88,7 @@ are given:
 #### Boot a board
 
 Use the bootstream containing U-Boot capable of handling SDP together with
-UUU tool to boot a new / bricked board (see Artifacts section for your board for
+UUU tool to boot a new / bricked board (see Artefacts section for your board for
 the exact name of the bootstream image for uuu configuration):
 
 If using U-Boot with SPL:
@@ -107,7 +107,7 @@ sudo uuu <bootstream for uuu>
 
 Use the bootstream containing U-Boot capable of handling SDP together with
 UUU tool to boot a new / bricked board and use the booted system to programm
-the bootstream and the wic image to eMMC (see Artifacts section for your board
+the bootstream and the wic image to eMMC (see Artefacts section for your board
 for the exact names of the images to use):
 
 ```

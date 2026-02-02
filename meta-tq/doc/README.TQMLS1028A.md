@@ -108,9 +108,9 @@ case of overheating.
 * Linux: currently no out of the box support for Linux kernel on SPI-NOR
   * `tq-image-small-debug` image from `spaetzle` distribution is too large
 
-## Artifacts
+## Artefacts
 
-Artifacs can be found at the usual locations for bitbake:
+Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 * `atf/`
   * `bl2_flexspi_nor.pbl` Primary Boot Loader with RCW (1 GiB)
@@ -129,7 +129,7 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 
-Artifacts under `atf` can be used to manually update boot images on SOM or exchange them in WIC image.
+Artefacts under `atf` can be used to manually update boot images on SOM or exchange them in WIC image.
 
 ## Build-Time Configuration (default boot images for SPI-NOR and WIC)
 

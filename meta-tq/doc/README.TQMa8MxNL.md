@@ -150,9 +150,9 @@ _MBa8x HW Rev.030x only_
   * OV9281: gstreamer: capture not starting out of the box, need to use  `yavta` to
     capture some frames, `gstreamer` starts afterwards
 
-## Build Artifacts
+## Build Artefacts
 
-Artifacs can be found at the usual locations for bitbake:
+Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs
@@ -465,7 +465,7 @@ gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-bayer,format=rggb10le,bpp=10
 ### Cortex M7
 
 Demos are compiled to use UART4 (MBa8Mx X17:56,58 + X17:54 for GND) with 115200 8N1.
-For demos available in the BSP and the device tree to be used see [artifacts section](#build-artifacts).
+For demos available in the BSP and the device tree to be used see [artefacts section](#build-artefacts).
 
 Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8M.md).
 
@@ -489,7 +489,7 @@ Change by switching from GPIO2_1 (SEL_USB_HUB_B)
 #### Linux
 
 Default dtb is configured for USB Host support via USB hub. A special dtb
-is provided for USB dual role support, see see [artifacts section](#build-artifacts).
+is provided for USB dual role support, see see [artefacts section](#build-artefacts).
 
 ### High Assurance Boot (Secure Boot)
 

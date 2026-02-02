@@ -161,9 +161,9 @@ _Only mainline kernel supported_
   in U-Boot defconfig. Other config settings can easily be added.
 * Wake-Up via RTC currently does not work
 
-## Build Artifacts
+## Build Artefacts
 
-Artifacs can be found at the usual locations for bitbake:
+Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 | device tree name                                  | description                                        |

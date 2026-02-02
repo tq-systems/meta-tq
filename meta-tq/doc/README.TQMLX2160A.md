@@ -119,7 +119,7 @@ details
 * In BSP, suspend to disk is not supported, despite CONFIG_HIBERNATION being
   compiled into the kernel.
 
-## Build Artifacts
+## Build Artefacts
 
 * atf/
   * ddr_fip.bin: firmware for DDR controller PHY

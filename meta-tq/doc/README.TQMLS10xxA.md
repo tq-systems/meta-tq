@@ -118,7 +118,7 @@ SD-Card and eMMC are mutually exclusive. DIP-Switch S5 controls SD-Card/eMMC
 access. With S5-1 `ON` eMMC on TQMLS10xxA module is accesible. With S5-1 `OFF`
 SD-Card on MBLS10xxA is accessible.
 
-## Build Artifacts
+## Build Artefacts
 
 ### TQMLS1043A
 

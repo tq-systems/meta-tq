@@ -253,9 +253,9 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   RAM configuration enabled. For example, use `TQMA8MPXL_RAM_SINGLE_2GB` instead of `TQMA8MPXL_RAM_MULTI`
   in U-Boot defconfig. Other config settings can easily be added.
 
-## Build Artifacts
+## Build Artefacts
 
-Artifacs can be found at the usual locations for bitbake:
+Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 ### MBa8MPxL specific
@@ -425,7 +425,7 @@ See [here](./README.CAN.md) for details about configurating of CAN interfaces.
 ### Cortex M7
 
 Demos are compiled to use UART3 with 115200 8N1.
-For demos available in the BSP and the device tree to be used see [artifacts section](#build-artifacts).
+For demos available in the BSP and the device tree to be used see [artefacts section](#build-artefacts).
 
 Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8M.md).
 

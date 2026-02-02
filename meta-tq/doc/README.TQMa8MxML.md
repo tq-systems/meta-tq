@@ -143,7 +143,7 @@ _MBa8Mx HW Rev.030x only_
   running at lower DDR frequencies does not work in this version of BSP.
 * Default setting for `fdt_file` in u-boot from older BSP version does
   not match kernel naming scheme since linux 5.10. Use U-Boot from this
-  BSP release or see [Build Artifacts](#artifacts) for complete
+  BSP release or see [Build Artefacts](#artefacts) for complete
   list of supported Device Tree files.
 * USB hub disconnects after suspend
 * LVDS shows wrong colors on older Tianma display kit (HW issue on older
@@ -156,9 +156,9 @@ _MBa8Mx HW Rev.030x only_
   * IMX327: bayer support with 12 Bit does not work at the moment, only 10 Bit with
     1280x720 is tested with gstreamer
 
-## Artifacts
+## Artefacts
 
-Artifacs can be found at the usual locations for bitbake:
+Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs
@@ -501,7 +501,7 @@ gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-bayer,format=rggb10le,bpp=10
 ### Cortex M4
 
 Demos are compiled to use UART4 (MBa8Mx X17:56,58 + X17:54 for GND) with 115200 8N1.
-For demos available in the BSP and the device tree to be used see [artifacts section](#build-artifacts).
+For demos available in the BSP and the device tree to be used see [artefacts section](#build-artefacts).
 
 Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8M.md).
 

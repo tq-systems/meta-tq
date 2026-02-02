@@ -134,9 +134,9 @@ Support matrix for `MBa91xxCA` REV.010x / `MBa93xxCA` REV.020x
     The UDC gadget driver warns not only for failed pinmux but also when no pinmux group
     is assigned in device tree.
 
-## Build Artifacts
+## Build Artefacts
 
-Artifacs can be found at the usual locations for bitbake:
+Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs

@@ -123,9 +123,9 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * Boot from SPI-NOR is currently unsupported (needs redesign)
 * Currently no separate boot image for serial download
 
-## Artifacts
+## Artefacts
 
-Artifacs can be found at the usual locations for bitbake:
+Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * imx95-tqma9596sa\*.dtb: device tree blobs for TQMa95xxSA

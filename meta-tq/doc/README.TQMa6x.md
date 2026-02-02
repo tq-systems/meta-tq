@@ -92,9 +92,9 @@ yocto scarthgap. For Linux 6.1 support use yocto kirkstone.
   Workaround: enable `GPIO_LED` support and other releated settings. Will be fixed in next
   release.
 
-## Artifacts
+## Artefacts
 
-Artifacs can be found at the usual locations for bitbake:
+Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs

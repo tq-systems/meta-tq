@@ -118,9 +118,9 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   - `tq-image-small-debug` image from `spaetzle` distribution is too large
 - RGB displays stay black although drivers are initialized properly
 
-## Build Artifacts
+## Build Artefacts
 
-Artifacs can be found at the usual locations for bitbake:
+Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs

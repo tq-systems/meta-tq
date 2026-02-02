@@ -2,9 +2,9 @@
 
 [[_TOC_]]
 
-## Build artifacts
+## Build artefacts
 
-Artifacts can be found at:
+Artefacts can be found at:
 `deploy-ti/images/${MACHINE}`
 
 * fitImage: Combined kernel image with Device Trees and overlays
@@ -30,7 +30,7 @@ root filesystem you are currently running from.
 
 #### SD card / eMMC
 
-To program a complete system image, write the [WIC image](#build-artifacts) to
+To program a complete system image, write the [WIC image](#build-artefacts) to
 SD card / eMMC at offset 0. The following command can be used to write a file
 `/mnt/image.wic` to the eMMC:
 ```sh
@@ -58,7 +58,7 @@ mount -t ubifs ubi0:root /mnt
 When booting from eMMC / SD card, the bootloader and system firmware are loaded
 from a FAT partition (the first partition of the boot medium by default). They
 can be updated by replacing the files on this partition. See the
-[build artifacts](#build-artifacts) section for a list of relevant files.
+[build artefacts](#build-artefacts) section for a list of relevant files.
 
 For SPI-NOR boot, each stage is loaded from a fixed offset in the flash. The MTD
 partition list is configured to match these offsets.

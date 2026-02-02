@@ -203,9 +203,9 @@ features provided by TQMa93xx are supported. The differences are listed below:
 * Cortex-M33 will not be supported
   * it's technically possible, but there is no dedicated UART available
 
-## Build Artifacts
+## Build Artefacts
 
-Artifacs can be found at the usual locations for bitbake:
+Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * \*.dtb: device tree blobs
