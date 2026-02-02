@@ -67,7 +67,7 @@ MACHINE_FEATURES += "\
 KERNEL_IMAGETYPE = "fitImage"
 # override default from conf/machine/include/imx-base.inc
 KERNEL_IMAGETYPE:mx9-generic-bsp = "fitImage"
-KERNEL_IMAGETYPES = "${KERNEL_IMAGETYPE} ${@bb.utils.contains('DISTRO_FEATURES', 'tiny', '', 'Image', d)}"
+KERNEL_IMAGETYPES = "${KERNEL_IMAGETYPE} Image"
 
 PREFERRED_PROVIDER_imx-boot ?= "imx-boot-tq"
 PREFERRED_PROVIDER_virtual/kernel:mx93-nxp-bsp ?= "linux-imx-tq"
