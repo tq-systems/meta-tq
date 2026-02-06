@@ -28,7 +28,8 @@ Support matrix for `MBa91xxCA` REV.010x / `MBa93xxCA` REV.020x
 
 |                    Feature                      | u-boot-imx-tq_2024.04 |
 | :---------------------------------------------: | :-------------------: |
-|                  RAM configs                    |        1 GiB          |
+|                  RAM configs                    |      0.5 / 1 GiB      |
+|                  inline ECC                     |          x            |
 |                 CPU variants                    |        i.MX91         |
 |                 Fuses / OCRAM                   |          x            |
 |   speed grade / temperature grade detection     |          x            |
@@ -118,6 +119,10 @@ Support matrix for `MBa91xxCA` REV.010x / `MBa93xxCA` REV.020x
 
 ## Known Issues
 
+* 512 MiB: booting Linux with default environment not possible
+
+  The addresses used in default environment and in BSP FIT image generation
+  expect variants with 1 GiB or more RAM. Can be fixed manually.
 * NFS boot: The interface to be used for NFS boot (`netdev`) has inverted order, compared
   to u-boot and Linux. Device renaming in Linux happens after mounting rootfs.
 * U-Boot:
@@ -128,9 +133,6 @@ Support matrix for `MBa91xxCA` REV.010x / `MBa93xxCA` REV.020x
   * boot from USB using `uuu` config displays misleading pinctrl / iomux warning.  
     The UDC gadget driver warns not only for failed pinmux but also when no pinmux group
     is assigned in device tree.
-  * watchdog will reset the system after using `wdt start [timeout]`.  
-    Watchdog is enabled but not configured for automatic servicing.
-    If needed, `CONFIG_WATCHDOG` can be activated in defconfig.
 
 ## Build Artifacts
 
@@ -146,6 +148,8 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 * imx-boot-${MACHINE}-sd.bin-flash\_singleboot: CortexA boot stream for SD / eMMC
 * imx-boot-${MACHINE}-sd.bin-flash\_singleboot\_flexspi: CortexA boot stream for FlexSPI
+* imx-boot-${MACHINE}-ecc.bin-flash\_spl\_uboot: boot stream with inline ECC for SD / eMMC
+* imx-boot-${MACHINE}-ecc.bin-flash\_evk\_flexspi: boot stream with inline ECC for FlexSPI
 * imx-boot-${MACHINE}-uuu.bin-flash\_singleboot: boot stream for UUU
 
 ## Boot DIP Switches
@@ -217,11 +221,47 @@ on your hardware setup.
 
 ### RS485
 
-TODO
+<!-- TODO -->
 
 ### High Assurance Boot (Secure Boot)
 
-TODO
+<!-- TODO -->
+
+### Inline ECC
+
+The i.MX91 DDR controller supports inline ECC, i.e. using part of RAM for
+ECC data without additional sideband RAM. To use this feature, a special boot
+stream is needed. The U-Boot in this boot stream will add a reserved memory
+node to the kernel device tree. The reserved region covers 1/8 of total RAM
+size and is located at the top of RAM. This region is used for storing ECC
+parity bits.
+
+To build the ECC boot stream, add the `ecc` configuration to `UBOOT_CONFIG`
+(added by default) and rebuild the boot stream:
+```
+bitbake imx-boot
+```
+
+Replace the current boot stream with the ECC boot stream on SD card or directly
+in the wic image:
+```
+dd if=imx-boot-${MACHINE}-ecc.bin-flash_spl_uboot of=/dev/<SD card device> bs=1K seek=32 conv=fsync
+# OR
+dd if=imx-boot-${MACHINE}-ecc.bin-flash_spl_uboot of=<path/to/wic/image> bs=1K seek=32 conv=notrunc
+```
+
+To test the ECC functionality, the following procedure can be used:
+
+Requirements:
+
+- Boot stream with ECC support: `UBOOT_CONFIG` contains `ecc` (enabled by default)
+- Synopsys EDAC support on Linux: `CONFIG_EDAC_SYNOPSYS=(y|m)`
+- User space access to all of `/dev/mem` for Linux: `CONFIG_STRICT_DEVMEM=n`
+- `devmem` executable in image
+
+Addresses:
+
+<!-- TODO -->
 
 ### Access U-Boot environment from Linux
 
