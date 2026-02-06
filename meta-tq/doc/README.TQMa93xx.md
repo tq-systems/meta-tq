@@ -36,6 +36,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | Feature                                          | MBa93xxCA  REV.020x   | MBa93xxLA  REV.020x   | MBa93xxLA-MINI REV.020x |
 | :----------------------------------------------: | :-------------------: | :-------------------: | :---------------------: |
 | RAM configs                                      |   1 / 1.5 / 2 GiB     |   1 / 1.5 / 2 GiB     |     1 / 1.5 / 2 GiB     |
+| inline ECC                                       |          x            |       x               |         x               |
 | CPU variants                                     |     i.MX93            |     i.MX93            |       i.MX93            |
 | Fuses / OCRAM                                    |       x               |       x               |         x               |
 | speed grade / temperature grade detection        |       x               |       x               |         x               |
@@ -67,7 +68,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | env settings for starting from TCM               |                       |                       |                         |
 | examples with UART3 as debug console             |                       |                       |                         | 
 
-**NOTE:** for MBa93xxLA-MINI REV.010x is only be used for IBPQ  customers will get REV.020x or later
+**NOTE:** for MBa93xxLA-MINI REV.010x is only be used for IBPQ. Customers will get REV.020x or later.
 
 **TODO or not tested / supported**
 
@@ -127,8 +128,6 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 |   Gray with Vision Components GmbH camera (Sensor OV9281)    |                  |                  |                 |
 | Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |                  |                  |                 |
 
-**NOTE** LVDS support for `linux-tq_6.12` on MBA93xxCA is missing. 
-
 ## TODO
 
 * MIPI-DSI
@@ -161,9 +160,6 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
   * boot from USB using `uuu` config displays misleading pinctrl / iomux warning.  
     The UDC gadget driver warns not only for faild pinmux but also when no pinmux group
     is assigned in device tree.
-  * watchdog will reset the system after using `wdt start [timeout]`.  
-    Watchdog is enabled but not configured for automatic servicing.
-    If needed, `CONFIG_WATCHDOG` can be activated in defconfig.
 * eth1 does not work after suspend, needs `ip link set down/up dev eth1` to be functional
 * When using `i2c probe` command in U-Boot all valid addresses respond instead of addresses
   used by a physical connected device.
@@ -190,7 +186,7 @@ LINUX_VERSION:tqma93xx = "${LINUX_RELEASE}.23"
 The SoM TQMa93xx can be mounted on MBa91xxCA as well. Due to the support for TQMa91xx not all
 features provided by TQMa93xx are supported. The differences are listed below:
 * Parallel Display support
-  * alternatively LVDS display support
+  * alternatively LVDS display support with LVDS serializer
 * No CAN2
 * No DisplayPort
 * No dedicated LVDS display port
@@ -222,6 +218,8 @@ Artifacs can be found at the usual locations for bitbake:
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
+* imx-boot-${MACHINE}-ecc.bin-flash\_spl\_uboot: boot stream with inline ECC for SD / eMMC
+* imx-boot-${MACHINE}-ecc.bin-flash\_evk\_flexspi: boot stream with inline ECC for FlexSPI
 * imx-boot-${MACHINE}-sd.bin-flash\_singleboot: CortexA boot stream for SD / eMMC
 * imx-boot-${MACHINE}-sd.bin-flash\_singleboot\_flexspi: CortexA boot stream for FlexSPI
 * imx-boot-${MACHINE}-uuu.bin-flash\_singleboot: boot stream for UUU
@@ -336,6 +334,42 @@ __Note:__ Due to API incompatibilities in the ethos-u driver stack and Cortex-M3
 ### High Assurance Boot (Secure Boot)
 
 See [i.MX High Assurance Boot](README.Verified-Boot.md).
+
+### Inline ECC
+
+The i.MX93 DDR controller supports inline ECC, i.e. using part of RAM for
+ECC data without additional sideband RAM. To use this feature, a special boot
+stream is needed. The U-Boot in this boot stream will add a reserved memory
+node to the kernel device tree. The reserved region covers 1/8 of total RAM
+size and is located at the top of RAM. This region is used for storing ECC
+parity bits.
+
+To build the ECC boot stream, add the `ecc` configuration to `UBOOT_CONFIG`
+(added by default) and rebuild the boot stream:
+```
+bitbake imx-boot
+```
+
+Replace the current boot stream with the ECC boot stream on SD card or directly
+in the wic image:
+```
+dd if=imx-boot-${MACHINE}-ecc.bin-flash_spl_uboot of=/dev/<SD card device> bs=1K seek=32 conv=fsync
+# OR
+dd if=imx-boot-${MACHINE}-ecc.bin-flash_spl_uboot of=<path/to/wic/image> bs=1K seek=32 conv=notrunc
+```
+
+To test the ECC functionality, the following procedure can be used:
+
+Requirements:
+
+- Boot stream with ECC support: `UBOOT_CONFIG` contains `ecc` (enabled by default)
+- Synopsys EDAC support on Linux: `CONFIG_EDAC_SYNOPSYS=(y|m)`
+- user space access to all of `/dev/mem` for Linux: `CONFIG_STRICT_DEVMEM=n`
+- `devmem` executable in image
+
+Addresses:
+
+<!-- TODO -->
 
 ### Access U-Boot environment from Linux
 
