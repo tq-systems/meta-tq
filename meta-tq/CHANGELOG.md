@@ -11,6 +11,9 @@ Releases are named with the following scheme:
 
 ### Added
 
+* u-boot-tq-2026.01: new recipe
+
+  Replaces u-boot-tq-2025.10 for TQMa62xx[L]/TQMa64xxL/TQMa67xx[L].
 * TQMa95xxLA: add board support for MBa95xxCA
 
   This adds the board support based on the same recipe versions used for
@@ -139,6 +142,10 @@ Releases are named with the following scheme:
 * linux-rt-tq-6.6: TQMa6 / TQMa6UL[L]x[L] / TQMa7 / TQMa8Mx / TQMa8MxML / TQMa8MxNL:
 
   Include stable fixes up to v6.6.106-rt61
+
+### Removed
+
+* u-boot-tq-2025.10: TQMa62xx[L]/TQMa64xxL/TQMa67xx[L] use u-boot-tq-2026.01 now
 
 ### Fixed
 

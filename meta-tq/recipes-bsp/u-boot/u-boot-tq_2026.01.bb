@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: MIT
-# Copyright (C) 2025 TQ-Systems GmbH <oss@ew.tq-group.com>, D-82229 Seefeld, Germany.
+# Copyright (C) 2026 TQ-Systems GmbH <oss@ew.tq-group.com>, D-82229 Seefeld, Germany.
 
 UBOOT_BASE_INC = "recipes-bsp/u-boot/u-boot.inc"
 UBOOT_BASE_INC:k3 = "recipes-bsp/u-boot/u-boot-ti.inc"
@@ -7,7 +7,7 @@ UBOOT_BASE_INC:k3r5 = "recipes-bsp/u-boot/u-boot-ti.inc"
 
 require ${UBOOT_BASE_INC}
 
-DESCRIPTION = "U-boot 2025.10 for TQ-Systems modules"
+DESCRIPTION = "U-boot 2026.01 for TQ-Systems modules"
 
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=2ca5f2c35c8cc335f0a19756634782f1"
 
@@ -21,8 +21,8 @@ require recipes-bsp/u-boot/u-boot-tq.inc
 
 UBOOT_INITIAL_ENV = "u-boot-initial-env"
 
-SRCBRANCH = "TQMaxx-u-boot-v2025.10"
-SRCREV = "8b28c8a5b601a45bbe440c104a6a1be141cbc456"
+SRCBRANCH = "TQMaxx-u-boot-v2026.01"
+SRCREV = "64bc975b0c96c67a29498c0e7aa77c4db34eaddb"
 
 DEPENDS += "python3-setuptools-native"
 
