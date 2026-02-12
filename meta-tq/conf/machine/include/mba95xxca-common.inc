@@ -31,20 +31,6 @@ MACHINE_FEATURES += "\
     wifi \
 "
 
-MACHINE_FIRMWARE += "\
-    firmware-nxp-wifi-nxp8801-sdio \
-    firmware-nxp-wifi-nxp8987-sdio \
-    firmware-nxp-wifi-nxp8997-pcie \
-    firmware-nxp-wifi-nxp8997-sdio \
-    firmware-nxp-wifi-nxp9098-pcie \
-    firmware-nxp-wifi-nxp9098-sdio \
-    firmware-nxp-wifi-nxpiw416-sdio \
-    firmware-nxp-wifi-nxpiw610-sdio \
-    firmware-nxp-wifi-nxpiw612-sdio \
-"
-
-## MACHINE_EXTRA_RRECOMMENDS += "kernel-module-nxp-wlan"
-
 #
 # fitImage Settings:
 # Kernel image offset in RAM:               16 MiB
