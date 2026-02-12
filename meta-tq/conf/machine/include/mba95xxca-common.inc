@@ -81,7 +81,7 @@ UBOOT_EXTLINUX_KERNEL_IMAGE_default = "../fitImage"
 UBOOT_EXTLINUX_MENU_DESCRIPTION_default = "${DISTRO_NAME} on ${MACHINE} (default)"
 
 UBOOT_EXTLINUX_KERNEL_IMAGE_lvds-tm070jdhg30 = \
-    "../fitImage#${FIT_CONF_PREFIX}imx95-tqma9596cla-mba95xxca.dtb#${FIT_CONF_PREFIX}imx95-tqma9596cla-mba95xxca-lvds-tm070jvhg33.dtbo"
+    "../fitImage#${FIT_CONF_PREFIX}imx95-tqma9596la-mba95xxca.dtb#${FIT_CONF_PREFIX}imx95-tqma9596cla-mba95xxca-lvds-tm070jvhg33.dtbo"
 UBOOT_EXTLINUX_MENU_DESCRIPTION_lvds-tm070jdhg30 = \
     "${DISTRO_NAME} on ${MACHINE} (LVDS display: TM070JDHG30)"
 
