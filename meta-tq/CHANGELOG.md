@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## scarthgap.TQ.ARM.BSP.0007 (not released yet)
+
 ### Added
 
 * u-boot-tq-2026.01: new recipe
