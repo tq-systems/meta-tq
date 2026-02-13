@@ -2,7 +2,7 @@
 
 MACHINEOVERRIDES =. "tqma95xxsa:"
 
-require conf/machine/include/tqma95xx-common.inc
+require conf/machine/include/tqma95xx.inc
 
 OEI_BOARD = "tqma95xxsa"
 
