@@ -9,6 +9,20 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* imx-boot-tq:
+  * i.MX9[4,5]: do not build FlexSPI boot images for Octal SPI with DTR and DQS by default
+
+    Not all boards have Octal SPI assembled. Use generic but slower setup by default.
+    If needed this can be configured per board using modified `QSPI_HEADER` environment.
+  * update to use upstream version `lf-6.12.49-2.2.0`
+* linux-imx-tq-6.12: TQMa95xxLA:
+  * FlexSPI support
+  * 10GiGE support
+  * dual LVDS example
+* linux-tq-6.6: update to 6.6.124
+
 ## scarthgap.TQ.ARM.BSP.0007 (not released yet)
 
 ### Added
