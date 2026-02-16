@@ -1,0 +1,64 @@
+From a87770311ca2b5eadaa704ce5369ff9a041e6724 Mon Sep 17 00:00:00 2001
+From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+Date: Wed, 12 Nov 2025 12:02:19 +0100
+Subject: [PATCH] i.MX94 / i.MX95: use default logic for QSPI_HEADER
+
+When building a QSPI / FSPI bootable image a firmware control block
+is needed in front of the real image. The ROM-loader uses this data to
+configure the SPI controller allowing to read the boot image with
+optimized settings at a higher speed.
+
+The default for i.MX94 / i.MX95 is to look up a configuration file
+for said block defaulting to Octal SPI with DQS and DTR. Since the
+default and the fallback configuration files are located at fixed
+locations simply set the QSPI_HEADER to a known good configuration
+SPI-NOR with 1-1-1 and 50 MHz clock.
+
+Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
+---
+ iMX94/soc.mak | 6 +-----
+ iMX95/soc.mak | 7 ++-----
+ 2 files changed, 3 insertions(+), 10 deletions(-)
+
+diff --git a/iMX94/soc.mak b/iMX94/soc.mak
+index 750a75e..7e6c13a 100644
+--- a/iMX94/soc.mak
++++ b/iMX94/soc.mak
+@@ -8,11 +8,7 @@ CFLAGS ?= -O2 -Wall -std=c99
+ INCLUDE = ./lib
+ 
+ #define the F(Q)SPI header file
+-ifneq ($(wildcard ./scripts/fspi_header_200),)
+-	QSPI_HEADER ?= ./scripts/fspi_header_200
+-else
+-	QSPI_HEADER = ../scripts/fspi_header
+-endif
++QSPI_HEADER ?= ../scripts/fspi_header
+ 
+ QSPI_PACKER = ../scripts/fspi_packer.sh
+ QSPI_FCB_GEN = ../scripts/fspi_fcb_gen.sh
+diff --git a/iMX95/soc.mak b/iMX95/soc.mak
+index 6c0b321..9e24392 100644
+--- a/iMX95/soc.mak
++++ b/iMX95/soc.mak
+@@ -8,11 +8,7 @@ CFLAGS ?= -O2 -Wall -std=c99
+ INCLUDE = ./lib
+ 
+ #define the F(Q)SPI header file
+-ifneq ($(wildcard ./scripts/fspi_header_200),)
+-	QSPI_HEADER ?= ./scripts/fspi_header_200
+-else
+-	QSPI_HEADER = ../scripts/fspi_header
+-endif
++QSPI_HEADER ?= ../scripts/fspi_header
+ 
+ QSPI_PACKER = ../scripts/fspi_packer.sh
+ QSPI_FCB_GEN = ../scripts/fspi_fcb_gen.sh
+@@ -286,6 +282,7 @@ u-boot-atf-container-spinand.img: bl31.bin u-boot-hash.bin
+ 	fi
+ 
+ fcb.bin: FORCE
++	echo "QSPI_HEADER: $(QSPI_HEADER)"
+ 	./$(QSPI_FCB_GEN) $(QSPI_HEADER)
+ 
+ flash_fw.bin: FORCE

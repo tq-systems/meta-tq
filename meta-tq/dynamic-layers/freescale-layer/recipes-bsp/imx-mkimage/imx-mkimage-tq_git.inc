@@ -28,6 +28,7 @@ SRC_URI = "\
     file://0010-iMX8-9-redirect-more-messages-to-stderr.patch \
     file://0011-iMX8M-print_fit_hab-fix-output-for-symlinked-inputs.patch \
     file://0012-Add-generic-wrapper-for-mkimage_imx8.patch \
+    file://0013-i.MX94-i.MX95-use-default-logik-for-QSPI_HEADER.patch \
 "
 
 SRC_URI:append:nxp-hab4 = "\
