@@ -1,4 +1,4 @@
-From 4ed42737dcb21ba8dc9ef41d909c64942aecb521 Mon Sep 17 00:00:00 2001
+From 288c9de564eafcb190afc7677815967587f2d8ca Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Thu, 24 Oct 2024 16:55:34 +0200
 Subject: [PATCH] Add generic wrapper for mkimage_imx8
@@ -157,7 +157,7 @@ index fd522e6..0e63bd4 100644
  
  # Add for System ready
 diff --git a/iMX94/soc.mak b/iMX94/soc.mak
-index 14de569..30113a6 100644
+index faaad03..750a75e 100644
 --- a/iMX94/soc.mak
 +++ b/iMX94/soc.mak
 @@ -225,8 +225,9 @@ fcb.bin: FORCE

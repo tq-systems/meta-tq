@@ -1,4 +1,4 @@
-From 97d59ab548e0342a8982b9431974ddaa17173006 Mon Sep 17 00:00:00 2001
+From 4e2e7478cc33910b859867d6d89886c620d64f1d Mon Sep 17 00:00:00 2001
 From: Matthias Schiffer <matthias.schiffer@tq-group.com>
 Date: Fri, 28 Apr 2023 14:07:39 +0200
 Subject: [PATCH] iMX8M: print_fit_hab: fix output for symlinked inputs

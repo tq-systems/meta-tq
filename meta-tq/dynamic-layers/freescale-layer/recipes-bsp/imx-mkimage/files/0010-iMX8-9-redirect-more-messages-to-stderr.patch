@@ -1,4 +1,4 @@
-From 2dd1e2772f9c539e6fcc0c1c2bc4fb13ad6c79fd Mon Sep 17 00:00:00 2001
+From 1317dffd157721f2865e554005a53f9af9d024c5 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Thu, 24 Oct 2024 17:26:56 +0200
 Subject: [PATCH] iMX8/9: redirect more messages to stderr
@@ -113,7 +113,7 @@ index 9421904..fd522e6 100644
  ifneq ($(wildcard /usr/bin/rename.ul),)
      RENAME = rename.ul
 diff --git a/iMX94/soc.mak b/iMX94/soc.mak
-index dceb9db..14de569 100644
+index d4faf4e..faaad03 100644
 --- a/iMX94/soc.mak
 +++ b/iMX94/soc.mak
 @@ -16,7 +16,7 @@ endif

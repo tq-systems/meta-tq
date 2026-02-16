@@ -1,4 +1,4 @@
-From bd0c82295a63b576f1c9f213965ac4654e6e4fee Mon Sep 17 00:00:00 2001
+From 03a75ca32f4fd6bc85c1fd10409b1a9d37750903 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 11 Oct 2022 16:20:15 +0200
 Subject: [PATCH] iMX8M: soc.mak: use native mkimage from sysroot

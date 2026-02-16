@@ -1,4 +1,4 @@
-From d555bc48a69aab64b4c02355afe3118d1e6d4c0c Mon Sep 17 00:00:00 2001
+From 23925cf45d57791087852e4dff93e911f640703b Mon Sep 17 00:00:00 2001
 From: Matthias Schiffer <matthias.schiffer@tq-group.com>
 Date: Fri, 28 Apr 2023 10:39:37 +0200
 Subject: [PATCH] iMX8M: add mkimage_imx8 wrapper to redirect output

@@ -1,4 +1,4 @@
-From 8bfcd6a58aa47d7c03afa03492febe543421f2c0 Mon Sep 17 00:00:00 2001
+From be40b9cdfb6f2cf70503678c00cfb9f95dea9f34 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 22 Nov 2022 08:01:43 +0100
 Subject: [PATCH] iMX8ULP: remove unused targets

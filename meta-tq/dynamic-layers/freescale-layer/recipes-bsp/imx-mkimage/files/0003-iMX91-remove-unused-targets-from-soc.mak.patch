@@ -1,4 +1,4 @@
-From ace007abc030980c8ae465bae5c5ebf7b6ddd85a Mon Sep 17 00:00:00 2001
+From fa05b4bfdacb22f1ff03fe7490eac55f2dbb8192 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Thu, 4 Sep 2025 12:59:03 +0200
 Subject: [PATCH] iMX91: remove unused targets from soc.mak

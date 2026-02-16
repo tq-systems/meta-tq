@@ -1,4 +1,4 @@
-From 52ab217f2640b97be4fd35f2fbe57d948ccc3833 Mon Sep 17 00:00:00 2001
+From 9e813c4d98941755647666a4e4994eeb1bc12c62 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 22 Nov 2022 07:58:31 +0100
 Subject: [PATCH] iMX8DXL: remove unused targets
