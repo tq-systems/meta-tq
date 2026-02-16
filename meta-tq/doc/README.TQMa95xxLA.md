@@ -57,55 +57,60 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ### Linux
 
-| Feature                               | fslc-6.12 |
-|:--------------------------------------|:---------:|
-| **RAM configs**                       |           |
-| TQMa95xxLA                            |    4 GiB  |
-|                                       |           |
-| CPU variants                          | (A1) / B0 |
-| Fuses / OCRAM                         |           |
-| speed grade                           |           |
-| **UART**                              |           |
-| console on LPUART1 (X26)              |     x     |
-| System manager debug (LPUART2) (X26)  |     x     |
-| **GPIO**                              |           |
-| GPIO used for several functions       |     x     |
-| **I2C**                               |           |
-| Temperature Sensors                   |     x     |
-| RTC                                   |     x     |
-| EEPROMS                               |     x     |
-| **ENET (GigE via Phy on TQMa93xxSA)** |           |
-| ENET 0                                |     x     |
-| ENET 1                                |     x     |
-| **USB**                               |           |
-| USB 2.0 Device (X9)                   |     x     |
-| USB 3.0 Host (Hub on MBa95xxCA) (X8)  |     x     |
-| **QSPI NOR**                          |           |
-| Read with 1-4-4 SDR                   |           |
-| PP / Erase with 1-1-4 SDR             |           |
-| **Graphic**                           |           |
-| GPU                                   |     x     |
-| VPU                                   |     x     |
-| **Display**                           |           |
-| LVDS                                  |     x     |
-| **Audio**                             |           |
-| Line IN / Line Out (X23, X24)         |     x     |
-| **PCIe**                              |           |
-| M.2 on MBa95xxCA (X16)                |     x     |
-| M.2 on MBa95xxCA (X17)                |     x     |
-| **SDIO**                              |           |
-| M.2 on MBa95xxCA (X16)                |           |
-| **CAN-FD**                            |           |
-| CAN-FD                                |     x     |
-| **SPI**                               |           |
-| SPI user space device on all CS (X4)  |     x     |
-| **PWM**                               |           |
-| PWM backlight                         |     x     |
-| **CPU/PMIC thermal sensors**          |           |
-| via thermal zone                      |     x     |
-| **Cortex M7**                         |           |
-| examples running from TCM             |           |
-| use UART as debug console             |           |
+| Feature                                | fslc-6.12 |
+|:---------------------------------------|:---------:|
+| **RAM configs**                        |           |
+| TQMa95xxLA                             |    4 GiB  |
+|                                        |           |
+| CPU variants                           | (A1) / B0 |
+| Fuses / OCRAM                          |           |
+| speed grade                            |           |
+| **UART**                               |           |
+| console on LPUART1 (X26)               |     x     |
+| RS485 on LPUART8 (X15)                 |     x     |
+| System manager debug (LPUART2) (X26)   |     x     |
+| **GPIO**                               |           |
+| GPIO used for several functions        |     x     |
+| **I2C**                                |           |
+| Temperature Sensors                    |     x     |
+| RTC                                    |     x     |
+| EEPROMS                                |     x     |
+| **ENET (GigE via Phy on MBa95xxCA)**   |           |
+| ENET 0                                 |     x     |
+| ENET 1                                 |     x     |
+| **ENET (10GigE via SFP on MBa95xxCA)** |           |
+| ENET 2                                 |     x     |
+| **USB**                                |           |
+| USB 2.0 Device (X9)                    |     x     |
+| USB 3.0 Host (Hub on MBa95xxCA) (X8)   |     x     |
+| **QSPI NOR**                           |           |
+| Read with 1-4-4 SDR                    |     x     |
+| PP / Erase with 1-1-4 SDR              |     x     |
+| **Graphic**                            |           |
+| GPU                                    |     x     |
+| VPU                                    |     x     |
+| **Display**                            |           |
+| LVDS                                   |     x     |
+| **Audio**                              |           |
+| Line IN / Line OUT (X23, X24)          |     x     |
+| Headphone out (X22)                    |           |
+| Microphone in (X22)                    |           |
+| **PCIe**                               |           |
+| M.2 on MBa95xxCA (X16)                 |     x     |
+| M.2 on MBa95xxCA (X17)                 |     x     |
+| **SDIO**                               |           |
+| M.2 on MBa95xxCA (X16)                 |           |
+| **CAN-FD**                             |           |
+| CAN-FD                                 |     x     |
+| **SPI**                                |           |
+| SPI user space device on all CS (X4)   |     x     |
+| **PWM**                                |           |
+| PWM backlight                          |     x     |
+| **CPU/PMIC thermal sensors**           |           |
+| via thermal zone                       |     x     |
+| **Cortex M7**                          |           |
+| examples running from TCM              |           |
+| use UART as debug console              |           |
 
 ## Known Issues / Limitations
 
@@ -137,6 +142,7 @@ Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
 * imx95-tqma9596la\*.dtb: device tree blobs for TQMa95xxLA
+* imx95-tqma9596la\*.dtbo: device tree overlays for TQMa95xxLA
 * Image: Linux kernel image
 * \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
@@ -233,9 +239,10 @@ echo mem > /sys/power/state
 Each Display can be used on its own by using the corresponding device tree.
 To allow reusage, the support for each display is separated in a dtsi fragment.
 
-| Interface       | Device tree                                      | Type               |
-|-----------------|--------------------------------------------------|--------------------|
-| LVDS0           | imx95-tqma9596la-mba95xxca-lvds-tm070jvhg33.dtb  | Tianma TM070JVHG33 |
+| Interface       | Device tree                                           | Type               |
+|-----------------|-------------------------------------------------------|--------------------|
+| LVDS0           | imx95-tqma9596la-mba95xxca-lvds-tm070jvhg33.dtb       | Tianma TM070JVHG33 |
+| LVDS0, dual     | imx95-tqma9596la-mba95xxca-lvds-lvds-g133han01.dtb    | AUO G133HAN.01     |
 
 ### CAN
 
@@ -253,6 +260,11 @@ See [here](./README.CAN.md) for details about configurating of CAN interfaces.
   When CAN-FD is enabled, the non-datarate needs to be lower than 
   the datarate. The Linux kernel will emit a warning when it detects
   that the `brp` setting does not match.
+
+### RS485
+
+RS485 is enabled with `linux,rs485-enabled-at-boot-time` in MBa95xxCA devicetree.
+Use DIP S8 for Termination.
 
 ### Cortex M7
 
