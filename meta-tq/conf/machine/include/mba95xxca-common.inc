@@ -18,6 +18,8 @@ KERNEL_DEVICETREE = ""
 
 KERNEL_DEVICETREE_linux-imx-tq = "\
     freescale/imx95-tqma9596la-mba95xxca.dtb \
+    freescale/imx95-tqma9596la-mba95xxca-lvds-g133han01.dtb \
+    freescale/imx95-tqma9596la-mba95xxca-lvds-g133han01.dtbo \
     freescale/imx95-tqma9596la-mba95xxca-lvds-tm070jvhg33.dtb \
     freescale/imx95-tqma9596la-mba95xxca-lvds-tm070jvhg33.dtbo \
 "
@@ -57,6 +59,7 @@ UBOOT_EXTLINUX_LABELS ?= " \
 EXTRA_EXTLINUX_LABELS ?= ""
 
 EXTRA_EXTLINUX_LABELS:mx95-nxp-bsp = " \
+    lvds-g133han01 \
     lvds-tm070jdhg30 \
 "
 
@@ -65,6 +68,11 @@ UBOOT_EXTLINUX_LABELS += "${EXTRA_EXTLINUX_LABELS}"
 UBOOT_EXTLINUX_DEFAULT_LABEL ?= "default"
 UBOOT_EXTLINUX_KERNEL_IMAGE_default = "../fitImage"
 UBOOT_EXTLINUX_MENU_DESCRIPTION_default = "${DISTRO_NAME} on ${MACHINE} (default)"
+
+UBOOT_EXTLINUX_KERNEL_IMAGE_lvds-g133han01 = \
+    "../fitImage#${FIT_CONF_PREFIX}imx95-tqma9596la-mba95xxca.dtb#${FIT_CONF_PREFIX}imx95-tqma9596la-mba95xxca-lvds-g133han01.dtbo"
+UBOOT_EXTLINUX_MENU_DESCRIPTION_lvds-g133han01 = \
+    "${DISTRO_NAME} on ${MACHINE} (LVDS display: G133HAN01)"
 
 UBOOT_EXTLINUX_KERNEL_IMAGE_lvds-tm070jdhg30 = \
     "../fitImage#${FIT_CONF_PREFIX}imx95-tqma9596la-mba95xxca.dtb#${FIT_CONF_PREFIX}imx95-tqma9596cla-mba95xxca-lvds-tm070jvhg33.dtbo"
