@@ -56,6 +56,7 @@ SRC_URI:aarch64 = "\
     file://rfkill-support.cfg \
     file://rtc.cfg \
     file://sdma.cfg \
+    file://sfp-support.cfg \
     file://tq-generic-devices.cfg \
     file://unused-media.cfg \
     file://usb-gadget-support.cfg \
