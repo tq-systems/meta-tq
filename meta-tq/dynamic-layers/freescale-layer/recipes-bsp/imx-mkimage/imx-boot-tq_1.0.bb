@@ -92,15 +92,6 @@ BOOT_STAGING:mx91-generic-bsp  = "${S}/iMX91"
 BOOT_STAGING:mx93-generic-bsp  = "${S}/iMX93"
 BOOT_STAGING:mx95-generic-bsp  = "${S}/iMX95"
 
-SOC_FAMILY = "INVALID"
-SOC_FAMILY:mx8-generic-bsp = "mx8"
-SOC_FAMILY:mx8m-generic-bsp = "mx8m"
-SOC_FAMILY:mx8x-generic-bsp = "mx8x"
-SOC_FAMILY:mx8ulp-generic-bsp = "mx8ulp"
-SOC_FAMILY:mx91-generic-bsp   = "mx91"
-SOC_FAMILY:mx93-generic-bsp   = "mx93"
-SOC_FAMILY:mx95-generic-bsp   = "mx95"
-
 REV_OPTION ?= "REV=${IMX_SOC_REV_UPPER}"
 
 MKIMAGE_EXTRA_ARGS ?= ""
