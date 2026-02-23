@@ -23,6 +23,7 @@ For SD-card and eMMC following table applies:
 |    iMX8    |        32 KiB (0x8000)        | 64 / 0x40 |     0 KiB (0x0)     |  0 / 0x0  |
 |   iMX91    |        32 KiB (0x8000)        | 64 / 0x40 |     0 KiB (0x0)     |  0 / 0x0  |
 |   iMX93    |        32 KiB (0x8000)        | 64 / 0x40 |     0 KiB (0x0)     |  0 / 0x0  |
+|   iMX94    |        32 KiB (0x8000)        | 64 / 0x40 |     0 KiB (0x0)     |  0 / 0x0  |
 |   iMX95    |        32 KiB (0x8000)        | 64 / 0x40 |     0 KiB (0x0)     |  0 / 0x0  |
 
 Note: iMX6 applies to all i.MX6, i.MX6UL and i.MX6ULL variants
@@ -105,12 +106,15 @@ mmc write ${loadaddr} ${bstart} ${bsz}
 mmc dev 0 0
 ```
 
-### Bootable QSPI NOR
+### Bootable SPI-NOR on QSPI / FlexSPI / XSPI controller
 
-To create a bootable QSPI NOR with boot stream only (for exact file name see
-SOM specific documentation)
+**Attention:** This documentation assumes that the boot image is prepended with a valid
+firmware configuration block (FCB). This information is used by ROM loader
+to initialise the SPI controller before loading the boot firmware
 
-Example for U-Boot, booting from SD-Card:
+To create a bootable SPI-NOR with boot firmware only (for exact file name see
+SOM specific documentation) the following steps are needed - the example
+assumes using U-Boot, booted from SD-Card or via serial download mode:
 
 ```
 tftp <bootstream>
@@ -152,7 +156,7 @@ Download bootstream from TFTP and update:
 
 For eMMC this updates the U-Boot on the active Boot Partition or the USER Area.
 
-### FLEXSPI
+### QSPI / FlexSPI / XSPI
 
 Download bootstream from TFTP and update:
 
