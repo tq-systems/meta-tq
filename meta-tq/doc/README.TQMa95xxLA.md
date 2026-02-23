@@ -31,10 +31,10 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | GPIO                                  |             x              |
 | I2C                                   |             x              |
 | **QSPI**                              |                            |
-| Read                                  |                            |
-| Write                                 |                            |
-| Erase                                 |                            |
-| Boot                                  |             -              |
+| Read                                  |          1-4-4-4B          |
+| Write                                 |          1-1-4-4B          |
+| Erase                                 |          1-1-1-4B          |
+| Boot                                  |             x              |
 | **eMMC / SD-Card**                    |                            |
 | Read                                  |             x              |
 | Write                                 |             x              |
@@ -45,15 +45,12 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **ENET (GigE via Phy on MBa95xxCA)**  |                            |
 | ENET 0                                |             x              |
 | ENET 1                                |             x              |
+| **ENET (10GigE via SFP on MBa95xxCA)** |           |
+| ENET 2                                 |     -     |
 | **Bootstreams**                       |                            |
-| FlexSPI                               |                            |
+| FlexSPI                               |             x              |
 | SD / eMMC                             |             x              |
 | UUU                                   |  (TBD: use SD-Card image)  |
-
-
-**TODO or not tested / supported**
-
-* SCMI access to board resources from system manager
 
 ### Linux
 
@@ -75,6 +72,8 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | Temperature Sensors                    |     x     |
 | RTC                                    |     x     |
 | EEPROMS                                |     x     |
+| GPIO expander                          |     x     |
+| Fan                                    |     -     |
 | **ENET (GigE via Phy on MBa95xxCA)**   |           |
 | ENET 0                                 |     x     |
 | ENET 1                                 |     x     |
@@ -114,6 +113,8 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ## Known Issues / Limitations
 
+* SCMI access to board resources from system manager not completely implemented
+ 
 * USB
   * The USB Type-C connector (X9 on MBa95xxCA) currently only supports USB device mode.
   * USB host is not supported when booting in serial download mode
