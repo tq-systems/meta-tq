@@ -83,6 +83,7 @@ IMX_BOOT_SOC_TARGET:mx8qm-generic-bsp = "iMX8QM"
 IMX_BOOT_SOC_TARGET:mx8x-generic-bsp = "iMX8QX"
 IMX_BOOT_SOC_TARGET:mx91-generic-bsp = "iMX91"
 IMX_BOOT_SOC_TARGET:mx93-generic-bsp = "iMX93"
+IMX_BOOT_SOC_TARGET:mx94-generic-bsp = "iMX94"
 IMX_BOOT_SOC_TARGET:mx95-generic-bsp = "iMX95"
 
 BOOT_STAGING = "${S}/${IMX_BOOT_SOC_TARGET}"
@@ -90,6 +91,7 @@ BOOT_STAGING:mx8m-generic-bsp = "${S}/iMX8M"
 BOOT_STAGING:mx8dx-generic-bsp = "${S}/iMX8QX"
 BOOT_STAGING:mx91-generic-bsp  = "${S}/iMX91"
 BOOT_STAGING:mx93-generic-bsp  = "${S}/iMX93"
+BOOT_STAGING:mx94-generic-bsp  = "${S}/iMX94"
 BOOT_STAGING:mx95-generic-bsp  = "${S}/iMX95"
 
 REV_OPTION ?= "REV=${IMX_SOC_REV_UPPER}"
@@ -102,6 +104,8 @@ MKIMAGE_EXTRA_ARGS_IMX9_SCP ?= " \
     LPDDR_TYPE=${DDR_TYPE} \
     ${@'LPDDR_FW_VERSION='+d.getVar('LPDDR_FW_VERSION') if d.getVar('LPDDR_FW_VERSION') else ''} \
 "
+
+MKIMAGE_EXTRA_ARGS:mx94-generic-bsp ?= "${MKIMAGE_EXTRA_ARGS_IMX9_SCP}"
 
 MKIMAGE_EXTRA_ARGS:mx95-generic-bsp ?= "\
     ${MKIMAGE_EXTRA_ARGS_IMX9_SCP} \
@@ -205,6 +209,11 @@ compile_prepare_mx9_scp_common() {
 }
 
 compile_prepare:mx95-generic-bsp() {
+    compile_prepare_mx9_common "$@"
+    compile_prepare_mx9_scp_common "$@"
+}
+
+compile_prepare:mx94-generic-bsp() {
     compile_prepare_mx9_common "$@"
     compile_prepare_mx9_scp_common "$@"
 }
