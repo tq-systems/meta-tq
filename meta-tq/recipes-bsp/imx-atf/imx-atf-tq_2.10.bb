@@ -1,5 +1,4 @@
 #
-
 # Copyright (C) 2017-2023 NXP
 # Copyright (C) 2022-2024 TQ-Systems GmbH
 
