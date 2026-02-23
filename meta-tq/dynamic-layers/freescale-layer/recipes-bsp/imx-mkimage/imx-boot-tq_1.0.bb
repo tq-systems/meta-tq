@@ -95,11 +95,18 @@ BOOT_STAGING:mx95-generic-bsp  = "${S}/iMX95"
 REV_OPTION ?= "REV=${IMX_SOC_REV_UPPER}"
 
 MKIMAGE_EXTRA_ARGS ?= ""
-MKIMAGE_EXTRA_ARGS:mx95-nxp-bsp ?= " \
+
+# i.MX9 with System Control Processor aka SystemManager
+MKIMAGE_EXTRA_ARGS_IMX9_SCP ?= " \
     OEI=${OEI_ENABLE} \
     LPDDR_TYPE=${DDR_TYPE} \
     ${@'LPDDR_FW_VERSION='+d.getVar('LPDDR_FW_VERSION') if d.getVar('LPDDR_FW_VERSION') else ''} \
-    ${@bb.utils.contains('SYSTEM_MANAGER_CONFIG', 'mx95alt', 'MSEL=1', '', d)}"
+"
+
+MKIMAGE_EXTRA_ARGS:mx95-generic-bsp ?= "\
+    ${MKIMAGE_EXTRA_ARGS_IMX9_SCP} \
+    ${@bb.utils.contains('SYSTEM_MANAGER_CONFIG', 'mx95alt', 'MSEL=1', '', d)} \
+"
 
 ##
 # do assignment for TQMa8Xx[S] / TQMa8x SOM to enable bootstream with M4 demo
