@@ -190,17 +190,23 @@ compile_prepare:mx9-generic-bsp() {
     compile_prepare_mx9_common "$@"
 }
 
+# i.MX9 with System Control Processor aka SystemManager
+compile_prepare_mx9_scp_common() {
+    for oei_config in ${OEI_CONFIGS}; do
+        oei_image="oei-${OEI_CORE}-${oei_config}.bin"
+        bbnote "Copy ${oei_image} from ${DEPLOY_DIR_IMAGE} -> ${BOOT_STAGING}"
+        cp "${DEPLOY_DIR_IMAGE}/${oei_image}" "${BOOT_STAGING}/"
+    done
+
+    # Copy SM image to be used
+    scp_image="${SYSTEM_MANAGER_FIRMWARE_BASENAME}-${SYSTEM_MANAGER_CONFIG}.bin"
+    bbnote "Copy ${scp_image} from ${DEPLOY_DIR_IMAGE} -> ${BOOT_STAGING}"
+    cp "${DEPLOY_DIR_IMAGE}/${scp_image}" "${BOOT_STAGING}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}.bin"
+}
+
 compile_prepare:mx95-generic-bsp() {
     compile_prepare_mx9_common "$@"
-
-    if [ "${OEI_SOC}" = "mx95" ] ; then
-        bbnote 'i.MX95 copy OEI / SM'
-        # Copy OEI images to be used
-        cp "${DEPLOY_DIR_IMAGE}/oei-m33-ddr.bin" "${BOOT_STAGING}/"
-        cp "${DEPLOY_DIR_IMAGE}/oei-m33-tcm.bin" "${BOOT_STAGING}/"
-        # Copy SM image to be used
-        cp "${DEPLOY_DIR_IMAGE}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}-${SYSTEM_MANAGER_CONFIG}.bin" "${BOOT_STAGING}/${SYSTEM_MANAGER_FIRMWARE_BASENAME}.bin"
-    fi
+    compile_prepare_mx9_scp_common "$@"
 }
 
 compile_finish() {
