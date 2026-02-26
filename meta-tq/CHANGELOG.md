@@ -11,6 +11,8 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* u-boot-imx-tq-2025.04:
+  * TQMa95xxLA: FlexSPI boot support
 * imx-boot-tq:
   * i.MX9[4,5]: do not build FlexSPI boot images for Octal SPI with DTR and DQS by default
 
@@ -21,7 +23,16 @@ Releases are named with the following scheme:
   * FlexSPI support
   * 10GiGE support
   * dual LVDS example
-* linux-tq-6.6: update to 6.6.124
+* linux-tq-6.6: update to 6.6.127
+* linux-rt-tq-6.6-rt: update to v6.6.126-rt68
+* linux-tq-6.12: update to v6.12.73
+
+### Fixed
+
+* u-boot-imx-tq-2025.04:
+  * TQMa95xxLA: correct FlexSPI pin muxing
+
+    Muxing uses wrong pads. Thus FlexSPI could not be used.
 
 ## scarthgap.TQ.ARM.BSP.0007 (not released yet)
 
