@@ -116,6 +116,8 @@ Support matrix for `MBa91xxCA` REV.010x / `MBa93xxCA` REV.020x
 * DVFS is not supported using cpu-freq framework. See [here](#frequency-scaling)
   on how to use frequency scaling
 * Ethernet device order is defined by DT aliases. Linux and bootloader DT need to match
+* The SPI UBI rootfs Volume has been renamed from `rootfs` to `root`
+  to conform with distroboot settings (scarthgap.TQ.ARM.BSP.0007, u-boot 2024.04)
 
 ## Known Issues
 
