@@ -176,6 +176,11 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 * HDMI Audio
 
+## Important Notes
+
+* The SPI UBI rootfs Volume has been renamed from `rootfs` to `root`
+  to conform with distroboot settings (scarthgap.TQ.ARM.BSP.0007, u-boot 2024.04)
+
 ## Known Issues / Limitations
 
 * REV.020x SoM without variant data in EEPROM (prototypes)
