@@ -118,6 +118,11 @@ _Only mainline kernel supported_
 * HDMI Audio
 * Sleep modes
 
+## Important Notes
+
+* The SPI UBI rootfs Volume has been renamed from `rootfs` to `root`
+  to conform with distroboot settings (scarthgap.TQ.ARM.BSP.0007, u-boot 2024.04)
+
 ## Known Issues / Limitations
 
 * SD-Card: CD# (card detect) does not work in Linux
