@@ -147,6 +147,8 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
   on how to use frequency scaling
 * Ethernet device order is defined by DT aliases. Linux and bootloader DT need to match
 * CPU mask 1.0 and older is not longer supported. No up to date firmare available from NXP.
+* The SPI UBI rootfs Volume has been renamed from `rootfs` to `root`
+  to conform with distroboot settings (scarthgap.TQ.ARM.BSP.0007, u-boot 2024.04)
 
 ## Known Issues
 
