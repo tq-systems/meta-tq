@@ -218,6 +218,14 @@ BOOT\_MODE can be configured using DIP switch S3 on MB-SMARC-2.
 See [here](./README.imx.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
 
+**Note:** For SPI boot it is required to update the script partition once using the following command sequence:
+
+```
+tftp boot-ubi.scr
+sf probe
+sf update ${loadaddr} script ${filesize}
+```
+
 ## Use UUU Tool
 
 See [here](./README.imx.UUU.md) for details about using Serial Download mode and UUU.
