@@ -260,18 +260,76 @@ dd if=imx-boot-${MACHINE}-ecc.bin-flash_spl_uboot of=/dev/<SD card device> bs=1K
 dd if=imx-boot-${MACHINE}-ecc.bin-flash_spl_uboot of=<path/to/wic/image> bs=1K seek=32 conv=notrunc
 ```
 
-To test the ECC functionality, the following procedure can be used:
+To test the ECC functionality, the procedure below can be used. For further reading
+please consult the application note AN14438 "ECC on i.MX 93 and i.MX 91".
 
-Requirements:
+Production Requirements:
 
-- Boot stream with ECC support: `UBOOT_CONFIG` contains `ecc` (enabled by default)
-- Synopsys EDAC support on Linux: `CONFIG_EDAC_SYNOPSYS=(y|m)`
-- User space access to all of `/dev/mem` for Linux: `CONFIG_STRICT_DEVMEM=n`
+- Boot stream with ECC support: enabled by default if `UBOOT_CONFIG` contains `ecc`
+- Layerscape EDAC support on Linux: `CONFIG_EDAC_LAYERSCAPE=(y|m)`
+  - Note: EDAC not available in mainline kernel yet (only included since version 6.13)
+
+Test Requirements:
+
+- user space access to all of `/dev/mem` for Linux: `CONFIG_STRICT_DEVMEM=n`
 - `devmem` executable in image
+- Optional: `CONFIG_EDAC_DEBUG` for error-injection via debugfs files
 
 Addresses:
 
-<!-- TODO -->
+- ECC test addresses
+
+RAM size | `DATA_REGION_CORRUPTION_ADDR`
+-------- | -----------------------------
+512MB    | `0x9E000000`
+1GB      | `0xB7000000`
+1.5GB    | `0xDC000000`
+2GB      | `0xEE000000`
+
+**Attention:** Corrupting ECC parity data can affect processes using the
+memory at `${DATA_REGION_CORRUPTION_ADDR}`. Use this only for development
+purposes.
+
+Steps:
+1. Clear ERR_DETECT flags to keep test honest for 
+   next corrupted ECC test
+```
+devmem 0x4e301140 32 0x8000000D
+```
+1. set SBET (Bit 16-19) to 4 to allow trigger of SBE error
+```
+devmem 0x4e301158 32
+0x790
+devmem 0x4e301158 32 0x00040000
+```
+1. Define the address that you want to as a trigger 
+   when injecting ECC errors
+```
+devmem 0x4e30110C 32 $DATA_REGION_CORRUPTION_ADDR
+```
+1. Configure `ERR_INJECT`:
+- [31] `ADDR_TEN = 1` to enable address triggering for error injection
+- [22-21] `ECC_INJ_SRC = 11b` to enable use of address error injection
+- [8] `EIEN = 1` to enable error injection
+```
+devmem 0x4e301108 32 0x80600100
+```
+1. Corrupt `DATA_REGION_CORRUPTION_ADDR`
+```
+# Example
+devmem ${DATA_REGION_CORRUPTION_ADDR} 8
+0x00
+devmem ${DATA_REGION_CORRUPTION_ADDR} 8 0x03
+```
+1. Show error flags and counters
+```
+echo `devmem 0x4e301158 32` ERR_SBE
+echo `devmem 0x4e301128 32` CAPTURE_ECC
+echo `devmem 0x4e301140 32` ERR_DETECT
+
+cat /sys/devices/system/edac/mc/mc0/ce_count
+cat /sys/devices/system/edac/mc/mc0/ue_count
+```
 
 ### Access U-Boot environment from Linux
 
