@@ -120,6 +120,7 @@ _Only mainline kernel supported_
 
 ## Known Issues / Limitations
 
+* SD-Card: CD# (card detect) does not work in Linux
 * Ethernet
   * Possible communication error to PHY attached to FEC, reboot required to fix
   * ETH1 looses manual assigned IP after suspend/resume. Default systemd network
