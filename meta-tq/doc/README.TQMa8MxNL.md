@@ -131,6 +131,10 @@ _MBa8x HW Rev.030x only_
 
 ## Known Issues
 
+* FlexSPI: the configured clock exceeds the limit given in datasheet
+
+  When using without DQS internal clock, delay limits the maximum usable speed to
+  66MHz. The interface is configured with a limit of 80MHz.
 * U-Boot:
   * USB is limited to device mode in favour of SDP
 * Linux: operating points for DDR controller missing in device tree.
