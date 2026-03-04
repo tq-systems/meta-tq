@@ -84,6 +84,12 @@ Releases are named with the following scheme:
 
     Muxing uses wrong pads. Thus FlexSPI could not be used.
 
+### Removed
+
+* linux-tq_6.1: remove recipe after all boards are updated to 6.6 or 6.12
+* linux-rt-tq_6.1: remove recipe after all boards are updated to 6.6 or 6.12
+* linux-imx-tq_6.1: remove recipe after all boards are updated to 6.6
+
 ## scarthgap.TQ.ARM.BSP.0007
 
 ### Added
