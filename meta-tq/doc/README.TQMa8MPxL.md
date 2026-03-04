@@ -184,6 +184,10 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   * Use fixed 2GB U-Boot configuration. This is built by default `UBOOT_CONFIG`
     entries `sd-2gb` and `uuu-2gb`
     **Note:** the generated wic-File uses the U-Boot multi RAM config
+* FlexSPI: the configured clock exceeds the limit given in datasheet
+
+  When using without DQS internal clock, delay limits the maximum usable speed to
+  66MHz. The interface is configured with a limit of 80MHz.
 * MIPI CSI
   * driver stack is not completely v4l2-compliance test proof. The IOCTLS for format / resolution
     enumeration and query can return invalid / wrong values depending of the internal state
