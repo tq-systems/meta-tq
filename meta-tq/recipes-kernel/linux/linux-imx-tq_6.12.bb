@@ -35,6 +35,7 @@ SRC_URI:aarch64 = "\
     file://enable-led-features.cfg \
     file://features/debug.cfg \
     file://features/devicetree.cfg \
+    file://features/i2c-mux.cfg \
     file://features/iio.cfg \
     file://features/network.cfg \
     file://features/pwm.cfg \
