@@ -151,6 +151,12 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* u-boot-tq-2026.01:
+  * TQMa62xx[L], TQMa64xxL, TQMa67xx[L]: increase maximum cluster size for FAT filesystems from 16k
+    to 64k, fixing U-Boot access to larger filesystems
+  * TQMa62xx[L], TQMa64xxL, TQMa67xx[L]: fix U-Boot becoming unable to establish an Ethernet link on
+    any interface when the connection on the interface tried first fails
+  * TQMa67xx[L]: enable MBa67xx USB hub ports (X11) in U-Boot
 * linux-tq_6.12:
   * TQMa8MPxS: fix SD card reset
 
