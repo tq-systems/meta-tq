@@ -476,10 +476,13 @@ dd if=imx-boot-${MACHINE}-ecc.bin-flash_spl_uboot of=<path/to/wic/image> bs=1K s
 
 To test the ECC functionality, the following procedure can be used:
 
-Requirements:
+Production Requirements:
 
-- Boot stream with ECC support: `UBOOT_CONFIG` contains `ecc` (enabled by default)
+- Boot stream with ECC support: enabled by default if `UBOOT_CONFIG` contains `ecc`
 - Synopsys EDAC support on Linux: `CONFIG_EDAC_SYNOPSYS=(y|m)`
+
+Test Requirements:
+
 - user space access to all of `/dev/mem` for Linux: `CONFIG_STRICT_DEVMEM=n`
 - `devmem` executable in image
 
