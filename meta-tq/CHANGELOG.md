@@ -9,27 +9,75 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* imx-system-manager-tq:
+  * prepare TQMa94xxLA / MBa94xxCA
+* imx-oei-tq:
+  * prepare TQMa94xxLA / MBa94xxCA
+* linux-imx-tq-6.12:
+  * TQMa95xxLA / TQMa95xxSA: support thermal zones for PMIC temperature sensors
+
 ### Changed
 
+* imx-system-manager-tq: update to NXP version lf-6.18.2_1.0.0
+
+  This integrates all fixes and features from NXP release and port
+  supported boards from TQ-Systems. Switch to use new branch TQM-lf-6.18.2
+* imx-oei-tq: update to NXP version lf-6.18.2_1.0.0
+
+  This integrates all fixes and features from NXP release and port
+  supported boards from TQ-Systems. Switch to use new branch TQM-lf-6.18.2
+* linux-imx-tq-6.12:
+  * TQMa95xxLA / TQMa95xxSA: support thermal zones for PMIC temperature sensors
+  * integrate fixes from NXP lf-6.12.49-2.2.0
+* linux-imx-tq-6.6: integrate fixes from FSLC 6.6.-2.2.x-imx
+
+  This includes fixes from linux-stable up to tag v6.6.129
+* imx-system-manager-tq: update to NXP version lf-6.12.49_2.2.0
+  * prepare TQMa94xxLA / MBa94xxCA
+  * TQMa95xxLA/TQMa95xxSA: improve debug UART support code
+* imx-oei-tq: update to NXP version lf-6.12.49_2.2.0
+  * prepare TQMa94xxLA / MBa94xxCA
+  * TQMa95xxLA/TQMa95xxSA: improve debug UART support code
 * linux-ti-tq-6.12: enable `rpmsg_ctrl` kernel module
 * u-boot-imx-tq-2025.04:
+  * Enable U-Boot environment handling from rootfs
+  * Update to NXP downstream version lf-6.12.49_2.2.0
+    * prepare for TQMa94xxLA
+    * TQMa95xxLA/TQMa95xxSA: simplify and implrove board support code
+
+      Use `board_phys_sdram_size` generic implementation under `arch/arm/mach-imx`
+      and handle CPU variants with features disabled by fuses
   * TQMa95xxLA: FlexSPI boot support
 * imx-boot-tq:
+  * prepare building for i.MX94
   * i.MX9[4,5]: do not build FlexSPI boot images for Octal SPI with DTR and DQS by default
 
     Not all boards have Octal SPI assembled. Use generic but slower setup by default.
     If needed this can be configured per board using modified `QSPI_HEADER` environment.
   * update to use upstream version `lf-6.12.49-2.2.0`
-* linux-imx-tq-6.12: TQMa95xxLA:
-  * FlexSPI support
-  * 10GiGE support
-  * dual LVDS example
+* linux-imx-tq-6.12:
+  * Prepare config fragments for TQMa94xxLA / MBa94xxCA support
+  * TQMa95xxLA:
+    * FlexSPI support
+    * 10GiGE support
+    * dual LVDS example
 * linux-tq-6.6: update to 6.6.127
 * linux-rt-tq-6.6-rt: update to v6.6.126-rt68
 * linux-tq-6.12: update to v6.12.73
 
 ### Fixed
 
+* linux-imx-tq-6.12:
+  TQMa95xxLA: fix RTS / CTS pad configuration for LPUART5 / LPUART7.
+
+  UART did not work with activated hardware flow control.
+* imx-system-manager-tq:
+  * TQMa95xxSA: fix DDR ranges.
+
+    The ranges shall reflect the assembled RAM size, not the addressable range of
+    the DDR controller
 * u-boot-imx-tq-2025.04:
   * TQMa95xxLA: correct FlexSPI pin muxing
 
