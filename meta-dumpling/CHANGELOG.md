@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+* distro: dumpling: remove unused PACKAGECONFIG modifications for gstreamer1.0-plugin-good
+
 ## scarthgap.TQ.ARM.BSP.0007 (not released yet)
 
 ### Added
