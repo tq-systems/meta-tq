@@ -7,7 +7,7 @@
 Sometimes access to U-Boot environment from Linux user land shall be possible.
 An Example is the interaction between bootloader and updater systems. To provide
 a show case for multiple boot devices and different environment locations
-the `libubootenv` implementation of `fw_prinenv` / `fw_setenv` has a new config
+the `libubootenv` implementation of `fw_printenv` / `fw_setenv` has a new config
 file format allowing to define multiple configurations.
 
 For details see https://github.com/sbabic/libubootenv
