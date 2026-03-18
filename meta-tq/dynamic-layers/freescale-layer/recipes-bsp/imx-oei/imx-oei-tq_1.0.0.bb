@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b66f32a90f9577a5a3255c21d79bc619"
 SRC_URI = "${IMX_OEI_SRC};branch=${SRCBRANCH}"
 IMX_OEI_SRC = "${TQ_GIT_BASEURL}/tq-imx-oei.git;protocol=${TQ_GIT_PROTOCOL}"
 SRCBRANCH = "TQM-lf-6.12.49"
-SRCREV = "c3fee0e8b985f56083caaba0607520d02fa8fad9"
+SRCREV = "6ddaaf0c759a66ef7d050c51ed0f26a96576ae18"
 
 require dynamic-layers/arm-toolchain/recipes-bsp/imx-oei/imx-oei.inc
 
