@@ -11,6 +11,7 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-ti-tq-6.12: enable `rpmsg_ctrl` kernel module
 * u-boot-imx-tq-2025.04:
   * TQMa95xxLA: FlexSPI boot support
 * imx-boot-tq:
