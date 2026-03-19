@@ -344,8 +344,8 @@ gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-bayer,format=rggb10le,bpp=10
 
 For IMX219 (X20):
 ```
-media-ctl -V '"30142000.ticsi2rx":0[fmt:SRGGB10/1920x1080]'
-media-ctl -V '"cdns_csi2rx.30141000.csi-bridge":0[fmt:SRGGB10/1920x1080]'
+media-ctl -V '"30162000.ticsi2rx":0[fmt:SRGGB10/1920x1080]'
+media-ctl -V '"cdns_csi2rx.30161000.csi-bridge":0[fmt:SRGGB10/1920x1080]'
 media-ctl -V '"imx219 5-0010":0[fmt:SRGGB10/1920x1080 field:none]'
 gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-bayer,format=rggb10le,bpp=10,width=1920,height=1080 ! \
   bayer2rgb ! waylandsink sync=false
