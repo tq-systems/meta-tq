@@ -45,6 +45,7 @@ _Kernel:_
 * On TQMa62xx variants without user EEPROM, the EEPROM device is not disabled
   in the Linux Device Tree, resulting in a non-critical error message in the
   kernel log during boot
+* The generic FullHD Dual-LVDS Device Tree overlay is currently broken.
 
 ## Supported features
 
