@@ -57,17 +57,12 @@ do_compile[depends] += "\
 
 SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
 
-OEI_ENABLE = "${@bb.utils.contains('DEPENDS', 'virtual/imx-oei', 'YES', 'NO', d)}"
-OEI_NAME ?= "oei-${OEI_CORE}-*.bin"
-
 ATF_MACHINE_NAME ?= "bl31-${ATF_PLATFORM}.bin"
 ATF_MACHINE_NAME:append = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', '-optee', '', d)}"
 
 # Defaults from uboot-sign.bbclass
 UBOOT_DTB_BINARY ?= "u-boot.dtb"
 UBOOT_DTB_SIGNED ?= "${UBOOT_DTB_BINARY}-signed"
-
-TOOLS_NAME ?= "mkimage_imx8"
 
 DEPLOY_OPTEE = "${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'true', 'false', d)}"
 
@@ -100,7 +95,7 @@ MKIMAGE_EXTRA_ARGS ?= ""
 
 # i.MX9 with System Control Processor aka SystemManager
 MKIMAGE_EXTRA_ARGS_IMX9_SCP ?= " \
-    OEI=${OEI_ENABLE} \
+    OEI=YES \
     LPDDR_TYPE=${DDR_TYPE} \
     ${@'LPDDR_FW_VERSION='+d.getVar('LPDDR_FW_VERSION') if d.getVar('LPDDR_FW_VERSION') else ''} \
 "
