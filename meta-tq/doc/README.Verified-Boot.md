@@ -181,26 +181,21 @@ To use custom key and certificate, one has to override `UBOOT_SIGN_KEYDIR`,
 
 ### Booting a signed FIT image
 
-#### TQMa8 series
+#### TQMa8/9 series
 
-On older U-Boot versions, used by TQMa8 module series, some modification is
-needed in U-Boot environment to boot a FIT image:
+Multiple different U-Boot versions are used by the TQMa8 and TQMa9 module
+families supported by meta-tq. The following commands are provided as an example
+for booting a signed FIT image from the root partition of an eMMC or SD card:
 
-    setenv image fitImage
-    setenv boot_os 'bootm ${loadaddr}'
-    setenv sec_boot no
+    load mmc ${mmcdev}:2 $loadaddr /boot/fitImage
+    setenv bootargs
+    run mmcargs
+    bootm ${loadaddr}
 
-`sec_boot` is set to `yes` if HAB4/AHAB boot is enabled in U-Boot config. This
-setting requires a signed os container to be loaded, which is beyond the scope
-of this README. Set to `no` to skip this check.
+Note: Manual adjustments to the bootargs may be necessary instead of using
+the `mmcargs` script.
 
-#### TQMa9 series
-
-TQMa9x can boot signed FIT image with distroboot:
-
-    run distro_bootcmd
-
-## DM-Verity for Root-Partition
+## DM-Verity for root partition
 
 The verity devicemapper is a way to guarantee integrity of some data. It is used
 here to create a protected rootfs partition. To do so, we need meta-security,
@@ -247,14 +242,23 @@ is build.
 
 The FIT image with initramfs for dm-verity usage is located in the boot
 partition, because the root hash that is saved inside the initramfs must be kept
-separate from the root partition.
+separate from the root partition. The following commands can be used to boot
+the FIT image from the boot partition:
+
+    load mmc ${mmcdev}:1 $loadaddr /fitImage
+    setenv bootargs
+    run mmcargs
+    bootm ${loadaddr}
+
+Note: Manual adjustments to the bootargs may be necessary instead of using
+the `mmcargs` script.
 
 #### TQMa8 series
 
-For TQMa8 module series with U-Boot 2020.04, the environment settings for TQMa8
-from [Booting a signed FIT image](#booting-a-signed-fit-image) can be used.
-Additionally, `loadaddr` must be set to an address with enough free memory space
-to fit a FIT image with initramfs:
+`loadaddr` must be set to an address with enough free memory space to fit the
+FIT image with initramfs, so it doesn't conflict with any addresses referenced
+by the FIT image itself or U-Boot. The following table shows example addresses
+for different TQMa8 platforms:
 
 Module    | `loadaddr`
 --------- | ------------
@@ -265,22 +269,6 @@ TQMa8Mx   | `0x60000000`
 TQMa8MxML | `0x60000000`
 TQMa8MxNL | `0x60000000`
 TQMa8MPxL | `0x60000000`
-
-#### TQMa9 series
-
-The bootloader for TQMa9 module series loads images from root fs by default. To
-load the FIT image from the boot partition, some environment adjustments are
-needed:
-
-    setenv mmcpart 1
-    setenv mmcpath /
-    setenv image fitImage
-    setenv boot_os 'bootm ${kernel_addr_r}'
-    setenv sec_boot no
-
-`sec_boot` is set to `yes` if HAB4/AHAB boot is enabled in U-Boot config. This
-setting requires a signed os container to be loaded, which is beyond the scope
-of this README. Set to `no` to skip this check.
 
 ## Limitations
 
