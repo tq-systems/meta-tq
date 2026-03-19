@@ -57,11 +57,6 @@ MACHINE_FEATURES += "\
     vfat \
 "
 
-KERNEL_IMAGETYPE = "fitImage"
-# override default from conf/machine/include/imx-base.inc
-KERNEL_IMAGETYPE:mx9-generic-bsp = "fitImage"
-KERNEL_IMAGETYPES = "${KERNEL_IMAGETYPE} Image"
-
 PREFERRED_PROVIDER_imx-boot ?= "imx-boot-tq"
 UBOOT_SUFFIX:pn-u-boot-imx-tq = "bin"
 IMX_DEFAULT_BOOTLOADER ?= "u-boot-imx-tq"
@@ -71,5 +66,10 @@ TQ_FW_ENV_CONFIGS = "mmc0 mmc1 spi"
 
 # Common image configuration
 require conf/machine/include/tq-image.inc
+
+KERNEL_IMAGETYPE = "fitImage"
+# override default from conf/machine/include/imx-base.inc
+KERNEL_IMAGETYPE:mx9-generic-bsp = "fitImage"
+KERNEL_IMAGETYPES = "${KERNEL_IMAGETYPE} Image"
 
 PREFERRED_VERSION_linux-imx-tq ?= "6.6.%"

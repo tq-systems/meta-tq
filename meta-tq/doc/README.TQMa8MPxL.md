@@ -176,6 +176,11 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 * HDMI Audio
 
+## Important Notes
+
+* The SPI UBI rootfs Volume has been renamed from `rootfs` to `root`
+  to conform with distroboot settings (scarthgap.TQ.ARM.BSP.0007, u-boot 2024.04)
+
 ## Known Issues / Limitations
 
 * REV.020x SoM without variant data in EEPROM (prototypes)
@@ -184,6 +189,10 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   * Use fixed 2GB U-Boot configuration. This is built by default `UBOOT_CONFIG`
     entries `sd-2gb` and `uuu-2gb`
     **Note:** the generated wic-File uses the U-Boot multi RAM config
+* FlexSPI: the configured clock exceeds the limit given in datasheet
+
+  When using without DQS internal clock, delay limits the maximum usable speed to
+  66MHz. The interface is configured with a limit of 80MHz.
 * MIPI CSI
   * driver stack is not completely v4l2-compliance test proof. The IOCTLS for format / resolution
     enumeration and query can return invalid / wrong values depending of the internal state
@@ -245,13 +254,6 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * When using HDMI the default audio device changes to HDMI output.
   For using I2S audio codec `aplay` requires the parameter `-Dsysdefault:CARD=tqmtlv320aic32`
 * The HDMI audio device has to be selected explicitely by passing `-Dsysdefault:CARD=audiohdmi` to `aplay` & friends
-* U-Boot: watchdog will reset the system after using `wdt start [timeout]`.  
-  Watchdog is enabled but not configured for automatic servicing.
-  If needed, `CONFIG_WATCHDOG` can be activated in defconfig.
-* U-Boot: not booting when building with secure boot enabled. With updating to NXP base v2024.04
-  the size of SPL is larger than with older versions. It is recommended to build with only one
-  RAM configuration enabled. For example, use `TQMA8MPXL_RAM_SINGLE_2GB` instead of `TQMA8MPXL_RAM_MULTI`
-  in U-Boot defconfig. Other config settings can easily be added.
 
 ## Build Artefacts
 
@@ -331,6 +333,14 @@ BOOT\_MODE: 0110
 
 See [here](./README.imx.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
+
+**Note:** For SPI boot it is required to update the script partition once using the following command sequence:
+
+```
+tftp boot-ubi.scr
+sf probe
+sf update ${loadaddr} script ${filesize}
+```
 
 ## Use UUU Tool
 
@@ -466,10 +476,13 @@ dd if=imx-boot-${MACHINE}-ecc.bin-flash_spl_uboot of=<path/to/wic/image> bs=1K s
 
 To test the ECC functionality, the following procedure can be used:
 
-Requirements:
+Production Requirements:
 
-- Boot stream with ECC support: `UBOOT_CONFIG` contains `ecc` (enabled by default)
+- Boot stream with ECC support: enabled by default if `UBOOT_CONFIG` contains `ecc`
 - Synopsys EDAC support on Linux: `CONFIG_EDAC_SYNOPSYS=(y|m)`
+
+Test Requirements:
+
 - user space access to all of `/dev/mem` for Linux: `CONFIG_STRICT_DEVMEM=n`
 - `devmem` executable in image
 

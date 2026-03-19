@@ -179,6 +179,24 @@ There are scripts to update the PBL and TF-A / U-Boot FIP.
 
 These scripts are named `update_[pbl|uboot]_[spi|mmc|sd]`.
 
+To update DDR timing and DPAA2 in SPI, the following scripts can be used:
+
+```
+sf probe
+
+tftp ddr_fip.bin
+sf update ${fileaddr} 0x00800000 ${filesize}
+
+tftp mc.itb
+sf update ${fileaddr} 0x00a00000 ${filesize}
+
+tftp dpl.itb
+sf update ${fileaddr} 0x00d00000 ${filesize}
+
+tftp dpc.itb
+sf update ${fileaddr} 0x00e00000 ${filesize}
+```
+
 **Attention**
 
 * use PBL/RCW image to update PBL
