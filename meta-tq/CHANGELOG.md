@@ -83,7 +83,7 @@ Releases are named with the following scheme:
 
     Muxing uses wrong pads. Thus FlexSPI could not be used.
 
-## scarthgap.TQ.ARM.BSP.0007 (not released yet)
+## scarthgap.TQ.ARM.BSP.0007
 
 ### Added
 

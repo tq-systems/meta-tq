@@ -11,7 +11,7 @@ Releases are named with the following scheme:
 
 * distro: dumpling: remove unused PACKAGECONFIG modifications for gstreamer1.0-plugin-good
 
-## scarthgap.TQ.ARM.BSP.0007 (not released yet)
+## scarthgap.TQ.ARM.BSP.0007
 
 ### Added
 
@@ -27,8 +27,6 @@ Releases are named with the following scheme:
   bb.note is printed to the console in default configuration. The reason
   for this output is debugging why `kmscube`in / is not installed. The
   output is still visible in the log files.
-
-### Changed
 
 * weston: drop patch for PowerVR SGX GPU support now provided by meta-ti
 
