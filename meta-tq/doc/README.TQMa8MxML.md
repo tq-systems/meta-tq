@@ -64,7 +64,6 @@ _MBa8Mx HW Rev.030x only_
 
 ### Linux
 
-
 | Feature                                                      |      fslc-6.6       |    linux-tq-6.6     |
 | :----------------------------------------------------------- | :-----------------: | :-----------------: |
 | RAM configs                                                  |      1,2,4 GiB      |      1,2,4 GiB      |
@@ -103,7 +102,7 @@ _MBa8Mx HW Rev.030x only_
 | **Display**                                                  |                     |                     |
 | DSI to LVDS bridge                                           |          x          |                     |
 | **Audio**                                                    |                     |                     |
-| Codec (Line IN X14 / Line OUT X13)                           |          x          |          x          |
+| Codec (Line IN X13 / Line OUT X14)                           |          x          |          x          |
 | **PCIe**                                                     |                     |                     |
 | PCIe Slot on MBa8Mx (X36)                                    |          x          |          x          |
 | **SPI**                                                      |                     |                     |
