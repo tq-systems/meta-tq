@@ -64,7 +64,7 @@ _MBa8x HW Rev.020x/30x only / TQMa8Mx HW Rev.020x only_
 
 _MBa8x HW Rev.020x/30x only_
 
-| Feature                                                      |      fslc-6.6      |    inux-tq-6.6     |
+| Feature                                                      |      fslc-6.6      |    linux-tq-6.6    |
 | :----------------------------------------------------------- | :----------------: | :----------------: |
 | RAM configs                                                  |     1,2,4 GiB      |     1,2,4 GiB      |
 | CPU variants                                                 | i.MX8MQ / i.MX8MQL | i.MX8MQ / i.MX8MQL |
