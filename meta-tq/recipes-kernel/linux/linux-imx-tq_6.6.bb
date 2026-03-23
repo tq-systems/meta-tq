@@ -36,6 +36,7 @@ SRC_URI:aarch64 = "\
     file://features/debug.cfg \
     file://features/devicetree.cfg \
     file://features/network.cfg \
+    file://features/ptp-1588.cfg \
     file://features/rauc.cfg \
     file://features/trusted-keys.cfg \
     file://gpio-enablement.cfg \
