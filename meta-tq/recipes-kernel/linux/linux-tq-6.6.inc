@@ -20,6 +20,7 @@ KERNEL_CONFIG_FILES:imx ?= "\
     file://ubi.cfg \
     file://features/devicetree.cfg \
     file://features/network.cfg \
+    file://features/ptp-1588.cfg \
     file://features/spidev.cfg \
     file://features/usb-gadget-support.cfg \
 "
