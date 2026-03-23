@@ -38,6 +38,7 @@ SRC_URI:aarch64 = "\
     file://features/i2c-mux.cfg \
     file://features/iio.cfg \
     file://features/network.cfg \
+    file://features/ptp-1588.cfg \
     file://features/pwm.cfg \
     file://features/rauc.cfg \
     file://features/spidev.cfg \
