@@ -34,7 +34,7 @@ Note: Blocks are in sizes of 512 Bytes
 
 Compressed WIC images and matching BMAP-files (block map files) are created by default.
 To make use of this feature, install the `bmap-tools` package to use `bmaptool`. Current
-versions of `UUU` (https://github.com/nxp-imx/uuus) supports packed WIC and BMAP, too.
+versions of `UUU` (https://github.com/nxp-imx/mfgtools) supports packed WIC and BMAP, too.
 The packed WIC can also be decompressed and used with `dd` or other disk image tools.
 
 **Attention**: when using `bmaptool` with BMAP-files keep in mind that only parts of the
@@ -70,7 +70,7 @@ system with installed `bmaptool`):
 bmaptool copy <image>.wic[.compress] /dev/mmcblk0
 ```
 
-For provisioning etc. one can use `uuu` tool from NXP `uuus`, too. See [here](./README.imx.UUU.md)
+For provisioning etc. one can use `uuu` tool from NXPs `mfgtools`, too. See [here](./README.imx.UUU.md)
 for details.
 
 To create a bootable eMMC with boot stream only (for exact file name see
