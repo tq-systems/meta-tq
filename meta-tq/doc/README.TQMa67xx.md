@@ -292,7 +292,7 @@ Most configurations support DisplayPort in addition to the other display options
 `dsi-rpi-7inch-panel` configuration disables the DisplayPort, as both are connected to the same
 DSI interface of the AM67x internally.
 
-Simulaneous operation of multiple cameras is possible in some combinations, but
+Simultaneous operation of multiple cameras is possible in some combinations, but
 no labels are defined in `extlinux.conf` for such configurations at the moment.
 
 #### RaspberryPi 7" DSI display
