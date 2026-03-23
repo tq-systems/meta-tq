@@ -20,6 +20,7 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-rt-tq-6.12: update to v6.12.74-rt16
 * imx-system-manager-tq: update to NXP version lf-6.18.2_1.0.0
 
   This integrates all fixes and features from NXP release and port
@@ -63,9 +64,9 @@ Releases are named with the following scheme:
     * FlexSPI support
     * 10GiGE support
     * dual LVDS example
-* linux-tq-6.6: update to 6.6.127
-* linux-rt-tq-6.6-rt: update to v6.6.126-rt68
-* linux-tq-6.12: update to v6.12.73
+* linux-tq-6.6: update to 6.6.129
+* linux-rt-tq-6.6-rt: update to v6.6.129-rt70
+* linux-tq-6.12: update to v6.12.76
 
 ### Fixed
 
