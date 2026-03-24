@@ -22,7 +22,7 @@ RDEPENDS:${PN} = "\
     qtmultimedia-examples \
 "
 
-QT6_OPENGL_DEMOS ="\
+QT6_OPENGL_DEMOS = "\
     qt3d-examples \
     qtquick3d-examples \
 "

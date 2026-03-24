@@ -21,9 +21,9 @@ PV = "${LINUX_VERSION}+git"
 #
 # If the defconfig file was created with make_savedefconfig, not all options are
 # specified, and should be restored with their defaults, not set to 'n'.
-# To properly expand a defconfig like this, we need to specify: KCONFIG_MODE="--alldefconfig"
+# To properly expand a defconfig like this, we need to specify: KCONFIG_MODE = "--alldefconfig"
 # in the kernel recipe include.
-KCONFIG_MODE="--alldefconfig"
+KCONFIG_MODE = "--alldefconfig"
 
 ####
 # kernel.bbclass unconditionally creates .scmversion files in ${B} and ${S}.
