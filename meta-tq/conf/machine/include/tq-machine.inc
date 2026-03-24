@@ -11,20 +11,16 @@ KERNEL_IMAGETYPES_INSTALL = "\
     )} \
 "
 
-# Only install kernel-devicetree if a non-fitImage kernel is installed
+FIT_IMAGE ?= ""
+# Only install kernel-image and kernel-devicetree if not fitimage is installed
 MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-    ${@oe.utils.ifelse(oe.utils.str_filter_out('^fitImage$', d.getVar('KERNEL_IMAGETYPES_INSTALL'), d) != '', \
-        'kernel-devicetree', \
-        '', \
-    )} \
-"
-
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS += "\
-    ${@ ' '.join( \
+    ${FIT_IMAGE} \
+    ${@oe.utils.conditional('FIT_IMAGE', '', 'kernel-devicetree', '', d)} \
+    ${@oe.utils.conditional('FIT_IMAGE', '', ' '.join( \
         ['kernel-image-' + type.lower() \
             for type in d.getVar('KERNEL_IMAGETYPES_INSTALL').split() \
         ] \
-    )} \
+    ), '', d)} \
 "
 
 MACHINE_EXTRA_RRECOMMENDS += "\

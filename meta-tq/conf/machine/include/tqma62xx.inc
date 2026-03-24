@@ -18,7 +18,6 @@ require conf/machine/include/am62xx.inc
 SYSFW_DEFAULT_VARIANT ?= "am62x-hs-fs"
 
 KERNEL_CLASSES += "ti-secdev"
-KERNEL_IMAGETYPE = "fitImage"
 
 # All 3 tiboot3 variants are installed to the boot partition
 # The default variant is additionally installed as tiboot3.bin
@@ -61,6 +60,8 @@ MACHINE_FEATURES += "\
 
 # Common image configuration
 require conf/machine/include/tq-image.inc
+
+FIT_IMAGE += "linux-tq-fitimage"
 
 # TI image configuration
 require conf/machine/include/tq-image-ti.inc

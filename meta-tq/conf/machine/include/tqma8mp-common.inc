@@ -67,10 +67,7 @@ IMXBOOT_TARGETS ?= "\
 #
 MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-flash_spl_uboot"
 
-KERNEL_IMAGETYPE = "fitImage"
-# override default from conf/machine/include/imx-base.inc
-KERNEL_IMAGETYPE:mx8-generic-bsp = "fitImage"
-KERNEL_IMAGETYPES = "${KERNEL_IMAGETYPE} Image"
+FIT_IMAGE += "linux-tq-fitimage"
 
 #
 # TODO: revisit memory layout for optee support

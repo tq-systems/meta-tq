@@ -21,7 +21,6 @@ require conf/machine/include/j722s.inc
 SYSFW_DEFAULT_VARIANT ?= "j722s-hs-fs"
 
 KERNEL_CLASSES += "ti-secdev"
-KERNEL_IMAGETYPE = "fitImage"
 
 # Both tiboot3 variants are installed to the boot partition
 # The default variant is additionally installed as tiboot3.bin
@@ -63,6 +62,8 @@ MACHINE_FEATURES += "\
 
 # Common image configuration
 require conf/machine/include/tq-image.inc
+
+FIT_IMAGE += "linux-tq-fitimage"
 
 # TI image configuration
 require conf/machine/include/tq-image-ti.inc
