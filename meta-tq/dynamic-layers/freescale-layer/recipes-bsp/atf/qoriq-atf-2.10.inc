@@ -8,5 +8,3 @@ ATF_SRC ?= "git://github.com/nxp-qoriq/atf.git;protocol=https"
 SRC_URI = "${ATF_SRC};branch=${ATF_BRANCH}"
 SRCREV = "78a14c75a06dea39036c44ae0f9d23acc7bcaef2"
 
-S = "${UNPACKDIR}/git"
-

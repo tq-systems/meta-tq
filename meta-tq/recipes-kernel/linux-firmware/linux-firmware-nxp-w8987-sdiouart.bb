@@ -11,8 +11,6 @@ LIC_FILES_CHKSUM = "file://EULA.txt;md5=be5ff43682ed6c57dfcbeb97651c2829"
 SRC_URI = "git://github.com/NXP/imx-firmware.git;protocol=https;branch=lf-5.15.52_2.1.0"
 SRCREV = "b6f070e3d4cab23932d9e6bc29e3d884a7fd68f4"
 
-S = "${UNPACKDIR}/git"
-
 inherit allarch
 
 do_configure[noexec] = "1"

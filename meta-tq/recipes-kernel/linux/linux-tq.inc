@@ -72,8 +72,6 @@ do_install:append(){
     fi
 }
 
-S = "${UNPACKDIR}/git"
-
 # copied from linux-yocto.inc
 # Skip processing of this recipe if it is not explicitly specified as the
 # PREFERRED_PROVIDER for virtual/kernel. This avoids network access required

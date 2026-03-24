@@ -18,8 +18,6 @@ IMX_SYSTEM_MANAGER_SRC = "${TQ_GIT_BASEURL}/tq-imx-sm.git;protocol=${TQ_GIT_PROT
 SRCBRANCH = "TQM-lf-6.18.2"
 SRCREV = "276eb5537c558e5fbbb28c800f50ca86e1074cce"
 
-S = "${UNPACKDIR}/git"
-
 require dynamic-layers/arm-toolchain/recipes-bsp/imx-system-manager/imx-system-manager.inc
 
 # for production releases monitor and console needs to be disabled

@@ -17,7 +17,6 @@ SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branc
 
 DEPENDS += "bison-native"
 
-S = "${UNPACKDIR}/git"
 B = "${UNPACKDIR}/build"
 
 do_configure[cleandirs] = "${B}"

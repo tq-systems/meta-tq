@@ -41,4 +41,3 @@ SRC_URI:append:nxp-ahab = "\
     file://csf_uboot_atf.txt.in \
 "
 
-S = "${UNPACKDIR}/git"

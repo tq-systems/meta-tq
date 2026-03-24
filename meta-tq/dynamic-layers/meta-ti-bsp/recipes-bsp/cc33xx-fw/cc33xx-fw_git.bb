@@ -9,8 +9,6 @@ PV = "1.7.0.323"
 
 CLEANBROKEN = "1"
 
-S = "${UNPACKDIR}/git"
-
 do_compile[no_exec] = "1"
 
 EXTRA_OEMAKE = "DEST_DIR=${D} BASE_LIB_DIR=${nonarch_base_libdir}"
