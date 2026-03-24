@@ -7,7 +7,7 @@ IMAGE_INSTALL:append = "\
 "
 
 # enable root login w/o password and passwordless ssh login
-IMAGE_FEATURES:append = " debug-tweaks"
+IMAGE_FEATURES += "allow-empty-password allow-root-login empty-root-password post-install-logging"
 # poky defined collection of debug tools
 # tools-testapps is not appended here since it increases images size
 # without having a global benefit due to ltp and complex dependencies
@@ -30,5 +30,5 @@ do_issue_warning () {
 }
 
 ROOTFS_POSTPROCESS_COMMAND += '${@bb.utils.contains_any("IMAGE_FEATURES", \
-    [ 'debug-tweaks', 'empty-root-password', 'allow-root-login' ], \
+    [ 'allow-empty-password', 'empty-root-password', 'allow-root-login' ], \
     "do_issue_warning; ", "",d)}'
