@@ -31,7 +31,7 @@ TCLIBC = "musl"
 # https://git.musl-libc.org/cgit/musl/commit/?id=7be59733d71ada3a32a98622507399253f1d5e48
 TCLIBC:e5500-64b = "glibc"
 
-FULL_OPTIMIZATION="-Os -pipe ${DEBUG_FLAGS}"
+FULL_OPTIMIZATION = "-Os -pipe ${DEBUG_FLAGS}"
 
 # do not overwrite the kernel provider and version here
 

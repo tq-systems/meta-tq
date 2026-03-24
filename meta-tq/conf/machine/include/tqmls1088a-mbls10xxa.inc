@@ -39,7 +39,7 @@ UBOOT_CONFIG[tfa] = "tqmls1088a_mbls10xxa_tfa_defconfig"
 RCWQSPI ??= "default/rcw_1400_3333_5559"
 RCWAUTO ??= "default/rcw_1400_3333_5559"
 
-ATF_RCW_VARIANTS ="\
+ATF_RCW_VARIANTS = "\
     default/rcw_1400_1133_5506 \
     default/rcw_1400_1133_5559 \
     default/rcw_1400_1133_5577 \
