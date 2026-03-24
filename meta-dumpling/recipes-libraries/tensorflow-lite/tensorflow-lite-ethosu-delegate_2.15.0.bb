@@ -17,14 +17,14 @@ SRC_URI = "${TENSORFLOW_LITE_ETHOSU_DELEGATE_SRC};branch=${SRCBRANCH_ethosu};nam
            ${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH_tf};name=tf;destsuffix=tfgit \
 "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit python3native cmake
 
 EXTRA_OECMAKE = "-DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR}"
 EXTRA_OECMAKE += " \
      -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
-     -DFETCHCONTENT_SOURCE_DIR_TENSORFLOW=${WORKDIR}/tfgit \
+     -DFETCHCONTENT_SOURCE_DIR_TENSORFLOW=${UNPACKDIR}/tfgit \
      -DTFLITE_LIB_LOC=${STAGING_DIR_HOST}${libdir}/libtensorflow-lite.so \
      ${S} \
 "

@@ -21,7 +21,7 @@ INITSCRIPT_PARAMS = "start 10 S ."
 RDEPENDS:${PN} += "util-linux-findmnt"
 
 do_install() {
-    install -Dm 755 "${WORKDIR}/u-boot-env-tq.sh" "${D}${libexecdir}/tq/u-boot-env-tq.sh"
+    install -Dm 755 "${UNPACKDIR}/u-boot-env-tq.sh" "${D}${libexecdir}/tq/u-boot-env-tq.sh"
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
 	    install -d ${D}${sysconfdir}/init.d/
@@ -29,7 +29,7 @@ do_install() {
     fi
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-        install -Dm 0644 "${WORKDIR}/u-boot-env-tq.service" "${D}${systemd_system_unitdir}/u-boot-env-tq.service"
+        install -Dm 0644 "${UNPACKDIR}/u-boot-env-tq.service" "${D}${systemd_system_unitdir}/u-boot-env-tq.service"
         sed -i -e "s,@LIBEXECDIR@,${libexecdir},g" "${D}${systemd_system_unitdir}/u-boot-env-tq.service"
     fi
 

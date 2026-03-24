@@ -31,7 +31,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
 SRC_URI = "file://tqma8-cortexm-demos-${SDK_BASE_REV}-${SDK_TQ_REV}.tar.gz"
 
-S = "${WORKDIR}/${BPN}-${SDK_BASE_REV}-${SDK_TQ_REV}"
+S = "${UNPACKDIR}/${BPN}-${SDK_BASE_REV}-${SDK_TQ_REV}"
 
 do_deploy () {
     install -m 0644 ${S}/${SOC}/*.bin ${DEPLOYDIR}

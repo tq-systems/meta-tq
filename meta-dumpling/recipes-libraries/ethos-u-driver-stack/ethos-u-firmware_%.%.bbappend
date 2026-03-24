@@ -13,6 +13,6 @@ SRC_URI:append:tqma93xx = " file://${ETHOS_U_FIRMWARE}"
 
 do_install:tqma93xx () {
     install -d ${D}${nonarch_base_libdir}/firmware
-    install -m 0644 ${WORKDIR}/${ETHOS_U_FIRMWARE} ${D}${nonarch_base_libdir}/firmware/ethosu_firmware
+    install -m 0644 ${UNPACKDIR}/${ETHOS_U_FIRMWARE} ${D}${nonarch_base_libdir}/firmware/ethosu_firmware
 }
 

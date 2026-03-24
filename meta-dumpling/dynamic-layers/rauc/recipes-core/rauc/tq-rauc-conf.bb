@@ -37,18 +37,18 @@ INITSCRIPT_PARAMS = "start 10 S ."
 
 do_install () {
     install -d "${D}${sysconfdir}/rauc"
-    install -m 0644 "${WORKDIR}/${RAUC_KEYRING_FILE}" "${D}${sysconfdir}/rauc/"
+    install -m 0644 "${UNPACKDIR}/${RAUC_KEYRING_FILE}" "${D}${sysconfdir}/rauc/"
     ln -s /run/tq/rauc/system.conf "${D}${sysconfdir}/rauc/system.conf"
 
     for variant in ${RAUC_SYSTEM_CONF_VARIANTS}; do
-        install -m 0644 "${WORKDIR}/system.conf-${variant}" "${D}${sysconfdir}/rauc/"
+        install -m 0644 "${UNPACKDIR}/system.conf-${variant}" "${D}${sysconfdir}/rauc/"
         sed -i \
             -e "s!@RAUC_BUNDLE_COMPATIBLE@!${RAUC_BUNDLE_COMPATIBLE}!g" \
             -e "s!@RAUC_KEYRING_FILE@!$(basename "${RAUC_KEYRING_FILE}")!g" \
             "${D}${sysconfdir}/rauc/system.conf-${variant}"
     done
 
-    install -Dm 0755 "${WORKDIR}/rauc-conf.sh" "${D}${libexecdir}/tq/rauc-conf.sh"
+    install -Dm 0755 "${UNPACKDIR}/rauc-conf.sh" "${D}${libexecdir}/tq/rauc-conf.sh"
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
 	    install -d ${D}${sysconfdir}/init.d/
@@ -56,11 +56,11 @@ do_install () {
     fi
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-        install -Dm 0644 "${WORKDIR}/tq-rauc-conf.service" "${D}${systemd_system_unitdir}/tq-rauc-conf.service"
+        install -Dm 0644 "${UNPACKDIR}/tq-rauc-conf.service" "${D}${systemd_system_unitdir}/tq-rauc-conf.service"
         sed -i -e "s,@LIBEXECDIR@,${libexecdir},g" "${D}${systemd_system_unitdir}/tq-rauc-conf.service"
 
-        install -Dm 0644 "${WORKDIR}/tq-rauc-conf.conf" "${D}${systemd_system_unitdir}/rauc.service.d/10-tq-rauc-conf.conf"
-        install -Dm 0644 "${WORKDIR}/tq-rauc-conf.conf" "${D}${systemd_system_unitdir}/rauc-mark-good.service.d/10-tq-rauc-conf.conf"
+        install -Dm 0644 "${UNPACKDIR}/tq-rauc-conf.conf" "${D}${systemd_system_unitdir}/rauc.service.d/10-tq-rauc-conf.conf"
+        install -Dm 0644 "${UNPACKDIR}/tq-rauc-conf.conf" "${D}${systemd_system_unitdir}/rauc-mark-good.service.d/10-tq-rauc-conf.conf"
     fi
 }
 

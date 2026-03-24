@@ -23,7 +23,7 @@ INITSCRIPT_PARAMS = "start 05 S ."
 RDEPENDS:${PN} += "util-linux-findmnt"
 
 do_install() {
-    install -Dm 755 "${WORKDIR}/tq-mount-data.sh" "${D}${libexecdir}/tq/mount-data.sh"
+    install -Dm 755 "${UNPACKDIR}/tq-mount-data.sh" "${D}${libexecdir}/tq/mount-data.sh"
     sed -i -e "s,@TQ_DATA_MOUNT_TARGET@,${TQ_DATA_MOUNT_TARGET},g" "${D}${libexecdir}/tq/mount-data.sh"
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
@@ -32,7 +32,7 @@ do_install() {
     fi
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-        install -Dm 0644 "${WORKDIR}/tq-mount-data.service" "${D}${systemd_system_unitdir}/tq-mount-data.service"
+        install -Dm 0644 "${UNPACKDIR}/tq-mount-data.service" "${D}${systemd_system_unitdir}/tq-mount-data.service"
         sed -i -e "s,@LIBEXECDIR@,${libexecdir},g" "${D}${systemd_system_unitdir}/tq-mount-data.service"
     fi
 

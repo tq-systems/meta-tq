@@ -27,7 +27,7 @@ SRC_URI = " \
 # so it can be selected for a build using IMX_HAB_KEY_NAME.
 
 do_install() {
-   local in="${WORKDIR}/hab4" out="${D}${datadir}/${BPN}/hab4"
+   local in="${UNPACKDIR}/hab4" out="${D}${datadir}/${BPN}/hab4"
 
    install -DT -m644 ${in}/CSF1_1_sha256_2048_65537_v3_usr_crt.pem ${out}/${IMX_HAB_CSF_CERT}
    install -DT -m600 ${in}/CSF1_1_sha256_2048_65537_v3_usr_key.pem ${out}/${IMX_HAB_CSF_KEY}
@@ -36,7 +36,7 @@ do_install() {
    install -DT -m644 ${in}/SRK_1_2_3_4_table.bin ${out}/${IMX_HAB_SRK_TABLE}
    install -DT -m600 ${in}/key_pass.txt ${out}/${IMX_HAB_KEY_PASS}
 
-   local in="${WORKDIR}/ahab" out="${D}${datadir}/${BPN}/ahab"
+   local in="${UNPACKDIR}/ahab" out="${D}${datadir}/${BPN}/ahab"
 
    install -DT -m644 ${in}/SRK1_sha512_secp521r1_v3_usr_crt.pem ${out}/${IMX_HAB_SRK_CERT}
    install -DT -m644 ${in}/SRK1_sha512_secp521r1_v3_usr_key.pem ${out}/${IMX_HAB_SRK_KEY}

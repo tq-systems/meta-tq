@@ -5,14 +5,14 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 SRC_URI = "file://byteswap.tcl"
 
-S = "${WORKDIR}"
+S = "${UNPACKDIR}"
 
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
 
 do_install () {
     install -d ${D}/${bindir}
-    install -m 755 ${WORKDIR}/byteswap.tcl ${D}/${bindir}
+    install -m 755 ${UNPACKDIR}/byteswap.tcl ${D}/${bindir}
 }
 
 RDEPENDS:${PN} += "tcl-native"

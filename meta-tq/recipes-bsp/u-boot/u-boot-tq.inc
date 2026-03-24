@@ -17,8 +17,8 @@ SRC_URI = "${TQ_GIT_BASEURL}/u-boot-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branc
 
 DEPENDS += "bison-native"
 
-S = "${WORKDIR}/git"
-B = "${WORKDIR}/build"
+S = "${UNPACKDIR}/git"
+B = "${UNPACKDIR}/build"
 
 do_configure[cleandirs] = "${B}"
 
@@ -86,7 +86,7 @@ do_compile:prepend() {
 
 do_install:append() {
     for config in ${TQ_FW_ENV_CONFIGS}; do
-        install -m 644 "${WORKDIR}/fw_env.config-${config}" "${D}${sysconfdir}/fw_env.config-${config}"
+        install -m 644 "${UNPACKDIR}/fw_env.config-${config}" "${D}${sysconfdir}/fw_env.config-${config}"
     done
 
     i=0

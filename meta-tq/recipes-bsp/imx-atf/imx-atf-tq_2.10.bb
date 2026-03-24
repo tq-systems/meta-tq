@@ -17,7 +17,7 @@ ATF_SRC = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL}"
 SRC_URI = "${ATF_SRC};branch=${ATF_BRANCH}"
 SRCREV = "5ce451b197ff8646275f00970b16270598a500a1"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit deploy
 

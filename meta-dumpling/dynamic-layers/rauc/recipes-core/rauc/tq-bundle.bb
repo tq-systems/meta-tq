@@ -22,7 +22,7 @@ RAUC_SLOT_rootfs[fstype] ?= "tar.gz"
 
 do_bundle:prepend () {
     (
-        cd "${WORKDIR}" && for file in "${RAUC_KEY_FILE}" "${RAUC_CERT_FILE}" "${RAUC_KEYRING_FILE}"; do
+        cd "${UNPACKDIR}" && for file in "${RAUC_KEY_FILE}" "${RAUC_CERT_FILE}" "${RAUC_KEYRING_FILE}"; do
             mkdir -p "$(dirname "${B}/${file}")"
             cp "${file}" "${B}/${file}"
         done

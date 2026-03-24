@@ -13,7 +13,7 @@ ETHOS_U_SRC ?= "git://github.com/nxp-imx/ethos-u-driver-stack-imx.git;protocol=h
 SRCBRANCH = "lf-6.6.23_2.0.0"
 SRCREV = "2acb7e2626fe3ff8764019e385829105a6e210bb"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit cmake setuptools3
 

@@ -22,7 +22,7 @@ SRC_URI = "\
     file://${BPN}-${SC_FIRMWARE_NAME_TQ}.tar.gz \
 "
 
-S = "${WORKDIR}/${BPN}-${SC_FIRMWARE_VERSION_TQ}"
+S = "${UNPACKDIR}/${BPN}-${SC_FIRMWARE_VERSION_TQ}"
 
 # clear vars to prevent default assignments
 SC_FIRMWARE_NAME ??= "invalid"

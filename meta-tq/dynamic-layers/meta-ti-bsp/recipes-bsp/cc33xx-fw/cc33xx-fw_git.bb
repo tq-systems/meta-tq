@@ -9,7 +9,7 @@ PV = "1.7.0.323"
 
 CLEANBROKEN = "1"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 do_compile[no_exec] = "1"
 

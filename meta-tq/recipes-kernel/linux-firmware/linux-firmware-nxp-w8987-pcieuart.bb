@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=44a8052c384584ba09077e85a3d1654f"
 SRC_URI = "git://github.com/NXP/imx-firmware.git;protocol=https;branch=lf-6.6.3_1.0.0"
 SRCREV = "2afa15e77f0b58eade42b4f59c9215339efcca66"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit allarch
 

@@ -9,6 +9,6 @@ SRC_URI = "\
 "
 
 do_install() {
-    install -Dm 644 ${WORKDIR}/persistent-storage-mtd.rules \
+    install -Dm 644 ${UNPACKDIR}/persistent-storage-mtd.rules \
         ${D}${nonarch_base_libdir}/udev/rules.d/60-persistent-storage-mtd.rules
 }

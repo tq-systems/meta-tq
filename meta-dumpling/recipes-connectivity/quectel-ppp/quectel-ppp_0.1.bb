@@ -20,7 +20,7 @@ SRC_URI = "\
     file://quectel-chat-disconnect \
 "
 
-S = "${WORKDIR}"
+S = "${UNPACKDIR}"
 
 # set the Access Point Name (APN) of the SIM card
 # set this variable in conf/local.conf
@@ -41,8 +41,8 @@ do_configure () {
         bbwarn "USB UART of quectel wwan card is not set! Set the UART in QUECTEL_PPP_TTY."
     fi
 
-    sed s#@QUECTEL_PPP_APN@#${QUECTEL_PPP_APN}#g ${WORKDIR}/quectel-chat-connect.in > ${S}/quectel-chat-connect
-    sed s#@QUECTEL_PPP_TTY@#${QUECTEL_PPP_TTY}#g ${WORKDIR}/quectel-ppp.in > ${S}/quectel-ppp
+    sed s#@QUECTEL_PPP_APN@#${QUECTEL_PPP_APN}#g ${UNPACKDIR}/quectel-chat-connect.in > ${S}/quectel-chat-connect
+    sed s#@QUECTEL_PPP_TTY@#${QUECTEL_PPP_TTY}#g ${UNPACKDIR}/quectel-ppp.in > ${S}/quectel-ppp
 }
 
 inherit allarch

@@ -18,7 +18,7 @@ SRC_URI = "${TENSORFLOW_LITE_VX_DELEGATE_SRC};branch=${SRCBRANCH_vx};name=vx \
            file://0001-Findtim-vx.cmake-Fix-LIBDIR-for-multilib-environment.patch \
 "
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit python3native cmake
 
@@ -26,7 +26,7 @@ EXTRA_OECMAKE = "-DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR}"
 EXTRA_OECMAKE += " \
      -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
      -DTIM_VX_INSTALL=${STAGING_DIR_HOST}/usr \
-     -DFETCHCONTENT_SOURCE_DIR_TENSORFLOW=${WORKDIR}/tfgit \
+     -DFETCHCONTENT_SOURCE_DIR_TENSORFLOW=${UNPACKDIR}/tfgit \
      -DTFLITE_LIB_LOC=${STAGING_DIR_HOST}${libdir}/libtensorflow-lite.so \
      ${S} \
 "

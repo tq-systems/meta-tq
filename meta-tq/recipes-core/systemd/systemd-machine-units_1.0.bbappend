@@ -31,19 +31,19 @@ HAS_ETH1:tqmls1028a ?= "false"
 do_install:append() {
     # all our boards have at least one native network port
     install -d ${D}${systemd_unitdir}/network/
-    install -m 0644 "${WORKDIR}/10-eth0.network" ${D}${systemd_unitdir}/network/
-    install -m 0644 "${WORKDIR}/90-dhcp-default.network" ${D}${systemd_unitdir}/network/
+    install -m 0644 "${UNPACKDIR}/10-eth0.network" ${D}${systemd_unitdir}/network/
+    install -m 0644 "${UNPACKDIR}/90-dhcp-default.network" ${D}${systemd_unitdir}/network/
 
     if [ "${HAS_ETH1}" = "true" ]; then
-        install -m 0644 "${WORKDIR}/10-eth1.network" ${D}${systemd_unitdir}/network/
+        install -m 0644 "${UNPACKDIR}/10-eth1.network" ${D}${systemd_unitdir}/network/
     fi
 
     if [ "${HAS_CAN0}" = "true" ]; then
-        install -m 0644 "${WORKDIR}/20-can0.network" ${D}${systemd_unitdir}/network/
+        install -m 0644 "${UNPACKDIR}/20-can0.network" ${D}${systemd_unitdir}/network/
     fi
 
     if [ "${HAS_CAN1}" = "true" ]; then
-        install -m 0644 "${WORKDIR}/20-can1.network" ${D}${systemd_unitdir}/network/
+        install -m 0644 "${UNPACKDIR}/20-can1.network" ${D}${systemd_unitdir}/network/
     fi
 }
 

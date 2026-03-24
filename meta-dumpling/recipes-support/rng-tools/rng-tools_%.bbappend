@@ -10,10 +10,10 @@ SRC_URI += "\
 PACKAGECONFIG:append = " libjitterentropy"
 
 do_install:append() {
-    install -Dm 755 ${WORKDIR}/check_hwrng ${D}${bindir}/check_hwrng
+    install -Dm 755 ${UNPACKDIR}/check_hwrng ${D}${bindir}/check_hwrng
 
     # Install systemd service override file which will be merged into regular one
-    install -Dm 0644 ${WORKDIR}/rngd.start-check.conf \
+    install -Dm 0644 ${UNPACKDIR}/rngd.start-check.conf \
                 ${D}${systemd_system_unitdir}/rngd.service.d/start-check.conf
 }
 

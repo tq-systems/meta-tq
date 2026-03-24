@@ -97,7 +97,7 @@ EOF
 
 do_compile() {
     for variant in ${VARIANTS}; do
-        build_scr "${variant}" "${WORKDIR}/${variant}.cmd" "${variant}.scr"
+        build_scr "${variant}" "${UNPACKDIR}/${variant}.cmd" "${variant}.scr"
     done
 }
 

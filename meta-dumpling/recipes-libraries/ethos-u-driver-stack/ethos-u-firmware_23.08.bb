@@ -12,7 +12,7 @@ ETHOS_U_FIRMWARE_SRC ?= "git://github.com/nxp-imx/ethos-u-firmware.git;protocol=
 SRCBRANCH = "lf-6.6.23_2.0.0"
 SRCREV = "bd12be9d5e61a12641fe284d323ff964c9c7a080"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 ETHOS_U_FIRMWARE = "ethosu_firmware"
 ETHOS_U_FIRMWARE:imx93-9x9-lpddr4-qsb    = "ethosu_firmware_9x9"

@@ -43,7 +43,7 @@ KCONFIG_MODE="--alldefconfig"
 ####
 KERNEL_LOCALVERSION = "-tq"
 
-do_set_localversion_tq[dirs] += "${STAGING_KERNEL_DIR} ${WORKDIR}"
+do_set_localversion_tq[dirs] += "${STAGING_KERNEL_DIR} ${UNPACKDIR}"
 do_set_localversion_tq() {
     if [ "${SRCREV}" = "INVALID" ]; then
         hash=${SRCREV_machine}
@@ -72,7 +72,7 @@ do_install:append(){
     fi
 }
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 # copied from linux-yocto.inc
 # Skip processing of this recipe if it is not explicitly specified as the

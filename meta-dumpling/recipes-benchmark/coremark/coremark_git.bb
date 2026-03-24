@@ -25,7 +25,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=0a18b17ae63deaa8a595035f668aebe1"
 SRC_URI = "git://github.com/eembc/coremark.git;branch=main;protocol=https"
 SRCREV = "1f483d5b8316753a742cbf5590caf5bd0a4e4777"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 TARGET_CC_ARCH += "${LDFLAGS}"
 
 CORE_VARIANTS ?= "1 2 4 8 16"

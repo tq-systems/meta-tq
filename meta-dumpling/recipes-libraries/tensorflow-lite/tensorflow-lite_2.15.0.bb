@@ -14,7 +14,7 @@ SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/mobile
 SRC_URI[model-mobv1.md5sum] = "36af340c00e60291931cb30ce32d4e86"
 SRC_URI[model-mobv1.sha256sum] = "d32432d28673a936b2d6281ab0600c71cf7226dfe4cdcef3012555f691744166"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit python3native cmake
 
@@ -103,7 +103,7 @@ do_install() {
     cp ${S}/tensorflow/lite/examples/python/label_image.py ${D}${bindir}/${PN}-${PV}/examples
 
     # Install mobilenet tflite file
-    cp ${WORKDIR}/mobilenet_*.tflite ${D}${bindir}/${PN}-${PV}/examples
+    cp ${UNPACKDIR}/mobilenet_*.tflite ${D}${bindir}/${PN}-${PV}/examples
 
     # Install pip package
     install -d ${D}/${PYTHON_SITEPACKAGES_DIR}

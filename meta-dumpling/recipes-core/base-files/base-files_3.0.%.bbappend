@@ -19,7 +19,7 @@ VENDOR_LONG_NAME ??= "TQ-Systems"
 DISTRO_SHORT_NAME ??= "dumpling"
 
 do_install:append() {
-    install -m 0755 ${WORKDIR}/handle_issue.sh ${D}${sysconfdir}/profile.d/handle_issue.sh
+    install -m 0755 ${UNPACKDIR}/handle_issue.sh ${D}${sysconfdir}/profile.d/handle_issue.sh
 }
 
 do_install_basefilesissue:append() {

@@ -270,11 +270,11 @@ generate_csf_hab4() {
 
     imx_hab_generate_csf_hab4 \
         ${S}/csf_spl-${type}.txt-${target} \
-        ${WORKDIR}/csf_spl.txt.in \
+        ${UNPACKDIR}/csf_spl.txt.in \
         "${SPL_HAB_BLOCK} \"${flash_bin}\""
     imx_hab_generate_csf_hab4 \
         ${S}/csf_fit-${type}.txt-${target} \
-        ${WORKDIR}/csf_fit.txt.in \
+        ${UNPACKDIR}/csf_fit.txt.in \
         "${hab_blocks}"
 }
 
@@ -305,7 +305,7 @@ generate_csf_ahab() {
 
     imx_hab_generate_csf_ahab \
         ${S}/${csf_template}-${type}.txt-${target} \
-        ${WORKDIR}/${csf_template}.txt.in \
+        ${UNPACKDIR}/${csf_template}.txt.in \
         "${offsets}" \
         "${flash_bin}"
 }

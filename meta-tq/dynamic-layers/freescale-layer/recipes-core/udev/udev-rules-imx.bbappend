@@ -4,6 +4,6 @@ SRC_URI += "\
 "
 
 do_install:append:tqma8mpxl-mba8mp-ras314() {
-    install -Dm 644 ${WORKDIR}/mba8mp-ras314.rules \
+    install -Dm 644 ${UNPACKDIR}/mba8mp-ras314.rules \
         ${D}${nonarch_base_libdir}/udev/rules.d/10-mba8mp-ras314.rules
 }

@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 BRANCH = "master"
 SRC_URI = "git://gitlab-ext.sigma-chemnitz.de/ensc/bayer2rgb.git;protocol=https;branch=${BRANCH}"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 SRCREV = "15feb1115b4828488cc36d09f625e23e8b6a0ec5"
 PV = "0.6.1+git"

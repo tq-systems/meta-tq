@@ -16,7 +16,7 @@ SRC_URI = "git://github.com/bingmann/pmbw;protocol=https;branch=master"
 PV = "0.6.3+git${SRCPV}"
 SRCREV = "1a2f3ff96e6c9b8f9fc85084909edde6afac34ce"
 
-S = "${WORKDIR}/git"
+S = "${UNPACKDIR}/git"
 
 inherit autotools
 
