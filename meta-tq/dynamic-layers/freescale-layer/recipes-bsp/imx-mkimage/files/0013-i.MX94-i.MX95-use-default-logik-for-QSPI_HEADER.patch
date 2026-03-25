@@ -14,6 +14,7 @@ default and the fallback configuration files are located at fixed
 locations simply set the QSPI_HEADER to a known good configuration
 SPI-NOR with 1-1-1 and 50 MHz clock.
 
+Upstream-Status: Inappropriate
 Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 ---
  iMX94/soc.mak | 6 +-----
