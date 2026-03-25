@@ -8,6 +8,8 @@ SRC_URI = "\
     file://90-dhcp-default.network \
 "
 
+S = "${UNPACKDIR}"
+
 # most boards have a second ethernet port and 2 can interfaces
 HAS_ETH1 ??= "true"
 HAS_CAN0 ??= "true"
