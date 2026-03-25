@@ -20,6 +20,11 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* rcw: update TQMLS1028A PCIe configuration
+  * The default RCW was renamed from "default" to "8_5_11_14", providing SGMII,
+    QSGMII, PCIe Gen2 and SATA
+  * A second RCW variant "8_5_11_11" was added, providing SGMII, QSGMII, PCIe
+    Gen3, but no SATA
 * linux-ti-tq-6.12: update to latest ti-linux-6.12.y
 * linux-rt-tq-6.12: update to v6.12.74-rt16
 * imx-system-manager-tq: update to NXP version lf-6.18.2_1.0.0

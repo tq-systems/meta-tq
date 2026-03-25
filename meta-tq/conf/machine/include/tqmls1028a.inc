@@ -64,12 +64,15 @@ BL3_IMAGE ?= "fip_uboot${ATF_SECURE_SUFFIX}.bin"
 BOOTTYPE ?= "auto flexspi_nor"
 
 ATF_RCW_VARIANTS ?= " \
-    default/rcw_800 \
-    default/rcw_1000 \
-    default/rcw_1300 \
+    8_5_11_11/rcw_800 \
+    8_5_11_11/rcw_1000 \
+    8_5_11_11/rcw_1300 \
+    8_5_11_14/rcw_800 \
+    8_5_11_14/rcw_1000 \
+    8_5_11_14/rcw_1300 \
 "
-RCWAUTO ?= "default/rcw_1300"
-RCWXSPI ?= "default/rcw_1300"
+RCWAUTO ?= "8_5_11_14/rcw_1300"
+RCWXSPI ?= "8_5_11_14/rcw_1300"
 
 RCW_FOLDER:${MACHINE} = "tqmls1028a"
 PLATFORM:${MACHINE} = "tqmls1028a_1gb"
