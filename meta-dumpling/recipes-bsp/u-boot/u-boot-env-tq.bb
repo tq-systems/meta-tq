@@ -13,6 +13,8 @@ SRC_URI = "\
     file://u-boot-env-tq.service \
     file://u-boot-env-tq.sh \
 "
+
+S = "${UNPACKDIR}"
 SYSTEMD_SERVICE:${PN} = "u-boot-env-tq.service"
 
 INITSCRIPT_NAME = "u-boot-env-tq.sh"
