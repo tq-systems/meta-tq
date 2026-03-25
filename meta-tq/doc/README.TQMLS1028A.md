@@ -144,6 +144,27 @@ Set `BL2_IMAGE` to `bl2_auto${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.pbl` and
 `BL3_IMAGE` to `fip_uboot${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.bin` to create an SD/eMMC image for the 4GiB
 variant (or 2gb/8gb for the 2GiB/8GiB variants respectively).
 
+### RCW variants
+
+The following RCW variants a listed in `ATF_RCW_VARIANTS`:
+
+- `8_5_11_11/rcw_800`
+- `8_5_11_11/rcw_1000`
+- `8_5_11_11/rcw_1300`
+- `8_5_11_14/rcw_800`
+- `8_5_11_14/rcw_1000`
+- `8_5_11_14/rcw_1300`
+
+`RCWAUTO` and `RCWXSPI` can be set to any entry from this list.
+
+The first path component refers to the SERDES configuration:
+
+- `8_5_11_11`: SGMII/QSGMII/PCIe Gen3; the SATA port is unavailable
+- `8_5_11_14` (default): SGMII/QSGMII/PCIe Gen2/SATA
+
+The second path component is be used to select 800, 1000 or 1300 MHz CPU clock
+frequency (defaulting to 1300 in `RCWAUTO` and `RCWXSPI`).
+
 ### Secure Boot
 
 Secure Boot is enabled by adding "secure" to `DISTRO_FEATURES`. With this setting, signed variants
