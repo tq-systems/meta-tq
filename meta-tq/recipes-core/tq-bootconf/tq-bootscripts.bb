@@ -17,6 +17,9 @@ SRC_URI = "\
     file://boot-blockdev-rauc.cmd \
     file://boot-ubi.cmd \
 "
+
+S = "${UNPACKDIR}"
+
 VARIANTS = "\
     boot-blockdev \
     boot-blockdev-rauc \
