@@ -93,6 +93,7 @@ Releases are named with the following scheme:
 
 ### Removed
 
+* linux-ti-tq-6.6: remove recipe after all boards are updated to 6.12
 * linux-tq_6.1: remove recipe after all boards are updated to 6.6 or 6.12
 * linux-rt-tq_6.1: remove recipe after all boards are updated to 6.6 or 6.12
 * linux-imx-tq_6.1: remove recipe after all boards are updated to 6.6
