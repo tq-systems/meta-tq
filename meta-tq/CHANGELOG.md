@@ -20,6 +20,7 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-ti-tq-6.12: update to latest ti-linux-6.12.y
 * linux-rt-tq-6.12: update to v6.12.74-rt16
 * imx-system-manager-tq: update to NXP version lf-6.18.2_1.0.0
 
@@ -77,6 +78,8 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* linux-ti-tq-6.12:
+  * TQMa62xx/TQMa67xx: fix dual-channel LVDS example Device Tree
 * linux-imx-tq-6.12:
   TQMa95xxLA: fix RTS / CTS pad configuration for LPUART5 / LPUART7.
 

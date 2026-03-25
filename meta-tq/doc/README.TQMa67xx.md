@@ -36,7 +36,6 @@ _Kernel:_
   switch to an SD card from a different manufacturer or try the workarounds
   described in the
   [Processor SDK Linux for J722S documentation](https://software-dl.ti.com/jacinto7/esd/processor-sdk-linux-j722s/11_01_00_03/exports/docs/linux/Foundational_Components/U-Boot/UG-Memory-K3.html#steps-for-working-around-sd-card-issues-in-u-boot).
-* The generic FullHD Dual-LVDS Device Tree overlay is currently broken.
 
 ## Supported features
 
