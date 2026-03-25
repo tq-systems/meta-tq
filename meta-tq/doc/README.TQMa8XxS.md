@@ -9,12 +9,12 @@ This README contains some useful information for TQMa8XxS on MB-SMARC-2
 * TQMa8XQPS REV.030x
 * TQMa8XDPS REV.030x
 
-## Version information for software components
+## Version Information for Software Components
 
 See [here](./README.SoftwareVersions.md) for the software base versions of atf,
 bootloader and Linux kernel.
 
-## Supported machine configurations
+## Supported Machine Configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
@@ -195,7 +195,7 @@ _Note:_
 | ON      |   |   |   | x |
 | OFF     | x | x | x |   |
 
-## Boot device initialisation and update
+## Boot Device Initialisation and Update
 
 See [here](./README.imx.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
@@ -225,7 +225,7 @@ sudo uuu -b spl imx-boot-<machine>-uuu.bin
 
 ## Howto
 
-### Using RTC for wakeup
+### Using RTC for Wakeup
 
 See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RTC.
 
@@ -277,7 +277,7 @@ Detailed documentation for CortexM support can be found [here](./README.CortexM-
 
 See [i.MX High Assurance Boot](README.Verified-Boot.md).
 
-### Access U-Boot environment from Linux
+### Access U-Boot Environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
 

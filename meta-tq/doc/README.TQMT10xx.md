@@ -1,4 +1,4 @@
-# TQMT1042/TQMT1022/TQMT1040/TQMT1024 on carrier board STK104x
+# TQMT1042/TQMT1022/TQMT1040/TQMT1024 on Carrier Board STK104x
 
 [[_TOC_]]
 
@@ -8,7 +8,7 @@
 * TQMT1040 with 2GiB RAM on STK104x Rev.0200
 * TQMT1024 with 2GiB RAM on STK104x Rev.0200
 
-## Version information for software components
+## Version Information for Software Components
 
 ### U-Boot
 
@@ -119,7 +119,7 @@ For Serdes Config 0x86
 | Lane F | X24 |
 | Lane G | X20 |
 
-#### Dip Switch settings
+#### Dip Switch Settings
 
 | DIP-Switch | Function      | On  | Off |
 | ---------- | ------------- | --- | ----|
@@ -146,7 +146,7 @@ For Serdes Config 0x6B
 | ------ | --------- |
 | Lane A | X19 |
 
-#### Dip Switch settings
+#### Dip Switch Settings
 
 Important Dip Switch settings for this configuration
 
@@ -174,7 +174,7 @@ For Serdes Config 0x95
 | ------ | --------- |
 | Lane A | X19 |
 
-#### Dip Switch settings
+#### Dip Switch Settings
 
 Important Dip Switch settings for this configuration
 
@@ -208,7 +208,7 @@ For Serdes Config 0x66
 | Lane F | X24 |
 | Lane G | X20 |
 
-#### Dip Switch settings
+#### Dip Switch Settings
 
 Important Dip Switch settings for this configuration
 
@@ -225,9 +225,9 @@ Important Dip Switch settings for this configuration
 
 Note that the output of the LVDS interface is in Jeida-24 mode.
 
-## Program system image
+## Program System Image
 
-### SD card / eMMC
+### SD Card / eMMC
 
 To program a complete system image, write the [WIC image](#Artefacts) to
 SD card / eMMC at offset 0.

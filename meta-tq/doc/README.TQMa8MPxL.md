@@ -9,11 +9,11 @@ This README contains some useful information for TQMa8MPxL on MBa8MPxL and MBa8M
 * TQMa8MPQL REV.020x on MBa8MPxL REV.020x
 * TQMa8MPQL REV.020x on MBa8MP-RAS314 REV.010x
 
-## Version information for software components
+## Version Information for Software Components
 
 See [here](./README.SoftwareVersions.md) for the software base versions.
 
-## Supported machine configurations
+## Supported Machine Configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
@@ -258,7 +258,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
 
-### MBa8MPxL specific
+### MBa8MPxL Specific
 
 * \*.dtb: device tree blobs
   * imx8mp-tqma8mpql-mba8mpxl.dtb
@@ -267,12 +267,12 @@ Artefacts can be found at the usual locations for bitbake:
   * imx8mp-tqma8mpql-mba8mpxl-ov9281.dtb (Vision Components CSI camera with OmniVision OV9281)
   * imx8mp-tqma8mpql-mba8mpxl-rpmsg.dtb (CortexM / RPMSG Support)
 
-### MBa8MP-RAS314 specific
+### MBa8MP-RAS314 Specific
 
 * \*.dtb: device tree blobs
   * imx8mp-tqma8mpql-mba8mp-ras314.dtb
 
-### All boards
+### All Boards
 
 * Image: Linux kernel image
 * \*.wic[.<compress>]: SD / eMMC system image
@@ -327,7 +327,7 @@ BOOT\_MODE: 0110
 | On         |   | x | x |   |
 | Off        | x |   |   | x |
 
-## Boot device initialisation and update
+## Boot Device Initialisation and Update
 
 See [here](./README.imx.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
@@ -346,21 +346,21 @@ See [here](./README.imx.UUU.md) for details about using Serial Download mode and
 
 ## Howto
 
-### OS boot
+### OS Boot
 
 See the [Distroboot README](README.Distroboot.md).
 
-### OS updates
+### OS Updates
 
 See [RAUC](RAUC.md).
 
-### Using RTC for wakeup
+### Using RTC for Wakeup
 
 See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RTC.
 
 ### MIPI-CSI
 
-#### Vision Components GmbH cameras
+#### Vision Components GmbH Cameras
 
 *Note*: see known issue section above.
 
@@ -540,11 +540,11 @@ cat /sys/devices/system/edac/mc/mc0/ce_count
 cat /sys/devices/system/edac/mc/mc0/ue_count
 ```
 
-### Access U-Boot environment from Linux
+### Access U-Boot Environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
 
-### PREEMPT-RT / Realtime support
+### PREEMPT-RT / Realtime Support
 
 For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
 

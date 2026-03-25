@@ -12,11 +12,11 @@ This README contains some useful information for TQMa6ULx / TQMa6ULLx / TQMa6ULx
 * TQMa6ULLxL REV.020x on MBa6ULx REV.020x carrier board (aka STKa6ULLxL)
 * TQMa6ULxL REV.020x on MBa6ULxL REV.020x carrier board
 
-## Version information for software components
+## Version Information for Software Components
 
 See [here](./README.SoftwareVersions.md) for the software base versions.
 
-## Supported machine configurations
+## Supported Machine Configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
@@ -92,7 +92,7 @@ _Note:_ Mini PCIe connector only supports USB.
 * Pixel Pipeline PXP
 * RS485 (X16)
 
-## Known issues / Limitations
+## Known Issues / Limitations
 
 * edt-ft5406 touch controller on some Glyn displays might cause CRC errors
   after restart using `reboot` command. At startup as well as during runtime. The device
@@ -220,7 +220,7 @@ _Note:_
 | ON      |     |  x  |  x  |  x  |  -  |  -  |  -  |     |   |  x  |     |
 | OFF     |  x  |     |     |     |     |     |     | (x) |   |     |  x  |
 
-## Boot device initialisation and update
+## Boot Device Initialisation and Update
 
 See [here](./README.imx.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
@@ -251,11 +251,11 @@ Each display can be used on its own by using the corresponding device tree.
 Support for parallel display is provided using `imx6ul-tqma6ul2l-mba6ulxl-glyn-etm0700g0edh6.dtb`
 (type Glyn ETM0700 REV. G0EDH6 )
 
-### Access U-Boot environment from Linux
+### Access U-Boot Environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
 
-### PREEMPT-RT / Realtime support
+### PREEMPT-RT / Realtime Support
 
 For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
 

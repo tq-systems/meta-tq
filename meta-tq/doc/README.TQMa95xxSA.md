@@ -8,12 +8,12 @@ This README contains some useful information for TQMa95xxSA on MB-SMARC-2
 
 * TQMa95xxSA REV.0102 (i.MX95 B0)
 
-## Version information for software components
+## Version Information for Software Components
 
 See [here](./README.SoftwareVersions.md) for the software base versions of atf,
 bootloader and Linux kernel.
 
-## Supported machine configurations
+## Supported Machine Configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
@@ -172,7 +172,7 @@ _Note:_
 | ON      |   |   |   | x |
 | OFF     | x | x | x |   |
 
-## Boot device initialisation and update
+## Boot Device Initialisation and Update
 
 See [here](./README.imx.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
@@ -189,13 +189,13 @@ sudo uuu -bmap -b emmc_all imx-boot-tqma95xxsa-4gb-mb-smarc-2-sd.bin-flash_a55  
 
 ## Howto
 
-### OS boot
+### OS Boot
 
 See the [Distroboot README](README.Distroboot.md).
 
 __Note:__ Default u-boot environment variable `bootcmd` has to be set to `run distro_bootcmd`
 
-### Test sleepmode and wakeup
+### Test Sleepmode and Wakeup
 
 Use rtc0 (external RTC on TQMa95xxSA module) or rtc1 (RTC in CPU SNVS domain) to wakeup after 20 seconds:
 
@@ -242,7 +242,7 @@ See [here](./README.CAN.md) for details about configurating of CAN interfaces.
 
 <!-- TODO -->
 
-### Revision A0/A1 support
+### Revision A0/A1 Support
 
 Revision A0/A1 chips need a special ELE firmware and also uses a different DDR-RAM timing.
 There the following lines need to be added to your `conf/local.conf`:
@@ -252,7 +252,7 @@ IMX_SOC_REV:${MACHINE} ?= "A0"
 OEI_DDRCONFIG = "TQMa95xxSA.DDR-Timing.${OEI_RAM_SIZE}GB.V16.0005"
 ```
 
-### Access U-Boot environment from Linux
+### Access U-Boot Environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
 

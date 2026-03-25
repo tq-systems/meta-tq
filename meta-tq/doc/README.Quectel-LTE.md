@@ -1,16 +1,16 @@
-# LTE with Quectel wwan Card
+# LTE with Quectel WWAN Card
 
 This README contains some useful information for using Quectel LTE card.
 
 [[_TOC_]]
 
-# Supported hardware
+# Supported Hardware
 
-## hardware platform
+## Hardware Platform
 Currently with Linux 5.15 the supported platforms are
 * TQMa9xxx
 
-## Quectel modules
+## Quectel Modules
 * Quectel EC21
   * USB VID: 0x2c7c
   * USB PID: 0x0121
@@ -21,9 +21,9 @@ Currently with Linux 5.15 the supported platforms are
 
 A `ppp0` device should be available when executing the command `ifconfig ppp0`.
 
-## Building & configuration
+## Building & Configuration
 
-### Kernel configuration
+### Kernel Configuration
 
 ```
 CONFIG_PPP=m
@@ -35,12 +35,12 @@ CONFIG_USB_NET_QMI_WWAN=m
 CONFIG_USB_WDM=m
 ```
 
-### Kernel patches
+### Kernel Patches
 
 The kernel patches from the Quectel documentation are not necessary for the
 Quectel EC21 module.
 
-### PPP scripts
+### PPP Scripts
 
 The current ppp scripts only support SIM cards without PIN.
 
@@ -58,7 +58,7 @@ In order to select the Quectel support the following Access Point Name
 QUECTEL_PPP_APN = "my-apn"
 ```
 
-The following variable sets the USB UART for AT commands of the wwan card.
+The following variable sets the USB UART for AT commands of the WWAN card.
 The default UART is `/dev/ttyUSB2`. It should be set in the `conf/machine/tqma*.conf`
 by path (see below).
 ```

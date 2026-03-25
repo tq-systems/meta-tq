@@ -1,13 +1,13 @@
-# Boot device initialisation and update
+# Boot Device Initialisation and Update
 
 This README documents how to write boostream images to different boot media and
 how default U-Boot env supports update for development purpose.
 
 [[_TOC_]]
 
-## Boot device initialisation
+## Boot Device Initialisation
 
-### Bootstream location on SD and eMMC
+### Bootstream Location on SD and eMMC
 
 For SD-card and eMMC following table applies:
 
@@ -22,7 +22,7 @@ For SD-card and eMMC following table applies:
 
 Note: Blocks are in sizes of 512 Bytes
 
-### Prerequisites for block devices
+### Prerequisites for Block Devices
 
 Compressed WIC images and matching BMAP-files (block map files) are created by default.
 To make use of this feature, install the `bmap-tools` package to use `bmaptool`.
@@ -63,6 +63,6 @@ or
 
 See scripts in SoM specific U-Boot environment
 
-## Update components via U-Boot
+## Update Components via U-Boot
 
 See scripts in SoM specific U-Boot environment

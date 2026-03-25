@@ -8,11 +8,11 @@ This README contains some useful information for TQMa8MxML on MBa8Mx REV.030x
 
 * TQMa8MQML REV.020x
 
-## Version information for software components
+## Version Information for Software Components
 
 See [here](./README.SoftwareVersions.md) for the software base versions.
 
-## Supported machine configurations
+## Supported Machine Configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
@@ -193,7 +193,7 @@ _Note:_
 * S10: Board config
 * X means position of DIP, - means don't care
 
-### Board config
+### Board Config
 
 | DIP S10  | 1 | 2 | 3 | 4 |
 | -------- | - | - | - | - |
@@ -324,7 +324,7 @@ _S9_
   * ON: DSI to eDP bridge
   * OFF: DSI to LVDS bridge
 
-## Boot device initialisation
+## Boot Device Initialisation
 
 ### Bootable SD-Card
 
@@ -381,7 +381,7 @@ sf probe
 sf update ${loadaddr} 0 ${filesize}
 ```
 
-## Update components via U-Boot
+## Update Components via U-Boot
 
 For ease of development a set of variables and scripts are in default env.
 
@@ -427,7 +427,7 @@ See [here](./README.imx.UUU.md) for details about using Serial Download mode and
 
 ## Howto
 
-### Using RTC for wakeup
+### Using RTC for Wakeup
 
 See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RTC.
 
@@ -435,7 +435,7 @@ See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RT
 
 **Note**: By default the `RTC_EVENT#` is not connect to any input, but left open on `X4` pin 11 on TQMa8MxML-ADAP. In order to use the RTC IRQ feature this output has to be connected to a GPIO input with IRQ support, e.g. `GPIO01_06` on `X17` pin 9 on MBa8Mx.
 
-#### DT changes
+#### DT Changes
 For the example from above the following DT change has to be applied in order to support RTC IRQ support.
 
 ```diff
@@ -473,7 +473,7 @@ index 65e0b68c13a5..6a9d0b65604d 100644
 
 ### MIPI-CSI
 
-#### Vision Components GmbH cameras
+#### Vision Components GmbH Cameras
 
 *Note*: see known issue section above.
 
@@ -512,11 +512,11 @@ Detailed documentation for CortexM support can be found [here](./README.CortexM-
 
 See [i.MX High Assurance Boot](README.Verified-Boot.md).
 
-### Access U-Boot environment from Linux
+### Access U-Boot Environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
 
-### PREEMPT-RT / Realtime support
+### PREEMPT-RT / Realtime Support
 
 For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
 

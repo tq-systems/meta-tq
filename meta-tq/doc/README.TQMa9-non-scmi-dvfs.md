@@ -1,4 +1,4 @@
-# Dynamic frequency scaling for i.MX91 and i.MX93
+# Dynamic Frequency Scaling for i.MX91 and i.MX93
 
 For i.MX91 and i.MX93 a SOC specific driver (`imx93-lpm`) is used.
 Depending on SOC following modes can be supported

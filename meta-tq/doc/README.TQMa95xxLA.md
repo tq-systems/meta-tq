@@ -8,12 +8,12 @@ This README contains some useful information for TQMa95xxLA on MBa95xxCA
 
 * TQMa95xxLA REV.0102 (i.MX95 B0)
 
-## Version information for software components
+## Version Information for Software Components
 
 See [here](./README.SoftwareVersions.md) for the software base versions of TF-A (atf),
 bootloader and Linux kernel.
 
-## Supported machine configurations
+## Supported Machine Configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
@@ -200,7 +200,7 @@ __Note:__ preferred mode for production hardware.
 | ON      |   |   |   | x |
 | OFF     | x | x | x |   |
 
-## Boot device initialisation and update
+## Boot Device Initialisation and Update
 
 See [here](./README.imx.BootMedia.md) for detailed information on how to write a
 bootstream image and bootloader support for updating the bootstream.
@@ -223,7 +223,7 @@ See the [Distroboot README](README.Distroboot.md).
 
 __Note:__ Default u-boot environment variable `bootcmd` has to be set to `run distro_bootcmd`
 
-### Test sleepmode and wakeup
+### Test Sleepmode and Wakeup
 
 Use rtc0 (external RTC on TQMa95xxSA module) or rtc1 (RTC in CPU SNVS domain) to wakeup after 20 seconds:
 
@@ -271,7 +271,7 @@ Use DIP S8 for Termination.
 
 <!-- TODO -->
 
-### Revision A0/A1 support
+### Revision A0/A1 Support
 
 Revision A0/A1 chips need a special ELE firmware and also uses a different DDR-RAM timing.
 There the following lines need to be added to your `conf/local.conf`:
@@ -281,7 +281,7 @@ IMX_SOC_REV:${MACHINE} ?= "A0"
 OEI_DDRCONFIG = "TQMa95xxSA.DDR-Timing.${OEI_RAM_SIZE}GB.V16.0005"
 ```
 
-### Access U-Boot environment from Linux
+### Access U-Boot Environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
 

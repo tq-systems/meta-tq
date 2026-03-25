@@ -22,7 +22,7 @@ or [AHAB](https://source.denx.de/u-boot/u-boot/-/tree/master/doc/imx/ahab)
 respectively, for further information on signing key generation, signature
 creation and general concepts of HAB.
 
-### Supported platforms
+### Supported Platforms
 
 meta-tq supports HAB4 signature generation on all i.MX8M-based platforms:
 
@@ -68,7 +68,7 @@ Enabling the distro feature has two effects:
   `IMX_HAB_KEY_NAME` variable. If this variable is unset, signing will be
   skipped and a log message is printed.
 
-#### Separate signing step
+#### Separate Signing Step
 
 If signatures are not generated as a part of the Yocto build, the
 `IMX_HAB_KEY_NAME` variable should be left unset.
@@ -121,7 +121,7 @@ each U-Boot configuration `config` and boot source `target`):
   A bbappend for the `imx-boot-tq` recipe can be used to customize these
   templates.
 
-#### Automated signing
+#### Automated Signing
 
 For convenience during development, the entire signature generation can be
 handled as a part of the Yocto build process. This requires the signing keys
@@ -156,7 +156,7 @@ the signature of the FIT image and therefore prove its integrity.
 Signed FIT images can be used for all TQ modules. A FIT image is assembled
 by default if a TQ image is used.
 
-### Signing using example keys
+### Signing Using Example Keys
 
 Example key and certificate needed for signing and verification are provided in
 meta-dumpling. To enable signing this FIT image, the option `UBOOT_SIGN_ENABLE`
@@ -164,7 +164,7 @@ must be set to `1` in `local.conf`:
 
     UBOOT_SIGN_ENABLE = "1"
 
-### Signing using custom keys
+### Signing Using Custom Keys
 
 A custom key and certificate can be used instead of the provided example key.
 Key and certificate must have the same file name and the file endings `key` and
@@ -180,9 +180,9 @@ To use custom key and certificate, one has to override `UBOOT_SIGN_KEYDIR`,
     UBOOT_SIGN_KEYDIR = "/keys/directory"
     UBOOT_SIGN_KEYNAME = "custom" # keys name in keydir (eg. "custom.crt", "custom.key")
 
-### Booting a signed FIT image
+### Booting a Signed FIT image
 
-#### TQMa8/9 series
+#### TQMa8/9 Series
 
 Multiple different U-Boot versions are used by the TQMa8 and TQMa9 module
 families supported by meta-tq. The following commands are provided as an example
@@ -196,7 +196,7 @@ for booting a signed FIT image from the root partition of an eMMC or SD card:
 Note: Manual adjustments to the bootargs may be necessary instead of using
 the `mmcargs` script.
 
-## DM-Verity for root partition
+## DM-Verity for Root Partition
 
 The verity devicemapper is a way to guarantee integrity of some data. It is used
 here to create a protected rootfs partition. To do so, we need meta-security,
@@ -239,7 +239,7 @@ Bitbake will automatically create the hash data for the root partition and store
 the root hash inside the initramfs when the image set in `DM_VERITY_IMAGE`
 is build.
 
-### Booting a signed FIT image for dm-verity
+### Booting a Signed FIT image for DM-Verity
 
 The FIT image with initramfs for dm-verity usage is located in the boot
 partition, because the root hash that is saved inside the initramfs must be kept
@@ -254,7 +254,7 @@ the FIT image from the boot partition:
 Note: Manual adjustments to the bootargs may be necessary instead of using
 the `mmcargs` script.
 
-#### TQMa8 series
+#### TQMa8 Series
 
 `loadaddr` must be set to an address with enough free memory space to fit the
 FIT image with initramfs, so it doesn't conflict with any addresses referenced
@@ -273,7 +273,7 @@ TQMa8MPxL | `0x60000000`
 
 ## Limitations
 
-### Protection measures for root filesystem
+### Protection Measures for Root Filesystem
 
 For now, only DMVerity is applied in the example implementation. Other
 mesasures for protecting the root filesystem exist in the Linux kernel,

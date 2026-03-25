@@ -10,7 +10,7 @@ This README contains some useful information for TQMa335x\[L\] on MBa335x
 * TQMa335x / TQMa335xL REV.020x 512 MiB DDR3
 * MBa335x REV.020x
 
-## Version information for software components
+## Version Information for Software Components
 
 ### U-Boot
 
@@ -64,7 +64,7 @@ This README contains some useful information for TQMa335x\[L\] on MBa335x
 | Mini-PCIe (USB only) (X22)           |      x        |
 | PRU                                  |               |
 
-## Supported machine configurations
+## Supported Machine Configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
@@ -113,7 +113,7 @@ Artefacts can be found at the usual locations for bitbake:
 | S3      | CAN termination   |
 | S4      | RS485 Termination |
 
-### Boot sequence
+### Boot Sequence
 
 #### SD Card
 
@@ -142,9 +142,9 @@ Boot sequence: SPI0 (NOR) → MMC0 (SD) → USB0 (N/A) → UART0 (N/A)
 | ON      |  x  |  x  |  x  |     |     |     |     |     |
 | OFF     |     |     |     |  x  |  x  |  x  |  x  |  x  |
 
-## Boot device initialisation
+## Boot Device Initialisation
 
-### Prerequisites for block devices
+### Prerequisites for Block Devices
 
 Compressed WIC images and matching BMAP-files (block map files) are created by default.
 To make use of this feature, install the `bmap-tools` package to use `bmaptool`.
@@ -206,9 +206,9 @@ tftp u-boot.img
 sf update ${loadaddr} 0x20000 ${filesize}
 ```
 
-## Update components via U-Boot
+## Update Components via U-Boot
 
-### U-Boot environment variables
+### U-Boot Environment Variables
 
 For ease of development a set of variables and scripts are in default env.
 Depending on your configuration some variable values needs to bet changend

@@ -6,7 +6,7 @@
 * TQMLS1028A / TQMLS1017A SOM REV.020x/030x with 1/2/4/8 GiB RAM
 * MBLS1028A / MBLS1028A-IND carrier board
 
-## Version information for software components
+## Version Information for Software Components
 
 See [here](./README.SoftwareVersions.md) for the software base versions.
 
@@ -131,7 +131,7 @@ Artefacts can be found at the usual locations for bitbake:
 
 Artefacts under `atf` can be used to manually update boot images on SOM or exchange them in WIC image.
 
-## Build-Time Configuration (default boot images for SPI-NOR and WIC)
+## Build-Time Configuration (Default Boot Images for SPI-NOR and WIC)
 
 * BL2_IMAGE: ATF/TF-A BL2 file used for WIC image creation
 * BL3_IMAGE: ATF/TF-A BL3 file used for WIC image creation

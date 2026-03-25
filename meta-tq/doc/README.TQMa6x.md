@@ -1,4 +1,4 @@
-# TQMa6\[QP,DP,Q,D,DL,S\] up to Rev.040x on MBa6x REV.020x carrier board
+# TQMa6\[QP,DP,Q,D,DL,S\] up to Rev.040x on MBa6x REV.020x Carrier Board
 
 [[_TOC_]]
 
@@ -7,11 +7,11 @@
 * TQMa6x: module revisions REV.010x ... REV.040x
 * MBa6x:  board revisions REV.020x
 
-## Version information for software components
+## Version Information for Software Components
 
 See [here](./README.SoftwareVersions.md) for the software base versions.
 
-## Supported machine configurations
+## Supported Machine Configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
@@ -63,7 +63,7 @@ yocto scarthgap. For Linux 6.1 support use yocto kirkstone.
 * MLB (X28)
 * RS485 (UART4 / X16)
 
-## Known issues / Limitations
+## Known Issues / Limitations
 
 ### General
 
@@ -137,7 +137,7 @@ _Note:_
 | ON      |      |     |  x   |  x   |      |      |      |      |    |     |     |     |     |     |     |     |     |    |     |     |     |  x  |  x  |     |     |     |    |  x  |     |
 | OFF     |  x   |  x  |      |      |  x   |  x   |  x   |  x   |    |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |    |  x  |  x  |  x  |     |     |  x  |  x  |  x  |    |     |  x  |
 
-## Boot device initialisation and update
+## Boot Device Initialisation and Update
 
 See [here](./README.imx.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
@@ -166,11 +166,11 @@ Support can vary with kernel branch and version.
 | Parallel        | imx6\[dl,q,qp\]-mba6\[a,b\]-cdtech-dc44.dtb               | CDTECH DC44 (DMB)  |
 | Parallel        | imx6\[dl,q,qp\]-mba6\[a,b\]-cdtech-fc21.dtb               | CDTECH FC21 (DMB)  |
 
-### Access U-Boot environment from Linux
+### Access U-Boot Environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
 
-### PREEMPT-RT / Realtime support
+### PREEMPT-RT / Realtime Support
 
 For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
 

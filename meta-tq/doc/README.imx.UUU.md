@@ -69,7 +69,7 @@ your use case. Check if your U-Boot configuration and the builtins fit your use 
 You can use the cmdlist support of UUU to create tailored workflows. Some board specific
 examples are given below.
 
-### BSP example configuration
+### BSP Example Configuration
 
 For all boards with support for `Serial Download Mode` multiple U-Boot configurations
 are given:
@@ -83,9 +83,9 @@ are given:
 - Configuration(s) with support for boot devices. The images have the above features disabled
   since they are mostly not needed or undesired for production firmware.
 
-### Use builtin commands
+### Use Builtin Commands
 
-#### Boot a board
+#### Boot a Board
 
 Use the bootstream containing U-Boot capable of handling SDP together with
 UUU tool to boot a new / bricked board (see Artefacts section for your board for
@@ -103,7 +103,7 @@ If using U-Boot without SPL:
 sudo uuu <bootstream for uuu>
 ```
 
-#### Program image to eMMC
+#### Program Image to eMMC
 
 Use the bootstream containing U-Boot capable of handling SDP together with
 UUU tool to boot a new / bricked board and use the booted system to programm
@@ -118,7 +118,7 @@ sudo uuu -b emmc_all <bootstream for uuu> <wic image>
 and eMMC is configured to use boot partition. This bootstream is expected to be able
 to boot from eMMC and to handle serial download.
 
-#### Use a custom workflow
+#### Use a Custom Workflow
 
 One can collect `uuu` commands in a cmdlist file for a custom workflow.
 The following example can be used to program a wic image to eMMC without

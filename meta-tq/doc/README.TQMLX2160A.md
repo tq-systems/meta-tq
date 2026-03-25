@@ -4,7 +4,7 @@
 
 ## Overview
 
-### Supported Hardware:
+### Supported Hardware
 
 * TQMLX2080A/TQMLX2160A: module revisions REV.010x
 * MBLX2160A:  board revisions REV.010x .. REV.020x
@@ -110,7 +110,7 @@ details
 
 * SIM card (X15)
 
-## Known issues
+## Known Issues
 
 * SDHC:
   * On MBLX2160A REV.0100, the SD card only works for a few start-ups and is
@@ -209,7 +209,7 @@ ubiformat /dev/mtd7 -f tq-image-generic-tqmlx2160a-mblx2160a.ubi
 ubiattach /dev/ubi_ctrl -m 7
 ```
 
-### SD / eMMC images
+### SD / eMMC Images
 
 See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 
@@ -316,7 +316,7 @@ The DPL file is loaded by U-Boot before starting the kernel using the command
 `fsl_mc lazyapply DPL ${addr_dpl}`. Note that the default BSP DPL file (`dpl-min.dts`) does not
 configure any Ethernet interfaces.
 
-### DPL configuration example
+### DPL Configuration Example
 
 This example shows how to:
 
@@ -425,7 +425,7 @@ connectors.
 | SATA.2    | X42 (M.2)         |
 | SATA.3    | X43 (M.2)         |
 
-### DIP switch settings
+### DIP Switch Settings
 
 Depending on the selected RCW, the DIP switches on the MBLX2160A must be set
 accordingly for the interfaces to work:
@@ -441,7 +441,7 @@ accordingly for the interfaces to work:
 | S4-3       | SD3 Lanes 4-7 | PCIe.5 x8 | PCIe.6 x4      |
 | S5-1       | None (EC2)    | RGMII.18  | IEEE1588 (X32) |
 
-## PREEMPT-RT / Realtime support
+## PREEMPT-RT / Realtime Support
 
 For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
 

@@ -4,7 +4,7 @@ This README contains some useful information for using Linux Preempt-RT
 
 [[_TOC_]]
 
-# Supported platforms
+# Supported Platforms
 
 | Board     | linux 6.6| linux 6.12 |
 |-----------|----------|------------|

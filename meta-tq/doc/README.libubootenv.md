@@ -1,4 +1,4 @@
-# U-Boot environment support in RootFS
+# U-Boot Environment Support in RootFS
 
 [[_TOC_]]
 
@@ -12,7 +12,7 @@ file format allowing to define multiple configurations.
 
 For details see https://github.com/sbabic/libubootenv
 
-## Implementation details
+## Implementation Details
 
 The new configuration file format uses YAML. For every boot device supported by
 a machine the environment settings are placed in a separate configuration file.

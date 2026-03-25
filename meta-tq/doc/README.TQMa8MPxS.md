@@ -9,11 +9,11 @@ This README contains some useful information for TQMa8MPxS on MB-SMARC-2
 * TQMa8MPQS REV.030x on MB-SMARC-2
 * TQMa8MPQS REV.010x on MB-SMARC-2 (Prototypes)
 
-## Version information for software components
+## Version Information for Software Components
 
 See [here](./README.SoftwareVersions.md) for the software base versions.
 
-## Supported machine configurations
+## Supported Machine Configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
@@ -216,7 +216,7 @@ BOOT\_MODE can be configured using DIP switch S3 on MB-SMARC-2.
 | ON     |       |       |       |   x   |
 | OFF    |   x   |   x   |   x   |       |
 
-## Boot device initialisation and update
+## Boot Device Initialisation and Update
 
 See [here](./README.imx.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
@@ -235,15 +235,15 @@ See [here](./README.imx.UUU.md) for details about using Serial Download mode and
 
 ## Howto
 
-### OS boot
+### OS Boot
 
 See the [Distroboot README](README.Distroboot.md).
 
-### OS updates
+### OS Updates
 
 See [RAUC](RAUC.md).
 
-### Using RTC for wakeup
+### Using RTC for Wakeup
 
 See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RTC.
 
@@ -291,11 +291,11 @@ See [here](./README.CAN.md) for details about configurating of CAN interfaces.
 
 See [i.MX High Assurance Boot](README.Verified-Boot.md).
 
-### Access U-Boot environment from Linux
+### Access U-Boot Environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
 
-### PREEMPT-RT / Realtime support
+### PREEMPT-RT / Realtime Support
 
 For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
 

@@ -9,11 +9,11 @@ This README contains some useful information for TQMa91xxCA and TQMa91xxLA
 * TQMa91xxCA / TQMa91xxLA (1 GiB RAM) REV.010x on MBa91xxCA REV.010x
 * TQMa91xxCA / TQMa91xxLA (1 GiB RAM) REV.010x on MBa93xxCA REV.020x
 
-## Version information for software components
+## Version Information for Software Components
 
 See [here](./README.SoftwareVersions.md) for the software base versions.
 
-## Supported machine configurations
+## Supported Machine Configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
@@ -162,7 +162,7 @@ BOOT\_MODE can be configured using DIP switch S1 on mainboard.
 | 0011     | SD Card (USDHC2)      | OFF  | OFF  | ON   | ON   |
 | 0100     | QSPI (FlexSPI NOR)    | OFF  | ON   | OFF  | OFF  |
 
-## Boot device initialisation and update
+## Boot Device Initialisation and Update
 
 See [here](./README.imx.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
@@ -181,19 +181,19 @@ See [here](./README.imx.UUU.md) for details about using Serial Download mode and
 
 ## Howto
 
-### Frequency scaling
+### Frequency Scaling
 
 See [here](./README.TQMa9-non-scmi-dvfs.md) for details about frequency scaling.
 
-### OS boot
+### OS Boot
 
 See the [Distroboot README](README.Distroboot.md).
 
-### OS updates
+### OS Updates
 
 See [RAUC](RAUC.md).
 
-### Using RTC for wakeup
+### Using RTC for Wakeup
 
 See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RTC.
 
@@ -327,7 +327,7 @@ cat /sys/devices/system/edac/mc/mc0/ce_count
 cat /sys/devices/system/edac/mc/mc0/ue_count
 ```
 
-### Access U-Boot environment from Linux
+### Access U-Boot Environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
 

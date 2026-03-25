@@ -1,13 +1,13 @@
-# Boot device initialisation and update
+# Boot Device Initialisation and Update
 
 This README documents how to write boostream images to different boot media and
 how default U-Boot env supports update for development purpose.
 
 [[_TOC_]]
 
-## Boot device initialisation
+## Boot Device Initialisation
 
-### Bootstream location on SD and eMMC
+### Bootstream Location on SD and eMMC
 
 For SD-card and eMMC following table applies:
 
@@ -30,7 +30,7 @@ Note: iMX6 applies to all i.MX6, i.MX6UL and i.MX6ULL variants
 
 Note: Blocks are in sizes of 512 Bytes
 
-### Prerequisites for block devices
+### Prerequisites for Block Devices
 
 Compressed WIC images and matching BMAP-files (block map files) are created by default.
 To make use of this feature, install the `bmap-tools` package to use `bmaptool`. Current
@@ -106,7 +106,7 @@ mmc write ${loadaddr} ${bstart} ${bsz}
 mmc dev 0 0
 ```
 
-### Bootable SPI-NOR on QSPI / FlexSPI / XSPI controller
+### Bootable SPI-NOR on QSPI / FlexSPI / XSPI Controller
 
 **Attention:** This documentation assumes that the boot image is prepended with a valid
 firmware configuration block (FCB). This information is used by ROM loader
@@ -122,14 +122,14 @@ sf probe
 sf update ${loadaddr} 0 ${filesize}
 ```
 
-## Update components via U-Boot
+## Update Components via U-Boot
 
 For ease of development a set of variables and scripts are in default env.
 
 _Note_: Update and start scripts expect a partitioned / initialized SD-Card or
 eMMC.
 
-### U-Boot environment variables
+### U-Boot Environment Variables
 
 * `uboot`: name of bootstream image (default = bootstream.bin)
 * `mmcdev`: 0 for eMMC, 1 for SD-Card (automatically generated,
@@ -194,7 +194,7 @@ environment:
 * `nfsboot`: load kernel and dtb from NFS and boots into rootfs on a NFS.
   Kernel and dtb are expected in the NFS rootfs (`${rootpath}/boot` on NFS server)
 
-## Cortex M4/M7 support
+## Cortex M4/M7 Support
 
 This section only applies to following CPU families:
 

@@ -10,11 +10,11 @@ This README contains some useful information for TQMa8Mx on MBa8Mx
 * TQMa8MQ / TQMa8MD / TQMa8MQL REV.020x 2GiB LPDDR4
 * TQMa8MQ / TQMa8MD / TQMa8MQL REV.020x 4GiB LPDDR4
 
-## Version information for software components
+## Version Information for Software Components
 
 See [here](./README.SoftwareVersions.md) for the software base versions.
 
-## Supported machine configurations
+## Supported Machine Configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
@@ -208,7 +208,7 @@ _Note:_
 * S10: Board config
 * X means position of DIP, - means don't care
 
-### Board config
+### Board Config
 
 | DIP S10 | 1 | 2 | 3 | 4 |
 | ------- | - | - | - | - |
@@ -354,7 +354,7 @@ _S9_
   * ON: DSI to eDP bridge
   * OFF: DSI to LVDS bridge
 
-## Boot device initialisation
+## Boot Device Initialisation
 
 ### Bootable SD-Card
 
@@ -397,7 +397,7 @@ mmc dev 0
 mmc write ${loadaddr} 42 ${bsz}
 ```
 
-## Update components via U-Boot
+## Update Components via U-Boot
 
 For ease of development a set of variables and scripts are in default env.
 
@@ -434,13 +434,13 @@ See [here](./README.imx.UUU.md) for details about using Serial Download mode and
 
 ## Howto
 
-### Using RTC for wakeup
+### Using RTC for Wakeup
 
 See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RTC.
 
 **Note**: On this platform `rtc0` is the I2C RTC on SoM and `rtc1` is the RTC in CPU SNVS domain
 
-### Using GPIOs for wakeup
+### Using GPIOs for Wakeup
 
 Send Linux to sleep mode and press one of the gpio buttons S\[1,2,3\] afterwards:
 
@@ -449,7 +449,7 @@ echo mem > /sys/power/state
 echo freeze > /sys/power/state
 ```
 
-### Audio output
+### Audio Output
 
 To test audio output using alsa:
 
@@ -470,7 +470,7 @@ arecord -f cd --duration=12 /tmp/test.wav &
 speaker-test -D hw:0 -l 1 -c 2 -f 500 -t sine
 ```
 
-### VPU support
+### VPU Support
 
 ```
 WAYLAND_DISPLAY=/run/wayland-0 gst-play-1.0 /mnt/sd/tears_of_steel_1080p.webm
@@ -482,7 +482,7 @@ Add `--audiosink='alsasink device=hw:1'` for selecting a specific audio device
 
 *Note*: see known issue section above.
 
-#### Vision Components GmbH cameras
+#### Vision Components GmbH Cameras
 
 __Gray with Omnivision OV9281__
 
@@ -515,11 +515,11 @@ Detailed documentation for CortexM support can be found [here](./README.CortexM-
 
 See [i.MX High Assurance Boot](README.Verified-Boot.md).
 
-### Access U-Boot environment from Linux
+### Access U-Boot Environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
 
-### PREEMPT-RT / Realtime support
+### PREEMPT-RT / Realtime Support
 
 For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
 

@@ -9,12 +9,12 @@ This README contains some useful information for TQMa8x on MBa8x
 * TQMa8QM 4 GB RAM REV.020x / 0102 and newer
 * TQMa8QM 8 GB RAM REV.020x / 0102 and newer
 
-## Version information for software components
+## Version Information for Software Components
 
 See [here](./README.SoftwareVersions.md) for the software base versions of atf,
 bootloader and Linux kernel.
 
-## Supported machine configurations
+## Supported Machine Configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
@@ -221,7 +221,7 @@ _Note:_
 | ON       |   |   |   |   |   |   |
 | OFF      | x | x | x | x | x | x |
 
-## Boot device initialisation and update
+## Boot Device Initialisation and Update
 
 See [here](./README.imx.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
@@ -251,13 +251,13 @@ sudo uuu -b spl imx-boot-<machine>-uuu.bin
 
 ## Howto
 
-### Using RTC for wakeup
+### Using RTC for Wakeup
 
 See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RTC.
 
 Note: Only `rtc1` (RTC in CPU SNVS domain) can be used on this platform
 
-### Using GPIOs for wakeup
+### Using GPIOs for Wakeup
 
 Send Linux to sleep mode and press one of the gpio buttons `SWITCH_A` or `SWITCH_B`
 afterwards
@@ -266,7 +266,7 @@ afterwards
 echo mem > /sys/power/state
 ```
 
-### PWM fan
+### PWM Fan
 
 The PWM fan can optionally be used for cooling the SoC. Due to electrical connection
 the configuration value `3` for the `hwmon` attribute `pwm1_enable` is required.
@@ -315,7 +315,7 @@ Detailed documentation for CortexM support can be found [here](./README.CortexM-
 
 See [i.MX High Assurance Boot](README.Verified-Boot.md).
 
-### Access U-Boot environment from Linux
+### Access U-Boot Environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
 

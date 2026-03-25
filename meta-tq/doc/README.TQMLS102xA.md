@@ -1,4 +1,4 @@
-# TQMLS102xA on MBLS102xA carrier board
+# TQMLS102xA on MBLS102xA Carrier Board
 
 This README contains some useful information for TQMLS102xA on MBLS102xA
 
@@ -9,12 +9,12 @@ This README contains some useful information for TQMLS102xA on MBLS102xA
 * TQMLS102xA: module
 * MBLS102xA: board
 
-## Version information for software components
+## Version Information for Software Components
 
 See [here](./README.SoftwareVersions.md) for the software base versions of
 bootloader and Linux kernel.
 
-## Supported machine configurations
+## Supported Machine Configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
@@ -100,7 +100,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * CPLD mux mode #1 EC1_HDMI matches the default RCW configuration of the TQMLS102xA BSP.
 * If DIP S9 is not set to one of the CPLD mux modes #1 - #12, the CPLD firmware selects mux mode #1.
 
-## Known issues
+## Known Issues
 
 - The power supply (VBUS) of the USB-OTG (X40) port can't be disabled on the
   MBLS102xA. The port must not be used in device mode.
@@ -188,7 +188,7 @@ eMMC is a placement option on TQMLS102xA
   * ON: TQMLS102xA without eMMC
   * OFF: TQMLS102xA with eMMC
 
-### CPLD signal routing
+### CPLD Signal Routing
 
 | DIP S9      | 1   | 2   | 3 | 4 |
 | ----------- | --- | --- | - | - |
@@ -217,7 +217,7 @@ When using HDMI output the default CMA size (16MiB) might be too small, `weston`
 
 Using an HDMI monitor might require color space conversion. Without a GPU this causes a high CPU usage.
 
-### NFS boot
+### NFS Boot
 
 When booting from NFS the `netdev` variable needs to be set correspondent to the used Ethernet interface,
 specified in variable `ethact`.

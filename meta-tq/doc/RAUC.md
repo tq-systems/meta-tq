@@ -1,4 +1,4 @@
-# BSP updates using RAUC
+# BSP Updates Using RAUC
 
 `meta-tq` and `meta-dumpling` contain basic configuration and example recipes
 to allow for easy integration of the software update tool
@@ -29,7 +29,7 @@ of failed attempts.
 Updating the bootloader, boot script or other contents of the boot partition
 is currently not supported by the example configuration.
 
-### Data partition
+### Data Partition
 
 When using the example distros from meta-dumpling, a persistent data partition
 that is not touched by updates will be mounted during boot (under `/srv/data` by
@@ -82,7 +82,7 @@ Partition sizes can be adjusted using the `WIC_ROOTPART_SIZE` and
 the partitioning can't be modified during updates, so enough space for future
 additions must be reserved.
 
-### Example configuration and update bundle
+### Example Configuration and Update Bundle
 
 The dumpling distros come with a full example configuration for RAUC:
 
@@ -141,7 +141,7 @@ would require the other slot to be marked invalid (using a command like
 `rauc status mark-bad other` or, more permanently, deleting the contents of the
 inactive rootfs using `blkdiscard`).
 
-### Read-only rootfs
+### Read-Only Rootfs
 
 As the root filesystem will be replaced on each update, variable files must be
 stored in a separate data partition to persist across updates.

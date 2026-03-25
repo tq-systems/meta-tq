@@ -1,8 +1,8 @@
-# Common features of TQMa62xx\[L\]/TQMa64xxL/TQMa67xx\[L\]
+# Common Features of TQMa62xx\[L\]/TQMa64xxL/TQMa67xx\[L\]
 
 [[_TOC_]]
 
-## Build artefacts
+## Build Artefacts
 
 Artefacts can be found at:
 `deploy-ti/images/${MACHINE}`
@@ -23,12 +23,12 @@ Artefacts can be found at:
 
 ## HowTo
 
-### Program system image
+### Program System Image
 
 **Note:** Do not use the commands described in the following to overwrite the
 root filesystem you are currently running from.
 
-#### SD card / eMMC
+#### SD Card / eMMC
 
 To program a complete system image, write the [WIC image](#build-artefacts) to
 SD card / eMMC at offset 0. The following command can be used to write a file
@@ -83,7 +83,7 @@ incompatiblities between stages of old and new versions are avoided.
 Kernel and Device Trees are part of the root filesystem. They cannot be updated
 from U-Boot separately from the filesystem.
 
-### Inline ECC support
+### Inline ECC Support
 
 Inline ECC can be enabled in the U-Boot configuration, at the cost of slightly
 increasing boot time and reducing usable memory by 1/8. A config snippet for
@@ -93,7 +93,7 @@ following line to `local.conf`:
 SRC_URI:append:pn-u-boot-ti-tq:k3r5 = " file://inline-ecc.cfg"
 ```
 
-### M4/R5 cores
+### M4/R5 Cores
 
 On the AM62x, the R5 core has a special role and is used for Device Management
 (clock and power configuration). The firmware running on the R5 core is embedded

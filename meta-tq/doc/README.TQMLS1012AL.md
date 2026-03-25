@@ -9,11 +9,11 @@ This README contains some useful information for TQMLS1012AL on MBLS1012AL carri
 * TQMLS1012AL SOM REV.020x 512 MiB / 1024 MiB RAM 
 * MBLS1012AL carrier Board
 
-## Version information for software components
+## Version Information for Software Components
 
 See [here](./README.SoftwareVersions.md) for the software base versions.
 
-## Supported machine configurations
+## Supported Machine Configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
@@ -73,7 +73,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **SATA**                                          |               |
 | SATA M.2 (X10)                                    |       x       |
 
-## Important notes
+## Important Notes
 
 *Attention*: CPU supports only booting from QSPI NOR. When deleting bootloader
 recovery via JTAG is needed.
@@ -113,7 +113,7 @@ Artefacts can be found at the usual locations for bitbake:
 |   3    | Debug-UART on USB / pin header | Debug-UART on OpenSDA          |
 |   4    | CPU-JTAG disabled              | CPU-JTAG enabled               |
 
-## Boot device initialisation and update
+## Boot Device Initialisation and Update
 
 Make sure the power supply is on during update, see [important notes](#important-notes)
 for recovery.
@@ -121,7 +121,7 @@ for recovery.
 U-Boot envinronment provides scripts to help updating components needed to boot
 the board. For filenames see [artefacts section](#artefacts).
 
-### Update with static IP
+### Update with Static IP
 
 ```
 setenv ipaddr <ipaddr>
@@ -132,7 +132,7 @@ setenv uboot_spi_file <filename>	# U-Boot FIP file name
 run update_uboot			# update U-Boot FIP
 ```
 
-### Update with dynamic IP
+### Update with Dynamic IP
 
 ```
 setenv ipmode dynamic			# obtain IP configuration via DHCP
@@ -142,7 +142,7 @@ setenv uboot_spi_file <filename>	# U-Boot FIP file name
 run update_uboot			# update U-Boot FIP
 ```
 
-### SD / eMMC images
+### SD / eMMC Images
 
 See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 

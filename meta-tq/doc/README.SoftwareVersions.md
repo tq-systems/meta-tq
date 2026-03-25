@@ -1,10 +1,10 @@
-# Version information for software components
+# Version Information for Software Components
 
 [[_TOC_]]
 
 ## SOM with i.MX ARMv7-A CPU
 
-### Supported SOM families
+### Supported SOM Families
 
 * TQMa6x
 * TQMa6ULx
@@ -15,7 +15,7 @@
 
 ### U-Boot:
 
-#### U-Boot based on v2023.04 (forked from mainline U-Boot)
+#### U-Boot Based on v2023.04 (Forked from Mainline U-Boot)
 
 * based on U-Boot (https://github.com/u-boot/u-boot)
 * branched from v2023.04 (Branch master)
@@ -27,7 +27,7 @@ lifetime degradation.
 
 ### Linux:
 
-#### Kernel based on 6.6-rt (linux-stable-rt)
+#### Kernel Based on 6.6-rt (linux-stable-rt)
 
 * based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
 * defconfig changes and patches for TQ-Systems starter kits and build time optimisation
@@ -35,7 +35,7 @@ lifetime degradation.
 
 For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 
-#### Kernel based on 6.6 (linux-stable)
+#### Kernel Based on 6.6 (linux-stable)
 
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git)
 * defconfig changes and patches for TQ-Systems starter kits and build time optimisation
@@ -43,7 +43,7 @@ For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 
 ## SOM with Layerscape CPU
 
-### Supported SOM families
+### Supported SOM Families
 
 * TQMLS1012AL
 * TQMLS102xA
@@ -132,7 +132,7 @@ Version information:
 
 ### Linux
 
-#### Kernel based on 6.6 (linux-imx-fslc)
+#### Kernel Based on 6.6 (linux-imx-fslc)
 
 Supported SOM families:
 

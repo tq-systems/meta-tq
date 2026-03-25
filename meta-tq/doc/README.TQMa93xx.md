@@ -17,11 +17,11 @@ __Note__: Depending on the SoM revision different CPU mask variants may be assem
 CPU mask revisions 1.0 (bitbake variable `IMX_SOC_REV = "A0"`) and older are protoypes,
 have additional erratas and are not supported.
 
-## Version information for software components
+## Version Information for Software Components
 
 See [here](./README.SoftwareVersions.md) for the software base versions.
 
-## Supported machine configurations
+## Supported Machine Configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
@@ -185,7 +185,7 @@ LINUX_VERSION:tqma93xx = "${LINUX_RELEASE}.23"
 * on MBa93xxLA-MINI the QSPI pins are used for SDIO
   If a module with QSPI is required, a specially adapted mainboard devicetree must be created.
 
-## MBa91 differences
+## MBa91 Differences
 
 The SoM TQMa93xx can be mounted on MBa91xxCA as well. Due to the support for TQMa91xx not all
 features provided by TQMa93xx are supported. The differences are listed below:
@@ -242,7 +242,7 @@ BOOT\_MODE can be configured using DIP switch S1.
 
 **NOTE:** LPB boot modes not supported / tested yet.
 
-## Boot device initialisation and update
+## Boot Device Initialisation and Update
 
 See [here](./README.imx.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
@@ -261,22 +261,22 @@ See [here](./README.imx.UUU.md) for details about using Serial Download mode and
 
 ## Howto
 
-### Frequency scaling
+### Frequency Scaling
 
 *Attention*: only with CPU stepping A1! Older variants will stall due to CPU
 errata.
 
 See [here](./README.TQMa9-non-scmi-dvfs.md) for details about frequency scaling.
 
-### OS boot
+### OS Boot
 
 See the [Distroboot README](README.Distroboot.md).
 
-### OS updates
+### OS Updates
 
 See [RAUC](RAUC.md).
 
-### Using RTC for wakeup
+### Using RTC for Wakeup
 
 See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RTC.
 
@@ -441,11 +441,11 @@ cat /sys/devices/system/edac/mc/mc0/ce_count
 cat /sys/devices/system/edac/mc/mc0/ue_count
 ```
 
-### Access U-Boot environment from Linux
+### Access U-Boot Environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
 
-### PREEMPT-RT / Realtime support
+### PREEMPT-RT / Realtime Support
 
 For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
 

@@ -1,4 +1,4 @@
-# Standard boot/Distroboot
+# Standard Boot/Distroboot
 
 The terms "Standard boot and "Distroboot" describe a standardized interface
 between the U-Boot bootloader and the operating system. The operating system can

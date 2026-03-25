@@ -1,4 +1,4 @@
-# TQMa7x on MBa7x carrier board (aka STKa7x)
+# TQMa7x on MBa7x Carrier Board (aka STKa7x)
 
 This README contains some useful information for TQMa7x on MBa7x
 
@@ -11,11 +11,11 @@ This README contains some useful information for TQMa7x on MBa7x
 * TQMa7D module revisions REV.020x 2048 MiB RAM
 * MBa7x:  board revisions REV.020x
 
-## Version information for software components
+## Version Information for Software Components
 
 See [here](./README.SoftwareVersions.md) for the software base versions.
 
-## Supported machine configurations
+## Supported Machine Configurations
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
@@ -62,7 +62,7 @@ yocto scarthgap. For Linux 6.1 support use yocto kirkstone.
 * Pixel Pipeline PXP
 * RS485 (X12)
 
-## Known issues / Limitations
+## Known Issues / Limitations
 
 * When using LCD Displays the signal BOOT_EN# (GPIO4_IO03)
   must be driven HIGH to separate BOOT_CFG circuits from LCD signals.
@@ -136,7 +136,7 @@ _Note:_
 | ON      |      |     |     |     |     |     |     |     |    |      |     |     |     |     |     |  x  |     |    |     |     |     |     |    |  x  |     |
 | OFF     |  x   |  x  |  x  |  x  |  x  |  x  |  x  |  x  |    |  x   |  x  |  x  |  x  |  x  |  x  |     |  x  |    |  -  |  -  |  -  |  -  |    |     |  x  |
 
-## Boot device initialisation and update
+## Boot Device Initialisation and Update
 
 See [here](./README.imx.BootMedia.md) for detailed information how to write a
 bootstream image and bootloader support for updating the bootstream.
@@ -172,11 +172,11 @@ Using as device tree overlay is prepared.
 | Parallel        | imx7d-mba7-rgb-cdtech-dc44.dtb           | CDTECH DC44 (DMB)  |
 | Parallel        | imx7d-mba7-rgb-cdtech-fc21.dtb           | CDTECH FC21 (DMB)  |
 
-### Access U-Boot environment from Linux
+### Access U-Boot Environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
 
-### PREEMPT-RT / Realtime support
+### PREEMPT-RT / Realtime Support
 
 For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
 

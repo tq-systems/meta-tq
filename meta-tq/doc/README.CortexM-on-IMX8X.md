@@ -56,7 +56,7 @@ To build a bootstream with M4 binary in SD / eMMC the bitbake variable
 To build a bootstream with M4 binaries in SD / eMMC the bitbake variable
 `IMXBOOT_TARGETS` must contain the target `flash_linux_m4`
 
-### Preparing the system
+### Preparing the System
 
 Per default SD / eMMC wic images are built using a bootstream without M4
 firmware. Bootstreams with M4 firmware follow the naming convention
@@ -81,7 +81,7 @@ When using the ping pong demo you can connect from running Linux using:
 modprobe imx_rpmsg_pingpong
 ```
 
-## Development hints
+## Development Hints
 
 *Note:* This demo runs for a fixed number of cycles and terminates the RPMSG system.
 The kernel driver stack may generate a warning after the demo on Cortex M terminates.

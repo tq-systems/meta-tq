@@ -8,7 +8,7 @@
 * TQMLS1046A with 2 GiB / 4 GiB / 8 GiB RAM, HW REV.020x/030x on MBLS10xxA, HW REV.020x
 * TQMLS1088A with 2 GiB / 4 GiB RAM, HW REV.020x/030x on MBLS10xxA HW REV.020x
 
-## Version information for software components
+## Version Information for Software Components
 
 ### U-Boot
 
@@ -88,7 +88,7 @@
 
 ## HowTo
 
-### MBLS10xxA DIP-Switch Settings for boot
+### MBLS10xxA DIP-Switch Settings for Boot
 
 #### SD-Card
 
@@ -226,7 +226,7 @@ see: [TQ Embedded Wiki for TQMLS10xxA](https://support.tq-group.com/en/layerscap
 | 5559 (13)     | PCIe.1 | PCIe.2 | PCIe.3     | SATA       |
 | 5577 (20)     | PCIe.1 | PCIe.2 | PCIe.3 x 2 | PCIe.3 x 2 |
 
-## DIP-Switch settings
+## DIP-Switch Settings
 
 The DIP-switches should match the used RCW, otherwise interfaces will not work,
 or will not start. See [Serdes Config](#serdes-configuration)
@@ -278,7 +278,7 @@ Pay attention to the following DIP-Switches:
 |            |                       |            |         |
 | S5-1       | SD-Card / eMMC        | eMMC       | SD-Card |
 
-### Program system image
+### Program System Image
 
 #### QSPI NOR
 
@@ -311,7 +311,7 @@ Download UBIFS image from TFTP and update:
 
 See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 
-### Update parts of system
+### Update Parts of System
 
 In U-Boot the following update scripts are available to update the components:
 * RCW/PBL (use `*.pbl` file ):
@@ -333,11 +333,11 @@ In U-Boot the following update scripts are available to update the components:
 * `update_dpaa2_firmware_mmc`
 * `update_dpaa2_firmware_spi`
 
-## Access U-Boot environment from Linux
+## Access U-Boot Environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
 
-### PREEMPT-RT / Realtime support
+### PREEMPT-RT / Realtime Support
 
 For Preempt-RT see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md).
 
