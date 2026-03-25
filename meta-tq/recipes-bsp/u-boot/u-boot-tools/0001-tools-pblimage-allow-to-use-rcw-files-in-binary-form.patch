@@ -1,4 +1,4 @@
-From 67c7364dea6d82d944946ed51839c811a01860b8 Mon Sep 17 00:00:00 2001
+From 065259e4f9fdb865a0e5987d2721bb23e120c128 Mon Sep 17 00:00:00 2001
 From: Gregor Herburger <gregor.herburger@tq-group.com>
 Date: Thu, 10 Aug 2023 16:18:11 +0200
 Subject: [PATCH 1/1] tools: pblimage: allow to use rcw files in binary form
@@ -13,11 +13,11 @@ try to parse the file with the pbl_parser function.
 Upstream-Status: Pending
 Signed-off-by: Gregor Herburger <gregor.herburger@tq-group.com>
 ---
- tools/pblimage.c | 55 +++++++++++++++++++++++++++++++++++++++++++++---
- 1 file changed, 52 insertions(+), 3 deletions(-)
+ tools/pblimage.c | 54 +++++++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 51 insertions(+), 3 deletions(-)
 
 diff --git a/tools/pblimage.c b/tools/pblimage.c
-index 6c4d360e469..ba0cb073227 100644
+index 34650cf7b7c..ac32da76d49 100644
 --- a/tools/pblimage.c
 +++ b/tools/pblimage.c
 @@ -40,6 +40,9 @@ static union
@@ -30,16 +30,15 @@ index 6c4d360e469..ba0cb073227 100644
  #define ENDIANNESS ((char)endian_test.l)
  
  /*
-@@ -187,11 +190,46 @@ static void add_end_cmd(void)
+@@ -187,11 +190,45 @@ static void add_end_cmd(void)
  
  void pbl_load_uboot(int ifd, struct image_tool_params *params)
  {
 -	FILE *fp_uboot;
 +	FILE *fp_uboot, *fp_rcw;
+ 	int size, ret;
 +	uint8_t *data;
- 	int size;
 +	int rcwsize;
-+	int ret;
 +
 +	fp_rcw = fopen(params->imagename, "r");
 +	if (!fp_rcw)
@@ -80,7 +79,7 @@ index 6c4d360e469..ba0cb073227 100644
  
  	/* parse the pbi.cfg file. */
  	if (params->imagename2[0] != '\0')
-@@ -216,6 +254,17 @@ void pbl_load_uboot(int ifd, struct image_tool_params *params)
+@@ -221,6 +258,17 @@ void pbl_load_uboot(int ifd, struct image_tool_params *params)
  			params->imagefile, strerror(errno));
  		exit(EXIT_FAILURE);
  	}
@@ -99,5 +98,5 @@ index 6c4d360e469..ba0cb073227 100644
  
  static int pblimage_check_image_types(uint8_t type)
 -- 
-2.34.1
+2.43.0
 
