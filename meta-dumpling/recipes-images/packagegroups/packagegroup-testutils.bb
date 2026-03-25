@@ -15,7 +15,7 @@ inherit packagegroup
 
 ALSA_RDEPENDS = "\
     alsa-utils-alsabat \
-    alsa-utils-speakertest \
+    alsa-utils-speaker-test \
 "
 
 BENCHMARK_TOOLS = "\
