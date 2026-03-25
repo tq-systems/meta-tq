@@ -38,9 +38,6 @@ FULL_OPTIMIZATION="-Os -pipe ${DEBUG_FLAGS}"
 # empty this to prevent packages slipping in from poky
 POKY_DEFAULT_EXTRA_RRECOMMENDS = ""
 
-# This is already set by poky
-# TCLIBCAPPEND = ""
-
 # as log as we do not use ncurses we do not care for wide character support
 # ENABLE_WIDEC = "false"
 # ENABLE_WIDEC:class-native = "true"
