@@ -32,7 +32,9 @@ Releases are named with the following scheme:
 * linux-imx-tq-6.12:
   * TQMa95xxLA / TQMa95xxSA: support thermal zones for PMIC temperature sensors
   * integrate fixes from NXP lf-6.12.49-2.2.0
-* linux-imx-tq-6.6: integrate fixes from FSLC 6.6.-2.2.x-imx
+* linux-imx-tq-6.6:
+  * enable CONFIG_PTP_1588_CLOCK
+  * integrate fixes from FSLC 6.6-2.2.x-imx
 
   This includes fixes from linux-stable up to tag v6.6.129
 * imx-system-manager-tq: update to NXP version lf-6.12.49_2.2.0
@@ -59,14 +61,19 @@ Releases are named with the following scheme:
     If needed this can be configured per board using modified `QSPI_HEADER` environment.
   * update to use upstream version `lf-6.12.49-2.2.0`
 * linux-imx-tq-6.12:
+  * enable CONFIG_PTP_1588_CLOCK
   * Prepare config fragments for TQMa94xxLA / MBa94xxCA support
   * TQMa95xxLA:
     * FlexSPI support
     * 10GiGE support
     * dual LVDS example
-* linux-tq-6.6: update to 6.6.129
+* linux-tq-6.6:
+  * enable CONFIG_PTP_1588_CLOCK
+  * update to 6.6.129
 * linux-rt-tq-6.6-rt: update to v6.6.129-rt70
-* linux-tq-6.12: update to v6.12.76
+* linux-tq-6.12:
+  * enable CONFIG_PTP_1588_CLOCK
+  * update to v6.12.76
 
 ### Fixed
 
