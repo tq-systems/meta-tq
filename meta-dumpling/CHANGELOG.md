@@ -9,6 +9,14 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* packagegroup-testutils: add kernel-selftest
+
+  This enables some utils from kernel internal selftests, especially for testing PTP and RTC.
+
+### Removed
+
 * distro: dumpling: remove unused PACKAGECONFIG modifications for gstreamer1.0-plugin-good
 
 ## scarthgap.TQ.ARM.BSP.0007
