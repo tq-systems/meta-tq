@@ -95,7 +95,7 @@ do_install:append() {
         for type in ${UBOOT_CONFIG}; do
             j=$(expr $j + 1)
             if [ $j -eq $i ]; then
-                (cd "${B}/${config}" && uboot_tq_install_config "${type}")
+                (cd "${B}/${config}-${type}" && uboot_tq_install_config "${type}")
             fi
         done
     done
