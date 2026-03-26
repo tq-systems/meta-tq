@@ -15,7 +15,7 @@
 
 ### U-Boot:
 
-#### U-Boot Based on v2023.04 (Forked from Mainline U-Boot)
+#### u-boot-tq 2023.04
 
 * based on U-Boot (https://github.com/u-boot/u-boot)
 * branched from v2023.04 (Branch master)
@@ -27,7 +27,7 @@ lifetime degradation.
 
 ### Linux:
 
-#### Kernel Based on 6.6-rt (linux-stable-rt)
+#### Kernel 6.6-rt (linux-stable-rt)
 
 * based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
 * defconfig changes and patches for TQ-Systems starter kits and build time optimisation
@@ -35,7 +35,7 @@ lifetime degradation.
 
 For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 
-#### Kernel Based on 6.6 (linux-stable)
+#### Kernel 6.6 (linux-stable)
 
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git)
 * defconfig changes and patches for TQ-Systems starter kits and build time optimisation
@@ -132,7 +132,7 @@ Version information:
 
 ### Linux
 
-#### Kernel Based on 6.6 (linux-imx-fslc)
+#### Kernel 6.6 (linux-imx-fslc)
 
 Supported SOM families:
 
@@ -146,7 +146,7 @@ Version information:
 * branched from `6.6-2.2.x-imx`
   (see `LINUX_VERSION` in `linux-imx-tq_6.6.bb` for exact release)
 
-#### Kernel 6.12 stable
+#### Kernel 6.12 (stable)
 
 Supported SOM families:
 
@@ -163,7 +163,7 @@ Version information:
 * branched from `6.12.y`
   (see `LINUX_VERSION` in `linux-tq_6.12.bb` for exact release)
 
-#### Kernel 6.12 stable-rt
+#### Kernel 6.12 (stable-rt)
 
 Supported SOM families:
 
@@ -184,7 +184,7 @@ For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 
 ## SOM with i.MX ARMv8-A CPU
 
-### Supported SOM families
+### Supported SOM Families
 
 * TQMa8Mx
 * TQMa8MxML
@@ -276,7 +276,7 @@ Version information:
 
 ### Linux
 
-#### Kernel based on 6.6 (linux-imx-fslc)
+#### Kernel 6.6 (linux-imx-fslc)
 
 Supported SOM families
 
@@ -295,7 +295,7 @@ Version information:
 * branched from `6.6-2.2.x-imx`
   (see `LINUX_VERSION` in `linux-imx-tq_6.6.bb` for exact release)
 
-#### Kernel based on 6.12 (linux-imx-fslc)
+#### Kernel 6.12 (linux-imx-fslc)
 
 Supported SOM families
 
@@ -326,7 +326,7 @@ Version information:
 
 For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 
-#### Kernel 6.12 stable-rt
+#### Kernel 6.12 (stable-rt)
 
 Supported SOM families
 
@@ -343,7 +343,7 @@ For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 * defconfig not ready for production use
   (see `LINUX_VERSION` in `linux-rt-tq_6.12.bb` for exact release)
 
-#### Kernel 6.6 stable
+#### Kernel 6.6 (stable)
 
 Supported SOM families
 
@@ -357,7 +357,7 @@ Version information:
 * defconfig changes for TQ-Systems starter kits and build time optimisation
   (see `LINUX_VERSION` in `linux-tq_6.6.bb` for exact release)
 
-#### Kernel 6.6 stable-rt
+#### Kernel 6.6 (stable-rt)
 
 Supported SOM families
 
