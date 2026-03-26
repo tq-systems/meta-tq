@@ -15,6 +15,8 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-rt-tq-6.1: update to v6.1.164-rt60
+* linux-tq-6.1: update to v6.1.164
 * linux-imx-tq-6.1: TQMa6x / TQMa6ULx[L] / TQMa6ULLx[L] / TQMa7x / TQMa8Mx / TQMa8MxML / TQMa8MxNL: change soundcard model name in device tree
 
  The name equals the one used in upstream device trees. Since the audio codec on the
