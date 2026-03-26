@@ -175,7 +175,7 @@ Download UBIFS image from TFTP and update:
 
 `run update_rootfs_spi`
 
-__Note:__: set `ubirootfs` to the correct image name. This is usually the artifact with the extension
+__Note:__: set `ubirootfs` to the correct image name. This is usually the artefact with the extension
 `.rootfs.ubifs`
 
 ## Booting Linux OS

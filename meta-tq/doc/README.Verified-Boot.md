@@ -73,7 +73,7 @@ Enabling the distro feature has two effects:
 If signatures are not generated as a part of the Yocto build, the
 `IMX_HAB_KEY_NAME` variable should be left unset.
 
-On supported platforms, the build will place the following files in the artifact
+On supported platforms, the build will place the following files in the artefact
 directory at `${DEPLOY_DIR_IMAGE}` to facilitate the creation of signatures (for
 each U-Boot configuration `config` and boot source `target`):
 

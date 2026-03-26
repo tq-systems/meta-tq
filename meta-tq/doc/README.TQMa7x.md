@@ -66,7 +66,7 @@ yocto scarthgap. For Linux 6.1 support use yocto kirkstone.
 
 * When using LCD Displays the signal BOOT_EN# (GPIO4_IO03)
   must be driven HIGH to separate BOOT_CFG circuits from LCD signals.
-  Otherwise, artifacts may appear in the display view.
+  Otherwise, artefacts may appear in the display view.
 * Using internal PCIe PHY clock is currently not supported by the Linux
   mainline and newer NXP vendor kernel. PCIe can not be used on MBa7x
   with these kernel versions.
