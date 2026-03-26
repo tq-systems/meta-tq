@@ -9,6 +9,14 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Deprecated
+
+Upstream support and development for kirkstone branch will end in April 2026. See
+* https://lists.openembedded.org/g/openembedded-devel/message/124804
+* https://lists.openembedded.org/g/bitbake-devel/message/19196
+
+Please update to a newer branch with LTS maintenance (scarthgap at time of writing)
+
 ### Added
 
 * Added bmaptools to `packagegroup-testutils`
