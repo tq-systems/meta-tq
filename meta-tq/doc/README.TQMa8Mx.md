@@ -45,7 +45,7 @@ _MBa8x HW Rev.020x/30x only / TQMa8Mx HW Rev.020x only_
 | **Ethernet**                                     |                    |
 | GigE via Phy on MBa8Mx                           |         x          |
 | **Bootdevices**                                  |                    |
-| SD-Card on USDHC2                                |         x          |
+| SD card on USDHC2                                |         x          |
 | eMMC on USDHC1                                   |         x          |
 | **Display**                                      |                    |
 | HDMI (fixed resolution)                          |         x          |
@@ -274,7 +274,7 @@ BOOT\_MODE: Internal Boot
 * BOOT_CFG\[8\] - 0 - USDHC loopback clock source
 * BOOT_CFG\[9\] - 0 - Power cycle enable
 * BOOT_CFG\[\11:10\] - 01 - USDHC2
-* BOOT_CFG\[\15:12\] - 0001 - SD Card
+* BOOT_CFG\[\15:12\] - 0001 - SD card
 
 ###### MBa8Mx REV.030x
 
@@ -293,7 +293,7 @@ BOOT\_MODE: Internal Boot
 * BOOT_CFG\[8\] - 0 - USDHC loopback clock source
 * BOOT_CFG\[9\] - 1 - Power cycle enable
 * BOOT_CFG\[\11:10\] - 01 - USDHC2
-* BOOT_CFG\[\15:12\] - 0001 - SD Card
+* BOOT_CFG\[\15:12\] - 0001 - SD card
 
 ##### eMMC
 
@@ -360,15 +360,15 @@ _S9_
 
 ## Boot Device Initialisation
 
-### Bootable SD-Card
+### Bootable SD Card
 
-To create a bootable SD-Card with complete system image:
+To create a bootable SD card with complete system image:
 
 write *.wic Image to SD (offset 0)
 
-To create a bootable SD-Card with boot stream only (file name see above):
+To create a bootable SD card with boot stream only (file name see above):
 
-write bootstream at offset 33 kiB (0x8400) to SD-Card
+write bootstream at offset 33 kiB (0x8400) to SD card
 
 Example for Linux:
 
@@ -382,7 +382,7 @@ write *.wic image to eMMC (offset 0)
 
 To create a bootable eMMC with boot stream only (file name see above)
 
-Boot from SD-Card and write bootstream at offset 33 kiB (0x8400) to eMMC
+Boot from SD card and write bootstream at offset 33 kiB (0x8400) to eMMC
 
 Example for Linux:
 
@@ -405,13 +405,13 @@ mmc write ${loadaddr} 42 ${bsz}
 
 For ease of development a set of variables and scripts are in default env.
 
-_Note_: Update and start scripts expect a partitioned / initialized SD-Card or
+_Note_: Update and start scripts expect a partitioned / initialized SD card or
 eMMC.
 
 _U-Boot environment variables_
 
 * `uboot`: name of bootstream image (default = bootstream.bin)
-* `mmcdev`: 0 for eMMC, 1 for SD-Card (automatically generated,
+* `mmcdev`: 0 for eMMC, 1 for SD card (automatically generated,
   can be overwritten)
   `mmcpart`: partition number for kernel and devicetree (default = 1)
   `mmcpath`: path to kernel and device tree (default = /)

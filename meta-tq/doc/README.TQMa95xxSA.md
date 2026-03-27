@@ -35,7 +35,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | Write                                 |          1-1-4-4B          |
 | Erase                                 |          1-1-1-4B          |
 | Boot                                  |             -              |
-| **eMMC / SD-Card**                    |                            |
+| **eMMC / SD card**                    |                            |
 | Read                                  |             x              |
 | Write                                 |             x              |
 | Boot                                  |     SD: ok / eMMC: no      |
@@ -48,7 +48,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **Bootstreams**                       |                            |
 | FlexSPI                               |   error (hardware issue)   |
 | SD / eMMC                             |             x              |
-| UUU                                   |  (TBD: use SD-Card image)  |
+| UUU                                   |  (TBD: use SD card image)  |
 
 
 **TODO or not tested / supported**

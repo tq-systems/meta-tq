@@ -9,9 +9,9 @@ how default U-Boot env supports update for development purpose.
 
 ### Bootstream Location on SD and eMMC
 
-For SD-card and eMMC following table applies:
+For SD card and eMMC following table applies:
 
-| CPU family | SD-card / eMMC user partition |   Block   | eMMC boot partition |   Block   |
+| CPU family | SD card / eMMC user partition |   Block   | eMMC boot partition |   Block   |
 |:----------:|:-----------------------------:|:---------:|:-------------------:|:---------:|
 |    iMX6    |         1 KiB (0x400)         |  2 / 0x2  |    1 KiB (0x400)    |  2 / 0x2  |
 |    iMX7    |         1 KiB (0x400)         |  2 / 0x2  |    1 KiB (0x400)    |  2 / 0x2  |
@@ -42,19 +42,19 @@ image with valid information is written. As a consequence parts like U-Boot envi
 may be left over from a previous version. If this could be an issue, use
 `bmaptool copy --nobmap` or uncompress the wic-image and use `dd`.
 
-### Bootable SD-Card
+### Bootable SD Card
 
-Write the `*.wic` image to SD-Card to create a bootable SD-Card with complete system image.
-The following command can be used (the example assumes an SD-Card reader on PC and
+Write the `*.wic` image to SD card to create a bootable SD card with complete system image.
+The following command can be used (the example assumes an SD card reader on PC and
 `bmap-tools` package is installed):
 
 ```bash
 bmaptool copy <image>.wic[.compress] --bmap <image>.bmap /dev/sd<y>
 ```
 
-To create a bootable SD-Card with boot stream only (for exact file name see
+To create a bootable SD card with boot stream only (for exact file name see
 SOM specific documentation), write bootstream image with correct
-[offset](#bootstream-location-on-sd-and-emmc) to SD-Card:
+[offset](#bootstream-location-on-sd-and-emmc) to SD card:
 
 Example for Linux:
 
@@ -83,7 +83,7 @@ Example for Linux:
 
 `sudo dd if=<bootstream> of=/dev/mmcblk0 bs=1k seek=<kiB offset> conv=fsync`
 
-Example for U-Boot, see [SD-card / eMMC partition start block number](#bootstream-location-on-sd-and-emmc).
+Example for U-Boot, see [SD card / eMMC partition start block number](#bootstream-location-on-sd-and-emmc).
 
 **Attention**: partition in this context means the eMMC hardware partitions. This is unrelated to MBR or
 GPT partitions in eMMC user partition.
@@ -114,7 +114,7 @@ to initialise the SPI controller before loading the boot firmware
 
 To create a bootable SPI-NOR with boot firmware only (for exact file name see
 SOM specific documentation) the following steps are needed - the example
-assumes using U-Boot, booted from SD-Card or via serial download mode:
+assumes using U-Boot, booted from SD card or via serial download mode:
 
 ```
 tftp <bootstream>
@@ -126,13 +126,13 @@ sf update ${loadaddr} 0 ${filesize}
 
 For ease of development a set of variables and scripts are in default env.
 
-_Note_: Update and start scripts expect a partitioned / initialized SD-Card or
+_Note_: Update and start scripts expect a partitioned / initialized SD card or
 eMMC.
 
 ### U-Boot Environment Variables
 
 * `uboot`: name of bootstream image (default = bootstream.bin)
-* `mmcdev`: 0 for eMMC, 1 for SD-Card (automatically generated,
+* `mmcdev`: 0 for eMMC, 1 for SD card (automatically generated,
   can be overwritten)
 * `mmcpart`: partition number for kernel and devicetree (default = 1)
 * `mmcpath`: path to kernel and device tree (default = /)

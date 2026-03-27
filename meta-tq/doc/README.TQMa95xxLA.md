@@ -35,7 +35,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | Write                                 |          1-1-4-4B          |
 | Erase                                 |          1-1-1-4B          |
 | Boot                                  |             x              |
-| **eMMC / SD-Card**                    |                            |
+| **eMMC / SD card**                    |                            |
 | Read                                  |             x              |
 | Write                                 |             x              |
 | Boot                                  |     SD: ok / eMMC: ok      |
@@ -50,7 +50,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **Bootstreams**                       |                            |
 | FlexSPI                               |             x              |
 | SD / eMMC                             |             x              |
-| UUU                                   |  (TBD: use SD-Card image)  |
+| UUU                                   |  (TBD: use SD card image)  |
 
 ### Linux
 

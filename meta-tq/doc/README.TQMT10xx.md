@@ -33,7 +33,7 @@
 | LEDs                         |      x        |
 | USB Hub (X23)                |      x        |
 | USB Host (X28)               |      x        |
-| SD-Card                      |      x        |
+| SD card                      |      x        |
 | Ethernet                     |      x        |
 | LVDS                         |      x        |
 | PCIe                         |      x        |
@@ -69,7 +69,7 @@ To support different configurations a custom device tree has to be created.
 
 ## Boot DIP Switches
 
- * S2-2: On : SD Card
+ * S2-2: On : SD card
  * S2-2: Off: IFC SPI Nor
 
 ## Signal Switch Select
@@ -82,13 +82,13 @@ DIP S3 allows switching of signals:
 | S3-3       | Serdes Lane G | miniPCIE (X20) | see S3.4 |
 | S3-4       | Serdes Lane G | SGMII (X37BB) | SATA(X26) |
 | S2-1       | DIU SEL       | UCC | Display |
-| S2-2       | Boot Source   | SD-Card | Nor Flash |
+| S2-2       | Boot Source   | SD card | Nor Flash |
 | S2-3       | USB Ref CLK   | USBCLK to D3 (for T1024)| USBCLK to F8 |
 | S2-4       | Serdes Ref CLK| 156.25 MHz | 100Mhz |
 | S4-1       | DVDD          | 3.3V | 1.8V |
 | S4-2       | EVDD	     | 3.3V | 1.8V |
 | S4-3       | CVDD	     | 3.3V | 1.8V |
-| S4-4       | SDHC EXT SEL  | SD-Card| eMMC |
+| S4-4       | SDHC EXT SEL  | SD card| eMMC |
 | S9-1       | Refclk D21    | 156.25 MHz | 125MHz |
 | S9-2       | D21 Config    | QSGMII | SGMII |
 

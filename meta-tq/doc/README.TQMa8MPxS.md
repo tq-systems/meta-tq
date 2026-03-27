@@ -38,7 +38,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | GBE0 (X11)                                |      x      |
 | GBE1 (X10)                                |      x      |
 | **Bootdevices**                           |             |
-| SD-Card on USDHC2                         |      x      |
+| SD card on USDHC2                         |      x      |
 | eMMC on USDHC3                            |      x      |
 | QSPI-NOR on FlexSPI                       |      x      |
 | Serial Downloader (X4)                    |      x      |

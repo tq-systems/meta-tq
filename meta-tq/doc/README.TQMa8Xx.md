@@ -38,7 +38,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | Read                                             |              x              |
 | Write                                            |              x              |
 | Boot                                             |              x              |
-| **eMMC / SD-Card**                               |                             |
+| **eMMC / SD card**                               |                             |
 | Read                                             |              x              |
 | Write                                            |              x              |
 | Boot                                             |              x              |

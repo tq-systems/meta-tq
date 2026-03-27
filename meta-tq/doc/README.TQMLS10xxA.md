@@ -90,7 +90,7 @@
 
 ### MBLS10xxA DIP Switch Settings for Boot
 
-#### SD-Card
+#### SD Card
 
 | DIP S5 | 1 | 2 | 3 | 4 |
 |--------|:-:|:-:|:-:|:-:|
@@ -113,10 +113,10 @@
 
 #### Notes
 
-* SD-Card/eMMC:
-SD-Card and eMMC are mutually exclusive. DIP switch S5 controls SD-Card/eMMC
+* SD card/eMMC:
+SD card and eMMC are mutually exclusive. DIP switch S5 controls SD card/eMMC
 access. With S5-1 `ON` eMMC on TQMLS10xxA module is accesible. With S5-1 `OFF`
-SD-Card on MBLS10xxA is accessible.
+SD card on MBLS10xxA is accessible.
 
 ## Build Artefacts
 
@@ -131,7 +131,7 @@ SD-Card on MBLS10xxA is accessible.
 * fsl_fman_ucode_ls1043_r1.1_106_4_18.bin: Fman Ethernet Firmware
 * Image: Kernel
 * fsl-ls1043a-tqmls1043a-mbls10xxa.dtb: Device Tree Blob.
-* \*.wic[.<compress>]: Complete eMMC / SD-Card Image
+* \*.wic[.<compress>]: Complete eMMC / SD card Image
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 
@@ -146,7 +146,7 @@ SD-Card on MBLS10xxA is accessible.
 * fsl_fman_ucode_ls1046_r1.0_106_4_18.bin: Fman Ethernet Firmware
 * Image: Kernel
 * fsl-ls1046a-tqmls1046a-mbls10xxa.dtb: Device Tree Blob.
-* \*.wic[.<compress>]: Complete eMMC / SD-Card Image
+* \*.wic[.<compress>]: Complete eMMC / SD card Image
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 
@@ -162,7 +162,7 @@ SD-Card on MBLS10xxA is accessible.
 * mc-utils: the DPAA2-Ethernet Configuration files
 * Image: Kernel
 * fsl-ls1088a-tqmls1088a-mbls10xxa.dtb: Device Tree Blob.
-* \*.wic[.<compress>]: Complete eMMC / SD-Card Image
+* \*.wic[.<compress>]: Complete eMMC / SD card Image
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 
@@ -252,7 +252,7 @@ Pay attention to the following DIP switches:
 | S10-1      | DVDD                  | 3.3V       | 1.8V    |
 | S10-2      | EVDD                  | 3.3V       | 1.8V    |
 |            |                       |            |         |
-| S5-1       | SD-Card / eMMC        | eMMC       | SD-Card |
+| S5-1       | SD card / eMMC        | eMMC       | SD card |
 
 ### TQMLS1046A and TQMLS1088A
 
@@ -276,7 +276,7 @@ Pay attention to the following DIP switches:
 | S10-1      | DVDD                  | 3.3V       | 1.8V    |
 | S10-2      | EVDD                  | 3.3V       | 1.8V    |
 |            |                       |            |         |
-| S5-1       | SD-Card / eMMC        | eMMC       | SD-Card |
+| S5-1       | SD card / eMMC        | eMMC       | SD card |
 
 ### Program System Image
 

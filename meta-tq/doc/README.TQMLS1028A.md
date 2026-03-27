@@ -25,7 +25,7 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 | Read                                      |        x        |
 | Write                                     |        x        |
 | Boot                                      |        x        |
-| **eMMC / SD-Card**                        |                 |
+| **eMMC / SD card**                        |                 |
 | Read                                      |        x        |
 | Write                                     |        x        |
 | Boot                                      |        x        |

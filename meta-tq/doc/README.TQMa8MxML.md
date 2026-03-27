@@ -43,7 +43,7 @@ _MBa8Mx HW Rev.030x only_
 | **Ethernet**                                     |                      |
 | GigE via Phy on MBa8Mx                           |          x           |
 | **Bootdevices**                                  |                      |
-| SD-Card on USDHC2                                |          x           |
+| SD card on USDHC2                                |          x           |
 | eMMC on USDHC3                                   |          x           |
 | QSPI-NOR on FlexSPI                              |          x           |
 | **USB**                                          |                      |
@@ -255,7 +255,7 @@ BOOT\_MODE: Internal Boot
 * BOOT_CFG\[8\]      - 0 - USDHC loopback clock source
 * BOOT_CFG\[9\]      - 1 - Power cycle enable
 * BOOT_CFG\[\11:10\] - 01 - USDHC2
-* BOOT_CFG\[\15:12\] - 0001 - SD Card
+* BOOT_CFG\[\15:12\] - 0001 - SD card
 
 ##### eMMC (USDHC3)
 
@@ -330,15 +330,15 @@ _S9_
 
 ## Boot Device Initialisation
 
-### Bootable SD-Card
+### Bootable SD Card
 
 Complete system image:
 
 write *.wic Image to SD (offset 0)
 
-To create a bootable SD-Card with boot stream only (file name see above):
+To create a bootable SD card with boot stream only (file name see above):
 
-write bootstream at offset 33 kiB (0x8400) to SD-Card
+write bootstream at offset 33 kiB (0x8400) to SD card
 
 Example for Linux:
 
@@ -352,7 +352,7 @@ write *.wic image to eMMC (offset 0)
 
 To create a bootable eMMC with boot stream only (file name see above)
 
-Boot from SD-Card and write bootstream at offset 33 kiB (0x8400) to eMMC
+Boot from SD card and write bootstream at offset 33 kiB (0x8400) to eMMC
 
 Example for Linux:
 
@@ -375,7 +375,7 @@ mmc write ${loadaddr} 42 ${bsz}
 
 To create a bootable QSPI NOR with boot stream only (file name see above)
 
-Example for U-Boot, booting from SD-Card:
+Example for U-Boot, booting from SD card:
 
 ```
 # SPI-NOR @ FlexSPI, offset 0
@@ -389,13 +389,13 @@ sf update ${loadaddr} 0 ${filesize}
 
 For ease of development a set of variables and scripts are in default env.
 
-_Note_: Update and start scripts expect a partitioned / initialized SD-Card or
+_Note_: Update and start scripts expect a partitioned / initialized SD card or
 eMMC.
 
 _U-Boot environment variables_
 
 * `uboot`: name of bootstream image (default = bootstream.bin)
-* `mmcdev`: 0 for eMMC, 1 for SD-Card (automatically generated,
+* `mmcdev`: 0 for eMMC, 1 for SD card (automatically generated,
   can be overwritten)
   `mmcpart`: partition number for kernel and devicetree (default = 1)
   `mmcpath`: path to kernel and device tree (default = /)

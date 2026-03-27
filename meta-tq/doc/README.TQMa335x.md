@@ -150,17 +150,17 @@ Compressed WIC images and matching BMAP-files (block map files) are created by d
 To make use of this feature, install the `bmap-tools` package to use `bmaptool`.
 The packed WIC can also be decompressed and used with `dd` or other disk image tools.
 
-### Bootable SD-Card
+### Bootable SD card
 
-Write the `*.wic` image to SD-Card to create a bootable SD-Card with complete system image.
-The following command can be used (the example assumes an SD-Card reader on PC and
+Write the `*.wic` image to SD card to create a bootable SD card with complete system image.
+The following command can be used (the example assumes an SD card reader on PC and
 `bmap-tools` package is installed):
 
 ```bash
 bmaptool copy <image>.wic[.compress] --bmap <image>.bmap /dev/sd<x>
 ```
 
-To create a bootable SD-Card with boot stream only write `*.wic.bootonly` to SD (offset 0x0)
+To create a bootable SD card with boot stream only write `*.wic.bootonly` to SD (offset 0x0)
 
 Example for Linux:
 
@@ -196,7 +196,7 @@ mmc write ${loadaddr} 0 ${bsz}
 ### Bootable SPI NOR
 
 To create a bootable SPI NOR with boot loader only use the generated
-[bootloader images](#artefacts). Example for U-Boot, booting from SD-Card:
+[bootloader images](#artefacts). Example for U-Boot, booting from SD card:
 
 ```
 sf probe
@@ -214,14 +214,14 @@ For ease of development a set of variables and scripts are in default env.
 Depending on your configuration some variable values needs to bet changend
 to the right values. For files to use see the [artefacts](#artefacts) section.
 
-_Note_: Update and start scripts expect a partitioned / initialized SD-Card or
+_Note_: Update and start scripts expect a partitioned / initialized SD card or
 eMMC.
 
 * `uboot`: name of U-Boot payload image for SD / eMMC (default = u-boot.img)
 * `mlo`: name of U-Boot SPL image for SD / eMMC (default = MLO)
 * `uboot_spi`: name of U-Boot payload image for SPI flash (default = u-boot.img)
 * `mlo_spi`: name of U-Boot SPL image for SPI flash (default = MLO.byteswap)
-* `mmcdev`: 1 for eMMC, 2 for SD-Card (automatically generated when booting
+* `mmcdev`: 1 for eMMC, 2 for SD card (automatically generated when booting
    from SD / eMMC with the index of the boot device, can be overwritten;
    must be set if needed when booting from SPI NOR)
 * `fdtfile`: device tree blob,

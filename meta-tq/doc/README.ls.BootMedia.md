@@ -9,9 +9,9 @@ how default U-Boot env supports update for development purpose.
 
 ### Bootstream Location on SD and eMMC
 
-For SD-card and eMMC following table applies:
+For SD card and eMMC following table applies:
 
-| CPU family | SD-card / eMMC user partition |   Block   | eMMC boot partition  |   Block   |
+| CPU family | SD card / eMMC user partition |   Block   | eMMC boot partition  |   Block   |
 |:----------:|:-----------------------------:|:---------:|:--------------------:|:---------:|
 |  LS1012A   |     not supported by CPU      |  ------   | not supported by CPU |     -     |
 |  LS102xA   |         4 KiB (0x1000)        |  8 / 0x8  |      not tested      |     -     |
@@ -32,9 +32,9 @@ image with valid information is written. As a consequence parts like U-Boot envi
 may be left over from a previous version. If this could be an issue, use
 `bmaptool copy --nobmap` or uncompress the wic-image and use `dd`.
 
-### Bootable eMMC / SD-Card
+### Bootable eMMC / SD Card
 
-Write the `*.wic` image to eMMC / SD-Card to create a bootable card with complete system image.
+Write the `*.wic` image to eMMC / SD card to create a bootable card with complete system image.
 The following commands can be used - the example assumes `bmap-tools` package is installed:
 
 ```bash
@@ -49,7 +49,7 @@ bmaptool copy <image>.wic[.compress] /dev/mmcblk0
 
 To create a bootable card with boot images only (for exact file names see
 SOM specific documentation), write bootstream image with correct
-[offset](#bootstream-location-on-sd-and-emmc) to SD-Card:
+[offset](#bootstream-location-on-sd-and-emmc) to SD card:
 
 Example for Linux:
 

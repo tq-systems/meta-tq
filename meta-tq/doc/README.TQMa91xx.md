@@ -47,7 +47,7 @@ Support matrix for `MBa91xxCA` REV.010x / `MBa93xxCA` REV.020x
 |        GigE / FEC via Phy on MBa91xxCA          |          x            |
 |       GigE / EQOS via Phy on MBa91xxCA          |          x            |
 |                **Bootdevices**                  |                       |
-|               SD-Card on USDHC2                 |          x            |
+|               SD card on USDHC2                 |          x            |
 |                eMMC on USDHC1                   |          x            |
 |              QSPI-NOR on FlexSPI                |          x            |
 |               Serial Downloader                 |          x            |
@@ -159,7 +159,7 @@ BOOT\_MODE can be configured using DIP switch S1 on mainboard.
 | 0000     | Boot from fuses       | OFF  | OFF  | OFF  | OFF  |
 | 0001     | Serial Downloader     | OFF  | OFF  | OFF  | ON   |
 | 0010     | eMMC (USDHC1)         | OFF  | OFF  | ON   | OFF  |
-| 0011     | SD Card (USDHC2)      | OFF  | OFF  | ON   | ON   |
+| 0011     | SD card (USDHC2)      | OFF  | OFF  | ON   | ON   |
 | 0100     | QSPI (FlexSPI NOR)    | OFF  | ON   | OFF  | OFF  |
 
 ## Boot Device Initialisation and Update

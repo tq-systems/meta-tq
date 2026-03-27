@@ -55,7 +55,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | GigE / FEC via Phy on MBa93xxCA                  |       x               |       x               |         x               |
 | GigE / EQOS via Phy on MBa93xxCA                 |       x               |       x               |         x               |
 | **Bootdevices**                                  |                       |                       |                         |
-| SD-Card on USDHC2                                |       x               |       x               |         x               |
+| SD card on USDHC2                                |       x               |       x               |         x               |
 | eMMC on USDHC1                                   |       x               |       x               |         x               |
 | QSPI-NOR on FlexSPI                              |       x               |       x               |   see Known Issues      |
 | Serial Downloader                                |                       |       x               |         x               |
@@ -237,7 +237,7 @@ BOOT\_MODE can be configured using DIP switch S1.
 | 0000     | Boot from fuses       | OFF  | OFF  | OFF  | OFF  |
 | 0001     | Serial Downloader     | OFF  | OFF  | OFF  | ON   |
 | 0010     | eMMC (USDHC1)         | OFF  | OFF  | ON   | OFF  |
-| 0011     | SD Card (USDHC2)      | OFF  | OFF  | ON   | ON   |
+| 0011     | SD card (USDHC2)      | OFF  | OFF  | ON   | ON   |
 | 0100     | QSPI (FlexSPI NOR)    | OFF  | ON   | OFF  | OFF  |
 
 **NOTE:** LPB boot modes not supported / tested yet.

@@ -41,7 +41,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **Ethernet**                                     |              |
 | 2 x FEC via Phy on MBa6ULx                       |       x      |
 | **Bootdevices**                                  |              |
-| SD-Card                                          |       x      |
+| SD card                                          |       x      |
 | eMMC                                             |       x      |
 | QSPI-NOR on QuadSPI                              |       x      |
 | Serial Downloader                                |       x      |

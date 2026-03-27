@@ -138,7 +138,7 @@ details
 * \*.rootfs.ubi: UBI image containing UBIFS rootfs for SPI-NOR
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
-* \*.wic[.<compress>]: Complete eMMC / SD-Card Image
+* \*.wic[.<compress>]: Complete eMMC / SD card Image
 
 Note: As U-Boot use the fip_uboot.bin from the atf directory.
 
@@ -155,7 +155,7 @@ BOOT\_MODE can be configured using DIP switch S1
 | On     |   |   |   |   |
 | Off    | x | x | x | x |
 
-* SD-Card
+* SD card
 
 | DIP S1 | 1 | 2 | 3 | 4 |
 |--------|---|---|---|---|
@@ -228,7 +228,7 @@ See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 |  0xe00000 |  0xf00000 | DPAA2-DPC  |
 | 0x1000000 | 0x8000000 | RootFS UBI |
 
-### eMMC / SD-Card
+### eMMC / SD Card
 
 |     start | content        |
 | --------: | -------------- |

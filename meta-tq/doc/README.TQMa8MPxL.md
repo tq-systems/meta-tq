@@ -42,7 +42,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | GigE / FEC via Phy on MBa8MPxL                   |       x      |
 | GigE / EQOS via Phy on MBa8MPxL                  |       x      |
 | **Bootdevices**                                  |              |
-| SD-Card on USDHC2                                |       x      |
+| SD card on USDHC2                                |       x      |
 | eMMC on USDHC3                                   |       x      |
 | QSPI-NOR on FlexSPI                              |       x      |
 | Serial Downloader                                |       x      |
