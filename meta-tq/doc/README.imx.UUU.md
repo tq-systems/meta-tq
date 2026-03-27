@@ -61,7 +61,7 @@ bitbake imx-boot-tq
 
 You need to set your board to Boot Mode for `Serial Downloader` or make sure that
 no bootstream can be found on the selected boot media and on eventually configured
-fallback media. See your boards Boot DIP Switches section how to configure Boot Mode
+fallback media. See your boards Boot DIP switches section how to configure Boot Mode
 for `Serial Downloader`.
 
 Please note, that the builtin scripts of UUU make some assumtions that may or may not fit

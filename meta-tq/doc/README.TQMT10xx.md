@@ -75,7 +75,7 @@ To support different configurations a custom device tree has to be created.
 ## Signal Switch Select
 
 DIP S3 allows switching of signals:
-| DIP-Switch | Serdes Lane   | On  | Off |
+| DIP Switch | Serdes Lane   | On  | Off |
 | ---------- | ------------- | --- | ---- |
 | S3-1       | Serdes Lane C | SGMII (X30BB) | QSGMII (X30) |
 | S3-2       | Serdes Lane E | miniPCIE (X19) |Auroroa (X8) |
@@ -119,9 +119,9 @@ For Serdes Config 0x86
 | Lane F | X24 |
 | Lane G | X20 |
 
-#### Dip Switch Settings
+#### DIP Switch Settings
 
-| DIP-Switch | Function      | On  | Off |
+| DIP Switch | Function      | On  | Off |
 | ---------- | ------------- | --- | ----|
 | S9-1       | Refclk D21    |     |  X  |
 | S9-2       | QSGMII/SGMII  |     |  X  |
@@ -146,11 +146,11 @@ For Serdes Config 0x6B
 | ------ | --------- |
 | Lane A | X19 |
 
-#### Dip Switch Settings
+#### DIP Switch Settings
 
-Important Dip Switch settings for this configuration
+Important DIP switch settings for this configuration
 
-| DIP-Switch | Function      | On  | Off |
+| DIP Switch | Function      | On  | Off |
 | ---------- | ------------- | --- | ----|
 | S9-1       | Refclk D21    |     |  X  |
 | S9-2       | QSGMII/SGMII  |     |  X  |
@@ -174,11 +174,11 @@ For Serdes Config 0x95
 | ------ | --------- |
 | Lane A | X19 |
 
-#### Dip Switch Settings
+#### DIP Switch Settings
 
-Important Dip Switch settings for this configuration
+Important DIP switch settings for this configuration
 
-| DIP-Switch | Function      | On  | Off |
+| DIP Switch | Function      | On  | Off |
 | ---------- | ------------- | --- | ----|
 | S9-1       | Refclk D21    |     |  X  |
 | S9-2       | QSGMII/SGMII  |     |  X  |
@@ -208,11 +208,11 @@ For Serdes Config 0x66
 | Lane F | X24 |
 | Lane G | X20 |
 
-#### Dip Switch Settings
+#### DIP Switch Settings
 
-Important Dip Switch settings for this configuration
+Important DIP switch settings for this configuration
 
-| DIP-Switch | Function      | On  | Off |
+| DIP Switch | Function      | On  | Off |
 | ---------- | ------------- | --- | ----|
 | S9-1       | Refclk D21    |     |  X  |
 | S9-2       | QSGMII/SGMII  |  X  |     |

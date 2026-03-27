@@ -144,7 +144,7 @@ Note: As U-Boot use the fip_uboot.bin from the atf directory.
 
 ## HowTo
 
-### DIP-Switch Settings
+### DIP Switch Settings
 
 BOOT\_MODE can be configured using DIP switch S1
 

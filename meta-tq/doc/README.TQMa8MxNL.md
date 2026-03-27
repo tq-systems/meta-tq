@@ -197,12 +197,12 @@ _Note:_
 
 ### BOOT\_MODE
 
-BOOT Mode \[3:0\] is mapped to the following DIP Switches:
+BOOT Mode \[3:0\] is mapped to the following DIP switches:
 
-* 3: DIP Switch BOOT\_MODE 3 (TQMa8MxML ADAP)
-* 2: DIP Switch BOOT\_MODE 2 (TQMa8MxML ADAP, inverted)
-* 1: DIP Switch S9:3 (MBa8Mx, inverted)
-* 0: DIP Switch S9:2 (MBa8Mx, inverted)
+* 3: DIP switch BOOT\_MODE 3 (TQMa8MxML ADAP)
+* 2: DIP switch BOOT\_MODE 2 (TQMa8MxML ADAP, inverted)
+* 1: DIP switch S9:3 (MBa8Mx, inverted)
+* 0: DIP switch S9:2 (MBa8Mx, inverted)
 
 #### Boot from Fuses
 

@@ -88,7 +88,7 @@
 
 ## HowTo
 
-### MBLS10xxA DIP-Switch Settings for Boot
+### MBLS10xxA DIP Switch Settings for Boot
 
 #### SD-Card
 
@@ -114,7 +114,7 @@
 #### Notes
 
 * SD-Card/eMMC:
-SD-Card and eMMC are mutually exclusive. DIP-Switch S5 controls SD-Card/eMMC
+SD-Card and eMMC are mutually exclusive. DIP switch S5 controls SD-Card/eMMC
 access. With S5-1 `ON` eMMC on TQMLS10xxA module is accesible. With S5-1 `OFF`
 SD-Card on MBLS10xxA is accessible.
 
@@ -226,15 +226,15 @@ see: [TQ Embedded Wiki for TQMLS10xxA](https://support.tq-group.com/en/layerscap
 | 5559 (13)     | PCIe.1 | PCIe.2 | PCIe.3     | SATA       |
 | 5577 (20)     | PCIe.1 | PCIe.2 | PCIe.3 x 2 | PCIe.3 x 2 |
 
-## DIP-Switch Settings
+## DIP Switch Settings
 
-The DIP-switches should match the used RCW, otherwise interfaces will not work,
+The DIP switches should match the used RCW, otherwise interfaces will not work,
 or will not start. See [Serdes Config](#serdes-configuration)
-Pay attention to the following DIP-Switches:
+Pay attention to the following DIP switches:
 
 ### TQMLS1043A
 
-| DIP-Switch | Function              | On         | Off     |
+| DIP Switch | Function              | On         | Off     |
 |------------|-----------------------|------------|---------|
 | S6-1       | -                     | -          | -       |
 | S6-2       | SD1 Lane B            | SGMII      | QSGMIIb |
@@ -256,7 +256,7 @@ Pay attention to the following DIP-Switches:
 
 ### TQMLS1046A and TQMLS1088A
 
-| DIP-Switch | Function              | On         | Off     |
+| DIP Switch | Function              | On         | Off     |
 |------------|-----------------------|------------|---------|
 | S6-1       | SD1 Lane A            | SGMII      | QSGMIIa |
 | S6-2       | SD1 Lane B            | SGMII      | QSGMIIb |
