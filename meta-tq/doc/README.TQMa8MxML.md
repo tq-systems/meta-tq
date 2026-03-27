@@ -134,7 +134,7 @@ _MBa8Mx HW Rev.030x only_
   `UBI_MAX_LEB_COUNT` on machine level.
 * MBa8Mx before REV.0300 is not supported.
 
-## Known Issues
+## Known Issues / Limitations
 
 * FlexSPI: the configured clock exceeds the limit given in datasheet
 

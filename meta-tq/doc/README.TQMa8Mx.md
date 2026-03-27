@@ -126,7 +126,7 @@ _MBa8x HW Rev.020x/30x only_
   * DSI to DP bridge
 * HDMI ARC is untested
 
-## Known Issues
+## Known Issues / Limitations
 
 * Linux: operating points for DDR controller missing in device tree.
   running at lower DDR frequencies does not work in this version of BSP.

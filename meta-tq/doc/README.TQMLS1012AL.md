@@ -78,7 +78,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 *Attention*: CPU supports only booting from QSPI NOR. When deleting bootloader
 recovery via JTAG is needed.
 
-## Known Issues
+## Known Issues / Limitations
 
 * U-Boot: USB HUB(X3): sometimes lock after second `usb reset` when using USB stick
   * seems to be hardware dependend

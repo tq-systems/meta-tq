@@ -68,7 +68,7 @@
 
 * CAN-FD (X24)
 
-## Known Issues
+## Known Issues / Limitations
 
 * TQMLS1088A: software `reset` or `reboot` always boots from QSPI when the flash
   contains a valid boot image.

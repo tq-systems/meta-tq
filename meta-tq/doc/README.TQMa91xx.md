@@ -119,7 +119,7 @@ Support matrix for `MBa91xxCA` REV.010x / `MBa93xxCA` REV.020x
 * The SPI UBI rootfs Volume has been renamed from `rootfs` to `root`
   to conform with distroboot settings (scarthgap.TQ.ARM.BSP.0007, u-boot 2024.04)
 
-## Known Issues
+## Known Issues / Limitations
 
 * NFS boot: The interface to be used for NFS boot (`netdev`) has inverted order, compared
   to u-boot and Linux. Device renaming in Linux happens after mounting rootfs.

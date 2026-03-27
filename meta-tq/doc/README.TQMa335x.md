@@ -68,7 +68,7 @@ This README contains some useful information for TQMa335x\[L\] on MBa335x
 
 See top level [README](../README.md) for configurations usable as MACHINE.
 
-## Known Issues
+## Known Issues / Limitations
 
 * TQMa335x[L] on MBa335x: sometimes after booting the ethernet phy shows
   up wrong addresses or can not be found. This needs a hardware fix on MBa335x.

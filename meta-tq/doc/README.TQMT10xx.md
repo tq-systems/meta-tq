@@ -38,7 +38,7 @@
 | LVDS                         |      x        |
 | PCIe                         |      x        |
 
-## Known Issues
+## Known Issues / Limitations
 
 * USB on Port X28 only works in Host-Mode.
 * Musl libc does not support the e5500 core in 64bit. It is possible

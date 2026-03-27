@@ -95,7 +95,7 @@ higher precision.
 The sensor is used for automatic core clock reduction and shutdown in the
 case of overheating.
 
-## Known Issues
+## Known Issues / Limitations
 
 * DisplayPort only works with some monitors and only in 1920x1080.
 * Buzzer does not work

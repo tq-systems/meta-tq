@@ -129,7 +129,7 @@ _MBa8x HW Rev.030x only_
 * USB: see [USB Howto](#usb)
 * MBa8Mx before REV.0300 is not supported.
 
-## Known Issues
+## Known Issues / Limitations
 
 * FlexSPI: the configured clock exceeds the limit given in datasheet
 

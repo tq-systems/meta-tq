@@ -127,7 +127,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   * PWM (missing in CPU DT)
 * HDMI in
 
-## Known Issues
+## Known Issues / Limitations
 
 * Default setting for `fdt_file` in u-boot does not match older linux kernel
   naming scheme. Current naming scheme is `<cpu>-<som>-<baseboard>[-feature].dtb`,

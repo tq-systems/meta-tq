@@ -110,7 +110,7 @@ details
 
 * SIM card (X15)
 
-## Known Issues
+## Known Issues / Limitations
 
 * SDHC:
   * On MBLX2160A REV.0100, the SD card only works for a few start-ups and is
