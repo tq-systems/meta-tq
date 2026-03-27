@@ -97,7 +97,7 @@ The upper lanes (E, F, G, H) of T104x are mapped to T1024 lanes (A, B, C, D).
 
 ## Ethernet/Serdes Port Assignment
 
-### TQMT1042/TQMT1022:
+### TQMT1042/TQMT1022
 
 For Serdes Config 0x86
 
@@ -130,7 +130,7 @@ For Serdes Config 0x86
 | S3-3       | Serdes Lane G |  X  |     |
 | S2-4       | Refclk Serdes |     |  X  |
 
-### TQMT1024:
+### TQMT1024
 For Serdes Config 0x6B
 
 #### Ethernet
@@ -158,7 +158,7 @@ Important Dip Switch settings for this configuration
 | S3-4       | Serdes Lane G |  X  |     |
 | S2-4       | Refclk Serdes |     |  X  |
 
-### TQMT1024:
+### TQMT1024
 For Serdes Config 0x95
 
 #### Ethernet
@@ -186,7 +186,7 @@ Important Dip Switch settings for this configuration
 | S3-4       | Serdes Lane G |  X  |     |
 | S2-4       | Refclk Serdes |  X  |     |
 
-### TQMT1040:
+### TQMT1040
 For Serdes Config 0x66
 
 #### Ethernet

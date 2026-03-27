@@ -111,7 +111,7 @@
 | ON     |   | x | x |   |
 | OFF    |   |   |   | x |
 
-#### Notes:
+#### Notes
 
 * SD-Card/eMMC:
 SD-Card and eMMC are mutually exclusive. DIP-Switch S5 controls SD-Card/eMMC

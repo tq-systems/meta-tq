@@ -13,7 +13,7 @@
 * TQMa6ULLxL
 * TQMa7x
 
-### U-Boot:
+### U-Boot
 
 #### u-boot-tq 2023.04
 
@@ -25,7 +25,7 @@ before v5.9. on TQMa6x SOM hardware revisions before 040x. Due to changes in dev
 tree node naming DSR settings can not be applied to eMMC. This may lead to
 lifetime degradation.
 
-### Linux:
+### Linux
 
 #### Kernel 6.6-rt (linux-stable-rt)
 
