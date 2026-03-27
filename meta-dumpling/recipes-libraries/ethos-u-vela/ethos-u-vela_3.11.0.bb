@@ -21,6 +21,6 @@ do_compile:prepend() {
     export https_proxy=${https_proxy}
 }
 
-RDEPENDS:${PN} += "python3-flatbuffers python3-numpy python3-lxml python3-pkg-resources"
+RDEPENDS:${PN} += "python3-flatbuffers python3-numpy python3-lxml"
 
 COMPATIBLE_MACHINE = "(mx93-nxp-bsp)"
