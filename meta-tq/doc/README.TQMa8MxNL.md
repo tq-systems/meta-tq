@@ -204,7 +204,9 @@ BOOT Mode \[3:0\] is mapped to the following DIP Switches:
 * 1: DIP Switch S9:3 (MBa8Mx, inverted)
 * 0: DIP Switch S9:2 (MBa8Mx, inverted)
 
-#### Boot from Fuses (needs boot fuses to be set)
+#### Boot from Fuses
+
+To use this boot mode, the boot fuses need to be set.
 
 BOOT\_MODE: 0000
 
