@@ -146,7 +146,7 @@ _MBa8Mx HW Rev.030x only_
   running at lower DDR frequencies does not work in this version of BSP.
 * Default setting for `fdt_file` in u-boot from older BSP version does
   not match kernel naming scheme since linux 5.10. Use U-Boot from this
-  BSP release or see [Build Artefacts](#artefacts) for complete
+  BSP release or see [Build Artefacts](#build-artefacts) for complete
   list of supported Device Tree files.
 * USB hub disconnects after suspend
 * LVDS shows wrong colors on older Tianma display kit (HW issue on older
@@ -159,7 +159,7 @@ _MBa8Mx HW Rev.030x only_
   * IMX327: bayer support with 12 Bit does not work at the moment, only 10 Bit with
     1280x720 is tested with gstreamer
 
-## Artefacts
+## Build Artefacts
 
 Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)

@@ -44,7 +44,7 @@
 * Musl libc does not support the e5500 core in 64bit. It is possible
   using musl libc with a powerpc-nf (32bit) toolchain.
 
-## Artefacts
+## Build Artefacts
 
 Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
@@ -229,7 +229,7 @@ Note that the output of the LVDS interface is in Jeida-24 mode.
 
 ### SD Card / eMMC
 
-To program a complete system image, write the [WIC image](#Artefacts) to
+To program a complete system image, write the [WIC image](#build-artefacts) to
 SD card / eMMC at offset 0.
 
 ### SPI-NOR

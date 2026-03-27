@@ -130,7 +130,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * Default setting for `fdt_file` in u-boot does not match older linux kernel
   naming scheme. Current naming scheme is `<cpu>-<som>-<baseboard>[-feature].dtb`,
   old scheme was `<cpu>-<baseboard>[-feature].dtb`.
-  See [Build Artefacts](#artefacts) for complete list of supported Device Tree files
+  See [Build Artefacts](#build-artefacts) for complete list of supported Device Tree files
 * USB
   * U-Boot: USB 2.0 dual role port is limited to device mode for UUU / MFG use case
   * U-Boot: USB 3.0 port does not initialize USB 2.0 subsystem after USB reset
@@ -145,7 +145,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
   `UBI_MAX_LEB_COUNT` on machine level.
 
-## Artefacts
+## Build Artefacts
 
 Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
@@ -270,7 +270,7 @@ See [here](./README.CAN.md) for details about configurating of CAN interfaces.
 ### Cortex M4
 
 Demos are compiled to use Cortex M4 UART with 115200 8N1 on Pins SCU\_GPIO\_00 and SCU\_GPIO\_01
-For demos available in the BSP and the device tree to be used see [artefacts section](#artefacts).
+For demos available in the BSP and the device tree to be used see [artefacts section](#build-artefacts).
 
 Detailed documentation for CortexM support can be found [here](./README.CortexM-on-IMX8X.md).
 

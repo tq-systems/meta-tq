@@ -87,7 +87,7 @@ yocto scarthgap. For Linux 6.1 support use yocto kirkstone.
 * Environment of U-Boot v2023.04 was reworked to use variable names that conforms with
   distroboot contract. The default environment of older U-Boot versions are incompatible.
 
-## Artefacts
+## Build Artefacts
 
 Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)

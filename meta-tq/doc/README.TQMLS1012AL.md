@@ -86,7 +86,7 @@ recovery via JTAG is needed.
   * `tq-image-small-debug` image from `spaetzle` distribution is too large
 * Linux: Wake up support using GPIO button not working
 
-## Artefacts
+## Build Artefacts
 
 Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
@@ -119,7 +119,7 @@ Make sure the power supply is on during update, see [important notes](#important
 for recovery.
 
 U-Boot envinronment provides scripts to help updating components needed to boot
-the board. For filenames see [artefacts section](#artefacts).
+the board. For filenames see [artefacts section](#build-artefacts).
 
 ### Update with Static IP
 

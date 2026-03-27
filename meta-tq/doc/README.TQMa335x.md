@@ -91,7 +91,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
     Workaround: Repeat command
 * Suspend/Resume is currently not supported
 
-## Artefacts
+## Build Artefacts
 
 Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
@@ -169,12 +169,12 @@ Example for Linux:
 ### Bootable eMMC
 
 To create a bootable eMMC with complete system image use the generated
-[wic image](#artefacts):
+[wic image](#build-artefacts):
 
 write *.wic image to eMMC (offset 0)
 
 To create a bootable eMMC with minimum boot image use the generated
-[minimal wic image](#artefacts):
+[minimal wic image](#build-artefacts):
 
 write *.wic.bootonly to eMMC (offset 0)
 
@@ -196,7 +196,7 @@ mmc write ${loadaddr} 0 ${bsz}
 ### Bootable SPI NOR
 
 To create a bootable SPI NOR with boot loader only use the generated
-[bootloader images](#artefacts). Example for U-Boot, booting from SD card:
+[bootloader images](#build-artefacts). Example for U-Boot, booting from SD card:
 
 ```
 sf probe
@@ -212,7 +212,7 @@ sf update ${loadaddr} 0x20000 ${filesize}
 
 For ease of development a set of variables and scripts are in default env.
 Depending on your configuration some variable values needs to bet changend
-to the right values. For files to use see the [artefacts](#artefacts) section.
+to the right values. For files to use see the [artefacts](#build-artefacts) section.
 
 _Note_: Update and start scripts expect a partitioned / initialized SD card or
 eMMC.

@@ -108,7 +108,7 @@ case of overheating.
 * Linux: currently no out of the box support for Linux kernel on SPI-NOR
   * `tq-image-small-debug` image from `spaetzle` distribution is too large
 
-## Artefacts
+## Build Artefacts
 
 Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)

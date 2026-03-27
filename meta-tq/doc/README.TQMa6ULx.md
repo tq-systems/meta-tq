@@ -114,7 +114,7 @@ _Note:_ Mini PCIe connector only supports USB.
 * MBa6ULx: USB devices at miniPCIe connector (X22) are not detected after POR. After warm reset
   devices enumerate.
 
-## Artefacts
+## Build Artefacts
 
 Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)

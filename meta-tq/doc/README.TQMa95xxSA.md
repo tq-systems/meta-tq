@@ -123,7 +123,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * Boot from SPI-NOR is currently unsupported (needs redesign)
 * Currently no separate boot image for serial download
 
-## Artefacts
+## Build Artefacts
 
 Artefacts can be found at the usual locations for bitbake:
 `${DEPLOY_DIR_IMAGE}` (default: `${DEPLOY_DIR}/images/${MACHINE}`)
