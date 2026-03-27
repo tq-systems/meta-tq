@@ -217,7 +217,9 @@ _Note:_
 
 ### BOOT\_MODE
 
-#### Boot from Fuses (needs boot fuses to be set)
+#### Boot from Fuses
+
+To use this boot mode, the boot fuses need to be set.
 
 BOOT\_MODE: 00b
 
@@ -237,7 +239,9 @@ BOOT\_MODE: 01b
 | ON         |   |   | X |   |
 | OFF        | - | X |   | - |
 
-#### Internal Boot (no boot fuses set, use boot config pins)
+#### Internal Boot
+
+If no boot fuses are set, use the internal boot mode and configure the boot config pins.
 
 BOOT\_MODE: 10b
 
