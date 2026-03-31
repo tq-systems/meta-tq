@@ -1,21 +1,21 @@
-# Copyright 2020-2021 NXP
-DESCRIPTION = "TensorFlow Lite VX Delegate"
-LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=7d6260e4f3f6f85de05af9c8f87e6fb5"
+# Copyright 2020-2025 NXP
+DESCRIPTION = "TensorFlow Lite Ethos-u Delegate"
+LICENSE = "Apache-2.0"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
-DEPENDS = "tensorflow-lite tim-vx"
+DEPENDS = "tensorflow-lite ethos-u-driver-stack tensorflow-lite-host-tools-native"
 
 require tensorflow-lite-${PV}.inc
 
-TENSORFLOW_LITE_VX_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-vx-delegate-imx.git;protocol=https" 
-SRCBRANCH_vx = "lf-6.6.23_2.0.0"
-SRCREV_vx = "9ae63a7d915f339ba5504710211e4e31a0dfd0e2"
+TENSORFLOW_LITE_ETHOSU_DELEGATE_SRC ?= "git://github.com/nxp-imx/tflite-ethosu-delegate-imx.git;protocol=https" 
+SRCBRANCH_ethosu = "lf-6.12.34_2.1.0"
+SRCREV_ethosu = "b6e7baa28be57196e14535e8a8c94a40c8f959eb"
 
-SRCREV_FORMAT = "vx_tf"
+SRCREV_FORMAT = "ethosu_tf"
 
-SRC_URI = "${TENSORFLOW_LITE_VX_DELEGATE_SRC};branch=${SRCBRANCH_vx};name=vx \
+SRC_URI = "${TENSORFLOW_LITE_ETHOSU_DELEGATE_SRC};branch=${SRCBRANCH_ethosu};name=ethosu \
            ${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH_tf};name=tf;destsuffix=tfgit \
-           file://0001-Findtim-vx.cmake-Fix-LIBDIR-for-multilib-environment.patch \
+           file://0001-ethosu_drv.h-Fix-gcc15-build-issues.patch \
 "
 
 inherit python3native cmake
@@ -23,7 +23,7 @@ inherit python3native cmake
 EXTRA_OECMAKE = "-DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR}"
 EXTRA_OECMAKE += " \
      -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
-     -DTIM_VX_INSTALL=${STAGING_DIR_HOST}/usr \
+     -DTFLITE_HOST_TOOLS_DIR=${STAGING_BINDIR_NATIVE} \
      -DFETCHCONTENT_SOURCE_DIR_TENSORFLOW=${UNPACKDIR}/tfgit \
      -DTFLITE_LIB_LOC=${STAGING_DIR_HOST}${libdir}/libtensorflow-lite.so \
      ${S} \
@@ -50,14 +50,6 @@ do_install() {
     do
         cp --no-preserve=ownership -d $lib ${D}${libdir}
     done
-
-    # install header files
-    install -d ${D}${includedir}/tensorflow-lite-vx-delegate
-    cd ${S}
-    cp --parents \
-        $(find . -name "*.h*") \
-        ${D}${includedir}/tensorflow-lite-vx-delegate
-
 }
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
@@ -66,6 +58,4 @@ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
 
-COMPATIBLE_MACHINE          = "(^$)"
-COMPATIBLE_MACHINE:imxgpu3d = "(mx8-nxp-bsp)"
-COMPATIBLE_MACHINE:mx8mm-nxp-bsp    = "(^$)"
+COMPATIBLE_MACHINE = "(mx93-nxp-bsp)"

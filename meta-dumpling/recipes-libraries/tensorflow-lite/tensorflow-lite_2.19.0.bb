@@ -1,4 +1,4 @@
-# Copyright 2020-2021 NXP
+# Copyright 2020-2025 NXP
 DESCRIPTION = "TensorFlow Lite C++ Library"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=4158a261ca7f2525513e31ba9c50ae98"
@@ -11,13 +11,16 @@ require tensorflow-lite-${PV}.inc
 SRC_URI = "${TENSORFLOW_LITE_SRC};branch=${SRCBRANCH_tf};name=tf"
 
 SRC_URI += "https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_1.0_224_quant.tgz;name=model-mobv1"
-SRC_URI[model-mobv1.md5sum] = "36af340c00e60291931cb30ce32d4e86"
 SRC_URI[model-mobv1.sha256sum] = "d32432d28673a936b2d6281ab0600c71cf7226dfe4cdcef3012555f691744166"
 
 inherit python3native cmake
 
-TFLITE_ENABLE_GPU = "off"
-TFLITE_ENABLE_GPU:mx95-nxp-bsp = "on"
+PACKAGECONFIG ??= "python-example ${PACKAGECONFIG_GPU_DELEGATE}"
+PACKAGECONFIG_GPU_DELEGATE              = ""
+PACKAGECONFIG_GPU_DELEGATE:mx95-nxp-bsp = "gpu-delegate"
+
+PACKAGECONFIG[gpu-delegate] = "-DTFLITE_ENABLE_GPU=on,-DTFLITE_ENABLE_GPU=off"
+PACKAGECONFIG[python-example] = ",,,python3-pillow"
 
 EXTRA_OECMAKE = " \
     -DCMAKE_SYSROOT=${PKG_CONFIG_SYSROOT_DIR} \
@@ -31,12 +34,12 @@ EXTRA_OECMAKE = " \
     -DTFLITE_ENABLE_XNNPACK=on \
     -DTFLITE_PYTHON_WRAPPER_BUILD_CMAKE2=on \
     -DTFLITE_ENABLE_EXTERNAL_DELEGATE=on \
-    -DTFLITE_ENABLE_GPU=${TFLITE_ENABLE_GPU} \
     ${S}/tensorflow/lite/ \
 "
 EXTRA_OECMAKE_BUILD = "benchmark_model label_image"
 
 CXXFLAGS += "-fPIC"
+
 
 do_configure[network] = "1"
 do_configure:prepend() {
@@ -72,6 +75,12 @@ do_install() {
         $(find . -name "*.h*") \
         ${D}${includedir}/tensorflow/lite
 
+    install -d ${D}${includedir}/tensorflow/compiler/mlir/lite
+    cd ${S}/tensorflow/compiler/mlir/lite
+    cp --parents \
+        $(find . -name "*.h*") \
+        ${D}${includedir}/tensorflow/compiler/mlir/lite
+
     # install version.h from core
     install -d ${D}${includedir}/tensorflow/core/public
     cp ${S}/tensorflow/core/public/version.h ${D}${includedir}/tensorflow/core/public
@@ -98,7 +107,9 @@ do_install() {
 
 
     # Install python example
-    cp ${S}/tensorflow/lite/examples/python/label_image.py ${D}${bindir}/${PN}-${PV}/examples
+    if ${@bb.utils.contains('PACKAGECONFIG', 'python-example', 'true', 'false', d)}; then
+        cp ${S}/tensorflow/lite/examples/python/label_image.py ${D}${bindir}/${PN}-${PV}/examples
+    fi
 
     # Install mobilenet tflite file
     cp ${UNPACKDIR}/mobilenet_*.tflite ${D}${bindir}/${PN}-${PV}/examples
@@ -108,6 +119,9 @@ do_install() {
     ${STAGING_BINDIR_NATIVE}/pip3 install --disable-pip-version-check -vvv --platform linux_${TARGET_ARCH} \
         -t ${D}/${PYTHON_SITEPACKAGES_DIR} --no-cache-dir --no-deps \
         ${B}/tflite_pip/dist/tflite_runtime-*.whl
+
+    # Fixup ownership of files
+    chown -R root:root ${D}
 }
 
 PACKAGE_ARCH = "${MACHINE_SOCARCH}"
@@ -115,7 +129,12 @@ PACKAGE_ARCH = "${MACHINE_SOCARCH}"
 RDEPENDS:${PN}   = " \
     python3 \
     python3-numpy \
+    ${RDEPENDS_OPENCL} \
 "
+RDEPENDS_OPENCL               = "virtual-opencl-icd"
+RDEPENDS_OPENCL:mx8mm-nxp-bsp = ""
+
+INSANE_SKIP:${PN} += "dev-deps"
 
 # TensorFlow and TensorFlow Lite both exports few files, suppress the error
 # SSTATE_ALLOW_OVERLAP_FILES = "${D}${includedir}"
@@ -126,6 +145,7 @@ INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INSANE_SKIP:${PN} += " \
     already-stripped \
     staticdev \
+    buildpaths \
 "
 
 FILES:${PN} += "${libdir}/python*"
