@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## scarthgap.TQ.ARM.BSP.0008 (not released yet)
+
 ### Added
 
 * packagegroup-testutils: add kernel-selftest

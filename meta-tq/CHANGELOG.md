@@ -9,8 +9,12 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## scarthgap.TQ.ARM.BSP.0008 (not released yet)
+
 ### Added
 
+* linux-tq-6.12:
+  * TQMa93xx: support EDAC for inline ECC
 * imx-system-manager-tq:
   * prepare TQMa94xxLA / MBa94xxCA
 * imx-oei-tq:
@@ -20,6 +24,8 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* u-boot-imx-tq-2024.04:
+  * TQMa8MPxS: add support for hardware revision 030x
 * rcw: update TQMLS1028A PCIe configuration
   * The default RCW was renamed from "default" to "8_5_11_14", providing SGMII,
     QSGMII, PCIe Gen2 and SATA
