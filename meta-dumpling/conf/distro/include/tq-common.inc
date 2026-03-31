@@ -39,6 +39,9 @@ QA_LOG = "1"
 # generate 'etc/buildinfo' in image and in 'DEPLOY_DIR_IMAGE' folder
 INHERIT += "tq-buildinfo"
 
+# disable ptest feature
+DISTRO_FEATURES_OPTED_OUT += "ptest"
+
 DISTRO_EXTRA_RDEPENDS += "os-release u-boot-env-tq"
 DISTRO_EXTRA_RRECOMMENDS += " \
     zstd \
