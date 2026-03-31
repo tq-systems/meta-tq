@@ -1,6 +1,6 @@
 # Common definitions for all TQ-Systems GmbH TQMa95xxLA / TQMa95xxSA modules
 
-MACHINEOVERRIDES =. "imx:mx9:mx95:tqma95xx:"
+MACHINEOVERRIDES =. "imx:nxp-ahab:mx9:mx95:tqma95xx:"
 
 # optionally source the machine specific features for multimedia etc. from
 # meta-freescale
