@@ -61,7 +61,7 @@ do_compile:append() {
                     fi
                     case "${plain_type}" in
                         *_sd)
-                            cd ${B}/$config
+                            cd ${B}/${config}-${type}
                                 spl_file="u-boot-spl-$(basename ${RCW_FILE}).pbl"
                                 # Must match u-boot's CONFIG_SPL_PAD_TO
                                 spl_pad_to=0x1c000
@@ -72,7 +72,7 @@ do_compile:append() {
                                 cat u-boot.bin >> u-boot-${type}.${UBOOT_SUFFIX}
                             ;;
                         *_qspi)
-                            cd ${B}/$config
+                            cd ${B}/${config}-${type}
                                 # Must match u-boot's CONFIG_SPL_PAD_TO
                                 spl_pad_to=0x10000
 
