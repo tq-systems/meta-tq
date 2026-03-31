@@ -1,6 +1,5 @@
-#
-# Copyright (C) 2017-2023 NXP
-# Copyright (C) 2022-2024 TQ-Systems GmbH
+# Copyright (C) 2017-2025 NXP
+# Copyright (C) 2022-2026 TQ-Systems GmbH
 
 DESCRIPTION = "i.MX ARM Trusted Firmware"
 SECTION = "BSP"
@@ -11,18 +10,18 @@ PROVIDES += "imx-atf"
 
 PV .= "+git"
 
-ATF_BRANCH = "TQM-lf_v2.10"
+SRCBRANCH = "TQM-lf_v2.12"
 ATF_SRC = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL}"
 
-SRC_URI = "${ATF_SRC};branch=${ATF_BRANCH}"
-SRCREV = "5ce451b197ff8646275f00970b16270598a500a1"
+SRC_URI = "${ATF_SRC};branch=${SRCBRANCH}"
+SRCREV = "68258fd2abdcd7e5bfc2204391f37574461b19c2"
 
 inherit deploy
 
 ATF_PLATFORM ??= "INVALID"
 
 # We return INVALID here since this is highly machine dependend.
-# Currently only i.MX8[M,MMini,MNano,MPlus] and i.MX93 have support to override
+# Currently only i.MX8[M,MMini,MNano,MPlus] and i.MX9[13] have support to override
 # the debug / boot UART base address.
 ATF_IMX_BOOT_UART_BASE ??= "INVALID"
 
