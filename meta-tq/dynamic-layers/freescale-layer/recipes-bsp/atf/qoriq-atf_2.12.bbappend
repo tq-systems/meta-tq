@@ -1,6 +1,6 @@
 ATF_SRC = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL}"
-ATF_BRANCH = "TQM-lf_v2.10"
-SRCREV = "7adcc63c6a947ca8109d5294ccae8aab8586cfe5"
+ATF_BRANCH = "TQM-lf_v2.12"
+SRCREV = "68258fd2abdcd7e5bfc2204391f37574461b19c2"
 
 ATF_RCW_VARIANTS ??= ""
 DDR_ECC_EN ?= "yes"

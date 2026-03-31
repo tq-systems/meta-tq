@@ -2,11 +2,11 @@ require qoriq-atf-${PV}.inc
 
 inherit deploy
 
-DEPENDS += "u-boot-mkimage-native u-boot openssl openssl-native mbedtls rcw qoriq-cst-native bc-native"
+DEPENDS += "u-boot-mkimage-native u-boot openssl openssl-native rcw qoriq-cst-native bc-native"
 do_compile[depends] += "u-boot:do_deploy rcw:do_deploy uefi:do_deploy"
 
-SRC_URI += "git://github.com/ARMmbed/mbedtls;protocol=https;nobranch=1;destsuffix=git/mbedtls;name=mbedtls \
-    git://github.com/nxp/ddr-phy-binary;protocol=https;nobranch=1;destsuffix=git/ddr-phy-binary;name=ddr \
+SRC_URI += "git://github.com/ARMmbed/mbedtls;protocol=https;nobranch=1;destsuffix=${S}/mbedtls;name=mbedtls \
+    git://github.com/nxp/ddr-phy-binary;protocol=https;nobranch=1;destsuffix=${S}/ddr-phy-binary;name=ddr \
 "
 SRCREV_mbedtls = "0795874acdf887290b2571b193cafd3c4041a708"
 SRCREV_ddr = "fbc036b88acb6c06ffed02c898cbae9856ec75ba"

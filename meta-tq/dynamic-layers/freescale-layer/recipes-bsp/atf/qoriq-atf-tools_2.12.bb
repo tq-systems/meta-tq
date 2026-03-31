@@ -10,3 +10,4 @@ do_install () {
 }
 
 BBCLASSEXTEND = "native"
+
