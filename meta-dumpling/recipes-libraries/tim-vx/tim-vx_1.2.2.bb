@@ -7,11 +7,11 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a223f028c6a73fd2bd9223b79a38dcf6"
 
 DEPENDS = "imx-gpu-viv"
 
-SRC_URI = "${TIM_VX_SRC};branch=${SRCBRANCH}"
+SRC_URI = "${TIM_VX_SRC};branch=${SRCBRANCH} \
+           file://0001-permute_vector.h-Fix-GCC-15-build-issue.patch"
 TIM_VX_SRC ?= "git://github.com/nxp-imx/tim-vx-imx.git;protocol=https"
-SRCBRANCH = "lf-6.6.23_2.0.0"
-SRCREV = "37be6a7229db9a8261f873f68c407323c072d9c2" 
-
+SRCBRANCH = "lf-6.12.34_2.1.0"
+SRCREV = "81d8d14cef8a8fe6987b2ae27eddd6c87bbaff81"
 
 inherit cmake
 
@@ -26,6 +26,6 @@ EXTRA_OECMAKE =  " \
 SOLIBS = ".so"
 FILES_SOLIBSDEV = ""
 
-COMPATIBLE_MACHINE          = "(^$)"
-COMPATIBLE_MACHINE:imxgpu3d = "(mx8-nxp-bsp)"
-COMPATIBLE_MACHINE:mx8mm-nxp-bsp    = "(^$)"
+COMPATIBLE_MACHINE               = "(^$)"
+COMPATIBLE_MACHINE:mx8-nxp-bsp   = "(imxviv)"
+COMPATIBLE_MACHINE:mx8mm-nxp-bsp = "(^$)"
