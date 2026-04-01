@@ -231,7 +231,7 @@ on your hardware setup.
 
 ### High Assurance Boot (Secure Boot)
 
-<!-- TODO -->
+See [i.MX High Assurance Boot](README.Verified-Boot.md).
 
 ### Inline ECC
 
