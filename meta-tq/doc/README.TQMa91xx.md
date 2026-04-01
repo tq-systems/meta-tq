@@ -121,10 +121,6 @@ Support matrix for `MBa91xxCA` REV.010x / `MBa93xxCA` REV.020x
 
 ## Known Issues
 
-* 512 MiB: booting Linux with default environment not possible
-
-  The addresses used in default environment and in BSP FIT image generation
-  expect variants with 1 GiB or more RAM. Can be fixed manually.
 * NFS boot: The interface to be used for NFS boot (`netdev`) has inverted order, compared
   to u-boot and Linux. Device renaming in Linux happens after mounting rootfs.
 * U-Boot:
