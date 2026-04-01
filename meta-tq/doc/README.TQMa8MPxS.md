@@ -167,8 +167,11 @@ Artefacts can be found at the usual locations for bitbake:
 | device tree name                                  | description                                        |
 | ------------------------------------------------- | -------------------------------------------------- |
 | imx8mp-tqma8mpqs-mb-smarc-2.dtb                   | (default)                                          |
+| imx8mp-tqma8mpqs-mb-smarc-2-rev0100.dtb           | Prototypes (HW rev.0100)                           |
 | imx8mp-tqma8mpqs-mb-smarc-2-lvds0-tm070jvhg33.dtb | LVDS display TIANMA TM070JVHG33 on LVDS0, X46, X48 |
 | imx8mp-tqma8mpqs-mb-smarc-2-lvds1-tm070jvhg33.dtb | LVDS display TIANMA TM070JVHG33 on LVDS1, X46, X48 |
+| imx8mp-tqma8mpqs-mb-smarc-2-lvds-g133han01.dtb    | LVDS display AUO G133HAN01 on LVDS0/1, X46, X48    |
+| imx8mp-tqma8mpqs-mb-smarc-2-lvds-g185han01.dtb    | LVDS display AUO G185HAN01 on LVDS0/1, X46, X48    |
 
 | Image name                                        | description                                   |
 | ------------------------------------------------- | --------------------------------------------- |
