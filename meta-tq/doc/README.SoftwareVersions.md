@@ -261,6 +261,19 @@ Version information:
 * branched from lf_v2024.04  / integrates all commits up to
   6c4545203d123c246c5d7995f2893959506d28e0 / tag lf-6.6.52-2.2.0)
 
+#### u-boot-imx-tq 2025.04
+
+Supported SOM families
+
+* TQMa95xxLA
+* TQMa95xxSA
+
+Version information:
+
+* U-Boot based on v2025.04 and NXP vendor BSP
+  [`uboot-imx`](https://github.com/nxp-imx/uboot-imx)
+* branched from lf_v2025.04
+
 ### Linux
 
 #### Kernel based on 6.6 (linux-imx-fslc)
@@ -281,6 +294,19 @@ Version information:
 * based on linux-imx-fslc (https://github.com/Freescale/linux-fslc.git)
 * branched from `6.6-2.2.x-imx`
   (see `LINUX_VERSION` in `linux-imx-tq_6.6.bb` for exact release)
+
+#### Kernel based on 6.12 (linux-imx-fslc)
+
+Supported SOM families
+
+* TQMa95xxLA
+* TQMa95xxSA
+
+Version information:
+
+* based on linux-imx-fslc (https://github.com/Freescale/linux-fslc.git)
+* branched from `6.12-2.0.x-imx`
+  (see `LINUX_VERSION` in `linux-imx-tq_6.12.bb` for exact release)
 
 #### Kernel 6.12 stable
 
