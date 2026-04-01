@@ -14,6 +14,7 @@ Releases are named with the following scheme:
 ### Added
 
 * linux-tq-6.12:
+  * TQMa8MPxS: support for hardware REV.0300
   * TQMa93xx: support EDAC for inline ECC
 * imx-system-manager-tq:
   * prepare TQMa94xxLA / MBa94xxCA
@@ -84,11 +85,18 @@ Releases are named with the following scheme:
   * update to 6.6.129
 * linux-rt-tq-6.6-rt: update to v6.6.129-rt70
 * linux-tq-6.12:
+  * TQMa8MPxS: enable Eqos / TSN multiple queue support
   * enable CONFIG_PTP_1588_CLOCK
   * update to v6.12.76
 
 ### Fixed
 
+* linux-tq-6.12:
+  * TQMa8MPxS: correct GPIO for RTC interrupt
+  * TQMa8MPxS: fix ethernet phy IRQ
+  * TQMa8MPxS: correct SD-Card supply
+
+    When reinserting the card under Linux card detect was not functional
 * linux-ti-tq-6.12:
   * TQMa62xx/TQMa67xx: fix dual-channel LVDS example Device Tree
 * linux-imx-tq-6.12:
