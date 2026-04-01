@@ -162,7 +162,7 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
     The USB controller is configured as device only via device tree to support
     serial download use case.
   * boot from USB using `uuu` config displays misleading pinctrl / iomux warning.  
-    The UDC gadget driver warns not only for faild pinmux but also when no pinmux group
+    The UDC gadget driver warns not only for failed pinmux but also when no pinmux group
     is assigned in device tree.
 * eth1 does not work after suspend, needs `ip link set down/up dev eth1` to be functional
 * When using `i2c probe` command in U-Boot all valid addresses respond instead of addresses
