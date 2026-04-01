@@ -14,7 +14,8 @@ This README contains some useful information for TQMa93xxCA and TQMa93xxLA
 * TQMa93xxLA REV.010x on MBa93xxLA-MINI REV.020x (1 / 1.5 / 2 GiB RAM)
 
 __Note__: Depending on the SoM revision different CPU mask variants may be assembled.
-CPU mask revisions 1.0 and older are protoypes and have additional erratas.
+CPU mask revisions 1.0 (bitbake variable `IMX_SOC_REV = "A0"`) and older are protoypes,
+have additional erratas and are not supported.
 
 ## Version information for software components
 
@@ -147,6 +148,7 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
   on how to use frequency scaling
 * Ethernet device order is defined by DT aliases. Linux and bootloader DT need to match
 * CPU mask 1.0 and older is not longer supported. No up to date firmare available from NXP.
+  Variants with old mask will not boot.
 * The SPI UBI rootfs Volume has been renamed from `rootfs` to `root`
   to conform with distroboot settings (scarthgap.TQ.ARM.BSP.0007, u-boot 2024.04)
 
@@ -442,18 +444,6 @@ cat /sys/devices/system/edac/mc/mc0/ue_count
 ### Access U-Boot environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
-
-### Chip revision A0/1.0
-
-Early release samples of TQMa93xx use i.MX93 chip revision 1.0.
-[AN13997 Migration Guide from i.MX 93 A0 to A1](https://www.nxp.com/webapp/Download?colCode=AN13997)
-lists differences between A0 to A1 parts. An alternative description is "Sillicon Rev" 1.0 and 2.0 as mentioned in Figure 1 "Part number nomenclature - i.MX93" in Datasheet Rev. 3 12/1023.
-
-A0 and A1 need a different sentinel firmware files, defaulting for A1.
-In order to set the older firmware, add the following line to `conf/local.conf`:
-```
-IMX_SOC_REV = "A0"
-```
 
 ### PREEMPT-RT / Realtime support
 
