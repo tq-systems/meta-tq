@@ -202,7 +202,7 @@ See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RT
 ### Display Support (MBa91xxCA)
 
 Each Display can be used on its own by using the corresponding device tree.
-To allow reusage, the support for each display is separated in a dtsi fragment.
+To allow reusage, the support for each display is separated in a dtso overlay.
 
 
 | Interface | Device tree                                   | Type        ----   |
