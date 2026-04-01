@@ -74,6 +74,7 @@ is _mandatory_ - see [table](#supported-machines):
 * AM355x
 * AM62xx
 * AM64xx
+* AM67xx
 
 **Note:** If using the `meta-ti-bsp` layer from `meta-ti`, the `meta-arm` and `meta-arm-toolchain` layers
 are needed too, since `meta-ti-bsp` depends on them.
