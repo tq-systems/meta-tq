@@ -27,7 +27,7 @@ lifetime degradation.
 
 ### Linux
 
-#### Kernel 6.6-rt (linux-stable-rt)
+#### Kernel 6.6-rt (stable-rt)
 
 * based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
 * defconfig changes and patches for TQ-Systems starter kits and build time optimisation
@@ -35,7 +35,7 @@ lifetime degradation.
 
 For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 
-#### Kernel 6.6 (linux-stable)
+#### Kernel 6.6 (stable)
 
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git)
 * defconfig changes and patches for TQ-Systems starter kits and build time optimisation
