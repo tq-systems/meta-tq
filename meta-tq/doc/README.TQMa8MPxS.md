@@ -6,7 +6,8 @@ This README contains some useful information for TQMa8MPxS on MB-SMARC-2
 
 ## Variants
 
-* TQMa8MPQS REV.010x on MB-SMARC-2
+* TQMa8MPQS REV.030x on MB-SMARC-2
+* TQMa8MPQS REV.010x on MB-SMARC-2 (Prototypes)
 
 ## Version information for software components
 
@@ -20,7 +21,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ### U-Boot
 
-| Feature                                   |  REV.010x   |
+| Feature                                   |             |
 | :---------------------------------------- | :---------: |
 | RAM configs                               | 1,2,4,8 GiB |
 | CPU variants                              |  i.MX8MPQ   |
@@ -116,32 +117,30 @@ _Only mainline kernel supported_
 
 * I²C interface of PCIe Clock generator not tested
 * HDMI Audio
-* Sleep modes
+* Suspend / Resume (currently not functional with mainline kernel)
 
 ## Important Notes
 
 * The SPI UBI rootfs Volume has been renamed from `rootfs` to `root`
   to conform with distroboot settings (scarthgap.TQ.ARM.BSP.0007, u-boot 2024.04)
+* Hardware revision 0x0100 (prototypes) can be used with a slighty modified
+  devicetree. The overlays can be applied as well. For display support with
+  Distroboot change the menu items in the machine configuration file.
 
 ## Known Issues / Limitations
 
-* SD-Card: CD# (card detect) does not work in Linux
 * Ethernet
   * Possible communication error to PHY attached to FEC, reboot required to fix
   * ETH1 looses manual assigned IP after suspend/resume. Default systemd network
     configuration uses DHCP with fallback. Has to be adjusted if needed.
 * USB Host
   * USB Superspeed U3 powersave mode is broken
-  * Enumeration of USB devices may fail with different error conditions.
-
-    This is caused by erroneous overcurrent detection. As a result this sometimes
-    triggers CPU reset in U-Boot caused by exceptions in USB stack.
-* USB 2.0 DRD (X4):
+  * Some USB devices are not detected (overcurrent detection on MB-SMARC-2)
+* USB 2.0 DRD (X4 on MB-SMARC-2):
   * Linux: no detection of USB devices in host mode (hardware limitation on SoM)
-  * U-Boot: limited to peripheral in (dual role not supported by upstream DWC3 driver)
-* USB 3.0 micro (X3)
+  * U-Boot: limited to peripheral (dual role not supported by upstream DWC3 driver)
+* USB 3.0 micro (X3 on MB-SMARC-2)
   * peripheral mode not supported (hardware limitation on SoM, connected to Hub)
-  * USB 3.0 devices are known to cause over-current condition
 * USB Bluetooth:
   * Some adapters cause the following error during bootup  
     `Bluetooth: hci0: unexpected event for opcode 0xfc2f`  
@@ -149,15 +148,16 @@ _Only mainline kernel supported_
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle[-nxp]`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
   `UBI_MAX_LEB_COUNT` on machine level.
-* SER2's RTS and CTS signals are controlled by GPIO only
+* Hardware Rev. 010x: SER2's RTS and CTS signals are controlled by GPIO only, fixed with
+  Hardware Rev. 030x
 * LVDS
   * Display AUO G185HAN01 not tested on regular base
-* Sleep modes: Wake-up doesn't work.
+* Kernel based on linux-tq / linux-rt-tq
+  * Suspend & resume not supported (yet)
 * NFS boot: The order of network devices is swapped during Linux boot.
   Therefore, the U-Boot environment variable `netdev` must be swapped to the U-Boot network device used.
   *  For U-Boot **eth0** (ethernet@30bf0000) set `netdev=eth1` (default)
   *  For U-Boot **eth1** (ethernet@30be0000) set `netdev=eth0`
-* Wake-Up via RTC currently does not work
 
 ## Build Artefacts
 
