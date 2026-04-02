@@ -9,6 +9,10 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Removed
+
+* distro: Remove `tqmt10xx' overrides. The SoM that are using the override are not supported in scarthgap.
+
 ## scarthgap.TQ.ARM.BSP.0008
 
 ### Added
