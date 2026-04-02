@@ -9,6 +9,12 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Removed
+
+* u-boot-tqmt-2015.07: TQMT10xx variants using this recipe are not supported under scarthgap.
+* linux-tqmt-5.15: TQMT10xx variants using this recipe are not supported under scarthgap.
+* machines: Remove TQMT10xx variants since they are not supported under scarthgap.
+
 ## scarthgap.TQ.ARM.BSP.0008
 
 ### Added
