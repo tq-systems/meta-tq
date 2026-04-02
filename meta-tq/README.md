@@ -216,10 +216,6 @@ Support for the following machines is contained in this version:
 | [b]    | AM6411                  | TQMa6411L               | MBaX4XxL       | tqma64xxl-mbax4xxl               | TQMa6411L HW REV.020x, MBaX4XxL HW REV.020x                                                                                                                  |
 | [b]    | AM6442                  | TQMa6442L               | MBaX4XxL       | tqma64xxl-mbax4xxl               | TQMa6442L HW REV.020x, MBaX4XxL HW REV.020x                                                                                                                  |
 | [p]    | AM67A94                 | TQMa67A94\[L\]          | MBa67xx        | tqma67xx-mba67xx                 | TQMa67A94\[L\] HW REV.020x, MBa67xx HW REV.020x                                                                                                              |
-| [ ]    | T1040                   | TQMT1040                | STKT104x       | tqmt1040-64bit-stkt104x          | TQMT1040 HW REV.020x with 2GiB RAM                                                                                                                           |
-| [ ]    | T1042                   | TQMT1042                | STKT104x       | tqmt1042-64bit-stkt104x          | TQMT1042 HW REV.020x with 2GiB RAM                                                                                                                           |
-| [ ]    | T1022                   | TQMT1022                | STKT104x       | tqmt1022-64bit-stkt104x          | TQMT1022 HW REV.020x with 2GiB RAM                                                                                                                           |
-| [ ]    | T1024                   | TQMT1024                | STKT104x       | tqmt1024-64bit-stkt104x          | TQMT1024 HW REV.020x with 2GiB RAM                                                                                                                           |
 
 Definition of support status:
 
@@ -236,7 +232,8 @@ Definition of support status:
 
 * TQMa57: Use `kirkstone` branch instead, last release is kirkstone.TQMa57xx.BSP.SW.0015
 * TQMa65xx: Use `hardknott` branch or `kirkstone.TQMa65xx.BSP.SW.0009` release instead
-* TQMA7S: Use `kirkstone` branch instead
+* TQMA7S: Use `kirkstone` / `kirkstone-next` branches instead, contact support for updates.
+* TQMT10xx: Use `kirkstone` / `kirkstone-next` branches instead, contact support for updates.
 
 ### Support for wic
 
@@ -298,4 +295,3 @@ Under the given links SOM specific information can be found:
 * [TQMLS1017A/TQMLS1028A](doc/README.TQMLS1028A.md)
 * [TQMLS1043/TQMLS1046A/TQMLS1088A](doc/README.TQMLS10xxA.md)
 * [TQMLX2160A](doc/README.TQMLX2160A.md)
-* [TQMT10xx](doc/README.TQMT10xx.md)
