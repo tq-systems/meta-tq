@@ -42,7 +42,7 @@ UBOOT_RD_ENTRYPOINT = "0x84000000"
 
 require conf/machine/include/tqmxx.inc
 
-MACHINE_FEATURES:remove = "efi"
+MACHINE_FEATURES_OPTED_OUT += "efi"
 EFI_PROVIDER = ""
 
 WIC_BOOTPART_SIZE = "12M"

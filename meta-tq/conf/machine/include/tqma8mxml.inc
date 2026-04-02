@@ -44,7 +44,7 @@ IMX_BOOT_SEEK = "${RAW_BOOT_START_OFFSET_KB}"
 #MACHINE_FEATURES:append = " optee"
 #OPTEE_BIN_EXT = "8mm"
 DISTRO_FEATURES_OPTED_OUT += "optee"
-MACHINE_FEATURES:remove = "optee"
+MACHINE_FEATURES_OPTED_OUT += "optee"
 IMAGE_INSTALL:remove = "packagegroup-fsl-optee-imx"
 
 # Image Options

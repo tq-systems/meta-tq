@@ -16,7 +16,7 @@ MACHINE_FEATURES += "\
 
 # This should be added to 'MACHINE_FEATURES` after inclusion of 'imx-base.inc'
 MACHINE_FEATURES += "vpu"
-MACHINE_FEATURES:remove:mx8mn-generic-bsp = "vpu"
+MACHINE_FEATURES_OPTED_OUT:append:mx8mn-generic-bsp = "vpu"
 
 PREFERRED_PROVIDER_imx-boot ?= "imx-boot-tq"
 

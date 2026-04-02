@@ -46,7 +46,7 @@ ATF_PLATFORM = "imx8mp"
 #MACHINE_FEATURES:append = " optee"
 #OPTEE_BIN_EXT = "8mp"
 DISTRO_FEATURES_OPTED_OUT += "optee"
-MACHINE_FEATURES:remove = "optee"
+MACHINE_FEATURES_OPTED_OUT += "optee"
 IMAGE_INSTALL:remove = "packagegroup-fsl-optee-imx"
 
 # Image Options

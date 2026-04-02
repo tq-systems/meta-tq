@@ -11,7 +11,7 @@ MACHINE_FEATURES += "\
 "
 
 # we have no audio interface on our board.
-MACHINE_FEATURES:remove = "alsa"
+MACHINE_FEATURES_OPTED_OUT += "alsa"
 
 # direct assign to SERIAL_CONSOLES to prevent wrong defaults and not using
 # deprecated SERIAL_CONSOLE
