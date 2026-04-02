@@ -71,8 +71,8 @@ DISTRO_FEATURES += " tiny"
 # * wifi
 # * bluetooth
 
-DISTRO_FEATURES:class-native = "${DISTRO_FEATURES_DEFAULT} ${POKY_DEFAULT_DISTRO_FEATURES}"
-DISTRO_FEATURES:class-nativesdk = "${DISTRO_FEATURES_DEFAULT} ${POKY_DEFAULT_DISTRO_FEATURES}"
+DISTRO_FEATURES:class-native = "${POKY_DEFAULT_DISTRO_FEATURES}"
+DISTRO_FEATURES:class-nativesdk = "${POKY_DEFAULT_DISTRO_FEATURES}"
 
 # FIXME: Consider adding "modules" to MACHINE_FEATURES and using that in
 # packagegroup-core-base to select modutils-initscripts or not.  Similar with "net" and
@@ -108,7 +108,7 @@ INIT_MANAGER = "none"
 # force removal of systemd from DISTRO_FEATURES
 # take care when updating yocto, at the moment sysvinit must not be removed,
 # see above
-DISTRO_FEATURES_BACKFILL_CONSIDERED:append = " systemd"
+DISTRO_FEATURES_OPTED_OUT += "systemd"
 VIRTUAL-RUNTIME_dev_manager = "eudev"
 VIRTUAL-RUNTIME_login_manager = "busybox"
 VIRTUAL-RUNTIME_init_manager = "busybox"

@@ -41,7 +41,7 @@ IMX_BOOT_SEEK = "${RAW_BOOT_START_OFFSET_KB}"
 # optee rule filters for matching machine names and expects at least imx for MX8
 #MACHINE_FEATURES:append = " optee"
 #OPTEE_BIN_EXT = "8mn"
-DISTRO_FEATURES:remove = "optee"
+DISTRO_FEATURES_OPTED_OUT += "optee"
 MACHINE_FEATURES:remove = "optee"
 IMAGE_INSTALL:remove = "packagegroup-fsl-optee-imx"
 
