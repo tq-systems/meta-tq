@@ -6,23 +6,26 @@ This README contains some useful information for using Linux Preempt-RT
 
 # Supported platforms
 
-| Board      | linux 6.1 | linux 6.6| linux 6.12 |
-|------------|-----------|----------|------------|
-| TQMa6ULx   |     x  1) |    x     |            |
-| TQMa6ULxL  |     x  1) |    x     |            |
-| TQMa6x     |     x  1) |    x     |            |
-| TQMa7x     |     x  1) |    x     |            |
-| TQMa8Mx    |     x  1) |    x     |            |
-| TQMa8MxML  |     x  1) |    x     |            |
-| TQMa8MxNL  |     x  1) |    x     |            |
-| TQMa8MPxL  |     x  1) |    x     |    x       |
-| TQMa93xx   |           |          |    x       |
-| TQMLS10xxA |     x  1) |          |    x       |
-| TQMLX2160A |     x  1) |          |    x       |
+| Board     | linux 6.6| linux 6.12 |
+|-----------|----------|------------|
+| TQMa6ULx  |    x     |            |
+| TQMa6ULxL |    x     |            |
+| TQMa6x    |    x     |            |
+| TQMa7x    |    x     |            |
+| TQMa8Mx   |    x     |            |
+| TQMa8MxML |    x     |            |
+| TQMa8MxNL |    x     |            |
+| TQMa8MPxL |   (x)    |    x       |
+| TQMa8MPxS |          |    x       |
+| TQMa93xx  |          |    x       |
+| TQMa335x  |          |    x       |
+| TQMLS102xA|          |    x       |
+| TQMLS10xxA|          |    x       |
+| TQMLX2160A|          |    x       |
 
 Notes:
 
-* **1):** if `linux-rt-6.1` is needed, use `kirkstone` branch
+* **(x):** Version is not tested.
 
 # Usage
 

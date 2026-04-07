@@ -35,6 +35,7 @@ meta-tq supports AHAB signature generation on the following platforms:
 
 - TQMa8x
 - TQMa8Xx
+- TQMa91xx
 - TQMa93xx
 
 ### Abbreviations
