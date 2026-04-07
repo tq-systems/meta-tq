@@ -9,6 +9,21 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* linux-tq-6.12: update to v6.12.80
+* linux-tq-6.6: update to v6.6.133
+* linux-rt-tq-6.6: update to v6.6.132-rt72
+
+### Fixed
+
+* u-boot-imx-tq-2024.04:
+  * TQMa93xxCA/LA: set thermal trips from fuses
+
+    Using hard settings for consumer grade CPU can lead to boot issues for
+    industrial graded CPU when the temperatur is outside of consumer grade
+    temperatur range.
+
 ### Removed
 
 * u-boot-tqmt-2015.07: TQMT10xx variants using this recipe are not supported under scarthgap.
