@@ -1,0 +1,33 @@
+From 14f98b402e2af9451ec8f2fc9182b84c05326720 Mon Sep 17 00:00:00 2001
+From: Alexander Stein <alexander.stein@ew.tq-group.com>
+Date: Tue, 7 Apr 2026 13:46:58 +0200
+Subject: [PATCH] ipu: uapi: Fixed size integer types are define since C99
+ onwards
+
+Fixed width integer types are defined since C99, so not define them
+ourself.
+
+Signed-off-by: Alexander Stein <alexander.stein@ew.tq-group.com>
+Upstream-Status: Pending
+---
+ include/uapi/linux/ipu.h | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/include/uapi/linux/ipu.h b/include/uapi/linux/ipu.h
+index 7bdac34bd1f0..785ad78c78d6 100644
+--- a/include/uapi/linux/ipu.h
++++ b/include/uapi/linux/ipu.h
+@@ -38,9 +38,13 @@ typedef unsigned char bool;
+ #endif
+ #define irqreturn_t int
+ #define dma_addr_t int
++#if defined __STDC_VERSION__ && __STDC_VERSION__ >= 199901L
++/* Fixed width integer types are defined since C99. */
++#else
+ #define uint32_t unsigned int
+ #define uint16_t unsigned short
+ #define uint8_t unsigned char
++#endif
+ #define u32 unsigned int
+ #define u8 unsigned char
+ #define __u32 u32
