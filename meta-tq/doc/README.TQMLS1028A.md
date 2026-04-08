@@ -131,7 +131,7 @@ Artefacts can be found at the usual locations for bitbake:
 
 Artefacts under `atf` can be used to manually update boot images on SOM or exchange them in WIC image.
 
-## Build-Time Configuration (Default Boot Images for SPI-NOR and WIC)
+## Build-Time Configuration
 
 * BL2_IMAGE: ATF/TF-A BL2 file used for WIC image creation
 * BL3_IMAGE: ATF/TF-A BL3 file used for WIC image creation
@@ -144,9 +144,9 @@ Set `BL2_IMAGE` to `bl2_auto${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.pbl` and
 `BL3_IMAGE` to `fip_uboot${ATF_SECURE_SUFFIX}_tqmls1028a_4gb.bin` to create an SD/eMMC image for the 4GiB
 variant (or 2gb/8gb for the 2GiB/8GiB variants respectively).
 
-### RCW variants
+### RCW Variants
 
-The following RCW variants a listed in `ATF_RCW_VARIANTS`:
+The following RCW variants are listed in `ATF_RCW_VARIANTS`:
 
 - `8_5_11_11/rcw_800`
 - `8_5_11_11/rcw_1000`
