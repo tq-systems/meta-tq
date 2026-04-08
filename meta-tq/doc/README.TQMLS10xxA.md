@@ -10,20 +10,12 @@
 
 ## Version Information for Software Components
 
-### U-Boot
+See [here](./README.SoftwareVersions.md) for the software base versions of
+bootloader and Linux kernel.
 
-* based on qoriq-u-boot (https://github.com/nxp-qoriq/u-boot/)
-* branched from lf-5.15.71-2.2.0 (v2022.04)
+## Supported Machine Configurations
 
-### ATF
-
-* based on qoriq-atf (https://github.com/nxp-qoriq/atf/)
-* branched from lf-5.15.5-1.0.0 (v2.4)
-
-### Linux
-
-* based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/)
-* branched from linux-6.12.y
+See top level [README](../README.md) for configurations usable as MACHINE.
 
 ## Supported Features
 
