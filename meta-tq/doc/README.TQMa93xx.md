@@ -67,7 +67,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | PP / Erase with 1-1-4 SDR                        |       x               |       x               |   see Known Issues      |
 | **Cortex M33**                                   |                       |                       |                         |
 | env settings for starting from TCM               |                       |                       |                         |
-| examples with UART3 as debug console             |                       |                       |                         | 
+| examples with UART3 as debug console             |                       |                       |                         |
 
 **NOTE:** for MBa93xxLA-MINI REV.010x is only be used for IBPQ. Customers will get REV.020x or later.
 
@@ -79,55 +79,55 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 
-|                           Feature                            | linux-imx-tq_6.1 | linux-imx-tq_6.6 | linux-tq_6.12   |
-|:------------------------------------------------------------:|:----------------:|:----------------:|:---------------:|
-|                         RAM configs                          | 1 / 1.5 / 2 GiB  | 1 / 1.5 / 2 GiB  | 1 / 1.5 / 2 GiB |
-|                         CPU variants                         |      i.MX93      |      i.MX93      |      i.MX93     |
-|                        Fuses / OCRAM                         |         x        |         x        |         x       |
-|          speed grade / temperature grade detection           |                  |         x        |         x       |
-|                       Frequency scaling                      |                  |         x        |                 |
-|                           **UART**                           |                  |                  |                 |
-|         console on UART1 (via USB / UART converter)          |         x        |         x        |         x       |
-|                          UART2/3/4                           |         x        |         x        |         x       |
-|                           **GPIO**                           |                  |                  |                 |
-|                             LED                              |         x        |         x        |         x       |
-|                            Button                            |         x        |         x        |         x       |
-|                           **I2C**                            |                  |                  |                 |
-|                           EEPROMs                            |         x        |         x        |         x       |
-|                             PMIC                             |         x        |         x        |         x       |
-|                             RTC                              |         x        |         x        |         x       |
-|                     Temperature Sensors                      |         x        |         x        |         x       |
-|                       IMU / Gyroscope                        |         x        |         x        |         x       |
-|                        Port expander                         |         x        |         x        |         x       |
-|                           **ENET**                           |                  |                  |                 |
-|               GigE / FEC via Phy on MBa93xxCA                |         x        |         x        |         x       |
-|               GigE / EQOS via Phy on MBa93xxCA               |         x        |         x        |         x       |
-|                           **USB**                            |                  |                  |                 |
-|                      USB 2.0 Host / Hub                      |         x        |         x        |         x       |
-|             USB DRD (USB 2.0 Cable Detect, VBUS)             |         x        |         x        |         x       |
-|                         **QSPI NOR**                         |                  |                  |                 |
-|                     Read with 1-1-4 SDR                      |         x        |                  |                 |
-|                     Read with 1-4-4 SDR                      |                  |         x        |         x       |
-|                  PP / Erase with 1-1-4 SDR                   |         x        |                  |                 |
-|                  PP / Erase with 1-4-4 SDR                   |                  |         x        |         x       |
-|                         **Display**                          |                  |                  |                 |
-|                             LVDS                             |         x        |         x        |         x       |
-|                          **CAN-FD**                          |                  |                  |                 |
-|                            CAN-FD                            |         x        |         x        |         x       |
-|                           **SPI**                            |                  |                  |                 |
-|                       spidev at all CS                       |         x        |         x        |                 |
-|                       **internal ADC**                       |                  |                  |                 |
-|                             ADC                              |         x        |         x        |         x       |
-|                        **Cortex M33**                        |                  |                  |                 |
-|                  examples running from TCM                   |     see notes    |     see notes    |                 |
-|           use UART3 as debug console (see issues)            |         x        |         x        |                 |
-|                           LPB boot                           |                  |                  |                 |
-|                        **NPU**                               |                  |                  |                 |
-|                  Firmware for CORTEX M33                     |                  |     see issues   |                 |
-|                              Demo                            |                  |                  |                 |
-|              **MIPI CSI (see Issues section)**               |                  |                  |                 |
-|   Gray with Vision Components GmbH camera (Sensor OV9281)    |                  |                  |                 |
-| Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |                  |                  |                 |
+|                           Feature                            | linux-imx-tq_6.6| linux-tq_6.12   |
+|:------------------------------------------------------------:|:---------------:|:---------------:|
+|                         RAM configs                          | 1 / 1.5 / 2 GiB | 1 / 1.5 / 2 GiB |
+|                         CPU variants                         |      i.MX93     |      i.MX93     |
+|                        Fuses / OCRAM                         |         x       |         x       |
+|          speed grade / temperature grade detection           |         x       |         x       |
+|                       Frequency scaling                      |         x       |                 |
+|                           **UART**                           |                 |                 |
+|         console on UART1 (via USB / UART converter)          |         x       |         x       |
+|                          UART2/3/4                           |         x       |         x       |
+|                           **GPIO**                           |                 |                 |
+|                             LED                              |         x       |         x       |
+|                            Button                            |         x       |         x       |
+|                           **I2C**                            |                 |                 |
+|                           EEPROMs                            |         x       |         x       |
+|                             PMIC                             |         x       |         x       |
+|                             RTC                              |         x       |         x       |
+|                     Temperature Sensors                      |         x       |         x       |
+|                       IMU / Gyroscope                        |         x       |         x       |
+|                        Port expander                         |         x       |         x       |
+|                           **ENET**                           |                 |                 |
+|               GigE / FEC via Phy on MBa93xxCA                |         x       |         x       |
+|               GigE / EQOS via Phy on MBa93xxCA               |         x       |         x       |
+|                           **USB**                            |                 |                 |
+|                      USB 2.0 Host / Hub                      |         x       |         x       |
+|             USB DRD (USB 2.0 Cable Detect, VBUS)             |         x       |         x       |
+|                         **QSPI NOR**                         |                 |                 |
+|                     Read with 1-1-4 SDR                      |                 |                 |
+|                     Read with 1-4-4 SDR                      |         x       |         x       |
+|                  PP / Erase with 1-1-4 SDR                   |                 |                 |
+|                  PP / Erase with 1-4-4 SDR                   |         x       |         x       |
+|                         **Display**                          |                 |                 |
+|                             LVDS                             |         x       |         x       |
+|                          **CAN-FD**                          |                 |                 |
+|                            CAN-FD                            |         x       |         x       |
+|                           **SPI**                            |                 |                 |
+|                       spidev at all CS                       |         x       |                 |
+|                       **internal ADC**                       |                 |                 |
+|                             ADC                              |         x       |         x       |
+|                        **Cortex M33**                        |                 |                 |
+|                  examples running from TCM                   |     see notes   |                 |
+|           use UART3 as debug console (see issues)            |         x       |                 |
+|                           LPB boot                           |                 |                 |
+|                        **NPU**                               |                 |                 |
+|                  Firmware for CORTEX M33                     |     see issues  |                 |
+|                              Demo                            |                 |                 |
+|              **MIPI CSI (see Issues section)**               |                 |                 |
+|   Gray with Vision Components GmbH camera (Sensor OV9281)    |                 |                 |
+| Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |                 |                 |
 
 ## TODO
 
