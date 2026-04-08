@@ -180,7 +180,7 @@ To use custom key and certificate, one has to override `UBOOT_SIGN_KEYDIR`,
     UBOOT_SIGN_KEYDIR = "/keys/directory"
     UBOOT_SIGN_KEYNAME = "custom" # keys name in keydir (eg. "custom.crt", "custom.key")
 
-### Booting a Signed FIT image
+### Booting a Signed FIT Image
 
 #### TQMa8/9 Series
 
@@ -196,7 +196,7 @@ for booting a signed FIT image from the root partition of an eMMC or SD card:
 Note: Manual adjustments to the bootargs may be necessary instead of using
 the `mmcargs` script.
 
-## DM-Verity for Root Partition
+## dm-verity for Root Partition
 
 The verity devicemapper is a way to guarantee integrity of some data. It is used
 here to create a protected rootfs partition. To do so, we need meta-security,
@@ -239,7 +239,7 @@ Bitbake will automatically create the hash data for the root partition and store
 the root hash inside the initramfs when the image set in `DM_VERITY_IMAGE`
 is build.
 
-### Booting a Signed FIT image for DM-Verity
+### Booting a Signed FIT Image for dm-verity
 
 The FIT image with initramfs for dm-verity usage is located in the boot
 partition, because the root hash that is saved inside the initramfs must be kept
