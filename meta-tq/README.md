@@ -163,7 +163,6 @@ Support for the following machines is contained in this version:
 |--------|-------------------------|-------------------------|--------------- |----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [y]    | i.MX6\[S,DL,D,Q,QP,DP\] | TQMa6\[S,DL,D,Q,QP,DP\] | MBa6x          | tqma6qdl-multi-mba6x             | TQMa6\[QP,DP\] HW REV.040x, TQMa6\[D,Q\] 1/2 GiB HW REV.010x ... 040x, TQMa6DL 1/2 GiB HW REV.010x ... 040x, TQMa6S HW REV.010x ... 040x / MBa6x HW REV.020x |
 | [y]    | i.MX6UL                 | TQMa6ULx[L]             | MBaULx         | tqma6ul-multi-mba6ulx            | TQMa6ULx HW REV.030x / TQMa6ULxL HW REV.020x 256/512 MB RAM, MBa6ULx HW REV.020x                                                                             |
-| [y]    | i.MX6UL                 | TQMa6ULxL               | MBaULxL        | tqma6ulx-lga-mba6ulxl            | TQMa6ULxL HW REV.020x / MBa6ULxL HW REV.020x                                                                                                                 |
 | [y]    | i.MX6ULL                | TQMa6ULLx               | MBaULx         | tqma6ull-multi-mba6ulx           | TQMa6ULLx HW REV.030x / TQMa6ULLxL HW REV.020x  256/512 MB RAM, MBa6ULx HW REV.020x                                                                          |
 | [y]    | i.MX7D                  | TQMa7D                  | MBa7x          | tqma7x-multi-mba7                | TQMa7D HW REV.010x ... 020x / 1 GiB / 2 GiB /512 MiB RAM / MBa7x HW REV.020x                                                                                 |
 | [y]    | i.MX8MP                 | TQMa8MPxL               | MBa8MPxL       | tqma8mpxl-mba8mpxl               | TQMa8MPQL with 1/2/4/8 GiB RAM, HW REV.020x, MBa8MPxL HW REV.020x                                                                                            |
@@ -234,6 +233,7 @@ Definition of support status:
 * TQMa65xx: Use `hardknott` branch or `kirkstone.TQMa65xx.BSP.SW.0009` release instead
 * TQMA7S: Use `kirkstone` / `kirkstone-next` branches instead, contact support for updates.
 * TQMT10xx: Use `kirkstone` / `kirkstone-next` branches instead, contact support for updates.
+* MBaULxL (SBC with TQMa6ULxL): Use `kirkstone` / `kirkstone-next` branches instead, contact support for updates.
 
 ### Support for wic
 
