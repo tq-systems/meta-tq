@@ -10,7 +10,6 @@ This README contains some useful information for TQMa6ULx / TQMa6ULLx / TQMa6ULx
 * TQMa6ULxL REV.020x on MBa6ULx REV.020x carrier board (aka STKa6ULxL)
 * TQMa6ULLx REV.030x on MBa6ULx REV.020x carrier board (aka STKa6ULLx)
 * TQMa6ULLxL REV.020x on MBa6ULx REV.020x carrier board (aka STKa6ULLxL)
-* TQMa6ULxL REV.020x on MBa6ULxL REV.020x carrier board
 
 ## Version Information for Software Components
 
@@ -97,9 +96,6 @@ _Note:_ Mini PCIe connector only supports USB.
 * edt-ft5406 touch controller on some Glyn displays might cause CRC errors
   after restart using `reboot` command. At startup as well as during runtime. The device
   is still functioning though.
-* MBa6ULxL: DPI with Glyn / ETM0700 produces invalid color mapping. Output shows
-  therefore wrong colors.
-* MBa6ULxL: accuracy of ADC is limited due to board layout.
 * Linux / DTB: when booting kernel versions from this BSP the disabling of fused IP in
   device tree before loading the OS may fail with U-Boot from older BSP versions.
   Device tree path names were changed several times in CPU device tree fragment to conform the
@@ -166,60 +162,6 @@ _Note:_
 | ON      |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |   |  x  |  x  |  x  |  x  |     |  x  |  x  |  x  |    |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |    |     |  x  |
 | OFF     |     |     |     |     |     |     |     |     |   |     |     |     |     |  x  |     |     |     |    |     |     |     |     |     |     |     |     |    |  x  |     |
 
-### MBa6ULxL DIP Switches
-
-_Note:_
-
-* S13: BOOT\_MODE\[1:0\]
-
-| Mode              | S13 |     |
-| ----------------- | --- | --- |
-|                   |  2  |  1  |
-| Boot from Fuses   |  0  |  0  |
-| Serial Downloader |  0  |  1  |
-| Internal Boot     |  1  |  0  |
-| Reserved          |  1  |  1  |
-
-* S16: BOOT_CFG (reduced set)
-
-| S16 DIP | i.MX6UL BOOT_CFG      |
-| ------- | --------------------- |
-|   8     |  BOOT_CFG04           |
-|   7     |  BOOT_CFG02           |
-|   6     |  BOOT_CFG06           |
-|   5     |  BOOT_CFG05           |
-|   4     |  BOOT_CFG11           |
-|   3     |  BOOT_CFG13           |
-|   2     |  BOOT_CFG14           |
-|   1     |  DEBUG UART / CSI MUX |
-
-
-* `x` means position of DIP, * `-` means don't care
-
-#### SD Card
-
-|         | S16 |     |     |     |     |     |     |     |   |S13  |     |
-| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: |
-| DIP     |  8  |  7  |  6  |  5  |  4  |  3  |  2  |  1  |   |  2  | 1   |
-| ON      |  x  |     |     |  x  |  x  |     |  x  |     |   |  x  |     |
-| OFF     |     |  x  |  x  |     |     |  x  |     | (x) |   |     |  x  |
-
-#### eMMC
-
-|         | S16 |     |     |     |     |     |     |     |   |S13  |     |
-| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: |
-| DIP     |  8  |  7  |  6  |  5  |  4  |  3  |  2  |  1  |   |  2  |  1  |
-| ON      |  x  |  x  |     |     |     |  x  |     |     |   |  x  |     |
-| OFF     |     |     |  x  |  x  |  x  |     |  x  | (x) |   |     |  x  |
-
-#### QSPI
-
-|         | S16 |     |     |     |     |     |     |     |   |S13  |     |
-| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: |
-| DIP     |  8  |  7  |  6  |  5  |  4  |  3  |  2  |  1  |   |  2  |  1  |
-| ON      |     |  x  |  x  |  x  |  -  |  -  |  -  |     |   |  x  |     |
-| OFF     |  x  |     |     |     |     |     |     | (x) |   |     |  x  |
-
 ## Boot Device Initialisation and Update
 
 See [here](./README.imx.BootMedia.md) for detailed information how to write a
@@ -245,11 +187,6 @@ Each display can be used on its own by using the corresponding device tree.
 | LVDS            | imx6ull-tqma6ull2[l]-mba6ulx-lvds.dtb        | Tianma TM070JVHG33 |
 | Parallel        | imx6ull-tqma6ull2[l]-mba6ulx-cdtech-dc44.dtb | CDTECH DC44 (DMB)  |
 | Parallel        | imx6ull-tqma6ull2[l]-mba6ulx-cdtech-fc21.dtb | CDTECH FC21 (DMB)  |
-
-### Display Support MBa6ULxL
-
-Support for parallel display is provided using `imx6ul-tqma6ul2l-mba6ulxl-glyn-etm0700g0edh6.dtb`
-(type Glyn ETM0700 REV. G0EDH6 )
 
 ### Access U-Boot Environment from Linux
 
