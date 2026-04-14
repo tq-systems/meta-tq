@@ -9,6 +9,13 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* imx-atf-tq: add support for v2.12 based on NXP lf_v2.12 branch
+* qoriq-atf: add support for v2.12 based on NXP lf_v2.12 branch
+
+  Add support for TQMLS1012AL, TQMLS10xxA, TQMLS1028A, TQMLX2160A
+
 ### Changed
 
 * linux-tq-6.12: update to v6.12.80
@@ -26,6 +33,8 @@ Releases are named with the following scheme:
 
 ### Removed
 
+* imx-atf-tq-2.10: remove recipe, all users were updated to use imx-atf-tq-2.12
+* qoriq-atf-2.10: remove recipe, all users were updated to use qoriq-atf-2.12
 * u-boot-tqmt-2015.07: TQMT10xx variants using this recipe are not supported under scarthgap.
 * linux-tqmt-5.15: TQMT10xx variants using this recipe are not supported under scarthgap.
 * machines: Remove TQMT10xx variants since they are not supported under scarthgap.
