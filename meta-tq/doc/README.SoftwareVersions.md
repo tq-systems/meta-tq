@@ -66,10 +66,10 @@ Supported SOM families:
 
 Version information:
 
-* TF-A based on v2.10 and NXP vendor BSP
+* TF-A based on v2.12 and NXP vendor BSP
   (https://github.com/nxp-imx/imx-atf.git),
-* branched from v2.10 based branch lf_v2.10 / integrates all commits up to
-  7e374c5f57328949a2b141a567175b6a2939e964 / tag lf-6.6.52-2.2.1
+* branched from v2.12 based branch lf_v2.12 / integrates all commits up to
+  a266ff458c2526a6474036a5c6648be6fdc54fe3 / tag lf-6.12.49-2.2.0
 
 ### U-Boot
 
@@ -224,10 +224,10 @@ Supported SOM families
 
 Version information:
 
-* TF-A based on v2.10 and NXP vendor BSP
+* TF-A based on v2.12 and NXP vendor BSP
   (https://github.com/nxp-imx/imx-atf.git),
-* branched from v2.10 based branch lf_v2.10 / integrates all commits up to
-  7e374c5f57328949a2b141a567175b6a2939e964 / tag lf-6.6.52-2.2.1
+* branched from v2.12 based branch lf_v2.12 / integrates all commits up to
+  a266ff458c2526a6474036a5c6648be6fdc54fe3 / tag lf-6.12.49-2.2.0
 
 ### U-Boot
 
