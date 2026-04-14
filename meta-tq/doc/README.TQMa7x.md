@@ -23,34 +23,34 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ### Linux
 
-|                            | linux-tq-5.15 | linux-tq-6.1 |
-| :------------------------- | :-----------: | :----------: |
-| Fuses                      |       x       |      x       |
-| UART (console, X13 or X14) |       x       |      x       |
-| GPIO                       |       x       |      x       |
-| Button (S11, S12, S13)     |       x       |      x       |
-| I2C                        |       x       |      x       |
-| GPIO expander              |       x       |      x       |
-| EEPROM                     |       x       |      x       |
-| RTC                        |       x       |      x       |
-| SPI NOR                    |       x       |      x       |
-| Buzzer                     |       x       |      x       |
-| LEDs                       |       x       |      x       |
-| SPI                        |       x       |      x       |
-| USB Host (X4)              |       x       |      x       |
-| USB Dual Role (X5)         |       x       |      x       |
-| USB on Mini PCIe (X17)     |       x       |      x       |
-| eMMC/SD (on-board/X7)      |       x       |      x       |
-| Ethernet GigE (X8/X9)      |       x       |      x       |
-| CAN (X10/X11)              |       x       |      x       |
-| RS-485 (X12)               |       x       |      x       |
-| LVDS (X15, X16)            |       x       |      x       |
-| PCIe (X17)                 |               |              |
-| Audio Line In (X20)        |       x       |      x       |
-| Audio Line Out (x21)       |       x       |      x       |
-| Parallel LCD (X23)         |       x       |      x       |
-| Touch (X23)                |       x       |      x       |
-| ADC (X23/X24)              |               |      x       |
+|                            | linux-tq-6.1 |
+| :------------------------- | :----------: |
+| Fuses                      |      x       |
+| UART (console, X13 or X14) |      x       |
+| GPIO                       |      x       |
+| Button (S11, S12, S13)     |      x       |
+| I2C                        |      x       |
+| GPIO expander              |      x       |
+| EEPROM                     |      x       |
+| RTC                        |      x       |
+| SPI NOR                    |      x       |
+| Buzzer                     |      x       |
+| LEDs                       |      x       |
+| SPI                        |      x       |
+| USB Host (X4)              |      x       |
+| USB Dual Role (X5)         |      x       |
+| USB on Mini PCIe (X17)     |      x       |
+| eMMC/SD (on-board/X7)      |      x       |
+| Ethernet GigE (X8/X9)      |      x       |
+| CAN (X10/X11)              |      x       |
+| RS-485 (X12)               |      x       |
+| LVDS (X15, X16)            |      x       |
+| PCIe (X17)                 |              |
+| Audio Line In (X20)        |      x       |
+| Audio Line Out (x21)       |      x       |
+| Parallel LCD (X23)         |      x       |
+| Touch (X23)                |      x       |
+| ADC (X23/X24)              |      x       |
 
 ## ToDo / Untested
 
