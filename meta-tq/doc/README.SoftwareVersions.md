@@ -35,20 +35,6 @@ For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 * based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
 * branched from `v6.1-rt` / tag commit is merged into (see `LINUX_VERSION` in `linux-tq-rt_6.1.bb` for exact release)
 
-#### Kernel based on 5.15 (linux-stable)
-
-* not recommended, use version based on 6.1
-* based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
-* branched from `linux-5.15.y` / tag commit is merged into (see `LINUX_VERSION` in `linux-tq_5.15.bb` for exact release)
-
-#### Kernel based on 5.15-rt (linux-stable-rt)
-
-For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
-
-* not recommended, use version based on 6.1
-* based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
-* branched from `v5.15-rt` / tag commit is merged into (see `LINUX_VERSION` in `linux-tq-rt_5.15.bb` for exact release)
-
 #### Kernel based on 5.15 (linux-imx-fslc)
 
 _Note:_ Not supported for:
@@ -66,32 +52,6 @@ _Note:_ Not supported for:
 
 * based on [lf-5.15.y](https://github.com/nxp-imx/linux-imx/tree/lf-5.15.y)
 * branched from lf-5.15.5-1.0.0 / contains commits up to c1084c2773fc1005ed140db625399d5334d94a28
-
-#### Kernel based on 5.10 (linux-imx-fslc)
-
-_Note:_ Not supported for:
-
-- TQMa6ULx / TQMa6ULxL: use [6.1 linux-stable](#kernel-based-on-61-linux-stable)
-- TQMa6ULLx / TQMa6ULLxL: use [6.1 linux-stable](#kernel-based-on-61-linux-stable)
-- TQMa7x: use [6.1 linux-stable](#kernel-based-on-61-linux-stable)
-
-* based on linux-imx-fslc (https://github.com/Freescale/linux-fslc.git)
-* branched from `TQMa8-fslc-5.10-2.1.x-imx` / contains commits up to 3485dced8f9c272e44b70c2df74ed58ae8bacac7
-
-#### Kernel based on 5.4 (linux-imx-fslc)
-
-_Note:_ Not recommended for usage with
-
-- TQMa6x: use [6.1](#kernel-based-on-61-linux-imx-fslc) or
-  use [6.1 linux-stable](#kernel-based-on-61-linux-stable)
-- TQMa6ULx / TQMa6ULxL: use [6.1 linux-stable](#kernel-based-on-61-linux-stable)
-- TQMa6ULLx / TQMa6ULLxL: use [6.1 linux-stable](#kernel-based-on-61-linux-stable)
-- TQMa7x: use [6.1 linux-stable](#kernel-based-on-61-linux-stable)
-- TQMLS1012AL: use [5.15](#kernel-based-on-515-linux-imx-fslc)
-
-* not selected by default
-* based on linux-imx-fslc (https://github.com/Freescale/linux-fslc.git)
-* branched from `5.4-1.0.0-imx` / contains commits up to 067b7d3c4d293e901aac09f0f769744be73a7fb2
 
 #### Kernel based on 5.4 (linux-stable)
 
@@ -163,4 +123,3 @@ __Note__: supports only TQMa8M*
 * not recommended, use kernel based on 6.1 (linux-imx-fslc)
 * based on linux-imx-fslc (https://github.com/Freescale/linux-fslc.git)
 * branched from `5.15-2.0.x-imx` / contains commits up to d818413e4d7901cb8a00a631a389326e2c93ae41
-
