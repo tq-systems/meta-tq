@@ -64,6 +64,10 @@ UBOOT_SIGN_KEYDIR ?= "${DUMPLING_LAYERDIR}/files/keys/u-boot"
 UBOOT_SIGN_KEYNAME ?= "dev"
 UBOOT_MKIMAGE_DTCOPTS = "--in-format dts --out-format dtb"
 
+FIT_KERNEL_SIGN_ENABLE = "${UBOOT_SIGN_ENABLE}"
+FIT_KERNEL_SIGN_KEYNAME = "${UBOOT_SIGN_KEYNAME}"
+FIT_KERNEL_SIGN_KEYDIR = "${UBOOT_SIGN_KEYDIR}"
+
 #
 # busybox has prio 50 per default, inetutils has 79
 # ping from iputils should have same features as full featured
