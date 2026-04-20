@@ -69,6 +69,7 @@ Support matrix for `MBa91xxCA` REV.010x / `MBa93xxCA` REV.020x
 |                 RAM configs                   |      1 GiB         |
 |                CPU variants                   |      i.MX91        |
 |                Fuses / OCRAM                  |        x           |
+|                 EDAC / ECC                    |        x           |
 |  speed grade / temperature grade detection    |                    |
 |                  **UART**                     |                    |
 | console on UART1 (via USB / UART converter)   |        x           |
