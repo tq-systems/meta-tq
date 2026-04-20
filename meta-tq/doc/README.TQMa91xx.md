@@ -66,7 +66,7 @@ Support matrix for `MBa91xxCA` REV.010x / `MBa93xxCA` REV.020x
 
 |                   Feature                     | linux-imx-tq_6.6   |
 | :-------------------------------------------: | :----------------: |
-|                 RAM configs                   |      1 GiB         |
+|                 RAM configs                   |    0.5 / 1 GiB     |
 |                CPU variants                   |      i.MX91        |
 |                Fuses / OCRAM                  |        x           |
 |                 EDAC / ECC                    |        x           |
