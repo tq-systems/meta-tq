@@ -84,6 +84,7 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 |                         RAM configs                          | 1 / 1.5 / 2 GiB | 1 / 1.5 / 2 GiB |
 |                         CPU variants                         |      i.MX93     |      i.MX93     |
 |                        Fuses / OCRAM                         |         x       |         x       |
+|                         EDAC / ECC                           |         x       |         x       |
 |          speed grade / temperature grade detection           |         x       |         x       |
 |                       Frequency scaling                      |         x       |                 |
 |                           **UART**                           |                 |                 |
