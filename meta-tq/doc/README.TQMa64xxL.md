@@ -52,7 +52,7 @@ _Kernel:_
 
 | Feature                        |                                              |
 | :----------------------------- | :------------------------------------------: |
-| RAM configs                    |                 1 GiB, 2GiB                  |
+| RAM configs                    |          1 GiB, 1 GiB Nanya, 2 GiB           |
 | CPU variants                   |                AM6442, AM6411                |
 | UART (console on UART0)        |                      x                       |
 | GPIO                           |                      x                       |
