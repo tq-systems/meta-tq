@@ -9,6 +9,30 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* linux-tq-6.12: update to v6.12.82
+* linux-tq-6.6: update to v6.6.135
+
+### Deprecated
+
+* meta-ti: TQMa62xx / TQMa64xx / TQMa67xx
+
+  These SoM depend on TI vendor kernel. Development / Update of the vendor branch is
+  out of scope for TQ-Systems GmbH. The support for the mentioned SoM for
+  yocto / openembedded scarthgap branch (5.0.y) will be deprecated with the first BSP
+  release for wrynose.
+
+* meta-freescale: NXP based kernel / driver stack for TQMa8M / TQMa8x / TQMa8Xx / TQMa91 / TQMa93 / TQMa95
+
+  These SoM depend on NXP vendor kernel. Development / Update of the vendor branch is
+  out of scope for TQ-Systems GmbH. The support for the mentioned SoM for
+  yocto / openembedded scarthgap branch (5.0.y) will be deprecated with the first BSP
+  release for wrynose.
+
+  **Note** Support for TQMa8M / TQMa93 with LTS based kernel / mainline driver stack
+  is not deprecated.
+
 ## scarthgap.TQ.ARM.BSP.0009 (not released yet)
 
 ### Added
@@ -28,6 +52,14 @@ Releases are named with the following scheme:
 * linux-tq-6.6: update to v6.6.133
 * linux-rt-tq-6.6: update to v6.6.132-rt72
 
+### Removed
+
+* imx-atf-tq-2.10: remove recipe, all users were updated to use imx-atf-tq-2.12
+* qoriq-atf-2.10: remove recipe, all users were updated to use qoriq-atf-2.12
+* u-boot-tqmt-2015.07: TQMT10xx variants using this recipe are not supported under scarthgap.
+* linux-tqmt-5.15: TQMT10xx variants using this recipe are not supported under scarthgap.
+* machines: Remove TQMT10xx variants since they are not supported under scarthgap.
+
 ### Fixed
 
 * u-boot-imx-tq-2024.04:
@@ -36,14 +68,6 @@ Releases are named with the following scheme:
     Using hard settings for consumer grade CPU can lead to boot issues for
     industrial graded CPU when the temperatur is outside of consumer grade
     temperatur range.
-
-### Removed
-
-* imx-atf-tq-2.10: remove recipe, all users were updated to use imx-atf-tq-2.12
-* qoriq-atf-2.10: remove recipe, all users were updated to use qoriq-atf-2.12
-* u-boot-tqmt-2015.07: TQMT10xx variants using this recipe are not supported under scarthgap.
-* linux-tqmt-5.15: TQMT10xx variants using this recipe are not supported under scarthgap.
-* machines: Remove TQMT10xx variants since they are not supported under scarthgap.
 
 ## scarthgap.TQ.ARM.BSP.0008
 
