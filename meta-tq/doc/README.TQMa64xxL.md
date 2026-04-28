@@ -50,64 +50,64 @@ _Kernel:_
 
 ### U-Boot
 
-| Feature                                          |                       |
-| :----------------------------------------------- | :-------------------: |
-| RAM configs                                      | 1 GiB, 2GiB           |
-| CPU variants                                     | AM6442, AM6411        |
-| UART (console on UART0)                          | x                     |
-| GPIO                                             | x                     |
-| I2C                                              | x                     |
-| System EEPROM parsing                            | x                     |
-| eMMC / SD                                        | x                     |
-| SPI-NOR                                          | x                     |
-| Ethernet                                         | Port X5 only          |
-| Cortex-R5F                                       | no                    |
-| Cortex-M4F                                       | no                    |
-| **Boot devices**                                 |                       |
-| eMMC                                             | x                     |
-| SD card                                          | x                     |
-| SPI-NOR                                          | x                     |
-| USB Mass Storage (X1)                            | x                     |
-| USB DFU (X1)                                     | x                     |
-| **USB**                                          |                       |
-| USB Host (X1, via OTG adapter)                   | USB Mass Storage boot only |
-| USB Device (X1)                                  | All boot devices execpt for USB Mass Storage |
-| USB Cable Detect / ID (X1)                       | no                    |
-| USB switchable VBUS (X1)                         | no (fixed setting for boot device) |
+| Feature                        |                                              |
+| :----------------------------- | :------------------------------------------: |
+| RAM configs                    |                 1 GiB, 2GiB                  |
+| CPU variants                   |                AM6442, AM6411                |
+| UART (console on UART0)        |                      x                       |
+| GPIO                           |                      x                       |
+| I2C                            |                      x                       |
+| System EEPROM parsing          |                      x                       |
+| eMMC / SD                      |                      x                       |
+| SPI-NOR                        |                      x                       |
+| Ethernet                       |                 Port X5 only                 |
+| Cortex-R5F                     |                      no                      |
+| Cortex-M4F                     |                      no                      |
+| **Boot devices**               |                                              |
+| eMMC                           |                      x                       |
+| SD card                        |                      x                       |
+| SPI-NOR                        |                      x                       |
+| USB Mass Storage (X1)          |                      x                       |
+| USB DFU (X1)                   |                      x                       |
+| **USB**                        |                                              |
+| USB Host (X1, via OTG adapter) |          USB Mass Storage boot only          |
+| USB Device (X1)                | All boot devices execpt for USB Mass Storage |
+| USB Cable Detect / ID (X1)     |                      no                      |
+| USB switchable VBUS (X1)       |      no (fixed setting for boot device)      |
 
 ### Linux
 
-| Feature                                                      |             |
-| :----------------------------------------------------------- | :---------: |
-| Suspend (deep / s2idle)                                      | no          |
-| **UART**                                                     |             |
-| Console (UART0, via X2 USB / UART converter)                 | x           |
-| RS485 (MCU\_UART0)                                           | x           |
-| BG95 IoT module (MAIN_UART1/4/5)                             | x           |
-| **GPIO**                                                     |             |
-| LED                                                          | x           |
-| Button                                                       | x           |
-| **I2C**                                                      |             |
-| EEPROMs                                                      | x           |
-| PMIC                                                         | x           |
-| RTC                                                          | x           |
-| Temperature sensor                                           | x           |
-| **Ethernet**                                                 |             |
-| 1x Gigabit Ethernet on MBaX4XxL (X5)                         | x           |
-| 2x PRU Gigabit Ethernet on MBaX4XxL (X6)                     | x           |
-| **WLAN/Bluetooth**                                           |             |
-| Marvell/NXP 88W8987-based WLAN/BT                            | WLAN only   |
-| **CAN**                                                      |             |
-| 2x CAN with CAN FD                                           | x           |
-| **USB**                                                      |             |
-| USB (X1: Dual role, Cable Detect, VBUS)                      | x           |
-| **PWM**                                                      |             |
-| Fan control                                                  | x (disabled by default) |
-| **SPI-NOR**                                                  |             |
-| Read with 1-4-4 SDR                                          | x           |
-| Write / erase with 1-4-4 SDR                                 | x           |
-| **SPI**                                                      |             |
-| Analog frontend (NAFE1338)                                   | x           |
+| Feature                                      |                         |
+| :------------------------------------------- | :---------------------: |
+| Suspend (deep / s2idle)                      |           no            |
+| **UART**                                     |                         |
+| Console (UART0, via X2 USB / UART converter) |            x            |
+| RS485 (MCU\_UART0)                           |            x            |
+| BG95 IoT module (MAIN_UART1/4/5)             |            x            |
+| **GPIO**                                     |                         |
+| LED                                          |            x            |
+| Button                                       |            x            |
+| **I2C**                                      |                         |
+| EEPROMs                                      |            x            |
+| PMIC                                         |            x            |
+| RTC                                          |            x            |
+| Temperature sensor                           |            x            |
+| **Ethernet**                                 |                         |
+| 1x Gigabit Ethernet on MBaX4XxL (X5)         |            x            |
+| 2x PRU Gigabit Ethernet on MBaX4XxL (X6)     |            x            |
+| **WLAN/Bluetooth**                           |                         |
+| Marvell/NXP 88W8987-based WLAN/BT            |        WLAN only        |
+| **CAN**                                      |                         |
+| 2x CAN with CAN FD                           |            x            |
+| **USB**                                      |                         |
+| USB (X1: Dual role, Cable Detect, VBUS)      |            x            |
+| **PWM**                                      |                         |
+| Fan control                                  | x (disabled by default) |
+| **SPI-NOR**                                  |                         |
+| Read with 1-4-4 SDR                          |            x            |
+| Write / erase with 1-4-4 SDR                 |            x            |
+| **SPI**                                      |                         |
+| Analog frontend (NAFE1338)                   |            x            |
 
 ### First-Stage Bootloader Variants
 
