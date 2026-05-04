@@ -11,8 +11,8 @@ DEPENDS = "\
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-SRCBRANCH = "lf-6.12.49_2.2.0"
-SRCREV = "81fca6434be0610f3f9216a762aadc4dc3e8d8db"
+SRCBRANCH = "lf-6.18.2_1.0.0"
+SRCREV = "c0debd7c0b4a125bd3ca66bc68f1915882b2bb62"
 
 SRC_URI = "\
     git://github.com/nxp-imx/imx-mkimage.git;protocol=https;branch=${SRCBRANCH} \
@@ -28,7 +28,7 @@ SRC_URI = "\
     file://0010-iMX8-9-redirect-more-messages-to-stderr.patch \
     file://0011-iMX8M-print_fit_hab-fix-output-for-symlinked-inputs.patch \
     file://0012-Add-generic-wrapper-for-mkimage_imx8.patch \
-    file://0013-i.MX94-i.MX95-use-default-logik-for-QSPI_HEADER.patch \
+    file://0013-i.MX94-i.MX95-use-default-logic-for-QSPI_HEADER.patch \
 "
 
 SRC_URI:append:nxp-hab4 = "\

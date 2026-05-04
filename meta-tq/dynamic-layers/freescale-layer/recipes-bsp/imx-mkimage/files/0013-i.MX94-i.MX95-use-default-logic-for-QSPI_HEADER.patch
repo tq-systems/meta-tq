@@ -1,4 +1,4 @@
-From a87770311ca2b5eadaa704ce5369ff9a041e6724 Mon Sep 17 00:00:00 2001
+From 1ce2a676929559fec7a4a728a1034bc7e7aa731b Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Wed, 12 Nov 2025 12:02:19 +0100
 Subject: [PATCH] i.MX94 / i.MX95: use default logic for QSPI_HEADER
@@ -22,7 +22,7 @@ Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
  2 files changed, 3 insertions(+), 10 deletions(-)
 
 diff --git a/iMX94/soc.mak b/iMX94/soc.mak
-index 750a75e..7e6c13a 100644
+index 655067d..69b5452 100644
 --- a/iMX94/soc.mak
 +++ b/iMX94/soc.mak
 @@ -8,11 +8,7 @@ CFLAGS ?= -O2 -Wall -std=c99
@@ -39,7 +39,7 @@ index 750a75e..7e6c13a 100644
  QSPI_PACKER = ../scripts/fspi_packer.sh
  QSPI_FCB_GEN = ../scripts/fspi_fcb_gen.sh
 diff --git a/iMX95/soc.mak b/iMX95/soc.mak
-index 6c0b321..9e24392 100644
+index 9a87c4e..b23f519 100644
 --- a/iMX95/soc.mak
 +++ b/iMX95/soc.mak
 @@ -8,11 +8,7 @@ CFLAGS ?= -O2 -Wall -std=c99
@@ -55,7 +55,7 @@ index 6c0b321..9e24392 100644
  
  QSPI_PACKER = ../scripts/fspi_packer.sh
  QSPI_FCB_GEN = ../scripts/fspi_fcb_gen.sh
-@@ -286,6 +282,7 @@ u-boot-atf-container-spinand.img: bl31.bin u-boot-hash.bin
+@@ -328,6 +324,7 @@ u-boot-atf-container-spinand.img: bl31.bin u-boot-hash.bin
  	fi
  
  fcb.bin: FORCE

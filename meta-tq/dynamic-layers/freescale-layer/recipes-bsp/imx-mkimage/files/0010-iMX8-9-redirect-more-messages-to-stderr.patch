@@ -1,4 +1,4 @@
-From 1317dffd157721f2865e554005a53f9af9d024c5 Mon Sep 17 00:00:00 2001
+From 660f000978bb7a23171e6414e0eab76a9cb90e50 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Thu, 24 Oct 2024 17:26:56 +0200
 Subject: [PATCH] iMX8/9: redirect more messages to stderr
@@ -74,7 +74,7 @@ index f2f7849..41791a7 100755
  ifneq ($(wildcard /usr/bin/rename.ul),)
      RENAME = rename.ul
 diff --git a/iMX8ULP/soc.mak b/iMX8ULP/soc.mak
-index ef74ecd..1460bfe 100644
+index 6859c31..c81fe23 100644
 --- a/iMX8ULP/soc.mak
 +++ b/iMX8ULP/soc.mak
 @@ -9,7 +9,7 @@ INCLUDE = ./lib
@@ -87,7 +87,7 @@ index ef74ecd..1460bfe 100644
  
  ifneq ($(wildcard /usr/bin/rename.ul),)
 diff --git a/iMX91/soc.mak b/iMX91/soc.mak
-index 4ff8988..2f975ff 100644
+index ccabd87..fdad856 100644
 --- a/iMX91/soc.mak
 +++ b/iMX91/soc.mak
 @@ -11,7 +11,7 @@ INCLUDE = ./lib
@@ -100,7 +100,7 @@ index 4ff8988..2f975ff 100644
  ifneq ($(wildcard /usr/bin/rename.ul),)
      RENAME = rename.ul
 diff --git a/iMX93/soc.mak b/iMX93/soc.mak
-index 9421904..fd522e6 100644
+index 7e51b7a..9b2aa2e 100644
 --- a/iMX93/soc.mak
 +++ b/iMX93/soc.mak
 @@ -11,7 +11,7 @@ INCLUDE = ./lib
@@ -113,7 +113,7 @@ index 9421904..fd522e6 100644
  ifneq ($(wildcard /usr/bin/rename.ul),)
      RENAME = rename.ul
 diff --git a/iMX94/soc.mak b/iMX94/soc.mak
-index d4faf4e..faaad03 100644
+index 383deba..6d32489 100644
 --- a/iMX94/soc.mak
 +++ b/iMX94/soc.mak
 @@ -16,7 +16,7 @@ endif
@@ -126,7 +126,7 @@ index d4faf4e..faaad03 100644
  ifneq ($(wildcard /usr/bin/rename.ul),)
      RENAME = rename.ul
 diff --git a/iMX95/soc.mak b/iMX95/soc.mak
-index 060531e..501c537 100644
+index e0e388c..25a05c6 100644
 --- a/iMX95/soc.mak
 +++ b/iMX95/soc.mak
 @@ -16,7 +16,7 @@ endif

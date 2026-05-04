@@ -1,4 +1,4 @@
-From 8f670386296982f67504949a2b70c12ec2d0a332 Mon Sep 17 00:00:00 2001
+From 86d7fe31bd206c0f86bf14e32c1d196b7f7138eb Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 22 Nov 2022 08:00:33 +0100
 Subject: [PATCH] iMX8QM: remove unused target

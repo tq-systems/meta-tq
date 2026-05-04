@@ -1,4 +1,4 @@
-From 288c9de564eafcb190afc7677815967587f2d8ca Mon Sep 17 00:00:00 2001
+From ba5da20df0c5f3e5e3cfc0a60473ff17d70007da Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Thu, 24 Oct 2024 16:55:34 +0200
 Subject: [PATCH] Add generic wrapper for mkimage_imx8
@@ -25,12 +25,13 @@ Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
  iMX93/soc.mak   |  3 ++-
  iMX94/soc.mak   |  3 ++-
  iMX95/soc.mak   |  3 ++-
+ iMX952/soc.mak  |  2 +-
  mkimage_imx8    |  7 +++++++
- 10 files changed, 29 insertions(+), 14 deletions(-)
+ 11 files changed, 30 insertions(+), 15 deletions(-)
  create mode 100755 mkimage_imx8
 
 diff --git a/Makefile b/Makefile
-index b14f9ce..7b39f8a 100644
+index 17ad2e9..9311848 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -1,5 +1,5 @@
@@ -53,9 +54,9 @@ index b14f9ce..7b39f8a 100644
  	@rm -f src/build_info.h
  ifdef O
  	@$(MAKE) --no-print-directory -C $(O) -f ../$(SOC_DIR)/soc.mak clean
-@@ -48,11 +48,11 @@ endif
- 	@$(MAKE) --no-print-directory -C iMX95 -f soc.mak  clean
+@@ -49,11 +49,11 @@ endif
  	@$(MAKE) --no-print-directory -C iMX94 -f soc.mak  clean
+ 	@$(MAKE) --no-print-directory -C iMX952 -f soc.mak  clean
  
 -$(MKIMG): src/build_info.h $(SRCS)
 -	@echo "Compiling mkimage_imx8"
@@ -112,7 +113,7 @@ index 41791a7..b3d9283 100755
  
  flash: $(MKIMG) $(AHAB_IMG) scfw_tcm.bin u-boot-atf.bin
 diff --git a/iMX8ULP/soc.mak b/iMX8ULP/soc.mak
-index 1460bfe..4cd4b2b 100644
+index c81fe23..04fedad 100644
 --- a/iMX8ULP/soc.mak
 +++ b/iMX8ULP/soc.mak
 @@ -58,8 +58,9 @@ u-boot-atf-container.img: bl31.bin u-boot-hash.bin
@@ -127,7 +128,7 @@ index 1460bfe..4cd4b2b 100644
  
  flash_dualboot: $(MKIMG) u-boot-spl.bin u-boot-atf-container.img
 diff --git a/iMX91/soc.mak b/iMX91/soc.mak
-index 2f975ff..b79b6fd 100644
+index fdad856..903c646 100644
 --- a/iMX91/soc.mak
 +++ b/iMX91/soc.mak
 @@ -149,8 +149,9 @@ flash_fw.bin: FORCE
@@ -142,7 +143,7 @@ index 2f975ff..b79b6fd 100644
  
  # Add for System ready
 diff --git a/iMX93/soc.mak b/iMX93/soc.mak
-index fd522e6..0e63bd4 100644
+index 9b2aa2e..5b34551 100644
 --- a/iMX93/soc.mak
 +++ b/iMX93/soc.mak
 @@ -161,8 +161,9 @@ flash_fw.bin: FORCE
@@ -157,25 +158,25 @@ index fd522e6..0e63bd4 100644
  
  # Add for System ready
 diff --git a/iMX94/soc.mak b/iMX94/soc.mak
-index faaad03..750a75e 100644
+index 6d32489..655067d 100644
 --- a/iMX94/soc.mak
 +++ b/iMX94/soc.mak
-@@ -225,8 +225,9 @@ fcb.bin: FORCE
+@@ -305,8 +305,9 @@ fcb.bin: FORCE
  
  .PHONY: clean nightly
  clean:
--	@rm -f $(MKIMG) u-boot-atf-container.img u-boot-spl-ddr-v2.bin m33-oei-ddrfw.bin a55-oei-ddrfw.bin u-boot-hash.bin flash.bin head.hash boot-spl-container.img
-+	@rm -f u-boot-atf-container.img u-boot-spl-ddr-v2.bin m33-oei-ddrfw.bin a55-oei-ddrfw.bin u-boot-hash.bin flash.bin head.hash boot-spl-container.img
+-	@rm -f $(MKIMG) u-boot-atf-container.img u-boot-spl-ddr-v2.bin m33-oei-ddrfw.bin u-boot-hash.bin flash.bin head.hash boot-spl-container.img
++	@rm -f u-boot-atf-container.img u-boot-spl-ddr-v2.bin m33-oei-ddrfw.bin u-boot-hash.bin flash.bin head.hash boot-spl-container.img
  	@rm -rf extracted_imgs
 +	rm -f mkimage.log
  	@echo "imx94 clean done"
  
  flash_lpboot: $(MKIMG) $(AHAB_IMG) $(MCU_IMG) $(OEI_IMG_M33)
 diff --git a/iMX95/soc.mak b/iMX95/soc.mak
-index 501c537..6c0b321 100644
+index 25a05c6..9a87c4e 100644
 --- a/iMX95/soc.mak
 +++ b/iMX95/soc.mak
-@@ -294,8 +294,9 @@ flash_fw.bin: FORCE
+@@ -336,8 +336,9 @@ flash_fw.bin: FORCE
  
  .PHONY: clean nightly
  clean:
@@ -185,7 +186,20 @@ index 501c537..6c0b321 100644
 +	rm -f mkimage.log
  	@echo "imx95 clean done"
  
- flash_lpboot: $(MKIMG) $(AHAB_IMG) $(MCU_IMG) $(OEI_IMG_M33)
+ # Add for System ready
+diff --git a/iMX952/soc.mak b/iMX952/soc.mak
+index 5313f5f..7942712 100644
+--- a/iMX952/soc.mak
++++ b/iMX952/soc.mak
+@@ -267,7 +267,7 @@ fcb.bin: FORCE
+ 
+ .PHONY: clean nightly
+ clean:
+-	@rm -f $(MKIMG) u-boot-atf-container.img u-boot-spl-ddr-v2.bin m33-oei-ddrfw.bin a55-oei-ddrfw.bin u-boot-hash.bin flash.bin head.hash boot-spl-container.img
++	@rm -f u-boot-atf-container.img u-boot-spl-ddr-v2.bin m33-oei-ddrfw.bin a55-oei-ddrfw.bin u-boot-hash.bin flash.bin head.hash boot-spl-container.img
+ 	@rm -rf extracted_imgs
+ 	@echo "imx952 clean done"
+ 
 diff --git a/mkimage_imx8 b/mkimage_imx8
 new file mode 100755
 index 0000000..834aba9

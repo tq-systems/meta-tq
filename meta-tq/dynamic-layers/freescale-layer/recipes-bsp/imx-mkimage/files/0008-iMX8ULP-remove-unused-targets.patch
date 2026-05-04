@@ -1,4 +1,4 @@
-From be40b9cdfb6f2cf70503678c00cfb9f95dea9f34 Mon Sep 17 00:00:00 2001
+From 8b0a1cfc7edd617200395d78d2d200f2c690a2b3 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Tue, 22 Nov 2022 08:01:43 +0100
 Subject: [PATCH] iMX8ULP: remove unused targets
@@ -13,7 +13,7 @@ Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
  1 file changed, 11 deletions(-)
 
 diff --git a/iMX8ULP/soc.mak b/iMX8ULP/soc.mak
-index dd61cd7..ef74ecd 100644
+index cc85166..6859c31 100644
 --- a/iMX8ULP/soc.mak
 +++ b/iMX8ULP/soc.mak
 @@ -40,17 +40,6 @@ u-boot-hash.bin: u-boot.bin

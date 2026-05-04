@@ -1,4 +1,4 @@
-From 64dc09385baf887dcf174ab8db2a09829f2b1bd2 Mon Sep 17 00:00:00 2001
+From 9a296cd6bf0e8a37630de0718fc098bbe57cdc61 Mon Sep 17 00:00:00 2001
 From: Markus Niebel <Markus.Niebel@ew.tq-group.com>
 Date: Thu, 4 Sep 2025 12:59:41 +0200
 Subject: [PATCH] iMX95: remove unused targets from soc.mak
@@ -14,10 +14,10 @@ Signed-off-by: Markus Niebel <Markus.Niebel@ew.tq-group.com>
  1 file changed, 11 deletions(-)
 
 diff --git a/iMX95/soc.mak b/iMX95/soc.mak
-index a3eaa2e..060531e 100644
+index 326746d..e0e388c 100644
 --- a/iMX95/soc.mak
 +++ b/iMX95/soc.mak
-@@ -236,17 +236,6 @@ u-boot-hash.bin: u-boot.bin
+@@ -278,17 +278,6 @@ u-boot-hash.bin: u-boot.bin
  	./$(MKIMG) -commit > head.hash
  	@cat u-boot.bin head.hash > u-boot-hash.bin
  
