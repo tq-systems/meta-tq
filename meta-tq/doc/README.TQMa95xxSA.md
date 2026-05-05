@@ -249,7 +249,7 @@ There the following lines need to be added to your `conf/local.conf`:
 
 ```
 IMX_SOC_REV:${MACHINE} ?= "A0"
-OEI_DDRCONFIG = "TQMa95xxSA.DDR-Timing.${OEI_RAM_SIZE}GB.V16.0005"
+OEI_DDR_CONFIG = "TQMa95xxSA.DDR-Timing.${OEI_RAM_SIZE}GB.V16.0005"
 ```
 
 ### Access U-Boot Environment from Linux
