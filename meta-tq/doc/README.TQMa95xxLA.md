@@ -21,45 +21,45 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ### U-Boot
 
-| Feature                               |                            |
-|:--------------------------------------|:--------------------------:|
-| **RAM configs**                       |                            |
-| TQMa95xxLA                            |              4 GB          |
-|                                       |                            |
-| CPU variants                          |          (A1) / B0         |
-| Fuses                                 |             x              |
-| GPIO                                  |             x              |
-| I2C                                   |             x              |
-| **QSPI**                              |                            |
-| Read                                  |          1-4-4-4B          |
-| Write                                 |          1-1-4-4B          |
-| Erase                                 |          1-1-1-4B          |
-| Boot                                  |             x              |
-| **eMMC / SD card**                    |                            |
-| Read                                  |             x              |
-| Write                                 |             x              |
-| Boot                                  |     SD: ok / eMMC: ok      |
-| **USB**                               |                            |
-| USB 2.0 Dual Role                     |  disabled (REV.010x SDP)   |
-| USB 3.0 (Hub on TQMa95xxSA)           | Host disabled, USB 2.0 SDP |
-| **ENET (GigE via Phy on MBa95xxCA)**  |                            |
-| ENET 0                                |             x              |
-| ENET 1                                |             x              |
-| **ENET (10GigE via SFP on MBa95xxCA)** |           |
-| ENET 2                                 |     -     |
-| **Bootstreams**                       |                            |
-| FlexSPI                               |             x              |
-| SD / eMMC                             |             x              |
-| UUU                                   |  (TBD: use SD card image)  |
+| Feature                                |                            |
+|:---------------------------------------|:--------------------------:|
+| **RAM configs**                        |                            |
+| TQMa95xxLA                             |            4 GB            |
+|                                        |                            |
+| CPU variants                           |             B0             |
+| Fuses                                  |             x              |
+| GPIO                                   |             x              |
+| I2C                                    |             x              |
+| **QSPI**                               |                            |
+| Read                                   |          1-4-4-4B          |
+| Write                                  |          1-1-4-4B          |
+| Erase                                  |          1-1-1-4B          |
+| Boot                                   |             x              |
+| **eMMC / SD card**                     |                            |
+| Read                                   |             x              |
+| Write                                  |             x              |
+| Boot                                   |     SD: ok / eMMC: ok      |
+| **USB**                                |                            |
+| USB 2.0 Dual Role                      |  disabled (REV.010x SDP)   |
+| USB 3.0 (Hub on TQMa95xxSA)            | Host disabled, USB 2.0 SDP |
+| **ENET (GigE via Phy on MBa95xxCA)**   |                            |
+| ENET 0                                 |             x              |
+| ENET 1                                 |             x              |
+| **ENET (10GigE via SFP on MBa95xxCA)** |                            |
+| ENET 2                                 |             -              |
+| **Bootstreams**                        |                            |
+| FlexSPI                                |             x              |
+| SD / eMMC                              |             x              |
+| UUU                                    |  (TBD: use SD card image)  |
 
 ### Linux
 
-| Feature                                | fslc-6.12 |
+| Feature                                | fslc-6.18 |
 |:---------------------------------------|:---------:|
 | **RAM configs**                        |           |
-| TQMa95xxLA                             |    4 GiB  |
+| TQMa95xxLA                             |   4 GiB   |
 |                                        |           |
-| CPU variants                           | (A1) / B0 |
+| CPU variants                           |    B0     |
 | Fuses / OCRAM                          |           |
 | speed grade                            |           |
 | **UART**                               |           |
@@ -116,7 +116,6 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * SCMI access to board resources from system manager not completely implemented
  
 * USB
-  * The USB Type-C connector (X9 on MBa95xxCA) currently only supports USB device mode.
   * USB host is not supported when booting in serial download mode
 
     USB0 signals are routed to X9 when booting with [serial download mode](#serial-downloader)
@@ -136,6 +135,8 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
   `UBI_MAX_LEB_COUNT` on machine level.
+
+* FAN controller driver lacks support for supply voltage
 
 ## Build Artefacts
 
@@ -225,15 +226,17 @@ __Note:__ Default u-boot environment variable `bootcmd` has to be set to `run di
 
 ### Test Sleepmode and Wakeup
 
-Use rtc0 (external RTC on TQMa95xxSA module) or rtc1 (RTC in CPU SNVS domain) to wakeup after 20 seconds:
+Use rtc1 (RTC in CPU SNVS domain) to wakeup after 20 seconds:
 
 ```
-RTC=rtc0
+RTC=rtc1
 echo enabled > /sys/class/rtc/${RTC}/device/power/wakeup
 echo 0 > /sys/class/rtc/${RTC}/wakealarm
 echo +20 > /sys/class/rtc//${RTC}/wakealarm
 echo mem > /sys/power/state
 ```
+
+__Note:__ rtc0 IRQ-GPIO is not accessible from Cortex-A domain
 
 ### Display Support
 
@@ -270,16 +273,6 @@ Use DIP S8 for Termination.
 ### Cortex M7
 
 <!-- TODO -->
-
-### Revision A0/A1 Support
-
-Revision A0/A1 chips need a special ELE firmware and also uses a different DDR-RAM timing.
-There the following lines need to be added to your `conf/local.conf`:
-
-```
-IMX_SOC_REV:${MACHINE} ?= "A0"
-OEI_DDRCONFIG = "TQMa95xxSA.DDR-Timing.${OEI_RAM_SIZE}GB.V16.0005"
-```
 
 ### Access U-Boot Environment from Linux
 
