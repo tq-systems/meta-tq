@@ -26,7 +26,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **RAM configs**                       |                            |
 | TQMa95xxSA                            |          2 / 4 GB          |
 |                                       |                            |
-| CPU variants                          |          A1 / B0           |
+| CPU variants                          |             B0             |
 | Fuses                                 |             x              |
 | GPIO                                  |             x              |
 | I2C                                   |             x              |
@@ -57,53 +57,53 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ### Linux
 
-| Feature                               | fslc-6.12 |
-|:--------------------------------------|:---------:|
-| **RAM configs**                       |           |
-| TQMa95xxSA                            |  2/4 GiB  |
-|                                       |           |
-| CPU variants                          |  A1 / B0  |
-| Fuses / OCRAM                         |           |
-| speed grade                           |           |
-| **UART**                              |           |
-| console on LPUART7 (X20)              |     x     |
-| LPUART1 on Cortex-M33 (X39)           |     x     |
-| **GPIO**                              |           |
-| SMARC GPIO pins                       |     x     |
-| **I2C**                               |           |
-| Temperature Sensors                   |     x     |
-| RTC                                   |     x     |
-| EEPROMS                               |     x     |
-| **ENET (GigE via Phy on TQMa93xxSA)** |           |
-| ENET 0                                |     x     |
-| ENET 1                                |     x     |
-| **USB**                               |           |
-| USB 2.0 Dual Role (X3/X4)             |           |
-| USB 3.0 (Hub on TQMa93xxSA) (X7/X8)   |     x     |
-| **QSPI NOR**                          |           |
-| Read with 1-4-4 SDR                   |     x     |
-| PP / Erase with 1-1-4 SDR             |     x     |
-| **Graphic**                           |           |
-| GPU                                   |     x     |
-| VPU                                   |     x     |
-| **Display**                           |           |
-| LVDS                                  |     x     |
-| **Audio**                             |           |
-| Line IN / Line Out (X17, X18)         |     x     |
-| **PCIe**                              |           |
-| mini-PCIe on MB-SMARC-2 (X44)         |     x     |
-| PCIe x1 on MB-SMARC-2 (X22)           |     x     |
-| **CAN-FD**                            |           |
-| CAN-FD                                |     x     |
-| **SPI**                               |           |
-| SPI user space device on all CS (X24) |     x     |
-| **PWM**                               |           |
-| PWM in TPM3                           |     x     |
-| **CPU/PMIC thermal sensors**          |           |
-| via thermal zone                      |     x     |
-| **Cortex M7**                         |           |
-| examples running from TCM             |           |
-| use UART as debug console             |           |
+| Feature                               |  fslc-6.18  |
+|:--------------------------------------|:-----------:|
+| **RAM configs**                       |             |
+| TQMa95xxSA                            |   2/4 GiB   |
+|                                       |             |
+| CPU variants                          |     B0      |
+| Fuses / OCRAM                         |             |
+| speed grade                           |             |
+| **UART**                              |             |
+| console on LPUART7 (X20)              |      x      |
+| LPUART1 on Cortex-M33 (X39)           |      x      |
+| **GPIO**                              |             |
+| SMARC GPIO pins                       |      x      |
+| **I2C**                               |             |
+| Temperature Sensors                   |      x      |
+| RTC                                   |      x      |
+| EEPROMS                               |      x      |
+| **ENET (GigE via Phy on TQMa93xxSA)** |             |
+| ENET 0                                |      x      |
+| ENET 1                                |      x      |
+| **USB**                               |             |
+| USB 2.0 Dual Role (X3/X4)             | (see below) |
+| USB 3.0 (Hub on TQMa93xxSA) (X7/X8)   |      x      |
+| **QSPI NOR**                          |             |
+| Read with 1-4-4 SDR                   |      x      |
+| PP / Erase with 1-1-4 SDR             |      x      |
+| **Graphic**                           |             |
+| GPU                                   |      x      |
+| VPU                                   |      x      |
+| **Display**                           |             |
+| LVDS                                  |      x      |
+| **Audio**                             |             |
+| Line IN / Line Out (X17, X18)         |      x      |
+| **PCIe**                              |             |
+| mini-PCIe on MB-SMARC-2 (X44)         |      x      |
+| PCIe x1 on MB-SMARC-2 (X22)           |      x      |
+| **CAN-FD**                            |             |
+| CAN-FD                                |      x      |
+| **SPI**                               |             |
+| SPI user space device on all CS (X24) |      x      |
+| **PWM**                               |             |
+| PWM in TPM3                           |      x      |
+| **CPU/PMIC thermal sensors**          |             |
+| via thermal zone                      |      x      |
+| **Cortex M7**                         |             |
+| examples running from TCM             |             |
+| use UART as debug console             |             |
 
 ## Known Issues / Limitations
 
@@ -241,16 +241,6 @@ See [here](./README.CAN.md) for details about configurating of CAN interfaces.
 ### Cortex M7
 
 <!-- TODO -->
-
-### Revision A0/A1 Support
-
-Revision A0/A1 chips need a special ELE firmware and also uses a different DDR-RAM timing.
-There the following lines need to be added to your `conf/local.conf`:
-
-```
-IMX_SOC_REV:${MACHINE} ?= "A0"
-OEI_DDR_CONFIG = "TQMa95xxSA.DDR-Timing.${OEI_RAM_SIZE}GB.V16.0005"
-```
 
 ### Access U-Boot Environment from Linux
 
