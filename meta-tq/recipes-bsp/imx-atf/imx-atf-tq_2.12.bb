@@ -14,7 +14,7 @@ SRCBRANCH = "TQM-lf_v2.12"
 ATF_SRC = "${TQ_GIT_BASEURL}/atf.git;protocol=${TQ_GIT_PROTOCOL}"
 
 SRC_URI = "${ATF_SRC};branch=${SRCBRANCH}"
-SRCREV = "68258fd2abdcd7e5bfc2204391f37574461b19c2"
+SRCREV = "6dca42494cb9c5535cb1e90f748b476d0c65f76f"
 
 inherit deploy
 
