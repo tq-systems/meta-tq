@@ -4,7 +4,7 @@ This README contains some useful information for TQMLS102xA on MBLS102xA
 
 [[_TOC_]]
 
-### Variants
+## Variants
 
 * TQMLS102xA: module
 * MBLS102xA: board
