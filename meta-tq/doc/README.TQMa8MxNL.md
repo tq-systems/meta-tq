@@ -319,7 +319,7 @@ Example for Linux:
 
 Example for U-Boot:
 
-```raw
+```
 # 32k -> 64 blocks -> 0x40
 
 tftp <bootstream>
@@ -336,7 +336,7 @@ To create a bootable QSPI NOR with boot stream only (file name see above)
 
 Example for U-Boot, booting from SD card:
 
-```raw
+```
 # SPI-NOR @ FlexSPI, offset 0
 
 tftp <bootstream>
@@ -445,7 +445,7 @@ __Gray with Omnivision OV9281__
 * Devicetree: `imx8mn-tqma8mqnl-mba8mx-lcdif-lvds-tm070jvhg33-ov9281.dtb`
 * gstreamer example:
 
-```raw
+```
 # configure
 yavta --format Y8 --size 1280x800 --capture=1 /dev/video0
 
@@ -463,7 +463,7 @@ __Raw Bayer with Sony IMX327__
 * Devicetree: `imx8mn-tqma8mqnl-mba8mx-lcdif-lvds-tm070jvhg33-imx327.dtb`
 * gstreamer example:
 
-```raw
+```
 gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-bayer,format=rggb10le,bpp=10,width=1280,height=720 ! \
   bayer2rgb ! waylandsink sync=false
 ```
@@ -495,7 +495,7 @@ Change by switching from GPIO2_1 (SEL_USB_HUB_B)
 #### Linux
 
 Default dtb is configured for USB Host support via USB hub. A special dtb
-is provided for USB dual role support, see see [artefacts section](#build-artefacts).
+is provided for USB dual role support, see [artefacts section](#build-artefacts).
 
 ### High Assurance Boot (Secure Boot)
 

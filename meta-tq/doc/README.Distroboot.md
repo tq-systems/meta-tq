@@ -1,10 +1,10 @@
 # Standard Boot/Distroboot
 
-The terms "Standard boot and "Distroboot" describe a standardized interface
+The terms "Standard boot" and "Distroboot" describe a standardized interface
 between the U-Boot bootloader and the operating system. The operating system can
 provide its own boot script as a `boot.scr` image (which can optionally be
 signed for Secure Boot) and/or a `extlinux.conf`, which define the loaded
-kernel, Device Trees, command line or other details of the OS boot, rather than
+kernel, device trees, command line or other details of the OS boot, rather than
 hardcoding these in the bootloader.
 
 The older "Distroboot" based on scripts in the U-Boot environment and the newer

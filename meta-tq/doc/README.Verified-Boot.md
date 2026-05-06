@@ -52,7 +52,7 @@ Signature generation can either be handled as part of the Yocto build (for
 convenience during development) or separately (strongly recommended for
 production images, so signing keys can be stored on a protected host separate
 from the build system). Also the process of signing images should be executed in
-a trusted environment).
+a trusted environment.
 
 In both cases, the "secure" distro feature must be enabled, either in a
 custom distro config or in `local.conf`:

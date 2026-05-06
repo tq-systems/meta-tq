@@ -25,7 +25,7 @@ When using other M4 firmware keep in mind to adjust
 * Bootloader (if needed)
 * yocto recipes
 
-*Note* The SCU firmare in this BSP implements handling for M4 enabled images with
+*Note* The SCU firmware in this BSP implements handling for M4 enabled images with
 alternate config flag supplied from `imx-mkimage` when building `flash_linux_m4`.
 
 ## Building
