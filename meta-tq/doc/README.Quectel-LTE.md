@@ -4,26 +4,26 @@ This README contains some useful information for using Quectel LTE card.
 
 [[_TOC_]]
 
-# Supported Hardware
+## Supported Hardware
 
-## Hardware Platform
+### Hardware Platform
 Currently with Linux 5.15 the supported platforms are
 * TQMa9xxx
 
-## Quectel Modules
+### Quectel Modules
 * Quectel EC21
   * USB VID: 0x2c7c
   * USB PID: 0x0121
 
-# Usage
+## Usage
 
 `pppd call quectel-ppp`
 
 A `ppp0` device should be available when executing the command `ifconfig ppp0`.
 
-## Building & Configuration
+### Building & Configuration
 
-### Kernel Configuration
+#### Kernel Configuration
 
 ```
 CONFIG_PPP=m
@@ -35,19 +35,19 @@ CONFIG_USB_NET_QMI_WWAN=m
 CONFIG_USB_WDM=m
 ```
 
-### Kernel Patches
+#### Kernel Patches
 
 The kernel patches from the Quectel documentation are not necessary for the
 Quectel EC21 module.
 
-### PPP Scripts
+#### PPP Scripts
 
 The current ppp scripts only support SIM cards without PIN.
 
 The recipe for the ppp script is in
 `meta-dumpling/recipes-connectivity/quectel-ppp/quectel-ppp_0.1.bb`.
 
-### Miscellaneous
+#### Miscellaneous
 
 There is an `lte` machine feature and a `packagegroup-lte` to add LTE support
 for a target.

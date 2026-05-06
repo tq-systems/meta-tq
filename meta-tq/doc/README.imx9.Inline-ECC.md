@@ -1,4 +1,4 @@
-### Inline ECC
+# Inline ECC
 
 The i.MX9X DDR controller supports inline ECC, i.e. using part of RAM for
 ECC data without additional sideband RAM. Enabling this feature requires

@@ -4,7 +4,7 @@ This README contains some useful information for using Linux Preempt-RT
 
 [[_TOC_]]
 
-# Supported Platforms
+## Supported Platforms
 
 | Board     | linux 6.6| linux 6.12 |
 |-----------|----------|------------|
@@ -27,9 +27,9 @@ Notes:
 
 * **(x):** Version is not tested.
 
-# Usage
+## Usage
 
-## Configuration
+### Configuration
 
 In order to select the the Preempt-RT patched kernel the following line has to
 be added to your `conf/local.conf`:
@@ -40,7 +40,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-rt-tq"
 This uses a patched kernel and also enables the necessary kernel
 configurations for Preempt-RT.
 
-## Building
+### Building
 
 When building together with `meta-dumpling` one of the two example images can be used:
 * `tq-image-generic-rt`
@@ -49,7 +49,7 @@ When building together with `meta-dumpling` one of the two example images can be
 These recipes ensure that an RT patched kernel is used as well as include tools for
 testing / meassuring RT features. These are based on the regular `tq-image-generic[-debug]`.
 
-## Verification
+### Verification
 
 Once booted to check that an RT patched kernel is used a simple test is
 ```
