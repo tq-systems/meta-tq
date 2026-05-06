@@ -148,7 +148,7 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 * DVFS is not supported using cpu-freq framework. See [here](#frequency-scaling)
   on how to use frequency scaling
 * Ethernet device order is defined by DT aliases. Linux and bootloader DT need to match
-* CPU mask 1.0 and older is not longer supported. No up to date firmare available from NXP.
+* CPU mask 1.0 and older is not longer supported. No up to date firmware available from NXP.
   Variants with old mask will not boot.
 * The SPI UBI rootfs Volume has been renamed from `rootfs` to `root`
   to conform with distroboot settings (scarthgap.TQ.ARM.BSP.0007, u-boot 2024.04)
@@ -183,7 +183,7 @@ SRCREV:tqma93xx = "6d8a66ee71659362646d93f2752354858c04f205"
 LINUX_VERSION:tqma93xx = "${LINUX_RELEASE}.23"
 ```
 * Watchdog is not enabled by default
-* on MBa93xxLA-MINI the QSPI pins are used for SDIO
+* On MBa93xxLA-MINI the QSPI pins are used for SDIO
   If a module with QSPI is required, a specially adapted mainboard devicetree must be created.
 
 ## MBa91 Differences
