@@ -34,8 +34,8 @@ Releases are named with the following scheme:
   * TQMa93xxCA/LA: set thermal trips from fuses
 
     Using hard settings for consumer grade CPU can lead to boot issues for
-    industrial graded CPU when the temperatur is outside of consumer grade
-    temperatur range.
+    industrial graded CPU when the temperature is outside of consumer grade
+    temperature range.
 
 ### Removed
 
