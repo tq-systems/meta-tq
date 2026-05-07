@@ -11,8 +11,11 @@ Releases are named with the following scheme:
 
 ### Changed
 
-* linux-tq-6.12: update to v6.12.82
-* linux-tq-6.6: update to v6.6.135
+* linux-rt-tq-6.12: incorporate TQ-Systems fixes from linux-tq-6.12
+* linux-rt-tq-6.6: update to v6.6.135-rt75
+* linux-tq-6.12: update to v6.12.86
+* linux-tq-6.6: update to v6.6.137
+* linux-imx-tq-6.6: update from linux-fslc incl. v6.6.137
 
 ### Deprecated
 
@@ -32,6 +35,17 @@ Releases are named with the following scheme:
 
   **Note** Support for TQMa8M / TQMa93 with LTS based kernel / mainline driver stack
   is not deprecated.
+
+### Fixed
+
+* u-boot-imx-tq-2024.04: TQMa8MPxL / TQMa8MPxS
+
+  Add missing check for started Cortex-M and add `clk-imx8mp.mcore_booted=1` to
+  kernel command line to prevent swithcing off unused clocks. Otherwise a running
+  firmware on Cortex-M will stop during kernel boot.
+* linux-tq-6.12: includes fix for 'Copy fail` (CVE-2026-31431)
+* linux-tq-6.6: includes fix for 'Copy fail` (CVE-2026-31431)
+* linux-imx-tq-6.6: includes fix for 'Copy fail` (CVE-2026-31431)
 
 ## scarthgap.TQ.ARM.BSP.0009 (not released yet)
 
