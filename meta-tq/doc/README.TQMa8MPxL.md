@@ -64,60 +64,61 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 #### MBa8MPxL
 
-| Feature                                                      |   fslc-6.6  |    6.12.y   |
-|:-------------------------------------------------------------|:-----------:| :---------: |
-| RAM configs                                                  | 1,2,4,8 GiB | 1,2,4,8 GiB |
-| CPU variants                                                 |  i.MX8MPQ   |  i.MX8MPQ   |
-| Fuses / OCRAM                                                |      x      |      x      |
-| speed grade / temperature grade detection                    |      x      |      x      |
-| **UART**                                                     |             |             |
-| console on UART4 (via USB / UART converter) (X28 USB If 3)   |      x      |      x      |
-| UART3 via USB UART converter (X28 USB If 2)                  |      x      |      x      |
-| UART1 / UART2 via pin header                                 |             |      x      |
-| **GPIO**                                                     |             |             |
-| LED                                                          |      x      |      x      |
-| Button                                                       |      x      |      x      |
-| 24V IO                                                       |             |      x      |
-| **I2C**                                                      |             |      x      |
-| EEPROMs                                                      |      x      |      x      |
-| PMIC                                                         |      x      |             |
-| RTC                                                          |      x      |      x      |
-| Temperature Sensors                                          |      x      |             |
-| **ENET**                                                     |             |      x      |
-| GigE / FEC via Phy on MBa8MPxL                               |      x      |      x      |
-| GigE / EQOS via Phy on MBa8MPxL                              |      x      |      x      |
-| **USB**                                                      |             |             |
-| USB 3.0 Host / Hub                                           |      x      |      x      |
-| USB DRD (USB 3.0 Cable Detect, VBUS)                         |      x      |      x      |
-| **QSPI NOR**                                                 |             |             |
-| Read with 1-1-4 SDR                                          |      x      |      x      |
-| PP / Erase with 1-1-1 SDR                                    |      x      |      x      |
-| **Graphic / Multimedia**                                     |             |             |
-| GPU                                                          |      x      |      x      |
-| VPU                                                          |      x      |             |
-| **Display**                                                  |             |             |
-| LVDS                                                         |      x      |             |
-| Dual-Channel LVDS                                            |      x      |             |
-| HDMI                                                         |      x      |      x      |
-| MIPI-DSI (DP Bridge)                                         |             |      x      |
-| **Audio**                                                    |             |             |
-| HDMI                                                         |      x      |             |
-| Codec (Line IN / Line OUT)                                   |      x      |      x      |
-| **PCIe**                                                     |             |             |
-| wireless card at M.2                                         |      x      |             |
-| **CAN-FD**                                                   |             |             |
-| CAN-FD                                                       |      x      |      x      |
-| **SPI**                                                      |             |             |
-| spidev at all CS                                             |      x      |             |
-| ADC                                                          |      x      |      x      |
-| **Cortex M7**                                                |             |             |
-| examples running from TCM                                    |      x      |             |
-| use UART3 as debug console (see issues)                      |      x      |             |
-| **MIPI CSI (see Issues section)**                            |             |             |
-| Gray with Vision Components GmbH camera (Sensor OV9281)      |      x      |             |
-| Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |      x      |             |
-| **NPU**                                                      |             |             |
-| NPU                                                          |      x      |             |
+| Feature                                                      | linux-tq-6.18 |
+|:-------------------------------------------------------------|:-------------:|
+| RAM configs                                                  |  1,2,4,8 GiB  |
+| CPU variants                                                 |   i.MX8MPQ    |
+| Fuses / OCRAM                                                |       x       |
+| speed grade / temperature grade detection                    |       x       |
+| **UART**                                                     |               |
+| console on UART4 (via USB / UART converter) (X28 USB If 3)   |       x       |
+| UART3 via USB UART converter (X28 USB If 2)                  |       x       |
+| UART1 / UART2 via pin header                                 |       x       |
+| **GPIO**                                                     |               |
+| LED                                                          |       x       |
+| Button                                                       |       x       |
+| 24V IO                                                       |       x       |
+| **I2C**                                                      |               |
+| EEPROMs                                                      |       x       |
+| PMIC                                                         |       x       |
+| RTC                                                          |       x       |
+| Temperature Sensors                                          |       x       |
+| **ENET**                                                     |               |
+| GigE / FEC via Phy on MBa8MPxL                               |       x       |
+| GigE / EQOS via Phy on MBa8MPxL                              |       x       |
+| **USB**                                                      |               |
+| USB 3.0 Host / Hub                                           |       x       |
+| USB DRD (USB 3.0 Cable Detect, VBUS)                         |       x       |
+| **QSPI NOR**                                                 |               |
+| Read with 1-1-4 SDR                                          |       x       |
+| PP / Erase with 1-1-1 SDR                                    |       x       |
+| **Graphic / Multimedia**                                     |               |
+| GPU                                                          |       x       |
+| VPU (decode)                                                 |       -       |
+| VPU (decode)                                                 |       x       |
+| **Display**                                                  |               |
+| LVDS                                                         |       x       |
+| Dual-Channel LVDS                                            |       x       |
+| HDMI                                                         |       x       |
+| MIPI-DSI (DP Bridge)                                         |       x       |
+| **Audio**                                                    |               |
+| HDMI                                                         |               |
+| Codec (Line IN / Line OUT)                                   |       x       |
+| **PCIe**                                                     |               |
+| wireless card at M.2                                         |       x       |
+| **CAN-FD**                                                   |               |
+| CAN-FD                                                       |       x       |
+| **SPI**                                                      |               |
+| spidev at all CS                                             |       x       |
+| ADC                                                          |       x       |
+| **Cortex M7**                                                |               |
+| examples running from TCM                                    |               |
+| use UART3 as debug console (see issues)                      |               |
+| **MIPI CSI (see Issues section)**                            |               |
+| Gray with Vision Components GmbH camera (Sensor OV9281)      |               |
+| Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |               |
+| **NPU**                                                      |               |
+| NPU                                                          |               |
 
 #### MBa8MP-RAS314
 
