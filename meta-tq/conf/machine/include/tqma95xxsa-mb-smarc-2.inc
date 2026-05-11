@@ -50,7 +50,7 @@ UBOOT_EXTLINUX_LABELS ?= " \
 EXTRA_EXTLINUX_LABELS ?= ""
 
 EXTRA_EXTLINUX_LABELS:mx95-nxp-bsp = " \
-    lvds-tm070jdhg30 \
+    lvds-tm070jvhg33 \
 "
 
 UBOOT_EXTLINUX_LABELS += "${EXTRA_EXTLINUX_LABELS}"
@@ -59,9 +59,9 @@ UBOOT_EXTLINUX_DEFAULT_LABEL ?= "default"
 UBOOT_EXTLINUX_KERNEL_IMAGE_default = "../fitImage"
 UBOOT_EXTLINUX_MENU_DESCRIPTION_default = "${DISTRO_NAME} on ${MACHINE} (default)"
 
-UBOOT_EXTLINUX_KERNEL_IMAGE_lvds-tm070jdhg30 = \
+UBOOT_EXTLINUX_KERNEL_IMAGE_lvds-tm070jvhg33 = \
     "../fitImage#${FIT_CONF_PREFIX}imx95-tqma9596sa-mb-smarc-2.dtb#${FIT_CONF_PREFIX}imx95-tqma9596sa-mb-smarc-2-lvds-tm070jvhg33.dtbo"
-UBOOT_EXTLINUX_MENU_DESCRIPTION_lvds-tm070jdhg30 = \
-    "${DISTRO_NAME} on ${MACHINE} (LVDS display: TM070JDHG30)"
+UBOOT_EXTLINUX_MENU_DESCRIPTION_lvds-tm070jvhg33 = \
+    "${DISTRO_NAME} on ${MACHINE} (LVDS display: TM070JDVG33)"
 
 require conf/machine/include/tq-distroboot.inc
