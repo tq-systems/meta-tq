@@ -2,7 +2,7 @@ require conf/machine/include/tq-machine.inc
 
 # direct assign to SERIAL_CONSOLES to prevent wrong defaults and not using
 # deprecated SERIAL_CONSOLE
-SERIAL_CONSOLES = "115200;ttyLP6"
+SERIAL_CONSOLES = "115200;ttyLP0"
 
 # disable virtual console support for this board and limit getty to SERIAL_CONSOLES only
 USE_VT = "0"
