@@ -38,6 +38,11 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* tqma93xx-mba93xxca/la: fix distroboot flow for rpmsg and lvds configs with linux-imx-tq
+
+  Use correct overrides for the BSP flavour to generate the menu entries and use correct overlay
+  name for rpmsg menu item. Otherwise no configurations were generated for NXP BSP flavour and
+  the remoteproc device tree overlay was silently not applied.
 * u-boot-imx-tq-2024.04: TQMa8MPxL / TQMa8MPxS
 
   Add missing check for started Cortex-M and add `clk-imx8mp.mcore_booted=1` to
