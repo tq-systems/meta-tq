@@ -88,3 +88,5 @@ IMX_DEFAULT_BOOTLOADER ?= "u-boot-imx-tq"
 
 # Common image configuration
 require conf/machine/include/tq-image.inc
+
+FIT_IMAGE += "linux-tq-fitimage"
