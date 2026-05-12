@@ -122,46 +122,46 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 #### MBa8MP-RAS314
 
-| Feature                                                      |    6.12.y   |
-|:-------------------------------------------------------------| :---------: |
-| RAM configs                                                  | 1,2,4,8 GiB |
-| CPU variants                                                 |  i.MX8MPQ   |
-| Fuses / OCRAM                                                |      x      |
-| speed grade / temperature grade detection                    |      x      |
-| **UART**                                                     |             |
-| console on UART4 (via USB / UART converter) (X4 USB If 2)    |      x      |
-| UART3 via USB UART converter (X4 USB If 1)                   |      x      |
-| **GPIO**                                                     |             |
-| LED                                                          |      x      |
-| **I2C**                                                      |      x      |
-| EEPROMs                                                      |      x      |
-| PMIC                                                         |             |
-| RTC                                                          |      x      |
-| Temperature Sensors                                          |      x      |
-| **ENET**                                                     |      x      |
-| GigE / FEC via Phy on MBa8MPxL                               |      x      |
-| GigE / EQOS via Phy on MBa8MPxL                              |      x      |
-| **USB**                                                      |             |
-| USB 3.0 Host / Hub (X12/X13)                                 |      x      |
-| USB Device (X14)                                             |      x      |
-| **QSPI NOR**                                                 |             |
-| Read with 1-1-4 SDR                                          |      x      |
-| PP / Erase with 1-1-1 SDR                                    |      x      |
-| **Graphic / Multimedia**                                     |             |
-| GPU                                                          |      x      |
-| VPU                                                          |      x      |
-| **Display**                                                  |             |
-| LVDS                                                         |             |
-| HDMI                                                         |      x      |
-| **Audio**                                                    |             |
-| HDMI                                                         |             |
-| Codec (Headphone / Mic In)                                   |      x      |
-| **PCIe**                                                     |             |
-| wireless & BT card on-board                                  |      x      |
-| **MIPI CSI**                                                 |             |
-| Raspberry Pi Camera Module 2                                 |             |
-| **NPU**                                                      |             |
-| NPU                                                          |             |
+| Feature                                                   | linux-tq-6.18 |
+|:----------------------------------------------------------|:-------------:|
+| RAM configs                                               |  1,2,4,8 GiB  |
+| CPU variants                                              |   i.MX8MPQ    |
+| Fuses / OCRAM                                             |       x       |
+| speed grade / temperature grade detection                 |       x       |
+| **UART**                                                  |               |
+| console on UART4 (via USB / UART converter) (X4 USB If 2) |       x       |
+| UART3 via USB UART converter (X4 USB If 1)                |       x       |
+| **GPIO**                                                  |               |
+| LED                                                       |       x       |
+| **I2C**                                                   |               |
+| EEPROMs                                                   |       x       |
+| PMIC                                                      |       x       |
+| RTC                                                       |       x       |
+| Temperature Sensors                                       |       x       |
+| **ENET**                                                  |               |
+| GigE / FEC via Phy on MBa8MPxL                            |       x       |
+| GigE / EQOS via Phy on MBa8MPxL                           |       x       |
+| **USB**                                                   |               |
+| USB 3.0 Host / Hub (X12/X13)                              |       x       |
+| USB Device (X14)                                          |       x       |
+| **QSPI NOR**                                              |               |
+| Read with 1-1-4 SDR                                       |       x       |
+| PP / Erase with 1-1-1 SDR                                 |       x       |
+| **Graphic / Multimedia**                                  |               |
+| GPU                                                       |       x       |
+| VPU                                                       |       x       |
+| **Display**                                               |               |
+| LVDS                                                      |       x       |
+| HDMI                                                      |       x       |
+| **Audio**                                                 |               |
+| HDMI                                                      |               |
+| Codec (Headphone / Mic In)                                |       x       |
+| **PCIe**                                                  |               |
+| wireless & BT card on-board                               |       x       |
+| **MIPI CSI**                                              |               |
+| Raspberry Pi Camera Module 2                              |               |
+| **NPU**                                                   |               |
+| NPU                                                       |               |
 
 ## TODO / Untested
 
