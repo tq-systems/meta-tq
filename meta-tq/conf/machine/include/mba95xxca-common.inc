@@ -75,7 +75,7 @@ UBOOT_EXTLINUX_MENU_DESCRIPTION_lvds-g133han01 = \
     "${DISTRO_NAME} on ${MACHINE} (LVDS display: G133HAN01)"
 
 UBOOT_EXTLINUX_KERNEL_IMAGE_lvds-tm070jvhg33 = \
-    "../fitImage#${FIT_CONF_PREFIX}imx95-tqma9596la-mba95xxca.dtb#${FIT_CONF_PREFIX}imx95-tqma9596cla-mba95xxca-lvds-tm070jvhg33.dtbo"
+    "../fitImage#${FIT_CONF_PREFIX}imx95-tqma9596la-mba95xxca.dtb#${FIT_CONF_PREFIX}imx95-tqma9596la-mba95xxca-lvds-tm070jvhg33.dtbo"
 UBOOT_EXTLINUX_MENU_DESCRIPTION_lvds-tm070jvhg33 = \
     "${DISTRO_NAME} on ${MACHINE} (LVDS display: TM070JDVG33)"
 
