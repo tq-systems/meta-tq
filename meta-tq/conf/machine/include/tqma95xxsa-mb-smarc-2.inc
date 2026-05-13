@@ -62,6 +62,6 @@ UBOOT_EXTLINUX_MENU_DESCRIPTION_default = "${DISTRO_NAME} on ${MACHINE} (default
 UBOOT_EXTLINUX_KERNEL_IMAGE_lvds-tm070jvhg33 = \
     "../fitImage#${FIT_CONF_PREFIX}imx95-tqma9596sa-mb-smarc-2.dtb#${FIT_CONF_PREFIX}imx95-tqma9596sa-mb-smarc-2-lvds-tm070jvhg33.dtbo"
 UBOOT_EXTLINUX_MENU_DESCRIPTION_lvds-tm070jvhg33 = \
-    "${DISTRO_NAME} on ${MACHINE} (LVDS display: TM070JDHG30)"
+    "${DISTRO_NAME} on ${MACHINE} (LVDS display: TM070JDVG33)"
 
 require conf/machine/include/tq-distroboot.inc
