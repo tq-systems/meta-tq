@@ -54,62 +54,64 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ### Linux
 
-| Feature                                | fslc-6.18 |
-|:---------------------------------------|:---------:|
-| **RAM configs**                        |           |
-| TQMa95xxLA                             |   4 GiB   |
-|                                        |           |
-| CPU variants                           |    B0     |
-| Fuses / OCRAM                          |           |
-| speed grade                            |           |
-| **UART**                               |           |
-| console on LPUART1 (X26)               |     x     |
-| RS485 on LPUART8 (X15)                 |     x     |
-| System manager debug (LPUART2) (X26)   |     x     |
-| **GPIO**                               |           |
-| GPIO used for several functions        |     x     |
-| **I2C**                                |           |
-| Temperature Sensors                    |     x     |
-| RTC                                    |     x     |
-| EEPROMS                                |     x     |
-| GPIO expander                          |     x     |
-| Fan                                    |     -     |
-| **ENET (GigE via Phy on MBa95xxCA)**   |           |
-| ENET 0                                 |     x     |
-| ENET 1                                 |     x     |
-| **ENET (10GigE via SFP on MBa95xxCA)** |           |
-| ENET 2                                 |     x     |
-| **USB**                                |           |
-| USB 2.0 Device (X9)                    |     x     |
-| USB 3.0 Host (Hub on MBa95xxCA) (X8)   |     x     |
-| **QSPI NOR**                           |           |
-| Read with 1-4-4 SDR                    |     x     |
-| PP / Erase with 1-1-4 SDR              |     x     |
-| **Graphic**                            |           |
-| GPU                                    |     x     |
-| VPU                                    |     x     |
-| **Display**                            |           |
-| LVDS                                   |     x     |
-| **Audio**                              |           |
-| Line IN / Line OUT (X23, X24)          |     x     |
-| Headphone out (X22)                    |           |
-| Microphone in (X22)                    |           |
-| **PCIe**                               |           |
-| M.2 on MBa95xxCA (X16)                 |     x     |
-| M.2 on MBa95xxCA (X17)                 |     x     |
-| **SDIO**                               |           |
-| M.2 on MBa95xxCA (X16)                 |           |
-| **CAN-FD**                             |           |
-| CAN-FD                                 |     x     |
-| **SPI**                                |           |
-| SPI user space device on all CS (X4)   |     x     |
-| **PWM**                                |           |
-| PWM backlight                          |     x     |
-| **CPU/PMIC thermal sensors**           |           |
-| via thermal zone                       |     x     |
-| **Cortex M7**                          |           |
-| examples running from TCM              |           |
-| use UART as debug console              |           |
+| Feature                                               | fslc-6.18 |
+|:----------------------------------------------------: |:---------:|
+| **RAM configs**                                       |           |
+| TQMa95xxLA                                            |   4 GiB   |
+|                                                       |           |
+| CPU variants                                          |    B0     |
+| Fuses / OCRAM                                         |           |
+| speed grade                                           |           |
+| **UART**                                              |           |
+| console on LPUART1 (X26)                              |     x     |
+| RS485 on LPUART8 (X15)                                |     x     |
+| System manager debug (LPUART2) (X26)                  |     x     |
+| **GPIO**                                              |           |
+| GPIO used for several functions                       |     x     |
+| **I2C**                                               |           |
+| Temperature Sensors                                   |     x     |
+| RTC                                                   |     x     |
+| EEPROMS                                               |     x     |
+| GPIO expander                                         |     x     |
+| Fan                                                   |     -     |
+| **ENET (GigE via Phy on MBa95xxCA)**                  |           |
+| ENET 0                                                |     x     |
+| ENET 1                                                |     x     |
+| **ENET (10GigE via SFP on MBa95xxCA)**                |           |
+| ENET 2                                                |     x     |
+| **USB**                                               |           |
+| USB 2.0 Device (X9)                                   |     x     |
+| USB 3.0 Host (Hub on MBa95xxCA) (X8)                  |     x     |
+| **QSPI NOR**                                          |           |
+| Read with 1-4-4 SDR                                   |     x     |
+| PP / Erase with 1-1-4 SDR                             |     x     |
+| **Graphic**                                           |           |
+| GPU                                                   |     x     |
+| VPU                                                   |     x     |
+| **Display**                                           |           |
+| LVDS                                                  |     x     |
+| **Audio**                                             |           |
+| Line IN / Line OUT (X23, X24)                         |     x     |
+| Headphone out (X22)                                   |           |
+| Microphone in (X22)                                   |           |
+| **PCIe**                                              |           |
+| M.2 on MBa95xxCA (X16)                                |     x     |
+| M.2 on MBa95xxCA (X17)                                |     x     |
+| **SDIO**                                              |           |
+| M.2 on MBa95xxCA (X16)                                |           |
+| **CAN-FD**                                            |           |
+| CAN-FD                                                |     x     |
+| **SPI**                                               |           |
+| SPI user space device on all CS (X4)                  |     x     |
+| **PWM**                                               |           |
+| PWM backlight                                         |     x     |
+| **CPU/PMIC thermal sensors**                          |           |
+| via thermal zone                                      |     x     |
+| **Cortex M7**                                         |           |
+| examples running from TCM                             |           |
+| use UART as debug console                             |           |
+| **MIPI CSI**                                          |           |
+| 4k color with NXP IMX-OS08A20 camera (Sensor OS08A20) |     x     |
 
 ## Known Issues / Limitations
 
@@ -277,6 +279,39 @@ Use DIP S8 for Termination.
 ### Access U-Boot Environment from Linux
 
 See [U-Boot environment tools](README.libubootenv.md).
+
+### MIPI-CSI
+
+#### NXP IMX-OS08A20 camera
+
+* Devicetree/Overlay: `imx95-tqma9596la-mba95xxca-os08a20.dtb/dtbo`
+* or choose an entry with OS08A20 overlay in distroboot menu
+
+gstreamer examples:
+
+```
+# set nxp/neo pipeline to be first in pipeline match list (selects correct
+# libcamera driver)
+export LIBCAMERA_PIPELINES_MATCH_LIST='nxp/neo,imx8-isi,simple'
+
+# record and encode video to file
+gst-launch-1.0 -e libcamerasrc ! \
+  "video/x-raw,format=(string)NV12,width=3840,height=2160,framerate=(fraction)30/1" ! \
+  videoconvert ! v4l2h264enc ! h264parse ! mp4mux ! filesink location=video.mp4
+
+# show live video
+gst-launch-1.0 -e libcamerasrc ! \
+  "video/x-raw,format=(string)NV12,width=3840,height=2160,framerate=(fraction)30/1" ! \
+  videoconvert ! waylandsink
+```
+
+By default, libcamera (NXP fork) uses the built-in driver for the i.MX95 NEO
+ISP. The BSP also provides the uGuzzi IPA from MM Solutions. One can select the
+uGuzzi IPA by setting `LIBCAMERA_IPA_MODULE_PATH`:
+
+```
+export LIBCAMERA_IPA_MODULE_PATH="/usr/lib/libcamera/ipa-nxp-neo-uguzzi"
+```
 
 ## Support Wiki
 
