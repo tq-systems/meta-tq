@@ -11,10 +11,11 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-rt-tq-6.12: update to v6.12.89-rt18
 * linux-rt-tq-6.12: incorporate TQ-Systems fixes from linux-tq-6.12
 * linux-rt-tq-6.6: update to v6.6.135-rt75
-* linux-tq-6.12: update to v6.12.87
-* linux-tq-6.6: update to v6.6.138
+* linux-tq-6.12: update to v6.12.90
+* linux-tq-6.6: update to v6.6.140
 * linux-imx-tq-6.6: update from linux-fslc incl. v6.6.138
 
 ### Deprecated
