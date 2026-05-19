@@ -62,56 +62,56 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 _Only mainline kernel supported_
 
-| Feature                                                      |   6.12.y    |
-| :----------------------------------------------------------- | :---------: |
-| RAM configs                                                  | 1,2,4,8 GiB |
-| CPU variants                                                 |  i.MX8MPQ   |
-| Fuses / OCRAM                                                |      x      |
-| speed grade / temperature grade detection                    |      x      |
-| **UART**                                                     |             |
-| SER0 on UART1 (X39)                                          |      x      |
-| SER1 on UART3 (console, X20)                                 |      x      |
-| SER2 on UART2 (X25)                                          |      x      |
-| SER3 on UART4 (X40)                                          |      x      |
-| **I2C**                                                      |             |
-| EEPROMs                                                      |      x      |
-| PMIC                                                         |      x      |
-| RTC                                                          |      x      |
-| Temperature Sensors                                          |      x      |
-| **ENET**                                                     |             |
-| GBE0 (X11)                                                   |      x      |
-| GBE1 (X10)                                                   |      x      |
-| **USB**                                                      |             |
-| USB 3.0 Host / Hub (X7)                                      |      x      |
-| USB 2.0 Host / Hub (X8)                                      |      x      |
-| USB 3.0 Micro / Hub, (X3, host only)                         |             |
-| USB DRD (USB 2.0 Cable Detect, VBUS, X4)                     |      x      |
-| **QSPI NOR**                                                 |             |
-| Read with 1-4-4 SDR                                          |      x      |
-| PP / Erase with 1-4-4 SDR                                    |      x      |
-| **Graphic / Multimedia**                                     |             |
-| GPU                                                          |      x      |
-| VPU                                                          |      x      |
-| **Display**                                                  |             |
-| LVDS (X46, X48)                                              |      x      |
-| Dual-Channel LVDS                                            |      x      |
-| HDMI (X6)                                                    |      x      |
-| DisplayPort using MIPI-DSI Bridge (X5)                       |      x      |
-| **Audio**                                                    |             |
-| HDMI                                                         |             |
-| Codec (Line IN / Line OUT / MIC)                             |      x      |
-| **PCIe**                                                     |             |
-| wireless card at M.2 (X44)                                   |      x      |
-| **CAN-FD**                                                   |             |
-| CAN-FD (X29, X30)                                            |      x      |
-| **Cortex M7**                                                |             |
-| examples running from TCM                                    |             |
-| use UART4 as debug console (see issues)                      |             |
-| **MIPI CSI (see Issues section)**                            |             |
-| Gray with Vision Components GmbH camera (Sensor OV9281)      |             |
-| Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |             |
-| **NPU**                                                      |             |
-| NPU                                                          |             |
+| Feature                                                      | linux-tq-6.18 |
+|:-------------------------------------------------------------|:-------------:|
+| RAM configs                                                  |  1,2,4,8 GiB  |
+| CPU variants                                                 |   i.MX8MPQ    |
+| Fuses / OCRAM                                                |       x       |
+| speed grade / temperature grade detection                    |       x       |
+| **UART**                                                     |               |
+| SER0 on UART1 (X39)                                          |       x       |
+| SER1 on UART3 (console, X20)                                 |       x       |
+| SER2 on UART2 (X25)                                          |       x       |
+| SER3 on UART4 (X40)                                          |       x       |
+| **I2C**                                                      |               |
+| EEPROMs                                                      |       x       |
+| PMIC                                                         |       x       |
+| RTC                                                          |       x       |
+| Temperature Sensors                                          |       x       |
+| **ENET**                                                     |               |
+| GBE0 (X11)                                                   |       x       |
+| GBE1 (X10)                                                   |       x       |
+| **USB**                                                      |               |
+| USB 3.0 Host / Hub (X7)                                      |       x       |
+| USB 2.0 Host / Hub (X8)                                      |       x       |
+| USB 3.0 Micro / Hub, (X3, host only)                         |       x       |
+| USB DRD (USB 2.0 Cable Detect, VBUS, X4)                     |       x       |
+| **QSPI NOR**                                                 |               |
+| Read with 1-4-4 SDR                                          |       x       |
+| PP / Erase with 1-4-4 SDR                                    |       x       |
+| **Graphic / Multimedia**                                     |               |
+| GPU                                                          |       x       |
+| VPU                                                          |       x       |
+| **Display**                                                  |               |
+| LVDS (X46, X48)                                              |       x       |
+| Dual-Channel LVDS                                            |       x       |
+| HDMI (X6)                                                    |       x       |
+| DisplayPort using MIPI-DSI Bridge (X5)                       |       x       |
+| **Audio**                                                    |               |
+| HDMI                                                         |               |
+| Codec (Line IN / Line OUT / MIC)                             |       x       |
+| **PCIe**                                                     |               |
+| wireless card at mPCIe (X44)                                 |       x       |
+| **CAN-FD**                                                   |               |
+| CAN-FD (X29, X30)                                            |       x       |
+| **Cortex M7**                                                |               |
+| examples running from TCM                                    |               |
+| use UART4 as debug console (see issues)                      |               |
+| **MIPI CSI (see Issues section)**                            |               |
+| Gray with Vision Components GmbH camera (Sensor OV9281)      |               |
+| Raw Bayer with Vision Components GmbH camera (Sensor IMX327) |               |
+| **NPU**                                                      |               |
+| NPU                                                          |               |
 
 ## TODO / Untested
 
