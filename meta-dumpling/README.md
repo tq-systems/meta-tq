@@ -7,6 +7,18 @@ D-82229 Seefeld, Germany.
 
 # OpenEmbedded / Yocto Project evaluation BSP layer for TQ-Systems ARM SOM
 
+Upstream support and development for kirkstone branch has ended in April 2026. See
+
+ * https://lists.openembedded.org/g/openembedded-devel/message/124804
+ * https://lists.openembedded.org/g/bitbake-devel/message/19196
+
+Development for this branch (kirkstone) has stopped by TQ-Systems GmbH because of
+deprecation of kirkstone LTS by Yocto Project / OpenEmbedded, see
+[Releases page of Yocto Project](https://www.yoctoproject.org/development/releases/).
+If updating to newer LTS version is not possible, contact TQ-Systems GmbH support for assistance.
+
+**Please update to a newer branch with LTS maintenance**
+
 This README file contains information on the content of the meta-dumpling layer.
 
 Please see the corresponding sections below for details.
