@@ -14,3 +14,11 @@ MX93_PKGS_LIST = " \
 "
 
 RDEPENDS:${PN}:mx93-nxp-bsp += " ${MX93_PKGS_LIST}"
+
+MX95_PKGS_LIST = " \
+    neutron \
+    tensorflow-lite \
+    tensorflow-lite-neutron-delegate \
+"
+
+RDEPENDS:${PN}:mx95-nxp-bsp += "${MX95_PKGS_LIST}"
