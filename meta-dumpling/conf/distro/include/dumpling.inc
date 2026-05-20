@@ -4,6 +4,7 @@ require tq-common.inc
 DISTRO_SHORT_NAME = "dumpling"
 DISTRO_FEATURES_OPTED_OUT += "pcmcia zeroconf x11"
 DISTRO_FEATURES += "npu"
+DISTRO_FEATURES += "${@bb.utils.contains('MACHINE_FEATURES', 'npu', 'opencl', '', d)}"
 DISTRO_FEATURES += "opengl"
 DISTRO_FEATURES += "pam"
 DISTRO_FEATURES += "pni-names"
