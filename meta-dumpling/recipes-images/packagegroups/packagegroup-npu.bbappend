@@ -1,5 +1,9 @@
-# Add runtime dependencies for i.MX8M Plus tensorflow delegate
-# RDEPENDS:${PN}:append:mx8mp-nxp-bsp  = " tensorflow-lite-vx-delegate"
+MX8MP_PKGS_LIST = " \
+    tensorflow-lite \
+    tensorflow-lite-vx-delegate \
+"
+
+RDEPENDS:${PN}:mx8mp-nxp-bsp += " ${MX8MP_PKGS_LIST}"
 
 MX93_PKGS_LIST = " \
     ethos-u-firmware \
