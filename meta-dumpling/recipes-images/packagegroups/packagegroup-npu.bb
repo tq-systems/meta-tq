@@ -7,5 +7,5 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
 # Default dependencies
-RDEPENDS:${PN} = "\
+RDEPENDS:${PN} ?= "\
 "

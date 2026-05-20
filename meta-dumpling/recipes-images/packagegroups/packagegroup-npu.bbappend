@@ -9,4 +9,4 @@ MX93_PKGS_LIST = " \
     tensorflow-lite-ethosu-delegate \
 "
 
-# RDEPENDS:${PN}:append:mx93-nxp-bsp  = " ${MX93_PKGS_LIST}"
+RDEPENDS:${PN}:mx93-nxp-bsp += " ${MX93_PKGS_LIST}"
