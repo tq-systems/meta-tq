@@ -1,0 +1,6 @@
+[Match]
+Name=end2 eno2 eth2
+
+[Network]
+DHCP=ipv4
+Address=192.168.2.100/24

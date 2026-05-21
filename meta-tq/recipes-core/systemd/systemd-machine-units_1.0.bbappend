@@ -3,6 +3,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 SRC_URI = "\
     file://10-eth0.network \
     file://10-eth1.network \
+    file://10-eth2.network \
     file://20-can0.network \
     file://20-can1.network \
     file://90-dhcp-default.network \
@@ -10,6 +11,7 @@ SRC_URI = "\
 
 # most boards have a second ethernet port and 2 can interfaces
 HAS_ETH1 ??= "true"
+HAS_ETH2 ??= "false"
 HAS_CAN0 ??= "true"
 HAS_CAN1 ??= "true"
 
@@ -26,6 +28,8 @@ HAS_ETH1:tqma8mxnl ?= "false"
 HAS_CAN0:tqma8mxnl ?= "false"
 HAS_CAN1:tqma8mxnl ?= "false"
 
+HAS_ETH2:tqma95xxla ?= "true"
+
 HAS_ETH1:tqmls1028a ?= "false"
 
 do_install:append() {
@@ -36,6 +40,10 @@ do_install:append() {
 
     if [ "${HAS_ETH1}" = "true" ]; then
         install -m 0644 "${WORKDIR}/10-eth1.network" ${D}${systemd_unitdir}/network/
+    fi
+
+    if [ "${HAS_ETH2}" = "true" ]; then
+        install -m 0644 "${WORKDIR}/10-eth2.network" ${D}${systemd_unitdir}/network/
     fi
 
     if [ "${HAS_CAN0}" = "true" ]; then
