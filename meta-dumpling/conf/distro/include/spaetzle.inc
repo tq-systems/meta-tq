@@ -103,12 +103,7 @@ require conf/distro/include/tq-common.inc
 
 # tinification of tq-common.inc (mostly similar to init-manager-mdev-busybox.inc).
 # start with default ...
-INIT_MANAGER = "none"
-# some modification of settings from INIT_MANAGER = "mdev-busybox"
-# force removal of systemd from DISTRO_FEATURES
-# take care when updating yocto, at the moment sysvinit must not be removed,
-# see above
-DISTRO_FEATURES_OPTED_OUT += "systemd"
+INIT_MANAGER = "mdev-busybox"
 VIRTUAL-RUNTIME_dev_manager = "eudev"
 VIRTUAL-RUNTIME_login_manager = "busybox"
 VIRTUAL-RUNTIME_init_manager = "busybox"
