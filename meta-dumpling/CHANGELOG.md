@@ -9,6 +9,17 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## wrynose release 0001 (not released yet)
+
+### Changed
+
+* gstreamer: remove superfluous patch
+* systemd: remove superfluous patch
+* alsa-utils: remove superfluous patch
+* adjust to wrynose release
+  * Sanity fixes
+  * Variable usage fixes
+
 ### Removed
 
 * distro: Remove `tqmt10xx' overrides. The SoM that are using the override are not supported in scarthgap.

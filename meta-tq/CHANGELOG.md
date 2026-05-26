@@ -9,14 +9,32 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## wrynose release 0001 (not released yet)
+
+### Added
+
+* linux-imx-tq-6.18 (based on NXP lf-6.18.2_1.0.0 release + FSLC stable updates)
+  * Support for TQMa95xxLA and TQMa95xxSA
+* linux-tq-6.18
+  * Support for TQMa8MPxL and TQMa8MPxS
+  * Support fot TQMa93xxCA an TQMa93xxLA
+
 ### Changed
 
+* imx-boot-tq: use NXP lf-6.18.2_1.0.0 release
+* qoriq-atf / imx-atf: update to v2.12 based NXP branch
+* adjust to wrynose release
+  * U-Boot configuration variables
+  * Sanity fixes
+  * Variable usage fixes
+  * FIT image generation
 * linux-tq-6.12: update to v6.12.80
 * linux-tq-6.6: update to v6.6.133
 * linux-rt-tq-6.6: update to v6.6.132-rt72
 
 ### Fixed
 
+* tqma91 / tqma93: fix bootmenu generation
 * u-boot-imx-tq-2024.04:
   * TQMa93xxCA/LA: set thermal trips from fuses
 
@@ -26,6 +44,10 @@ Releases are named with the following scheme:
 
 ### Removed
 
+* machines:
+  * remove tqma8mpxs REV.010x
+  * remove tqma6ulx-lga-mba6ulxl
+* linux-[rt-]tq-6.12: remove recipe, alls boards using the recipe are updated to v6.18 LTS
 * u-boot-tqmt-2015.07: TQMT10xx variants using this recipe are not supported under scarthgap.
 * linux-tqmt-5.15: TQMT10xx variants using this recipe are not supported under scarthgap.
 * machines: Remove TQMT10xx variants since they are not supported under scarthgap.
