@@ -25,11 +25,6 @@ DISTRO_NAME ?= "Spaetzle (TQ-Systems GmbH Spaetzle - a tiny example distribution
 DISTRO_SHORT_NAME = "spaetzle"
 DISTROOVERRIDES = "poky:spaetzle"
 TCLIBC = "musl"
-# musl libc does not work for PowerPC E5500 cores with 64 Bit mode. Build with glibc
-# instead. See
-# https://git.musl-libc.org/cgit/musl/tree/src/setjmp/powerpc64/setjmp.s#n74
-# https://git.musl-libc.org/cgit/musl/commit/?id=7be59733d71ada3a32a98622507399253f1d5e48
-TCLIBC:e5500-64b = "glibc"
 
 FULL_OPTIMIZATION = "-Os -pipe ${DEBUG_FLAGS}"
 
