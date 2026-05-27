@@ -14,11 +14,6 @@ RAUC_BUNDLE_VERSION ?= "r0"
 
 SKIP_RECIPE[rauc-conf] = "replaced with tq-rauc-conf"
 
-# RAUC example key - located under (and used by recipes in) dynamic-layers/rauc
-RAUC_KEYRING_FILE ?= "example.cert.pem"
-RAUC_CERT_FILE ?= "example.cert.pem"
-RAUC_KEY_FILE ?= "example.key.pem"
-
 # RAUC upgrades are possible between images that use the same
 # `RAUC_BUNDLE_COMPATIBLE`. The reference distros in meta-dumpling always use
 # "dumpling-${MACHINE}", so upgrades between dumpling and spaetzle are supported.

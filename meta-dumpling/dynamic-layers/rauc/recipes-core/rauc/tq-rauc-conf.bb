@@ -9,6 +9,8 @@ SUMMARY = "RAUC system configuration & verification keyring (TQ example config)"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 
+require example-files.inc
+
 RAUC_KEYRING_URI ??= "file://${RAUC_KEYRING_FILE}"
 
 RDEPENDS:${PN} += "util-linux-findmnt"
