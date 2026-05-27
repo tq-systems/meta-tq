@@ -53,6 +53,9 @@ DISTRO_FEATURES += "ipv4 ipv6"
 # packages
 DISTRO_FEATURES += "sysvinit"
 
+# Make it equal to default distro
+DISTRO_FEATURES += "usrmerge"
+
 # add a new "tiny" feature, maybe this will be supported in OE core in future, too
 # this will give a chance to select / unselect in packagegroups and the like.
 DISTRO_FEATURES += "tiny"
