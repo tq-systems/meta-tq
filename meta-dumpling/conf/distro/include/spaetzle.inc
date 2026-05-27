@@ -26,7 +26,7 @@ DISTRO_SHORT_NAME = "spaetzle"
 DISTROOVERRIDES = "poky:spaetzle"
 TCLIBC = "musl"
 
-FULL_OPTIMIZATION = "-Os -pipe ${DEBUG_FLAGS}"
+FULL_OPTIMIZATION = "-Os"
 
 # do not overwrite the kernel provider and version here
 
