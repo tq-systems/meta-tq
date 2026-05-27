@@ -27,19 +27,19 @@ lifetime degradation.
 
 ### Linux
 
-#### Kernel 6.6-rt (stable-rt)
+#### Kernel 6.18 with PREEMPT_RT
 
-* based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
+* based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
 * defconfig changes and patches for TQ-Systems starter kits and build time optimisation
-* branched from `v6.6-rt` / tag commit is merged into (see `LINUX_VERSION` in `linux-tq-rt_6.6.bb` for exact release)
+* branched from `linux-6.18.y` / tag commit is merged into (see `LINUX_VERSION` in `linux-rt-tq_6.18.bb` for exact release)
 
 For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 
-#### Kernel 6.6 (stable)
+#### Kernel 6.18 (stable)
 
-* based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git)
+* based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
 * defconfig changes and patches for TQ-Systems starter kits and build time optimisation
-* branched from `linux-6.6.y` / tag commit is merged into (see `LINUX_VERSION` in `linux-tq_6.6.bb` for exact release)
+* branched from `linux-6.18.y` / tag commit is merged into (see `LINUX_VERSION` in `linux-tq_6.18.bb` for exact release)
 
 ## SOM with Layerscape CPU
 
@@ -69,7 +69,7 @@ Version information:
 * TF-A based on v2.12 and NXP vendor BSP
   (https://github.com/nxp-imx/imx-atf.git),
 * branched from v2.12 based branch lf_v2.12 / integrates all commits up to
-  a266ff458c2526a6474036a5c6648be6fdc54fe3 / tag lf-6.12.49-2.2.0
+  4a2e9ef5f9f185bda68470b46365add008903b8c / tag lf-6.18.2-1.0.0
 
 ### U-Boot
 
@@ -146,7 +146,7 @@ Version information:
 * branched from `6.6-2.2.x-imx`
   (see `LINUX_VERSION` in `linux-imx-tq_6.6.bb` for exact release)
 
-#### Kernel 6.12 (stable)
+#### Kernel 6.18 with PREEMPT_RT
 
 Supported SOM families:
 
@@ -155,15 +155,14 @@ Supported SOM families:
 * TQMLS1046A
 * TQMLS1088A
 * TQMLX2160A
-
-Version information:
 
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
 * defconfig changes and patches for TQ-Systems starter kits and build time optimisation
-* branched from `6.12.y`
-  (see `LINUX_VERSION` in `linux-tq_6.12.bb` for exact release)
+* branched from `linux-6.18.y` / tag commit is merged into (see `LINUX_VERSION` in `linux-rt-tq_6.18.bb` for exact release)
 
-#### Kernel 6.12 (stable-rt)
+For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
+
+#### Kernel 6.18 (stable)
 
 Supported SOM families:
 
@@ -173,14 +172,9 @@ Supported SOM families:
 * TQMLS1088A
 * TQMLX2160A
 
-Version information:
-
-* based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
+* based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
 * defconfig changes and patches for TQ-Systems starter kits and build time optimisation
-* defconfig not ready for production use
-  (see `LINUX_VERSION` in `linux-rt-tq_6.12.bb` for exact release)
-
-For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
+* branched from `linux-6.18.y` / tag commit is merged into (see `LINUX_VERSION` in `linux-tq_6.18.bb` for exact release)
 
 ## SOM with i.MX ARMv8-A CPU
 
@@ -207,7 +201,7 @@ Version information:
 * SCU firmware based on NXP SCFW porting kit v1.15.0
 * TQ-Systems version TQMa8.NXP-v1.15.0.B5624.0037 (source code on request via
   Support@tq-group.com)
-* SECO firmware from NXP binary package 5.9.4 (imx-seco-5.9.4.bin)
+* SECO firmware from NXP binary package 5.9.4.1 (imx-seco-5.9.4-0333596.bin)
 
 ### ATF (TF-A)
 
@@ -227,7 +221,7 @@ Version information:
 * TF-A based on v2.12 and NXP vendor BSP
   (https://github.com/nxp-imx/imx-atf.git),
 * branched from v2.12 based branch lf_v2.12 / integrates all commits up to
-  a266ff458c2526a6474036a5c6648be6fdc54fe3 / tag lf-6.12.49-2.2.0
+  4a2e9ef5f9f185bda68470b46365add008903b8c / tag lf-6.18.2-1.0.0
 
 ### U-Boot
 
@@ -295,7 +289,7 @@ Version information:
 * branched from `6.6-2.2.x-imx`
   (see `LINUX_VERSION` in `linux-imx-tq_6.6.bb` for exact release)
 
-#### Kernel 6.12 (linux-imx-fslc)
+#### Kernel 6.18 (linux-imx-fslc)
 
 Supported SOM families
 
@@ -305,10 +299,10 @@ Supported SOM families
 Version information:
 
 * based on linux-imx-fslc (https://github.com/Freescale/linux-fslc.git)
-* branched from `6.12-2.0.x-imx`
+* branched from `6.18-1.0.x-imx`
   (see `LINUX_VERSION` in `linux-imx-tq_6.12.bb` for exact release)
 
-#### Kernel 6.12 stable
+#### Kernel 6.18 with PREEMPT_RT
 
 Supported SOM families
 
@@ -321,12 +315,12 @@ Version information:
 * based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
 * defconfig changes for TQ-Systems starter kits and build time optimisation
 * device tree adjustments for TQ-Systems starter kits
-  (see `LINUX_VERSION` in `linux-tq_6.12.bb` for exact release)
+  (see `LINUX_VERSION` in `linux-tq_6.18.bb` for exact release)
 * Supports Preempt-RT
 
 For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 
-#### Kernel 6.12 (stable-rt)
+#### Kernel 6.18 (stable)
 
 Supported SOM families
 
@@ -336,12 +330,10 @@ Supported SOM families
 
 Version information:
 
-For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
-
-* based on linux-stable-rt (https://git.kernel.org/pub/scm/linux/kernel/git/rt/linux-stable-rt.git)
+* based on linux-stable (https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git)
 * defconfig changes for TQ-Systems starter kits and build time optimisation
 * defconfig not ready for production use
-  (see `LINUX_VERSION` in `linux-rt-tq_6.12.bb` for exact release)
+  (see `LINUX_VERSION` in `linux-rt-tq_6.18.bb` for exact release)
 
 #### Kernel 6.6 (stable)
 
