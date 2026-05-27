@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 #
-# Copyright (c) 2024 TQ-Systems GmbH <oss@ew.tq-group.com>, D-82229 Seefeld, Germany.
+# Copyright (c) 2024-2026 TQ-Systems GmbH <oss@ew.tq-group.com>, D-82229 Seefeld, Germany.
 ###############################################################################
 
 ###############################################################################
@@ -58,11 +58,11 @@ DISTRO_FEATURES += "usbhost"
 # Make sure we have sysvinit in the list. Needed to get tasks injected by
 # update-rc.d.bbclass. This will bring in the initscripts from different
 # packages
-DISTRO_FEATURES:append = " sysvinit"
+DISTRO_FEATURES += "sysvinit"
 
 # add a new "tiny" feature, maybe this will be supported in OE core in future, too
 # this will give a chance to select / unselect in packagegroups and the like.
-DISTRO_FEATURES += " tiny"
+DISTRO_FEATURES += "tiny"
 
 # The following features are not enabled, mostly for their dependencies
 # that usually cause increase of rootfs size
@@ -70,6 +70,9 @@ DISTRO_FEATURES += " tiny"
 # * usbgadget
 # * wifi
 # * bluetooth
+
+# opt out all features from DISTRO_FEATURES_DEFAULTS
+DISTRO_FEATURES_OPTED_OUT = "*"
 
 DISTRO_FEATURES:class-native = "${POKY_DEFAULT_DISTRO_FEATURES}"
 DISTRO_FEATURES:class-nativesdk = "${POKY_DEFAULT_DISTRO_FEATURES}"
@@ -95,6 +98,8 @@ SKIP_RECIPE[core-image-weston] = "not buildable with spaetzle"
 SKIP_RECIPE[tq-image-generic] = "not buildable with spaetzle: use tq-image-small"
 SKIP_RECIPE[tq-image-weston] = "not buildable with spaetzle: use tq-image-small"
 SKIP_RECIPE[tq-image-qt6] = "not buildable with spaetzle: use tq-image-small"
+
+SKIP_RECIPE[ostree] = "not buildable with spaetzle"
 
 # Disable python usage in opkg-utils since it won't build with tiny config
 PACKAGECONFIG:remove:pn-opkg-utils = "python"
