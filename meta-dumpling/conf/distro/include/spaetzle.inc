@@ -47,8 +47,6 @@ IMAGE_LINGUAS = ""
 DISTRO_FEATURES = "ext2 pci"
 # basic network support
 DISTRO_FEATURES += "ipv4 ipv6"
-# usb support
-DISTRO_FEATURES += "usbhost"
 
 # Make sure we have sysvinit in the list. Needed to get tasks injected by
 # update-rc.d.bbclass. This will bring in the initscripts from different
