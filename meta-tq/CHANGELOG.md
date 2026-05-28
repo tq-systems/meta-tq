@@ -9,6 +9,25 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* linux-imx-tq-6.18
+  * Support for TQMa91
+  * Support for TQMa93
+
+### Changed
+
+* u-boot-imx-tq-2025.04
+  * integrate NXP Fixes up to BSP release tag lf-6.18.2_1.0.0
+* linux-imx-tq-6.18
+  * integrate FSLC fixes up to stable tag v6.18.32
+
+### Fixed
+
+* systemd-machine-units: adjust settings for TQMa95xxLA on MBa95xxCA
+
+  Configure CAN with CAN-FD by default and allow additional network interface.
+
 ## wrynose release 0001 (not released yet)
 
 ### Added
