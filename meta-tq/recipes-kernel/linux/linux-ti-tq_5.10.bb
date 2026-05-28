@@ -2,6 +2,7 @@ SUMMARY = "Linux kernel for TQ-Systems TQMa64xxL modules"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
+require linux-tq-unsupported.inc
 require linux-ti-tq-common.inc
 
 KBRANCH = "TQMaxx-ti-rt-linux-5.10.y"

@@ -1,5 +1,10 @@
 LIC_FILES_CHKSUM = "file://COPYING;md5=6bc538ed5bd9a7fc9398086aedcd7e46"
 
+python () {
+    if d.getVar("PREFERRED_PROVIDER_virtual/kernel") == d.getVar("PN"):
+        bb.warn("%s %s: this recipe and the BSP setup get no further updates from TQ-Systems GmbH. Please merge updates from kernel.org and include meta-lts-collab in your BSP or update to a maintained LTS version." % (d.getVar("PN"), d.getVar("PV")))
+}
+
 require linux-tq-common.inc
 
 # LINUX_VERSION must match version from Makefile

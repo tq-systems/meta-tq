@@ -7,6 +7,8 @@ DEPENDS += "lzop-native bc-native openssl-native"
 
 PROVIDES += "linux-rt linux-tq"
 
+require linux-tq-unsupported.inc
+
 inherit kernel
 
 SRC_URI = "\

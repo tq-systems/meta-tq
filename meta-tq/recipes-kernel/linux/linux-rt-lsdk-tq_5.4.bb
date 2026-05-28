@@ -1,5 +1,7 @@
 SUMMARY = "Linux kernel with PREEMPT_RT support for TQ-Systems GmbH Layerscape based modules"
 
+require linux-tq-unsupported.inc
+
 inherit kernel
 
 LICENSE = "GPL-2.0-only"

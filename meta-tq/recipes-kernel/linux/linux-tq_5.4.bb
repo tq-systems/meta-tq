@@ -2,6 +2,7 @@ SUMMARY = "Linux for TQ-Systems GmbH Freescale / LS102xA/LS104xA based modules"
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
+require linux-tq-unsupported.inc
 require linux-tq-common.inc
 
 KBRANCH = "TQMaxx-linux-v5.4.y"

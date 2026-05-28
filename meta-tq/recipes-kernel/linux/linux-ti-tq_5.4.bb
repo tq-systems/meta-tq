@@ -2,6 +2,7 @@ SUMMARY = "Linux kernel based on linux-ti for TQ-Systems GmbH TQ AM335x / AM57xx
 
 LIC_FILES_CHKSUM = "file://COPYING;md5=bbea815ee2795b2f4230826c0c6b8814"
 
+require linux-tq-unsupported.inc
 require linux-ti-tq-common.inc
 
 KBRANCH = "TQMa57xx-TI-linux-5.4.y-07.00.00.005-rt"
