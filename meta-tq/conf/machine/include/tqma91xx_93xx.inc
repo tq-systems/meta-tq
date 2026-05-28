@@ -69,4 +69,4 @@ require conf/machine/include/tq-image.inc
 
 FIT_IMAGE += "linux-tq-fitimage"
 
-PREFERRED_VERSION_linux-imx-tq ?= "6.6.%"
+PREFERRED_VERSION_linux-imx-tq ?= "6.18.%"

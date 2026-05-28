@@ -73,4 +73,6 @@ SRC_URI:append = " \
 "
 
 COMPATIBLE_MACHINE = "^$"
+COMPATIBLE_MACHINE:tqma91xx = "tqma91xx"
+COMPATIBLE_MACHINE:tqma93xx = "tqma93xx"
 COMPATIBLE_MACHINE:tqma95xx = "tqma95xx"
