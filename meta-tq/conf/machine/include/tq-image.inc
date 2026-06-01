@@ -80,3 +80,5 @@ UBINIZE_ARGS = "\
 # Use the expected value of the ubifs filesystem's volume name in the kernel
 # and u-boot.
 UBI_VOLNAME = "root"
+
+include conf/machine/include/tq-image-cyclonedx.inc
