@@ -1,5 +1,9 @@
 LICENSE = "GPL-2.0-only"
 
+# linux-tq / linux-rt-tq are TQ-maintained branches of the upstream kernel.
+# Their BPN is unknown in the NVD; map it to the canonical upstream CPE.
+CVE_PRODUCT = "linux:linux_kernel"
+
 DEPENDS += "lzop-native bc-native openssl-native"
 
 PROVIDES += "virtual/kernel"

@@ -3,6 +3,10 @@
 # Copyright (c) 2020-2023 TQ-Systems GmbH <oss@ew.tq-group.com>,
 # D-82229 Seefeld, Germany.
 
+# u-boot-tq is a TQ-maintained branch of mainline U-Boot.
+# Its BPN ("u-boot-tq") is unknown in the NVD; map it to the canonical name.
+CVE_PRODUCT = "denx:u-boot"
+
 inherit gitpkgv-nonexact
 inherit pkgconfig
 
