@@ -23,3 +23,6 @@ VIRTUAL-RUNTIME_base-utils-lscpu = "util-linux-lscpu"
 
 # Conflicts with systemd-networkd
 SYSTEMD_AUTO_ENABLE:dhcpcd = "disable"
+
+# Enable the libcamera gstreamer plugin distro wide
+PACKAGECONFIG:append:pn-libcamera = " gst"
