@@ -9,6 +9,16 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* packagegroup-npu: reenable tensorflow packages for i.MX93 with NXP BSP
+* tensorflow-lite-ethosu-delegate: update to NXP downstream lf-6.18.2_1.0.0
+* tensorflow-lite: update to NXP downstream lf-6.18.2_1.0.0
+* distro: dumpling: conditionally add opencl to DISTRO_FEATURES if MACHINE_FEATURES signals NPU support.
+
+  opencl is needed by tensorflow-lite dependencies. Since opencl itself pulls in a lot of packages
+  this is not configured by default to save compilation time for machines without support.
+
 ## wrynose release 0001 (not released yet)
 
 ### Changed
