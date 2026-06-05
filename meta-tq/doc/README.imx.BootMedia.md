@@ -131,7 +131,7 @@ eMMC.
 
 ### U-Boot Environment Variables for Distroboot
 
-* `boot_script_spi`: file name of SPI boot script image to be used for the update
+* `bootscript_name`: file name of SPI boot script image to be used for the update
   command (default = boot-ubi.scr)
 
 _Note_: Address variables are named according to the U-Boot defaults.
