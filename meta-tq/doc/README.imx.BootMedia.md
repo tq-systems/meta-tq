@@ -129,11 +129,17 @@ For ease of development a set of variables and scripts are in default env.
 _Note_: Update and start scripts expect a partitioned / initialized SD card or
 eMMC.
 
+### U-Boot Environment Variables for Distroboot
+
+* `boot_script_spi`: file name of SPI boot script image to be used for the update
+  command (default = boot-ubi.scr)
+
+_Note_: Address variables are named according to the U-Boot defaults.
+
 ### U-Boot Environment Variables
 
 _Note_: Address variables used in scripts are named according to the U-Boot defaults.
 
-* `boot_script_spi`: file name of SPI boot script image for Distroboot (default = boot-ubi.scr)
 * `uboot`: name of bootstream image (default = bootstream.bin)
 * `mmcdev`: 0 for eMMC, 1 for SD card (automatically generated,
   can be overwritten)
