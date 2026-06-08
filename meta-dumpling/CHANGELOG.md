@@ -11,13 +11,25 @@ Releases are named with the following scheme:
 
 ### Changed
 
-* packagegroup-npu: reenable tensorflow packages for i.MX93 with NXP BSP
+* linux-tq: integrate patches from linux-stable up to v6.18.34
+* packagegroup-npu:
+  * reenable tensorflow packages for i.MX8MP with NXP BSP
+  * reenable tensorflow packages for i.MX93 with NXP BSP
+* tensorflow-lite-neutron-delegate: update to NXP downstream lf-6.18.2_1.0.0
+* tensorflow-lite-vx-delegate: update to NXP downstream lf-6.18.2_1.0.0
 * tensorflow-lite-ethosu-delegate: update to NXP downstream lf-6.18.2_1.0.0
 * tensorflow-lite: update to NXP downstream lf-6.18.2_1.0.0
 * distro: dumpling: conditionally add opencl to DISTRO_FEATURES if MACHINE_FEATURES signals NPU support.
 
   opencl is needed by tensorflow-lite dependencies. Since opencl itself pulls in a lot of packages
   this is not configured by default to save compilation time for machines without support.
+
+###
+
+* tq-image-base.inc: include packagegroup-camera if MACHINE_FEATURES contains camera
+* packagegroup-camera: add packegroup for libcamera and ISP support for i.MX95 with NXP BSP
+* packagegroup-npu: add tensorflow packages for i.MX95 with NXP BSP
+* neutron: port recipe from meta-freescale-ml and meta-imx NXP downstream lf-6.18.2_1.0.0
 
 ## wrynose release 0001 (not released yet)
 
