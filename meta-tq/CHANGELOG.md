@@ -12,13 +12,17 @@ Releases are named with the following scheme:
 ### Added
 
 * linux-imx-tq-6.18
+  * OS08A20 camera Support for TQMa95xxLA
   * Support for TQMa91
   * Support for TQMa93
 
 ### Changed
 
+* imx-system-manager-tq
 * u-boot-imx-tq-2025.04
   * integrate NXP Fixes up to BSP release tag lf-6.18.2_1.0.0
+* linux-tq-6.18
+  * integrate fixes up to stable tag v6.18.34
 * linux-imx-tq-6.18
   * integrate FSLC fixes up to stable tag v6.18.32
 
