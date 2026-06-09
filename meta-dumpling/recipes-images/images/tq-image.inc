@@ -4,6 +4,7 @@ require tq-image-base.inc
 
 IMAGE_INSTALL:append = "\
     coreutils \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'camera', 'packagegroup-camera', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'camera', ' packagegroup-v4l2', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'vpu', ' packagegroup-v4l2', '', d)} \
 "

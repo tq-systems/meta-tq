@@ -11,7 +11,6 @@ IMAGE_INSTALL:append = "\
     packagegroup-sysutils \
     ${@bb.utils.contains('MACHINE_FEATURES', 'can', 'packagegroup-can', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'lte', 'packagegroup-lte', '', d)} \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'camera', 'packagegroup-camera', '', d)} \
     ${@bb.utils.contains('COMBINED_FEATURES', 'alsa', 'packagegroup-audio', '', d)} \
     ${@bb.utils.contains('COMBINED_FEATURES', 'npu', 'packagegroup-npu', '',d)} \
     ${@bb.utils.contains('COMBINED_FEATURES', 'wifi', 'packagegroup-wifi', '',d)} \
