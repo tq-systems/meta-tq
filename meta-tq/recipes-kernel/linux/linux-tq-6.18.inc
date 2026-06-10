@@ -16,6 +16,7 @@ KERNEL_EXTRA_CONFIG_FILES ?= ""
 KERNEL_CONFIG_FILES:imx ?= "\
     file://imx.cfg \
     file://arm-v7a.cfg \
+    file://features/audio-support.cfg \
     file://features/nonimx-drm-removal.cfg \
     file://features/debug.cfg \
     file://features/devicetree.cfg \
