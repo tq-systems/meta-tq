@@ -59,14 +59,18 @@ Releases are named with the following scheme:
   * includes fix for `Copy fail` (CVE-2026-31431)
   * includes fix for `Dirty frag` (CVE-2026-43284)
 
-## scarthgap.TQ.ARM.BSP.0009 (not released yet)
+## scarthgap.TQ.ARM.BSP.0009
 
 ### Added
 
-* u-boot-2026.01: add TQMa62xx and TQMa64xxL 1GiB Nanya RAM variants
+* u-boot-2026.01:
+  * TQMa6\[62,64,67\]xx(L): enable "hash" command
+  * TQMa6\[62,64,67\]xx(L): enable "ddr ecc_err" error injection command
+  * Add TQMa62xx and TQMa64xxL 1GiB Nanya RAM variants (experimental)
 
-  Alternative RAM vendor needs a different configuration. RAM type
-  detection and initialisation is handled in boot firmware
+    Alternative RAM vendor needs a different configuration. RAM type
+    detection and initialisation is handled in boot firmware.
+    Include a _temporary_ workaround for TQMa64xxL for Nanya RAM initialization.
 * imx-atf-tq: add support for v2.12 based on NXP lf_v2.12 branch
 * qoriq-atf: add support for v2.12 based on NXP lf_v2.12 branch
 
@@ -92,8 +96,8 @@ Releases are named with the following scheme:
   * TQMa93xxCA/LA: set thermal trips from fuses
 
     Using hard settings for consumer grade CPU can lead to boot issues for
-    industrial graded CPU when the temperatur is outside of consumer grade
-    temperatur range.
+    industrial graded CPU when the temperature is outside of consumer grade
+    temperature range.
 
 ## scarthgap.TQ.ARM.BSP.0008
 
