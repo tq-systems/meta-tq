@@ -3,10 +3,10 @@ SUMMARY = "Linux kernel with PREEMPT_RT support from linux mainline v6.6-rt for 
 require linux-tq-6.6.inc
 
 KBRANCH = "TQM-linux-v6.6.y-rt"
-SRCREV = "23cdb26efd93c846c38262263956a6344ad9366e"
+SRCREV = "fba7071a3ebf11726027daf97627b99d1991dfe4"
 
 # LINUX_VERSION must match version from Makefile
-LINUX_VERSION = "${LINUX_RELEASE}.135"
+LINUX_VERSION = "${LINUX_RELEASE}.142"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
