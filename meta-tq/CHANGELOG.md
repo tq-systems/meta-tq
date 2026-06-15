@@ -13,9 +13,9 @@ Releases are named with the following scheme:
 
 * linux-rt-tq-6.12: update to v6.12.89-rt18
 * linux-rt-tq-6.12: incorporate TQ-Systems fixes from linux-tq-6.12
-* linux-rt-tq-6.6: update to v6.6.135-rt75
-* linux-tq-6.12: update to v6.12.90
-* linux-tq-6.6: update to v6.6.140
+* linux-rt-tq-6.6: update to v6.6.142-rt75
+* linux-tq-6.12: update to v6.12.92
+* linux-tq-6.6: update to v6.6.142
 * linux-imx-tq-6.6: update from linux-fslc incl. v6.6.138
 
 ### Deprecated
