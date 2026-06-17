@@ -9,6 +9,11 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* CVE: add CVE_PRODUCT mappings for TQ-maintained kernel, bootloader and ATF recipes
+* BOM: add CYCLONEDX_EXTRA_RUNTIME_RECIPES for firmware components deployed via EXTRA_IMAGEDEPENDS
+
 ## scarthgap.TQ.ARM.BSP.0010 (not released yet)
 
 ### Changed
