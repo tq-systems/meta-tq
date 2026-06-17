@@ -11,6 +11,11 @@ Releases are named with the following scheme:
 
 ## scarthgap.TQ.ARM.BSP.0010
 
+### Added
+
+* CVE: add CVE_PRODUCT mappings for TQ-maintained kernel, bootloader and ATF recipes
+* BOM: add CYCLONEDX_EXTRA_RUNTIME_RECIPES for firmware components deployed via EXTRA_IMAGEDEPENDS
+
 ### Changed
 
 * linux-rt-tq-6.12: update to v6.12.89-rt18
