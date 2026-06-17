@@ -42,6 +42,8 @@ Releases before `wrynose` used older names with the following scheme:
   * OS08A20 camera Support for TQMa95xxLA
   * Support for TQMa91
   * Support for TQMa93
+* CVE: add CVE_PRODUCT mappings for TQ-maintained kernel, bootloader and ATF recipes
+* BOM: add CYCLONEDX_EXTRA_RUNTIME_RECIPES for firmware components deployed via EXTRA_IMAGEDEPENDS
 
 ### Changed
 
