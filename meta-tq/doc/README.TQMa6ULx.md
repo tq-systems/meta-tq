@@ -21,7 +21,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ## Supported Features
 
-### U-Boot
+### U-Boot MBa6ULx
 
 | Feature                                          |   REV.020x   |
 | :----------------------------------------------: | :----------: |
@@ -51,7 +51,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | Read                                             |       x      |
 | PP / Erase                                       |       x      |
 
-### Linux
+### Linux MBa6ULx
 
 NOTE: Device tree for Linux Kernel older than 6.6 is not out of the box compatible to newer kernel
 versions due to node naming changes.
@@ -59,10 +59,10 @@ versions due to node naming changes.
 | Feature                              | linux-tq-6.6 |
 | :----------------------------------: | :----------: |
 | Fuses                                |      x       |
-| UART1 (console, X15)                 |      x       |
+| UART1 (console, X15/X1700)           |      x       |
 | UART3 (X5)                           |      x       |
 | GPIO                                 |      x       |
-| Button (S6, S7, S8)                  |      x       |
+| Button (S6, S7, S14)                 |      x       |
 | I2C                                  |      x       |
 | GPIO expander                        |      x       |
 | EEPROM                               |      x       |
@@ -70,8 +70,8 @@ versions due to node naming changes.
 | QSPI NOR                             |      x       |
 | Buzzer                               |      x       |
 | USB Host (X7/X8/X22)                 |      x       |
-| USB Dual Role (X10)                  |      x       |
-| eMMC/SD (on-board/X9)                |      x       |
+| USB Dual Role (X9)                   |      x       |
+| eMMC/SD (on-board/X10)               |      x       |
 | Ethernet 100M (X1400)                |      x       |
 | Ethernet 100M (X1500) - not G1 CPU   |      x       |
 | CAN (X13)                            |      x       |
@@ -79,6 +79,7 @@ versions due to node naming changes.
 | RS-485 (X16)                         |              |
 | LVDS (X17, X18)                      |      x       |
 | Parallel LCD (X4)                    |      x       |
+| Audio Mikrofon (X19)                 |              |
 | Audio Line In (X20)                  |      x       |
 | Audio Line Out (x21)                 |      x       |
 
