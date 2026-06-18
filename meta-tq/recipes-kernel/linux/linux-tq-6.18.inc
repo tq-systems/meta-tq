@@ -14,49 +14,49 @@ KERNEL_CONFIG_FILES ?= ""
 KERNEL_EXTRA_CONFIG_FILES ?= ""
 
 KERNEL_CONFIG_FILES:imx ?= "\
-    file://imx.cfg \
     file://arm-v7a.cfg \
     file://features/audio-support.cfg \
-    file://features/nonimx-drm-removal.cfg \
     file://features/debug.cfg \
     file://features/devicetree.cfg \
     file://features/disable-hibernate.cfg \
     file://features/iio.cfg \
     file://features/network.cfg \
-    file://features/rauc.cfg \
-    file://features/spidev.cfg \
-    file://features/rm-non-tq-platforms.cfg \
-    file://features/ubi.cfg \
-    file://features/usb.cfg \
+    file://features/nonimx-drm-removal.cfg \
     file://features/ptp-1588.cfg \
     file://features/pwm.cfg \
+    file://features/rauc.cfg \
+    file://features/rm-non-tq-platforms.cfg \
+    file://features/spidev.cfg \
     file://features/trusted-keys.cfg \
+    file://features/ubi.cfg \
+    file://features/usb.cfg \
+    file://imx.cfg \
 "
 
 KERNEL_CONFIG_FILES:tqma335x ?= "\
-    file://tqma335x.cfg \
     file://can.cfg \
     file://display.cfg \
-    file://sound.cfg \
-    file://spi.cfg \
     file://features/devicetree.cfg \
     file://features/network.cfg \
     file://features/spidev.cfg \
     file://features/ubi.cfg \
+    file://sound.cfg \
+    file://spi.cfg \
+    file://tqma335x.cfg \
 "
 
 KERNEL_CONFIG_FILES:qoriq ?= "\
     file://disable-imx-platforms.cfg \
     file://disable_suspend.cfg \
     file://dpaa2.cfg \
-    file://smmu-bypass.cfg \
-    file://features/nonimx-drm-removal.cfg \
     file://features/debug.cfg \
     file://features/devicetree.cfg \
     file://features/network.cfg \
+    file://features/nonimx-drm-removal.cfg \
     file://features/rm-non-tq-platforms.cfg \
     file://features/ubi.cfg \
     file://features/usb.cfg \
+    file://smmu-bypass.cfg \
 "
 
 KERNEL_CONFIG_FILES:append:tqmls102xa ?= "\
