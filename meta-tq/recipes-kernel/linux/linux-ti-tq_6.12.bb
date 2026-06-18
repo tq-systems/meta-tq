@@ -23,8 +23,8 @@ PROVIDES += "linux-ti-staging"
 
 SRC_URI = "\
     ${TQ_GIT_BASEURL}/linux-tqmaxx.git;protocol=${TQ_GIT_PROTOCOL};branch=${KBRANCH} \
-    file://defconfig \
     file://bpf-support.cfg \
+    file://defconfig \
     file://devicetree.cfg \
     file://dynamic-debug.cfg \
     file://general-optimizations.cfg \
