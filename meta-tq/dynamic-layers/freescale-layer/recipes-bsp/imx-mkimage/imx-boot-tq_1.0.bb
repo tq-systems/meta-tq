@@ -19,11 +19,13 @@ IMX_EXTRA_FIRMWARE:append = " ${@bb.utils.contains('IMXBOOT_TARGETS', 'flash_lin
 
 inherit imx-hab
 
+# This package aggregates output deployed by other packages,
+# so set the appropriate dependencies
 DEPENDS += "\
+    virtual/bootloader \
     ${IMX_EXTRA_FIRMWARE} \
     ${IMX_DEFAULT_ATF_PROVIDER} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os', '', d)} \
-    u-boot \
     xxd-native \
 "
 
@@ -36,6 +38,8 @@ DEPENDS:append:mx8m-generic-bsp = "\
     u-boot-mkimage-native \
 "
 
+do_compile[deptask] = "do_deploy"
+
 BOOT_NAME = "imx-boot"
 PROVIDES = "${BOOT_NAME}"
 
@@ -46,14 +50,6 @@ CFLAGS = "-O2 -Wall -std=c99 -I ${STAGING_INCDIR_NATIVE} -L ${STAGING_LIBDIR_NAT
 
 M4_DEFAULT_IMAGE    ??= "INVALID"
 M4_1_DEFAULT_IMAGE  ??= "INVALID"
-
-# This package aggregates output deployed by other packages,
-# so set the appropriate dependencies
-do_compile[depends] += "\
-    ${IMX_DEFAULT_ATF_PROVIDER}:do_deploy \
-    ${@' '.join('%s:do_deploy' % r for r in '${IMX_EXTRA_FIRMWARE}'.split() )} \
-    ${@bb.utils.contains('MACHINE_FEATURES', 'optee', 'optee-os:do_deploy', '', d)} \
-"
 
 SC_FIRMWARE_NAME ?= "scfw_tcm.bin"
 
