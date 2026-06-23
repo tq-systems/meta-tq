@@ -55,6 +55,14 @@ EXTRA_IMAGEDEPENDS += "\
 
 PREFERRED_VERSION_linux-imx-tq ?= "6.6.%"
 
+IMXBOOT_SDMMC_HDMI_TARGET = "flash_hdmi_spl_uboot"
+IMXBOOT_SDMMC_TARGET = "flash_spl_uboot"
+
+IMXBOOT_TARGETS ?= "\
+    ${IMXBOOT_SDMMC_HDMI_TARGET} \
+    ${IMXBOOT_SDMMC_TARGET} \
+"
+
 #
 # bootstream name, construction see imx-boot recipe, do_deploy
 #

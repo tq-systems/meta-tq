@@ -19,11 +19,3 @@ KERNEL_DEVICETREE_linux-imx-tq = "\
 KERNEL_DEVICETREE += "${@kernel_provider_dtbs(d)}"
 
 IMAGE_BOOT_FILES += "${@create_image_boot_dtb_files(d)}"
-
-IMXBOOT_SDMMC_HDMI_TARGET = "flash_hdmi_spl_uboot"
-IMXBOOT_SDMMC_TARGET = "flash_spl_uboot"
-
-IMXBOOT_TARGETS ?= "\
-    ${IMXBOOT_SDMMC_HDMI_TARGET} \
-    ${IMXBOOT_SDMMC_TARGET} \
-"
