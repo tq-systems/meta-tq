@@ -9,8 +9,3 @@ RDEPENDS:${PN}:remove = "${PN}-sensorsdetect"
 RDEPENDS:${PN}:remove = "${PN}-sensorsconfconvert"
 
 SYSTEMD_AUTO_ENABLE = "enable"
-
-# Workaround for issue in upstream recipe, revert once
-# once fc88c96c4e40 (lmsensors: Fix build without sensord) is backported to
-# meta-openembedded, branch scarthgap
-EXTRA_OEMAKE += 'PROG_EXTRA="sensors ${PACKAGECONFIG_CONFARGS}"'
