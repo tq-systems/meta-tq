@@ -24,11 +24,11 @@ the following layers:
 
 | URI                                             | branch     | layer              | remark                            |
 | :---------------------------------------------- | :--------: | :----------------: | :-------------------------------: |
-| https://git.openembedded.org/openembedded-core  | scarthgap  | meta               |                                   |
-| https://git.yoctoproject.org/git/meta-freescale | scarthgap  | meta-freescale     | mandatory for Layerscape and i.MX |
-| https://git.yoctoproject.org/git/meta-ti        | scarthgap  | meta-ti-bsp        | mandatory for TI SOC              |
-| https://git.yoctoproject.org/git/meta-arm       | scarthgap  | meta-arm           |                                   |
-| https://git.yoctoproject.org/git/meta-arm       | scarthgap  | meta-arm-toolchain |                                   |
+| https://git.openembedded.org/openembedded-core  | wrynose    | meta               |                                   |
+| https://git.yoctoproject.org/git/meta-freescale | wrynose    | meta-freescale     | mandatory for Layerscape and i.MX |
+| https://git.yoctoproject.org/git/meta-ti        | wrynose    | meta-ti-bsp        | mandatory for TI SOC              |
+| https://git.yoctoproject.org/git/meta-arm       | wrynose    | meta-arm           |                                   |
+| https://git.yoctoproject.org/git/meta-arm       | wrynose    | meta-arm-toolchain |                                   |
 
 For tested revisions of the referenced layers see BSP setup and release notes.
 
