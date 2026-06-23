@@ -56,16 +56,20 @@ EXTRA_IMAGEDEPENDS += "\
     imx-boot \
 "
 
+# default target for SD / eMMC boot image
+IMXBOOT_SDMMC_TARGET ?= "flash_spl_uboot"
+IMXBOOT_FSPI_TARGET ?= "flash_evk_flexspi"
+
 # SD boot image and FlexSPI boot image can be built using same U-Boot config
 IMXBOOT_TARGETS ?= "\
-    flash_evk_flexspi \
-    flash_spl_uboot \
+    ${IMXBOOT_FSPI_TARGET} \
+    ${IMXBOOT_SDMMC_TARGET} \
 "
 
 #
 # bootstream name, construction see imx-boot recipe, do_deploy
 #
-MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-flash_spl_uboot"
+MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-${IMXBOOT_SDMMC_TARGET}"
 
 FIT_IMAGE += "linux-tq-fitimage"
 

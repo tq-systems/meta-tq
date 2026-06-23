@@ -54,7 +54,15 @@ EXTRA_IMAGEDEPENDS += "\
 
 PREFERRED_VERSION_linux-imx-tq ?= "6.6.%"
 
+IMXBOOT_FSPI_TARGET ?= "flash_evk_flexspi"
+IMXBOOT_SDMMC_TARGET ?= "flash_spl_uboot"
+
+IMXBOOT_TARGETS ?= "\
+    ${IMXBOOT_FSPI_TARGET} \
+    ${IMXBOOT_SDMMC_TARGET} \
+"
+
 #
 # bootstream name, construction see imx-boot recipe, do_deploy
 #
-MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-flash_spl_uboot"
+MACHINE_WKS_BOOTSTREAM ?= "imx-boot-${MACHINE}-sd.bin-${IMXBOOT_SDMMC_TARGET}"
