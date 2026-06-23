@@ -18,3 +18,12 @@ SPL_BINARYNAME = ""
 SPL_UART_BINARY = ""
 
 PROVIDES += "imx-boot"
+
+OVERRIDES:append = "${@bb.utils.contains('DISTRO_FEATURES', 'secure', ':secure', '', d)}"
+DEPENDS:append:secure = " imx-cst-native imx-cst-keys-native"
+SRC_URI:append:secure:nxp-ahab = " file://imx-hab.cfg"
+SRC_URI:append:secure:nxp-hab4 = " file://imx-hab.cfg"
+
+EXTRA_OEMAKE:append:secure = " SRK_TABLE=${STAGING_DATADIR_NATIVE}/imx-cst-keys/${IMX_HAB_KEY_NAME}/${IMX_HAB_SRK_TABLE}"
+EXTRA_OEMAKE:append:secure = " CSF_KEY=${STAGING_DATADIR_NATIVE}/imx-cst-keys/${IMX_HAB_KEY_NAME}/${IMX_HAB_CSF_CERT}"
+EXTRA_OEMAKE:append:secure = " IMG_KEY=${STAGING_DATADIR_NATIVE}/imx-cst-keys/${IMX_HAB_KEY_NAME}/${IMX_HAB_IMG_CERT}"
