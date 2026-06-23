@@ -229,11 +229,14 @@ Definition of support status:
 
 ### Obsolete machines
 
-* TQMa57: Use `kirkstone` branch instead, last release is kirkstone.TQMa57xx.BSP.SW.0015
-* TQMa65xx: Use `hardknott` branch or `kirkstone.TQMa65xx.BSP.SW.0009` release instead
-* TQMA7S: Use `kirkstone` / `kirkstone-next` branches instead, contact support for updates.
-* TQMT10xx: Use `kirkstone` / `kirkstone-next` branches instead, contact support for updates.
-* MBaULxL (SBC with TQMa6ULxL): Use `kirkstone` / `kirkstone-next` branches instead, contact support for updates.
+The following list is a short reference. Please contact TQ Embedded support for details and updates.
+The mentioned versions are for evaluation purpose and not intended for production use.
+
+* TQMa57: Use `kirkstone` branch, last release is kirkstone.TQMa57xx.BSP.SW.0015
+* TQMa65xx: Use `hardknott` branch or `kirkstone.TQMa65xx.BSP.SW.0009` release
+* TQMA7S: Use `kirkstone` / `kirkstone-next` branches, Linux and U-Boot support is upstream
+* TQMT10xx: Use `kirkstone` / `kirkstone-next` branches
+* MBaULxL (SBC with TQMa6ULxL): Use `scarthgap` / `scarthgap-next` branches
 
 ### Support for wic
 
