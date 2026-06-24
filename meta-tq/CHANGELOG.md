@@ -28,6 +28,10 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* TQMa335x/62xx\[L\]/64xxL/67xx\[L\]: Fix generation of `wic.bootonly` images
+
+  The partition table in these images was broken. This is a regression in
+  BSP release 6.0.0.0.
 * systemd-machine-units: adjust settings for TQMa95xxLA on MBa95xxCA
 
   Configure CAN with CAN-FD by default and allow additional network interface.

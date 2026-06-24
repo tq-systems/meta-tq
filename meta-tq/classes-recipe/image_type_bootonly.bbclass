@@ -30,7 +30,7 @@ generate_bootonly_image() {
     local sector="0"
     local wicfile="${IMAGE_NAME}.${type}"
     local outfile="${wicfile}.bootonly"
-    local reverse_part_list=""
+    local part_list
 
     if [ -z ${type} ] || [ "${type}" != "wic" ]; then
         bberror "generate_bootonly_image: bootonly image can only be generated from wic image."
@@ -42,17 +42,17 @@ generate_bootonly_image() {
         exit 1
     fi
 
-    reverse_part_list=$(partx --show --noheadings  --output NR "${wicfile}" | tac)
-    partition_count="$(echo ${reverse_part_list} | wc -w)"
+    part_list="$(partx --show --noheadings  --output NR "${wicfile}")"
+    partition_count="$(echo "${part_list}" | wc -l)"
     # If only one Partition is found, cut at start of first partition
     if [ "${partition_count}" -eq "1" ]; then
         # Delete all partitions
         cutoff_partition="START"
-        delete_part_list=${reverse_part_list}
+        delete_part_list="$(echo "${part_list}" | tac)"
     elif [ "${partition_count}" -gt "1" ]; then
         # Remove all but first partition from partition table.
         cutoff_partition="END"
-        delete_part_list=${reverse_part_list% *}
+        delete_part_list="$(echo "${part_list}" | tail -n +2 | tac)"
     else
         bberror "generate_bootonly_image: Unsupported wic image structure."
         exit 1
