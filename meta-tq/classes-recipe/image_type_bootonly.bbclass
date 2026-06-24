@@ -26,18 +26,18 @@ CONVERSIONTYPES += "bootonly"
 # the correct file names
 #
 generate_bootonly_image() {
-    local type=${1}
-    local sector="0"
+    local type="${1}"
+    local sector
     local wicfile="${IMAGE_NAME}.${type}"
     local outfile="${wicfile}.bootonly"
     local part_list
 
-    if [ -z ${type} ] || [ "${type}" != "wic" ]; then
+    if [ "${type}" != "wic" ]; then
         bberror "generate_bootonly_image: bootonly image can only be generated from wic image."
         exit 1
     fi
 
-    if [ ! -r ${wicfile} ]; then
+    if [ ! -r "${wicfile}" ]; then
         bberror "generate_bootonly_image: wicfile ${wicfile} does not exist"
         exit 1
     fi
@@ -70,14 +70,14 @@ generate_bootonly_image() {
         exit 1
     fi
 
-    dd if="${wicfile}" of="${outfile}" bs=512 count=${sector}
+    dd if="${wicfile}" of="${outfile}" bs=512 count="${sector}"
     for part in ${delete_part_list}; do
-        bbdebug 1 "delete P${part}  - ${outfile}";
-        sfdisk --delete "${outfile}" ${part};
+        bbdebug 1 "delete P${part}  - ${outfile}"
+        sfdisk --delete "${outfile}" "${part}"
     done
 }
 
-CONVERSION_CMD:bootonly = "generate_bootonly_image ${type}"
+CONVERSION_CMD:bootonly = "generate_bootonly_image "${type}""
 
 # we need dd / partx and sfdisk, so add dependencies
 # note: this is not an override, hence the underscore is needed
