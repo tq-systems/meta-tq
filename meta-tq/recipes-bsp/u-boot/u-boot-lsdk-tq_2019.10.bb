@@ -3,7 +3,7 @@ require u-boot-tq.inc
 
 DESCRIPTION = "U-Boot for TQ-Systems GmbH Freescale LS1012A/LS1028A based modules"
 
-SRCREV = "70cb4d824a7cbbe7bdefc7c485b6dcf5eed74415"
+SRCREV = "361a162a569b5e78a070796af5e9142a44993557"
 SRCBRANCH = "TQMLSxx-LSDK-20.04-update-290520"
 
 COMPATIBLE_MACHINE = "^$"
