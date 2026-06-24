@@ -33,12 +33,12 @@ generate_bootonly_image() {
     local reverse_part_list=""
 
     if [ -z ${type} ] || [ "${type}" != "wic" ]; then
-        bberror "bootonly image can only be generated from wic image."
+        bberror "generate_bootonly_image: bootonly image can only be generated from wic image."
         exit 1
     fi
 
     if [ ! -r ${wicfile} ]; then
-        bberror "wicfile ${wicfile} does not exist"
+        bberror "generate_bootonly_image: wicfile ${wicfile} does not exist"
         exit 1
     fi
 
@@ -54,19 +54,19 @@ generate_bootonly_image() {
         cutoff_partition="END"
         delete_part_list=${reverse_part_list% *}
     else
-        bberror "Unsupported wic image structure."
+        bberror "generate_bootonly_image: Unsupported wic image structure."
         exit 1
     fi
 
     if [ "$(partx  --show --noheadings --nr 1 --output SCHEME "${wicfile}")" != "dos" ]; then
-        bberror "wic image with gpt is not handled."
+        bberror "generate_bootonly_image: wic image with gpt is not handled."
         exit 1
     fi
 
     sector=$(partx --nr 1 --bytes --noheadings --output "${cutoff_partition}" "${wicfile}")
     [ ${cutoff_partition} = "END" ] && sector=$(expr $sector + 1)
     if [ -z ${sector} ] || [ "${sector}" -le "0" ]; then
-        bberror "Unsupported wic image structure."
+        bberror "generate_bootonly_image: Unsupported wic image structure."
         exit 1
     fi
 
