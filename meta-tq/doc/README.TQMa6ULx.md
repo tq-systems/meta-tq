@@ -170,12 +170,18 @@ _Note:_
 
 #### BOOT Device
 
-_Note:_
-* `x` means position of DIP, * `-` means don't care
-* Switch `S5` to `Internal Boot`
+_Notes for DIP Settings:_
+
+* `x`: position of DIP
+* `-`: don't care
+
+_Signal Mapping:_
+
 * S12: BOOT_CFG1\[0 .. 7\]
 * S11: BOOT_CFG2\[0 .. 7\]
 * S13: BOOT_CFG4\[0 .. 7\]
+
+To use boot device selection from DIP Switch, `BOOT_MODE` must be set at `S5` to `Internal Boot`.
 
 ##### SD Card
 
