@@ -33,6 +33,11 @@ Releases before `wrynose` used older names with the following scheme:
 
 ### Added
 
+* linux-ti-tq-6.18
+  * Support for TQMa62xx\[L\]
+  * Support for TQMa64xxL
+  * Support for TQMa67xx\[L\]
+
 * linux-imx-tq-6.18
   * OS08A20 camera Support for TQMa95xxLA
   * Support for TQMa91
@@ -61,6 +66,10 @@ Releases before `wrynose` used older names with the following scheme:
   * integrate fixes up to stable tag v6.18.36
 * linux-imx-tq-6.18
   * integrate FSLC fixes up to stable tag v6.18.32
+
+### Removed
+
+* linux-ti-tq-6.12: Remove recipe for TQMa62xx\[L\], TQMa64xxL and TQMa67xx\[L\]
 
 ### Fixed
 
