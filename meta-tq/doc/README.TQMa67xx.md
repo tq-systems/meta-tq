@@ -19,7 +19,7 @@ _Bootloader:_
 
 _Kernel:_
 
-* linux-ti-tq-6.12 (based on ti-linux-6.12.y)
+* linux-ti-tq-6.18 (based on ti-linux-6.18.y)
 
 ### Known Issues
 
