@@ -40,11 +40,25 @@ Releases before `wrynose` used older names with the following scheme:
 
 ### Changed
 
-* imx-system-manager-tq
+* TQMa95*: use new imx-system-manager-tq configuration names
+* imx-system-manager-tq: support unified configuration name scheme for TQ-Systems SoM
+* TQMa8M*: improve assignment for IMXBOOT_TARGETS / IMXBOOT_FSPI_TARGET / IMXBOOT_SDMMC_TARGET
+
+  Use default assignment for all variables, move this to the SoM specific part and use IMXBOOT_FSPI_TARGET
+  IMXBOOT_SDMMC_TARGET when the relevant target name is used e.g. for MACHINE_WKS_BOOTSTREAM  etc.
+* imx-boot-tq: improve dependencies
+* u-boot-2026.01:
+  * TQMa6\[62,64,67\]xx(L): enable "hash" command
+  * TQMa6\[62,64,67\]xx(L): enable "ddr ecc_err" error injection command
+  * Add TQMa62xx and TQMa64xxL 1GiB Nanya RAM variants (experimental)
+
+    Alternative RAM vendor needs a different configuration. RAM type
+    detection and initialisation is handled in boot firmware.
+    Include a _temporary_ workaround for TQMa64xxL for Nanya RAM initialization.
 * u-boot-imx-tq-2025.04
   * integrate NXP Fixes up to BSP release tag lf-6.18.2_1.0.0
 * linux-tq-6.18
-  * integrate fixes up to stable tag v6.18.34
+  * integrate fixes up to stable tag v6.18.36
 * linux-imx-tq-6.18
   * integrate FSLC fixes up to stable tag v6.18.32
 
