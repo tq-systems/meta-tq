@@ -1,7 +1,29 @@
 # Changelog
 
 All notable changes to this project will be documented in this file.
-Releases are named with the following scheme:
+Releases since `wrynose` use names with the following scheme:
+
+`<Yocto Project major version number>.<Yocto Project minor version number>.<TQ major version number>.<TQ patch version number>`
+
+## Semi-automatic Releases
+
+There are semi-automatic releases with a `-ci.<CI release version number>`
+suffix and contains the current development and are
+released **without any testing**. They always target a release with
+`TQ patch version number` set to `0`.
+
+## Release Candidates (RC)
+
+Release candidates use a `-rc.<RC release version number>` suffix. These are
+used for release preparation. Once the first RC has been.
+released a semi-automatic release increases the `<TQ major version number>`.
+
+**NOTE:** For details to the changes in a release see the CHANGELOG.md
+files in git the submodule for meta-tq (meta layers meta-tq and meta-dumpling).
+
+## Older Releases
+
+Releases before `wrynose` used older names with the following scheme:
 
 `<Yocto Project version name>.<TQ module family>.BSP.SW.<version number>`
 
@@ -31,7 +53,7 @@ Releases are named with the following scheme:
 * packagegroup-npu: add tensorflow packages for i.MX95 with NXP BSP
 * neutron: port recipe from meta-freescale-ml and meta-imx NXP downstream lf-6.18.2_1.0.0
 
-## wrynose release 0001 (not released yet)
+## 6.0.0.0
 
 ### Changed
 

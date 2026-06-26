@@ -203,7 +203,7 @@ here to create a protected rootfs partition. To do so, we need meta-security,
 which provides `dm-verity-img.bbclass`, as dependency:
 
 URI: https://git.yoctoproject.org/meta-security  
-branch: scarthgap  
+branch: wrynose  
 revision: HEAD  
 layers: meta-security
 

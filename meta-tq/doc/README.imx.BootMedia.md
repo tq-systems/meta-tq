@@ -131,6 +131,9 @@ eMMC.
 
 ### U-Boot Environment Variables
 
+_Note_: Address variables used in scripts are named according to the U-Boot defaults.
+
+* `boot_script_spi`: file name of SPI boot script image for Distroboot (default = boot-ubi.scr)
 * `uboot`: name of bootstream image (default = bootstream.bin)
 * `mmcdev`: 0 for eMMC, 1 for SD card (automatically generated,
   can be overwritten)
@@ -178,7 +181,17 @@ Download UBIFS image from TFTP and update:
 __Note:__: set `ubirootfs` to the correct image name. This is usually the artefact with the extension
 `.rootfs.ubifs`
 
+Download distroboot bootscript image from TFTP and update:
+
+`run update_boot_script_spi`
+
 ## Booting Linux OS
+
+### Distroboot / Stdboot
+
+See the [Distroboot README](README.Distroboot.md) for U-Boot 2024.04 or newer.
+
+### Traditional boot using scripts
 
 To boot a Linux OS from a running U-Boot following scripts are implemented in
 environment:

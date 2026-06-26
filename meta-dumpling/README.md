@@ -24,28 +24,22 @@ for TQ-Systems SOM and some initial example distro support.
 
 ### Dependencies
 
-This layer in the checked out branch depends on:
+This layer in the checked out branch depends on [bitbake](https://git.openembedded.org/bitbake) and
+the following layers:
 
-URI: https://git.yoctoproject.org/poky  
-branch: scarthgap  
-layers: meta  
+| URI                                                | branch     | layer              | remark                            |
+| :------------------------------------------------- | :--------: | :----------------: | :-------------------------------: |
+| https://git.openembedded.org/openembedded-core     | wrynose    | meta               |                                   |
+| https://github.com/openembedded/meta-openembedded  | wrynose    | meta-oe            |                                   |
+| https://git.yoctoproject.org/meta-yocto            | wrynose    | meta-poky          | for distros defined in this layer |
+| https://github.com/tq-systems/meta-tq              | wrynose    | meta-tq            |                                   |
 
-URI: https://github.com/openembedded/meta-openembedded.git
-branch: scarthgap  
-layers: meta-oe  
-
-URI: https://github.com/tq-systems/meta-tq.git  
-branch: scarthgap  
-layers: meta-tq  
+For tested revisions of the referenced layers see BSP setup and release notes.
 
 When using one of the distros definded in this layer you need
 additionally the `meta-poky` layer from the poky repo that defines
 `poky` which the distros defined in this layer depend on.
 **Note** Recipes and bbappends in this layer do not depend on `meta-poky`
-
-URI: https://git.yoctoproject.org/poky  
-branch: scarthgap  
-layers: meta-poky  
 
 This layer additionally contains optional fixes and extensions for other layers
 as far as needed or useful for TQ-Systems SOM. Most of these bbappends

@@ -21,7 +21,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ## Supported Features
 
-### U-Boot
+### U-Boot MBa6ULx
 
 | Feature                                          |   REV.020x   |
 | :----------------------------------------------: | :----------: |
@@ -51,18 +51,18 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | Read                                             |       x      |
 | PP / Erase                                       |       x      |
 
-### Linux
+### Linux MBa6ULx
 
-NOTE: Device tree from Linux Kernel 6.1 is not out of the box compatible to
-yocto scarthgap. For Linux 6.1 support use yocto kirkstone.
+NOTE: Device tree for Linux Kernel older than 6.6 is not out of the box compatible to newer kernel
+versions due to node naming changes.
 
 | Feature                              | linux-tq-6.6 |
 | :----------------------------------: | :----------: |
 | Fuses                                |      x       |
-| UART1 (console, X15)                 |      x       |
+| UART1 (console, X15/X1700)           |      x       |
 | UART3 (X5)                           |      x       |
 | GPIO                                 |      x       |
-| Button (S6, S7, S8)                  |      x       |
+| Button (S6, S7, S14)                 |      x       |
 | I2C                                  |      x       |
 | GPIO expander                        |      x       |
 | EEPROM                               |      x       |
@@ -70,8 +70,8 @@ yocto scarthgap. For Linux 6.1 support use yocto kirkstone.
 | QSPI NOR                             |      x       |
 | Buzzer                               |      x       |
 | USB Host (X7/X8/X22)                 |      x       |
-| USB Dual Role (X10)                  |      x       |
-| eMMC/SD (on-board/X9)                |      x       |
+| USB Dual Role (X9)                   |      x       |
+| eMMC/SD (on-board/X10)               |      x       |
 | Ethernet 100M (X1400)                |      x       |
 | Ethernet 100M (X1500) - not G1 CPU   |      x       |
 | CAN (X13)                            |      x       |
@@ -79,6 +79,7 @@ yocto scarthgap. For Linux 6.1 support use yocto kirkstone.
 | RS-485 (X16)                         |              |
 | LVDS (X17, X18)                      |      x       |
 | Parallel LCD (X4)                    |      x       |
+| Audio Mikrofon (X19)                 |              |
 | Audio Line In (X20)                  |      x       |
 | Audio Line Out (x21)                 |      x       |
 
@@ -128,39 +129,83 @@ Artefacts can be found at the usual locations for bitbake:
 
 ## Boot DIP Switches
 
-### MBa6ULx DIP Switches
+_Note:_
+* `x` means position of DIP, * `-` means don't care
 
 _Note:_
+* S15: Switch Debug UART
+* S5:  BOOT\_MODE\[0 .. 1\]
+* S12: BOOT_CFG1\[0 .. 7\]
+* S11: BOOT_CFG2\[0 .. 7\]
+* S13: BOOT_CFG4\[0 .. 7\]
+
+### MBa6ULx DIP Switches
+
+#### Debug UART
+
+_Note:_
+* `1` means DIP on, `0` means DIP off, `-` means don't care
+* S15: Switch Debug UART
+
+| Mode        | S15 |
+| ----------- | :-: |
+| DIP         |  1  |
+| RS232 (x15) |  0  |
+| USB (X1700) |  1  |
+
+#### BOOT MODE
+
+_Note:_
+* `1` means DIP on, `0` means DIP off, `-` means don't care
+* S5: BOOT\_MODE\[1:0\]
+* Serial Downloader vie USB (X9)
+
+| Mode              | S5  |     |
+| ----------------- | --- | --- |
+| DIP               |  1  |  2  |
+| Boot from Fuses   |  0  |  0  |
+| Serial Downloader |  1  |  0  |
+| Internal Boot     |  0  |  1  |
+| Reserved          |  1  |  1  |
+
+#### BOOT Device
+
+_Notes for DIP Settings:_
+
+* `x`: position of DIP
+* `-`: don't care
+
+_Signal Mapping:_
 
 * S12: BOOT_CFG1\[0 .. 7\]
 * S11: BOOT_CFG2\[0 .. 7\]
 * S13: BOOT_CFG4\[0 .. 7\]
-* S5: BOOT\_MODE\[0 .. 1\]
-* `x` means position of DIP, `-` means don't care
 
-#### SD Card
+To use boot device selection from DIP Switch, `BOOT_MODE` must be set at `S5` to `Internal Boot`.
 
-|         | S11 |     |     |     |     |     |     |     |   | S12 |     |     |     |     |     |     |     |    | S13 |     |     |     |     |     |     |     |    |  S5 |     |
-| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: |
-| DIP     |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |   |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |
-| ON      |  x  |  x  |     |  x  |  x  |  x  |  x  |  x  |   |  x  |  x  |     |  x  |  x  |  x  |     |  x  |    |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |    |     |  x  |
-| OFF     |     |     |  x  |     |     |     |     |     |   |     |     |  x  |     |     |     |  x  |     |    |     |     |     |     |     |     |     |     |    |  x  |     |
+##### SD Card
 
-#### eMMC
+|         | S11 |     |     |     |     |     |     |     |   | S12 |     |     |     |     |     |     |     |    | S13 |     |     |     |     |     |     |     |
+| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| DIP     |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |   |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |
+| ON      |  x  |  x  |     |  x  |  x  |  x  |  x  |  x  |   |  x  |  x  |     |  x  |  x  |  x  |     |  x  |    |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |
+| OFF     |     |     |  x  |     |     |     |     |     |   |     |     |  x  |     |     |     |  x  |     |    |     |     |     |     |     |     |     |     |
 
-|         | S11 |     |     |     |     |     |     |     |   | S12 |     |     |     |     |     |     |     |    | S13 |     |     |     |     |     |     |     |    |  S5 |     |
-| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: |
-| DIP     |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |   |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |
-| ON      |  x  |     |  x  |  x  |     |  x  |  x  |  x  |   |  x  |  x  |  x  |  x  |  x  |     |     |  x  |    |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |    |     |  x  |
-| OFF     |     |  x  |     |     |  x  |     |     |     |   |     |     |     |     |     |  x  |  x  |     |    |     |     |     |     |     |     |     |     |    |  x  |     |
+##### eMMC
 
-#### QSPI
+|         | S11 |     |     |     |     |     |     |     |   | S12 |     |     |     |     |     |     |     |    | S13 |     |     |     |     |     |     |     |
+| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| DIP     |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |   |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |
+| ON      |  x  |     |  x  |  x  |     |  x  |  x  |  x  |   |  x  |  x  |  x  |  x  |  x  |     |     |  x  |    |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |
+| OFF     |     |  x  |     |     |  x  |     |     |     |   |     |     |     |     |     |  x  |  x  |     |    |     |     |     |     |     |     |     |     |
 
-|         | S11 |     |     |     |     |     |     |     |   | S12 |     |     |     |     |     |     |     |    | S13 |     |     |     |     |     |     |     |    |  S5 |     |
-| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: |
-| DIP     |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |   |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |
-| ON      |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |   |  x  |  x  |  x  |  x  |     |  x  |  x  |  x  |    |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |    |     |  x  |
-| OFF     |     |     |     |     |     |     |     |     |   |     |     |     |     |  x  |     |     |     |    |     |     |     |     |     |     |     |     |    |  x  |     |
+##### QSPI
+
+|         | S11 |     |     |     |     |     |     |     |   | S12 |     |     |     |     |     |     |     |    | S13 |     |     |     |     |     |     |     |
+| ------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | - | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | -- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| DIP     |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |   |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |    |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |
+| ON      |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |   |  x  |  x  |  x  |  x  |     |  x  |  x  |  x  |    |  x  |  x  |  x  |  x  |  x  |  x  |  x  |  x  |
+| OFF     |     |     |     |     |     |     |     |     |   |     |     |     |     |  x  |     |     |     |    |     |     |     |     |     |     |     |     |
 
 ## Boot Device Initialisation and Update
 

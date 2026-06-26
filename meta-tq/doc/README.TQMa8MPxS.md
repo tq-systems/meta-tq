@@ -7,7 +7,6 @@ This README contains some useful information for TQMa8MPxS on MB-SMARC-2
 ## Variants
 
 * TQMa8MPQS REV.030x on MB-SMARC-2
-* TQMa8MPQS REV.010x on MB-SMARC-2 (Prototypes)
 
 ## Version Information for Software Components
 

@@ -19,8 +19,8 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ### Linux
 
-NOTE: Device tree from Linux Kernel 6.1 is not out of the box compatible to
-yocto scarthgap. For Linux 6.1 support use yocto kirkstone.
+NOTE: Device tree for Linux Kernel older than 6.6 is not out of the box compatible to newer kernel
+versions due to node naming changes.
 
 |                              | linux-tq-6.6  |
 | :--------------------------: | :-----------: |

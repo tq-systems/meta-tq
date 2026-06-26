@@ -24,11 +24,11 @@ the following layers:
 
 | URI                                             | branch     | layer              | remark                            |
 | :---------------------------------------------- | :--------: | :----------------: | :-------------------------------: |
-| https://git.openembedded.org/openembedded-core  | scarthgap  | meta               |                                   |
-| https://git.yoctoproject.org/git/meta-freescale | scarthgap  | meta-freescale     | mandatory for Layerscape and i.MX |
-| https://git.yoctoproject.org/git/meta-ti        | scarthgap  | meta-ti-bsp        | mandatory for TI SOC              |
-| https://git.yoctoproject.org/git/meta-arm       | scarthgap  | meta-arm           |                                   |
-| https://git.yoctoproject.org/git/meta-arm       | scarthgap  | meta-arm-toolchain |                                   |
+| https://git.openembedded.org/openembedded-core  | wrynose    | meta               |                                   |
+| https://git.yoctoproject.org/git/meta-freescale | wrynose    | meta-freescale     | mandatory for Layerscape and i.MX |
+| https://git.yoctoproject.org/git/meta-ti        | wrynose    | meta-ti-bsp        | mandatory for TI SOC              |
+| https://git.yoctoproject.org/git/meta-arm       | wrynose    | meta-arm           |                                   |
+| https://git.yoctoproject.org/git/meta-arm       | wrynose    | meta-arm-toolchain |                                   |
 
 For tested revisions of the referenced layers see BSP setup and release notes.
 
@@ -167,7 +167,7 @@ Support for the following machines is contained in this version:
 | [b]    | i.MX7D                  | TQMa7D                  | MBa7x          | tqma7x-multi-mba7                | TQMa7D HW REV.010x ... 020x / 1 GiB / 2 GiB /512 MiB RAM / MBa7x HW REV.020x                                                                                 |
 | [y]    | i.MX8MP                 | TQMa8MPxL               | MBa8MPxL       | tqma8mpxl-mba8mpxl               | TQMa8MPQL with 1/2/4/8 GiB RAM, HW REV.020x, MBa8MPxL HW REV.020x                                                                                            |
 | [y]    | i.MX8MP                 | TQMa8MPxL               | MBa8MP-RAS314  | tqma8mpxl-mba8mp-ras314          | TQMa8MPQL with 1/2/4/8 GiB RAM, HW REV.020x, MBa8MP-RAS314 HW REV.010x                                                                                       |
-| [b]    | i.MX8MP                 | TQMa8MPxS               | MB-SMARC-2     | tqma8mpxs-mb-smarc-2             | TQMa8MPQS with 1/2/4/8 GiB RAM, HW REV.010x and HW REV.030x                                                                                                  |
+| [b]    | i.MX8MP                 | TQMa8MPxS               | MB-SMARC-2     | tqma8mpxs-mb-smarc-2             | TQMa8MPQS with 1/2/4/8 GiB RAM HW REV.030x                                                                                                                   |
 | [b]    | i.MX8M\[D,Q,QL\]        | TQMa8M\[D,Q,QL\]        | MBa8Mx         | tqma8mx-multi-mba8mx             | TQMa8M\[D,Q,QL\] with 1/2/4 GiB RAM, HW REV.020x, MBa8Mx HW REV.020x / 030x                                                                                  |
 | [b]    | i.MX8MM\[D,Q\]          | TQMa8M\[D,Q\]ML         | MBa8Mx         | tqma8mxml-multi-mba8mx           | TQMa8M\[D,Q\]ML / 1/2/4 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x                                                                                             |
 | [b]    | i.MX8MN\[Q,DL\]         | TQMa8M\[Q,DL\]NL        | MBa8Mx         | tqma8mxnl-1gb-mba8mx             | TQMa8M\[Q,DL\]NL / 1 GiB RAM, HW REV.020x, MBa8Mx HW REV.030x                                                                                                |
@@ -229,11 +229,14 @@ Definition of support status:
 
 ### Obsolete machines
 
-* TQMa57: Use `kirkstone` branch instead, last release is kirkstone.TQMa57xx.BSP.SW.0015
-* TQMa65xx: Use `hardknott` branch or `kirkstone.TQMa65xx.BSP.SW.0009` release instead
-* TQMA7S: Use `kirkstone` / `kirkstone-next` branches instead, contact support for updates.
-* TQMT10xx: Use `kirkstone` / `kirkstone-next` branches instead, contact support for updates.
-* MBaULxL (SBC with TQMa6ULxL): Use `kirkstone` / `kirkstone-next` branches instead, contact support for updates.
+The following list is a short reference. Please contact TQ Embedded support for details and updates.
+The mentioned versions are for evaluation purpose and not intended for production use.
+
+* TQMa57: Use `kirkstone` branch, last release is kirkstone.TQMa57xx.BSP.SW.0015
+* TQMa65xx: Use `hardknott` branch or `kirkstone.TQMa65xx.BSP.SW.0009` release
+* TQMA7S: Use `kirkstone` / `kirkstone-next` branches, Linux and U-Boot support is upstream
+* TQMT10xx: Use `kirkstone` / `kirkstone-next` branches
+* MBaULxL (SBC with TQMa6ULxL): Use `scarthgap` / `scarthgap-next` branches
 
 ### Support for wic
 

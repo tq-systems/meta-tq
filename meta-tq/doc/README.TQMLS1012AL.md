@@ -43,8 +43,6 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ### Linux
 
-**Note:** For Linux 5.15 based on NXP / vendor branch prefer using `kirkstone` branch.
-
 | Feature                                           |   fslc-6.6    |
 |:--------------------------------------------------|:-------------:|
 | RAM configs                                       | 512MiB, 1 GiB |
