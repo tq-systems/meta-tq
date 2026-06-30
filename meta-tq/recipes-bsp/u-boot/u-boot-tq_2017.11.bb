@@ -14,7 +14,7 @@ DEPENDS:append:tqmls102xa = "\
     swap-file-endianess-native \
 "
 
-SRCREV = "f22901aa6b3d4f746cbe2dd39cd29f693df65b3d"
+SRCREV = "e7980913deb34f2b202f5640cab76a6b024c6419"
 SRCBRANCH = "TQMaxx-u-boot-v2017.11"
 
 # target not supported in U-Boot before v2019.07
