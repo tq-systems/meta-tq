@@ -2,7 +2,7 @@
 #@NAME: TQ-Systems GmbH TQMLS1088A Module on MBLS10xxA Baseboard
 #@SOC: LS1088A
 #@DESCRIPTION: Machine configuration for TQ-Systems GmbH TQMLS1088A
-#@MAINTAINER: Gregor Herburger <oss@ew.tq-group.com>
+#@MAINTAINER: Alexander Stein <oss@ew.tq-group.com>
 #
 # By default, this machine will build for the full featured option
 # with QSPI-NOR boot
