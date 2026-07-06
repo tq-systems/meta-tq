@@ -67,7 +67,7 @@ python do_create_extlinux_config() {
             menu_description = getLabelVar(d, label, 'MENU_DESCRIPTION')
             if not menu_description:
                 menu_description = label
-            cfgfile.write('\tMENU LABEL %s\n' % (menu_description))
+            cfgfile.write('\tMENU LABEL %s: %s\n' % (label, menu_description))
 
             kernel_image = getLabelVar(d, label, 'KERNEL_IMAGE')
             cfgfile.write('\tKERNEL %s\n' % (kernel_image))
