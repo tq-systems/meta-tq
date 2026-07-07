@@ -82,6 +82,8 @@ yocto scarthgap. For Linux 6.1 support use yocto kirkstone.
   `tq-image-small-[debug]` are intended for demonstration of howto generate a system
   running from SPI-NOR. This does not make any claims on feature / functional completeness.
 * U-Boot: USB dual role port (X5) is tested in U-Boot in peripheral mode only.
+* U-Boot: HSIC USB port (X4) can only be initialized once. Subsequent resets won't detect devices
+  on this Hub.
 * U-Boot: A POR might fail even if main power supply is disconnected, when running with
   USB dual role port (X5) connected to PC / HUB with powered VBUS.
 * Environment of U-Boot v2023.04 was reworked to use variable names that conforms with
