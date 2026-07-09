@@ -47,6 +47,13 @@ Releases before `wrynose` used older names with the following scheme:
 
 ### Changed
 
+* tq-extlinux: add labels to extlinux.conf menu
+* u-boot-tq-2017.11: TQMLS102xA:  support alternative temperature sensor
+
+  Add detection logic and device tree fixupto supports SoM variants with different sensor types.
+* u-boot-lsdk-tq_2019.10: TQMLS1028A: support alternative temperature sensor
+
+  Add detection logic and device tree fixupto supports SoM variants with different sensor types.
 * TQMa95*: use new imx-system-manager-tq configuration names
 * imx-system-manager-tq: support unified configuration name scheme for TQ-Systems SoM
 * TQMa8M*: improve assignment for IMXBOOT_TARGETS / IMXBOOT_FSPI_TARGET / IMXBOOT_SDMMC_TARGET
@@ -74,6 +81,11 @@ Releases before `wrynose` used older names with the following scheme:
 * linux-ti-tq-6.12: Remove recipe for TQMa62xx\[L\], TQMa64xxL and TQMa67xx\[L\]
 
 ### Fixed
+
+* u-boot-imx-tq-2023.04: TQMa6UL[L]x[L]: Fix redundant environment offset
+
+  Set the offset to a correct value to prevent overwriting data in QSPI NOR.
+  Otherwise saving the environment on QSPI NOR can lead to a non booting system.
 
 * TQMa335x/62xx\[L\]/64xxL/67xx\[L\]: Fix generation of `wic.bootonly` images
 
