@@ -4,8 +4,6 @@
 # D-82229 Seefeld, Germany.
 # Author: Markus Niebel
 
-PACKAGECONFIG:append:class-target = " examples"
-
 # From meta-freescale: linuxfb missing in meta-freescale for imx91 / imx93
 # current linuxfb plugin can handle DRM framebuffer, too
 PACKAGECONFIG_GRAPHICS:imxpxp += "\
