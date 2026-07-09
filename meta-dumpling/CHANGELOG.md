@@ -45,13 +45,14 @@ Releases before `wrynose` used older names with the following scheme:
 
   opencl is needed by tensorflow-lite dependencies. Since opencl itself pulls in a lot of packages
   this is not configured by default to save compilation time for machines without support.
-
-###
-
 * tq-image-base.inc: include packagegroup-camera if MACHINE_FEATURES contains camera
 * packagegroup-camera: add packegroup for libcamera and ISP support for i.MX95 with NXP BSP
 * packagegroup-npu: add tensorflow packages for i.MX95 with NXP BSP
 * neutron: port recipe from meta-freescale-ml and meta-imx NXP downstream lf-6.18.2_1.0.0
+
+### Fixed
+
+* qtbase: remove invalid PACKAGECONFIG, fix yocto QA check
 
 ## 6.0.0.0
 
