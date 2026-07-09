@@ -16,7 +16,7 @@ DEPENDS += "\
     lzop-native \
 "
 
-SRCREV = "cc88ef2ca7197e840680faae2e03b74fa875266c"
+SRCREV = "9e9dd7765de0b6f2f594049b62d1652c0a0d0b8a"
 SRCBRANCH = "TQM-v2023.04"
 
 UBOOT_INITIAL_ENV = "u-boot-initial-env"
