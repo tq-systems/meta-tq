@@ -46,6 +46,8 @@ Releases before `wrynose` used older names with the following scheme:
   * Support for TQMa93
 * CVE: add CVE_PRODUCT mappings for TQ-maintained kernel, bootloader and ATF recipes
 * BOM: add CYCLONEDX_EXTRA_RUNTIME_RECIPES for firmware components deployed via EXTRA_IMAGEDEPENDS
+* u-boot-tq-2026.04
+  * Support for TQMa8MPxL
 
 ### Changed
 
