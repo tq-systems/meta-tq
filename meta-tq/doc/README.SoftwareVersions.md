@@ -268,6 +268,17 @@ Version information:
   [`uboot-imx`](https://github.com/nxp-imx/uboot-imx)
 * branched from lf_v2025.04
 
+#### u-boot-tq 2026.04
+
+Supported SOM families
+
+* TQMa8MPxL (not selected by default)
+
+Version information:
+
+* based on U-Boot (https://github.com/u-boot/u-boot)
+* branched from tag `v2026.04`
+
 ### Linux
 
 #### Kernel 6.6 (linux-imx-fslc)
