@@ -5,9 +5,10 @@
 # this keeps reusability and easier settings for custom boards
 
 KERNEL_IMAGETYPES_INSTALL = "\
-    ${@oe.utils.all_distro_features(d, 'tiny', \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'tiny', \
         d.getVar('KERNEL_IMAGETYPE'), \
         d.getVar('KERNEL_IMAGETYPES'), \
+        d, \
     )} \
 "
 
