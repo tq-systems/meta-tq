@@ -14,8 +14,6 @@ Releases are named with the following scheme:
 * CVE: add CVE_PRODUCT mappings for TQ-maintained kernel, bootloader and ATF recipes
 * BOM: add CYCLONEDX_EXTRA_RUNTIME_RECIPES for firmware components deployed via EXTRA_IMAGEDEPENDS
 
-## scarthgap.TQ.ARM.BSP.0010 (not released yet)
-
 ### Changed
 
 * linux-rt-tq-6.12: update to v6.12.89-rt18
@@ -46,6 +44,10 @@ Releases are named with the following scheme:
 
 ### Fixed
 
+* u-boot-imx-tq-2023.04: TQMa6UL[L]x[L]: Fix redundant environment offset
+
+  Set the offset to a correct value to prevent overwriting data in QSPI NOR.
+  Otherwise saving the environment on QSPI NOR can lead to a non booting system.
 * tqma93xx-mba93xxca/la: fix distroboot flow for rpmsg and lvds configs with linux-imx-tq
 
   Use correct overrides for the BSP flavour to generate the menu entries and use correct overlay
@@ -54,7 +56,7 @@ Releases are named with the following scheme:
 * u-boot-imx-tq-2024.04: TQMa8MPxL / TQMa8MPxS
 
   Add missing check for started Cortex-M and add `clk-imx8mp.mcore_booted=1` to
-  kernel command line to prevent swithcing off unused clocks. Otherwise a running
+  kernel command line to prevent switching off unused clocks. Otherwise a running
   firmware on Cortex-M will stop during kernel boot.
 * linux-tq-6.12:
   * includes fix for `Copy fail` (CVE-2026-31431)
