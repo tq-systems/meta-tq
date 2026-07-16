@@ -365,3 +365,46 @@ For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 * defconfig changes for TQ-Systems starter kits and build time optimisation
 * defconfig not ready for production use
   (see `LINUX_VERSION` in `linux-rt-tq_6.6.bb` for exact release)
+
+## SOM with TI K3 (Sitara/Jacinto) ARMv8-A CPU
+
+### Supported SOM Families
+
+* TQMa62xx\[L\]
+* TQMa64xxL
+* TQMa67xx\[L\]
+
+### TF-A / OP-TEE
+
+TF-A and OP-TEE are provided by meta-ti. Their versions are managed
+indepentendtly of meta-tq and are not listed here.
+
+### U-Boot
+
+#### u-boot-tq 2026.01
+
+Supported SOM families:
+
+* TQMa62xx\[L\]
+* TQMa64xxL
+* TQMa67xx\[L\]
+
+Version information:
+
+* Based on U-Boot (https://github.com/u-boot/u-boot)
+* Branched from tag `v2026.01`
+
+### Linux
+
+#### Kernel 6.18 (linux-ti)
+
+Supported SOM families:
+
+* TQMa62xx\[L\]
+* TQMa64xxL
+* TQMa67xx\[L\]
+
+Version information:
+
+* Based on ti-linux-kernel (https://github.com/TexasInstruments/ti-linux-kernel)
+* Tracking branch `ti-linux-6.18.y`
