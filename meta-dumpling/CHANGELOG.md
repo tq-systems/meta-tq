@@ -31,6 +31,8 @@ Releases before `wrynose` used older names with the following scheme:
 
 ## Next Release
 
+### 6.0.1.0-ci1
+
 ### Changed
 
 * linux-tq: integrate patches from linux-stable up to v6.18.34
