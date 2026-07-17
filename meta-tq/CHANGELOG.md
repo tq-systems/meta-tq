@@ -11,6 +11,9 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* linux-tq-6.12: update to v6.12.95
+* linux-tq-6.6: update to v6.6.144
+* linux-imx-tq-6.6: update from linux-fslc incl. v6.6.144
 * u-boot-imx-tq_2024.04
   * tqma91xx / tqma93xx / tqma8mpxs / tqma8mpxl: use generic name for QSPI nor bootscript in
     update helper script.
