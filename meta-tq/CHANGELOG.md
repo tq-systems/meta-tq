@@ -9,6 +9,8 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## scarthgap.TQ.ARM.BSP.0011 (not released yet)
+
 ### Changed
 
 * linux-tq-6.12: update to v6.12.95

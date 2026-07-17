@@ -9,6 +9,12 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+## scarthgap.TQ.ARM.BSP.0011 (not released yet)
+
+### Removed
+
+* lmsensors: remove obsolete fix for building without sensord
+
 ## scarthgap.TQ.ARM.BSP.0010
 
 ## scarthgap.TQ.ARM.BSP.0009
