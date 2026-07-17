@@ -9,6 +9,24 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* u-boot-imx-tq_2024.04
+  * tqma91xx / tqma93xx / tqma8mpxs / tqma8mpxl: use generic name for QSPI nor bootscript in
+    update helper script.
+* tq-exlinux:
+  * also show config labels in menu labels
+* u-boot-tq-2017.11
+  * tqmls102xa: support for alternative temperature sensor
+* imx-boot-tq:
+  * improve dependency handling
+* imx-system-manager-tq:
+  * tqma95xxla / tqma95xxsa: change board configuration naming
+* u-boot-lsdk-tq_2019.10:
+  * tqmls1028a: support for alternative temperature sensor
+
+## scarthgap.TQ.ARM.BSP.0010
+
 ### Added
 
 * CVE: add CVE_PRODUCT mappings for TQ-maintained kernel, bootloader and ATF recipes
