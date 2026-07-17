@@ -31,7 +31,7 @@ Releases before `wrynose` used older names with the following scheme:
 
 ## Next Release
 
-### 6.0.1.0-ci1
+## 6.0.1.0-ci1
 
 ### Added
 
