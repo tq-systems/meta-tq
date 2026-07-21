@@ -15,7 +15,7 @@ require recipes-bsp/u-boot/u-boot-tq.inc
 UBOOT_INITIAL_ENV = "u-boot-initial-env"
 
 SRCBRANCH = "TQM-v2026.04"
-SRCREV = "184c960437b4e8c2d1ccc2ca2c97499b8b05df00"
+SRCREV = "430ddbee730c0bf282afe35665e1b41acd13d2dd"
 
 DEPENDS += "\
     bc-native \
