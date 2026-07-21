@@ -22,6 +22,8 @@ SRC_URI = " \
     file://ahab/key_pass.txt \
 "
 
+S = "${UNPACKDIR}"
+
 # This recipe can be extended with additional signing keys from a bbappend. Each
 # set of keys should be installed to a separate directory below ${datadir}/${BPN},
 # so it can be selected for a build using IMX_HAB_KEY_NAME.
