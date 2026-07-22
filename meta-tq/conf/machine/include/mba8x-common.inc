@@ -26,6 +26,9 @@ BOARD_FIRMWARE_FILES = "\
     hdmirxfw.bin \
 "
 
+# provide HDMI / DP firmware under /lib/firmware
+MACHINE_FIRMWARE += "firmware-imx-hdmi"
+
 IMAGE_BOOT_FILES = "\
     ${@create_image_boot_dtb_files(d)} \
     ${BOARD_FIRMWARE_FILES} \
