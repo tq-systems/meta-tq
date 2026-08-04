@@ -1,0 +1,1 @@
+EXTRA_OEMAKE:append:ti-soc:k3 = " CFG_TEE_CORE_LOG_LEVEL=2"
