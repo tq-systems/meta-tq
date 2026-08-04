@@ -29,6 +29,11 @@ Releases are named with the following scheme:
   * tqma95xxla / tqma95xxsa: change board configuration naming
 * u-boot-lsdk-tq_2019.10:
   * tqmls1028a: support for alternative temperature sensor
+  * tqmls1028a: switch mmcdev for mmc and SD card
+
+### Removed
+
+* meta-tq/conf/layer.conf: Remove stale LICENSE_PATH
 
 ## scarthgap.TQ.ARM.BSP.0010
 
