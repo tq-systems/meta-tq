@@ -12,5 +12,8 @@ IMAGE_FSTYPES += "wic.bootonly"
 # Disable meta-ti's dynamic generation of KERNEL_DEVICETREE
 KERNEL_DEVICETREE_PREFIX = ""
 
+# Disable meta-ti's dtbdest override in ti-soc.inc
+KERNEL_DTBDEST = "${KERNEL_IMAGEDEST}"
+
 # Disable ti_ prefix in FIT nodes (Yocto default; set to 1 by meta-ti)
 KERNEL_DTBVENDORED = "0"
