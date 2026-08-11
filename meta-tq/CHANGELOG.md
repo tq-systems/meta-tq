@@ -35,6 +35,10 @@ Releases before `wrynose` used older names with the following scheme:
 
 ### Added
 
+* u-boot-tq-2026.04
+  * new recipe based on upstream U-Boot
+  * optional support for TQMa8MPxL boards (preferred versiuon still based on NXP downstream fork)
+
 * linux-ti-tq-6.18
   * Support for TQMa62xx\[L\]
   * Support for TQMa64xxL
@@ -46,11 +50,19 @@ Releases before `wrynose` used older names with the following scheme:
   * Support for TQMa93
 * CVE: add CVE_PRODUCT mappings for TQ-maintained kernel, bootloader and ATF recipes
 * BOM: add CYCLONEDX_EXTRA_RUNTIME_RECIPES for firmware components deployed via EXTRA_IMAGEDEPENDS
-* u-boot-tq-2026.04
-  * Support for TQMa8MPxL
 
 ### Changed
 
+* u-boot-tq_2023.04
+  * tqma6ulx[l] / tqma6ullx[l]: cleanup defconfigs for environment settings
+
+    Images for QSPI boot and SD/eMMC boot have different linker settings. Starter kit BSP supports
+    environment on boot device only. Not needed settings are remived for clarity.
+* u-boot-lsdk-tq-2019.10
+  * tqmls1028a-mbls1028a: fix DT aliases for eMMC and SD
+
+    Use `0` for eMMC and `1` for SD-Card, to conform to other TQ-Systems starter kits
+* tqma8mx / mba8mx: add hdmi firmware to MACHINE_FIRMWARE
 * tq-extlinux: add labels to extlinux.conf menu
 * u-boot-tq-2017.11: TQMLS102xA:  support alternative temperature sensor
 
@@ -86,6 +98,16 @@ Releases before `wrynose` used older names with the following scheme:
 
 ### Fixed
 
+* tqma335x: adjust `KERNEL_DTBDEST` to allow loading from rootfs with U-Boot env boot script.
+
+  Otherwise the default environment needs adjustments to boot BSP image.
+* layer.conf: Remove stale LICENSE_PATH variable
+
+  pointing to non existant directory breaks `devtool add`
+* udev-rules-imx: the recipe in `meta-freescale` has a version now, correct file name of bbappend
+* imx-cst-keys: fix wrong default for `S`
+
+  Use `UNPACKDIR` since there are only local files.
 * u-boot-imx-tq-2023.04: TQMa6UL[L]x[L]: Fix redundant environment offset
 
   Set the offset to a correct value to prevent overwriting data in QSPI NOR.
