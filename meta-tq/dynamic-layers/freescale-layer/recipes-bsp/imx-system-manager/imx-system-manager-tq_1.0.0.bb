@@ -16,7 +16,7 @@ SRC_URI = "${IMX_SYSTEM_MANAGER_SRC};branch=${SRCBRANCH}"
 IMX_SYSTEM_MANAGER_SRC = "${TQ_GIT_BASEURL}/tq-imx-sm.git;protocol=${TQ_GIT_PROTOCOL}"
 
 SRCBRANCH = "TQM-lf-6.18.2"
-SRCREV = "92abd4d91cd8103cde05a30779254408822754d8"
+SRCREV = "9f0c9eaace7d651067cf7f3b2ac7e7203e93d04d"
 
 require dynamic-layers/arm-toolchain/recipes-bsp/imx-system-manager/imx-system-manager.inc
 
