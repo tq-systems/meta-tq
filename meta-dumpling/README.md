@@ -36,7 +36,7 @@ the following layers:
 
 For tested revisions of the referenced layers see BSP setup and release notes.
 
-When using one of the distros definded in this layer you need
+When using one of the distros defined in this layer you need
 additionally the `meta-poky` layer from the poky repo that defines
 `poky` which the distros defined in this layer depend on.
 **Note** Recipes and bbappends in this layer do not depend on `meta-poky`
