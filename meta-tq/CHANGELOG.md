@@ -31,6 +31,10 @@ Releases before `wrynose` used older names with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* optee-os: Use loglevel 'info' throughout all TI modules.
+
 ## 6.0.1.0-ci1
 
 ### Added
