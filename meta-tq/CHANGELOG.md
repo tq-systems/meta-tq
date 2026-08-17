@@ -37,7 +37,7 @@ Releases before `wrynose` used older names with the following scheme:
 
 * u-boot-tq-2026.04
   * new recipe based on upstream U-Boot
-  * optional support for TQMa8MPxL boards (preferred versiuon still based on NXP downstream fork)
+  * optional support for TQMa8MPxL boards (preferred version still based on NXP downstream fork)
 
 * linux-ti-tq-6.18
   * Support for TQMa62xx\[L\]
@@ -57,7 +57,7 @@ Releases before `wrynose` used older names with the following scheme:
   * tqma6ulx[l] / tqma6ullx[l]: cleanup defconfigs for environment settings
 
     Images for QSPI boot and SD/eMMC boot have different linker settings. Starter kit BSP supports
-    environment on boot device only. Not needed settings are remived for clarity.
+    environment on boot device only. Not needed settings are removed for clarity.
 * u-boot-lsdk-tq-2019.10
   * tqmls1028a-mbls1028a: fix DT aliases for eMMC and SD
 
@@ -66,10 +66,10 @@ Releases before `wrynose` used older names with the following scheme:
 * tq-extlinux: add labels to extlinux.conf menu
 * u-boot-tq-2017.11: TQMLS102xA:  support alternative temperature sensor
 
-  Add detection logic and device tree fixupto supports SoM variants with different sensor types.
+  Add detection logic and device tree fixup to support SoM variants with different sensor types.
 * u-boot-lsdk-tq_2019.10: TQMLS1028A: support alternative temperature sensor
 
-  Add detection logic and device tree fixupto supports SoM variants with different sensor types.
+  Add detection logic and device tree fixup to support SoM variants with different sensor types.
 * TQMa95*: use new imx-system-manager-tq configuration names
 * imx-system-manager-tq: support unified configuration name scheme for TQ-Systems SoM
 * TQMa8M*: improve assignment for IMXBOOT_TARGETS / IMXBOOT_FSPI_TARGET / IMXBOOT_SDMMC_TARGET
@@ -84,7 +84,7 @@ Releases before `wrynose` used older names with the following scheme:
 
     Alternative RAM vendor needs a different configuration. RAM type
     detection and initialisation is handled in boot firmware.
-    Include a _temporary_ workaround for TQMa64xxL for Nanya RAM initialization.
+    Include a _temporary_ workaround for TQMa64xxL for Nanya RAM initialisation.
 * u-boot-imx-tq-2025.04
   * integrate NXP Fixes up to BSP release tag lf-6.18.2_1.0.0
 * linux-tq-6.18
@@ -103,7 +103,7 @@ Releases before `wrynose` used older names with the following scheme:
   Otherwise the default environment needs adjustments to boot BSP image.
 * layer.conf: Remove stale LICENSE_PATH variable
 
-  pointing to non existant directory breaks `devtool add`
+  pointing to nonexistent directory breaks `devtool add`
 * udev-rules-imx: the recipe in `meta-freescale` has a version now, correct file name of bbappend
 * imx-cst-keys: fix wrong default for `S`
 
@@ -151,8 +151,8 @@ Releases before `wrynose` used older names with the following scheme:
   * TQMa93xxCA/LA: set thermal trips from fuses
 
     Using hard settings for consumer grade CPU can lead to boot issues for
-    industrial graded CPU when the temperatur is outside of consumer grade
-    temperatur range.
+    industrial graded CPU when the temperature is outside of consumer grade
+    temperature range.
 
 ### Removed
 
@@ -216,7 +216,7 @@ Releases before `wrynose` used older names with the following scheme:
   * Enable U-Boot environment handling from rootfs
   * Update to NXP downstream version lf-6.12.49_2.2.0
     * prepare for TQMa94xxLA
-    * TQMa95xxLA/TQMa95xxSA: simplify and implrove board support code
+    * TQMa95xxLA/TQMa95xxSA: simplify and improve board support code
 
       Use `board_phys_sdram_size` generic implementation under `arch/arm/mach-imx`
       and handle CPU variants with features disabled by fuses
@@ -361,7 +361,7 @@ Releases before `wrynose` used older names with the following scheme:
 * linux-ti-tq-6.12:
   * Update to latest version of ti-linux-6.12.y (includes linux-stable up to v6.12.57 and the cc33xx
     WLAN and Bluetooth drivers version 1.0.2.10). cc33xx-fw has been updated to 1.7.0.323 for
-    compatiblity with the new driver version.
+    compatibility with the new driver version.
 * doc: add MBa93xxLA-MINI
 * imx-boot-tq: simplify compile_prepare for i.MX8M / i.MX8 / i.MX8X
 
@@ -376,7 +376,7 @@ Releases before `wrynose` used older names with the following scheme:
   * Set defaults for `WKS_FILE`, `MACHINE_WKS_BOOTSTREAM`, and
     `WIC_BOOTPART_SIZE` in module includes. They can still be overridden in
     individual machine configurations if needed.
-* imx-system-amanager-tq: update to NXP lf-6.12.20 baseline. This is needed
+* imx-system-manager-tq: update to NXP lf-6.12.20 baseline. This is needed
   to support newer i.MX95 chip revisions. While at it use common include
   from `meta-freescale` and prepare building without debug console / monitor.
 
@@ -407,7 +407,7 @@ Releases before `wrynose` used older names with the following scheme:
   * Integrate stable-rt fixes up to tag v6.12.57-rt14
 * linux-imx-tq-6.6:
   * TQMa8Mx / TQMa8MxML / TQMa8MxNL / TQMa8Xx / TQMa8XxS / TQMa8x:
-    * allow using truested keys from different providers: CAAM, TPM, TEE
+    * allow using trusted keys from different providers: CAAM, TPM, TEE
     * Include stable fixes up to v6.6.119
 
 * linux-tq-6.6: TQMa6 / TQMa6UL[L]x[L] / TQMa7 / TQMa8Mx / TQMa8MxML / TQMa8MxNL:
@@ -549,7 +549,7 @@ Releases before `wrynose` used older names with the following scheme:
 * u-boot-tq-2017.11: TQMLS102xA:
 
   Upstream device tree node naming for ESDHC controller was changes. Fix board
-  specific DSR code to be compatibel with old and new naming.
+  specific DSR code to be compatible with old and new naming.
 * u-boot-imx-tq-2024.04:
 
   FEC driver MDIO bus handling for enabled DM_MDIO and DM_ETH_PHY
@@ -563,7 +563,7 @@ Releases before `wrynose` used older names with the following scheme:
   on Kconfig settings.
 * u-boot-lsdk-tq-2019.04: TQMLS1028A: Fix PCIe initialisation flow
 
-  Backport some fixes to the initalisation flow, limit to Gen2 and
+  Backport some fixes to the initialisation flow, limit to Gen2 and
   add wait for link polling. Both the limitation and the polling loop
   improve compatibility to more cards, since bootloader support is
   crucial for working PCIe under Linux.
@@ -709,7 +709,7 @@ Releases before `wrynose` used older names with the following scheme:
     will be allocated but never freed. If no MAC address is given, `mdio` command may cause
     an infinite loop.
 * TQMa6ULx[L] / TQMa6ULLx[L]:
-  * u-boot-tq-2023.04: redundand environment was not configured but is expected by environment
+  * u-boot-tq-2023.04: redundant environment was not configured but is expected by environment
     access tools in rootfs
 * machines: fix creation of multiple wic images for machines with a fixed boot firmware dependency
   to the actual assembled RAM.
@@ -1390,7 +1390,7 @@ No changes.
 
 * TQMa62xx:
   * u-boot-ti-tq:
-    * Fix CPU core clock initialization, which was breaking cpufreq on
+    * Fix CPU core clock initialisation, which was breaking cpufreq on
       Linux with ti-dm-fw REL.MCUSDK.09.00.01.17 and newer
     * Do not print EEPROM information twice
   * linux-ti-tq: The internal RTC of the AM62x SoC has been disabled
@@ -1531,7 +1531,7 @@ No changes.
 
 * TQMLS1088A U-Boot:
   * Fixed netboot command
-  * Fixed VID Core Voltage initialization
+  * Fixed VID Core Voltage initialisation
   * Fixed memory passed to OS
 
 ## kirkstone.TQ.ARM.BSP.0010
@@ -2026,7 +2026,7 @@ No changes.
   * linux-ti-tq_5.10: make OSPI working
 * TQMa57xx:
   * Update U-Boot for Kernel/DTB in rootfs
-  * Fix MBa57xx USB hub initialization
+  * Fix MBa57xx USB hub initialisation
   * Fix inclusion of PRU Ethernet firmwares
 * linux-tq / linux-rt-tq 5.4: tqmls102xa - fix rtc quartz capacity
   handling. Even if the correct value is set by bootloader the value
@@ -2510,7 +2510,7 @@ __Start of porting to honister__
 ### Changed
 * tqmls1043a/tqmls1046a: linux-tq: update to v5.4.87
 * tqmls1088a: linux-lsdk-tq: update to v5.4.47
-* tqmls10xxa: u-boot-tq: add XFI Retimer and serdes initialization
+* tqmls10xxa: u-boot-tq: add XFI Retimer and serdes initialisation
 * tqmls10xxa: u-boot-tq: add mmc subcommand to query max enhanced partition size
 
 ## zeus.TQMLS1028A.BSP.SW.0105
