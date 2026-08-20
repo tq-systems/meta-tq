@@ -33,7 +33,20 @@ Releases before `wrynose` used older names with the following scheme:
 
 ### Changed
 
+* imx-oei-tq: updates for project internal CI settings, no functional change
+* imx-system-manager-tq:
+  * updates for project internal CI settings
+  * remove unused configurations for TQ-Systems boards
+
+    After BSP switched to new configuration names with technical identical settings the old configs
+    were removed from.
 * optee-os: Use loglevel 'info' throughout all TI modules.
+
+### Fixed
+
+* tq-extlinux: add missing variable dependency
+
+  Rebuild was not triggered when UBOOT_EXTLINUX_KERNEL_ARGS_EXTRA was changed
 
 ## 6.0.1.0-ci1
 
