@@ -4,7 +4,7 @@
 
 ## Variants
 * TQMLS1028A / TQMLS1017A SOM REV.020x/030x with 1/2/4/8 GiB RAM
-* MBLS1028A / MBLS1028A-IND carrier board
+* MBLS1028A / MBLS1028A-IND carrier board REV.0101..010x
 
 ## Version Information for Software Components
 
