@@ -136,7 +136,6 @@ _Only mainline kernel supported_
   * USB Superspeed U3 powersave mode is broken
   * Some USB devices are not detected (overcurrent detection on MB-SMARC-2)
 * USB 2.0 DRD (X4 on MB-SMARC-2):
-  * Linux: no detection of USB devices in host mode (hardware limitation on SoM)
   * U-Boot: limited to peripheral (dual role not supported by upstream DWC3 driver)
 * USB 3.0 micro (X3 on MB-SMARC-2)
   * peripheral mode not supported (hardware limitation on SoM, connected to Hub)
