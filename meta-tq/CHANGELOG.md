@@ -9,6 +9,16 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* imx-oei-tq: updates for project internal CI settings, no functional change
+* imx-system-manager-tq:
+  * updates for project internal CI settings
+  * remove unused configurations for TQ-Systems boards
+
+    After BSP switched to new configuration names with technical identical settings the old configs
+    were removed from system manager.
+
 ## scarthgap.TQ.ARM.BSP.0011
 
 ### Changed
