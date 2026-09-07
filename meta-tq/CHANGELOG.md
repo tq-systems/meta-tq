@@ -33,6 +33,8 @@ Releases before `wrynose` used older names with the following scheme:
 
 ### Changed
 
+* u-boot-tq_2023.04
+  * tqma6: increase max U-Boot size for SPI flash
 * imx-oei-tq: updates for project internal CI settings, no functional change
 * imx-system-manager-tq:
   * updates for project internal CI settings
@@ -44,6 +46,11 @@ Releases before `wrynose` used older names with the following scheme:
 
 ### Fixed
 
+* u-boot-tq_2023.04
+  * tqma6,6ul,7: default environment for `fdtoverlay_addr_r`
+
+    Booting with FDT overlay does not work with the default. Do not rely on
+    preprocessor arithmetic for env initialisation.
 * tq-extlinux: add missing variable dependency
 
   Rebuild was not triggered when UBOOT_EXTLINUX_KERNEL_ARGS_EXTRA was changed
