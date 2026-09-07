@@ -11,6 +11,8 @@ Releases are named with the following scheme:
 
 ### Changed
 
+* u-boot-tq_2023.04
+  * tqma6: increase max U-Boot size for SPI flash
 * imx-oei-tq: updates for project internal CI settings, no functional change
 * imx-system-manager-tq:
   * updates for project internal CI settings
@@ -18,6 +20,14 @@ Releases are named with the following scheme:
 
     After BSP switched to new configuration names with technical identical settings the old configs
     were removed from system manager.
+
+### Fixed
+
+* u-boot-tq_2023.04
+  * tqma6,6ul,7: default environment for `fdtoverlay_addr_r`
+
+    Booting with FDT overlay does not work with the default. Do not rely on
+    preprocessor arithmetic for env initialisation.
 
 ## scarthgap.TQ.ARM.BSP.0011
 
