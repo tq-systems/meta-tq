@@ -132,6 +132,13 @@ _Only mainline kernel supported_
   * Possible communication error to PHY attached to FEC, reboot required to fix
   * ETH1 looses manual assigned IP after suspend/resume. Default systemd network
     configuration uses DHCP with fallback. Has to be adjusted if needed.
+  * ETH0 (`EQOS`): autonegotiation problems with 10/100 link partners
+
+    If `EQOS` is configured to use multiple TX/RX queues (with a compatible
+    PHY), only full-duplex link modes are advertised. This may cause
+    autonegotiation problems with 10/100 link partnes, i.e. no link is
+    established. Use a fixed configuration without autonegotiation (e.g. with
+    `ethtool`) as workaround.
 * USB Host
   * USB Superspeed U3 powersave mode is broken
   * Some USB devices are not detected (overcurrent detection on MB-SMARC-2)
