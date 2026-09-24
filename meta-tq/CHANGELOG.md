@@ -46,6 +46,11 @@ Releases before `wrynose` used older names with the following scheme:
 
 ### Fixed
 
+* u-boot-tq_2026.01
+  * TQMa\[62,64,67\]xx(L): fix RAM size detection by U-Boot
+
+    An unused function in R5 SPL caused U-Boot proper to ignore RAM detection and
+    ECC reservation resulting in the default RAM configuration always being loaded.
 * u-boot-tq_2023.04
   * tqma6,6ul,7: default environment for `fdtoverlay_addr_r`
 
