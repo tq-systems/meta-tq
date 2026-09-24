@@ -22,7 +22,7 @@ require recipes-bsp/u-boot/u-boot-tq.inc
 UBOOT_INITIAL_ENV = "u-boot-initial-env"
 
 SRCBRANCH = "TQMaxx-u-boot-v2026.01"
-SRCREV = "5c778312688bd46835a93b811c51f1510e0b3cb9"
+SRCREV = "3d5478638e93fab9030cf7c4cd0ac3405b349b4a"
 
 DEPENDS += "python3-setuptools-native"
 
