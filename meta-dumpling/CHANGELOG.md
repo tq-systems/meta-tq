@@ -11,7 +11,11 @@ Releases are named with the following scheme:
 
 ## scarthgap.TQ.ARM.BSP.0012
 
-* None
+### Removed
+
+* packagegroup-sysutils: Remove cpufrequtils dependency
+
+  cpufrequtils is not maintained anymore and causes conflicts when building the sdk.
 
 ## scarthgap.TQ.ARM.BSP.0011
 
