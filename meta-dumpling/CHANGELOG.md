@@ -31,6 +31,12 @@ Releases before `wrynose` used older names with the following scheme:
 
 ## Next Release
 
+### Removed
+
+* packagegroup-sysutils: Remove cpufrequtils dependency
+
+  cpufrequtils is not maintained anymore and causes conflicts when building the sdk.
+
 ## 6.0.1.0-ci1
 
 ### Changed
