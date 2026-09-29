@@ -26,7 +26,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 Support matrix for `MBa91xxCA` REV.010x / `MBa93xxCA` REV.020x
 
-|                    Feature                      | u-boot-imx-tq_2024.04 |
+|                    Feature                      | u-boot-imx-tq-2024.04 |
 | :---------------------------------------------: | :-------------------: |
 |                  RAM configs                    |      0.5 / 1 GiB      |
 |                  inline ECC                     |          x            |
@@ -64,7 +64,7 @@ Support matrix for `MBa91xxCA` REV.010x / `MBa93xxCA` REV.020x
 Support matrix for `MBa91xxCA` REV.010x / `MBa93xxCA` REV.020x
 
 
-|                   Feature                     | linux-imx-tq_6.6   |
+|                   Feature                     | linux-imx-tq-6.6   |
 | :-------------------------------------------: | :----------------: |
 |                 RAM configs                   |    0.5 / 1 GiB     |
 |                CPU variants                   |      i.MX91        |
