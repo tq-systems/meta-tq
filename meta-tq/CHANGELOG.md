@@ -33,6 +33,8 @@ Releases before `wrynose` used older names with the following scheme:
 
 ### Changed
 
+* linux-ti-tq_6.18: update to ti-linux-kernel 12.01.00.05, including linux-stable updates
+  up to v6.18.35
 * u-boot-tq_2023.04
   * tqma6: increase max U-Boot size for SPI flash
 * imx-oei-tq: updates for project internal CI settings, no functional change
@@ -46,6 +48,8 @@ Releases before `wrynose` used older names with the following scheme:
 
 ### Fixed
 
+* linux-ti-tq_6.18
+  * Fix LVDS Overlays not being applicable because of renamed node names
 * u-boot-tq_2026.01
   * TQMa\[62,64,67\]xx(L): fix RAM size detection by U-Boot
 
