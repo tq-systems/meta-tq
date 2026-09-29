@@ -9,6 +9,13 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Changed
+
+* linux-tq-6.12: update to v6.12.103
+* linux-tq-6.6: update to v6.6.151
+* linux-rt-tq-6.6: update to v6.6.147-rt77
+* linux-imx-tq-6.6: update from linux-fslc incl. v6.6.157
+
 ## scarthgap.TQ.ARM.BSP.0012 (not released yet)
 
 ### Changed
