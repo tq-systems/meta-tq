@@ -118,8 +118,8 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 |                       **internal ADC**                       |                 |
 |                             ADC                              |        x        |
 |                        **Cortex M33**                        |                 |
-|                  examples running from TCM                   |                 |
-|           use UART3 as debug console (see issues)            |                 |
+|                  examples running from TCM                   |        x        |
+|           use UART3 as debug console (see issues)            |        x        |
 |                           LPB boot                           |                 |
 |                           **NPU**                            |                 |
 |                   Firmware for CORTEX M33                    |                 |
@@ -134,8 +134,6 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 * MIPI-CSI
 * WiFi (driver and firmware loading OK, needs additional testing)
 * Bluetooth firmware on MBa93xxLA does not initialize
-* Cortex M33 (prerelease on request)
-* NPU (prerelease on request)
 * LPB Boot modes
 * optee support
 * TRNG performance in linux-fslc-6.6 is less than of linux-fslc-6.1
@@ -154,7 +152,7 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
 ## Known Issues / Limitations
 
 * NFS boot: The interface to be used for NFS boot (`netdev`) has inverted order, compared
-  to u-boot and Linux. Device renaming in Linux happens after mounting rootfs.
+  to U-Boot and Linux. Device renaming in Linux happens after mounting rootfs.
 * U-Boot:
   * Not all USB sticks are detected properly.
   * Using `usb reset` in U-Boot will give a warning from Type-C port controller.  
@@ -170,19 +168,14 @@ Support matrix for `MBa93xxCA` REV.020x and `MBa93xxLA`  REV.010x
   * When resuming using wakeup GPIO the following error can occur:
     `pca953x 2-0070: failed reading register`. The (wakeup) IRQ handler is executed before the expander
     has been resumed. This message can be ignored.
-* The NPU driver `ethosu` assumes the Cortex-M33 is not running. Starting Cortex-M33 from e.g. u-boot
-  or using remoteproc is not supported by `ethosu` driver. The driver is not working with `linux-imx-tq`
-  based on NXP `lf-6.6.52-2.2.0` release. Switching back to old release is posible with following
-  changes in `linux-imx-tq_6.6.bb` recipe:
-
-```
-KBRANCH:tqma93xx = "TQMa-fslc-6.6-2.0.x-imx"
-SRCREV:tqma93xx = "6d8a66ee71659362646d93f2752354858c04f205"
-LINUX_VERSION:tqma93xx = "${LINUX_RELEASE}.23"
-```
+* The NPU driver `ethosu` assumes the Cortex-M33 is not running. Starting Cortex-M33 from e.g. U-Boot
+  or using remoteproc is not supported by `ethosu` driver. The driver works only for linux-imx-tq.
+  For sources see https://github.com/tq-systems/mcuxsdk-examples-tq. Compile and replace in BSP
+* Cortex M33 images are not part of BSP deployment. For sources and build instructions
+  see https://github.com/tq-systems/mcuxsdk-examples-tq.
 * Watchdog is not enabled by default
 * On MBa93xxLA-MINI the QSPI pins are used for SDIO
-  If a module with QSPI is required, a specially adapted mainboard devicetree must be created.
+  If a module with QSPI is required, a specially adapted mainboard device tree must be created.
 
 ## MBa91 Differences
 
@@ -215,7 +208,7 @@ Artefacts can be found at the usual locations for bitbake:
   * imx93-tqma9352-mba91xxca*.dtb
   * imx93-tqma9352-mba93xxca*.dtb
   * imx93-tqma9352-mba93xxla*.dtb
-  * imx93-tqma9352-mba93xx*-rpmsg.dtb (NPU enabled)
+  * imx93-tqma9352-mba93xx*-rpmsg.dtb (M33 support, NPU enabled for linux-imx-tq)
 * Image: Linux kernel image
 * \*.wic[.<compress>]: SD / eMMC system image
 * \*.rootfs.tar.gz: RootFS archive (NFS root etc.)
@@ -326,11 +319,12 @@ TODO
 
 ### Cortex M33
 
-TODO
+Use rpmsg device tree (`imx93-tqma9352-mba93xx*-rpmsg.dtb`) to reserve hardware to Cortex-M33. For available examples and
+usage see https://github.com/tq-systems/mcuxsdk-examples-tq/tree/main/_boards/tqma93xxca-mba93xxca/examples.
 
 ### NPU
 
-__Note:__ For using the NPU, the Cortex-M33 needs to be loaded with a firmware controlling the NPU and the rpmsg-DeviceTree (`imx93-tqma9352-mba93xx*-rpmsg.dtb` has to be used.
+__Note:__ For using the NPU, the Cortex-M33 needs to be loaded with a firmware controlling the NPU and the rpmsg device tree (`imx93-tqma9352-mba93xx*-rpmsg.dtb` has to be used.
 
 Before running, translate tensorflow lite model to ETHOS-U format using vela compiler:
 
@@ -339,8 +333,6 @@ cd /usr/bin/tensorflow-lite-2.15.0/examples
 vela mobilenet_v1_1.0_224_quant.tflite
 ./label_image -m output/mobilenet_v1_1.0_224_quant_vela.tflite --external_delegate_path=/usr/lib/libethosu_delegate.so
 ```
-
-__Note:__ Due to API incompatibilities in the ethos-u driver stack and Cortex-M33 firmware only kernel v6.6.23 is supported.
 
 ### High Assurance Boot (Secure Boot)
 
