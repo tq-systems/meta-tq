@@ -56,12 +56,12 @@ do_set_localversion_tq() {
     fi
     if [ "$hash" = "AUTOINC" ]; then
         branch=$(git --git-dir=${STAGING_KERNEL_DIR}/.git  symbolic-ref --short -q HEAD)
-        head=$(git --git-dir=${STAGING_KERNEL_DIR}/.git rev-parse --verify --short origin/${branch} 2> /dev/null)
+        head=$(git --git-dir=${STAGING_KERNEL_DIR}/.git rev-parse --verify --short --quiet "origin/${branch}^{commit}" || echo 'unknown')
     else
-        head=$(git --git-dir=${STAGING_KERNEL_DIR}/.git rev-parse --verify --short ${hash} 2> /dev/null)
+        head=$(git --git-dir=${STAGING_KERNEL_DIR}/.git rev-parse --verify --short --quiet "${hash}^{commit}" || echo 'unknown')
     fi
-    patches=$(git --git-dir=${STAGING_KERNEL_DIR}/.git rev-list --count ${head}..HEAD 2> /dev/null)
-    printf "%s%s%s%s\n" "-g" "${head}" "-p" "${patches}" > ${STAGING_KERNEL_DIR}/localversion-tq
+    patches=$(git --git-dir=${STAGING_KERNEL_DIR}/.git rev-list --count ${head}..HEAD 2> /dev/null || echo "0")
+    printf -- "-g%s-p%s\n" "${head}" "${patches}" > ${STAGING_KERNEL_DIR}/localversion-tq
 }
 addtask set_localversion_tq before do_configure after do_patch do_symlink_kernsrc do_kernel_metadata
 
