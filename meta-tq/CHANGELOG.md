@@ -31,8 +31,17 @@ Releases before `wrynose` used older names with the following scheme:
 
 ## Next Release
 
+### Added
+
+* TQMa93xxLA/TQMa93xxCA: enable devicetree overlay and bootmenu for Cortex-M33 and
+  mainline kernel.
+* linux-tq-6.18: TQMa93xxLA/TQMa93xxCA: Cortex-M33 support
+  * port example drivers from NXP downstream linux-imx
+  * add devicetree overlay with reserved hardware and memory for Cortex-M33
+
 ### Changed
 
+* linux-tq-6.18: update to linux-stable 6.18.44
 * linux-ti-tq_6.18: update to ti-linux-kernel 12.01.00.05, including linux-stable updates
   up to v6.18.35
 * u-boot-tq_2023.04
