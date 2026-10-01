@@ -73,14 +73,14 @@ do_compile:prepend() {
                 hash=${SRCREV}
         fi
         if [ "$hash" = "AUTOINC" ]; then
-                branch=`git --git-dir=${S}/.git  symbolic-ref --short -q HEAD`
-                head=`git --git-dir=${S}/.git rev-parse --verify --short origin/${branch} 2> /dev/null`
+                branch=$(git --git-dir=${S}/.git  symbolic-ref --short -q HEAD)
+                head=$(git --git-dir=${S}/.git rev-parse --verify --short --quiet "origin/${branch}^{commit}" || echo 'unknown')
         else
-                head=`git --git-dir=${S}/.git rev-parse --verify --short $hash 2> /dev/null`
+                head=$(git --git-dir=${S}/.git rev-parse --verify --short --quiet "${hash}^{commit}" || echo 'unknown')
         fi
-        patches=`git --git-dir=${S}/.git rev-list --count $head..HEAD 2> /dev/null`
-        printf "%s%s%s%s" +g $head +p $patches > ${S}/.scmversion
-        printf "%s%s%s%s" +g $head +p $patches > ${B}/.scmversion
+        patches=$(git --git-dir=${S}/.git rev-list --count $head..HEAD 2> /dev/null || echo "0")
+        printf "+g%s+p%s" "${head}" "${patches}" > ${S}/.scmversion
+        printf "+g%s+p%s" "${head}" "${patches}" > ${B}/.scmversion
     else
         printf "%s" "${UBOOT_LOCALVERSION}" > ${S}/.scmversion
         printf "%s" "${UBOOT_LOCALVERSION}" > ${B}/.scmversion
