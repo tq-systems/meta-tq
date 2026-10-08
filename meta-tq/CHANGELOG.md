@@ -31,6 +31,45 @@ Releases before `wrynose` used older names with the following scheme:
 
 ## Next Release
 
+### Added
+
+* u-boot-imx-tq-2025.05: TQMa95xxLA / TQMa95xxSA
+  * USB host support for MBa95xxCA when not in serial download mode
+
+    Implement runtime device tree fixup for U-Boot proper to decide at runtime if USB host is
+    available.
+  * DISTROBOOT for QSPI-NOR
+
+    MTD partitioning needs an additional partition for the extlinux.conf script. The partition uses
+    reserved space just before the UBI rootfs. Since partitions are referenced by name in environment
+    and kernel command line no reformatting of SPI-NOR is needed. Update script for script partition
+    is now part of default environment.
+  * prepare new hardware:
+    * Microchip USB5734 USB hub
+    * NXP PCAL9538 I2C portexpander
+
+### Changed
+
+* u-boot-imx-tq-2025.05: TQMa95xxLA / TQMa95xxSA
+  * long reset SD card pulse to allow SD3 / UHS104 cards on MB-SMARC-2
+  * pin mux / pad config optimisation
+  * defconfig optimisation: remove unused drivers
+  * environment imrovements: kernel_addr_r is no identical to loadaddr
+
+    Allows loading larger fitImages to kernel_addr_r without overwriting parts of the extracted
+    system components before booting.
+  * allow using relative paths from generic filesystem functions
+* u-boot-imx-tq-2025.05: TQMa95xxLA / TQMa95xxSA
+  * DISTROBOOT for QSPI-NOR
+* linux-tq-6.18: update to linux-stable 6.18.55
+
+### Fixed
+
+* u-boot-imx-tq-2025.05: TQMa95xxLA / TQMa95xxSA: boot from eMMC stucked in SPL
+
+  A combination of SPL malloc limits caused failure to initialize the eMMC and to lod next
+  image container from eMMC.
+
 ## 6.0.1.0 (not released yet)
 
 ### Added
