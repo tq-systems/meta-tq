@@ -59,6 +59,7 @@ Releases before `wrynose` used older names with the following scheme:
 
 * linux-ti-tq_6.18
   * Fix LVDS Overlays not being applicable because of renamed node names
+  * TQMa\[62,64,67\]xx(L): add default UART properties to fix console initialization.
 * u-boot-tq_2026.01
   * TQMa\[62,64,67\]xx(L): fix RAM size detection by U-Boot
 
