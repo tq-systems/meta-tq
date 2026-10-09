@@ -31,6 +31,8 @@ Releases before `wrynose` used older names with the following scheme:
 
 ## Next Release
 
+## 6.0.1.0 (not released yet)
+
 ### Added
 
 * TQMa93xxLA/TQMa93xxCA: enable devicetree overlay and bootmenu for Cortex-M33 and
