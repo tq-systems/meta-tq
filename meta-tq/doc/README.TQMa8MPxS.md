@@ -177,16 +177,19 @@ Artefacts can be found at the usual locations for bitbake:
 | imx8mp-tqma8mpqs-mb-smarc-2-lvds-g133han01.dtb    | LVDS display AUO G133HAN01 on LVDS0/1, X46, X48    |
 | imx8mp-tqma8mpqs-mb-smarc-2-lvds-g185han01.dtb    | LVDS display AUO G185HAN01 on LVDS0/1, X46, X48    |
 
-| Image name                                        | description                                   |
-| ------------------------------------------------- | --------------------------------------------- |
-| Image                                             | Linux kernel image                            |
-| \*.wic[.<compress>]                               | SD / eMMC system image                        |
-| \*.rootfs.tar.gz                                  | RootFS archive (NFS root etc.)                |
-| \*.rootfs.ubifs                                   | UBIFS rootfs (incl. kernel and device trees)  |
-| \*.rootfs.ubi                                     | UBI image containing UBIFS rootfs for SPI-NOR |
-| imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot      | boot stream for SD / eMMC                     |
-| imx-boot-${MACHINE}-sd.bin-flash\_evk\_flexspi    | boot stream for FlexSPI                       |
-| imx-boot-${MACHINE}-uuu.bin-flash\_spl\_uboot     | boot stream for UUU                           |
+| Image name                                        | description                                            |
+| ------------------------------------------------- | ------------------------------------------------------ |
+| Image                                             | Linux kernel image                                     |
+| \*.wic[.<compress>]                               | SD / eMMC system image                                 |
+| \*.rootfs.tar.gz                                  | RootFS archive (NFS root etc.)                         |
+| \*.rootfs.ubifs                                   | UBIFS rootfs (incl. kernel and device trees)           |
+| \*.rootfs.ubi                                     | UBI image containing UBIFS rootfs for SPI-NOR          |
+| imx-boot-${MACHINE}-sd.bin-flash\_spl\_uboot      | boot stream for SD / eMMC                              |
+| imx-boot-${MACHINE}-sd.bin-flash\_evk\_flexspi    | boot stream for FlexSPI                                |
+| imx-boot-${MACHINE}-uuu.bin-flash\_spl\_uboot     | boot stream for UUU                                    |
+| extlinux.conf                                     | Boot configuration for U-Boot distroboot               |
+| boot-blockdev.scr                                 | U-Boot boot script image for boot from eMMC/SD/USB     |
+| boot-ubi.scr                                      | U-Boot boot script image for boot from UBIFS (SPI-NOR) |
 
 ## Boot DIP Switches
 
