@@ -21,6 +21,7 @@ following modules:
 - TQMa8MPxS (Distroboot)
 - TQMa91xx[LA/CA] (Distroboot)
 - TQMa93xx[LA/CA] (Distroboot)
+- TQMa95xx[LA/SA] (Distroboot)
 
 By default, U-Boot will boot the OS from the same medium that it was started
 from (eMMC, SD card or SPI-NOR). The boot source can be modified by setting
