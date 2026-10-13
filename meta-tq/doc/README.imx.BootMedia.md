@@ -187,9 +187,22 @@ Download UBIFS image from TFTP and update:
 __Note:__: set `ubirootfs` to the correct image name. This is usually the artefact with the extension
 `.rootfs.ubifs`
 
-Download distroboot bootscript image from TFTP and update:
+To boot Linux from UBI partition on SPI-NOR using [Distroboot / Stdboot](README.Distroboot.md) it is
+required to update the script partition on SPI-NOR with distroboot bootscript image once using the
+following command sequence:
+
+```
+tftp boot-ubi.scr
+sf probe
+sf update ${loadaddr} script ${filesize}
+```
+
+This can also be acchieved with U-Boot script in default environment:
 
 `run update_boot_script_spi`
+
+__Note:__: set `bootscript_name` to the correct image name before. This is usually the artefact named
+`boot-ubi.scr`
 
 ## Booting Linux OS
 
