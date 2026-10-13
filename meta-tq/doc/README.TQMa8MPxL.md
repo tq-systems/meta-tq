@@ -275,6 +275,9 @@ Artefacts can be found at the usual locations for bitbake:
 * imx-boot-${MACHINE}-ecc.bin-flash\_evk\_flexspi: boot stream with inline ECC for FlexSPI
 * hello\_world.bin (Cortex M7 demo, UART3, TCM)
 * rpmsg\_lite\_pingpong\_rtos\_linux\_remote.bin (Cortex M7 demo, UART3, TCM)
+* extlinux.conf: Boot configuration for U-Boot distroboot
+* boot-blockdev.scr: U-Boot boot script image for boot from eMMC/SD/USB
+* boot-ubi.scr: U-Boot boot script image for boot from UBIFS (SPI-NOR)
 
 ## Boot DIP Switches
 
