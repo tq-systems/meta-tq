@@ -223,7 +223,7 @@ sudo uuu -bmap -b emmc_all imx-boot-tqma95xxla-4gb-mba95xxca-sd.bin-flash_a55  t
 
 ## Howto
 
-### OS boot
+### OS Boot
 
 See the [Distroboot README](README.Distroboot.md).
 
