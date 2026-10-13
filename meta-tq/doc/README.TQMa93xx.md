@@ -219,6 +219,9 @@ Artefacts can be found at the usual locations for bitbake:
 * imx-boot-${MACHINE}-sd.bin-flash\_singleboot: CortexA boot stream for SD / eMMC
 * imx-boot-${MACHINE}-sd.bin-flash\_singleboot\_flexspi: CortexA boot stream for FlexSPI
 * imx-boot-${MACHINE}-uuu.bin-flash\_singleboot: boot stream for UUU
+* extlinux.conf: Boot configuration for U-Boot distroboot
+* boot-blockdev.scr: U-Boot boot script image for boot from eMMC/SD/USB
+* boot-ubi.scr: U-Boot boot script image for boot from UBIFS (SPI-NOR)
 
 ## Boot DIP Switches
 
