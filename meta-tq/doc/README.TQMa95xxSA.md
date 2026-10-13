@@ -135,6 +135,9 @@ Artefacts can be found at the usual locations for bitbake:
 * \*.rootfs.ubifs: UBIFS rootfs (incl. kernel and device trees)
 * imx-boot-${MACHINE}-sd.bin-flash\_a55: boot stream for SD / eMMC / uuu
 * imx-boot-${MACHINE}-sd.bin-flash\_a55_flexspi: boot stream for FlexSPI
+* extlinux.conf: Boot configuration for U-Boot distroboot
+* boot-blockdev.scr: U-Boot boot script image for boot from eMMC/SD/USB
+* boot-ubi.scr: U-Boot boot script image for boot from UBIFS (SPI-NOR)
 
 <!-- FIXME: update list -->
 
