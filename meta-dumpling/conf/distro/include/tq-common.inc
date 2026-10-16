@@ -29,7 +29,6 @@ INHERIT += "sanity"
 
 # run QA tests
 INHERIT += "insane"
-QA_LOG = "1"
 
 # generate 'etc/buildinfo' in image and in 'DEPLOY_DIR_IMAGE' folder
 INHERIT += "tq-buildinfo"
