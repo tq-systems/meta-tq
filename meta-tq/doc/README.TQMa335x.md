@@ -70,13 +70,13 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ## Known Issues / Limitations
 
-* TQMa335x[L] on MBa335x: sometimes after booting the ethernet phy shows
+* TQMa335x[L] on MBa335x: sometimes after booting the Ethernet phy shows
   up wrong addresses or can not be found. This needs a hardware fix on MBa335x.
   Please contact TQ-Systems support
 * TQMa335x[L] on MBa335x: U-Boot: only the first port of the CPSW is working.
   This is a driver limitation in the used U-Boot version, under Linux both ports
   are working.
-* TQMa335xL: warnings for non exisiting chips when booting Linux. Disable
+* TQMa335xL: warnings for non existing chips when booting Linux. Disable
   RTC / EEPROM / temperature sensor in DT.
 * The generated UBIFS does not fit into the default SPI-NOR (16 MiB). If
   rootfs on SPI NOR is required, following solutions:
@@ -108,7 +108,7 @@ Artefacts can be found at the usual locations for bitbake:
 
 | Switch  | Description       |
 | ------- | :---------------: |
-| S1      | Oscilator         |
+| S1      | Oscillator        |
 | S2      | Boot device       |
 | S3      | CAN termination   |
 | S4      | RS485 Termination |
@@ -211,7 +211,7 @@ sf update ${loadaddr} 0x20000 ${filesize}
 ### U-Boot Environment Variables
 
 For ease of development a set of variables and scripts are in default env.
-Depending on your configuration some variable values needs to bet changend
+Depending on your configuration some variable values needs to bet changed
 to the right values. For files to use see the [artefacts](#build-artefacts) section.
 
 _Note_: Update and start scripts expect a partitioned / initialized SD card or

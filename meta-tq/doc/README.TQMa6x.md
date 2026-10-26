@@ -80,7 +80,7 @@ versions due to node naming changes.
 ### U-Boot
 
 * FEC Ethernet port may have ARP timeouts. Restart the network command usually fixes
-  the issue. Root cause is ethernet PHY on MBa6x.
+  the issue. Root cause is Ethernet PHY on MBa6x.
 * USB Ethernet (LAN9500 / X12C) is only usable after `usb start` and with valid
   MAC in `eth1addr` environment variable. Default value is parsed from EEPROM on MBa6x.
   To select the device, set `ethact` to the devicename. The name can be determined using
@@ -89,7 +89,7 @@ versions due to node naming changes.
   are supported by built U-Boot configuration..
 * USB dual role port (X8) is tested in U-Boot in peripheral mode only.
 * Setting and clearing of several GPIOs (e.g. for user LEDs) is not working.
-  Workaround: enable `GPIO_LED` support and other releated settings. Will be fixed in next
+  Workaround: enable `GPIO_LED` support and other related settings. Will be fixed in next
   release.
 
 ## Build Artefacts
@@ -146,12 +146,12 @@ bootstream image and bootloader support for updating the bootstream.
 
 See [here](./README.imx.UUU.md) for details about using Serial Download mode and UUU.
 
-## Howto
+## HowTo
 
 ### Display Support
 
 Each Display can be used on its own by using the corresponding device tree.
-To allow reusage, the support for each display is separated in a dtsi fragment.
+To allow reuse, the support for each display is separated in a dtsi fragment.
 Support can vary with kernel branch and version.
 
 *Note:* With MBa6x only one control interface for backlight is available.

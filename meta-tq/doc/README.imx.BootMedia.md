@@ -1,6 +1,6 @@
 # Boot Device Initialisation and Update
 
-This README documents how to write boostream images to different boot media and
+This README documents how to write bootstream images to different boot media and
 how default U-Boot env supports update for development purpose.
 
 [[_TOC_]]
@@ -70,7 +70,7 @@ system with installed `bmaptool`):
 bmaptool copy <image>.wic[.compress] /dev/mmcblk0
 ```
 
-For provisioning etc. one can use `uuu` tool from NXPs `mfgtools`, too. See [here](./README.imx.UUU.md)
+For provisioning etc. one can use `uuu` tool from NXP's `mfgtools`, too. See [here](./README.imx.UUU.md)
 for details.
 
 To create a bootable eMMC with boot stream only (for exact file name see
@@ -149,7 +149,7 @@ _Note_: Address variables used in scripts are named according to the U-Boot defa
 * `image`: kernel image,
 * `ubirootfspart`: name of ubi partition for rootfs  (default = ubi)
 * `ubirootfsvol`: name of ubi volume for rootfs (default = rootfs)
-* `ubimtdidx`: number or name of of mtd partition containing the ubi volume for
+* `ubimtdidx`: number or name of mtd partition containing the ubi volume for
    rootfs (default = 3 or `ubi`)
 * `ubirootfs`: name of ubifs image to be used for the update command
   (default = rootfs.ubifs)
@@ -197,7 +197,7 @@ sf probe
 sf update ${loadaddr} script ${filesize}
 ```
 
-This can also be acchieved with U-Boot script in default environment:
+This can also be achieved with U-Boot script in default environment:
 
 `run update_boot_script_spi`
 
@@ -215,8 +215,8 @@ See the [Distroboot README](README.Distroboot.md) for U-Boot 2024.04 or newer.
 To boot a Linux OS from a running U-Boot following scripts are implemented in
 environment:
 
-* `mmboot`: load kernel and dtb from SD/eMMC instance given with variable `mmcdev`
-  * Boot device is SD / eMMC: `mcdev` is set to device index of the boot device if
+* `mmcboot`: load kernel and dtb from SD/eMMC instance given with variable `mmcdev`
+  * Boot device is SD / eMMC: `mmcdev` is set to device index of the boot device if
     `mmcautodetect` is `yes` (default)
   * Boot device is not SD / eMMC: `mmcdev` has to be set before using `mmcboot`
 * `ubiboot`: load kernel and dtb from UBIFS in default UBI volume and boots into

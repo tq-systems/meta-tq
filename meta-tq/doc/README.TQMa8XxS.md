@@ -75,7 +75,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **I2C**                                          |                            |
 | Temperature Sensors (without cpu-temp)           |              x             |
 | RTC                                              |              x             |
-| EEPROMS                                          |              x             |
+| EEPROMs                                          |              x             |
 | **ENET (GigE via Phy on TQMa8XxS)**              |                            |
 | ENET 0                                           |              x             |
 | ENET 1                                           |              x             |
@@ -111,7 +111,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 * temperature grade
   * Due to SCU-API limitation temperature grading cannot be queried from SCU.
-    Therfore thermal trip points are hardcoded in devicetree and must match the
+    Therefore thermal trip points are hard-coded in devicetree and must match the
     assembled CPU type. BSP default are trip points for industrial grading.
 * DSI - DP bridge
   * Custom, experimental support upon request
@@ -120,7 +120,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ## Known Issues / Limitations
 
-* Default setting for `fdt_file` in u-boot does not match older linux kernel
+* Default setting for `fdt_file` in u-boot does not match older Linux kernel
   naming scheme. Current naming scheme is `<cpu>-<som>-<baseboard>[-feature].dtb`,
   old scheme was `<cpu>-<baseboard>[-feature].dtb`.
   See [Build Artefacts](#build-artefacts) for complete list of supported Device Tree files
@@ -132,10 +132,10 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   * U-Boot: USB 3.0 port does not initialize USB 2.0 subsystem after USB reset
   * Linux: overcurrent with some USB Sticks on MB-SMARC-2
 * FlexSPI
-  * erase of ranges >= 16 MB fails under linux
+  * erase of ranges >= 16 MB fails under Linux
 * SPI: Hardware-controlled chipselects are not driven as expected
   * Toggle after each Byte when using DMA
-  * Inbetween each `spi_transfer`
+  * In-between each `spi_transfer`
   * Use of GPIO controlled chip-selects instead is recommended
   * By default all chip-selects are configured as GPIO
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle[-nxp]`.
@@ -223,7 +223,7 @@ with UUU tool:
 sudo uuu -b spl imx-boot-<machine>-uuu.bin
 ```
 
-## Howto
+## HowTo
 
 ### Using RTC for Wakeup
 
@@ -234,7 +234,7 @@ Note: Only `rtc1` (RTC in CPU SNVS domain) can be used on this platform
 ### Display Support
 
 Each Display can be used on its own by using the corresponding device tree.
-To allow reusage, the support for each display is separated in a dtsi fragment.
+To allow reuse, the support for each display is separated in a dtsi fragment.
 
 | Interface       | Device tree                                    | Type               |
 |-----------------|------------------------------------------------|--------------------|
@@ -256,7 +256,7 @@ In case of problems first check the bus termination:
 | CAN0      | X29       | `TERM CAN0` |
 | CAN1      | X30       | `TERM CAN1` |
 
-See [here](./README.CAN.md) for details about configurating of CAN interfaces.
+See [here](./README.CAN.md) for details about configuration of CAN interfaces.
 
 **Note**: There is an absolute hardware limit on the bitrate of 1MBit/s, independently from CAN-FD.
   For that reason CAN-FD is disabled by default. While technically possible using CAN-FD with 1MBit/s, the non-datarate

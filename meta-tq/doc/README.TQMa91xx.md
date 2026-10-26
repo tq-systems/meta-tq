@@ -175,7 +175,7 @@ bootstream image and bootloader support for updating the bootstream.
 
 See [here](./README.imx.UUU.md) for details about using Serial Download mode and UUU.
 
-## Howto
+## HowTo
 
 ### Frequency Scaling
 
@@ -198,7 +198,7 @@ See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RT
 ### Display Support (MBa91xxCA)
 
 Each Display can be used on its own by using the corresponding device tree.
-To allow reusage, the support for each display is separated in a dtso overlay.
+To allow reuse, the support for each display is separated in a dtso overlay.
 
 
 | Interface | Device tree                                   | Type        ----   |
@@ -216,7 +216,7 @@ In case of problems first check the bus termination
 | --------- | --------- | ------------------------------- |
 | CAN1      | X8        | S4.1 (CAN1\_H) / S4.2 (CAN1\_L) |
 
-See [here](./README.CAN.md) for details about configurating of CAN interfaces.
+See [here](./README.CAN.md) for details about configuration of CAN interfaces.
 
 __Note:__ Values for bitrate, sample-point, dbitrate and dsample-point depend
 on your hardware setup.

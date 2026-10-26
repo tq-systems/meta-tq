@@ -71,7 +71,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   on input of GPIO expander
   * There is no support for masking interrupts on the GPIO expander
   * This also affects the shared interrupts of `D58` and `D59` GPIO expander
-  * Therefore the IRQ of GPIO expander is unsed
+  * Therefore the IRQ of GPIO expander is unused
 * CAN-FD controller (D60) is not accessible using SPI
 * USB 3.0 Type-C (X16) is host-only
 * RS-485 (X23): `linux,rs485-enabled-at-boot-time` property must **not** be set
@@ -107,7 +107,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 * SD card/eMMC:
 SD card and eMMC are mutually exclusive. DIP switch S5 controls SD card/eMMC
-access. With S5-1 `ON` eMMC on TQMLS10xxA module is accesible. With S5-1 `OFF`
+access. With S5-1 `ON` eMMC on TQMLS10xxA module is accessible. With S5-1 `OFF`
 SD card on MBLS10xxA is accessible.
 
 ## Build Artefacts
@@ -161,7 +161,7 @@ SD card on MBLS10xxA is accessible.
 ## Serdes Configuration
 
 The following tables show the supported Serdes configrations.
-* Ethernet protocols: `[Protocoll].[Mac-nr]`
+* Ethernet protocols: `[Protocol].[Mac-nr]`
 * PCIe: `PCIe.[Controller-Nr] x[Lanes]`
 
 ### TQMLS1043A

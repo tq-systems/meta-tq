@@ -73,7 +73,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **I2C**                                          |               |
 | Temperature Sensors (without cpu-temp)           |       x       |
 | RTC                                              |       x       |
-| EEPROMS                                          |       x       |
+| EEPROMs                                          |       x       |
 | **ENET (GigE via Phy on MBa8x)**                 |               |
 | ENET 0                                           |       x       |
 | ENET 1                                           |       x       |
@@ -121,7 +121,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * MIKRO Bus
 * temperature grade
   * Due to SCU-API limitation temperature grading cannot be queried from SCU.
-    Therfore thermal trip points are hardcoded in devicetree and must match the
+    Therefore thermal trip points are hard-coded in devicetree and must match the
     assembled CPU type. BSP default are trip points for industrial grading.
 * FTM
   * PWM (missing in CPU DT)
@@ -129,7 +129,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 
 ## Known Issues / Limitations
 
-* Default setting for `fdt_file` in u-boot does not match older linux kernel
+* Default setting for `fdt_file` in u-boot does not match older Linux kernel
   naming scheme. Current naming scheme is `<cpu>-<som>-<baseboard>[-feature].dtb`,
   old scheme was `<cpu>-<baseboard>[-feature].dtb`.
   See [Build Artefacts](#build-artefacts) for complete list of supported Device Tree files
@@ -149,7 +149,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   ```
 * SPI: Hardware-controlled chipselects are not driven as expected
   * Toggle after each Byte when using DMA
-  * Inbetween each `spi_transfer`
+  * In-between each `spi_transfer`
   * Use of GPIO controlled chip-selects instead is recommended
   * By default all chip-selects are configured as GPIO
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle[-nxp]`.
@@ -249,7 +249,7 @@ with UUU tool:
 sudo uuu -b spl imx-boot-<machine>-uuu.bin
 ```
 
-## Howto
+## HowTo
 
 ### Using RTC for Wakeup
 
@@ -280,7 +280,7 @@ configuration values.
 
 ### Display Support
 
-Each Display output could be activated independend by using the corresponding device tree.
+Each Display output could be activated independent by using the corresponding device tree.
 
 | Interface   | Device tree                               | Type           |
 |-------------|-------------------------------------------|----------------|
@@ -302,7 +302,7 @@ In case of problems first check the bus termination:
 | CAN0      |    X18    | S10 |
 | CAN1      |    X19    | S11 |
 
-See [here](./README.CAN.md) for details about configurating of CAN interfaces.
+See [here](./README.CAN.md) for details about configuration of CAN interfaces.
 
 ### Cortex M4
 

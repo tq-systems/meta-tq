@@ -388,7 +388,7 @@ For usage see [Linux Preempt-RT on i.MX](./README.Preempt-RT.md)
 ### TF-A / OP-TEE
 
 TF-A and OP-TEE are provided by meta-ti. Their versions are managed
-indepentendtly of meta-tq and are not listed here.
+independently of meta-tq and are not listed here.
 
 ### U-Boot
 

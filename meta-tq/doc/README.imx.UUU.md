@@ -64,7 +64,7 @@ no bootstream can be found on the selected boot media and on eventually configur
 fallback media. See your boards Boot DIP switches section how to configure Boot Mode
 for `Serial Downloader`.
 
-Please note, that the builtin scripts of UUU make some assumtions that may or may not fit
+Please note, that the builtin scripts of UUU make some assumptions that may or may not fit
 your use case. Check if your U-Boot configuration and the builtins fit your use case.
 You can use the cmdlist support of UUU to create tailored workflows. Some board specific
 examples are given below.
@@ -106,7 +106,7 @@ sudo uuu <bootstream for uuu>
 #### Program Image to eMMC
 
 Use the bootstream containing U-Boot capable of handling SDP together with
-UUU tool to boot a new / bricked board and use the booted system to programm
+UUU tool to boot a new / bricked board and use the booted system to program
 the bootstream and the wic image to eMMC (see Artefacts section for your board
 for the exact names of the images to use):
 

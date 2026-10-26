@@ -14,7 +14,7 @@ This README contains some useful information for TQMa93xxCA and TQMa93xxLA
 * TQMa93xxLA REV.010x on MBa93xxLA-MINI REV.020x (1 / 1.5 / 2 GiB RAM)
 
 __Note__: Depending on the SoM revision different CPU mask variants may be assembled.
-CPU mask revisions 1.0 (bitbake variable `IMX_SOC_REV = "A0"`) and older are protoypes,
+CPU mask revisions 1.0 (bitbake variable `IMX_SOC_REV = "A0"`) and older are prototypes,
 have additional erratas and are not supported.
 
 ## Version Information for Software Components
@@ -246,7 +246,7 @@ bootstream image and bootloader support for updating the bootstream.
 
 See [here](./README.imx.UUU.md) for details about using Serial Download mode and UUU.
 
-## Howto
+## HowTo
 
 ### Frequency Scaling
 
@@ -272,7 +272,7 @@ See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RT
 ### Display Support
 
 Each Display can be used on its own by using the corresponding device tree.
-To allow reusage, the support for each display is separated in a dtso overlay.
+To allow reuse, the support for each display is separated in a dtso overlay.
 
 | Interface       | Device tree                                          | Type        ----   |
 |-----------------|------------------------------------------------------|--------------------|
@@ -291,12 +291,12 @@ In case of problems first check the bus termination
 | CAN1      | X8        | S4.1 (CAN1\_H) / S4.2 (CAN1\_L) |
 | CAN2      | X9        | S5.1 (CAN1\_H) / S5.2 (CAN1\_L) |
 
-See [here](./README.CAN.md) for details about configurating of CAN interfaces.
+See [here](./README.CAN.md) for details about configuration of CAN interfaces.
 
 __Note:__ Values for bitrate, sample-point, dbitrate and dsample-point depend
 on your hardware setup.
 
-#### MBa93xxLA-MINI (Wifi)
+#### MBa93xxLA-MINI (WiFi)
 
 Support for Ezurio Wlan/Bluetooth Module (LWB5+ M.2) on MBa93xxLA-MINI.
 
@@ -306,7 +306,7 @@ Support for Ezurio Wlan/Bluetooth Module (LWB5+ M.2) on MBa93xxLA-MINI.
 
 Ezurio recommends using their own yocto layer (especially for radio certification), which includes adaptations to the core modules and its own firmware variants.
 
-The Ezurio firmware in combination with the current kernel modules was sufficient to get WLAN and Bluethooth up and running.
+The Ezurio firmware in combination with the current kernel modules was sufficient to get WLAN and Bluetooth up and running.
 
 ### RS485
 
@@ -321,7 +321,7 @@ usage see https://github.com/tq-systems/mcuxsdk-examples-tq/tree/main/_boards/tq
 
 __Note:__ For using the NPU, the Cortex-M33 needs to be loaded with a firmware controlling the NPU and the rpmsg device tree (`imx93-tqma9352-mba93xx*-rpmsg.dtb` has to be used.
 
-Before running, translate tensorflow lite model to ETHOS-U format using vela compiler:
+Before running, translate TensorFlow lite model to ETHOS-U format using vela compiler:
 
 ```
 cd /usr/bin/tensorflow-lite-2.15.0/examples

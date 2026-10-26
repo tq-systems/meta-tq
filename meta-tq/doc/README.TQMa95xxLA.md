@@ -71,7 +71,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **I2C**                                               |           |
 | Temperature Sensors                                   |     x     |
 | RTC                                                   |     x     |
-| EEPROMS                                               |     x     |
+| EEPROMs                                               |     x     |
 | GPIO expander                                         |     x     |
 | Fan                                                   |     -     |
 | **ENET (GigE via Phy on MBa95xxCA)**                  |           |
@@ -124,7 +124,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   * USB dual role port X9 via USB1 is not supported with [serial download mode](#serial-downloader)
 
     USB1 controller is disabled in serial download mode to allow using USB0 as device on X9.
-  * Serial download mode needs to be selected explicitely on [dip switch S1](#serial-downloader),
+  * Serial download mode needs to be selected explicitly on [dip switch S1](#serial-downloader),
 
     The [dip switch S1](#serial-downloader) controls routing of USB signals to the
     USB dual role port X9. In case of no / invalid boot image on primary boot device
@@ -221,7 +221,7 @@ Write complete image to eMMC:
 sudo uuu -bmap -b emmc_all imx-boot-tqma95xxla-4gb-mba95xxca-sd.bin-flash_a55  tq-image-generic-debug-tqma95xxla-4gb-mba95xxca.rootfs.wic.zst
 ```
 
-## Howto
+## HowTo
 
 ### OS Boot
 
@@ -246,7 +246,7 @@ __Note:__ rtc0 IRQ-GPIO is not accessible from Cortex-A domain
 ### Display Support
 
 Each Display can be used on its own by using the corresponding device tree.
-To allow reusage, the support for each display is separated in a dtsi fragment.
+To allow reuse, the support for each display is separated in a dtsi fragment.
 
 | Interface       | Device tree                                           | Type               |
 |-----------------|-------------------------------------------------------|--------------------|
@@ -264,7 +264,7 @@ In case of problems first check the bus termination:
 | CAN0      | X29       | `TERM CAN0` / S4:1 |
 | CAN1      | X30       | `TERM CAN1` / S4:2 |
 
-See [here](./README.CAN.md) for details about configurating of CAN interfaces.
+See [here](./README.CAN.md) for details about configuration of CAN interfaces.
 
   When CAN-FD is enabled, the non-datarate needs to be lower than 
   the datarate. The Linux kernel will emit a warning when it detects

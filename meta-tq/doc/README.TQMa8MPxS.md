@@ -122,7 +122,7 @@ _Only mainline kernel supported_
 
 * The SPI UBI rootfs Volume has been renamed from `rootfs` to `root`
   to conform with distroboot settings (scarthgap.TQ.ARM.BSP.0007, u-boot 2024.04)
-* Hardware revision 0x0100 (prototypes) can be used with a slighty modified
+* Hardware revision 0x0100 (prototypes) can be used with a slightly modified
   devicetree. The overlays can be applied as well. For display support with
   Distroboot change the menu items in the machine configuration file.
 
@@ -136,7 +136,7 @@ _Only mainline kernel supported_
 
     If `EQOS` is configured to use multiple TX/RX queues (with a compatible
     PHY), only full-duplex link modes are advertised. This may cause
-    autonegotiation problems with 10/100 link partnes, i.e. no link is
+    autonegotiation problems with 10/100 link partners, i.e. no link is
     established. Use a fixed configuration without autonegotiation (e.g. with
     `ethtool`) as workaround.
 * USB Host
@@ -232,7 +232,7 @@ bootstream image and bootloader support for updating the bootstream.
 
 See [here](./README.imx.UUU.md) for details about using Serial Download mode and UUU.
 
-## Howto
+## HowTo
 
 ### OS Boot
 
@@ -249,7 +249,7 @@ See [here](./README.Wakeup.md) for details about sleep modes and wakeup using RT
 ### Display Support
 
 HDMI and DP support are enabled by default. Additionally LVDS display can be enabled by
-using the corresponding device tree. To allow reusage, the support for each display
+using the corresponding device tree. To allow reuse, the support for each display
 is separated in a dtsi fragment.
 
 | Interface   | Device tree                                       | Type               |
@@ -261,7 +261,7 @@ is separated in a dtsi fragment.
 | LVDS1       | imx8mp-tqma8mpqs-mb-smarc-2-lvds1-tm070jvhg33.dtb | Tianma TM070JVHG33 |
 
 *Note*: `weston` by default uses the DRI device with highest number. This is usually Display Port.
-To explicitely select a DRI device, please refer to `--drm-device` argument during startup.
+To explicitly select a DRI device, please refer to `--drm-device` argument during startup.
 
 Please note manual for backlight power supply. For MB-SMARC-2 you can bridge
 X14 pin 1 and 2 to provide 12V.
@@ -277,7 +277,7 @@ In case of problems first check the bus termination:
 | CAN0      | X29       |  S4   |
 | CAN1      | X30       |  S4   |
 
-See [here](./README.CAN.md) for details about configurating of CAN interfaces.
+See [here](./README.CAN.md) for details about configuration of CAN interfaces.
 
 **Note**: There is an absolute hardware limit on the bitrate of 1MBit/s, independently from CAN-FD.
   For that reason CAN-FD is disabled by default. While technically possible using CAN-FD with 1MBit/s, the non-datarate

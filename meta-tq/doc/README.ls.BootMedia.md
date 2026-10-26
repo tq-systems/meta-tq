@@ -1,6 +1,6 @@
 # Boot Device Initialisation and Update
 
-This README documents how to write boostream images to different boot media and
+This README documents how to write bootstream images to different boot media and
 how default U-Boot env supports update for development purpose.
 
 [[_TOC_]]

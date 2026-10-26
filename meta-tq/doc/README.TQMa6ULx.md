@@ -79,7 +79,7 @@ versions due to node naming changes.
 | RS-485 (X16)                         |              |
 | LVDS (X17, X18)                      |      x       |
 | Parallel LCD (X4)                    |      x       |
-| Audio Mikrofon (X19)                 |              |
+| Audio microphone (X19)               |              |
 | Audio Line In (X20)                  |      x       |
 | Audio Line Out (x21)                 |      x       |
 
@@ -104,7 +104,7 @@ _Note:_ Mini PCIe connector only supports USB.
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
   `UBI_MAX_LEB_COUNT` on machine level. The distro definition and the image recipes
-  `tq-image-small-[debug]` are intended for demonstration of howto generate a system
+  `tq-image-small-[debug]` are intended for demonstration of how to generate a system
   running from SPI-NOR. This does not make any claims on feature / functional completeness.
 * Environment of U-Boot v2023.04 was reworked to use variable names that conforms with
   distroboot contract. The default environment of older U-Boot versions are incompatible.
@@ -216,7 +216,7 @@ bootstream image and bootloader support for updating the bootstream.
 
 See [here](./README.imx.UUU.md) for details about using Serial Download mode and UUU.
 
-## Howto
+## HowTo
 
 ### Display Support MBa6ULx
 

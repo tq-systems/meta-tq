@@ -8,7 +8,7 @@ setenv cm_image <demo>
 run boot_cm_mmc
 ```
 
-Starting from Linux kernel v5.19 a linux kernel command line has to be added.
+Starting from Linux kernel v5.19 a Linux kernel command line has to be added.
 In order to keep the clocks enabled, which are needed for Cortex-M usage,
 a module specific parameter has to be added:
 

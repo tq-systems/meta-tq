@@ -126,7 +126,7 @@ _MBa8x HW Rev.030x only_
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle[-nxp]`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
   `UBI_MAX_LEB_COUNT` on machine level.
-* USB: see [USB Howto](#usb)
+* USB: see [USB HowTo](#usb)
 * MBa8Mx before REV.0300 is not supported.
 
 ## Known Issues / Limitations
@@ -388,7 +388,7 @@ Download bootstream from TFTP and update:
 
 See [here](./README.imx.UUU.md) for details about using Serial Download mode and UUU.
 
-## Howto
+## HowTo
 
 ### Using RTC for Wakeup
 

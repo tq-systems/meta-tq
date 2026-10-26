@@ -70,7 +70,7 @@ _Kernel:_
 | USB DFU (X10)                                    | x                     |
 | **USB**                                          |                       |
 | USB Host (X10, via OTG adapter)                  | USB Mass Storage boot only |
-| USB Device (X10)                                 | All boot devices execpt for USB Mass Storage |
+| USB Device (X10)                                 | All boot devices except for USB Mass Storage |
 | USB Cable Detect / ID (X10)                      | no                    |
 | USB switchable VBUS (X10)                        | no (fixed setting for boot device) |
 | USB Host (X11, internal HUB)                     | x                     |
