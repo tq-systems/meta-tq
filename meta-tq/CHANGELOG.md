@@ -277,9 +277,9 @@ Releases are named with the following scheme:
 ### Removed
 
 * linux-ti-tq-6.6: remove recipe after all boards are updated to 6.12
-* linux-tq_6.1: remove recipe after all boards are updated to 6.6 or 6.12
-* linux-rt-tq_6.1: remove recipe after all boards are updated to 6.6 or 6.12
-* linux-imx-tq_6.1: remove recipe after all boards are updated to 6.6
+* linux-tq-6.1: remove recipe after all boards are updated to 6.6 or 6.12
+* linux-rt-tq-6.1: remove recipe after all boards are updated to 6.6 or 6.12
+* linux-imx-tq-6.1: remove recipe after all boards are updated to 6.6
 
 ## scarthgap.TQ.ARM.BSP.0007
 
@@ -389,7 +389,7 @@ Releases are named with the following scheme:
 * imx-oei-tq: update to NXP lf-6.12.20 baseline. This gives better support for
   multiple DDR configurations and is needed for new i.MX95 chip revisions.
 
-* u-boot-imx-tq_2024.04:
+* u-boot-imx-tq-2024.04:
   * TQMa8MPxL / TQMa8MPxS / TQMa93xx / TQMa91xx: improve defconfigs
 
     Remove unused commands and settings
@@ -435,7 +435,7 @@ Releases are named with the following scheme:
   * TQMa62xx[L], TQMa64xxL, TQMa67xx[L]: fix U-Boot becoming unable to establish an Ethernet link on
     any interface when the connection on the interface tried first fails
   * TQMa67xx[L]: enable MBa67xx USB hub ports (X11) in U-Boot
-* linux-tq_6.12:
+* linux-tq-6.12:
   * TQMa8MPxS: fix SD card reset
 
     Implement long reset pulse to guarantee a clean reset of the card to bring
@@ -445,13 +445,13 @@ Releases are named with the following scheme:
   At temperatures < -25°C eMMC data errors may be detected and detection only works
   with a retry. A warning in bootlog will be seen in this case.
   Detection works as expected with optimized pad configuration.
-* linux-imx-tq_6.6:
+* linux-imx-tq-6.6:
   * TQMa91xx / TQMa93xx: fix eMMC detection at low temperatures
 
   At temperatures < -25°C eMMC data errors may be detected and detection only works
   with a retry. A warning in bootlog will be seen in this case.
   Detection works as expected with optimized pad configuration.
-* u-boot-imx-tq_2024.04:
+* u-boot-imx-tq-2024.04:
   * TQMa8MPxL / TQMa8MPxS / TQMa91xx / TQMa93xx: avoid address conflicts for boot scripts
 
     Select addresses in env to prevent overrides for use cases like PXE boot.
@@ -586,7 +586,7 @@ Releases are named with the following scheme:
 
 ### Removed
 
-* u-boot-tq_2018.07: remove recipe after TQMLS10xxA was upgraded to v2022.04
+* u-boot-tq-2018.07: remove recipe after TQMLS10xxA was upgraded to v2022.04
 
 ## scarthgap.TQ.ARM.BSP.0005
 
@@ -769,8 +769,8 @@ Releases are named with the following scheme:
   * restore support for TQMa6ULxL on MBa6ULxL SBC
   * add new machine for TQMa8MPxL on MBa8MP-RAS314 starter kit
   * add new machine for TQMa91xxCA/LA on MBa91xxCA starter kit
-* u-boot-imx-tq_2024.03: new recipe with support for TQMa91xx and TQMa93xx
-* imx-tq-atf_2.10: support for TQMa91xxCA/LA
+* u-boot-imx-tq-2024.03: new recipe with support for TQMa91xx and TQMa93xx
+* imx-tq-atf-2.10: support for TQMa91xxCA/LA
 * linux-rt-tq-6.12:
   add recipe to support PREEMPT_RT with the same branch as used for linux-tq-6.12
 * linux-tq-6.12:
@@ -839,7 +839,7 @@ Releases are named with the following scheme:
   * rewrite recipe to keep shared settings in include file
   * backport upstream fixes for TMPDIR leakage
   * integrate changes from linux-stable up to tag v6.1.132
-* imx-tq-atf_2.10: integrate changes from NXP BSP release `lf-6.6.52-2.2.0`
+* imx-tq-atf-2.10: integrate changes from NXP BSP release `lf-6.6.52-2.2.0`
 * linux-imx-tq-6.6:
   * integrate fixes from linux-fslc up to
     5ff4cf4d61e1 ("Merge pull request #713 from angolini/fix_imx93")
@@ -864,7 +864,7 @@ Releases are named with the following scheme:
     when loading as module. Follow the recommendation from Linux Kconfig
 
 * linux-imx-tq-6.6: fix flexspi driver error caused by update to new fslc branch:
-  commit 791210cc944a ("meta-tq: linux-imx-tq_6.6: update to new branch TQMa-fslc-6.6-2.2.x-imx")
+  commit 791210cc944a ("meta-tq: linux-imx-tq-6.6: update to new branch TQMa-fslc-6.6-2.2.x-imx")
 * imx-boot-tq: do not overwrite settings for IMX_EXTRA_FIRMWARE.
 
 ### Removed
@@ -959,10 +959,10 @@ Releases are named with the following scheme:
 
 ### Fixed
 
-* u-boot-tq_2023.04: fix a warning in MTD partition parsing when the last partition
+* u-boot-tq-2023.04: fix a warning in MTD partition parsing when the last partition
   uses remaining size but free space is left before this partition.
 
-* u-boot-imx-tq_2020.04 / u-boot-imx-tq_2023.04 / u-boot-tq_2023.04: provide
+* u-boot-imx-tq-2020.04 / u-boot-imx-tq-2023.04 / u-boot-tq-2023.04: provide
   configurations for U-Boot env tools based on rootfs. Multiconfiguration config
   file does not work in on device in the configuration is not present.
 
@@ -974,7 +974,7 @@ Releases are named with the following scheme:
 
 ### Removed
 
-* u-boot-imx-tq_2016.03: recipe is removed since no SoM uses it anymore.
+* u-boot-imx-tq-2016.03: recipe is removed since no SoM uses it anymore.
 
 ## scarthgap.TQ.ARM.BSP.0002
 
@@ -1061,7 +1061,7 @@ Releases are named with the following scheme:
   TQMa62xx(L)/TQMa64xxL
 * gstreamer-plugins-bad: Add bit depth format support for bayer2rgb
 * Add new match pattern for `end*` to systemd's network configuration files
-* u-boot-imx-tq_2020.04:
+* u-boot-imx-tq-2020.04:
   * Add support for MBa8MP-RAS314
   * Fix for adding spi-nor device partitions
 * linux-imx-tq-6.6: new kernel based on fslc-6.6
@@ -1187,7 +1187,7 @@ No changes.
 
 * qoriq-atf:
   * TQMLS1028A: Added support for the 2 and 8 GiB variants
-* u-boot-imx-tq_2023.04:
+* u-boot-imx-tq-2023.04:
   * TQMa93xxLA: support for 1.5 GiB variant
   * devicetree syncs with kernel
   * TQMa8MQ/TQMa8MM: console support on different UART
@@ -1231,9 +1231,9 @@ No changes.
     (not enabled by default)
 * classes: improve checks for file existence to prevent silent failures in
   image generation / conversion
-* u-boot-imx-tq_2023.04:
+* u-boot-imx-tq-2023.04:
   * TQMa93xx: prepare for Cortex-M demos started from U-Boot
-* imx-atf-tq_2.8: integration of NXP changes up to tag lf-6.6.3-1.0.0 / commit
+* imx-atf-tq-2.8: integration of NXP changes up to tag lf-6.6.3-1.0.0 / commit
   8dbe28631802 ("LF-11383 imx95: Add support for q-channel/lpcg based wakeup sources")
 * linux-imx-tq\_6.1:
   * TQMa93xx: device tree fixes for LPM mode, Cortex-M33 and NPU
@@ -1277,7 +1277,7 @@ No changes.
 
 ### Changed
 
-* TQMa93xx[CA,LA]: u-boot-imx-tq_2023.04:
+* TQMa93xx[CA,LA]: u-boot-imx-tq-2023.04:
   * add support for 2 GiB SoM variants
   * add timing with multiple frequency set points
 * TQMLX2160A:
@@ -1313,7 +1313,7 @@ No changes.
   custom machine, distro, or in `local.conf`.
 
 * README.md: update patches section
-* linux-imx-tq_6.1:
+* linux-imx-tq-6.1:
   * Enable `CONFIG_CORE_DUMP_DEFAULT_ELF_HEADERS` for better support for
     PIE post-mortem debugging
 
@@ -1350,26 +1350,26 @@ No changes.
 * TQMa93xx:
   * firmware-sentinel: update to 0.11 to enable support for new i.MX93
     chip revision
-  * linux-imx-tq_6.1:
+  * linux-imx-tq-6.1:
     * improve pad configuration in device tree
     * improve compatibility to mainboard REV. 020x in device tree
     * improve reserved memory configuration in device tree
-  * u-boot-imx-tq_2023.04:
+  * u-boot-imx-tq-2023.04:
     * improve pad configuration
     * add more options for secure boot
     * backport DT changes from linux
     * implement UUU configuration
 * TQMa8 / TQMa93xx:
   * update imx-boot-tq / imx-mkimage recipes to lf-6.1.55-2.2.0
-  * imx-atf-tq_2.8: include NXP changes up to lf-6.1.55-2.2.0 / commit
+  * imx-atf-tq-2.8: include NXP changes up to lf-6.1.55-2.2.0 / commit
     08e9d4eef226 ("LF-10644 plat: imx8ulp: drop my name")
 * Bump PREFERRED_VERSION_linux-imx-tq for TQMa8* based machines to 6.1 kernel
 
 ### Fixed
 
-* TQMa335x: linux-ti-tq_5.1: add fixes for display flickering/tearing
+* TQMa335x: linux-ti-tq-5.1: add fixes for display flickering/tearing
   under load
-* TQMa93xx: linux-imx-tq_6.1: correct CMA alloc ranges in DTB
+* TQMa93xx: linux-imx-tq-6.1: correct CMA alloc ranges in DTB
 * Fix non-deterministic localversion for linux-tq, u-boot-tq recipes
 
 ## kirkstone.TQ.ARM.BSP.0015
@@ -1656,7 +1656,7 @@ No changes.
 
 ### Fixed
 
-* TQMa8x/TQMa8Xx/TQMa8XxS: linux-imx-tq_5.15: fix lpi2c clock handling in probe
+* TQMa8x/TQMa8Xx/TQMa8XxS: linux-imx-tq-5.15: fix lpi2c clock handling in probe
   and resume path
 
 ## kirkstone.TQ.ARM.BSP.0008
@@ -1802,7 +1802,7 @@ No changes.
     adds only the minimal amount of code required to boot on a the LS1028A
     with Secure Boot enabled. Only the early boot stages (up to U-Boot) are
     signed and verified.
-  * u-boot-lsdk-tq_2019.10: use tqmls1028a for COMPATIBLE_MACHINE
+  * u-boot-lsdk-tq-2019.10: use tqmls1028a for COMPATIBLE_MACHINE
 * TQMLS104xA: Do not rename linux in boot partition.
 
 ### Removed
@@ -1875,8 +1875,8 @@ No changes.
 *  TQMLS102xA
    * improve settings for U-Boot specific variables
    * allow easier usage with different RCW
-   * u-boot-tq_2017.11: simplify recipe for TQMLS102xA
-* imx-sc-firmware-tq_1.13.0 (TQMa8X[D,Q]P[S], TQMa8QM)
+   * u-boot-tq-2017.11: simplify recipe for TQMLS102xA
+* imx-sc-firmware-tq-1.13.0 (TQMa8X[D,Q]P[S], TQMa8QM)
   * update to TQMa8.NXP-v1.13.0.B5561.0035
   * Improve DRAM memory region protection: only existing DRAM is partitioned
   * Move recipe out of dynamic-layers/freescale-layer. Since we provide our own
@@ -1948,7 +1948,7 @@ No changes.
 * TQMa8 / TQMa9: rewrite logic for `KERNEL_DEVICETREE` and device trees in
   `IMAGE_BOOT_FILES`. This removes the intermidiate variable `BOARD_DEVICETREE_FILES`
 * u-boot-imx-tq: TQMa8[x,Xx,Mx,MxML,MxNL,MPxL]: cleanup default environment
-* TQMa93xxAL: update imx-tf-tq_2.6 to NXP BSP lf-5.15.71-2.2.0
+* TQMa93xxAL: update imx-tf-tq-2.6 to NXP BSP lf-5.15.71-2.2.0
 * TQMa93xxAL: update security controller firmware to version 0.8 from NXP
 * TQMa64xxL: Update to include latest ti-u-boot-2021.01 changes. This fixes
   a license issue in U-Boot (inclusion of GPL-incompatible code).
@@ -2021,15 +2021,15 @@ No changes.
 
 * linux-rt-tq-4.19: Remove recipe
 * linux-ti-tq-4.19: Remove recipe
-* qoriq-atf_1.5: Removed recipe
-* linux-imx-tq_5.4: Drop support for tqmls1028a
+* qoriq-atf-1.5: Removed recipe
+* linux-imx-tq-5.4: Drop support for tqmls1028a
 * TQMa8MP: 2GB machine config variant, support for 2GB fallback bootstream is
   included in new tqma8mpx-mba8mpxl machine configuration
 
 ### Fixed
 
 * TQMa64xx:
-  * linux-ti-tq_5.10: make OSPI working
+  * linux-ti-tq-5.10: make OSPI working
 * TQMa57xx:
   * Update U-Boot for Kernel/DTB in rootfs
   * Fix MBa57xx USB hub initialisation
@@ -2046,7 +2046,7 @@ No changes.
     SD / eMMC
   * TQMa8[*]: change assignment for `WKS_FILE` to ensure our wks
     template is used and not the one from meta-freescale
-* u-boot-tq_2019.04:
+* u-boot-tq-2019.04:
   * TQMa335x[L]: fixed incorrect MAC addresses in environment
   * SPDX license header for TQMa335x[L] sources and DT
   * backport fixes for environment for multiple environment
@@ -2067,7 +2067,7 @@ No changes.
 * imx-boot-tq: Remove ${DEPLOYDIR}/${BOOT_TOOLS} usage. This makes
   recipes providing artifacts for boot stream generation cleaner and
   simplify imx-boot-tq deploy itself.
-* linux-rt-tq_5.15: update to 5.15.55-rt48
+* linux-rt-tq-5.15: update to 5.15.55-rt48
 * linux-tq-5.15: update to 5.15.55
 * all machines with i.MX8[*] CPU: improve variables for image and wic
   generation
@@ -2094,13 +2094,13 @@ No changes.
 * TQMa335x[L]: documentation
   * add Issues
   * add infos for boot sources and update
-* u-boot-tq_2019.04:
+* u-boot-tq-2019.04:
   * TQMa335x[L]: cleanup update scripts and variables
-* u-boot-lsdk-tq_2019.10: tqmls1028a: add support for second DRAM bank
+* u-boot-lsdk-tq-2019.10: tqmls1028a: add support for second DRAM bank
 * qoriq-atf_v2.4:
   * add support for tqmls1028a
   * add support for tqmls1028a 4GiB variant
-* u-boot-imx-tq_2020.04: TQMa8Mx/TQMa8MxML/TQMa8MxNL/TQMa8MP
+* u-boot-imx-tq-2020.04: TQMa8Mx/TQMa8MxML/TQMa8MxNL/TQMa8MP
   * backport MMU table fixxes from upstream
   * backport U-Boot relocation and RAM size fixes from upstream
 * TQMa335x/TQMa57xx/TQMa65xx: allow configuration of boot VFAT size. This enables
@@ -2111,19 +2111,19 @@ No changes.
 * TQMa6x / TQMa335x: add ubi to `MACHINE_FEATURES`
   since we have an optionally assembled SPI-NOR, `ubi` should be added to have
   the ability to install MTD utils in rootfs based on `MACHINE_FEATURES`
-* u-boot-imx-tq_2020.04: TQMa8MPxL: update RAM Timings
+* u-boot-imx-tq-2020.04: TQMa8MPxL: update RAM Timings
 
 ### Added
 
 * TQMa57xx:
   * Added support for the linux-ti-tq-5.10 kernel. This kernel is the default
     now. See the TQMa57xx README for more information.
-* u-boot-imx-tq_2016.03: update
+* u-boot-imx-tq-2016.03: update
   * tqma6ul: remove obsolete warning for 512 MB variants
 * TQMa8MPxL: update u-boot-imx-tq
   * support 4GiB variant
   * optional support for LVDS splash (clock, ldb, pwm, lcdif2)
-* linux-imx-tq_5.15:
+* linux-imx-tq-5.15:
   * Support for TQMa6x
   * Support for TQMa8Mx
   * Support for TQMa8MxML
@@ -2137,18 +2137,18 @@ No changes.
 * MBa6ULx: add bluetooth and firmware
 * MBa6: add bluetooth and firmware
 * linux-tq-5.15: add optional bluetooth config support
-* linux-tq_5.15: add ath10k usb support for QCA9377
+* linux-tq-5.15: add ath10k usb support for QCA9377
 * MBa8: add bluetooth and firmware
 * MB-SMARC-2: add bluetooth and firmware
 * linux-imx-tq-5.10: add optional bluetooth config support
 * qoriq-atf_v2.4: add support for tqmlx2160a
 * TQMa8MPxL: add `bluetooth` to `MACHINE_FEATURES` of MBa8MPxL and add missing
   firmware to `MACHINE_EXTRA_RRECOMMENDS`
-* linux-imx-tq_5.15: Add support for tqmls1028a as default kernel
+* linux-imx-tq-5.15: Add support for tqmls1028a as default kernel
 * Add preliminary TQMa64xxl/MBaX4XxL support (tqma64xxl-mbax4xxl)
   * New kernel linux-ti-tq-5.10
   * New U-Boot u-boot-ti-tq-2021.01
-* u-boot-tq_2019.04:
+* u-boot-tq-2019.04:
   * TQMa335x[L]: installation of MLO for SPI NOR Flash in yocto recipe
   * TQMa335x[L]: SPI NOR boot support
 * tqmls1028a: use BL2_IMAGE, BL3_IMAGE variable for wic file creation
@@ -2156,7 +2156,7 @@ No changes.
   images
 * TQMa8MP: new machine config variant (single image for multiple RAM sizes)
   with support for 2GB RAM fallback variant
-* u-boot-imx-tq_2020.04: TQMa8MP
+* u-boot-imx-tq-2020.04: TQMa8MP
   * variant and revision data support
   * single image for multiple RAM size variants
 * rcw: tqmls1028a:
@@ -2177,11 +2177,11 @@ __Start of porting to kirkstone__
 
 ### Fixed
 
-* u-boot-imx-tq_2020.04:
+* u-boot-imx-tq-2020.04:
   * TQMa8MPxL: fix mmc env offset for redundant env
   * TQMa8QM/ TQMa8Xx[S]: fix argument check for scu_rm command
-* linux-tq_5.15: TQMa6x: non working DDC for HDMI
-* u-boot-tq_2019.04: RAM timings for TQMa335x
+* linux-tq-5.15: TQMa6x: non working DDC for HDMI
+* u-boot-tq-2019.04: RAM timings for TQMa335x
 
 ### Changed
 
@@ -2193,8 +2193,8 @@ __Start of porting to kirkstone__
 * TQMa6x / TQMa335x: add ubi to `MACHINE_FEATURES`
   since we have an optionally assembled SPI-NOR, `ubi` should be added to have
   the ability to install MTD utils in rootfs based on `MACHINE_FEATURES`
-* u-boot-imx-tq_2020.04: TQMa8MPxL: update RAM Timings
-* linux-ti-tq_5.4.43: TQMa335x
+* u-boot-imx-tq-2020.04: TQMa8MPxL: update RAM Timings
+* linux-ti-tq-5.4.43: TQMa335x
   - change compression to speed up booting
   - disable debug options to speed up booting
   - rewrite recipe to support config fragments
@@ -2202,7 +2202,7 @@ __Start of porting to kirkstone__
   - use same e-MMC pad configs in DT as in U-Boot
 * TQMa335x: merge machines to a single config
 * systemd-machine-units: TQMa8MPxL: enable CAN-FD support
-* u-boot-tq_2019.04: rework for TQMa335x
+* u-boot-tq-2019.04: rework for TQMa335x
   - update RAM-Timings to be compliant with more RAM types
   - Restore delay during RAM calibration to make Winbond RAM usable
   - Use a single config for both RAM variants
@@ -2218,9 +2218,9 @@ __Start of porting to kirkstone__
   layout for the two boards)
 * tqmls1012al: add wifi to MACHINE_FEATURES and rrecommend firmware-ath10k
 * tqmls1012al: hardknott release using updated versions:
-  * `qoriq-atf_2.4`
+  * `qoriq-atf-2.4`
   * `u-boot-lsdk-tq-2021.04`
-  * `linux-imx-tq_5.15`
+  * `linux-imx-tq-5.15`
 
 ### Removed
 
@@ -2272,7 +2272,7 @@ __Start of porting to honister__
 
 ### Changed
 
-* linux-imx-tq_5.10: rename and optimize kernel config fragments:
+* linux-imx-tq-5.10: rename and optimize kernel config fragments:
   * remove `tqma8x` prefix for generic fragments
   * use `tqma8` instead of `tqma8x` for others
 
@@ -2280,15 +2280,15 @@ __Start of porting to honister__
 
 * TQMa57xx: wks file generates non booting wic images with dosfstools 4.2, mkfs.vfat
   change /boot partition config to use --ofset and --fixed-size and increase size
-* linux-imx-tq_5.10:
+* linux-imx-tq-5.10:
   * TQMa8: optimize kernel config for USB gadget:
     gadgets should be modules to not block loading the UDC driver if gadget cannot
     be loaded. Tested with TQMa8MPxL
   * TQMa6x: fix for smsc95xx suspend / resume
   * TQMa8MPxL: enable missing ADC driver
-* linux-imx-tq_5.10: merge all mainline stable fixes up to v5.10.103
+* linux-imx-tq-5.10: merge all mainline stable fixes up to v5.10.103
   (CVE-2022-0847 "Dirty Pipe Vulnerability")
-* linux-tq_5.15: merge all mainline stable fixes up to v5.15.27
+* linux-tq-5.15: merge all mainline stable fixes up to v5.15.27
   (CVE-2022-0847 "Dirty Pipe Vulnerability")
 
 ## hardknott.TQMa65xx.BSP.SW.0008
@@ -2347,10 +2347,10 @@ __Start of porting to honister__
 
 ### Added
 
-* u-boot-imx-tq_2020.04: TQMa8Xx/TQMa8XxS/TQMa8x: support booting UBI rootfs
+* u-boot-imx-tq-2020.04: TQMa8Xx/TQMa8XxS/TQMa8x: support booting UBI rootfs
   from SPI NOR
 * TQMa6UL\[L\]x/[L\] : linux 5.15 support based on linux-stable 5.15.y
-* linux-tq_5.4 / TQMLS102xA: support EDAC for ECC RAM
+* linux-tq-5.4 / TQMLS102xA: support EDAC for ECC RAM
 * mesa: add bbappend to support TQMa6x / TQMa7x / TQMa6U\[L\]x\[L\] with mainline
   kernel
 * TQMa8 / TQMa6x: add new MACHINE_FEATURE `vpu` for all but TQMa8MxNL
@@ -2365,7 +2365,7 @@ __Start of porting to honister__
 
 * TQMa6UL\[L\]x/[L\] / TQMa6x: add firmware ath10k as `MACHINE_EXTRA_RRECOMEND`
 * TQMLS\[all machines\]: remove rootfs size restrictions for wic images
-* linux-tq_5.4: rewrite to use linux-yocto class
+* linux-tq-5.4: rewrite to use linux-yocto class
 * TQMa8 / TQMa6x: force build vivante gpu driver for linux-tq-imx as out of tree module
   to ensure versions between module and userland match. Overrides default assignments
   from meta-freescale.
@@ -2376,16 +2376,16 @@ __Start of porting to honister__
 
 ### Fixed
 
-* u-boot-imx-tq_2020.04: support for large micron SPI NOR on TQMa8Xx / TQMa8x
+* u-boot-imx-tq-2020.04: support for large micron SPI NOR on TQMa8Xx / TQMa8x
   flash was discovered but progam / erase silently fails. Backport upstream
   driver changes for FlexSPI IP and use this driver instead of the older one.
 * TQMa6x: VPU firmware was not installed if building against linux mainline kernel
   without meta-freescale
-* linux-tq_5.15: TQMa6x: kernel defconfig
+* linux-tq-5.15: TQMa6x: kernel defconfig
   remove debug options to improve performance and cleanup
 * treewide: fix assignment of `IMAGE_BOOT_FILES` in machine configs. Do not use `?=`
   to prevent unwanted defaults from vendor layers.
-* u-boot-tq_2017.11 / TQMLS102xA: ensure backward compatibility to older SOM variants
+* u-boot-tq-2017.11 / TQMLS102xA: ensure backward compatibility to older SOM variants
   using module EEPROM on different I2C address
 * machines: add `USE_VT = "0"` where missing to disable virtual console support.
 * u-boot-imx-tq\_2020.04: tqma8\[all variants\] adjust `DEFAULT_FDT_FILE` to
@@ -2397,7 +2397,7 @@ __Start of porting to honister__
 
 ### Removed
 
-* linux-imx-tq_5.4: remove support for i.MX8 based machines
+* linux-imx-tq-5.4: remove support for i.MX8 based machines
 
 ## hardknott.TQMa8.BSP.SW.0082
 
@@ -2416,7 +2416,7 @@ __Start of porting to honister__
 
 ### Fixed
 
-* linux-rt-tq_4.19: fix missing defaults for SRCREV and SRCBRANCH
+* linux-rt-tq-4.19: fix missing defaults for SRCREV and SRCBRANCH
 * ti-sgx-ddk-km: spurious build problems due to bbappend. Not tested with rootfs
 * tqma335x: linux-ti-tq: fixes for RTC TPS65910 in dtb
 
@@ -2508,8 +2508,8 @@ __Start of porting to honister__
 ## zeus.TQMa57xx.BSP.SW.0014
 
 ### Changed
-* u-boot-tq_2019.04: fix crc offset for variant detection on TQMa57xx
-* u-boot-tq_2019.04: fix written file names for update_uboot script on TQMa57xx
+* u-boot-tq-2019.04: fix crc offset for variant detection on TQMa57xx
+* u-boot-tq-2019.04: fix written file names for update_uboot script on TQMa57xx
 
 ## zeus.TQMLS10xxA.BSP.SW.0103
 
@@ -2745,7 +2745,7 @@ also be found under the following tag names:
 
 * tqma\[6,6ul,6ull,7\]: add SDMA firmware to MACHINE\_EXTRA\_RRECOMMENDS
 * tqma6ul\[l\]x\[l\]: simplify machine configs
-* u-boot-tq_2016.03: update to support 512 MB variant of tqma6ul\[l\]x
+* u-boot-tq-2016.03: update to support 512 MB variant of tqma6ul\[l\]x
 
 ### Fixed
 
