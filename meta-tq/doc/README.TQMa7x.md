@@ -79,7 +79,7 @@ versions due to node naming changes.
 * UBI / UBIFS images are enabled by default when using `DISTRO=spaetzle`.
   The generated rootfs size must not exceed the size defined by `UBI_LEB_SIZE` and
   `UBI_MAX_LEB_COUNT` on machine level. The distro definition and the image recipes
-  `tq-image-small-[debug]` are intended for demonstration of howto generate a system
+  `tq-image-small-[debug]` are intended for demonstration of how to generate a system
   running from SPI-NOR. This does not make any claims on feature / functional completeness.
 * U-Boot: USB dual role port (X5) is tested in U-Boot in peripheral mode only.
 * U-Boot: HSIC USB port (X4) can only be initialized once. Subsequent resets won't detect devices
@@ -147,19 +147,19 @@ bootstream image and bootloader support for updating the bootstream.
 
 See [here](./README.imx.UUU.md) for details about using Serial Download mode and UUU.
 
-## Howto
+## HowTo
 
 ### Mainline Kernel
 
 Mainline kernel before v5.15 depends on the presence of running firmware in
 TrustZone that implements the PSCI to start a second core. Starting with
-commit e34645f45805 ("ARM: imx: add smp support for imx7d") linux is able to
+commit e34645f45805 ("ARM: imx: add smp support for imx7d") Linux is able to
 handle the second CPU core without PSCI.
 
 This version of BSP is only tested with an U-Boot version that implements PSCI
-and starting linux outside of Trustzone (`non secure`).
+and starting Linux outside of Trustzone (`non secure`).
 
-The number of running CPUs can be checked with `nproc` under linux.
+The number of running CPUs can be checked with `nproc` under Linux.
 
 ### Display Support
 

@@ -241,7 +241,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   * no support for vendor kernel and BSP
 * When using HDMI the default audio device changes to HDMI output.
   For using I2S audio codec `aplay` requires the parameter `-Dsysdefault:CARD=tqmtlv320aic32`
-* The HDMI audio device has to be selected explicitely by passing `-Dsysdefault:CARD=audiohdmi` to `aplay` & friends
+* The HDMI audio device has to be selected explicitly by passing `-Dsysdefault:CARD=audiohdmi` to `aplay` & friends
 
 ## Build Artefacts
 
@@ -334,7 +334,7 @@ sf update ${loadaddr} script ${filesize}
 
 See [here](./README.imx.UUU.md) for details about using Serial Download mode and UUU.
 
-## Howto
+## HowTo
 
 ### OS Boot
 
@@ -387,7 +387,7 @@ gst-launch-1.0 v4l2src device=/dev/video0 ! video/x-bayer,format=rggb10le,bpp=10
 ### Display Support
 
 HDMI support is enabled by default. Additionally LVDS display can be enabled by using the
-corresponding device tree. To allow reusage, the support for each display is separated
+corresponding device tree. To allow reuse, the support for each display is separated
 in a dtsi fragment.
 
 #### MBa8MPxL
@@ -405,7 +405,7 @@ in a dtsi fragment.
 | HDMI / DP       | imx8mp-tqma8mpql-mba8mp-ras314.dtb             | compatible monitor |
 
 *Note*: `weston` by default uses the DRI device with highest number. This is usually Display Port.
-To explicitely select a DRI device, please refer to `--drm-device` argument during startup.
+To explicitly select a DRI device, please refer to `--drm-device` argument during startup.
 
 ### CAN (MBa8MPxL only)
 
@@ -418,7 +418,7 @@ In case of problems first check the bus termination:
 | CAN0      | X18       | S12 |
 | CAN1      | X19       | S11 |
 
-See [here](./README.CAN.md) for details about configurating of CAN interfaces.
+See [here](./README.CAN.md) for details about configuration of CAN interfaces.
 
 ### Cortex M7
 

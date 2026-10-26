@@ -71,7 +71,7 @@ and how to change them.
 ### Starting
 
 To demonstrate `rpmsg` and `freertos` start the prepared SD / eMMC. The CortexM4
-firmware uses the CortexM UART(s) connecte to the FTDI USB / UART converter on
+firmware uses the CortexM UART(s) connected to the FTDI USB / UART converter on
 the starter kits. The M4 firmware is started by the bootstream. You should see
 a banner message on the UART for the M4 when the demo is started.
 

@@ -1,2 +1,2 @@
-# wait until combo FW is loaded by wifi driver
+# wait until combo FW is loaded by WiFi driver
 KERNEL=="mlan*", ACTION=="add", RUN+="/sbin/modprobe btnxpuart"

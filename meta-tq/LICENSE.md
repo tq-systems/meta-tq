@@ -13,4 +13,4 @@ License information for any other files is either explicitly stated
 or defaults to GPL version 2.
 
 TQ-Systems GmbH owns the copyright to all files created and modified by TQ-Systems GmbH.
-Additional copyright holders are mentioned explicitely in the covered files.
+Additional copyright holders are mentioned explicitly in the covered files.

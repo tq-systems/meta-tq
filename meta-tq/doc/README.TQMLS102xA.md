@@ -209,7 +209,7 @@ eMMC is a placement option on TQMLS102xA
 
 See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 
-## Howto
+## HowTo
 
 ### HDMI
 

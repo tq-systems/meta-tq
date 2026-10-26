@@ -23,15 +23,15 @@ inherit deploy
 
 ATF_PLATFORM ??= "INVALID"
 
-# We return INVALID here since this is highly machine dependend.
+# We return INVALID here since this is highly machine dependent.
 # Currently only i.MX8[M,MMini,MNano,MPlus] and i.MX9[1,3,4,5] have support to override
 # the debug / boot UART base address.
 ATF_IMX_BOOT_UART_BASE ??= "INVALID"
-# We return INVALID here since this is highly machine dependend.
+# We return INVALID here since this is highly machine dependent.
 # Currently only i.MX94 hase support to override UART baudrate
 ATF_IMX_BOOT_UART_BAUD ??= "INVALID"
 
-# We return INVALID here since this is highly machine dependend.
+# We return INVALID here since this is highly machine dependent.
 # Currently only i.MX8QM / i.MX8[D,Q]XP have support to override the UART index.
 ATF_IMX_DEBUG_UART ??= "INVALID"
 

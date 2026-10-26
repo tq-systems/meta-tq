@@ -82,7 +82,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **I2C**                                          |                            |
 | Temperature Sensors (without cpu-temp)           |              x             |
 | RTC                                              |              x             |
-| EEPROMS                                          |              x             |
+| EEPROMs                                          |              x             |
 | **ENET (GigE via Phy on MBa8x)**                 |                            |
 | ENET 0                                           |              x             |
 | ENET 1                                           |              x             |
@@ -121,13 +121,13 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 * TQMa8XDP REV.020x
 * temperature grade
   * Due to SCU-API limitation temperature grading cannot be queried from SCU.
-    Therfore thermal trip points are hardcoded in devicetree and must match the
+    Therefore thermal trip points are hard-coded in devicetree and must match the
     assembled CPU type. BSP default are trip points for industrial grading.
 * DSI - DP bridge
 
 ## Known Issues / Limitations
 
-* Default setting for `fdt_file` in u-boot does not match older linux kernel
+* Default setting for `fdt_file` in u-boot does not match older Linux kernel
   naming scheme. Current naming scheme is `<cpu>-<som>-<baseboard>[-feature].dtb`,
   old scheme was `<cpu>-<baseboard>[-feature].dtb`.
   See [Build Artefacts](#build-artefacts) for complete list of supported Device Tree files
@@ -136,7 +136,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
   * U-Boot: USB 3.0 port does not initialize USB 2.0 subsystem after USB reset
 * SPI: Hardware-controlled chipselects are not driven as expected
   * Toggle after each Byte when using DMA
-  * Inbetween each `spi_transfer`
+  * In-between each `spi_transfer`
   * Use of GPIO controlled chip-selects instead is recommended
   * By default chip-selects are configured as GPIO, if possible (see below)
   * Note for MBa8Xx: The following pin **cannot** be configured as GPIO:
@@ -239,12 +239,12 @@ with UUU tool:
 sudo uuu -b spl imx-boot-<machine>-uuu.bin
 ```
 
-## Howto
+## HowTo
 
 ### Display Support
 
 Each Display can be used on its own by using the corresponding device tree.
-To allow reusage, the support for each display is separated in a dtsi fragment.
+To allow reuse, the support for each display is separated in a dtsi fragment.
 
 *Note:* With MBa8Xx only one control interface for backlight is available (X22).
 
@@ -265,7 +265,7 @@ In case of problems first check the bus termination:
 | CAN0      |    X11    | SW1 |
 | CAN1      |    X12    | SW2 |
 
-See [here](./README.CAN.md) for details about configurating of CAN interfaces.
+See [here](./README.CAN.md) for details about configuration of CAN interfaces.
 
 ### Cortex M4
 

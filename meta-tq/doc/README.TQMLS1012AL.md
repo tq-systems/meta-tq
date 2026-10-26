@@ -59,7 +59,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | Temperature Sensors                               |       x       |
 | **ENET**                                          |               |
 | GigE / SGMII (X23)                                |       x       |
-| GigE / RGMII on Ethernetswitch (X12/X13)          |       x       |
+| GigE / RGMII on Ethernet switch (X12/X13)         |       x       |
 | **USB**                                           |               |
 | USB 3.0 Host / Hub (X6)                           |       x       |
 | wireless card at Mini-PCIe (X3)                   |       x       |
@@ -79,7 +79,7 @@ recovery via JTAG is needed.
 ## Known Issues / Limitations
 
 * U-Boot: USB HUB(X3): sometimes lock after second `usb reset` when using USB stick
-  * seems to be hardware dependend
+  * seems to be hardware dependent
 * Linux: currently no out of the box support for RootFS on SPI
   * `tq-image-small-debug` image from `spaetzle` distribution is too large
 * Linux: Wake up support using GPIO button not working
@@ -116,7 +116,7 @@ Artefacts can be found at the usual locations for bitbake:
 Make sure the power supply is on during update, see [important notes](#important-notes)
 for recovery.
 
-U-Boot envinronment provides scripts to help updating components needed to boot
+U-Boot environment provides scripts to help updating components needed to boot
 the board. For filenames see [artefacts section](#build-artefacts).
 
 ### Update with Static IP
@@ -144,7 +144,7 @@ run update_uboot			# update U-Boot FIP
 
 See [Layerscape Boot Media](./README.ls.BootMedia.md) for details.
 
-## Howto
+## HowTo
 
 ### U-Boot mtest
 

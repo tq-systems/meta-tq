@@ -9,7 +9,7 @@ SRC_URI = "\
     file://90-dhcp-default.network \
 "
 
-# most boards have a second ethernet port and 2 can interfaces
+# most boards have a second Ethernet port and 2 CAN interfaces
 HAS_ETH1 ??= "true"
 HAS_ETH2 ??= "false"
 HAS_CAN0 ??= "true"

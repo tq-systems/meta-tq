@@ -53,7 +53,7 @@ _MBa8x HW Rev.020x/30x only / TQMa8Mx HW Rev.020x only_
 | USB Host (USB1 via hub 2.0 and 3.0)              |         x          |
 | USB DRD (USB 2.0 Cable Detect, VBUS)             |         x          |
 | **QSPI NOR**                                     |                    |
-| 4 byte adressing, SPI mode                       |         x          |
+| 4 byte addressing, SPI mode                      |         x          |
 | see Known Issues                                 |                    |
 | **Cortex M4**                                    |                    |
 | env settings for starting from TCM               |         x          |
@@ -131,7 +131,7 @@ _MBa8x HW Rev.020x/30x only_
 * Linux: operating points for DDR controller missing in device tree.
   running at lower DDR frequencies does not work in this version of BSP.
 * Default setting for `fdt_file` in u-boot from older BSP version does
-  not match kernel naming scheme since linux 5.10. Use U-Boot from this
+  not match kernel naming scheme since Linux 5.10. Use U-Boot from this
   BSP release or see [Build Artefacts](#build-artefacts) for complete
   list of supported Device Tree files.
 * LVDS shows wrong colors on older Tianma display kit (HW issue on older
@@ -150,7 +150,7 @@ _MBa8x HW Rev.020x/30x only_
   * MIPI CSI does not work reliably. It may work, it may fail or even lockup the system
 * When using HDMI the default Audio device changes to HDMI output.
   For using DAI codec `aplay` requires the parameter `-Dsysdefault:CARD=tqmtlv320aic32`
-* The HDMI audio device has to be selected explicitely by passing `-Dsysdefault:CARD=imxaudiohdmi` to `aplay` & friends
+* The HDMI audio device has to be selected explicitly by passing `-Dsysdefault:CARD=imxaudiohdmi` to `aplay` & friends
 * HDMI: When using large displays, module variants with> = 2 GiB RAM are recommended.
   It is known that some use cases will not work with less memory. Like Weston on a 4K monitor
 * Note: GPU temperature observation uses CPU thermal-zone! Playing 4K Videos on 4K Display will raise the thermal-zone (CPU) temperature >80°C, reducing VPU clock. Apparently there is no dedicated VPU sensor
@@ -426,7 +426,7 @@ Download kernel image from TFTP and update:
 
 See [here](./README.imx.UUU.md) for details about using Serial Download mode and UUU.
 
-## Howto
+## HowTo
 
 ### Using RTC for Wakeup
 

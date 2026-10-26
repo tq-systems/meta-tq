@@ -60,7 +60,7 @@ See [here](./README.SoftwareVersions.md) for the software base versions.
 | **I2C**                                   |                 |
 | Temperature Sensors                       |        x        |
 | RTC                                       |        x        |
-| EEPROMS                                   |        x        |
+| EEPROMs                                   |        x        |
 | **ENET**                                  |                 |
 | ENET 0  (X7)                              |        x        |
 | ENET 1  (X6)                              |        x        |
@@ -171,7 +171,7 @@ Secure Boot is enabled by adding "secure" to `DISTRO_FEATURES`. With this settin
 of all ATF components are generated and built into the SD/eMMC system image.
 
 By default, a newly generated keypair will be used for signing, which may be lost when certain
-packages are rebuilt. To enable the build of secured images with a pregenerated keypair, the
+packages are rebuilt. To enable the build of secured images with a pre-generated keypair, the
 following settings can be added to a distro configuration or `local.conf`:
 
 ```

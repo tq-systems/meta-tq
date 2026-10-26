@@ -60,7 +60,7 @@ as described by RAUC documentation. For `meta-tq` an example implementation is g
 using U-Boot and [Distroboot](README.Distroboot.md).
 
 To allow fallback from non booting OS in an A/B setup it is important to make sure,
-that the bootloader activates the hardware watchdog of the CPU und configures the
+that the bootloader activates the hardware watchdog of the CPU and configures the
 watchdog timeout long enough that the OS to be booted can service the watchdog and mark
 the boot as successful before the watchdog times out.
 

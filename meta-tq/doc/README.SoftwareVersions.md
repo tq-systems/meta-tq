@@ -259,7 +259,7 @@ Version information:
 * U-Boot based on v2024.04 and NXP vendor BSP
   [`uboot-imx`](https://github.com/nxp-imx/uboot-imx)
 * branched from lf_v2024.04  / integrates all commits up to
-  6c4545203d123c246c5d7995f2893959506d28e0 / tag lf-6.6.52-2.2.0)
+  6c4545203d123c246c5d7995f2893959506d28e0 / tag lf-6.6.52-2.2.0
 
 #### u-boot-imx-tq 2025.04
 

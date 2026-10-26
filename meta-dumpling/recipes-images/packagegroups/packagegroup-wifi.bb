@@ -1,4 +1,4 @@
-DESCRIPTION = "tools for wifi support"
+DESCRIPTION = "tools for WiFi support"
 LICENSE = "MIT"
 
 inherit packagegroup

@@ -121,7 +121,7 @@ _MBa8Mx HW Rev.030x only_
 * DSI
   * DSI to DP bridge
 * PCIe
-  * wifi not tested, adapter to mini PCIe needed
+  * WiFi not tested, adapter to mini PCIe needed
 * No V4L2 sensor controls for MIPI-CSI cameras
 
 ## Important Notes
@@ -145,7 +145,7 @@ _MBa8Mx HW Rev.030x only_
 * Linux: operating points for DDR controller missing in device tree.
   running at lower DDR frequencies does not work in this version of BSP.
 * Default setting for `fdt_file` in u-boot from older BSP version does
-  not match kernel naming scheme since linux 5.10. Use U-Boot from this
+  not match kernel naming scheme since Linux 5.10. Use U-Boot from this
   BSP release or see [Build Artefacts](#build-artefacts) for complete
   list of supported Device Tree files.
 * USB hub disconnects after suspend
@@ -429,7 +429,7 @@ Download bootstream from TFTP and update:
 
 See [here](./README.imx.UUU.md) for details about using Serial Download mode and UUU.
 
-## Howto
+## HowTo
 
 ### Using RTC for Wakeup
 

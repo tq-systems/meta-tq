@@ -78,7 +78,7 @@ can be modified to control the filenames requested via TFTP.
 
 By default, the files `tiboot3.bin` and `u-boot.img` are requested. The 2 stages
 of the bootloader are always updated at the same time, so potential
-incompatiblities between stages of old and new versions are avoided.
+incompatibilities between stages of old and new versions are avoided.
 
 Kernel and Device Trees are part of the root filesystem. They cannot be updated
 from U-Boot separately from the filesystem.

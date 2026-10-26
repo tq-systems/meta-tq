@@ -79,7 +79,7 @@ details
 | **I2C**                                   |                 |
 | Temperature Sensors                       |        x        |
 | RTC                                       |        x        |
-| EEPROMS                                   |        x        |
+| EEPROMs                                   |        x        |
 | **QSPI-NOR**                              |                 |
 | Read                                      |        x        |
 | Write                                     |        x        |
@@ -125,10 +125,10 @@ details
   * ddr_fip.bin: firmware for DDR controller PHY
   * 32GiB
     * fip_uboot.bin: TF-A / U-Boot Firmware Image Package
-    * bl2_[auto|flexspi_nor].pbl: Boot-media dependend Primary Boot Loader with RCW
+    * bl2_[auto|flexspi_nor].pbl: Boot-media dependent Primary Boot Loader with RCW
   * 16GiB
     * fip_uboot_tqmlx2160a_16gb.bin: TF-A / U-Boot Firmware Image Package
-    * bl2_[auto|flexspi_nor]_tqmlx2160a_16gb.pbl: Boot-media dependend Primary Boot Loader with RCW
+    * bl2_[auto|flexspi_nor]_tqmlx2160a_16gb.pbl: Boot-media dependent Primary Boot Loader with RCW
 * atf/variants/: contains RCW-PBL for all supported RCW serdes-configurations and all supported boot sources.
 * rcw/: different rcw configurations to use with atf-recipe
 * mc_app/: the DPAA2-Ethernet Firmware
@@ -269,7 +269,7 @@ Secure Boot is enabled by adding "secure" to `DISTRO_FEATURES`. With this settin
 of all ATF components are generated and built into the SD/eMMC system image.
 
 By default, a newly generated keypair will be used for signing, which may be lost when certain
-packages are rebuilt. To enable the build of secured images with a pregenerated keypair, the
+packages are rebuilt. To enable the build of secured images with a pre-generated keypair, the
 following settings can be added to a distro configuration or `local.conf`:
 
 ```
@@ -293,7 +293,7 @@ like the Linux kernel.
 ## Ethernet and DPAA2
 
 Ethernet depends on the DPAA2 Management-Complex firmware, which is automatically loaded by U-Boot
-during network initization by running the `mcinitcmd` command from the environment.
+during network initialization by running the `mcinitcmd` command from the environment.
 
 Not all Ethernet interfaces can be enabled at the same time; which interfaces are available depends
 on the selected [SerDes Configuration](#serdes-configuration). To be usable on Linux, the available
@@ -361,13 +361,13 @@ __Notes:__
 
 * In U-Boot, Ethernet interfaces are named `DPMAC<xx>@<interface>` (e.g. "DPMAC17@rgmii-id")
 * On MAC.17 and MAC.18, SGMII configuration takes precedence over RGMII. The RGMII interfaces (X14)
-  are only used in SerDes confgurations that don't include SGMII.17 and SGMII.18.
+  are only used in SerDes configurations that don't include SGMII.17 and SGMII.18.
 * Port names follow the schematic names; `X<nn>.A` refers to the lower and `X<nn>.B` to the upper
   socket of a dual port connector
 
 ## SerDes Configuration
 
-The following tables show the supported SerDes configrations. The SerDes configuration must be
+The following tables show the supported SerDes configurations. The SerDes configuration must be
 selected using the RCW (Reset Configuration Word), which is built into the BL2 bootloader image.
 The *meta-tq* BSP provides RCWs for the following combinations of SerDes configurations
 (where *X\_Y\_Z* refers to configuration *X* on SerDes 1, *Y* on SerDes 2 and *Z* on SerDes 3):

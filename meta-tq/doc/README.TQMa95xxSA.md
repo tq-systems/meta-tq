@@ -73,7 +73,7 @@ See top level [README](../README.md) for configurations usable as MACHINE.
 | **I2C**                               |           |
 | Temperature Sensors                   |     x     |
 | RTC                                   |     x     |
-| EEPROMS                               |     x     |
+| EEPROMs                               |     x     |
 | **ENET (GigE via Phy on TQMa93xxSA)** |           |
 | ENET 0                                |     x     |
 | ENET 1                                |     x     |
@@ -187,7 +187,7 @@ Write complete image to eMMC:
 sudo uuu -bmap -b emmc_all imx-boot-tqma95xxsa-4gb-mb-smarc-2-sd.bin-flash_a55  tq-image-generic-debug-tqma95xxsa-4gb-mb-smarc-2.rootfs.wic.zst
 ```
 
-## Howto
+## HowTo
 
 ### OS Boot
 
@@ -210,7 +210,7 @@ echo mem > /sys/power/state
 ### Display Support
 
 Each Display can be used on its own by using the corresponding device tree.
-To allow reusage, the support for each display is separated in a dtsi fragment.
+To allow reuse, the support for each display is separated in a dtsi fragment.
 
 | Interface       | Device tree                                      | Type               |
 |-----------------|--------------------------------------------------|--------------------|
@@ -230,7 +230,7 @@ In case of problems first check the bus termination:
 | CAN0      | X29       | `TERM CAN0` / S4:1 |
 | CAN1      | X30       | `TERM CAN1` / S4:2 |
 
-See [here](./README.CAN.md) for details about configurating of CAN interfaces.
+See [here](./README.CAN.md) for details about configuration of CAN interfaces.
 
 **Note**: There is an absolute hardware limit on the bitrate of 1MBit/s, independently from CAN-FD.
   For that reason CAN-FD is disabled by default. While technically possible using CAN-FD with 1MBit/s, the non-datarate

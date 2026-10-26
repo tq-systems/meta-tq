@@ -26,5 +26,5 @@ cat /sys/devices/platform/imx93-lpm/mode
 
 Additionally the DRAM hardware fast frequency change (HWFFC) can be controlled with
 `/sys/devices/platform/imx93-lpm/auto_clk_gating` when running with multiple DRAM set points.
-HWFFC switches dynamically between the two fastes DRAM setpoints in a hardware controlled manner.
+HWFFC switches dynamically between the two fastest DRAM setpoints in a hardware controlled manner.
 A value of zero disables HWFFC, non zero values enable the HWFFC.
