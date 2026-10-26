@@ -81,9 +81,9 @@ Releases before `wrynose` are documented in [CHANGELOG-5.0.0-scarthgap.md](CHANG
 ### Changed
 
 * linux-tq-6.18: update to linux-stable 6.18.44
-* linux-ti-tq_6.18: update to ti-linux-kernel 12.01.00.05, including linux-stable updates
+* linux-ti-tq-6.18: update to ti-linux-kernel 12.01.00.05, including linux-stable updates
   up to v6.18.35
-* u-boot-tq_2023.04
+* u-boot-tq-2023.04
   * tqma6: increase max U-Boot size for SPI flash
 * imx-oei-tq: updates for project internal CI settings, no functional change
 * imx-system-manager-tq:
@@ -96,15 +96,15 @@ Releases before `wrynose` are documented in [CHANGELOG-5.0.0-scarthgap.md](CHANG
 
 ### Fixed
 
-* linux-ti-tq_6.18
+* linux-ti-tq-6.18
   * Fix LVDS Overlays not being applicable because of renamed node names
   * TQMa\[62,64,67\]xx(L): add default UART properties to fix console initialization.
-* u-boot-tq_2026.01
+* u-boot-tq-2026.01
   * TQMa\[62,64,67\]xx(L): fix RAM size detection by U-Boot
 
     An unused function in R5 SPL caused U-Boot proper to ignore RAM detection and
     ECC reservation resulting in the default RAM configuration always being loaded.
-* u-boot-tq_2023.04
+* u-boot-tq-2023.04
   * tqma6,6ul,7: default environment for `fdtoverlay_addr_r`
 
     Booting with FDT overlay does not work with the default. Do not rely on
@@ -135,7 +135,7 @@ Releases before `wrynose` are documented in [CHANGELOG-5.0.0-scarthgap.md](CHANG
 
 ### Changed
 
-* u-boot-tq_2023.04
+* u-boot-tq-2023.04
   * tqma6ulx[l] / tqma6ullx[l]: cleanup defconfigs for environment settings
 
     Images for QSPI boot and SD/eMMC boot have different linker settings. Starter kit BSP supports
@@ -149,7 +149,7 @@ Releases before `wrynose` are documented in [CHANGELOG-5.0.0-scarthgap.md](CHANG
 * u-boot-tq-2017.11: TQMLS102xA:  support alternative temperature sensor
 
   Add detection logic and device tree fixup to support SoM variants with different sensor types.
-* u-boot-lsdk-tq_2019.10: TQMLS1028A: support alternative temperature sensor
+* u-boot-lsdk-tq-2019.10: TQMLS1028A: support alternative temperature sensor
 
   Add detection logic and device tree fixup to support SoM variants with different sensor types.
 * TQMa95*: use new imx-system-manager-tq configuration names
