@@ -12,71 +12,11 @@ CYCLONEDX_EXTRA_RUNTIME_RECIPES_BOOTLOADER = \
 
 # --- i.MX (NXP) ---
 
-# Common ATF + bootloader stack for all i.MX ARM64 machines.
-# Resolve ATF via IMX_DEFAULT_ATF_PROVIDER (set in tqmxx.inc / imx-base.inc).
-# Resolve boot container via PREFERRED_PROVIDER_imx-boot (set per machine include).
-CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_ARM8A = "\
-    ${@ d.getVar('IMX_DEFAULT_ATF_PROVIDER') or ''} \
-    ${@ d.getVar('PREFERRED_PROVIDER_imx-boot') or ''} \
-    ${CYCLONEDX_EXTRA_RUNTIME_RECIPES_BOOTLOADER} \
-"
+CYCLONEDX_EXTRA_RUNTIME_RECIPES:append:imx8-generic-bsp = \
+    "${@ d.getVar('PREFERRED_PROVIDER_imx-boot') or ''}"
 
-# LPDDR training firmware required on i.MX 8M / 91 / 93 (SPL + DRAM init).
-CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_SPLRAM = "\
-    imx-boot-firmware-files \
-"
-
-# System Controller Firmware (SCFW) used on i.MX 8QM and i.MX 8X / 8DX / 8DXL.
-# Resolve via PREFERRED_PROVIDER_imx-sc-firmware (set in tqma8xx-common.inc / tqma8x.inc).
-CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_SCU = "\
-    ${@ d.getVar('PREFERRED_PROVIDER_imx-sc-firmware') or ''} \
-"
-
-# Edge Lock Enclave (ELE) firmware used on i.MX 91 / 93 / 95.
-CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_ELE = "\
-    firmware-ele-imx \
-"
-
-# i.MX95 with SCP (system control processor) aka system manager
-CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_SCP = "\
-    ${@ d.getVar('PREFERRED_PROVIDER_virtual/imx-oei') or ''} \
-    ${@ d.getVar('PREFERRED_PROVIDER_virtual/imx-system-manager') or ''} \
-    imx-boot-firmware-files \
-"
-
-CYCLONEDX_EXTRA_RUNTIME_RECIPES:append:mx8m-generic-bsp = "\
-    ${CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_ARM8A} \
-    ${CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_SPLRAM} \
-    tq-bootscripts \
-"
-CYCLONEDX_EXTRA_RUNTIME_RECIPES:append:mx91-generic-bsp = "\
-    ${CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_ARM8A} \
-    ${CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_SPLRAM} \
-    ${CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_ELE} \
-    tq-bootscripts \
-"
-CYCLONEDX_EXTRA_RUNTIME_RECIPES:append:mx93-generic-bsp = "\
-    ${CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_ARM8A} \
-    ${CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_SPLRAM} \
-    ${CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_ELE} \
-    tq-bootscripts \
-"
-CYCLONEDX_EXTRA_RUNTIME_RECIPES:append:mx95-generic-bsp = "\
-    ${CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_ARM8A} \
-    ${CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_SCP} \
-    ${CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_ELE} \
-    tq-bootscripts \
-"
-# mx8-generic-bsp is intentionally NOT used for SCU: it also covers i.MX 8M machines,
-# which do not use SCFW.
-CYCLONEDX_EXTRA_RUNTIME_RECIPES:append:mx8qm-generic-bsp = "\
-    ${CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_ARM8A} \
-    ${CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_SCU} \
-"
-CYCLONEDX_EXTRA_RUNTIME_RECIPES:append:mx8x-generic-bsp = "\
-    ${CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_ARM8A} \
-    ${CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_SCU} \
-"
+CYCLONEDX_EXTRA_RUNTIME_RECIPES:append:imx9-generic-bsp = \
+    "${@ d.getVar('PREFERRED_PROVIDER_imx-boot') or ''}"
 
 # i.MX 6 / 7 (ARMv7) — no ATF, bootloader only.
 CYCLONEDX_EXTRA_RUNTIME_RECIPES_IMX_ARM7A = "\
