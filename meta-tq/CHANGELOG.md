@@ -31,6 +31,7 @@ Releases before `wrynose` are documented in [CHANGELOG-5.0.0-scarthgap.md](CHANG
 
 ### Added
 
+* meta-tq: Support building packages with EXTERNALSRC with invalid/unknown SRCREV values.
 * u-boot-imx-tq-2025.05: TQMa95xxLA / TQMa95xxSA
   * USB host support for MBa95xxCA when not in serial download mode
 
@@ -48,11 +49,14 @@ Releases before `wrynose` are documented in [CHANGELOG-5.0.0-scarthgap.md](CHANG
 
 ### Changed
 
+* linux-ti-tq-6.18:
+  * update to ti-linux-kernel 12.01.00.06, including linux-stable updates up to 6.18.47
+  * TQMa62xx: enable spidev for NAFE13388 analog frontend
 * u-boot-imx-tq-2025.05: TQMa95xxLA / TQMa95xxSA
   * long reset SD card pulse to allow SD3 / UHS104 cards on MB-SMARC-2
   * pin mux / pad config optimisation
   * defconfig optimisation: remove unused drivers
-  * environment imrovements: kernel_addr_r is no identical to loadaddr
+  * environment improvements: kernel_addr_r is no longer identical to loadaddr
 
     Allows loading larger fitImages to kernel_addr_r without overwriting parts of the extracted
     system components before booting.
@@ -63,7 +67,7 @@ Releases before `wrynose` are documented in [CHANGELOG-5.0.0-scarthgap.md](CHANG
 
 ### Fixed
 
-* u-boot-imx-tq-2025.05: TQMa95xxLA / TQMa95xxSA: boot from eMMC stucked in SPL
+* u-boot-imx-tq-2025.05: TQMa95xxLA / TQMa95xxSA: boot from eMMC stuck in SPL
 
   A combination of SPL malloc limits caused failure to initialize the eMMC and to lod next
   image container from eMMC.
