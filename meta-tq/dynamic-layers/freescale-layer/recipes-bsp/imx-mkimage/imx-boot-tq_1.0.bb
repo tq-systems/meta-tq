@@ -19,6 +19,8 @@ IMX_EXTRA_FIRMWARE:append = " ${@bb.utils.contains('IMXBOOT_TARGETS', 'flash_lin
 
 inherit imx-hab
 
+INHIBIT_DEFAULT_DEPS = "1"
+
 # This package aggregates output deployed by other packages,
 # so set the appropriate dependencies
 DEPENDS += "\
