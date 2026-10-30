@@ -108,7 +108,7 @@ mmc dev 0 0
 
 ### Bootable SPI-NOR on QSPI / FlexSPI / XSPI Controller
 
-**Attention:** This documentation assumes that the boot image is prepended with a valid
+**Attention**: This documentation assumes that the boot image is prepended with a valid
 firmware configuration block (FCB). This information is used by ROM loader
 to initialise the SPI controller before loading the boot firmware
 
@@ -154,7 +154,7 @@ _Note_: Address variables used in scripts are named according to the U-Boot defa
 * `ubirootfs`: name of ubifs image to be used for the update command
   (default = rootfs.ubifs)
 
-_Attention_ UBI related variables have to be in sync with `mtdparts` and
+_Attention_: UBI related variables have to be in sync with `mtdparts` and
 `mtdids` variables.
 
 ### SD / eMMC
@@ -184,7 +184,7 @@ Download UBIFS image from TFTP and update:
 
 `run update_rootfs_spi`
 
-__Note:__: set `ubirootfs` to the correct image name. This is usually the artefact with the extension
+__Note__: set `ubirootfs` to the correct image name. This is usually the artefact with the extension
 `.rootfs.ubifs`
 
 To boot Linux from UBI partition on SPI-NOR using [Distroboot / Stdboot](README.Distroboot.md) it is
@@ -201,7 +201,7 @@ This can also be achieved with U-Boot script in default environment:
 
 `run update_boot_script_spi`
 
-__Note:__: set `bootscript_name` to the correct image name before. This is usually the artefact named
+__Note__: set `bootscript_name` to the correct image name before. This is usually the artefact named
 `boot-ubi.scr`
 
 ## Booting Linux OS
@@ -210,7 +210,7 @@ __Note:__: set `bootscript_name` to the correct image name before. This is usual
 
 See the [Distroboot README](README.Distroboot.md) for U-Boot 2024.04 or newer.
 
-### Traditional boot using scripts
+### Traditional Boot Using Scripts
 
 To boot a Linux OS from a running U-Boot following scripts are implemented in
 environment:

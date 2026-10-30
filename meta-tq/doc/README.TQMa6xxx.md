@@ -46,7 +46,7 @@ on a USB drive), use the following command:
 ubiformat /dev/mtd/by-name/ospi.rootfs -f /mnt/rootfs.ubi
 ```
 
-To check check usability of the programmed root filesystem, the following
+To check usability of the programmed root filesystem, the following
 commands can be used:
 ```sh
 ubiattach -p /dev/mtd/by-name/ospi.rootfs

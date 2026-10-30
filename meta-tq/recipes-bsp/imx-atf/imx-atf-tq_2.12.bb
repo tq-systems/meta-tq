@@ -21,7 +21,7 @@ inherit deploy
 ATF_PLATFORM ??= "INVALID"
 
 # We return INVALID here since this is highly machine dependent.
-# Currently only i.MX8[M,MMini,MNano,MPlus] and i.MX9[13] have support to override
+# Currently only i.MX8[M,MMini,MNano,MPlus] and i.MX9[1,3] have support to override
 # the debug / boot UART base address.
 ATF_IMX_BOOT_UART_BASE ??= "INVALID"
 

@@ -160,7 +160,7 @@ Artefacts can be found at the usual locations for bitbake:
 * imx-boot-${MACHINE}-sd.bin-flash\_spl: boot stream for SD / eMMC
 * imx-boot-${MACHINE}-sd.bin-flash\_linux\_m4: boot stream for SD / eMMC + M4 Demo
 * imx-boot-${MACHINE}-sd.bin-flash\_spl_flexspi: boot stream for QSPI
-* imx-boot-uuu-${MACHINE}-uuu.bin-flash\_spl: boot stream for UUU
+* imx-boot-${MACHINE}-uuu.bin-flash\_spl: boot stream for UUU
 * hello\_world.bin (Cortex M4 demo, CM4 UART, TCM)
 * rpmsg\_lite\_pingpong\_rtos\_linux\_remote.bin (Cortex M4 demo, CM4 UART, TCM)
 

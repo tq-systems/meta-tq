@@ -319,7 +319,7 @@ usage see https://github.com/tq-systems/mcuxsdk-examples-tq/tree/main/_boards/tq
 
 ### NPU
 
-__Note:__ For using the NPU, the Cortex-M33 needs to be loaded with a firmware controlling the NPU and the rpmsg device tree (`imx93-tqma9352-mba93xx*-rpmsg.dtb` has to be used.
+__Note:__ For using the NPU, the Cortex-M33 needs to be loaded with a firmware controlling the NPU and the rpmsg device tree (`imx93-tqma9352-mba93xx*-rpmsg.dtb` has to be used).
 
 Before running, translate TensorFlow lite model to ETHOS-U format using vela compiler:
 
