@@ -1,9 +1,9 @@
 # Verified Boot
 
 meta-tq provides some support for building a chain of trust consisting
-of signed bootloader images, signed FIT images and rootfs partition with
-dm-verity. This readme contains useful information on how to activate each
-part of the chain and provides also some background information.
+of signed bootloader images, signed FIT images and a rootfs partition with
+dm-verity. This README contains useful information on how to activate each
+part of the chain and provides some background information.
 
 [[_TOC_]]
 

@@ -170,7 +170,7 @@ Artefacts can be found at the usual locations for bitbake:
 * imx-boot-${MACHINE}-sd.bin-flash\_spl: boot stream for SD / eMMC
 * imx-boot-${MACHINE}-sd.bin-flash\_linux\_m4: boot stream for SD / eMMC + M4 Demo
 * imx-boot-${MACHINE}-sd.bin-flash\_spl_flexspi: boot stream for QSPI
-* imx-boot-uuu-${MACHINE}-uuu.bin-flash\_spl: boot stream for UUU
+* imx-boot-${MACHINE}-uuu.bin-flash\_spl: boot stream for UUU
 * rpmsg\_lite\_pingpong\_rtos\_linux\_remote\_m40.bin: CortexM4 demo for device 0
 * rpmsg\_lite\_pingpong\_rtos\_linux\_remote\_m41.bin: CortexM4 demo for device 1
 
@@ -280,7 +280,7 @@ configuration values.
 
 ### Display Support
 
-Each Display output could be activated independent by using the corresponding device tree.
+Each Display output could be activated independently by using the corresponding device tree.
 
 | Interface   | Device tree                               | Type           |
 |-------------|-------------------------------------------|----------------|
