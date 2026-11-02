@@ -51,9 +51,9 @@ Releases are named with the following scheme:
 * linux-tq-6.6: update to v6.6.144
 * linux-imx-tq-6.6: update from linux-fslc incl. v6.6.144
 * u-boot-imx-tq_2024.04
-  * tqma91xx / tqma93xx / tqma8mpxs / tqma8mpxl: use generic name for QSPI nor bootscript in
+  * tqma91xx / tqma93xx / tqma8mpxs / tqma8mpxl: use generic name for QSPI NOR bootscript in
     update helper script.
-* tq-exlinux:
+* tq-extlinux:
   * also show config labels in menu labels
 * u-boot-tq-2017.11
   * tqmls102xa: support for alternative temperature sensor
@@ -569,7 +569,7 @@ Releases are named with the following scheme:
   on Kconfig settings.
 * u-boot-lsdk-tq-2019.04: TQMLS1028A: Fix PCIe initialisation flow
 
-  Backport some fixes to the initalisation flow, limit to Gen2 and
+  Backport some fixes to the initialisation flow, limit to Gen2 and
   add wait for link polling. Both the limitation and the polling loop
   improve compatibility to more cards, since bootloader support is
   crucial for working PCIe under Linux.
