@@ -47,6 +47,18 @@ KCONFIG_MODE = "--alldefconfig"
 ####
 KERNEL_LOCALVERSION = "-tq"
 
+python do_recipe_qa:append() {
+    msrev = d.getVar('SRCREV_machine')
+    srev = d.getVar('SRCREV')
+
+    if msrev and srev != "INVALID":
+        oe.qa.handle_error(
+            "src-uri-bad",
+            "%s: SRCREV and SRCREV_machine set at the same time! This is a mistake." % d.getVar('PN'),
+            d
+        )
+}
+
 do_set_localversion_tq[dirs] += "${STAGING_KERNEL_DIR} ${UNPACKDIR}"
 do_set_localversion_tq() {
     if [ "${SRCREV}" = "INVALID" ]; then
