@@ -2,6 +2,10 @@ require qoriq-atf-${PV}.inc
 
 inherit deploy
 
+# Baremetal, just need a compiler
+INHIBIT_DEFAULT_DEPS = "1"
+DEPENDS += "virtual/${HOST_PREFIX}gcc"
+
 DEPENDS += "u-boot-mkimage-native u-boot openssl openssl-native rcw qoriq-cst-native bc-native"
 do_compile[depends] += "u-boot:do_deploy rcw:do_deploy uefi:do_deploy"
 
