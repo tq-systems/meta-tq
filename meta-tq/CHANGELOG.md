@@ -49,6 +49,8 @@ Releases before `wrynose` are documented in [CHANGELOG-5.0.0-scarthgap.md](CHANG
 
 ### Changed
 
+* imx-boot-tq: set INHIBIT_DEFAULT_DEPS to prevent superfluous dependencies
+* linux-[rt-]tq-6.18: update to linux-stable 6.18.59
 * linux-ti-tq-6.18:
   * update to ti-linux-kernel 12.01.00.06, including linux-stable updates up to 6.18.47
   * TQMa62xx: enable spidev for NAFE13388 analog frontend
@@ -61,11 +63,22 @@ Releases before `wrynose` are documented in [CHANGELOG-5.0.0-scarthgap.md](CHANG
     Allows loading larger fitImages to kernel_addr_r without overwriting parts of the extracted
     system components before booting.
   * allow using relative paths from generic filesystem functions
-* u-boot-imx-tq-2025.05: TQMa95xxLA / TQMa95xxSA
+* u-boot-imx-tq-2025.04: TQMa95xxLA / TQMa95xxSA
   * DISTROBOOT for QSPI-NOR
-* linux-tq-6.18: update to linux-stable 6.18.55
+* linux-tq-[rt-]6.18: update to linux-stable 6.18.55
 
 ### Fixed
+
+* u-boot-imx-tq-2024.04: allow external RMII REF_CLK for i.MX91 / i.MX93 EQOS
+
+  * backport platform specific reset for i.MX93
+  * handle 'snps,rmii_refclk_ext' property in low level chip specific setup handler
+
+* u-boot-imx-tq-2024.04: backport fixes from upstream for i.MX LPUART
+
+  * use ipg clk for i.MX7ULP compatible variants. This allows to use the same clock properties as in
+    upstream and allows using different UART for console without device tree patching
+  * error handling to prevent hang in recieve path
 
 * u-boot-imx-tq-2025.05: TQMa95xxLA / TQMa95xxSA: boot from eMMC stuck in SPL
 
