@@ -9,6 +9,9 @@ SECTION = "BSP"
 
 PROVIDES += "imx-sc-firmware"
 
+# No compiler needed, precompiled firmware binaries
+INHIBIT_DEFAULT_DEPS = "1"
+
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${PV}:${THISDIR}/${PN}:"
 
 # Need tq_imx-scfw-v1.2.7-b3357 or newer for build
