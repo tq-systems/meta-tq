@@ -20,7 +20,7 @@ Releases are named with the following scheme:
 
 ### Changed
 
-* u-boot-tq_2023.04
+* u-boot-tq-2023.04
   * tqma6: increase max U-Boot size for SPI flash
 * imx-oei-tq: updates for project internal CI settings, no functional change
 * imx-system-manager-tq:
@@ -32,12 +32,12 @@ Releases are named with the following scheme:
 
 ### Fixed
 
-* u-boot-tq_2026.01
+* u-boot-tq-2026.01
   * TQMa\[62,64,67\]xx(L): fix RAM size detection by U-Boot
 
     An unused function in R5 SPL caused U-Boot proper to ignore RAM detection and
     ECC reservation resulting in the default RAM configuration always being loaded.
-* u-boot-tq_2023.04
+* u-boot-tq-2023.04
   * tqma6,6ul,7: default environment for `fdtoverlay_addr_r`
 
     Booting with FDT overlay does not work with the default. Do not rely on
@@ -50,7 +50,7 @@ Releases are named with the following scheme:
 * linux-tq-6.12: update to v6.12.95
 * linux-tq-6.6: update to v6.6.144
 * linux-imx-tq-6.6: update from linux-fslc incl. v6.6.144
-* u-boot-imx-tq_2024.04
+* u-boot-imx-tq-2024.04
   * tqma91xx / tqma93xx / tqma8mpxs / tqma8mpxl: use generic name for QSPI NOR bootscript in
     update helper script.
 * tq-extlinux:
@@ -61,7 +61,7 @@ Releases are named with the following scheme:
   * improve dependency handling
 * imx-system-manager-tq:
   * tqma95xxla / tqma95xxsa: change board configuration naming
-* u-boot-lsdk-tq_2019.10:
+* u-boot-lsdk-tq-2019.10:
   * tqmls1028a: support for alternative temperature sensor
   * tqmls1028a: switch mmcdev for mmc and SD card
 
