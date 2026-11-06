@@ -1,4 +1,4 @@
-SUMMARY = "Linux kernel with PREEMPT_RT support based on linux stable 6.18.y for TQ-Systems SoMs"
+SUMMARY = "Linux kernel with PREEMPT_RT support based on Linux stable 6.18.y for TQ-Systems SoMs"
 
 require linux-tq_6.18.bb
 
