@@ -1,12 +1,12 @@
-SUMMARY = "Linux kernel with PREEMPT_RT support from linux mainline v6.6-rt for TQ-Systems GmbH i.MX based modules"
+SUMMARY = "Linux kernel with PREEMPT_RT support from Linux mainline v6.6-rt for TQ-Systems GmbH i.MX based modules"
 
 require linux-tq-6.6.inc
 
 KBRANCH = "TQM-linux-v6.6.y-rt"
-SRCREV = "b3df173c63c229ec728bf21e3a59d559182888ef"
+SRCREV = "058693a58c186321891e673ca864b119550428a7"
 
 # LINUX_VERSION must match version from Makefile
-LINUX_VERSION = "${LINUX_RELEASE}.147"
+LINUX_VERSION = "${LINUX_RELEASE}.159"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}-${LINUX_RELEASE}:"
 
