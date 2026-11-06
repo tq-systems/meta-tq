@@ -31,7 +31,10 @@ Releases before `wrynose` are documented in [CHANGELOG-5.0.0-scarthgap.md](CHANG
 
 ### Added
 
-* meta-tq: Support building packages with EXTERNALSRC with invalid/unknown SRCREV values.
+* SBOM: allow CycloneDX SBOM generation for Layerscape / i.MX ARM64 boot images
+
+  Conditionally add `populate_cyclonedx` task to the recipes that construct the boot images.
+  Since these images may be deployed separately a dedicated SBOM is needed.
 * u-boot-imx-tq-2025.05: TQMa95xxLA / TQMa95xxSA
   * USB host support for MBa95xxCA when not in serial download mode
 
@@ -45,10 +48,16 @@ Releases before `wrynose` are documented in [CHANGELOG-5.0.0-scarthgap.md](CHANG
     is now part of default environment.
   * prepare new hardware:
     * Microchip USB5734 USB hub
-    * NXP PCAL9538 I2C portexpander
+    * NXP PCAL9538 I2C port expander
 
 ### Changed
 
+* linux-imx-tq-6.6: update from FSLC, includes stable fixes up to 6.6.161
+* qoriq-atf-2.12: remove superfluous dependencies
+* U-Boot / Linux: improve SRCREV handling in `.scmversion` / `localversion`
+
+  Support building with `EXTERNALSRC` with invalid/unknown `SRCREV` values. For Linux recipes a QA error
+  will be generated if both `SRCREV` and `SRCREV_machine` are set.
 * imx-boot-tq: set INHIBIT_DEFAULT_DEPS to prevent superfluous dependencies
 * linux-[rt-]tq-6.18: update to linux-stable 6.18.59
 * linux-ti-tq-6.18:
@@ -69,6 +78,12 @@ Releases before `wrynose` are documented in [CHANGELOG-5.0.0-scarthgap.md](CHANG
 
 ### Fixed
 
+* imx-sc-firmware-tq-1.15.0: update to TQMa8.NXP-v1.15.0.B5624.0038 adding backport fixes
+
+  * TQMa8QM: fix PMIC power up ramp time. The calculated ramp time is too large and cause decreased
+      performance when using DVFS
+  * TQMa8QM / TQMa8Xx[S]: implement KS1 errata workarounds. The workarounds proposed by NXP shall
+    decrease the current needed when using power management.
 * u-boot-imx-tq-2024.04: allow external RMII REF_CLK for i.MX91 / i.MX93 EQOS
 
   * backport platform specific reset for i.MX93
@@ -82,7 +97,7 @@ Releases before `wrynose` are documented in [CHANGELOG-5.0.0-scarthgap.md](CHANG
 
 * u-boot-imx-tq-2025.05: TQMa95xxLA / TQMa95xxSA: boot from eMMC stuck in SPL
 
-  A combination of SPL malloc limits caused failure to initialize the eMMC and to lod next
+  A combination of SPL malloc limits caused failure to initialize the eMMC and to load next
   image container from eMMC.
 
 ## 6.0.1.0 (not released yet)
