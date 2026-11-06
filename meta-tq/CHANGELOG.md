@@ -9,12 +9,48 @@ Releases are named with the following scheme:
 
 ## Next Release
 
+### Added
+
+* SBOM: allow CycloneDX SBOM generation for Layerscape / i.MX ARM64 boot images
+
+  Conditionally add `populate_cyclonedx` task to the recipes that construct the boot images.
+  Since these images may be deployed separately a dedicated SBOM is needed.
+
 ### Changed
 
+* linux-tq-6.12: update to v6.12.116
+* linux-imx-tq-6.6: update from FSLC, includes stable fixes up to 6.6.161
+* linux-rt-tq-6.6: update to v6.6.159-rt82
+* linux-tq-6.6: update to v6.6.160
+* qoriq-atf-2.12: remove superfluous dependencies
+* imx-boot-tq: set INHIBIT_DEFAULT_DEPS to prevent superfluous dependencies
+* U-Boot / Linux: improve SRCREV handling in `.scmversion` / `localversion`
+
+  Support building with `EXTERNALSRC` with invalid/unknown `SRCREV` values. For Linux recipes a QA error
+  will be generated if both `SRCREV` and `SRCREV_machine` are set.
 * linux-tq-6.12: update to v6.12.103
 * linux-tq-6.6: update to v6.6.151
 * linux-rt-tq-6.6: update to v6.6.147-rt77
 * linux-imx-tq-6.6: update from linux-fslc incl. v6.6.157
+
+### Fixed
+
+* imx-sc-firmware-tq-1.15.0: update to TQMa8.NXP-v1.15.0.B5624.0038 adding backport fixes
+
+  * TQMa8QM: fix PMIC power up ramp time. The calculated ramp time is too large and cause decreased
+      performance when using DVFS
+  * TQMa8QM / TQMa8Xx[S]: implement KS1 errata workarounds. The workarounds proposed by NXP shall
+    decrease the current needed when using power management.
+* u-boot-imx-tq-2024.04: allow external RMII REF_CLK for i.MX91 / i.MX93 EQOS
+
+  * backport platform specific reset for i.MX93
+  * handle 'snps,rmii_refclk_ext' property in low level chip specific setup handler
+
+* u-boot-imx-tq-2024.04: backport fixes from upstream for i.MX LPUART
+
+  * use ipg clk for i.MX7ULP compatible variants. This allows to use the same clock properties as in
+    upstream and allows using different UART for console without device tree patching
+  * error handling to prevent hang in recieve path
 
 ## scarthgap.TQ.ARM.BSP.0012
 
