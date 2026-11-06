@@ -1,4 +1,4 @@
-SUMMARY = "Linux kernel based on linux stable 6.6.y for TQ-Systems GmbH i.MX and Layerscape SoM"
+SUMMARY = "Linux kernel based on Linux stable 6.6.y for TQ-Systems GmbH i.MX and Layerscape SoM"
 
 require linux-tq-6.6.inc
 

@@ -1,4 +1,4 @@
-SUMMARY = "Linux kernel based on linux stable 6.12.y for TQ-Systems SoMs"
+SUMMARY = "Linux kernel based on Linux stable 6.12.y for TQ-Systems SoMs"
 
 require linux-tq-6.12.inc
 
