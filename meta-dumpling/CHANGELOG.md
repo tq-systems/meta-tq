@@ -29,6 +29,10 @@ Releases before `wrynose` are documented in [CHANGELOG-5.0.0-scarthgap.md](CHANG
 
 ## Next Release
 
+### Fixed
+
+tq-udev-rules: adjust directory settings for recipe
+
 ## 6.0.1.0 (not released yet)
 
 ### Removed
